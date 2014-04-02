@@ -54,7 +54,7 @@ if (! class_exists ( 'GADASH_Frontend' )) {
 				}
 				
 				$page_url = str_replace(site_url(), "", get_permalink());
-
+				
 				$post_id = $post->ID;
 				$data_visits= $GADASH_GAPI->frontend_afterpost_visits($projectId, $page_url, $post_id );
 				$data_keywords= $GADASH_GAPI->frontend_afterpost_searches($projectId, $page_url, $post_id );

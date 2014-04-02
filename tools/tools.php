@@ -38,7 +38,6 @@ if (! class_exists ( 'GADASH_Tools' )) {
 					" " 
 			), "", $domain );
 		}
-
 		function ga_dash_clear_cache() {
 			global $wpdb;
 			update_option ( 'gadash_lasterror', 'N/A' );
@@ -52,8 +51,8 @@ if (! class_exists ( 'GADASH_Tools' )) {
 			if (empty ( $transient )) {
 				$sqlquery = $wpdb->query ( "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_timeout_gadash%%'" );
 				$sqlquery = $wpdb->query ( "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_timeout_ga_dash%%'" );
-				set_transient ( "gadash_cleanup_timeouts", '1', 60*60*24*3 );
-			}	
+				set_transient ( "gadash_cleanup_timeouts", '1', 60 * 60 * 24 * 3 );
+			}
 		}
 		function ga_dash_safe_get($key) {
 			if (array_key_exists ( $key, $_POST )) {
@@ -84,21 +83,22 @@ if (! class_exists ( 'GADASH_Tools' )) {
 			}
 			return '#' . $rgb;
 		}
-		
-		function check_roles($access_level, $tracking=false){
-			if(is_user_logged_in() && isset($access_level)){
+		function check_roles($access_level, $tracking = false) {
+			if (is_user_logged_in () && isset ( $access_level )) {
 				global $current_user;
 				$roles = $current_user->roles;
-				$user_role = array_shift($roles);
-				if (($user_role=='administrator') and !$tracking){
+				
+				$user_role = array_shift ( $roles );
+				
+				if ((current_user_can('manage_options')) and ! $tracking) {
 					return true;
 				}
-				if(in_array($user_role,$access_level)){
+				if (in_array ( $user_role, $access_level )) {
 					return true;
-				}else{
+				} else {
 					return false;
 				}
-			}			
-		}		
+			}
+		}
 	}
 }

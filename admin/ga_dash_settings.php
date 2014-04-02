@@ -35,7 +35,6 @@ class GADASH_Settings {
 			} else if ($who == 'frontend') {
 				$options ['ga_dash_frontend_stats'] = 0;
 				$options ['ga_dash_frontend_keywords'] = 0;
-				error_log('Am Salvat',3,'mylog.txt');
 				if (empty($new_options['ga_dash_access_front'])){
 					$new_options['ga_dash_access_front'][] = 'administrator';
 				}				
@@ -88,18 +87,29 @@ class GADASH_Settings {
                                		<?php
                                     if ( !isset( $wp_roles ) ){
 										$wp_roles = new WP_Roles();
-									}	
+									}
+									$i=0;
+									?>
+									<table><tr>
+									<?php 	
                                     foreach ( $wp_roles->role_names as $role => $name ) {
 										if ($role!='subscriber'){
-                                    ?>
-                                    	<label>
-                                        	<?php echo $name; ?>
-                                            	<input type="checkbox" name="options[ga_dash_access_front][]" value="<?php echo $role; ?>" <?php if (in_array($role,$options['ga_dash_access_front']) OR $role=='administrator') echo 'checked="checked"'; if ($role=='administrator') echo 'disabled';?> />&nbsp;&nbsp;
-										</label>
-                                    <?php
+											$i++;
+		                                    ?>
+		                                    	<td><label>
+		                                        	<input type="checkbox" name="options[ga_dash_access_front][]" value="<?php echo $role; ?>" <?php if (in_array($role,$options['ga_dash_access_front']) OR $role=='administrator') echo 'checked="checked"'; if ($role=='administrator') echo 'disabled';?> />
+		                                        	<?php echo $name; ?>
+												</label></td>
+		                                    <?php
+                                    	}
+                                    	if ($i %4 == 0){
+                                    		?>
+                                    			</tr><tr>
+                                    		<?php 
                                     	}
                                     }
                                     ?>
+                                    </table>
 							</td>
 							</tr>
 							<tr>
@@ -189,21 +199,32 @@ class GADASH_Settings {
 							<tr>
 								<td class="roles title"><label for="ga_dash_access_back"><?php _e("Show stats to: ", 'ga-dash' ); ?></label></td>
 								<td class="roles">
-                               		<?php
+									<?php 
                                     if ( !isset( $wp_roles ) ){
 										$wp_roles = new WP_Roles();
-									}	
+									}								
+									$i=0;
+									?>
+									<table><tr>
+									<?php 	
                                     foreach ( $wp_roles->role_names as $role => $name ) {
 										if ($role!='subscriber'){
-                                    ?>
-                                    	<label>
-                                        	<?php echo $name; ?>
-                                            	<input type="checkbox" name="options[ga_dash_access_back][]" value="<?php echo $role; ?>" <?php if (in_array($role,$options['ga_dash_access_back']) OR $role=='administrator') echo 'checked="checked"'; if ($role=='administrator') echo 'disabled';?> />&nbsp;&nbsp;
-										</label>
-                                    <?php
+											$i++;
+		                                    ?>
+		                                    	<td><label>
+		                                        	<input type="checkbox" name="options[ga_dash_access_back][]" value="<?php echo $role; ?>" <?php if (in_array($role,$options['ga_dash_access_back']) OR $role=='administrator') echo 'checked="checked"'; if ($role=='administrator') echo 'disabled';?> />
+		                                        	<?php echo $name; ?>
+												</label></td>
+		                                    <?php
+                                    	}
+                                    	if ($i %4 == 0){
+                                    		?>
+                                    			</tr><tr>
+                                    		<?php 
                                     	}
                                     }
                                     ?>
+                                    </table>
 							</td>
 							</tr>
 
@@ -516,16 +537,27 @@ class GADASH_Settings {
                                		<?php
                                     if ( !isset( $wp_roles ) ){
 										$wp_roles = new WP_Roles();
-									}	
+									}
+									$i=0;
+									?>
+									<table><tr>
+									<?php 	
                                     foreach ( $wp_roles->role_names as $role => $name ) {
-                                    ?>
-                                    	<label>
-                                        	<?php echo $name; ?>
-                                            	<input type="checkbox" name="options[ga_track_exclude][]" value="<?php echo $role; ?>" <?php if (in_array($role,$options['ga_track_exclude'])) echo 'checked="checked"'; ?> />&nbsp;&nbsp;
-										</label>
-                                    <?php
+										$i++;
+	                                    ?>
+	                                    	<td><label>
+	                                        	<input type="checkbox" name="options[ga_track_exclude][]" value="<?php echo $role; ?>" <?php if (in_array($role,$options['ga_track_exclude'])) echo 'checked="checked"'; ?> />
+	                                        	<?php echo $name; ?>
+											</label></td>
+	                                    <?php
+                                    	if ($i %4 == 0){
+                                    		?>
+                                    			</tr><tr>
+                                    		<?php 
+                                    	}
                                     }
                                     ?>
+                                    </table>
 							</td>
 							</tr>
 							<?php
