@@ -98,7 +98,8 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - minor display tweaks
 - removed debugging log file
 - permissions fix for WPMU
-- URI fix for frontend filters 
+- URI fix for frontend filters
+- exclude frontend stats in preview mode 
 
 = 01.04.2014 - v4.2.17 =
 - fixed on/off toggle bug for frontend settings
