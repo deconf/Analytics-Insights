@@ -90,7 +90,7 @@ if (! class_exists ( 'GADASH_Tools' )) {
 				
 				$user_role = array_shift ( $roles );
 				
-				if ((current_user_can('manage_options')) and ! $tracking) {
+				if ((current_user_can ( 'manage_options' )) and ! $tracking) {
 					return true;
 				}
 				if (in_array ( $user_role, $access_level )) {
