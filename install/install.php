@@ -29,8 +29,8 @@ Class GADASH_Install{
 			$options ['ga_dash_anonim'] = 0;
 			$options ['ga_dash_userapi'] = 0;
 			$options ['ga_event_tracking'] = 0;
-			$options ['ga_event_downloads'] = 'zip|mp3|mpeg|pdf|doc*|ppt*|xls*|jpeg|png|gif|tiff';
-			$options ['ga_track_exclude'][] = 'administrator';
+			$options ['ga_event_downloads'] = 'zip|ra*|mp*|avi|flv|mpeg|pdf|doc*|ppt*|xls*|jp*|png|gif|tiff|bmp|txt';
+			$options ['ga_track_exclude'] = array();
 			$options ['ga_target_geomap'] = '';
 			$options ['ga_target_number'] = 10;
 			$options ['ga_realtime_pages'] = 10;
@@ -75,7 +75,7 @@ Class GADASH_Install{
 			$options ['ga_dash_userapi'] = get_option ( 'ga_dash_userapi' );
 			$options ['ga_event_tracking'] = get_option ( 'ga_event_tracking' );
 			$options ['ga_event_downloads'] = get_option ( 'ga_event_downloads' );
-			$options ['ga_track_exclude'][] = 'administrator';
+			$options ['ga_track_exclude'] = array();
 			$options ['ga_target_geomap'] = get_option ( 'ga_target_geomap' );
 			$options ['ga_target_number'] = get_option ( 'ga_target_number' );
 			$options ['ga_realtime_pages'] = get_option ( 'ga_realtime_pages' );

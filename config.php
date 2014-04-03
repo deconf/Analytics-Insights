@@ -64,7 +64,6 @@ if (! class_exists ( 'GADASH_Config' )) {
 			
 			if (!is_array($this->options['ga_track_exclude'])){
 				$this->options['ga_track_exclude'] = array();
-				$this->options['ga_track_exclude'][] = 'administrator';
 			}			
 			
 		}
