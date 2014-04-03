@@ -97,7 +97,8 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - translations bugfix
 - minor display tweaks
 - removed debugging log file
-- bugfix: network admin was not able to see plugin's option pages
+- permissions fix for WPMU
+- URI fix for frontend filters 
 
 = 01.04.2014 - v4.2.17 =
 - fixed on/off toggle bug for frontend settings
