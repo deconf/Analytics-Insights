@@ -57,8 +57,14 @@ if (! class_exists ( 'GADASH_Widgets' )) {
 		function ga_dash_admin_actions() {
 			global $GADASH_Config;
 			global $wp_version;
+
+			/*
+			 * Include Tools
+			*/
+			include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
+			$tools = new GADASH_Tools ();			
 			
-			if (current_user_can ( 'manage_options' )) {
+			if ($tools->check_roles($GADASH_Config->options ['ga_dash_access_back'])) {
 				include ($GADASH_Config->plugin_path . '/admin/ga_dash_settings.php');
 				
 				add_menu_page ( __( "Google Analytics",'ga-dash' ), __( "Google Analytics",'ga-dash' ), 'manage_options', 'gadash_settings', array (
@@ -157,7 +163,7 @@ if (! class_exists ( 'GADASH_Widgets' )) {
 				return;
 			}
 			
-			if (current_user_can ( 'manage_options' )) {
+			if ($tools->check_roles($GADASH_Config->options ['ga_dash_access_back'])) {
 				
 				if (isset ( $_REQUEST ['ga_dash_profile_select'] )) {
 					$GADASH_Config->options ['ga_dash_tableid'] = $_REQUEST ['ga_dash_profile_select'];
@@ -201,7 +207,7 @@ if (! class_exists ( 'GADASH_Widgets' )) {
 				<form id="ga-dash" method="POST">
 			<?php			
 			
-			if (current_user_can ( 'manage_options' )) {
+			if ($tools->check_roles($GADASH_Config->options ['ga_dash_access_back'])) {
 				if ($GADASH_Config->options ['ga_dash_jailadmins']) {
 					if ($GADASH_Config->options ['ga_dash_tableid_jail']) {
 						$projectId = $GADASH_Config->options ['ga_dash_tableid_jail'];

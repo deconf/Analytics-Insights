@@ -101,7 +101,8 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - URI fix for frontend filters
 - exclude frontend stats in preview mode
 - updated download filters
-- by default administrators are not excluded from tracking 
+- by default administrators are not excluded from tracking
+- bugfix for refresh_profiles() method 
 
 = 01.04.2014 - v4.2.17 =
 - fixed on/off toggle bug for frontend settings

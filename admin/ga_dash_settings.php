@@ -50,7 +50,14 @@ class GADASH_Settings {
 	}
 	public static function frontend_settings() {
 		global $GADASH_Config;
-		if (! current_user_can ( 'manage_options' )) {
+		
+		/*
+		 * Include Tools
+		*/
+		include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
+		$tools = new GADASH_Tools ();		
+		
+		if (! $tools->check_roles($GADASH_Config->options ['ga_dash_access_back'])) {
 			return;
 		}
 		
@@ -165,7 +172,14 @@ class GADASH_Settings {
 	}
 	public static function backend_settings() {
 		global $GADASH_Config;
-		if (! current_user_can ( 'manage_options' )) {
+		
+		/*
+		 * Include Tools
+		*/
+		include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
+		$tools = new GADASH_Tools ();
+				
+		if (! $tools->check_roles($GADASH_Config->options ['ga_dash_access_back'])) {
 			return;
 		}
 		
@@ -381,15 +395,15 @@ class GADASH_Settings {
 	public static function tracking_settings() {
 		global $GADASH_Config;
 		
-		if (! current_user_can ( 'manage_options' )) {
-			return;
-		}
-		
 		/*
 		 * Include Tools
-		 */
+		*/
 		include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
 		$tools = new GADASH_Tools ();
+				
+		if (! $tools->check_roles($GADASH_Config->options ['ga_dash_access_back'])) {
+			return;
+		}
 		
 		$options = self::set_get_options ( 'tracking' );
 		
@@ -580,11 +594,18 @@ class GADASH_Settings {
 		self::output_sidebar ();
 	}
 	public static function general_settings() {
-		if (! current_user_can ( 'manage_options' )) {
-			return;
-		}
 		
 		global $GADASH_Config;
+		
+		/*
+		 * Include Tools
+		*/
+		include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
+		$tools = new GADASH_Tools ();
+
+		if (! $tools->check_roles($GADASH_Config->options ['ga_dash_access_back'])) {
+			return;
+		}		
 		
 		$options = self::set_get_options ( 'general' );		
 		
@@ -593,12 +614,6 @@ class GADASH_Settings {
 		 */
 		include_once ($GADASH_Config->plugin_path . '/tools/gapi.php');
 		global $GADASH_GAPI;
-		
-		/*
-		 * Include Tools
-		 */
-		include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
-		$tools = new GADASH_Tools ();
 		
 		if (isset ( $_REQUEST ['ga_dash_code'] )) {
 				try{
