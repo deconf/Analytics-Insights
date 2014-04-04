@@ -51,13 +51,7 @@ class GADASH_Settings {
 	public static function frontend_settings() {
 		global $GADASH_Config;
 		
-		/*
-		 * Include Tools
-		*/
-		include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
-		$tools = new GADASH_Tools ();		
-		
-		if (! $tools->check_roles($GADASH_Config->options ['ga_dash_access_back'])) {
+		if (current_user_can ( 'manage_options' )) {
 			return;
 		}
 		
@@ -172,14 +166,8 @@ class GADASH_Settings {
 	}
 	public static function backend_settings() {
 		global $GADASH_Config;
-		
-		/*
-		 * Include Tools
-		*/
-		include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
-		$tools = new GADASH_Tools ();
 				
-		if (! $tools->check_roles($GADASH_Config->options ['ga_dash_access_back'])) {
+		if (current_user_can ( 'manage_options' )) {
 			return;
 		}
 		
@@ -401,7 +389,7 @@ class GADASH_Settings {
 		include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
 		$tools = new GADASH_Tools ();
 				
-		if (! $tools->check_roles($GADASH_Config->options ['ga_dash_access_back'])) {
+		if (current_user_can ( 'manage_options' )) {
 			return;
 		}
 		
@@ -603,7 +591,7 @@ class GADASH_Settings {
 		include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
 		$tools = new GADASH_Tools ();
 
-		if (! $tools->check_roles($GADASH_Config->options ['ga_dash_access_back'])) {
+		if (current_user_can ( 'manage_options' )) {
 			return;
 		}		
 		
