@@ -169,10 +169,14 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 				$GADASH_Config->options ['ga_dash_tableid'] = "";
 				$GADASH_Config->options ['ga_dash_tableid_jail'] = "";
 				$GADASH_Config->options ['ga_dash_profile_list'] = "";
-				$this->client->revokeToken ();
-			}	
+				try{
+					$this->client->revokeToken ();
+				} catch (Exception $e) {
+					$GADASH_Config->set_plugin_options ();
+				}	
+			}
+				
 			$GADASH_Config->set_plugin_options ();
-		
 		}
 		
 		// Get Main Chart
