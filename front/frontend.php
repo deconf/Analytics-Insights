@@ -27,7 +27,7 @@ if (! class_exists ( 'GADASH_Frontend' )) {
 				return $content;
 			}
 			
-			if (! is_feed () && ! is_home () && ! is_front_page () && ! is_preview ()) {
+			if ((is_page () || is_single ()) && ! is_preview ()) {
 				
 				/*
 				 * Include GAPI

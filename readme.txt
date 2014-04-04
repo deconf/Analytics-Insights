@@ -95,10 +95,10 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 
 = 04.04.2014 - v4.2.18 =
 - translations bugfix
-- minor display tweaks
+- menu display tweaks
 - removed debugging log file
 - permissions fix for WPMU
-- URI fix for frontend filters
+- URI fix for frontend filters (top pages and top searches)
 - exclude frontend stats in preview mode
 - updated download filters
 - by default administrators are not excluded from tracking
