@@ -93,6 +93,9 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 
 == Changelog ==
 
+= 05.04.2014 - v4.2.19 =
+- added Portuguese translation
+
 = 04.04.2014 - v4.2.18 =
 - translations bugfix
 - menu display tweaks
