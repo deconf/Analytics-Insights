@@ -24,7 +24,7 @@ Class GADASH_Install{
 			$options ['ga_dash_jailadmins'] = 1;
 			$options ['ga_dash_cachetime'] = 3600;
 			$options ['ga_dash_tracking'] = 1;
-			$options ['ga_dash_tracking_type'] = 'classic';
+			$options ['ga_dash_tracking_type'] = 'universal';
 			$options ['ga_dash_default_ua'] = '';
 			$options ['ga_dash_anonim'] = 0;
 			$options ['ga_dash_userapi'] = 0;
