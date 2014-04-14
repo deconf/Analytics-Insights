@@ -13,10 +13,14 @@ $rootdomain = $tools->get_root_domain ( $profile [3] );
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
+  
   ga('create', '<?php echo $profile[2]; ?>', '<?php echo $rootdomain['domain']; ?>');
-  <?php	if ($GADASH_Config->options ['ga_enhanced_links']) {?>
+<?php	if ($GADASH_Config->options ['ga_dash_remarketing']) {?>
+  ga('require', 'displayfeatures');
+<?php }?>
+<?php	if ($GADASH_Config->options ['ga_enhanced_links']) {?>
   ga('require', 'linkid', 'linkid.js');
-  <?php }?>
-  <?php	if ($GADASH_Config->options ['ga_dash_anonim']) {?>ga('send', 'pageview', {'anonymizeIp': true});<?php } else {?>ga('send', 'pageview');<?php }?>
+<?php }?>
+<?php if ($GADASH_Config->options ['ga_dash_anonim']) {?>  ga('send', 'pageview', {'anonymizeIp': true});<?php } else {?>  ga('send', 'pageview');<?php }?>
+
 </script>

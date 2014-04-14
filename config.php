@@ -51,7 +51,11 @@ if (! class_exists ( 'GADASH_Config' )) {
 			if (!isset($this->options['ga_enhanced_links'])){
 				$this->options['ga_enhanced_links'] = 0;
 			}
-
+			
+			if (!isset($this->options['ga_dash_remarketing'])){
+				$this->options ['ga_dash_remarketing'] = 0;
+			}
+			
 			if (!is_array($this->options['ga_dash_access_front']) OR empty($this->options['ga_dash_access_front'])){
 				$this->options['ga_dash_access_front'] = array();
 				$this->options['ga_dash_access_front'][] = 'administrator';
