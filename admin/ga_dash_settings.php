@@ -686,7 +686,7 @@ class GADASH_Settings {
 		}
 		
 		if (!function_exists('curl_version')){
-			$message = "<div class='error'><p><strong>" . __( "CURL is required. Please install/enable CURL!", 'ga-dash' ) . "</strong></p></div>";
+			$message = "<div class='error'><p><strong>" . __( "PHP CURL is required. Please install/enable PHP CURL!", 'ga-dash' ) . "</strong></p></div>";
 		}
 		
 		?>
