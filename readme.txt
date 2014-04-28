@@ -99,7 +99,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - frontend widget CSS fix
 - added remarketing, demographics and interests tracking support
 - universal analytics is now the default tracking method
-- css fix for dashboard widgets
+- CSS fix for dashboard widgets
 
 = 04.04.2014 - v4.2.18 =
 - translations bugfix
