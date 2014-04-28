@@ -41,6 +41,7 @@ Using this plugin, your analytics data is collected in a fast and secure manner 
 - automatically generates the tracking code; the user can also define a custom code
 - IP address anonymization feature
 - enhanced link attribution feature
+- demographics and interests tracking
 - track events feature: track downloads, emails and outbound links (supported for both tracking methods: classic tracking and universal tracking)
 - exclude traffic based on user level access
  
