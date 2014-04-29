@@ -94,6 +94,9 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 
 == Changelog ==
 
+= 29.04.2014 - v4.2.20 =
+- bugfix for the russian country map
+
 = 28.04.2014 - v4.2.19 =
 - added Portuguese translation
 - frontend widget CSS fix
