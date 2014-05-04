@@ -94,11 +94,12 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 
 == Changelog ==
 
-= 29.04.2014 - v4.2.20 =
+= 04.05.2014 - v4.2.20 =
 - bugfix for the russian country map
+- added german translation 
 
 = 28.04.2014 - v4.2.19 =
-- added Portuguese translation
+- added portuguese translation
 - frontend widget CSS fix
 - added remarketing, demographics and interests tracking support
 - universal analytics is now the default tracking method
