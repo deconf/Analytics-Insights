@@ -95,7 +95,8 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 == Changelog ==
 
 = 04.05.2014 - v4.2.20 =
-- bugfix for the russian country map
+- bugfix: russian country map is not working
+- bugfix: issues with check_roles() while using cache
 - added german translation
 - added spanish translation
 
