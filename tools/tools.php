@@ -87,13 +87,11 @@ if (! class_exists ( 'GADASH_Tools' )) {
 			if (is_user_logged_in () && isset ( $access_level )) {
 				global $current_user;
 				$roles = $current_user->roles;
-				
-				$user_role = array_shift ( $roles );
-				
+
 				if ((current_user_can ( 'manage_options' )) and ! $tracking) {
 					return true;
 				}
-				if (in_array ( $user_role, $access_level )) {
+				if (in_array ( $roles[0], $access_level )) {
 					return true;
 				} else {
 					return false;
