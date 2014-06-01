@@ -630,10 +630,11 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 			foreach ( $data ['rows'] as $item ) {
 				$max_array [] = $item [3];
 			}
-			$max = max ( $max_array );
+
+			$max = max ( $max_array ) ? max ( $max_array ) : 1;
 			
 			for($i = 0; $i < $data ['totalResults']; $i ++) {
-				$ga_dash_statsdata .= "['" . $data ['rows'] [$i] [0] . "-" . $data ['rows'] [$i] [1] . "-" . $data ['rows'] [$i] [2] . "'," . ($anonim ? round ( $data ['rows'] [$i] [3] * 100 / ($max + ($max / 10000)), 2 ) : $data ['rows'] [$i] [3]) . "],";
+				$ga_dash_statsdata .= "['" . $data ['rows'] [$i] [0] . "-" . $data ['rows'] [$i] [1] . "-" . $data ['rows'] [$i] [2] . "'," . ($anonim ? str_replace(',','.',round ( $data ['rows'] [$i] [3] * 100 / $max, 2 )) : $data ['rows'] [$i] [3]) . "],";
 			}
 			$ga_dash_statsdata = rtrim ( $ga_dash_statsdata, ',' );
 			
@@ -641,7 +642,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 				if ($display != 3){				
 					if ($anonim) {
 						$formater = "var formatter = new google.visualization.NumberFormat({ 
-					  pattern: '#,##%', 
+					  suffix: '%', 
 					  fractionDigits: 2
 					});
 	
