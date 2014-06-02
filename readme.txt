@@ -95,6 +95,9 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 == Changelog ==
 
 = 31.05.2014 - v4.2.20 =
+- added hungarian translation
+ 
+= 31.05.2014 - v4.2.20 =
 - bugfix: russian country map is not working
 - bugfix: only administrator can see stats while using a cache plugin
 - bugfix: division by zero on frontend widget

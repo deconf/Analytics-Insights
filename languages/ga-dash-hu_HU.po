@@ -1,11 +1,11 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Google Analytics Dashboard for WP\n"
+"Project-Id-Version: Google Analytics Dashboard for WP 4.2.20\n"
 "POT-Creation-Date: 2014-06-02 21:03+0200\n"
 "PO-Revision-Date: 2014-06-02 21:03+0200\n"
-"Last-Translator: jb <jb@jb.es>\n"
-"Language-Team: \n"
-"Language: es_ES\n"
+"Last-Translator: ILoveWP <info@ilovewp.net>\n"
+"Language-Team: Deconf <admin@deconf.com>\n"
+"Language: hu_HU\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,6 +13,7 @@ msgstr ""
 "X-Poedit-KeywordsList: _e;__\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: ../.\n"
 
 #: .././admin/dashboard_widgets.php:64
@@ -22,112 +23,113 @@ msgstr "Google Analytics"
 #: .././admin/dashboard_widgets.php:68 .././admin/ga_dash_settings.php:84
 #: .././admin/ga_dash_settings.php:200 .././admin/ga_dash_settings.php:780
 msgid "General Settings"
-msgstr "Configuración general"
+msgstr "Általános beállítások"
 
 #: .././admin/dashboard_widgets.php:72
 msgid "Backend Settings"
-msgstr "Configuración del backend"
+msgstr "Admin beállítások"
 
 #: .././admin/dashboard_widgets.php:76
 msgid "Frontend Settings"
-msgstr "Configuración del frontend"
+msgstr "Weblap beállítások"
 
 #: .././admin/dashboard_widgets.php:80 .././admin/ga_dash_settings.php:451
-#, fuzzy
 msgid "Tracking Code"
-msgstr "Tipo de seguimiento:"
+msgstr "Követőkód"
 
 #: .././admin/dashboard_widgets.php:113
 msgid "Settings"
-msgstr "Ajustes"
+msgstr "Beállítások"
 
 #: .././admin/dashboard_widgets.php:127 .././front/widgets.php:13
 msgid "Google Analytics Dashboard"
-msgstr "Escritorio de Google Analytics"
+msgstr "Google Analytics vezérlőpult"
 
 #: .././admin/dashboard_widgets.php:143
 msgid "This plugin needs an authorization:"
-msgstr ""
+msgstr "Ennek a bővítménynek engedélyre van szüksége:"
 
 #: .././admin/dashboard_widgets.php:143 .././admin/ga_dash_settings.php:888
-#, fuzzy
 msgid "Authorize Plugin"
-msgstr "Autorizar aplicación"
+msgstr "Bővítmény engedélyezése"
 
 #: .././admin/dashboard_widgets.php:156
 msgid ""
 "Something went wrong. Please check the Debugging Data section for possible "
 "errors"
 msgstr ""
+"Valami rosszul ment. Kérjük, ellenőrizze a hibakeresés adatok részben az "
+"esetleges hibákat"
 
 #: .././admin/dashboard_widgets.php:156 .././admin/dashboard_widgets.php:402
 #: .././admin/dashboard_widgets.php:408
 msgid "Error Log"
-msgstr ""
+msgstr "Hiba napló"
 
 #: .././admin/dashboard_widgets.php:188 .././admin/ga_dash_settings.php:443
 #: .././admin/ga_dash_settings.php:791 .././admin/ga_dash_settings.php:814
 msgid "View Name:"
-msgstr ""
+msgstr "Név:"
 
 #: .././admin/dashboard_widgets.php:193
 msgid "Something went wrong while retrieving profiles list."
-msgstr ""
+msgstr "Valami rosszul ment a profil lista lekérése közben."
 
 #: .././admin/dashboard_widgets.php:193
 msgid "More details"
-msgstr ""
+msgstr "További részletek"
 
 #: .././admin/dashboard_widgets.php:209 .././admin/dashboard_widgets.php:220
-#, fuzzy
 msgid "An admin should asign a default Google Analytics Profile."
-msgstr "Pide a un administrador que asigne un perfil de Google Analytics"
+msgstr ""
+"Az alapértelmezett  Google Analytics profilt egy admin képes kijelölni."
 
 #: .././admin/dashboard_widgets.php:209 .././admin/dashboard_widgets.php:220
-#, fuzzy
 msgid "Select Domain"
-msgstr "un solo dominio"
+msgstr "Domain kiválasztása"
 
 #: .././admin/dashboard_widgets.php:226
 msgid ""
 "Something went wrong while retrieving property data. You need to create and "
 "properly configure a Google Analytics account:"
 msgstr ""
+"Valami rosszul ment a tulajdon adat lekérése közben. Egy jól konfigurált "
+"Google Analytics fiókra van szüksége:"
 
 #: .././admin/dashboard_widgets.php:226
 msgid "Find out more!"
-msgstr ""
+msgstr "Tudjon meg többet!"
 
 #: .././admin/dashboard_widgets.php:267
 msgid "Real-Time"
-msgstr "Tiempo real"
+msgstr "Valós idejű"
 
 #: .././admin/dashboard_widgets.php:268
 msgid "Today"
-msgstr "Hoy"
+msgstr "Ma"
 
 #: .././admin/dashboard_widgets.php:270
 msgid "Yesterday"
-msgstr "Ayer"
+msgstr "Tegnap"
 
 #: .././admin/dashboard_widgets.php:272 .././front/widgets.php:100
 #: .././tools/gapi.php:698
 msgid "Last 7 Days"
-msgstr "Últimos 7 días "
+msgstr "Elmúlt 7 nap"
 
 #: .././admin/dashboard_widgets.php:274 .././front/widgets.php:101
 #: .././tools/gapi.php:699
 msgid "Last 14 Days"
-msgstr "Últimos 14 días"
+msgstr "Elmúlt 14 nap"
 
 #: .././admin/dashboard_widgets.php:276 .././front/widgets.php:102
 #: .././tools/gapi.php:700
 msgid "Last 30 Days"
-msgstr "Últimos 30 días"
+msgstr "Elmúlt 30 nap"
 
 #: .././admin/dashboard_widgets.php:278
 msgid "Last 90 Days"
-msgstr "Últimos 30 días"
+msgstr "Elmúlt 90 nap"
 
 #: .././admin/dashboard_widgets.php:282 .././admin/dashboard_widgets.php:385
 #: .././admin/dashboard_widgets.php:478 .././admin/dashboard_widgets.php:505
@@ -135,426 +137,410 @@ msgstr "Últimos 30 días"
 #: .././admin/dashboard_widgets.php:563 .././admin/dashboard_widgets.php:587
 #: .././tools/gapi.php:585 .././tools/gapi.php:670 .././tools/gapi.php:838
 msgid "Visits"
-msgstr "Visitas"
+msgstr "Látogatások"
 
 #: .././admin/dashboard_widgets.php:284 .././admin/dashboard_widgets.php:369
 msgid "Visitors"
-msgstr "Visitantes"
+msgstr "Látogatók"
 
 #: .././admin/dashboard_widgets.php:286
 msgid "Organic"
-msgstr "Búsquedas orgánicas"
+msgstr "Organikus"
 
 #: .././admin/dashboard_widgets.php:288 .././admin/dashboard_widgets.php:373
 msgid "Page Views"
-msgstr "Páginas vistas"
+msgstr "Oldalmegtekintések"
 
 #: .././admin/dashboard_widgets.php:290 .././admin/dashboard_widgets.php:377
 msgid "Bounce Rate"
-msgstr "Porcenaje de rebote"
+msgstr "Visszafordulási arány"
 
 #: .././admin/dashboard_widgets.php:301 .././admin/dashboard_widgets.php:308
 msgid "Hour"
-msgstr "Hora"
+msgstr "Óra"
 
 #: .././admin/dashboard_widgets.php:315 .././admin/dashboard_widgets.php:322
 #: .././admin/dashboard_widgets.php:329 .././admin/dashboard_widgets.php:336
 #: .././tools/gapi.php:670 .././tools/gapi.php:768
 msgid "Date"
-msgstr "Fecha"
+msgstr "Dátum"
 
 #: .././admin/dashboard_widgets.php:381
 msgid "Organic Searches"
-msgstr "Búsquedas orgánicas"
+msgstr "Organikus keresés"
 
 #: .././admin/dashboard_widgets.php:402 .././admin/dashboard_widgets.php:408
 msgid ""
 "No stats available. Please check the Debugging Data section for possible "
 "errors"
 msgstr ""
+"Nincs elérhető statisztika. Kérjük, ellenőrizze a hibakeresés adatok részben "
+"az esetleges hibákat"
 
 #: .././admin/dashboard_widgets.php:478
 msgid "Country/City"
-msgstr "País/Ciudad"
+msgstr "Ország/város"
 
 #: .././admin/dashboard_widgets.php:505
 msgid "Source"
-msgstr "Fuente"
+msgstr "Forrás"
 
 #: .././admin/dashboard_widgets.php:509
 msgid "Type"
-msgstr "Tipo"
+msgstr "Típus"
 
 #: .././admin/dashboard_widgets.php:517
 msgid "Traffic Sources"
-msgstr "Fuentes de tráfico"
+msgstr "Forgalmi források"
 
 #: .././admin/dashboard_widgets.php:526
 msgid "New vs. Returning"
-msgstr "Nuevos vs Recurrentes"
+msgstr "Új vagy visszatérő"
 
 #: .././admin/dashboard_widgets.php:540
 msgid "Top Pages"
-msgstr "Páginas principales"
+msgstr "Legnépszerűbb oldalak"
 
 #: .././admin/dashboard_widgets.php:563
 msgid "Top Referrers"
-msgstr "Referencias principales"
+msgstr "Leggyakoribb hivatkozók"
 
 #: .././admin/dashboard_widgets.php:587 .././tools/gapi.php:838
 msgid "Top Searches"
-msgstr "Búsquedas principales"
+msgstr "Legfőbb keresések"
 
 #: .././admin/dashboard_widgets.php:611
 msgid "Visits:"
-msgstr "Visitas:"
+msgstr "Látogatások:"
 
 #: .././admin/dashboard_widgets.php:613
 msgid "Visitors:"
-msgstr "Visitantes:"
+msgstr "Látogatók:"
 
 #: .././admin/dashboard_widgets.php:615
 msgid "Page Views:"
-msgstr "Páginas vistas:"
+msgstr "Oldalmeg- tekintések:"
 
 #: .././admin/dashboard_widgets.php:619
 msgid "Bounce Rate:"
-msgstr "Porcentaje de rebote:"
+msgstr "Visszafordulási arány:"
 
 #: .././admin/dashboard_widgets.php:621
 msgid "Organic Search:"
-msgstr "Búsquedas orgánicas:"
+msgstr "Organikus keresés:"
 
 #: .././admin/dashboard_widgets.php:623
 msgid "Pages per Visit:"
-msgstr "Páginas por visita:"
+msgstr "Oldal / látogató"
 
 #: .././admin/dashboard_widgets.php:632
 msgid ""
 "This is a beta feature and is only available when using my Developer Key! ("
 msgstr ""
+"Ez béta szolgáltatás, és csak akkor elérhető, amikor az én Fejlesztői "
+"Kulcsomat (Developer Key) használja! ("
 
 #: .././admin/dashboard_widgets.php:632
 msgid "more about this feature"
-msgstr ""
+msgstr "többet erről a szolgáltatásról"
 
 #: .././admin/dashboard_widgets.php:632 .././admin/ga_dash_settings.php:262
 #: .././admin/ga_dash_settings.php:297
 msgid ")"
-msgstr ""
+msgstr ")"
 
 #: .././admin/dashboard_widgets.php:641 .././tools/gapi.php:1063
 msgid "REFERRAL"
-msgstr "REFERENCIA"
+msgstr "HIVATKOZÓ"
 
 #: .././admin/dashboard_widgets.php:642 .././tools/gapi.php:1064
 msgid "ORGANIC"
-msgstr "ORGÁNICO"
+msgstr "ORGANIKUS"
 
 #: .././admin/dashboard_widgets.php:643 .././tools/gapi.php:976
 #: .././tools/gapi.php:1065
 msgid "SOCIAL"
-msgstr "SOCIAL"
+msgstr "KÖZÖSSÉGI"
 
 #: .././admin/dashboard_widgets.php:646 .././tools/gapi.php:979
 #: .././tools/gapi.php:1068
 msgid "DIRECT"
-msgstr "DIRECTO"
+msgstr "KÖZVETLEN"
 
 #: .././admin/dashboard_widgets.php:647 .././tools/gapi.php:1069
 msgid "NEW"
-msgstr "NUEVO"
+msgstr "ÚJ"
 
 #: .././admin/dashboard_widgets.php:648 .././tools/gapi.php:1070
 msgid "RETURNING"
-msgstr "RECURRENTE"
+msgstr "VISSZATÉRŐ"
 
 #: .././admin/dashboard_widgets.php:662
 msgid "Visits from "
-msgstr "Visitas desde"
+msgstr "Látogatások innen "
 
 #: .././admin/dashboard_widgets.php:664
 msgid "Visits by Country"
-msgstr "Visitas por país"
+msgstr "Látogatások országonként"
 
 #: .././admin/dashboard_widgets.php:671
 msgid "Traffic Overview"
-msgstr "Vista general de tráfico"
+msgstr "Forgalom áttekintés"
 
 #: .././admin/ga_dash_settings.php:62 .././admin/ga_dash_settings.php:178
 #: .././admin/ga_dash_settings.php:400 .././admin/ga_dash_settings.php:678
 msgid "Options saved."
-msgstr "Opciones guardadas."
+msgstr "Beállítások mentve."
 
 #: .././admin/ga_dash_settings.php:66 .././admin/ga_dash_settings.php:182
 #: .././admin/ga_dash_settings.php:404
 msgid "Something went wrong, you need to"
-msgstr ""
+msgstr "Valami rosszul ment, szükséges a "
 
 #: .././admin/ga_dash_settings.php:66 .././admin/ga_dash_settings.php:182
 #: .././admin/ga_dash_settings.php:404
 msgid "auhorize the plugin"
-msgstr "autorizar aplicación"
+msgstr "bővítményt engedélyezni"
 
 #: .././admin/ga_dash_settings.php:66 .././admin/ga_dash_settings.php:182
 #: .././admin/ga_dash_settings.php:404
 msgid "or properly configure your"
-msgstr ""
+msgstr "vagy helyesen beállítani a"
 
 #: .././admin/ga_dash_settings.php:66 .././admin/ga_dash_settings.php:182
 #: .././admin/ga_dash_settings.php:404
-#, fuzzy
 msgid "Google Analytics account"
-msgstr "Seguimiento de Google Analytics"
+msgstr "Google Analytics fiókját"
 
 #: .././admin/ga_dash_settings.php:74
 msgid "Google Analytics Frontend Settings"
-msgstr "Configuración del frontend de Google Analytics"
+msgstr "Google Analytics weblap beállítások"
 
 #: .././admin/ga_dash_settings.php:87 .././admin/ga_dash_settings.php:203
 msgid "Show stats to: "
-msgstr ""
+msgstr "Statisztikák megjelenítése:"
 
 #: .././admin/ga_dash_settings.php:130
-#, fuzzy
 msgid " show page visits and visitors in frontend (after each article)"
-msgstr ""
-"mostrar las visitas de página y las busquedas principales en el frontend "
-"(después de cada artículo)"
+msgstr "oldal látogatások és látogatók mutatása a weblapon (minden cikk után)"
 
 #: .././admin/ga_dash_settings.php:148
-#, fuzzy
 msgid " show page searches (after each article)"
-msgstr ""
-"mostrar las visitas de página y las busquedas principales en el frontend "
-"(después de cada artículo)"
+msgstr "oldal keresések mutatása (minden cikk után)"
 
 #: .././admin/ga_dash_settings.php:159 .././admin/ga_dash_settings.php:375
 #: .././admin/ga_dash_settings.php:592 .././admin/ga_dash_settings.php:875
 msgid "Update Options"
-msgstr "Actualizar opciones"
+msgstr "Beállítások frissítése"
 
 #: .././admin/ga_dash_settings.php:190
 msgid "Google Analytics Dashboard Settings"
-msgstr "Configuración del escritorio de Google Analytics"
+msgstr "Google Analytics vezérlőpult beállítások"
 
 #: .././admin/ga_dash_settings.php:247
-#, fuzzy
 msgid "disable Switch Profile/View functionality"
-msgstr " desactivar la funcionalidad de cambio de perfil en el escritorio"
+msgstr "Profil/Nézet Kapcsoló letiltása"
 
 #: .././admin/ga_dash_settings.php:252
-#, fuzzy
 msgid "Real-Time Settings"
-msgstr "Configuración de la caché"
+msgstr "Valós idejű beállítások"
 
 #: .././admin/ga_dash_settings.php:255
 msgid "Maximum number of pages to display on real-time tab:"
-msgstr ""
+msgstr "Maximális oldalszám megjelenítése a valós idejű fülön:"
 
 #: .././admin/ga_dash_settings.php:259
 msgid "(find out more"
-msgstr ""
+msgstr "(tudjon meg többet"
 
 #: .././admin/ga_dash_settings.php:261 .././admin/ga_dash_settings.php:296
 msgid "about this feature"
-msgstr ""
+msgstr "erről a szolgáltatásról"
 
 #: .././admin/ga_dash_settings.php:265
 msgid "Additional Stats & Charts"
-msgstr ""
+msgstr "További statisztikák és grafikonok"
 
 #: .././admin/ga_dash_settings.php:279
-#, fuzzy
 msgid " show Geo Map chart for visits"
-msgstr "mostrar geo mapa para visitas"
+msgstr "földrajzi adatok mutatása a látogatásokhoz"
 
 #: .././admin/ga_dash_settings.php:285
 msgid "Target Geo Map to region:"
-msgstr ""
+msgstr "Cél földrajzi térkép a régióban:"
 
 #: .././admin/ga_dash_settings.php:289
 msgid "and render top"
-msgstr ""
+msgstr "és mutassa a top"
 
 #: .././admin/ga_dash_settings.php:293
 msgid "cities (find out more"
-msgstr ""
+msgstr "várost (tudjon meg többet"
 
 #: .././admin/ga_dash_settings.php:312
 msgid " show traffic overview"
-msgstr "mostrar vista general del tráfico"
+msgstr "forgalom áttekintés bekapcsolása"
 
 #: .././admin/ga_dash_settings.php:328
 msgid " show top pages"
-msgstr "mostrar páginas principales"
+msgstr "legnépszerűbb oldalak bekapcsolása"
 
 #: .././admin/ga_dash_settings.php:345
 msgid " show top referrers"
-msgstr "mostrar referencias principales"
+msgstr "leggyakoribb hivatkozók bekapcsolása"
 
 #: .././admin/ga_dash_settings.php:362
 msgid " show top searches"
-msgstr "mostrar búsquedas principales"
+msgstr "legfőbb keresések bekapcsolása"
 
 #: .././admin/ga_dash_settings.php:412
-#, fuzzy
 msgid "Google Analytics Tracking Code"
-msgstr "Seguimiento de Google Analytics"
+msgstr "Google Analytics követőkód"
 
 #: .././admin/ga_dash_settings.php:422
-#, fuzzy
 msgid "Tracking Settings"
-msgstr "Configuración del backend"
+msgstr "Követési beállítások"
 
 #: .././admin/ga_dash_settings.php:425
-#, fuzzy
 msgid "Tracking Options: "
-msgstr "Tipo de seguimiento:"
+msgstr "Követés beállítások:"
 
 #: .././admin/ga_dash_settings.php:429
 msgid "Disabled"
-msgstr "desactivado"
+msgstr "Letiltva"
 
 #: .././admin/ga_dash_settings.php:431
-#, fuzzy
 msgid "Enabled"
-msgstr "desactivado"
+msgstr "Engedélyezve"
 
 #: .././admin/ga_dash_settings.php:433
 msgid "Custom Code"
-msgstr ""
+msgstr "Egyéni kód"
 
 #: .././admin/ga_dash_settings.php:443 .././admin/ga_dash_settings.php:814
-#, fuzzy
 msgid "Tracking ID:"
-msgstr "Tipo de seguimiento:"
+msgstr "Követési azonosító:"
 
 #: .././admin/ga_dash_settings.php:443 .././admin/ga_dash_settings.php:814
 msgid "Default URL:"
-msgstr ""
+msgstr "Alapértelmezett webcím:"
 
 #: .././admin/ga_dash_settings.php:443 .././admin/ga_dash_settings.php:814
 msgid "Time Zone:"
-msgstr ""
+msgstr "Időzóna:"
 
 #: .././admin/ga_dash_settings.php:457
 msgid "Tracking Type: "
-msgstr "Tipo de seguimiento:"
+msgstr "Követési típus:"
 
 #: .././admin/ga_dash_settings.php:461
 msgid "Classic Analytics"
-msgstr ""
+msgstr "Klasszikus Analytics"
 
 #: .././admin/ga_dash_settings.php:463
 msgid "Universal Analytics"
-msgstr ""
+msgstr "Univerzális Analytics"
 
 #: .././admin/ga_dash_settings.php:478
 msgid " anonymize IPs while tracking"
-msgstr "anonimizar IPs durante el seguimiento"
+msgstr "nyomon követés közben IP anonimizálása"
 
 #: .././admin/ga_dash_settings.php:494
 msgid " enable enhanced link attribution"
-msgstr ""
+msgstr "kibővített link tulajdonság engedélyezése"
 
 #: .././admin/ga_dash_settings.php:510
 msgid " enable demographics and interests reports"
 msgstr ""
 
 #: .././admin/ga_dash_settings.php:518
-#, fuzzy
 msgid "Your Tracking Code:"
-msgstr "Tipo de seguimiento:"
+msgstr "Követési kód:"
 
 #: .././admin/ga_dash_settings.php:525
-#, fuzzy
 msgid "Events Tracking"
-msgstr "Activar seguimiento:"
+msgstr "Események követése"
 
 #: .././admin/ga_dash_settings.php:539
 msgid " track downloads, mailto and outbound links"
-msgstr ""
+msgstr "letöltések, mailto és kimenő linkek követése"
 
 #: .././admin/ga_dash_settings.php:544
 msgid "Download Filters:"
-msgstr ""
+msgstr "Letöltés szűrők:"
 
 #: .././admin/ga_dash_settings.php:551
-#, fuzzy
 msgid "Exclude Tracking"
-msgstr "Activar seguimiento:"
+msgstr "Követés kizárás"
 
 #: .././admin/ga_dash_settings.php:554
-#, fuzzy
 msgid "Exclude tracking for: "
-msgstr "Activar seguimiento:"
+msgstr "Követés kizárása a következőkre:"
 
 #: .././admin/ga_dash_settings.php:630
 msgid "Plugin authorization succeeded."
-msgstr ""
+msgstr "Bővítmény engedélyezése sikeres."
 
 #: .././admin/ga_dash_settings.php:663
 msgid "Cleared Cache."
-msgstr "Caché borrada."
+msgstr "Cache kiűrítve."
 
 #: .././admin/ga_dash_settings.php:669
-#, fuzzy
 msgid "Token Reseted and Revoked."
-msgstr "Token reseteado."
+msgstr "Token visszaállítva és visszavonva."
 
 #: .././admin/ga_dash_settings.php:674
 msgid "Dumping log data."
-msgstr ""
+msgstr "Napló adat ürítése."
 
 #: .././admin/ga_dash_settings.php:682
 msgid "All other domains/properties were removed."
-msgstr ""
+msgstr "Összes többi domain/tulajdon eltávolításra került."
 
 #: .././admin/ga_dash_settings.php:689
+#, fuzzy
 msgid "PHP CURL is required. Please install/enable PHP CURL!"
-msgstr ""
+msgstr "CURL szükséges. Kérjük, telepítse/engedélyezze a CURL-t!"
 
 #: .././admin/ga_dash_settings.php:694
 msgid "Google Analytics Settings"
-msgstr "Configuración de Google Analytics"
+msgstr "Google Analytics beállítások"
 
 #: .././admin/ga_dash_settings.php:718
-#, fuzzy
 msgid "Plugin Authorization"
-msgstr "Borrar autorización"
+msgstr "Bővítmény engedélyezés"
 
 #: .././admin/ga_dash_settings.php:722
-#, fuzzy
 msgid "You should watch the"
-msgstr "Deberías ver este"
+msgstr "Kérjük, nézze meg ezt a"
 
 #: .././admin/ga_dash_settings.php:722
 msgid "video"
-msgstr ""
+msgstr "videót"
 
 #: .././admin/ga_dash_settings.php:722
 msgid "and read this"
-msgstr ""
+msgstr "és olvassa el ezt az"
 
 #: .././admin/ga_dash_settings.php:722
-#, fuzzy
 msgid "tutorial"
-msgstr "Tutorial de configuración"
+msgstr "oktatói anyagot"
 
 #: .././admin/ga_dash_settings.php:722
 msgid ""
 "before proceeding to authorization. This plugin requires a properly "
 "configured Google Analytics account"
 msgstr ""
+"mielőtt engedélyezné. Ezt a bővítményt csak helyesen beállított Google "
+"Analytics fiókkal lehet használni"
 
 #: .././admin/ga_dash_settings.php:733
 msgid " use your own API Project credentials"
-msgstr ""
+msgstr "használja a saját API Project hitelesítő adatait"
 
 #: .././admin/ga_dash_settings.php:742
 msgid "API Key:"
-msgstr "API Key:"
+msgstr "API key:"
 
 #: .././admin/ga_dash_settings.php:748
 msgid "Client ID:"
@@ -566,312 +552,188 @@ msgstr "Client Secret:"
 
 #: .././admin/ga_dash_settings.php:771
 msgid "Clear Authorization"
-msgstr "Borrar autorización"
+msgstr "Engedélyezés törlése"
 
 #: .././admin/ga_dash_settings.php:773 .././admin/ga_dash_settings.php:890
 msgid "Clear Cache"
-msgstr "Borrar caché"
+msgstr "Cache ürítése"
 
 #: .././admin/ga_dash_settings.php:784
-#, fuzzy
 msgid "Select Domain: "
-msgstr "un solo dominio"
+msgstr "Domain kiválasztása:"
 
 #: .././admin/ga_dash_settings.php:799
 msgid "and/or hide all other domains"
-msgstr ""
+msgstr "és/vagy az összes többi domain eltüntetése"
 
 #: .././admin/ga_dash_settings.php:801
 msgid "Hide Now"
-msgstr ""
+msgstr "Elrejtés most"
 
 #: .././admin/ga_dash_settings.php:822
 msgid "Theme Color: "
-msgstr ""
+msgstr "Téma színe:"
 
 #: .././admin/ga_dash_settings.php:831
 msgid "A new frontend widget is available! To enable it, go to"
-msgstr ""
+msgstr "Elérhető egy új frontend widget! Engedélyezéshez, menjen a"
 
 #: .././admin/ga_dash_settings.php:831
 msgid "Appearance -> Widgets"
-msgstr ""
+msgstr "Megjelenés -> Widgetek"
 
 #: .././admin/ga_dash_settings.php:831
 msgid "and look for Google Analytics Dashboard."
-msgstr "y busca escritorio de Google Analytics."
+msgstr "menühöz és keresse a Google Analytics vezérlőpultot."
 
 #: .././admin/ga_dash_settings.php:838 .././admin/ga_dash_settings.php:898
 msgid "Debugging Data"
-msgstr ""
+msgstr "Hibakeresés adatok"
 
 #: .././admin/ga_dash_settings.php:958
-#, fuzzy
 msgid "Setup Tutorial & Demo"
-msgstr "Tutorial de configuración"
+msgstr "Beállítás oktató anyag és demo"
 
 #: .././admin/ga_dash_settings.php:969
-#, fuzzy
 msgid "Support & Reviews"
-msgstr "Enlaces de soporte"
+msgstr "Támogatás és vélemények"
 
 #: .././admin/ga_dash_settings.php:976
 msgid "You can find support on"
-msgstr ""
+msgstr "A segítséget megtalálhatja itt:"
 
 #: .././admin/ga_dash_settings.php:976
 msgid "DeConf Help Center"
-msgstr ""
+msgstr "DeConf Help Center"
 
 #: .././admin/ga_dash_settings.php:983
 msgid "Your feedback and review are both important,"
-msgstr ""
+msgstr "Az Ön visszajelzése és értékelése egyaránt fontos számunkra,"
 
 #: .././admin/ga_dash_settings.php:983
 msgid "rate this plugin"
-msgstr ""
+msgstr "értékelje ezt a bővítményt"
 
 #: .././admin/ga_dash_settings.php:988
 msgid "Further Reading"
-msgstr ""
+msgstr "További olvasmány"
 
 #: .././admin/ga_dash_settings.php:995
 msgid "Other"
-msgstr ""
+msgstr "Egyéb"
 
 #: .././admin/ga_dash_settings.php:995
 msgid "WordPress Plugins"
-msgstr ""
+msgstr "WordPress bővítmények"
 
 #: .././admin/ga_dash_settings.php:995
 msgid "written by the same author"
-msgstr ""
+msgstr "ettől a szerzőtől"
 
 #: .././admin/ga_dash_settings.php:1001
 msgid "Web Analytics"
-msgstr "Analíticas web"
+msgstr "Web Analitika"
 
 #: .././admin/ga_dash_settings.php:1001
 msgid "service with visitors tracking at IP level."
-msgstr ""
+msgstr "szolgáltatás látogatók nyomon követésével IP szinten"
 
 #: .././front/widgets.php:14
 msgid "Will display your google analytics stats in a widget"
-msgstr ""
+msgstr "Megjelenik a Google Analytics statisztika egy widgetben"
 
 #: .././front/widgets.php:62
 msgid "generated by"
-msgstr ""
+msgstr "által generált"
 
 #: .././front/widgets.php:75
 msgid "Google Analytics Stats"
-msgstr "Estadísticas de Google Analytics"
+msgstr "Google Analytics statisztika"
 
 #: .././front/widgets.php:82
 msgid "Title:"
-msgstr ""
+msgstr "Cím:"
 
 #: .././front/widgets.php:86
 msgid "Display:"
-msgstr ""
+msgstr "Megjelenés:"
 
 #: .././front/widgets.php:88
 msgid "Chart & Totals"
-msgstr ""
+msgstr "Diagram és összegzés"
 
 #: .././front/widgets.php:89
 msgid "Chart"
-msgstr ""
+msgstr "Diagram"
 
 #: .././front/widgets.php:90
 msgid "Totals"
-msgstr ""
+msgstr "Összes"
 
 #: .././front/widgets.php:94
 msgid "Anonimize chart's stats:"
-msgstr ""
+msgstr "Grafikon statisztika anonimizálás:"
 
 #: .././front/widgets.php:98
 msgid "Stats for:"
-msgstr ""
+msgstr "Statisztika:"
 
 #: .././front/widgets.php:106
 msgid "Give credits:"
-msgstr ""
+msgstr "Köszönet:"
 
 #: .././tools/gapi.php:75
 msgid "Use this link to get your access code:"
-msgstr ""
+msgstr "Használja ezt a linket, hogy a hozzáférési kódot megkapja:"
 
 #: .././tools/gapi.php:75
 msgid "Get Access Code"
-msgstr ""
+msgstr "Hozzáférési kód beszerzése"
 
 #: .././tools/gapi.php:79
 msgid "Access Code:"
-msgstr "Código de acceso:"
+msgstr "Hozzáférési kód:"
 
 #: .././tools/gapi.php:90
 msgid "Save Access Code"
-msgstr ""
+msgstr "Hozzáférési kód mentése"
 
 #: .././tools/gapi.php:585 .././tools/gapi.php:670
 msgid "\\' trend"
-msgstr ""
+msgstr "\\' trend"
 
 #: .././tools/gapi.php:703
 msgid "Period:"
-msgstr ""
+msgstr "Időszak:"
 
 #: .././tools/gapi.php:704
 msgid "Total Visits:"
-msgstr "Total de visitas:"
+msgstr "Összes látogatás:"
 
 #: .././tools/gapi.php:720
 msgid "Views vs UniqueViews"
-msgstr "Visitas vs visitas únicas"
+msgstr "Látogatások vs egyedi látogatások"
 
 #: .././tools/gapi.php:768
 msgid "Views"
-msgstr "Vistas"
+msgstr "Látogatások"
 
 #: .././tools/gapi.php:768
 msgid "UniqueViews"
-msgstr "Visitas únicas"
+msgstr "Egyedi látogatások"
 
 #: .././tools/gapi.php:970
 msgid "REFERRALS"
-msgstr ""
+msgstr "HIVATKOZÓK"
 
 #: .././tools/gapi.php:973
 msgid "KEYWORDS"
-msgstr ""
+msgstr "KULCSSZAVAK"
 
-#, fuzzy
 #~ msgid ""
 #~ " (watch this <a href='http://deconf.com/projects/google-analytics-"
 #~ "dashboard-for-wordpress/' target='_blank'>Step by step video tutorial</a>)"
 #~ msgstr ""
-#~ " (ver este <a href='http://www.deconf.com/en/projects/google-analytics-"
-#~ "dashboard-for-wordpress/' target='_blank'>videotutorial paso a paso</a>)"
-
-#~ msgid "Help on Wordpress Forum"
-#~ msgstr "Ayuda en el foro de Wordpress"
-
-#~ msgid "Support on Deconf Forum"
-#~ msgstr "Soporte en el foro de Deconf"
-
-#~ msgid "GA Dashboard"
-#~ msgstr "GA Dashboard"
-
-#~ msgid "Ask an admin to authorize this Application"
-#~ msgstr "Pide a un administrador que autorice esta aplicación"
-
-#~ msgid "Step by step video tutorial"
-#~ msgstr "video tutorial paso a paso"
-
-#~ msgid "step by step video tutorial"
-#~ msgstr "video tutorial paso a paso"
-
-#~ msgid ""
-#~ "(the rest of the settings will show up after completing the authorization "
-#~ "process)"
-#~ msgstr ""
-#~ "(el resto de la configuración se mostrará después de completar el proceso "
-#~ "de autorización)"
-
-#~ msgid "Google Analytics Dashboard Official Page"
-#~ msgstr "Página oficial de Google Analytics Dashboard"
-
-#~ msgid "Google Analytics Dashboard Wordpress Support"
-#~ msgstr "Soporte de Wordpress de Google Analytics Dashboard"
-
-#~ msgid "Google Analytics Dashboard on Deconf Forum"
-#~ msgstr "Google Analytics Dashboard en el foro de Deconf"
-
-#~ msgid "Useful Plugins"
-#~ msgstr "Plugins de interés"
-
-#~ msgid "YouTube Analytics Dashboard"
-#~ msgstr "YouTube Analytics Dashboard"
-
-#~ msgid "Google Adsense Dashboard"
-#~ msgstr "Google Adsense Dashboard"
-
-#~ msgid "Access Level"
-#~ msgstr "Nivel de acceso"
-
-#~ msgid "View Access Level: "
-#~ msgstr "Mostrar nivel de acceso:"
-
-#~ msgid "Administrators"
-#~ msgstr "administradores"
-
-#~ msgid "Editors"
-#~ msgstr "editores"
-
-#~ msgid "Authors"
-#~ msgstr "autores"
-
-#~ msgid "Contributors"
-#~ msgstr "colaboradores"
-
-#~ msgid "Lock selected access level to this profile: "
-#~ msgstr "Bloquear el nivel de acceso seleccionado a este perfil:"
-
-#~ msgid "your profile list needs an update:"
-#~ msgstr "tu lista de perfiles necesita una actualización:"
-
-#~ msgid "Click here"
-#~ msgstr "Pulsa aqui"
-
-#~ msgid "CSS Settings: "
-#~ msgstr "Configuración CSS:"
-
-#~ msgid "Blue Theme"
-#~ msgstr "Tema azul"
-
-#~ msgid "Light Theme"
-#~ msgstr "Tema claro"
-
-#~ msgid "Cache Time: "
-#~ msgstr "Tiempo de caché:"
-
-#~ msgid "15 minutes"
-#~ msgstr "15 minutos"
-
-#~ msgid "30 minutes"
-#~ msgstr "30 minutos"
-
-#~ msgid "1 hour"
-#~ msgstr "1 hora"
-
-#~ msgid "2 hours"
-#~ msgstr "2 horas"
-
-#~ msgid "Domain and Subdomains"
-#~ msgstr "dominio y subdominios"
-
-#~ msgid "Multiple TLD Domains"
-#~ msgstr "multiples dominio TLD"
-
-#~ msgid "Default Tracking Domain: "
-#~ msgstr "Dominio predeterminado de seguimiento:"
-
-#~ msgid "None"
-#~ msgstr "Ninguno"
-
-#~ msgid "Client ID, Client Secret or API Key is missing"
-#~ msgstr "Falta Client ID, Client Secret o API Key"
-
-#~ msgid "API Key, Client ID or Client Secret is missing."
-#~ msgstr "Falta API Key, Client ID o Client Secret."
-
-#~ msgid "ex: AIzaSyASK7dLaii4326AZVyZ6MCOIQOY6F30G_1"
-#~ msgstr "ej.: AIzaSyASK7dLaii4326AZVyZ6MCOIQOY6F30G_1"
-
-#~ msgid "ex: 111342334706.apps.googleusercontent.com"
-#~ msgstr "ej.: 111342334706.apps.googleusercontent.com"
-
-#~ msgid "ex: c62POy23C_2qK5fd3fdsec2o"
-#~ msgstr "ej.: c62POy23C_2qK5fd3fdsec2o"
+#~ " (tekintse meg a <a href='http://deconf.com/projects/google-analytics-"
+#~ "dashboard-for-wordpress/' target='_blank'>Lépésről lépésre videó "
+#~ "bemutató</a>t)"
