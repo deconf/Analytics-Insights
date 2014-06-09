@@ -96,6 +96,8 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 
 = 31.05.2014 - v4.2.21 =
 - added hungarian translation
+- added german translation
+- bugfix: escaping characters in google charts
  
 = 31.05.2014 - v4.2.20 =
 - bugfix: russian country map is not working
