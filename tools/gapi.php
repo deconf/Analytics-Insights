@@ -690,7 +690,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 				</table>';
 			}			
 			
-			return $content;
+			return apply_filters( 'gadash_frontend_content',$content);
 		}
 		
 		// Frontend Visists

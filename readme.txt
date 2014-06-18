@@ -94,10 +94,11 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 
 == Changelog ==
 
-= 09.06.2014 - v4.2.21 =
+= 18.06.2014 - v4.2.21 =
 - added hungarian translation
 - added italian translation
 - bugfix: escaping characters in google charts
+- new filter on frontend widget 
  
 = 31.05.2014 - v4.2.20 =
 - bugfix: russian country map is not working
