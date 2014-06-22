@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Google Analytics Dashboard for WP 4.2.20\n"
-"POT-Creation-Date: 2014-06-02 21:03+0200\n"
-"PO-Revision-Date: 2014-06-02 21:03+0200\n"
+"POT-Creation-Date: 2014-06-22 19:16+0200\n"
+"PO-Revision-Date: 2014-06-22 19:24+0200\n"
 "Last-Translator: ILoveWP <info@ilovewp.net>\n"
 "Language-Team: Deconf <admin@deconf.com>\n"
 "Language: hu_HU\n"
@@ -113,17 +113,17 @@ msgid "Yesterday"
 msgstr "Tegnap"
 
 #: .././admin/dashboard_widgets.php:272 .././front/widgets.php:100
-#: .././tools/gapi.php:698
+#: .././tools/gapi.php:683
 msgid "Last 7 Days"
 msgstr "Elmúlt 7 nap"
 
 #: .././admin/dashboard_widgets.php:274 .././front/widgets.php:101
-#: .././tools/gapi.php:699
+#: .././tools/gapi.php:684
 msgid "Last 14 Days"
 msgstr "Elmúlt 14 nap"
 
 #: .././admin/dashboard_widgets.php:276 .././front/widgets.php:102
-#: .././tools/gapi.php:700
+#: .././tools/gapi.php:685
 msgid "Last 30 Days"
 msgstr "Elmúlt 30 nap"
 
@@ -135,7 +135,7 @@ msgstr "Elmúlt 90 nap"
 #: .././admin/dashboard_widgets.php:478 .././admin/dashboard_widgets.php:505
 #: .././admin/dashboard_widgets.php:509 .././admin/dashboard_widgets.php:540
 #: .././admin/dashboard_widgets.php:563 .././admin/dashboard_widgets.php:587
-#: .././tools/gapi.php:585 .././tools/gapi.php:670 .././tools/gapi.php:838
+#: .././tools/gapi.php:570 .././tools/gapi.php:655 .././tools/gapi.php:820
 msgid "Visits"
 msgstr "Látogatások"
 
@@ -161,7 +161,7 @@ msgstr "Óra"
 
 #: .././admin/dashboard_widgets.php:315 .././admin/dashboard_widgets.php:322
 #: .././admin/dashboard_widgets.php:329 .././admin/dashboard_widgets.php:336
-#: .././tools/gapi.php:670 .././tools/gapi.php:768
+#: .././tools/gapi.php:655 .././tools/gapi.php:753
 msgid "Date"
 msgstr "Dátum"
 
@@ -205,7 +205,7 @@ msgstr "Legnépszerűbb oldalak"
 msgid "Top Referrers"
 msgstr "Leggyakoribb hivatkozók"
 
-#: .././admin/dashboard_widgets.php:587 .././tools/gapi.php:838
+#: .././admin/dashboard_widgets.php:587 .././tools/gapi.php:820
 msgid "Top Searches"
 msgstr "Legfőbb keresések"
 
@@ -249,29 +249,29 @@ msgstr "többet erről a szolgáltatásról"
 msgid ")"
 msgstr ")"
 
-#: .././admin/dashboard_widgets.php:641 .././tools/gapi.php:1063
+#: .././admin/dashboard_widgets.php:641 .././tools/gapi.php:1045
 msgid "REFERRAL"
 msgstr "HIVATKOZÓ"
 
-#: .././admin/dashboard_widgets.php:642 .././tools/gapi.php:1064
+#: .././admin/dashboard_widgets.php:642 .././tools/gapi.php:1046
 msgid "ORGANIC"
 msgstr "ORGANIKUS"
 
-#: .././admin/dashboard_widgets.php:643 .././tools/gapi.php:976
-#: .././tools/gapi.php:1065
+#: .././admin/dashboard_widgets.php:643 .././tools/gapi.php:958
+#: .././tools/gapi.php:1047
 msgid "SOCIAL"
 msgstr "KÖZÖSSÉGI"
 
-#: .././admin/dashboard_widgets.php:646 .././tools/gapi.php:979
-#: .././tools/gapi.php:1068
+#: .././admin/dashboard_widgets.php:646 .././tools/gapi.php:961
+#: .././tools/gapi.php:1050
 msgid "DIRECT"
 msgstr "KÖZVETLEN"
 
-#: .././admin/dashboard_widgets.php:647 .././tools/gapi.php:1069
+#: .././admin/dashboard_widgets.php:647 .././tools/gapi.php:1051
 msgid "NEW"
 msgstr "ÚJ"
 
-#: .././admin/dashboard_widgets.php:648 .././tools/gapi.php:1070
+#: .././admin/dashboard_widgets.php:648 .././tools/gapi.php:1052
 msgid "RETURNING"
 msgstr "VISSZATÉRŐ"
 
@@ -450,8 +450,8 @@ msgid " enable enhanced link attribution"
 msgstr "kibővített link tulajdonság engedélyezése"
 
 #: .././admin/ga_dash_settings.php:510
-msgid " enable demographics and interests reports"
-msgstr ""
+msgid " enable remarketing, demographics and interests reports"
+msgstr "lehetővé remarketing, demográfia és érdeklődés jelentések"
 
 #: .././admin/ga_dash_settings.php:518
 msgid "Your Tracking Code:"
@@ -498,7 +498,6 @@ msgid "All other domains/properties were removed."
 msgstr "Összes többi domain/tulajdon eltávolításra került."
 
 #: .././admin/ga_dash_settings.php:689
-#, fuzzy
 msgid "PHP CURL is required. Please install/enable PHP CURL!"
 msgstr "CURL szükséges. Kérjük, telepítse/engedélyezze a CURL-t!"
 
@@ -698,35 +697,35 @@ msgstr "Hozzáférési kód:"
 msgid "Save Access Code"
 msgstr "Hozzáférési kód mentése"
 
-#: .././tools/gapi.php:585 .././tools/gapi.php:670
+#: .././tools/gapi.php:570 .././tools/gapi.php:655
 msgid "\\' trend"
 msgstr "\\' trend"
 
-#: .././tools/gapi.php:703
+#: .././tools/gapi.php:688
 msgid "Period:"
 msgstr "Időszak:"
 
-#: .././tools/gapi.php:704
+#: .././tools/gapi.php:689
 msgid "Total Visits:"
 msgstr "Összes látogatás:"
 
-#: .././tools/gapi.php:720
+#: .././tools/gapi.php:705
 msgid "Views vs UniqueViews"
 msgstr "Látogatások vs egyedi látogatások"
 
-#: .././tools/gapi.php:768
+#: .././tools/gapi.php:753
 msgid "Views"
 msgstr "Látogatások"
 
-#: .././tools/gapi.php:768
+#: .././tools/gapi.php:753
 msgid "UniqueViews"
 msgstr "Egyedi látogatások"
 
-#: .././tools/gapi.php:970
+#: .././tools/gapi.php:952
 msgid "REFERRALS"
 msgstr "HIVATKOZÓK"
 
-#: .././tools/gapi.php:973
+#: .././tools/gapi.php:955
 msgid "KEYWORDS"
 msgstr "KULCSSZAVAK"
 
