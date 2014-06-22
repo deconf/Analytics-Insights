@@ -44,7 +44,18 @@ Using this plugin, your analytics data is collected in a fast and secure manner 
 - remarketing, demographics and interests tracking
 - track events feature: track downloads, emails and outbound links (supported for both tracking methods: classic tracking and universal tracking)
 - exclude traffic based on user level access
- 
+
+= Translations =
+
+Google Analytics Dashboard for WP has been translated into the following languages:
+
+1. English
+2. German
+3. Hungarian
+4. Italian
+5. Portuguese
+6. Spanish
+
 = Further reading and info =
 
 * My [Google Analytics Dashboard](http://deconf.com/google-analytics-dashboard-wordpress/) homepage
@@ -98,7 +109,9 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - added hungarian translation
 - added italian translation
 - bugfix: escaping characters in google charts
-- new filter on frontend widget 
+- new filter on frontend widget
+- cache timeout adjustments
+- description update
  
 = 31.05.2014 - v4.2.20 =
 - bugfix: russian country map is not working

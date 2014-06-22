@@ -846,7 +846,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 					$data = $this->service->data_realtime->get ( 'ga:' . $projectId, $metrics, array (
 							'dimensions' => $dimensions
 					) );
-					set_transient ( $serial, $data, 20 );
+					set_transient ( $serial, $data, 60 );
 				} else {
 					$data = $transient;
 				}
@@ -1059,7 +1059,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 			   };
 			   };
 			   online_refresh();
-			   setInterval(online_refresh, 20000);
+			   setInterval(online_refresh, 60000);
 			   </script>';
 			return $code;
 		}

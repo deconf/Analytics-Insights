@@ -507,7 +507,7 @@ class GADASH_Settings {
 											<div class="onoffswitch-switch"></div>
 										</label>
 									</div>
-									<div class="switch-desc"><?php _e ( " enable demographics and interests reports", 'ga-dash' );?></div>
+									<div class="switch-desc"><?php _e ( " enable remarketing, demographics and interests reports", 'ga-dash' );?></div>
 
 								</td>
 							</tr>														
