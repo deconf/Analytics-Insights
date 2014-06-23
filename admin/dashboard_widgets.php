@@ -645,7 +645,7 @@ if (! class_exists ( 'GADASH_Widgets' )) {
 							<td class='gadash-tdo-rights' id='gadash-tdo-rights'>
 								<span class=\"gadash-bigtext\">" . __ ( "DIRECT", 'ga-dash' ) . ": 0</span><br /><br />
 								<span class=\"gadash-bigtext\">" . __ ( "NEW", 'ga-dash' ) . ": 0</span><br /><br />
-								<span class=\"gadash-bigtext\">" . __ ( "RETURNING", 'ga-dash' ) . ": 0</span><br /><br />
+								<span class=\"gadash-bigtext\">" . __ ( "RETURN", 'ga-dash' ) . ": 0</span><br /><br />
 							</td>
 						</tr>
 						<tr>

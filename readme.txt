@@ -105,29 +105,31 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 
 == Changelog ==
 
-= 18.06.2014 - v4.2.21 =
+= v4.2.21 =
 - added hungarian translation
 - added italian translation
 - bugfix: escaping characters in google charts
 - new filter on frontend widget
 - cache timeout adjustments
 - description update
+- bugfix: fatal error on invalid_grant
+- added timestamp on last error  
  
-= 31.05.2014 - v4.2.20 =
+= v4.2.20 =
 - bugfix: russian country map is not working
 - bugfix: only administrator can see stats while using a cache plugin
 - bugfix: division by zero on frontend widget
 - added german translation
 - added spanish translation
 
-= 28.04.2014 - v4.2.19 =
+= v4.2.19 =
 - added portuguese translation
 - frontend widget CSS fix
 - added remarketing, demographics and interests tracking support
 - universal analytics is now the default tracking method
 - CSS fix for dashboard widgets
 
-= 04.04.2014 - v4.2.18 =
+= v4.2.18 =
 - translations bugfix
 - menu display tweaks
 - removed debugging log file
@@ -138,13 +140,13 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - by default administrators are not excluded from tracking
 - bugfix for refresh_profiles() method 
 
-= 01.04.2014 - v4.2.17 =
+= v4.2.17 =
 - fixed on/off toggle bug for frontend settings
 
-= 30.03.2014 - v4.2.16 =
+= v4.2.16 =
 - properly nonce verification
 
-= 28.03.2014 - v4.2.15 =
+= v4.2.15 =
 - force token reset procedure when failing to authenticate
 - deleting refresh token transient on uninstall
 - trying to catch all possible exceptions in gapi
@@ -158,12 +160,12 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - switching to default jquery-ui-tooltip wordpress library
 - fixed settings link not displayed in plugins page
 
-= 23.03.2014 - v4.2.14 =
+= v4.2.14 =
 - bugfix for error reporting
 - custom API credential are now saved before starting the authorization procedure
 - hiding additional info in log data
 
-= 23.03.2014 - v4.2.13 =
+= v4.2.13 =
 - bugfix for I18n
 - implemented a basic debugging log
 - CURL required error messages
@@ -177,7 +179,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - additional validations on frontend features
 
 
-= 10.03.2014 - v4.2.12 =
+= v4.2.12 =
 - refreshing charts when the time interval changes
 - saving last selection
 - minimizing requests by using same query serial for frontend and backend queries
@@ -185,22 +187,22 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - fixed Notice: Undefined index: ga_dash_frontend_stats for new installs
 - no more queries if there is no token
  
-= 09.03.2014 - v4.2.11 =
+= v4.2.11 =
 - added support for enhanced link attribution
 - bugfix on classic tracking code
 
-= 08.03.2014 - v4.2.10 =
+= v4.2.10 =
 - using predefined color for pie charts 
 
-= 24.02.2014 - v4.2.9b =
+= v4.2.9b =
 - refresh token handles additional uncaught exceptions
 - partially resolved conflicts with other analytics plugins
 
-= 23.02.2014 - v4.2.8b =
+= v4.2.8b =
 - checkboxes replaced with switch on/off buttons
 - multiple bug fixes
 
-= 16.02.2014 - v4.2.7b =
+= v4.2.7b =
 - plugin code rewritten from scratch
 - new enhanced, user friendly interface
 - added custom tracking code
@@ -208,113 +210,113 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - cache improvements, loading speeds optimization, less GAPI queries
 - responsive design
 
-= 20.01.2014 - v4.2.6 =
+= v4.2.6 =
 - google analytics api token refresh bugfix
 
-= 16.01.2014 - v4.2.5 =
+= v4.2.5 =
 - corrected wrong analytics stats reporting
 
-= 02.01.2014 - v4.2.4 =
+= v4.2.4 =
 - css fixes
 - clear cache fixes
 
-= 11.11.2013 - v4.2.3 =
+= v4.2.3 =
 - time zone fixes
 - hourly reports for yesterday and today
 - small css fix on frontend
 
-= 06.11.2013 - v4.2.2 =
+= v4.2.2 =
 - small fixes and update
 
-= 12.10.2013 - v4.2.1 =
+= v4.2.1 =
 - fixed Domain and Subdomains tracking code for Universal Analytics 
 
-= 21.09.2013 - v4.2 =
+= v4.2 =
 - added google analytics real-time support
 - new date ranges: Today, Yesterday, Last 30 Days and Last 90 Days 
 
-= 15.09.2013 - v4.1.5 =
+= v4.1.5 =
 - fixed "lightblack" color issue, on geomap, on light theme
 - added cursor:pointer property to class .gabutton
 
-= 09.09.2013 - v4.1.4 =
+= v4.1.4 =
 - added access level option to Additional Backend Settings section 
 - added access level option to Additional Frontend Settings section
 - new feature for Geo Map allowing local websites to display cities, instead of countries, on a regional map
 - fixed colors for Geo Chart containing world visits by country
 
-= 16.08.2013 - v4.1.3 =
+= v4.1.3 =
 - solved WooCommerce conflict using .note class
 - added traffic exclusion based on user level access
 
-= 29.07.2013 - v4.1.1 =
+= v4.1.1 =
 - added missing files
 - other minor fixes
 
-= 27.07.2013 - v4.1 =
+= v4.1 =
 - added event tracking feature: track downloads, track emails, track outbound links
 - remove trailing comma for IE8 compatibility
 
-= 14.07.2013 - v4.0.4 =
+= v4.0.4 =
 - a better way to retrieve domains and subdomains from profiles
 - remove escaping slashes generating errors on table display
 
-= 21.06.2013 - v4.0.3 =
+= v4.0.3 =
 - improvements on tracking code
 - redundant variable for default domain name
 - fix for "cannot redeclare class URI_Template_Parser" error
 - added Settings to plugins page
 - modified Google Profiles timeouts
 
-= 29.05.2013 - v4.0.2 =
+= v4.0.2 =
 - minimize Google Analytics API requests
 - new warnings available on Admin Option Page
 - avoid any unnecessary profile list update
 - avoid errors output for regular users while adding the tracking code
 
-= 29.05.2013 - v4.0.1 =
+= v4.0.1 =
 - fixed some 'Undefined index' notices
 - cache fix to decrease number of API requests
 
-= 03.05.2013 - v4.0 =
+= v4.0 =
 
 * simplified authorization process for beginners
 * advanced users can use their own API Project
 
-= 30.04.2013 - v3.5.3 =
+= v3.5.3 =
 
 * translation fix, textdomain ga-dash everywhere
 
-= 25.04.2013 - v3.5.2 =
+= v3.5.2 =
 
 * some small javascript fixes for google tracking code
 
-= 19.04.2013 - v3.5.1 =
+= v3.5.1 =
 
 * renamed function get_main_domain() to ga_dash_get_main_domain
 
-= 19.04.2013 - v3.5 =
+= v3.5 =
 
 * small bug fix for multiple TLD domains tracking and domain with subdomains tracking
 * added universal analytics support (you can track visits using analytics.js or using ga.js)
 
-= 17.04.2013 - v3.4.1 =
+= v3.4.1 =
 
 * switch to domain names instead of profile names on select lists
 * added is_front_page() check to avoid problems in Woocommerce
 
-= 13.04.2013 - v3.4 =
+= v3.4 =
 
 * i8n improvements
 * RTL improvements
 * usability and accessibility improvements
 * added google analytics tracking features
 
-= 10.04.2013 - v3.3.3 =
+= v3.3.3 =
 
 * a better way to determine temp dir for google api cache
 
-= 09.04.2013 - v3.3.3 =
+= v3.3.3 =
 
 * added error handles 
 * added quick support buttons
@@ -323,28 +325,28 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 * fixed select lists issues after implementing translation, fixed frontend default google analytics profile
 * added frontpage per article statistics
 
-= 25.03.2013 - v3.2 =
+= v3.2 =
 
 * added multilingual support
 * small bug fix when locking admins to a single google analytics profile
 
-= 25.03.2013 - v3.1 =
+= v3.1 =
 
 * added Traffic Overview in Pie Charts
 * added lock google analytics profile feature for Admins
 * code optimization
 
-= 25.03.2013 - v3.0 =
+= v3.0 =
 
 * added Geo Map, sortable tables
 * minor fixes
 
-= 22.03.2013 - v2.5 =
+= v2.5 =
 
 * added cache feature
 * simplifying google analytics api authorizing process
 
-= 21.03.2013 - v2.0 =
+= v2.0 =
 
 * added light theme
 * added top pages tab
@@ -352,34 +354,34 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 * added top referrers tab
 * added display settings
 
-= 20.03.2013 - v1.6 =
+= v1.6 =
 
 * admins can jail access level to a single google analytics profile
 
-= 20.03.2013 - v1.5 =
+= v1.5 =
 
 * added multi-website support
 * table ids and profile names are now automatically retrived from google analytics
 
-= 17.03.2013 - v1.4 =
+= v1.4 =
 
 * added View access levels (be caution, ex: if level is set to "Authors" than all editors and authors will have view access)
 * fixed menu display issue
 
-= 15.03.2013 - v1.3 =
+= v1.3 =
 
 * switch to Google API PHP Client 0.6.1
 * resolved some Google Analytics Dashboard conflicts
 
-= 13.03.2013 - v1.2.1 =
+= v1.2.1 =
 
 * minor fixes on google analytics api
 * added video tutorials
 
-= 12.03.2013 - v1.2 =
+= v1.2 =
 
 * minor fixes
 
-= 11.03.2013 - v1.0 =
+= v1.0 =
 
 * first release

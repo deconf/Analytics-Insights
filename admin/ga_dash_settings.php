@@ -634,7 +634,7 @@ class GADASH_Settings {
 				return false;
 			}catch (Exception $e){
 					update_option ( 'gadash_lasterror', date('Y-m-d H:i:s').': '.esc_html($e));
-					ga_dash_reset_token(false);
+					$GADASH_GAPI->ga_dash_reset_token(false);
 				}	
 		}		
 		
