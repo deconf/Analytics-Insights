@@ -14,7 +14,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 		function __construct() {
 			global $GADASH_Config;
 			if (! function_exists ( 'curl_version' )) {
-				update_option ( 'gadash_lasterror', 'CURL disabled. Please enable CURL!' );
+				update_option ( 'gadash_lasterror', date('Y-m-d H:i:s').': CURL disabled. Please enable CURL!' );
 				return;
 			}
 			if (! class_exists ( 'Google_Client' )) {
@@ -117,13 +117,13 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 					update_option ( 'gadash_lasterror', 'N/A' );
 					return ($ga_dash_profile_list);
 				} else {
-					update_option ( 'gadash_lasterror', 'No properties were found in this account!' );
+					update_option ( 'gadash_lasterror', date('Y-m-d H:i:s').': No properties were found in this account!' );
 				}
 			} catch ( Google_IOException $e ){
-				update_option ( 'gadash_lasterror', esc_html($e ));
+				update_option ( 'gadash_update_option ( 'gadash_lasterror', date('Y-m-d H:i:s').': '.esc_html($e));or', esc_html($e ));
 				return false;
 			} catch (Exception $e){
-				update_option('gadash_lasterror',esc_html($e));
+				update_option('gadash_lasterror', date('Y-m-d H:i:s').': '.esc_html($e));
 				$this->ga_dash_reset_token (true);
 			}	
 		}
@@ -151,11 +151,11 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 					return $transient;
 				}
 			} catch ( Google_IOException $e ){
-				update_option ( 'gadash_lasterror', esc_html($e ));
+				update_option ( 'gadash_lasterror', date('Y-m-d H:i:s').': '.esc_html($e));
 				return false;
 			}catch ( Exception $e ) {
 				$this->ga_dash_reset_token (false);
-				update_option ( 'gadash_lasterror', esc_html($e ));
+				update_option ( 'gadash_lasterror', date('Y-m-d H:i:s').': '.esc_html($e));
 				return false;
 			}
 		}
@@ -214,7 +214,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 					$data = $transient;
 				}
 			} catch ( Exception $e ) {
-				update_option ( 'gadash_lasterror', esc_html($e ));
+				update_option ( 'gadash_lasterror', date('Y-m-d H:i:s').': '.esc_html($e));
 				return 0;
 			}
 			
@@ -259,7 +259,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 					$data = $transient;
 				}
 			} catch ( Exception $e ) {
-				update_option ( 'gadash_lasterror', esc_html($e ));
+				update_option ( 'gadash_lasterror', date('Y-m-d H:i:s').': '.esc_html($e));
 				return 0;
 			}
 			
@@ -303,7 +303,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 					$data = $transient;
 				}
 			} catch ( Exception $e ) {
-				update_option ( 'gadash_lasterror', esc_html($e ));
+				update_option ( 'gadash_lasterror', date('Y-m-d H:i:s').': '.esc_html($e));
 				return 0;
 			}
 			if (! isset ( $data ['rows'] )) {
@@ -350,7 +350,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 					$data = $transient;
 				}
 			} catch ( Exception $e ) {
-				update_option ( 'gadash_lasterror', esc_html($e ));
+				update_option ( 'gadash_lasterror', date('Y-m-d H:i:s').': '.esc_html($e));
 				return 0;
 			}
 			if (! isset ( $data ['rows'] )) {
@@ -395,7 +395,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 					$data = $transient;
 				}
 			} catch ( Exception $e ) {
-				update_option ( 'gadash_lasterror', esc_html($e ));
+				update_option ( 'gadash_lasterror', date('Y-m-d H:i:s').': '.esc_html($e));
 				return 0;
 			}
 			if (! isset ( $data ['rows'] )) {
@@ -460,7 +460,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 					$data = $transient;
 				}
 			} catch ( Exception $e ) {
-				update_option ( 'gadash_lasterror', esc_html($e ));
+				update_option ( 'gadash_lasterror', date('Y-m-d H:i:s').': '.esc_html($e));
 				return 0;
 			}
 			if (! isset ( $data ['rows'] )) {
@@ -502,7 +502,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 					$data = $transient;
 				}
 			} catch ( Exception $e ) {
-				update_option ( 'gadash_lasterror', esc_html($e ));
+				update_option ( 'gadash_lasterror', date('Y-m-d H:i:s').': '.esc_html($e));
 				return 0;
 			}
 			if (! isset ( $data ['rows'] )) {
@@ -543,7 +543,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 					$data = $transient;
 				}
 			} catch ( Exception $e ) {
-				update_option ( 'gadash_lasterror', esc_html($e ));
+				update_option ( 'gadash_lasterror', date('Y-m-d H:i:s').': '.esc_html($e));
 				return 0;
 			}
 			if (! isset ( $data ['rows'] )) {
@@ -602,7 +602,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 					$data = $transient;
 				}
 			} catch ( Exception $e ) {
-				update_option ( 'gadash_lasterror', esc_html($e ));
+				update_option ( 'gadash_lasterror', date('Y-m-d H:i:s').': '.esc_html($e));
 				return '';
 			}
 			if (! isset ( $data ['rows'] )) {
@@ -732,7 +732,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 					$data = $transient;
 				}
 			} catch ( Exception $e ) {
-				update_option ( 'gadash_lasterror', esc_html($e ));
+				update_option ( 'gadash_lasterror', date('Y-m-d H:i:s').': '.esc_html($e));
 				return '';
 			}
 			if (! isset ( $data ['rows'] )) {
@@ -794,7 +794,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 					$data = $transient;
 				}
 			} catch ( Exception $e ) {
-				update_option ( 'gadash_lasterror', esc_html($e));
+				update_option ( 'gadash_lasterror', date('Y-m-d H:i:s').': '.esc_html($e));
 				return '';
 			}
 			
@@ -851,7 +851,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 					$data = $transient;
 				}
 			} catch ( Exception $e ) {
-				update_option ( 'gadash_lasterror', esc_html($e));
+				update_option ( 'gadash_lasterror', date('Y-m-d H:i:s').': '.esc_html($e));
 				return '';
 			}
 			return $data;			
