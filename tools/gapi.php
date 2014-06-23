@@ -846,7 +846,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 					$data = $this->service->data_realtime->get ( 'ga:' . $projectId, $metrics, array (
 							'dimensions' => $dimensions
 					) );
-					set_transient ( $serial, $data, 60 );
+					set_transient ( $serial, $data, 55 );
 				} else {
 					$data = $transient;
 				}
@@ -1046,10 +1046,10 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 						document.getElementById("gadash-tdo-right").innerHTML += "<span class=\"gadash-bigtext\"><a href=\"#\" title=\""+gadash_generatetooltip(ukeywordsstats)+"\">"+\'' . __ ( "ORGANIC", 'ga-dash' ) . '\'+"</a>: "+countvisits(data,uvisittype[1])+"</span><br /><br />";
 						document.getElementById("gadash-tdo-right").innerHTML += "<span class=\"gadash-bigtext\"><a href=\"#\" title=\""+gadash_generatetooltip(usocialstats)+"\">"+\'' . __ ( "SOCIAL", 'ga-dash' ) . '\'+"</a>: "+countvisits(data,uvisittype[2])+"</span><br /><br />";
 		
-						var uvisitortype = ["DIRECT","NEW","RETURNING"];
+						var uvisitortype = ["DIRECT","NEW","RETURN"];
 						document.getElementById("gadash-tdo-rights").innerHTML = "<span class=\"gadash-bigtext\">"+\'' . __ ( "DIRECT", 'ga-dash' ) . '\'+": "+countvisits(data,uvisitortype[0])+"</span><br /><br />";
 						document.getElementById("gadash-tdo-rights").innerHTML += "<span class=\"gadash-bigtext\">"+\'' . __ ( "NEW", 'ga-dash' ) . '\'+": "+countvisits(data,uvisitortype[1])+"</span><br /><br />";
-						document.getElementById("gadash-tdo-rights").innerHTML += "<span class=\"gadash-bigtext\">"+\'' . __ ( "RETURNING", 'ga-dash' ) . '\'+": "+countvisits(data,uvisitortype[2])+"</span><br /><br />";
+						document.getElementById("gadash-tdo-rights").innerHTML += "<span class=\"gadash-bigtext\">"+\'' . __ ( "RETURN", 'ga-dash' ) . '\'+": "+countvisits(data,uvisitortype[2])+"</span><br /><br />";
 		
 						if (!data["totalsForAllResults"]["ga:activeVisitors"]){
 							location.reload();
