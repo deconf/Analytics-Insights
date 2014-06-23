@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Google Analytics Dashboard for WP\n"
-"POT-Creation-Date: 2014-06-22 19:11+0200\n"
-"PO-Revision-Date: 2014-06-22 19:11+0200\n"
+"POT-Creation-Date: 2014-06-23 17:17+0200\n"
+"PO-Revision-Date: 2014-06-23 17:17+0200\n"
 "Last-Translator: \n"
 "Language-Team: Deconf <admin@deconf.com>\n"
 "Language: en\n"
@@ -263,7 +263,7 @@ msgid "NEW"
 msgstr ""
 
 #: .././admin/dashboard_widgets.php:648 .././tools/gapi.php:1052
-msgid "RETURNING"
+msgid "RETURN"
 msgstr ""
 
 #: .././admin/dashboard_widgets.php:662

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Google Analytics Dashboard for WP\n"
-"POT-Creation-Date: 2014-06-02 21:03+0200\n"
-"PO-Revision-Date: 2014-06-22 19:28+0200\n"
+"POT-Creation-Date: 2014-06-23 17:19+0200\n"
+"PO-Revision-Date: 2014-06-23 17:19+0200\n"
 "Last-Translator: \n"
 "Language-Team: Deconf <admin@deconf.com>\n"
 "Language: pt_BR\n"
@@ -112,17 +112,17 @@ msgid "Yesterday"
 msgstr "Ontem"
 
 #: .././admin/dashboard_widgets.php:272 .././front/widgets.php:100
-#: .././tools/gapi.php:698
+#: .././tools/gapi.php:683
 msgid "Last 7 Days"
 msgstr "Últimos 7 dias"
 
 #: .././admin/dashboard_widgets.php:274 .././front/widgets.php:101
-#: .././tools/gapi.php:699
+#: .././tools/gapi.php:684
 msgid "Last 14 Days"
 msgstr "Últimos 14 dias"
 
 #: .././admin/dashboard_widgets.php:276 .././front/widgets.php:102
-#: .././tools/gapi.php:700
+#: .././tools/gapi.php:685
 msgid "Last 30 Days"
 msgstr "Últimos 30 dias"
 
@@ -134,7 +134,7 @@ msgstr "Últimos 90 dias"
 #: .././admin/dashboard_widgets.php:478 .././admin/dashboard_widgets.php:505
 #: .././admin/dashboard_widgets.php:509 .././admin/dashboard_widgets.php:540
 #: .././admin/dashboard_widgets.php:563 .././admin/dashboard_widgets.php:587
-#: .././tools/gapi.php:585 .././tools/gapi.php:670 .././tools/gapi.php:838
+#: .././tools/gapi.php:570 .././tools/gapi.php:655 .././tools/gapi.php:820
 msgid "Visits"
 msgstr "Visitas"
 
@@ -160,7 +160,7 @@ msgstr "Hora"
 
 #: .././admin/dashboard_widgets.php:315 .././admin/dashboard_widgets.php:322
 #: .././admin/dashboard_widgets.php:329 .././admin/dashboard_widgets.php:336
-#: .././tools/gapi.php:670 .././tools/gapi.php:768
+#: .././tools/gapi.php:655 .././tools/gapi.php:753
 msgid "Date"
 msgstr "Dia"
 
@@ -204,7 +204,7 @@ msgstr "Principais Páginas"
 msgid "Top Referrers"
 msgstr "Principais Referências"
 
-#: .././admin/dashboard_widgets.php:587 .././tools/gapi.php:838
+#: .././admin/dashboard_widgets.php:587 .././tools/gapi.php:820
 msgid "Top Searches"
 msgstr "Principais Buscas"
 
@@ -248,30 +248,30 @@ msgstr "mais sobre este recurso"
 msgid ")"
 msgstr ")"
 
-#: .././admin/dashboard_widgets.php:641 .././tools/gapi.php:1063
+#: .././admin/dashboard_widgets.php:641 .././tools/gapi.php:1045
 msgid "REFERRAL"
 msgstr "ENCAMINHAMENTO"
 
-#: .././admin/dashboard_widgets.php:642 .././tools/gapi.php:1064
+#: .././admin/dashboard_widgets.php:642 .././tools/gapi.php:1046
 msgid "ORGANIC"
 msgstr "ÔRGANICO"
 
-#: .././admin/dashboard_widgets.php:643 .././tools/gapi.php:976
-#: .././tools/gapi.php:1065
+#: .././admin/dashboard_widgets.php:643 .././tools/gapi.php:958
+#: .././tools/gapi.php:1047
 msgid "SOCIAL"
 msgstr "SOCIAL"
 
-#: .././admin/dashboard_widgets.php:646 .././tools/gapi.php:979
-#: .././tools/gapi.php:1068
+#: .././admin/dashboard_widgets.php:646 .././tools/gapi.php:961
+#: .././tools/gapi.php:1050
 msgid "DIRECT"
 msgstr "DIRETO"
 
-#: .././admin/dashboard_widgets.php:647 .././tools/gapi.php:1069
+#: .././admin/dashboard_widgets.php:647 .././tools/gapi.php:1051
 msgid "NEW"
 msgstr "NOVO"
 
-#: .././admin/dashboard_widgets.php:648 .././tools/gapi.php:1070
-msgid "RETURNING"
+#: .././admin/dashboard_widgets.php:648 .././tools/gapi.php:1052
+msgid "RETURN"
 msgstr "RETORNO"
 
 #: .././admin/dashboard_widgets.php:662
@@ -450,7 +450,7 @@ msgid " enable enhanced link attribution"
 msgstr "permitir reforço a atribuição de link"
 
 #: .././admin/ga_dash_settings.php:510
-msgid " enable demographics and interests reports"
+msgid " enable remarketing, demographics and interests reports"
 msgstr "permitir Informações demográficas e interesses relatórios"
 
 #: .././admin/ga_dash_settings.php:518
@@ -697,35 +697,35 @@ msgstr "Código de acesso:"
 msgid "Save Access Code"
 msgstr "Salvar Código de Acesso"
 
-#: .././tools/gapi.php:585 .././tools/gapi.php:670
+#: .././tools/gapi.php:570 .././tools/gapi.php:655
 msgid "\\' trend"
 msgstr "\\' tendência "
 
-#: .././tools/gapi.php:703
+#: .././tools/gapi.php:688
 msgid "Period:"
 msgstr "período:"
 
-#: .././tools/gapi.php:704
+#: .././tools/gapi.php:689
 msgid "Total Visits:"
 msgstr "Total de Visitas:"
 
-#: .././tools/gapi.php:720
+#: .././tools/gapi.php:705
 msgid "Views vs UniqueViews"
 msgstr "Visualizações x Visualização única"
 
-#: .././tools/gapi.php:768
+#: .././tools/gapi.php:753
 msgid "Views"
 msgstr "Visualizações"
 
-#: .././tools/gapi.php:768
+#: .././tools/gapi.php:753
 msgid "UniqueViews"
 msgstr "Visualização Única "
 
-#: .././tools/gapi.php:970
+#: .././tools/gapi.php:952
 msgid "REFERRALS"
 msgstr "REFERÊNCIAS"
 
-#: .././tools/gapi.php:973
+#: .././tools/gapi.php:955
 msgid "KEYWORDS"
 msgstr "PALAVRAS-CHAVE"
 

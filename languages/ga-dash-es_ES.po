@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Google Analytics Dashboard for WP\n"
-"POT-Creation-Date: 2014-06-22 19:16+0200\n"
-"PO-Revision-Date: 2014-06-22 19:16+0200\n"
+"POT-Creation-Date: 2014-06-23 17:18+0200\n"
+"PO-Revision-Date: 2014-06-23 17:18+0200\n"
 "Last-Translator: jb <jb@jb.es>\n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -266,7 +266,8 @@ msgid "NEW"
 msgstr "NUEVO"
 
 #: .././admin/dashboard_widgets.php:648 .././tools/gapi.php:1052
-msgid "RETURNING"
+#, fuzzy
+msgid "RETURN"
 msgstr "RECURRENTE"
 
 #: .././admin/dashboard_widgets.php:662
