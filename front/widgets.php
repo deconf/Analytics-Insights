@@ -18,7 +18,7 @@ class GADSH_Frontend_Widget extends WP_Widget {
     public function widget( $args, $instance ) {
         global $GADASH_Config;
         $title = apply_filters( 'widget_title', $instance['title'] );
-        echo "\n<!-- BEGIN GADWP Widget - http://deconf.com/google-analytics-dashboard-wordpress/ -->\n";
+        echo "\n<!-- BEGIN GADWP v".GADWP_CURRENT_VERSION." Widget - http://deconf.com/google-analytics-dashboard-wordpress/ -->\n";
         echo $args['before_widget'];
         if ( ! empty( $title ) ) echo $args['before_title'] . $title . $args['after_title'];
 	        /*

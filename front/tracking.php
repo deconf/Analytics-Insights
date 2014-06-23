@@ -45,7 +45,7 @@ if (! class_exists ( 'GADASH_Tracking' )) {
 				}
 								
 				if ($traking_type == "universal") {
-					echo "\n<!-- BEGIN GADWP Universal Tracking - http://deconf.com/google-analytics-dashboard-wordpress/ -->\n";
+					echo "\n<!-- BEGIN GADWP v".GADWP_CURRENT_VERSION." Universal Tracking - http://deconf.com/google-analytics-dashboard-wordpress/ -->\n";
 					if ($GADASH_Config->options ['ga_event_tracking']) {
 						require_once 'tracking/events-universal.php';
 					}
@@ -55,7 +55,7 @@ if (! class_exists ( 'GADASH_Tracking' )) {
 					echo "\n<!-- END GADWP Universal Tracking -->\n\n";					
 				} else {
 
-					echo "\n<!-- BEGIN GADWP Classic Tracking - http://deconf.com/google-analytics-dashboard-wordpress/ -->\n";					
+					echo "\n<!-- BEGIN GADWP v".GADWP_CURRENT_VERSION." Classic Tracking - http://deconf.com/google-analytics-dashboard-wordpress/ -->\n";					
 					if ($GADASH_Config->options ['ga_event_tracking']) {
 						require_once 'tracking/events-classic.php';
 					}
@@ -66,7 +66,7 @@ if (! class_exists ( 'GADASH_Tracking' )) {
 			} else{
 
 				if ($GADASH_Config->options['ga_tracking_code']){
-					echo "\n<!-- BEGIN GADWP Custom Tracking - http://deconf.com/google-analytics-dashboard-wordpress/ -->\n";
+					echo "\n<!-- BEGIN GADWP v".GADWP_CURRENT_VERSION." Custom Tracking - http://deconf.com/google-analytics-dashboard-wordpress/ -->\n";
 					if ($GADASH_Config->options ['ga_event_tracking']){
 						if (strpos($GADASH_Config->options['ga_tracking_code'],'analytics.js')){
 							require_once 'tracking/events-universal.php';

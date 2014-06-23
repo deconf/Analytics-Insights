@@ -16,6 +16,7 @@ if (! class_exists ( 'GADASH_Config' )) {
 			
 			// get plugin options
 			$this->get_plugin_options ();
+
 		}
 
 		public function set_plugin_options() {
