@@ -40,7 +40,6 @@ if (! class_exists ( 'GADASH_Tools' )) {
 		}
 		function ga_dash_clear_cache() {
 			global $wpdb;
-			update_option ( 'gadash_lasterror', 'N/A' );
 			$sqlquery = $wpdb->query ( "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_gadash%%'" );
 			$sqlquery = $wpdb->query ( "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_timeout_gadash%%'" );
 			$sqlquery = $wpdb->query ( "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_timeout_ga_dash%%'" );
