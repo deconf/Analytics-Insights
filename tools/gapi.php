@@ -120,7 +120,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 					update_option ( 'gadash_lasterror', date('Y-m-d H:i:s').': No properties were found in this account!' );
 				}
 			} catch ( Google_IOException $e ){
-				update_option ( 'gadash_update_option ( 'gadash_lasterror', date('Y-m-d H:i:s').': '.esc_html($e));or', esc_html($e ));
+				update_option('gadash_lasterror', date('Y-m-d H:i:s').': '.esc_html($e));
 				return false;
 			} catch (Exception $e){
 				update_option('gadash_lasterror', date('Y-m-d H:i:s').': '.esc_html($e));
