@@ -9,3 +9,25 @@ jQuery(document).ready(function(){
     });
  
 });
+
+
+jQuery(window).resize(function(){
+	if(typeof ga_dash_drawstats == "function"){
+		ga_dash_drawstats();
+	}
+	if(typeof ga_dash_drawmap == "function"){
+		ga_dash_drawmap();
+	}
+	if(typeof ga_dash_drawpgd == "function"){
+		ga_dash_drawpgd();
+	}
+	if(typeof ga_dash_drawrd == "function"){
+		ga_dash_drawrd();
+	}
+	if(typeof ga_dash_drawsd == "function"){
+		ga_dash_drawsd();
+	}
+	if(typeof ga_dash_drawtraffic == "function"){
+		ga_dash_drawtraffic();
+	}
+});

@@ -105,6 +105,9 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 
 == Changelog ==
 
+= v4.2.22 =
+- responsive Google Charts
+
 = v4.2.21 =
 - added hungarian translation
 - added italian translation

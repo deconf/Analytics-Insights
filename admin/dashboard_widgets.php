@@ -669,7 +669,7 @@ if (! class_exists ( 'GADASH_Widgets' )) {
 			
 			if ($GADASH_Config->options ['ga_dash_traffic'] and $tools->check_roles($GADASH_Config->options ['ga_dash_access_back']) and ($ga_dash_top_referrers or $ga_dash_top_pages or ($ga_dash_traffic_sources and $ga_dash_new_return))) {
 				$code .= '<br /><h3>' . __ ( "Traffic Overview", 'ga-dash' ) . '</h3>
-		<table width="100%"><tr><td width="50%"><div id="ga_dash_trafficdata"></div></td><td width="50%"><div id="ga_dash_nvrdata"></div></td></tr></table>';
+				<div style="width:100%;clear:both;"><div style="width:50%; float:left;"><div id="ga_dash_trafficdata"></div></div><div style="width:50%;float:left;"><div id="ga_dash_nvrdata"></div></div></div><div style="clear:both;"></div>';
 			}
 			
 			if ($GADASH_Config->options ['ga_dash_pgd'] and $tools->check_roles($GADASH_Config->options ['ga_dash_access_back']))

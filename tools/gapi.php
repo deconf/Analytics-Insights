@@ -660,7 +660,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 					  pointSize: 3," . $css . "
 					  title: '" . $title . "',
 					  titlePosition: 'in',
-					  chartArea: {width: '100%',height:'85%'},
+					  chartArea: {width: '95%',height:'75%'},
 					  hAxis: { textPosition: 'none' },
 					  vAxis: { textPosition: 'none', minValue: 0},
 				 	};
