@@ -107,6 +107,8 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 
 = v4.2.22 =
 - responsive Google Charts
+- single authorization for multisite
+- bugfix: SERVER_ADDR PHP notice
 
 = v4.2.21 =
 - added hungarian translation

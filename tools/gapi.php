@@ -130,7 +130,11 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 		function ga_dash_refresh_token() {
 			global $GADASH_Config;
 			try {
-				$transient = get_transient ( "ga_dash_refresh_token" );
+				if (is_multisite() && $GADASH_Config->options['ga_dash_network']){
+					$transient = get_site_transient ( "ga_dash_refresh_token" );
+				}else{
+					$transient = get_transient ( "ga_dash_refresh_token" );
+				}	
 				if (empty ( $transient )) {
 					
 					if (! $GADASH_Config->options ['ga_dash_refresh_token']) {
@@ -143,7 +147,11 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 					
 					$token = $this->client->getAccessToken ();
 					$google_token = json_decode ( $token );
-					set_transient ( "ga_dash_refresh_token", $token, $google_token->expires_in );
+					if (is_multisite() && $GADASH_Config->options['ga_dash_network']){
+						set_site_transient ( "ga_dash_refresh_token", $token, $google_token->expires_in );
+					}else{
+						set_transient ( "ga_dash_refresh_token", $token, $google_token->expires_in );
+					}	
 					$GADASH_Config->options ['ga_dash_token'] = $token;
 					$GADASH_Config->set_plugin_options ();
 					return $token;
@@ -162,7 +170,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 		function ga_dash_reset_token($all = true) {
 			global $GADASH_Config;
 			
-			delete_transient ( 'ga_dash_refresh_token' );
+			delete_site_transient ( 'ga_dash_refresh_token' );
 			$GADASH_Config->options ['ga_dash_token'] = "";
 			$GADASH_Config->options ['ga_dash_refresh_token'] = "";
 						
@@ -206,8 +214,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 				$transient = get_transient ( $serial );
 				if (empty ( $transient )) {
 					$data = $this->service->data_ga->get ( 'ga:' . $projectId, $from, $to, $metrics, array (
-							'dimensions' => $dimensions,
-							'userIp' => $_SERVER ['SERVER_ADDR'] 
+							'dimensions' => $dimensions 
 					) );
 					set_transient ( $serial, $data, $this->get_timeouts ( $timeouts ) );
 				} else {
@@ -251,8 +258,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 				$transient = get_transient ( $serial );
 				if (empty ( $transient )) {
 					$data = $this->service->data_ga->get ( 'ga:' . $projectId, $from, $to, $metrics, array (
-							'dimensions' => $dimensions,
-							'userIp' => $_SERVER ['SERVER_ADDR'] 
+							'dimensions' => $dimensions
 					) );
 					set_transient ( $serial, $data, $this->get_timeouts ( $timeouts ) );
 				} else {
@@ -295,8 +301,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 					$data = $this->service->data_ga->get ( 'ga:' . $projectId, $from, $to, $metrics, array (
 							'dimensions' => $dimensions,
 							'sort' => '-ga:pageviews',
-							'max-results' => '24',
-							'userIp' => $_SERVER ['SERVER_ADDR'] 
+							'max-results' => '24'
 					) ); // 'filters' => 'ga:pagePath!=/'
 					set_transient ( $serial, $data, $this->get_timeouts ( $timeouts ) );
 				} else {
@@ -342,8 +347,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 							'dimensions' => $dimensions,
 							'sort' => '-ga:visits',
 							'max-results' => '24',
-							'filters' => 'ga:medium==referral',
-							'userIp' => $_SERVER ['SERVER_ADDR'] 
+							'filters' => 'ga:medium==referral'
 					) );
 					set_transient ( $serial, $data, $this->get_timeouts ( $timeouts ) );
 				} else {
@@ -387,8 +391,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 					$data = $this->service->data_ga->get ( 'ga:' . $projectId, $from, $to, $metrics, array (
 							'dimensions' => $dimensions,
 							'sort' => '-ga:visits',
-							'max-results' => '24',
-							'userIp' => $_SERVER ['SERVER_ADDR'] 
+							'max-results' => '24'
 					) );
 					set_transient ( $serial, $data, $this->get_timeouts ( $timeouts ) );
 				} else {
@@ -447,13 +450,11 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 								'dimensions' => $dimensions,
 								'filters' => $filters,
 								'sort' => '-ga:visits',
-								'max-results' => $GADASH_Config->options ['ga_target_number'],
-								'userIp' => $_SERVER ['SERVER_ADDR'] 
+								'max-results' => $GADASH_Config->options ['ga_target_number']
 						) );
 					else
 						$data = $this->service->data_ga->get ( 'ga:' . $projectId, $from, $to, $metrics, array (
-								'dimensions' => $dimensions,
-								'userIp' => $_SERVER ['SERVER_ADDR'] 
+								'dimensions' => $dimensions
 						) );
 					set_transient ( $serial, $data, $this->get_timeouts ( $timeouts ) );
 				} else {
@@ -494,8 +495,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 				$transient = get_transient ( $serial );
 				if (empty ( $transient )) {
 					$data = $this->service->data_ga->get ( 'ga:' . $projectId, $from, $to, $metrics, array (
-							'dimensions' => $dimensions,
-							'userIp' => $_SERVER ['SERVER_ADDR'] 
+							'dimensions' => $dimensions
 					) );
 					set_transient ( $serial, $data, $this->get_timeouts ( $timeouts ) );
 				} else {
@@ -535,8 +535,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 				$transient = get_transient ( $serial );
 				if (empty ( $transient )) {
 					$data = $this->service->data_ga->get ( 'ga:' . $projectId, $from, $to, $metrics, array (
-							'dimensions' => $dimensions,
-							'userIp' => $_SERVER ['SERVER_ADDR'] 
+							'dimensions' => $dimensions
 					) );
 					set_transient ( $serial, $data, $this->get_timeouts ( $timeouts ) );
 				} else {
@@ -595,7 +594,6 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 				if (empty ( $transient )) {
 					$data = $this->service->data_ga->get ( 'ga:' . $projectId, $from, $to, $metrics, array (
 							'dimensions' => $dimensions,
-							'userIp' => $_SERVER ['SERVER_ADDR'] 
 					) );
 					set_transient ( $serial, $data, $this->get_timeouts ( 1 ) );
 				} else {
@@ -724,8 +722,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 				if (empty ( $transient )) {
 					$data = $this->service->data_ga->get ( 'ga:' . $projectId, $from, $to, $metrics, array (
 							'dimensions' => $dimensions,
-							'filters' => 'ga:pagePath==' . $page_url,
-							'userIp' => $_SERVER ['SERVER_ADDR'] 
+							'filters' => 'ga:pagePath==' . $page_url
 					) );
 					set_transient ( $serial, $data, $this->get_timeouts ( 1 ) );
 				} else {
@@ -786,8 +783,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 							'dimensions' => $dimensions,
 							'sort' => '-ga:visits',
 							'max-results' => '24',
-							'filters' => 'ga:pagePath==' . $page_url,
-							'userIp' => $_SERVER ['SERVER_ADDR'] 
+							'filters' => 'ga:pagePath==' . $page_url
 					) );
 					set_transient ( $serial, $data, $this->get_timeouts ( 1 ) );
 				} else {

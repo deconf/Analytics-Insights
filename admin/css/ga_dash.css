@@ -96,6 +96,10 @@ td.title, td.info{
 	padding-left:20px;
 }
 
+td.title-select{
+	width:300px;	
+}
+
 td.debugging {
 	width:150px;
 }

@@ -45,6 +45,7 @@ Class GADASH_Install{
 			$options ['ga_dash_default_metric'] = 'visits';
 			$options ['ga_dash_default_dimension'] = '30daysAgo';
 			$options ['ga_dash_frontend_stats'] = 0;
+			$options ['ga_dash_network'] = 0;
 		}else{
 			$options = array();
 			$options ['ga_dash_apikey'] = get_option ( 'ga_dash_apikey' );
@@ -89,6 +90,7 @@ Class GADASH_Install{
 			$options ['ga_dash_remarketing'] = 0;
 			$options ['ga_dash_default_metric'] = 'visits';
 			$options ['ga_dash_default_dimension'] = '30daysAgo';
+			$options ['ga_dash_network'] = 0;
 				
 			delete_option ( 'ga_dash_apikey' );
 			delete_option ( 'ga_dash_clientid' );
