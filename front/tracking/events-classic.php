@@ -15,7 +15,7 @@
                 }
             };
             $('a').filter(function() {
-                return this.href.match(/.*\.(<?php echo $GADASH_Config->options['ga_event_downloads'];?>)/);
+                return this.href.match(/.*\.(<?php echo esc_js($GADASH_Config->options['ga_event_downloads']);?>)/);
             }).click(function(e) {
                 ga_track(['_trackEvent', 'download', 'click', this.href]);
             });
@@ -27,7 +27,7 @@
             loc = loc.join('.');
             var localURLs = [
                               loc,
-                              '<?php echo get_option('siteurl');?>'
+                              '<?php echo esc_html(get_option('siteurl'));?>'
                             ];
             $('a[href^="http"]').filter(function() {
                 for (var i = 0; i < localURLs.length; i++) {

@@ -67,7 +67,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 			
 			?>
 <form name="input"
-	action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>"
+	action="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>"
 	method="post">
 	<table class="options">
 		<tr>
@@ -236,9 +236,8 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 					$ga_dash_statsdata .= "['" . $data ['rows'] [$i] [0] . "-" . $data ['rows'] [$i] [1] . "-" . $data ['rows'] [$i] [2] . "'," . round ( $data ['rows'] [$i] [3], 2 ) . "],";
 				}
 			}
-			$ga_dash_statsdata = rtrim ( $ga_dash_statsdata, ',' );
 			
-			return $ga_dash_statsdata;
+			return wp_kses(rtrim ( $ga_dash_statsdata, ',' ),$GADASH_Config->allowed_html);
 		}
 		
 		// Get bottom Stats
@@ -322,8 +321,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 				$ga_dash_data .= "['<a href=\"http://".addslashes($data ['rows'] [$i] [1].$data ['rows'] [$i] [2])."\" target=\"_blank\">" . addslashes( $data ['rows'] [$i] [0] ) . "</a>'," . $data ['rows'] [$i] [3] . "],";
 				$i ++;
 			}
-			
-			return rtrim ( $ga_dash_data, ',' );
+			return wp_kses(rtrim ( $ga_dash_data, ',' ),$GADASH_Config->allowed_html);
 		}
 		
 		// Get Top referrers
@@ -368,7 +366,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 				$i ++;
 			}
 			
-			return rtrim ( $ga_dash_data, ',' );
+			return wp_kses(rtrim ( $ga_dash_data, ',' ),$GADASH_Config->allowed_html);
 		}
 		
 		// Get Top searches
@@ -414,7 +412,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 				$i ++;
 			}
 			
-			return rtrim ( $ga_dash_data, ',' );
+			return wp_kses(rtrim ( $ga_dash_data, ',' ),$GADASH_Config->allowed_html);
 		}
 		// Get Visits by Country
 		function ga_dash_visits_country($projectId, $from, $to) {
@@ -514,7 +512,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 				$ga_dash_data .= "['" . str_replace ( "(none)", "direct", $data ['rows'] [$i] [0] ) . "'," . $data ['rows'] [$i] [1] . "],";
 			}
 			
-			return rtrim ( $ga_dash_data, ',' );
+			return wp_kses(rtrim ( $ga_dash_data, ',' ),$GADASH_Config->allowed_html);
 		}
 		
 		// Get New vs. Returning
@@ -554,7 +552,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 				$ga_dash_data .= "['" . addslashes( $data ['rows'] [$i] [0] ) . "'," . $data ['rows'] [$i] [1] . "],";
 			}
 			
-			return rtrim ( $ga_dash_data, ',' );
+			return wp_kses(rtrim ( $ga_dash_data, ',' ),$GADASH_Config->allowed_html);
 		}
 		
 		// Frontend Widget Stats
@@ -619,7 +617,8 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 			for($i = 0; $i < $data ['totalResults']; $i ++) {
 				$ga_dash_statsdata .= "['" . $data ['rows'] [$i] [0] . "-" . $data ['rows'] [$i] [1] . "-" . $data ['rows'] [$i] [2] . "'," . ($anonim ? str_replace(',','.',round ( $data ['rows'] [$i] [3] * 100 / $max, 2 )) : $data ['rows'] [$i] [3]) . "],";
 			}
-			$ga_dash_statsdata = rtrim ( $ga_dash_statsdata, ',' );
+
+			$ga_dash_statsdata = wp_kses(rtrim ( $ga_dash_statsdata, ',' ),$GADASH_Config->allowed_html);
 			
 			if ($ga_dash_statsdata) {
 				if ($display != 3){				
@@ -740,7 +739,8 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 			for($i = 0; $i < $data ['totalResults']; $i ++) {
 				$ga_dash_statsdata .= "['" . $data ['rows'] [$i] [0] . "-" . $data ['rows'] [$i] [1] . "-" . $data ['rows'] [$i] [2] . "'," . round ( $data ['rows'] [$i] [3], 2 ) . "," . round ( $data ['rows'] [$i] [4], 2 ) . "],";
 			}
-			$ga_dash_statsdata = rtrim ( $ga_dash_statsdata, ',' );
+
+			$ga_dash_statsdata = wp_kses(rtrim ( $ga_dash_statsdata, ',' ),$GADASH_Config->allowed_html);
 			
 			if ($ga_dash_statsdata) {
 				$content .= '
@@ -805,7 +805,8 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 				}
 				$i ++;
 			}
-			$ga_dash_organicdata = rtrim ( $ga_dash_organicdata, ',' );
+			
+			$ga_dash_organicdata = wp_kses(rtrim ( $ga_dash_organicdata, ',' ),$GADASH_Config->allowed_html);
 			
 			if ($ga_dash_organicdata) {
 				$content .= '
@@ -850,7 +851,8 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 				update_option ( 'gadash_lasterror', date('Y-m-d H:i:s').': '.esc_html($e));
 				return '';
 			}
-			return $data;			
+			
+			return $data;
 		}		
 		
 		// Realtime Stats
@@ -964,6 +966,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 								
 					jQuery.post(ajaxurl, {action: "gadash_get_online_data", gadash_security: "'.wp_create_nonce('gadash_get_online_data').'"}, function(response){
 						var data = jQuery.parseJSON(response);
+						console.log(data);
 						if (data["totalsForAllResults"]["ga:activeVisitors"]!==document.getElementById("gadash-online").innerHTML){
 							jQuery("#gadash-online").fadeOut("slow");
 							jQuery("#gadash-online").fadeOut(500);

@@ -206,9 +206,9 @@ if (! class_exists ( 'GADASH_Widgets' )) {
 							$GADASH_Config->options ['ga_dash_tableid'] = $profile [1];
 						}
 						if (isset ( $profile [3] )) {
-							$profile_switch .= '<option value="' . $profile [1] . '" ';
+							$profile_switch .= '<option value="' . esc_attr($profile [1]) . '" ';
 							$profile_switch .= selected ( $profile [1], $GADASH_Config->options ['ga_dash_tableid'], false );
-							$profile_switch .= ' title="' . __ ( "View Name:", 'ga-dash' ) . ' ' . $profile [0] . '">' . $tools->ga_dash_get_profile_domain ( $profile [3] ) . '</option>';
+							$profile_switch .= ' title="' . __ ( "View Name:", 'ga-dash' ) . ' ' . esc_attr($profile [0]) . '">' . esc_attr($tools->ga_dash_get_profile_domain ( $profile [3] )) . '</option>';
 						}
 					}
 					$profile_switch .= "</select>";
@@ -487,7 +487,7 @@ if (! class_exists ( 'GADASH_Widgets' )) {
 		
       }";
 			}
-			
+			$ga_dash_visits_country = '';
 			if ($GADASH_Config->options ['ga_dash_map'] and $tools->check_roles ( $GADASH_Config->options ['ga_dash_access_back'] )) {
 				$ga_dash_visits_country = $GADASH_GAPI->ga_dash_visits_country ( $projectId, $from, $to );
 				if ($ga_dash_visits_country) {
@@ -515,6 +515,8 @@ if (! class_exists ( 'GADASH_Widgets' )) {
 		  }";
 				}
 			}
+			$ga_dash_traffic_sources = '';
+			$ga_dash_new_return = '';
 			if ($GADASH_Config->options ['ga_dash_traffic'] and $tools->check_roles ( $GADASH_Config->options ['ga_dash_access_back'] )) {
 				$ga_dash_traffic_sources = $GADASH_GAPI->ga_dash_traffic_sources ( $projectId, $from, $to );
 				$ga_dash_new_return = $GADASH_GAPI->ga_dash_new_return ( $projectId, $from, $to );
@@ -551,6 +553,7 @@ if (! class_exists ( 'GADASH_Widgets' )) {
 		  }";
 				}
 			}
+			$ga_dash_top_pages = '';
 			if ($GADASH_Config->options ['ga_dash_pgd'] and $tools->check_roles ( $GADASH_Config->options ['ga_dash_access_back'] )) {
 				$ga_dash_top_pages = $GADASH_GAPI->ga_dash_top_pages ( $projectId, $from, $to );
 				if ($ga_dash_top_pages) {
@@ -574,6 +577,7 @@ if (! class_exists ( 'GADASH_Widgets' )) {
 		  }";
 				}
 			}
+			$ga_dash_top_referrers = '';
 			if ($GADASH_Config->options ['ga_dash_rd'] and $tools->check_roles ( $GADASH_Config->options ['ga_dash_access_back'] )) {
 				$ga_dash_top_referrers = $GADASH_GAPI->ga_dash_top_referrers ( $projectId, $from, $to );
 				if ($ga_dash_top_referrers) {
@@ -597,6 +601,7 @@ if (! class_exists ( 'GADASH_Widgets' )) {
 		  }";
 				}
 			}
+			$ga_dash_top_searches = '';
 			if ($GADASH_Config->options ['ga_dash_sd'] and $tools->check_roles ( $GADASH_Config->options ['ga_dash_access_back'] )) {
 				$ga_dash_top_searches = $GADASH_GAPI->ga_dash_top_searches ( $projectId, $from, $to );
 				if ($ga_dash_top_searches) {
@@ -630,19 +635,19 @@ if (! class_exists ( 'GADASH_Widgets' )) {
 			<table class="gatable" cellpadding="4">
 			<tr>
 			<td width="24%">' . __ ( "Visits:", 'ga-dash' ) . '</td>
-			<td width="12%" class="gavalue"><a href="?query=visits&period=' . $period . '" class="gatable">' . $ga_dash_bottom_stats ['rows'] [0] [1] . '</td>
+			<td width="12%" class="gavalue"><a href="?query=visits&period=' . $period . '" class="gatable">' . (int)$ga_dash_bottom_stats ['rows'] [0] [1] . '</td>
 			<td width="24%">' . __ ( "Visitors:", 'ga-dash' ) . '</td>
-			<td width="12%" class="gavalue"><a href="?query=visitors&period=' . $period . '" class="gatable">' . $ga_dash_bottom_stats ['rows'] [0] [2] . '</a></td>
+			<td width="12%" class="gavalue"><a href="?query=visitors&period=' . $period . '" class="gatable">' . (int)$ga_dash_bottom_stats ['rows'] [0] [2] . '</a></td>
 			<td width="24%">' . __ ( "Page Views:", 'ga-dash' ) . '</td>
-			<td width="12%" class="gavalue"><a href="?query=pageviews&period=' . $period . '" class="gatable">' . $ga_dash_bottom_stats ['rows'] [0] [3] . '</a></td>
+			<td width="12%" class="gavalue"><a href="?query=pageviews&period=' . $period . '" class="gatable">' . (int)$ga_dash_bottom_stats ['rows'] [0] [3] . '</a></td>
 			</tr>
 			<tr>
 			<td>' . __ ( "Bounce Rate:", 'ga-dash' ) . '</td>
-			<td class="gavalue"><a href="?query=visitBounceRate&period=' . $period . '" class="gatable">' . round ( $ga_dash_bottom_stats ['rows'] [0] [4], 2 ) . '%</a></td>
+			<td class="gavalue"><a href="?query=visitBounceRate&period=' . $period . '" class="gatable">' . (double)round ( $ga_dash_bottom_stats ['rows'] [0] [4], 2 ) . '%</a></td>
 			<td>' . __ ( "Organic Search:", 'ga-dash' ) . '</td>
-			<td class="gavalue"><a href="?query=organicSearches&period=' . $period . '" class="gatable">' . $ga_dash_bottom_stats ['rows'] [0] [5] . '</a></td>
+			<td class="gavalue"><a href="?query=organicSearches&period=' . $period . '" class="gatable">' . (int)$ga_dash_bottom_stats ['rows'] [0] [5] . '</a></td>
 			<td>' . __ ( "Pages per Visit:", 'ga-dash' ) . '</td>
-			<td class="gavalue"><a href="#" class="gatable">' . (($ga_dash_bottom_stats ['rows'] [0] [1]) ? round ( $ga_dash_bottom_stats ['rows'] [0] [3] / $ga_dash_bottom_stats ['rows'] [0] [1], 2 ) : '0') . '</a></td>
+			<td class="gavalue"><a href="#" class="gatable">' . (double)(($ga_dash_bottom_stats ['rows'] [0] [1]) ? round ( $ga_dash_bottom_stats ['rows'] [0] [3] / $ga_dash_bottom_stats ['rows'] [0] [1], 2 ) : '0') . '</a></td>
 			</tr>
 			</table>
 			
@@ -701,6 +706,7 @@ if (! class_exists ( 'GADASH_Widgets' )) {
 				$code .= '<div id="ga_dash_sdata"></div>';
 			
 			echo $code;
+			
 		}
 	}
 }
