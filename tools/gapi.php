@@ -966,7 +966,6 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 								
 					jQuery.post(ajaxurl, {action: "gadash_get_online_data", gadash_security: "'.wp_create_nonce('gadash_get_online_data').'"}, function(response){
 						var data = jQuery.parseJSON(response);
-						console.log(data);
 						if (data["totalsForAllResults"]["ga:activeVisitors"]!==document.getElementById("gadash-online").innerHTML){
 							jQuery("#gadash-online").fadeOut("slow");
 							jQuery("#gadash-online").fadeOut(500);

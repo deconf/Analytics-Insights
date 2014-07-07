@@ -45,6 +45,11 @@ Using this plugin, your analytics data is collected in a fast and secure manner 
 - track events feature: track downloads, emails and outbound links (supported for both tracking methods: classic tracking and universal tracking)
 - exclude traffic based on user level access
 
+= WPMU features =
+
+- authorize the entire network with a single Google Account
+- set corresponding properties/views, for each blog, from you Network Admin screen
+
 = Translations =
 
 Google Analytics Dashboard for WP has been translated into the following languages:
@@ -111,6 +116,8 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - bugfix: SERVER_ADDR PHP notice
 - bugfix: notices on admin dashboard
 - additional data validation and sanitizing
+- bugfix: realtime switching profile functionality
+- multisite: blog's cleanup on uninstall
 
 = v4.2.21 =
 - added hungarian translation

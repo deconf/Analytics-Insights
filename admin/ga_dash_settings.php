@@ -451,7 +451,7 @@ class GADASH_Settings {
 		
 		?>
 <form name="ga_dash_form" method="post"
-	action="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>">
+	action="<?php  esc_url($_SERVER['REQUEST_URI']); ?>">
 
 	<div class="wrap">
 			<?php echo "<h2>" . __( "Google Analytics Tracking Code", 'ga-dash' ) . "</h2>"; ?><hr>
@@ -922,9 +922,9 @@ class GADASH_Settings {
 								if ($anonim['ga_dash_apikey']){
 									$anonim['ga_dash_apikey'] = 'HIDDEN';
 								}	
-								print_r($anonim); 
+								echo esc_html(print_r($anonim, true)); 
 								echo '<br/>Last Error: ';
-								print_r(esc_html(get_option('gadash_lasterror','N/A')));
+								echo esc_html(print_r(get_option('gadash_lasterror','N/A'), true));
 								echo '<br/><br/>************************************* End Log *************************************</pre>';
 								?>
 								</div>
@@ -1363,9 +1363,9 @@ class GADASH_Settings {
 									if ($anonim['ga_dash_apikey']){
 										$anonim['ga_dash_apikey'] = 'HIDDEN';
 									}																																
-									print_r($anonim); 
+									echo esc_html(print_r($anonim, true)); 
 									echo '<br/>Last Error: ';
-									print_r(get_option('gadash_lasterror','N/A'));
+									echo esc_html(print_r(get_option('gadash_lasterror','N/A'), true));
 									echo '<br/><br/>************************************* End Log *************************************</pre>';
 									?>
 									</div>

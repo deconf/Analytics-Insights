@@ -54,7 +54,11 @@ if (! class_exists ( 'GADASH_Widgets' )) {
 				die ();
 			}
 			
-			print_r ( stripslashes ( json_encode ( $GADASH_GAPI->gadash_realtime_data ( $GADASH_Config->options ['ga_dash_tableid'] ) ) ) );
+			if (current_user_can ( 'manage_options' ) AND !$GADASH_Config->options ['ga_dash_jailadmins'] ) {
+				print_r ( stripslashes ( json_encode ( $GADASH_GAPI->gadash_realtime_data ( $GADASH_Config->options ['ga_dash_tableid'] ) ) ) );
+			} else	{				
+				print_r ( stripslashes ( json_encode ( $GADASH_GAPI->gadash_realtime_data ( $GADASH_Config->options ['ga_dash_tableid_jail'] ) ) ) );
+			}	
 			
 			die ();
 		}
