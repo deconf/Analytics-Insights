@@ -8,7 +8,7 @@
  * Author URI: http://deconf.com
  */  
 
-define ( 'GADWP_CURRENT_VERSION', '4.2.22b' );
+define ( 'GADWP_CURRENT_VERSION', '4.3' );
 
 /*
  * Include Install
