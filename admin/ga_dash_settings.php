@@ -1226,9 +1226,7 @@ class GADASH_Settings {
 				if ($options ['ga_dash_token']) {
 					?>
 						<tr>
-									<td colspan="2">
-									<?php wp_nonce_field('gadash_form','gadash_security'); ?>
-									<input type="submit" name="Reset"
+									<td colspan="2"><input type="submit" name="Reset"
 										class="button button-secondary"
 										value="<?php _e( "Clear Authorization", 'ga-dash' ); ?>" /> <input
 										type="submit" name="Clear" class="button button-secondary"
