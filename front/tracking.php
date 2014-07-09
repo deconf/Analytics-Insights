@@ -38,7 +38,7 @@ if (! class_exists ( 'GADASH_Tracking' )) {
 			$traking_mode = $GADASH_Config->options ['ga_dash_tracking'];
 			$traking_type = $GADASH_Config->options ['ga_dash_tracking_type'];
 			
-			if ($traking_mode == 1 OR ($traking_mode == 2 AND !$GADASH_Config->options['ga_tracking_code'])) {
+			if ($traking_mode > 0) {
 				
 				if (!$GADASH_Config->options ['ga_dash_tableid_jail']) {
 					return;
@@ -63,20 +63,6 @@ if (! class_exists ( 'GADASH_Tracking' )) {
 					require_once 'tracking/code-classic.php';
 					echo "\n<!-- END GADWP Classic Tracking -->\n\n";					
 				}
-			} else{
-
-				if ($GADASH_Config->options['ga_tracking_code']){
-					echo "\n<!-- BEGIN GADWP v".GADWP_CURRENT_VERSION." Custom Tracking - http://deconf.com/google-analytics-dashboard-wordpress/ -->\n";
-					if ($GADASH_Config->options ['ga_event_tracking']){
-						if (strpos($GADASH_Config->options['ga_tracking_code'],'analytics.js')){
-							require_once 'tracking/events-universal.php';
-						}else{
-							require_once 'tracking/events-classic.php';
-						}
-					}
-					echo "\n".stripslashes($GADASH_Config->options['ga_tracking_code'])."\n";
-					echo "\n<!-- END GADWP Custom Tracking -->\n\n";					
-				}	
 			}
 		}
 	}

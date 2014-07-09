@@ -474,8 +474,6 @@ class GADASH_Settings {
 											<?php selected( $options['ga_dash_tracking'], 0 ); ?>><?php _e("Disabled", 'ga-dash');?></option>
 										<option value="1"
 											<?php selected( $options['ga_dash_tracking'], 1 ); ?>><?php _e("Enabled", 'ga-dash');?></option>
-										<option value="2"
-											<?php selected( $options['ga_dash_tracking'], 2 ); ?>><?php _e("Custom Code", 'ga-dash');?></option>
 								</select></td>
 							</tr>
 							<?php
@@ -556,13 +554,6 @@ class GADASH_Settings {
 
 								</td>
 							</tr>														
-							<?php
-			} else if ($options ['ga_dash_tracking'] == 2) {
-				?>
-							<tr>
-								<td class="title gadash-top"><label for="ga_tracking_code"><?php _e("Your Tracking Code:", 'ga-dash'); ?></label></td>
-								<td><pre class="gadash"><textarea id="ga_tracking_code" name="options[ga_tracking_code]" cols="40" rows="5"><?php echo esc_textarea(stripslashes($options['ga_tracking_code'])); ?></textarea></pre></td>
-							</tr>						
 							<?php
 			}
 			?>							
