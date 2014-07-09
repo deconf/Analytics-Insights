@@ -44,24 +44,23 @@ if (! class_exists ( 'GADASH_Tracking' )) {
 					return;
 				}
 								
-				if ($traking_type == "universal") {
+				if ($traking_type == "classic") {
+					echo "\n<!-- BEGIN GADWP v".GADWP_CURRENT_VERSION." Classic Tracking - http://deconf.com/google-analytics-dashboard-wordpress/ -->\n";
+					if ($GADASH_Config->options ['ga_event_tracking']) {
+						require_once 'tracking/events-classic.php';
+					}
+						
+					require_once 'tracking/code-classic.php';
+					echo "\n<!-- END GADWP Classic Tracking -->\n\n";			
+				} else {
 					echo "\n<!-- BEGIN GADWP v".GADWP_CURRENT_VERSION." Universal Tracking - http://deconf.com/google-analytics-dashboard-wordpress/ -->\n";
 					if ($GADASH_Config->options ['ga_event_tracking']) {
 						require_once 'tracking/events-universal.php';
 					}
-					
+						
 					require_once 'tracking/code-universal.php';
-					
+						
 					echo "\n<!-- END GADWP Universal Tracking -->\n\n";					
-				} else {
-
-					echo "\n<!-- BEGIN GADWP v".GADWP_CURRENT_VERSION." Classic Tracking - http://deconf.com/google-analytics-dashboard-wordpress/ -->\n";					
-					if ($GADASH_Config->options ['ga_event_tracking']) {
-						require_once 'tracking/events-classic.php';
-					}
-					
-					require_once 'tracking/code-classic.php';
-					echo "\n<!-- END GADWP Classic Tracking -->\n\n";					
 				}
 			}
 		}
