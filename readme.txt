@@ -110,6 +110,9 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 
 == Changelog ==
 
+= v4.3.1 =
+- bugfix: link on top referrers list not working
+
 = v4.3 =
 - responsive Google Charts
 - single authorization for multisite

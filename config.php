@@ -29,7 +29,38 @@ if (! class_exists ( 'GADASH_Config' )) {
 					'strong' => array () 
 			);
 		}
-
+		
+		// Validates data before storing
+		private static function validate_data($options) { 
+		
+			if (isset($options['ga_realtime_pages'])){
+				$options['ga_realtime_pages'] = (int)$options['ga_realtime_pages'];
+			}
+			if (isset($options['ga_dash_apikey'])){
+				$options['ga_dash_apikey'] = sanitize_text_field($options['ga_dash_apikey']);
+			}			
+			if (isset($options['ga_dash_clientid'])){
+				$options['ga_dash_clientid'] = sanitize_text_field($options['ga_dash_clientid']);
+			}
+			if (isset($options['ga_dash_clientsecret'])){
+				$options['ga_dash_clientsecret'] = sanitize_text_field($options['ga_dash_clientsecret']);
+			}
+			if (isset($options['ga_dash_style'])){
+				$options['ga_dash_style'] = sanitize_text_field($options['ga_dash_style']);
+			}
+			if (isset($options['ga_event_downloads'])){
+				$options['ga_event_downloads'] = sanitize_text_field($options['ga_event_downloads']);
+			}
+			if (isset($options['ga_target_number'])){
+				$options['ga_target_number'] = (int)$options['ga_target_number'];;
+			}
+			if (isset($options['ga_target_geomap'])){
+				$options['ga_target_geomap'] = sanitize_text_field($options['ga_target_geomap']);
+			}
+		
+			return $options;
+		}				
+		
 		public function set_plugin_options($network_settings = false) {
 			//Handle Network Mode
 			if (is_multisite()){
@@ -45,12 +76,12 @@ if (! class_exists ( 'GADASH_Config' )) {
 					if (isset($this->options['ga_dash_tableid_network'])){
 						$network_options['ga_dash_tableid_network'] = $this->options['ga_dash_tableid_network'];
 					}	
-					update_site_option ( 'gadash_network_options', json_encode ( $network_options ) );
+					update_site_option ( 'gadash_network_options', json_encode ( $this->validate_data($network_options) ) );
 				}
 			}			
 			
 			if (current_user_can ( 'manage_options' )){
-				update_option ( 'gadash_options', json_encode ( $this->options ) );
+				update_option ( 'gadash_options', json_encode ( $this->validate_data($this->options) ) );
 			}	
 		}
 		

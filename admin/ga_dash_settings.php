@@ -6,48 +6,20 @@
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
 class GADASH_Settings {
-	
-	private static function validate_data($options) {
-		
-		if (isset($options['ga_realtime_pages'])){
-			$options['ga_realtime_pages'] = (int)$options['ga_realtime_pages'];
-		}
-		if (isset($options['ga_dash_clientid'])){
-			$options['ga_dash_clientid'] = sanitize_text_field($options['ga_dash_clientid']);
-		}
-		if (isset($options['ga_dash_clientsecret'])){
-			$options['ga_dash_clientsecret'] = sanitize_text_field($options['ga_dash_clientsecret']);
-		}
-		if (isset($options['ga_dash_style'])){
-			$options['ga_dash_style'] = sanitize_text_field($options['ga_dash_style']);
-		}
-		if (isset($options['ga_event_downloads'])){
-			$options['ga_event_downloads'] = sanitize_text_field($options['ga_event_downloads']);
-		}	
-		if (isset($options['ga_target_number'])){
-			$options['ga_target_number'] = (int)$options['ga_target_number'];;
-		}
-		if (isset($options['ga_target_geomap'])){
-			$options['ga_target_geomap'] = sanitize_text_field($options['ga_target_geomap']);
-		}
-
-		return $options;
-	}
-	
 	private static function set_get_options($who) {
 		global $GADASH_Config;
 		$network_settings = false;
 		$options = $GADASH_Config->options;
-		if (isset ( $_REQUEST ['options']['ga_dash_hidden'] ) and isset ( $_REQUEST ['options'] ) and (isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' )) and $who!='Reset') {
+		if (isset ( $_POST ['options']['ga_dash_hidden'] ) and isset ( $_POST ['options'] ) and (isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' )) and $who!='Reset') {
 			
-			$new_options = self::validate_data($_REQUEST ['options']);
+			$new_options = $_POST ['options'];
 			
 			if ($who == 'tracking') {
 				$options ['ga_dash_anonim'] = 0;
 				$options ['ga_event_tracking'] = 0;
 				$options ['ga_enhanced_links'] = 0;
 				$options ['ga_dash_remarketing'] = 0;
-				if (isset ( $_REQUEST ['options'] ['ga_tracking_code'] )) {
+				if (isset ( $_POST ['options'] ['ga_tracking_code'] )) {
 					$new_options ['ga_tracking_code'] = trim ( $new_options ['ga_tracking_code'], "\t" );
 				}
 				if (empty($new_options['ga_track_exclude'])){
@@ -92,7 +64,7 @@ class GADASH_Settings {
 		
 		$options = self::set_get_options ( 'frontend' );
 		
-		if (isset ( $_REQUEST ['options']['ga_dash_hidden'] )) {
+		if (isset ( $_POST ['options']['ga_dash_hidden'] )) {
 			$message = "<div class='updated'><p><strong>" . __( "Options saved.", 'ga-dash' ) . "</strong></p></div>";
 			if (!(isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' ))){
 				$message = "<div class='error'><p><strong>" . __( "Cheating Huh?", 'ga-dash' ) . "</strong></p></div>";
@@ -212,7 +184,7 @@ class GADASH_Settings {
 		
 		$options = self::set_get_options ( 'backend' );
 		
-		if (isset ( $_REQUEST ['options']['ga_dash_hidden'] )) {
+		if (isset ( $_POST ['options']['ga_dash_hidden'] )) {
 			$message = "<div class='updated'><p><strong>" . __( "Options saved.", 'ga-dash' ) . "</strong></p></div>";
 			if (!(isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' ))){
 				$message = "<div class='error'><p><strong>" . __( "Cheating Huh?", 'ga-dash' ) . "</strong></p></div>";
@@ -438,7 +410,7 @@ class GADASH_Settings {
 		
 		$options = self::set_get_options ( 'tracking' );
 		
-		if (isset ( $_REQUEST ['options']['ga_dash_hidden'] )) {
+		if (isset ( $_POST ['options']['ga_dash_hidden'] )) {
 			$message = "<div class='updated'><p><strong>" . __( "Options saved.", 'ga-dash' ) . "</strong></p></div>";
 			if (!(isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' ))){
 				$message = "<div class='error'><p><strong>" . __( "Cheating Huh?", 'ga-dash' ) . "</strong></p></div>";
@@ -657,9 +629,9 @@ class GADASH_Settings {
 		include_once ($GADASH_Config->plugin_path . '/tools/gapi.php');
 		global $GADASH_GAPI;
 		
-		if (isset ( $_REQUEST ['ga_dash_code'] )) {
+		if (isset ( $_POST ['ga_dash_code'] )) {
 				try{
-					$GADASH_GAPI->client->authenticate ( $_REQUEST ['ga_dash_code'] );
+					$GADASH_GAPI->client->authenticate ( $_POST ['ga_dash_code'] );
 					$GADASH_Config->options ['ga_dash_token'] = $GADASH_GAPI->client->getAccessToken ();
 					$google_token = json_decode ( $GADASH_GAPI->client->getAccessToken () );
 					$GADASH_Config->options ['ga_dash_refresh_token'] = $google_token->refresh_token;
@@ -695,7 +667,7 @@ class GADASH_Settings {
 			}
 		}
 		
-		if (isset ( $_REQUEST ['Clear'] )) {
+		if (isset ( $_POST ['Clear'] )) {
 			if (isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' )){
 				$tools->ga_dash_clear_cache ();
 				$message = "<div class='updated'><p><strong>" . __( "Cleared Cache.", 'ga-dash' ) . "</strong></p></div>";
@@ -704,7 +676,7 @@ class GADASH_Settings {
 			}	
 		}
 		
-		if (isset ( $_REQUEST ['Reset'] )) {
+		if (isset ( $_POST ['Reset'] )) {
 			if (isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' )){
 				$GADASH_GAPI->ga_dash_reset_token (true);
 				$tools->ga_dash_clear_cache ();
@@ -715,18 +687,18 @@ class GADASH_Settings {
 			}
 		}
 		
-		if (isset ( $_REQUEST ['Log'] )) {
+		if (isset ( $_POST ['Log'] )) {
 			$message = "<div class='updated'><p><strong>" . __( "Dumping log data.", 'ga-dash' ) . "</strong></p></div>";
 		}
 		
-		if (isset ( $_REQUEST ['options']['ga_dash_hidden'] ) and ! isset ( $_REQUEST ['Clear'] ) and ! isset ( $_REQUEST ['Reset']) and ! isset ( $_REQUEST ['Log'])) {
+		if (isset ( $_POST ['options']['ga_dash_hidden'] ) and ! isset ( $_POST ['Clear'] ) and ! isset ( $_POST ['Reset']) and ! isset ( $_POST ['Log'])) {
 			$message = "<div class='updated'><p><strong>" . __( "Options saved.", 'ga-dash' ) . "</strong></p></div>";
 			if (!(isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' ))){
 				$message = "<div class='error'><p><strong>" . __( "Cheating Huh?", 'ga-dash' ) . "</strong></p></div>";
 			}
 		}
 		
-		if (isset ( $_REQUEST ['Hide'] )) {
+		if (isset ( $_POST ['Hide'] )) {
 			if (isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' )){
 				$message = "<div class='updated'><p><strong>" . __( "All other domains/properties were removed.", 'ga-dash' ) . "</strong></p></div>";
 				$lock_profile = $tools->get_selected_profile ( $GADASH_Config->options ['ga_dash_profile_list'], $GADASH_Config->options ['ga_dash_tableid_jail'] );
@@ -754,7 +726,7 @@ class GADASH_Settings {
 				
 					<?php
 		
-		if (isset ( $_REQUEST ['Authorize'] )) {
+		if (isset ( $_POST ['Authorize'] )) {
 			$tools->ga_dash_clear_cache ();
 			$GADASH_GAPI->token_request ();
 		} else {
@@ -1026,9 +998,9 @@ class GADASH_Settings {
 		include_once ($GADASH_Config->plugin_path . '/tools/gapi.php');
 		global $GADASH_GAPI;
 	
-		if (isset ( $_REQUEST ['ga_dash_code'] )) {
+		if (isset ( $_POST ['ga_dash_code'] )) {
 			try{
-				$GADASH_GAPI->client->authenticate ( $_REQUEST ['ga_dash_code'] );
+				$GADASH_GAPI->client->authenticate ( $_POST ['ga_dash_code'] );
 				$GADASH_Config->options ['ga_dash_token'] = $GADASH_GAPI->client->getAccessToken ();
 				$google_token = json_decode ( $GADASH_GAPI->client->getAccessToken () );
 				$GADASH_Config->options ['ga_dash_refresh_token'] = $google_token->refresh_token;
@@ -1045,7 +1017,7 @@ class GADASH_Settings {
 		}
 
 		
-		if (isset ( $_REQUEST ['Refresh'] )) {
+		if (isset ( $_POST ['Refresh'] )) {
 			if (isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' )){
 				$GADASH_Config->options ['ga_dash_profile_list']='';
 				$message = "<div class='updated'><p><strong>" . __( "Properties refreshed.", 'ga-dash' ) . "</strong></p></div>";
@@ -1075,7 +1047,7 @@ class GADASH_Settings {
 			}
 		}
 	
-		if (isset ( $_REQUEST ['Clear'] )) {
+		if (isset ( $_POST ['Clear'] )) {
 			if (isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' )){
 				$tools->ga_dash_clear_cache ();
 				$message = "<div class='updated'><p><strong>" . __( "Cleared Cache.", 'ga-dash' ) . "</strong></p></div>";
@@ -1084,7 +1056,7 @@ class GADASH_Settings {
 			}
 		}
 	
-		if (isset ( $_REQUEST ['Reset'] )) {
+		if (isset ( $_POST ['Reset'] )) {
 			if (isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' )){
 				$GADASH_GAPI->ga_dash_reset_token (true);
 				$tools->ga_dash_clear_cache ();
@@ -1095,18 +1067,18 @@ class GADASH_Settings {
 			}
 		}
 	
-		if (isset ( $_REQUEST ['Log'] )) {
+		if (isset ( $_POST ['Log'] )) {
 			$message = "<div class='updated'><p><strong>" . __( "Dumping log data.", 'ga-dash' ) . "</strong></p></div>";
 		}
 	
-		if (isset ( $_REQUEST ['options']['ga_dash_hidden'] ) and ! isset ( $_REQUEST ['Clear'] ) and ! isset ( $_REQUEST ['Reset']) and ! isset ( $_REQUEST ['Log']) and ! isset ( $_REQUEST ['Refresh'])) {
+		if (isset ( $_POST ['options']['ga_dash_hidden'] ) and ! isset ( $_POST ['Clear'] ) and ! isset ( $_POST ['Reset']) and ! isset ( $_POST ['Log']) and ! isset ( $_POST ['Refresh'])) {
 			$message = "<div class='updated'><p><strong>" . __( "Options saved.", 'ga-dash' ) . "</strong></p></div>";
 			if (!(isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' ))){
 				$message = "<div class='error'><p><strong>" . __( "Cheating Huh?", 'ga-dash' ) . "</strong></p></div>";
 			}
 		}
 	
-		if (isset ( $_REQUEST ['Hide'] )) {
+		if (isset ( $_POST ['Hide'] )) {
 			if (isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' )){
 				$message = "<div class='updated'><p><strong>" . __( "All other domains/properties were removed.", 'ga-dash' ) . "</strong></p></div>";
 				$lock_profile = $tools->get_selected_profile ( $GADASH_Config->options ['ga_dash_profile_list'], $GADASH_Config->options ['ga_dash_tableid_jail'] );
@@ -1134,7 +1106,7 @@ class GADASH_Settings {
 					
 						<?php
 			
-			if (isset ( $_REQUEST ['Authorize'] )) {
+			if (isset ( $_POST ['Authorize'] )) {
 				$tools->ga_dash_clear_cache ();
 				$GADASH_GAPI->token_request ();
 			} else {
@@ -1254,8 +1226,8 @@ class GADASH_Settings {
 									<?php
 									foreach ( $options ['ga_dash_profile_list'] as $items ) {
 										if ($items [3]) {
-											echo '<option value="' . $items [1] . '" ' . selected ( $items [1], $options['ga_dash_tableid_network']->$blog['blog_id']);
-											echo ' title="' . __( "View Name:", 'ga-dash' ) . ' ' . $items [0] . '">' . $tools->ga_dash_get_profile_domain ( $items [3] ) . '</option>';
+											echo '<option value="' . esc_attr($items [1]) . '" ' . selected ( $items [1], $options['ga_dash_tableid_network']->$blog['blog_id']);
+											echo ' title="' . __( "View Name:", 'ga-dash' ) . ' ' . esc_attr($items [0]) . '">' . $tools->ga_dash_get_profile_domain ( $items [3] ) . '</option>';
 										}
 									}
 									?>
