@@ -15,8 +15,6 @@ define ( 'GADWP_CURRENT_VERSION', '4.3.1' );
 */
 
 include_once (dirname ( __FILE__ ) . '/install/install.php');
-// $test = new GADASH_Install;
-// $test->install();
 register_activation_hook ( __FILE__, array (
 		'GADASH_Install',
 		'install' 

@@ -112,6 +112,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 
 = v4.3.1 =
 - bugfix: link on top referrers list not working
+- allowing today as default stats
 
 = v4.3 =
 - responsive Google Charts
@@ -121,7 +122,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - additional data validation and sanitizing
 - bugfix: realtime switching profile functionality
 - multisite: blog's cleanup on uninstall
-- depricating custom tracking code
+- deprecating custom tracking code
 
 = v4.2.21 =
 - added hungarian translation

@@ -271,10 +271,8 @@ if (! class_exists ( 'GADASH_Widgets' )) {
 			
 			if (isset ( $_REQUEST ['period'] )) {
 				$period = $_REQUEST ['period'];
-				if ($period != 'today') {
-					$GADASH_Config->options ['ga_dash_default_dimension'] = $period;
-					$GADASH_Config->set_plugin_options ();
-				}
+				$GADASH_Config->options ['ga_dash_default_dimension'] = $period;
+				$GADASH_Config->set_plugin_options ();
 			} else {
 				$period = isset ( $GADASH_Config->options ['ga_dash_default_dimension'] ) ? $GADASH_Config->options ['ga_dash_default_dimension'] : '30daysAgo';
 			}
