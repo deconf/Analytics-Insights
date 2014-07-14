@@ -559,6 +559,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 		// Frontend Widget Stats
 		function frontend_widget_stats($projectId, $period, $anonim, $display) {
 			global $GADASH_Config;
+			
 			$content = '';
 			$from = $period;
 			$to = 'yesterday';
@@ -659,8 +660,8 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 					  title: '" . $title . "',
 					  titlePosition: 'in',
 					  chartArea: {width: '95%',height:'75%'},
-					  hAxis: { textPosition: 'none' },
-					  vAxis: { textPosition: 'none', minValue: 0},
+					  hAxis: { textPosition: 'none'},
+					  vAxis: { textPosition: 'none', minValue: 0}
 				 	};
 					
 					var chart = new google.visualization.AreaChart(document.getElementById('ga_dash_widgetstatsdata'));
@@ -689,7 +690,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 						break;
 				}
 				
-				$content .= '<table style="border:none;"><tr><td style="font-weight:bold;padding:' . ($display == 3 ? '15px' : '0') . ' 0 10px 0;">' . __ ( "Period:", 'ga-dash' ) . '</td><td style="padding:' . ($display == 3 ? '15px' : '0') . ' 0 10px 20px;">' . $periodtext . '</td></tr>
+				$content .= '<style>table#gadwp-stats, table#gadwp-stats td{border:none;}</style><table id="gadwp-stats"><tr><td style="font-weight:bold;padding:' . ($display == 3 ? '15px' : '0') . ' 0 10px 0;">' . __ ( "Period:", 'ga-dash' ) . '</td><td style="padding:' . ($display == 3 ? '15px' : '0') . ' 0 10px 20px;">' . $periodtext . '</td></tr>
 				<tr><td style="font-weight:bold;padding:0 0 15px 0;">' . __ ( 'Total Visits:', 'ga-dash' ) . '</td><td style="padding:0 0 15px 20px;">' . ($data ['totalsForAllResults'] ['ga:visits']) . '</td></tr>
 				</table>';
 			}
