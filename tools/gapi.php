@@ -119,9 +119,11 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 					update_option ( 'gadash_lasterror', date ( 'Y-m-d H:i:s' ) . ': No properties were found in this account!' );
 				}
 			} catch ( Google_IOException $e ) {
+				$this->client->setUseObjects ( false );
 				update_option ( 'gadash_lasterror', date ( 'Y-m-d H:i:s' ) . ': ' . esc_html ( $e ) );
 				return false;
 			} catch ( Exception $e ) {
+				$this->client->setUseObjects ( false );
 				update_option ( 'gadash_lasterror', date ( 'Y-m-d H:i:s' ) . ': ' . esc_html ( $e ) );
 				$this->ga_dash_reset_token ( true );
 			}

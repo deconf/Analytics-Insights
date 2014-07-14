@@ -113,6 +113,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 = v4.3.1 =
 - bugfix: link on top referrers list not working
 - allowing today as default stats
+- bugfix: profiles refresh issue
 
 = v4.3 =
 - responsive Google Charts
