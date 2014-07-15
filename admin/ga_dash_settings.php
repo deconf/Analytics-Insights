@@ -126,6 +126,8 @@ class GADASH_Settings {
 		?>
                                     
 									
+									
+									
 									</table>
 								</td>
 							</tr>
@@ -176,6 +178,8 @@ class GADASH_Settings {
 						</table>
 						<input type="hidden" name="options[ga_dash_hidden]" value="Y">
 						<?php wp_nonce_field('gadash_form','gadash_security'); ?>
+
+
 
 
 
@@ -253,6 +257,8 @@ class GADASH_Settings {
 		}
 		?>
                                     
+									
+									
 									
 									</table>
 								</td>
@@ -407,6 +413,8 @@ class GADASH_Settings {
 						</table>
 						<input type="hidden" name="options[ga_dash_hidden]" value="Y">
 						<?php wp_nonce_field('gadash_form','gadash_security'); ?>
+
+
 
 
 
@@ -610,6 +618,8 @@ class GADASH_Settings {
 			?>
                                     
 									
+									
+									
 									</table>
 								</td>
 							</tr>
@@ -628,6 +638,8 @@ class GADASH_Settings {
 						</table>
 						<input type="hidden" name="options[ga_dash_hidden]" value="Y">
 						<?php wp_nonce_field('gadash_form','gadash_security'); ?>
+
+
 
 
 
@@ -669,7 +681,7 @@ class GADASH_Settings {
 				update_option ( 'gadash_lasterror', date ( 'Y-m-d H:i:s' ) . ': ' . esc_html ( $e ) );
 				return false;
 			} catch ( Exception $e ) {
-				update_option ( 'gadash_lasterror', date ( 'Y-m-d H:i:s' ) . ': ' . esc_html ( $e ) );
+				update_option ( 'gadash_lasterror', date ( 'Y-m-d H:i:s' ) . ': ' . esc_html ( $e ) . "\nResponseHttpCode:" . $e->getCode () );
 				$GADASH_GAPI->ga_dash_reset_token ( false );
 			}
 		}
@@ -1043,7 +1055,7 @@ class GADASH_Settings {
 				update_option ( 'gadash_lasterror', date ( 'Y-m-d H:i:s' ) . ': ' . esc_html ( $e ) );
 				return false;
 			} catch ( Exception $e ) {
-				update_option ( 'gadash_lasterror', date ( 'Y-m-d H:i:s' ) . ': ' . esc_html ( $e ) );
+				update_option ( 'gadash_lasterror', date ( 'Y-m-d H:i:s' ) . ': ' . esc_html ( $e ) . "\nResponseHttpCode:" . $e->getCode () );
 				$GADASH_GAPI->ga_dash_reset_token ( false );
 			}
 		}
