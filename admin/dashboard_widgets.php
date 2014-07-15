@@ -54,11 +54,11 @@ if (! class_exists ( 'GADASH_Widgets' )) {
 				die ();
 			}
 			
-			if (current_user_can ( 'manage_options' ) AND !$GADASH_Config->options ['ga_dash_jailadmins'] ) {
+			if (current_user_can ( 'manage_options' ) and ! $GADASH_Config->options ['ga_dash_jailadmins']) {
 				print_r ( stripslashes ( json_encode ( $GADASH_GAPI->gadash_realtime_data ( $GADASH_Config->options ['ga_dash_tableid'] ) ) ) );
-			} else	{				
+			} else {
 				print_r ( stripslashes ( json_encode ( $GADASH_GAPI->gadash_realtime_data ( $GADASH_Config->options ['ga_dash_tableid_jail'] ) ) ) );
-			}	
+			}
 			
 			die ();
 		}
@@ -210,9 +210,9 @@ if (! class_exists ( 'GADASH_Widgets' )) {
 							$GADASH_Config->options ['ga_dash_tableid'] = $profile [1];
 						}
 						if (isset ( $profile [3] )) {
-							$profile_switch .= '<option value="' . esc_attr($profile [1]) . '" ';
+							$profile_switch .= '<option value="' . esc_attr ( $profile [1] ) . '" ';
 							$profile_switch .= selected ( $profile [1], $GADASH_Config->options ['ga_dash_tableid'], false );
-							$profile_switch .= ' title="' . __ ( "View Name:", 'ga-dash' ) . ' ' . esc_attr($profile [0]) . '">' . esc_attr($tools->ga_dash_get_profile_domain ( $profile [3] )) . '</option>';
+							$profile_switch .= ' title="' . __ ( "View Name:", 'ga-dash' ) . ' ' . esc_attr ( $profile [0] ) . '">' . esc_attr ( $tools->ga_dash_get_profile_domain ( $profile [3] ) ) . '</option>';
 						}
 					}
 					$profile_switch .= "</select>";
@@ -637,19 +637,19 @@ if (! class_exists ( 'GADASH_Widgets' )) {
 			<table class="gatable" cellpadding="4">
 			<tr>
 			<td width="24%">' . __ ( "Visits:", 'ga-dash' ) . '</td>
-			<td width="12%" class="gavalue"><a href="?query=visits&period=' . $period . '" class="gatable">' . (int)$ga_dash_bottom_stats ['rows'] [0] [1] . '</td>
+			<td width="12%" class="gavalue"><a href="?query=visits&period=' . $period . '" class="gatable">' . ( int ) $ga_dash_bottom_stats ['rows'] [0] [1] . '</td>
 			<td width="24%">' . __ ( "Visitors:", 'ga-dash' ) . '</td>
-			<td width="12%" class="gavalue"><a href="?query=visitors&period=' . $period . '" class="gatable">' . (int)$ga_dash_bottom_stats ['rows'] [0] [2] . '</a></td>
+			<td width="12%" class="gavalue"><a href="?query=visitors&period=' . $period . '" class="gatable">' . ( int ) $ga_dash_bottom_stats ['rows'] [0] [2] . '</a></td>
 			<td width="24%">' . __ ( "Page Views:", 'ga-dash' ) . '</td>
-			<td width="12%" class="gavalue"><a href="?query=pageviews&period=' . $period . '" class="gatable">' . (int)$ga_dash_bottom_stats ['rows'] [0] [3] . '</a></td>
+			<td width="12%" class="gavalue"><a href="?query=pageviews&period=' . $period . '" class="gatable">' . ( int ) $ga_dash_bottom_stats ['rows'] [0] [3] . '</a></td>
 			</tr>
 			<tr>
 			<td>' . __ ( "Bounce Rate:", 'ga-dash' ) . '</td>
-			<td class="gavalue"><a href="?query=visitBounceRate&period=' . $period . '" class="gatable">' . (double)round ( $ga_dash_bottom_stats ['rows'] [0] [4], 2 ) . '%</a></td>
+			<td class="gavalue"><a href="?query=visitBounceRate&period=' . $period . '" class="gatable">' . ( double ) round ( $ga_dash_bottom_stats ['rows'] [0] [4], 2 ) . '%</a></td>
 			<td>' . __ ( "Organic Search:", 'ga-dash' ) . '</td>
-			<td class="gavalue"><a href="?query=organicSearches&period=' . $period . '" class="gatable">' . (int)$ga_dash_bottom_stats ['rows'] [0] [5] . '</a></td>
+			<td class="gavalue"><a href="?query=organicSearches&period=' . $period . '" class="gatable">' . ( int ) $ga_dash_bottom_stats ['rows'] [0] [5] . '</a></td>
 			<td>' . __ ( "Pages per Visit:", 'ga-dash' ) . '</td>
-			<td class="gavalue"><a href="#" class="gatable">' . (double)(($ga_dash_bottom_stats ['rows'] [0] [1]) ? round ( $ga_dash_bottom_stats ['rows'] [0] [3] / $ga_dash_bottom_stats ['rows'] [0] [1], 2 ) : '0') . '</a></td>
+			<td class="gavalue"><a href="#" class="gatable">' . ( double ) (($ga_dash_bottom_stats ['rows'] [0] [1]) ? round ( $ga_dash_bottom_stats ['rows'] [0] [3] / $ga_dash_bottom_stats ['rows'] [0] [1], 2 ) : '0') . '</a></td>
 			</tr>
 			</table>
 			
@@ -708,7 +708,6 @@ if (! class_exists ( 'GADASH_Widgets' )) {
 				$code .= '<div id="ga_dash_sdata"></div>';
 			
 			echo $code;
-			
 		}
 	}
 }

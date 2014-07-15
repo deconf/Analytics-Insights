@@ -17,15 +17,23 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 				update_option ( 'gadash_lasterror', date ( 'Y-m-d H:i:s' ) . ': CURL disabled. Please enable CURL!' );
 				return;
 			}
-			if (! class_exists ( 'Google_Client' )) {
-				include_once $GADASH_Config->plugin_path . '/tools/src/Google_Client.php';
+			// If at least PHP 5.3.0 use the autoloader, if not try to edit the include_path
+			if (version_compare ( PHP_VERSION, '5.3.0' ) >= 0) {
+				require 'vendor/autoload.php';
+			} else {
+				set_include_path ( $GADASH_Config->plugin_path . '/tools/src/' . PATH_SEPARATOR . get_include_path () );
 			}
-			
-			if (! class_exists ( 'Google_AnalyticsService' )) {
-				include_once $GADASH_Config->plugin_path . '/tools/src/contrib/Google_AnalyticsService.php';
+			// Include GAPI client
+			if (! class_exists ( 'Google_Client' )) {
+				include_once $GADASH_Config->plugin_path . '/tools/src/Google/Client.php';
+			}
+			// Include GAPI Analytics Service
+			if (! class_exists ( 'Google_Service_Analytics' )) {
+				include_once $GADASH_Config->plugin_path . '/tools/src/Google/Service/Analytics.php';
 			}
 			
 			$this->client = new Google_Client ();
+			$this->client->setScopes ( 'https://www.googleapis.com/auth/analytics.readonly' );
 			$this->client->setAccessType ( 'offline' );
 			$this->client->setApplicationName ( 'Google Analytics Dashboard' );
 			$this->client->setRedirectUri ( 'urn:ietf:wg:oauth:2.0:oob' );
@@ -40,7 +48,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 				$this->client->setDeveloperKey ( 'AIzaSyBG7LlUoHc29ZeC_dsShVaBEX15SfRl_WY' );
 			}
 			
-			$this->service = new Google_AnalyticsService ( $this->client );
+			$this->service = new Google_Service_Analytics ( $this->client );
 			
 			if ($GADASH_Config->options ['ga_dash_token']) {
 				$token = $GADASH_Config->options ['ga_dash_token'];
@@ -94,10 +102,8 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 		}
 		function refresh_profiles() {
 			try {
-				$this->client->setUseObjects ( true );
 				$profiles = $this->service->management_profiles->listManagementProfiles ( '~all', '~all' );
 				$items = $profiles->getItems ();
-				$this->client->setUseObjects ( false );
 				if (count ( $items ) != 0) {
 					$ga_dash_profile_list = array ();
 					foreach ( $items as $profile ) {
@@ -119,11 +125,9 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 					update_option ( 'gadash_lasterror', date ( 'Y-m-d H:i:s' ) . ': No properties were found in this account!' );
 				}
 			} catch ( Google_IOException $e ) {
-				$this->client->setUseObjects ( false );
 				update_option ( 'gadash_lasterror', date ( 'Y-m-d H:i:s' ) . ': ' . esc_html ( $e ) );
 				return false;
 			} catch ( Exception $e ) {
-				$this->client->setUseObjects ( false );
 				update_option ( 'gadash_lasterror', date ( 'Y-m-d H:i:s' ) . ': ' . esc_html ( $e ) );
 				$this->ga_dash_reset_token ( true );
 			}
@@ -148,13 +152,14 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 					
 					$token = $this->client->getAccessToken ();
 					$google_token = json_decode ( $token );
+					$GADASH_Config->options ['ga_dash_token'] = $token;
 					if (is_multisite () && $GADASH_Config->options ['ga_dash_network']) {
 						set_site_transient ( "ga_dash_refresh_token", $token, $google_token->expires_in );
+						$GADASH_Config->set_plugin_options ( true );
 					} else {
 						set_transient ( "ga_dash_refresh_token", $token, $google_token->expires_in );
+						$GADASH_Config->set_plugin_options ();
 					}
-					$GADASH_Config->options ['ga_dash_token'] = $token;
-					$GADASH_Config->set_plugin_options ();
 					return $token;
 				} else {
 					return $transient;
@@ -170,8 +175,11 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 		}
 		function ga_dash_reset_token($all = true) {
 			global $GADASH_Config;
-			
-			delete_site_transient ( 'ga_dash_refresh_token' );
+			if (is_multisite () && $GADASH_Config->options ['ga_dash_network']) {
+				delete_site_transient ( 'ga_dash_refresh_token' );
+			} else {
+				delete_transient ( 'ga_dash_refresh_token' );
+			}
 			$GADASH_Config->options ['ga_dash_token'] = "";
 			$GADASH_Config->options ['ga_dash_refresh_token'] = "";
 			
@@ -182,11 +190,19 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 				try {
 					$this->client->revokeToken ();
 				} catch ( Exception $e ) {
-					$GADASH_Config->set_plugin_options ();
+					if (is_multisite () && $GADASH_Config->options ['ga_dash_network']) {
+						$GADASH_Config->set_plugin_options ( true );
+					} else {
+						$GADASH_Config->set_plugin_options ();
+					}
 				}
 			}
 			
-			$GADASH_Config->set_plugin_options ();
+			if (is_multisite () && $GADASH_Config->options ['ga_dash_network']) {
+				$GADASH_Config->set_plugin_options ( true );
+			} else {
+				$GADASH_Config->set_plugin_options ();
+			}
 		}
 		
 		// Get Main Chart
