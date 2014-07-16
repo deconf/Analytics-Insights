@@ -43,7 +43,7 @@ class GADASH_Settings {
 				}
 			} else if ($who == 'general') {
 				$options ['ga_dash_userapi'] = 0;
-			} else if ($who == 'network') {
+			} else if ($who == 'network' or $_POST['network_screen']=='yes') {
 				$options ['ga_dash_userapi'] = 0;
 				$options ['ga_dash_network'] = 0;
 				$network_settings = true;
@@ -649,6 +649,7 @@ class GADASH_Settings {
 	}
 	public static function general_settings() {
 		global $GADASH_Config;
+		global $wp_version;
 		
 		/*
 		 * Include Tools
@@ -916,6 +917,7 @@ class GADASH_Settings {
 								<?php
 				echo '<pre class="log_data">************************************* Start Log *************************************<br/><br/>';
 				$anonim = $GADASH_Config->options;
+				$anonim['wp_version'] = $wp_version;
 				if ($anonim ['ga_dash_token']) {
 					$anonim ['ga_dash_token'] = 'HIDDEN';
 				}
@@ -977,6 +979,7 @@ class GADASH_Settings {
 								<?php
 				echo '<pre class="log_data">************************************* Start Log *************************************<br/><br/>';
 				$anonim = $GADASH_Config->options;
+				$anonim['wp_version'] = $wp_version;
 				if ($anonim ['ga_dash_token']) {
 					$anonim ['ga_dash_token'] = 'HIDDEN';
 				}
@@ -1023,7 +1026,7 @@ class GADASH_Settings {
 	// Network Settings
 	public static function general_settings_network() {
 		global $GADASH_Config;
-		
+		global $wp_version;
 		/*
 		 * Include Tools
 		 */
@@ -1162,6 +1165,7 @@ class GADASH_Settings {
 						<form name="ga_dash_form" method="post"
 											action="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>">
 											<input type="hidden" name="options[ga_dash_hidden]" value="Y">
+											<input type="hidden" name="network_screen" value="yes">
 							<?php wp_nonce_field('gadash_form','gadash_security'); ?>
 							<table class="options">
 												<tr>
@@ -1300,6 +1304,7 @@ class GADASH_Settings {
 									<?php
 					echo '<pre class="log_data">************************************* Start Log *************************************<br/><br/>';
 					$anonim = $GADASH_Config->options;
+					$anonim['wp_version'] = $wp_version;
 					if ($anonim ['ga_dash_token']) {
 						$anonim ['ga_dash_token'] = 'HIDDEN';
 					}
@@ -1363,6 +1368,7 @@ class GADASH_Settings {
 									<?php
 					echo '<pre class="log_data">************************************* Start Log *************************************<br/><br/>';
 					$anonim = $GADASH_Config->options;
+					$anonim['wp_version'] = $wp_version;
 					if ($anonim ['ga_dash_token']) {
 						$anonim ['ga_dash_token'] = 'HIDDEN';
 					}

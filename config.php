@@ -64,7 +64,7 @@ if (! class_exists ( 'GADASH_Config' )) {
 		public function set_plugin_options($network_settings = false) {
 			//Handle Network Mode
 			if (is_multisite()){
-				if ($this->options['ga_dash_network'] && (is_network_admin()) && $network_settings){
+				if (is_network_admin() && $network_settings){
 					$network_options['ga_dash_token'] = $this->options['ga_dash_token'];
 					$network_options['ga_dash_refresh_token'] = $this->options['ga_dash_refresh_token'];					
 					$network_options['ga_dash_apikey'] = $this->options['ga_dash_apikey'];
@@ -135,8 +135,6 @@ if (! class_exists ( 'GADASH_Config' )) {
 					
 					$this->options = array_merge($this->options, $network_options);
 					
-					//print_r($this->options);
-					
 				}
 			}
 		}
@@ -167,7 +165,11 @@ if (! class_exists ( 'GADASH_Config' )) {
 			
 			if (!is_array($this->options['ga_track_exclude'])){
 				$this->options['ga_track_exclude'] = array();
-			}			
+			}
+
+			if (isset($this->options['ga_tracking_code'])){
+				unset($this->options['ga_tracking_code']);
+			}
 			
 		}
 		

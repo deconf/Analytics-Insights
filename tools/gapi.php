@@ -23,6 +23,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 			} else {
 				set_include_path ( $GADASH_Config->plugin_path . '/tools/src/' . PATH_SEPARATOR . get_include_path () );
 			}
+			
 			// Include GAPI client
 			if (! class_exists ( 'Google_Client' )) {
 				include_once $GADASH_Config->plugin_path . '/tools/src/Google/Client.php';
