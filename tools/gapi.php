@@ -22,15 +22,14 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 				require 'vendor/autoload.php';
 			} else {
 				set_include_path ( $GADASH_Config->plugin_path . '/tools/src/' . PATH_SEPARATOR . get_include_path () );
-			}
-			
-			// Include GAPI client
-			if (! class_exists ( 'Google_Client' )) {
-				include_once $GADASH_Config->plugin_path . '/tools/src/Google/Client.php';
-			}
-			// Include GAPI Analytics Service
-			if (! class_exists ( 'Google_Service_Analytics' )) {
-				include_once $GADASH_Config->plugin_path . '/tools/src/Google/Service/Analytics.php';
+				// Include GAPI client
+				if (! class_exists ( 'Google_Client' )) {
+					require_once 'Google/Client.php';
+				}
+				// Include GAPI Analytics Service
+				if (! class_exists ( 'Google_Service_Analytics' )) {
+					require_once 'Google/Service/Analytics.php';
+				}
 			}
 			
 			$this->client = new Google_Client ();
@@ -125,7 +124,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 				} else {
 					update_option ( 'gadash_lasterror', date ( 'Y-m-d H:i:s' ) . ': No properties were found in this account!' );
 				}
-			} catch ( Google_IOException $e ) {
+			} catch ( Google_IO_Exception $e ) {
 				update_option ( 'gadash_lasterror', date ( 'Y-m-d H:i:s' ) . ': ' . esc_html ( $e ) );
 				return false;
 			} catch ( Exception $e ) {
@@ -165,7 +164,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 				} else {
 					return $transient;
 				}
-			} catch ( Google_IOException $e ) {
+			} catch ( Google_IO_Exception $e ) {
 				update_option ( 'gadash_lasterror', date ( 'Y-m-d H:i:s' ) . ': ' . esc_html ( $e ) );
 				return false;
 			} catch ( Exception $e ) {

@@ -226,7 +226,7 @@ if (! class_exists ( 'GADASH_Widgets' )) {
 			
 			?>
 <form id="ga-dash" method="POST">
-			<?php
+						<?php
 			
 			if (current_user_can ( 'manage_options' )) {
 				if ($GADASH_Config->options ['ga_dash_jailadmins']) {
@@ -285,8 +285,9 @@ if (! class_exists ( 'GADASH_Widgets' )) {
 			}
 			
 			?>
-
-	<select id="ga_dash_period" name="period" onchange="this.form.submit()">
+			
+				<select id="ga_dash_period" name="period"
+		onchange="this.form.submit()">
 		<option value="realtime"
 			<?php selected ( "realtime", $period, true ); ?>><?php _e("Real-Time",'ga-dash'); ?></option>
 		<option value="today" <?php selected ( "today", $period, true ); ?>><?php _e("Today",'ga-dash'); ?></option>
@@ -301,8 +302,9 @@ if (! class_exists ( 'GADASH_Widgets' )) {
 		<option value="90daysAgo"
 			<?php selected ( "90daysAgo", $period, true ); ?>><?php _e("Last 90 Days",'ga-dash'); ?></option>
 	</select>
-	<?php if (!$realtime) {?>
-	<select id="ga_dash_query" name="query" onchange="this.form.submit()">
+				<?php if (!$realtime) {?>
+				<select id="ga_dash_query" name="query"
+		onchange="this.form.submit()">
 		<option value="visits" <?php selected ( "visits", $query, true ); ?>><?php _e("Visits",'ga-dash'); ?></option>
 		<option value="visitors"
 			<?php selected ( "visitors", $query, true ); ?>><?php _e("Visitors",'ga-dash'); ?></option>
@@ -313,8 +315,8 @@ if (! class_exists ( 'GADASH_Widgets' )) {
 		<option value="visitBounceRate"
 			<?php selected ( "visitBounceRate", $query, true ); ?>><?php _e("Bounce Rate",'ga-dash'); ?></option>
 	</select> 	
-	<?php }?>
-</form>
+				<?php }?>
+			</form>
 <?php
 			switch ($period) {
 				
@@ -441,80 +443,85 @@ if (! class_exists ( 'GADASH_Widgets' )) {
 				$css = "";
 				$color = "#3366CC";
 			}
-			
-			$code = '<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(ga_dash_callback);
-		
-	  function ga_dash_callback(){
-			if(typeof ga_dash_drawstats == "function"){
-				ga_dash_drawstats();
-			}
-			if(typeof ga_dash_drawmap == "function"){
-				ga_dash_drawmap();
-			}
-			if(typeof ga_dash_drawpgd == "function"){
-				ga_dash_drawpgd();
-			}
-			if(typeof ga_dash_drawrd == "function"){
-				ga_dash_drawrd();
-			}
-			if(typeof ga_dash_drawsd == "function"){
-				ga_dash_drawsd();
-			}
-			if(typeof ga_dash_drawtraffic == "function"){
-				ga_dash_drawtraffic();
-			}
-	  }';
+			?>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+		      google.load("visualization", "1", {packages:["corechart"]});
+		      google.setOnLoadCallback(ga_dash_callback);
+				
+			  function ga_dash_callback(){
+					if(typeof ga_dash_drawstats == "function"){
+						ga_dash_drawstats();
+					}
+					if(typeof ga_dash_drawmap == "function"){
+						ga_dash_drawmap();
+					}
+					if(typeof ga_dash_drawpgd == "function"){
+						ga_dash_drawpgd();
+					}
+					if(typeof ga_dash_drawrd == "function"){
+						ga_dash_drawrd();
+					}
+					if(typeof ga_dash_drawsd == "function"){
+						ga_dash_drawsd();
+					}
+					if(typeof ga_dash_drawtraffic == "function"){
+						ga_dash_drawtraffic();
+					}
+			  };
+			  
+			<?php
 			
 			if ($realtime != "realtime") {
 				
-				$code .= 'function ga_dash_drawstats() {
-        var data = google.visualization.arrayToDataTable([' . "
-          ['" . $dh . "', '" . $title . "']," . $ga_dash_statsdata . "
-        ]);
-		
-        var options = {
-		  legend: {position: 'none'},
-		  pointSize: 3," . $css . "
-          title: '" . $title . "',
-		  chartArea: {width: '85%'},
-		  vAxis: {minValue: 0},
-          hAxis: { title: '" . $dh . "',  titleTextStyle: {color: '" . $dark_color . "'}, showTextEvery: " . $haxis . "}
-		};
-		" . $formater . "
-        var chart = new google.visualization.AreaChart(document.getElementById('ga_dash_statsdata'));
-		chart.draw(data, options);
-		
-      }";
+				?>
+					
+				function ga_dash_drawstats() {
+		        var data = google.visualization.arrayToDataTable([
+		          ['<?php echo $dh; ?>', '<?php echo $title; ?>'], <?php echo $ga_dash_statsdata ?>]);
+				
+		        var options = {
+				  legend: {position: 'none'},
+				  pointSize: 3,<?php echo $css;?>
+		          title: '<?php echo $title;?>',
+				  chartArea: {width: '85%'},
+				  vAxis: {minValue: 0},
+		          hAxis: { title: '<?php echo $dh;?>',  titleTextStyle: {color: '<?php echo $dark_color;?>'}, showTextEvery: <?php echo $haxis;?>}
+				};
+				<?php echo $formater?>
+		        var chart = new google.visualization.AreaChart(document.getElementById('ga_dash_statsdata'));
+				chart.draw(data, options);
+	      		};
+	      		
+	      	<?php
 			}
 			$ga_dash_visits_country = '';
 			if ($GADASH_Config->options ['ga_dash_map'] and $tools->check_roles ( $GADASH_Config->options ['ga_dash_access_back'] )) {
 				$ga_dash_visits_country = $GADASH_GAPI->ga_dash_visits_country ( $projectId, $from, $to );
 				if ($ga_dash_visits_country) {
+					?>		
+					google.load("visualization", "1", {packages:["geochart"]})
+					function ga_dash_drawmap() {
+						var data = google.visualization.arrayToDataTable([
+						  ['<?php _e( "Country/City", 'ga-dash' ) ?>', ' <?php _e( "Visits", 'ga-dash' ) ?>'], <?php echo $ga_dash_visits_country; ?>
+						]);
 					
-					$code .= '
-			google.load("visualization", "1", {packages:["geochart"]})
-			function ga_dash_drawmap() {
-			var data = google.visualization.arrayToDataTable([' . "
-			  ['" . __ ( "Country/City", 'ga-dash' ) . "', '" . __ ( "Visits", 'ga-dash' ) . "']," . $ga_dash_visits_country . "
-			]);
-		
-			var options = {";
-					
-					$code .= "colors: ['" . $light_color . "', '" . $dark_color . "'],";
-					
+						var options = {
+							colors: ['<?php echo $light_color; ?>', '<?php echo $dark_color; ?>'],
+							<?php
 					if ($GADASH_Config->options ['ga_target_geomap']) {
-						$code .= "\nregion : '" . $GADASH_Config->options ['ga_target_geomap'] . "',";
-						$code .= "\ndisplayMode : 'markers',";
-						$code .= "\ndatalessRegionColor : 'EFEFEF'";
+						?>
+								region : '<?php echo esc_html($GADASH_Config->options ['ga_target_geomap']); ?>',
+								displayMode : 'markers',
+								datalessRegionColor : 'EFEFEF'
+							<?php
 					}
-					
-					$code .= "\n};\nvar chart = new google.visualization.GeoChart(document.getElementById('ga_dash_mapdata'));
-			chart.draw(data, options);
-		
-		  }";
+					?>		
+							}
+						var chart = new google.visualization.GeoChart(document.getElementById('ga_dash_mapdata'));
+						chart.draw(data, options);
+					}
+				<?php
 				}
 			}
 			$ga_dash_traffic_sources = '';
@@ -523,191 +530,243 @@ if (! class_exists ( 'GADASH_Widgets' )) {
 				$ga_dash_traffic_sources = $GADASH_GAPI->ga_dash_traffic_sources ( $projectId, $from, $to );
 				$ga_dash_new_return = $GADASH_GAPI->ga_dash_new_return ( $projectId, $from, $to );
 				if ($ga_dash_traffic_sources and $ga_dash_new_return) {
-					$code .= '
-			google.load("visualization", "1", {packages:["corechart"]})
-			function ga_dash_drawtraffic() {
-			var data = google.visualization.arrayToDataTable([' . "
-			  ['" . __ ( "Source", 'ga-dash' ) . "', '" . __ ( "Visits", 'ga-dash' ) . "']," . $ga_dash_traffic_sources . '
-			]);
+					?>
+					google.load("visualization", "1", {packages:["corechart"]})
+					function ga_dash_drawtraffic() {
+						var data = google.visualization.arrayToDataTable([
+						  ['<?php _e( "Source", 'ga-dash' ); ?>', '<?php _e( "Visits", 'ga-dash' ); ?>'], <?php echo $ga_dash_traffic_sources;?> ]);
 		
-			var datanvr = google.visualization.arrayToDataTable([' . "
-			  ['" . __ ( "Type", 'ga-dash' ) . "', '" . __ ( "Visits", 'ga-dash' ) . "']," . $ga_dash_new_return . "
-			]);
+						var datanvr = google.visualization.arrayToDataTable([
+						  ['<?php echo _e( "Type", 'ga-dash' );?>', '<?php  _e( "Visits", 'ga-dash' ); ?>'], <?php echo $ga_dash_new_return; ?> 
+						]);
 		
-			var chart = new google.visualization.PieChart(document.getElementById('ga_dash_trafficdata'));
-			chart.draw(data, {
-				is3D: false,
-				tooltipText: 'percentage',
-				legend: 'none',
-				title: '" . __ ( "Traffic Sources", 'ga-dash' ) . "',
-				colors:['" . $GADASH_Config->options ['ga_dash_style'] . "','" . $tools->colourVariator ( $GADASH_Config->options ['ga_dash_style'], - 10 ) . "','" . $tools->colourVariator ( $GADASH_Config->options ['ga_dash_style'], + 20 ) . "','" . $tools->colourVariator ( $GADASH_Config->options ['ga_dash_style'], + 10 ) . "','" . $tools->colourVariator ( $GADASH_Config->options ['ga_dash_style'], - 20 ) . "']
-			});
+						var chart = new google.visualization.PieChart(document.getElementById('ga_dash_trafficdata'));
+						chart.draw(data, {
+							is3D: false,
+							tooltipText: 'percentage',
+							legend: 'none',
+							title: '<?php _e( "Traffic Sources", 'ga-dash' ); ?>',
+							colors:['<?php echo esc_html($GADASH_Config->options ['ga_dash_style']); ?>','<?php echo esc_html($tools->colourVariator ( $GADASH_Config->options ['ga_dash_style'], - 10 )); ?>','<?php echo esc_html($tools->colourVariator ( $GADASH_Config->options ['ga_dash_style'], + 20 )); ?>','<?php echo esc_html($tools->colourVariator ( $GADASH_Config->options ['ga_dash_style'], + 10 )); ?>','<?php echo esc_html($tools->colourVariator ( $GADASH_Config->options ['ga_dash_style'], - 20 )); ?>']
+						});
 		
-			var chart1 = new google.visualization.PieChart(document.getElementById('ga_dash_nvrdata'));
-			chart1.draw(datanvr,  {
-				is3D: false,
-				tooltipText: 'percentage',
-				legend: 'none',
-				title: '" . __ ( "New vs. Returning", 'ga-dash' ) . "',
-				colors:['" . $GADASH_Config->options ['ga_dash_style'] . "','" . $tools->colourVariator ( $GADASH_Config->options ['ga_dash_style'], - 10 ) . "','" . $tools->colourVariator ( $GADASH_Config->options ['ga_dash_style'], + 20 ) . "','" . $tools->colourVariator ( $GADASH_Config->options ['ga_dash_style'], + 10 ) . "','" . $tools->colourVariator ( $GADASH_Config->options ['ga_dash_style'], - 20 ) . "']				
-			});
+						var chart1 = new google.visualization.PieChart(document.getElementById('ga_dash_nvrdata'));
+						chart1.draw(datanvr,  {
+							is3D: false,
+							tooltipText: 'percentage',
+							legend: 'none',
+							title: '<?php _e( "New vs. Returning", 'ga-dash' ); ?>',
+							colors:['<?php echo esc_html($GADASH_Config->options ['ga_dash_style']); ?>','<?php echo esc_html($tools->colourVariator ( $GADASH_Config->options ['ga_dash_style'], - 10 )); ?>','<?php echo esc_html($tools->colourVariator ( $GADASH_Config->options ['ga_dash_style'], + 20 )); ?>','<?php echo esc_html($tools->colourVariator ( $GADASH_Config->options ['ga_dash_style'], + 10 )); ?>','<?php echo esc_html($tools->colourVariator ( $GADASH_Config->options ['ga_dash_style'], - 20 )); ?>']				
+						});
 		
-		  }";
+		  			}
+		  		<?php
 				}
 			}
+			
 			$ga_dash_top_pages = '';
 			if ($GADASH_Config->options ['ga_dash_pgd'] and $tools->check_roles ( $GADASH_Config->options ['ga_dash_access_back'] )) {
 				$ga_dash_top_pages = $GADASH_GAPI->ga_dash_top_pages ( $projectId, $from, $to );
 				if ($ga_dash_top_pages) {
-					$code .= '
-			google.load("visualization", "1", {packages:["table"]})
-			function ga_dash_drawpgd() {
-			var data = google.visualization.arrayToDataTable([' . "
-			  ['" . __ ( "Top Pages", 'ga-dash' ) . "', '" . __ ( "Visits", 'ga-dash' ) . "']," . $ga_dash_top_pages . "
-			]);
+					?>
+					google.load("visualization", "1", {packages:["table"]})
+					function ga_dash_drawpgd() {
+					var data = google.visualization.arrayToDataTable([
+					  ['<?php _e( "Top Pages", 'ga-dash' ); ?>', '<?php  _e( "Visits", 'ga-dash' ); ?>'], <?php echo $ga_dash_top_pages; ?>
+					]);
 		
-			var options = {
-				page: 'enable',
-				pageSize: 6,
-				width: '100%',
-				allowHtml:true			
-			};
+					var options = {
+						page: 'enable',
+						pageSize: 6,
+						width: '100%',
+						allowHtml:true			
+					};
 		
-			var chart = new google.visualization.Table(document.getElementById('ga_dash_pgddata'));
-			chart.draw(data, options);
+					var chart = new google.visualization.Table(document.getElementById('ga_dash_pgddata'));
+					chart.draw(data, options);
 		
-		  }";
+					};
+				<?php
 				}
 			}
+			
 			$ga_dash_top_referrers = '';
 			if ($GADASH_Config->options ['ga_dash_rd'] and $tools->check_roles ( $GADASH_Config->options ['ga_dash_access_back'] )) {
 				$ga_dash_top_referrers = $GADASH_GAPI->ga_dash_top_referrers ( $projectId, $from, $to );
 				if ($ga_dash_top_referrers) {
-					$code .= '
-			google.load("visualization", "1", {packages:["table"]})
-			function ga_dash_drawrd() {
-			var datar = google.visualization.arrayToDataTable([' . "
-			  ['" . __ ( "Top Referrers", 'ga-dash' ) . "', '" . __ ( "Visits", 'ga-dash' ) . "']," . $ga_dash_top_referrers . "
-			]);
-		
-			var options = {
-				page: 'enable',
-				pageSize: 6,
-				width: '100%',
-				allowHtml:true	
-			};
-		
-			var chart = new google.visualization.Table(document.getElementById('ga_dash_rdata'));
-			chart.draw(datar, options);
-		
-		  }";
+					?>
+					google.load("visualization", "1", {packages:["table"]})
+					function ga_dash_drawrd() {
+						var datar = google.visualization.arrayToDataTable([
+				  			['<?php _e( "Top Referrers", 'ga-dash' ); ?>', '<?php _e( "Visits", 'ga-dash' ); ?>'], <?php echo $ga_dash_top_referrers; ?>
+						]);
+			
+						var options = {
+							page: 'enable',
+							pageSize: 6,
+							width: '100%',
+							allowHtml:true	
+						};
+			
+						var chart = new google.visualization.Table(document.getElementById('ga_dash_rdata'));
+						chart.draw(datar, options);
+		  			}
+		  		<?php
 				}
 			}
+			
 			$ga_dash_top_searches = '';
 			if ($GADASH_Config->options ['ga_dash_sd'] and $tools->check_roles ( $GADASH_Config->options ['ga_dash_access_back'] )) {
 				$ga_dash_top_searches = $GADASH_GAPI->ga_dash_top_searches ( $projectId, $from, $to );
 				if ($ga_dash_top_searches) {
-					$code .= '
-			google.load("visualization", "1", {packages:["table"]})
-			function ga_dash_drawsd() {
+					?>
+					google.load("visualization", "1", {packages:["table"]})
+					function ga_dash_drawsd() {
 		
-			var datas = google.visualization.arrayToDataTable([' . "
-			  ['" . __ ( "Top Searches", 'ga-dash' ) . "', '" . __ ( "Visits", 'ga-dash' ) . "']," . $ga_dash_top_searches . "
-			]);
+						var datas = google.visualization.arrayToDataTable([
+						  ['<?php echo _e( "Top Searches", 'ga-dash' );?>', '<?php _e( "Visits", 'ga-dash' );?>'], <?php echo $ga_dash_top_searches; ?>
+						]);
+					
+						var options = {
+							page: 'enable',
+							pageSize: 6,
+							width: '100%'
+						};
+					
+						var chart = new google.visualization.Table(document.getElementById('ga_dash_sdata'));
+						chart.draw(datas, options);
 		
-			var options = {
-				page: 'enable',
-				pageSize: 6,
-				width: '100%'
-			};
-		
-			var chart = new google.visualization.Table(document.getElementById('ga_dash_sdata'));
-			chart.draw(datas, options);
-		
-		  }";
+					}
+				<?php
 				}
 			}
-			$code .= "</script>";
-			$code .= "</script>";
-			
+			?>
+			</script>
+</script>
+<?php
 			if ($realtime != "realtime") {
-				$code .= '<div id="ga_dash_statsdata" class="widefat" style="height: 350px;"></div>
-		<div id="details_div">
-		
-			<table class="gatable" cellpadding="4">
-			<tr>
-			<td width="24%">' . __ ( "Visits:", 'ga-dash' ) . '</td>
-			<td width="12%" class="gavalue"><a href="?query=visits&period=' . $period . '" class="gatable">' . ( int ) $ga_dash_bottom_stats ['rows'] [0] [1] . '</td>
-			<td width="24%">' . __ ( "Visitors:", 'ga-dash' ) . '</td>
-			<td width="12%" class="gavalue"><a href="?query=visitors&period=' . $period . '" class="gatable">' . ( int ) $ga_dash_bottom_stats ['rows'] [0] [2] . '</a></td>
-			<td width="24%">' . __ ( "Page Views:", 'ga-dash' ) . '</td>
-			<td width="12%" class="gavalue"><a href="?query=pageviews&period=' . $period . '" class="gatable">' . ( int ) $ga_dash_bottom_stats ['rows'] [0] [3] . '</a></td>
-			</tr>
-			<tr>
-			<td>' . __ ( "Bounce Rate:", 'ga-dash' ) . '</td>
-			<td class="gavalue"><a href="?query=visitBounceRate&period=' . $period . '" class="gatable">' . ( double ) round ( $ga_dash_bottom_stats ['rows'] [0] [4], 2 ) . '%</a></td>
-			<td>' . __ ( "Organic Search:", 'ga-dash' ) . '</td>
-			<td class="gavalue"><a href="?query=organicSearches&period=' . $period . '" class="gatable">' . ( int ) $ga_dash_bottom_stats ['rows'] [0] [5] . '</a></td>
-			<td>' . __ ( "Pages per Visit:", 'ga-dash' ) . '</td>
-			<td class="gavalue"><a href="#" class="gatable">' . ( double ) (($ga_dash_bottom_stats ['rows'] [0] [1]) ? round ( $ga_dash_bottom_stats ['rows'] [0] [3] / $ga_dash_bottom_stats ['rows'] [0] [1], 2 ) : '0') . '</a></td>
-			</tr>
-			</table>
-			
-		</div>';
+				?>
+<div id="ga_dash_statsdata" class="widefat" style="height: 350px;"></div>
+<div id="details_div">
+
+	<table class="gatable" cellpadding="4">
+		<tr>
+			<td width="24%"><?php _e( "Visits:", 'ga-dash' );?></td>
+			<td width="12%" class="gavalue"><a
+				href="?query=visits&period=<?php echo $period; ?>" class="gatable"><?php echo ( int ) $ga_dash_bottom_stats ['rows'] [0] [1];?></td>
+			<td width="24%"><?php _e( "Visitors:", 'ga-dash' );?></td>
+			<td width="12%" class="gavalue"><a
+				href="?query=visitors&period=<?php echo $period; ?>" class="gatable"><?php echo ( int ) $ga_dash_bottom_stats ['rows'] [0] [2];?></a></td>
+			<td width="24%"><?php _e( "Page Views:", 'ga-dash' );?></td>
+			<td width="12%" class="gavalue"><a
+				href="?query=pageviews&period=<?php echo $period; ?>"
+				class="gatable"><?php echo ( int ) $ga_dash_bottom_stats ['rows'] [0] [3];?></a></td>
+		</tr>
+		<tr>
+			<td><?php _e( "Bounce Rate:", 'ga-dash' );?></td>
+			<td class="gavalue"><a
+				href="?query=visitBounceRate&period=<?php echo $period; ?>"
+				class="gatable"><?php echo ( double ) round ( $ga_dash_bottom_stats ['rows'] [0] [4], 2 );?>%</a></td>
+			<td><?php _e( "Organic Search:", 'ga-dash' );?></td>
+			<td class="gavalue"><a
+				href="?query=organicSearches&period=<?php echo $period; ?>"
+				class="gatable"><?php echo ( int ) $ga_dash_bottom_stats ['rows'] [0] [5];?></a></td>
+			<td><?php _e( "Pages per Visit:", 'ga-dash' );?></td>
+			<td class="gavalue"><a href="#" class="gatable"><?php echo ( double ) (($ga_dash_bottom_stats ['rows'] [0] [1]) ? round ( $ga_dash_bottom_stats ['rows'] [0] [3] / $ga_dash_bottom_stats ['rows'] [0] [1], 2 ) : '0');?></a></td>
+		</tr>
+	</table>
+
+</div>
+<?php
 			} else {
 				
 				if ($GADASH_Config->options ['ga_dash_userapi']) {
-					$code .= "<p style='padding:100px;line-height:2em;'>" . __ ( "This is a beta feature and is only available when using my Developer Key! (", 'ga-dash' ) . '<a href="http://deconf.com/google-analytics-dashboard-real-time-reports/" target="_blank">' . __ ( "more about this feature", 'ga-dash' ) . '</a>' . __ ( ")", 'ga-dash' ) . "</p>";
+					?>
+<p style='padding: 100px; line-height: 2em;'> <?php _e( "This is a beta feature and is only available when using my Developer Key! (", 'ga-dash' )?> <a
+		href="http://deconf.com/google-analytics-dashboard-real-time-reports/"
+		target="_blank"><?php _e( "more about this feature", 'ga-dash' );?></a>)
+</p>
+<?php
 				} else {
+					?>
+<table width='90%' class='realtime'>
+	<tr>
+		<td class='gadash-tdo-left'>
+			<div>
+				<span class='gadash-online' id='gadash-online'>&nbsp;</span>
+			</div>
+		</td>
+		<td class='gadash-tdo-right' id='gadash-tdo-right'><span
+			class="gadash-bigtext"><?php _e( "REFERRAL", 'ga-dash' );?>: 0</span><br />
+		<br /> <span class="gadash-bigtext"><?php _e( "ORGANIC", 'ga-dash' );?>: 0</span><br />
+		<br /> <span class="gadash-bigtext"><?php _e( "SOCIAL", 'ga-dash' );?>: 0</span><br />
+		<br /></td>
+		<td class='gadash-tdo-rights' id='gadash-tdo-rights'><span
+			class="gadash-bigtext"><?php _e( "DIRECT", 'ga-dash' );?>: 0</span><br />
+		<br /> <span class="gadash-bigtext"><?php _e( "NEW", 'ga-dash' );?>: 0</span><br />
+		<br /> <span class="gadash-bigtext"><?php _e( "RETURN", 'ga-dash' );?>: 0</span><br />
+		<br /></td>
+	</tr>
+	<tr>
+		<td id='gadash-pages' class='gadash-pages' colspan='3'>&nbsp;</td>
+	</tr>
+</table>
+<?php
 					
-					$code .= "<table width='90%' class='realtime'>
-						<tr>
-							<td class='gadash-tdo-left'>
-								<div><span class='gadash-online' id='gadash-online'>&nbsp;</span></div>
-							</td>
-							<td class='gadash-tdo-right' id='gadash-tdo-right'>
-								<span class=\"gadash-bigtext\">" . __ ( "REFERRAL", 'ga-dash' ) . ": 0</span><br /><br />
-								<span class=\"gadash-bigtext\">" . __ ( "ORGANIC", 'ga-dash' ) . ": 0</span><br /><br />
-								<span class=\"gadash-bigtext\">" . __ ( "SOCIAL", 'ga-dash' ) . ": 0</span><br /><br />
-							</td>
-							<td class='gadash-tdo-rights' id='gadash-tdo-rights'>
-								<span class=\"gadash-bigtext\">" . __ ( "DIRECT", 'ga-dash' ) . ": 0</span><br /><br />
-								<span class=\"gadash-bigtext\">" . __ ( "NEW", 'ga-dash' ) . ": 0</span><br /><br />
-								<span class=\"gadash-bigtext\">" . __ ( "RETURN", 'ga-dash' ) . ": 0</span><br /><br />
-							</td>
-						</tr>
-						<tr>
-						<td id='gadash-pages' class='gadash-pages' colspan='3'>&nbsp;</td>
-						</tr>
-					</table>";
-					$code .= $GADASH_GAPI->ga_realtime ();
+echo $GADASH_GAPI->ga_realtime ();
 				}
 			}
 			if ($GADASH_Config->options ['ga_dash_map'] and $tools->check_roles ( $GADASH_Config->options ['ga_dash_access_back'] ) and $ga_dash_visits_country) {
-				$code .= '<br /><h3>';
+				?>
+<br />
+<h3>
+				<?php
 				if ($GADASH_Config->options ['ga_target_geomap']) {
 					$GADASH_GAPI->getcountrycodes ();
-					$code .= __ ( "Visits from ", 'ga-dash' ) . $GADASH_GAPI->country_codes [$GADASH_Config->options ['ga_target_geomap']];
+					echo __ ( "Visits from ", 'ga-dash' ) . esc_html ( $GADASH_GAPI->country_codes [$GADASH_Config->options ['ga_target_geomap']] );
 				} else {
-					$code .= __ ( "Visits by Country", 'ga-dash' );
+					echo __ ( "Visits by Country", 'ga-dash' );
 				}
-				$code .= '</h3>
-		<div id="ga_dash_mapdata"></div>';
+				?>
+				</h3>
+<div id="ga_dash_mapdata"></div>
+
+			<?php
 			}
 			
 			if ($GADASH_Config->options ['ga_dash_traffic'] and $tools->check_roles ( $GADASH_Config->options ['ga_dash_access_back'] ) and ($ga_dash_top_referrers or $ga_dash_top_pages or ($ga_dash_traffic_sources and $ga_dash_new_return))) {
-				$code .= '<br /><h3>' . __ ( "Traffic Overview", 'ga-dash' ) . '</h3>
-				<div style="width:100%;clear:both;"><div style="width:50%; float:left;"><div id="ga_dash_trafficdata"></div></div><div style="width:50%;float:left;"><div id="ga_dash_nvrdata"></div></div></div><div style="clear:both;"></div>';
+				?>
+<br />
+<h3>
+				<?php _e( "Traffic Overview", 'ga-dash' );?>
+				</h3>
+<div style="width: 100%; clear: both;">
+	<div style="width: 50%; float: left;">
+		<div id="ga_dash_trafficdata"></div>
+	</div>
+	<div style="width: 50%; float: left;">
+		<div id="ga_dash_nvrdata"></div>
+	</div>
+</div>
+<div style="clear: both;"></div>
+
+			<?php
 			}
 			
-			if ($GADASH_Config->options ['ga_dash_pgd'] and $tools->check_roles ( $GADASH_Config->options ['ga_dash_access_back'] ))
-				$code .= '<div id="ga_dash_pgddata"></div>';
-			if ($GADASH_Config->options ['ga_dash_rd'] and $tools->check_roles ( $GADASH_Config->options ['ga_dash_access_back'] ))
-				$code .= '<div id="ga_dash_rdata"></div>';
-			if ($GADASH_Config->options ['ga_dash_sd'] and $tools->check_roles ( $GADASH_Config->options ['ga_dash_access_back'] ))
-				$code .= '<div id="ga_dash_sdata"></div>';
-			
-			echo $code;
+			if ($GADASH_Config->options ['ga_dash_pgd'] and $tools->check_roles ( $GADASH_Config->options ['ga_dash_access_back'] )) {
+				?>
+<div id="ga_dash_pgddata"></div>
+<?php
+			}
+			if ($GADASH_Config->options ['ga_dash_rd'] and $tools->check_roles ( $GADASH_Config->options ['ga_dash_access_back'] )) {
+				?>
+<div id="ga_dash_rdata"></div>
+<?php
+			}
+			if ($GADASH_Config->options ['ga_dash_sd'] and $tools->check_roles ( $GADASH_Config->options ['ga_dash_access_back'] )) {
+				?>
+<div id="ga_dash_sdata"></div>
+<?php
+			}
 		}
 	}
 }
