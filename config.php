@@ -64,15 +64,17 @@ if (! class_exists ( 'GADASH_Config' )) {
 		public function set_plugin_options($network_settings = false) {
 			//Handle Network Mode
 			if (is_multisite()){
-				if (is_network_admin() && $network_settings){
+				if ($network_settings){
 					$network_options['ga_dash_token'] = $this->options['ga_dash_token'];
 					$network_options['ga_dash_refresh_token'] = $this->options['ga_dash_refresh_token'];					
-					$network_options['ga_dash_apikey'] = $this->options['ga_dash_apikey'];
-					$network_options['ga_dash_clientid'] = $this->options['ga_dash_clientid'];
-					$network_options['ga_dash_clientsecret'] = $this->options['ga_dash_clientsecret'];
-					$network_options['ga_dash_userapi'] = $this->options['ga_dash_userapi'];
-					$network_options['ga_dash_network'] = $this->options['ga_dash_network'];
-					$network_options['ga_dash_profile_list'] = $this->options['ga_dash_profile_list'];
+					if (is_network_admin()){
+						$network_options['ga_dash_profile_list'] = $this->options['ga_dash_profile_list'];
+						$network_options['ga_dash_apikey'] = $this->options['ga_dash_apikey'];
+						$network_options['ga_dash_clientid'] = $this->options['ga_dash_clientid'];
+						$network_options['ga_dash_clientsecret'] = $this->options['ga_dash_clientsecret'];
+						$network_options['ga_dash_userapi'] = $this->options['ga_dash_userapi'];
+						$network_options['ga_dash_network'] = $this->options['ga_dash_network'];						
+					}	
 					if (isset($this->options['ga_dash_tableid_network'])){
 						$network_options['ga_dash_tableid_network'] = $this->options['ga_dash_tableid_network'];
 					}	

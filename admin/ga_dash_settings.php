@@ -43,7 +43,7 @@ class GADASH_Settings {
 				}
 			} else if ($who == 'general') {
 				$options ['ga_dash_userapi'] = 0;
-			} else if ($who == 'network' or $_POST['network_screen']=='yes') {
+			} else if ($who == 'network' or is_network_admin()) {
 				$options ['ga_dash_userapi'] = 0;
 				$options ['ga_dash_network'] = 0;
 				$network_settings = true;
@@ -997,7 +997,7 @@ class GADASH_Settings {
 				}
 				print_r ( $anonim );
 				echo '<br/>Last Error: ';
-				print_r ( get_option ( 'gadash_lasterror', 'N/A' ) );
+				echo esc_html ( print_r ( get_option ( 'gadash_lasterror', 'N/A' ), true ) );
 				echo '<br/><br/>************************************* End Log *************************************</pre>';
 				?>
 								</div>
@@ -1165,7 +1165,6 @@ class GADASH_Settings {
 						<form name="ga_dash_form" method="post"
 											action="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>">
 											<input type="hidden" name="options[ga_dash_hidden]" value="Y">
-											<input type="hidden" name="network_screen" value="yes">
 							<?php wp_nonce_field('gadash_form','gadash_security'); ?>
 							<table class="options">
 												<tr>
@@ -1322,7 +1321,7 @@ class GADASH_Settings {
 					}
 					print_r ( $anonim );
 					echo '<br/>Last Error: ';
-					print_r ( get_option ( 'gadash_lasterror', 'N/A' ) );
+					echo esc_html ( print_r ( get_option ( 'gadash_lasterror', 'N/A' ), true ) );
 					echo '<br/><br/>************************************* End Log *************************************</pre>';
 					?>
 									</div>
