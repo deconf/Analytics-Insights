@@ -130,7 +130,7 @@ if (! class_exists ( 'GADASH_Config' )) {
 						$network_options = ( array ) json_decode ( $get_network_options);
 					}
 					
-					if (!is_network_admin()){
+					if (!is_network_admin() && !empty($network_options ['ga_dash_profile_list'])){
 						$network_options['ga_dash_profile_list']=array(0 => $tools->get_selected_profile ( $network_options ['ga_dash_profile_list'], $network_options ['ga_dash_tableid_network']->$blog_id ));
 						$network_options['ga_dash_tableid_jail']=$network_options['ga_dash_profile_list'][0][1];
 					}

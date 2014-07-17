@@ -1269,7 +1269,9 @@ class GADASH_Settings {
 													<td colspan="2"><?php echo "<h2>" . __( "Properties/Views Settings", 'ga-dash' ) . "</h2>"; ?></td>
 												</tr>
 								<?php
-					$options ['ga_dash_tableid_network'] = json_decode ( json_encode ( $options ['ga_dash_tableid_network'] ), FALSE );
+					if (isset($options ['ga_dash_tableid_network'])){			
+						$options ['ga_dash_tableid_network'] = json_decode ( json_encode ( $options ['ga_dash_tableid_network'] ), FALSE );
+					}	
 					foreach ( wp_get_sites () as $blog ) {
 						?>
 							<tr>
@@ -1280,7 +1282,7 @@ class GADASH_Settings {
 									<?php
 						foreach ( $options ['ga_dash_profile_list'] as $items ) {
 							if ($items [3]) {
-								echo '<option value="' . esc_attr ( $items [1] ) . '" ' . selected ( $items [1], $options ['ga_dash_tableid_network']->$blog ['blog_id'] );
+								echo '<option value="' . esc_attr ( $items [1] ) . '" ' . selected ( $items [1], isset($options ['ga_dash_tableid_network']->$blog ['blog_id'])?$options ['ga_dash_tableid_network']->$blog ['blog_id']:'' );
 								echo ' title="' . __ ( "View Name:", 'ga-dash' ) . ' ' . esc_attr ( $items [0] ) . '">' . $tools->ga_dash_get_profile_domain ( $items [3] ) . '</option>';
 							}
 						}
