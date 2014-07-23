@@ -111,7 +111,7 @@ class GADASH_Settings {
 		                                    	<td><label> <input
 													type="checkbox" name="options[ga_dash_access_front][]"
 													value="<?php echo $role; ?>"
-													<?php if (in_array($role,$options['ga_dash_access_front']) OR $role=='administrator') echo 'checked="checked"'; if ($role=='administrator') echo 'disabled';?> />
+													<?php if (in_array($role,$options['ga_dash_access_front']) OR $role=='administrator') echo 'checked="checked"'; if ($role=='administrator') echo 'disabled="disabled"';?> />
 		                                        	<?php echo $name; ?>
 												</label></td>
 		                                    <?php
@@ -243,7 +243,7 @@ class GADASH_Settings {
 		                                    	<td><label> <input
 													type="checkbox" name="options[ga_dash_access_back][]"
 													value="<?php echo $role; ?>"
-													<?php if (in_array($role,$options['ga_dash_access_back']) OR $role=='administrator') echo 'checked="checked"'; if ($role=='administrator') echo 'disabled';?> />
+													<?php if (in_array($role,$options['ga_dash_access_back']) OR $role=='administrator') echo 'checked="checked"'; if ($role=='administrator') echo 'disabled="disabled"';?> />
 		                                        	<?php echo $name; ?>
 												</label></td>
 		                                    <?php
@@ -678,7 +678,7 @@ class GADASH_Settings {
 				$GADASH_Config->set_plugin_options ();
 				$message = "<div class='updated'><p><strong>" . __ ( "Plugin authorization succeeded.", 'ga-dash' ) . "</strong></p></div>";
 				$options = self::set_get_options ( 'general' );
-			} catch ( Google_IOException $e ) {
+			} catch ( Google_IO_Exception $e ) {
 				update_option ( 'gadash_lasterror', date ( 'Y-m-d H:i:s' ) . ': ' . esc_html ( $e ) );
 				return false;
 			} catch ( Exception $e ) {
@@ -798,7 +798,7 @@ class GADASH_Settings {
 									id="ga_dash_userapi" value="1"
 									<?php checked( $options['ga_dash_userapi'], 1 ); ?>
 									onchange="this.form.submit()"
-									<?php echo ($options['ga_dash_network'])?'disabled':''; ?> /><?php _e ( " use your own API Project credentials", 'ga-dash' );?>
+									<?php echo ($options['ga_dash_network'])?'disabled="disabled"':''; ?> /><?php _e ( " use your own API Project credentials", 'ga-dash' );?>
 							</td>
 							</tr>						
 						
@@ -840,7 +840,7 @@ class GADASH_Settings {
 								<td colspan="2"><input type="submit" name="Reset"
 									class="button button-secondary"
 									value="<?php _e( "Clear Authorization", 'ga-dash' ); ?>"
-									<?php echo $options['ga_dash_network']?'disabled':''; ?> /> <input
+									<?php echo $options['ga_dash_network']?'disabled="disabled"':''; ?> /> <input
 									type="submit" name="Clear" class="button button-secondary"
 									value="<?php _e( "Clear Cache", 'ga-dash' ); ?>" /></td>
 							</tr>
@@ -961,7 +961,7 @@ class GADASH_Settings {
 								<td colspan="2"><input type="submit" name="Authorize"
 									class="button button-secondary" id="authorize"
 									value="<?php _e( "Authorize Plugin", 'ga-dash' ); ?>"
-									<?php echo ((!function_exists('curl_version') OR ($options['ga_dash_network']))?'disabled':''); ?> />
+									<?php echo ((!function_exists('curl_version') OR ($options['ga_dash_network']))?'disabled="disabled"':''); ?> />
 									<input type="submit" name="Clear"
 									class="button button-secondary"
 									value="<?php _e( "Clear Cache", 'ga-dash' ); ?>" /></td>
@@ -1054,7 +1054,7 @@ class GADASH_Settings {
 				$GADASH_Config->set_plugin_options ( true );
 				$message = "<div class='updated'><p><strong>" . __ ( "Plugin authorization succeeded.", 'ga-dash' ) . "</strong></p></div>";
 				$options = self::set_get_options ( 'network' );
-			} catch ( Google_IOException $e ) {
+			} catch ( Google_IO_Exception $e ) {
 				update_option ( 'gadash_lasterror', date ( 'Y-m-d H:i:s' ) . ': ' . esc_html ( $e ) );
 				return false;
 			} catch ( Exception $e ) {
@@ -1351,7 +1351,7 @@ class GADASH_Settings {
 													<td colspan="2"><input type="submit" name="Authorize"
 														class="button button-secondary" id="authorize"
 														value="<?php _e( "Authorize Plugin", 'ga-dash' ); ?>"
-														<?php echo (!function_exists('curl_version')?'disabled':''); ?> />
+														<?php echo (!function_exists('curl_version')?'disabled="disabled"':''); ?> />
 														<input type="submit" name="Clear"
 														class="button button-secondary"
 														value="<?php _e( "Clear Cache", 'ga-dash' ); ?>" /></td>

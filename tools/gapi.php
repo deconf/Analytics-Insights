@@ -124,7 +124,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 				} else {
 					update_option ( 'gadash_lasterror', date ( 'Y-m-d H:i:s' ) . ': No properties were found in this account!' );
 				}
-			} catch ( Google_IOException $e ) {
+			} catch ( Google_IO_Exception $e ) {
 				update_option ( 'gadash_lasterror', date ( 'Y-m-d H:i:s' ) . ': ' . esc_html ( $e ) );
 				return false;
 			} catch ( Exception $e ) {
@@ -164,7 +164,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 				} else {
 					return $transient;
 				}
-			} catch ( Google_IOException $e ) {
+			} catch ( Google_IO_Exception $e ) {
 				update_option ( 'gadash_lasterror', date ( 'Y-m-d H:i:s' ) . ': ' . esc_html ( $e ) );
 				return false;
 			} catch ( Exception $e ) {

@@ -118,6 +118,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - bugfix: multiple fixes for network mode
 - updated GAPI libarry
 - using autloader for PHP 5.3.0 and greater
+- security improvements
 
 = v4.3 =
 - responsive Google Charts
