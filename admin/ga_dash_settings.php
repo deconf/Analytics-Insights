@@ -1033,7 +1033,7 @@ class GADASH_Settings {
 		include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
 		$tools = new GADASH_Tools ();
 		
-		if (! current_user_can ( 'manage_options' )) {
+		if (! current_user_can ( 'manage_network_options' )) {
 			return;
 		}
 		
