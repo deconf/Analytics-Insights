@@ -9,7 +9,8 @@ class GADASH_Settings {
 	private static function set_get_options($who) {
 		global $GADASH_Config;
 		$network_settings = false;
-		$options = $GADASH_Config->options;
+		$GADASH_Config->get_plugin_options (); // Retrieve current options
+		$options = $GADASH_Config->options; // Get current options
 		if (isset ( $_POST ['options'] ['ga_dash_hidden'] ) and isset ( $_POST ['options'] ) and (isset ( $_POST ['gadash_security'] ) && wp_verify_nonce ( $_POST ['gadash_security'], 'gadash_form' )) and $who != 'Reset') {
 			
 			$new_options = $_POST ['options'];
@@ -860,7 +861,7 @@ class GADASH_Settings {
 				foreach ( $options ['ga_dash_profile_list'] as $items ) {
 					if ($items [3]) {
 						echo '<option value="' . esc_attr ( $items [1] ) . '" ' . selected ( $items [1], $options ['ga_dash_tableid_jail'] );
-						echo ' title="' . __ ( "View Name:", 'ga-dash' ) . ' ' . esc_attr ( $items [0] ) . '">' . esc_html ( $tools->ga_dash_get_profile_domain ( $items [3] ) ) . '</option>';
+						echo ' title="' . __ ( "View Name:", 'ga-dash' ) . ' ' . esc_attr ( $items [0] ) . '">' . esc_html ( $tools->ga_dash_get_profile_domain ( $items [3] ) ) .' &#8658; '.esc_attr ( $items [0] ).'</option>';
 					}
 				}
 				?>
@@ -1082,7 +1083,7 @@ class GADASH_Settings {
 				}
 				if ($profiles) {
 					$GADASH_Config->options ['ga_dash_profile_list'] = $profiles;
-					if (! $GADASH_Config->options ['ga_dash_tableid_jail']) {
+					if (isset($GADASH_Config->options ['ga_dash_tableid_jail']) AND ! $GADASH_Config->options ['ga_dash_tableid_jail']) {
 						$profile = $tools->guess_default_domain ( $profiles );
 						$GADASH_Config->options ['ga_dash_tableid_jail'] = $profile;
 						$GADASH_Config->options ['ga_dash_tableid'] = $profile;
@@ -1283,7 +1284,7 @@ class GADASH_Settings {
 						foreach ( $options ['ga_dash_profile_list'] as $items ) {
 							if ($items [3]) {
 								echo '<option value="' . esc_attr ( $items [1] ) . '" ' . selected ( $items [1], isset($options ['ga_dash_tableid_network']->$blog ['blog_id'])?$options ['ga_dash_tableid_network']->$blog ['blog_id']:'' );
-								echo ' title="' . __ ( "View Name:", 'ga-dash' ) . ' ' . esc_attr ( $items [0] ) . '">' . $tools->ga_dash_get_profile_domain ( $items [3] ) . '</option>';
+								echo ' title="' . __ ( "View Name:", 'ga-dash' ) . ' ' . esc_attr ( $items [0] ) . '">' . $tools->ga_dash_get_profile_domain ( $items [3] ) .' &#8658; '.esc_attr ( $items [0] ).'</option>';
 							}
 						}
 						?>

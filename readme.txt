@@ -4,7 +4,7 @@ Donate link: http://deconf.com/donate/
 Tags: google,analytics,google analytics,dashboard,analytics dashboard,google analytics dashboard,google analytics widget,tracking,realtime,wpmu,multisite
 Requires at least: 2.8
 Tested up to: 3.9.1
-Stable tag: 4.3.1
+Stable tag: 4.3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -109,6 +109,9 @@ A dedicated section for Wordpress Plugins is available here: [Wordpress Plugins 
 This plugin it's released under the GPLv2, you can use it free of charge on your personal or commercial website.
 
 == Changelog ==
+
+= v4.3.2 =
+- bugfix: fixes for multisite with a single Google Account
 
 = v4.3.1 =
 - bugfix: link on top referrers list not working
