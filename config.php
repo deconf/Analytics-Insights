@@ -51,8 +51,12 @@ if (! class_exists ( 'GADASH_Config' )) {
 			}
 			if (isset ( $options ['ga_target_number'] )) {
 				$options ['ga_target_number'] = ( int ) $options ['ga_target_number'];
-				;
 			}
+			
+			if (isset ( $options ['ga_speed_samplerate'] ) && ($options ['ga_speed_samplerate']<1 || $options ['ga_speed_samplerate']>100)) {
+				$options ['ga_speed_samplerate'] = 1;
+			}
+			
 			if (isset ( $options ['ga_target_geomap'] )) {
 				$options ['ga_target_geomap'] = sanitize_text_field ( $options ['ga_target_geomap'] );
 			}
@@ -121,24 +125,13 @@ if (! class_exists ( 'GADASH_Config' )) {
 			}
 			$this->options = ( array ) json_decode ( get_option ( 'gadash_options' ) );
 			
-			// Maintain Compatibility
-			$this->maintain_compatibility ();
-			
 			// Handle Network Mode
 			if (is_multisite ()) {
 				$get_network_options = get_site_option ( 'gadash_network_options' );
 				$network_options = ( array ) json_decode ( $get_network_options );
 				if (isset ( $network_options ['ga_dash_network'] ) && ($network_options ['ga_dash_network'])) {
-					if (! $get_network_options) {
-						$network_options ['ga_dash_token'] = '';
-						$network_options ['ga_dash_refresh_token'] = '';
-						$network_options ['ga_dash_apikey'] = '';
-						$network_options ['ga_dash_clientid'] = '';
-						$network_options ['ga_dash_clientsecret'] = '';
-						$network_options ['ga_dash_userapi'] = '';
-					} else {
-						$network_options = ( array ) json_decode ( $get_network_options );
-					}
+
+					$network_options = ( array ) json_decode ( $get_network_options );
 					
 					if (! is_network_admin () && ! empty ( $network_options ['ga_dash_profile_list'] )) {
 						$network_options ['ga_dash_profile_list'] = array (
@@ -162,6 +155,14 @@ if (! class_exists ( 'GADASH_Config' )) {
 			
 			if (! isset ( $this->options ['ga_dash_remarketing'] )) {
 				$this->options ['ga_dash_remarketing'] = 0;
+			}
+			
+			if (! isset ( $this->options ['ga_dash_adsense'] )) {
+				$this->options ['ga_dash_adsense'] = 0;
+			}
+			
+			if (! isset ( $this->options ['ga_speed_samplerate'] )) {
+				$this->options ['ga_speed_samplerate'] = 1;
 			}
 			
 			if (! is_array ( $this->options ['ga_dash_access_front'] ) or empty ( $this->options ['ga_dash_access_front'] )) {

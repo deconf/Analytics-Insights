@@ -42,6 +42,8 @@ Using this plugin, your analytics data is collected in a fast and secure manner 
 - IP address anonymization feature
 - enhanced link attribution feature
 - remarketing, demographics and interests tracking
+- Google AdSense account linking
+- page speed sampling rate customization
 - track events feature: track downloads, emails and outbound links (supported for both tracking methods: classic tracking and universal tracking)
 - exclude traffic based on user level access
 
@@ -112,6 +114,9 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 
 = v4.3.2 =
 - bugfix: fixes for multisite with a single Google Account
+- feature: Adsense account linking
+- feature: adjust page speed sample rate 
+- bugfix: notice while displaying searches report
 
 = v4.3.1 =
 - bugfix: link on top referrers list not working

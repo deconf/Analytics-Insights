@@ -46,6 +46,8 @@ class GADASH_Install {
 			$options ['ga_dash_default_dimension'] = '30daysAgo';
 			$options ['ga_dash_frontend_stats'] = 0;
 			$options ['ga_dash_network'] = 0;
+			$options['ga_dash_adsense'] = 0;
+			$options['ga_speed_samplerate'] = 1;
 		} else {
 			$options = array ();
 			$options ['ga_dash_apikey'] = get_option ( 'ga_dash_apikey' );

@@ -207,3 +207,7 @@ pre.log_data{
 td.roles{
 	padding-bottom:15px;
 }
+
+#ga_speed_samplerate, #ga_target_number, #ga_realtime_pages{
+	width:50px;	
+}

@@ -19,6 +19,7 @@ class GADASH_Settings {
 				$options ['ga_event_tracking'] = 0;
 				$options ['ga_enhanced_links'] = 0;
 				$options ['ga_dash_remarketing'] = 0;
+				$options['ga_dash_adsense'] = 0;
 				if (isset ( $_POST ['options'] ['ga_tracking_code'] )) {
 					$new_options ['ga_tracking_code'] = trim ( $new_options ['ga_tracking_code'], "\t" );
 				}
@@ -292,8 +293,7 @@ class GADASH_Settings {
 							</tr>
 							<tr>
 								<td colspan="2" class="title"> <?php _e("Maximum number of pages to display on real-time tab:", 'ga-dash'); ?>
-								<input type="text" style="text-align: center;"
-									name="options[ga_realtime_pages]"
+								<input type="number" name="options[ga_realtime_pages]" id="ga_realtime_pages"
 									value="<?php echo (int)$options['ga_realtime_pages']; ?>"
 									size="3">
 								<?php _e("(find out more", 'ga-dash')?>	<a
@@ -328,8 +328,7 @@ class GADASH_Settings {
 									value="<?php echo esc_attr($options['ga_target_geomap']); ?>"
 									size="3">
 									<?php _e("and render top",'ga-dash'); ?>
-									<input type="text" style="text-align: center;"
-									name="options[ga_target_number]"
+									<input type="number" id="ga_target_number" name="options[ga_target_number]"
 									value="<?php echo (int)$options['ga_target_number']; ?>"
 									size="3">
 									<?php _e("cities (find out more", 'ga-dash')?>
@@ -561,7 +560,31 @@ class GADASH_Settings {
 									<div class="switch-desc"><?php _e ( " enable remarketing, demographics and interests reports", 'ga-dash' );?></div>
 
 								</td>
-							</tr>														
+							</tr>
+							<tr>
+								<td colspan="2" class="title">
+
+									<div class="onoffswitch">
+										<input type="checkbox" name="options[ga_dash_adsense]"
+											value="1" class="onoffswitch-checkbox"
+											id="ga_dash_adsense"
+											<?php checked( $options['ga_dash_adsense'], 1 ); ?>> <label
+											class="onoffswitch-label" for="ga_dash_adsense">
+											<div class="onoffswitch-inner"></div>
+											<div class="onoffswitch-switch"></div>
+										</label>
+									</div>
+									<div class="switch-desc"><?php _e ( " enable AdSense account linking", 'ga-dash' );?></div>
+
+								</td>
+							</tr>
+							<tr>
+								<td class="title"><label for="ga_speed_samplerate"><?php _e("Page Speed SR:", 'ga-dash'); ?></label></td>
+								<td><input type="number" id="ga_speed_samplerate"
+									name="options[ga_speed_samplerate]"
+									value="<?php echo (int)($options['ga_speed_samplerate']); ?>"
+									 max="100" min="1"> %</td>
+							</tr>																													
 							<?php
 			}
 			?>							

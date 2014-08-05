@@ -794,6 +794,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 		
 		// Frontend searches
 		function frontend_afterpost_searches($projectId, $page_url, $post_id) {
+			global $GADASH_Config;
 			$content = '';
 			$from = '30daysAgo';
 			$to = 'yesterday';
