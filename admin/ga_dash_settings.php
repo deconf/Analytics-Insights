@@ -9,7 +9,6 @@ class GADASH_Settings {
 	private static function set_get_options($who) {
 		global $GADASH_Config;
 		$network_settings = false;
-		$GADASH_Config->get_plugin_options (); // Retrieve current options
 		$options = $GADASH_Config->options; // Get current options
 		if (isset ( $_POST ['options'] ['ga_dash_hidden'] ) and isset ( $_POST ['options'] ) and (isset ( $_POST ['gadash_security'] ) && wp_verify_nonce ( $_POST ['gadash_security'], 'gadash_form' )) and $who != 'Reset') {
 			
@@ -44,7 +43,7 @@ class GADASH_Settings {
 				}
 			} else if ($who == 'general') {
 				$options ['ga_dash_userapi'] = 0;
-			} else if ($who == 'network' or is_network_admin()) {
+			} else if ($who == 'network') {
 				$options ['ga_dash_userapi'] = 0;
 				$options ['ga_dash_network'] = 0;
 				$network_settings = true;
@@ -129,6 +128,8 @@ class GADASH_Settings {
 									
 									
 									
+									
+									
 									</table>
 								</td>
 							</tr>
@@ -179,6 +180,8 @@ class GADASH_Settings {
 						</table>
 						<input type="hidden" name="options[ga_dash_hidden]" value="Y">
 						<?php wp_nonce_field('gadash_form','gadash_security'); ?>
+
+
 
 
 
@@ -258,6 +261,8 @@ class GADASH_Settings {
 		}
 		?>
                                     
+									
+									
 									
 									
 									
@@ -414,6 +419,8 @@ class GADASH_Settings {
 						</table>
 						<input type="hidden" name="options[ga_dash_hidden]" value="Y">
 						<?php wp_nonce_field('gadash_form','gadash_security'); ?>
+
+
 
 
 
@@ -621,6 +628,8 @@ class GADASH_Settings {
 									
 									
 									
+									
+									
 									</table>
 								</td>
 							</tr>
@@ -639,6 +648,8 @@ class GADASH_Settings {
 						</table>
 						<input type="hidden" name="options[ga_dash_hidden]" value="Y">
 						<?php wp_nonce_field('gadash_form','gadash_security'); ?>
+
+
 
 
 
@@ -841,8 +852,9 @@ class GADASH_Settings {
 								<td colspan="2"><input type="submit" name="Reset"
 									class="button button-secondary"
 									value="<?php _e( "Clear Authorization", 'ga-dash' ); ?>"
-									<?php echo $options['ga_dash_network']?'disabled="disabled"':''; ?> /> <input
-									type="submit" name="Clear" class="button button-secondary"
+									<?php echo $options['ga_dash_network']?'disabled="disabled"':''; ?> />
+									<input type="submit" name="Clear"
+									class="button button-secondary"
 									value="<?php _e( "Clear Cache", 'ga-dash' ); ?>" /></td>
 							</tr>
 							<tr>
@@ -861,7 +873,7 @@ class GADASH_Settings {
 				foreach ( $options ['ga_dash_profile_list'] as $items ) {
 					if ($items [3]) {
 						echo '<option value="' . esc_attr ( $items [1] ) . '" ' . selected ( $items [1], $options ['ga_dash_tableid_jail'] );
-						echo ' title="' . __ ( "View Name:", 'ga-dash' ) . ' ' . esc_attr ( $items [0] ) . '">' . esc_html ( $tools->ga_dash_get_profile_domain ( $items [3] ) ) .' &#8658; '.esc_attr ( $items [0] ).'</option>';
+						echo ' title="' . __ ( "View Name:", 'ga-dash' ) . ' ' . esc_attr ( $items [0] ) . '">' . esc_html ( $tools->ga_dash_get_profile_domain ( $items [3] ) ) . ' &#8658; ' . esc_attr ( $items [0] ) . '</option>';
 					}
 				}
 				?>
@@ -918,7 +930,7 @@ class GADASH_Settings {
 								<?php
 				echo '<pre class="log_data">************************************* Start Log *************************************<br/><br/>';
 				$anonim = $GADASH_Config->options;
-				$anonim['wp_version'] = $wp_version;
+				$anonim ['wp_version'] = $wp_version;
 				if ($anonim ['ga_dash_token']) {
 					$anonim ['ga_dash_token'] = 'HIDDEN';
 				}
@@ -980,7 +992,7 @@ class GADASH_Settings {
 								<?php
 				echo '<pre class="log_data">************************************* Start Log *************************************<br/><br/>';
 				$anonim = $GADASH_Config->options;
-				$anonim['wp_version'] = $wp_version;
+				$anonim ['wp_version'] = $wp_version;
 				if ($anonim ['ga_dash_token']) {
 					$anonim ['ga_dash_token'] = 'HIDDEN';
 				}
@@ -1083,7 +1095,7 @@ class GADASH_Settings {
 				}
 				if ($profiles) {
 					$GADASH_Config->options ['ga_dash_profile_list'] = $profiles;
-					if (isset($GADASH_Config->options ['ga_dash_tableid_jail']) AND ! $GADASH_Config->options ['ga_dash_tableid_jail']) {
+					if (isset ( $GADASH_Config->options ['ga_dash_tableid_jail'] ) and ! $GADASH_Config->options ['ga_dash_tableid_jail']) {
 						$profile = $tools->guess_default_domain ( $profiles );
 						$GADASH_Config->options ['ga_dash_tableid_jail'] = $profile;
 						$GADASH_Config->options ['ga_dash_tableid'] = $profile;
@@ -1270,9 +1282,9 @@ class GADASH_Settings {
 													<td colspan="2"><?php echo "<h2>" . __( "Properties/Views Settings", 'ga-dash' ) . "</h2>"; ?></td>
 												</tr>
 								<?php
-					if (isset($options ['ga_dash_tableid_network'])){			
+					if (isset ( $options ['ga_dash_tableid_network'] )) {
 						$options ['ga_dash_tableid_network'] = json_decode ( json_encode ( $options ['ga_dash_tableid_network'] ), FALSE );
-					}	
+					}
 					foreach ( wp_get_sites () as $blog ) {
 						?>
 							<tr>
@@ -1283,8 +1295,8 @@ class GADASH_Settings {
 									<?php
 						foreach ( $options ['ga_dash_profile_list'] as $items ) {
 							if ($items [3]) {
-								echo '<option value="' . esc_attr ( $items [1] ) . '" ' . selected ( $items [1], isset($options ['ga_dash_tableid_network']->$blog ['blog_id'])?$options ['ga_dash_tableid_network']->$blog ['blog_id']:'' );
-								echo ' title="' . __ ( "View Name:", 'ga-dash' ) . ' ' . esc_attr ( $items [0] ) . '">' . $tools->ga_dash_get_profile_domain ( $items [3] ) .' &#8658; '.esc_attr ( $items [0] ).'</option>';
+								echo '<option value="' . esc_attr ( $items [1] ) . '" ' . selected ( $items [1], isset ( $options ['ga_dash_tableid_network']->$blog ['blog_id'] ) ? $options ['ga_dash_tableid_network']->$blog ['blog_id'] : '' );
+								echo ' title="' . __ ( "View Name:", 'ga-dash' ) . ' ' . esc_attr ( $items [0] ) . '">' . $tools->ga_dash_get_profile_domain ( $items [3] ) . ' &#8658; ' . esc_attr ( $items [0] ) . '</option>';
 							}
 						}
 						?>
@@ -1306,7 +1318,7 @@ class GADASH_Settings {
 									<?php
 					echo '<pre class="log_data">************************************* Start Log *************************************<br/><br/>';
 					$anonim = $GADASH_Config->options;
-					$anonim['wp_version'] = $wp_version;
+					$anonim ['wp_version'] = $wp_version;
 					if ($anonim ['ga_dash_token']) {
 						$anonim ['ga_dash_token'] = 'HIDDEN';
 					}
@@ -1370,7 +1382,7 @@ class GADASH_Settings {
 									<?php
 					echo '<pre class="log_data">************************************* Start Log *************************************<br/><br/>';
 					$anonim = $GADASH_Config->options;
-					$anonim['wp_version'] = $wp_version;
+					$anonim ['wp_version'] = $wp_version;
 					if ($anonim ['ga_dash_token']) {
 						$anonim ['ga_dash_token'] = 'HIDDEN';
 					}

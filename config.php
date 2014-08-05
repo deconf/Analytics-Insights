@@ -62,15 +62,18 @@ if (! class_exists ( 'GADASH_Config' )) {
 		public function set_plugin_options($network_settings = false) {
 			// Handle Network Mode
 			$options = $this->options;
+			$get_network_options = get_site_option ( 'gadash_network_options' );
+			$old_network_options = ( array ) json_decode ( $get_network_options );
+			
 			if (is_multisite ()) {
-				if ($network_settings) { //Retrieve network options, clear blog options, store both to db
+				if ($network_settings) { // Retrieve network options, clear blog options, store both to db
 					$network_options ['ga_dash_token'] = $this->options ['ga_dash_token'];
 					$options ['ga_dash_token'] = '';
 					$network_options ['ga_dash_refresh_token'] = $this->options ['ga_dash_refresh_token'];
-					$options ['ga_dash_refresh_token'] ='';
+					$options ['ga_dash_refresh_token'] = '';
 					if (is_network_admin ()) {
 						$network_options ['ga_dash_profile_list'] = $this->options ['ga_dash_profile_list'];
-						$options ['ga_dash_profile_list'] = array();
+						$options ['ga_dash_profile_list'] = array ();
 						$network_options ['ga_dash_apikey'] = $this->options ['ga_dash_apikey'];
 						$options ['ga_dash_apikey'] = '';
 						$network_options ['ga_dash_clientid'] = $this->options ['ga_dash_clientid'];
@@ -80,14 +83,14 @@ if (! class_exists ( 'GADASH_Config' )) {
 						$network_options ['ga_dash_userapi'] = $this->options ['ga_dash_userapi'];
 						$options ['ga_dash_userapi'] = 0;
 						$network_options ['ga_dash_network'] = $this->options ['ga_dash_network'];
-						$options ['ga_dash_network'] = 0;
+						unset ( $options ['ga_dash_network'] );
 						
 						if (isset ( $this->options ['ga_dash_tableid_network'] )) {
 							$network_options ['ga_dash_tableid_network'] = $this->options ['ga_dash_tableid_network'];
-							$options ['ga_dash_tableid_network'] = array();
+							unset ( $options ['ga_dash_tableid_network'] );
 						}
 					}
-					update_site_option ( 'gadash_network_options', json_encode ( $this->validate_data ( $network_options ) ) );
+					update_site_option ( 'gadash_network_options', json_encode ( $this->validate_data ( array_merge ( $old_network_options, $network_options ) ) ) );
 				}
 			}
 			
@@ -102,7 +105,7 @@ if (! class_exists ( 'GADASH_Config' )) {
 			$this->plugin_path = dirname ( __FILE__ );
 			$this->plugin_url = plugins_url ( "", __FILE__ );
 		}
-		public function get_plugin_options() {
+		private function get_plugin_options() {
 			/*
 			 * Get plugin options
 			 */
