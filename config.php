@@ -125,6 +125,9 @@ if (! class_exists ( 'GADASH_Config' )) {
 			}
 			$this->options = ( array ) json_decode ( get_option ( 'gadash_options' ) );
 			
+			// Maintain Compatibility
+-			$this->maintain_compatibility ();
+			
 			// Handle Network Mode
 			if (is_multisite ()) {
 				$get_network_options = get_site_option ( 'gadash_network_options' );
