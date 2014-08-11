@@ -114,9 +114,11 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 
 = v4.3.2 =
 - bugfix: fixes for multisite with a single Google Account
+- bugfix: notice while displaying searches report
+- bugfix: downloads regex update
 - feature: Adsense account linking
 - feature: adjust page speed sample rate 
-- bugfix: notice while displaying searches report
+- tweak: reset downloads filters to default when empty
 
 = v4.3.1 =
 - bugfix: link on top referrers list not working

@@ -2,7 +2,7 @@
 (function($){
     $(window).load(function() {
             $('a').filter(function() {
-                return this.href.match(/.*\.(<?php echo esc_js($GADASH_Config->options['ga_event_downloads']);?>)/);
+                return this.href.match(/.*\.(<?php echo esc_js($GADASH_Config->options['ga_event_downloads']);?>)(\?.*)?$/);
             }).click(function(e) {
                 ga('send','event', 'download', 'click', this.href);
             });
