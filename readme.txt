@@ -1,9 +1,9 @@
 === Google Analytics Dashboard for WP ===
 Contributors: deconf
-Donate link: http://deconf.com/donate/
+Donate link: https://deconf.com/donate/
 Tags: google,analytics,google analytics,dashboard,analytics dashboard,google analytics dashboard,google analytics widget,tracking,realtime,wpmu,multisite
 Requires at least: 2.8
-Tested up to: 3.9.1
+Tested up to: 3.9.2
 Stable tag: 4.3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -11,7 +11,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Displays Google Analytics Reports and Real-Time Statistics in your Dashboard. Automatically inserts the tracking code in every page of your website.
 
 == Description ==
-Using a widget, [Google Analytics Dashboard](http://deconf.com/google-analytics-dashboard-wordpress/) displays detailed analytics info and statistics about: number of visits, number of visitors, bounce rates, organic searches, pages per visit directly on your Administration Dashboard.
+Using a widget, [Google Analytics Dashboard](https://deconf.com/google-analytics-dashboard-wordpress/) displays detailed analytics info and statistics about: number of visits, number of visitors, bounce rates, organic searches, pages per visit directly on your Administration Dashboard.
 
 Authorized users can also view statistics like Views, UniqueViews and top searches, on frontend, at the end of each article.
 
@@ -46,6 +46,7 @@ Using this plugin, your analytics data is collected in a fast and secure manner 
 - page speed sampling rate customization
 - track events feature: track downloads, emails and outbound links (supported for both tracking methods: classic tracking and universal tracking)
 - exclude traffic based on user level access
+- option to exclude event tracking from bounce-rate calculation
 
 = WPMU features =
 
@@ -65,9 +66,9 @@ Google Analytics Dashboard for WP has been translated into the following languag
 
 = Further reading and info =
 
-* My [Google Analytics Dashboard](http://deconf.com/google-analytics-dashboard-wordpress/) homepage
-* Other [WordPress Plugins](http://deconf.com/wordpress/) by same author
-* [Google Analytics Dashboard](http://deconf.com/ask/) translations and support 
+* My [Google Analytics Dashboard](https://deconf.com/google-analytics-dashboard-wordpress/) homepage
+* Other [WordPress Plugins](https://deconf.com/wordpress/) by same author
+* [Google Analytics Dashboard](https://deconf.com/ask/) translations and support 
 
 == Installation ==
 
@@ -78,7 +79,7 @@ Google Analytics Dashboard for WP has been translated into the following languag
 5. Go back to the plugin configuration page, which is located under "Google Analytics" menu to update/set your settings.
 6. Use Google Analytics Tracking options to configure/enable/disable tracking
 
-A tutorial and a short demo is available here: [Google Analytics Dashboard video tutorial](http://deconf.com/google-analytics-dashboard-wordpress/)
+A tutorial and a short demo is available here: [Google Analytics Dashboard video tutorial](https://deconf.com/google-analytics-dashboard-wordpress/)
 
 == Frequently Asked Questions == 
 
@@ -92,7 +93,7 @@ We are constantly improving our plugin, sometimes the video tutorial may be a li
 
 = More Questions? =
 
-A dedicated section for Wordpress Plugins is available here: [Wordpress Plugins Support](http://deconf.com/ask/)
+A dedicated section for Wordpress Plugins is available here: [Wordpress Plugins Support](https://deconf.com/ask/)
 
 == Screenshots ==
 

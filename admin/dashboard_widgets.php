@@ -1,7 +1,7 @@
 <?php
 /**
  * Author: Alin Marcu
- * Author URI: http://deconf.com
+ * Author URI: https://deconf.com
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -250,7 +250,7 @@ if (! class_exists ( 'GADASH_Widgets' )) {
 			}
 			
 			if (! ($projectId)) {
-				echo '<p>' . __ ( "Something went wrong while retrieving property data. You need to create and properly configure a Google Analytics account:", 'ga-dash' ) . '</p> <form action="http://deconf.com/how-to-set-up-google-analytics-on-your-website/" method="POST">' . get_submit_button ( __ ( "Find out more!", 'ga-dash' ), 'secondary' ) . '</form>';
+				echo '<p>' . __ ( "Something went wrong while retrieving property data. You need to create and properly configure a Google Analytics account:", 'ga-dash' ) . '</p> <form action="https://deconf.com/how-to-set-up-google-analytics-on-your-website/" method="POST">' . get_submit_button ( __ ( "Find out more!", 'ga-dash' ), 'secondary' ) . '</form>';
 				return;
 			} else {
 				$profile_info = $tools->get_selected_profile ( $GADASH_Config->options ['ga_dash_profile_list'], $projectId );
@@ -682,7 +682,7 @@ if (! class_exists ( 'GADASH_Widgets' )) {
 				if ($GADASH_Config->options ['ga_dash_userapi']) {
 					?>
 <p style='padding: 100px; line-height: 2em;'> <?php _e( "This is a beta feature and is only available when using my Developer Key! (", 'ga-dash' )?> <a
-		href="http://deconf.com/google-analytics-dashboard-real-time-reports/"
+		href="https://deconf.com/google-analytics-dashboard-real-time-reports/"
 		target="_blank"><?php _e( "more about this feature", 'ga-dash' );?></a>)
 </p>
 <?php

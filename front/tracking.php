@@ -1,7 +1,7 @@
 <?php
 /**
  * Author: Alin Marcu
- * Author URI: http://deconf.com
+ * Author URI: https://deconf.com
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -45,7 +45,7 @@ if (! class_exists ( 'GADASH_Tracking' )) {
 				}
 				
 				if ($traking_type == "classic") {
-					echo "\n<!-- BEGIN GADWP v" . GADWP_CURRENT_VERSION . " Classic Tracking - http://deconf.com/google-analytics-dashboard-wordpress/ -->\n";
+					echo "\n<!-- BEGIN GADWP v" . GADWP_CURRENT_VERSION . " Classic Tracking - https://deconf.com/google-analytics-dashboard-wordpress/ -->\n";
 					if ($GADASH_Config->options ['ga_event_tracking']) {
 						require_once 'tracking/events-classic.php';
 					}
@@ -53,7 +53,7 @@ if (! class_exists ( 'GADASH_Tracking' )) {
 					require_once 'tracking/code-classic.php';
 					echo "\n<!-- END GADWP Classic Tracking -->\n\n";
 				} else {
-					echo "\n<!-- BEGIN GADWP v" . GADWP_CURRENT_VERSION . " Universal Tracking - http://deconf.com/google-analytics-dashboard-wordpress/ -->\n";
+					echo "\n<!-- BEGIN GADWP v" . GADWP_CURRENT_VERSION . " Universal Tracking - https://deconf.com/google-analytics-dashboard-wordpress/ -->\n";
 					if ($GADASH_Config->options ['ga_event_tracking']) {
 						require_once 'tracking/events-universal.php';
 					}

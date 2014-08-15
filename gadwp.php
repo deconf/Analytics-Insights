@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: Google Analytics Dashboard for WP 
- * Plugin URI: http://deconf.com 
+ * Plugin URI: https://deconf.com 
  * Description: Displays Google Analytics Reports and Real-Time Statistics in your Dashboard. Automatically inserts the tracking code in every page of your website.  
  * Author: Alin Marcu 
  * Version: 4.3.2 
- * Author URI: http://deconf.com
+ * Author URI: https://deconf.com
  */
 define ( 'GADWP_CURRENT_VERSION', '4.3.2' );
 
