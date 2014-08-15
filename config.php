@@ -149,9 +149,7 @@ if (! class_exists ( 'GADASH_Config' )) {
 					$this->options = array_merge ( $this->options, $network_options );
 				}
 			}
-			
-			//Maintain compatibility
-			$this->maintain_compatibility();
+
 		}
 		
 		private function maintain_compatibility() {

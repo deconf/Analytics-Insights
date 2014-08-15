@@ -211,3 +211,7 @@ td.roles{
 #ga_speed_samplerate, #ga_target_number, #ga_realtime_pages{
 	width:50px;	
 }
+
+.event-option, .event-option-desc{
+	float:left;
+}
