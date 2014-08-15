@@ -123,7 +123,6 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - tweak: reset downloads filters to default when empty
 - deprecate: classic analytics
 
-
 = v4.3.1 =
 - bugfix: link on top referrers list not working
 - allowing today as default stats

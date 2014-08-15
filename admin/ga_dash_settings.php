@@ -20,13 +20,10 @@ class GADASH_Settings {
 				$options ['ga_enhanced_links'] = 0;
 				$options ['ga_dash_remarketing'] = 0;
 				$options['ga_dash_adsense'] = 0;
-<<<<<<< HEAD
-=======
 				$options['ga_event_bouncerate'] = 0;
 				if (isset ( $_POST ['options'] ['ga_tracking_code'] )) {
 					$new_options ['ga_tracking_code'] = trim ( $new_options ['ga_tracking_code'], "\t" );
 				}
->>>>>>> refs/heads/work
 				if (empty ( $new_options ['ga_track_exclude'] )) {
 					$new_options ['ga_track_exclude'] = array ();
 				}
