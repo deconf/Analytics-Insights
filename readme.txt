@@ -116,9 +116,13 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - bugfix: fixes for multisite with a single Google Account
 - bugfix: notice while displaying searches report
 - bugfix: downloads regex update
+- bugfix: always exclude outbound links from bounce-rate calculation 
 - feature: Adsense account linking
-- feature: adjust page speed sample rate 
+- feature: adjust page speed sample rate
+- feature: exclude event tracking from bounce-rate calculation for downloads and mailto
 - tweak: reset downloads filters to default when empty
+- deprecate: classic analytics
+
 
 = v4.3.1 =
 - bugfix: link on top referrers list not working

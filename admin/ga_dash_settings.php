@@ -20,6 +20,13 @@ class GADASH_Settings {
 				$options ['ga_enhanced_links'] = 0;
 				$options ['ga_dash_remarketing'] = 0;
 				$options['ga_dash_adsense'] = 0;
+<<<<<<< HEAD
+=======
+				$options['ga_event_bouncerate'] = 0;
+				if (isset ( $_POST ['options'] ['ga_tracking_code'] )) {
+					$new_options ['ga_tracking_code'] = trim ( $new_options ['ga_tracking_code'], "\t" );
+				}
+>>>>>>> refs/heads/work
 				if (empty ( $new_options ['ga_track_exclude'] )) {
 					$new_options ['ga_track_exclude'] = array ();
 				}
@@ -611,6 +618,18 @@ class GADASH_Settings {
 									value="<?php echo esc_attr($options['ga_event_downloads']); ?>"
 									size="50"></td>
 							</tr>
+							<tr>
+								<td class="title"></td>
+								<td>
+										<div class="event-option"><input type="checkbox" name="options[ga_event_bouncerate]"
+											value="1" id="ga_event_bouncerate"
+											<?php checked( $options['ga_event_bouncerate'], 1 ); ?>> <label
+											 for="ga_event_bouncerate">
+										</label></div>
+									<div class="event-option-desc"><?php _e(" exclude the event hit from bounce-rate calculation", 'ga-dash' ); ?></div>
+
+								</td>
+							</tr>							
 							<tr>
 								<td colspan="2"><hr><?php echo "<h2>" . __( "Exclude Tracking", 'ga-dash' ) . "</h2>"; ?></td>
 							</tr>

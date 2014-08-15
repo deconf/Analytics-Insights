@@ -47,7 +47,7 @@ if (! class_exists ( 'GADASH_Config' )) {
 				$options ['ga_dash_style'] = sanitize_text_field ( $options ['ga_dash_style'] );
 			}
 			if (isset ( $options ['ga_event_downloads'] )) {
-				if (is_emtpy($options ['ga_event_downloads'])){
+				if (empty($options ['ga_event_downloads'])){
 					$options ['ga_event_downloads'] = 'zip|mp3*|mpe*g|pdf|docx*|pptx*|xlsx*|jpe*g|png|gif|tiff|rar*';
 				} 
 				$options ['ga_event_downloads'] = sanitize_text_field ( $options ['ga_event_downloads'] );
@@ -149,7 +149,11 @@ if (! class_exists ( 'GADASH_Config' )) {
 					$this->options = array_merge ( $this->options, $network_options );
 				}
 			}
+			
+			//Maintain compatibility
+			$this->maintain_compatibility();
 		}
+		
 		private function maintain_compatibility() {
 			if (! isset ( $this->options ['ga_enhanced_links'] )) {
 				$this->options ['ga_enhanced_links'] = 0;
@@ -170,6 +174,10 @@ if (! class_exists ( 'GADASH_Config' )) {
 			if (! isset ( $this->options ['ga_speed_samplerate'] )) {
 				$this->options ['ga_speed_samplerate'] = 1;
 			}
+
+			if (! isset ( $this->options['ga_event_bouncerate'] )) {
+				$this->options['ga_event_bouncerate'] = 1;
+			}			
 			
 			if (! is_array ( $this->options ['ga_dash_access_front'] ) or empty ( $this->options ['ga_dash_access_front'] )) {
 				$this->options ['ga_dash_access_front'] = array ();
