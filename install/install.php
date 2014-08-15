@@ -29,7 +29,7 @@ class GADASH_Install {
 			$options ['ga_dash_anonim'] = 0;
 			$options ['ga_dash_userapi'] = 0;
 			$options ['ga_event_tracking'] = 0;
-			$options ['ga_event_downloads'] = 'zip|ra*|mp*|avi|flv|mpeg|pdf|doc*|ppt*|xls*|jp*|png|gif|tiff|bmp|txt';
+			$options ['ga_event_downloads'] = 'zip|mp3*|mpe*g|pdf|docx*|pptx*|xlsx*|jpe*g|png|gif|tiff|rar*';
 			$options ['ga_track_exclude'] = array ();
 			$options ['ga_target_geomap'] = '';
 			$options ['ga_target_number'] = 10;
