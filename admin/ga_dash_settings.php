@@ -1518,6 +1518,18 @@ class GADASH_Settings {
 													src="<?php echo plugins_url( 'images/clicky.png' , __FILE__ ); ?>" /></a>
 											</div>
 											<div class="gadash-desc"><?php echo  '<a href="https://deconf.com/clicky-web-analytics-review/">'.__('Web Analytics', 'ga-dash').'</a> '.__('service with visitors tracking at IP level.', 'ga-dash'); ?></div>
+											<br />
+											<div class="gadash-title">
+												<a href="https://deconf.com//out/sucuri"><img
+													src="<?php echo plugins_url( 'images/sucuri.png' , __FILE__ ); ?>" /></a>
+											</div>
+											<div class="gadash-desc"><?php echo  '<a href="https://deconf.com/out/sucuri">'.__('Protect your website,', 'ga-dash').'</a> '.__('web integrity monitoring and malware removal.', 'ga-dash'); ?></div>
+											<br />
+											<div class="gadash-title">
+												<a href="https://deconf.com//out/maxcdn"><img
+													src="<?php echo plugins_url( 'images/cdn.png' , __FILE__ ); ?>" /></a>
+											</div>
+											<div class="gadash-desc"><?php echo  '<a href="https://deconf.com/out/maxcdn">'.__('Speed up your website,', 'ga-dash').'</a> '.__('using a reliable CDN service.', 'ga-dash'); ?></div>											
 										</div>
 									</div>
 								</div>
