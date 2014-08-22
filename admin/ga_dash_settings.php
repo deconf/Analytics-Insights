@@ -967,6 +967,7 @@ class GADASH_Settings {
 				echo '<pre class="log_data">************************************* Start Log *************************************<br/><br/>';
 				$anonim = $GADASH_Config->options;
 				$anonim ['wp_version'] = $wp_version;
+				$anonim ['gadwp_version'] = GADWP_CURRENT_VERSION;
 				if ($anonim ['ga_dash_token']) {
 					$anonim ['ga_dash_token'] = 'HIDDEN';
 				}
@@ -1029,6 +1030,7 @@ class GADASH_Settings {
 				echo '<pre class="log_data">************************************* Start Log *************************************<br/><br/>';
 				$anonim = $GADASH_Config->options;
 				$anonim ['wp_version'] = $wp_version;
+				$anonim ['gadwp_version'] = GADWP_CURRENT_VERSION;
 				if ($anonim ['ga_dash_token']) {
 					$anonim ['ga_dash_token'] = 'HIDDEN';
 				}
@@ -1355,6 +1357,7 @@ class GADASH_Settings {
 					echo '<pre class="log_data">************************************* Start Log *************************************<br/><br/>';
 					$anonim = $GADASH_Config->options;
 					$anonim ['wp_version'] = $wp_version;
+					$anonim ['gadwp_version'] = GADWP_CURRENT_VERSION;
 					if ($anonim ['ga_dash_token']) {
 						$anonim ['ga_dash_token'] = 'HIDDEN';
 					}
@@ -1419,6 +1422,7 @@ class GADASH_Settings {
 					echo '<pre class="log_data">************************************* Start Log *************************************<br/><br/>';
 					$anonim = $GADASH_Config->options;
 					$anonim ['wp_version'] = $wp_version;
+					$anonim ['gadwp_version'] = GADWP_CURRENT_VERSION;
 					if ($anonim ['ga_dash_token']) {
 						$anonim ['ga_dash_token'] = 'HIDDEN';
 					}
