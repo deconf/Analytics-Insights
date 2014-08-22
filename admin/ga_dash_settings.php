@@ -514,6 +514,13 @@ class GADASH_Settings {
 								</select></td>
 							</tr>
 							<tr>
+								<td class="title"><label for="ga_speed_samplerate"><?php _e("Page Speed SR:", 'ga-dash'); ?></label></td>
+								<td><input type="number" id="ga_speed_samplerate"
+									name="options[ga_speed_samplerate]"
+									value="<?php echo (int)($options['ga_speed_samplerate']); ?>"
+									 max="100" min="1"> %</td>
+							</tr>							
+							<tr>
 								<td colspan="2" class="title">
 
 									<div class="onoffswitch">
@@ -579,13 +586,6 @@ class GADASH_Settings {
 
 								</td>
 							</tr>
-							<tr>
-								<td class="title"><label for="ga_speed_samplerate"><?php _e("Page Speed SR:", 'ga-dash'); ?></label></td>
-								<td><input type="number" id="ga_speed_samplerate"
-									name="options[ga_speed_samplerate]"
-									value="<?php echo (int)($options['ga_speed_samplerate']); ?>"
-									 max="100" min="1"> %</td>
-							</tr>																													
 							<?php
 			}
 			?>							
