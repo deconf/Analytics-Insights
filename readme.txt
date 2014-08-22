@@ -117,7 +117,8 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 = 4.3.3 =
 - feature: added Polish translation
 - bugfix: missing icon and wrong link in GADWP settings
-- enhancement: moving Page Speed SR to top, to avoid some confusions
+- tweak: moving Page Speed SR to top, to avoid some confusions
+- tweak: added plugin version to debugging data
 
 = v4.3.2 =
 - bugfix: fixes for multisite with a single Google Account
