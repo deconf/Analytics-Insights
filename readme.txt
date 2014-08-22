@@ -61,8 +61,9 @@ Google Analytics Dashboard for WP has been translated into the following languag
 2. German
 3. Hungarian
 4. Italian
-5. Portuguese
-6. Spanish
+5. Polish
+6. Portuguese
+7. Spanish
 
 = Further reading and info =
 
