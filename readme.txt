@@ -47,6 +47,7 @@ Using this plugin, your analytics data is collected in a fast and secure manner 
 - track events feature: track downloads, emails and outbound links (supported for both tracking methods: classic tracking and universal tracking)
 - exclude traffic based on user level access
 - option to exclude event tracking from bounce-rate calculation
+- action hook for code customization
 
 = WPMU features =
 
@@ -113,6 +114,9 @@ A dedicated section for Wordpress Plugins is available here: [Wordpress Plugins 
 This plugin it's released under the GPLv2, you can use it free of charge on your personal or commercial website.
 
 == Changelog ==
+
+= 4.3.4 =
+- added ga_dash_addtrackingcode action hook
 
 = 4.3.3 =
 - feature: added Polish translation

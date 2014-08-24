@@ -21,9 +21,11 @@ $rootdomain = $tools->get_root_domain ( $profile [3] );
 <?php	if ($GADASH_Config->options ['ga_enhanced_links']) {?>
   ga('require', 'linkid', 'linkid.js');
 <?php }?>
+<?php 
+	do_action('ga_dash_addtrackingcode');
+?>  
 <?php if ($GADASH_Config->options ['ga_dash_anonim']) {?>  ga('send', 'pageview', {'anonymizeIp': true});<?php } else {?>  ga('send', 'pageview');
 <?php }?>
-
 <?php if ($GADASH_Config->options ['ga_dash_adsense']) {?>
   window.google_analytics_uacct = "<?php echo esc_html($profile[2]); ?>";
 <?php }?>  
