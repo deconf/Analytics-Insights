@@ -59,12 +59,13 @@ Using this plugin, your analytics data is collected in a fast and secure manner 
 Google Analytics Dashboard for WP has been translated into the following languages:
 
 1. English
-2. German
-3. Hungarian
-4. Italian
-5. Polish
-6. Portuguese
-7. Spanish
+2. French
+3. German
+4. Hungarian
+5. Italian
+6. Polish
+7. Portuguese
+8. Spanish
 
 = Further reading and info =
 
@@ -117,6 +118,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 
 = 4.3.4 =
 - added ga_dash_addtrackingcode action hook
+- feature: added French translation
 
 = 4.3.3 =
 - feature: added Polish translation
