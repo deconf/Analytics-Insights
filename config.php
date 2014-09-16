@@ -161,6 +161,10 @@ if (! class_exists ( 'GADASH_Config' )) {
 				$this->options ['ga_dash_network'] = 0;
 			}
 			
+			if (! isset ( $this->options ['ga_event_pos'] )) {
+				$this->options['ga_event_pos'] = 0;
+			}
+			
 			if (! isset ( $this->options ['ga_dash_remarketing'] )) {
 				$this->options ['ga_dash_remarketing'] = 0;
 			}

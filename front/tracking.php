@@ -12,17 +12,59 @@ if (! class_exists ( 'GADASH_Tracking' )) {
 					$this,
 					'ga_dash_tracking' 
 			) );
-			add_action ( 'wp_enqueue_scripts', array (
-					$this,
-					'ga_dash_enqueue_scripts' 
-			) );
+			
+			add_action ( 'init', array (
+			$this,
+			'ga_dash_tracking_events'
+					) );			
 		}
-		function ga_dash_enqueue_scripts() {
+		
+		function ga_dash_tracking_events() {
 			global $GADASH_Config;
-			if ($GADASH_Config->options ['ga_event_tracking'] and ! wp_script_is ( 'jquery' )) {
-				wp_enqueue_script ( 'jquery' );
+			/*
+			 * Include Tools
+			*/
+			include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
+			$tools = new GADASH_Tools ();
+				
+			if ($tools->check_roles ( $GADASH_Config->options ['ga_track_exclude'], true )) {
+				return;
 			}
-		}
+				
+			if ($GADASH_Config->options ['ga_dash_tracking'] > 0) {
+		
+				if (! $GADASH_Config->options ['ga_dash_tableid_jail']) {
+					return;
+				}
+
+				$bouncerate = (isset ( $GADASH_Config->options ['ga_event_bouncerate'] ) && $GADASH_Config->options ['ga_event_bouncerate']) ? '{"nonInteraction": "1"}' : '{"nonInteraction": "0"}';
+						
+				if ($GADASH_Config->options ['ga_dash_tracking'] == "classic") {
+
+					if ($GADASH_Config->options ['ga_event_tracking']) {
+						wp_register_script ( 'gadash_events', plugins_url ( 'tracking/events-classic.js', __FILE__ ), array('jquery'), NULL, $GADASH_Config->options['ga_event_pos']);
+						wp_localize_script ( 'gadash_events', 'gadash_eventsdata', array (
+						'extensions' => esc_js ( $GADASH_Config->options ['ga_event_downloads'] ),
+						'siteurl' => esc_html(get_option('siteurl'))
+						) );
+						wp_enqueue_script ( 'gadash_events' );						
+					}
+						
+				} else {
+					if ($GADASH_Config->options ['ga_event_tracking']) {
+						wp_register_script ( 'gadash_events', plugins_url ( 'tracking/events-universal.js', __FILE__ ), array('jquery'), NULL, $GADASH_Config->options['ga_event_pos']);
+						wp_localize_script ( 'gadash_events', 'gadash_eventsdata', array (
+						'extensions' => esc_js ( $GADASH_Config->options ['ga_event_downloads'] ),
+						'bouncerate' => $bouncerate,
+						'siteurl' => esc_html(get_option('siteurl'))
+						) );
+						wp_enqueue_script ( 'gadash_events' );
+					}
+				}
+			}
+		}		
+		
+		
 		function ga_dash_tracking($head) {
 			global $GADASH_Config;
 			/*
@@ -35,31 +77,19 @@ if (! class_exists ( 'GADASH_Tracking' )) {
 				return;
 			}
 			
-			$traking_mode = $GADASH_Config->options ['ga_dash_tracking'];
-			$traking_type = $GADASH_Config->options ['ga_dash_tracking_type'];
-			
-			if ($traking_mode > 0) {
+			if ($GADASH_Config->options ['ga_dash_tracking'] > 0) {
 				
 				if (! $GADASH_Config->options ['ga_dash_tableid_jail']) {
 					return;
 				}
 				
-				if ($traking_type == "classic") {
+				if ($GADASH_Config->options ['ga_dash_tracking'] == "classic") {
 					echo "\n<!-- BEGIN GADWP v" . GADWP_CURRENT_VERSION . " Classic Tracking - https://deconf.com/google-analytics-dashboard-wordpress/ -->\n";
-					if ($GADASH_Config->options ['ga_event_tracking']) {
-						require_once 'tracking/events-classic.php';
-					}
-					
 					require_once 'tracking/code-classic.php';
 					echo "\n<!-- END GADWP Classic Tracking -->\n\n";
 				} else {
 					echo "\n<!-- BEGIN GADWP v" . GADWP_CURRENT_VERSION . " Universal Tracking - https://deconf.com/google-analytics-dashboard-wordpress/ -->\n";
-					if ($GADASH_Config->options ['ga_event_tracking']) {
-						require_once 'tracking/events-universal.php';
-					}
-					
 					require_once 'tracking/code-universal.php';
-					
 					echo "\n<!-- END GADWP Universal Tracking -->\n\n";
 				}
 			}
