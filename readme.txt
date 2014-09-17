@@ -119,8 +119,6 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 = 4.3.4 =
 - added ga_dash_addtrackingcode action hook
 - feature: added French translation
-- feature: events script placement option
-- tweak: don't track outbound downloads as outbound links
 
 = 4.3.3 =
 - feature: added Polish translation
