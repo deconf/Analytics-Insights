@@ -36,9 +36,9 @@ Using this plugin, your analytics data is collected in a fast and secure manner 
 
 - enable/disable google analytics tracking code
 - switch between universal analytics and classic analytics tracking methods
-- supports analytics.js tracking for comaptibility with Universal Analytics web property  
-- supports ga.js tracking for comaptibility with Classic Analytics web property
-- automatically generates the tracking code; the user can also define a custom code
+- supports analytics.js tracking for compatibility with Universal Analytics web property  
+- supports ga.js tracking for compatibility with Classic Analytics web property
+- automatically generates the Google Analytics tracking code
 - IP address anonymization feature
 - enhanced link attribution feature
 - remarketing, demographics and interests tracking
@@ -47,7 +47,9 @@ Using this plugin, your analytics data is collected in a fast and secure manner 
 - track events feature: track downloads, emails and outbound links (supported for both tracking methods: classic tracking and universal tracking)
 - exclude traffic based on user level access
 - option to exclude event tracking from bounce-rate calculation
+- multiple domains / cross domain tracking
 - action hook for code customization
+- track authors, publication year, categories and user engagement using Google Analytics custom dimensions
 
 = WPMU features =
 
@@ -117,8 +119,11 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 == Changelog ==
 
 = 4.3.4 =
-- added ga_dash_addtrackingcode action hook
-- feature: added French translation
+- feature: ga_dash_addtrackingcode action hook
+- feature: French translation
+- feature: cross domain tracking support
+- feature: Google Analytics custom definitions, using custom dimensions to track authors, years, categories and engagement
+- tweak: never treat downloads as outbound links
 
 = 4.3.3 =
 - feature: added Polish translation

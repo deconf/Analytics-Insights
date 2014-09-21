@@ -34,6 +34,12 @@ if (! class_exists ( 'GADASH_Config' )) {
 			if (isset ( $options ['ga_realtime_pages'] )) {
 				$options ['ga_realtime_pages'] = ( int ) $options ['ga_realtime_pages'];
 			}
+			if (isset ( $options ['ga_crossdomain_tracking'] )) {
+				$options ['ga_crossdomain_tracking'] = ( int ) $options ['ga_crossdomain_tracking'];
+			}			
+			if (isset ( $options ['ga_crossdomain_list'] )) {
+				$options ['ga_crossdomain_list'] = sanitize_text_field ( $options ['ga_crossdomain_list'] );
+			}			
 			if (isset ( $options ['ga_dash_apikey'] )) {
 				$options ['ga_dash_apikey'] = sanitize_text_field ( $options ['ga_dash_apikey'] );
 			}
@@ -63,6 +69,19 @@ if (! class_exists ( 'GADASH_Config' )) {
 			if (isset ( $options ['ga_target_geomap'] )) {
 				$options ['ga_target_geomap'] = sanitize_text_field ( $options ['ga_target_geomap'] );
 			}
+			
+			if (isset ( $options ['ga_author_dimindex'] )) {
+				$options ['ga_author_dimindex'] = (int)$options ['ga_author_dimindex'];
+			}
+			if (isset ( $options ['ga_category_dimindex'] )) {
+				$options ['ga_category_dimindex'] = (int)$options ['ga_category_dimindex'];
+			}
+			if (isset ( $options ['ga_user_dimindex'] )) {
+				$options ['ga_user_dimindex'] = (int)$options ['ga_user_dimindex'];
+			}
+			if (isset ( $options ['ga_pubyear_dimindex'] )) {
+				$options ['ga_pubyear_dimindex'] = (int)$options ['ga_pubyear_dimindex'];
+			}			
 			
 			return $options;
 		}
@@ -191,6 +210,24 @@ if (! class_exists ( 'GADASH_Config' )) {
 				$this->options ['ga_track_exclude'] = array ();
 			}
 			
+			if (! isset ( $this->options ['ga_crossdomain_tracking'] )) {
+				$this->options ['ga_crossdomain_tracking'] = 0;
+			}
+			if (! isset ( $this->options ['ga_crossdomain_list'] )) {
+				$this->options ['ga_crossdomain_list'] = '';
+			}
+			if (! isset ( $this->options ['ga_author_dimindex'] )) {
+				$this->options ['ga_author_dimindex'] = 0;
+			}						
+			if (! isset ( $this->options ['ga_category_dimindex'] )) {
+				$this->options ['ga_category_dimindex'] = 0;
+			}
+			if (! isset ( $this->options ['ga_user_dimindex'] )) {
+				$this->options ['ga_user_dimindex'] = 0;
+			}
+			if (! isset ( $this->options ['ga_pubyear_dimindex'] )) {
+				$this->options ['ga_pubyear_dimindex'] = 0;
+			}									
 			if (isset ( $this->options ['ga_tracking_code'] )) {
 				unset ( $this->options ['ga_tracking_code'] );
 			}

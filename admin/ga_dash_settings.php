@@ -21,6 +21,8 @@ class GADASH_Settings {
 				$options ['ga_dash_remarketing'] = 0;
 				$options['ga_dash_adsense'] = 0;
 				$options['ga_event_bouncerate'] = 0;
+				$options['ga_crossdomain_tracking'] = 0;
+				
 				if (isset ( $_POST ['options'] ['ga_tracking_code'] )) {
 					$new_options ['ga_tracking_code'] = trim ( $new_options ['ga_tracking_code'], "\t" );
 				}
@@ -498,7 +500,7 @@ class GADASH_Settings {
 		if ($options ['ga_dash_tracking']) {
 			?>									
 							<tr>
-								<td colspan="2"><hr><?php echo "<h2>" . __( "Tracking Code", 'ga-dash' ) . "</h2>"; ?></td>
+								<td colspan="2"><hr><?php echo "<h2>" . __( "Basic Tracking", 'ga-dash' ) . "</h2>"; ?></td>
 							</tr>
 							<?php
 			if ($options ['ga_dash_tracking'] == 1) {
@@ -513,13 +515,7 @@ class GADASH_Settings {
 											<?php selected( $options['ga_dash_tracking_type'], 'universal' ); ?>><?php _e("Universal Analytics", 'ga-dash');?></option>
 								</select></td>
 							</tr>
-							<tr>
-								<td class="title"><label for="ga_speed_samplerate"><?php _e("Page Speed SR:", 'ga-dash'); ?></label></td>
-								<td><input type="number" id="ga_speed_samplerate"
-									name="options[ga_speed_samplerate]"
-									value="<?php echo (int)($options['ga_speed_samplerate']); ?>"
-									 max="100" min="1"> %</td>
-							</tr>							
+						
 							<tr>
 								<td colspan="2" class="title">
 
@@ -533,22 +529,6 @@ class GADASH_Settings {
 										</label>
 									</div>
 									<div class="switch-desc"><?php _e ( " anonymize IPs while tracking", 'ga-dash' );?></div>
-
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2" class="title">
-
-									<div class="onoffswitch">
-										<input type="checkbox" name="options[ga_enhanced_links]"
-											value="1" class="onoffswitch-checkbox" id="ga_enhanced_links"
-											<?php checked( $options['ga_enhanced_links'], 1 ); ?>> <label
-											class="onoffswitch-label" for="ga_enhanced_links">
-											<div class="onoffswitch-inner"></div>
-											<div class="onoffswitch-switch"></div>
-										</label>
-									</div>
-									<div class="switch-desc"><?php _e ( " enable enhanced link attribution", 'ga-dash' );?></div>
 
 								</td>
 							</tr>
@@ -570,6 +550,32 @@ class GADASH_Settings {
 								</td>
 							</tr>
 							<tr>
+								<td colspan="2"><hr><?php echo "<h2>" . __( "Advanced Tracking", 'ga-dash' ) . "</h2>"; ?></td>
+							</tr>
+							<tr>
+								<td class="title"><label for="ga_speed_samplerate"><?php _e("Page Speed SR:", 'ga-dash'); ?></label></td>
+								<td><input type="number" id="ga_speed_samplerate"
+									name="options[ga_speed_samplerate]"
+									value="<?php echo (int)($options['ga_speed_samplerate']); ?>"
+									 max="100" min="1"> %</td>
+							</tr>	
+							<tr>
+								<td colspan="2" class="title">
+
+									<div class="onoffswitch">
+										<input type="checkbox" name="options[ga_enhanced_links]"
+											value="1" class="onoffswitch-checkbox" id="ga_enhanced_links"
+											<?php checked( $options['ga_enhanced_links'], 1 ); ?>> <label
+											class="onoffswitch-label" for="ga_enhanced_links">
+											<div class="onoffswitch-inner"></div>
+											<div class="onoffswitch-switch"></div>
+										</label>
+									</div>
+									<div class="switch-desc"><?php _e ( " enable enhanced link attribution", 'ga-dash' );?></div>
+
+								</td>
+							</tr>
+							<tr>
 								<td colspan="2" class="title">
 
 									<div class="onoffswitch">
@@ -586,6 +592,29 @@ class GADASH_Settings {
 
 								</td>
 							</tr>
+							<tr>
+								<td colspan="2" class="title">
+
+									<div class="onoffswitch">
+										<input type="checkbox" name="options[ga_crossdomain_tracking]"
+											value="1" class="onoffswitch-checkbox" id="ga_crossdomain_tracking"
+											<?php checked( $options['ga_crossdomain_tracking'], 1 ); ?>> <label
+											class="onoffswitch-label" for="ga_crossdomain_tracking">
+											<div class="onoffswitch-inner"></div>
+											<div class="onoffswitch-switch"></div>
+										</label>
+									</div>
+									<div class="switch-desc"><?php _e(" enable cross domain tracking", 'ga-dash' ); ?></div>
+
+								</td>
+							</tr>
+							<tr>
+								<td class="title"><label for="ga_crossdomain_list"><?php _e("Cross Domains:", 'ga-dash'); ?></label></td>
+								<td><input type="text" id="ga_crossdomain_list"
+									name="options[ga_crossdomain_list]"
+									value="<?php echo esc_attr($options['ga_crossdomain_list']); ?>"
+									size="50"></td>
+							</tr>																												
 							<?php
 			}
 			?>							
@@ -626,7 +655,50 @@ class GADASH_Settings {
 									<div class="event-option-desc"><?php _e(" exclude the event hit from bounce-rate calculation", 'ga-dash' ); ?></div>
 
 								</td>
-							</tr>							
+							</tr>
+							<tr>
+								<td colspan="2"><hr><?php echo "<h2>" . __( "Custom Definitions", 'ga-dash' ) . "</h2>"; ?></td>
+							</tr>
+							<tr>
+								<td class="title"><label for="ga_author_dimindex"><?php _e("Authors: ", 'ga-dash' ); ?></label></td>
+								<td><select id="ga_author_dimindex"
+									name="options[ga_author_dimindex]">
+										<?php for ($i=0;$i<21;$i++){?>
+										<option value="<?php echo $i;?>"
+											<?php selected( $options['ga_author_dimindex'], $i ); ?>><?php echo $i==0?'Disabled':'dimension '.$i; ?></option>
+										<?php } ?>	
+								</select></td>
+							</tr>
+							<tr>
+								<td class="title"><label for="ga_pubyear_dimindex"><?php _e("Publication Year: ", 'ga-dash' ); ?></label></td>
+								<td><select id="ga_pubyear_dimindex"
+									name="options[ga_pubyear_dimindex]">
+										<?php for ($i=0;$i<21;$i++){?>
+										<option value="<?php echo $i;?>"
+											<?php selected( $options['ga_pubyear_dimindex'], $i ); ?>><?php echo $i==0?'Disabled':'dimension '.$i; ?></option>
+										<?php } ?>	
+								</select></td>
+							</tr>								
+							<tr>
+								<td class="title"><label for="ga_category_dimindex"><?php _e("Categories: ", 'ga-dash' ); ?></label></td>
+								<td><select id="ga_category_dimindex"
+									name="options[ga_category_dimindex]">
+										<?php for ($i=0;$i<21;$i++){?>
+										<option value="<?php echo $i;?>"
+											<?php selected( $options['ga_category_dimindex'], $i ); ?>><?php echo $i==0?'Disabled':'dimension '.$i; ?></option>
+										<?php } ?>	
+								</select></td>
+							</tr>
+							<tr>
+								<td class="title"><label for="ga_user_dimindex"><?php _e("User Type: ", 'ga-dash' ); ?></label></td>
+								<td><select id="ga_user_dimindex"
+									name="options[ga_user_dimindex]">
+										<?php for ($i=0;$i<21;$i++){?>
+										<option value="<?php echo $i;?>"
+											<?php selected( $options['ga_user_dimindex'], $i ); ?>><?php echo $i==0?'Disabled':'dimension '.$i; ?></option>
+										<?php } ?>	
+								</select></td>
+							</tr>
 							<tr>
 								<td colspan="2"><hr><?php echo "<h2>" . __( "Exclude Tracking", 'ga-dash' ) . "</h2>"; ?></td>
 							</tr>
