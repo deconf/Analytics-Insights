@@ -193,7 +193,7 @@ if (! class_exists ( 'GADASH_Config' )) {
 			}
 
 			if (! isset ( $this->options['ga_event_bouncerate'] )) {
-				$this->options['ga_event_bouncerate'] = 1;
+				$this->options['ga_event_bouncerate'] = 0;
 			}			
 			
 			if (! is_array ( $this->options ['ga_dash_access_front'] ) or empty ( $this->options ['ga_dash_access_front'] )) {

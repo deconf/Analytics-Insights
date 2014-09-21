@@ -48,7 +48,7 @@ class GADASH_Install {
 			$options ['ga_dash_network'] = 0;
 			$options['ga_dash_adsense'] = 0;
 			$options['ga_speed_samplerate'] = 1;
-			$options['ga_event_bouncerate'] = 1;
+			$options['ga_event_bouncerate'] = 0;
 			$options['ga_crossdomain_tracking'] = 0;
 			$options['ga_crossdomain_list'] = '';
 			$options ['ga_author_dimindex'] = 0;
@@ -100,7 +100,7 @@ class GADASH_Install {
 			$options ['ga_dash_default_metric'] = 'visits';
 			$options ['ga_dash_default_dimension'] = '30daysAgo';
 			$options ['ga_dash_network'] = 0;
-			$options['ga_event_bouncerate'] = 1;
+			$options['ga_event_bouncerate'] = 0;
 			$options['ga_crossdomain_tracking'] = 0;
 			$options['ga_crossdomain_list'] = '';
 			$options ['ga_author_dimindex'] = 0;
