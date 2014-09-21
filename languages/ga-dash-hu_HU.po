@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Google Analytics Dashboard for WP 4.2.20\n"
-"POT-Creation-Date: 2014-08-15 20:02+0200\n"
-"PO-Revision-Date: 2014-08-15 20:02+0200\n"
+"POT-Creation-Date: 2014-09-21 18:07+0200\n"
+"PO-Revision-Date: 2014-09-21 18:07+0200\n"
 "Last-Translator: Alin Marcu <admin@deconf.com>\n"
 "Language-Team: Deconf <admin@deconf.com>\n"
 "Language: hu_HU\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.7\n"
+"X-Generator: Poedit 1.6.9\n"
 "X-Poedit-KeywordsList: _e;__\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -21,8 +21,8 @@ msgid "Google Analytics"
 msgstr "Google Analytics"
 
 #: .././admin/dashboard_widgets.php:76 .././admin/dashboard_widgets.php:105
-#: .././admin/ga_dash_settings.php:95 .././admin/ga_dash_settings.php:231
-#: .././admin/ga_dash_settings.php:901
+#: .././admin/ga_dash_settings.php:97 .././admin/ga_dash_settings.php:233
+#: .././admin/ga_dash_settings.php:973
 msgid "General Settings"
 msgstr "Általános beállítások"
 
@@ -34,7 +34,7 @@ msgstr "Admin beállítások"
 msgid "Frontend Settings"
 msgstr "Weblap beállítások"
 
-#: .././admin/dashboard_widgets.php:88 .././admin/ga_dash_settings.php:501
+#: .././admin/dashboard_widgets.php:88
 msgid "Tracking Code"
 msgstr "Követőkód"
 
@@ -50,8 +50,8 @@ msgstr "Google Analytics vezérlőpult"
 msgid "This plugin needs an authorization:"
 msgstr "Ennek a bővítménynek engedélyre van szüksége:"
 
-#: .././admin/dashboard_widgets.php:170 .././admin/ga_dash_settings.php:1012
-#: .././admin/ga_dash_settings.php:1402
+#: .././admin/dashboard_widgets.php:170 .././admin/ga_dash_settings.php:1085
+#: .././admin/ga_dash_settings.php:1477
 msgid "Authorize Plugin"
 msgstr "Bővítmény engedélyezése"
 
@@ -68,9 +68,9 @@ msgstr ""
 msgid "Error Log"
 msgstr "Hiba napló"
 
-#: .././admin/dashboard_widgets.php:215 .././admin/ga_dash_settings.php:493
-#: .././admin/ga_dash_settings.php:912 .././admin/ga_dash_settings.php:936
-#: .././admin/ga_dash_settings.php:1335
+#: .././admin/dashboard_widgets.php:215 .././admin/ga_dash_settings.php:495
+#: .././admin/ga_dash_settings.php:984 .././admin/ga_dash_settings.php:1008
+#: .././admin/ga_dash_settings.php:1409
 msgid "View Name:"
 msgstr "Név:"
 
@@ -285,265 +285,304 @@ msgstr "Látogatások országonként"
 msgid "Traffic Overview"
 msgstr "Forgalom áttekintés"
 
-#: .././admin/ga_dash_settings.php:70 .././admin/ga_dash_settings.php:206
-#: .././admin/ga_dash_settings.php:449 .././admin/ga_dash_settings.php:783
-#: .././admin/ga_dash_settings.php:1170
+#: .././admin/ga_dash_settings.php:72 .././admin/ga_dash_settings.php:208
+#: .././admin/ga_dash_settings.php:451 .././admin/ga_dash_settings.php:855
+#: .././admin/ga_dash_settings.php:1244
 msgid "Options saved."
 msgstr "Beállítások mentve."
 
-#: .././admin/ga_dash_settings.php:72 .././admin/ga_dash_settings.php:208
-#: .././admin/ga_dash_settings.php:451 .././admin/ga_dash_settings.php:763
-#: .././admin/ga_dash_settings.php:774 .././admin/ga_dash_settings.php:785
-#: .././admin/ga_dash_settings.php:798 .././admin/ga_dash_settings.php:1121
-#: .././admin/ga_dash_settings.php:1150 .././admin/ga_dash_settings.php:1161
-#: .././admin/ga_dash_settings.php:1172 .././admin/ga_dash_settings.php:1185
+#: .././admin/ga_dash_settings.php:74 .././admin/ga_dash_settings.php:210
+#: .././admin/ga_dash_settings.php:453 .././admin/ga_dash_settings.php:835
+#: .././admin/ga_dash_settings.php:846 .././admin/ga_dash_settings.php:857
+#: .././admin/ga_dash_settings.php:870 .././admin/ga_dash_settings.php:1195
+#: .././admin/ga_dash_settings.php:1224 .././admin/ga_dash_settings.php:1235
+#: .././admin/ga_dash_settings.php:1246 .././admin/ga_dash_settings.php:1259
 msgid "Cheating Huh?"
 msgstr ""
 
-#: .././admin/ga_dash_settings.php:77 .././admin/ga_dash_settings.php:213
-#: .././admin/ga_dash_settings.php:456
+#: .././admin/ga_dash_settings.php:79 .././admin/ga_dash_settings.php:215
+#: .././admin/ga_dash_settings.php:458
 msgid "Something went wrong, you need to"
 msgstr "Valami rosszul ment, szükséges a "
 
-#: .././admin/ga_dash_settings.php:77 .././admin/ga_dash_settings.php:213
-#: .././admin/ga_dash_settings.php:456
+#: .././admin/ga_dash_settings.php:79 .././admin/ga_dash_settings.php:215
+#: .././admin/ga_dash_settings.php:458
 msgid "auhorize the plugin"
 msgstr "bővítményt engedélyezni"
 
-#: .././admin/ga_dash_settings.php:77 .././admin/ga_dash_settings.php:213
-#: .././admin/ga_dash_settings.php:456
+#: .././admin/ga_dash_settings.php:79 .././admin/ga_dash_settings.php:215
+#: .././admin/ga_dash_settings.php:458
 msgid "or properly configure your"
 msgstr "vagy helyesen beállítani a"
 
-#: .././admin/ga_dash_settings.php:77 .././admin/ga_dash_settings.php:213
-#: .././admin/ga_dash_settings.php:456
+#: .././admin/ga_dash_settings.php:79 .././admin/ga_dash_settings.php:215
+#: .././admin/ga_dash_settings.php:458
 msgid "Google Analytics account"
 msgstr "Google Analytics fiókját"
 
-#: .././admin/ga_dash_settings.php:85
+#: .././admin/ga_dash_settings.php:87
 msgid "Google Analytics Frontend Settings"
 msgstr "Google Analytics weblap beállítások"
 
-#: .././admin/ga_dash_settings.php:98 .././admin/ga_dash_settings.php:234
+#: .././admin/ga_dash_settings.php:100 .././admin/ga_dash_settings.php:236
 msgid "Show stats to: "
 msgstr "Statisztikák megjelenítése:"
 
-#: .././admin/ga_dash_settings.php:151
+#: .././admin/ga_dash_settings.php:153
 msgid " show page visits and visitors in frontend (after each article)"
 msgstr "oldal látogatások és látogatók mutatása a weblapon (minden cikk után)"
 
-#: .././admin/ga_dash_settings.php:169
+#: .././admin/ga_dash_settings.php:171
 msgid " show page searches (after each article)"
 msgstr "oldal keresések mutatása (minden cikk után)"
 
-#: .././admin/ga_dash_settings.php:180 .././admin/ga_dash_settings.php:417
-#: .././admin/ga_dash_settings.php:682 .././admin/ga_dash_settings.php:999
-#: .././admin/ga_dash_settings.php:1387
+#: .././admin/ga_dash_settings.php:182 .././admin/ga_dash_settings.php:419
+#: .././admin/ga_dash_settings.php:754 .././admin/ga_dash_settings.php:1072
+#: .././admin/ga_dash_settings.php:1462
 msgid "Update Options"
 msgstr "Beállítások frissítése"
 
-#: .././admin/ga_dash_settings.php:221
+#: .././admin/ga_dash_settings.php:223
 msgid "Google Analytics Dashboard Settings"
 msgstr "Google Analytics vezérlőpult beállítások"
 
-#: .././admin/ga_dash_settings.php:288
+#: .././admin/ga_dash_settings.php:290
 msgid "disable Switch Profile/View functionality"
 msgstr "Profil/Nézet Kapcsoló letiltása"
 
-#: .././admin/ga_dash_settings.php:293
+#: .././admin/ga_dash_settings.php:295
 msgid "Real-Time Settings"
 msgstr "Valós idejű beállítások"
 
-#: .././admin/ga_dash_settings.php:296
+#: .././admin/ga_dash_settings.php:298
 msgid "Maximum number of pages to display on real-time tab:"
 msgstr "Maximális oldalszám megjelenítése a valós idejű fülön:"
 
-#: .././admin/ga_dash_settings.php:300
+#: .././admin/ga_dash_settings.php:302
 msgid "(find out more"
 msgstr "(tudjon meg többet"
 
-#: .././admin/ga_dash_settings.php:302 .././admin/ga_dash_settings.php:338
+#: .././admin/ga_dash_settings.php:304 .././admin/ga_dash_settings.php:340
 msgid "about this feature"
 msgstr "erről a szolgáltatásról"
 
-#: .././admin/ga_dash_settings.php:303 .././admin/ga_dash_settings.php:339
+#: .././admin/ga_dash_settings.php:305 .././admin/ga_dash_settings.php:341
 msgid ")"
 msgstr ")"
 
-#: .././admin/ga_dash_settings.php:306
+#: .././admin/ga_dash_settings.php:308
 msgid "Additional Stats & Charts"
 msgstr "További statisztikák és grafikonok"
 
-#: .././admin/ga_dash_settings.php:320
+#: .././admin/ga_dash_settings.php:322
 msgid " show Geo Map chart for visits"
 msgstr "földrajzi adatok mutatása a látogatásokhoz"
 
-#: .././admin/ga_dash_settings.php:326
+#: .././admin/ga_dash_settings.php:328
 msgid "Target Geo Map to region:"
 msgstr "Cél földrajzi térkép a régióban:"
 
-#: .././admin/ga_dash_settings.php:331
+#: .././admin/ga_dash_settings.php:333
 msgid "and render top"
 msgstr "és mutassa a top"
 
-#: .././admin/ga_dash_settings.php:335
+#: .././admin/ga_dash_settings.php:337
 msgid "cities (find out more"
 msgstr "várost (tudjon meg többet"
 
-#: .././admin/ga_dash_settings.php:354
+#: .././admin/ga_dash_settings.php:356
 msgid " show traffic overview"
 msgstr "forgalom áttekintés bekapcsolása"
 
-#: .././admin/ga_dash_settings.php:370
+#: .././admin/ga_dash_settings.php:372
 msgid " show top pages"
 msgstr "legnépszerűbb oldalak bekapcsolása"
 
-#: .././admin/ga_dash_settings.php:387
+#: .././admin/ga_dash_settings.php:389
 msgid " show top referrers"
 msgstr "leggyakoribb hivatkozók bekapcsolása"
 
-#: .././admin/ga_dash_settings.php:404
+#: .././admin/ga_dash_settings.php:406
 msgid " show top searches"
 msgstr "legfőbb keresések bekapcsolása"
 
-#: .././admin/ga_dash_settings.php:464
+#: .././admin/ga_dash_settings.php:466
 msgid "Google Analytics Tracking Code"
 msgstr "Google Analytics követőkód"
 
-#: .././admin/ga_dash_settings.php:474
+#: .././admin/ga_dash_settings.php:476
 msgid "Tracking Settings"
 msgstr "Követési beállítások"
 
-#: .././admin/ga_dash_settings.php:477
+#: .././admin/ga_dash_settings.php:479
 msgid "Tracking Options: "
 msgstr "Követés beállítások:"
 
-#: .././admin/ga_dash_settings.php:481
+#: .././admin/ga_dash_settings.php:483
 msgid "Disabled"
 msgstr "Letiltva"
 
-#: .././admin/ga_dash_settings.php:483
+#: .././admin/ga_dash_settings.php:485
 msgid "Enabled"
 msgstr "Engedélyezve"
 
-#: .././admin/ga_dash_settings.php:493 .././admin/ga_dash_settings.php:936
+#: .././admin/ga_dash_settings.php:495 .././admin/ga_dash_settings.php:1008
 msgid "Tracking ID:"
 msgstr "Követési azonosító:"
 
-#: .././admin/ga_dash_settings.php:493 .././admin/ga_dash_settings.php:936
+#: .././admin/ga_dash_settings.php:495 .././admin/ga_dash_settings.php:1008
 msgid "Default URL:"
 msgstr "Alapértelmezett webcím:"
 
-#: .././admin/ga_dash_settings.php:493 .././admin/ga_dash_settings.php:936
+#: .././admin/ga_dash_settings.php:495 .././admin/ga_dash_settings.php:1008
 msgid "Time Zone:"
 msgstr "Időzóna:"
 
-#: .././admin/ga_dash_settings.php:507
+#: .././admin/ga_dash_settings.php:503
+#, fuzzy
+msgid "Basic Tracking"
+msgstr "Események követése"
+
+#: .././admin/ga_dash_settings.php:509
 msgid "Tracking Type: "
 msgstr "Követési típus:"
 
-#: .././admin/ga_dash_settings.php:511
+#: .././admin/ga_dash_settings.php:513
 msgid "Classic Analytics"
 msgstr "Klasszikus Analytics"
 
-#: .././admin/ga_dash_settings.php:513
+#: .././admin/ga_dash_settings.php:515
 msgid "Universal Analytics"
 msgstr "Univerzális Analytics"
 
-#: .././admin/ga_dash_settings.php:528
+#: .././admin/ga_dash_settings.php:531
 msgid " anonymize IPs while tracking"
 msgstr "nyomon követés közben IP anonimizálása"
 
-#: .././admin/ga_dash_settings.php:544
-msgid " enable enhanced link attribution"
-msgstr "kibővített link tulajdonság engedélyezése"
-
-#: .././admin/ga_dash_settings.php:561
+#: .././admin/ga_dash_settings.php:548
 msgid " enable remarketing, demographics and interests reports"
 msgstr "lehetővé remarketing, demográfia és érdeklődés jelentések"
 
-#: .././admin/ga_dash_settings.php:578
-msgid " enable AdSense account linking"
-msgstr ""
+#: .././admin/ga_dash_settings.php:553
+#, fuzzy
+msgid "Advanced Tracking"
+msgstr "Események követése"
 
-#: .././admin/ga_dash_settings.php:583
+#: .././admin/ga_dash_settings.php:556
 #, fuzzy
 msgid "Page Speed SR:"
 msgstr "Oldal / látogató"
 
-#: .././admin/ga_dash_settings.php:593
+#: .././admin/ga_dash_settings.php:574
+msgid " enable enhanced link attribution"
+msgstr "kibővített link tulajdonság engedélyezése"
+
+#: .././admin/ga_dash_settings.php:591
+msgid " enable AdSense account linking"
+msgstr ""
+
+#: .././admin/ga_dash_settings.php:607
+msgid " enable cross domain tracking"
+msgstr ""
+
+#: .././admin/ga_dash_settings.php:612
+msgid "Cross Domains:"
+msgstr ""
+
+#: .././admin/ga_dash_settings.php:622
 msgid "Events Tracking"
 msgstr "Események követése"
 
-#: .././admin/ga_dash_settings.php:607
+#: .././admin/ga_dash_settings.php:636
 msgid " track downloads, mailto and outbound links"
 msgstr "letöltések, mailto és kimenő linkek követése"
 
-#: .././admin/ga_dash_settings.php:612
+#: .././admin/ga_dash_settings.php:641
 msgid "Download Filters:"
 msgstr "Letöltés szűrők:"
 
-#: .././admin/ga_dash_settings.php:626
+#: .././admin/ga_dash_settings.php:655
 msgid " exclude the event hit from bounce-rate calculation"
 msgstr ""
 
-#: .././admin/ga_dash_settings.php:631
+#: .././admin/ga_dash_settings.php:660
+msgid "Custom Definitions"
+msgstr ""
+
+#: .././admin/ga_dash_settings.php:663
+msgid "Authors: "
+msgstr ""
+
+#: .././admin/ga_dash_settings.php:673
+msgid "Publication Year: "
+msgstr ""
+
+#: .././admin/ga_dash_settings.php:683
+msgid "Categories: "
+msgstr ""
+
+#: .././admin/ga_dash_settings.php:693
+#, fuzzy
+msgid "User Type: "
+msgstr "Követési típus:"
+
+#: .././admin/ga_dash_settings.php:703
 msgid "Exclude Tracking"
 msgstr "Követés kizárás"
 
-#: .././admin/ga_dash_settings.php:634
+#: .././admin/ga_dash_settings.php:706
 msgid "Exclude tracking for: "
 msgstr "Követés kizárása a következőkre:"
 
-#: .././admin/ga_dash_settings.php:727 .././admin/ga_dash_settings.php:1104
+#: .././admin/ga_dash_settings.php:799 .././admin/ga_dash_settings.php:1178
 msgid "Plugin authorization succeeded."
 msgstr "Bővítmény engedélyezése sikeres."
 
-#: .././admin/ga_dash_settings.php:761 .././admin/ga_dash_settings.php:1148
+#: .././admin/ga_dash_settings.php:833 .././admin/ga_dash_settings.php:1222
 msgid "Cleared Cache."
 msgstr "Cache kiűrítve."
 
-#: .././admin/ga_dash_settings.php:771 .././admin/ga_dash_settings.php:1158
+#: .././admin/ga_dash_settings.php:843 .././admin/ga_dash_settings.php:1232
 msgid "Token Reseted and Revoked."
 msgstr "Token visszaállítva és visszavonva."
 
-#: .././admin/ga_dash_settings.php:779 .././admin/ga_dash_settings.php:1166
+#: .././admin/ga_dash_settings.php:851 .././admin/ga_dash_settings.php:1240
 msgid "Dumping log data."
 msgstr "Napló adat ürítése."
 
-#: .././admin/ga_dash_settings.php:791 .././admin/ga_dash_settings.php:1178
+#: .././admin/ga_dash_settings.php:863 .././admin/ga_dash_settings.php:1252
 msgid "All other domains/properties were removed."
 msgstr "Összes többi domain/tulajdon eltávolításra került."
 
-#: .././admin/ga_dash_settings.php:803 .././admin/ga_dash_settings.php:1190
+#: .././admin/ga_dash_settings.php:875 .././admin/ga_dash_settings.php:1264
 msgid "PHP CURL is required. Please install/enable PHP CURL!"
 msgstr "CURL szükséges. Kérjük, telepítse/engedélyezze a CURL-t!"
 
-#: .././admin/ga_dash_settings.php:808 .././admin/ga_dash_settings.php:1195
+#: .././admin/ga_dash_settings.php:880 .././admin/ga_dash_settings.php:1269
 msgid "Google Analytics Settings"
 msgstr "Google Analytics beállítások"
 
-#: .././admin/ga_dash_settings.php:833 .././admin/ga_dash_settings.php:1247
+#: .././admin/ga_dash_settings.php:905 .././admin/ga_dash_settings.php:1321
 msgid "Plugin Authorization"
 msgstr "Bővítmény engedélyezés"
 
-#: .././admin/ga_dash_settings.php:837 .././admin/ga_dash_settings.php:1251
+#: .././admin/ga_dash_settings.php:909 .././admin/ga_dash_settings.php:1325
 msgid "You should watch the"
 msgstr "Kérjük, nézze meg ezt a"
 
-#: .././admin/ga_dash_settings.php:837 .././admin/ga_dash_settings.php:1251
+#: .././admin/ga_dash_settings.php:909 .././admin/ga_dash_settings.php:1325
 msgid "video"
 msgstr "videót"
 
-#: .././admin/ga_dash_settings.php:837 .././admin/ga_dash_settings.php:1251
+#: .././admin/ga_dash_settings.php:909 .././admin/ga_dash_settings.php:1325
 msgid "and read this"
 msgstr "és olvassa el ezt az"
 
-#: .././admin/ga_dash_settings.php:837 .././admin/ga_dash_settings.php:1251
+#: .././admin/ga_dash_settings.php:909 .././admin/ga_dash_settings.php:1325
 msgid "tutorial"
 msgstr "oktatói anyagot"
 
-#: .././admin/ga_dash_settings.php:837 .././admin/ga_dash_settings.php:1251
+#: .././admin/ga_dash_settings.php:909 .././admin/ga_dash_settings.php:1325
 msgid ""
 "before proceeding to authorization. This plugin requires a properly "
 "configured Google Analytics account"
@@ -551,130 +590,138 @@ msgstr ""
 "mielőtt engedélyezné. Ezt a bővítményt csak helyesen beállított Google "
 "Analytics fiókkal lehet használni"
 
-#: .././admin/ga_dash_settings.php:849 .././admin/ga_dash_settings.php:1262
+#: .././admin/ga_dash_settings.php:921 .././admin/ga_dash_settings.php:1336
 msgid " use your own API Project credentials"
 msgstr "használja a saját API Project hitelesítő adatait"
 
-#: .././admin/ga_dash_settings.php:858 .././admin/ga_dash_settings.php:1271
+#: .././admin/ga_dash_settings.php:930 .././admin/ga_dash_settings.php:1345
 msgid "API Key:"
 msgstr "API key:"
 
-#: .././admin/ga_dash_settings.php:865 .././admin/ga_dash_settings.php:1278
+#: .././admin/ga_dash_settings.php:937 .././admin/ga_dash_settings.php:1352
 msgid "Client ID:"
 msgstr "Client ID:"
 
-#: .././admin/ga_dash_settings.php:872 .././admin/ga_dash_settings.php:1286
+#: .././admin/ga_dash_settings.php:944 .././admin/ga_dash_settings.php:1360
 msgid "Client Secret:"
 msgstr "Client Secret:"
 
-#: .././admin/ga_dash_settings.php:890 .././admin/ga_dash_settings.php:1304
+#: .././admin/ga_dash_settings.php:962 .././admin/ga_dash_settings.php:1378
 msgid "Clear Authorization"
 msgstr "Engedélyezés törlése"
 
-#: .././admin/ga_dash_settings.php:894 .././admin/ga_dash_settings.php:1016
-#: .././admin/ga_dash_settings.php:1307 .././admin/ga_dash_settings.php:1406
+#: .././admin/ga_dash_settings.php:966 .././admin/ga_dash_settings.php:1089
+#: .././admin/ga_dash_settings.php:1381 .././admin/ga_dash_settings.php:1481
 msgid "Clear Cache"
 msgstr "Cache ürítése"
 
-#: .././admin/ga_dash_settings.php:905
+#: .././admin/ga_dash_settings.php:977
 msgid "Select Domain: "
 msgstr "Domain kiválasztása:"
 
-#: .././admin/ga_dash_settings.php:920
+#: .././admin/ga_dash_settings.php:992
 msgid "and/or hide all other domains"
 msgstr "és/vagy az összes többi domain eltüntetése"
 
-#: .././admin/ga_dash_settings.php:923
+#: .././admin/ga_dash_settings.php:995
 msgid "Hide Now"
 msgstr "Elrejtés most"
 
-#: .././admin/ga_dash_settings.php:944
+#: .././admin/ga_dash_settings.php:1016
 msgid "Theme Color: "
 msgstr "Téma színe:"
 
-#: .././admin/ga_dash_settings.php:954
+#: .././admin/ga_dash_settings.php:1026
 msgid "A new frontend widget is available! To enable it, go to"
 msgstr "Elérhető egy új frontend widget! Engedélyezéshez, menjen a"
 
-#: .././admin/ga_dash_settings.php:954
+#: .././admin/ga_dash_settings.php:1026
 msgid "Appearance -> Widgets"
 msgstr "Megjelenés -> Widgetek"
 
-#: .././admin/ga_dash_settings.php:954
+#: .././admin/ga_dash_settings.php:1026
 msgid "and look for Google Analytics Dashboard."
 msgstr "menühöz és keresse a Google Analytics vezérlőpultot."
 
-#: .././admin/ga_dash_settings.php:961 .././admin/ga_dash_settings.php:1023
-#: .././admin/ga_dash_settings.php:1349 .././admin/ga_dash_settings.php:1413
+#: .././admin/ga_dash_settings.php:1033 .././admin/ga_dash_settings.php:1096
+#: .././admin/ga_dash_settings.php:1423 .././admin/ga_dash_settings.php:1488
 msgid "Debugging Data"
 msgstr "Hibakeresés adatok"
 
-#: .././admin/ga_dash_settings.php:1118
+#: .././admin/ga_dash_settings.php:1192
 msgid "Properties refreshed."
 msgstr ""
 
-#: .././admin/ga_dash_settings.php:1220
+#: .././admin/ga_dash_settings.php:1294
 msgid "Network Setup"
 msgstr ""
 
-#: .././admin/ga_dash_settings.php:1236
+#: .././admin/ga_dash_settings.php:1310
 msgid " use a single Google Analytics account for the entire network"
 msgstr ""
 
-#: .././admin/ga_dash_settings.php:1310
+#: .././admin/ga_dash_settings.php:1384
 msgid "Refresh Properties"
 msgstr ""
 
-#: .././admin/ga_dash_settings.php:1318
+#: .././admin/ga_dash_settings.php:1392
 #, fuzzy
 msgid "Properties/Views Settings"
 msgstr "Weblap beállítások"
 
-#: .././admin/ga_dash_settings.php:1475
+#: .././admin/ga_dash_settings.php:1551
 msgid "Setup Tutorial & Demo"
 msgstr "Beállítás oktató anyag és demo"
 
-#: .././admin/ga_dash_settings.php:1487
+#: .././admin/ga_dash_settings.php:1563
 msgid "Support & Reviews"
 msgstr "Támogatás és vélemények"
 
-#: .././admin/ga_dash_settings.php:1495
+#: .././admin/ga_dash_settings.php:1571
 msgid "You can find support on"
 msgstr "A segítséget megtalálhatja itt:"
 
-#: .././admin/ga_dash_settings.php:1495
+#: .././admin/ga_dash_settings.php:1571
 msgid "DeConf Help Center"
 msgstr "DeConf Help Center"
 
-#: .././admin/ga_dash_settings.php:1502
+#: .././admin/ga_dash_settings.php:1578
 msgid "Your feedback and review are both important,"
 msgstr "Az Ön visszajelzése és értékelése egyaránt fontos számunkra,"
 
-#: .././admin/ga_dash_settings.php:1502
+#: .././admin/ga_dash_settings.php:1578
 msgid "rate this plugin"
 msgstr "értékelje ezt a bővítményt"
 
-#: .././admin/ga_dash_settings.php:1507
+#: .././admin/ga_dash_settings.php:1583
 msgid "Further Reading"
 msgstr "További olvasmány"
 
-#: .././admin/ga_dash_settings.php:1514
+#: .././admin/ga_dash_settings.php:1590
+msgid "Improve search rankings"
+msgstr ""
+
+#: .././admin/ga_dash_settings.php:1590
+msgid "by moving your website to HTTPS/SSL."
+msgstr ""
+
+#: .././admin/ga_dash_settings.php:1596
 msgid "Other"
 msgstr "Egyéb"
 
-#: .././admin/ga_dash_settings.php:1514
+#: .././admin/ga_dash_settings.php:1596
 msgid "WordPress Plugins"
 msgstr "WordPress bővítmények"
 
-#: .././admin/ga_dash_settings.php:1514
+#: .././admin/ga_dash_settings.php:1596
 msgid "written by the same author"
 msgstr "ettől a szerzőtől"
 
-#: .././admin/ga_dash_settings.php:1520
+#: .././admin/ga_dash_settings.php:1602
 msgid "Web Analytics"
 msgstr "Web Analitika"
 
-#: .././admin/ga_dash_settings.php:1520
+#: .././admin/ga_dash_settings.php:1602
 msgid "service with visitors tracking at IP level."
 msgstr "szolgáltatás látogatók nyomon követésével IP szinten"
 
