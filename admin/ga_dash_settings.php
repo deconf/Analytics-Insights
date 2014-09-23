@@ -22,6 +22,7 @@ class GADASH_Settings {
 				$options ['ga_dash_adsense'] = 0;
 				$options ['ga_event_bouncerate'] = 0;
 				$options ['ga_crossdomain_tracking'] = 0;
+				$options ['ga_aff_tracking'] = 0;
 				
 				if (isset ( $_POST ['options'] ['ga_tracking_code'] )) {
 					$new_options ['ga_tracking_code'] = trim ( $new_options ['ga_tracking_code'], "\t" );
@@ -78,6 +79,7 @@ class GADASH_Settings {
 		if (! $GADASH_Config->options ['ga_dash_tableid_jail'] or ! $GADASH_Config->options ['ga_dash_token']) {
 			$message = "<div class='error'><p><strong>" . __ ( "Something went wrong, you need to", 'ga-dash' ) . "</strong> <a href='" . menu_page_url ( 'gadash_settings', false ) . "'>" . __ ( 'auhorize the plugin', 'ga-dash' ) . "</a><strong> " . __ ( "or properly configure your", 'ga-dash' ) . '</strong> <a href="https://deconf.com/how-to-set-up-google-analytics-on-your-website/" target="_blank">' . __ ( 'Google Analytics account', 'ga-dash' ) . "</a>" . "<stong>!</strong></p></div>";
 		}
+		
 		?>
 <form name="ga_dash_form" method="post"
 	action="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>">
@@ -127,7 +129,7 @@ class GADASH_Settings {
 			}
 		}
 		?>
-									</table>
+							</table>
 								</td>
 							</tr>
 							<tr>
@@ -250,7 +252,7 @@ class GADASH_Settings {
 			}
 		}
 		?>
- 								</table>
+						</table>
 								</td>
 							</tr>
 
@@ -525,88 +527,6 @@ class GADASH_Settings {
 								</td>
 							</tr>
 							<tr>
-								<td colspan="2"><hr><?php echo "<h2>" . __( "Events Tracking", 'ga-dash' ) . "</h2>"; ?></td>
-							</tr>
-							<tr>
-								<td colspan="2" class="title">
-
-									<div class="onoffswitch">
-										<input type="checkbox" name="options[ga_event_tracking]"
-											value="1" class="onoffswitch-checkbox" id="ga_event_tracking"
-											<?php checked( $options['ga_event_tracking'], 1 ); ?>> <label
-											class="onoffswitch-label" for="ga_event_tracking">
-											<div class="onoffswitch-inner"></div>
-											<div class="onoffswitch-switch"></div>
-										</label>
-									</div>
-									<div class="switch-desc"><?php _e(" track downloads, mailto and outbound links", 'ga-dash' ); ?></div>
-
-								</td>
-							</tr>
-							<tr>
-								<td class="title"><label for="ga_event_downloads"><?php _e("Download Filters:", 'ga-dash'); ?></label></td>
-								<td><input type="text" id="ga_event_downloads"
-									name="options[ga_event_downloads]"
-									value="<?php echo esc_attr($options['ga_event_downloads']); ?>"
-									size="50"></td>
-							</tr>
-							<tr>
-								<td class="title"></td>
-								<td>
-									<div class="event-option">
-										<input type="checkbox" name="options[ga_event_bouncerate]"
-											value="1" id="ga_event_bouncerate"
-											<?php checked( $options['ga_event_bouncerate'], 1 ); ?>> <label
-											for="ga_event_bouncerate"> </label>
-									</div>
-									<div class="event-option-desc"><?php _e(" exclude the event hit from bounce-rate calculation", 'ga-dash' ); ?></div>
-
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2"><hr><?php echo "<h2>" . __( "Custom Definitions", 'ga-dash' ) . "</h2>"; ?></td>
-							</tr>
-							<tr>
-								<td class="title"><label for="ga_author_dimindex"><?php _e("Authors: ", 'ga-dash' ); ?></label></td>
-								<td><select id="ga_author_dimindex"
-									name="options[ga_author_dimindex]">
-										<?php for ($i=0;$i<21;$i++){?>
-										<option value="<?php echo $i;?>"
-											<?php selected( $options['ga_author_dimindex'], $i ); ?>><?php echo $i==0?'Disabled':'dimension '.$i; ?></option>
-										<?php } ?>	
-								</select></td>
-							</tr>
-							<tr>
-								<td class="title"><label for="ga_pubyear_dimindex"><?php _e("Publication Year: ", 'ga-dash' ); ?></label></td>
-								<td><select id="ga_pubyear_dimindex"
-									name="options[ga_pubyear_dimindex]">
-										<?php for ($i=0;$i<21;$i++){?>
-										<option value="<?php echo $i;?>"
-											<?php selected( $options['ga_pubyear_dimindex'], $i ); ?>><?php echo $i==0?'Disabled':'dimension '.$i; ?></option>
-										<?php } ?>	
-								</select></td>
-							</tr>
-							<tr>
-								<td class="title"><label for="ga_category_dimindex"><?php _e("Categories: ", 'ga-dash' ); ?></label></td>
-								<td><select id="ga_category_dimindex"
-									name="options[ga_category_dimindex]">
-										<?php for ($i=0;$i<21;$i++){?>
-										<option value="<?php echo $i;?>"
-											<?php selected( $options['ga_category_dimindex'], $i ); ?>><?php echo $i==0?'Disabled':'dimension '.$i; ?></option>
-										<?php } ?>	
-								</select></td>
-							</tr>
-							<tr>
-								<td class="title"><label for="ga_user_dimindex"><?php _e("User Type: ", 'ga-dash' ); ?></label></td>
-								<td><select id="ga_user_dimindex"
-									name="options[ga_user_dimindex]">
-										<?php for ($i=0;$i<21;$i++){?>
-										<option value="<?php echo $i;?>"
-											<?php selected( $options['ga_user_dimindex'], $i ); ?>><?php echo $i==0?'Disabled':'dimension '.$i; ?></option>
-										<?php } ?>	
-								</select></td>
-							</tr>
-							<tr>
 								<td colspan="2"><hr><?php echo "<h2>" . __( "Advanced Tracking", 'ga-dash' ) . "</h2>"; ?></td>
 							</tr>
 							<tr>
@@ -676,6 +596,111 @@ class GADASH_Settings {
 			}
 			?>							
 							<tr>
+								<td colspan="2"><hr><?php echo "<h2>" . __( "Events Tracking", 'ga-dash' ) . "</h2>"; ?></td>
+							</tr>
+							<tr>
+								<td colspan="2" class="title">
+
+									<div class="onoffswitch">
+										<input type="checkbox" name="options[ga_event_tracking]"
+											value="1" class="onoffswitch-checkbox" id="ga_event_tracking"
+											<?php checked( $options['ga_event_tracking'], 1 ); ?>> <label
+											class="onoffswitch-label" for="ga_event_tracking">
+											<div class="onoffswitch-inner"></div>
+											<div class="onoffswitch-switch"></div>
+										</label>
+									</div>
+									<div class="switch-desc"><?php _e(" track downloads, mailto and outbound links", 'ga-dash' ); ?></div>
+
+								</td>
+							</tr>
+							<tr>
+								<td class="title"><label for="ga_event_downloads"><?php _e("Downloads Regex:", 'ga-dash'); ?></label></td>
+								<td><input type="text" id="ga_event_downloads"
+									name="options[ga_event_downloads]"
+									value="<?php echo esc_attr($options['ga_event_downloads']); ?>"
+									size="50"></td>
+							</tr>
+							<tr>
+								<td colspan="2" class="title">
+
+									<div class="onoffswitch">
+										<input type="checkbox" name="options[ga_aff_tracking]"
+											value="1" class="onoffswitch-checkbox" id="ga_aff_tracking"
+											<?php checked( $options['ga_aff_tracking'], 1 ); ?>> <label
+											class="onoffswitch-label" for="ga_aff_tracking">
+											<div class="onoffswitch-inner"></div>
+											<div class="onoffswitch-switch"></div>
+										</label>
+									</div>
+									<div class="switch-desc"><?php _e(" track affiliate links matching this regex", 'ga-dash' ); ?></div>
+
+								</td>
+							</tr>
+							<tr>
+								<td class="title"><label for="ga_event_affiliates"><?php _e("Affiliates Regex:", 'ga-dash'); ?></label></td>
+								<td><input type="text" id="ga_event_affiliates"
+									name="options[ga_event_affiliates]"
+									value="<?php echo esc_attr($options['ga_event_affiliates']); ?>"
+									size="50"></td>
+							</tr>
+							<tr>
+								<td class="title"></td>
+								<td>
+									<div class="event-option">
+										<input type="checkbox" name="options[ga_event_bouncerate]"
+											value="1" id="ga_event_bouncerate"
+											<?php checked( $options['ga_event_bouncerate'], 1 ); ?>> <label
+											for="ga_event_bouncerate"> </label>
+									</div>
+									<div class="event-option-desc"><?php _e(" exclude download events from bounce-rate calculation", 'ga-dash' ); ?></div>
+
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2"><hr><?php echo "<h2>" . __( "Custom Definitions", 'ga-dash' ) . "</h2>"; ?></td>
+							</tr>
+							<tr>
+								<td class="title"><label for="ga_author_dimindex"><?php _e("Authors: ", 'ga-dash' ); ?></label></td>
+								<td><select id="ga_author_dimindex"
+									name="options[ga_author_dimindex]">
+										<?php for ($i=0;$i<21;$i++){?>
+										<option value="<?php echo $i;?>"
+											<?php selected( $options['ga_author_dimindex'], $i ); ?>><?php echo $i==0?'Disabled':'dimension '.$i; ?></option>
+										<?php } ?>	
+								</select></td>
+							</tr>
+							<tr>
+								<td class="title"><label for="ga_pubyear_dimindex"><?php _e("Publication Year: ", 'ga-dash' ); ?></label></td>
+								<td><select id="ga_pubyear_dimindex"
+									name="options[ga_pubyear_dimindex]">
+										<?php for ($i=0;$i<21;$i++){?>
+										<option value="<?php echo $i;?>"
+											<?php selected( $options['ga_pubyear_dimindex'], $i ); ?>><?php echo $i==0?'Disabled':'dimension '.$i; ?></option>
+										<?php } ?>	
+								</select></td>
+							</tr>
+							<tr>
+								<td class="title"><label for="ga_category_dimindex"><?php _e("Categories: ", 'ga-dash' ); ?></label></td>
+								<td><select id="ga_category_dimindex"
+									name="options[ga_category_dimindex]">
+										<?php for ($i=0;$i<21;$i++){?>
+										<option value="<?php echo $i;?>"
+											<?php selected( $options['ga_category_dimindex'], $i ); ?>><?php echo $i==0?'Disabled':'dimension '.$i; ?></option>
+										<?php } ?>	
+								</select></td>
+							</tr>
+							<tr>
+								<td class="title"><label for="ga_user_dimindex"><?php _e("User Type: ", 'ga-dash' ); ?></label></td>
+								<td><select id="ga_user_dimindex"
+									name="options[ga_user_dimindex]">
+										<?php for ($i=0;$i<21;$i++){?>
+										<option value="<?php echo $i;?>"
+											<?php selected( $options['ga_user_dimindex'], $i ); ?>><?php echo $i==0?'Disabled':'dimension '.$i; ?></option>
+										<?php } ?>	
+								</select></td>
+							</tr>
+							<tr>
 								<td colspan="2"><hr><?php echo "<h2>" . __( "Exclude Tracking", 'ga-dash' ) . "</h2>"; ?></td>
 							</tr>
 							<tr>
@@ -686,8 +711,7 @@ class GADASH_Settings {
 				$wp_roles = new WP_Roles ();
 			}
 			$i = 0;
-			?>
-									<table>
+			?>		<table>
 										<tr>
 									<?php
 			foreach ( $wp_roles->role_names as $role => $name ) {
@@ -702,18 +726,16 @@ class GADASH_Settings {
 	                                    <?php
 				if ($i % 4 == 0) {
 					?>
-                                    			</tr>
+                                 			</tr>
 										<tr>
-      		<?php
+                                    		<?php
 				}
 			}
 			?>
-									
-									
 									</table>
 								</td>
 							</tr>
-		<?php
+							<?php
 		}
 		?>									
 							<tr>
@@ -728,7 +750,6 @@ class GADASH_Settings {
 						</table>
 						<input type="hidden" name="options[ga_dash_hidden]" value="Y">
 						<?php wp_nonce_field('gadash_form','gadash_security'); ?>
-
 </form>
 <?php
 		self::output_sidebar ();
@@ -1496,10 +1517,8 @@ class GADASH_Settings {
 				return;
 			}
 			?>						
-	
 						</table>
 										</form>
-	
 	<?php
 		}
 		self::output_sidebar ();

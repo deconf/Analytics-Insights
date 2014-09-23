@@ -81,7 +81,18 @@ if (! class_exists ( 'GADASH_Config' )) {
 			}
 			if (isset ( $options ['ga_pubyear_dimindex'] )) {
 				$options ['ga_pubyear_dimindex'] = (int)$options ['ga_pubyear_dimindex'];
+			}
+			
+			if (isset ( $options ['ga_aff_tracking'] )) {
+				$options ['ga_aff_tracking'] = (int)$options ['ga_aff_tracking'];
 			}			
+
+			if (isset ( $options ['ga_event_affiliates'] )) {
+				if (empty($options ['ga_event_affiliates'])){
+					$options ['ga_event_affiliates'] = '/out/';
+				}
+				$options ['ga_event_affiliates'] = sanitize_text_field($options ['ga_event_affiliates']);
+			}
 			
 			return $options;
 		}
@@ -227,7 +238,14 @@ if (! class_exists ( 'GADASH_Config' )) {
 			}
 			if (! isset ( $this->options ['ga_pubyear_dimindex'] )) {
 				$this->options ['ga_pubyear_dimindex'] = 0;
-			}									
+			}	
+			if (! isset ( $this->options ['ga_event_affiliates'] )) {
+				$this->options ['ga_event_affiliates'] = '/out/';
+			}
+			if (! isset ( $this->options['ga_aff_tracking'] )) {
+				$this->options['ga_aff_tracking'] = 0;
+			}			
+
 			if (isset ( $this->options ['ga_tracking_code'] )) {
 				unset ( $this->options ['ga_tracking_code'] );
 			}
@@ -238,5 +256,3 @@ if (! class_exists ( 'GADASH_Config' )) {
 if (! isset ( $GLOBALS ['GADASH_Config'] )) {
 	$GLOBALS ['GADASH_Config'] = new GADASH_Config ();
 }
-
-	

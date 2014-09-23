@@ -13,10 +13,9 @@
             $('a[href^="mailto"]').click(function(e) {
                 ga('send','event', 'email', 'send', this.href<?php if(isset($GADASH_Config->options['ga_event_bouncerate']) && $GADASH_Config->options['ga_event_bouncerate']){echo ", {'nonInteraction': 1}";}?>);
              });
-
             <?php if ($GADASH_Config->options['ga_event_affiliates'] AND $GADASH_Config->options['ga_aff_tracking']){ ?>
-            
-            //Track Affiliates            
+
+            //Track Affiliates
             $('a').filter(function() {
             	if ('<?php echo esc_js($GADASH_Config->options['ga_event_affiliates']);?>'!=''){
                 	return this.href.match(/(<?php echo str_replace('/','\/',(esc_js($GADASH_Config->options['ga_event_affiliates'])));?>)/);
