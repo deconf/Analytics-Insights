@@ -23,7 +23,7 @@
 	                }
 				}    
             }).click(function(e) {
-                ga('send','event', 'outbound', 'click', this.href, {'nonInteraction': 1});
+                ga('send','event', 'outbound', 'click', this.href, this.href<?php if(isset($GADASH_Config->options['ga_event_bouncerate']) && $GADASH_Config->options['ga_event_bouncerate']){echo ", {'nonInteraction': 1}";}?>);
             });
     });
 })(jQuery);
