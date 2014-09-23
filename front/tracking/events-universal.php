@@ -22,9 +22,7 @@
                 	return this.href.match(/(<?php echo str_replace('/','\/',(esc_js($GADASH_Config->options['ga_event_affiliates'])));?>)/);
             	}	
             }).click(function(event) {
-            	if((!this.target || this.target.match(/^_(self|parent|top)$/i))){
                		ga('send','event', 'affiliates', 'click', this.href<?php if(isset($GADASH_Config->options['ga_event_bouncerate']) && $GADASH_Config->options['ga_event_bouncerate']){echo ", {'nonInteraction': 1}";}?>);
-            	}	
             });
             <?php } ?>
             
