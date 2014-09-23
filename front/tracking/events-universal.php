@@ -1,14 +1,34 @@
 <script type="text/javascript">
 (function($){
     $(window).load(function() {
+
+        	//Track Downloads
             $('a').filter(function() {
                 return this.href.match(/.*\.(<?php echo esc_js($GADASH_Config->options['ga_event_downloads']);?>)(\?.*)?$/);
             }).click(function(e) {
                 ga('send','event', 'download', 'click', this.href<?php if(isset($GADASH_Config->options['ga_event_bouncerate']) && $GADASH_Config->options['ga_event_bouncerate']){echo ", {'nonInteraction': 1}";}?>);
             });
+
+            //Track Mailto
             $('a[href^="mailto"]').click(function(e) {
                 ga('send','event', 'email', 'send', this.href<?php if(isset($GADASH_Config->options['ga_event_bouncerate']) && $GADASH_Config->options['ga_event_bouncerate']){echo ", {'nonInteraction': 1}";}?>);
              });
+
+            <?php if ($GADASH_Config->options['ga_event_affiliates'] AND $GADASH_Config->options['ga_aff_tracking']){ ?>
+            
+            //Track Affiliates            
+            $('a').filter(function() {
+            	if ('<?php echo esc_js($GADASH_Config->options['ga_event_affiliates']);?>'!=''){
+                	return this.href.match(/(<?php echo str_replace('/','\/',(esc_js($GADASH_Config->options['ga_event_affiliates'])));?>)/);
+            	}	
+            }).click(function(event) {
+            	if((!this.target || this.target.match(/^_(self|parent|top)$/i))){
+               		ga('send','event', 'affiliates', 'click', this.href<?php if(isset($GADASH_Config->options['ga_event_bouncerate']) && $GADASH_Config->options['ga_event_bouncerate']){echo ", {'nonInteraction': 1}";}?>);
+            	}	
+            });
+            <?php } ?>
+            
+            //Track Outbound Links
             var loc = location.host.split('.');
             while (loc.length > 2) { loc.shift(); }
             loc = loc.join('.');
