@@ -50,6 +50,7 @@ Using this plugin, your analytics data is collected in a fast and secure manner 
 - multiple domains / cross domain tracking
 - action hook for code customization
 - track authors, publication year, categories and user engagement using Google Analytics custom dimensions
+- affiliate links tracking with Google Analytics
 
 = WPMU features =
 
@@ -123,6 +124,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - feature: French translation
 - feature: cross domain tracking support
 - feature: Google Analytics custom definitions, using custom dimensions to track authors, years, categories and engagement
+- feature: support for affiliate links tracking 
 - tweak: never treat downloads as outbound links
 
 = 4.3.3 =
