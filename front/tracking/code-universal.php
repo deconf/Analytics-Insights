@@ -25,7 +25,7 @@ $rootdomain = $tools->get_root_domain ( $profile [3] );
 		$create_options .= "'allowLinker' : true";
 	}
 	$create_options .= '}';
-	?>	
+	?>
   ga('create', '<?php echo esc_html($profile[2]); ?>', 'auto'<?php	if ($create_options != '{}') {?>, <?php echo $create_options; }?>);
 <?php if ($GADASH_Config->options ['ga_crossdomain_tracking'] AND $GADASH_Config->options ['ga_crossdomain_list']!='') {?>
   ga('require', 'linker');
@@ -50,7 +50,7 @@ if ($GADASH_Config->options ['ga_enhanced_links']) {
 <?php
 }
 
-if ($GADASH_Config->options ['ga_author_dimindex'] and is_single ()) {
+if ($GADASH_Config->options ['ga_author_dimindex'] and (is_single () or is_page())) {
 	global $post;
 	$author_id = $post->post_author;
 	$author_name = get_the_author_meta ( 'display_name', $author_id );
@@ -100,5 +100,5 @@ if ($GADASH_Config->options ['ga_dash_adsense']) {
 	?>
 
   window.google_analytics_uacct = "<?php echo esc_html($profile[2]); ?>";
-<?php }?>  
+<?php }?>
 </script>

@@ -119,6 +119,9 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 
 == Changelog ==
 
+= 4.3.5 =
+- bugfix: authors custom dimension not working for pages
+
 = 4.3.4 =
 - feature: ga_dash_addtrackingcode action hook
 - feature: French translation

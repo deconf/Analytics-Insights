@@ -1,13 +1,13 @@
 <?php
 /**
- * Plugin Name: Google Analytics Dashboard for WP 
- * Plugin URI: https://deconf.com 
- * Description: Displays Google Analytics Reports and Real-Time Statistics in your Dashboard. Automatically inserts the tracking code in every page of your website.  
- * Author: Alin Marcu 
- * Version: 4.3.4 
+ * Plugin Name: Google Analytics Dashboard for WP
+ * Plugin URI: https://deconf.com
+ * Description: Displays Google Analytics Reports and Real-Time Statistics in your Dashboard. Automatically inserts the tracking code in every page of your website.
+ * Author: Alin Marcu
+ * Version: 4.3.4b
  * Author URI: https://deconf.com
  */
-define ( 'GADWP_CURRENT_VERSION', '4.3.4' );
+define ( 'GADWP_CURRENT_VERSION', '4.3.4b' );
 
 /*
  * Include Install
@@ -16,7 +16,7 @@ define ( 'GADWP_CURRENT_VERSION', '4.3.4' );
 include_once (dirname ( __FILE__ ) . '/install/install.php');
 register_activation_hook ( __FILE__, array (
 		'GADASH_Install',
-		'install' 
+		'install'
 ) );
 
 /*
@@ -25,7 +25,7 @@ register_activation_hook ( __FILE__, array (
 include_once (dirname ( __FILE__ ) . '/install/uninstall.php');
 register_uninstall_hook ( __FILE__, array (
 		'GADASH_Uninstall',
-		'uninstall' 
+		'uninstall'
 ) );
 
 // Plugin i18n
@@ -45,13 +45,13 @@ function gadash_admin_init() {
 	 */
 	include_once (dirname ( __FILE__ ) . '/config.php');
 	global $GADASH_Config;
-	
+
 	/*
 	 * Include Tools
 	 */
 	include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
 	$tools = new GADASH_Tools ();
-	
+
 	/*
 	 * Include backend widgets
 	 */
@@ -69,13 +69,13 @@ function gadash_front_init() {
 	 */
 	include_once (dirname ( __FILE__ ) . '/config.php');
 	global $GADASH_Config;
-	
+
 	/*
 	 * Include Tools
 	 */
 	include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
 	$tools = new GADASH_Tools ();
-	
+
 	/*
 	 * Include frontend stats
 	 */
