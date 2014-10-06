@@ -29,7 +29,7 @@ class GADASH_Install {
 			$options ['ga_dash_anonim'] = 0;
 			$options ['ga_dash_userapi'] = 0;
 			$options ['ga_event_tracking'] = 0;
-			$options ['ga_event_downloads'] = 'zip|mp3*|mpe*g|pdf|docx*|pptx*|xlsx*|jpe*g|png|gif|tiff|rar*';
+			$options ['ga_event_downloads'] = 'zip|mp3*|mpe*g|pdf|docx*|pptx*|xlsx*|rar*';
 			$options ['ga_track_exclude'] = array ();
 			$options ['ga_target_geomap'] = '';
 			$options ['ga_target_number'] = 10;
@@ -75,13 +75,13 @@ class GADASH_Install {
 			$options ['ga_dash_style'] = '#3366CC';
 			$options ['ga_dash_jailadmins'] = get_option ( 'ga_dash_jailadmins' );
 			$options ['ga_dash_cachetime'] = get_option ( 'ga_dash_cachetime' );
-			
+
 			if (get_option ( 'ga_dash_tracking' ) == 4) {
 				$options ['ga_dash_tracking'] = 0;
 			} else {
 				$options ['ga_dash_tracking'] = 1;
 			}
-			
+
 			$options ['ga_dash_tracking_type'] = get_option ( 'ga_dash_tracking_type' );
 			$options ['ga_dash_default_ua'] = get_option ( 'ga_dash_default_ua' );
 			$options ['ga_dash_anonim'] = get_option ( 'ga_dash_anonim' );
@@ -111,7 +111,7 @@ class GADASH_Install {
 			$options ['ga_pubyear_dimindex'] = 0;
 			$options ['ga_event_affiliates'] = '/out/';
 			$options['ga_aff_tracking'] = 0;
-			
+
 			delete_option ( 'ga_dash_apikey' );
 			delete_option ( 'ga_dash_clientid' );
 			delete_option ( 'ga_dash_clientsecret' );
@@ -144,7 +144,7 @@ class GADASH_Install {
 			delete_option ( 'ga_dash_profile_list' );
 			delete_option ( 'ga_dash_tableid' );
 		}
-		
+
 		add_option ( 'gadash_options', json_encode ( $options ) );
 	}
 }
