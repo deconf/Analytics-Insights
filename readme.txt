@@ -120,8 +120,11 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 == Changelog ==
 
 = 4.3.5 =
-- bugfix: authors custom dimension not working for pages
-- bugfix: outbound detection  
+- bugfix: authors custom dimension not working for pages, reported by [tylerarnold23](https://wordpress.org/support/profile/tylerarnold23)
+- bugfix: outbound detection
+- bugfix: fixed unicode issue, reported by [Haruka_Suzuki](https://wordpress.org/support/profile/haruka_suzuki)
+- tweak: removed image extensions from default download filter  
+
 
 = 4.3.4 =
 - feature: ga_dash_addtrackingcode action hook

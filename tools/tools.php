@@ -35,7 +35,7 @@ if (! class_exists ( 'GADASH_Tools' )) {
 			return str_replace ( array (
 					"https://",
 					"http://",
-					" " 
+					" "
 			), "", $domain );
 		}
 		function ga_dash_clear_cache() {
@@ -63,7 +63,7 @@ if (! class_exists ( 'GADASH_Tools' )) {
 			$colour = substr ( $colour, 1 );
 			$rgb = '';
 			$per = $per / 100 * 255;
-			
+
 			if ($per < 0) {
 				// Darker
 				$per = abs ( $per );
@@ -85,11 +85,11 @@ if (! class_exists ( 'GADASH_Tools' )) {
 		function check_roles($access_level, $tracking = false) {
 			if (is_user_logged_in () && isset ( $access_level )) {
 				global $current_user;
-				$roles = $current_user->roles;
+				$roles = (array)$current_user->roles;
 				if ((current_user_can ( 'manage_options' )) and ! $tracking) {
 					return true;
 				}
-				if (isset($roles[0]) && in_array ( $roles[0], $access_level )) {
+				if (count(array_intersect($roles, $access_level )) > 0 ) {
 					return true;
 				} else {
 					return false;
