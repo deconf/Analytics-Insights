@@ -8,14 +8,14 @@ Stable tag: 4.3.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Displays Google Analytics Reports and Real-Time Statistics in your Dashboard. Automatically inserts the tracking code in every page of your website.
+Displays Google Analytics reports and real-time statistics in your WordPress Dashboard. Inserts the latest tracking code in every page of your site.
 
 == Description ==
-Using a widget, [Google Analytics Dashboard](https://deconf.com/google-analytics-dashboard-wordpress/) displays detailed analytics info and statistics about: number of visits, number of visitors, bounce rates, organic searches, pages per visit directly on your Administration Dashboard.
+Using a widget, [Google Analytics Dashboard](https://deconf.com/google-analytics-dashboard-wordpress/) displays detailed analytics info and statistics about: number of visits, number of visitors, bounce rates, organic searches, pages per visit directly on your WordPress Dashboard.
 
 Authorized users can also view statistics like Views, UniqueViews and top searches, on frontend, at the end of each article.
 
-Using this plugin, your analytics data is collected in a fast and secure manner because Google Analytics Dashboard uses OAuth2 protocol and Google Analytics API.
+Using this WordPress plugin, your analytics data is collected in a fast and secure manner because Google Analytics Dashboard uses OAuth2 protocol and Google Analytics API.
 
 = Google Analytics Dashboard =
 
@@ -54,7 +54,7 @@ Using this plugin, your analytics data is collected in a fast and secure manner 
 
 = WPMU features =
 
-- authorize the entire network with a single Google Account
+- authorize an entire WordPress Network using a single Google Account
 - set corresponding properties/views, for each blog, from you Network Admin screen
 
 = Translations =
@@ -72,7 +72,7 @@ Google Analytics Dashboard for WP has been translated into the following languag
 
 = Further reading and info =
 
-* My [Google Analytics Dashboard](https://deconf.com/google-analytics-dashboard-wordpress/) homepage
+* Homepage of [Google Analytics Dashboard](https://deconf.com/google-analytics-dashboard-wordpress/) for WordPress
 * Other [WordPress Plugins](https://deconf.com/wordpress/) by same author
 * [Google Analytics Dashboard](https://deconf.com/ask/) translations and support 
 
