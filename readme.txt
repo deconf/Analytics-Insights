@@ -61,14 +61,15 @@ Using this WordPress plugin, your analytics data is collected in a fast and secu
 
 Google Analytics Dashboard for WP has been translated into the following languages:
 
-1. English
-2. French
-3. German
-4. Hungarian
-5. Italian
-6. Polish
-7. Portuguese
-8. Spanish
+1. Arabic
+2. English
+3. French
+4. German
+5. Hungarian
+6. Italian
+7. Polish
+8. Portuguese
+9. Spanish
 
 = Further reading and info =
 
@@ -123,8 +124,8 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - bugfix: authors custom dimension not working for pages, reported by [tylerarnold23](https://wordpress.org/support/profile/tylerarnold23)
 - bugfix: outbound detection
 - bugfix: fixed unicode issue, reported by [Haruka_Suzuki](https://wordpress.org/support/profile/haruka_suzuki)
-- tweak: removed image extensions from default download filter  
-
+- tweak: removed image extensions from default download filter
+- feature: Arabic translation
 
 = 4.3.4 =
 - feature: ga_dash_addtrackingcode action hook
