@@ -864,8 +864,8 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 
 		// Realtime Ajax Response
 		function gadash_realtime_data($projectId) {
-			$metrics = 'ga:activeVisitors';
-			$dimensions = 'ga:pagePath,ga:source,ga:keyword,ga:trafficType,ga:visitorType,ga:pageTitle';
+			$metrics = 'rt:activeVisitors';
+			$dimensions = 'rt:pagePath,rt:source,rt:keyword,rt:trafficType,rt:visitorType,rt:pageTitle';
 			try {
 				$serial = "gadash_realtimecache_" . $projectId;
 				$transient = get_transient ( $serial );
@@ -996,16 +996,16 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 
 					jQuery.post(ajaxurl, {action: "gadash_get_online_data", gadash_security: "' . wp_create_nonce ( 'gadash_get_online_data' ) . '"}, function(response){
 						var data = jQuery.parseJSON(response);
-						if (data["totalsForAllResults"]["ga:activeVisitors"]!==document.getElementById("gadash-online").innerHTML){
+						if (data["totalsForAllResults"]["rt:activeVisitors"]!==document.getElementById("gadash-online").innerHTML){
 							jQuery("#gadash-online").fadeOut("slow");
 							jQuery("#gadash-online").fadeOut(500);
 							jQuery("#gadash-online").fadeOut("slow", function() {
-								if ((parseInt(data["totalsForAllResults"]["ga:activeVisitors"]))<(parseInt(document.getElementById("gadash-online").innerHTML))){
+								if ((parseInt(data["totalsForAllResults"]["rt:activeVisitors"]))<(parseInt(document.getElementById("gadash-online").innerHTML))){
 									jQuery("#gadash-online").css({\'background-color\' : \'#FFE8E8\'});
 								}else{
 									jQuery("#gadash-online").css({\'background-color\' : \'#E0FFEC\'});
 								}
-								document.getElementById("gadash-online").innerHTML = data["totalsForAllResults"]["ga:activeVisitors"];
+								document.getElementById("gadash-online").innerHTML = data["totalsForAllResults"]["rt:activeVisitors"];
 							});
 							jQuery("#gadash-online").fadeIn("slow");
 							jQuery("#gadash-online").fadeIn(500);
@@ -1079,7 +1079,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 						document.getElementById("gadash-tdo-rights").innerHTML += "<span class=\"gadash-bigtext\">"+\'' . __ ( "NEW", 'ga-dash' ) . '\'+": "+countvisits(data,uvisitortype[1])+"</span><br /><br />";
 						document.getElementById("gadash-tdo-rights").innerHTML += "<span class=\"gadash-bigtext\">"+\'' . __ ( "RETURN", 'ga-dash' ) . '\'+": "+countvisits(data,uvisitortype[2])+"</span><br /><br />";
 
-						if (!data["totalsForAllResults"]["ga:activeVisitors"]){
+						if (!data["totalsForAllResults"]["rt:activeVisitors"]){
 							location.reload();
 						}
 
