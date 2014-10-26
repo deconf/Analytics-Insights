@@ -785,7 +785,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 				  title: '" . $title . "',
 		  		  vAxis: {minValue: 0},
 				  chartArea: {width: '100%'},
-				  hAxis: { showTextEvery: 5}
+				  hAxis: { textPosition: 'none'}
 				};
 
 				var chart = new google.visualization.AreaChart(document.getElementById('ga_dash_statsdata'));
