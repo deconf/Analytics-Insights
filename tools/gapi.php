@@ -218,7 +218,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 				$dimensions = 'ga:hour';
 				$timeouts = 1;
 			} else {
-				$dimensions = 'ga:year,ga:month,ga:day';
+				$dimensions = 'ga:date,ga:dayOfWeekName';
 				$timeouts = 1;
 			}
 
@@ -250,7 +250,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 				}
 			} else {
 				for($i = 0; $i < $data ['totalResults']; $i ++) {
-					$ga_dash_statsdata .= "['" . $data ['rows'] [$i] [0] . "-" . $data ['rows'] [$i] [1] . "-" . $data ['rows'] [$i] [2] . "'," . round ( $data ['rows'] [$i] [3], 2 ) . "],";
+					$ga_dash_statsdata .= "['" . __($data ['rows'] [$i] [1]) . ', ' . substr_replace(substr_replace($data ['rows'] [$i] [0] , '-', 4, 0), '-', 7, 0) . "'," . round ( $data ['rows'] [$i] [2], 2 ) . "],";
 				}
 			}
 
@@ -585,7 +585,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 			$from = $period;
 			$to = 'yesterday';
 			$metrics = 'ga:visits';
-			$dimensions = 'ga:year,ga:month,ga:day';
+			$dimensions = 'ga:date,ga:dayOfWeekName';
 
 			$title = __ ( "Visits", 'ga-dash' ) . ($anonim ? __ ( "\' trend", 'ga-dash' ) : '');
 
@@ -638,7 +638,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 			$max = max ( $max_array ) ? max ( $max_array ) : 1;
 
 			for($i = 0; $i < $data ['totalResults']; $i ++) {
-				$ga_dash_statsdata .= "['" . $data ['rows'] [$i] [0] . "-" . $data ['rows'] [$i] [1] . "-" . $data ['rows'] [$i] [2] . "'," . ($anonim ? str_replace ( ',', '.', round ( $data ['rows'] [$i] [3] * 100 / $max, 2 ) ) : $data ['rows'] [$i] [3]) . "],";
+				$ga_dash_statsdata .= "['" . __($data ['rows'] [$i] [1]) . ', ' . substr_replace(substr_replace($data ['rows'] [$i] [0] , '-', 4, 0), '-', 7, 0) . "'," . ($anonim ? str_replace ( ',', '.', round ( $data ['rows'] [$i] [2] * 100 / $max, 2 ) ) : $data ['rows'] [$i] [2]) . "],";
 			}
 
 			$ga_dash_statsdata = wp_kses ( rtrim ( $ga_dash_statsdata, ',' ), $GADASH_Config->allowed_html );
@@ -726,7 +726,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 			$from = '30daysAgo';
 			$to = 'yesterday';
 			$metrics = 'ga:pageviews,ga:uniquePageviews';
-			$dimensions = 'ga:year,ga:month,ga:day';
+			$dimensions = 'ga:date,ga:dayOfWeekName';
 
 			$title = __ ( "Views vs UniqueViews", 'ga-dash' );
 
@@ -766,7 +766,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 
 			$ga_dash_statsdata = "";
 			for($i = 0; $i < $data ['totalResults']; $i ++) {
-				$ga_dash_statsdata .= "['" . $data ['rows'] [$i] [0] . "-" . $data ['rows'] [$i] [1] . "-" . $data ['rows'] [$i] [2] . "'," . round ( $data ['rows'] [$i] [3], 2 ) . "," . round ( $data ['rows'] [$i] [4], 2 ) . "],";
+				$ga_dash_statsdata .= "['" . __($data ['rows'] [$i] [1]) . ', ' . substr_replace(substr_replace($data ['rows'] [$i] [0] , '-', 4, 0), '-', 7, 0) . "'," . round ( $data ['rows'] [$i] [2], 2 ) . "," . round ( $data ['rows'] [$i] [3], 2 ) . "],";
 			}
 
 			$ga_dash_statsdata = wp_kses ( rtrim ( $ga_dash_statsdata, ',' ), $GADASH_Config->allowed_html );

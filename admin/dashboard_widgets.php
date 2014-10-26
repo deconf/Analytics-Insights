@@ -484,9 +484,9 @@ if (! class_exists ( 'GADASH_Widgets' )) {
 				  legend: {position: 'none'},
 				  pointSize: 3,<?php echo $css;?>
 		          title: '<?php echo $title;?>',
-				  chartArea: {width: '85%'},
+				  chartArea: {width: '85%',height: '90%'},
 				  vAxis: {minValue: 0},
-		          hAxis: { title: '<?php echo $dh;?>',  titleTextStyle: {color: '<?php echo $dark_color;?>'}, showTextEvery: <?php echo $haxis;?>}
+				  hAxis: { textPosition: 'none' }
 				};
 				<?php echo $formater?>
 		        var chart = new google.visualization.AreaChart(document.getElementById('ga_dash_statsdata'));
@@ -645,7 +645,7 @@ if (! class_exists ( 'GADASH_Widgets' )) {
 <?php
 			if ($realtime != "realtime") {
 				?>
-<div id="ga_dash_statsdata" class="widefat" style="height: 350px;"></div>
+<div id="ga_dash_statsdata" class="widefat" style="height: 250px;"></div>
 <div id="details_div">
 
 	<table class="gatable" cellpadding="4">

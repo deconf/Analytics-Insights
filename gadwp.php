@@ -34,6 +34,18 @@ function ga_dash_load_i18n() {
 	load_plugin_textdomain ( 'ga-dash', false, basename ( dirname ( __FILE__ ) ) . '/languages' );
 }
 
+function gadwp_activate() {
+	/*
+	 * Include Tools
+	 */
+	include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
+	$tools = new GADASH_Tools ();
+
+	$tools->ga_dash_clear_cache();
+}
+
+register_activation_hook( __FILE__, 'gadwp_activate' );
+
 if (is_admin ()) {
 	add_action ( 'plugins_loaded', 'gadash_admin_init' );
 } else {
