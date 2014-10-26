@@ -75,7 +75,7 @@ Google Analytics Dashboard for WP has been translated into the following languag
 
 * Homepage of [Google Analytics Dashboard](https://deconf.com/google-analytics-dashboard-wordpress/) for WordPress
 * Other [WordPress Plugins](https://deconf.com/wordpress/) by same author
-* [Google Analytics Dashboard](https://deconf.com/ask/) translations and support 
+* To submit new translation use [this forum](https://deconf.com/ask/) 
 
 == Installation ==
 
@@ -124,8 +124,9 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - bugfix: authors custom dimension not working for pages, reported by [tylerarnold23](https://wordpress.org/support/profile/tylerarnold23)
 - bugfix: outbound detection
 - bugfix: fixed unicode issue, reported by [Haruka_Suzuki](https://wordpress.org/support/profile/haruka_suzuki)
+- bugfix: properly display cities with same name from different regions, reported by [matt6303](https://wordpress.org/support/profile/matt6303)
 - tweak: removed image extensions from default download filter
-- feature: Arabic translation
+- feature: Arabic translation, translated by [Ahmed Majed](https://deconf.com/ask/author/almobdaa/)
 
 = 4.3.4 =
 - feature: ga_dash_addtrackingcode action hook

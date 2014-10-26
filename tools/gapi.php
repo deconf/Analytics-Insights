@@ -445,7 +445,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 			}
 
 			if ($GADASH_Config->options ['ga_target_geomap']) {
-				$dimensions = 'ga:city';
+				$dimensions = 'ga:city, ga:region';
 				$this->getcountrycodes ();
 				$filters = 'ga:country==' . ($this->country_codes [$GADASH_Config->options ['ga_target_geomap']]);
 			} else {
@@ -460,17 +460,18 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 				}
 				$transient = get_transient ( $serial );
 				if (empty ( $transient )) {
-					if ($filters)
+					if ($filters){
 						$data = $this->service->data_ga->get ( 'ga:' . $projectId, $from, $to, $metrics, array (
 								'dimensions' => $dimensions,
 								'filters' => $filters,
 								'sort' => '-ga:visits',
 								'max-results' => $GADASH_Config->options ['ga_target_number']
 						) );
-					else
+					}else{
 						$data = $this->service->data_ga->get ( 'ga:' . $projectId, $from, $to, $metrics, array (
 								'dimensions' => $dimensions
 						) );
+					}
 					set_transient ( $serial, $data, $this->get_timeouts ( $timeouts ) );
 				} else {
 					$data = $transient;
@@ -486,7 +487,11 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 			$ga_dash_data = "";
 			$i = 0;
 			while ( isset ( $data ['rows'] [$i] [1] ) ) {
-				$ga_dash_data .= "['" . addslashes ( $data ['rows'] [$i] [0] ) . "'," . $data ['rows'] [$i] [1] . "],";
+				if (isset($data ['rows'] [$i] [2])){
+					$ga_dash_data .= "['" . addslashes ( $data ['rows'] [$i] [0] ) .", ". addslashes ( $data ['rows'] [$i] [1] ) ."'," . $data ['rows'] [$i] [2] . "],";
+				}else{
+					$ga_dash_data .= "['" . addslashes ( $data ['rows'] [$i] [0] ) . "'," . $data ['rows'] [$i] [1] . "],";
+				}
 				$i ++;
 			}
 

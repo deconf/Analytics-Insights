@@ -1552,7 +1552,7 @@ class GADASH_Settings {
 													href="https://deconf.com/google-analytics-dashboard-wordpress/"><img
 													src="<?php echo plugins_url( 'images/help.png' , __FILE__ ); ?>" /></a>
 											</div>
-											<div class="gadash-desc"><?php echo  __('You can find support on', 'ga-dash') . ' <a href="https://deconf.com/ask/">'.__('DeConf Help Center', 'ga-dash').'</a>.'; ?></div>
+											<div class="gadash-desc"><?php echo  __('You can find support on', 'ga-dash') . ' <a href="https://deconf.com/google-analytics-dashboard-wordpress/">'.__('DeConf.com', 'ga-dash').'</a>.'; ?></div>
 											<br />
 											<div class="gadash-title">
 												<a
