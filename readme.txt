@@ -126,6 +126,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - bugfix: fixed unicode issue, reported by [Haruka_Suzuki](https://wordpress.org/support/profile/haruka_suzuki)
 - bugfix: properly display cities with same name from different regions, reported by [matt6303](https://wordpress.org/support/profile/matt6303)
 - tweak: removed image extensions from default download filter
+- tweak: add day of week to dashboard dates, suggested by [nethrs](https://deconf.com/ask/author/timnethers/)
 - feature: Arabic translation, translated by [Ahmed Majed](https://deconf.com/ask/author/almobdaa/)
 
 = 4.3.4 =

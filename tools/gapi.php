@@ -632,7 +632,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 
 			$max_array = array ();
 			foreach ( $data ['rows'] as $item ) {
-				$max_array [] = $item [3];
+				$max_array [] = $item [2];
 			}
 
 			$max = max ( $max_array ) ? max ( $max_array ) : 1;
