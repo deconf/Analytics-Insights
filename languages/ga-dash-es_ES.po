@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Google Analytics Dashboard for WP\n"
 "POT-Creation-Date: 2014-11-09 11:35+0200\n"
-"PO-Revision-Date: 2014-11-09 11:36+0200\n"
+"PO-Revision-Date: 2014-11-09 21:52+0200\n"
 "Last-Translator: Alin Marcu <admin@deconf.com>\n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -130,7 +130,7 @@ msgstr "Últimos 30 días"
 
 #: .././admin/dashboard_widgets.php:303
 msgid "Last 90 Days"
-msgstr "Últimos 30 días"
+msgstr "Últimos 90 días"
 
 #: .././admin/dashboard_widgets.php:308 .././admin/dashboard_widgets.php:410
 #: .././admin/dashboard_widgets.php:506 .././admin/dashboard_widgets.php:537
