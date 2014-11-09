@@ -13,7 +13,7 @@ $rootdomain = $tools->get_root_domain ( $profile [3] );
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-	<?php
+<?php
 	$create_options = '{';
 	if ($GADASH_Config->options ['ga_speed_samplerate'] != 1) {
 		$create_options .= "'siteSpeedSampleRate' : " . ( int ) $GADASH_Config->options ['ga_speed_samplerate'];
@@ -26,8 +26,7 @@ $rootdomain = $tools->get_root_domain ( $profile [3] );
 	}
 	$create_options .= '}';
 	?>
-  ga('create', '<?php echo esc_html($profile[2]); ?>', 'auto'<?php	if ($create_options != '{}') {?>, <?php echo $create_options; }?>);
-<?php if ($GADASH_Config->options ['ga_crossdomain_tracking'] AND $GADASH_Config->options ['ga_crossdomain_list']!='') {?>
+  ga('create', '<?php echo esc_html($profile[2]); ?>', 'auto'<?php	if ($create_options != '{}') {?>, <?php echo $create_options; }?>);<?php if ($GADASH_Config->options ['ga_crossdomain_tracking'] AND $GADASH_Config->options ['ga_crossdomain_list']!='') {?>
   ga('require', 'linker');
 <?php
 	$crossdomain_list = explode ( ',', $GADASH_Config->options ['ga_crossdomain_list'] );

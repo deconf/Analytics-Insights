@@ -53,7 +53,7 @@ if (! class_exists ( 'GADASH_Config' )) {
 				$options ['ga_dash_style'] = sanitize_text_field ( $options ['ga_dash_style'] );
 			}
 			if (isset ( $options ['ga_event_downloads'] )) {
-				if (empty($options ['ga_event_downloads'])){
+				if (empty ( $options ['ga_event_downloads'] )) {
 					$options ['ga_event_downloads'] = 'zip|mp3*|mpe*g|pdf|docx*|pptx*|xlsx*|rar*';
 				}
 				$options ['ga_event_downloads'] = sanitize_text_field ( $options ['ga_event_downloads'] );
@@ -62,7 +62,7 @@ if (! class_exists ( 'GADASH_Config' )) {
 				$options ['ga_target_number'] = ( int ) $options ['ga_target_number'];
 			}
 
-			if (isset ( $options ['ga_speed_samplerate'] ) && ($options ['ga_speed_samplerate']<1 || $options ['ga_speed_samplerate']>100)) {
+			if (isset ( $options ['ga_speed_samplerate'] ) && ($options ['ga_speed_samplerate'] < 1 || $options ['ga_speed_samplerate'] > 100)) {
 				$options ['ga_speed_samplerate'] = 1;
 			}
 
@@ -71,27 +71,27 @@ if (! class_exists ( 'GADASH_Config' )) {
 			}
 
 			if (isset ( $options ['ga_author_dimindex'] )) {
-				$options ['ga_author_dimindex'] = (int)$options ['ga_author_dimindex'];
+				$options ['ga_author_dimindex'] = ( int ) $options ['ga_author_dimindex'];
 			}
 			if (isset ( $options ['ga_category_dimindex'] )) {
-				$options ['ga_category_dimindex'] = (int)$options ['ga_category_dimindex'];
+				$options ['ga_category_dimindex'] = ( int ) $options ['ga_category_dimindex'];
 			}
 			if (isset ( $options ['ga_user_dimindex'] )) {
-				$options ['ga_user_dimindex'] = (int)$options ['ga_user_dimindex'];
+				$options ['ga_user_dimindex'] = ( int ) $options ['ga_user_dimindex'];
 			}
 			if (isset ( $options ['ga_pubyear_dimindex'] )) {
-				$options ['ga_pubyear_dimindex'] = (int)$options ['ga_pubyear_dimindex'];
+				$options ['ga_pubyear_dimindex'] = ( int ) $options ['ga_pubyear_dimindex'];
 			}
 
 			if (isset ( $options ['ga_aff_tracking'] )) {
-				$options ['ga_aff_tracking'] = (int)$options ['ga_aff_tracking'];
+				$options ['ga_aff_tracking'] = ( int ) $options ['ga_aff_tracking'];
 			}
 
 			if (isset ( $options ['ga_event_affiliates'] )) {
-				if (empty($options ['ga_event_affiliates'])){
+				if (empty ( $options ['ga_event_affiliates'] )) {
 					$options ['ga_event_affiliates'] = '/out/';
 				}
-				$options ['ga_event_affiliates'] = sanitize_text_field($options ['ga_event_affiliates']);
+				$options ['ga_event_affiliates'] = sanitize_text_field ( $options ['ga_event_affiliates'] );
 			}
 
 			return $options;
@@ -179,10 +179,16 @@ if (! class_exists ( 'GADASH_Config' )) {
 					$this->options = array_merge ( $this->options, $network_options );
 				}
 			}
-
 		}
-
 		private function maintain_compatibility() {
+
+			if (GADWP_CURRENT_VERSION != get_option ( 'gadwp_version' )) {
+				include_once ($this->plugin_path . '/tools/tools.php');
+				$tools = new GADASH_Tools ();
+				$tools->ga_dash_clear_cache ();
+				update_option ( 'gadwp_version', GADWP_CURRENT_VERSION );
+			}
+
 			if (! isset ( $this->options ['ga_enhanced_links'] )) {
 				$this->options ['ga_enhanced_links'] = 0;
 			}
@@ -203,8 +209,8 @@ if (! class_exists ( 'GADASH_Config' )) {
 				$this->options ['ga_speed_samplerate'] = 1;
 			}
 
-			if (! isset ( $this->options['ga_event_bouncerate'] )) {
-				$this->options['ga_event_bouncerate'] = 0;
+			if (! isset ( $this->options ['ga_event_bouncerate'] )) {
+				$this->options ['ga_event_bouncerate'] = 0;
 			}
 
 			if (! is_array ( $this->options ['ga_dash_access_front'] ) or empty ( $this->options ['ga_dash_access_front'] )) {
@@ -242,8 +248,8 @@ if (! class_exists ( 'GADASH_Config' )) {
 			if (! isset ( $this->options ['ga_event_affiliates'] )) {
 				$this->options ['ga_event_affiliates'] = '/out/';
 			}
-			if (! isset ( $this->options['ga_aff_tracking'] )) {
-				$this->options['ga_aff_tracking'] = 0;
+			if (! isset ( $this->options ['ga_aff_tracking'] )) {
+				$this->options ['ga_aff_tracking'] = 0;
 			}
 
 			if (isset ( $this->options ['ga_tracking_code'] )) {
