@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Google Analytics Dashboard for WP\n"
-"POT-Creation-Date: 2014-10-20 08:35+0200\n"
-"PO-Revision-Date: 2014-10-20 08:35+0200\n"
+"POT-Creation-Date: 2014-11-09 11:33+0200\n"
+"PO-Revision-Date: 2014-11-09 11:33+0200\n"
 "Last-Translator: Alin Marcu <admin@deconf.com>\n"
 "Language-Team: Ahmed Majed <admin@almobdaa.com>\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.9\n"
+"X-Generator: Poedit 1.6.10\n"
 "X-Poedit-KeywordsList: _e;__\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -114,17 +114,17 @@ msgid "Yesterday"
 msgstr "البارحة"
 
 #: .././admin/dashboard_widgets.php:297 .././front/widgets.php:107
-#: .././tools/gapi.php:699
+#: .././tools/gapi.php:704
 msgid "Last 7 Days"
 msgstr "اخر ٧ ايام"
 
 #: .././admin/dashboard_widgets.php:299 .././front/widgets.php:108
-#: .././tools/gapi.php:702
+#: .././tools/gapi.php:707
 msgid "Last 14 Days"
 msgstr "أخر ١٤ يوم"
 
 #: .././admin/dashboard_widgets.php:301 .././front/widgets.php:109
-#: .././tools/gapi.php:705
+#: .././tools/gapi.php:710
 msgid "Last 30 Days"
 msgstr "اخر ٣٠ يوم"
 
@@ -136,7 +136,7 @@ msgstr "أخر ٩٠ يوم"
 #: .././admin/dashboard_widgets.php:506 .././admin/dashboard_widgets.php:537
 #: .././admin/dashboard_widgets.php:540 .././admin/dashboard_widgets.php:574
 #: .././admin/dashboard_widgets.php:600 .././admin/dashboard_widgets.php:626
-#: .././tools/gapi.php:585 .././tools/gapi.php:670 .././tools/gapi.php:842
+#: .././tools/gapi.php:590 .././tools/gapi.php:675 .././tools/gapi.php:847
 msgid "Visits"
 msgstr "الزيارات"
 
@@ -162,7 +162,7 @@ msgstr "الساعة"
 
 #: .././admin/dashboard_widgets.php:341 .././admin/dashboard_widgets.php:348
 #: .././admin/dashboard_widgets.php:355 .././admin/dashboard_widgets.php:362
-#: .././tools/gapi.php:670 .././tools/gapi.php:774
+#: .././tools/gapi.php:675 .././tools/gapi.php:779
 msgid "Date"
 msgstr "التاريخ"
 
@@ -204,7 +204,7 @@ msgstr "الصفحات الأكثر شعبية"
 msgid "Top Referrers"
 msgstr "المشيرين الاكثر شعبية"
 
-#: .././admin/dashboard_widgets.php:626 .././tools/gapi.php:842
+#: .././admin/dashboard_widgets.php:626 .././tools/gapi.php:847
 msgid "Top Searches"
 msgstr "البحث الاكثر شعبية"
 
@@ -241,29 +241,29 @@ msgstr "هذه ميزة تجريبية وهي متوفرة فقط عند است�
 msgid "more about this feature"
 msgstr "المزيد حول هذه الميزة"
 
-#: .././admin/dashboard_widgets.php:699 .././tools/gapi.php:1068
+#: .././admin/dashboard_widgets.php:699 .././tools/gapi.php:1084
 msgid "REFERRAL"
 msgstr "المصدر"
 
-#: .././admin/dashboard_widgets.php:700 .././tools/gapi.php:1069
+#: .././admin/dashboard_widgets.php:700 .././tools/gapi.php:1085
 msgid "ORGANIC"
 msgstr "عضوي"
 
-#: .././admin/dashboard_widgets.php:701 .././tools/gapi.php:981
-#: .././tools/gapi.php:1070
+#: .././admin/dashboard_widgets.php:701 .././tools/gapi.php:992
+#: .././tools/gapi.php:1086
 msgid "SOCIAL"
 msgstr "اجتماعي"
 
-#: .././admin/dashboard_widgets.php:704 .././tools/gapi.php:984
-#: .././tools/gapi.php:1073
+#: .././admin/dashboard_widgets.php:704 .././tools/gapi.php:995
+#: .././tools/gapi.php:1089
 msgid "DIRECT"
 msgstr "مباشر"
 
-#: .././admin/dashboard_widgets.php:705 .././tools/gapi.php:1074
+#: .././admin/dashboard_widgets.php:705 .././tools/gapi.php:1090
 msgid "NEW"
 msgstr "جديد"
 
-#: .././admin/dashboard_widgets.php:706 .././tools/gapi.php:1075
+#: .././admin/dashboard_widgets.php:706 .././tools/gapi.php:1091
 msgid "RETURN"
 msgstr "عائد"
 
@@ -678,8 +678,8 @@ msgid "You can find support on"
 msgstr "يمكنك ايجاد الدعم في"
 
 #: .././admin/ga_dash_settings.php:1555
-msgid "DeConf Help Center"
-msgstr "مركز المساعدة"
+msgid "DeConf.com"
+msgstr "DeConf.com"
 
 #: .././admin/ga_dash_settings.php:1562
 msgid "Your feedback and review are both important,"
@@ -754,7 +754,7 @@ msgid "Totals"
 msgstr "الكل"
 
 #: .././front/widgets.php:96
-msgid "Anonimize chart's stats:"
+msgid "Anonimize chart&#39;s stats:"
 msgstr "عمم الاحصائيات:"
 
 #: .././front/widgets.php:103
@@ -781,37 +781,40 @@ msgstr "كود الدخول:"
 msgid "Save Access Code"
 msgstr "أحفظ كود الدخول"
 
-#: .././tools/gapi.php:585 .././tools/gapi.php:670
-msgid "\\' trend"
-msgstr "\\' النزعة"
+#: .././tools/gapi.php:590 .././tools/gapi.php:675
+msgid "&#39; trend"
+msgstr "&#39; النزعة"
 
-#: .././tools/gapi.php:709
+#: .././tools/gapi.php:714
 msgid "Period:"
 msgstr "الفترة:"
 
-#: .././tools/gapi.php:710
+#: .././tools/gapi.php:715
 msgid "Total Visits:"
 msgstr "الزيارات الكلية:"
 
-#: .././tools/gapi.php:726
+#: .././tools/gapi.php:731
 msgid "Views vs UniqueViews"
 msgstr "المشاهدات ضد المشاهدات الحقيقية"
 
-#: .././tools/gapi.php:774
+#: .././tools/gapi.php:779
 msgid "Views"
 msgstr "المشاهدات"
 
-#: .././tools/gapi.php:774
+#: .././tools/gapi.php:779
 msgid "UniqueViews"
 msgstr "المشاهدات الخاصة"
 
-#: .././tools/gapi.php:975
+#: .././tools/gapi.php:986
 msgid "REFERRALS"
 msgstr "المصادر"
 
-#: .././tools/gapi.php:978
+#: .././tools/gapi.php:989
 msgid "KEYWORDS"
 msgstr "الكلمات المفتاحية"
+
+#~ msgid "DeConf Help Center"
+#~ msgstr "مركز المساعدة"
 
 #~ msgid ""
 #~ " (watch this <a href='http://deconf.com/projects/google-analytics-"
