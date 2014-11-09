@@ -250,7 +250,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 				}
 			} else {
 				for($i = 0; $i < $data ['totalResults']; $i ++) {
-					$ga_dash_statsdata .= "['" . __($data ['rows'] [$i] [1]) . ', ' . substr_replace(substr_replace($data ['rows'] [$i] [0] , '-', 4, 0), '-', 7, 0) . "'," . round ( $data ['rows'] [$i] [2], 2 ) . "],";
+					$ga_dash_statsdata .= "['" . ucfirst(__($data ['rows'] [$i] [1])) . ', ' . substr_replace(substr_replace($data ['rows'] [$i] [0] , '-', 4, 0), '-', 7, 0) . "'," . round ( $data ['rows'] [$i] [2], 2 ) . "],";
 				}
 			}
 
@@ -638,7 +638,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 			$max = max ( $max_array ) ? max ( $max_array ) : 1;
 
 			for($i = 0; $i < $data ['totalResults']; $i ++) {
-				$ga_dash_statsdata .= "['" . __($data ['rows'] [$i] [1]) . ', ' . substr_replace(substr_replace($data ['rows'] [$i] [0] , '-', 4, 0), '-', 7, 0) . "'," . ($anonim ? str_replace ( ',', '.', round ( $data ['rows'] [$i] [2] * 100 / $max, 2 ) ) : $data ['rows'] [$i] [2]) . "],";
+				$ga_dash_statsdata .= "['" . ucfirst(__($data ['rows'] [$i] [1])) . ', ' . substr_replace(substr_replace($data ['rows'] [$i] [0] , '-', 4, 0), '-', 7, 0) . "'," . ($anonim ? str_replace ( ',', '.', round ( $data ['rows'] [$i] [2] * 100 / $max, 2 ) ) : $data ['rows'] [$i] [2]) . "],";
 			}
 
 			$ga_dash_statsdata = wp_kses ( rtrim ( $ga_dash_statsdata, ',' ), $GADASH_Config->allowed_html );
@@ -766,7 +766,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 
 			$ga_dash_statsdata = "";
 			for($i = 0; $i < $data ['totalResults']; $i ++) {
-				$ga_dash_statsdata .= "['" . __($data ['rows'] [$i] [1]) . ', ' . substr_replace(substr_replace($data ['rows'] [$i] [0] , '-', 4, 0), '-', 7, 0) . "'," . round ( $data ['rows'] [$i] [2], 2 ) . "," . round ( $data ['rows'] [$i] [3], 2 ) . "],";
+				$ga_dash_statsdata .= "['" . ucfirst(__($data ['rows'] [$i] [1])) . ', ' . substr_replace(substr_replace($data ['rows'] [$i] [0] , '-', 4, 0), '-', 7, 0) . "'," . round ( $data ['rows'] [$i] [2], 2 ) . "," . round ( $data ['rows'] [$i] [3], 2 ) . "],";
 			}
 
 			$ga_dash_statsdata = wp_kses ( rtrim ( $ga_dash_statsdata, ',' ), $GADASH_Config->allowed_html );
@@ -880,6 +880,12 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 			} catch ( Exception $e ) {
 				update_option ( 'gadash_lasterror', date ( 'Y-m-d H:i:s' ) . ': ' . esc_html ( $e ) );
 				return '';
+			}
+
+			$i = 0;
+			while ( isset ( $data->rows[$i] ) ) {
+				$data->rows[$i] = str_replace('"',"'",$data->rows[$i]); //remove all double quotes before sending data
+				$i ++;
 			}
 
 			return $data;
@@ -996,6 +1002,7 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 
 					jQuery.post(ajaxurl, {action: "gadash_get_online_data", gadash_security: "' . wp_create_nonce ( 'gadash_get_online_data' ) . '"}, function(response){
 						var data = jQuery.parseJSON(response);
+
 						if (data["totalsForAllResults"]["rt:activeVisitors"]!==document.getElementById("gadash-online").innerHTML){
 							jQuery("#gadash-online").fadeOut("slow");
 							jQuery("#gadash-online").fadeOut(500);
@@ -1012,6 +1019,10 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 							jQuery("#gadash-online").fadeIn("slow", function() {
 								jQuery("#gadash-online").css({\'background-color\' : \'#FFFFFF\'});
 							});
+						};
+
+						if (data["totalsForAllResults"]["rt:activeVisitors"] == 0){
+							data["rows"]= [];
 						};
 
 						var pagepath = [];

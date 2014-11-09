@@ -128,6 +128,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - tweak: removed image extensions from default download filter
 - tweak: add day of week to dashboard dates, suggested by [nethrs](https://deconf.com/ask/author/timnethers/)
 - feature: Arabic translation, translated by [Ahmed Majed](https://deconf.com/ask/author/almobdaa/)
+- bugfix: multiple fixes for real time reports
 
 = 4.3.4 =
 - feature: ga_dash_addtrackingcode action hook
