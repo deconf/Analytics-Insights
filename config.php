@@ -256,7 +256,9 @@ if (! class_exists ( 'GADASH_Config' )) {
 			if (! isset ( $this->options ['ga_aff_tracking'] )) {
 				$this->options ['ga_aff_tracking'] = 0;
 			}
-
+			if (! isset ( $this->options ['ga_hash_tracking'] )) {
+				$this->options ['ga_hash_tracking'] = 0;
+			}
 			if (isset ( $this->options ['ga_tracking_code'] )) {
 				unset ( $this->options ['ga_tracking_code'] );
 			}

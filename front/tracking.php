@@ -54,7 +54,7 @@ if (! class_exists ( 'GADASH_Tracking' )) {
 					echo "\n<!-- END GADWP Classic Tracking -->\n\n";
 				} else {
 					echo "\n<!-- BEGIN GADWP v" . GADWP_CURRENT_VERSION . " Universal Tracking - https://deconf.com/google-analytics-dashboard-wordpress/ -->\n";
-					if ($GADASH_Config->options ['ga_event_tracking']) {
+					if ($GADASH_Config->options ['ga_event_tracking'] OR $GADASH_Config->options ['ga_aff_tracking'] OR $GADASH_Config->options ['ga_hash_tracking']) {
 						require_once 'tracking/events-universal.php';
 					}
 

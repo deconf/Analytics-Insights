@@ -23,6 +23,7 @@ class GADASH_Settings {
 				$options ['ga_event_bouncerate'] = 0;
 				$options ['ga_crossdomain_tracking'] = 0;
 				$options ['ga_aff_tracking'] = 0;
+				$options ['ga_hash_tracking'] = 0;
 
 				if (isset ( $_POST ['options'] ['ga_tracking_code'] )) {
 					$new_options ['ga_tracking_code'] = trim ( $new_options ['ga_tracking_code'], "\t" );
@@ -577,15 +578,19 @@ class GADASH_Settings {
 									size="50"></td>
 							</tr>
 							<tr>
-								<td class="title"></td>
-								<td>
-									<div class="event-option">
-										<input type="checkbox" name="options[ga_event_bouncerate]"
-											value="1" id="ga_event_bouncerate"
-											<?php checked( $options['ga_event_bouncerate'], 1 ); ?>> <label
-											for="ga_event_bouncerate"> </label>
+								<td colspan="2" class="title">
+
+									<div class="onoffswitch">
+										<input type="checkbox" name="options[ga_hash_tracking]"
+											value="1" class="onoffswitch-checkbox" id="ga_hash_tracking"
+											<?php checked( $options['ga_hash_tracking'], 1 ); ?>> <label
+											class="onoffswitch-label" for="ga_hash_tracking">
+											<div class="onoffswitch-inner"></div>
+											<div class="onoffswitch-switch"></div>
+										</label>
 									</div>
-									<div class="event-option-desc"><?php _e(" exclude events from bounce-rate calculation", 'ga-dash' ); ?></div>
+									<div class="switch-desc"><?php _e(" track fragment identifiers, hashmarks (#) in URI links", 'ga-dash' ); ?></div>
+
 								</td>
 							</tr>
 							<tr>
@@ -640,6 +645,22 @@ class GADASH_Settings {
 									name="options[ga_speed_samplerate]"
 									value="<?php echo (int)($options['ga_speed_samplerate']); ?>"
 									max="100" min="1"> %</td>
+							</tr>
+							<tr>
+								<td colspan="2" class="title">
+
+									<div class="onoffswitch">
+										<input type="checkbox" name="options[ga_event_bouncerate]"
+											value="1" class="onoffswitch-checkbox" id="ga_event_bouncerate"
+											<?php checked( $options['ga_event_bouncerate'], 1 ); ?>> <label
+											class="onoffswitch-label" for="ga_event_bouncerate">
+											<div class="onoffswitch-inner"></div>
+											<div class="onoffswitch-switch"></div>
+										</label>
+									</div>
+									<div class="switch-desc"><?php _e ( " exclude events from bounce-rate calculation", 'ga-dash' );?></div>
+
+								</td>
 							</tr>
 							<tr>
 								<td colspan="2" class="title">
