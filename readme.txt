@@ -121,12 +121,12 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 == Changelog ==
 
 = 4.3.7 =
-- feature: option to exclude Super Admin tracking for the entire network, suggested by [Marie](https://wordpress.org/support/profile/yamaryam)
+- feature: option to exclude Super Administrator tracking for the entire network, suggested by [Marie](https://wordpress.org/support/profile/yamaryam)
 - bugfix: warning during Network Activate, reported by [JoelStickney](https://wordpress.org/support/profile/joelstickney)
 - bugfix: track affiliates while downloads, mailto and outbound links tracking is disabled
 - feature: track fragment identifiers, hashmarks (#) in URI links
 - tweak: improving i18n
-- tweak: moving bounce-rate option yo Advanced Settings 
+- tweak: moving bounce-rate option to Advanced Tracking 
 
 = 4.3.6 =
 - bugfix: clear cache not working properly
