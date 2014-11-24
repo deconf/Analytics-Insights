@@ -120,6 +120,7 @@ if (! class_exists ( 'GADASH_Config' )) {
 						$network_options ['ga_dash_userapi'] = $this->options ['ga_dash_userapi'];
 						$options ['ga_dash_userapi'] = 0;
 						$network_options ['ga_dash_network'] = $this->options ['ga_dash_network'];
+						$network_options ['ga_dash_excludesa'] = $this->options ['ga_dash_excludesa'];
 						unset ( $options ['ga_dash_network'] );
 
 						if (isset ( $this->options ['ga_dash_tableid_network'] )) {
@@ -195,6 +196,10 @@ if (! class_exists ( 'GADASH_Config' )) {
 
 			if (! isset ( $this->options ['ga_enhanced_network'] )) {
 				$this->options ['ga_dash_network'] = 0;
+			}
+
+			if (! isset ( $this->options ['ga_enhanced_excludesa'] )) {
+				$this->options ['ga_dash_excludesa'] = 0;
 			}
 
 			if (! isset ( $this->options ['ga_dash_remarketing'] )) {

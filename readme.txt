@@ -3,8 +3,8 @@ Contributors: deconf
 Donate link: https://deconf.com/donate/
 Tags: google,analytics,google analytics,dashboard,analytics dashboard,google analytics dashboard,google analytics widget,tracking,realtime,wpmu,multisite
 Requires at least: 2.8
-Tested up to: 4.0
-Stable tag: 4.3.6
+Tested up to: 4.0.1
+Stable tag: 4.3.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -119,6 +119,11 @@ A dedicated section for Wordpress Plugins is available here: [Wordpress Plugins 
 This plugin it's released under the GPLv2, you can use it free of charge on your personal or commercial website.
 
 == Changelog ==
+
+= 4.3.7 =
+- feature: option to exclude Super Admin tracking for the entire network, suggested by [Marie](https://wordpress.org/support/profile/yamaryam)
+- bugfix: warning during Network Activate, reported by [JoelStickney](https://wordpress.org/support/profile/joelstickney)
+- bugfix: improving i18n 
 
 = 4.3.6 =
 - bugfix: clear cache not working properly

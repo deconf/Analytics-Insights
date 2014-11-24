@@ -51,6 +51,7 @@ class GADASH_Settings {
 			} else if ($who == 'network') {
 				$options ['ga_dash_userapi'] = 0;
 				$options ['ga_dash_network'] = 0;
+				$options ['ga_dash_excludesa'] = 0;
 				$network_settings = true;
 			}
 			$options = array_merge ( $options, $new_options );
@@ -892,7 +893,7 @@ class GADASH_Settings {
 							</tr>
 							<tr>
 								<td colspan="2" class="info">
-						<?php echo __("You should watch the",'ga-dash')." <a href='https://deconf.com/google-analytics-dashboard-wordpress/' target='_blank'>". __("video",'ga-dash')."</a> ".__("and read this", 'ga-dash')." <a href='https://deconf.com/google-analytics-dashboard-wordpress/' target='_blank'>". __("tutorial",'ga-dash')."</a> ".__("before proceeding to authorization. This plugin requires a properly configured Google Analytics account", 'ga-dash')."!";?>
+						<?php echo __("You should watch the",'ga-dash')." <a href='https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=top_video&utm_campaign=gadwp' target='_blank'>". __("video",'ga-dash')."</a> ".__("and read this", 'ga-dash')." <a href='https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=top_tutorial&utm_campaign=gadwp' target='_blank'>". __("tutorial",'ga-dash')."</a> ".__("before proceeding to authorization. This plugin requires a properly configured Google Analytics account", 'ga-dash')."!";?>
 						</td>
 							</tr>
 						<?php
@@ -1276,27 +1277,27 @@ class GADASH_Settings {
 											<input type="hidden" name="options[ga_dash_hidden]" value="Y">
 							<?php wp_nonce_field('gadash_form','gadash_security'); ?>
 							<table class="options">
-												<tr>
-													<td colspan="2"><?php echo "<h2>" . __( "Network Setup", 'ga-dash' ) . "</h2>"; ?></td>
-												</tr>
-												<tr>
-													<td colspan="2" class="title">
+								<tr>
+									<td colspan="2"><?php echo "<h2>" . __( "Network Setup", 'ga-dash' ) . "</h2>"; ?></td>
+								</tr>
+								<tr>
+									<td colspan="2" class="title">
 
-														<div class="onoffswitch">
-															<input type="checkbox" name="options[ga_dash_network]"
-																value="1" class="onoffswitch-checkbox"
-																id="ga_dash_network"
-																<?php checked( $options['ga_dash_network'], 1); ?>
-																onchange="this.form.submit()"> <label
-																class="onoffswitch-label" for="ga_dash_network">
-																<div class="onoffswitch-inner"></div>
-																<div class="onoffswitch-switch"></div>
-															</label>
-														</div>
-														<div class="switch-desc"><?php _e ( " use a single Google Analytics account for the entire network", 'ga-dash' );?></div>
+										<div class="onoffswitch">
+											<input type="checkbox" name="options[ga_dash_network]"
+												value="1" class="onoffswitch-checkbox"
+												id="ga_dash_network"
+												<?php checked( $options['ga_dash_network'], 1); ?>
+												onchange="this.form.submit()"> <label
+												class="onoffswitch-label" for="ga_dash_network">
+												<div class="onoffswitch-inner"></div>
+												<div class="onoffswitch-switch"></div>
+											</label>
+										</div>
+										<div class="switch-desc"><?php _e ( " use a single Google Analytics account for the entire network", 'ga-dash' );?></div>
 
-													</td>
-												</tr>
+									</td>
+								</tr>
 								<?php if ($options['ga_dash_network']){  //Network Mode check?>
 								<tr>
 													<td colspan="2"><hr></td>
@@ -1401,6 +1402,29 @@ class GADASH_Settings {
 							<?php
 					}
 					?>
+							<tr>
+								<td colspan="2"><hr><?php echo "<h2>" . __( "Exclude Tracking", 'ga-dash' ) . "</h2>"; ?></td>
+							</tr>
+
+												<tr>
+													<td colspan="2" class="title">
+
+														<div class="onoffswitch">
+															<input type="checkbox" name="options[ga_dash_excludesa]"
+																value="1" class="onoffswitch-checkbox"
+																id="ga_dash_excludesa"
+																<?php checked( $options['ga_dash_excludesa'], 1); ?>">
+															<label
+																class="onoffswitch-label" for="ga_dash_excludesa">
+																<div class="onoffswitch-inner"></div>
+																<div class="onoffswitch-switch"></div>
+															</label>
+														</div>
+														<div class="switch-desc"><?php _e ( " exclude Super Admin tracking for the entire network", 'ga-dash' );?></div>
+
+													</td>
+												</tr>
+
 								<tr>
 													<td colspan="2"><hr></td>
 
@@ -1536,7 +1560,7 @@ class GADASH_Settings {
 										</h3>
 										<div class="inside">
 											<a
-												href="https://deconf.com/google-analytics-dashboard-wordpress/"
+												href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=video&utm_campaign=gadwp"
 												target="_blank"><img
 												src="<?php echo plugins_url( 'images/google-analytics-dashboard.png' , __FILE__ );?>"
 												width="100%" alt="" /></a>
@@ -1552,7 +1576,7 @@ class GADASH_Settings {
 													href="https://deconf.com/google-analytics-dashboard-wordpress/"><img
 													src="<?php echo plugins_url( 'images/help.png' , __FILE__ ); ?>" /></a>
 											</div>
-											<div class="gadash-desc"><?php echo  __('You can find support on', 'ga-dash') . ' <a href="https://deconf.com/google-analytics-dashboard-wordpress/">'.__('DeConf.com', 'ga-dash').'</a>.'; ?></div>
+											<div class="gadash-desc"><?php echo  __('You can find support on', 'ga-dash') . ' <a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=support&utm_campaign=gadwp">'.__('DeConf.com', 'ga-dash').'</a>.'; ?></div>
 											<br />
 											<div class="gadash-title">
 												<a
@@ -1571,19 +1595,19 @@ class GADASH_Settings {
 												<a href="https://deconf.com/move-website-https-ssl/"><img
 													src="<?php echo plugins_url( 'images/ssl.png' , __FILE__ ); ?>" /></a>
 											</div>
-											<div class="gadash-desc"><?php echo  '<a href="https://deconf.com/move-website-https-ssl/">'.__('Improve search rankings', 'ga-dash').'</a> '.__('by moving your website to HTTPS/SSL.', 'ga-dash'); ?></div>
+											<div class="gadash-desc"><?php echo  '<a href="https://deconf.com/move-website-https-ssl/?utm_source=gadwp_config&utm_medium=link&utm_content=ssl&utm_campaign=gadwp">'.__('Improve search rankings', 'ga-dash').'</a> '.__('by moving your website to HTTPS/SSL.', 'ga-dash'); ?></div>
 											<br />
 											<div class="gadash-title">
 												<a href="https://deconf.com/wordpress/"><img
 													src="<?php echo plugins_url( 'images/wp.png' , __FILE__ ); ?>" /></a>
 											</div>
-											<div class="gadash-desc"><?php echo  __('Other', 'ga-dash').' <a href="https://deconf.com/wordpress/">'.__('WordPress Plugins', 'ga-dash').'</a> '.__('written by the same author', 'ga-dash').'.'; ?></div>
+											<div class="gadash-desc"><?php echo  __('Other', 'ga-dash').' <a href="https://deconf.com/wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=plugins&utm_campaign=gadwp">'.__('WordPress Plugins', 'ga-dash').'</a> '.__('written by the same author', 'ga-dash').'.'; ?></div>
 											<br />
 											<div class="gadash-title">
 												<a href="https://deconf.com/clicky-web-analytics-review/"><img
 													src="<?php echo plugins_url( 'images/clicky.png' , __FILE__ ); ?>" /></a>
 											</div>
-											<div class="gadash-desc"><?php echo  '<a href="https://deconf.com/clicky-web-analytics-review/">'.__('Web Analytics', 'ga-dash').'</a> '.__('service with visitors tracking at IP level.', 'ga-dash'); ?></div>
+											<div class="gadash-desc"><?php echo  '<a href="https://deconf.com/clicky-web-analytics-review/?utm_source=gadwp_config&utm_medium=link&utm_content=clicky&utm_campaign=gadwp">'.__('Web Analytics', 'ga-dash').'</a> '.__('service with visitors tracking at IP level.', 'ga-dash'); ?></div>
 										</div>
 									</div>
 								</div>

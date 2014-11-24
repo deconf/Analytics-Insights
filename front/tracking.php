@@ -10,11 +10,11 @@ if (! class_exists ( 'GADASH_Tracking' )) {
 		function __construct() {
 			add_action ( 'wp_head', array (
 					$this,
-					'ga_dash_tracking' 
+					'ga_dash_tracking'
 			) );
 			add_action ( 'wp_enqueue_scripts', array (
 					$this,
-					'ga_dash_enqueue_scripts' 
+					'ga_dash_enqueue_scripts'
 			) );
 		}
 		function ga_dash_enqueue_scripts() {
@@ -30,26 +30,26 @@ if (! class_exists ( 'GADASH_Tracking' )) {
 			 */
 			include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
 			$tools = new GADASH_Tools ();
-			
-			if ($tools->check_roles ( $GADASH_Config->options ['ga_track_exclude'], true )) {
+
+			if ($tools->check_roles ( $GADASH_Config->options ['ga_track_exclude'], true ) OR $GADASH_Config->options ['ga_dash_excludesa']) {
 				return;
 			}
-			
+
 			$traking_mode = $GADASH_Config->options ['ga_dash_tracking'];
 			$traking_type = $GADASH_Config->options ['ga_dash_tracking_type'];
-			
+
 			if ($traking_mode > 0) {
-				
+
 				if (! $GADASH_Config->options ['ga_dash_tableid_jail']) {
 					return;
 				}
-				
+
 				if ($traking_type == "classic") {
 					echo "\n<!-- BEGIN GADWP v" . GADWP_CURRENT_VERSION . " Classic Tracking - https://deconf.com/google-analytics-dashboard-wordpress/ -->\n";
 					if ($GADASH_Config->options ['ga_event_tracking']) {
 						require_once 'tracking/events-classic.php';
 					}
-					
+
 					require_once 'tracking/code-classic.php';
 					echo "\n<!-- END GADWP Classic Tracking -->\n\n";
 				} else {
@@ -57,9 +57,9 @@ if (! class_exists ( 'GADASH_Tracking' )) {
 					if ($GADASH_Config->options ['ga_event_tracking']) {
 						require_once 'tracking/events-universal.php';
 					}
-					
+
 					require_once 'tracking/code-universal.php';
-					
+
 					echo "\n<!-- END GADWP Universal Tracking -->\n\n";
 				}
 			}
