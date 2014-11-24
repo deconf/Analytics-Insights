@@ -42,7 +42,7 @@
 
             //Track Hashmarks
             $('a').filter(function() {
-                if (this.href.indexOf('<?php echo $domaindata['domain']; ?>') == -1) return this.href;
+                if (this.href.indexOf('<?php echo $domaindata['domain']; ?>') != -1 || this.href.indexOf('://') == -1) return this.hash;
             }).click(function(e) {
                 ga('send','event', 'hashmark', 'click', this.href<?php if(isset($GADASH_Config->options['ga_event_bouncerate']) && $GADASH_Config->options['ga_event_bouncerate']){echo ", {'nonInteraction': 1}";}?>);
             });
