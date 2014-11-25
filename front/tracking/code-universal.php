@@ -26,7 +26,8 @@ $rootdomain = $tools->get_root_domain ( $profile [3] );
 	}
 	$create_options .= '}';
 	?>
-  ga('create', '<?php echo esc_html($profile[2]); ?>', 'auto'<?php	if ($create_options != '{}') {?>, <?php echo $create_options; }?>);<?php if ($GADASH_Config->options ['ga_crossdomain_tracking'] AND $GADASH_Config->options ['ga_crossdomain_list']!='') {?>
+  ga('create', '<?php echo esc_html($profile[2]); ?>', 'auto'<?php	if ($create_options != '{}') {?>, <?php echo $create_options; }?>);
+<?php if ($GADASH_Config->options ['ga_crossdomain_tracking'] AND $GADASH_Config->options ['ga_crossdomain_list']!='') {?>
   ga('require', 'linker');
 <?php
 	$crossdomain_list = explode ( ',', $GADASH_Config->options ['ga_crossdomain_list'] );
