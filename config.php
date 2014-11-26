@@ -262,9 +262,6 @@ if (! class_exists ( 'GADASH_Config' )) {
 			if (isset ( $this->options ['ga_tracking_code'] )) {
 				unset ( $this->options ['ga_tracking_code'] );
 			}
-
-			//$this->options['ga_dash_frontend_stats'] = 0;
-			//$this->options['ga_dash_frontend_keywords'] = 0;
 		}
 	}
 }
