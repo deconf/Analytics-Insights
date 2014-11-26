@@ -1090,10 +1090,6 @@ if (! class_exists ( 'GADASH_GAPI' )) {
 						document.getElementById("gadash-tdo-rights").innerHTML += "<span class=\"gadash-bigtext\">"+\'' . __ ( "NEW", 'ga-dash' ) . '\'+": "+countvisits(data,uvisitortype[1])+"</span><br /><br />";
 						document.getElementById("gadash-tdo-rights").innerHTML += "<span class=\"gadash-bigtext\">"+\'' . __ ( "RETURN", 'ga-dash' ) . '\'+": "+countvisits(data,uvisitortype[2])+"</span><br /><br />";
 
-						if (!data["totalsForAllResults"]["rt:activeVisitors"]){
-							location.reload();
-						}
-
 					});
 			   };
 			   };
