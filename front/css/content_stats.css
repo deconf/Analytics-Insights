@@ -1,0 +1,30 @@
+#gadwp {
+	font-family: 'Open Sans', sans-serif;
+}
+
+#gadwp-searches td {
+	line-height: 1.5em;
+	padding: 2px;
+	font-size: 1em;
+}
+
+#gadwp-searches {
+	line-height: 10px;
+	margin-top: 15px;
+}
+
+#gadwp-visits {
+	height: 200px;
+	margin-top: 15px;
+}
+
+#gadwp-content {
+	width: 100%;
+}
+
+#gadwp-title {
+	text-transform: uppercase;
+	font-weight: 600;
+	font-size: 14px;
+	padding-bottom: 5px;
+}
