@@ -126,6 +126,9 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 
 == Changelog ==
 
+= 4.3.9 =
+- switch map resolution to metro areas
+
 = 4.3.8 =
 - feature: frontend component redesign
 - tweak: optimizing frontend component to improve page loading speed
