@@ -82,7 +82,7 @@ class GADASH_Settings
         $options = self::set_get_options('frontend');
         
         if (isset($_POST['options']['ga_dash_hidden'])) {
-            $message = "<div class='updated'><p><strong>" . __("Options saved.", 'ga-dash') . "</strong></p></div>";
+            $message = "<div class='updated'><p><strong>" . __("Settings saved.", 'ga-dash') . "</strong></p></div>";
             if (! (isset($_POST['gadash_security']) && wp_verify_nonce($_POST['gadash_security'], 'gadash_form'))) {
                 $message = "<div class='error'><p><strong>" . __("Cheating Huh?", 'ga-dash') . "</strong></p></div>";
             }
@@ -190,7 +190,7 @@ class GADASH_Settings
 							<tr>
 								<td colspan="2" class="submit"><input type="submit"
 									name="Submit" class="button button-primary"
-									value="<?php _e('Update Options', 'ga-dash' ) ?>" /></td>
+									value="<?php _e('Save Changes', 'ga-dash' ) ?>" /></td>
 							</tr>
 						</table>
 						<input type="hidden" name="options[ga_dash_hidden]" value="Y">
@@ -215,7 +215,7 @@ class GADASH_Settings
         $options = self::set_get_options('backend');
         
         if (isset($_POST['options']['ga_dash_hidden'])) {
-            $message = "<div class='updated'><p><strong>" . __("Options saved.", 'ga-dash') . "</strong></p></div>";
+            $message = "<div class='updated'><p><strong>" . __("Settings saved.", 'ga-dash') . "</strong></p></div>";
             if (! (isset($_POST['gadash_security']) && wp_verify_nonce($_POST['gadash_security'], 'gadash_form'))) {
                 $message = "<div class='error'><p><strong>" . __("Cheating Huh?", 'ga-dash') . "</strong></p></div>";
             }
@@ -426,7 +426,7 @@ class GADASH_Settings
 							<tr>
 								<td colspan="2" class="submit"><input type="submit"
 									name="Submit" class="button button-primary"
-									value="<?php _e('Update Options', 'ga-dash' ) ?>" /></td>
+									value="<?php _e('Save Changes', 'ga-dash' ) ?>" /></td>
 							</tr>
 						</table>
 						<input type="hidden" name="options[ga_dash_hidden]" value="Y">
@@ -457,7 +457,7 @@ class GADASH_Settings
         $options = self::set_get_options('tracking');
         
         if (isset($_POST['options']['ga_dash_hidden'])) {
-            $message = "<div class='updated'><p><strong>" . __("Options saved.", 'ga-dash') . "</strong></p></div>";
+            $message = "<div class='updated'><p><strong>" . __("Settings saved.", 'ga-dash') . "</strong></p></div>";
             if (! (isset($_POST['gadash_security']) && wp_verify_nonce($_POST['gadash_security'], 'gadash_form'))) {
                 $message = "<div class='error'><p><strong>" . __("Cheating Huh?", 'ga-dash') . "</strong></p></div>";
             }
@@ -801,7 +801,7 @@ class GADASH_Settings
 							<tr>
 								<td colspan="2" class="submit"><input type="submit"
 									name="Submit" class="button button-primary"
-									value="<?php _e('Update Options', 'ga-dash' ) ?>" /></td>
+									value="<?php _e('Save Changes', 'ga-dash' ) ?>" /></td>
 							</tr>
 						</table>
 						<input type="hidden" name="options[ga_dash_hidden]" value="Y">
@@ -876,6 +876,10 @@ class GADASH_Settings
             }
         }
         
+        if ($GADASH_GAPI->gapi_error_code == 403){
+            $message = '<div class="updated"><p>' . __("Daily Limit Exceeded (quotas are automatically reseted by Google at 00:00 PST). The reports will be available after the reset.", 'ga-dash')." ".__("The tracking won't be affected and no further actions are required.", 'ga-dash') . '</p></div>';
+        }        
+        
         if (isset($_POST['Clear'])) {
             if (isset($_POST['gadash_security']) && wp_verify_nonce($_POST['gadash_security'], 'gadash_form')) {
                 $tools->ga_dash_clear_cache();
@@ -901,7 +905,7 @@ class GADASH_Settings
         }
         
         if (isset($_POST['options']['ga_dash_hidden']) and ! isset($_POST['Clear']) and ! isset($_POST['Reset']) and ! isset($_POST['Log'])) {
-            $message = "<div class='updated'><p><strong>" . __("Options saved.", 'ga-dash') . "</strong></p></div>";
+            $message = "<div class='updated'><p><strong>" . __("Settings saved.", 'ga-dash') . "</strong></p></div>";
             if (! (isset($_POST['gadash_security']) && wp_verify_nonce($_POST['gadash_security'], 'gadash_form'))) {
                 $message = "<div class='error'><p><strong>" . __("Cheating Huh?", 'ga-dash') . "</strong></p></div>";
             }
@@ -1118,7 +1122,7 @@ class GADASH_Settings
 							<tr>
 								<td colspan="2" class="submit"><input type="submit"
 									name="Submit" class="button button-primary"
-									value="<?php _e('Update Options', 'ga-dash' ) ?>" /></td>
+									value="<?php _e('Save Changes', 'ga-dash' ) ?>" /></td>
 							</tr>
 
 		<?php
@@ -1291,7 +1295,7 @@ class GADASH_Settings
         }
         
         if (isset($_POST['options']['ga_dash_hidden']) and ! isset($_POST['Clear']) and ! isset($_POST['Reset']) and ! isset($_POST['Log']) and ! isset($_POST['Refresh'])) {
-            $message = "<div class='updated'><p><strong>" . __("Options saved.", 'ga-dash') . "</strong></p></div>";
+            $message = "<div class='updated'><p><strong>" . __("Settings saved.", 'ga-dash') . "</strong></p></div>";
             if (! (isset($_POST['gadash_security']) && wp_verify_nonce($_POST['gadash_security'], 'gadash_form'))) {
                 $message = "<div class='error'><p><strong>" . __("Cheating Huh?", 'ga-dash') . "</strong></p></div>";
             }
@@ -1530,7 +1534,7 @@ class GADASH_Settings
 												<tr>
 													<td colspan="2" class="submit"><input type="submit"
 														name="Submit" class="button button-primary"
-														value="<?php _e('Update Options', 'ga-dash' ) ?>" /></td>
+														value="<?php _e('Save Changes', 'ga-dash' ) ?>" /></td>
 												</tr>
 
 			<?php

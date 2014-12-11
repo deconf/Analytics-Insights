@@ -16,6 +16,8 @@ if (! class_exists('GADASH_GAPI')) {
 
         public $timeshift;
 
+        public $gapi_error_code;
+
         function __construct()
         {
             global $GADASH_Config;
@@ -37,6 +39,8 @@ if (! class_exists('GADASH_GAPI')) {
                     require_once 'Google/Service/Analytics.php';
                 }
             }
+            
+            $this->check_gapi_errors();
             
             $this->client = new Google_Client();
             $this->client->setScopes('https://www.googleapis.com/auth/analytics.readonly');
@@ -62,6 +66,28 @@ if (! class_exists('GADASH_GAPI')) {
                 if ($token) {
                     $this->client->setAccessToken($token);
                 }
+            }
+        }
+
+        public function check_gapi_errors()
+        {
+            
+            $this->gapi_error_code = 0;
+            
+            if (get_transient('gadash_gapi_error_code')) {
+                $this->gapi_error_code = 403;
+                return;
+            }
+            
+            $last_error = get_option('gadash_lasterror');
+            if (strpos($last_error, '(403) Daily Limit Exceeded') != FALSE) {
+                $midnight = strtotime("tomorrow 00:00:00"); // UTC midnight
+                $midnight = $midnight + 8 * 3600; // UTC 8 AM
+                $timeout = $midnight - time();
+                update_option('gadash_lasterror', str_replace('(403) Daily Limit Exceeded', '[403] Daily Limit Exceeded', $last_error));
+                set_transient('gadash_gapi_error_code', '403', $timeout); // timeout at midnight PST
+                $this->gapi_error_code = 403;
+                return;
             }
         }
 
@@ -248,6 +274,11 @@ if (! class_exists('GADASH_GAPI')) {
                 ), "", $projectId . $from . $metrics);
                 $transient = get_transient($serial);
                 if (empty($transient)) {
+                    
+                    if ($this->gapi_error_code == 403){
+                        return 403;
+                    }
+                    
                     $data = $this->service->data_ga->get('ga:' . $projectId, $from, $to, $metrics, array(
                         'dimensions' => $dimensions
                     ));
@@ -257,7 +288,7 @@ if (! class_exists('GADASH_GAPI')) {
                 }
             } catch (Exception $e) {
                 update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e));
-                return 0;
+                return $e->getCode();
             }
             
             $ga_dash_statsdata = "";
@@ -292,6 +323,11 @@ if (! class_exists('GADASH_GAPI')) {
                 $serial = 'gadash_qr3' . $projectId . $from;
                 $transient = get_transient($serial);
                 if (empty($transient)) {
+                    
+                    if ($this->gapi_error_code == 403){
+                        return 403;
+                    }
+                    
                     $data = $this->service->data_ga->get('ga:' . $projectId, $from, $to, $metrics, array(
                         'dimensions' => $dimensions
                     ));
@@ -301,7 +337,7 @@ if (! class_exists('GADASH_GAPI')) {
                 }
             } catch (Exception $e) {
                 update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e));
-                return 0;
+                return $e->getCode();
             }
             
             if (isset($data['rows'][1][1])) {
@@ -334,6 +370,11 @@ if (! class_exists('GADASH_GAPI')) {
                 $serial = 'gadash_qr4' . $projectId . $from;
                 $transient = get_transient($serial);
                 if (empty($transient)) {
+                    
+                    if ($this->gapi_error_code == 403){
+                        return 403;
+                    }
+                    
                     $data = $this->service->data_ga->get('ga:' . $projectId, $from, $to, $metrics, array(
                         'dimensions' => $dimensions,
                         'sort' => '-ga:pageviews',
@@ -345,7 +386,7 @@ if (! class_exists('GADASH_GAPI')) {
                 }
             } catch (Exception $e) {
                 update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e));
-                return 0;
+                return $e->getCode();
             }
             if (! isset($data['rows'])) {
                 return 0;
@@ -379,6 +420,11 @@ if (! class_exists('GADASH_GAPI')) {
                 $serial = 'gadash_qr5' . $projectId . $from;
                 $transient = get_transient($serial);
                 if (empty($transient)) {
+                    
+                    if ($this->gapi_error_code == 403){
+                        return 403;
+                    }                    
+                    
                     $data = $this->service->data_ga->get('ga:' . $projectId, $from, $to, $metrics, array(
                         'dimensions' => $dimensions,
                         'sort' => '-ga:visits',
@@ -391,7 +437,7 @@ if (! class_exists('GADASH_GAPI')) {
                 }
             } catch (Exception $e) {
                 update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e));
-                return 0;
+                return $e->getCode();
             }
             if (! isset($data['rows'])) {
                 return 0;
@@ -425,6 +471,11 @@ if (! class_exists('GADASH_GAPI')) {
                 $serial = 'gadash_qr6' . $projectId . $from;
                 $transient = get_transient($serial);
                 if (empty($transient)) {
+                    
+                    if ($this->gapi_error_code == 403){
+                        return 403;
+                    }                    
+                    
                     $data = $this->service->data_ga->get('ga:' . $projectId, $from, $to, $metrics, array(
                         'dimensions' => $dimensions,
                         'sort' => '-ga:visits',
@@ -436,7 +487,7 @@ if (! class_exists('GADASH_GAPI')) {
                 }
             } catch (Exception $e) {
                 update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e));
-                return 0;
+                return $e->getCode();
             }
             if (! isset($data['rows'])) {
                 return 0;
@@ -483,7 +534,13 @@ if (! class_exists('GADASH_GAPI')) {
                 }
                 $transient = get_transient($serial);
                 if (empty($transient)) {
+                    
+                    if ($this->gapi_error_code == 403){
+                        return 403;
+                    }                    
+                    
                     if ($filters) {
+                        
                         $data = $this->service->data_ga->get('ga:' . $projectId, $from, $to, $metrics, array(
                             'dimensions' => $dimensions,
                             'filters' => $filters,
@@ -501,7 +558,7 @@ if (! class_exists('GADASH_GAPI')) {
                 }
             } catch (Exception $e) {
                 update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e));
-                return 0;
+                return $e->getCode();
             }
             if (! isset($data['rows'])) {
                 return 0;
@@ -518,7 +575,7 @@ if (! class_exists('GADASH_GAPI')) {
                 $i ++;
             }
             
-			return wp_kses(rtrim($ga_dash_data, ','), $GADASH_Config->allowed_html);
+            return wp_kses(rtrim($ga_dash_data, ','), $GADASH_Config->allowed_html);
         }
         // Get Traffic Sources
         function ga_dash_traffic_sources($projectId, $from, $to)
@@ -538,6 +595,11 @@ if (! class_exists('GADASH_GAPI')) {
                 $serial = 'gadash_qr8' . $projectId . $from;
                 $transient = get_transient($serial);
                 if (empty($transient)) {
+                    
+                    if ($this->gapi_error_code == 403){
+                        return 403;
+                    }                    
+                    
                     $data = $this->service->data_ga->get('ga:' . $projectId, $from, $to, $metrics, array(
                         'dimensions' => $dimensions
                     ));
@@ -547,7 +609,7 @@ if (! class_exists('GADASH_GAPI')) {
                 }
             } catch (Exception $e) {
                 update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e));
-                return 0;
+                return $e->getCode();
             }
             if (! isset($data['rows'])) {
                 return 0;
@@ -579,6 +641,11 @@ if (! class_exists('GADASH_GAPI')) {
                 $serial = 'gadash_qr9' . $projectId . $from;
                 $transient = get_transient($serial);
                 if (empty($transient)) {
+                    
+                    if ($this->gapi_error_code == 403){
+                        return 403;
+                    }                    
+                    
                     $data = $this->service->data_ga->get('ga:' . $projectId, $from, $to, $metrics, array(
                         'dimensions' => $dimensions
                     ));
@@ -588,7 +655,7 @@ if (! class_exists('GADASH_GAPI')) {
                 }
             } catch (Exception $e) {
                 update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e));
-                return 0;
+                return $e->getCode();
             }
             if (! isset($data['rows'])) {
                 return 0;
@@ -639,6 +706,11 @@ if (! class_exists('GADASH_GAPI')) {
                 
                 $transient = get_transient($serial);
                 if (empty($transient)) {
+                    
+                    if ($this->gapi_error_code == 403){
+                        return 403;
+                    }                    
+                    
                     $data = $this->service->data_ga->get('ga:' . $projectId, $from, $to, $metrics, array(
                         'dimensions' => $dimensions
                     ));
@@ -648,10 +720,10 @@ if (! class_exists('GADASH_GAPI')) {
                 }
             } catch (Exception $e) {
                 update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e));
-                return '';
+                return $e->getCode();
             }
             if (! isset($data['rows'])) {
-                return '';
+                return 0;
             }
             
             $ga_dash_statsdata = "";
@@ -758,6 +830,11 @@ if (! class_exists('GADASH_GAPI')) {
                 $serial = 'gadash_qr21' . $post_id . 'stats';
                 $transient = get_transient($serial);
                 if (empty($transient)) {
+                    
+                    if ($this->gapi_error_code == 403){
+                        return 403;
+                    }                    
+                    
                     $data = $this->service->data_ga->get('ga:' . $projectId, $from, $to, $metrics, array(
                         'dimensions' => $dimensions,
                         'filters' => 'ga:pagePath==' . $page_url
@@ -768,7 +845,7 @@ if (! class_exists('GADASH_GAPI')) {
                 }
             } catch (Exception $e) {
                 update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e));
-                return 0;
+                return $e->getCode();
             }
             if (! isset($data['rows'])) {
                 return 0;
@@ -786,7 +863,6 @@ if (! class_exists('GADASH_GAPI')) {
                 $ga_dash_statsdata = '[["' . __('Date', "ga-dash") . '", "' . __('Views', "ga-dash") . '", "' . __('UniqueViews', "ga-dash") . '"],' . $ga_dash_statsdata . ']';
                 
                 return $ga_dash_statsdata;
-				
             } else {
                 return 0;
             }
@@ -805,6 +881,11 @@ if (! class_exists('GADASH_GAPI')) {
                 $serial = 'gadash_qr22' . $post_id . 'search';
                 $transient = get_transient($serial);
                 if (empty($transient)) {
+                    
+                    if ($this->gapi_error_code == 403){
+                        return 403;
+                    }                    
+                    
                     $data = $this->service->data_ga->get('ga:' . $projectId, $from, $to, $metrics, array(
                         'dimensions' => $dimensions,
                         'sort' => '-ga:visits',
@@ -817,7 +898,7 @@ if (! class_exists('GADASH_GAPI')) {
                 }
             } catch (Exception $e) {
                 update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e));
-                return 0;
+                return $e->getCode();
             }
             
             $ga_dash_organicdata = "";
@@ -839,7 +920,6 @@ if (! class_exists('GADASH_GAPI')) {
                 $ga_dash_organicdata = '[["' . __('Top Searches', "ga-dash") . '", "' . __('Visits', "ga-dash") . '"],' . $ga_dash_organicdata . ' ]';
                 
                 return $ga_dash_organicdata;
-				
             } else {
                 
                 return 0;
@@ -856,6 +936,11 @@ if (! class_exists('GADASH_GAPI')) {
                 $serial = "gadash_realtimecache_" . $projectId;
                 $transient = get_transient($serial);
                 if (empty($transient)) {
+                    
+                    if ($this->gapi_error_code == 403){
+                        return 403;
+                    }                    
+                    
                     $data = $this->service->data_realtime->get('ga:' . $projectId, $metrics, array(
                         'dimensions' => $dimensions
                     ));
@@ -865,7 +950,7 @@ if (! class_exists('GADASH_GAPI')) {
                 }
             } catch (Exception $e) {
                 update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e));
-                return '';
+                return $e->getCode();
             }
             
             $i = 0;

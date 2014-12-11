@@ -82,16 +82,24 @@ if (! class_exists('GADASH_Frontend')) {
 							  function ga_dash_callback(){
 									if(typeof ga_dash_drawstats == "function"){
 										jQuery.post("' . admin_url('admin-ajax.php') . '", {action: "gadash_get_frontendvisits_data",gadash_pageurl: "' . $page_url . '",gadash_postid: "' . $post_id . '",gadash_security_aaf: "' . wp_create_nonce('gadash_get_frontendvisits_data') . '"}, function(response){
-											if (response != 0){
+											if (response != 0 && response != 403){
 												ga_dash_drawstats(JSON.parse(response));
-											}	
+											}else{
+										        jQuery("#gadwp-visits").css({"background-color":"#F7F7F7","height":"auto","padding-top":"30px","padding-bottom":"30px"});  
+										        jQuery("#gadwp-visits").html("'.__("This report is unavailable",'ga-dash').' ("+response+")");
+										        gadwp_chart_drawn();      
+                                            }	
 										});
 									}
 									if(typeof ga_dash_drawsd == "function"){
 										jQuery.post("' . admin_url('admin-ajax.php') . '", {action: "gadash_get_frontendsearches_data",gadash_pageurl: "' . $page_url . '",gadash_postid: "' . $post_id . '",gadash_security_aas: "' . wp_create_nonce('gadash_get_frontendsearches_data') . '"}, function(response){
-											if (response != 0){
+											if (response != 0 && response != 403){
 												ga_dash_drawsd(JSON.parse(response));
-											}	
+											}else{
+										        jQuery("#gadwp-searches").css({"background-color":"#F7F7F7","height":"auto","padding-top":"30px","padding-bottom":"30px"});
+										        jQuery("#gadwp-searches").html("'.__("This report unavailable",'ga-dash').' ("+response+")");
+										        gadwp_chart_drawn();
+                                            }	
 										});
 									}
 							};
