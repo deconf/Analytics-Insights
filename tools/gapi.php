@@ -7,7 +7,7 @@
  */
 if (! class_exists('GADASH_GAPI')) {
 
-    class GADASH_GAPI
+    final class GADASH_GAPI
     {
 
         public $client, $service;
@@ -71,7 +71,6 @@ if (! class_exists('GADASH_GAPI')) {
 
         public function check_gapi_errors()
         {
-            
             $this->gapi_error_code = 0;
             
             if (get_transient('gadash_gapi_error_code')) {
@@ -275,8 +274,8 @@ if (! class_exists('GADASH_GAPI')) {
                 $transient = get_transient($serial);
                 if (empty($transient)) {
                     
-                    if ($this->gapi_error_code == 403){
-                        return 403;
+                    if ($this->gapi_error_code == 403) {
+                        return - 23;
                     }
                     
                     $data = $this->service->data_ga->get('ga:' . $projectId, $from, $to, $metrics, array(
@@ -324,8 +323,8 @@ if (! class_exists('GADASH_GAPI')) {
                 $transient = get_transient($serial);
                 if (empty($transient)) {
                     
-                    if ($this->gapi_error_code == 403){
-                        return 403;
+                    if ($this->gapi_error_code == 403) {
+                        return - 23;
                     }
                     
                     $data = $this->service->data_ga->get('ga:' . $projectId, $from, $to, $metrics, array(
@@ -371,8 +370,8 @@ if (! class_exists('GADASH_GAPI')) {
                 $transient = get_transient($serial);
                 if (empty($transient)) {
                     
-                    if ($this->gapi_error_code == 403){
-                        return 403;
+                    if ($this->gapi_error_code == 403) {
+                        return - 23;
                     }
                     
                     $data = $this->service->data_ga->get('ga:' . $projectId, $from, $to, $metrics, array(
@@ -421,9 +420,9 @@ if (! class_exists('GADASH_GAPI')) {
                 $transient = get_transient($serial);
                 if (empty($transient)) {
                     
-                    if ($this->gapi_error_code == 403){
-                        return 403;
-                    }                    
+                    if ($this->gapi_error_code == 403) {
+                        return - 23;
+                    }
                     
                     $data = $this->service->data_ga->get('ga:' . $projectId, $from, $to, $metrics, array(
                         'dimensions' => $dimensions,
@@ -472,9 +471,9 @@ if (! class_exists('GADASH_GAPI')) {
                 $transient = get_transient($serial);
                 if (empty($transient)) {
                     
-                    if ($this->gapi_error_code == 403){
-                        return 403;
-                    }                    
+                    if ($this->gapi_error_code == 403) {
+                        return - 23;
+                    }
                     
                     $data = $this->service->data_ga->get('ga:' . $projectId, $from, $to, $metrics, array(
                         'dimensions' => $dimensions,
@@ -535,9 +534,9 @@ if (! class_exists('GADASH_GAPI')) {
                 $transient = get_transient($serial);
                 if (empty($transient)) {
                     
-                    if ($this->gapi_error_code == 403){
-                        return 403;
-                    }                    
+                    if ($this->gapi_error_code == 403) {
+                        return - 23;
+                    }
                     
                     if ($filters) {
                         
@@ -596,9 +595,9 @@ if (! class_exists('GADASH_GAPI')) {
                 $transient = get_transient($serial);
                 if (empty($transient)) {
                     
-                    if ($this->gapi_error_code == 403){
-                        return 403;
-                    }                    
+                    if ($this->gapi_error_code == 403) {
+                        return - 23;
+                    }
                     
                     $data = $this->service->data_ga->get('ga:' . $projectId, $from, $to, $metrics, array(
                         'dimensions' => $dimensions
@@ -642,9 +641,9 @@ if (! class_exists('GADASH_GAPI')) {
                 $transient = get_transient($serial);
                 if (empty($transient)) {
                     
-                    if ($this->gapi_error_code == 403){
-                        return 403;
-                    }                    
+                    if ($this->gapi_error_code == 403) {
+                        return - 23;
+                    }
                     
                     $data = $this->service->data_ga->get('ga:' . $projectId, $from, $to, $metrics, array(
                         'dimensions' => $dimensions
@@ -669,8 +668,14 @@ if (! class_exists('GADASH_GAPI')) {
             return wp_kses(rtrim($ga_dash_data, ','), $GADASH_Config->allowed_html);
         }
         
-        // Frontend Widget Stats
-        function frontend_widget_stats($projectId, $period, $anonim, $display)
+        /**
+         * Analytics data for frontend Widget (chart data and totals separated by "|")
+         * @param $projectId
+         * @param $period
+         * @param $anonim
+         * @return string|int
+         */
+        function frontend_widget_stats($projectId, $period, $anonim)
         {
             global $GADASH_Config;
             
@@ -679,22 +684,6 @@ if (! class_exists('GADASH_GAPI')) {
             $to = 'yesterday';
             $metrics = 'ga:visits';
             $dimensions = 'ga:date,ga:dayOfWeekName';
-            
-            $title = __("Visits", 'ga-dash') . ($anonim ? __("&#39; trend", 'ga-dash') : '');
-            
-            /*
-             * Include Tools
-             */
-            include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
-            $tools = new GADASH_Tools();
-            
-            if (isset($GADASH_Config->options['ga_dash_style'])) {
-                $css = "colors:['" . $GADASH_Config->options['ga_dash_style'] . "','" . $tools->colourVariator($GADASH_Config->options['ga_dash_style'], - 20) . "'],";
-                $color = $GADASH_Config->options['ga_dash_style'];
-            } else {
-                $css = "";
-                $color = "#3366CC";
-            }
             
             try {
                 
@@ -707,9 +696,9 @@ if (! class_exists('GADASH_GAPI')) {
                 $transient = get_transient($serial);
                 if (empty($transient)) {
                     
-                    if ($this->gapi_error_code == 403){
-                        return 403;
-                    }                    
+                    if ($this->gapi_error_code == 403) {
+                        return - 23;
+                    }
                     
                     $data = $this->service->data_ga->get('ga:' . $projectId, $from, $to, $metrics, array(
                         'dimensions' => $dimensions
@@ -723,7 +712,7 @@ if (! class_exists('GADASH_GAPI')) {
                 return $e->getCode();
             }
             if (! isset($data['rows'])) {
-                return 0;
+                return - 21;
             }
             
             $ga_dash_statsdata = "";
@@ -736,84 +725,18 @@ if (! class_exists('GADASH_GAPI')) {
             $max = max($max_array) ? max($max_array) : 1;
             
             for ($i = 0; $i < $data['totalResults']; $i ++) {
-                $ga_dash_statsdata .= "['" . ucfirst(__($data['rows'][$i][1])) . ', ' . substr_replace(substr_replace($data['rows'][$i][0], '-', 4, 0), '-', 7, 0) . "'," . ($anonim ? str_replace(',', '.', round($data['rows'][$i][2] * 100 / $max, 2)) : $data['rows'][$i][2]) . "],";
+                $ga_dash_statsdata .= '["' . ucfirst(__($data["rows"][$i][1])) . ", " . substr_replace(substr_replace($data["rows"][$i][0], "-", 4, 0), "-", 7, 0) . '",' . ($anonim ? str_replace(",", ".", round($data["rows"][$i][2] * 100 / $max, 2)) : $data["rows"][$i][2]) . '],';
             }
             
-            $ga_dash_statsdata = wp_kses(rtrim($ga_dash_statsdata, ','), $GADASH_Config->allowed_html);
+            $ga_dash_statsdata = '[["' . __("Date", 'ga-dash') . '", "' . __("Visits", 'ga-dash') . ($anonim ? "' ".__("trend", 'ga-dash') : '') . '"],' . rtrim($ga_dash_statsdata,",") . "]";
+            
+            $ga_dash_statsdata = wp_kses($ga_dash_statsdata, $GADASH_Config->allowed_html);
             
             if ($ga_dash_statsdata) {
-                if ($display != 3) {
-                    if ($anonim) {
-                        $formater = "var formatter = new google.visualization.NumberFormat({
-					  suffix: '%',
-					  fractionDigits: 2
-					});
-
-					formatter.format(data, 1);	";
-                    } else {
-                        $formater = '';
-                    }
-                    
-                    $content = '<script type="text/javascript">
-						  google.setOnLoadCallback(ga_dash_callback);
-
-						  function ga_dash_callback(){
-
-								if(typeof ga_dash_drawwidgetstats == "function"){
-									ga_dash_drawwidgetstats();
-								}
-
-						}';
-                    
-                    $content .= '
-					google.load("visualization", "1", {packages:["corechart"]});
-					function ga_dash_drawwidgetstats() {
-					var data = google.visualization.arrayToDataTable([' . "
-					  ['" . __("Date", 'ga-dash') . "', '" . __("Visits", 'ga-dash') . ($anonim ? __("&#39; trend", 'ga-dash') : '') . "']," . $ga_dash_statsdata . "
-					]);
-
-					var options = {
-					  legend: {position: 'none'},
-					  pointSize: 3," . $css . "
-					  title: '" . $title . "',
-					  titlePosition: 'in',
-					  chartArea: {width: '95%',height:'75%'},
-					  hAxis: { textPosition: 'none'},
-					  vAxis: { textPosition: 'none', minValue: 0}
-				 	};
-
-					var chart = new google.visualization.AreaChart(document.getElementById('ga_dash_widgetstatsdata'));
-
-					" . $formater . "
-
-					chart.draw(data, options);
-
-					}";
-                }
-                
-                $content .= "</script>";
-                
-                $content .= '<div id="ga_dash_widgetstatsdata" style="width:100%;"></div>';
+                return  array($ga_dash_statsdata,(int)$data['totalsForAllResults']['ga:visits']);
+            } else {
+                return - 22;
             }
-            if ($display != 2 and isset($data['totalsForAllResults']['ga:visits'])) {
-                switch ($period) {
-                    case '7daysAgo':
-                        $periodtext = __('Last 7 Days', 'ga-dash');
-                        break;
-                    case '14daysAgo':
-                        $periodtext = __('Last 14 Days', 'ga-dash');
-                        break;
-                    default:
-                        $periodtext = __('Last 30 Days', 'ga-dash');
-                        break;
-                }
-                
-                $content .= '<style>table#gadwp-stats, table#gadwp-stats td{border:none;}</style><table id="gadwp-stats"><tr><td style="font-weight:bold;padding:' . ($display == 3 ? '15px' : '0') . ' 0 10px 0;">' . __("Period:", 'ga-dash') . '</td><td style="padding:' . ($display == 3 ? '15px' : '0') . ' 0 10px 20px;">' . $periodtext . '</td></tr>
-				<tr><td style="font-weight:bold;padding:0 0 15px 0;">' . __('Total Visits:', 'ga-dash') . '</td><td style="padding:0 0 15px 20px;">' . ($data['totalsForAllResults']['ga:visits']) . '</td></tr>
-				</table>';
-            }
-            
-            return apply_filters('gadash_frontend_content', $content);
         }
         
         // Frontend Visists
@@ -831,9 +754,9 @@ if (! class_exists('GADASH_GAPI')) {
                 $transient = get_transient($serial);
                 if (empty($transient)) {
                     
-                    if ($this->gapi_error_code == 403){
-                        return 403;
-                    }                    
+                    if ($this->gapi_error_code == 403) {
+                        return - 23;
+                    }
                     
                     $data = $this->service->data_ga->get('ga:' . $projectId, $from, $to, $metrics, array(
                         'dimensions' => $dimensions,
@@ -848,7 +771,7 @@ if (! class_exists('GADASH_GAPI')) {
                 return $e->getCode();
             }
             if (! isset($data['rows'])) {
-                return 0;
+                return - 21;
             }
             
             $ga_dash_statsdata = "";
@@ -864,7 +787,7 @@ if (! class_exists('GADASH_GAPI')) {
                 
                 return $ga_dash_statsdata;
             } else {
-                return 0;
+                return - 22;
             }
         }
         
@@ -882,9 +805,9 @@ if (! class_exists('GADASH_GAPI')) {
                 $transient = get_transient($serial);
                 if (empty($transient)) {
                     
-                    if ($this->gapi_error_code == 403){
-                        return 403;
-                    }                    
+                    if ($this->gapi_error_code == 403) {
+                        return - 23;
+                    }
                     
                     $data = $this->service->data_ga->get('ga:' . $projectId, $from, $to, $metrics, array(
                         'dimensions' => $dimensions,
@@ -903,7 +826,7 @@ if (! class_exists('GADASH_GAPI')) {
             
             $ga_dash_organicdata = "";
             if (! isset($data['rows'])) {
-                return 0;
+                return - 21;
             }
             $i = 0;
             while (isset($data['rows'][$i][0])) {
@@ -922,7 +845,7 @@ if (! class_exists('GADASH_GAPI')) {
                 return $ga_dash_organicdata;
             } else {
                 
-                return 0;
+                return - 22;
             }
         }
         
@@ -937,9 +860,9 @@ if (! class_exists('GADASH_GAPI')) {
                 $transient = get_transient($serial);
                 if (empty($transient)) {
                     
-                    if ($this->gapi_error_code == 403){
-                        return 403;
-                    }                    
+                    if ($this->gapi_error_code == 403) {
+                        return - 23;
+                    }
                     
                     $data = $this->service->data_realtime->get('ga:' . $projectId, $metrics, array(
                         'dimensions' => $dimensions

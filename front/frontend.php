@@ -7,7 +7,7 @@
  */
 if (! class_exists('GADASH_Frontend')) {
 
-    class GADASH_Frontend
+    final class GADASH_Frontend
     {
 
         function __construct()
@@ -16,7 +16,7 @@ if (! class_exists('GADASH_Frontend')) {
                 $this,
                 'ga_dash_front_content'
             ));
-            // Admin Styles
+            // Frontend Styles
             add_action('wp_enqueue_scripts', array(
                 $this,
                 'ga_dash_front_enqueue_styles'
@@ -31,20 +31,15 @@ if (! class_exists('GADASH_Frontend')) {
                 return;
             }
             
-            wp_register_style('ga_dash-front', $GADASH_Config->plugin_url . '/front/css/content_stats.css');
-            wp_register_style('ga_dash-nprogress', $GADASH_Config->plugin_url . '/tools/nprogress/nprogress.css');
-            wp_enqueue_style('ga_dash-front');
-            wp_enqueue_style('ga_dash-nprogress');
+            wp_enqueue_style('ga_dash-front', $GADASH_Config->plugin_url . '/front/css/content_stats.css');
+            wp_enqueue_style('ga_dash-nprogress', $GADASH_Config->plugin_url . '/tools/nprogress/nprogress.css');
             wp_enqueue_script('ga_dash-front', $GADASH_Config->plugin_url . '/front/js/content_stats.js', array(
                 'jquery'
             ));
             wp_enqueue_script('ga_dash-nprogress', $GADASH_Config->plugin_url . '/tools/nprogress/nprogress.js', array(
                 'jquery'
             ));
-            if (! wp_script_is('googlejsapi')) {
-                wp_register_script('googlejsapi', 'https://www.google.com/jsapi');
-                wp_enqueue_script('googlejsapi');
-            }
+            wp_enqueue_script('googlejsapi', 'https://www.google.com/jsapi');
         }
 
         function ga_dash_front_content($content)
@@ -68,47 +63,44 @@ if (! class_exists('GADASH_Frontend')) {
                     'jquery'
                 ));
                 
-                $page_url = $_SERVER ["REQUEST_URI"]; // str_replace(site_url(), "", get_permalink());
+                $page_url = $_SERVER["REQUEST_URI"]; // str_replace(site_url(), "", get_permalink());
                 
                 $post_id = $post->ID;
                 
                 $content .= '<script type="text/javascript">
-					var firstclick = true;
-                    function gadwp_chart_drawn(){
-                        NProgress.done();
-                    }
+					gadash_firstclick = true;
+
 					jQuery(document).ready(function(){
 					 	jQuery("#gadwp-title").click(function(){
-							  function ga_dash_callback(){
-									if(typeof ga_dash_drawstats == "function"){
+							  	if (gadash_firstclick){
+            					   NProgress.configure({ parent: "#gadwp-content" });
+            					   NProgress.configure({ showSpinner: false });
+            					   NProgress.start();
+									if(typeof ga_dash_drawpagevisits == "function"){
 										jQuery.post("' . admin_url('admin-ajax.php') . '", {action: "gadash_get_frontendvisits_data",gadash_pageurl: "' . $page_url . '",gadash_postid: "' . $post_id . '",gadash_security_aaf: "' . wp_create_nonce('gadash_get_frontendvisits_data') . '"}, function(response){
-											if (response != 0 && response != 403){
-												ga_dash_drawstats(JSON.parse(response));
+										    gadash_pagevisits = jQuery.parseJSON(response);
+										    if (!jQuery.isNumeric(gadash_pagevisits)){
+		          							    google.setOnLoadCallback(ga_dash_drawpagevisits(gadash_pagevisits));
 											}else{
-										        jQuery("#gadwp-visits").css({"background-color":"#F7F7F7","height":"auto","padding-top":"30px","padding-bottom":"30px"});  
-										        jQuery("#gadwp-visits").html("'.__("This report is unavailable",'ga-dash').' ("+response+")");
-										        gadwp_chart_drawn();      
+										        jQuery("#gadwp-visits").css({"background-color":"#F7F7F7","height":"auto","padding-top":"30px","padding-bottom":"30px","color":"#000"});  
+										        jQuery("#gadwp-visits").html("' . __("This report is unavailable", 'ga-dash') . ' ("+response+")");
+										        NProgress.done();    
                                             }	
 										});
 									}
-									if(typeof ga_dash_drawsd == "function"){
+									if(typeof ga_dash_drawpagesearches == "function"){
 										jQuery.post("' . admin_url('admin-ajax.php') . '", {action: "gadash_get_frontendsearches_data",gadash_pageurl: "' . $page_url . '",gadash_postid: "' . $post_id . '",gadash_security_aas: "' . wp_create_nonce('gadash_get_frontendsearches_data') . '"}, function(response){
-											if (response != 0 && response != 403){
-												ga_dash_drawsd(JSON.parse(response));
+                                            gadash_pagesearches = jQuery.parseJSON(response); 
+										    if (!jQuery.isNumeric(gadash_pagesearches)){
+												google.setOnLoadCallback(ga_dash_drawpagesearches(gadash_pagesearches));
 											}else{
-										        jQuery("#gadwp-searches").css({"background-color":"#F7F7F7","height":"auto","padding-top":"30px","padding-bottom":"30px"});
-										        jQuery("#gadwp-searches").html("'.__("This report unavailable",'ga-dash').' ("+response+")");
-										        gadwp_chart_drawn();
+										        jQuery("#gadwp-searches").css({"background-color":"#F7F7F7","height":"auto","padding-top":"30px","padding-bottom":"30px","color":"#000"});
+										        jQuery("#gadwp-searches").html("' . __("This report unavailable", 'ga-dash') . ' ("+response+")");
+										        NProgress.done();
                                             }	
 										});
 									}
-							};
-							if (firstclick){
-            					NProgress.configure({ parent: "#gadwp-content" });
-            					NProgress.configure({ showSpinner: false });
-            					NProgress.start();							    
-							    ga_dash_callback();
-								firstclick = false;
+    							gadash_firstclick = false;
 							}
 						});
 					});';
@@ -127,9 +119,9 @@ if (! class_exists('GADASH_Frontend')) {
                     
                     $content .= '
 			google.load("visualization", "1", {packages:["corechart"]});
-			function ga_dash_drawstats(response) {
-			
-			var data = google.visualization.arrayToDataTable(response);
+			function ga_dash_drawpagevisits(gadash_pagevisits) {
+	
+			var data = google.visualization.arrayToDataTable(gadash_pagevisits);
 
 			var options = {
 			  legend: {position: "none"},
@@ -142,7 +134,7 @@ if (! class_exists('GADASH_Frontend')) {
 
 			var chart = new google.visualization.AreaChart(document.getElementById("gadwp-visits"));
 			chart.draw(data, options);
-            gadwp_chart_drawn();      
+            NProgress.done();      
 			}';
                 }
                 
@@ -150,9 +142,9 @@ if (! class_exists('GADASH_Frontend')) {
                     
                     $content .= '
 				google.load("visualization", "1", {packages:["table"]})
-				function ga_dash_drawsd(response) {
+				function ga_dash_drawpagesearches(gadash_pagesearches) {
 
-				var datas = google.visualization.arrayToDataTable(response);
+				var datas = google.visualization.arrayToDataTable(gadash_pagesearches);
 
 				var options = {
 					page: "enable",
@@ -163,7 +155,7 @@ if (! class_exists('GADASH_Frontend')) {
 
 				var chart = new google.visualization.Table(document.getElementById("gadwp-searches"));
 				chart.draw(datas, options);
-				gadwp_chart_drawn();
+				NProgress.done();
 			  }';
                 }
                 

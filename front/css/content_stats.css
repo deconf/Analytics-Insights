@@ -30,3 +30,28 @@
 	font-size: 14px;
 	padding-bottom: 5px;
 }
+
+#gadash-widgetchart{
+	width:100%;
+	text-align:center;
+}
+
+#gadash-widgettotals{
+	margin: 0 0 10px 0;
+	width: 100%;
+	display:table;
+	clear:both;
+}
+
+#gadash-widgettotals .gadash-left{
+	padding: 10px 0 0 0;
+	width : 45%;
+	float:left;
+	font-weight: 600;
+}
+
+#gadash-widgettotals .gadash-right{
+	padding: 10px 0 0 0;
+	float:left;
+	font-style:italic;
+}

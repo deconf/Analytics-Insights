@@ -7,7 +7,7 @@
  */
 if (! class_exists('GADASH_Config')) {
 
-    class GADASH_Config
+   final class GADASH_Config
     {
 
         public $options;
@@ -203,6 +203,7 @@ if (! class_exists('GADASH_Config')) {
                 include_once ($this->plugin_path . '/tools/tools.php');
                 $tools = new GADASH_Tools();
                 $tools->ga_dash_clear_cache();
+                delete_option('gadash_lasterror');
                 update_option('gadwp_version', GADWP_CURRENT_VERSION);
             }
             
