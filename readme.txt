@@ -4,7 +4,7 @@ Donate link: https://deconf.com/donate/
 Tags: google,analytics,google analytics,dashboard,analytics dashboard,google analytics dashboard,google analytics widget,tracking,realtime,wpmu,multisite
 Requires at least: 2.8
 Tested up to: 4.1
-Stable tag: 4.3.8
+Stable tag: 4.3.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -127,7 +127,12 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 == Changelog ==
 
 = 4.3.9 =
-- switch map resolution to metro areas
+- tweak: marking classes as final
+- tweak: redesign the frontend widget
+- tweak: responsive design for frontend widget
+- tweak: responsive design for page reports
+- bugfix: load jsapi only when the frontend widget is active
+- bugfix: javascript errors while resizing window
 
 = 4.3.8 =
 - feature: frontend component redesign
