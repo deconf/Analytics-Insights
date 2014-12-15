@@ -393,7 +393,7 @@ if (! class_exists('GADASH_GAPI')) {
             
             $ga_dash_data = "";
             $i = 0;
-            // print_r($data ['rows'] );
+            
             while (isset($data['rows'][$i][0])) {
                 $ga_dash_data .= "['<a href=\"http://" . addslashes($data['rows'][$i][1] . $data['rows'][$i][2]) . "\" target=\"_blank\">" . addslashes($data['rows'][$i][0]) . "</a>'," . $data['rows'][$i][3] . "],";
                 $i ++;
