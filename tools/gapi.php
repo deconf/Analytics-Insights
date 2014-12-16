@@ -246,7 +246,15 @@ if (! class_exists('GADASH_GAPI')) {
             }
         }
         
-        // Get Main Chart
+        /**
+         * Analytics data for backend reports (top stats main report)
+         * @param $projectId
+         * @param $period
+         * @param $from
+         * @param $to
+         * @param $query
+         * @return string|int
+         */
         function ga_dash_main_charts($projectId, $period, $from, $to, $query)
         {
             global $GADASH_Config;
@@ -316,7 +324,14 @@ if (! class_exists('GADASH_GAPI')) {
 
         }
         
-        // Get bottom Stats
+        /**
+         * Analytics data for backend reports (bottom stats main report)
+         * @param $projectId
+         * @param $period
+         * @param $from
+         * @param $to
+         * @return array|int
+         */
         function ga_dash_bottom_stats($projectId, $period, $from, $to)
         {
             global $GADASH_Config;
@@ -366,7 +381,13 @@ if (! class_exists('GADASH_GAPI')) {
             return $data;
         }
         
-        // Get Top Pages
+        /**
+         * Analytics data for backend reports (top pages)
+         * @param $projectId
+         * @param $from
+         * @param $to
+         * @return string|int
+         */
         function ga_dash_top_pages($projectId, $from, $to)
         {
             global $GADASH_Config;
@@ -424,7 +445,13 @@ if (! class_exists('GADASH_GAPI')) {
 
         }
         
-        // Get Top referrers
+        /**
+         * Analytics data for backend reports (top referrers)
+         * @param $projectId
+         * @param $from
+         * @param $to
+         * @return string|int
+         */
         function ga_dash_top_referrers($projectId, $from, $to)
         {
             global $GADASH_Config;
@@ -481,7 +508,13 @@ if (! class_exists('GADASH_GAPI')) {
             }   
         }
         
-        // Get Top searches
+        /**
+         * Analytics data for backend reports (top searches)
+         * @param $projectId
+         * @param $from
+         * @param $to
+         * @return string|int
+         */
         function ga_dash_top_searches($projectId, $from, $to)
         {
             global $GADASH_Config;
@@ -539,7 +572,13 @@ if (! class_exists('GADASH_GAPI')) {
             }
 
         }
-        // Get Visits by Country
+        /**
+         * Analytics data for backend reports (location reports)
+         * @param $projectId
+         * @param $from
+         * @param $to
+         * @return string|int
+         */
         function ga_dash_visits_country($projectId, $from, $to)
         {
             global $GADASH_Config;
@@ -619,7 +658,13 @@ if (! class_exists('GADASH_GAPI')) {
             }
 
         }
-        // Get Traffic Sources
+        /**
+         * Analytics data for backend reports (traffic sources)
+         * @param $projectId
+         * @param $from
+         * @param $to
+         * @return string|int
+         */
         function ga_dash_traffic_sources($projectId, $from, $to)
         {
             global $GADASH_Config;
@@ -671,7 +716,13 @@ if (! class_exists('GADASH_GAPI')) {
             }     
         }
         
-        // Get New vs. Returning
+        /**
+         * Analytics data for backend reports (traffic type)
+         * @param $projectId
+         * @param $from
+         * @param $to
+         * @return string|int
+         */
         function ga_dash_new_return($projectId, $from, $to)
         {
             global $GADASH_Config;
@@ -713,16 +764,21 @@ if (! class_exists('GADASH_GAPI')) {
             for ($i = 0; $i < $data['totalResults']; $i ++) {
                 $ga_dash_data .= "['" . addslashes($data['rows'][$i][0]) . "'," . $data['rows'][$i][1] . "],";
             }
+            $ga_dash_data = wp_kses(rtrim($ga_dash_data, ','), $GADASH_Config->allowed_html);
             
-            return wp_kses(rtrim($ga_dash_data, ','), $GADASH_Config->allowed_html);
+            if ($ga_dash_data){
+                return $ga_dash_data;
+            }else{
+                return -22;
+            }
         }
         
         /**
-         * Analytics data for frontend Widget (chart data and totals separated by "|")
+         * Analytics data for frontend Widget (chart data and totals)
          * @param $projectId
          * @param $period
          * @param $anonim
-         * @return string|int
+         * @return array|int
          */
         function frontend_widget_stats($projectId, $period, $anonim)
         {
@@ -764,7 +820,7 @@ if (! class_exists('GADASH_GAPI')) {
                 return - 21;
             }
             
-            $ga_dash_statsdata = "";
+            $ga_dash_data = "";
             
             $max_array = array();
             foreach ($data['rows'] as $item) {
@@ -774,21 +830,27 @@ if (! class_exists('GADASH_GAPI')) {
             $max = max($max_array) ? max($max_array) : 1;
             
             for ($i = 0; $i < $data['totalResults']; $i ++) {
-                $ga_dash_statsdata .= '["' . ucfirst(__($data["rows"][$i][1])) . ", " . substr_replace(substr_replace($data["rows"][$i][0], "-", 4, 0), "-", 7, 0) . '",' . ($anonim ? str_replace(",", ".", round($data["rows"][$i][2] * 100 / $max, 2)) : $data["rows"][$i][2]) . '],';
+                $ga_dash_data .= '["' . ucfirst(__($data["rows"][$i][1])) . ", " . substr_replace(substr_replace($data["rows"][$i][0], "-", 4, 0), "-", 7, 0) . '",' . ($anonim ? str_replace(",", ".", round($data["rows"][$i][2] * 100 / $max, 2)) : $data["rows"][$i][2]) . '],';
             }
             
-            $ga_dash_statsdata = '[["' . __("Date", 'ga-dash') . '", "' . __("Visits", 'ga-dash') . ($anonim ? "' ".__("trend", 'ga-dash') : '') . '"],' . rtrim($ga_dash_statsdata,",") . "]";
+            $ga_dash_data = '[["' . __("Date", 'ga-dash') . '", "' . __("Visits", 'ga-dash') . ($anonim ? "' ".__("trend", 'ga-dash') : '') . '"],' . rtrim($ga_dash_data,",") . "]";
             
-            $ga_dash_statsdata = wp_kses($ga_dash_statsdata, $GADASH_Config->allowed_html);
+            $ga_dash_data = wp_kses($ga_dash_data, $GADASH_Config->allowed_html);
             
-            if ($ga_dash_statsdata) {
-                return  array($ga_dash_statsdata,(int)$data['totalsForAllResults']['ga:visits']);
+            if ($ga_dash_data) {
+                return array($ga_dash_data,(int)$data['totalsForAllResults']['ga:visits']);
             } else {
                 return - 22;
             }
         }
         
-        // Frontend Visists
+        /**
+         * Analytics data for frontend reports (pagviews and unique pageviews per page)
+         * @param $projectId
+         * @param $period
+         * @param $anonim
+         * @return string|int
+         */
         function frontend_afterpost_visits($projectId, $page_url, $post_id)
         {
             global $GADASH_Config;
@@ -840,7 +902,13 @@ if (! class_exists('GADASH_GAPI')) {
             }
         }
         
-        // Frontend searches
+        /**
+         * Analytics data for frontend reports (searches per page)
+         * @param $projectId
+         * @param $period
+         * @param $anonim
+         * @return string|int
+         */
         function frontend_afterpost_searches($projectId, $page_url, $post_id)
         {
             global $GADASH_Config;
