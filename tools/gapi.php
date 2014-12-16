@@ -290,19 +290,30 @@ if (! class_exists('GADASH_GAPI')) {
                 return $e->getCode();
             }
             
-            $ga_dash_statsdata = "";
+            if (! isset($data['rows'])) {
+                return -21;
+            }            
+            
+            $ga_dash_data = "";
             
             if ($period == "today" or $period == "yesterday") {
                 for ($i = 0; $i < $data['totalResults']; $i ++) {
-                    $ga_dash_statsdata .= "['" . $data['rows'][$i][0] . ":00'," . round($data['rows'][$i][1], 2) . "],";
+                    $ga_dash_data .= "['" . $data['rows'][$i][0] . ":00'," . round($data['rows'][$i][1], 2) . "],";
                 }
             } else {
                 for ($i = 0; $i < $data['totalResults']; $i ++) {
-                    $ga_dash_statsdata .= "['" . ucfirst(__($data['rows'][$i][1])) . ', ' . substr_replace(substr_replace($data['rows'][$i][0], '-', 4, 0), '-', 7, 0) . "'," . round($data['rows'][$i][2], 2) . "],";
+                    $ga_dash_data .= "['" . ucfirst(__($data['rows'][$i][1])) . ', ' . substr_replace(substr_replace($data['rows'][$i][0], '-', 4, 0), '-', 7, 0) . "'," . round($data['rows'][$i][2], 2) . "],";
                 }
             }
             
-            return wp_kses(rtrim($ga_dash_statsdata, ','), $GADASH_Config->allowed_html);
+            $ga_dash_data = wp_kses(rtrim($ga_dash_data, ','), $GADASH_Config->allowed_html);
+            
+            if ($ga_dash_data){
+                return $ga_dash_data;
+            }else{
+                return -22;
+            }
+
         }
         
         // Get bottom Stats
@@ -337,6 +348,10 @@ if (! class_exists('GADASH_GAPI')) {
             } catch (Exception $e) {
                 update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e));
                 return $e->getCode();
+            }
+            
+            if (! isset($data['rows'])) {
+                return -21;
             }
             
             if (isset($data['rows'][1][1])) {
@@ -388,7 +403,7 @@ if (! class_exists('GADASH_GAPI')) {
                 return $e->getCode();
             }
             if (! isset($data['rows'])) {
-                return 0;
+                return -21;
             }
             
             $ga_dash_data = "";
@@ -398,7 +413,15 @@ if (! class_exists('GADASH_GAPI')) {
                 $ga_dash_data .= "['<a href=\"http://" . addslashes($data['rows'][$i][1] . $data['rows'][$i][2]) . "\" target=\"_blank\">" . addslashes($data['rows'][$i][0]) . "</a>'," . $data['rows'][$i][3] . "],";
                 $i ++;
             }
-            return wp_kses(rtrim($ga_dash_data, ','), $GADASH_Config->allowed_html);
+            
+            $ga_dash_data = wp_kses(rtrim($ga_dash_data, ','), $GADASH_Config->allowed_html);
+            
+            if ($ga_dash_data){
+                return $ga_dash_data;
+            }else{
+                return -22;
+            }            
+
         }
         
         // Get Top referrers
@@ -439,7 +462,7 @@ if (! class_exists('GADASH_GAPI')) {
                 return $e->getCode();
             }
             if (! isset($data['rows'])) {
-                return 0;
+                return -21;
             }
             
             $ga_dash_data = "";
@@ -449,7 +472,13 @@ if (! class_exists('GADASH_GAPI')) {
                 $i ++;
             }
             
-            return wp_kses(rtrim($ga_dash_data, ','), $GADASH_Config->allowed_html);
+            $ga_dash_data = wp_kses(rtrim($ga_dash_data, ','), $GADASH_Config->allowed_html); 
+            
+            if ($ga_dash_data){
+                return $ga_dash_data;
+            }else{
+                return -22;
+            }   
         }
         
         // Get Top searches
@@ -489,7 +518,7 @@ if (! class_exists('GADASH_GAPI')) {
                 return $e->getCode();
             }
             if (! isset($data['rows'])) {
-                return 0;
+                return -21;
             }
             
             $ga_dash_data = "";
@@ -501,7 +530,14 @@ if (! class_exists('GADASH_GAPI')) {
                 $i ++;
             }
             
-            return wp_kses(rtrim($ga_dash_data, ','), $GADASH_Config->allowed_html);
+            $ga_dash_data = wp_kses(rtrim($ga_dash_data, ','), $GADASH_Config->allowed_html);
+            
+            if ($ga_dash_data){
+                return $ga_dash_data;
+            }else{
+                return -22;
+            }
+
         }
         // Get Visits by Country
         function ga_dash_visits_country($projectId, $from, $to)
@@ -560,7 +596,7 @@ if (! class_exists('GADASH_GAPI')) {
                 return $e->getCode();
             }
             if (! isset($data['rows'])) {
-                return 0;
+                return -21;
             }
             
             $ga_dash_data = "";
@@ -574,7 +610,14 @@ if (! class_exists('GADASH_GAPI')) {
                 $i ++;
             }
             
-            return wp_kses(rtrim($ga_dash_data, ','), $GADASH_Config->allowed_html);
+            $ga_dash_data = wp_kses(rtrim($ga_dash_data, ','), $GADASH_Config->allowed_html);
+            
+            if ($ga_dash_data){
+                return $ga_dash_data;
+            }else{
+                return -22;
+            }
+
         }
         // Get Traffic Sources
         function ga_dash_traffic_sources($projectId, $from, $to)
@@ -611,7 +654,7 @@ if (! class_exists('GADASH_GAPI')) {
                 return $e->getCode();
             }
             if (! isset($data['rows'])) {
-                return 0;
+                return -21;
             }
             
             $ga_dash_data = "";
@@ -619,7 +662,13 @@ if (! class_exists('GADASH_GAPI')) {
                 $ga_dash_data .= "['" . str_replace("(none)", "direct", $data['rows'][$i][0]) . "'," . $data['rows'][$i][1] . "],";
             }
             
-            return wp_kses(rtrim($ga_dash_data, ','), $GADASH_Config->allowed_html);
+            $ga_dash_data = wp_kses(rtrim($ga_dash_data, ','), $GADASH_Config->allowed_html); 
+            
+            if ($ga_dash_data){
+                return $ga_dash_data;
+            }else{
+                return -22;
+            }     
         }
         
         // Get New vs. Returning
@@ -657,7 +706,7 @@ if (! class_exists('GADASH_GAPI')) {
                 return $e->getCode();
             }
             if (! isset($data['rows'])) {
-                return 0;
+                return -21;
             }
             
             $ga_dash_data = "";
@@ -774,18 +823,18 @@ if (! class_exists('GADASH_GAPI')) {
                 return - 21;
             }
             
-            $ga_dash_statsdata = "";
+            $ga_dash_data = "";
             for ($i = 0; $i < $data['totalResults']; $i ++) {
-                $ga_dash_statsdata .= '["' . ucfirst(__($data['rows'][$i][1])) . ", " . substr_replace(substr_replace($data['rows'][$i][0], "-", 4, 0), "-", 7, 0) . '",' . round($data['rows'][$i][2], 2) . ',' . round($data['rows'][$i][3], 2) . '],';
+                $ga_dash_data .= '["' . ucfirst(__($data['rows'][$i][1])) . ", " . substr_replace(substr_replace($data['rows'][$i][0], "-", 4, 0), "-", 7, 0) . '",' . round($data['rows'][$i][2], 2) . ',' . round($data['rows'][$i][3], 2) . '],';
             }
             
-            $ga_dash_statsdata = wp_kses(rtrim($ga_dash_statsdata, ','), $GADASH_Config->allowed_html);
+            $ga_dash_data = wp_kses(rtrim($ga_dash_data, ','), $GADASH_Config->allowed_html);
             
-            if ($ga_dash_statsdata) {
+            if ($ga_dash_data) {
                 
-                $ga_dash_statsdata = '[["' . __('Date', "ga-dash") . '", "' . __('Views', "ga-dash") . '", "' . __('UniqueViews', "ga-dash") . '"],' . $ga_dash_statsdata . ']';
+                $ga_dash_data = '[["' . __('Date', "ga-dash") . '", "' . __('Views', "ga-dash") . '", "' . __('UniqueViews', "ga-dash") . '"],' . $ga_dash_data . ']';
                 
-                return $ga_dash_statsdata;
+                return $ga_dash_data;
             } else {
                 return - 22;
             }
@@ -824,25 +873,25 @@ if (! class_exists('GADASH_GAPI')) {
                 return $e->getCode();
             }
             
-            $ga_dash_organicdata = "";
+            $ga_dash_data = "";
             if (! isset($data['rows'])) {
                 return - 21;
             }
             $i = 0;
             while (isset($data['rows'][$i][0])) {
                 if ($data['rows'][$i][0] != "(not set)") {
-                    $ga_dash_organicdata .= '["' . stripslashes(esc_html($data['rows'][$i][0])) . '",' . $data['rows'][$i][1] . '],';
+                    $ga_dash_data .= '["' . stripslashes(esc_html($data['rows'][$i][0])) . '",' . $data['rows'][$i][1] . '],';
                 }
                 $i ++;
             }
             
-            $ga_dash_organicdata = wp_kses(rtrim($ga_dash_organicdata, ','), $GADASH_Config->allowed_html);
+            $ga_dash_data = wp_kses(rtrim($ga_dash_data, ','), $GADASH_Config->allowed_html);
             
-            if ($ga_dash_organicdata) {
+            if ($ga_dash_data) {
                 
-                $ga_dash_organicdata = '[["' . __('Top Searches', "ga-dash") . '", "' . __('Visits', "ga-dash") . '"],' . $ga_dash_organicdata . ' ]';
+                $ga_dash_data = '[["' . __('Top Searches', "ga-dash") . '", "' . __('Visits', "ga-dash") . '"],' . $ga_dash_data . ' ]';
                 
-                return $ga_dash_organicdata;
+                return $ga_dash_data;
             } else {
                 
                 return - 22;
@@ -875,6 +924,10 @@ if (! class_exists('GADASH_GAPI')) {
                 update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e));
                 return $e->getCode();
             }
+            
+            if (! isset($data['rows'])) {
+                return - 21;
+            }            
             
             $i = 0;
             while (isset($data->rows[$i])) {

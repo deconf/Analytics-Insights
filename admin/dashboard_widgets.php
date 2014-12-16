@@ -444,13 +444,13 @@ if (! class_exists('GADASH_Widgets')) {
             }
             
             $ga_dash_statsdata = $GADASH_GAPI->ga_dash_main_charts($projectId, $period, $from, $to, $query);
-            if (! $ga_dash_statsdata) {
+            if (is_numeric($ga_dash_statsdata)) {
                 echo '<p>' . __("No stats available. Please check the Debugging Data section for possible errors", 'ga-dash') . '</p><form action="' . menu_page_url('gadash_settings', false) . '" method="POST">' . get_submit_button(__("Error Log", 'ga-dash'), 'secondary') . '</form>';
                 return;
             }
             
             $ga_dash_bottom_stats = $GADASH_GAPI->ga_dash_bottom_stats($projectId, $period, $from, $to);
-            if (! $ga_dash_bottom_stats) {
+            if (is_numeric($ga_dash_bottom_stats)) {
                 echo '<p>' . __("No stats available. Please check the Debugging Data section for possible errors", 'ga-dash') . '</p><form action="' . menu_page_url('gadash_settings', false) . '" method="POST">' . get_submit_button(__("Error Log", 'ga-dash'), 'secondary') . '</form>';
                 return;
             }
@@ -518,7 +518,7 @@ if (! class_exists('GADASH_Widgets')) {
             $ga_dash_visits_country = '';
             if ($GADASH_Config->options['ga_dash_map'] and $tools->check_roles($GADASH_Config->options['ga_dash_access_back'])) {
                 $ga_dash_visits_country = $GADASH_GAPI->ga_dash_visits_country($projectId, $from, $to);
-                if ($ga_dash_visits_country) {
+                if (!is_numeric($ga_dash_visits_country)) {
                     ?>
 					google.load("visualization", "1", {packages:["geochart"]})
 					function ga_dash_drawmap() {
@@ -549,7 +549,7 @@ if (! class_exists('GADASH_Widgets')) {
             if ($GADASH_Config->options['ga_dash_traffic'] and $tools->check_roles($GADASH_Config->options['ga_dash_access_back'])) {
                 $ga_dash_traffic_sources = $GADASH_GAPI->ga_dash_traffic_sources($projectId, $from, $to);
                 $ga_dash_new_return = $GADASH_GAPI->ga_dash_new_return($projectId, $from, $to);
-                if ($ga_dash_traffic_sources and $ga_dash_new_return) {
+                if (!is_numeric($ga_dash_traffic_sources) and !is_numeric($ga_dash_new_return)) {
                     ?>
 					google.load("visualization", "1", {packages:["corechart"]})
 					function ga_dash_drawtraffic() {
@@ -586,7 +586,7 @@ if (! class_exists('GADASH_Widgets')) {
             $ga_dash_top_pages = '';
             if ($GADASH_Config->options['ga_dash_pgd'] and $tools->check_roles($GADASH_Config->options['ga_dash_access_back'])) {
                 $ga_dash_top_pages = $GADASH_GAPI->ga_dash_top_pages($projectId, $from, $to);
-                if ($ga_dash_top_pages) {
+                if (!is_numeric($ga_dash_top_pages)) {
                     ?>
 					google.load("visualization", "1", {packages:["table"]})
 					function ga_dash_drawpgd() {
@@ -612,7 +612,7 @@ if (! class_exists('GADASH_Widgets')) {
             $ga_dash_top_referrers = '';
             if ($GADASH_Config->options['ga_dash_rd'] and $tools->check_roles($GADASH_Config->options['ga_dash_access_back'])) {
                 $ga_dash_top_referrers = $GADASH_GAPI->ga_dash_top_referrers($projectId, $from, $to);
-                if ($ga_dash_top_referrers) {
+                if (!is_numeric($ga_dash_top_referrers)) {
                     ?>
 					google.load("visualization", "1", {packages:["table"]})
 					function ga_dash_drawrd() {
@@ -637,7 +637,7 @@ if (! class_exists('GADASH_Widgets')) {
             $ga_dash_top_searches = '';
             if ($GADASH_Config->options['ga_dash_sd'] and $tools->check_roles($GADASH_Config->options['ga_dash_access_back'])) {
                 $ga_dash_top_searches = $GADASH_GAPI->ga_dash_top_searches($projectId, $from, $to);
-                if ($ga_dash_top_searches) {
+                if (!is_numeric($ga_dash_top_searches)) {
                     ?>
 					google.load("visualization", "1", {packages:["table"]})
 					function ga_dash_drawsd() {
