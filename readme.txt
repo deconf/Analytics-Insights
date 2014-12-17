@@ -4,7 +4,7 @@ Donate link: https://deconf.com/donate/
 Tags: google,analytics,google analytics,dashboard,analytics dashboard,google analytics dashboard,google analytics widget,tracking,realtime,wpmu,multisite
 Requires at least: 2.8
 Tested up to: 4.1
-Stable tag: 4.3.9b
+Stable tag: 4.3.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -131,11 +131,11 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Enhancement: redesign the frontend widget
 - Enhancement: responsive design for frontend widget
 - Enhancement: responsive design for page reports
+- Enhancement: error codes standardization
+- Enhancement: frontend stats are now able to display the error number
 - Bug Fix: load jsapi only when the frontend widget is active
 - Bug Fix: javascript errors while resizing window
 - Bug Fix: real-time component not loading properly in certain conditions
-- Enhancement: error codes standardization
-- Enhancement: frontend stats are now able to display the error number
 - Bug Fix: stop retrying when a daily limit has exceeded
 
 = 4.3.8 =

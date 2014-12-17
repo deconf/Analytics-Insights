@@ -82,7 +82,7 @@ if (! class_exists('GADASH_Frontend')) {
 										    if (!jQuery.isNumeric(gadash_pagevisits)){
 		          							    google.setOnLoadCallback(ga_dash_drawpagevisits(gadash_pagevisits));
 											}else{
-										        jQuery("#gadwp-visits").css({"background-color":"#F7F7F7","height":"auto","padding-top":"30px","padding-bottom":"30px","color":"#000"});  
+										        jQuery("#gadwp-visits").css({"background-color":"#F7F7F7","height":"auto","padding-top":"30px","padding-bottom":"30px","color":"#000","text-align":"center"});  
 										        jQuery("#gadwp-visits").html("' . __("This report is unavailable", 'ga-dash') . ' ("+response+")");
 										        NProgress.done();    
                                             }	
@@ -94,8 +94,8 @@ if (! class_exists('GADASH_Frontend')) {
 										    if (!jQuery.isNumeric(gadash_pagesearches)){
 												google.setOnLoadCallback(ga_dash_drawpagesearches(gadash_pagesearches));
 											}else{
-										        jQuery("#gadwp-searches").css({"background-color":"#F7F7F7","height":"auto","padding-top":"30px","padding-bottom":"30px","color":"#000"});
-										        jQuery("#gadwp-searches").html("' . __("This report unavailable", 'ga-dash') . ' ("+response+")");
+										        jQuery("#gadwp-searches").css({"background-color":"#F7F7F7","height":"auto","padding-top":"30px","padding-bottom":"30px","color":"#000","text-align":"center"});
+										        jQuery("#gadwp-searches").html("' . __("This report is unavailable", 'ga-dash') . ' ("+response+")");
 										        NProgress.done();
                                             }	
 										});

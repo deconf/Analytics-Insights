@@ -129,7 +129,7 @@ class GADSH_Frontend_Widget extends WP_Widget
 						   ga_dash_drawtotalsstats(jQuery.parseJSON(response[1]));
 				        }  
 					}else{
-				        jQuery("#gadash-widgetchart").css({"background-color":"#F7F7F7","height":"auto","padding-top":"50px","padding-bottom":"50px","color":"#000"});  
+				        jQuery("#gadash-widgetchart").css({"background-color":"#F7F7F7","height":"auto","padding-top":"50px","padding-bottom":"50px","color":"#000","text-align":"center"});  
 				        jQuery("#gadash-widgetchart").html("' . __("This report is unavailable", 'ga-dash') . ' ("+response+")");
                     }	
 				});';
@@ -152,7 +152,7 @@ class GADSH_Frontend_Widget extends WP_Widget
     					chart.draw(data, options);
 				   }
     			   function ga_dash_drawtotalsstats(response) {
-                        jQuery("#gadash-widgettotals").html("<div class=\"gadash-left\">' . __("Period", 'ga-dash') . ':</div> <div class=\"gadash-right\">' . $periodtext . '</div><div class=\"gadash-left\">' . __("Total Visits", 'ga-dash') . ':</div> <div class=\"gadash-right\">"+response+"</div>");
+                        jQuery("#gadash-widgettotals").html("<div class=\"gadash-left\">' . __("Period:", 'ga-dash') . '</div> <div class=\"gadash-right\">' . $periodtext . '</div><div class=\"gadash-left\">' . __("Total Visits:", 'ga-dash') . '</div> <div class=\"gadash-right\">"+response+"</div>");
                    }';
         
         echo '</script>';
