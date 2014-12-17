@@ -127,74 +127,78 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 == Changelog ==
 
 = 4.3.9 =
-- tweak: marking classes as final
-- tweak: redesign the frontend widget
-- tweak: responsive design for frontend widget
-- tweak: responsive design for page reports
-- bugfix: load jsapi only when the frontend widget is active
-- bugfix: javascript errors while resizing window
+- Enhancement: marking classes as final
+- Enhancement: redesign the frontend widget
+- Enhancement: responsive design for frontend widget
+- Enhancement: responsive design for page reports
+- Bug Fix: load jsapi only when the frontend widget is active
+- Bug Fix: javascript errors while resizing window
+- Bug Fix: real-time component not loading properly in certain conditions
+- Enhancement: error codes standardization
+- Enhancement: frontend stats are now able to display the error number
+- Bug Fix: stop retrying when a daily limit has exceeded
 
 = 4.3.8 =
-- feature: frontend component redesign
-- tweak: optimizing frontend component to improve page loading speed
-- tweak: optimizing frontend component to minimize GAPI requests  
-- tweak: loading jsapi using wp-enqueue-script
-- tweak: better escaping to avoid javascript errors
+- Enhancement: frontend component redesign
+- Enhancement: optimizing frontend component to improve page loading speed
+- Enhancement: optimizing frontend component to minimize GAPI requests  
+- Enhancement: loading jsapi using wp-enqueue-script
+- Enhancement: better escaping to avoid javascript errors
 
 = 4.3.7 =
-- feature: option to exclude Super Administrator tracking for the entire network, suggested by [Marie](https://wordpress.org/support/profile/yamaryam)
-- bugfix: warning during Network Activate, reported by [JoelStickney](https://wordpress.org/support/profile/joelstickney)
-- bugfix: track affiliates while downloads, mailto and outbound links tracking is disabled
-- bugfix: avoid reload loops for realtime component
-- feature: track fragment identifiers, hashmarks (#) in URI links
-- tweak: improving i18n
-- tweak: moving bounce-rate option to Advanced Tracking 
+- Enhancement: option to exclude Super Administrator tracking for the entire network, suggested by [Marie](https://wordpress.org/support/profile/yamaryam)
+- Bug Fix: warning during Network Activate, reported by [JoelStickney](https://wordpress.org/support/profile/joelstickney)
+- Bug Fix: track affiliates while downloads, mailto and outbound links tracking is disabled
+- Bug Fix: avoid reload loops for realtime component
+- Enhancement: track fragment identifiers, hashmarks (#) in URI links
+- Enhancement: improving i18n
+- Enhancement: moving bounce-rate option to Advanced Tracking 
 
 = 4.3.6 =
-- bugfix: clear cache not working properly
-- bugfix: error correction in Spanish localization file
+- Bug Fix: clear cache not working properly
+- Bug Fix: error correction in Spanish localization file
 
 = 4.3.5 =
-- bugfix: authors custom dimension not working for pages, reported by [tylerarnold23](https://wordpress.org/support/profile/tylerarnold23)
-- bugfix: outbound detection
-- bugfix: fixed unicode issue, reported by [Haruka_Suzuki](https://wordpress.org/support/profile/haruka_suzuki)
-- bugfix: properly display cities with same name from different regions, reported by [matt6303](https://wordpress.org/support/profile/matt6303)
-- tweak: removed image extensions from default download filter
-- tweak: add day of week to dashboard dates, suggested by [nethrs](https://deconf.com/ask/author/timnethers/)
-- feature: Arabic translation, translated by [Ahmed Majed](https://deconf.com/ask/author/almobdaa/)
-- bugfix: multiple fixes for real time reports
+- Bug Fix: authors custom dimension not working for pages, reported by [tylerarnold23](https://wordpress.org/support/profile/tylerarnold23)
+- Bug Fix: outbound detection
+- Bug Fix: fixed unicode issue, reported by [Haruka_Suzuki](https://wordpress.org/support/profile/haruka_suzuki)
+- Bug Fix: properly display cities with same name from different regions, reported by [matt6303](https://wordpress.org/support/profile/matt6303)
+- Enhancement: removed image extensions from default download filter
+- Enhancement: add day of week to dashboard dates, suggested by [nethrs](https://deconf.com/ask/author/timnethers/)
+- Enhancement: Arabic translation, translated by [Ahmed Majed](https://deconf.com/ask/author/almobdaa/)
+- Bug Fix: multiple fixes for real time reports
 
 = 4.3.4 =
-- feature: ga_dash_addtrackingcode action hook
-- feature: French translation
-- feature: cross domain tracking support
-- feature: Google Analytics custom definitions, using custom dimensions to track authors, years, categories and engagement
-- feature: support for affiliate links tracking 
-- tweak: never treat downloads as outbound links
+- Enhancement: ga_dash_addtrackingcode action hook
+- Enhancement: French translation
+- Enhancement: cross domain tracking support
+- Enhancement: Google Analytics custom definitions, using custom dimensions to track authors, years, categories and engagement
+- Enhancement: support for affiliate links tracking 
+- Enhancement: never treat downloads as outbound links
 
 = 4.3.3 =
-- feature: added Polish translation
-- bugfix: missing icon and wrong link in GADWP settings
-- tweak: moving Page Speed SR to top, to avoid some confusions
-- tweak: added plugin version to debugging data
+- Enhancement: added Polish translation
+- Bug Fix: missing icon and wrong link in GADWP settings
+- Enhancement: moving Page Speed SR to top, to avoid some confusions
+- Enhancement: added plugin version to debugging data
 
 = v4.3.2 =
-- bugfix: fixes for multisite with a single Google Account
-- bugfix: notice while displaying searches report
-- bugfix: downloads regex update
-- bugfix: always exclude outbound links from bounce-rate calculation 
-- feature: Adsense account linking
-- feature: adjust page speed sample rate
-- feature: exclude event tracking from bounce-rate calculation for downloads and mailto
-- tweak: reset downloads filters to default when empty
+- Bug Fix: fixes for multisite with a single Google Account
+- Bug Fix: notice while displaying searches report
+- Bug Fix: downloads regex update
+- Bug Fix: always exclude outbound links from bounce-rate calculation 
+- Enhancement: Adsense account linking
+- Enhancement: adjust page speed sample rate
+- Enhancement: exclude event tracking from bounce-rate calculation for downloads and mailto
+- Enhancement: reset downloads filters to default when empty
 - deprecate: classic analytics
 
 = v4.3.1 =
-- bugfix: link on top referrers list not working
+- Bug Fix: link on top referrers list not working
 - allowing today as default stats
-- bugfix: profiles refresh issue
-- tweak: remove table borders on frontend widget
-- bugfix: multiple fixes for network mode
+- Bug Fix: profiles refresh issue
+- Enhancement: remove table borders on frontend widget
+- Bug Fix: multiple fixes for network mode
 - updated GAPI libarry
 - using autloader for PHP 5.3.0 and greater
 - security improvements
@@ -203,27 +207,27 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 = v4.3 =
 - responsive Google Charts
 - single authorization for multisite
-- bugfix: SERVER_ADDR PHP notice
-- bugfix: notices on admin dashboard
+- Bug Fix: SERVER_ADDR PHP notice
+- Bug Fix: notices on admin dashboard
 - additional data validation and sanitizing
-- bugfix: realtime switching profile functionality
+- Bug Fix: realtime switching profile functionality
 - multisite: blog's cleanup on uninstall
 - deprecating custom tracking code
 
 = v4.2.21 =
 - added hungarian translation
 - added italian translation
-- bugfix: escaping characters in google charts
+- Bug Fix: escaping characters in google charts
 - new filter on frontend widget
 - cache timeout adjustments
 - description update
-- bugfix: fatal error on invalid_grant
+- Bug Fix: fatal error on invalid_grant
 - added timestamp on last error  
  
 = v4.2.20 =
-- bugfix: russian country map is not working
-- bugfix: only administrator can see stats while using a cache plugin
-- bugfix: division by zero on frontend widget
+- Bug Fix: russian country map is not working
+- Bug Fix: only administrator can see stats while using a cache plugin
+- Bug Fix: division by zero on frontend widget
 - added german translation
 - added spanish translation
 

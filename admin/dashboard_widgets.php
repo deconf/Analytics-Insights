@@ -713,7 +713,7 @@ if (! class_exists('GADASH_Widgets')) {
 	<tr>
 		<td class='gadash-tdo-left'>
 			<div>
-				<span class='gadash-online' id='gadash-online'>&nbsp;</span>
+				<span class='gadash-online' id='gadash-online'>0</span>
 			</div>
 		</td>
 		<td class='gadash-tdo-right' id='gadash-tdo-right'><span

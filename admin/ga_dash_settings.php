@@ -876,7 +876,7 @@ final class GADASH_Settings
             }
         }
         
-        if ($GADASH_GAPI->gapi_error_code == 403){
+        if ($GADASH_GAPI->gapi_errors_handler()){
             $message = '<div class="updated"><p>' . __("Daily Limit Exceeded (quotas are automatically reseted by Google at 00:00 PST). The reports will be available after the reset.", 'ga-dash')." ".__("The tracking won't be affected and no further actions are required.", 'ga-dash') . '</p></div>';
         }        
         
