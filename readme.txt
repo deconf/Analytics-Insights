@@ -126,6 +126,10 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 
 == Changelog ==
 
+= 4.3.9.1 =
+- Bug Fix: removed the debugging log for frontend quries
+- Enhancement: adding library conflict notice in General Settings 
+
 = 4.3.9 =
 - Enhancement: marking classes as final
 - Enhancement: redesign the frontend widget

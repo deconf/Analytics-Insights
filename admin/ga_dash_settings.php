@@ -835,8 +835,10 @@ final class GADASH_Settings
         /*
          * Include GAPI
          */
+        echo '<div id="gapi-warning" class="updated"><p><strong>' . __('Loading the required libraries. If this results in a blank screen or a fatal error, try this solution:', "ga-dash") . ' </strong><a href="https://deconf.com/ask/question/ga-dashboard-absolutely-empty-general-settings#answer-770">Library conflicts between WordPress plugins</a></p></div>';        
         include_once ($GADASH_Config->plugin_path . '/tools/gapi.php');
         global $GADASH_GAPI;
+        echo '<script type="text/javascript">jQuery("#gapi-warning").hide()</script>';
         
         if (isset($_POST['ga_dash_code'])) {
             try {
@@ -1219,8 +1221,10 @@ final class GADASH_Settings
         /*
          * Include GAPI
          */
+        echo '<div id="gapi-warning" class="updated"><p><strong>' . __('Loading the required libraries. If this results in a blank screen or a fatal error, try this solution:', "ga-dash") . ' </strong><a href="https://deconf.com/ask/question/ga-dashboard-absolutely-empty-general-settings#answer-770">Library conflicts between WordPress plugins</a></p></div>';        
         include_once ($GADASH_Config->plugin_path . '/tools/gapi.php');
         global $GADASH_GAPI;
+        echo '<script type="text/javascript">jQuery("#gapi-warning").hide()</script>';
         
         if (isset($_POST['ga_dash_code'])) {
             try {

@@ -1063,8 +1063,7 @@ if (! class_exists('GADASH_GAPI')) {
             if (! isset($data['rows'])) {
                 return - 21;
             }
-            
-            error_log(json_encode($data));
+
             $i = 0;
             while (isset($data['rows'][$i][0])) {
                 if ($data['rows'][$i][0] != "(not set)") {
