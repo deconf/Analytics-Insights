@@ -29,26 +29,26 @@
 	padding-bottom: 5px;
 }
 
-#gadash-widgetchart{
-	width:100%;
+#gadash-widgetchart {
+	width: 100%;
 }
 
-#gadash-widgettotals{
+#gadash-widgettotals {
 	margin: 0 0 10px 0;
 	width: 100%;
-	display:table;
-	clear:both;
+	display: table;
+	clear: both;
 }
 
-#gadash-widgettotals .gadash-left{
+#gadash-widgettotals .gadash-left {
 	padding: 10px 0 0 0;
-	width : 45%;
-	float:left;
+	width: 45%;
+	float: left;
 	font-weight: 600;
 }
 
-#gadash-widgettotals .gadash-right{
+#gadash-widgettotals .gadash-right {
 	padding: 10px 0 0 0;
-	float:left;
-	font-style:italic;
+	float: left;
+	font-style: italic;
 }

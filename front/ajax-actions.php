@@ -48,7 +48,8 @@ if (! class_exists('GADASH_Frontend_Ajax')) {
             $post_id = $_REQUEST['gadash_postid'];
             
             if (! isset($_REQUEST['gadash_security_aaf']) or ! wp_verify_nonce($_REQUEST['gadash_security_aaf'], 'gadash_get_frontendvisits_data')) {
-                return;
+                print(json_encode(- 30));
+                die();
             }
             
             if ($GADASH_Config->options['ga_dash_token'] and function_exists('curl_version') and $GADASH_Config->options['ga_dash_tableid_jail']) {
@@ -57,22 +58,20 @@ if (! class_exists('GADASH_Frontend_Ajax')) {
                 include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
                 $tools = new GADASH_Tools();
             } else {
+                print(json_encode(- 24));
                 die();
+            }
+            
+            $projectId = $GADASH_Config->options['ga_dash_tableid_jail'];
+            $profile_info = $tools->get_selected_profile($GADASH_Config->options['ga_dash_profile_list'], $projectId);
+            if (isset($profile_info[4])) {
+                $GADASH_GAPI->timeshift = $profile_info[4];
+            } else {
+                $GADASH_GAPI->timeshift = (int) current_time('timestamp') - time();
             }
             
             if (! $GADASH_GAPI->client->getAccessToken()) {
-                die();
-            }
-            
-            if (isset($GADASH_Config->options['ga_dash_tableid_jail'])) {
-                $projectId = $GADASH_Config->options['ga_dash_tableid_jail'];
-                $profile_info = $tools->get_selected_profile($GADASH_Config->options['ga_dash_profile_list'], $projectId);
-                if (isset($profile_info[4])) {
-                    $GADASH_GAPI->timeshift = $profile_info[4];
-                } else {
-                    $GADASH_GAPI->timeshift = (int) current_time('timestamp') - time();
-                }
-            } else {
+                print(json_encode(- 25));
                 die();
             }
             
@@ -96,7 +95,8 @@ if (! class_exists('GADASH_Frontend_Ajax')) {
             $post_id = $_REQUEST['gadash_postid'];
             
             if (! isset($_REQUEST['gadash_security_aas']) or ! wp_verify_nonce($_REQUEST['gadash_security_aas'], 'gadash_get_frontendsearches_data')) {
-                return;
+                print(json_encode(- 30));
+                die();
             }
             
             if ($GADASH_Config->options['ga_dash_token'] and function_exists('curl_version') and $GADASH_Config->options['ga_dash_tableid_jail']) {
@@ -105,22 +105,20 @@ if (! class_exists('GADASH_Frontend_Ajax')) {
                 include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
                 $tools = new GADASH_Tools();
             } else {
+                print(json_encode(- 24));
                 die();
+            }
+            
+            $projectId = $GADASH_Config->options['ga_dash_tableid_jail'];
+            $profile_info = $tools->get_selected_profile($GADASH_Config->options['ga_dash_profile_list'], $projectId);
+            if (isset($profile_info[4])) {
+                $GADASH_GAPI->timeshift = $profile_info[4];
+            } else {
+                $GADASH_GAPI->timeshift = (int) current_time('timestamp') - time();
             }
             
             if (! $GADASH_GAPI->client->getAccessToken()) {
-                die();
-            }
-            
-            if (isset($GADASH_Config->options['ga_dash_tableid_jail'])) {
-                $projectId = $GADASH_Config->options['ga_dash_tableid_jail'];
-                $profile_info = $tools->get_selected_profile($GADASH_Config->options['ga_dash_profile_list'], $projectId);
-                if (isset($profile_info[4])) {
-                    $GADASH_GAPI->timeshift = $profile_info[4];
-                } else {
-                    $GADASH_GAPI->timeshift = (int) current_time('timestamp') - time();
-                }
-            } else {
+                print(json_encode(- 25));
                 die();
             }
             
@@ -145,7 +143,8 @@ if (! class_exists('GADASH_Frontend_Ajax')) {
             $display = $_REQUEST['gadash_display'];
             
             if (! isset($_REQUEST['gadash_security_afw']) or ! wp_verify_nonce($_REQUEST['gadash_security_afw'], 'gadash_get_frontendwidget_data')) {
-                return;
+                print(json_encode(- 30));
+                die();
             }
             
             if ($GADASH_Config->options['ga_dash_token'] and function_exists('curl_version') and $GADASH_Config->options['ga_dash_tableid_jail']) {
@@ -154,34 +153,20 @@ if (! class_exists('GADASH_Frontend_Ajax')) {
                 include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
                 $tools = new GADASH_Tools();
             } else {
+                print(json_encode(- 24));
                 die();
             }
             
-            if (isset($GADASH_Config->options['ga_dash_tableid_jail'])) {
-                $projectId = $GADASH_Config->options['ga_dash_tableid_jail'];
-                $profile_info = $tools->get_selected_profile($GADASH_Config->options['ga_dash_profile_list'], $projectId);
-                if (isset($profile_info[4])) {
-                    $GADASH_GAPI->timeshift = $profile_info[4];
-                } else {
-                    $GADASH_GAPI->timeshift = (int) current_time('timestamp') - time();
-                }
+            $projectId = $GADASH_Config->options['ga_dash_tableid_jail'];
+            $profile_info = $tools->get_selected_profile($GADASH_Config->options['ga_dash_profile_list'], $projectId);
+            if (isset($profile_info[4])) {
+                $GADASH_GAPI->timeshift = $profile_info[4];
             } else {
-                die();
+                $GADASH_GAPI->timeshift = (int) current_time('timestamp') - time();
             }
             
             if (! $GADASH_GAPI->client->getAccessToken()) {
-                die();
-            }
-            
-            if (isset($GADASH_Config->options['ga_dash_tableid_jail'])) {
-                $projectId = $GADASH_Config->options['ga_dash_tableid_jail'];
-                $profile_info = $tools->get_selected_profile($GADASH_Config->options['ga_dash_profile_list'], $projectId);
-                if (isset($profile_info[4])) {
-                    $GADASH_GAPI->timeshift = $profile_info[4];
-                } else {
-                    $GADASH_GAPI->timeshift = (int) current_time('timestamp') - time();
-                }
-            } else {
+                print(json_encode(- 25));
                 die();
             }
             

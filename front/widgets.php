@@ -44,16 +44,8 @@ class GADSH_Frontend_Widget extends WP_Widget
         
         echo "\n<!-- BEGIN GADWP v" . GADWP_CURRENT_VERSION . " Widget - https://deconf.com/google-analytics-dashboard-wordpress/ -->\n";
         echo $args['before_widget'];
-        if (! empty($widget_title))
+        if (! empty($widget_title)) {
             echo $args['before_title'] . $widget_title . $args['after_title'];
-            /*
-         * Include GAPI
-         */
-        if ($GADASH_Config->options['ga_dash_token'] and $GADASH_Config->options['ga_dash_tableid_jail'] and function_exists('curl_version')) {
-            include_once ($GADASH_Config->plugin_path . '/tools/gapi.php');
-            global $GADASH_GAPI;
-        } else {
-            return;
         }
         
         /*
@@ -61,10 +53,6 @@ class GADSH_Frontend_Widget extends WP_Widget
          */
         include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
         $tools = new GADASH_Tools();
-        
-        if (! $GADASH_GAPI->client->getAccessToken()) {
-            return;
-        }
         
         if (isset($GADASH_Config->options['ga_dash_style'])) {
             $css = "colors:['" . $GADASH_Config->options['ga_dash_style'] . "','" . $tools->colourVariator($GADASH_Config->options['ga_dash_style'], - 20) . "'],";

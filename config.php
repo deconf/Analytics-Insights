@@ -7,7 +7,7 @@
  */
 if (! class_exists('GADASH_Config')) {
 
-   final class GADASH_Config
+    final class GADASH_Config
     {
 
         public $options;

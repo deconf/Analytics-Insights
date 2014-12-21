@@ -251,3 +251,7 @@ td.roles {
 .event-option, .event-option-desc {
 	float: left;
 }
+
+#gapi-access-code {
+	color: red !important;
+}
