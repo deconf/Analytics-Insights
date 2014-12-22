@@ -1039,21 +1039,21 @@ final class GADASH_Settings
 								</td>
 								<td><input type="text" name="options[ga_dash_apikey]"
 									value="<?php echo esc_attr($options['ga_dash_apikey']); ?>"
-									size="40"></td>
+									size="40" required="required"></td>
 							</tr>
 							<tr>
 								<td class="title"><label for="options[ga_dash_clientid]"><?php _e("Client ID:", 'ga-dash'); ?></label>
 								</td>
 								<td><input type="text" name="options[ga_dash_clientid]"
 									value="<?php echo esc_attr($options['ga_dash_clientid']); ?>"
-									size="40"></td>
+									size="40" required="required"></td>
 							</tr>
 							<tr>
 								<td class="title"><label for="options[ga_dash_clientsecret]"><?php _e("Client Secret:", 'ga-dash'); ?></label>
 								</td>
 								<td><input type="text" name="options[ga_dash_clientsecret]"
 									value="<?php echo esc_attr($options['ga_dash_clientsecret']); ?>"
-									size="40"> <input type="hidden" name="options[ga_dash_hidden]"
+									size="40" required="required"> <input type="hidden" name="options[ga_dash_hidden]"
 									value="Y">
 									<?php wp_nonce_field('gadash_form','gadash_security'); ?>
 								</td>
@@ -1481,14 +1481,14 @@ final class GADASH_Settings
 													</td>
 													<td><input type="text" name="options[ga_dash_apikey]"
 														value="<?php echo esc_attr($options['ga_dash_apikey']); ?>"
-														size="40"></td>
+														size="40" required="required"></td>
 												</tr>
 												<tr>
 													<td class="title"><label for="options[ga_dash_clientid]"><?php _e("Client ID:", 'ga-dash'); ?></label>
 													</td>
 													<td><input type="text" name="options[ga_dash_clientid]"
 														value="<?php echo esc_attr($options['ga_dash_clientid']); ?>"
-														size="40"></td>
+														size="40" required="required"></td>
 												</tr>
 												<tr>
 													<td class="title"><label
@@ -1496,7 +1496,7 @@ final class GADASH_Settings
 													</td>
 													<td><input type="text" name="options[ga_dash_clientsecret]"
 														value="<?php echo esc_attr($options['ga_dash_clientsecret']); ?>"
-														size="40"> <input type="hidden"
+														size="40" required="required"> <input type="hidden"
 														name="options[ga_dash_hidden]" value="Y">
 										<?php wp_nonce_field('gadash_form','gadash_security'); ?>
 									</td>

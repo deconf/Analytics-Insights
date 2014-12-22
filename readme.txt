@@ -127,7 +127,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 == Changelog ==
 
 = 4.3.10 =
-- Bug Fix: removed the php debugging log for frontend queries
+- Bug Fix: removed the PHP debugging log for frontend queries
 - Enhancement: adding library conflict notice in General Settings
 - Enhancement: better handling of API errors
 - Enhancement: added an error when user enters the Tracking ID instead of an access code    
