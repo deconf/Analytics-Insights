@@ -543,7 +543,6 @@ final class GADASH_Settings
                     $GADASH_Config->set_plugin_options(true);
                     $message = "<div class='updated'><p><strong>" . __("Plugin authorization succeeded.", 'ga-dash') . "</strong></p></div>";
                     $options = self::set_get_options('network');
-                    delete_transient('ga_dash_gapi_errors');
                     if (is_multisite()) { // Cleanup errors on the entire network
                         foreach (wp_get_sites() as $blog) {
                             switch_to_blog($blog['blog_id']);

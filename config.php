@@ -205,6 +205,7 @@ if (! class_exists('GADASH_Config')) {
                 $tools->ga_dash_clear_cache();
                 delete_option('gadash_lasterror');
                 update_option('gadwp_version', GADWP_CURRENT_VERSION);
+                delete_transient('ga_dash_gapi_errors');
             }
             
             if (! isset($this->options['ga_enhanced_links'])) {
