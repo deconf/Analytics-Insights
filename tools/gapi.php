@@ -17,6 +17,8 @@ if (! class_exists('GADASH_GAPI')) {
         public $timeshift;
 
         private $error_timeout;
+        
+        private $managequota;
 
         function __construct()
         {
@@ -47,6 +49,7 @@ if (! class_exists('GADASH_GAPI')) {
             $this->client->setRedirectUri('urn:ietf:wg:oauth:2.0:oob');
             
             $this->set_error_timeout();
+            $this->managequota = 'u'.get_current_user_id().'s'.get_current_blog_id();
             
             if ($GADASH_Config->options['ga_dash_userapi']) {
                 $this->client->setClientId($GADASH_Config->options['ga_dash_clientid']);
@@ -345,7 +348,8 @@ if (! class_exists('GADASH_GAPI')) {
                     }
                     
                     $data = $this->service->data_ga->get('ga:' . $projectId, $from, $to, $metrics, array(
-                        'dimensions' => $dimensions
+                        'dimensions' => $dimensions,
+                        'quotaUser' => $this->managequota.'p'.$projectId
                     ));
                     set_transient($serial, $data, $this->get_timeouts($timeouts));
                 } else {
@@ -420,7 +424,8 @@ if (! class_exists('GADASH_GAPI')) {
                     }
                     
                     $data = $this->service->data_ga->get('ga:' . $projectId, $from, $to, $metrics, array(
-                        'dimensions' => $dimensions
+                        'dimensions' => $dimensions,
+                        'quotaUser' => $this->managequota.'p'.$projectId
                     ));
                     set_transient($serial, $data, $this->get_timeouts($timeouts));
                 } else {
@@ -487,7 +492,8 @@ if (! class_exists('GADASH_GAPI')) {
                     $data = $this->service->data_ga->get('ga:' . $projectId, $from, $to, $metrics, array(
                         'dimensions' => $dimensions,
                         'sort' => '-ga:pageviews',
-                        'max-results' => '24'
+                        'max-results' => '24',
+                        'quotaUser' => $this->managequota.'p'.$projectId
                     )); // 'filters' => 'ga:pagePath!=/'
                     set_transient($serial, $data, $this->get_timeouts($timeouts));
                 } else {
@@ -559,7 +565,8 @@ if (! class_exists('GADASH_GAPI')) {
                         'dimensions' => $dimensions,
                         'sort' => '-ga:visits',
                         'max-results' => '24',
-                        'filters' => 'ga:medium==referral'
+                        'filters' => 'ga:medium==referral',
+                        'quotaUser' => $this->managequota.'p'.$projectId
                     ));
                     set_transient($serial, $data, $this->get_timeouts($timeouts));
                 } else {
@@ -629,7 +636,8 @@ if (! class_exists('GADASH_GAPI')) {
                     $data = $this->service->data_ga->get('ga:' . $projectId, $from, $to, $metrics, array(
                         'dimensions' => $dimensions,
                         'sort' => '-ga:visits',
-                        'max-results' => '24'
+                        'max-results' => '24',
+                        'quotaUser' => $this->managequota.'p'.$projectId
                     ));
                     set_transient($serial, $data, $this->get_timeouts($timeouts));
                 } else {
@@ -692,7 +700,11 @@ if (! class_exists('GADASH_GAPI')) {
             if ($GADASH_Config->options['ga_target_geomap']) {
                 $dimensions = 'ga:city, ga:region';
                 $this->getcountrycodes();
-                $filters = 'ga:country==' . ($this->country_codes[$GADASH_Config->options['ga_target_geomap']]);
+                if (isset($this->country_codes[$GADASH_Config->options['ga_target_geomap']])){
+                    $filters = 'ga:country==' . ($this->country_codes[$GADASH_Config->options['ga_target_geomap']]);
+                }else{
+                    $filters = "";
+                }    
             } else {
                 $dimensions = 'ga:country';
                 $filters = "";
@@ -716,11 +728,13 @@ if (! class_exists('GADASH_GAPI')) {
                             'dimensions' => $dimensions,
                             'filters' => $filters,
                             'sort' => '-ga:visits',
-                            'max-results' => $GADASH_Config->options['ga_target_number']
+                            'max-results' => $GADASH_Config->options['ga_target_number'],
+                            'quotaUser' => $this->managequota.'p'.$projectId
                         ));
                     } else {
                         $data = $this->service->data_ga->get('ga:' . $projectId, $from, $to, $metrics, array(
-                            'dimensions' => $dimensions
+                            'dimensions' => $dimensions,
+                            'quotaUser' => $this->managequota.'p'.$projectId
                         ));
                     }
                     set_transient($serial, $data, $this->get_timeouts($timeouts));
@@ -793,7 +807,8 @@ if (! class_exists('GADASH_GAPI')) {
                     }
                     
                     $data = $this->service->data_ga->get('ga:' . $projectId, $from, $to, $metrics, array(
-                        'dimensions' => $dimensions
+                        'dimensions' => $dimensions,
+                        'quotaUser' => $this->managequota.'p'.$projectId
                     ));
                     set_transient($serial, $data, $this->get_timeouts($timeouts));
                 } else {
@@ -859,7 +874,8 @@ if (! class_exists('GADASH_GAPI')) {
                     }
                     
                     $data = $this->service->data_ga->get('ga:' . $projectId, $from, $to, $metrics, array(
-                        'dimensions' => $dimensions
+                        'dimensions' => $dimensions,
+                        'quotaUser' => $this->managequota.'p'.$projectId
                     ));
                     set_transient($serial, $data, $this->get_timeouts($timeouts));
                 } else {
@@ -927,7 +943,8 @@ if (! class_exists('GADASH_GAPI')) {
                     }
                     
                     $data = $this->service->data_ga->get('ga:' . $projectId, $from, $to, $metrics, array(
-                        'dimensions' => $dimensions
+                        'dimensions' => $dimensions,
+                        'quotaUser' => $this->managequota.'p'.$projectId
                     ));
                     set_transient($serial, $data, $this->get_timeouts(1));
                 } else {
@@ -1003,7 +1020,8 @@ if (! class_exists('GADASH_GAPI')) {
                     
                     $data = $this->service->data_ga->get('ga:' . $projectId, $from, $to, $metrics, array(
                         'dimensions' => $dimensions,
-                        'filters' => 'ga:pagePath==' . $page_url
+                        'filters' => 'ga:pagePath==' . $page_url,
+                        'quotaUser' => $this->managequota.'p'.$projectId
                     ));
                     set_transient($serial, $data, $this->get_timeouts(1));
                 } else {
@@ -1070,7 +1088,8 @@ if (! class_exists('GADASH_GAPI')) {
                         'dimensions' => $dimensions,
                         'sort' => '-ga:visits',
                         'max-results' => '24',
-                        'filters' => 'ga:pagePath==' . $page_url
+                        'filters' => 'ga:pagePath==' . $page_url,
+                        'quotaUser' => $this->managequota.'p'.$projectId
                     ));
                     set_transient($serial, $data, $this->get_timeouts(1));
                 } else {
@@ -1133,7 +1152,8 @@ if (! class_exists('GADASH_GAPI')) {
                     }
                     
                     $data = $this->service->data_realtime->get('ga:' . $projectId, $metrics, array(
-                        'dimensions' => $dimensions
+                        'dimensions' => $dimensions,
+                        'quotaUser' => $this->managequota.'p'.$projectId
                     ));
                     set_transient($serial, $data, 55);
                 } else {

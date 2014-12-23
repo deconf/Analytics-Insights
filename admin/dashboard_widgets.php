@@ -516,6 +516,7 @@ if (! class_exists('GADASH_Widgets')) {
 	      	<?php
             }
             $ga_dash_visits_country = '';
+            $GADASH_GAPI->getcountrycodes();
             if ($GADASH_Config->options['ga_dash_map'] and $tools->check_roles($GADASH_Config->options['ga_dash_access_back'])) {
                 $ga_dash_visits_country = $GADASH_GAPI->ga_dash_visits_country($projectId, $from, $to);
                 if (! is_numeric($ga_dash_visits_country)) {
@@ -529,7 +530,7 @@ if (! class_exists('GADASH_Widgets')) {
 						var options = {
 							colors: ['<?php echo $light_color; ?>', '<?php echo $dark_color; ?>'],
 							<?php
-                    if ($GADASH_Config->options['ga_target_geomap']) {
+                    if ($GADASH_Config->options['ga_target_geomap'] and isset($GADASH_GAPI->country_codes[$GADASH_Config->options['ga_target_geomap']])) {
                         ?>
 								region : '<?php echo esc_html($GADASH_Config->options ['ga_target_geomap']); ?>',
 								displayMode : 'markers',
@@ -741,8 +742,8 @@ if (! class_exists('GADASH_Widgets')) {
 <br />
 <h3>
 				<?php
-                if ($GADASH_Config->options['ga_target_geomap']) {
-                    $GADASH_GAPI->getcountrycodes();
+                
+                if ($GADASH_Config->options['ga_target_geomap'] and isset($GADASH_GAPI->country_codes[$GADASH_Config->options['ga_target_geomap']])) {
                     echo __("Visits from ", 'ga-dash') . esc_html($GADASH_GAPI->country_codes[$GADASH_Config->options['ga_target_geomap']]);
                 } else {
                     echo __("Visits by Country", 'ga-dash');
