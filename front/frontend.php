@@ -127,7 +127,7 @@ if (! class_exists('GADASH_Frontend')) {
 			  legend: {position: "none"},
 			  pointSize: 3,' . $css . '
 			  title: "' . $title . '",
-	  		  vAxis: {minValue: 0},
+	  		  vAxis: { textPosition: "none", minValue: 0, gridlines: {color: "transparent"}, baselineColor: "transparent"},
 			  chartArea: {width: "100%", height: "80%"},
 			  hAxis: { textPosition: "none"}
 			};

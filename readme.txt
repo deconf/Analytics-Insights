@@ -131,6 +131,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Bug Fix: fallback to world map when a wrong country code is entered
 - Bug Fix: removed double transient call on succesful authorization
 - Enhancement: clear all errors on version change
+- Enhancement: gridlines are now transparent
 
 = 4.3.10 =
 - Bug Fix: removed the PHP debugging log for frontend queries

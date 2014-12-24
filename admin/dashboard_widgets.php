@@ -504,8 +504,8 @@ if (! class_exists('GADASH_Widgets')) {
 				  legend: {position: 'none'},
 				  pointSize: 3,<?php echo $css;?>
 		          title: '<?php echo $title;?>',
-				  chartArea: {width: '85%',height: '90%'},
-				  vAxis: {minValue: 0},
+				  chartArea: {width: '99%',height: '90%'},
+				  vAxis: { textPosition: "none", minValue: 0, gridlines: {color: "transparent"}, baselineColor: "transparent"},
 				  hAxis: { textPosition: 'none' }
 				};
 				<?php echo $formater?>
