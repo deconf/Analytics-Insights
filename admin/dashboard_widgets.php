@@ -134,7 +134,7 @@ if (! class_exists('GADASH_Widgets')) {
             if (! in_array($hook, $valid_hooks) and 'index.php' != $hook)
                 return;
             
-            wp_register_style('ga_dash', $GADASH_Config->plugin_url . '/admin/css/ga_dash.css');
+            wp_register_style('ga_dash', $GADASH_Config->plugin_url . '/admin/css/ga_dash.css', NULL, GADWP_CURRENT_VERSION);
             
             wp_enqueue_style('ga_dash');
             wp_enqueue_style('wp-color-picker');
@@ -144,7 +144,7 @@ if (! class_exists('GADASH_Widgets')) {
             ), false, true);
             wp_enqueue_script('gadash-general-settings', plugins_url('js/admin.js', __FILE__), array(
                 'jquery'
-            ));
+            ), GADWP_CURRENT_VERSION);
             if (! wp_script_is('googlejsapi')) {
                 wp_register_script('googlejsapi', 'https://www.google.com/jsapi');
                 wp_enqueue_script('googlejsapi');

@@ -205,7 +205,15 @@ if (! class_exists('GADASH_Config')) {
                 $tools->ga_dash_clear_cache();
                 delete_option('gadash_lasterror');
                 update_option('gadwp_version', GADWP_CURRENT_VERSION);
-                delete_transient('ga_dash_gapi_errors');
+                if (is_multisite()) { // Cleanup errors on the entire network
+                    foreach (wp_get_sites() as $blog) {
+                        switch_to_blog($blog['blog_id']);
+                        delete_transient('ga_dash_gapi_errors');
+                        restore_current_blog();
+                    }
+                } else {
+                    delete_transient('ga_dash_gapi_errors');
+                }
             }
             
             if (! isset($this->options['ga_enhanced_links'])) {

@@ -29,6 +29,10 @@
 	padding-bottom: 5px;
 }
 
+#gadash-widget{
+	padding:0 5px;
+}
+
 #gadash-widgetchart {
 	width: 100%;
 }

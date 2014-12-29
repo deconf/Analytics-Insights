@@ -31,14 +31,14 @@ if (! class_exists('GADASH_Frontend')) {
                 return;
             }
             
-            wp_enqueue_style('ga_dash-front', $GADASH_Config->plugin_url . '/front/css/content_stats.css');
-            wp_enqueue_style('ga_dash-nprogress', $GADASH_Config->plugin_url . '/tools/nprogress/nprogress.css');
+            wp_enqueue_style('ga_dash-front', $GADASH_Config->plugin_url . '/front/css/content_stats.css', NULL, GADWP_CURRENT_VERSION);
+            wp_enqueue_style('ga_dash-nprogress', $GADASH_Config->plugin_url . '/tools/nprogress/nprogress.css', NULL, GADWP_CURRENT_VERSION);
             wp_enqueue_script('ga_dash-front', $GADASH_Config->plugin_url . '/front/js/content_stats.js', array(
                 'jquery'
-            ));
+            ), GADWP_CURRENT_VERSION);
             wp_enqueue_script('ga_dash-nprogress', $GADASH_Config->plugin_url . '/tools/nprogress/nprogress.js', array(
                 'jquery'
-            ));
+            ), GADWP_CURRENT_VERSION);
             wp_enqueue_script('googlejsapi', 'https://www.google.com/jsapi');
         }
 

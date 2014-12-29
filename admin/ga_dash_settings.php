@@ -1551,10 +1551,10 @@ final class GADASH_Settings
 										<div class="inside">
 											<div class="gadash-title">
 												<a
-													href="https://deconf.com/google-analytics-dashboard-wordpress/"><img
+													href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=support&utm_campaign=gadwp"><img
 													src="<?php echo plugins_url( 'images/help.png' , __FILE__ ); ?>" /></a>
 											</div>
-											<div class="gadash-desc"><?php echo  __('You can find support on', 'ga-dash') . ' <a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=support&utm_campaign=gadwp">'.__('DeConf.com', 'ga-dash').'</a>.'; ?></div>
+											<div class="gadash-desc"><?php echo  __('Plugin documentation and support on', 'ga-dash') . ' <a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=support&utm_campaign=gadwp">deconf.com</a>.'; ?></div>
 											<br />
 											<div class="gadash-title">
 												<a
@@ -1570,24 +1570,36 @@ final class GADASH_Settings
 										</h3>
 										<div class="inside">
 											<div class="gadash-title">
-												<a href="https://deconf.com/move-website-https-ssl/"><img
+												<a href="https://deconf.com/move-website-https-ssl/?utm_source=gadwp_config&utm_medium=link&utm_content=ssl&utm_campaign=gadwp"><img
 													src="<?php echo plugins_url( 'images/ssl.png' , __FILE__ ); ?>" /></a>
 											</div>
 											<div class="gadash-desc"><?php echo  '<a href="https://deconf.com/move-website-https-ssl/?utm_source=gadwp_config&utm_medium=link&utm_content=ssl&utm_campaign=gadwp">'.__('Improve search rankings', 'ga-dash').'</a> '.__('by moving your website to HTTPS/SSL.', 'ga-dash'); ?></div>
 											<br />
 											<div class="gadash-title">
-												<a href="https://deconf.com/wordpress/"><img
+												<a href="https://deconf.com/wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=plugins&utm_campaign=gadwp"><img
 													src="<?php echo plugins_url( 'images/wp.png' , __FILE__ ); ?>" /></a>
 											</div>
 											<div class="gadash-desc"><?php echo  __('Other', 'ga-dash').' <a href="https://deconf.com/wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=plugins&utm_campaign=gadwp">'.__('WordPress Plugins', 'ga-dash').'</a> '.__('written by the same author', 'ga-dash').'.'; ?></div>
+										</div>
+									</div>
+									<div class="postbox">
+										<h3>
+											<span><?php _e("Other Services",'ga-dash')?></span>
+										</h3>
+										<div class="inside">
+											<div class="gadash-title">
+												<a href="http://tracking.maxcdn.com/c/94142/36539/378"><img
+													src="<?php echo plugins_url( 'images/mcdn.png' , __FILE__ ); ?>" /></a>
+											</div>
+											<div class="gadash-desc"><?php echo  __('Speed up your website and plug into a whole', 'ga-dash').' <a href="http://tracking.maxcdn.com/c/94142/36539/378">'.__('new level of site speed', 'ga-dash').'</a>.'; ?></div>
 											<br />
 											<div class="gadash-title">
-												<a href="https://deconf.com/clicky-web-analytics-review/"><img
+												<a href="https://deconf.com/clicky-web-analytics-review/?utm_source=gadwp_config&utm_medium=link&utm_content=clicky&utm_campaign=gadwp"><img
 													src="<?php echo plugins_url( 'images/clicky.png' , __FILE__ ); ?>" /></a>
 											</div>
 											<div class="gadash-desc"><?php echo  '<a href="https://deconf.com/clicky-web-analytics-review/?utm_source=gadwp_config&utm_medium=link&utm_content=clicky&utm_campaign=gadwp">'.__('Web Analytics', 'ga-dash').'</a> '.__('service with users tracking at IP level.', 'ga-dash'); ?></div>
 										</div>
-									</div>
+									</div>									
 								</div>
 							</div>
 						</div>
