@@ -169,7 +169,7 @@ if (! class_exists('GADASH_Widgets')) {
             $tools = new GADASH_Tools();
             
             if ($tools->check_roles($GADASH_Config->options['ga_dash_access_back'])) {
-                wp_add_dashboard_widget('ga-dash-widget', __("Google Analytics Dashboard", 'ga-dash'), array(
+                wp_add_dashboard_widget('gadash-widget', __("Google Analytics Dashboard", 'ga-dash'), array(
                     $this,
                     'gadash_dashboard_widgets'
                 ), $control_callback = null);
@@ -287,7 +287,7 @@ if (! class_exists('GADASH_Widgets')) {
                 $GADASH_Config->options['ga_dash_default_metric'] = $query;
                 $GADASH_Config->set_plugin_options();
             } else {
-                $query = isset($GADASH_Config->options['ga_dash_default_metric']) ? $GADASH_Config->options['ga_dash_default_metric'] : 'visits';
+                $query = isset($GADASH_Config->options['ga_dash_default_metric']) ? $GADASH_Config->options['ga_dash_default_metric'] : 'sessions';
             }
             
             if (isset($_REQUEST['period'])) {
@@ -307,8 +307,7 @@ if (! class_exists('GADASH_Widgets')) {
             
             ?>
 
-				<select id="ga_dash_period" name="period"
-		onchange="this.form.submit()">
+	<select id="ga_dash_period" name="period" onchange="this.form.submit()">
 		<option value="realtime"
 			<?php selected ( "realtime", $period, true ); ?>><?php _e("Real-Time",'ga-dash'); ?></option>
 		<option value="today" <?php selected ( "today", $period, true ); ?>><?php _e("Today",'ga-dash'); ?></option>
@@ -326,9 +325,9 @@ if (! class_exists('GADASH_Widgets')) {
 				<?php if (!$realtime) {?>
 				<select id="ga_dash_query" name="query"
 		onchange="this.form.submit()">
-		<option value="visits" <?php selected ( "visits", $query, true ); ?>><?php _e("Visits",'ga-dash'); ?></option>
-		<option value="visitors"
-			<?php selected ( "visitors", $query, true ); ?>><?php _e("Visitors",'ga-dash'); ?></option>
+		<option value="sessions" <?php selected ( "sessions", $query, true ); ?>><?php _e("Sessions",'ga-dash'); ?></option>
+		<option value="users"
+			<?php selected ( "users", $query, true ); ?>><?php _e("Users",'ga-dash'); ?></option>
 		<option value="organicSearches"
 			<?php selected ( "organicSearches", $query, true ); ?>><?php _e("Organic",'ga-dash'); ?></option>
 		<option value="pageviews"
@@ -411,8 +410,8 @@ if (! class_exists('GADASH_Widgets')) {
                 
                 switch ($query) {
                     
-                    case 'visitors':
-                        $title = __("Visitors", 'ga-dash');
+                    case 'users':
+                        $title = __("Users", 'ga-dash');
                         break;
                     
                     case 'pageviews':
@@ -428,7 +427,7 @@ if (! class_exists('GADASH_Widgets')) {
                         break;
                     
                     default:
-                        $title = __("Visits", 'ga-dash');
+                        $title = __("Sessions", 'ga-dash');
                 }
             }
             
@@ -509,22 +508,22 @@ if (! class_exists('GADASH_Widgets')) {
 				  hAxis: { textPosition: 'none' }
 				};
 				<?php echo $formater?>
-		        var chart = new google.visualization.AreaChart(document.getElementById('ga_dash_statsdata'));
+		        var chart = new google.visualization.AreaChart(document.getElementById('gadash_mainchart'));
 				chart.draw(data, options);
 	      		};
 
 	      	<?php
             }
-            $ga_dash_visits_country = '';
+            $ga_dash_sessions_country = '';
             $GADASH_GAPI->getcountrycodes();
             if ($GADASH_Config->options['ga_dash_map'] and $tools->check_roles($GADASH_Config->options['ga_dash_access_back'])) {
-                $ga_dash_visits_country = $GADASH_GAPI->ga_dash_visits_country($projectId, $from, $to);
-                if (! is_numeric($ga_dash_visits_country)) {
+                $ga_dash_sessions_country = $GADASH_GAPI->ga_dash_sessions_country($projectId, $from, $to);
+                if (! is_numeric($ga_dash_sessions_country)) {
                     ?>
 					google.load("visualization", "1", {packages:["geochart"]})
 					function ga_dash_drawmap() {
 						var data = google.visualization.arrayToDataTable([
-						  ['<?php _e( "Country/City", 'ga-dash' ) ?>', ' <?php _e( "Visits", 'ga-dash' ) ?>'], <?php echo $ga_dash_visits_country; ?>
+						  ['<?php _e( "Country/City", 'ga-dash' ) ?>', ' <?php _e( "Sessions", 'ga-dash' ) ?>'], <?php echo $ga_dash_sessions_country; ?>
 						]);
 
 						var options = {
@@ -555,10 +554,10 @@ if (! class_exists('GADASH_Widgets')) {
 					google.load("visualization", "1", {packages:["corechart"]})
 					function ga_dash_drawtraffic() {
 						var data = google.visualization.arrayToDataTable([
-						  ['<?php _e( "Source", 'ga-dash' ); ?>', '<?php _e( "Visits", 'ga-dash' ); ?>'], <?php echo $ga_dash_traffic_sources;?> ]);
+						  ['<?php _e( "Source", 'ga-dash' ); ?>', '<?php _e( "Sessions", 'ga-dash' ); ?>'], <?php echo $ga_dash_traffic_sources;?> ]);
 
 						var datanvr = google.visualization.arrayToDataTable([
-						  ['<?php echo _e( "Type", 'ga-dash' );?>', '<?php  _e( "Visits", 'ga-dash' ); ?>'], <?php echo $ga_dash_new_return; ?>
+						  ['<?php echo _e( "Type", 'ga-dash' );?>', '<?php  _e( "Sessions", 'ga-dash' ); ?>'], <?php echo $ga_dash_new_return; ?>
 						]);
 
 						var chart = new google.visualization.PieChart(document.getElementById('ga_dash_trafficdata'));
@@ -592,7 +591,7 @@ if (! class_exists('GADASH_Widgets')) {
 					google.load("visualization", "1", {packages:["table"]})
 					function ga_dash_drawpgd() {
 					var data = google.visualization.arrayToDataTable([
-					  ['<?php _e( "Top Pages", 'ga-dash' ); ?>', '<?php  _e( "Visits", 'ga-dash' ); ?>'], <?php echo $ga_dash_top_pages; ?>
+					  ['<?php _e( "Top Pages", 'ga-dash' ); ?>', '<?php  _e( "Sessions", 'ga-dash' ); ?>'], <?php echo $ga_dash_top_pages; ?>
 					]);
 
 					var options = {
@@ -618,7 +617,7 @@ if (! class_exists('GADASH_Widgets')) {
 					google.load("visualization", "1", {packages:["table"]})
 					function ga_dash_drawrd() {
 						var datar = google.visualization.arrayToDataTable([
-				  			['<?php _e( "Top Referrers", 'ga-dash' ); ?>', '<?php _e( "Visits", 'ga-dash' ); ?>'], <?php echo $ga_dash_top_referrers; ?>
+				  			['<?php _e( "Top Referrers", 'ga-dash' ); ?>', '<?php _e( "Sessions", 'ga-dash' ); ?>'], <?php echo $ga_dash_top_referrers; ?>
 						]);
 
 						var options = {
@@ -644,7 +643,7 @@ if (! class_exists('GADASH_Widgets')) {
 					function ga_dash_drawsd() {
 
 						var datas = google.visualization.arrayToDataTable([
-						  ['<?php echo _e( "Top Searches", 'ga-dash' );?>', '<?php _e( "Visits", 'ga-dash' );?>'], <?php echo $ga_dash_top_searches; ?>
+						  ['<?php echo _e( "Top Searches", 'ga-dash' );?>', '<?php _e( "Sessions", 'ga-dash' );?>'], <?php echo $ga_dash_top_searches; ?>
 						]);
 
 						var options = {
@@ -667,37 +666,37 @@ if (! class_exists('GADASH_Widgets')) {
 <?php
             if ($realtime != "realtime") {
                 ?>
-<div id="ga_dash_statsdata" class="widefat" style="height: 250px;"></div>
-<div id="details_div">
+<div id="gadash_mainchart"></div>
 
-	<table class="gatable" cellpadding="4">
-		<tr>
-			<td width="24%"><?php _e( "Visits:", 'ga-dash' );?></td>
-			<td width="12%" class="gavalue"><a
-				href="?query=visits&period=<?php echo $period; ?>" class="gatable"><?php echo ( int ) $ga_dash_bottom_stats ['rows'] [0] [1];?></td>
-			<td width="24%"><?php _e( "Visitors:", 'ga-dash' );?></td>
-			<td width="12%" class="gavalue"><a
-				href="?query=visitors&period=<?php echo $period; ?>" class="gatable"><?php echo ( int ) $ga_dash_bottom_stats ['rows'] [0] [2];?></a></td>
-			<td width="24%"><?php _e( "Page Views:", 'ga-dash' );?></td>
-			<td width="12%" class="gavalue"><a
-				href="?query=pageviews&period=<?php echo $period; ?>"
-				class="gatable"><?php echo ( int ) $ga_dash_bottom_stats ['rows'] [0] [3];?></a></td>
-		</tr>
-		<tr>
-			<td><?php _e( "Bounce Rate:", 'ga-dash' );?></td>
-			<td class="gavalue"><a
-				href="?query=visitBounceRate&period=<?php echo $period; ?>"
-				class="gatable"><?php echo ( double ) round ( $ga_dash_bottom_stats ['rows'] [0] [4], 2 );?>%</a></td>
-			<td><?php _e( "Organic Search:", 'ga-dash' );?></td>
-			<td class="gavalue"><a
-				href="?query=organicSearches&period=<?php echo $period; ?>"
-				class="gatable"><?php echo ( int ) $ga_dash_bottom_stats ['rows'] [0] [5];?></a></td>
-			<td><?php _e( "Pages per Visit:", 'ga-dash' );?></td>
-			<td class="gavalue"><a href="#" class="gatable"><?php echo ( double ) (($ga_dash_bottom_stats ['rows'] [0] [1]) ? round ( $ga_dash_bottom_stats ['rows'] [0] [3] / $ga_dash_bottom_stats ['rows'] [0] [1], 2 ) : '0');?></a></td>
-		</tr>
-	</table>
-
+<div class="gadash-wrapper">
+	<div class="inside">
+		<div class="small-box">
+			<h3><?php _e( "Sessions", 'ga-dash' );?></h3>
+			<p id="gdsessions"><?php echo ( int ) $ga_dash_bottom_stats ['rows'] [0] [1];?></p>
+		</div>
+		<div class="small-box">
+			<h3><?php _e( "Users", 'ga-dash' );?></h3>
+			<p id="gdusers"><?php echo ( int ) $ga_dash_bottom_stats ['rows'] [0] [2];?></p>
+		</div>
+		<div class="small-box">
+			<h3><?php _e( "Page Views", 'ga-dash' );?></h3>
+			<p id="gdpageviews"><?php echo ( int ) $ga_dash_bottom_stats ['rows'] [0] [3];?></p>
+		</div>
+		<div class="small-box">
+			<h3><?php _e( "Bounce Rate", 'ga-dash' );?></h3>
+			<p id="gdbouncerate"><?php echo ( double ) round ( $ga_dash_bottom_stats ['rows'] [0] [4], 2 );?>%</p>
+		</div>
+		<div class="small-box">
+			<h3><?php _e( "Organic Search", 'ga-dash' );?></h3>
+			<p id="gdorganicsearch"><?php echo ( int ) $ga_dash_bottom_stats ['rows'] [0] [5];?></p>
+		</div>
+		<div class="small-box">
+			<h3><?php _e( "Pages/Session", 'ga-dash' );?></h3>
+			<p id="gdpagespervisit"><?php echo ( double ) round ( $ga_dash_bottom_stats ['rows'] [0] [6], 2);?></p>
+		</div>
+	</div>
 </div>
+
 <?php
             } else {
                 
@@ -710,43 +709,43 @@ if (! class_exists('GADASH_Widgets')) {
 <?php
                 } else {
                     ?>
-<table width='90%' class='realtime'>
-	<tr>
-		<td class='gadash-tdo-left'>
-			<div>
-				<span class='gadash-online' id='gadash-online'>0</span>
-			</div>
-		</td>
-		<td class='gadash-tdo-right' id='gadash-tdo-right'><span
-			class="gadash-bigtext"><?php _e( "REFERRAL", 'ga-dash' );?>: 0</span><br />
+<div class="realtime">
+	<div class="gadash-rt-box">
+		<div class='gadash-tdo-left'>
+			<div class='gadash-online' id='gadash-online'>0</div>
+		</div>
+		<div class='gadash-tdo-right' id='gadash-tdo-right'>
+			<span class="gadash-bigtext"><?php _e( "REFERRAL", 'ga-dash' );?>: 0</span><br />
 			<br /> <span class="gadash-bigtext"><?php _e( "ORGANIC", 'ga-dash' );?>: 0</span><br />
 			<br /> <span class="gadash-bigtext"><?php _e( "SOCIAL", 'ga-dash' );?>: 0</span><br />
-			<br /></td>
-		<td class='gadash-tdo-rights' id='gadash-tdo-rights'><span
-			class="gadash-bigtext"><?php _e( "DIRECT", 'ga-dash' );?>: 0</span><br />
+			<br />
+		</div>
+		<div class='gadash-tdo-rights' id='gadash-tdo-rights'>
+			<span class="gadash-bigtext"><?php _e( "DIRECT", 'ga-dash' );?>: 0</span><br />
 			<br /> <span class="gadash-bigtext"><?php _e( "NEW", 'ga-dash' );?>: 0</span><br />
 			<br /> <span class="gadash-bigtext"><?php _e( "RETURN", 'ga-dash' );?>: 0</span><br />
-			<br /></td>
-	</tr>
-	<tr>
-		<td id='gadash-pages' class='gadash-pages' colspan='3'>&nbsp;</td>
-	</tr>
-</table>
+			<br />
+		</div>
+	</div>
+	<div>
+		<div id='gadash-pages' class='gadash-pages' colspan='3'>&nbsp;</div>
+	</div>
+</div>
 <?php
                     
                     echo $GADASH_GAPI->ga_realtime();
                 }
             }
-            if ($GADASH_Config->options['ga_dash_map'] and $tools->check_roles($GADASH_Config->options['ga_dash_access_back']) and $ga_dash_visits_country) {
+            if ($GADASH_Config->options['ga_dash_map'] and $tools->check_roles($GADASH_Config->options['ga_dash_access_back']) and $ga_dash_sessions_country) {
                 ?>
 <br />
 <h3>
 				<?php
                 
                 if ($GADASH_Config->options['ga_target_geomap'] and isset($GADASH_GAPI->country_codes[$GADASH_Config->options['ga_target_geomap']])) {
-                    echo __("Visits from ", 'ga-dash') . esc_html($GADASH_GAPI->country_codes[$GADASH_Config->options['ga_target_geomap']]);
+                    echo __("Sessions from ", 'ga-dash') . esc_html($GADASH_GAPI->country_codes[$GADASH_Config->options['ga_target_geomap']]);
                 } else {
-                    echo __("Visits by Country", 'ga-dash');
+                    echo __("Sessions by Country", 'ga-dash');
                 }
                 ?>
 				</h3>

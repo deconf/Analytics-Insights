@@ -40,7 +40,7 @@ class GADSH_Frontend_Widget extends WP_Widget
         global $GADASH_Config;
         
         $widget_title = apply_filters('widget_title', $instance['title']);
-        $title = __("Visits", 'ga-dash') . ($instance['anonim'] ? "' " . __("trend", 'ga-dash') : '');
+        $title = __("Sessions", 'ga-dash') . ($instance['anonim'] ? "' " . __("trend", 'ga-dash') : '');
         
         echo "\n<!-- BEGIN GADWP v" . GADWP_CURRENT_VERSION . " Widget - https://deconf.com/google-analytics-dashboard-wordpress/ -->\n";
         echo $args['before_widget'];
@@ -110,8 +110,8 @@ class GADSH_Frontend_Widget extends WP_Widget
 					response = jQuery.parseJSON(response);
 				    if (!jQuery.isNumeric(response)){
 				        if (jQuery("#gadash-widgetchart")[0]){
-				           gadash_widgetvisits=jQuery.parseJSON(response[0]); 
-						   google.setOnLoadCallback(ga_dash_drawfwidgetvisits(gadash_widgetvisits));
+				           gadash_widgetsessions=jQuery.parseJSON(response[0]); 
+						   google.setOnLoadCallback(ga_dash_drawfwidgetsessions(gadash_widgetsessions));
 				        }
 				        if (jQuery("#gadash-widgettotals")[0]){ 
 						   ga_dash_drawtotalsstats(jQuery.parseJSON(response[1]));
@@ -123,7 +123,7 @@ class GADSH_Frontend_Widget extends WP_Widget
 				});';
         
         echo 'google.load("visualization", "1", {packages:["corechart"]});
-					function ga_dash_drawfwidgetvisits(response) {
+					function ga_dash_drawfwidgetsessions(response) {
     					var data = google.visualization.arrayToDataTable(response);
     					var options = {
     					  legend: {position: "none"},
@@ -140,7 +140,7 @@ class GADSH_Frontend_Widget extends WP_Widget
     					chart.draw(data, options);
 				   }
     			   function ga_dash_drawtotalsstats(response) {
-                        jQuery("#gadash-widgettotals").html("<div class=\"gadash-left\">' . __("Period:", 'ga-dash') . '</div> <div class=\"gadash-right\">' . $periodtext . '</div><div class=\"gadash-left\">' . __("Total Visits:", 'ga-dash') . '</div> <div class=\"gadash-right\">"+response+"</div>");
+                        jQuery("#gadash-widgettotals").html("<div class=\"gadash-left\">' . __("Period:", 'ga-dash') . '</div> <div class=\"gadash-right\">' . $periodtext . '</div><div class=\"gadash-left\">' . __("Sessions:", 'ga-dash') . '</div> <div class=\"gadash-right\">"+response+"</div>");
                    }';
         
         echo '</script>';

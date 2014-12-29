@@ -21,8 +21,8 @@ class GADASH_Uninstall
                 delete_option('gadash_lasterror');
                 delete_transient('ga_dash_refresh_token');
                 delete_transient('ga_dash_gapi_errors');
+                restore_current_blog();
             }
-            restore_current_blog();
             delete_site_option('gadash_network_options');
             delete_site_transient('ga_dash_refresh_token');
         } else { // Cleanup Single install

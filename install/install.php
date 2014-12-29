@@ -46,7 +46,7 @@ class GADASH_Install
             $options['ga_tracking_code'] = '';
             $options['ga_enhanced_links'] = 0;
             $options['ga_dash_remarketing'] = 0;
-            $options['ga_dash_default_metric'] = 'visits';
+            $options['ga_dash_default_metric'] = 'sessions';
             $options['ga_dash_default_dimension'] = '30daysAgo';
             $options['ga_dash_frontend_stats'] = 0;
             $options['ga_dash_network'] = 0;
@@ -103,7 +103,7 @@ class GADASH_Install
             $options['ga_dash_frontend_keywords'] = 0;
             $options['ga_enhanced_links'] = 0;
             $options['ga_dash_remarketing'] = 0;
-            $options['ga_dash_default_metric'] = 'visits';
+            $options['ga_dash_default_metric'] = 'sessions';
             $options['ga_dash_default_dimension'] = '30daysAgo';
             $options['ga_dash_network'] = 0;
             $options['ga_event_bouncerate'] = 0;

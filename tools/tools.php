@@ -13,13 +13,17 @@ if (! class_exists('GADASH_Tools')) {
         function guess_default_domain($profiles)
         {
             $domain = get_option('siteurl');
-            $domain = str_replace('http://', '', $domain);
-            foreach ($profiles as $items) {
-                if (strpos($items[3], $domain)) {
-                    return $items[1];
+            $domain = str_ireplace(array('http://', 'https://'), '', $domain);
+            if (is_array($profiles)){
+                foreach ($profiles as $items) {
+                    if (strpos($items[3], $domain)) {
+                        return $items[1];
+                    }
                 }
+                return $profiles[0][1];
+            }else{
+                return '';
             }
-            return $profiles[0][1];
         }
 
         function get_selected_profile($profiles, $profile)

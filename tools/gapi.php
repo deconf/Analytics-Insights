@@ -172,7 +172,7 @@ if (! class_exists('GADASH_GAPI')) {
         /**
          * Retrives all Google Analytics Views with details
          *
-         * @return array|boolean
+         * @return array|string
          */
         function refresh_profiles()
         {
@@ -195,19 +195,20 @@ if (! class_exists('GADASH_GAPI')) {
                         );
                     }
                     update_option('gadash_lasterror', 'N/A');
-                    return ($ga_dash_profile_list);
+                    return $ga_dash_profile_list;
                 } else {
                     update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': No properties were found in this account!');
+                    return '';
                 }
             } catch (Google_IO_Exception $e) {
                 update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e));
-                return false;
+                return '';
             } catch (Google_Service_Exception $e) {
                 update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html("(" . $e->getCode() . ") " . $e->getMessage()));
                 set_transient('ga_dash_gapi_errors', $e->getErrors(), $this->error_timeout);
-                return $e->getCode();
             } catch (Exception $e) {
                 update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e));
+                return '';
             }
         }
 
@@ -412,7 +413,7 @@ if (! class_exists('GADASH_GAPI')) {
                 $timeouts = 1;
             }
             
-            $metrics = 'ga:visits,ga:visitors,ga:pageviews,ga:visitBounceRate,ga:organicSearches,ga:timeOnSite';
+            $metrics = 'ga:sessions,ga:users,ga:pageviews,ga:BounceRate,ga:organicSearches,ga:pageviewsPerSession';
             $dimensions = 'ga:year';
             try {
                 $serial = 'gadash_qr3' . $projectId . $from;
@@ -543,7 +544,7 @@ if (! class_exists('GADASH_GAPI')) {
         {
             global $GADASH_Config;
             
-            $metrics = 'ga:visits';
+            $metrics = 'ga:sessions';
             $dimensions = 'ga:source,ga:fullReferrer,ga:medium';
             
             if ($from == "today") {
@@ -563,7 +564,7 @@ if (! class_exists('GADASH_GAPI')) {
                     
                     $data = $this->service->data_ga->get('ga:' . $projectId, $from, $to, $metrics, array(
                         'dimensions' => $dimensions,
-                        'sort' => '-ga:visits',
+                        'sort' => '-ga:sessions',
                         'max-results' => '24',
                         'filters' => 'ga:medium==referral',
                         'quotaUser' => $this->managequota.'p'.$projectId
@@ -615,7 +616,7 @@ if (! class_exists('GADASH_GAPI')) {
         {
             global $GADASH_Config;
             
-            $metrics = 'ga:visits';
+            $metrics = 'ga:sessions';
             $dimensions = 'ga:keyword';
             
             if ($from == "today") {
@@ -635,7 +636,7 @@ if (! class_exists('GADASH_GAPI')) {
                     
                     $data = $this->service->data_ga->get('ga:' . $projectId, $from, $to, $metrics, array(
                         'dimensions' => $dimensions,
-                        'sort' => '-ga:visits',
+                        'sort' => '-ga:sessions',
                         'max-results' => '24',
                         'quotaUser' => $this->managequota.'p'.$projectId
                     ));
@@ -684,11 +685,11 @@ if (! class_exists('GADASH_GAPI')) {
          *            $to
          * @return string|int
          */
-        function ga_dash_visits_country($projectId, $from, $to)
+        function ga_dash_sessions_country($projectId, $from, $to)
         {
             global $GADASH_Config;
             
-            $metrics = 'ga:visits';
+            $metrics = 'ga:sessions';
             $options = "";
             
             if ($from == "today") {
@@ -727,7 +728,7 @@ if (! class_exists('GADASH_GAPI')) {
                         $data = $this->service->data_ga->get('ga:' . $projectId, $from, $to, $metrics, array(
                             'dimensions' => $dimensions,
                             'filters' => $filters,
-                            'sort' => '-ga:visits',
+                            'sort' => '-ga:sessions',
                             'max-results' => $GADASH_Config->options['ga_target_number'],
                             'quotaUser' => $this->managequota.'p'.$projectId
                         ));
@@ -788,7 +789,7 @@ if (! class_exists('GADASH_GAPI')) {
         {
             global $GADASH_Config;
             
-            $metrics = 'ga:visits';
+            $metrics = 'ga:sessions';
             $dimensions = 'ga:medium';
             
             if ($from == "today") {
@@ -855,7 +856,7 @@ if (! class_exists('GADASH_GAPI')) {
         {
             global $GADASH_Config;
             
-            $metrics = 'ga:visits';
+            $metrics = 'ga:sessions';
             $dimensions = 'ga:visitorType';
             
             if ($from == "today") {
@@ -924,7 +925,7 @@ if (! class_exists('GADASH_GAPI')) {
             $content = '';
             $from = $period;
             $to = 'yesterday';
-            $metrics = 'ga:visits';
+            $metrics = 'ga:sessions';
             $dimensions = 'ga:date,ga:dayOfWeekName';
             
             try {
@@ -975,14 +976,14 @@ if (! class_exists('GADASH_GAPI')) {
                 $ga_dash_data .= '["' . ucfirst(__($data["rows"][$i][1])) . ", " . substr_replace(substr_replace($data["rows"][$i][0], "-", 4, 0), "-", 7, 0) . '",' . ($anonim ? str_replace(",", ".", round($data["rows"][$i][2] * 100 / $max, 2)) : $data["rows"][$i][2]) . '],';
             }
             
-            $ga_dash_data = '[["' . __("Date", 'ga-dash') . '", "' . __("Visits", 'ga-dash') . ($anonim ? "' " . __("trend", 'ga-dash') : '') . '"],' . rtrim($ga_dash_data, ",") . "]";
+            $ga_dash_data = '[["' . __("Date", 'ga-dash') . '", "' . __("Sessions", 'ga-dash') . ($anonim ? "' " . __("trend", 'ga-dash') : '') . '"],' . rtrim($ga_dash_data, ",") . "]";
             
             $ga_dash_data = wp_kses($ga_dash_data, $GADASH_Config->allowed_html);
             
             if ($ga_dash_data) {
                 return array(
                     $ga_dash_data,
-                    (int) $data['totalsForAllResults']['ga:visits']
+                    (int) $data['totalsForAllResults']['ga:sessions']
                 );
             } else {
                 return - 22;
@@ -1000,7 +1001,7 @@ if (! class_exists('GADASH_GAPI')) {
          *            $anonim
          * @return string|int
          */
-        function frontend_afterpost_visits($projectId, $page_url, $post_id)
+        function frontend_afterpost_sessions($projectId, $page_url, $post_id)
         {
             global $GADASH_Config;
             
@@ -1073,7 +1074,7 @@ if (! class_exists('GADASH_GAPI')) {
             
             $from = '30daysAgo';
             $to = 'yesterday';
-            $metrics = 'ga:visits';
+            $metrics = 'ga:sessions';
             $dimensions = 'ga:keyword';
             try {
                 $serial = 'gadash_qr22' . $post_id . 'search';
@@ -1086,7 +1087,7 @@ if (! class_exists('GADASH_GAPI')) {
                     
                     $data = $this->service->data_ga->get('ga:' . $projectId, $from, $to, $metrics, array(
                         'dimensions' => $dimensions,
-                        'sort' => '-ga:visits',
+                        'sort' => '-ga:sessions',
                         'max-results' => '24',
                         'filters' => 'ga:pagePath==' . $page_url,
                         'quotaUser' => $this->managequota.'p'.$projectId
@@ -1121,7 +1122,7 @@ if (! class_exists('GADASH_GAPI')) {
             
             if ($ga_dash_data) {
                 
-                $ga_dash_data = '[["' . __('Top Searches', "ga-dash") . '", "' . __('Visits', "ga-dash") . '"],' . $ga_dash_data . ' ]';
+                $ga_dash_data = '[["' . __('Top Searches', "ga-dash") . '", "' . __('Sessions', "ga-dash") . '"],' . $ga_dash_data . ' ]';
                 
                 return $ga_dash_data;
             } else {
@@ -1140,7 +1141,7 @@ if (! class_exists('GADASH_GAPI')) {
         function gadash_realtime_data($projectId)
         {
             global $GADASH_Config;
-            $metrics = 'rt:activeVisitors';
+            $metrics = 'rt:activeUsers';
             $dimensions = 'rt:pagePath,rt:source,rt:keyword,rt:trafficType,rt:visitorType,rt:pageTitle';
             try {
                 $serial = "gadash_realtimecache_" . $projectId;
@@ -1212,7 +1213,7 @@ if (! class_exists('GADASH_GAPI')) {
 					return self.indexOf(value) === index;
 				 }
 
-				function countvisits(data, searchvalue) {
+				function countsessions(data, searchvalue) {
 					var count = 0;
 					for ( var i = 0; i < data["rows"].length; i = i + 1 ) {
 						if (jQuery.inArray(searchvalue, data["rows"][ i ])>-1){
@@ -1297,24 +1298,23 @@ if (! class_exists('GADASH_GAPI')) {
 
 					jQuery.post(ajaxurl, {action: "gadash_get_online_data", gadash_security: "' . wp_create_nonce('gadash_get_online_data') . '"}, function(response){
 						var data = jQuery.parseJSON(response);
-
                         if (jQuery.isNumeric(data) || typeof data === "undefined"){
                             data = [];
                             data["totalsForAllResults"] = []
-                            data["totalsForAllResults"]["rt:activeVisitors"] = "0";
+                            data["totalsForAllResults"]["rt:activeUsers"] = "0";
                             data["rows"]= [];
                         }
 
-						if (data["totalsForAllResults"]["rt:activeVisitors"]!==document.getElementById("gadash-online").innerHTML){
+						if (data["totalsForAllResults"]["rt:activeUsers"]!==document.getElementById("gadash-online").innerHTML){
 							jQuery("#gadash-online").fadeOut("slow");
 							jQuery("#gadash-online").fadeOut(500);
 							jQuery("#gadash-online").fadeOut("slow", function() {
-								if ((parseInt(data["totalsForAllResults"]["rt:activeVisitors"]))<(parseInt(document.getElementById("gadash-online").innerHTML))){
+								if ((parseInt(data["totalsForAllResults"]["rt:activeUsers"]))<(parseInt(document.getElementById("gadash-online").innerHTML))){
 									jQuery("#gadash-online").css({\'background-color\' : \'#FFE8E8\'});
 								}else{
 									jQuery("#gadash-online").css({\'background-color\' : \'#E0FFEC\'});
 								}
-								document.getElementById("gadash-online").innerHTML = data["totalsForAllResults"]["rt:activeVisitors"];
+								document.getElementById("gadash-online").innerHTML = data["totalsForAllResults"]["rt:activeUsers"];
 							});
 							jQuery("#gadash-online").fadeIn("slow");
 							jQuery("#gadash-online").fadeIn(500);
@@ -1323,7 +1323,7 @@ if (! class_exists('GADASH_GAPI')) {
 							});
 						};
 
-						if (data["totalsForAllResults"]["rt:activeVisitors"] == 0){
+						if (data["totalsForAllResults"]["rt:activeUsers"] == 0){
 							data["rows"]= [];
 						};
 
@@ -1349,48 +1349,48 @@ if (! class_exists('GADASH_GAPI')) {
 						var upagepath = pagepath.filter(onlyUniqueValues);
 						var upagepathstats = [];
 						for ( var i = 0; i < upagepath.length; i = i + 1 ) {
-							upagepathstats[i]={"pagepath":upagepath[i],"count":countvisits(data,upagepath[i])};
+							upagepathstats[i]={"pagepath":upagepath[i],"count":countsessions(data,upagepath[i])};
 		 				}
 						upagepathstats.sort( function(a,b){ return b.count - a.count } );
 
 						var pgstatstable = "";
 						for ( var i = 0; i < upagepathstats.length; i = i + 1 ) {
 							if (i < ' . $GADASH_Config->options['ga_realtime_pages'] . '){
-								pgstatstable += "<tr class=\"gadash-pline\"><td class=\"gadash-pleft\"><a href=\"#\" title=\""+gadash_pagedetails(data, upagepathstats[i].pagepath)+"\">"+upagepathstats[i].pagepath.substring(0,70)+"</a></td><td class=\"gadash-pright\">"+upagepathstats[i].count+"</td></tr>";
+								pgstatstable += "<div class=\"gadash-pline\"><div class=\"gadash-pleft\"><a href=\"#\" title=\""+gadash_pagedetails(data, upagepathstats[i].pagepath)+"\">"+upagepathstats[i].pagepath.substring(0,70)+"</a></div><div class=\"gadash-pright\">"+upagepathstats[i].count+"</div></div>";
 							}
 		 				}
-						document.getElementById("gadash-pages").innerHTML="<br /><table class=\"gadash-pg\">"+pgstatstable+"</table>";
+						document.getElementById("gadash-pages").innerHTML="<br /><div class=\"gadash-pg\">"+pgstatstable+"</div>";
 
 						var ureferralsstats = [];
 						var ureferrals = referrals.filter(onlyUniqueValues);
 						for ( var i = 0; i < ureferrals.length; i = i + 1 ) {
-							ureferralsstats[i]={"value":ureferrals[i],"count":countvisits(data,ureferrals[i])};
+							ureferralsstats[i]={"value":ureferrals[i],"count":countsessions(data,ureferrals[i])};
 		 				}
 						ureferralsstats.sort( function(a,b){ return b.count - a.count } );
 
 						var ukeywordsstats = [];
 						var ukeywords = keywords.filter(onlyUniqueValues);
 						for ( var i = 0; i < ukeywords.length; i = i + 1 ) {
-							ukeywordsstats[i]={"value":ukeywords[i],"count":countvisits(data,ukeywords[i])};
+							ukeywordsstats[i]={"value":ukeywords[i],"count":countsessions(data,ukeywords[i])};
 		 				}
 						ukeywordsstats.sort( function(a,b){ return b.count - a.count } );
 
 						var usocialstats = [];
 						var usocial = social.filter(onlyUniqueValues);
 						for ( var i = 0; i < usocial.length; i = i + 1 ) {
-							usocialstats[i]={"value":usocial[i],"count":countvisits(data,usocial[i])};
+							usocialstats[i]={"value":usocial[i],"count":countsessions(data,usocial[i])};
 		 				}
 						usocialstats.sort( function(a,b){ return b.count - a.count } );
 
 						var uvisittype = ["REFERRAL","ORGANIC","SOCIAL"];
-						document.getElementById("gadash-tdo-right").innerHTML = "<span class=\"gadash-bigtext\"><a href=\"#\" title=\""+gadash_generatetooltip(ureferralsstats)+"\">"+\'' . __("REFERRAL", 'ga-dash') . '\'+"</a>: "+countvisits(data,uvisittype[0])+"</span><br /><br />";
-						document.getElementById("gadash-tdo-right").innerHTML += "<span class=\"gadash-bigtext\"><a href=\"#\" title=\""+gadash_generatetooltip(ukeywordsstats)+"\">"+\'' . __("ORGANIC", 'ga-dash') . '\'+"</a>: "+countvisits(data,uvisittype[1])+"</span><br /><br />";
-						document.getElementById("gadash-tdo-right").innerHTML += "<span class=\"gadash-bigtext\"><a href=\"#\" title=\""+gadash_generatetooltip(usocialstats)+"\">"+\'' . __("SOCIAL", 'ga-dash') . '\'+"</a>: "+countvisits(data,uvisittype[2])+"</span><br /><br />";
+						document.getElementById("gadash-tdo-right").innerHTML = "<span class=\"gadash-bigtext\"><a href=\"#\" title=\""+gadash_generatetooltip(ureferralsstats)+"\">"+\'' . __("REFERRAL", 'ga-dash') . '\'+"</a>: "+countsessions(data,uvisittype[0])+"</span><br /><br />";
+						document.getElementById("gadash-tdo-right").innerHTML += "<span class=\"gadash-bigtext\"><a href=\"#\" title=\""+gadash_generatetooltip(ukeywordsstats)+"\">"+\'' . __("ORGANIC", 'ga-dash') . '\'+"</a>: "+countsessions(data,uvisittype[1])+"</span><br /><br />";
+						document.getElementById("gadash-tdo-right").innerHTML += "<span class=\"gadash-bigtext\"><a href=\"#\" title=\""+gadash_generatetooltip(usocialstats)+"\">"+\'' . __("SOCIAL", 'ga-dash') . '\'+"</a>: "+countsessions(data,uvisittype[2])+"</span><br /><br />";
 
 						var uvisitortype = ["DIRECT","NEW","RETURN"];
-						document.getElementById("gadash-tdo-rights").innerHTML = "<span class=\"gadash-bigtext\">"+\'' . __("DIRECT", 'ga-dash') . '\'+": "+countvisits(data,uvisitortype[0])+"</span><br /><br />";
-						document.getElementById("gadash-tdo-rights").innerHTML += "<span class=\"gadash-bigtext\">"+\'' . __("NEW", 'ga-dash') . '\'+": "+countvisits(data,uvisitortype[1])+"</span><br /><br />";
-						document.getElementById("gadash-tdo-rights").innerHTML += "<span class=\"gadash-bigtext\">"+\'' . __("RETURN", 'ga-dash') . '\'+": "+countvisits(data,uvisitortype[2])+"</span><br /><br />";
+						document.getElementById("gadash-tdo-rights").innerHTML = "<span class=\"gadash-bigtext\">"+\'' . __("DIRECT", 'ga-dash') . '\'+": "+countsessions(data,uvisitortype[0])+"</span><br /><br />";
+						document.getElementById("gadash-tdo-rights").innerHTML += "<span class=\"gadash-bigtext\">"+\'' . __("NEW", 'ga-dash') . '\'+": "+countsessions(data,uvisitortype[1])+"</span><br /><br />";
+						document.getElementById("gadash-tdo-rights").innerHTML += "<span class=\"gadash-bigtext\">"+\'' . __("RETURN", 'ga-dash') . '\'+": "+countsessions(data,uvisitortype[2])+"</span><br /><br />";
 
 					});
 			   };

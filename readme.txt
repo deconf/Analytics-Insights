@@ -128,10 +128,13 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 
 = 4.3.11 =
 - Bug Fix: improvements on QPS management
-- Bug Fix: fallback to world map when a wrong country code is entered
-- Bug Fix: removed double transient call on succesful authorization
+- Bug Fix: fall-back to world map when a wrong country code is entered
+- Bug Fix: removed double transient call on successful authorization
+- Bug Fix: PHP warning when authorizing without a Google Analytics account
+- Bug Fix: switch back to initial blog after completing an error clean up in multisite mode
 - Enhancement: clear all errors on version change
-- Enhancement: gridlines are now transparent
+- Enhancement: grid lines are now transparent
+- Enhancement: responsive design improvements for admin widget
 
 = 4.3.10 =
 - Bug Fix: removed the PHP debugging log for frontend queries

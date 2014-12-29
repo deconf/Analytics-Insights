@@ -76,14 +76,14 @@ if (! class_exists('GADASH_Frontend')) {
             					   NProgress.configure({ parent: "#gadwp-content" });
             					   NProgress.configure({ showSpinner: false });
             					   NProgress.start();
-									if(typeof ga_dash_drawpagevisits == "function"){
-										jQuery.post("' . admin_url('admin-ajax.php') . '", {action: "gadash_get_frontendvisits_data",gadash_pageurl: "' . $page_url . '",gadash_postid: "' . $post_id . '",gadash_security_aaf: "' . wp_create_nonce('gadash_get_frontendvisits_data') . '"}, function(response){
-										    gadash_pagevisits = jQuery.parseJSON(response);
-										    if (!jQuery.isNumeric(gadash_pagevisits)){
-		          							    google.setOnLoadCallback(ga_dash_drawpagevisits(gadash_pagevisits));
+									if(typeof ga_dash_drawpagesessions == "function"){
+										jQuery.post("' . admin_url('admin-ajax.php') . '", {action: "gadash_get_frontendsessions_data",gadash_pageurl: "' . $page_url . '",gadash_postid: "' . $post_id . '",gadash_security_aaf: "' . wp_create_nonce('gadash_get_frontendsessions_data') . '"}, function(response){
+										    gadash_pagesessions = jQuery.parseJSON(response);
+										    if (!jQuery.isNumeric(gadash_pagesessions)){
+		          							    google.setOnLoadCallback(ga_dash_drawpagesessions(gadash_pagesessions));
 											}else{
-										        jQuery("#gadwp-visits").css({"background-color":"#F7F7F7","height":"auto","padding-top":"30px","padding-bottom":"30px","color":"#000","text-align":"center"});  
-										        jQuery("#gadwp-visits").html("' . __("This report is unavailable", 'ga-dash') . ' ("+response+")");
+										        jQuery("#gadwp-sessions").css({"background-color":"#F7F7F7","height":"auto","padding-top":"30px","padding-bottom":"30px","color":"#000","text-align":"center"});  
+										        jQuery("#gadwp-sessions").html("' . __("This report is unavailable", 'ga-dash') . ' ("+response+")");
 										        NProgress.done();    
                                             }	
 										});
@@ -119,9 +119,9 @@ if (! class_exists('GADASH_Frontend')) {
                     
                     $content .= '
 			google.load("visualization", "1", {packages:["corechart"]});
-			function ga_dash_drawpagevisits(gadash_pagevisits) {
+			function ga_dash_drawpagesessions(gadash_pagesessions) {
 	
-			var data = google.visualization.arrayToDataTable(gadash_pagevisits);
+			var data = google.visualization.arrayToDataTable(gadash_pagesessions);
 
 			var options = {
 			  legend: {position: "none"},
@@ -132,7 +132,7 @@ if (! class_exists('GADASH_Frontend')) {
 			  hAxis: { textPosition: "none"}
 			};
 
-			var chart = new google.visualization.AreaChart(document.getElementById("gadwp-visits"));
+			var chart = new google.visualization.AreaChart(document.getElementById("gadwp-sessions"));
 			chart.draw(data, options);
             NProgress.done();      
 			}';
@@ -166,7 +166,7 @@ if (! class_exists('GADASH_Frontend')) {
 									<a href="#gadwp">' . __('Google Analytics Reports', "ga-dash") . ' <span id="gadwp-arrow">&#x25BC;</span></a>
 									</div>
 									<div id="gadwp-content">
-										' . ($GADASH_Config->options['ga_dash_frontend_stats'] ? '<div id="gadwp-visits" class="gadwp-spinner"></div>' : '') . ($GADASH_Config->options['ga_dash_frontend_keywords'] ? '<div id="gadwp-searches" class="gadwp-spinner"></div>' : '') . '
+										' . ($GADASH_Config->options['ga_dash_frontend_stats'] ? '<div id="gadwp-sessions" class="gadwp-spinner"></div>' : '') . ($GADASH_Config->options['ga_dash_frontend_keywords'] ? '<div id="gadwp-searches" class="gadwp-spinner"></div>' : '') . '
 									</div>
 								</div>
 							</p>';

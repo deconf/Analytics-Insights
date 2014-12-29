@@ -12,10 +12,10 @@ if (! class_exists('GADASH_Frontend_Ajax')) {
 
         function __construct()
         {
-            // Frontend Visits action
-            add_action('wp_ajax_gadash_get_frontendvisits_data', array(
+            // Frontend Sessions action
+            add_action('wp_ajax_gadash_get_frontendsessions_data', array(
                 $this,
-                'ajax_afterpost_visits'
+                'ajax_afterpost_sessions'
             ));
             // Frontend Seraches action
             add_action('wp_ajax_gadash_get_frontendsearches_data', array(
@@ -34,23 +34,34 @@ if (! class_exists('GADASH_Frontend_Ajax')) {
             ));
         }
         
-        // Frontend Visits Request
+        // Frontend Sessions Request
         /**
          * Ajax handler for getting analytics data for frontend Views vs UniqueViews
          *
          * @return string|int
          */
-        function ajax_afterpost_visits()
+        function ajax_afterpost_sessions()
         {
             global $GADASH_Config;
             
             $page_url = $_REQUEST['gadash_pageurl'];
             $post_id = $_REQUEST['gadash_postid'];
             
-            if (! isset($_REQUEST['gadash_security_aaf']) or ! wp_verify_nonce($_REQUEST['gadash_security_aaf'], 'gadash_get_frontendvisits_data')) {
+            if (! isset($_REQUEST['gadash_security_aaf']) or ! wp_verify_nonce($_REQUEST['gadash_security_aaf'], 'gadash_get_frontendsessions_data')) {
                 print(json_encode(- 30));
                 die();
             }
+
+            /*
+             * Include Tools
+             */
+            include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
+            $tools = new GADASH_Tools();            
+            
+            if (! $tools->check_roles($GADASH_Config->options['ga_dash_access_front']) or ! ($GADASH_Config->options['ga_dash_frontend_stats'] or $GADASH_Config->options['ga_dash_frontend_keywords'])) {
+                print(json_encode(- 31));
+                die();
+            }            
             
             if ($GADASH_Config->options['ga_dash_token'] and function_exists('curl_version') and $GADASH_Config->options['ga_dash_tableid_jail']) {
                 include_once ($GADASH_Config->plugin_path . '/tools/gapi.php');
@@ -75,9 +86,9 @@ if (! class_exists('GADASH_Frontend_Ajax')) {
                 die();
             }
             
-            $data_visits = $GADASH_GAPI->frontend_afterpost_visits($projectId, $page_url, $post_id);
+            $data_sessions = $GADASH_GAPI->frontend_afterpost_sessions($projectId, $page_url, $post_id);
             
-            print($data_visits);
+            print($data_sessions);
             
             die();
         }
@@ -98,6 +109,17 @@ if (! class_exists('GADASH_Frontend_Ajax')) {
                 print(json_encode(- 30));
                 die();
             }
+            
+            /*
+             * Include Tools
+             */
+            include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
+            $tools = new GADASH_Tools();            
+            
+            if (! $tools->check_roles($GADASH_Config->options['ga_dash_access_front']) or ! ($GADASH_Config->options['ga_dash_frontend_stats'] or $GADASH_Config->options['ga_dash_frontend_keywords'])) {
+                print(json_encode(- 31));
+                die();
+            }            
             
             if ($GADASH_Config->options['ga_dash_token'] and function_exists('curl_version') and $GADASH_Config->options['ga_dash_tableid_jail']) {
                 include_once ($GADASH_Config->plugin_path . '/tools/gapi.php');
@@ -128,7 +150,7 @@ if (! class_exists('GADASH_Frontend_Ajax')) {
             
             die();
         }
-        // Frontend Visits Request
+        // Frontend Sessions Request
         /**
          * Ajax handler for getting analytics data for frontend Widget
          *
