@@ -35,11 +35,6 @@ final class GADASH_Settings
             } else 
                 if ($who == 'backend') {
                     $options['ga_dash_jailadmins'] = 0;
-                    $options['ga_dash_map'] = 0;
-                    $options['ga_dash_traffic'] = 0;
-                    $options['ga_dash_pgd'] = 0;
-                    $options['ga_dash_rd'] = 0;
-                    $options['ga_dash_sd'] = 0;
                     if (empty($new_options['ga_dash_access_back'])) {
                         $new_options['ga_dash_access_back'][] = 'administrator';
                     }
@@ -284,104 +279,29 @@ final class GADASH_Settings
 									id="ga_realtime_pages"
 									value="<?php echo (int)$options['ga_realtime_pages']; ?>"
 									size="3">
-								<?php _e("(find out more", 'ga-dash')?>	<a
+								<?php echo '('.__("find out more", 'ga-dash')?>	<a
 									href="https://deconf.com/google-analytics-dashboard-real-time-reports/"
 									target="_blank"><?php _e("about this feature", 'ga-dash') ?></a>
-								<?php _e(")", 'ga-dash')?></td>
-							</tr>
-							<tr>
-								<td colspan="2"><hr><?php echo "<h2>" . __( "Additional Stats & Charts", 'ga-dash' ) . "</h2>"; ?></td>
-							</tr>
-							<tr>
-								<td colspan="2" class="title">
-									<div class="onoffswitch">
-										<input type="checkbox" name="options[ga_dash_map]" value="1"
-											class="onoffswitch-checkbox" id="ga_dash_map"
-											<?php checked( $options['ga_dash_map'], 1 ); ?>> <label
-											class="onoffswitch-label" for="ga_dash_map">
-											<div class="onoffswitch-inner"></div>
-											<div class="onoffswitch-switch"></div>
-										</label>
-									</div>
-									<div class="switch-desc"><?php _e ( " show Geo Map chart for sessions", 'ga-dash' );?></div>
+								    )
 								</td>
 							</tr>
 							<tr>
+								<td colspan="2"><hr><?php echo "<h2>" . __( "Location Settings", 'ga-dash' ) . "</h2>"; ?></td>
+							</tr>
+							<tr>
 								<td colspan="2" class="title">
-									<?php echo __("Target Geo Map to region:", 'ga-dash'); ?>
+									<?php echo __("Target Geo Map to country:", 'ga-dash'); ?>
 									<input type="text" style="text-align: center;"
 									name="options[ga_target_geomap]"
 									value="<?php echo esc_attr($options['ga_target_geomap']); ?>"
 									size="3">
-									<?php _e("and render top",'ga-dash'); ?>
-									<input type="number" id="ga_target_number"
-									name="options[ga_target_number]"
-									value="<?php echo (int)$options['ga_target_number']; ?>"
-									size="3">
-									<?php _e("cities (find out more", 'ga-dash')?>
+									<?php echo '('.__("find out more", 'ga-dash')?>
 									<a
 									href="https://deconf.com/country-codes-for-google-analytics-dashboard/"
 									target="_blank"><?php _e("about this feature", 'ga-dash') ?></a>
-									<?php _e(")", 'ga-dash')?>
+									)
 								</td>
 							</tr>
-							<tr>
-								<td colspan="2" class="title">
-									<div class="onoffswitch">
-										<input type="checkbox" name="options[ga_dash_traffic]"
-											value="1" class="onoffswitch-checkbox" id="ga_dash_traffic"
-											<?php checked( $options['ga_dash_traffic'], 1 ); ?>> <label
-											class="onoffswitch-label" for="ga_dash_traffic">
-											<div class="onoffswitch-inner"></div>
-											<div class="onoffswitch-switch"></div>
-										</label>
-									</div>
-									<div class="switch-desc"><?php _e ( " show traffic overview", 'ga-dash' );?></div>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2" class="title">
-									<div class="onoffswitch">
-										<input type="checkbox" name="options[ga_dash_pgd]" value="1"
-											class="onoffswitch-checkbox" id="ga_dash_pgd"
-											<?php checked( $options['ga_dash_pgd'], 1 ); ?>> <label
-											class="onoffswitch-label" for="ga_dash_pgd">
-											<div class="onoffswitch-inner"></div>
-											<div class="onoffswitch-switch"></div>
-										</label>
-									</div>
-									<div class="switch-desc"><?php _e ( " show top pages", 'ga-dash' );?></div>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2" class="title">
-									<div class="onoffswitch">
-										<input type="checkbox" name="options[ga_dash_rd]" value="1"
-											class="onoffswitch-checkbox" id="ga_dash_rd"
-											<?php checked( $options['ga_dash_rd'], 1 ); ?>> <label
-											class="onoffswitch-label" for="ga_dash_rd">
-											<div class="onoffswitch-inner"></div>
-											<div class="onoffswitch-switch"></div>
-										</label>
-									</div>
-									<div class="switch-desc"><?php _e ( " show top referrers", 'ga-dash' );?></div>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2" class="title">
-									<div class="onoffswitch">
-										<input type="checkbox" name="options[ga_dash_sd]" value="1"
-											class="onoffswitch-checkbox" id="ga_dash_sd"
-											<?php checked( $options['ga_dash_sd'], 1 ); ?>> <label
-											class="onoffswitch-label" for="ga_dash_sd">
-											<div class="onoffswitch-inner"></div>
-											<div class="onoffswitch-switch"></div>
-										</label>
-									</div>
-									<div class="switch-desc"><?php _e ( " show top searches", 'ga-dash' );?></div>
-								</td>
-							</tr>
-
 							<tr>
 								<td colspan="2"><hr></td>
 							</tr>

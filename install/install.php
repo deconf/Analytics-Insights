@@ -19,11 +19,6 @@ class GADASH_Install
             $options['ga_dash_access_front'][] = 'administrator';
             $options['ga_dash_access_back'][] = 'administrator';
             $options['ga_dash_tableid_jail'] = '';
-            $options['ga_dash_pgd'] = 0;
-            $options['ga_dash_rd'] = 0;
-            $options['ga_dash_sd'] = 0;
-            $options['ga_dash_map'] = 0;
-            $options['ga_dash_traffic'] = 0;
             $options['ga_dash_style'] = '#3366CC';
             $options['ga_dash_jailadmins'] = 1;
             $options['ga_dash_cachetime'] = 3600;
@@ -36,7 +31,6 @@ class GADASH_Install
             $options['ga_event_downloads'] = 'zip|mp3*|mpe*g|pdf|docx*|pptx*|xlsx*|rar*';
             $options['ga_track_exclude'] = array();
             $options['ga_target_geomap'] = '';
-            $options['ga_target_number'] = 10;
             $options['ga_realtime_pages'] = 10;
             $options['ga_dash_token'] = '';
             $options['ga_dash_refresh_token'] = '';
@@ -70,11 +64,6 @@ class GADASH_Install
             $options['ga_dash_access_front'][] = 'administrator';
             $options['ga_dash_access_back'][] = 'administrator';
             $options['ga_dash_tableid_jail'] = get_option('ga_dash_tableid_jail');
-            $options['ga_dash_pgd'] = get_option('ga_dash_pgd');
-            $options['ga_dash_rd'] = get_option('ga_dash_rd');
-            $options['ga_dash_sd'] = get_option('ga_dash_sd');
-            $options['ga_dash_map'] = get_option('ga_dash_map');
-            $options['ga_dash_traffic'] = get_option('ga_dash_traffic');
             $options['ga_dash_frontend_stats'] = get_option('ga_dash_frontend');
             $options['ga_dash_style'] = '#3366CC';
             $options['ga_dash_jailadmins'] = get_option('ga_dash_jailadmins');
@@ -94,7 +83,6 @@ class GADASH_Install
             $options['ga_event_downloads'] = get_option('ga_event_downloads');
             $options['ga_track_exclude'] = array();
             $options['ga_target_geomap'] = get_option('ga_target_geomap');
-            $options['ga_target_number'] = get_option('ga_target_number');
             $options['ga_realtime_pages'] = get_option('ga_realtime_pages');
             $options['ga_dash_token'] = get_option('ga_dash_token');
             $options['ga_dash_refresh_token'] = get_option('ga_dash_refresh_token');
@@ -123,11 +111,6 @@ class GADASH_Install
             delete_option('ga_dash_access_front');
             delete_option('ga_dash_access_back');
             delete_option('ga_dash_tableid_jail');
-            delete_option('ga_dash_pgd');
-            delete_option('ga_dash_rd');
-            delete_option('ga_dash_sd');
-            delete_option('ga_dash_map');
-            delete_option('ga_dash_traffic');
             delete_option('ga_dash_frontend');
             delete_option('ga_dash_style');
             delete_option('ga_dash_jailadmins');
@@ -141,7 +124,6 @@ class GADASH_Install
             delete_option('ga_event_downloads');
             delete_option('ga_track_exclude');
             delete_option('ga_target_geomap');
-            delete_option('ga_target_number');
             delete_option('ga_realtime_pages');
             delete_option('ga_dash_token');
             delete_option('ga_dash_refresh_token');

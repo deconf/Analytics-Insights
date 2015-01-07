@@ -627,7 +627,7 @@ if (! class_exists('GADASH_GAPI')) {
                 if (isset($this->country_codes[$GADASH_Config->options['ga_target_geomap']])) {
                     $filters = 'ga:country==' . ($this->country_codes[$GADASH_Config->options['ga_target_geomap']]);
                     $title = __("Cities from", 'ga-dash') . ' ' . __($this->country_codes[$GADASH_Config->options['ga_target_geomap']]);
-                    $serial = 'gadash_qr7' . $projectId . $from . $GADASH_Config->options['ga_target_geomap'] . $GADASH_Config->options['ga_target_number'];
+                    $serial = 'gadash_qr7' . $projectId . $from . $GADASH_Config->options['ga_target_geomap'];
                     $options = array(
                         'dimensions' => $dimensions,
                         'filters' => $filters,
