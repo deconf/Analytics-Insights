@@ -5,6 +5,7 @@
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
+
 if (! class_exists('GADASH_Frontend')) {
 
     final class GADASH_Frontend
@@ -69,7 +70,8 @@ if (! class_exists('GADASH_Frontend')) {
                 
                 $content .= '<script type="text/javascript">
 					gadash_firstclick = true;
-
+                    npcounter = 0;
+                    
 					jQuery(document).ready(function(){
 					 	jQuery("#gadwp-title").click(function(){
 							  	if (gadash_firstclick){
@@ -77,26 +79,26 @@ if (! class_exists('GADASH_Frontend')) {
             					   NProgress.configure({ showSpinner: false });
             					   NProgress.start();
 									if(typeof ga_dash_drawpagesessions == "function"){
-										jQuery.post("' . admin_url('admin-ajax.php') . '", {action: "gadash_get_frontendsessions_data",gadash_pageurl: "' . $page_url . '",gadash_postid: "' . $post_id . '",gadash_security_aaf: "' . wp_create_nonce('gadash_get_frontendsessions_data') . '"}, function(response){
+										jQuery.post("' . admin_url('admin-ajax.php') . '", {action: "gadash_get_frontend_pagereports",gadash_pageurl: "' . $page_url . '",gadash_postid: "' . $post_id . '",query: "pageviews",gadash_security_pagereports: "' . wp_create_nonce('gadash_get_frontend_pagereports') . '"}, function(response){
 										    gadash_pagesessions = jQuery.parseJSON(response);
 										    if (!jQuery.isNumeric(gadash_pagesessions)){
 		          							    google.setOnLoadCallback(ga_dash_drawpagesessions(gadash_pagesessions));
 											}else{
 										        jQuery("#gadwp-sessions").css({"background-color":"#F7F7F7","height":"auto","padding-top":"30px","padding-bottom":"30px","color":"#000","text-align":"center"});  
 										        jQuery("#gadwp-sessions").html("' . __("This report is unavailable", 'ga-dash') . ' ("+response+")");
-										        NProgress.done();    
+										        checknpcounter(1);    
                                             }	
 										});
 									}
 									if(typeof ga_dash_drawpagesearches == "function"){
-										jQuery.post("' . admin_url('admin-ajax.php') . '", {action: "gadash_get_frontendsearches_data",gadash_pageurl: "' . $page_url . '",gadash_postid: "' . $post_id . '",gadash_security_aas: "' . wp_create_nonce('gadash_get_frontendsearches_data') . '"}, function(response){
+										jQuery.post("' . admin_url('admin-ajax.php') . '", {action: "gadash_get_frontend_pagereports",gadash_pageurl: "' . $page_url . '",gadash_postid: "' . $post_id . '",query: "searches",gadash_security_pagereports: "' . wp_create_nonce('gadash_get_frontend_pagereports') . '"}, function(response){
                                             gadash_pagesearches = jQuery.parseJSON(response); 
 										    if (!jQuery.isNumeric(gadash_pagesearches)){
 												google.setOnLoadCallback(ga_dash_drawpagesearches(gadash_pagesearches));
 											}else{
 										        jQuery("#gadwp-searches").css({"background-color":"#F7F7F7","height":"auto","padding-top":"30px","padding-bottom":"30px","color":"#000","text-align":"center"});
 										        jQuery("#gadwp-searches").html("' . __("This report is unavailable", 'ga-dash') . ' ("+response+")");
-										        NProgress.done();
+										        checknpcounter(1);
                                             }	
 										});
 									}
@@ -127,14 +129,14 @@ if (! class_exists('GADASH_Frontend')) {
 			  legend: {position: "none"},
 			  pointSize: 3,' . $css . '
 			  title: "' . $title . '",
-	  		  vAxis: { textPosition: "none", minValue: 0, gridlines: {color: "transparent"}, baselineColor: "transparent"},
+	  		  vAxis: { textPosition: "in", minValue: 0},
 			  chartArea: {width: "100%", height: "80%"},
 			  hAxis: { textPosition: "none"}
 			};
 
 			var chart = new google.visualization.AreaChart(document.getElementById("gadwp-sessions"));
 			chart.draw(data, options);
-            NProgress.done();      
+            checknpcounter(1);      
 			}';
                 }
                 
@@ -155,7 +157,7 @@ if (! class_exists('GADASH_Frontend')) {
 
 				var chart = new google.visualization.Table(document.getElementById("gadwp-searches"));
 				chart.draw(datas, options);
-				NProgress.done();
+				checknpcounter(1);
 			  }';
                 }
                 

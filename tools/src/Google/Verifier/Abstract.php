@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright 2011 Google Inc.
  *
@@ -7,7 +6,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,10 +22,9 @@
  */
 abstract class Google_Verifier_Abstract
 {
-
-    /**
-     * Checks a signature, returns true if the signature is correct,
-     * false otherwise.
-     */
-    abstract public function verify($data, $signature);
+  /**
+   * Checks a signature, returns true if the signature is correct,
+   * false otherwise.
+   */
+  abstract public function verify($data, $signature);
 }

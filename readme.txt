@@ -4,7 +4,7 @@ Donate link: https://deconf.com/donate/
 Tags: google,analytics,google analytics,dashboard,analytics dashboard,google analytics dashboard,google analytics widget,tracking,realtime,wpmu,multisite
 Requires at least: 2.8
 Tested up to: 4.1
-Stable tag: 4.3.11
+Stable tag: 4.4b
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -126,6 +126,25 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 
 == Changelog ==
 
+= 4.4 =
+- Bug Fix: frontend reports and widget are not responsive
+- Bug Fix: random notices for today and yesterday reports
+- Enhancement: Italian translation, updated by [Leo](https://www.facebook.com/leo.thestrategist)
+- Enhancement: admin widget responsive design and optimizations
+- Enhancement: added acquisition channel reports
+- Enhancement: added acquisition social networks reports
+- Enhancement: added acquisition search engines reports
+- Enhancement: new location report and countries/cities list table
+- Enhancement: new pages report (removed top 24 limit)
+- Enhancement: new searches report (removed top 24 limit)
+- Enhancement: new referrers report (removed top 24 limit)
+- Enhancement: frontend, per page reports (removed top 24 limit)
+- Enhancement: added campaigns in real-time report/screen
+- Enhancement: asynchronous reports loading and speed improvements
+- Enhancement: code optimization for all frontend and backend features
+- Enhancement: finished the error standardization process; easier debugging
+- Enhancement: GAPI library update
+
 = 4.3.11 =
 - Bug Fix: improvements on QPS management
 - Bug Fix: fall-back to world map when a wrong country code is entered
@@ -146,7 +165,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 
 = 4.3.9 =
 - Enhancement: marking classes as final
-- Enhancement: redesign the frontend widget
+- Enhancement: re-design the frontend widget
 - Enhancement: responsive design for frontend widget
 - Enhancement: responsive design for page reports
 - Enhancement: error codes standardization
@@ -157,7 +176,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Bug Fix: stop retrying when a daily limit has exceeded
 
 = 4.3.8 =
-- Enhancement: frontend component redesign
+- Enhancement: frontend component re-design
 - Enhancement: optimizing frontend component to improve page loading speed
 - Enhancement: optimizing frontend component to minimize GAPI requests  
 - Enhancement: loading jsapi using wp-enqueue-script

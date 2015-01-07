@@ -12,16 +12,12 @@ if (! class_exists('GADASH_Frontend_Ajax')) {
 
         function __construct()
         {
-            // Frontend Sessions action
-            add_action('wp_ajax_gadash_get_frontendsessions_data', array(
+            // Frontend Reports/Page action
+            add_action('wp_ajax_gadash_get_frontend_pagereports', array(
                 $this,
-                'ajax_afterpost_sessions'
+                'ajax_afterpost_reports'
             ));
-            // Frontend Seraches action
-            add_action('wp_ajax_gadash_get_frontendsearches_data', array(
-                $this,
-                'ajax_afterpost_searches'
-            ));
+            
             // Frontend Widget actions
             add_action('wp_ajax_gadash_get_frontendwidget_data', array(
                 $this,
@@ -34,40 +30,39 @@ if (! class_exists('GADASH_Frontend_Ajax')) {
             ));
         }
         
-        // Frontend Sessions Request
+        // Frontend Reports/Page
         /**
          * Ajax handler for getting analytics data for frontend Views vs UniqueViews
          *
          * @return string|int
          */
-        function ajax_afterpost_sessions()
+        function ajax_afterpost_reports()
         {
             global $GADASH_Config;
             
             $page_url = $_REQUEST['gadash_pageurl'];
             $post_id = $_REQUEST['gadash_postid'];
+            $query = $_REQUEST['query'];
             
-            if (! isset($_REQUEST['gadash_security_aaf']) or ! wp_verify_nonce($_REQUEST['gadash_security_aaf'], 'gadash_get_frontendsessions_data')) {
+            if (! isset($_REQUEST['gadash_security_pagereports']) or ! wp_verify_nonce($_REQUEST['gadash_security_pagereports'], 'gadash_get_frontend_pagereports')) {
                 print(json_encode(- 30));
                 die();
             }
-
+            
             /*
              * Include Tools
              */
             include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
-            $tools = new GADASH_Tools();            
+            $tools = new GADASH_Tools();
             
             if (! $tools->check_roles($GADASH_Config->options['ga_dash_access_front']) or ! ($GADASH_Config->options['ga_dash_frontend_stats'] or $GADASH_Config->options['ga_dash_frontend_keywords'])) {
                 print(json_encode(- 31));
                 die();
-            }            
+            }
             
             if ($GADASH_Config->options['ga_dash_token'] and function_exists('curl_version') and $GADASH_Config->options['ga_dash_tableid_jail']) {
                 include_once ($GADASH_Config->plugin_path . '/tools/gapi.php');
                 global $GADASH_GAPI;
-                include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
-                $tools = new GADASH_Tools();
             } else {
                 print(json_encode(- 24));
                 die();
@@ -86,71 +81,23 @@ if (! class_exists('GADASH_Frontend_Ajax')) {
                 die();
             }
             
-            $data_sessions = $GADASH_GAPI->frontend_afterpost_sessions($projectId, $page_url, $post_id);
-            
-            print($data_sessions);
+            switch ($query) {
+                
+                case 'pageviews':
+                    print($GADASH_GAPI->frontend_afterpost_pageviews($projectId, $page_url, $post_id));
+                    break;
+                case 'searches':
+                    print($GADASH_GAPI->frontend_afterpost_searches($projectId, $page_url, $post_id));
+                    break;
+                default:
+                    die();
+                    break;
+            }
             
             die();
         }
 
-        /**
-         * Ajax handler for getting analytics data for frontend searches
-         *
-         * @return string|int
-         */
-        function ajax_afterpost_searches()
-        {
-            global $GADASH_Config;
-            
-            $page_url = $_REQUEST['gadash_pageurl'];
-            $post_id = $_REQUEST['gadash_postid'];
-            
-            if (! isset($_REQUEST['gadash_security_aas']) or ! wp_verify_nonce($_REQUEST['gadash_security_aas'], 'gadash_get_frontendsearches_data')) {
-                print(json_encode(- 30));
-                die();
-            }
-            
-            /*
-             * Include Tools
-             */
-            include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
-            $tools = new GADASH_Tools();            
-            
-            if (! $tools->check_roles($GADASH_Config->options['ga_dash_access_front']) or ! ($GADASH_Config->options['ga_dash_frontend_stats'] or $GADASH_Config->options['ga_dash_frontend_keywords'])) {
-                print(json_encode(- 31));
-                die();
-            }            
-            
-            if ($GADASH_Config->options['ga_dash_token'] and function_exists('curl_version') and $GADASH_Config->options['ga_dash_tableid_jail']) {
-                include_once ($GADASH_Config->plugin_path . '/tools/gapi.php');
-                global $GADASH_GAPI;
-                include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
-                $tools = new GADASH_Tools();
-            } else {
-                print(json_encode(- 24));
-                die();
-            }
-            
-            $projectId = $GADASH_Config->options['ga_dash_tableid_jail'];
-            $profile_info = $tools->get_selected_profile($GADASH_Config->options['ga_dash_profile_list'], $projectId);
-            if (isset($profile_info[4])) {
-                $GADASH_GAPI->timeshift = $profile_info[4];
-            } else {
-                $GADASH_GAPI->timeshift = (int) current_time('timestamp') - time();
-            }
-            
-            if (! $GADASH_GAPI->client->getAccessToken()) {
-                print(json_encode(- 25));
-                die();
-            }
-            
-            $data_keywords = $GADASH_GAPI->frontend_afterpost_searches($projectId, $page_url, $post_id);
-            
-            print($data_keywords);
-            
-            die();
-        }
-        // Frontend Sessions Request
+        // Frontend Widget Reports
         /**
          * Ajax handler for getting analytics data for frontend Widget
          *

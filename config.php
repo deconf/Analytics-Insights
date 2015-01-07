@@ -16,25 +16,12 @@ if (! class_exists('GADASH_Config')) {
 
         public $plugin_path, $plugin_url;
 
-        public $allowed_html;
-
         public function __construct()
         {
             $this->getPluginPath();
             
             // get plugin options
             $this->get_plugin_options();
-            
-            // init security
-            $allowed_html = array(
-                'a' => array(
-                    'href' => array(),
-                    'title' => array()
-                ),
-                'br' => array(),
-                'em' => array(),
-                'strong' => array()
-            );
         }
         
         // Validates data before storing
