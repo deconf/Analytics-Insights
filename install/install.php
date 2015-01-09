@@ -19,7 +19,7 @@ class GADASH_Install
             $options['ga_dash_access_front'][] = 'administrator';
             $options['ga_dash_access_back'][] = 'administrator';
             $options['ga_dash_tableid_jail'] = '';
-            $options['ga_dash_style'] = '#3366CC';
+            $options['ga_dash_style'] = '#1e73be';
             $options['ga_dash_jailadmins'] = 1;
             $options['ga_dash_cachetime'] = 3600;
             $options['ga_dash_tracking'] = 1;
@@ -65,7 +65,7 @@ class GADASH_Install
             $options['ga_dash_access_back'][] = 'administrator';
             $options['ga_dash_tableid_jail'] = get_option('ga_dash_tableid_jail');
             $options['ga_dash_frontend_stats'] = get_option('ga_dash_frontend');
-            $options['ga_dash_style'] = '#3366CC';
+            $options['ga_dash_style'] = '#1e73be';
             $options['ga_dash_jailadmins'] = get_option('ga_dash_jailadmins');
             $options['ga_dash_cachetime'] = get_option('ga_dash_cachetime');
             

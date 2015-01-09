@@ -4,16 +4,16 @@ Donate link: https://deconf.com/donate/
 Tags: google,analytics,google analytics,dashboard,analytics dashboard,google analytics dashboard,google analytics widget,tracking,realtime,wpmu,multisite
 Requires at least: 2.8
 Tested up to: 4.1
-Stable tag: 4.4b
+Stable tag: 4.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Displays Google Analytics reports and real-time statistics in your WordPress Dashboard. Inserts the latest tracking code in every page of your site.
 
 == Description ==
-Using a widget, [Google Analytics Dashboard](https://deconf.com/google-analytics-dashboard-wordpress/) displays detailed analytics info and statistics about: number of visits, number of visitors, bounce rates, organic searches, pages per visit directly on your WordPress Dashboard.
+Using a widget, [Google Analytics Dashboard](https://deconf.com/google-analytics-dashboard-wordpress/) displays detailed analytics info and statistics about: number of visits (sessions), number of visitors (users), bounce rates, organic searches, pages per visit directly on your WordPress Dashboard.
 
-Authorized users can also view statistics like Views, UniqueViews and top searches, on frontend, at the end of each article.
+Authorized users can also view statistics like views, unique views and searches, on frontend, at the end of each article.
 
 > <strong>Google Analytics Dashboard on GitHub</strong><br>
 > You can submit pull requests, feature requests or bugs on [Google Analytics Dashboard](https://github.com/deconf/Google-Analytics-Dashboard-for-WP) repository.
@@ -24,7 +24,7 @@ Google Analytics reports, in real-time, on your dashboard screen:
 
 - displays the total number of visitors in real-time 
 - real-time statistics about your acquisition channels
-- per page real-time reports
+- per page real-time reports with traffic sources details 
 
 = Google Analytics Reports =
 
@@ -32,10 +32,10 @@ The reports you need, in your dashboard and on site's frontend:
 
 - you can access all websites statistics in a single widget (websites within same Google Account)
 - option to choose a default color for your charts, graphs and maps
-- option to display top 24 pages, referrers and searches (sortable by columns)
-- option to display Visitors by Country on Geo Map
-- local websites and business have an option to display cities, instead of countries, on a regional map
-- option to display Traffic Overview in Pie Charts
+- visitors by pages, referrers and searches reports
+- location reports, displaying visitors by country on a Geo Map and in a table chart
+- local websites and business have an option to display cities, instead of countries, on a regional map and in a table chart
+- traffic overview reports with details about acquisition channels, social networks, search engines, traffic mediums and visitor type 
 - user access level settings for Backend statistics and analytics reports
 - user access level settings for Frontend analytics data and reports
 - option to display Google Analytics statistics on frontend, at the end of each article

@@ -107,9 +107,20 @@ if (! class_exists('GADASH_Frontend_Ajax')) {
         {
             global $GADASH_Config;
             
-            $anonim = $_REQUEST['gadash_anonim'];
+            $anonim = (int)$_REQUEST['gadash_anonim'];
             $period = $_REQUEST['gadash_period'];
-            $display = $_REQUEST['gadash_display'];
+            
+            switch ($period) { //make sure we have a valid request
+                case '7daysAgo':
+                    $safeperiod = '7daysAgo';
+                    break;
+                case '14daysAgo':
+                    $safeperiod = '14daysAgo';
+                    break;
+                default:
+                    $safeperiod = '30daysAgo';
+                    break;
+            }
             
             if (! isset($_REQUEST['gadash_security_afw']) or ! wp_verify_nonce($_REQUEST['gadash_security_afw'], 'gadash_get_frontendwidget_data')) {
                 print(json_encode(- 30));
@@ -139,7 +150,7 @@ if (! class_exists('GADASH_Frontend_Ajax')) {
                 die();
             }
             
-            $data_widget = $GADASH_GAPI->frontend_widget_stats($projectId, $period, $anonim);
+            $data_widget = $GADASH_GAPI->frontend_widget_stats($projectId, $safeperiod, $anonim);
             
             print(json_encode($data_widget));
             

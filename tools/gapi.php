@@ -67,9 +67,10 @@ if (! class_exists('GADASH_GAPI')) {
             $this->error_timeout = $midnight - time();
             return;
         }
-        
-        private function prepare_json($value){
-            return esc_html(str_replace('\\','&#92;',stripslashes($value)));
+
+        private function prepare_json($value)
+        {
+            return esc_html(str_replace('\\', '&#92;', stripslashes($value)));
         }
 
         /**
@@ -315,9 +316,9 @@ if (! class_exists('GADASH_GAPI')) {
                     $timeouts = 1;
                 }
                 
-                if(strlen($serial) > 44){
-                    $serial = substr($serial,0,43); //keep a safe length
-                }    
+                if (strlen($serial) > 44) {
+                    $serial = substr($serial, 0, 43); // keep a safe length
+                }
                 
                 $transient = get_transient($serial);
                 if (empty($transient)) {
@@ -451,7 +452,11 @@ if (! class_exists('GADASH_GAPI')) {
             ), $serial);
             
             if (is_numeric($data)) {
-                return $data;
+                if ($data == - 21) {
+                    return array_fill(0, 6, 0);
+                } else {
+                    return $data;
+                }
             }
             
             $ga_dash_data = $data['rows'][0];
@@ -492,7 +497,7 @@ if (! class_exists('GADASH_GAPI')) {
             $i = 0;
             
             while (isset($data['rows'][$i][0])) {
-                $ga_dash_data .= '["<a href=\\"http://' . $this->prepare_json($data['rows'][$i][1] . $data['rows'][$i][2]) . '\\" target=\\"_blank\\">' . $this->prepare_json($data['rows'][$i][0]) . '</a>",' . (int) $data['rows'][$i][3] . '],';
+                $ga_dash_data .= '["' . $this->prepare_json($data['rows'][$i][0]) . '",' . (int) $data['rows'][$i][3] . '],';
                 $i ++;
             }
             
@@ -535,7 +540,7 @@ if (! class_exists('GADASH_GAPI')) {
             $ga_dash_data = "";
             $i = 0;
             while (isset($data['rows'][$i][0])) {
-                $ga_dash_data .= '["<a href=\\"http://' . $this->prepare_json($data["rows"][$i][1]) . '\\" target=\\"_blank\\">' . $this->prepare_json($data["rows"][$i][0]) . '</a>",' . (int) $data["rows"][$i][3] . '],';
+                $ga_dash_data .= '["' . $this->prepare_json($data["rows"][$i][0]) . '",' . (int) $data["rows"][$i][3] . '],';
                 $i ++;
             }
             
@@ -692,7 +697,7 @@ if (! class_exists('GADASH_GAPI')) {
             $ga_dash_data = "";
             
             for ($i = 0; $i < $data['totalResults']; $i ++) {
-				$shrink = explode(" ", $data["rows"][$i][0]);
+                $shrink = explode(" ", $data["rows"][$i][0]);
                 $ga_dash_data .= '["' . '<div style=\\"color:black; font-size:1.1em\\">' . esc_html($shrink[0]) . '</div><div style=\\"color:darkblue; font-size:1.2em\\">' . (int) $data["rows"][$i][1] . '</div>","' . '<div style=\\"color:black; font-size:1.1em\\">' . $title . '</div><div style=\\"color:darkblue; font-size:1.2em\\">' . (int) $data['totalsForAllResults']["ga:sessions"] . '</div>"],';
             }
             
@@ -910,7 +915,7 @@ if (! class_exists('GADASH_GAPI')) {
          * @return string|int
          */
         function gadash_realtime_data($projectId)
-        {   
+        {
             $metrics = 'rt:activeUsers';
             $dimensions = 'rt:pagePath,rt:source,rt:keyword,rt:trafficType,rt:visitorType,rt:pageTitle';
             try {
@@ -948,12 +953,11 @@ if (! class_exists('GADASH_GAPI')) {
             $ga_dash_data = $data;
             
             while (isset($data->rows[$i])) {
-                $ga_dash_data->rows[$i] = array_map('esc_html',$data->rows[$i]); 
+                $ga_dash_data->rows[$i] = array_map('esc_html', $data->rows[$i]);
                 $i ++;
             }
             
-            return print_r(json_encode($ga_dash_data),true);
-
+            return print_r(json_encode($ga_dash_data), true);
         }
 
         public function getcountrycodes()
