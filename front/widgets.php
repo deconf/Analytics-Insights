@@ -107,7 +107,7 @@ class GADSH_Frontend_Widget extends WP_Widget
         
         echo '<script type="text/javascript">
 
-				jQuery.post("' . admin_url('admin-ajax.php') . '", {action: "gadash_get_frontendwidget_data",gadash_anonim: "' . $instance['anonim'] . '",gadash_period: "' . $instance['period'] . '",gadash_display: "' . $instance['display'] . '",gadash_security_afw: "' . wp_create_nonce('gadash_get_frontendwidget_data') . '"}, function(response){
+				jQuery.post("' . admin_url('admin-ajax.php') . '", {action: "gadash_get_frontendwidget_data",gadash_anonim: "' . $instance['anonim'] . '",gadash_period: "' . $instance['period'] . '"}, function(response){
 					response = jQuery.parseJSON(response);
 				    if (!jQuery.isNumeric(response)){
 				        if (jQuery("#gadash-widgetchart")[0]){

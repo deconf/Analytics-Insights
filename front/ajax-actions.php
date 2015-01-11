@@ -40,9 +40,11 @@ if (! class_exists('GADASH_Frontend_Ajax')) {
         {
             global $GADASH_Config;
             
-            $page_url = $_REQUEST['gadash_pageurl'];
-            $post_id = $_REQUEST['gadash_postid'];
+            $page_url = esc_url($_REQUEST['gadash_pageurl']);
+            $post_id = (int)$_REQUEST['gadash_postid'];
             $query = $_REQUEST['query'];
+
+            ob_clean();
             
             if (! isset($_REQUEST['gadash_security_pagereports']) or ! wp_verify_nonce($_REQUEST['gadash_security_pagereports'], 'gadash_get_frontend_pagereports')) {
                 print(json_encode(- 30));
@@ -82,15 +84,11 @@ if (! class_exists('GADASH_Frontend_Ajax')) {
             }
             
             switch ($query) {
-                
                 case 'pageviews':
                     print($GADASH_GAPI->frontend_afterpost_pageviews($projectId, $page_url, $post_id));
                     break;
-                case 'searches':
-                    print($GADASH_GAPI->frontend_afterpost_searches($projectId, $page_url, $post_id));
-                    break;
                 default:
-                    die();
+                    print($GADASH_GAPI->frontend_afterpost_searches($projectId, $page_url, $post_id));
                     break;
             }
             
@@ -107,25 +105,21 @@ if (! class_exists('GADASH_Frontend_Ajax')) {
         {
             global $GADASH_Config;
             
-            $anonim = (int)$_REQUEST['gadash_anonim'];
-            $period = $_REQUEST['gadash_period'];
+            $anonim = (int)$_REQUEST['gadash_anonim']; //make sure we have an int value
             
-            switch ($period) { //make sure we have a valid request
+            switch ($_REQUEST['gadash_period']) { //make sure we have a valid request
                 case '7daysAgo':
-                    $safeperiod = '7daysAgo';
+                    $period = '7daysAgo';
                     break;
                 case '14daysAgo':
-                    $safeperiod = '14daysAgo';
+                    $period = '14daysAgo';
                     break;
                 default:
-                    $safeperiod = '30daysAgo';
+                    $period = '30daysAgo';
                     break;
             }
             
-            if (! isset($_REQUEST['gadash_security_afw']) or ! wp_verify_nonce($_REQUEST['gadash_security_afw'], 'gadash_get_frontendwidget_data')) {
-                print(json_encode(- 30));
-                die();
-            }
+            ob_clean();
             
             if ($GADASH_Config->options['ga_dash_token'] and function_exists('curl_version') and $GADASH_Config->options['ga_dash_tableid_jail']) {
                 include_once ($GADASH_Config->plugin_path . '/tools/gapi.php');
@@ -150,7 +144,7 @@ if (! class_exists('GADASH_Frontend_Ajax')) {
                 die();
             }
             
-            $data_widget = $GADASH_GAPI->frontend_widget_stats($projectId, $safeperiod, $anonim);
+            $data_widget = $GADASH_GAPI->frontend_widget_stats($projectId, $period, $anonim);
             
             print(json_encode($data_widget));
             

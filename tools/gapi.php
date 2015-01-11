@@ -23,12 +23,13 @@ if (! class_exists('GADASH_GAPI')) {
         function __construct()
         {
             global $GADASH_Config;
+            
             if (! function_exists('curl_version')) {
                 update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': CURL disabled. Please enable CURL!');
                 return;
             }
             
-            require 'autoload.php';
+            include_once ($GADASH_Config->plugin_path . '/tools/autoload.php');;
             
             $this->client = new Google_Client();
             $this->client->setScopes('https://www.googleapis.com/auth/analytics.readonly');

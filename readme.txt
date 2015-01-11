@@ -4,7 +4,7 @@ Donate link: https://deconf.com/donate/
 Tags: google,analytics,google analytics,dashboard,analytics dashboard,google analytics dashboard,google analytics widget,tracking,realtime,wpmu,multisite
 Requires at least: 2.8
 Tested up to: 4.1
-Stable tag: 4.4
+Stable tag: 4.4.1b
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -125,6 +125,11 @@ A dedicated section for WordPress Plugins is available here: [Wordpress Plugins 
 This plugin it's released under the GPLv2, you can use it free of charge on your personal or commercial website.
 
 == Changelog ==
+
+= 4.4.1 =
+- Bug Fix: frontend widget nonce issue while using a cache plugin, reported by [Rick](https://deconf.com/ask/author/rickbates/)
+- Bug Fix: clear the buffer immediately before returning AJAX response
+- Bug Fix: add fullpath while loading autoload.php
 
 = 4.4 =
 - Bug Fix: frontend reports and widget are not responsive
