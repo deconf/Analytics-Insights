@@ -50,6 +50,12 @@ if (! class_exists('GADASH_GAPI')) {
                 $this->client->setDeveloperKey('AIzaSyBG7LlUoHc29ZeC_dsShVaBEX15SfRl_WY');
             }
             
+            $curlversion = curl_version();
+            
+            if (isset($curlversion['version']) AND version_compare($curlversion['version'], '7.10.8') >= 0 AND defined('GADWP_IP_VERSION') AND GADWP_IP_VERSION){
+                $this->client->setClassConfig('Google_IO_Curl', array('options' => array(CURLOPT_IPRESOLVE => GADWP_IP_VERSION))); // Force CURL_IPRESOLVE_V4 OR CURL_IPRESOLVE_V6
+            }
+            
             $this->service = new Google_Service_Analytics($this->client);
             
             if ($GADASH_Config->options['ga_dash_token']) {
@@ -77,29 +83,24 @@ if (! class_exists('GADASH_GAPI')) {
         /**
          * Handles errors returned by GAPI
          *
-         * @return boolean
+         * @return int|boolean
          */
         function gapi_errors_handler()
         {
-            $errors = (array) get_transient('ga_dash_gapi_errors');
+            $errors = get_transient('ga_dash_gapi_errors');
             
-            if (isset($errors[0]['reason'])) {
+            if (isset($errors[1][0]['reason'])) {
                 
-                if ($errors[0]['reason'] == 'dailyLimitExceeded') {
+                if ($errors[1][0]['reason'] == 'dailyLimitExceeded') {
                     return TRUE;
                 }
                 
-                if ($errors[0]['reason'] == 'insufficientPermissions') {
+                if ($errors[1][0]['reason'] == 'invalidCredentials' || $errors[1][0]['reason'] == 'authError' || $errors[1][0]['reason'] == 'insufficientPermissions') {
                     $this->ga_dash_reset_token(false);
                     return TRUE;
                 }
                 
-                if ($errors[0]['reason'] == 'invalidCredentials' || $errors[0]['reason'] == 'authError') {
-                    $this->ga_dash_reset_token(false);
-                    return TRUE;
-                }
-                
-                if ($errors[0]['reason'] == 'invalidParameter' or $errors[0]['reason'] == 'badRequest') {
+                if ($errors[1][0]['reason'] == 'invalidParameter' or $errors[1][0]['reason'] == 'badRequest') {
                     return TRUE;
                 }
             }
@@ -199,7 +200,7 @@ if (! class_exists('GADASH_GAPI')) {
                 return '';
             } catch (Google_Service_Exception $e) {
                 update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html("(" . $e->getCode() . ") " . $e->getMessage()));
-                set_transient('ga_dash_gapi_errors', $e->getErrors(), $this->error_timeout);
+                set_transient('ga_dash_gapi_errors', array($e->getCode(),(array)$e->getErrors()), $this->error_timeout);
             } catch (Exception $e) {
                 update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e));
                 return '';
@@ -249,7 +250,7 @@ if (! class_exists('GADASH_GAPI')) {
                 return false;
             } catch (Google_Service_Exception $e) {
                 update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html("(" . $e->getCode() . ") " . $e->getMessage()));
-                set_transient('ga_dash_gapi_errors', $e->getErrors(), $this->error_timeout);
+                set_transient('ga_dash_gapi_errors', array($e->getCode(),(array)$e->getErrors()), $this->error_timeout);
                 return $e->getCode();
             } catch (Exception $e) {
                 update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e));
@@ -335,7 +336,7 @@ if (! class_exists('GADASH_GAPI')) {
                 }
             } catch (Google_Service_Exception $e) {
                 update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html("(" . $e->getCode() . ") " . $e->getMessage()));
-                set_transient('ga_dash_gapi_errors', $e->getErrors(), $this->error_timeout);
+                set_transient('ga_dash_gapi_errors', array($e->getCode(),(array)$e->getErrors()), $this->error_timeout);
                 return $e->getCode();
             } catch (Exception $e) {
                 update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e));
@@ -480,7 +481,7 @@ if (! class_exists('GADASH_GAPI')) {
         function get_contentpages($projectId, $from, $to)
         {
             $metrics = 'ga:pageviews';
-            $dimensions = 'ga:pageTitle,ga:hostname,ga:pagePath';
+            $dimensions = 'ga:pageTitle';
             
             $serial = 'gadash_qr4' . $projectId . $from;
             
@@ -498,7 +499,7 @@ if (! class_exists('GADASH_GAPI')) {
             $i = 0;
             
             while (isset($data['rows'][$i][0])) {
-                $ga_dash_data .= '["' . $this->prepare_json($data['rows'][$i][0]) . '",' . (int) $data['rows'][$i][3] . '],';
+                $ga_dash_data .= '["' . $this->prepare_json($data['rows'][$i][0]) . '",' . (int) $data['rows'][$i][1] . '],';
                 $i ++;
             }
             
@@ -523,7 +524,7 @@ if (! class_exists('GADASH_GAPI')) {
         function get_referrers($projectId, $from, $to)
         {
             $metrics = 'ga:sessions';
-            $dimensions = 'ga:source,ga:fullReferrer,ga:medium';
+            $dimensions = 'ga:source';
             
             $serial = 'gadash_qr5' . $projectId . $from;
             
@@ -541,7 +542,7 @@ if (! class_exists('GADASH_GAPI')) {
             $ga_dash_data = "";
             $i = 0;
             while (isset($data['rows'][$i][0])) {
-                $ga_dash_data .= '["' . $this->prepare_json($data["rows"][$i][0]) . '",' . (int) $data["rows"][$i][3] . '],';
+                $ga_dash_data .= '["' . $this->prepare_json($data["rows"][$i][0]) . '",' . (int) $data["rows"][$i][1] . '],';
                 $i ++;
             }
             
@@ -902,7 +903,7 @@ if (! class_exists('GADASH_GAPI')) {
             }
             
             if ($ga_dash_data) {
-                return '[["' . __('Top Searches', "ga-dash") . '", "' . __('Sessions', "ga-dash") . '"],' . rtrim($ga_dash_data, ',') . ' ]';
+                return '[["' . __('Searches', "ga-dash") . '", "' . __('Sessions', "ga-dash") . '"],' . rtrim($ga_dash_data, ',') . ' ]';
             } else {
                 return - 22;
             }
@@ -938,7 +939,7 @@ if (! class_exists('GADASH_GAPI')) {
                 }
             } catch (Google_Service_Exception $e) {
                 update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html("(" . $e->getCode() . ") " . $e->getMessage()));
-                set_transient('ga_dash_gapi_errors', $e->getErrors(), $this->error_timeout);
+                set_transient('ga_dash_gapi_errors', array($e->getCode(),(array)$e->getErrors()), $this->error_timeout);
                 return $e->getCode();
             } catch (Exception $e) {
                 update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e));

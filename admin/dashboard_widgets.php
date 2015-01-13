@@ -564,7 +564,7 @@ if (! class_exists('GADASH_Widgets')) {
                             data["totalsForAllResults"]["rt:activeUsers"] = "0";
                             data["rows"]= [];
                         }
-            
+                                    
             			if (data["totalsForAllResults"]["rt:activeUsers"]!==document.getElementById("gadash-online").innerHTML){
             				jQuery("#gadash-online").fadeOut("slow");
             				jQuery("#gadash-online").fadeOut(500);
@@ -673,11 +673,29 @@ if (! class_exists('GADASH_Widgets')) {
 <div id="gadash-trafficchannels"></div>
 <div id="gadash-prs"></div>
 <script type="text/javascript">
-            	google.load("visualization", "1", {packages:["table","orgchart"]})
-            	NProgress.configure({ parent: "#gadash-progressbar" });
-                NProgress.configure({ showSpinner: false });
-                NProgress.start();
-                npcounter = 0;
+            	google.load("visualization", "1", {packages:["table","orgchart"]});
+
+            	function checknpcounter(max) {
+            		try {
+            			if (npcounter == max) {
+            				NProgress.done();
+            			} else {
+            				npcounter++;
+            				NProgress.set((1/(max+1))*npcounter);
+            			}
+            		} catch(e) {}		
+            	}
+            	            	
+        		try {
+        	    	NProgress.configure({ parent: "#gadash-progressbar" });
+        	        NProgress.configure({ showSpinner: false });
+        	        NProgress.start();
+        		} catch(e) {
+        			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border":"1px solid red","border-left":"5px solid red"});
+        			jQuery("#gadash-progressbar").html("<?php _e("A JavaScript Error is blocking plugin resources!", 'ga-dash'); ?>");
+        		}    
+        	    npcounter = 0;
+            	
                                      
                 jQuery.post(ajaxurl, {action: "gadashadmin_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "<?php echo $query; ?>",gadashadmin_security_widget_reports: "<?php echo wp_create_nonce('gadashadmin_get_widgetreports'); ?>"}, function(response){
                 	   
@@ -741,11 +759,28 @@ if (! class_exists('GADASH_Widgets')) {
 </div>
 <script type="text/javascript">
             	google.load("visualization", "1", {packages:["corechart","orgchart"]});
-            	NProgress.configure({ parent: "#gadash-progressbar" });
-                NProgress.configure({ showSpinner: false });
-                NProgress.start();
-                npcounter = 0;
-                
+
+            	function checknpcounter(max) {
+            		try {
+            			if (npcounter == max) {
+            				NProgress.done();
+            			} else {
+            				npcounter++;
+            				NProgress.set((1/(max+1))*npcounter);
+            			}
+            		} catch(e) {}		
+            	}
+            	            	
+        		try {
+        	    	NProgress.configure({ parent: "#gadash-progressbar" });
+        	        NProgress.configure({ showSpinner: false });
+        	        NProgress.start();
+        		} catch(e) {
+        			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border":"1px solid red","border-left":"5px solid red"});
+        			jQuery("#gadash-progressbar").html("<?php _e("A JavaScript Error is blocking plugin resources!", 'ga-dash'); ?>");
+        		}    
+        	    npcounter = 0;            	
+               
                 jQuery.post(ajaxurl, {action: "gadashadmin_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "medium",gadashadmin_security_widget_reports: "<?php echo wp_create_nonce('gadashadmin_get_widgetreports'); ?>"}, function(response){
 
                     if (!jQuery.isNumeric(response)){
@@ -888,10 +923,27 @@ if (! class_exists('GADASH_Widgets')) {
 <div id="gadash-locations"></div>
 <script type="text/javascript">
             	google.load("visualization", "1", {packages:["geochart","table"]});
-            	NProgress.configure({ parent: "#gadash-progressbar" });
-                NProgress.configure({ showSpinner: false });
-                NProgress.start();
-                npcounter = 0;
+
+            	function checknpcounter(max) {
+            		try {
+            			if (npcounter == max) {
+            				NProgress.done();
+            			} else {
+            				npcounter++;
+            				NProgress.set((1/(max+1))*npcounter);
+            			}
+            		} catch(e) {}		
+            	}
+            	
+        		try {
+        	    	NProgress.configure({ parent: "#gadash-progressbar" });
+        	        NProgress.configure({ showSpinner: false });
+        	        NProgress.start();
+        		} catch(e) {
+        			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border":"1px solid red","border-left":"5px solid red"});
+        			jQuery("#gadash-progressbar").html("<?php _e("A JavaScript Error is blocking plugin resources!", 'ga-dash'); ?>");
+        		}    
+        	    npcounter = 0;
                         
                 jQuery.post(ajaxurl, {action: "gadashadmin_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "<?php echo $query; ?>",gadashadmin_security_widget_reports: "<?php echo wp_create_nonce('gadashadmin_get_widgetreports'); ?>"}, function(response){
 
@@ -975,12 +1027,29 @@ if (! class_exists('GADASH_Widgets')) {
 </div>
 <script type="text/javascript">
             
-    google.load("visualization", "1", {packages:["corechart"]})
-	NProgress.configure({ parent: "#gadash-progressbar" });
-    NProgress.configure({ showSpinner: false });
-    NProgress.start();
+    google.load("visualization", "1", {packages:["corechart"]});
+
+    function checknpcounter(max) {
+    	try {
+    		if (npcounter == max) {
+    			NProgress.done();
+    		} else {
+    			npcounter++;
+    			NProgress.set((1/(max+1))*npcounter);
+    		}
+    	} catch(e) {}		
+    }
+        
+	try {
+    	NProgress.configure({ parent: "#gadash-progressbar" });
+        NProgress.configure({ showSpinner: false });
+        NProgress.start();
+	} catch(e) {
+		jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border":"1px solid red","border-left":"5px solid red"});
+		jQuery("#gadash-progressbar").html("<?php _e("A JavaScript Error is blocking plugin resources!", 'ga-dash'); ?>");
+	}    
     npcounter = 0;
-            
+                
     jQuery.post(ajaxurl, {action: "gadashadmin_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "<?php echo $query; ?>",gadashadmin_security_widget_reports: "<?php echo wp_create_nonce('gadashadmin_get_widgetreports'); ?>"}, function(response){
 
         if (!jQuery.isNumeric(response)){

@@ -99,7 +99,7 @@ if (! class_exists('GADASH_Backend_Ajax')) {
                     print($GADASH_GAPI->get_mainreport($projectId, $from, $to, $query));
                     break;
             }
-            
+
             die();
         }
         

@@ -18,7 +18,7 @@ td.title-select {
 }
 
 td.debugging {
-	width: 150px;
+	width: 300px;
 }
 
 td.info {
@@ -357,4 +357,11 @@ td.roles {
 	.gadash-wrapper .inside .small-box {
 		width: 45%;
 	}
+}
+
+/* Tab nav bar focus fix */
+
+.nav-tab-active {
+outline: none!important;
+ box-shadow: none;
 }

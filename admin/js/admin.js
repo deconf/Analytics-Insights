@@ -1,12 +1,3 @@
-function checknpcounter(max) {
-	if (npcounter == max) {
-		NProgress.done();
-	} else {
-		npcounter++;
-		NProgress.set((1/(max+1))*npcounter);
-	}
-}
-
 jQuery(document).ready(
 	function() {
 		jQuery(".log_data").hide();
@@ -15,7 +6,35 @@ jQuery(document).ready(
 			jQuery(".log_data").slideToggle();
 			jQuery(this).text(jQuery(this).text() == 'Show Log' ? 'Hide Log' : 'Show Log');
 		});
+
+		if(window.location.href.indexOf("page=gadash_") != -1){
+			var ident = 'basic';
+			
+			if (window.location.hash){
+				ident = window.location.hash.split('#')[2].split('-')[1];
+			}
+
+			jQuery( ".nav-tab-wrapper a" ).each(function( index ) {
+				jQuery( this ).removeClass("nav-tab-active");
+				  jQuery("#"+this.hash.split('#')[2]).hide();
+			});
+			jQuery("#tab-"+ident).addClass("nav-tab-active");
+			jQuery("#gadwp-"+ident).show();
+		}		
+		
+		jQuery('a[href^="#"]').click(function(e) {
+			if(window.location.href.indexOf("page=gadash_") != -1){
+			jQuery( ".nav-tab-wrapper a" ).each(function( index ) {
+				  jQuery( this ).removeClass("nav-tab-active");
+				  jQuery("#"+this.hash.split('#')[2]).hide();
+			});
+			jQuery(this).addClass("nav-tab-active");
+			jQuery("#"+this.hash.split('#')[2]).show();
+			}
+        });
+
 	}
+	
 );
 
 jQuery(window).resize(

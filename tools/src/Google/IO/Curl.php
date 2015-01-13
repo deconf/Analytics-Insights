@@ -39,6 +39,7 @@ class Google_IO_Curl extends Google_IO_Abstract
    */
   public function executeRequest(Google_Http_Request $request)
   {
+
     $curl = curl_init();
 
     if ($request->getPostBody()) {
@@ -53,6 +54,7 @@ class Google_IO_Curl extends Google_IO_Abstract
       }
       curl_setopt($curl, CURLOPT_HTTPHEADER, $curlHeaders);
     }
+    
     curl_setopt($curl, CURLOPT_URL, $request->getUrl());
 
     curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $request->getRequestMethod());
@@ -68,6 +70,12 @@ class Google_IO_Curl extends Google_IO_Abstract
     if ($request->canGzip()) {
       curl_setopt($curl, CURLOPT_ENCODING, 'gzip,deflate');
     }
+    
+    $options = $this->client->getClassConfig('Google_IO_Curl', 'options');
+    
+    if (is_array($options)){
+        $this->setOptions($options);
+    }    
 
     foreach ($this->options as $key => $var) {
       curl_setopt($curl, $key, $var);
