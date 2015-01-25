@@ -132,7 +132,10 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Enhancement: GAPI errors handling improvement
 - Enhancement: added GADWP_IP_VERSION constant to force Internet Protocol version when needed  
 - Enhancement: run the cleanup method only in settings screen
-- Enhancement: adding tabs to Tracking Code page
+- Enhancement: added tabs to Tracking Code page
+- Enhancement: added a new menu item for errors and debugging
+- Enhancement: error alerts for Error & Debug submenu
+- Enhancement: disable GAPI libary file cache functionality
 
 = 4.4.2 =
 - Bug Fix: additioal check for frontend widget

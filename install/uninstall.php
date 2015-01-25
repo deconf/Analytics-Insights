@@ -18,7 +18,7 @@ class GADASH_Uninstall
                 $sqlquery = $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_gadash%%'");
                 $sqlquery = $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_timeout_gadash%%'");
                 delete_option('gadash_options');
-                delete_option('gadash_lasterror');
+                delete_transient('gadash_lasterror');
                 delete_transient('ga_dash_refresh_token');
                 delete_transient('ga_dash_gapi_errors');
                 restore_current_blog();
@@ -29,7 +29,7 @@ class GADASH_Uninstall
             $sqlquery = $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_gadash%%'");
             $sqlquery = $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_timeout_gadash%%'");
             delete_option('gadash_options');
-            delete_option('gadash_lasterror');
+            delete_transient('gadash_lasterror');
             delete_transient('ga_dash_refresh_token');
             delete_transient('ga_dash_gapi_errors');
         }

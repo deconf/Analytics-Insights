@@ -186,7 +186,7 @@ if (! class_exists('GADASH_Config')) {
                 include_once ($this->plugin_path . '/tools/tools.php');
                 $tools = new GADASH_Tools();
                 $tools->ga_dash_clear_cache();
-                delete_option('gadash_lasterror');
+                delete_transient('gadash_lasterror');
                 update_option('gadwp_version', GADWP_CURRENT_VERSION);
                 if (is_multisite()) { // Cleanup errors on the entire network
                     foreach (wp_get_sites() as $blog) {

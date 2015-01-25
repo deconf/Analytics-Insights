@@ -37,6 +37,25 @@ if (! class_exists('GADASH_Widgets')) {
                 $this,
                 'ga_dash_settings_link'
             ));
+            // Add error bubble
+            add_action('admin_print_scripts', array(
+                $this,
+                'draw_error_bubble'
+            ), 10000);
+        }
+
+        function draw_error_bubble()
+        {
+            $bubble_msg = '!';
+            if (get_transient('ga_dash_gapi_errors')) {
+                ?>
+                    <script type="text/javascript">
+                    jQuery(document).ready(function() {
+                        jQuery('#toplevel_page_gadash_settings li > a[href*="page=gadash_errors_debugging"]').append('&nbsp;<span class="awaiting-mod count-1"><span class="pending-count" style="padding:0 7px;"><?php echo $bubble_msg ?></span></span>');
+                    });
+                </script>
+                <?php
+            }
         }
 
         function ga_dash_admin_actions()
@@ -67,6 +86,10 @@ if (! class_exists('GADASH_Widgets')) {
                     'GADASH_Settings',
                     'tracking_settings'
                 ));
+                add_submenu_page('gadash_settings', __("Errors & Debug", 'ga-dash'), __("Errors & Debug", 'ga-dash'), 'manage_options', 'gadash_errors_debugging', array(
+                    'GADASH_Settings',
+                    'errors_debugging'
+                ));
             }
         }
 
@@ -86,6 +109,10 @@ if (! class_exists('GADASH_Widgets')) {
                     'GADASH_Settings',
                     'general_settings_network'
                 ));
+                add_submenu_page('gadash_settings', __("Errors & Debug", 'ga-dash'), __("Errors & Debug", 'ga-dash'), 'manage_network', 'gadash_errors_debugging', array(
+                    'GADASH_Settings',
+                    'errors_debugging'
+                ));
             }
         }
 
@@ -99,7 +126,8 @@ if (! class_exists('GADASH_Widgets')) {
                 'toplevel_page_gadash_settings',
                 'google-analytics_page_gadash_backend_settings',
                 'google-analytics_page_gadash_frontend_settings',
-                'google-analytics_page_gadash_tracking_settings'
+                'google-analytics_page_gadash_tracking_settings',
+                'google-analytics_page_gadash_errors_debugging'
             );
             
             if (! in_array($hook, $valid_hooks) and 'index.php' != $hook)

@@ -25,13 +25,15 @@ if (! class_exists('GADASH_GAPI')) {
             global $GADASH_Config;
             
             if (! function_exists('curl_version')) {
-                update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': CURL disabled. Please enable CURL!');
+                set_transient('gadash_lasterror', date('Y-m-d H:i:s') . ': CURL disabled. Please enable CURL!',$this->error_timeout);
                 return;
             }
             
             include_once ($GADASH_Config->plugin_path . '/tools/autoload.php');;
             
-            $this->client = new Google_Client();
+            $config = new Google_Config();
+            $config->setCacheClass('Google_Cache_Null');
+            $this->client = new Google_Client($config);
             $this->client->setScopes('https://www.googleapis.com/auth/analytics.readonly');
             $this->client->setAccessType('offline');
             $this->client->setApplicationName('Google Analytics Dashboard');
@@ -189,20 +191,20 @@ if (! class_exists('GADASH_GAPI')) {
                             $profile->getTimezone()
                         );
                     }
-                    update_option('gadash_lasterror', 'N/A');
+                    set_transient('gadash_lasterror', 'None');
                     return $ga_dash_profile_list;
                 } else {
-                    update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': No properties were found in this account!');
+                    set_transient('gadash_lasterror', date('Y-m-d H:i:s') . ': No properties were found in this account!', $this->error_timeout);
                     return '';
                 }
             } catch (Google_IO_Exception $e) {
-                update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e));
+                set_transient('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e), $this->error_timeout);
                 return '';
             } catch (Google_Service_Exception $e) {
-                update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html("(" . $e->getCode() . ") " . $e->getMessage()));
+                set_transient('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html("(" . $e->getCode() . ") " . $e->getMessage()), $this->error_timeout);
                 set_transient('ga_dash_gapi_errors', array($e->getCode(),(array)$e->getErrors()), $this->error_timeout);
             } catch (Exception $e) {
-                update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e));
+                set_transient('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e),$this->error_timeout);
                 return '';
             }
         }
@@ -246,14 +248,14 @@ if (! class_exists('GADASH_GAPI')) {
                     return $transient;
                 }
             } catch (Google_IO_Exception $e) {
-                update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e));
+                set_transient('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e), $this->error_timeout);
                 return false;
             } catch (Google_Service_Exception $e) {
-                update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html("(" . $e->getCode() . ") " . $e->getMessage()));
+                set_transient('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html("(" . $e->getCode() . ") " . $e->getMessage()), $this->error_timeout);
                 set_transient('ga_dash_gapi_errors', array($e->getCode(),(array)$e->getErrors()), $this->error_timeout);
                 return $e->getCode();
             } catch (Exception $e) {
-                update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e));
+                set_transient('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e), $this->error_timeout);
                 return false;
             }
         }
@@ -335,11 +337,11 @@ if (! class_exists('GADASH_GAPI')) {
                     $data = $transient;
                 }
             } catch (Google_Service_Exception $e) {
-                update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html("(" . $e->getCode() . ") " . $e->getMessage()));
+                set_transient('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html("(" . $e->getCode() . ") " . $e->getMessage()), $this->error_timeout);
                 set_transient('ga_dash_gapi_errors', array($e->getCode(),(array)$e->getErrors()), $this->error_timeout);
                 return $e->getCode();
             } catch (Exception $e) {
-                update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e));
+                set_transient('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e), $this->error_timeout);
                 return $e->getCode();
             }
             
@@ -938,11 +940,11 @@ if (! class_exists('GADASH_GAPI')) {
                     $data = $transient;
                 }
             } catch (Google_Service_Exception $e) {
-                update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html("(" . $e->getCode() . ") " . $e->getMessage()));
+                set_transient('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html("(" . $e->getCode() . ") " . $e->getMessage()), $this->error_timeout);
                 set_transient('ga_dash_gapi_errors', array($e->getCode(),(array)$e->getErrors()), $this->error_timeout);
                 return $e->getCode();
             } catch (Exception $e) {
-                update_option('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e));
+                set_transient('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e), $this->error_timeout);
                 return $e->getCode();
             }
             
