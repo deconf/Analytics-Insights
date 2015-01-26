@@ -715,7 +715,7 @@ final class GADASH_Settings
 						<table class="options">
 							<tr>
 								<td>
-						              <?php echo __("For errors and/or other issues please check",'ga-dash')." <a href='https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=top_tutorial&utm_campaign=gadwp' target='_blank'>". __("the plugin documentation page",'ga-dash')."</a> ".__("and related tutorials",'ga-dash').".";?>
+						              <?php echo __("For errors and/or other issues please check",'ga-dash')." <a href='https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=errors_screen&utm_campaign=gadwp' target='_blank'>". __("the plugin documentation page",'ga-dash')."</a> ".__("and related tutorials",'ga-dash').".";?>
 						        </td>
 							</tr>						
 							<tr>
@@ -831,7 +831,6 @@ final class GADASH_Settings
             }
         }
         
-        if (function_exists('curl_version')) {
             if ($GADASH_GAPI->client->getAccessToken()) {
                 if ($GADASH_Config->options['ga_dash_profile_list']) {
                     $profiles = $GADASH_Config->options['ga_dash_profile_list'];
@@ -849,7 +848,7 @@ final class GADASH_Settings
                     $options = self::set_get_options('general');
                 }
             }
-        }
+
         if (isset($_POST['Clear'])) {
             if (isset($_POST['gadash_security']) && wp_verify_nonce($_POST['gadash_security'], 'gadash_form')) {
                 $tools->ga_dash_clear_cache();
@@ -889,9 +888,7 @@ final class GADASH_Settings
                 $message = "<div class='error'><p>" . __("Cheating Huh?", 'ga-dash') . "</p></div>";
             }
         }
-        if (! function_exists('curl_version')) {
-            $message = "<div class='error'><p>" . __("PHP CURL is required. Ask your hosting provider to install/enable PHP CURL!", 'ga-dash') . "</p></div>";
-        }
+
         ?>
 <div class="wrap">
 	<?php echo "<h2>" . __( "Google Analytics Settings", 'ga-dash' ) . "</h2>"; ?><hr>
@@ -1058,7 +1055,7 @@ final class GADASH_Settings
 													<td colspan="2"><input type="submit" name="Authorize"
 														class="button button-secondary" id="authorize"
 														value="<?php _e( "Authorize Plugin", 'ga-dash' ); ?>"
-														<?php echo ((!function_exists('curl_version') OR ($options['ga_dash_network']))?'disabled="disabled"':''); ?> />
+														<?php echo $options['ga_dash_network']?'disabled="disabled"':''; ?> />
 														<input type="submit" name="Clear"
 														class="button button-secondary"
 														value="<?php _e( "Clear Cache", 'ga-dash' ); ?>" /></td>
@@ -1143,7 +1140,6 @@ final class GADASH_Settings
             }
         }
         
-        if (function_exists('curl_version')) {
             if ($GADASH_GAPI->client->getAccessToken()) {
                 if ($GADASH_Config->options['ga_dash_profile_list']) {
                     $profiles = $GADASH_Config->options['ga_dash_profile_list'];
@@ -1161,7 +1157,7 @@ final class GADASH_Settings
                     $options = self::set_get_options('network');
                 }
             }
-        }
+
         if (isset($_POST['Clear'])) {
             if (isset($_POST['gadash_security']) && wp_verify_nonce($_POST['gadash_security'], 'gadash_form')) {
                 $tools->ga_dash_clear_cache();
@@ -1201,9 +1197,7 @@ final class GADASH_Settings
                 $message = "<div class='error'><p>" . __("Cheating Huh?", 'ga-dash') . "</p></div>";
             }
         }
-        if (! function_exists('curl_version')) {
-            $message = "<div class='error'><p>" . __("PHP CURL is required. Ask your hosting provider to install/enable PHP CURL!", 'ga-dash') . "</p></div>";
-        }
+
         ?>
 	<div class="wrap">
 		<?php echo "<h2>" . __( "Google Analytics Settings", 'ga-dash' ) . "</h2>"; ?><hr>
@@ -1388,8 +1382,7 @@ final class GADASH_Settings
 																	<tr>
 																		<td colspan="2"><input type="submit" name="Authorize"
 																			class="button button-secondary" id="authorize"
-																			value="<?php _e( "Authorize Plugin", 'ga-dash' ); ?>"
-																			<?php echo (!function_exists('curl_version')?'disabled="disabled"':''); ?> />
+																			value="<?php _e( "Authorize Plugin", 'ga-dash' ); ?>"/>
 																			<input type="submit" name="Clear"
 																			class="button button-secondary"
 																			value="<?php _e( "Clear Cache", 'ga-dash' ); ?>" /></td>

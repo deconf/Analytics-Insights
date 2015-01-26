@@ -4,7 +4,7 @@ Donate link: https://deconf.com/donate/
 Tags: google,analytics,google analytics,dashboard,analytics dashboard,google analytics dashboard,google analytics widget,tracking,realtime,wpmu,multisite
 Requires at least: 2.8
 Tested up to: 4.1
-Stable tag: 4.4.3b
+Stable tag: 4.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -135,7 +135,8 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Enhancement: added tabs to Tracking Code page
 - Enhancement: added a new menu item for errors and debugging
 - Enhancement: error alerts for Error & Debug submenu
-- Enhancement: disable GAPI libary file cache functionality
+- Enhancement: disable file cache functionality in GAPI libray
+- Enhancement: if cURL is not available fall-back to HTTP streams; cURL is no longer a requirement
 
 = 4.4.2 =
 - Bug Fix: additioal check for frontend widget

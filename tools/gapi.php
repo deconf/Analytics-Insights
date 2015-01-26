@@ -24,11 +24,6 @@ if (! class_exists('GADASH_GAPI')) {
         {
             global $GADASH_Config;
             
-            if (! function_exists('curl_version')) {
-                set_transient('gadash_lasterror', date('Y-m-d H:i:s') . ': CURL disabled. Please enable CURL!',$this->error_timeout);
-                return;
-            }
-            
             include_once ($GADASH_Config->plugin_path . '/tools/autoload.php');;
             
             $config = new Google_Config();
@@ -52,11 +47,13 @@ if (! class_exists('GADASH_GAPI')) {
                 $this->client->setDeveloperKey('AIzaSyBG7LlUoHc29ZeC_dsShVaBEX15SfRl_WY');
             }
             
-            $curlversion = curl_version();
+            if (function_exists('curl_version')){
+                $curlversion = curl_version();
             
-            if (isset($curlversion['version']) AND version_compare($curlversion['version'], '7.10.8') >= 0 AND defined('GADWP_IP_VERSION') AND GADWP_IP_VERSION){
-                $this->client->setClassConfig('Google_IO_Curl', array('options' => array(CURLOPT_IPRESOLVE => GADWP_IP_VERSION))); // Force CURL_IPRESOLVE_V4 OR CURL_IPRESOLVE_V6
-            }
+                if (isset($curlversion['version']) AND version_compare($curlversion['version'], '7.10.8') >= 0 AND defined('GADWP_IP_VERSION') AND GADWP_IP_VERSION){
+                    $this->client->setClassConfig('Google_IO_Curl', array('options' => array(CURLOPT_IPRESOLVE => GADWP_IP_VERSION))); // Force CURL_IPRESOLVE_V4 OR CURL_IPRESOLVE_V6
+                }
+            }    
             
             $this->service = new Google_Service_Analytics($this->client);
             

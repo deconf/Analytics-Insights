@@ -56,7 +56,7 @@ if (! class_exists('GADASH_Backend_Ajax')) {
                 die();
             }
             
-            if ($GADASH_Config->options['ga_dash_token'] and function_exists('curl_version') and $projectId and $from and $to) {
+            if ($GADASH_Config->options['ga_dash_token'] and $projectId and $from and $to) {
                 include_once ($GADASH_Config->plugin_path . '/tools/gapi.php');
                 global $GADASH_GAPI;
             } else {
@@ -133,7 +133,7 @@ if (! class_exists('GADASH_Backend_Ajax')) {
                 die();
             }
             
-            if ($GADASH_Config->options['ga_dash_token'] and function_exists('curl_version') and $projectId) {
+            if ($GADASH_Config->options['ga_dash_token'] and $projectId) {
                 include_once ($GADASH_Config->plugin_path . '/tools/gapi.php');
                 global $GADASH_GAPI;
             } else {

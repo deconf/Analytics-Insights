@@ -183,11 +183,11 @@ if (! class_exists('GADASH_Widgets')) {
         function gadash_dashboard_widgets()
         {
             global $GADASH_Config;
-            
+
             /*
              * Include GAPI
              */
-            if ($GADASH_Config->options['ga_dash_token'] and function_exists('curl_version')) {
+            if ($GADASH_Config->options['ga_dash_token']) {
                 include_once ($GADASH_Config->plugin_path . '/tools/gapi.php');
                 global $GADASH_GAPI;
             } else {

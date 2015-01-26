@@ -30,7 +30,7 @@ if (! class_exists('GADASH_Tracking')) {
             }
         }
 
-        function ga_dash_tracking($head)
+        function ga_dash_tracking()
         {
             global $GADASH_Config;
             /*
