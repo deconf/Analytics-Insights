@@ -28,6 +28,14 @@ if (! class_exists('GADASH_GAPI')) {
             
             $config = new Google_Config();
             $config->setCacheClass('Google_Cache_Null');
+            if (function_exists('curl_version')){
+                $curlversion = curl_version();
+            
+                if (isset($curlversion['version']) AND version_compare($curlversion['version'], '7.10.8') >= 0 AND defined('GADWP_IP_VERSION') AND GADWP_IP_VERSION){
+                    $config->setClassConfig('Google_IO_Curl', array('options' => array(CURLOPT_IPRESOLVE => GADWP_IP_VERSION))); // Force CURL_IPRESOLVE_V4 OR CURL_IPRESOLVE_V6
+                }
+            }            
+            
             $this->client = new Google_Client($config);
             $this->client->setScopes('https://www.googleapis.com/auth/analytics.readonly');
             $this->client->setAccessType('offline');
@@ -46,14 +54,6 @@ if (! class_exists('GADASH_GAPI')) {
                 $this->client->setClientSecret('Kc7888wgbc_JbeCpbFjnYpwE');
                 $this->client->setDeveloperKey('AIzaSyBG7LlUoHc29ZeC_dsShVaBEX15SfRl_WY');
             }
-            
-            if (function_exists('curl_version')){
-                $curlversion = curl_version();
-            
-                if (isset($curlversion['version']) AND version_compare($curlversion['version'], '7.10.8') >= 0 AND defined('GADWP_IP_VERSION') AND GADWP_IP_VERSION){
-                    $this->client->setClassConfig('Google_IO_Curl', array('options' => array(CURLOPT_IPRESOLVE => GADWP_IP_VERSION))); // Force CURL_IPRESOLVE_V4 OR CURL_IPRESOLVE_V6
-                }
-            }    
             
             $this->service = new Google_Service_Analytics($this->client);
             
@@ -211,7 +211,7 @@ if (! class_exists('GADASH_GAPI')) {
          *
          * @return token|boolean
          */
-        function ga_dash_refresh_token()
+        private function ga_dash_refresh_token()
         {
             global $GADASH_Config;
             try {
@@ -307,7 +307,7 @@ if (! class_exists('GADASH_GAPI')) {
          * @param unknown $serial            
          * @return number|Google_Service_Analytics_GaData
          */
-        function handle_corereports($projectId, $from, $to, $metrics, $options, $serial)
+        private function handle_corereports($projectId, $from, $to, $metrics, $options, $serial)
         {
             try {
                 
@@ -967,6 +967,7 @@ if (! class_exists('GADASH_GAPI')) {
         }
     }
 }
+
 if (! isset($GLOBALS['GADASH_GAPI'])) {
     $GLOBALS['GADASH_GAPI'] = new GADASH_GAPI();
 }

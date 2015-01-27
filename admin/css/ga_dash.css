@@ -1,3 +1,9 @@
+/* Tab navigation */
+
+#gadwp-events, #gadwp-custom, #gadwp-advanced, #gadwp-exclude, #gadwp-config{
+	display:none;
+}
+
 /* Options pages */
 table.options {
 	padding-left: 10px;
@@ -353,11 +359,4 @@ td.roles {
 	.gadash-wrapper .inside .small-box {
 		width: 45%;
 	}
-}
-
-/* Tab nav bar focus fix */
-
-.nav-tab-active {
-outline: none!important;
- box-shadow: none;
 }

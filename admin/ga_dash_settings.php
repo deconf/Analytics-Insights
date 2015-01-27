@@ -867,10 +867,8 @@ final class GADASH_Settings
                 $message = "<div class='error'><p>" . __("Cheating Huh?", 'ga-dash') . "</p></div>";
             }
         }
-        if (isset($_POST['Log'])) {
-            $message = "<div class='updated'><p>" . __("Dumping log data.", 'ga-dash') . "</p></div>";
-        }
-        if (isset($_POST['options']['ga_dash_hidden']) and ! isset($_POST['Clear']) and ! isset($_POST['Reset']) and ! isset($_POST['Log'])) {
+
+        if (isset($_POST['options']['ga_dash_hidden']) and ! isset($_POST['Clear']) and ! isset($_POST['Reset'])) {
             $message = "<div class='updated'><p>" . __("Settings saved.", 'ga-dash') . "</p></div>";
             if (! (isset($_POST['gadash_security']) && wp_verify_nonce($_POST['gadash_security'], 'gadash_form'))) {
                 $message = "<div class='error'><p>" . __("Cheating Huh?", 'ga-dash') . "</p></div>";
@@ -1176,10 +1174,8 @@ final class GADASH_Settings
                 $message = "<div class='error'><p>" . __("Cheating Huh?", 'ga-dash') . "</p></div>";
             }
         }
-        if (isset($_POST['Log'])) {
-            $message = "<div class='updated'><p>" . __("Dumping log data.", 'ga-dash') . "</p></div>";
-        }
-        if (isset($_POST['options']['ga_dash_hidden']) and ! isset($_POST['Clear']) and ! isset($_POST['Reset']) and ! isset($_POST['Log']) and ! isset($_POST['Refresh'])) {
+
+        if (isset($_POST['options']['ga_dash_hidden']) and ! isset($_POST['Clear']) and ! isset($_POST['Reset']) and ! isset($_POST['Refresh'])) {
             $message = "<div class='updated'><p>" . __("Settings saved.", 'ga-dash') . "</p></div>";
             if (! (isset($_POST['gadash_security']) && wp_verify_nonce($_POST['gadash_security'], 'gadash_form'))) {
                 $message = "<div class='error'><p>" . __("Cheating Huh?", 'ga-dash') . "</p></div>";
