@@ -171,8 +171,7 @@ if (! class_exists('GADASH_Frontend')) {
 				var options = {
 					page: "enable",
 					pageSize: 6,
-					width: "100%",
-					allowHtml:true
+					width: "100%"
 				};
 
 				var chart = new google.visualization.Table(document.getElementById("gadwp-searches"));

@@ -723,7 +723,6 @@ if (! class_exists('GADASH_Widgets')) {
         			jQuery("#gadash-progressbar").html("<?php _e("A JavaScript Error is blocking plugin resources!", 'ga-dash'); ?>");
         		}    
         	    npcounter = 0;
-            	
                                      
                 jQuery.post(ajaxurl, {action: "gadashadmin_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "<?php echo $query; ?>",gadashadmin_security_widget_reports: "<?php echo wp_create_nonce('gadashadmin_get_widgetreports'); ?>"}, function(response){
                 	   
@@ -754,8 +753,7 @@ if (! class_exists('GADASH_Widgets')) {
                 	var options = {
                 		page: 'enable',
                 		pageSize: 10,
-                		width: '100%',
-                		allowHtml:true
+                		width: '100%'
                 	};
                 
                 	var chart = new google.visualization.Table(document.getElementById('gadash-prs'));
@@ -1014,8 +1012,7 @@ if (! class_exists('GADASH_Widgets')) {
                 	var options = {
                 		page: 'enable',
                 		pageSize: 10,
-                		width: '100%',
-                		allowHtml:true
+                		width: '100%'
                 	};
                 
                 	var chart = new google.visualization.Table(document.getElementById('gadash-locations'));

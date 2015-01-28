@@ -133,8 +133,7 @@ class GADSH_Frontend_Widget extends WP_Widget
     					  titlePosition: "in",
     					  chartArea: {width: "95%",height:"75%"},
     					  hAxis: { textPosition: "none"},
-    					  vAxis: { textPosition: "none", minValue: 0, gridlines: {color: "transparent"}, baselineColor: "transparent"},
-    					  allowHtml:true
+    					  vAxis: { textPosition: "none", minValue: 0, gridlines: {color: "transparent"}, baselineColor: "transparent"}
     				 	}
     					var chart = new google.visualization.AreaChart(document.getElementById("gadwp-widgetchart"));
     					' . $formater . '
