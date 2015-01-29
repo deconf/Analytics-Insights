@@ -483,13 +483,13 @@ if (! class_exists('GADASH_GAPI')) {
             $dimensions = 'ga:pageTitle';
             
             $serial = 'gadash_qr4' . $projectId . $from;
-            $start = microtime(true);
+
             $data = $this->handle_corereports($projectId, $from, $to, $metrics, array(
                 'dimensions' => $dimensions,
                 'sort' => '-ga:pageviews',
                 'quotaUser' => $this->managequota . 'p' . $projectId
             ), $serial);
-            error_log(microtime(true) - $start);
+
             if (is_numeric($data)) {
                 return $data;
             }
