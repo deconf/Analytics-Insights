@@ -130,13 +130,14 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Enhancement: further optimization on queries
 - Enhancement: less error prone while running javascript
 - Enhancement: GAPI errors handling improvement
-- Enhancement: added GADWP_IP_VERSION constant to force Internet Protocol version when needed  
+- Enhancement: added GADWP_IP_VERSION constant to force a particular Internet Protocol version when needed  
 - Enhancement: run the cleanup method only in settings screen
 - Enhancement: added tabs to Tracking Code page
 - Enhancement: added a new menu item for errors and debugging
 - Enhancement: error alerts for Error & Debug submenu
 - Enhancement: disable file cache functionality in GAPI libray
 - Enhancement: if cURL is not available fall-back to HTTP streams; cURL is no longer a requirement
+- Enhancement: wp_get_sites limit can now be adjusted through gadwp_sites_limit filter
 
 = 4.4.2 =
 - Bug Fix: additioal check for frontend widget

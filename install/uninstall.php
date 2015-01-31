@@ -13,7 +13,7 @@ class GADASH_Uninstall
     {
         global $wpdb;
         if (is_multisite()) { // Cleanup Network install
-            foreach (wp_get_sites() as $blog) {
+            foreach (wp_get_sites(array( 'limit' => apply_filters('gadwp_sites_limit', 100))) as $blog) {
                 switch_to_blog($blog['blog_id']);
                 $sqlquery = $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_gadash%%'");
                 $sqlquery = $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_timeout_gadash%%'");

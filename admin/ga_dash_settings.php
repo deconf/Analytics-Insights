@@ -1104,7 +1104,7 @@ final class GADASH_Settings
                     $message = "<div class='updated'><p>" . __("Plugin authorization succeeded.", 'ga-dash') . "</p></div>";
                     $options = self::set_get_options('network');
                     if (is_multisite()) { // Cleanup errors on the entire network
-                        foreach (wp_get_sites() as $blog) {
+                        foreach (wp_get_sites(array( 'limit' => apply_filters('gadwp_sites_limit', 100))) as $blog) {
                             switch_to_blog($blog['blog_id']);
                             delete_transient('ga_dash_gapi_errors');
                             restore_current_blog();
@@ -1320,7 +1320,7 @@ final class GADASH_Settings
                     if (isset($options['ga_dash_tableid_network'])) {
                         $options['ga_dash_tableid_network'] = json_decode(json_encode($options['ga_dash_tableid_network']), FALSE);
                     }
-                    foreach (wp_get_sites() as $blog) {
+                    foreach (wp_get_sites(array( 'limit' => apply_filters('gadwp_sites_limit', 100))) as $blog) {
                         ?>
 							<tr>
 																		<td class="title-select"><label
