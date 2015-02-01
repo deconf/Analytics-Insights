@@ -128,24 +128,24 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 
 = 4.4.3 =
 - Enhancement: further optimization on queries
-- Enhancement: less error prone while running javascript
+- Enhancement: less error prone while running JavaScript
 - Enhancement: GAPI errors handling improvement
 - Enhancement: added GADWP_IP_VERSION constant to force a particular Internet Protocol version when needed  
-- Enhancement: run the cleanup method only in settings screen
+- Enhancement: run the clean-up method only in settings screen
 - Enhancement: added tabs to Tracking Code page
 - Enhancement: added a new menu item for errors and debugging
-- Enhancement: error alerts for Error & Debug submenu
-- Enhancement: disable file cache functionality in GAPI libray
+- Enhancement: error alerts for Error & Debug sub-menu
+- Enhancement: disable file cache functionality in GAPI library
 - Enhancement: if cURL is not available fall-back to HTTP streams; cURL is no longer a requirement
 - Enhancement: wp_get_sites limit can now be adjusted through gadwp_sites_limit filter
 
 = 4.4.2 =
-- Bug Fix: additioal check for frontend widget
+- Bug Fix: additional check for frontend widget
 
 = 4.4.1 =
 - Bug Fix: frontend widget nonce issue while using a cache plugin, reported by [Rick](https://deconf.com/ask/author/rickbates/)
 - Bug Fix: clear the buffer immediately before returning AJAX response
-- Bug Fix: add fullpath while loading autoload.php
+- Bug Fix: add full-path while loading autoload.php
 
 = 4.4 =
 - Bug Fix: frontend reports and widget are not responsive
