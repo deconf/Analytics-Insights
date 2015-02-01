@@ -815,6 +815,7 @@ final class GADASH_Settings
                     $message = "<div class='updated'><p>" . __("Plugin authorization succeeded.", 'ga-dash') . "</p></div>";
                     $options = self::set_get_options('general');
                     delete_transient('ga_dash_gapi_errors');
+                    delete_transient('gadash_lasterror');
                 } catch (Google_IO_Exception $e) {
                     set_transient('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e), $GADASH_GAPI->error_timeout);
                     return false;
@@ -831,7 +832,7 @@ final class GADASH_Settings
             }
         }
         
-            if ($GADASH_GAPI->client->getAccessToken()) {
+        if ($GADASH_Config->options['ga_dash_token'] and $GADASH_GAPI->client->getAccessToken()) {
                 if ($GADASH_Config->options['ga_dash_profile_list']) {
                     $profiles = $GADASH_Config->options['ga_dash_profile_list'];
                 } else {
@@ -847,7 +848,7 @@ final class GADASH_Settings
                     $GADASH_Config->set_plugin_options();
                     $options = self::set_get_options('general');
                 }
-            }
+        }
 
         if (isset($_POST['Clear'])) {
             if (isset($_POST['gadash_security']) && wp_verify_nonce($_POST['gadash_security'], 'gadash_form')) {
@@ -1138,23 +1139,23 @@ final class GADASH_Settings
             }
         }
         
-            if ($GADASH_GAPI->client->getAccessToken()) {
-                if ($GADASH_Config->options['ga_dash_profile_list']) {
-                    $profiles = $GADASH_Config->options['ga_dash_profile_list'];
-                } else {
-                    $profiles = $GADASH_GAPI->refresh_profiles();
-                }
-                if ($profiles) {
-                    $GADASH_Config->options['ga_dash_profile_list'] = $profiles;
-                    if (isset($GADASH_Config->options['ga_dash_tableid_jail']) and ! $GADASH_Config->options['ga_dash_tableid_jail']) {
-                        $profile = $tools->guess_default_domain($profiles);
-                        $GADASH_Config->options['ga_dash_tableid_jail'] = $profile;
-                        $GADASH_Config->options['ga_dash_tableid'] = $profile;
-                    }
-                    $GADASH_Config->set_plugin_options(true);
-                    $options = self::set_get_options('network');
-                }
+        if ($GADASH_Config->options['ga_dash_token'] and $GADASH_GAPI->client->getAccessToken()) {
+            if ($GADASH_Config->options['ga_dash_profile_list']) {
+                $profiles = $GADASH_Config->options['ga_dash_profile_list'];
+            } else {
+                $profiles = $GADASH_GAPI->refresh_profiles();
             }
+            if ($profiles) {
+                $GADASH_Config->options['ga_dash_profile_list'] = $profiles;
+                if (isset($GADASH_Config->options['ga_dash_tableid_jail']) and ! $GADASH_Config->options['ga_dash_tableid_jail']) {
+                    $profile = $tools->guess_default_domain($profiles);
+                    $GADASH_Config->options['ga_dash_tableid_jail'] = $profile;
+                    $GADASH_Config->options['ga_dash_tableid'] = $profile;
+                }
+                $GADASH_Config->set_plugin_options(true);
+                $options = self::set_get_options('network');
+            }
+        }
 
         if (isset($_POST['Clear'])) {
             if (isset($_POST['gadash_security']) && wp_verify_nonce($_POST['gadash_security'], 'gadash_form')) {

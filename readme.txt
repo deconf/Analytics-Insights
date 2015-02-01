@@ -128,7 +128,8 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 
 = 4.4.4 =
 - Bug Fix: end tag missing on error message
-- Enhancement: handle some additional API errors 
+- Bug Fix: additional checks before making a View list request
+- Enhancement: handle some additional API errors
 
 = 4.4.3 =
 - Enhancement: further optimization on queries

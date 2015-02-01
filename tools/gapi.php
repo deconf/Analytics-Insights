@@ -170,6 +170,8 @@ if (! class_exists('GADASH_GAPI')) {
          */
         function refresh_profiles()
         {
+            global $GADASH_Config;
+
             try {
                 $profiles = $this->service->management_profiles->listManagementProfiles('~all', '~all');
                 $items = $profiles->getItems();
