@@ -129,6 +129,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 = 4.4.4 =
 - Bug Fix: end tag missing on error message
 - Bug Fix: additional checks before making a View list request
+- Bug Fix: avoid deleting errors while clearing the cache
 - Enhancement: handle some additional API errors
 
 = 4.4.3 =

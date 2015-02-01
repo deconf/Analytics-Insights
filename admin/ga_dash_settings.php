@@ -724,7 +724,7 @@ final class GADASH_Settings
 							<tr>
 								<td> 
                     				<?php
-        $errors = esc_html(print_r(get_transient('gadash_lasterror'), true)) ? esc_html(print_r(get_transient('gadash_lasterror'), true)) : __("None", 'ga-dash');
+        $errors = esc_html(print_r(get_transient('ga_dash_lasterror'), true)) ? esc_html(print_r(get_transient('ga_dash_lasterror'), true)) : __("None", 'ga-dash');
         echo '<pre class="log_data">Last Error: ';
         echo $errors;
         ?></pre>
@@ -815,16 +815,16 @@ final class GADASH_Settings
                     $message = "<div class='updated'><p>" . __("Plugin authorization succeeded.", 'ga-dash') . "</p></div>";
                     $options = self::set_get_options('general');
                     delete_transient('ga_dash_gapi_errors');
-                    delete_transient('gadash_lasterror');
+                    delete_transient('ga_dash_lasterror');
                 } catch (Google_IO_Exception $e) {
-                    set_transient('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e), $GADASH_GAPI->error_timeout);
+                    set_transient('ga_dash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e), $GADASH_GAPI->error_timeout);
                     return false;
                 } catch (Google_Service_Exception $e) {
-                    set_transient('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html("(" . $e->getCode() . ") " . $e->getMessage()), $GADASH_GAPI->error_timeout);
+                    set_transient('ga_dash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html("(" . $e->getCode() . ") " . $e->getMessage()), $GADASH_GAPI->error_timeout);
                     set_transient('ga_dash_gapi_errors', $e->getErrors(), $GADASH_GAPI->error_timeout);
                     return $e->getCode();
                 } catch (Exception $e) {
-                    set_transient('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e) . "\nResponseHttpCode:" . $e->getCode(), $GADASH_GAPI->error_timeout);
+                    set_transient('ga_dash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e) . "\nResponseHttpCode:" . $e->getCode(), $GADASH_GAPI->error_timeout);
                     $GADASH_GAPI->ga_dash_reset_token(false);
                 }
             } else {
@@ -1114,14 +1114,14 @@ final class GADASH_Settings
                         delete_transient('ga_dash_gapi_errors');
                     }
                 } catch (Google_IO_Exception $e) {
-                    set_transient('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e), $GADASH_GAPI->error_timeout);
+                    set_transient('ga_dash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e), $GADASH_GAPI->error_timeout);
                     return false;
                 } catch (Google_Service_Exception $e) {
-                    set_transient('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html("(" . $e->getCode() . ") " . $e->getMessage()), $GADASH_GAPI->error_timeout);
+                    set_transient('ga_dash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html("(" . $e->getCode() . ") " . $e->getMessage()), $GADASH_GAPI->error_timeout);
                     set_transient('ga_dash_gapi_errors', $e->getErrors(), $GADASH_GAPI->error_timeout);
                     return $e->getCode();
                 } catch (Exception $e) {
-                    set_transient('gadash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e) . "\nResponseHttpCode:" . $e->getCode(), $GADASH_GAPI->error_timeout);
+                    set_transient('ga_dash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e) . "\nResponseHttpCode:" . $e->getCode(), $GADASH_GAPI->error_timeout);
                     $GADASH_GAPI->ga_dash_reset_token(false);
                 }
             } else {
