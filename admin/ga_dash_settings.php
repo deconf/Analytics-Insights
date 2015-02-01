@@ -691,7 +691,7 @@ final class GADASH_Settings
         $options = self::set_get_options('frontend');
         
         if (! $GADASH_Config->options['ga_dash_tableid_jail'] or ! $GADASH_Config->options['ga_dash_token']) {
-            $message = "<div class='error'><p><strong>" . __("Something went wrong, check", 'ga-dash') . " <a href='" . menu_page_url('gadash_errors_debugging', false) . "'>" . __('Errors & Debug', 'ga-dash'). "</a> " .__('or', 'ga-dash') . " <a href='" . menu_page_url('gadash_settings', false) . "'>" . __('auhorize the plugin', 'ga-dash') . "</a>.</p></div>";
+            $message = "<div class='error'><p>" . __("Something went wrong, check", 'ga-dash') . " <a href='" . menu_page_url('gadash_errors_debugging', false) . "'>" . __('Errors & Debug', 'ga-dash'). "</a> " .__('or', 'ga-dash') . " <a href='" . menu_page_url('gadash_settings', false) . "'>" . __('auhorize the plugin', 'ga-dash') . "</a>.</p></div>";
         }
         ?>
 

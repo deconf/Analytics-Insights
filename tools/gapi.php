@@ -32,7 +32,7 @@ if (! class_exists('GADASH_GAPI')) {
                 $curlversion = curl_version();
             
                 if (isset($curlversion['version']) AND version_compare($curlversion['version'], '7.10.8') >= 0 AND defined('GADWP_IP_VERSION') AND GADWP_IP_VERSION){
-                    $config->setClassConfig('Google_IO_Curl', array('options' => array(CURLOPT_IPRESOLVE => GADWP_IP_VERSION))); // Force CURL_IPRESOLVE_V4 OR CURL_IPRESOLVE_V6
+                    $config->setClassConfig('Google_IO_Curl', array('options' => array(CURLOPT_IPRESOLVE => GADWP_IP_VERSION))); // Force CURL_IPRESOLVE_V4 or CURL_IPRESOLVE_V6
                 }
             }            
             
@@ -87,14 +87,14 @@ if (! class_exists('GADASH_GAPI')) {
         function gapi_errors_handler()
         {
             $errors = get_transient('ga_dash_gapi_errors');
-            
+
             if (isset($errors[1][0]['reason'])) {
                 
                 if ($errors[1][0]['reason'] == 'dailyLimitExceeded') {
                     return TRUE;
                 }
                 
-                if ($errors[1][0]['reason'] == 'invalidCredentials' || $errors[1][0]['reason'] == 'authError' || $errors[1][0]['reason'] == 'insufficientPermissions') {
+                if ($errors[1][0]['reason'] == 'invalidCredentials' or $errors[1][0]['reason'] == 'authError' or $errors[1][0]['reason'] == 'insufficientPermissions' or $errors[1][0]['reason'] == 'required') {
                     $this->ga_dash_reset_token(false);
                     return TRUE;
                 }
