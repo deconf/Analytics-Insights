@@ -87,7 +87,7 @@ if (! class_exists('GADASH_GAPI')) {
         function gapi_errors_handler()
         {
             $errors = get_transient('ga_dash_gapi_errors');
-            //set_transient('ga_dash_gapi_errors',1000,24*3600);
+
             if (isset($errors[1][0]['reason'])) {
                 
                 if ($errors[1][0]['reason'] == 'dailyLimitExceeded') {
