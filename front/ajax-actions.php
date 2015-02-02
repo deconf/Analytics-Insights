@@ -113,7 +113,6 @@ if (! class_exists('GADASH_Frontend_Ajax')) {
             
             if (isset($options[$widget_index[1]])){
                 $instance = $options[$widget_index[1]];
-                error_log(print_r($options[$widget_index[1]],true));
             }else{
                 print(json_encode(- 32));
                 die();
