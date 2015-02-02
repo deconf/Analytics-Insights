@@ -131,6 +131,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Bug Fix: additional checks before making a View list request
 - Bug Fix: avoid deleting errors while clearing the cache
 - Enhancement: handle some additional API errors
+- Enhancement: set totals to zero when anonymize stats is enabled
 
 = 4.4.3 =
 - Enhancement: further optimization on queries

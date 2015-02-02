@@ -187,7 +187,7 @@ class GADSH_Frontend_Widget extends WP_Widget
 	</select>
 </p>
 <p>
-	<label for="<?php echo $this->get_field_id( 'anonim' ); ?>"><?php _e( "Anonimize stats:",'ga-dash' ); ?></label>
+	<label for="<?php echo $this->get_field_id( 'anonim' ); ?>"><?php _e( "Anonymize stats:",'ga-dash' ); ?></label>
 	<input class="widefat"
 		id="<?php echo $this->get_field_id( 'anonim' ); ?>"
 		name="<?php echo $this->get_field_name( 'anonim' ); ?>"
