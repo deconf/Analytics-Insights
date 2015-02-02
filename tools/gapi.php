@@ -24,17 +24,22 @@ if (! class_exists('GADASH_GAPI')) {
         {
             global $GADASH_Config;
             
-            include_once ($GADASH_Config->plugin_path . '/tools/autoload.php');;
+            include_once ($GADASH_Config->plugin_path . '/tools/autoload.php');
+            ;
             
             $config = new Google_Config();
             $config->setCacheClass('Google_Cache_Null');
-            if (function_exists('curl_version')){
+            if (function_exists('curl_version')) {
                 $curlversion = curl_version();
-            
-                if (isset($curlversion['version']) AND version_compare($curlversion['version'], '7.10.8') >= 0 AND defined('GADWP_IP_VERSION') AND GADWP_IP_VERSION){
-                    $config->setClassConfig('Google_IO_Curl', array('options' => array(CURLOPT_IPRESOLVE => GADWP_IP_VERSION))); // Force CURL_IPRESOLVE_V4 or CURL_IPRESOLVE_V6
+                
+                if (isset($curlversion['version']) and version_compare($curlversion['version'], '7.10.8') >= 0 and defined('GADWP_IP_VERSION') and GADWP_IP_VERSION) {
+                    $config->setClassConfig('Google_IO_Curl', array(
+                        'options' => array(
+                            CURLOPT_IPRESOLVE => GADWP_IP_VERSION
+                        )
+                    )); // Force CURL_IPRESOLVE_V4 or CURL_IPRESOLVE_V6
                 }
-            }            
+            }
             
             $this->client = new Google_Client($config);
             $this->client->setScopes('https://www.googleapis.com/auth/analytics.readonly');
@@ -82,29 +87,30 @@ if (! class_exists('GADASH_GAPI')) {
         /**
          * Handles errors returned by GAPI
          *
-         * @return int|boolean
+         * @return boolean
          */
         function gapi_errors_handler()
         {
             $errors = get_transient('ga_dash_gapi_errors');
-
-            if (isset($errors[1][0]['reason'])) {
-                
-                if ($errors[1][0]['reason'] == 'dailyLimitExceeded') {
-                    return TRUE;
-                }
-                
-                if ($errors[1][0]['reason'] == 'invalidCredentials' or $errors[1][0]['reason'] == 'authError' or $errors[1][0]['reason'] == 'insufficientPermissions' or $errors[1][0]['reason'] == 'required') {
-                    $this->ga_dash_reset_token(false);
-                    return TRUE;
-                }
-                
-                if ($errors[1][0]['reason'] == 'invalidParameter' or $errors[1][0]['reason'] == 'badRequest') {
-                    return TRUE;
-                }
+            
+            if (! isset($errors[1][0]['reason']) or ! isset($errors[0])) {
+                return FALSE;
             }
             
-            return FALSE;
+            if ($errors[1][0]['reason'] == 'invalidCredentials' or $errors[1][0]['reason'] == 'authError' or $errors[1][0]['reason'] == 'insufficientPermissions' or $errors[1][0]['reason'] == 'required') {
+                $this->ga_dash_reset_token(false);
+                return TRUE;
+            }
+            
+            if ($errors[0] == 403) {
+                if ($errors[1][0]['reason'] == 'userRateLimitExceeded' or $errors[1][0]['reason'] == 'quotaExceeded') {
+                    return FALSE;
+                } else {
+                    return TRUE;
+                }
+            } else {
+                return TRUE;
+            }
         }
 
         /**
@@ -171,7 +177,7 @@ if (! class_exists('GADASH_GAPI')) {
         function refresh_profiles()
         {
             global $GADASH_Config;
-
+            
             try {
                 $profiles = $this->service->management_profiles->listManagementProfiles('~all', '~all');
                 $items = $profiles->getItems();
@@ -201,9 +207,12 @@ if (! class_exists('GADASH_GAPI')) {
                 return '';
             } catch (Google_Service_Exception $e) {
                 set_transient('ga_dash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html("(" . $e->getCode() . ") " . $e->getMessage()), $this->error_timeout);
-                set_transient('ga_dash_gapi_errors', array($e->getCode(),(array)$e->getErrors()), $this->error_timeout);
+                set_transient('ga_dash_gapi_errors', array(
+                    $e->getCode(),
+                    (array) $e->getErrors()
+                ), $this->error_timeout);
             } catch (Exception $e) {
-                set_transient('ga_dash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e),$this->error_timeout);
+                set_transient('ga_dash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e), $this->error_timeout);
                 return '';
             }
         }
@@ -251,7 +260,10 @@ if (! class_exists('GADASH_GAPI')) {
                 return false;
             } catch (Google_Service_Exception $e) {
                 set_transient('ga_dash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html("(" . $e->getCode() . ") " . $e->getMessage()), $this->error_timeout);
-                set_transient('ga_dash_gapi_errors', array($e->getCode(),(array)$e->getErrors()), $this->error_timeout);
+                set_transient('ga_dash_gapi_errors', array(
+                    $e->getCode(),
+                    (array) $e->getErrors()
+                ), $this->error_timeout);
                 return $e->getCode();
             } catch (Exception $e) {
                 set_transient('ga_dash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e), $this->error_timeout);
@@ -337,7 +349,10 @@ if (! class_exists('GADASH_GAPI')) {
                 }
             } catch (Google_Service_Exception $e) {
                 set_transient('ga_dash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html("(" . $e->getCode() . ") " . $e->getMessage()), $this->error_timeout);
-                set_transient('ga_dash_gapi_errors', array($e->getCode(),(array)$e->getErrors()), $this->error_timeout);
+                set_transient('ga_dash_gapi_errors', array(
+                    $e->getCode(),
+                    (array) $e->getErrors()
+                ), $this->error_timeout);
                 return $e->getCode();
             } catch (Exception $e) {
                 set_transient('ga_dash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e), $this->error_timeout);
@@ -485,13 +500,13 @@ if (! class_exists('GADASH_GAPI')) {
             $dimensions = 'ga:pageTitle';
             
             $serial = 'gadash_qr4' . $projectId . $from;
-
+            
             $data = $this->handle_corereports($projectId, $from, $to, $metrics, array(
                 'dimensions' => $dimensions,
                 'sort' => '-ga:pageviews',
                 'quotaUser' => $this->managequota . 'p' . $projectId
             ), $serial);
-
+            
             if (is_numeric($data)) {
                 return $data;
             }
@@ -940,7 +955,10 @@ if (! class_exists('GADASH_GAPI')) {
                 }
             } catch (Google_Service_Exception $e) {
                 set_transient('ga_dash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html("(" . $e->getCode() . ") " . $e->getMessage()), $this->error_timeout);
-                set_transient('ga_dash_gapi_errors', array($e->getCode(),(array)$e->getErrors()), $this->error_timeout);
+                set_transient('ga_dash_gapi_errors', array(
+                    $e->getCode(),
+                    (array) $e->getErrors()
+                ), $this->error_timeout);
                 return $e->getCode();
             } catch (Exception $e) {
                 set_transient('ga_dash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e), $this->error_timeout);

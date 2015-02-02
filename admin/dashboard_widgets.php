@@ -201,8 +201,6 @@ if (! class_exists('GADASH_Widgets')) {
             include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
             $tools = new GADASH_Tools();
             
-            $tools->ga_dash_cleanup_timeouts();
-            
             if (current_user_can('manage_options')) {
                 
                 if (isset($_REQUEST['ga_dash_profile_select'])) {
