@@ -1491,10 +1491,5 @@ final class GADASH_Settings
         /*
          * Include Tools
          */
-        include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
-        $tools = new GADASH_Tools();
-
-        $tools->ga_dash_cleanup_timeouts();
-
     }
 }

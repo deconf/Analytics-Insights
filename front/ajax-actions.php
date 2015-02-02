@@ -105,9 +105,21 @@ if (! class_exists('GADASH_Frontend_Ajax')) {
         {
             global $GADASH_Config;
             
-            $anonim = (int)$_REQUEST['gadash_anonim']; //make sure we have an int value
+            $widget_index = explode('-',$_REQUEST['gadash_id']);
+
+            $option_name = $_REQUEST['gadash_optionname'];
             
-            switch ($_REQUEST['gadash_period']) { //make sure we have a valid request
+            $options = get_option($option_name);
+            
+            if (isset($options[$widget_index[1]])){
+                $instance = $options[$widget_index[1]];
+                error_log(print_r($options[$widget_index[1]],true));
+            }else{
+                print(json_encode(- 32));
+                die();
+            }    
+            
+            switch ($instance['period']) { //make sure we have a valid request
                 case '7daysAgo':
                     $period = '7daysAgo';
                     break;
@@ -149,7 +161,7 @@ if (! class_exists('GADASH_Frontend_Ajax')) {
                 die();
             }
             
-            $data_widget = $GADASH_GAPI->frontend_widget_stats($projectId, $period, $anonim);
+            $data_widget = $GADASH_GAPI->frontend_widget_stats($projectId, $period, (int)$instance['anonim']);
             
             print(json_encode($data_widget));
             

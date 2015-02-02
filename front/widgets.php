@@ -107,7 +107,7 @@ class GADSH_Frontend_Widget extends WP_Widget
         
         echo '<script type="text/javascript">
 
-				jQuery.post("' . admin_url('admin-ajax.php') . '", {action: "gadash_get_frontendwidget_data",gadash_anonim: "' . $instance['anonim'] . '",gadash_period: "' . $instance['period'] . '"}, function(response){
+				jQuery.post("' . admin_url('admin-ajax.php') . '", {action: "gadash_get_frontendwidget_data",gadash_id: "' . $this->id . '",gadash_optionname: "' . $this->option_name . '"}, function(response){
 					response = jQuery.parseJSON(response);
 				    if (!jQuery.isNumeric(response)){
 				        if (jQuery("#gadwp-widgetchart")[0]){
@@ -187,7 +187,7 @@ class GADSH_Frontend_Widget extends WP_Widget
 	</select>
 </p>
 <p>
-	<label for="<?php echo $this->get_field_id( 'anonim' ); ?>"><?php _e( "Anonimize chart&#39;s stats:",'ga-dash' ); ?></label>
+	<label for="<?php echo $this->get_field_id( 'anonim' ); ?>"><?php _e( "Anonimize stats:",'ga-dash' ); ?></label>
 	<input class="widefat"
 		id="<?php echo $this->get_field_id( 'anonim' ); ?>"
 		name="<?php echo $this->get_field_name( 'anonim' ); ?>"

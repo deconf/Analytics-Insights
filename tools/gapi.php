@@ -93,7 +93,7 @@ if (! class_exists('GADASH_GAPI')) {
         {
             $errors = get_transient('ga_dash_gapi_errors');
             
-            if (! isset($errors[1][0]['reason']) or ! isset($errors[0])) {
+            if ($errors === false or ! isset($errors[1][0]['reason']) or ! isset($errors[0])) {
                 return FALSE;
             }
             
@@ -231,7 +231,7 @@ if (! class_exists('GADASH_GAPI')) {
                 } else {
                     $transient = get_transient("ga_dash_refresh_token");
                 }
-                if (empty($transient)) {
+                if ($transient === false) {
                     
                     if (! $GADASH_Config->options['ga_dash_refresh_token']) {
                         $google_token = json_decode($GADASH_Config->options['ga_dash_token']);
@@ -336,7 +336,7 @@ if (! class_exists('GADASH_GAPI')) {
                 }
                 
                 $transient = get_transient($serial);
-                if (empty($transient)) {
+                if ($transient === false) {
                     
                     if ($this->gapi_errors_handler()) {
                         return - 23;
@@ -829,7 +829,7 @@ if (! class_exists('GADASH_GAPI')) {
             if ($ga_dash_data) {
                 return array(
                     '[["' . __("Date", 'ga-dash') . '", "' . __("Sessions", 'ga-dash') . ($anonim ? "' " . __("trend", 'ga-dash') : '') . '"],' . rtrim($ga_dash_data, ",") . "]",
-                    (int) $data['totalsForAllResults']['ga:sessions']
+                    $anonim ? 0 : (int) $data['totalsForAllResults']['ga:sessions']
                 );
             } else {
                 return - 22;
@@ -939,7 +939,7 @@ if (! class_exists('GADASH_GAPI')) {
             try {
                 $serial = "gadash_realtimecache_" . $projectId;
                 $transient = get_transient($serial);
-                if (empty($transient)) {
+                if ($transient === false) {
                     
                     if ($this->gapi_errors_handler()) {
                         return - 23;
