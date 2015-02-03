@@ -6,7 +6,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 require_once realpath(dirname(__FILE__) . '/../../../autoload.php');
 
 /**
@@ -23,33 +22,33 @@ require_once realpath(dirname(__FILE__) . '/../../../autoload.php');
  */
 class Google_Cache_Null extends Google_Cache_Abstract
 {
-  public function __construct(Google_Client $client)
-  {
 
-  }
+    public function __construct(Google_Client $client)
+    {}
 
-   /**
-   * @inheritDoc
-   */
-  public function get($key, $expiration = false)
-  {
-    return false;
-  }
+    /**
+     * @inheritDoc
+     */
+    public function get($key, $expiration = false)
+    {
+        return false;
+    }
 
-  /**
-   * @inheritDoc
-   */
-  public function set($key, $value)
-  {
-    // Nop.
-  }
+    /**
+     * @inheritDoc
+     */
+    public function set($key, $value)
+    {
+        // Nop.
+    }
 
-  /**
-   * @inheritDoc
-   * @param String $key
-   */
-  public function delete($key)
-  {
-    // Nop.
-  }
+    /**
+     * @inheritDoc
+     * 
+     * @param String $key            
+     */
+    public function delete($key)
+    {
+        // Nop.
+    }
 }

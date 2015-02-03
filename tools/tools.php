@@ -13,15 +13,18 @@ if (! class_exists('GADASH_Tools')) {
         function guess_default_domain($profiles)
         {
             $domain = get_option('siteurl');
-            $domain = str_ireplace(array('http://', 'https://'), '', $domain);
-            if (is_array($profiles)){
+            $domain = str_ireplace(array(
+                'http://',
+                'https://'
+            ), '', $domain);
+            if (is_array($profiles)) {
                 foreach ($profiles as $items) {
                     if (strpos($items[3], $domain)) {
                         return $items[1];
                     }
                 }
                 return $profiles[0][1];
-            }else{
+            } else {
                 return '';
             }
         }
@@ -73,7 +76,6 @@ if (! class_exists('GADASH_Tools')) {
             $colour = substr($colour, 1);
             $rgb = '';
             $per = $per / 100 * 255;
-            
             if ($per < 0) {
                 // Darker
                 $per = abs($per);

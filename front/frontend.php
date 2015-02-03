@@ -5,7 +5,6 @@
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
-
 if (! class_exists('GADASH_Frontend')) {
 
     final class GADASH_Frontend
@@ -27,11 +26,9 @@ if (! class_exists('GADASH_Frontend')) {
         function ga_dash_front_enqueue_styles()
         {
             global $GADASH_Config;
-            
             if ((! is_page() and ! is_single()) or is_preview() or ! is_user_logged_in()) {
                 return;
             }
-            
             wp_enqueue_style('ga_dash-front', $GADASH_Config->plugin_url . '/front/css/content_stats.css', NULL, GADWP_CURRENT_VERSION);
             wp_enqueue_style('ga_dash-nprogress', $GADASH_Config->plugin_url . '/tools/nprogress/nprogress.css', NULL, GADWP_CURRENT_VERSION);
             wp_enqueue_script('ga_dash-front', $GADASH_Config->plugin_url . '/front/js/content_stats.js', array(
@@ -47,27 +44,20 @@ if (! class_exists('GADASH_Frontend')) {
         {
             global $post;
             global $GADASH_Config;
-            
             /*
              * Include Tools
              */
             include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
             $tools = new GADASH_Tools();
-            
             if (! $tools->check_roles($GADASH_Config->options['ga_dash_access_front']) or ! ($GADASH_Config->options['ga_dash_frontend_stats'] or $GADASH_Config->options['ga_dash_frontend_keywords'])) {
                 return $content;
             }
-            
             if ((is_page() || is_single()) && ! is_preview()) {
-                
                 wp_enqueue_script('gadash-general-settings', plugins_url('admin/js/admin.js', dirname(__FILE__)), array(
                     'jquery'
                 ));
-                
                 $page_url = $_SERVER["REQUEST_URI"]; // str_replace(site_url(), "", get_permalink());
-                
                 $post_id = $post->ID;
-                
                 $content .= '<script type="text/javascript">
                   
                   gadash_firstclick = true;
@@ -95,7 +85,7 @@ if (! class_exists('GADASH_Frontend')) {
                                         NProgress.start();
                                 	} catch(e) {
                                 		jQuery("#gadwp-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border":"1px solid red","border-left":"5px solid red","font-size":"13px"});
-                                		jQuery("#gadwp-progressbar").html("'.__("A JavaScript Error is blocking plugin resources!", 'ga-dash').'");
+                                		jQuery("#gadwp-progressbar").html("' . __("A JavaScript Error is blocking plugin resources!", 'ga-dash') . '");
                                 	} 
                                 		    
 									if(typeof ga_dash_drawpagesessions == "function"){
@@ -126,11 +116,8 @@ if (! class_exists('GADASH_Frontend')) {
 							}
 						});
 					});';
-                
                 if ($GADASH_Config->options['ga_dash_frontend_stats']) {
-                    
                     $title = __("Views vs UniqueViews", 'ga-dash');
-                    
                     if (isset($GADASH_Config->options['ga_dash_style'])) {
                         $css = "colors:['" . $GADASH_Config->options['ga_dash_style'] . "','" . $tools->colourVariator($GADASH_Config->options['ga_dash_style'], - 20) . "'],";
                         $color = $GADASH_Config->options['ga_dash_style'];
@@ -138,7 +125,6 @@ if (! class_exists('GADASH_Frontend')) {
                         $css = "";
                         $color = "#3366CC";
                     }
-                    
                     $content .= '
 			google.load("visualization", "1", {packages:["corechart"]});
 			function ga_dash_drawpagesessions(gadash_pagesessions) {
@@ -159,9 +145,7 @@ if (! class_exists('GADASH_Frontend')) {
             checknpcounter(1);      
 			}';
                 }
-                
                 if ($GADASH_Config->options['ga_dash_frontend_keywords']) {
-                    
                     $content .= '
 				google.load("visualization", "1", {packages:["table"]})
 				function ga_dash_drawpagesearches(gadash_pagesearches) {
@@ -179,7 +163,6 @@ if (! class_exists('GADASH_Frontend')) {
 				checknpcounter(1);
 			  }';
                 }
-                
                 $content .= "</script>";
                 $content .= '<p>
 								<div id="gadwp">

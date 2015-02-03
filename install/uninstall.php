@@ -13,12 +13,14 @@ class GADASH_Uninstall
     {
         global $wpdb;
         if (is_multisite()) { // Cleanup Network install
-            foreach (wp_get_sites(array( 'limit' => apply_filters('gadwp_sites_limit', 100))) as $blog) {
+            foreach (wp_get_sites(array(
+                'limit' => apply_filters('gadwp_sites_limit', 100)
+            )) as $blog) {
                 switch_to_blog($blog['blog_id']);
                 $sqlquery = $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_gadash%%'");
                 $sqlquery = $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_timeout_gadash%%'");
                 $sqlquery = $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_ga_dash%%'");
-                $sqlquery = $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_timeout_ga_dash%%'");                
+                $sqlquery = $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_timeout_ga_dash%%'");
                 delete_option('gadash_options');
                 delete_transient('ga_dash_lasterror');
                 delete_transient('ga_dash_refresh_token');
@@ -31,7 +33,7 @@ class GADASH_Uninstall
             $sqlquery = $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_gadash%%'");
             $sqlquery = $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_timeout_gadash%%'");
             $sqlquery = $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_ga_dash%%'");
-            $sqlquery = $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_timeout_ga_dash%%'");            
+            $sqlquery = $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_timeout_ga_dash%%'");
             delete_option('gadash_options');
             delete_transient('ga_dash_lasterror');
             delete_transient('ga_dash_refresh_token');

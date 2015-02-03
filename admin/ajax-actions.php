@@ -32,30 +32,24 @@ if (! class_exists('GADASH_Backend_Ajax')) {
         function ajax_adminwidget_reports()
         {
             global $GADASH_Config;
-            
             $projectId = $_REQUEST['projectId'];
             $from = $_REQUEST['from'];
             $to = $_REQUEST['to'];
             $query = $_REQUEST['query'];
-            
             ob_clean();
-            
             if (! isset($_REQUEST['gadashadmin_security_widget_reports']) or ! wp_verify_nonce($_REQUEST['gadashadmin_security_widget_reports'], 'gadashadmin_get_widgetreports')) {
                 print(json_encode(- 30));
                 die();
             }
-            
             /*
              * Include Tools
              */
             include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
             $tools = new GADASH_Tools();
-            
             if (! $tools->check_roles($GADASH_Config->options['ga_dash_access_back'])) {
                 print(json_encode(- 31));
                 die();
             }
-            
             if ($GADASH_Config->options['ga_dash_token'] and $projectId and $from and $to) {
                 include_once ($GADASH_Config->plugin_path . '/tools/gapi.php');
                 global $GADASH_GAPI;
@@ -63,7 +57,6 @@ if (! class_exists('GADASH_Backend_Ajax')) {
                 print(json_encode(- 24));
                 die();
             }
-            
             switch ($query) {
                 case 'referrers':
                     print($GADASH_GAPI->get_referrers($projectId, $from, $to));
@@ -91,7 +84,7 @@ if (! class_exists('GADASH_Backend_Ajax')) {
                     break;
                 case 'source':
                     print($GADASH_GAPI->get_trafficdetails($projectId, $from, $to, 'source'));
-                    break;                    
+                    break;
                 case 'searches':
                     print($GADASH_GAPI->get_searches($projectId, $from, $to));
                     break;
@@ -99,10 +92,8 @@ if (! class_exists('GADASH_Backend_Ajax')) {
                     print($GADASH_GAPI->get_mainreport($projectId, $from, $to, $query));
                     break;
             }
-
             die();
         }
-        
         // Real-Time Request
         /**
          * Ajax handler for getting realtime analytics data for Admin widget
@@ -112,27 +103,21 @@ if (! class_exists('GADASH_Backend_Ajax')) {
         function ajax_adminwidget_realtime()
         {
             global $GADASH_Config;
-            
             $projectId = $_REQUEST['projectId'];
-            
             ob_clean();
-            
             if (! isset($_REQUEST['gadashadmin_security_widgetrealtime']) or ! wp_verify_nonce($_REQUEST['gadashadmin_security_widgetrealtime'], 'gadashadmin_get_realtime')) {
                 print(json_encode(- 30));
                 die();
             }
-            
             /*
              * Include Tools
              */
             include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
             $tools = new GADASH_Tools();
-            
             if (! $tools->check_roles($GADASH_Config->options['ga_dash_access_back'])) {
                 print(json_encode(- 31));
                 die();
             }
-            
             if ($GADASH_Config->options['ga_dash_token'] and $projectId) {
                 include_once ($GADASH_Config->plugin_path . '/tools/gapi.php');
                 global $GADASH_GAPI;
@@ -140,12 +125,9 @@ if (! class_exists('GADASH_Backend_Ajax')) {
                 print(json_encode(- 24));
                 die();
             }
-            
             print($GADASH_GAPI->gadash_realtime_data($projectId));
-            
             die();
         }
     }
 }
-
 $GADASH_Backend_Ajax = new GADASH_Backend_Ajax();
