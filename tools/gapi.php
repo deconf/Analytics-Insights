@@ -77,32 +77,25 @@ if (! class_exists('GADASH_GAPI')) {
         }
 
         /**
-         * Handles errors returned by GAPI
+         * Handles errors returned by GAPI and allows exponential backoff
          *
          * @return boolean
          */
         function gapi_errors_handler()
         {
             $errors = get_transient('ga_dash_gapi_errors');
-            if ($errors === false or ! isset($errors[0])) { // valid error
+            if ($errors === false or ! isset($errors[0])) { // invalid error
                 return FALSE;
             }
-            if ($errors[0] == 400 or $errors[0] == 401) {
-                return TRUE;
-            }
-            if (! isset($errors[1][0]['reason'])) { // valid reason
-                return FALSE;
-            }
-            if ($errors[1][0]['reason'] == 'invalidCredentials' or $errors[1][0]['reason'] == 'authError' or $errors[1][0]['reason'] == 'insufficientPermissions' or $errors[1][0]['reason'] == 'required' or $errors[1][0]['reason'] == 'keyExpired') {
+            if (isset($errors[1][0]['reason']) and ($errors[1][0]['reason'] == 'invalidCredentials' or $errors[1][0]['reason'] == 'authError' or $errors[1][0]['reason'] == 'insufficientPermissions' or $errors[1][0]['reason'] == 'required' or $errors[1][0]['reason'] == 'keyExpired')) {
                 $this->ga_dash_reset_token(false);
                 return TRUE;
             }
-            if ($errors[0] == 403) {
-                if ($errors[1][0]['reason'] == 'userRateLimitExceeded' or $errors[1][0]['reason'] == 'quotaExceeded') { // allow retry
-                    return FALSE;
-                } else {
-                    return TRUE;
-                }
+            if (isset($errors[1][0]['reason']) and ($errors[1][0]['reason'] == 'userRateLimitExceeded' or $errors[1][0]['reason'] == 'quotaExceeded')) { // allow retry
+                return FALSE;
+            }
+            if ($errors[0] == 400 or $errors[0] == 401 or $errors[0] == 403) {
+                return TRUE;
             }
             return FALSE;
         }
@@ -301,6 +294,8 @@ if (! class_exists('GADASH_GAPI')) {
         /**
          * Get and cache Core Reports
          *
+         * @todo implement retries with exponential backoff
+         *      
          * @param
          *            $projecId
          * @param
