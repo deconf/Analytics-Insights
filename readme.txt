@@ -130,6 +130,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Bug Fix: end tag missing on error message
 - Bug Fix: additional checks before making a View list request
 - Bug Fix: avoid deleting errors while clearing the cache
+- Bug Fix: PHP notices fix on certain requests 
 - Enhancement: handle some additional API errors
 - Enhancement: set totals to zero when anonymize stats is enabled
 - Enhancement: auto-cleanup removed; all transients have static identifiers

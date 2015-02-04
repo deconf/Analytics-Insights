@@ -32,15 +32,15 @@ if (! class_exists('GADASH_Backend_Ajax')) {
         function ajax_adminwidget_reports()
         {
             global $GADASH_Config;
+            if (! isset($_REQUEST['gadashadmin_security_widget_reports']) or ! wp_verify_nonce($_REQUEST['gadashadmin_security_widget_reports'], 'gadashadmin_get_widgetreports')) {
+                print(json_encode(- 30));
+                die();
+            }
             $projectId = $_REQUEST['projectId'];
             $from = $_REQUEST['from'];
             $to = $_REQUEST['to'];
             $query = $_REQUEST['query'];
             ob_clean();
-            if (! isset($_REQUEST['gadashadmin_security_widget_reports']) or ! wp_verify_nonce($_REQUEST['gadashadmin_security_widget_reports'], 'gadashadmin_get_widgetreports')) {
-                print(json_encode(- 30));
-                die();
-            }
             /*
              * Include Tools
              */
@@ -103,12 +103,12 @@ if (! class_exists('GADASH_Backend_Ajax')) {
         function ajax_adminwidget_realtime()
         {
             global $GADASH_Config;
-            $projectId = $_REQUEST['projectId'];
-            ob_clean();
             if (! isset($_REQUEST['gadashadmin_security_widgetrealtime']) or ! wp_verify_nonce($_REQUEST['gadashadmin_security_widgetrealtime'], 'gadashadmin_get_realtime')) {
                 print(json_encode(- 30));
                 die();
             }
+            $projectId = $_REQUEST['projectId'];
+            ob_clean();
             /*
              * Include Tools
              */

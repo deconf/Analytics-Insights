@@ -36,14 +36,14 @@ if (! class_exists('GADASH_Frontend_Ajax')) {
         function ajax_afterpost_reports()
         {
             global $GADASH_Config;
-            $page_url = esc_url($_REQUEST['gadash_pageurl']);
-            $post_id = (int) $_REQUEST['gadash_postid'];
-            $query = $_REQUEST['query'];
-            ob_clean();
             if (! isset($_REQUEST['gadash_security_pagereports']) or ! wp_verify_nonce($_REQUEST['gadash_security_pagereports'], 'gadash_get_frontend_pagereports')) {
                 print(json_encode(- 30));
                 die();
             }
+            $page_url = esc_url($_REQUEST['gadash_pageurl']);
+            $post_id = (int) $_REQUEST['gadash_postid'];
+            $query = $_REQUEST['query'];
+            ob_clean();
             /*
              * Include Tools
              */
@@ -90,6 +90,10 @@ if (! class_exists('GADASH_Frontend_Ajax')) {
         function ajax_frontend_widget()
         {
             global $GADASH_Config;
+            if (! isset($_REQUEST['gadash_id']) or ! isset($_REQUEST['gadash_optionname'])) {
+                print(json_encode(- 30));
+                die();
+            }
             $widget_index = explode('-', $_REQUEST['gadash_id']);
             $option_name = $_REQUEST['gadash_optionname'];
             $options = get_option($option_name);
