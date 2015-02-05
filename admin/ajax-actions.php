@@ -40,7 +40,7 @@ if (! class_exists('GADASH_Backend_Ajax')) {
             $from = $_REQUEST['from'];
             $to = $_REQUEST['to'];
             $query = $_REQUEST['query'];
-            ob_clean();
+            if (ob_get_length()) ob_end_clean();
             /*
              * Include Tools
              */
@@ -108,7 +108,7 @@ if (! class_exists('GADASH_Backend_Ajax')) {
                 die();
             }
             $projectId = $_REQUEST['projectId'];
-            ob_clean();
+            if (ob_get_length()) ob_end_clean();
             /*
              * Include Tools
              */

@@ -126,10 +126,8 @@ if (! class_exists('GADASH_Config')) {
                     update_site_option('gadash_network_options', json_encode($this->validate_data(array_merge($old_network_options, $network_options))));
                 }
             }
-            if (current_user_can('manage_options')) {
-                update_option('gadash_options', json_encode($this->validate_data($options)));
-            }
-        }
+                 update_option('gadash_options', json_encode($this->validate_data($options)));
+         }
 
         public function getPluginPath()
         {

@@ -43,7 +43,7 @@ if (! class_exists('GADASH_Frontend_Ajax')) {
             $page_url = esc_url($_REQUEST['gadash_pageurl']);
             $post_id = (int) $_REQUEST['gadash_postid'];
             $query = $_REQUEST['query'];
-            ob_clean();
+            if (ob_get_length()) ob_end_clean();
             /*
              * Include Tools
              */
@@ -114,7 +114,7 @@ if (! class_exists('GADASH_Frontend_Ajax')) {
                     $period = '30daysAgo';
                     break;
             }
-            ob_clean();
+            if (ob_get_length()) ob_end_clean();
             if (! is_active_widget(false, false, 'gadash_frontend_widget')) {
                 print(json_encode(- 30));
                 die();
