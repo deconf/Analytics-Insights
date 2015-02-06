@@ -84,27 +84,41 @@ if (! class_exists('GADASH_Frontend')) {
                                         NProgress.configure({ showSpinner: false });
                                         NProgress.start();
                                 	} catch(e) {
-                                		jQuery("#gadwp-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border":"1px solid red","border-left":"5px solid red","font-size":"13px"});
+                                		jQuery("#gadwp-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red","font-size":"13px"});
                                 		jQuery("#gadwp-progressbar").html("' . __("A JavaScript Error is blocking plugin resources!", 'ga-dash') . '");
                                 	} 
                                 		    
 									if(typeof ga_dash_drawpagesessions == "function"){
 										jQuery.post("' . admin_url('admin-ajax.php') . '", {action: "gadash_get_frontend_pagereports",gadash_pageurl: "' . $page_url . '",gadash_postid: "' . $post_id . '",query: "pageviews",gadash_security_pagereports: "' . wp_create_nonce('gadash_get_frontend_pagereports') . '"}, function(response){
-										    gadash_pagesessions = jQuery.parseJSON(response);
-										    if (!jQuery.isNumeric(gadash_pagesessions)){
-		          							    google.setOnLoadCallback(ga_dash_drawpagesessions(gadash_pagesessions));
-											}else{
-										        jQuery("#gadwp-sessions").css({"background-color":"#F7F7F7","height":"auto","padding-top":"30px","padding-bottom":"30px","color":"#000","text-align":"center"});  
-										        jQuery("#gadwp-sessions").html("' . __("This report is unavailable", 'ga-dash') . ' ("+response+")");
-										        checknpcounter(1);    
-                                            }	
+										  if (!jQuery.isNumeric(response)){  
+                                            try{
+                                            	gadash_pagesessions = jQuery.parseJSON(response);
+                                       		    google.setOnLoadCallback(ga_dash_drawpagesessions(gadash_pagesessions));
+                                             } catch(e) {
+                                             	checknpcounter(0);
+                                     			jQuery("#gadwp-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red","font-size":"13px"});
+                                     			jQuery("#gadwp-progressbar").html("'. __("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'). '");
+                                     			console.log("\n********************* GADWP Log ********************* \n\n"+response);
+                                     		} 										  
+										  }else{
+									        jQuery("#gadwp-sessions").css({"background-color":"#F7F7F7","height":"auto","padding-top":"30px","padding-bottom":"30px","color":"#000","text-align":"center"});  
+									        jQuery("#gadwp-sessions").html("' . __("This report is unavailable", 'ga-dash') . ' ("+response+")");
+									        checknpcounter(1);    
+                                          }	
 										});
 									}
 									if(typeof ga_dash_drawpagesearches == "function"){
 										jQuery.post("' . admin_url('admin-ajax.php') . '", {action: "gadash_get_frontend_pagereports",gadash_pageurl: "' . $page_url . '",gadash_postid: "' . $post_id . '",query: "searches",gadash_security_pagereports: "' . wp_create_nonce('gadash_get_frontend_pagereports') . '"}, function(response){
-                                            gadash_pagesearches = jQuery.parseJSON(response); 
-										    if (!jQuery.isNumeric(gadash_pagesearches)){
-												google.setOnLoadCallback(ga_dash_drawpagesearches(gadash_pagesearches));
+                                            if (!jQuery.isNumeric(response)){										  
+                                              try{
+                                                  gadash_pagesearches = jQuery.parseJSON(response);
+                                           		  google.setOnLoadCallback(ga_dash_drawpagesearches(gadash_pagesearches));
+                                               } catch(e) {
+                                                  checknpcounter(0);
+                                         		  jQuery("#gadwp-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red","font-size":"13px"});
+                                         		  jQuery("#gadwp-progressbar").html("'. __("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'). '");
+                                         		  console.log("\n********************* GADWP Log ********************* \n\n"+response);
+                                       		   }										    
 											}else{
 										        jQuery("#gadwp-searches").css({"background-color":"#F7F7F7","height":"auto","padding-top":"30px","padding-bottom":"30px","color":"#000","text-align":"center"});
 										        jQuery("#gadwp-searches").html("' . __("This report is unavailable", 'ga-dash') . ' ("+response+")");
