@@ -16,13 +16,13 @@ $rootdomain = $tools->get_root_domain($profile[3]);
 <?php
 $create_options = '{';
 if ($GADASH_Config->options['ga_speed_samplerate'] != 1) {
-    $create_options .= "'siteSpeedSampleRate' : " . (int) $GADASH_Config->options['ga_speed_samplerate'];
+  $create_options .= "'siteSpeedSampleRate' : " . (int) $GADASH_Config->options['ga_speed_samplerate'];
 }
 if ($GADASH_Config->options['ga_crossdomain_tracking'] and $GADASH_Config->options['ga_crossdomain_list'] != '') {
-    if ($create_options != '{') {
-        $create_options .= ', ';
-    }
-    $create_options .= "'allowLinker' : true";
+  if ($create_options != '{') {
+    $create_options .= ', ';
+  }
+  $create_options .= "'allowLinker' : true";
 }
 $create_options .= '}';
 ?>
@@ -30,65 +30,65 @@ $create_options .= '}';
 <?php if ($GADASH_Config->options ['ga_crossdomain_tracking'] AND $GADASH_Config->options ['ga_crossdomain_list']!='') {?>
   ga('require', 'linker');
 <?php
-    $crossdomain_list = explode(',', $GADASH_Config->options['ga_crossdomain_list']);
-    $crossdomain_list = array_map('trim', $crossdomain_list);
-    $crossdomain_list = strip_tags(implode("','", $crossdomain_list));
-    ?>
+  $crossdomain_list = explode(',', $GADASH_Config->options['ga_crossdomain_list']);
+  $crossdomain_list = array_map('trim', $crossdomain_list);
+  $crossdomain_list = strip_tags(implode("','", $crossdomain_list));
+  ?>
   ga('linker:autoLink', ['<?php echo ($crossdomain_list)?>'] );
 <?php
 }
 if ($GADASH_Config->options['ga_dash_remarketing']) {
-    ?>
+  ?>
   ga('require', 'displayfeatures');
 <?php
 }
 if ($GADASH_Config->options['ga_enhanced_links']) {
-    ?>
+  ?>
   ga('require', 'linkid', 'linkid.js');
 <?php
 }
 if ($GADASH_Config->options['ga_author_dimindex'] and (is_single() or is_page())) {
-    global $post;
-    $author_id = $post->post_author;
-    $author_name = get_the_author_meta('display_name', $author_id);
-    ?>
+  global $post;
+  $author_id = $post->post_author;
+  $author_name = get_the_author_meta('display_name', $author_id);
+  ?>
   ga('set', 'dimension<?php echo (int)$GADASH_Config->options ['ga_author_dimindex']; ?>', '<?php echo $author_name; ?>');
 <?php
 }
 if ($GADASH_Config->options['ga_pubyear_dimindex'] and is_single()) {
-    global $post;
-    $date = get_the_date('Y', $post->ID);
-    ?>
+  global $post;
+  $date = get_the_date('Y', $post->ID);
+  ?>
   ga('set', 'dimension<?php echo (int)$GADASH_Config->options ['ga_pubyear_dimindex']; ?>', '<?php echo $date; ?>');
 <?php
 }
 if ($GADASH_Config->options['ga_category_dimindex'] and is_category()) {
-    ?>
+  ?>
   ga('set', 'dimension<?php echo (int)$GADASH_Config->options ['ga_category_dimindex']; ?>', '<?php echo single_tag_title(); ?>');
 <?php
 }
 if ($GADASH_Config->options['ga_category_dimindex'] and is_single()) {
-    global $post;
-    $categories = get_the_category($post->ID);
-    foreach ($categories as $category) {
-        ?>
+  global $post;
+  $categories = get_the_category($post->ID);
+  foreach ($categories as $category) {
+    ?>
   ga('set', 'dimension<?php echo (int)$GADASH_Config->options ['ga_category_dimindex']; ?>', '<?php echo $category->name; ?>');
 <?php
-        break;
-    }
+    break;
+  }
 }
 if ($GADASH_Config->options['ga_user_dimindex']) {
-    ?>
+  ?>
   ga('set', 'dimension<?php echo (int)$GADASH_Config->options ['ga_user_dimindex']; ?>', '<?php echo is_user_logged_in()?'registered':'guest'; ?>');
 <?php
 }
 do_action('ga_dash_addtrackingcode');
 if ($GADASH_Config->options['ga_dash_anonim']) {
-    ?>  ga('send', 'pageview', {'anonymizeIp': true});<?php } else {?>  ga('send', 'pageview');
+  ?>  ga('send', 'pageview', {'anonymizeIp': true});<?php } else {?>  ga('send', 'pageview');
 <?php
 }
 if ($GADASH_Config->options['ga_dash_adsense']) {
-    ?>
+  ?>
 
   window.google_analytics_uacct = "<?php echo esc_html($profile[2]); ?>";
 <?php }?>
