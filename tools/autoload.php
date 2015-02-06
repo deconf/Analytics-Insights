@@ -15,8 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-function google_api_php_client_autoload_gadwp($className)
-{
+function google_api_php_client_autoload_gadwp($className) {
     $classPath = explode('_', $className);
     if ($classPath[0] != 'Google') {
         return;

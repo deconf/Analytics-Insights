@@ -15,8 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class Google_Service
-{
+class Google_Service {
 
     public $version;
 
@@ -28,18 +27,16 @@ class Google_Service
 
     private $client;
 
-    public function __construct(Google_Client $client)
-    {
+    public function __construct(Google_Client $client) {
         $this->client = $client;
     }
 
     /**
      * Return the associated Google_Client class.
-     * 
+     *
      * @return Google_Client
      */
-    public function getClient()
-    {
+    public function getClient() {
         return $this->client;
     }
 }

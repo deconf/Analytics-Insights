@@ -22,8 +22,7 @@ require_once realpath(dirname(__FILE__) . '/../../../autoload.php');
  * @author Chris Chabot <chabotc@google.com>
  * @author Chirag Shah <chirags@google.com>
  */
-class Google_Http_REST
-{
+class Google_Http_REST {
 
     /**
      * Executes a Google_Http_Request
@@ -34,8 +33,7 @@ class Google_Http_REST
      * @throws Google_Service_Exception on server side error (ie: not authenticated,
      *         invalid or malformed post body, invalid url)
      */
-    public static function execute(Google_Client $client, Google_Http_Request $req)
-    {
+    public static function execute(Google_Client $client, Google_Http_Request $req) {
         $httpRequest = $client->getIo()->makeRequest($req);
         $httpRequest->setExpectedClass($req->getExpectedClass());
         return self::decodeHttpResponse($httpRequest, $client);
@@ -43,7 +41,7 @@ class Google_Http_REST
 
     /**
      * Decode an HTTP Response.
-     * 
+     *
      * @static
      *
      * @throws Google_Service_Exception
@@ -52,8 +50,7 @@ class Google_Http_REST
      * @param Google_Client $client            
      * @return mixed|null
      */
-    public static function decodeHttpResponse($response, Google_Client $client = null)
-    {
+    public static function decodeHttpResponse($response, Google_Client $client = null) {
         $code = $response->getResponseHttpCode();
         $body = $response->getResponseBody();
         $decoded = null;
@@ -101,7 +98,7 @@ class Google_Http_REST
     /**
      * Parse/expand request parameters and create a fully qualified
      * request uri.
-     * 
+     *
      * @static
      *
      * @param string $servicePath            
@@ -109,8 +106,7 @@ class Google_Http_REST
      * @param array $params            
      * @return string $requestUrl
      */
-    public static function createRequestUri($servicePath, $restPath, $params)
-    {
+    public static function createRequestUri($servicePath, $restPath, $params) {
         $requestUrl = $servicePath . $restPath;
         $uriTemplateVars = array();
         $queryVars = array();

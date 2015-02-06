@@ -21,8 +21,7 @@
  */
 require_once realpath(dirname(__FILE__) . '/../../../autoload.php');
 
-class Google_IO_Curl extends Google_IO_Abstract
-{
+class Google_IO_Curl extends Google_IO_Abstract {
     // cURL hex representation of version 7.30.0
     const NO_QUIRK_VERSION = 0x071E00;
 
@@ -37,8 +36,7 @@ class Google_IO_Curl extends Google_IO_Abstract
      *         response headers and response body filled in
      * @throws Google_IO_Exception on curl or IO error
      */
-    public function executeRequest(Google_Http_Request $request)
-    {
+    public function executeRequest(Google_Http_Request $request) {
         $curl = curl_init();
         if ($request->getPostBody()) {
             curl_setopt($curl, CURLOPT_POSTFIELDS, $request->getPostBody());
@@ -102,23 +100,21 @@ class Google_IO_Curl extends Google_IO_Abstract
 
     /**
      * Set options that update the transport implementation's behavior.
-     * 
+     *
      * @param
      *            $options
      */
-    public function setOptions($options)
-    {
+    public function setOptions($options) {
         $this->options = $options + $this->options;
     }
 
     /**
      * Set the maximum request time in seconds.
-     * 
+     *
      * @param $timeout in
      *            seconds
      */
-    public function setTimeout($timeout)
-    {
+    public function setTimeout($timeout) {
         // Since this timeout is really for putting a bound on the time
         // we'll set them both to the same. If you need to specify a longer
         // CURLOPT_TIMEOUT, or a tigher CONNECTTIMEOUT, the best thing to
@@ -129,11 +125,10 @@ class Google_IO_Curl extends Google_IO_Abstract
 
     /**
      * Get the maximum request time in seconds.
-     * 
+     *
      * @return timeout in seconds
      */
-    public function getTimeout()
-    {
+    public function getTimeout() {
         return $this->options[CURLOPT_TIMEOUT];
     }
 
@@ -144,8 +139,7 @@ class Google_IO_Curl extends Google_IO_Abstract
      *
      * @return boolean
      */
-    protected function needsQuirk()
-    {
+    protected function needsQuirk() {
         $ver = curl_version();
         $versionNum = $ver['version_number'];
         return $versionNum < Google_IO_Curl::NO_QUIRK_VERSION;

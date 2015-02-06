@@ -16,6 +16,5 @@
  */
 require_once realpath(dirname(__FILE__) . '/../../../autoload.php');
 
-class Google_Logger_Exception extends Google_Exception
-{
+class Google_Logger_Exception extends Google_Exception {
 }

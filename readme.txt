@@ -131,7 +131,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Bug Fix: additional checks before making a View list request
 - Bug Fix: avoid deleting errors while clearing the cache
 - Bug Fix: PHP notices fix for some requests
-- Bug Fix: PHP notices when calling ob_clean on an empty buffer 
+- Bug Fix: PHP notices fix when calling ob_clean on an empty buffer 
 - Enhancement: handle some additional API errors
 - Enhancement: set totals to zero when anonymize stats is enabled
 - Enhancement: auto-cleanup removed; all transients have static identifiers now

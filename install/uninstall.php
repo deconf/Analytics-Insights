@@ -6,11 +6,9 @@
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
-class GADASH_Uninstall
-{
+class GADASH_Uninstall {
 
-    static function uninstall()
-    {
+    static function uninstall() {
         global $wpdb;
         if (is_multisite()) { // Cleanup Network install
             foreach (wp_get_sites(array(

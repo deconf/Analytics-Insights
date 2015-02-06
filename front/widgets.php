@@ -6,11 +6,9 @@
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
-class GADSH_Frontend_Widget extends WP_Widget
-{
+class GADSH_Frontend_Widget extends WP_Widget {
 
-    final function __construct()
-    {
+    final function __construct() {
         parent::__construct('gadash_frontend_widget', __('Google Analytics Dashboard', 'ga-dash'), array(
             'description' => __("Will display your google analytics stats in a widget", 'ga-dash')
         ));
@@ -23,8 +21,7 @@ class GADSH_Frontend_Widget extends WP_Widget
         }
     }
 
-    function ga_dash_front_enqueue_styles()
-    {
+    function ga_dash_front_enqueue_styles() {
         global $GADASH_Config;
         wp_enqueue_style('ga_dash-front', $GADASH_Config->plugin_url . '/front/css/content_stats.css', NULL, GADWP_CURRENT_VERSION);
         wp_enqueue_script('ga_dash-front', $GADASH_Config->plugin_url . '/front/js/content_stats.js', array(
@@ -33,8 +30,7 @@ class GADSH_Frontend_Widget extends WP_Widget
         wp_enqueue_script('googlejsapi', 'https://www.google.com/jsapi');
     }
 
-    public function widget($args, $instance)
-    {
+    public function widget($args, $instance) {
         global $GADASH_Config;
         $widget_title = apply_filters('widget_title', $instance['title']);
         $title = __("Sessions", 'ga-dash') . ($instance['anonim'] ? "' " . __("trend", 'ga-dash') : '');
@@ -141,8 +137,7 @@ class GADSH_Frontend_Widget extends WP_Widget
         echo "\n<!-- END GADWP Widget -->\n";
     }
 
-    public function form($instance)
-    {
+    public function form($instance) {
         $widget_title = (isset($instance['title']) ? $instance['title'] : __("Google Analytics Stats", 'ga-dash'));
         $period = (isset($instance['period']) ? $instance['period'] : '7daysAgo');
         $display = (isset($instance['display']) ? $instance['display'] : 1);
@@ -195,8 +190,7 @@ class GADSH_Frontend_Widget extends WP_Widget
 <?php
     }
 
-    public function update($new_instance, $old_instance)
-    {
+    public function update($new_instance, $old_instance) {
         $instance = array();
         $instance['title'] = (! empty($new_instance['title'])) ? strip_tags($new_instance['title']) : 'Analytics Stats';
         $instance['period'] = (! empty($new_instance['period'])) ? strip_tags($new_instance['period']) : '7daysAgo';
@@ -207,8 +201,7 @@ class GADSH_Frontend_Widget extends WP_Widget
     }
 }
 
-function register_GADSH_Frontend_Widget()
-{
+function register_GADSH_Frontend_Widget() {
     register_widget('GADSH_Frontend_Widget');
 }
 add_action('widgets_init', 'register_GADSH_Frontend_Widget');

@@ -23,8 +23,7 @@
  * @author Chirag Shah <chirags@google.com>
  *        
  */
-class Google_Model implements ArrayAccess
-{
+class Google_Model implements ArrayAccess {
 
     protected $internal_gapi_mappings = array();
 
@@ -36,8 +35,7 @@ class Google_Model implements ArrayAccess
      * Polymorphic - accepts a variable number of arguments dependent
      * on the type of the model subclass.
      */
-    final public function __construct()
-    {
+    final public function __construct() {
         if (func_num_args() == 1 && is_array(func_get_arg(0))) {
             // Initialize the model with the array's contents.
             $array = func_get_arg(0);
@@ -48,13 +46,12 @@ class Google_Model implements ArrayAccess
 
     /**
      * Getter that handles passthrough access to the data array, and lazy object creation.
-     * 
+     *
      * @param string $key
      *            Property name.
      * @return mixed The value if any, or null.
      */
-    public function __get($key)
-    {
+    public function __get($key) {
         $keyTypeName = $this->keyType($key);
         $keyDataType = $this->dataType($key);
         if (isset($this->$keyTypeName) && ! isset($this->processed[$key])) {
@@ -94,8 +91,7 @@ class Google_Model implements ArrayAccess
      *            Used to seed this object's properties.
      * @return void
      */
-    protected function mapTypes($array)
-    {
+    protected function mapTypes($array) {
         // Hard initilise simple types, lazy load more complex ones.
         foreach ($array as $key => $val) {
             if (! property_exists($this, $this->keyType($key)) && property_exists($this, $key)) {
@@ -115,8 +111,7 @@ class Google_Model implements ArrayAccess
      * avoids the need for subclasses to have to implement the variadics handling in their
      * constructors.
      */
-    protected function gapiInit()
-    {
+    protected function gapiInit() {
         return;
     }
 
@@ -127,8 +122,7 @@ class Google_Model implements ArrayAccess
      * due to the usage of reflection, but shouldn't be called
      * a whole lot, and is the most straightforward way to filter.
      */
-    public function toSimpleObject()
-    {
+    public function toSimpleObject() {
         $object = new stdClass();
         // Process all other data.
         foreach ($this->modelData as $key => $val) {
@@ -155,8 +149,7 @@ class Google_Model implements ArrayAccess
      * Handle different types of values, primarily
      * other objects and map and array data types.
      */
-    private function getSimpleValue($value)
-    {
+    private function getSimpleValue($value) {
         if ($value instanceof Google_Model) {
             return $value->toSimpleObject();
         } else 
@@ -177,8 +170,7 @@ class Google_Model implements ArrayAccess
     /**
      * If there is an internal name mapping, use that.
      */
-    private function getMappedName($key)
-    {
+    private function getMappedName($key) {
         if (isset($this->internal_gapi_mappings) && isset($this->internal_gapi_mappings[$key])) {
             $key = $this->internal_gapi_mappings[$key];
         }
@@ -187,12 +179,11 @@ class Google_Model implements ArrayAccess
 
     /**
      * Returns true only if the array is associative.
-     * 
+     *
      * @param array $array            
      * @return bool True if the array is associative.
      */
-    protected function isAssociativeArray($array)
-    {
+    protected function isAssociativeArray($array) {
         if (! is_array($array)) {
             return false;
         }
@@ -214,40 +205,35 @@ class Google_Model implements ArrayAccess
      *            $item
      * @return object The object from the item.
      */
-    private function createObjectFromName($name, $item)
-    {
+    private function createObjectFromName($name, $item) {
         $type = $this->$name;
         return new $type($item);
     }
 
     /**
      * Verify if $obj is an array.
-     * 
+     *
      * @throws Google_Exception Thrown if $obj isn't an array.
      * @param array $obj
      *            Items that should be validated.
      * @param string $method
      *            Method expecting an array as an argument.
      */
-    public function assertIsArray($obj, $method)
-    {
+    public function assertIsArray($obj, $method) {
         if ($obj && ! is_array($obj)) {
             throw new Google_Exception("Incorrect parameter type passed to $method(). Expected an array.");
         }
     }
 
-    public function offsetExists($offset)
-    {
+    public function offsetExists($offset) {
         return isset($this->$offset) || isset($this->modelData[$offset]);
     }
 
-    public function offsetGet($offset)
-    {
+    public function offsetGet($offset) {
         return isset($this->$offset) ? $this->$offset : $this->__get($offset);
     }
 
-    public function offsetSet($offset, $value)
-    {
+    public function offsetSet($offset, $value) {
         if (property_exists($this, $offset)) {
             $this->$offset = $value;
         } else {
@@ -256,28 +242,23 @@ class Google_Model implements ArrayAccess
         }
     }
 
-    public function offsetUnset($offset)
-    {
+    public function offsetUnset($offset) {
         unset($this->modelData[$offset]);
     }
 
-    protected function keyType($key)
-    {
+    protected function keyType($key) {
         return $key . "Type";
     }
 
-    protected function dataType($key)
-    {
+    protected function dataType($key) {
         return $key . "DataType";
     }
 
-    public function __isset($key)
-    {
+    public function __isset($key) {
         return isset($this->modelData[$key]);
     }
 
-    public function __unset($key)
-    {
+    public function __unset($key) {
         unset($this->modelData[$key]);
     }
 }

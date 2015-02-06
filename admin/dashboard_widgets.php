@@ -7,11 +7,9 @@
  */
 if (! class_exists('GADASH_Widgets')) {
 
-    class GADASH_Widgets
-    {
+    class GADASH_Widgets {
 
-        function __construct()
-        {
+        function __construct() {
             global $GADASH_Config;
             add_action('wp_dashboard_setup', array(
                 $this,
@@ -44,8 +42,7 @@ if (! class_exists('GADASH_Widgets')) {
             ), 10000);
         }
 
-        function draw_error_bubble()
-        {
+        function draw_error_bubble() {
             $bubble_msg = '!';
             if (get_transient('ga_dash_gapi_errors')) {
                 ?>
@@ -58,8 +55,7 @@ if (! class_exists('GADASH_Widgets')) {
             }
         }
 
-        function ga_dash_admin_actions()
-        {
+        function ga_dash_admin_actions() {
             global $GADASH_Config;
             global $wp_version;
             if (current_user_can('manage_options')) {
@@ -91,8 +87,7 @@ if (! class_exists('GADASH_Widgets')) {
             }
         }
 
-        function ga_dash_network_actions()
-        {
+        function ga_dash_network_actions() {
             global $GADASH_Config;
             global $wp_version;
             if (current_user_can('manage_netwrok')) {
@@ -115,8 +110,7 @@ if (! class_exists('GADASH_Widgets')) {
         /*
          * Include styles
          */
-        function ga_dash_admin_enqueue_styles($hook)
-        {
+        function ga_dash_admin_enqueue_styles($hook) {
             global $GADASH_Config;
             $valid_hooks = array(
                 'toplevel_page_gadash_settings',
@@ -147,15 +141,13 @@ if (! class_exists('GADASH_Widgets')) {
             ), GADWP_CURRENT_VERSION);
         }
 
-        function ga_dash_settings_link($links)
-        {
+        function ga_dash_settings_link($links) {
             $settings_link = '<a href="' . get_admin_url(null, 'admin.php?page=gadash_settings') . '">' . __("Settings", 'ga-dash') . '</a>';
             array_unshift($links, $settings_link);
             return $links;
         }
 
-        function ga_dash_setup()
-        {
+        function ga_dash_setup() {
             global $GADASH_Config;
             /*
              * Include Tools
@@ -170,8 +162,7 @@ if (! class_exists('GADASH_Widgets')) {
             }
         }
 
-        function gadash_dashboard_widgets()
-        {
+        function gadash_dashboard_widgets() {
             global $GADASH_Config;
             /*
              * Include GAPI

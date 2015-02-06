@@ -20,8 +20,7 @@
  *
  * @see http://tools.ietf.org/html/rfc6570
  */
-class Google_Utils_URITemplate
-{
+class Google_Utils_URITemplate {
 
     const TYPE_MAP = "1";
 
@@ -96,8 +95,7 @@ class Google_Utils_URITemplate
         "%3B"
     );
 
-    public function parse($string, array $parameters)
-    {
+    public function parse($string, array $parameters) {
         return $this->resolveNextSection($string, $parameters);
     }
 
@@ -107,8 +105,7 @@ class Google_Utils_URITemplate
      * It then calls itself to find
      * subsequent blocks, if any.
      */
-    private function resolveNextSection($string, $parameters)
-    {
+    private function resolveNextSection($string, $parameters) {
         $start = strpos($string, "{");
         if ($start === false) {
             return $string;
@@ -121,8 +118,7 @@ class Google_Utils_URITemplate
         return $this->resolveNextSection($string, $parameters);
     }
 
-    private function replace($string, $start, $end, $parameters)
-    {
+    private function replace($string, $start, $end, $parameters) {
         // We know a data block will have {} round it, so we can strip that.
         $data = substr($string, $start + 1, $end - $start - 1);
         // If the first character is one of the reserved operators, it effects
@@ -182,8 +178,7 @@ class Google_Utils_URITemplate
         return substr($string, 0, $start) . $data . substr($string, $end + 1);
     }
 
-    private function replaceVars($section, $parameters, $sep = ",", $combine = null, $reserved = false, $tag_empty = false, $combine_on_empty = true)
-    {
+    private function replaceVars($section, $parameters, $sep = ",", $combine = null, $reserved = false, $tag_empty = false, $combine_on_empty = true) {
         if (strpos($section, ",") === false) {
             // If we only have a single value, we can immediately process.
             return $this->combine($section, $parameters, $sep, $combine, $reserved, $tag_empty, $combine_on_empty);
@@ -197,8 +192,7 @@ $combine_on_empty);
         }
     }
 
-    public function combine($key, $parameters, $sep, $combine, $reserved, $tag_empty, $combine_on_empty)
-    {
+    public function combine($key, $parameters, $sep, $combine, $reserved, $tag_empty, $combine_on_empty) {
         $length = false;
         $explode = false;
         $skip_final_combine = false;
@@ -277,8 +271,7 @@ $combine_on_empty);
     /**
      * Return the type of a passed in value
      */
-    private function getDataType($data)
-    {
+    private function getDataType($data) {
         if (is_array($data)) {
             reset($data);
             if (key($data) !== 0) {
@@ -293,8 +286,7 @@ $combine_on_empty);
      * Utility function that merges multiple combine calls
      * for multi-key templates.
      */
-    private function combineList($vars, $sep, $parameters, $combine, $reserved, $tag_empty, $combine_on_empty)
-    {
+    private function combineList($vars, $sep, $parameters, $combine, $reserved, $tag_empty, $combine_on_empty) {
         $ret = array();
         foreach ($vars as $var) {
             $response = $this->combine($var, $parameters, $sep, $combine, $reserved, $tag_empty, $combine_on_empty);
@@ -309,8 +301,7 @@ $combine_on_empty);
     /**
      * Utility function to encode and trim values
      */
-    private function getValue($value, $length)
-    {
+    private function getValue($value, $length) {
         if ($length) {
             $value = substr($value, 0, $length);
         }

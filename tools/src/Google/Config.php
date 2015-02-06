@@ -18,8 +18,7 @@
 /**
  * A class to contain the library configuration for the Google API client.
  */
-class Google_Config
-{
+class Google_Config {
 
     const GZIP_DISABLED = true;
 
@@ -42,8 +41,7 @@ class Google_Config
      * @param
      *            [$ini_file_location] - optional - The location of the ini file to load
      */
-    public function __construct($ini_file_location = null)
-    {
+    public function __construct($ini_file_location = null) {
         $this->configuration = array(
             // The application_name is included in the User-Agent HTTP header.
             'application_name' => '',
@@ -124,7 +122,7 @@ class Google_Config
      * Set configuration specific to a given class.
      * $config->setClassConfig('Google_Cache_File',
      * array('directory' => '/tmp/cache'));
-     * 
+     *
      * @param $class string
      *            The class name for the configuration
      * @param $config string
@@ -132,8 +130,7 @@ class Google_Config
      * @param $value string
      *            optional - if $config is a key, the value
      */
-    public function setClassConfig($class, $config, $value = null)
-    {
+    public function setClassConfig($class, $config, $value = null) {
         if (! is_array($config)) {
             if (! isset($this->configuration['classes'][$class])) {
                 $this->configuration['classes'][$class] = array();
@@ -144,8 +141,7 @@ class Google_Config
         }
     }
 
-    public function getClassConfig($class, $key = null)
-    {
+    public function getClassConfig($class, $key = null) {
         if (! isset($this->configuration['classes'][$class])) {
             return null;
         }
@@ -158,31 +154,28 @@ class Google_Config
 
     /**
      * Return the configured cache class.
-     * 
+     *
      * @return string
      */
-    public function getCacheClass()
-    {
+    public function getCacheClass() {
         return $this->configuration['cache_class'];
     }
 
     /**
      * Return the configured logger class.
-     * 
+     *
      * @return string
      */
-    public function getLoggerClass()
-    {
+    public function getLoggerClass() {
         return $this->configuration['logger_class'];
     }
 
     /**
      * Return the configured Auth class.
-     * 
+     *
      * @return string
      */
-    public function getAuthClass()
-    {
+    public function getAuthClass() {
         return $this->configuration['auth_class'];
     }
 
@@ -192,8 +185,7 @@ class Google_Config
      * @param $class string
      *            the class name to set
      */
-    public function setAuthClass($class)
-    {
+    public function setAuthClass($class) {
         $prev = $this->configuration['auth_class'];
         if (! isset($this->configuration['classes'][$class]) && isset($this->configuration['classes'][$prev])) {
             $this->configuration['classes'][$class] = $this->configuration['classes'][$prev];
@@ -207,8 +199,7 @@ class Google_Config
      * @param $class string
      *            the class name to set
      */
-    public function setIoClass($class)
-    {
+    public function setIoClass($class) {
         $prev = $this->configuration['io_class'];
         if (! isset($this->configuration['classes'][$class]) && isset($this->configuration['classes'][$prev])) {
             $this->configuration['classes'][$class] = $this->configuration['classes'][$prev];
@@ -222,8 +213,7 @@ class Google_Config
      * @param $class string
      *            the class name to set
      */
-    public function setCacheClass($class)
-    {
+    public function setCacheClass($class) {
         $prev = $this->configuration['cache_class'];
         if (! isset($this->configuration['classes'][$class]) && isset($this->configuration['classes'][$prev])) {
             $this->configuration['classes'][$class] = $this->configuration['classes'][$prev];
@@ -237,8 +227,7 @@ class Google_Config
      * @param $class string
      *            the class name to set
      */
-    public function setLoggerClass($class)
-    {
+    public function setLoggerClass($class) {
         $prev = $this->configuration['logger_class'];
         if (! isset($this->configuration['classes'][$class]) && isset($this->configuration['classes'][$prev])) {
             $this->configuration['classes'][$class] = $this->configuration['classes'][$prev];
@@ -251,18 +240,16 @@ class Google_Config
      *
      * @return string
      */
-    public function getIoClass()
-    {
+    public function getIoClass() {
         return $this->configuration['io_class'];
     }
 
     /**
      * Set the application name, this is included in the User-Agent HTTP header.
-     * 
+     *
      * @param string $name            
      */
-    public function setApplicationName($name)
-    {
+    public function setApplicationName($name) {
         $this->configuration['application_name'] = $name;
     }
 
@@ -270,30 +257,27 @@ class Google_Config
      *
      * @return string the name of the application
      */
-    public function getApplicationName()
-    {
+    public function getApplicationName() {
         return $this->configuration['application_name'];
     }
 
     /**
      * Set the client ID for the auth class.
-     * 
+     *
      * @param $clientId string
      *            - the API console client ID
      */
-    public function setClientId($clientId)
-    {
+    public function setClientId($clientId) {
         $this->setAuthConfig('client_id', $clientId);
     }
 
     /**
      * Set the client secret for the auth class.
-     * 
+     *
      * @param $secret string
      *            - the API console client secret
      */
-    public function setClientSecret($secret)
-    {
+    public function setClientSecret($secret) {
         $this->setAuthConfig('client_secret', $secret);
     }
 
@@ -305,51 +289,46 @@ class Google_Config
      * @param $uri string
      *            - the URI that users should be redirected to
      */
-    public function setRedirectUri($uri)
-    {
+    public function setRedirectUri($uri) {
         $this->setAuthConfig('redirect_uri', $uri);
     }
 
     /**
      * Set the app activities for the auth class.
-     * 
+     *
      * @param $rva string
      *            a space separated list of app activity types
      */
-    public function setRequestVisibleActions($rva)
-    {
+    public function setRequestVisibleActions($rva) {
         $this->setAuthConfig('request_visible_actions', $rva);
     }
 
     /**
      * Set the the access type requested (offline or online.)
-     * 
+     *
      * @param $access string
      *            - the access type
      */
-    public function setAccessType($access)
-    {
+    public function setAccessType($access) {
         $this->setAuthConfig('access_type', $access);
     }
 
     /**
      * Set when to show the approval prompt (auto or force)
-     * 
+     *
      * @param $approval string
      *            - the approval request
      */
-    public function setApprovalPrompt($approval)
-    {
+    public function setApprovalPrompt($approval) {
         $this->setAuthConfig('approval_prompt', $approval);
     }
 
     /**
      * Set the login hint (email address or sub identifier)
-     * 
+     *
      * @param $hint string            
      */
-    public function setLoginHint($hint)
-    {
+    public function setLoginHint($hint) {
         $this->setAuthConfig('login_hint', $hint);
     }
 
@@ -357,12 +336,11 @@ class Google_Config
      * Set the developer key for the auth class.
      * Note that this is separate value
      * from the client ID - if it looks like a URL, its a client ID!
-     * 
+     *
      * @param $key string
      *            - the API console developer key
      */
-    public function setDeveloperKey($key)
-    {
+    public function setDeveloperKey($key) {
         $this->setAuthConfig('developer_key', $key);
     }
 
@@ -371,12 +349,11 @@ class Google_Config
      * Google Apps hosted accounts.
      * By including the domain of the user, you
      * restrict sign-in to accounts at that domain.
-     * 
+     *
      * @param $hd string
      *            - the domain to use.
      */
-    public function setHostedDomain($hd)
-    {
+    public function setHostedDomain($hd) {
         $this->setAuthConfig('hd', $hd);
     }
 
@@ -385,11 +362,10 @@ class Google_Config
      * Valid values are none, consent and select_account.
      * If no value is specified and the user has not previously authorized
      * access, then the user is shown a consent screen.
-     * 
+     *
      * @param $prompt string            
      */
-    public function setPrompt($prompt)
-    {
+    public function setPrompt($prompt) {
         $this->setAuthConfig('prompt', $prompt);
     }
 
@@ -398,12 +374,11 @@ class Google_Config
      * 2.0.
      * It is used in OpenID 2.0 requests to signify the URL-space for which
      * an authentication request is valid.
-     * 
+     *
      * @param $realm string
      *            - the URL-space to use.
      */
-    public function setOpenidRealm($realm)
-    {
+    public function setOpenidRealm($realm) {
         $this->setAuthConfig('openid.realm', $realm);
     }
 
@@ -411,12 +386,11 @@ class Google_Config
      * If this is provided with the value true, and the authorization request is
      * granted, the authorization will include any previous authorizations
      * granted to this user/application combination for other scopes.
-     * 
+     *
      * @param $include boolean
      *            - the URL-space to use.
      */
-    public function setIncludeGrantedScopes($include)
-    {
+    public function setIncludeGrantedScopes($include) {
         $this->setAuthConfig('include_granted_scopes', $include ? "true" : "false");
     }
 
@@ -424,21 +398,19 @@ class Google_Config
      *
      * @return string the base URL to use for API calls
      */
-    public function getBasePath()
-    {
+    public function getBasePath() {
         return $this->configuration['base_path'];
     }
 
     /**
      * Set the auth configuration for the current auth class.
-     * 
+     *
      * @param $key -
      *            the key to set
      * @param $value -
      *            the parameter value
      */
-    private function setAuthConfig($key, $value)
-    {
+    private function setAuthConfig($key, $value) {
         if (! isset($this->configuration['classes'][$this->getAuthClass()])) {
             $this->configuration['classes'][$this->getAuthClass()] = array();
         }

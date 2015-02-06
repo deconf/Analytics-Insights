@@ -20,20 +20,22 @@ require_once realpath(dirname(__FILE__) . '/../../../autoload.php');
  *
  * @author Chirag Shah <chirags@google.com>
  */
-class Google_Http_Batch
-{
+class Google_Http_Batch {
 
     /**
+     *
      * @var string Multipart Boundary.
      */
     private $boundary;
 
     /**
+     *
      * @var array service requests to be executed.
      */
     private $requests = array();
 
     /**
+     *
      * @var Google_Client
      */
     private $client;
@@ -42,8 +44,7 @@ class Google_Http_Batch
 
     private $base_path;
 
-    public function __construct(Google_Client $client, $boundary = false)
-    {
+    public function __construct(Google_Client $client, $boundary = false) {
         $this->client = $client;
         $this->base_path = $this->client->getBasePath();
         $this->expected_classes = array();
@@ -51,18 +52,17 @@ class Google_Http_Batch
         $this->boundary = str_replace('"', '', $boundary);
     }
 
-    public function add(Google_Http_Request $request, $key = false)
-    {
+    public function add(Google_Http_Request $request, $key = false) {
         if (false == $key) {
             $key = mt_rand();
         }
         $this->requests[$key] = $request;
     }
 
-    public function execute()
-    {
+    public function execute() {
         $body = '';
         /**
+         *
          * @var Google_Http_Request $req
          */
         foreach ($this->requests as $key => $req) {
@@ -82,8 +82,7 @@ class Google_Http_Batch
         return $this->parseResponse($response);
     }
 
-    public function parseResponse(Google_Http_Request $response)
-    {
+    public function parseResponse(Google_Http_Request $response) {
         $contentType = $response->getResponseHeader('content-type');
         $contentType = explode(';', $contentType);
         $boundary = false;

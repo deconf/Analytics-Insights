@@ -7,11 +7,9 @@
  */
 if (! class_exists('GADASH_Frontend')) {
 
-    final class GADASH_Frontend
-    {
+    final class GADASH_Frontend {
 
-        function __construct()
-        {
+        function __construct() {
             add_filter('the_content', array(
                 $this,
                 'ga_dash_front_content'
@@ -23,8 +21,7 @@ if (! class_exists('GADASH_Frontend')) {
             ));
         }
 
-        function ga_dash_front_enqueue_styles()
-        {
+        function ga_dash_front_enqueue_styles() {
             global $GADASH_Config;
             if ((! is_page() and ! is_single()) or is_preview() or ! is_user_logged_in()) {
                 return;
@@ -40,8 +37,7 @@ if (! class_exists('GADASH_Frontend')) {
             wp_enqueue_script('googlejsapi', 'https://www.google.com/jsapi');
         }
 
-        function ga_dash_front_content($content)
-        {
+        function ga_dash_front_content($content) {
             global $post;
             global $GADASH_Config;
             /*

@@ -22,8 +22,7 @@ require_once realpath(dirname(__FILE__) . '/../../../autoload.php');
  * This logger will delegate all logging to a PSR-3 compatible logger specified
  * with the `Google_Logger_Psr::setLogger()` method.
  */
-class Google_Logger_Psr extends Google_Logger_Abstract
-{
+class Google_Logger_Psr extends Google_Logger_Abstract {
 
     /**
      *
@@ -39,8 +38,7 @@ class Google_Logger_Psr extends Google_Logger_Abstract
      * @param Psr\Log\LoggerInterface $logger
      *            PSR-3 logger where logging will be delegated.
      */
-    public function __construct(Google_Client $client, /*Psr\Log\LoggerInterface*/ $logger = null)
-    {
+    public function __construct(Google_Client $client, /*Psr\Log\LoggerInterface*/ $logger = null) {
         parent::__construct($client);
         if ($logger) {
             $this->setLogger($logger);
@@ -57,28 +55,21 @@ class Google_Logger_Psr extends Google_Logger_Abstract
      * @param Psr\Log\LoggerInterface $logger
      *            The PSR-3 logger
      */
-    public function setLogger(/*Psr\Log\LoggerInterface*/ $logger)
-    {
+    public function setLogger(/*Psr\Log\LoggerInterface*/ $logger) {
         $this->logger = $logger;
     }
 
     /**
-     *
      * @ERROR!!!
-     *
      */
-    public function shouldHandle($level)
-    {
+    public function shouldHandle($level) {
         return isset($this->logger) && parent::shouldHandle($level);
     }
 
     /**
-     *
      * @ERROR!!!
-     *
      */
-    public function log($level, $message, array $context = array())
-    {
+    public function log($level, $message, array $context = array()) {
         if (! $this->shouldHandle($level)) {
             return false;
         }
@@ -90,10 +81,7 @@ class Google_Logger_Psr extends Google_Logger_Abstract
     }
 
     /**
-     *
      * @ERROR!!!
-     *
      */
-    protected function write($message, array $context = array())
-    {}
+    protected function write($message, array $context = array()) {}
 }

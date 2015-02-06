@@ -7,11 +7,9 @@
  */
 if (! class_exists('GADASH_Frontend_Ajax')) {
 
-    final class GADASH_Frontend_Ajax
-    {
+    final class GADASH_Frontend_Ajax {
 
-        function __construct()
-        {
+        function __construct() {
             // Frontend Reports/Page action
             add_action('wp_ajax_gadash_get_frontend_pagereports', array(
                 $this,
@@ -33,8 +31,7 @@ if (! class_exists('GADASH_Frontend_Ajax')) {
          *
          * @return string|int
          */
-        function ajax_afterpost_reports()
-        {
+        function ajax_afterpost_reports() {
             global $GADASH_Config;
             if (! isset($_REQUEST['gadash_security_pagereports']) or ! wp_verify_nonce($_REQUEST['gadash_security_pagereports'], 'gadash_get_frontend_pagereports')) {
                 print(json_encode(- 30));
@@ -43,8 +40,9 @@ if (! class_exists('GADASH_Frontend_Ajax')) {
             $page_url = esc_url($_REQUEST['gadash_pageurl']);
             $post_id = (int) $_REQUEST['gadash_postid'];
             $query = $_REQUEST['query'];
-            if (ob_get_length()) ob_end_clean();
-            /*
+            if (ob_get_length())
+                ob_end_clean();
+                /*
              * Include Tools
              */
             include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
@@ -87,8 +85,7 @@ if (! class_exists('GADASH_Frontend_Ajax')) {
          *
          * @return string|int
          */
-        function ajax_frontend_widget()
-        {
+        function ajax_frontend_widget() {
             global $GADASH_Config;
             if (! isset($_REQUEST['gadash_id']) or ! isset($_REQUEST['gadash_optionname'])) {
                 print(json_encode(- 30));
@@ -114,7 +111,8 @@ if (! class_exists('GADASH_Frontend_Ajax')) {
                     $period = '30daysAgo';
                     break;
             }
-            if (ob_get_length()) ob_end_clean();
+            if (ob_get_length())
+                ob_end_clean();
             if (! is_active_widget(false, false, 'gadash_frontend_widget')) {
                 print(json_encode(- 30));
                 die();

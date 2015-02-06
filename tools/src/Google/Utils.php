@@ -21,11 +21,9 @@
  *
  * @author Chirag Shah <chirags@google.com>
  */
-class Google_Utils
-{
+class Google_Utils {
 
-    public static function urlSafeB64Encode($data)
-    {
+    public static function urlSafeB64Encode($data) {
         $b64 = base64_encode($data);
         $b64 = str_replace(array(
             '+',
@@ -40,8 +38,7 @@ class Google_Utils
         return $b64;
     }
 
-    public static function urlSafeB64Decode($b64)
-    {
+    public static function urlSafeB64Decode($b64) {
         $b64 = str_replace(array(
             '-',
             '_'
@@ -67,8 +64,7 @@ class Google_Utils
      * @param string $str            
      * @return int The number of bytes in a string.
      */
-    public static function getStrLen($str)
-    {
+    public static function getStrLen($str) {
         $strlenVar = strlen($str);
         $d = $ret = 0;
         for ($count = 0; $count < $strlenVar; ++ $count) {
@@ -112,12 +108,11 @@ class Google_Utils
 
     /**
      * Normalize all keys in an array to lower-case.
-     * 
+     *
      * @param array $arr            
      * @return array Normalized array.
      */
-    public static function normalize($arr)
-    {
+    public static function normalize($arr) {
         if (! is_array($arr)) {
             return array();
         }
@@ -130,12 +125,11 @@ class Google_Utils
 
     /**
      * Convert a string to camelCase
-     * 
+     *
      * @param string $value            
      * @return string
      */
-    public static function camelCase($value)
-    {
+    public static function camelCase($value) {
         $value = ucwords(str_replace(array(
             '-',
             '_'

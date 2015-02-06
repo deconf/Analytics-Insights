@@ -7,8 +7,7 @@
  */
 if (! class_exists('GADASH_GAPI')) {
 
-    final class GADASH_GAPI
-    {
+    final class GADASH_GAPI {
 
         public $client, $service;
 
@@ -20,8 +19,7 @@ if (! class_exists('GADASH_GAPI')) {
 
         private $managequota;
 
-        function __construct()
-        {
+        function __construct() {
             global $GADASH_Config;
             include_once ($GADASH_Config->plugin_path . '/tools/autoload.php');
             ;
@@ -63,16 +61,14 @@ if (! class_exists('GADASH_GAPI')) {
             }
         }
 
-        private function set_error_timeout()
-        {
+        private function set_error_timeout() {
             $midnight = strtotime("tomorrow 00:00:00"); // UTC midnight
             $midnight = $midnight + 8 * 3600; // UTC 8 AM
             $this->error_timeout = $midnight - time();
             return;
         }
 
-        private function prepare_json($value)
-        {
+        private function prepare_json($value) {
             return esc_html(str_replace('\\', '&#92;', stripslashes($value)));
         }
 
@@ -81,8 +77,7 @@ if (! class_exists('GADASH_GAPI')) {
          *
          * @return boolean
          */
-        function gapi_errors_handler()
-        {
+        function gapi_errors_handler() {
             $errors = get_transient('ga_dash_gapi_errors');
             if ($errors === false or ! isset($errors[0])) { // invalid error
                 return FALSE;
@@ -107,8 +102,7 @@ if (! class_exists('GADASH_GAPI')) {
          *            $daily
          * @return number
          */
-        function get_timeouts($daily)
-        {
+        function get_timeouts($daily) {
             $local_time = time() + $this->timeshift;
             if ($daily) {
                 $nextday = explode('-', date('n-j-Y', strtotime(' +1 day', $local_time)));
@@ -121,8 +115,7 @@ if (! class_exists('GADASH_GAPI')) {
             }
         }
 
-        function token_request()
-        {
+        function token_request() {
             $authUrl = $this->client->createAuthUrl();
             ?>
 <form name="input"
@@ -160,8 +153,7 @@ if (! class_exists('GADASH_GAPI')) {
          *
          * @return array|string
          */
-        function refresh_profiles()
-        {
+        function refresh_profiles() {
             global $GADASH_Config;
             try {
                 $profiles = $this->service->management_profiles->listManagementProfiles('~all', '~all');
@@ -207,8 +199,7 @@ if (! class_exists('GADASH_GAPI')) {
          *
          * @return token|boolean
          */
-        private function ga_dash_refresh_token()
-        {
+        private function ga_dash_refresh_token() {
             global $GADASH_Config;
             try {
                 if (is_multisite() && $GADASH_Config->options['ga_dash_network']) {
@@ -260,8 +251,7 @@ if (! class_exists('GADASH_GAPI')) {
          * @param
          *            $all
          */
-        function ga_dash_reset_token($all = true)
-        {
+        function ga_dash_reset_token($all = true) {
             global $GADASH_Config;
             if (is_multisite() && $GADASH_Config->options['ga_dash_network']) {
                 delete_site_transient('ga_dash_refresh_token');
@@ -310,8 +300,7 @@ if (! class_exists('GADASH_GAPI')) {
          *            $serial
          * @return int|Google_Service_Analytics_GaData
          */
-        private function handle_corereports($projectId, $from, $to, $metrics, $options, $serial)
-        {
+        private function handle_corereports($projectId, $from, $to, $metrics, $options, $serial) {
             try {
                 if ($from == "today") {
                     $timeouts = 0;
@@ -362,8 +351,7 @@ if (! class_exists('GADASH_GAPI')) {
          *            $query
          * @return string|int
          */
-        function get_mainreport($projectId, $from, $to, $query)
-        {
+        function get_mainreport($projectId, $from, $to, $query) {
             switch ($query) {
                 case 'users':
                     $title = __("Users", 'ga-dash');
@@ -428,8 +416,7 @@ if (! class_exists('GADASH_GAPI')) {
          *            $to
          * @return array|int
          */
-        function get_bottomstats($projectId, $from, $to)
-        {
+        function get_bottomstats($projectId, $from, $to) {
             $metrics = 'ga:sessions,ga:users,ga:pageviews,ga:BounceRate,ga:organicSearches,ga:pageviewsPerSession';
             $serial = 'gadash_qr3' . $projectId . $from;
             $data = $this->handle_corereports($projectId, $from, $to, $metrics, array(
@@ -459,8 +446,7 @@ if (! class_exists('GADASH_GAPI')) {
          *            $to
          * @return string|int
          */
-        function get_contentpages($projectId, $from, $to)
-        {
+        function get_contentpages($projectId, $from, $to) {
             $metrics = 'ga:pageviews';
             $dimensions = 'ga:pageTitle';
             $serial = 'gadash_qr4' . $projectId . $from;
@@ -496,8 +482,7 @@ if (! class_exists('GADASH_GAPI')) {
          *            $to
          * @return string|int
          */
-        function get_referrers($projectId, $from, $to)
-        {
+        function get_referrers($projectId, $from, $to) {
             $metrics = 'ga:sessions';
             $dimensions = 'ga:source';
             $serial = 'gadash_qr5' . $projectId . $from;
@@ -534,8 +519,7 @@ if (! class_exists('GADASH_GAPI')) {
          *            $to
          * @return string|int
          */
-        function get_searches($projectId, $from, $to)
-        {
+        function get_searches($projectId, $from, $to) {
             $metrics = 'ga:sessions';
             $dimensions = 'ga:keyword';
             $serial = 'gadash_qr6' . $projectId . $from;
@@ -573,8 +557,7 @@ if (! class_exists('GADASH_GAPI')) {
          *            $to
          * @return string|int
          */
-        function get_locations($projectId, $from, $to)
-        {
+        function get_locations($projectId, $from, $to) {
             global $GADASH_Config;
             $metrics = 'ga:sessions';
             $options = "";
@@ -634,8 +617,7 @@ if (! class_exists('GADASH_GAPI')) {
          *            $to
          * @return string|int
          */
-        function get_trafficchannels($projectId, $from, $to)
-        {
+        function get_trafficchannels($projectId, $from, $to) {
             $metrics = 'ga:sessions';
             $dimensions = 'ga:channelGrouping';
             $serial = 'gadash_qr8' . $projectId . $from;
@@ -672,8 +654,7 @@ if (! class_exists('GADASH_GAPI')) {
          *            $query
          * @return string|int
          */
-        function get_trafficdetails($projectId, $from, $to, $query)
-        {
+        function get_trafficdetails($projectId, $from, $to, $query) {
             $metrics = 'ga:sessions';
             $dimensions = 'ga:' . $query;
             if ($query == 'source') {
@@ -717,8 +698,7 @@ if (! class_exists('GADASH_GAPI')) {
          *            $anonim
          * @return array|int
          */
-        function frontend_widget_stats($projectId, $from, $anonim)
-        {
+        function frontend_widget_stats($projectId, $from, $anonim) {
             $content = '';
             $to = 'yesterday';
             $metrics = 'ga:sessions';
@@ -765,8 +745,7 @@ if (! class_exists('GADASH_GAPI')) {
          *            $post_id
          * @return string|int
          */
-        function frontend_afterpost_pageviews($projectId, $page_url, $post_id)
-        {
+        function frontend_afterpost_pageviews($projectId, $page_url, $post_id) {
             $from = '30daysAgo';
             $to = 'yesterday';
             $metrics = 'ga:pageviews,ga:uniquePageviews';
@@ -802,8 +781,7 @@ if (! class_exists('GADASH_GAPI')) {
          *            $post_id
          * @return string|int
          */
-        function frontend_afterpost_searches($projectId, $page_url, $post_id)
-        {
+        function frontend_afterpost_searches($projectId, $page_url, $post_id) {
             $from = '30daysAgo';
             $to = 'yesterday';
             $metrics = 'ga:sessions';
@@ -840,8 +818,7 @@ if (! class_exists('GADASH_GAPI')) {
          *            $projectId
          * @return string|int
          */
-        function gadash_realtime_data($projectId)
-        {
+        function gadash_realtime_data($projectId) {
             $metrics = 'rt:activeUsers';
             $dimensions = 'rt:pagePath,rt:source,rt:keyword,rt:trafficType,rt:visitorType,rt:pageTitle';
             try {
@@ -882,8 +859,7 @@ if (! class_exists('GADASH_GAPI')) {
             return print_r(json_encode($ga_dash_data), true);
         }
 
-        public function getcountrycodes()
-        {
+        public function getcountrycodes() {
             include_once 'iso3166.php';
         }
     }

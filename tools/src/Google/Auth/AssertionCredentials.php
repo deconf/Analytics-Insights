@@ -21,8 +21,7 @@ require_once realpath(dirname(__FILE__) . '/../../../autoload.php');
  *
  * @author Chirag Shah <chirags@google.com>
  */
-class Google_Auth_AssertionCredentials
-{
+class Google_Auth_AssertionCredentials {
 
     const MAX_TOKEN_LIFETIME_SECS = 3600;
 
@@ -65,8 +64,7 @@ class Google_Auth_AssertionCredentials
      *            bool useCache Whether to generate a cache key and allow
      *            automatic caching of the generated token.
      */
-    public function __construct($serviceAccountName, $scopes, $privateKey, $privateKeyPassword = 'notasecret', $assertionType = 'http://oauth.net/grant_type/jwt/1.0/bearer', $sub = false, $useCache = true)
-    {
+    public function __construct($serviceAccountName, $scopes, $privateKey, $privateKeyPassword = 'notasecret', $assertionType = 'http://oauth.net/grant_type/jwt/1.0/bearer', $sub = false, $useCache = true) {
         $this->serviceAccountName = $serviceAccountName;
         $this->scopes = is_string($scopes) ? $scopes : implode(' ', $scopes);
         $this->privateKey = $privateKey;
@@ -79,11 +77,10 @@ class Google_Auth_AssertionCredentials
 
     /**
      * Generate a unique key to represent this credential.
-     * 
+     *
      * @return string
      */
-    public function getCacheKey()
-    {
+    public function getCacheKey() {
         if (! $this->useCache) {
             return false;
         }
@@ -95,8 +92,7 @@ class Google_Auth_AssertionCredentials
         return md5($h);
     }
 
-    public function generateAssertion()
-    {
+    public function generateAssertion() {
         $now = time();
         $jwtParams = array(
             'aud' => Google_Auth_OAuth2::OAUTH2_TOKEN_URI,
@@ -116,12 +112,11 @@ class Google_Auth_AssertionCredentials
 
     /**
      * Creates a signed JWT.
-     * 
+     *
      * @param array $payload            
      * @return string The signed JWT.
      */
-    private function makeSignedJwt($payload)
-    {
+    private function makeSignedJwt($payload) {
         $header = array(
             'typ' => 'JWT',
             'alg' => 'RS256'

@@ -21,19 +21,17 @@ require_once realpath(dirname(__FILE__) . '/../../../autoload.php');
  * Can either be used to make requests
  * completely unauthenticated, or by using a Simple API Access developer
  * key.
- * 
+ *
  * @author Chris Chabot <chabotc@google.com>
  * @author Chirag Shah <chirags@google.com>
  */
-class Google_Auth_Simple extends Google_Auth_Abstract
-{
+class Google_Auth_Simple extends Google_Auth_Abstract {
 
     private $key = null;
 
     private $client;
 
-    public function __construct(Google_Client $client, $config = null)
-    {
+    public function __construct(Google_Client $client, $config = null) {
         $this->client = $client;
     }
 
@@ -47,14 +45,12 @@ class Google_Auth_Simple extends Google_Auth_Abstract
      * @return Google_Http_Request The resulting HTTP response including the
      *         responseHttpCode, responseHeaders and responseBody.
      */
-    public function authenticatedRequest(Google_Http_Request $request)
-    {
+    public function authenticatedRequest(Google_Http_Request $request) {
         $request = $this->sign($request);
         return $this->io->makeRequest($request);
     }
 
-    public function sign(Google_Http_Request $request)
-    {
+    public function sign(Google_Http_Request $request) {
         $key = $this->client->getClassConfig($this, 'developer_key');
         if ($key) {
             $this->client->getLogger()->debug('Simple API Access developer key authentication');

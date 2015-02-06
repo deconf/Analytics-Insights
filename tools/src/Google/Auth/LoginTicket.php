@@ -21,8 +21,7 @@ require_once realpath(dirname(__FILE__) . '/../../../autoload.php');
  *
  * @author Brian Eaton <beaton@google.com>
  */
-class Google_Auth_LoginTicket
-{
+class Google_Auth_LoginTicket {
 
     const USER_ATTR = "sub";
     // Information from id token envelope.
@@ -38,21 +37,19 @@ class Google_Auth_LoginTicket
      * @param string $payload
      *            Information from a verified authentication token.
      */
-    public function __construct($envelope, $payload)
-    {
+    public function __construct($envelope, $payload) {
         $this->envelope = $envelope;
         $this->payload = $payload;
     }
 
     /**
      * Returns the numeric identifier for the user.
-     * 
+     *
      * @throws Google_Auth_Exception
      * @return
      *
      */
-    public function getUserId()
-    {
+    public function getUserId() {
         if (array_key_exists(self::USER_ATTR, $this->payload)) {
             return $this->payload[self::USER_ATTR];
         }
@@ -63,11 +60,10 @@ class Google_Auth_LoginTicket
      * Returns attributes from the login ticket.
      * This can contain
      * various information about the user session.
-     * 
+     *
      * @return array
      */
-    public function getAttributes()
-    {
+    public function getAttributes() {
         return array(
             "envelope" => $this->envelope,
             "payload" => $this->payload

@@ -25,8 +25,7 @@ require_once realpath(dirname(__FILE__) . '/../../../autoload.php');
  * @author Chirag Shah <chirags@google.com>
  *        
  */
-class Google_Http_Request
-{
+class Google_Http_Request {
 
     const GZIP_UA = " (gzip)";
 
@@ -62,8 +61,7 @@ class Google_Http_Request
 
     public $accessKey;
 
-    public function __construct($url, $method = 'GET', $headers = array(), $postBody = null)
-    {
+    public function __construct($url, $method = 'GET', $headers = array(), $postBody = null) {
         $this->setUrl($url);
         $this->setRequestMethod($method);
         $this->setRequestHeaders($headers);
@@ -73,29 +71,26 @@ class Google_Http_Request
     /**
      * Misc function that returns the base url component of the $url
      * used by the OAuth signing class to calculate the base string
-     * 
+     *
      * @return string The base url component of the $url.
      */
-    public function getBaseComponent()
-    {
+    public function getBaseComponent() {
         return $this->baseComponent;
     }
 
     /**
      * Set the base URL that path and query parameters will be added to.
-     * 
+     *
      * @param $baseComponent string            
      */
-    public function setBaseComponent($baseComponent)
-    {
+    public function setBaseComponent($baseComponent) {
         $this->baseComponent = $baseComponent;
     }
 
     /**
      * Enable support for gzipped responses with this request.
      */
-    public function enableGzip()
-    {
+    public function enableGzip() {
         $this->setRequestHeaders(array(
             "Accept-Encoding" => "gzip"
         ));
@@ -106,8 +101,7 @@ class Google_Http_Request
     /**
      * Disable support for gzip responses with this request.
      */
-    public function disableGzip()
-    {
+    public function disableGzip() {
         if (isset($this->requestHeaders['accept-encoding']) && $this->requestHeaders['accept-encoding'] == "gzip") {
             unset($this->requestHeaders['accept-encoding']);
         }
@@ -117,35 +111,32 @@ class Google_Http_Request
 
     /**
      * Can this request accept a gzip response?
-     * 
+     *
      * @return bool
      */
-    public function canGzip()
-    {
+    public function canGzip() {
         return $this->canGzip;
     }
 
     /**
      * Misc function that returns an array of the query parameters of the current
      * url used by the OAuth signing class to calculate the signature
-     * 
+     *
      * @return array Query parameters in the query string.
      */
-    public function getQueryParams()
-    {
+    public function getQueryParams() {
         return $this->queryParams;
     }
 
     /**
      * Set a new query parameter.
-     * 
+     *
      * @param $key -
      *            string to set, does not need to be URL encoded
      * @param $value -
      *            string to set, does not need to be URL encoded
      */
-    public function setQueryParam($key, $value)
-    {
+    public function setQueryParam($key, $value) {
         $this->queryParams[$key] = $value;
     }
 
@@ -153,8 +144,7 @@ class Google_Http_Request
      *
      * @return string HTTP Response Code.
      */
-    public function getResponseHttpCode()
-    {
+    public function getResponseHttpCode() {
         return (int) $this->responseHttpCode;
     }
 
@@ -163,8 +153,7 @@ class Google_Http_Request
      * @param int $responseHttpCode
      *            HTTP Response Code.
      */
-    public function setResponseHttpCode($responseHttpCode)
-    {
+    public function setResponseHttpCode($responseHttpCode) {
         $this->responseHttpCode = $responseHttpCode;
     }
 
@@ -172,8 +161,7 @@ class Google_Http_Request
      *
      * @return $responseHeaders (array) HTTP Response Headers.
      */
-    public function getResponseHeaders()
-    {
+    public function getResponseHeaders() {
         return $this->responseHeaders;
     }
 
@@ -181,8 +169,7 @@ class Google_Http_Request
      *
      * @return string HTTP Response Body
      */
-    public function getResponseBody()
-    {
+    public function getResponseBody() {
         return $this->responseBody;
     }
 
@@ -192,18 +179,16 @@ class Google_Http_Request
      * @param $class string
      *            the class name
      */
-    public function setExpectedClass($class)
-    {
+    public function setExpectedClass($class) {
         $this->expectedClass = $class;
     }
 
     /**
      * Retrieve the expected class the response should expect.
-     * 
+     *
      * @return string class name
      */
-    public function getExpectedClass()
-    {
+    public function getExpectedClass() {
         return $this->expectedClass;
     }
 
@@ -213,8 +198,7 @@ class Google_Http_Request
      *            The HTTP response headers
      *            to be normalized.
      */
-    public function setResponseHeaders($headers)
-    {
+    public function setResponseHeaders($headers) {
         $headers = Google_Utils::normalize($headers);
         if ($this->responseHeaders) {
             $headers = array_merge($this->responseHeaders, $headers);
@@ -228,8 +212,7 @@ class Google_Http_Request
      * @return array|boolean Returns the requested HTTP header or
      *         false if unavailable.
      */
-    public function getResponseHeader($key)
-    {
+    public function getResponseHeader($key) {
         return isset($this->responseHeaders[$key]) ? $this->responseHeaders[$key] : false;
     }
 
@@ -238,8 +221,7 @@ class Google_Http_Request
      * @param string $responseBody
      *            The HTTP response body.
      */
-    public function setResponseBody($responseBody)
-    {
+    public function setResponseBody($responseBody) {
         $this->responseBody = $responseBody;
     }
 
@@ -247,8 +229,7 @@ class Google_Http_Request
      *
      * @return string $url The request URL.
      */
-    public function getUrl()
-    {
+    public function getUrl() {
         return $this->baseComponent . $this->path . (count($this->queryParams) ? "?" . $this->buildQuery($this->queryParams) : '');
     }
 
@@ -256,8 +237,7 @@ class Google_Http_Request
      *
      * @return string $method HTTP Request Method.
      */
-    public function getRequestMethod()
-    {
+    public function getRequestMethod() {
         return $this->requestMethod;
     }
 
@@ -265,8 +245,7 @@ class Google_Http_Request
      *
      * @return array $headers HTTP Request Headers.
      */
-    public function getRequestHeaders()
-    {
+    public function getRequestHeaders() {
         return $this->requestHeaders;
     }
 
@@ -276,8 +255,7 @@ class Google_Http_Request
      * @return array|boolean Returns the requested HTTP header or
      *         false if unavailable.
      */
-    public function getRequestHeader($key)
-    {
+    public function getRequestHeader($key) {
         return isset($this->requestHeaders[$key]) ? $this->requestHeaders[$key] : false;
     }
 
@@ -285,8 +263,7 @@ class Google_Http_Request
      *
      * @return string $postBody HTTP Request Body.
      */
-    public function getPostBody()
-    {
+    public function getPostBody() {
         return $this->postBody;
     }
 
@@ -295,8 +272,7 @@ class Google_Http_Request
      * @param string $url
      *            the url to set
      */
-    public function setUrl($url)
-    {
+    public function setUrl($url) {
         if (substr($url, 0, 4) != 'http') {
             // Force the path become relative.
             if (substr($url, 0, 1) !== '/') {
@@ -321,8 +297,7 @@ class Google_Http_Request
      *            it to upper-case, as required by HTTP.
      *            
      */
-    public function setRequestMethod($method)
-    {
+    public function setRequestMethod($method) {
         $this->requestMethod = strtoupper($method);
     }
 
@@ -332,8 +307,7 @@ class Google_Http_Request
      *            The HTTP request headers
      *            to be set and normalized.
      */
-    public function setRequestHeaders($headers)
-    {
+    public function setRequestHeaders($headers) {
         $headers = Google_Utils::normalize($headers);
         if ($this->requestHeaders) {
             $headers = array_merge($this->requestHeaders, $headers);
@@ -346,19 +320,17 @@ class Google_Http_Request
      * @param string $postBody
      *            the postBody to set
      */
-    public function setPostBody($postBody)
-    {
+    public function setPostBody($postBody) {
         $this->postBody = $postBody;
     }
 
     /**
      * Set the User-Agent Header.
-     * 
+     *
      * @param string $userAgent
      *            The User-Agent.
      */
-    public function setUserAgent($userAgent)
-    {
+    public function setUserAgent($userAgent) {
         $this->userAgent = $userAgent;
         if ($this->canGzip) {
             $this->userAgent = $userAgent . self::GZIP_UA;
@@ -369,8 +341,7 @@ class Google_Http_Request
      *
      * @return string The User-Agent.
      */
-    public function getUserAgent()
-    {
+    public function getUserAgent() {
         return $this->userAgent;
     }
 
@@ -378,11 +349,10 @@ class Google_Http_Request
      * Returns a cache key depending on if this was an OAuth signed request
      * in which case it will use the non-signed url and access key to make this
      * cache key unique per authenticated user, else use the plain request url
-     * 
+     *
      * @return string The md5 hash of the request cache key.
      */
-    public function getCacheKey()
-    {
+    public function getCacheKey() {
         $key = $this->getUrl();
         if (isset($this->accessKey)) {
             $key .= $this->accessKey;
@@ -393,8 +363,7 @@ class Google_Http_Request
         return md5($key);
     }
 
-    public function getParsedCacheControl()
-    {
+    public function getParsedCacheControl() {
         $parsed = array();
         $rawCacheControl = $this->getResponseHeader('cache-control');
         if ($rawCacheControl) {
@@ -409,8 +378,7 @@ class Google_Http_Request
      * @param string $id            
      * @return string A string representation of the HTTP Request.
      */
-    public function toBatchString($id)
-    {
+    public function toBatchString($id) {
         $str = '';
         $path = parse_url($this->getUrl(), PHP_URL_PATH) . "?" . http_build_query($this->queryParams);
         $str .= $this->getRequestMethod() . ' ' . $path . " HTTP/1.1\n";
@@ -437,8 +405,7 @@ class Google_Http_Request
      * @param $string -
      *            the query string to parse
      */
-    private function parseQuery($string)
-    {
+    private function parseQuery($string) {
         $return = array();
         $parts = explode("&", $string);
         foreach ($parts as $part) {
@@ -465,8 +432,7 @@ class Google_Http_Request
      * @param $parts array
      *            of key value pairs
      */
-    private function buildQuery($parts)
-    {
+    private function buildQuery($parts) {
         $return = array();
         foreach ($parts as $key => $value) {
             if (is_array($value)) {
@@ -485,8 +451,7 @@ class Google_Http_Request
      * parameters in there, which avoids length issues with longer query
      * params.
      */
-    public function maybeMoveParametersToBody()
-    {
+    public function maybeMoveParametersToBody() {
         if ($this->getRequestMethod() == "POST" && empty($this->postBody)) {
             $this->setRequestHeaders(array(
                 "content-type" => "application/x-www-form-urlencoded; charset=UTF-8"

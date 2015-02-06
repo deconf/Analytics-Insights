@@ -7,11 +7,9 @@
  */
 if (! class_exists('GADASH_Tools')) {
 
-    class GADASH_Tools
-    {
+    class GADASH_Tools {
 
-        function guess_default_domain($profiles)
-        {
+        function guess_default_domain($profiles) {
             $domain = get_option('siteurl');
             $domain = str_ireplace(array(
                 'http://',
@@ -29,8 +27,7 @@ if (! class_exists('GADASH_Tools')) {
             }
         }
 
-        function get_selected_profile($profiles, $profile)
-        {
+        function get_selected_profile($profiles, $profile) {
             if (is_array($profiles)) {
                 foreach ($profiles as $item) {
                     if ($item[1] == $profile) {
@@ -40,15 +37,13 @@ if (! class_exists('GADASH_Tools')) {
             }
         }
 
-        function get_root_domain($domain)
-        {
+        function get_root_domain($domain) {
             $root = explode('/', $domain);
             preg_match("/(?P<domain>[a-z0-9][a-z0-9\-]{1,63}\.[a-z\.]{2,6})$/i", str_ireplace('www', '', isset($root[2]) ? $root[2] : $domain), $root);
             return $root;
         }
 
-        function ga_dash_get_profile_domain($domain)
-        {
+        function ga_dash_get_profile_domain($domain) {
             return str_replace(array(
                 "https://",
                 "http://",
@@ -56,23 +51,20 @@ if (! class_exists('GADASH_Tools')) {
             ), "", $domain);
         }
 
-        function ga_dash_clear_cache()
-        {
+        function ga_dash_clear_cache() {
             global $wpdb;
             $sqlquery = $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_gadash%%'");
             $sqlquery = $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_timeout_gadash%%'");
         }
 
-        function ga_dash_safe_get($key)
-        {
+        function ga_dash_safe_get($key) {
             if (array_key_exists($key, $_POST)) {
                 return $_POST[$key];
             }
             return false;
         }
 
-        function colourVariator($colour, $per)
-        {
+        function colourVariator($colour, $per) {
             $colour = substr($colour, 1);
             $rgb = '';
             $per = $per / 100 * 255;
@@ -95,8 +87,7 @@ if (! class_exists('GADASH_Tools')) {
             return '#' . $rgb;
         }
 
-        function check_roles($access_level, $tracking = false)
-        {
+        function check_roles($access_level, $tracking = false) {
             if (is_user_logged_in() && isset($access_level)) {
                 global $current_user;
                 $roles = (array) $current_user->roles;

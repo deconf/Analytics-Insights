@@ -6,11 +6,9 @@
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
-final class GADASH_Settings
-{
+final class GADASH_Settings {
 
-    private static function set_get_options($who)
-    {
+    private static function set_get_options($who) {
         global $GADASH_Config;
         $network_settings = false;
         $options = $GADASH_Config->options; // Get current options
@@ -62,8 +60,7 @@ final class GADASH_Settings
         return $options;
     }
 
-    private static function navigation_tabs($tabs)
-    {
+    private static function navigation_tabs($tabs) {
         echo '<div id="icon-themes" class="icon32"><br></div>';
         echo '<h2 class="nav-tab-wrapper">';
         foreach ($tabs as $tab => $name) {
@@ -72,8 +69,7 @@ final class GADASH_Settings
         echo '</h2>';
     }
 
-    public static function frontend_settings()
-    {
+    public static function frontend_settings() {
         global $GADASH_Config;
         if (! current_user_can('manage_options')) {
             return;
@@ -136,6 +132,10 @@ final class GADASH_Settings
             }
         }
         ?>
+									
+									
+									
+									
 									</table>
 								</td>
 							</tr>
@@ -181,13 +181,16 @@ final class GADASH_Settings
 						</table>
 						<input type="hidden" name="options[ga_dash_hidden]" value="Y">
 						<?php wp_nonce_field('gadash_form','gadash_security'); ?>
+
+
+
+
 </form>
 <?php
         self::output_sidebar();
     }
 
-    public static function backend_settings()
-    {
+    public static function backend_settings() {
         global $GADASH_Config;
         if (! current_user_can('manage_options')) {
             return;
@@ -250,6 +253,10 @@ final class GADASH_Settings
             }
         }
         ?>
+									
+									
+									
+									
 									</table>
 								</td>
 							</tr>
@@ -311,13 +318,16 @@ final class GADASH_Settings
 						</table>
 						<input type="hidden" name="options[ga_dash_hidden]" value="Y">
 						<?php wp_nonce_field('gadash_form','gadash_security'); ?>
+
+
+
+
 </form>
 <?php
         self::output_sidebar();
     }
 
-    public static function tracking_settings()
-    {
+    public static function tracking_settings() {
         global $GADASH_Config;
         /*
          * Include Tools
@@ -658,6 +668,10 @@ final class GADASH_Settings
             }
         }
         ?>							
+										
+										
+										
+										
 										</table>
 									</td>
 								</tr>
@@ -675,13 +689,16 @@ final class GADASH_Settings
 						</table>
 						<input type="hidden" name="options[ga_dash_hidden]" value="Y">
 						<?php wp_nonce_field('gadash_form','gadash_security'); ?>
+
+
+
+
 </form>
 <?php
         self::output_sidebar();
     }
 
-    public static function errors_debugging()
-    {
+    public static function errors_debugging() {
         global $GADASH_Config;
         if (! current_user_can('manage_options')) {
             return;
@@ -781,8 +798,7 @@ final class GADASH_Settings
         self::output_sidebar();
     }
 
-    public static function general_settings()
-    {
+    public static function general_settings() {
         global $GADASH_Config;
         global $wp_version;
         /*
@@ -1065,8 +1081,7 @@ final class GADASH_Settings
         self::output_sidebar();
     }
     // Network Settings
-    public static function general_settings_network()
-    {
+    public static function general_settings_network() {
         global $GADASH_Config;
         global $wp_version;
         /*
@@ -1392,8 +1407,7 @@ final class GADASH_Settings
         self::output_sidebar();
     }
 
-    public static function output_sidebar()
-    {
+    public static function output_sidebar() {
         global $GADASH_Config;
         ?>
 </div>

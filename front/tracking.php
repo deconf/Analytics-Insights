@@ -7,11 +7,9 @@
  */
 if (! class_exists('GADASH_Tracking')) {
 
-    class GADASH_Tracking
-    {
+    class GADASH_Tracking {
 
-        function __construct()
-        {
+        function __construct() {
             add_action('wp_head', array(
                 $this,
                 'ga_dash_tracking'
@@ -22,16 +20,14 @@ if (! class_exists('GADASH_Tracking')) {
             ));
         }
 
-        function ga_dash_enqueue_scripts()
-        {
+        function ga_dash_enqueue_scripts() {
             global $GADASH_Config;
             if ($GADASH_Config->options['ga_event_tracking'] and ! wp_script_is('jquery')) {
                 wp_enqueue_script('jquery');
             }
         }
 
-        function ga_dash_tracking()
-        {
+        function ga_dash_tracking() {
             global $GADASH_Config;
             /*
              * Include Tools

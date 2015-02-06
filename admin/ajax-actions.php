@@ -7,11 +7,9 @@
  */
 if (! class_exists('GADASH_Backend_Ajax')) {
 
-    final class GADASH_Backend_Ajax
-    {
+    final class GADASH_Backend_Ajax {
 
-        function __construct()
-        {
+        function __construct() {
             // Backend Widget Realtime action
             add_action('wp_ajax_gadashadmin_get_realtime', array(
                 $this,
@@ -29,8 +27,7 @@ if (! class_exists('GADASH_Backend_Ajax')) {
          *
          * @return string|int
          */
-        function ajax_adminwidget_reports()
-        {
+        function ajax_adminwidget_reports() {
             global $GADASH_Config;
             if (! isset($_REQUEST['gadashadmin_security_widget_reports']) or ! wp_verify_nonce($_REQUEST['gadashadmin_security_widget_reports'], 'gadashadmin_get_widgetreports')) {
                 print(json_encode(- 30));
@@ -40,8 +37,9 @@ if (! class_exists('GADASH_Backend_Ajax')) {
             $from = $_REQUEST['from'];
             $to = $_REQUEST['to'];
             $query = $_REQUEST['query'];
-            if (ob_get_length()) ob_end_clean();
-            /*
+            if (ob_get_length())
+                ob_end_clean();
+                /*
              * Include Tools
              */
             include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
@@ -100,16 +98,16 @@ if (! class_exists('GADASH_Backend_Ajax')) {
          *
          * @return string|int
          */
-        function ajax_adminwidget_realtime()
-        {
+        function ajax_adminwidget_realtime() {
             global $GADASH_Config;
             if (! isset($_REQUEST['gadashadmin_security_widgetrealtime']) or ! wp_verify_nonce($_REQUEST['gadashadmin_security_widgetrealtime'], 'gadashadmin_get_realtime')) {
                 print(json_encode(- 30));
                 die();
             }
             $projectId = $_REQUEST['projectId'];
-            if (ob_get_length()) ob_end_clean();
-            /*
+            if (ob_get_length())
+                ob_end_clean();
+                /*
              * Include Tools
              */
             include_once ($GADASH_Config->plugin_path . '/tools/tools.php');

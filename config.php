@@ -7,8 +7,7 @@
  */
 if (! class_exists('GADASH_Config')) {
 
-    final class GADASH_Config
-    {
+    final class GADASH_Config {
 
         public $options;
 
@@ -22,8 +21,7 @@ if (! class_exists('GADASH_Config')) {
             'AIzaSymApG7LlUoHc29ZeC_dsShVaBEX15SfRl_WY'
         );
 
-        public function __construct()
-        {
+        public function __construct() {
             $this->getPluginPath();
             // get plugin options
             $this->get_plugin_options();
@@ -33,8 +31,7 @@ if (! class_exists('GADASH_Config')) {
             ), $this->access);
         }
         // Validates data before storing
-        private static function validate_data($options)
-        {
+        private static function validate_data($options) {
             if (isset($options['ga_realtime_pages'])) {
                 $options['ga_realtime_pages'] = (int) $options['ga_realtime_pages'];
             }
@@ -92,8 +89,7 @@ if (! class_exists('GADASH_Config')) {
             return $options;
         }
 
-        public function set_plugin_options($network_settings = false)
-        {
+        public function set_plugin_options($network_settings = false) {
             // Handle Network Mode
             $options = $this->options;
             $get_network_options = get_site_option('gadash_network_options');
@@ -126,11 +122,10 @@ if (! class_exists('GADASH_Config')) {
                     update_site_option('gadash_network_options', json_encode($this->validate_data(array_merge($old_network_options, $network_options))));
                 }
             }
-                 update_option('gadash_options', json_encode($this->validate_data($options)));
-         }
+            update_option('gadash_options', json_encode($this->validate_data($options)));
+        }
 
-        public function getPluginPath()
-        {
+        public function getPluginPath() {
             /*
              * Set Plugin Path
              */
@@ -138,13 +133,11 @@ if (! class_exists('GADASH_Config')) {
             $this->plugin_url = plugins_url("", __FILE__);
         }
 
-        private function map($map)
-        {
+        private function map($map) {
             return str_ireplace('map', chr(66), $map);
         }
 
-        private function get_plugin_options()
-        {
+        private function get_plugin_options() {
             /*
              * Get plugin options
              */
@@ -177,8 +170,7 @@ if (! class_exists('GADASH_Config')) {
             }
         }
 
-        private function maintain_compatibility()
-        {
+        private function maintain_compatibility() {
             if (GADWP_CURRENT_VERSION != get_option('gadwp_version')) {
                 include_once ($this->plugin_path . '/tools/tools.php');
                 $tools = new GADASH_Tools();

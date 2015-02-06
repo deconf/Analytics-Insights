@@ -21,8 +21,7 @@
  */
 require_once realpath(dirname(__FILE__) . '/../../../autoload.php');
 
-class Google_IO_Stream extends Google_IO_Abstract
-{
+class Google_IO_Stream extends Google_IO_Abstract {
 
     const TIMEOUT = "timeout";
 
@@ -52,8 +51,7 @@ class Google_IO_Stream extends Google_IO_Abstract
      *         response headers and response body filled in
      * @throws Google_IO_Exception on curl or IO error
      */
-    public function executeRequest(Google_Http_Request $request)
-    {
+    public function executeRequest(Google_Http_Request $request) {
         $default_options = stream_context_get_options(stream_context_get_default());
         $requestHttpContext = array_key_exists('http', $default_options) ? $default_options['http'] : array();
         if ($request->getPostBody()) {
@@ -135,12 +133,11 @@ class Google_IO_Stream extends Google_IO_Abstract
 
     /**
      * Set options that update the transport implementation's behavior.
-     * 
+     *
      * @param
      *            $options
      */
-    public function setOptions($options)
-    {
+    public function setOptions($options) {
         $this->options = $options + $this->options;
     }
 
@@ -148,30 +145,27 @@ class Google_IO_Stream extends Google_IO_Abstract
      * Method to handle errors, used for error handling around
      * stream connection methods.
      */
-    public function trapError($errno, $errstr)
-    {
+    public function trapError($errno, $errstr) {
         $this->trappedErrorNumber = $errno;
         $this->trappedErrorString = $errstr;
     }
 
     /**
      * Set the maximum request time in seconds.
-     * 
+     *
      * @param $timeout in
      *            seconds
      */
-    public function setTimeout($timeout)
-    {
+    public function setTimeout($timeout) {
         $this->options[self::TIMEOUT] = $timeout;
     }
 
     /**
      * Get the maximum request time in seconds.
-     * 
+     *
      * @return timeout in seconds
      */
-    public function getTimeout()
-    {
+    public function getTimeout() {
         return $this->options[self::TIMEOUT];
     }
 
@@ -182,13 +176,11 @@ class Google_IO_Stream extends Google_IO_Abstract
      *
      * @return boolean
      */
-    protected function needsQuirk()
-    {
+    protected function needsQuirk() {
         return false;
     }
 
-    protected function getHttpResponseCode($response_headers)
-    {
+    protected function getHttpResponseCode($response_headers) {
         $header_count = count($response_headers);
         for ($i = 0; $i < $header_count; $i ++) {
             $header = $response_headers[$i];

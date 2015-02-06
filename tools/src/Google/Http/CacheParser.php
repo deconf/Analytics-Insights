@@ -20,11 +20,10 @@ require_once realpath(dirname(__FILE__) . '/../../../autoload.php');
  * Implement the caching directives specified in rfc2616.
  * This
  * implementation is guided by the guidance offered in rfc2616-sec13.
- * 
+ *
  * @author Chirag Shah <chirags@google.com>
  */
-class Google_Http_CacheParser
-{
+class Google_Http_CacheParser {
 
     public static $CACHEABLE_HTTP_METHODS = array(
         'GET',
@@ -47,8 +46,7 @@ class Google_Http_CacheParser
      * @return bool True if the request is cacheable.
      *         False if the request is uncacheable.
      */
-    public static function isRequestCacheable(Google_Http_Request $resp)
-    {
+    public static function isRequestCacheable(Google_Http_Request $resp) {
         $method = $resp->getRequestMethod();
         if (! in_array($method, self::$CACHEABLE_HTTP_METHODS)) {
             return false;
@@ -72,8 +70,7 @@ class Google_Http_CacheParser
      * @return bool True if the response is cacheable.
      *         False if the response is un-cacheable.
      */
-    public static function isResponseCacheable(Google_Http_Request $resp)
-    {
+    public static function isResponseCacheable(Google_Http_Request $resp) {
         // First, check if the HTTP request was cacheable before inspecting the
         // HTTP response.
         if (false == self::isRequestCacheable($resp)) {
@@ -120,8 +117,7 @@ class Google_Http_CacheParser
      * @return bool True if the HTTP response is considered to be expired.
      *         False if it is considered to be fresh.
      */
-    public static function isExpired(Google_Http_Request $resp)
-    {
+    public static function isExpired(Google_Http_Request $resp) {
         // HTTP/1.1 clients and caches MUST treat other invalid date formats,
         // especially including the value “0”, as in the past.
         $parsedExpires = false;
@@ -172,8 +168,7 @@ class Google_Http_CacheParser
      * @param Google_Http_Request $response            
      * @return bool True if the entry is expired, else return false.
      */
-    public static function mustRevalidate(Google_Http_Request $response)
-    {
+    public static function mustRevalidate(Google_Http_Request $response) {
         // [13.3] When a cache has a stale entry that it would like to use as a
         // response to a client's request, it first has to check with the origin
         // server to see if its cached entry is still usable.

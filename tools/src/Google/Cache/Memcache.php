@@ -26,8 +26,7 @@ require_once realpath(dirname(__FILE__) . '/../../../autoload.php');
  *
  * @author Chris Chabot <chabotc@google.com>
  */
-class Google_Cache_Memcache extends Google_Cache_Abstract
-{
+class Google_Cache_Memcache extends Google_Cache_Abstract {
 
     private $connection = false;
 
@@ -43,8 +42,7 @@ class Google_Cache_Memcache extends Google_Cache_Abstract
      */
     private $client;
 
-    public function __construct(Google_Client $client)
-    {
+    public function __construct(Google_Client $client) {
         if (! function_exists('memcache_connect') && ! class_exists("Memcached")) {
             $error = "Memcache functions not available";
             $client->getLogger()->error($error);
@@ -69,8 +67,7 @@ class Google_Cache_Memcache extends Google_Cache_Abstract
     /**
      * @inheritDoc
      */
-    public function get($key, $expiration = false)
-    {
+    public function get($key, $expiration = false) {
         $this->connect();
         $ret = false;
         if ($this->mc) {
@@ -101,13 +98,12 @@ class Google_Cache_Memcache extends Google_Cache_Abstract
 
     /**
      * @inheritDoc
-     * 
+     *
      * @param string $key            
      * @param string $value            
      * @throws Google_Cache_Exception
      */
-    public function set($key, $value)
-    {
+    public function set($key, $value) {
         $this->connect();
         // we store it with the cache_time default expiration so objects will at
         // least get cleaned eventually.
@@ -136,11 +132,10 @@ class Google_Cache_Memcache extends Google_Cache_Abstract
 
     /**
      * @inheritDoc
-     * 
+     *
      * @param String $key            
      */
-    public function delete($key)
-    {
+    public function delete($key) {
         $this->connect();
         if ($this->mc) {
             $this->mc->delete($key, 0);
@@ -157,8 +152,7 @@ class Google_Cache_Memcache extends Google_Cache_Abstract
      * Uses pconnect for to take
      * advantage of the persistence pool where possible.
      */
-    private function connect()
-    {
+    private function connect() {
         if ($this->connection) {
             return;
         }

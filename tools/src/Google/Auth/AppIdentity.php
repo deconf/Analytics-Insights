@@ -25,8 +25,7 @@ require_once realpath(dirname(__FILE__) . '/../../../autoload.php');
 /**
  * Authentication via the Google App Engine App Identity service.
  */
-class Google_Auth_AppIdentity extends Google_Auth_Abstract
-{
+class Google_Auth_AppIdentity extends Google_Auth_Abstract {
 
     const CACHE_PREFIX = "Google_Auth_AppIdentity::";
 
@@ -38,16 +37,14 @@ class Google_Auth_AppIdentity extends Google_Auth_Abstract
 
     private $tokenScopes = false;
 
-    public function __construct(Google_Client $client, $config = null)
-    {
+    public function __construct(Google_Client $client, $config = null) {
         $this->client = $client;
     }
 
     /**
      * Retrieve an access token for the scopes supplied.
      */
-    public function authenticateForScope($scopes)
-    {
+    public function authenticateForScope($scopes) {
         if ($this->token && $this->tokenScopes == $scopes) {
             return $this->token;
         }
@@ -79,14 +76,12 @@ class Google_Auth_AppIdentity extends Google_Auth_Abstract
      * @return Google_Http_Request The resulting HTTP response including the
      *         responseHttpCode, responseHeaders and responseBody.
      */
-    public function authenticatedRequest(Google_Http_Request $request)
-    {
+    public function authenticatedRequest(Google_Http_Request $request) {
         $request = $this->sign($request);
         return $this->client->getIo()->makeRequest($request);
     }
 
-    public function sign(Google_Http_Request $request)
-    {
+    public function sign(Google_Http_Request $request) {
         if (! $this->token) {
             // No token, so nothing to do.
             return $request;

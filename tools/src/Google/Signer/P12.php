@@ -23,13 +23,11 @@ require_once realpath(dirname(__FILE__) . '/../../../autoload.php');
  *
  * @author Brian Eaton <beaton@google.com>
  */
-class Google_Signer_P12 extends Google_Signer_Abstract
-{
+class Google_Signer_P12 extends Google_Signer_Abstract {
     // OpenSSL private key resource
     private $privateKey;
     // Creates a new signer from a .p12 file.
-    public function __construct($p12, $password)
-    {
+    public function __construct($p12, $password) {
         if (! function_exists('openssl_x509_read')) {
             throw new Google_Exception('The Google PHP API library needs the openssl PHP extension');
         }
@@ -57,15 +55,13 @@ class Google_Signer_P12 extends Google_Signer_Abstract
         }
     }
 
-    public function __destruct()
-    {
+    public function __destruct() {
         if ($this->privateKey) {
             openssl_pkey_free($this->privateKey);
         }
     }
 
-    public function sign($data)
-    {
+    public function sign($data) {
         if (version_compare(PHP_VERSION, '5.3.0') < 0) {
             throw new Google_Auth_Exception("PHP 5.3.0 or higher is required to use service accounts.");
         }

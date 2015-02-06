@@ -20,8 +20,7 @@
  *
  * @author Brian Eaton <beaton@google.com>
  */
-abstract class Google_Signer_Abstract
-{
+abstract class Google_Signer_Abstract {
 
     /**
      * Signs data, returns the signature as binary data.

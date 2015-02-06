@@ -21,24 +21,17 @@ require_once realpath(dirname(__FILE__) . '/../../../autoload.php');
  *
  * This logger simply discards all messages.
  */
-class Google_Logger_Null extends Google_Logger_Abstract
-{
+class Google_Logger_Null extends Google_Logger_Abstract {
 
     /**
-     *
      * @ERROR!!!
-     *
      */
-    public function shouldHandle($level)
-    {
+    public function shouldHandle($level) {
         return false;
     }
 
     /**
-     *
      * @ERROR!!!
-     *
      */
-    protected function write($message, array $context = array())
-    {}
+    protected function write($message, array $context = array()) {}
 }

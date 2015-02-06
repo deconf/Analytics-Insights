@@ -24,8 +24,7 @@ require_once realpath(dirname(__FILE__) . '/../../../autoload.php');
  *
  * @author Chris Chabot <chabotc@google.com>
  */
-class Google_Cache_File extends Google_Cache_Abstract
-{
+class Google_Cache_File extends Google_Cache_Abstract {
 
     const MAX_LOCK_RETRIES = 10;
 
@@ -39,14 +38,12 @@ class Google_Cache_File extends Google_Cache_Abstract
      */
     private $client;
 
-    public function __construct(Google_Client $client)
-    {
+    public function __construct(Google_Client $client) {
         $this->client = $client;
         $this->path = $this->client->getClassConfig($this, 'directory');
     }
 
-    public function get($key, $expiration = false)
-    {
+    public function get($key, $expiration = false) {
         $storageFile = $this->getCacheFile($key);
         $data = false;
         if (! file_exists($storageFile)) {
@@ -80,8 +77,7 @@ class Google_Cache_File extends Google_Cache_Abstract
         return $data;
     }
 
-    public function set($key, $value)
-    {
+    public function set($key, $value) {
         $storageFile = $this->getWriteableCacheFile($key);
         if ($this->acquireWriteLock($storageFile)) {
             // We serialize the whole request object, since we don't only want the
@@ -102,8 +98,7 @@ class Google_Cache_File extends Google_Cache_Abstract
         }
     }
 
-    public function delete($key)
-    {
+    public function delete($key) {
         $file = $this->getCacheFile($key);
         if (file_exists($file) && ! unlink($file)) {
             $this->client->getLogger()->error('File cache delete failed', array(
@@ -118,18 +113,15 @@ class Google_Cache_File extends Google_Cache_Abstract
         ));
     }
 
-    private function getWriteableCacheFile($file)
-    {
+    private function getWriteableCacheFile($file) {
         return $this->getCacheFile($file, true);
     }
 
-    private function getCacheFile($file, $forWrite = false)
-    {
+    private function getCacheFile($file, $forWrite = false) {
         return $this->getCacheDir($file, $forWrite) . '/' . md5($file);
     }
 
-    private function getCacheDir($file, $forWrite)
-    {
+    private function getCacheDir($file, $forWrite) {
         // use the first 2 characters of the hash as a directory prefix
         // this should prevent slowdowns due to huge directory listings
         // and thus give some basic amount of scalability
@@ -145,13 +137,11 @@ class Google_Cache_File extends Google_Cache_Abstract
         return $storageDir;
     }
 
-    private function acquireReadLock($storageFile)
-    {
+    private function acquireReadLock($storageFile) {
         return $this->acquireLock(LOCK_SH, $storageFile);
     }
 
-    private function acquireWriteLock($storageFile)
-    {
+    private function acquireWriteLock($storageFile) {
         $rc = $this->acquireLock(LOCK_EX, $storageFile);
         if (! $rc) {
             $this->client->getLogger()->notice('File cache write lock failed', array(
@@ -162,8 +152,7 @@ class Google_Cache_File extends Google_Cache_Abstract
         return $rc;
     }
 
-    private function acquireLock($type, $storageFile)
-    {
+    private function acquireLock($type, $storageFile) {
         $mode = $type == LOCK_EX ? "w" : "r";
         $this->fh = fopen($storageFile, $mode);
         $count = 0;
@@ -177,8 +166,7 @@ class Google_Cache_File extends Google_Cache_Abstract
         return true;
     }
 
-    public function unlock($storageFile)
-    {
+    public function unlock($storageFile) {
         if ($this->fh) {
             flock($this->fh, LOCK_UN);
         }

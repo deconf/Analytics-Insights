@@ -20,8 +20,7 @@
  *
  * @author Chris Chabot <chabotc@google.com>
  */
-abstract class Google_Cache_Abstract
-{
+abstract class Google_Cache_Abstract {
 
     abstract public function __construct(Google_Client $client);
 

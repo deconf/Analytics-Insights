@@ -28,14 +28,12 @@ include_once (dirname(__FILE__) . '/config.php');
 // Plugin i18n
 add_action('plugins_loaded', 'ga_dash_load_i18n');
 
-function ga_dash_load_i18n()
-{
+function ga_dash_load_i18n() {
     load_plugin_textdomain('ga-dash', false, basename(dirname(__FILE__)) . '/languages');
 }
 add_action('plugins_loaded', 'gadash_init');
 
-function gadash_init()
-{
+function gadash_init() {
     global $GADASH_Config;
     /*
      * Include Tools

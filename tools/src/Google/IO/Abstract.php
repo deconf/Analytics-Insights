@@ -19,8 +19,7 @@
  */
 require_once realpath(dirname(__FILE__) . '/../../../autoload.php');
 
-abstract class Google_IO_Abstract
-{
+abstract class Google_IO_Abstract {
 
     const UNKNOWN_CODE = 0;
 
@@ -37,12 +36,12 @@ abstract class Google_IO_Abstract
     );
 
     /**
+     *
      * @var Google_Client
      */
     protected $client;
 
-    public function __construct(Google_Client $client)
-    {
+    public function __construct(Google_Client $client) {
         $this->client = $client;
         $timeout = $client->getClassConfig('Google_IO_Abstract', 'request_timeout_seconds');
         if ($timeout > 0) {
@@ -52,7 +51,7 @@ abstract class Google_IO_Abstract
 
     /**
      * Executes a Google_Http_Request and returns the resulting populated Google_Http_Request
-     * 
+     *
      * @param Google_Http_Request $request            
      * @return Google_Http_Request $request
      */
@@ -60,7 +59,7 @@ abstract class Google_IO_Abstract
 
     /**
      * Set options that update the transport implementation's behavior.
-     * 
+     *
      * @param
      *            $options
      */
@@ -68,7 +67,7 @@ abstract class Google_IO_Abstract
 
     /**
      * Set the maximum request time in seconds.
-     * 
+     *
      * @param $timeout in
      *            seconds
      */
@@ -76,7 +75,7 @@ abstract class Google_IO_Abstract
 
     /**
      * Get the maximum request time in seconds.
-     * 
+     *
      * @return timeout in seconds
      */
     abstract public function getTimeout();
@@ -95,13 +94,12 @@ abstract class Google_IO_Abstract
     /**
      * @visible for testing.
      * Cache the response to an HTTP request if it is cacheable.
-     * 
+     *
      * @param Google_Http_Request $request            
      * @return bool Returns true if the insertion was successful.
      *         Otherwise, return false.
      */
-    public function setCachedRequest(Google_Http_Request $request)
-    {
+    public function setCachedRequest(Google_Http_Request $request) {
         // Determine if the request is cacheable.
         if (Google_Http_CacheParser::isResponseCacheable($request)) {
             $this->client->getCache()->set($request->getCacheKey(), $request);
@@ -119,8 +117,7 @@ abstract class Google_IO_Abstract
      *         response headers and response body filled in
      * @throws Google_IO_Exception on curl or IO error
      */
-    public function makeRequest(Google_Http_Request $request)
-    {
+    public function makeRequest(Google_Http_Request $request) {
         // First, check to see if we have a valid cached version.
         $cached = $this->getCachedRequest($request);
         if ($cached !== false && $cached instanceof Google_Http_Request) {
@@ -151,13 +148,12 @@ abstract class Google_IO_Abstract
 
     /**
      * @visible for testing.
-     * 
+     *
      * @param Google_Http_Request $request            
      * @return Google_Http_Request|bool Returns the cached object or
      *         false if the operation was unsuccessful.
      */
-    public function getCachedRequest(Google_Http_Request $request)
-    {
+    public function getCachedRequest(Google_Http_Request $request) {
         if (false === Google_Http_CacheParser::isRequestCacheable($request)) {
             return false;
         }
@@ -167,12 +163,11 @@ abstract class Google_IO_Abstract
     /**
      * @visible for testing
      * Process an http request that contains an enclosed entity.
-     * 
+     *
      * @param Google_Http_Request $request            
      * @return Google_Http_Request Processed request with the enclosed entity.
      */
-    public function processEntityRequest(Google_Http_Request $request)
-    {
+    public function processEntityRequest(Google_Http_Request $request) {
         $postBody = $request->getPostBody();
         $contentType = $request->getRequestHeader("content-type");
         // Set the default content-type as application/x-www-form-urlencoded.
@@ -200,7 +195,7 @@ abstract class Google_IO_Abstract
     /**
      * Check if an already cached request must be revalidated, and if so update
      * the request with the correct ETag headers.
-     * 
+     *
      * @param Google_Http_Request $cached
      *            A previously cached response.
      * @param Google_Http_Request $request
@@ -208,8 +203,7 @@ abstract class Google_IO_Abstract
      *            return bool If the cached object needs to be revalidated, false if it is
      *            still current and can be re-used.
      */
-    protected function checkMustRevalidateCachedRequest($cached, $request)
-    {
+    protected function checkMustRevalidateCachedRequest($cached, $request) {
         if (Google_Http_CacheParser::mustRevalidate($cached)) {
             $addHeaders = array();
             if ($cached->getResponseHeader('etag')) {
@@ -228,14 +222,13 @@ abstract class Google_IO_Abstract
 
     /**
      * Update a cached request, using the headers from the last response.
-     * 
+     *
      * @param Google_HttpRequest $cached
      *            A previously cached response.
      * @param
      *            mixed Associative array of response headers from the last request.
      */
-    protected function updateCachedRequest($cached, $responseHeaders)
-    {
+    protected function updateCachedRequest($cached, $responseHeaders) {
         if (isset($responseHeaders['connection'])) {
             $hopByHop = array_merge(self::$HOP_BY_HOP, explode(',', $responseHeaders['connection']));
             $endToEnd = array();
@@ -257,8 +250,7 @@ abstract class Google_IO_Abstract
      *            $headerSize
      * @return array
      */
-    public function parseHttpResponse($respData, $headerSize)
-    {
+    public function parseHttpResponse($respData, $headerSize) {
         // check proxy header
         foreach (self::$CONNECTION_ESTABLISHED_HEADERS as $established_header) {
             if (stripos($respData, $established_header) !== false) {
@@ -290,13 +282,12 @@ abstract class Google_IO_Abstract
 
     /**
      * Parse out headers from raw headers
-     * 
+     *
      * @param
      *            rawHeaders array or string
      * @return array
      */
-    public function getHttpResponseHeaders($rawHeaders)
-    {
+    public function getHttpResponseHeaders($rawHeaders) {
         if (is_array($rawHeaders)) {
             return $this->parseArrayHeaders($rawHeaders);
         } else {
@@ -304,8 +295,7 @@ abstract class Google_IO_Abstract
         }
     }
 
-    private function parseStringHeaders($rawHeaders)
-    {
+    private function parseStringHeaders($rawHeaders) {
         $headers = array();
         $responseHeaderLines = explode("\r\n", $rawHeaders);
         foreach ($responseHeaderLines as $headerLine) {
@@ -322,8 +312,7 @@ abstract class Google_IO_Abstract
         return $headers;
     }
 
-    private function parseArrayHeaders($rawHeaders)
-    {
+    private function parseArrayHeaders($rawHeaders) {
         $header_count = count($rawHeaders);
         $headers = array();
         for ($i = 0; $i < $header_count; $i ++) {

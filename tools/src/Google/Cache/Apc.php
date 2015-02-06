@@ -24,8 +24,7 @@ require_once realpath(dirname(__FILE__) . '/../../../autoload.php');
  *
  * @author Chris Chabot <chabotc@google.com>
  */
-class Google_Cache_Apc extends Google_Cache_Abstract
-{
+class Google_Cache_Apc extends Google_Cache_Abstract {
 
     /**
      *
@@ -33,8 +32,7 @@ class Google_Cache_Apc extends Google_Cache_Abstract
      */
     private $client;
 
-    public function __construct(Google_Client $client)
-    {
+    public function __construct(Google_Client $client) {
         if (! function_exists('apc_add')) {
             $error = "Apc functions not available";
             $client->getLogger()->error($error);
@@ -46,8 +44,7 @@ class Google_Cache_Apc extends Google_Cache_Abstract
     /**
      * @inheritDoc
      */
-    public function get($key, $expiration = false)
-    {
+    public function get($key, $expiration = false) {
         $ret = apc_fetch($key);
         if ($ret === false) {
             $this->client->getLogger()->debug('APC cache miss', array(
@@ -73,8 +70,7 @@ class Google_Cache_Apc extends Google_Cache_Abstract
     /**
      * @inheritDoc
      */
-    public function set($key, $value)
-    {
+    public function set($key, $value) {
         $var = array(
             'time' => time(),
             'data' => $value
@@ -95,11 +91,10 @@ class Google_Cache_Apc extends Google_Cache_Abstract
 
     /**
      * @inheritDoc
-     * 
+     *
      * @param String $key            
      */
-    public function delete($key)
-    {
+    public function delete($key) {
         $this->client->getLogger()->debug('APC cache delete', array(
             'key' => $key
         ));

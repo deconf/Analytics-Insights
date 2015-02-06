@@ -25,8 +25,7 @@ require_once realpath(dirname(__FILE__) . '/../../../autoload.php');
  * @author Chirag Shah <chirags@google.com>
  *        
  */
-class Google_Service_Resource
-{
+class Google_Service_Resource {
     // Valid query parameters that work, but don't appear in discovery.
     private $stackParameters = array(
         'alt' => array(
@@ -72,32 +71,36 @@ class Google_Service_Resource
     );
 
     /**
+     *
      * @var Google_Service $service
      */
     private $service;
 
     /**
+     *
      * @var Google_Client $client
      */
     private $client;
 
     /**
+     *
      * @var string $serviceName
      */
     private $serviceName;
 
     /**
+     *
      * @var string $resourceName
      */
     private $resourceName;
 
     /**
+     *
      * @var array $methods
      */
     private $methods;
 
-    public function __construct($service, $serviceName, $resourceName, $resource)
-    {
+    public function __construct($service, $serviceName, $resourceName, $resource) {
         $this->service = $service;
         $this->client = $service->getClient();
         $this->serviceName = $serviceName;
@@ -109,7 +112,7 @@ class Google_Service_Resource
 
     /**
      * TODO(ianbarber): This function needs simplifying.
-     * 
+     *
      * @param
      *            $name
      * @param
@@ -119,8 +122,7 @@ class Google_Service_Resource
      * @return Google_Http_Request|expected_class
      * @throws Google_Exception
      */
-    public function call($name, $arguments, $expected_class = null)
-    {
+    public function call($name, $arguments, $expected_class = null) {
         if (! isset($this->methods[$name])) {
             $this->client->getLogger()->error('Service method unknown', array(
                 'service' => $this->serviceName,
@@ -220,8 +222,7 @@ class Google_Service_Resource
         return $this->client->execute($httpRequest);
     }
 
-    protected function convertToArrayAndStripNulls($o)
-    {
+    protected function convertToArrayAndStripNulls($o) {
         $o = (array) $o;
         foreach ($o as $k => $v) {
             if ($v === null) {

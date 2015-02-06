@@ -6,11 +6,9 @@
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
-class GADASH_Install
-{
+class GADASH_Install {
 
-    static function install()
-    {
+    static function install() {
         if (! get_option('ga_dash_token')) {
             $options = array();
             $options['ga_dash_apikey'] = '';

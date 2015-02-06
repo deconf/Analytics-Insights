@@ -21,8 +21,7 @@ require_once realpath(dirname(__FILE__) . '/../../../autoload.php');
  *
  * This logger writes to a PHP stream resource.
  */
-class Google_Logger_File extends Google_Logger_Abstract
-{
+class Google_Logger_File extends Google_Logger_Abstract {
 
     /**
      *
@@ -55,12 +54,9 @@ class Google_Logger_File extends Google_Logger_Abstract
     private $trappedErrorString;
 
     /**
-     *
      * @ERROR!!!
-     *
      */
-    public function __construct(Google_Client $client)
-    {
+    public function __construct(Google_Client $client) {
         parent::__construct($client);
         $file = $client->getClassConfig('Google_Logger_File', 'file');
         if (! is_string($file) && ! is_resource($file)) {
@@ -75,12 +71,9 @@ class Google_Logger_File extends Google_Logger_Abstract
     }
 
     /**
-     *
      * @ERROR!!!
-     *
      */
-    protected function write($message)
-    {
+    protected function write($message) {
         if (is_string($this->file)) {
             $this->open();
         } elseif (! is_resource($this->file)) {
@@ -100,8 +93,7 @@ class Google_Logger_File extends Google_Logger_Abstract
      *
      * @return resource
      */
-    private function open()
-    {
+    private function open() {
         // Used for trapping `fopen()` errors.
         $this->trappedErrorNumber = null;
         $this->trappedErrorString = null;
@@ -125,8 +117,7 @@ class Google_Logger_File extends Google_Logger_Abstract
     /**
      * Closes the log stream resource.
      */
-    private function close()
-    {
+    private function close() {
         if (is_resource($this->file)) {
             fclose($this->file);
         }
@@ -140,14 +131,12 @@ class Google_Logger_File extends Google_Logger_Abstract
      * @param string $errstr
      *            The error string
      */
-    private function trapError($errno, $errstr)
-    {
+    private function trapError($errno, $errstr) {
         $this->trappedErrorNumber = $errno;
         $this->trappedErrorString = $errstr;
     }
 
-    public function __destruct()
-    {
+    public function __destruct() {
         $this->close();
     }
 }

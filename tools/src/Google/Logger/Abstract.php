@@ -24,8 +24,7 @@ require_once realpath(dirname(__FILE__) . '/../../../autoload.php');
  *
  * @see https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md
  */
-abstract class Google_Logger_Abstract
-{
+abstract class Google_Logger_Abstract {
 
     /**
      * Default log format
@@ -134,8 +133,7 @@ abstract class Google_Logger_Abstract
      * @param Google_Client $client
      *            The current Google client
      */
-    public function __construct(Google_Client $client)
-    {
+    public function __construct(Google_Client $client) {
         $this->setLevel($client->getClassConfig('Google_Logger_Abstract', 'level'));
         $format = $client->getClassConfig('Google_Logger_Abstract', 'log_format');
         $this->logFormat = $format ? $format : self::DEFAULT_LOG_FORMAT;
@@ -149,8 +147,7 @@ abstract class Google_Logger_Abstract
      *
      * @param integer $level            
      */
-    public function setLevel($level)
-    {
+    public function setLevel($level) {
         $this->level = $this->normalizeLevel($level);
     }
 
@@ -160,8 +157,7 @@ abstract class Google_Logger_Abstract
      * @param integer $level            
      * @return boolean
      */
-    public function shouldHandle($level)
-    {
+    public function shouldHandle($level) {
         return $this->normalizeLevel($level) >= $this->level;
     }
 
@@ -173,8 +169,7 @@ abstract class Google_Logger_Abstract
      * @param array $context
      *            The log context
      */
-    public function emergency($message, array $context = array())
-    {
+    public function emergency($message, array $context = array()) {
         $this->log(self::EMERGENCY, $message, $context);
     }
 
@@ -189,8 +184,7 @@ abstract class Google_Logger_Abstract
      * @param array $context
      *            The log context
      */
-    public function alert($message, array $context = array())
-    {
+    public function alert($message, array $context = array()) {
         $this->log(self::ALERT, $message, $context);
     }
 
@@ -204,8 +198,7 @@ abstract class Google_Logger_Abstract
      * @param array $context
      *            The log context
      */
-    public function critical($message, array $context = array())
-    {
+    public function critical($message, array $context = array()) {
         $this->log(self::CRITICAL, $message, $context);
     }
 
@@ -218,8 +211,7 @@ abstract class Google_Logger_Abstract
      * @param array $context
      *            The log context
      */
-    public function error($message, array $context = array())
-    {
+    public function error($message, array $context = array()) {
         $this->log(self::ERROR, $message, $context);
     }
 
@@ -234,8 +226,7 @@ abstract class Google_Logger_Abstract
      * @param array $context
      *            The log context
      */
-    public function warning($message, array $context = array())
-    {
+    public function warning($message, array $context = array()) {
         $this->log(self::WARNING, $message, $context);
     }
 
@@ -247,8 +238,7 @@ abstract class Google_Logger_Abstract
      * @param array $context
      *            The log context
      */
-    public function notice($message, array $context = array())
-    {
+    public function notice($message, array $context = array()) {
         $this->log(self::NOTICE, $message, $context);
     }
 
@@ -262,8 +252,7 @@ abstract class Google_Logger_Abstract
      * @param array $context
      *            The log context
      */
-    public function info($message, array $context = array())
-    {
+    public function info($message, array $context = array()) {
         $this->log(self::INFO, $message, $context);
     }
 
@@ -275,8 +264,7 @@ abstract class Google_Logger_Abstract
      * @param array $context
      *            The log context
      */
-    public function debug($message, array $context = array())
-    {
+    public function debug($message, array $context = array()) {
         $this->log(self::DEBUG, $message, $context);
     }
 
@@ -290,8 +278,7 @@ abstract class Google_Logger_Abstract
      * @param array $context
      *            The log context
      */
-    public function log($level, $message, array $context = array())
-    {
+    public function log($level, $message, array $context = array()) {
         if (! $this->shouldHandle($level)) {
             return false;
         }
@@ -312,8 +299,7 @@ abstract class Google_Logger_Abstract
      *            The log variables.
      * @return string
      */
-    protected function interpolate(array $variables = array())
-    {
+    protected function interpolate(array $variables = array()) {
         $template = $this->logFormat;
         if (! $variables['context']) {
             $template = str_replace('%context%', '', $template);
@@ -335,8 +321,7 @@ abstract class Google_Logger_Abstract
      * @param array $context
      *            The log context
      */
-    protected function reverseJsonInContext(array &$context)
-    {
+    protected function reverseJsonInContext(array &$context) {
         if (! $context) {
             return;
         }
@@ -357,8 +342,7 @@ abstract class Google_Logger_Abstract
      * @param mixed $value
      *            The value to
      */
-    protected function export($value)
-    {
+    protected function export($value) {
         if (is_string($value)) {
             if ($this->allowNewLines) {
                 return $value;
@@ -389,8 +373,7 @@ abstract class Google_Logger_Abstract
      * @return integer $level The normalized level
      * @throws Google_Logger_Exception If $level is invalid
      */
-    protected function normalizeLevel($level)
-    {
+    protected function normalizeLevel($level) {
         if (is_int($level) && array_search($level, self::$levels) !== false) {
             return $level;
         }
