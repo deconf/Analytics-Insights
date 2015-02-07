@@ -137,6 +137,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Enhancement: set totals to zero when anonymize stats is enabled
 - Enhancement: auto-cleanup removed; all transients have static identifiers now
 - Enhancement: dump error details to JavaScript Console and throw an alert on invalid responses
+- Enhancement: Italian translation, updated by [Leo](https://www.facebook.com/leo.thestrategist)
 
 = 4.4.3 =
 - Enhancement: further optimization on queries

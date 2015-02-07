@@ -88,14 +88,14 @@ if (! class_exists('GADASH_Frontend_Ajax')) {
     function ajax_frontend_widget()
     {
       global $GADASH_Config;
-      if (! isset($_REQUEST['gadash_id']) or ! isset($_REQUEST['gadash_optionname']) or ! is_active_widget(false, false, 'gadash_frontend_widget')) {
+      if (! isset($_REQUEST['gadash_number']) or ! isset($_REQUEST['gadash_optionname']) or ! is_active_widget(false, false, 'gadash_frontend_widget')) {
         wp_die(-30);
       }
-      $widget_index = explode('-', $_REQUEST['gadash_id']);
+      $widget_index = $_REQUEST['gadash_number'];
       $option_name = $_REQUEST['gadash_optionname'];
       $options = get_option($option_name);
-      if (isset($options[$widget_index[1]])) {
-        $instance = $options[$widget_index[1]];
+      if (isset($options[$widget_index])) {
+        $instance = $options[$widget_index];
       } else {
         wp_die(-32);
       }
