@@ -95,8 +95,8 @@ class GADSH_Frontend_Widget extends WP_Widget
     echo '<script type="text/javascript">
 
 				jQuery.post("' . admin_url('admin-ajax.php') . '", {action: "gadash_get_frontendwidget_data",gadash_id: "' . $this->id . '",gadash_optionname: "' . $this->option_name . '"}, function(response){
-					response = jQuery.parseJSON(response);
 				    if (!jQuery.isNumeric(response)){
+				        response = jQuery.parseJSON(response);
 				        if (jQuery("#gadwp-widgetchart")[0]){
 				           gadash_widgetsessions=jQuery.parseJSON(response[0]); 
 						   google.setOnLoadCallback(ga_dash_drawfwidgetsessions(gadash_widgetsessions));

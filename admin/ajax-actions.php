@@ -33,8 +33,7 @@ if (! class_exists('GADASH_Backend_Ajax')) {
     {
       global $GADASH_Config;
       if (! isset($_REQUEST['gadashadmin_security_widget_reports']) or ! wp_verify_nonce($_REQUEST['gadashadmin_security_widget_reports'], 'gadashadmin_get_widgetreports')) {
-        print(json_encode(- 30));
-        die();
+        wp_die(- 30);
       }
       $projectId = $_REQUEST['projectId'];
       $from = $_REQUEST['from'];
@@ -49,15 +48,13 @@ if (! class_exists('GADASH_Backend_Ajax')) {
       include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
       $tools = new GADASH_Tools();
       if (! $tools->check_roles($GADASH_Config->options['ga_dash_access_back'])) {
-        print(json_encode(- 31));
-        die();
+        wp_die(- 31);
       }
       if ($GADASH_Config->options['ga_dash_token'] and $projectId and $from and $to) {
         include_once ($GADASH_Config->plugin_path . '/tools/gapi.php');
         global $GADASH_GAPI;
       } else {
-        print(json_encode(- 24));
-        die();
+        wp_die(- 24);
       }
       switch ($query) {
         case 'referrers':
@@ -94,7 +91,7 @@ if (! class_exists('GADASH_Backend_Ajax')) {
           print($GADASH_GAPI->get_mainreport($projectId, $from, $to, $query));
           break;
       }
-      die();
+      wp_die();
     }
     // Real-Time Request
     /**
@@ -106,8 +103,7 @@ if (! class_exists('GADASH_Backend_Ajax')) {
     {
       global $GADASH_Config;
       if (! isset($_REQUEST['gadashadmin_security_widgetrealtime']) or ! wp_verify_nonce($_REQUEST['gadashadmin_security_widgetrealtime'], 'gadashadmin_get_realtime')) {
-        print(json_encode(- 30));
-        die();
+        wp_die(- 30);
       }
       $projectId = $_REQUEST['projectId'];
       if (ob_get_length()) {
@@ -119,18 +115,16 @@ if (! class_exists('GADASH_Backend_Ajax')) {
       include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
       $tools = new GADASH_Tools();
       if (! $tools->check_roles($GADASH_Config->options['ga_dash_access_back'])) {
-        print(json_encode(- 31));
-        die();
+        wp_die(- 31);
       }
       if ($GADASH_Config->options['ga_dash_token'] and $projectId) {
         include_once ($GADASH_Config->plugin_path . '/tools/gapi.php');
         global $GADASH_GAPI;
       } else {
-        print(json_encode(- 24));
-        die();
+        wp_die(- 24);
       }
       print($GADASH_GAPI->gadash_realtime_data($projectId));
-      die();
+      wp_die();
     }
   }
 }

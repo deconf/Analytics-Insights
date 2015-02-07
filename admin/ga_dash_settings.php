@@ -112,10 +112,9 @@ final class GADASH_Settings
       $wp_roles = new WP_Roles();
     }
     $i = 0;
-    ?>
-									<table>
+    ?><table>
 										<tr>
-									<?php
+<?php
     foreach ($wp_roles->role_names as $role => $name) {
       if ($role != 'subscriber') {
         $i ++;
@@ -135,14 +134,7 @@ final class GADASH_Settings
                                     		<?php
       }
     }
-    ?>
-									
-									
-									
-									
-									
-									
-									</table>
+    ?>									</table>
 								</td>
 							</tr>
 							<tr>
@@ -186,14 +178,7 @@ final class GADASH_Settings
 							</tr>
 						</table>
 						<input type="hidden" name="options[ga_dash_hidden]" value="Y">
-						<?php wp_nonce_field('gadash_form','gadash_security'); ?>
-
-
-
-
-
-
-</form>
+						<?php wp_nonce_field('gadash_form','gadash_security'); ?></form>
 <?php
     self::output_sidebar();
   }
@@ -261,14 +246,7 @@ final class GADASH_Settings
                                     		<?php
       }
     }
-    ?>
-									
-									
-									
-									
-									
-									
-									</table>
+    ?>									</table>
 								</td>
 							</tr>
 							<tr>
@@ -328,14 +306,7 @@ final class GADASH_Settings
 							</tr>
 						</table>
 						<input type="hidden" name="options[ga_dash_hidden]" value="Y">
-						<?php wp_nonce_field('gadash_form','gadash_security'); ?>
-
-
-
-
-
-
-</form>
+						<?php wp_nonce_field('gadash_form','gadash_security'); ?></form>
 <?php
     self::output_sidebar();
   }
@@ -370,7 +341,6 @@ final class GADASH_Settings
 	<div class="wrap">
 			<?php echo "<h2>" . __( "Google Analytics Tracking Code", 'ga-dash' ) . "</h2>"; ?>
 	</div>
-
 	<div id="poststuff">
 		<div id="post-body" class="metabox-holder columns-2">
 			<div id="post-body-content">
@@ -414,7 +384,6 @@ final class GADASH_Settings
 								<tr>
 									<td colspan="2"><hr><?php echo "<h2>" . __( "Basic Tracking", 'ga-dash' ) . "</h2>"; ?></td>
 								</tr>
-
 								<tr>
 									<td class="title"><label for="ga_dash_tracking_type"><?php _e("Tracking Type:", 'ga-dash' ); ?></label></td>
 									<td><select id="ga_dash_tracking_type"
@@ -682,12 +651,6 @@ final class GADASH_Settings
       }
     }
     ?>							
-										
-										
-										
-										
-										
-										
 										</table>
 									</td>
 								</tr>
@@ -704,14 +667,7 @@ final class GADASH_Settings
 							</tr>
 						</table>
 						<input type="hidden" name="options[ga_dash_hidden]" value="Y">
-						<?php wp_nonce_field('gadash_form','gadash_security'); ?>
-
-
-
-
-
-
-</form>
+						<?php wp_nonce_field('gadash_form','gadash_security'); ?></form>
 <?php
     self::output_sidebar();
   }
@@ -727,7 +683,6 @@ final class GADASH_Settings
       $message = "<div class='error'><p>" . __("Something went wrong, check", 'ga-dash') . " <a href='" . menu_page_url('gadash_errors_debugging', false) . "'>" . __('Errors & Debug', 'ga-dash') . "</a> " . __('or', 'ga-dash') . " <a href='" . menu_page_url('gadash_settings', false) . "'>" . __('auhorize the plugin', 'ga-dash') . "</a>.</p></div>";
     }
     ?>
-
 <div class="wrap">
     	<?php echo "<h2>" . __( "Google Analytics Errors & Debugging", 'ga-dash' ) . "</h2>"; ?>
     	</div>
@@ -775,8 +730,6 @@ final class GADASH_Settings
     ?></pre><br />
 									<hr>
 								</td>
-							
-							
 							<tr>
 						
 						</table>
@@ -812,7 +765,6 @@ final class GADASH_Settings
 							</tr>
 						</table>
 					</div>    					
-    					
     <?php
     self::output_sidebar();
   }
@@ -1513,9 +1465,8 @@ final class GADASH_Settings
 											</div>
 										</div>
 <?php
-        
-        /*
-         * Include Tools
-         */
-    }
+    /*
+     * Include Tools
+     */
+  }
 }
