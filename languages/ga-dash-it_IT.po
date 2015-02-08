@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Google Analytics Dashboard for WP 4.4.3\n"
+"Project-Id-Version: Google Analytics Dashboard for WP 4.4.4\n"
 "POT-Creation-Date: 2015-02-07 11:41+0200\n"
-"PO-Revision-Date: 2015-02-07 11:42+0200\n"
-"Last-Translator: Alin Marcu <admin@deconf.com>\n"
+"PO-Revision-Date: 2015-02-07 11:13+0100\n"
+"Last-Translator: Leo The Strategist <leoxleox73@gmail.com>\n"
 "Language-Team: L.E.O.X. <leoxleox73@gmail.com>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.4\n"
+"X-Generator: Poedit 1.5.4\n"
 "X-Poedit-KeywordsList: _e;__\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -43,7 +43,7 @@ msgstr "Monitoraggio"
 #: .././admin/ga_dash_settings.php:333 .././admin/ga_dash_settings.php:683
 #: .././admin/ga_dash_settings.php:882 .././admin/ga_dash_settings.php:1184
 msgid "Errors & Debug"
-msgstr ""
+msgstr "Errori & Debug"
 
 #: .././admin/dashboard_widgets.php:152
 msgid "Settings"
@@ -215,7 +215,7 @@ msgstr "KEYWORDS"
 #: .././admin/dashboard_widgets.php:972 .././admin/dashboard_widgets.php:1083
 #: .././front/frontend.php:88
 msgid "A JavaScript Error is blocking plugin resources!"
-msgstr ""
+msgstr "Un errore JavaScript sta bloccando le risorse del plugin"
 
 #: .././admin/dashboard_widgets.php:696 .././admin/dashboard_widgets.php:715
 #: .././admin/dashboard_widgets.php:793 .././admin/dashboard_widgets.php:824
@@ -225,6 +225,7 @@ msgstr ""
 #: .././front/frontend.php:119
 msgid "Invalid response, more details in JavaScript Console (F12)."
 msgstr ""
+"Risposta non valida, ulteriori dettagli nella console JavaScript (F12)."
 
 #: .././admin/dashboard_widgets.php:701 .././admin/dashboard_widgets.php:720
 #: .././admin/dashboard_widgets.php:798 .././admin/dashboard_widgets.php:810
@@ -279,13 +280,13 @@ msgstr "Frode?"
 #: .././admin/ga_dash_settings.php:333 .././admin/ga_dash_settings.php:683
 #: .././admin/ga_dash_settings.php:882 .././admin/ga_dash_settings.php:1184
 msgid "Something went wrong, check"
-msgstr ""
+msgstr "Qualcosa è andato male, controlla"
 
 #: .././admin/ga_dash_settings.php:89 .././admin/ga_dash_settings.php:200
 #: .././admin/ga_dash_settings.php:333 .././admin/ga_dash_settings.php:683
 #: .././admin/ga_dash_settings.php:882 .././admin/ga_dash_settings.php:1184
 msgid "or"
-msgstr ""
+msgstr "o"
 
 #: .././admin/ga_dash_settings.php:89 .././admin/ga_dash_settings.php:200
 #: .././admin/ga_dash_settings.php:333 .././admin/ga_dash_settings.php:683
@@ -335,7 +336,7 @@ msgstr "Numero massimo di pagine da visualizzare nella scheda in tempo reale:"
 
 #: .././admin/ga_dash_settings.php:276 .././admin/ga_dash_settings.php:292
 msgid "find out more"
-msgstr ""
+msgstr "per saperne di più"
 
 #: .././admin/ga_dash_settings.php:278 .././admin/ga_dash_settings.php:295
 msgid "about this feature"
@@ -343,23 +344,23 @@ msgstr "su questa funzionalit&agrave;"
 
 #: .././admin/ga_dash_settings.php:283
 msgid "Location Settings"
-msgstr ""
+msgstr "Impostazioni posizione geografica"
 
 #: .././admin/ga_dash_settings.php:287
 msgid "Target Geo Map to country:"
-msgstr ""
+msgstr "Obiettivo Geo Map per paese:"
 
 #: .././admin/ga_dash_settings.php:336
 msgid "The tracking component is disabled. You should set"
-msgstr ""
+msgstr "Il componente di monitoraggio è disabilitato. È necessario impostare"
 
 #: .././admin/ga_dash_settings.php:336
 msgid "Tracking Options"
-msgstr ""
+msgstr "Opzioni di monitoraggio"
 
 #: .././admin/ga_dash_settings.php:336
 msgid "to"
-msgstr ""
+msgstr "a"
 
 #: .././admin/ga_dash_settings.php:336 .././admin/ga_dash_settings.php:372
 msgid "Enabled"
@@ -371,7 +372,7 @@ msgstr "Impostazioni Monitoraggio di Google Analytics "
 
 #: .././admin/ga_dash_settings.php:351
 msgid "Basic Settings"
-msgstr ""
+msgstr "Impostazioni di base"
 
 #: .././admin/ga_dash_settings.php:352 .././admin/ga_dash_settings.php:431
 msgid "Events Tracking"
@@ -388,7 +389,7 @@ msgstr "Escludi monitoraggio"
 
 #: .././admin/ga_dash_settings.php:355
 msgid "Advanced Settings"
-msgstr ""
+msgstr "Impostazioni avanzate"
 
 #: .././admin/ga_dash_settings.php:363
 msgid "Tracking Settings"
@@ -510,43 +511,43 @@ msgstr "Escludi per:"
 
 #: .././admin/ga_dash_settings.php:687
 msgid "Google Analytics Errors & Debugging"
-msgstr ""
+msgstr "Errori & Debugging di Google Analytics"
 
 #: .././admin/ga_dash_settings.php:697
 msgid "Errors & Details"
-msgstr ""
+msgstr "Dettagli errori"
 
 #: .././admin/ga_dash_settings.php:698
 msgid "Plugin Settings"
-msgstr ""
+msgstr "Impostazioni plugin"
 
 #: .././admin/ga_dash_settings.php:706
 msgid "For errors and/or other issues please check"
-msgstr ""
+msgstr "Per errori e/o altri problemi leggere"
 
 #: .././admin/ga_dash_settings.php:706
 msgid "the plugin documentation page"
-msgstr ""
+msgstr "la pagina della documentazione del plugin"
 
 #: .././admin/ga_dash_settings.php:706
 msgid "and related tutorials"
-msgstr ""
+msgstr "ed i tutorial relativi"
 
 #: .././admin/ga_dash_settings.php:710
 msgid "Last Error detected"
-msgstr ""
+msgstr "Ultimo errore rilevato"
 
 #: .././admin/ga_dash_settings.php:715 .././admin/ga_dash_settings.php:728
 msgid "None"
-msgstr ""
+msgstr "Nessuno"
 
 #: .././admin/ga_dash_settings.php:722
 msgid "Error Details"
-msgstr ""
+msgstr "Dettagli errore"
 
 #: .././admin/ga_dash_settings.php:740
 msgid "Plugin Configuration"
-msgstr ""
+msgstr "Configurazione plugin"
 
 #: .././admin/ga_dash_settings.php:788 .././admin/ga_dash_settings.php:1072
 msgid ""
@@ -819,7 +820,7 @@ msgstr "Totali"
 
 #: .././front/widgets.php:171
 msgid "Anonymize stats:"
-msgstr ""
+msgstr "Anonimizza le statistiche:"
 
 #: .././front/widgets.php:178
 msgid "Stats for:"
