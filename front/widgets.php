@@ -92,7 +92,6 @@ class GADSH_Frontend_Widget extends WP_Widget
         echo '<div id="gadwp-widget"><div id="gadwp-widgettotals"></div></div>';
         break;
     }
-    FB::log($this);
     echo '<script type="text/javascript">
 
 				jQuery.post("' . admin_url('admin-ajax.php') . '", {action: "gadash_get_frontendwidget_data",gadash_number: "' . $this->number . '",gadash_optionname: "' . $this->option_name . '"}, function(response){
