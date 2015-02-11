@@ -95,14 +95,13 @@ class GADSH_Frontend_Widget extends WP_Widget
     echo '<script type="text/javascript">
 
 				jQuery.post("' . admin_url('admin-ajax.php') . '", {action: "gadash_get_frontendwidget_data",gadash_number: "' . $this->number . '",gadash_optionname: "' . $this->option_name . '"}, function(response){
-				    if (!jQuery.isNumeric(response)){
-				        response = jQuery.parseJSON(response);
+				    if (!jQuery.isNumeric(response) && jQuery.isArray(response)){
 				        if (jQuery("#gadwp-widgetchart")[0]){
-				           gadash_widgetsessions=jQuery.parseJSON(response[0]); 
+				           gadash_widgetsessions=response[0]; 
 						   google.setOnLoadCallback(ga_dash_drawfwidgetsessions(gadash_widgetsessions));
 				        }
 				        if (jQuery("#gadwp-widgettotals")[0]){ 
-						   ga_dash_drawtotalsstats(jQuery.parseJSON(response[1]));
+						   ga_dash_drawtotalsstats(response[1]);
 				        }  
 					}else{
 				        jQuery("#gadwp-widgetchart").css({"background-color":"#F7F7F7","height":"auto","padding-top":"50px","padding-bottom":"50px","color":"#000","text-align":"center"});  

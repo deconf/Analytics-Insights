@@ -675,6 +675,7 @@ final class GADASH_Settings
   public static function errors_debugging()
   {
     global $GADASH_Config;
+    global $wp_version;
     if (! current_user_can('manage_options')) {
       return;
     }

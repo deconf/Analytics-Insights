@@ -337,7 +337,7 @@ if (! class_exists('GADASH_GAPI')) {
         set_transient('ga_dash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e), $this->error_timeout);
         return $e->getCode();
       }
-      if (isset($data['rows'])) {
+      if ($data->getRows() > 0) {
         return $data;
       } else {
         return - 21;
@@ -395,21 +395,28 @@ if (! class_exists('GADASH_GAPI')) {
       if (is_numeric($data)) {
         return $data;
       }
-      $ga_dash_data = "";
+      $ga_dash_data = array(
+        array(
+          $dayorhour,
+          $title
+        )
+      );
       if ($from == "today" or $from == "yesterday") {
-        for ($i = 0; $i < $data['totalResults']; $i ++) {
-          $ga_dash_data .= '["' . (int) $data["rows"][$i][0] . ':00",' . round($data["rows"][$i][1], 2) . '],';
+        foreach ($data->getRows() as $row) {
+          $ga_dash_data[] = array(
+            (int) $row[0] . ':00',
+            round($row[1], 2)
+          );
         }
       } else {
-        for ($i = 0; $i < $data['totalResults']; $i ++) {
-          $ga_dash_data .= '["' . esc_html(ucfirst(__($data["rows"][$i][1]))) . ", " . esc_html(substr_replace(substr_replace($data["rows"][$i][0], "-", 4, 0), "-", 7, 0)) . '",' . round($data["rows"][$i][2], 2) . '],';
+        foreach ($data->getRows() as $row) {
+          $ga_dash_data[] = array(
+            esc_html(ucfirst(__($row[1]))) . ',' . esc_html(substr_replace(substr_replace($row[0], "-", 4, 0), "-", 7, 0)),
+            round($row[2], 2)
+          );
         }
       }
-      if ($ga_dash_data) {
-        return '[["' . $dayorhour . '","' . $title . '"],' . rtrim($ga_dash_data, ',') . ']';
-      } else {
-        return - 22;
-      }
+      return $ga_dash_data;
     }
 
     /**
@@ -438,8 +445,10 @@ if (! class_exists('GADASH_GAPI')) {
           return $data;
         }
       }
-      $ga_dash_data = $data['rows'][0];
-      array_map('floatval', $ga_dash_data);
+      $ga_dash_data = array();
+      foreach ($data->getRows() as $row) {
+        $ga_dash_data = array_map('floatval', $row);
+      }
       return $ga_dash_data;
     }
 
@@ -467,17 +476,19 @@ if (! class_exists('GADASH_GAPI')) {
       if (is_numeric($data)) {
         return $data;
       }
-      $ga_dash_data = "";
-      $i = 0;
-      while (isset($data['rows'][$i][0])) {
-        $ga_dash_data .= '["' . $this->prepare_json($data['rows'][$i][0]) . '",' . (int) $data['rows'][$i][1] . '],';
-        $i ++;
+      $ga_dash_data = array(
+        array(
+          __("Pages", 'ga-dash'),
+          __("Views", 'ga-dash')
+        )
+      );
+      foreach ($data->getRows() as $row) {
+        $ga_dash_data[] = array(
+          $this->prepare_json($row[0]),
+          (int) $row[1]
+        );
       }
-      if ($ga_dash_data) {
-        return '[["' . __("Pages", 'ga-dash') . '","' . __("Views", 'ga-dash') . '"],' . rtrim($ga_dash_data, ',') . ']';
-      } else {
-        return - 22;
-      }
+      return $ga_dash_data;
     }
 
     /**
@@ -505,17 +516,19 @@ if (! class_exists('GADASH_GAPI')) {
       if (is_numeric($data)) {
         return $data;
       }
-      $ga_dash_data = "";
-      $i = 0;
-      while (isset($data['rows'][$i][0])) {
-        $ga_dash_data .= '["' . $this->prepare_json($data["rows"][$i][0]) . '",' . (int) $data["rows"][$i][1] . '],';
-        $i ++;
+      $ga_dash_data = array(
+        array(
+          __("Referrers", 'ga-dash'),
+          __("Sessions", 'ga-dash')
+        )
+      );
+      foreach ($data->getRows() as $row) {
+        $ga_dash_data[] = array(
+          $this->prepare_json($row[0]),
+          (int) $row[1]
+        );
       }
-      if ($ga_dash_data) {
-        return '[["' . __("Referrers", 'ga-dash') . '","' . __("Sessions", 'ga-dash') . '"],' . rtrim($ga_dash_data, ',') . ']';
-      } else {
-        return - 22;
-      }
+      return $ga_dash_data;
     }
 
     /**
@@ -542,19 +555,20 @@ if (! class_exists('GADASH_GAPI')) {
       if (is_numeric($data)) {
         return $data;
       }
-      $ga_dash_data = "";
-      $i = 0;
-      while (isset($data['rows'][$i][0])) {
-        if ($data['rows'][$i][0] != "(not set)") {
-          $ga_dash_data .= '["' . $this->prepare_json($data["rows"][$i][0]) . '",' . (int) $data["rows"][$i][1] . '],';
-        }
-        $i ++;
+
+      $ga_dash_data = array(
+        array(
+          __("Searches", 'ga-dash'),
+          __("Sessions", 'ga-dash')
+        )
+      );
+      foreach ($data->getRows() as $row) {
+        $ga_dash_data[] = array(
+          $this->prepare_json($row[0]),
+          (int) $row[1]
+        );
       }
-      if ($ga_dash_data) {
-        return '[["' . __("Searches", 'ga-dash') . '","' . __("Sessions", 'ga-dash') . '"],' . rtrim($ga_dash_data, ',') . ']';
-      } else {
-        return - 22;
-      }
+      return $ga_dash_data;
     }
 
     /**
@@ -601,21 +615,26 @@ if (! class_exists('GADASH_GAPI')) {
       if (is_numeric($data)) {
         return $data;
       }
-      $ga_dash_data = "";
-      $i = 0;
-      while (isset($data['rows'][$i][1])) {
-        if (isset($data['rows'][$i][2])) {
-          $ga_dash_data .= '["' . $this->prepare_json($data["rows"][$i][0]) . ', ' . $this->prepare_json($data["rows"][$i][1]) . '",' . (int) $data["rows"][$i][2] . '],';
+      $ga_dash_data = array(
+        array(
+          $title,
+          __("Sessions", 'ga-dash')
+        )
+      );
+      foreach ($data->getRows() as $row) {
+        if (isset($row[2])) {
+          $ga_dash_data[] = array(
+            $this->prepare_json($row[0]) . ', ' . $this->prepare_json($row[1]),
+            (int) $row[2]
+          );
         } else {
-          $ga_dash_data .= '["' . $this->prepare_json($data["rows"][$i][0]) . '",' . (int) $data["rows"][$i][1] . '],';
+          $ga_dash_data[] = array(
+            $this->prepare_json($row[0]),
+            (int) $row[1]
+          );
         }
-        $i ++;
       }
-      if ($ga_dash_data) {
-        return '[["' . $title . '", "' . __("Sessions", 'ga-dash') . '"],' . rtrim($ga_dash_data, ',') . ']';
-      } else {
-        return - 22;
-      }
+      return $ga_dash_data;
     }
 
     /**
@@ -642,16 +661,20 @@ if (! class_exists('GADASH_GAPI')) {
         return $data;
       }
       $title = __("Channels", 'ga-dash');
-      $ga_dash_data = "";
-      for ($i = 0; $i < $data['totalResults']; $i ++) {
-        $shrink = explode(" ", $data["rows"][$i][0]);
-        $ga_dash_data .= '["' . '<div style=\\"color:black; font-size:1.1em\\">' . esc_html($shrink[0]) . '</div><div style=\\"color:darkblue; font-size:1.2em\\">' . (int) $data["rows"][$i][1] . '</div>","' . '<div style=\\"color:black; font-size:1.1em\\">' . $title . '</div><div style=\\"color:darkblue; font-size:1.2em\\">' . (int) $data['totalsForAllResults']["ga:sessions"] . '</div>"],';
+      $ga_dash_data = array(
+        array(
+          '<div style=\\"color:black; font-size:1.1em\\">' . $title . '</div><div style=\\"color:darkblue; font-size:1.2em\\">' . (int) $data['totalsForAllResults']["ga:sessions"] . '</div>',
+          ""
+        )
+      );
+      foreach ($data->getRows() as $row) {
+        $shrink = explode(" ", $row[0]);
+        $ga_dash_data[] = array(
+          '<div style=\\"color:black; font-size:1.1em\\">' . esc_html($shrink[0]) . '</div><div style=\\"color:darkblue; font-size:1.2em\\">' . (int) $row[1] . '</div>',
+          '<div style=\\"color:black; font-size:1.1em\\">' . $title . '</div><div style=\\"color:darkblue; font-size:1.2em\\">' . (int) $data['totalsForAllResults']["ga:sessions"] . '</div>'
+        );
       }
-      if ($ga_dash_data) {
-        return '[["' . '<div style=\\"color:black; font-size:1.1em\\">' . $title . '</div><div style=\\"color:darkblue; font-size:1.2em\\">' . (int) $data['totalsForAllResults']["ga:sessions"] . '</div>", ""],' . rtrim($ga_dash_data, ',') . ']';
-      } else {
-        return - 22;
-      }
+      return $ga_dash_data;
     }
 
     /**
@@ -674,7 +697,7 @@ if (! class_exists('GADASH_GAPI')) {
       if ($query == 'source') {
         $options = array(
           'dimensions' => $dimensions,
-          'filters' => 'ga:medium==organic',
+          'filters' => 'ga:medium==organic;ga:keyword!=(not set)',
           'quotaUser' => $this->managequota . 'p' . $projectId
         );
       } else {
@@ -688,17 +711,19 @@ if (! class_exists('GADASH_GAPI')) {
       if (is_numeric($data)) {
         return $data;
       }
-      $ga_dash_data = "";
-      for ($i = 0; $i < $data['totalResults']; $i ++) {
-        if ($data['rows'][$i][0] != '(not set)') {
-          $ga_dash_data .= '["' . str_replace("(none)", "direct", esc_html($data['rows'][$i][0])) . '",' . (int) $data["rows"][$i][1] . '],';
-        }
+      $ga_dash_data = array(
+        array(
+          __("Type", 'ga-dash'),
+          __("Sessions", 'ga-dash')
+        )
+      );
+      foreach ($data->getRows() as $row) {
+          $ga_dash_data[] = array(
+            str_replace("(none)", "direct", esc_html($row[0])),
+            (int) $row[1]
+          );
       }
-      if ($ga_dash_data) {
-        return '[["' . __("Type", 'ga-dash') . '", "Sessions"],' . rtrim($ga_dash_data, ',') . ']';
-      } else {
-        return - 22;
-      }
+      return $ga_dash_data;
     }
 
     /**
@@ -730,23 +755,30 @@ if (! class_exists('GADASH_GAPI')) {
       if (is_numeric($data)) {
         return $data;
       }
-      $ga_dash_data = "";
-      $max_array = array();
-      foreach ($data['rows'] as $item) {
-        $max_array[] = $item[2];
+      $ga_dash_data = array(
+        array(
+          __("Date", 'ga-dash'),
+          __("Sessions", 'ga-dash') . ($anonim ? "' " . __("trend", 'ga-dash') : '')
+        )
+      );
+      if ($anonim) {
+        $max_array = array();
+        foreach ($data->getRows() as $item) {
+          $max_array[] = $item[2];
+        }
+        $max = max($max_array) ? max($max_array) : 1;
       }
-      $max = max($max_array) ? max($max_array) : 1;
-      for ($i = 0; $i < $data['totalResults']; $i ++) {
-        $ga_dash_data .= '["' . ucfirst(esc_html((__($data["rows"][$i][1])))) . ", " . esc_html(substr_replace(substr_replace($data["rows"][$i][0], "-", 4, 0), "-", 7, 0)) . '",' . ($anonim ? str_replace(",", ".", round($data["rows"][$i][2] * 100 / $max, 2)) : (int) $data["rows"][$i][2]) . '],';
-      }
-      if ($ga_dash_data) {
-        return array(
-          '[["' . __("Date", 'ga-dash') . '", "' . __("Sessions", 'ga-dash') . ($anonim ? "' " . __("trend", 'ga-dash') : '') . '"],' . rtrim($ga_dash_data, ",") . "]",
-          $anonim ? 0 : (int) $data['totalsForAllResults']['ga:sessions']
+      foreach ($data->getRows() as $row) {
+        $ga_dash_data[] = array(
+          ucfirst(esc_html((__($row[1])))) . ', ' . esc_html(substr_replace(substr_replace($row[0], "-", 4, 0), "-", 7, 0)),
+          ($anonim ? str_replace(",", ".", round($row[2] * 100 / $max, 2)) : (int) $row[2])
         );
-      } else {
-        return - 22;
       }
+      $totals = $data->getTotalsForAllResults();
+      return array(
+        $ga_dash_data,
+        $anonim ? 0 : $totals['ga:sessions']
+      );
     }
 
     /**
@@ -775,15 +807,21 @@ if (! class_exists('GADASH_GAPI')) {
       if (is_numeric($data)) {
         return $data;
       }
-      $ga_dash_data = "";
-      for ($i = 0; $i < $data['totalResults']; $i ++) {
-        $ga_dash_data .= '["' . ucfirst(esc_html(__($data['rows'][$i][1]))) . ", " . esc_html(substr_replace(substr_replace($data['rows'][$i][0], "-", 4, 0), "-", 7, 0)) . '",' . round($data['rows'][$i][2], 2) . ',' . round($data['rows'][$i][3], 2) . '],';
+      $ga_dash_data = array(
+        array(
+          __("Date", 'ga-dash'),
+          __("Views", 'ga-dash'),
+          __('UniqueViews', "ga-dash")
+        )
+      );
+      foreach ($data->getRows() as $row) {
+        $ga_dash_data[] = array(
+          ucfirst(esc_html(__($row[1]))) . ',' . esc_html(substr_replace(substr_replace($row[0], "-", 4, 0), "-", 7, 0)),
+          round($row[2], 2),
+          round($row[3], 2)
+        );
       }
-      if ($ga_dash_data) {
-        return '[["' . __('Date', "ga-dash") . '", "' . __('Views', "ga-dash") . '", "' . __('UniqueViews', "ga-dash") . '"],' . rtrim($ga_dash_data, ',') . ']';
-      } else {
-        return - 22;
-      }
+      return $ga_dash_data;
     }
 
     /**
@@ -807,25 +845,26 @@ if (! class_exists('GADASH_GAPI')) {
       $data = $this->handle_corereports($projectId, $from, $to, $metrics, array(
         'dimensions' => $dimensions,
         'sort' => '-ga:sessions',
-        'filters' => 'ga:pagePath==' . $page_url,
+        'filters' => 'ga:pagePath==' . $page_url .';ga:keyword!=(not set)',
         'quotaUser' => $this->managequota . 'p' . $projectId
       ), $serial);
       if (is_numeric($data)) {
         return $data;
       }
-      $ga_dash_data = "";
-      $i = 0;
-      while (isset($data['rows'][$i][0])) {
-        if ($data['rows'][$i][0] != "(not set)") {
-          $ga_dash_data .= '["' . $this->prepare_json($data['rows'][$i][0]) . '",' . (int) $data['rows'][$i][1] . '],';
-        }
-        $i ++;
+      FB::log($data->getRows());
+      $ga_dash_data = array(
+        array(
+          __("Searches", 'ga-dash'),
+          __("Sessions", 'ga-dash')
+        )
+      );
+      foreach ($data->getRows() as $row) {
+          $ga_dash_data[] = array(
+            $this->prepare_json($row[0]),
+            (int) $row[1]
+          );
       }
-      if ($ga_dash_data) {
-        return '[["' . __('Searches', "ga-dash") . '", "' . __('Sessions', "ga-dash") . '"],' . rtrim($ga_dash_data, ',') . ' ]';
-      } else {
-        return - 22;
-      }
+      return $ga_dash_data;
     }
 
     /**
@@ -865,16 +904,16 @@ if (! class_exists('GADASH_GAPI')) {
         set_transient('ga_dash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e), $this->error_timeout);
         return $e->getCode();
       }
-      if (! isset($data['rows'])) {
+      if ($data->getRows() < 1) {
         return - 21;
       }
       $i = 0;
       $ga_dash_data = $data;
-      while (isset($data->rows[$i])) {
-        $ga_dash_data->rows[$i] = array_map('esc_html', $data->rows[$i]);
+      foreach ($data->getRows() as $row) {
+        $ga_dash_data->rows[$i] = array_map('esc_html', $row);
         $i ++;
       }
-      return print_r(json_encode($ga_dash_data), true);
+      return $ga_dash_data;
     }
 
     public function getcountrycodes()

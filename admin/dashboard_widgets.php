@@ -543,8 +543,7 @@ if (! class_exists('GADASH_Widgets')) {
             	 function online_refresh(){
             		if (focusFlag){
             
-            		jQuery.post(ajaxurl, {action: "gadashadmin_get_realtime", projectId: "<?php echo $projectId;?>", gadashadmin_security_widgetrealtime: "<?php echo wp_create_nonce('gadashadmin_get_realtime');?>"}, function(response){
-            			var data = jQuery.parseJSON(response);
+            		jQuery.post(ajaxurl, {action: "gadashadmin_get_realtime", projectId: "<?php echo $projectId;?>", gadashadmin_security_widgetrealtime: "<?php echo wp_create_nonce('gadashadmin_get_realtime');?>"}, function(data){
             			
                         if (jQuery.isNumeric(data) || typeof data === "undefined"){
                             data = [];
@@ -687,10 +686,10 @@ if (! class_exists('GADASH_Widgets')) {
                 jQuery.post(ajaxurl, {action: "gadashadmin_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "<?php echo $query; ?>",gadashadmin_security_widget_reports: "<?php echo wp_create_nonce('gadashadmin_get_widgetreports'); ?>"}, function(response){
                 	   
                     if (!jQuery.isNumeric(response)){
-                        try{
-                    	   gadash_prs=jQuery.parseJSON(response);
+                        if (jQuery.isArray(response)){
+                    	   gadash_prs=response;
                     	   google.setOnLoadCallback(ga_dash_drawprs(gadash_prs));
-                        } catch(e) {
+                        } else {
                         	checknpcounter(0);
                 			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
                 			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
@@ -704,12 +703,11 @@ if (! class_exists('GADASH_Widgets')) {
                 });
 
                 jQuery.post(ajaxurl, {action: "gadashadmin_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "trafficchannels",gadashadmin_security_widget_reports: "<?php echo wp_create_nonce('gadashadmin_get_widgetreports'); ?>"}, function(response){
-
                     if (!jQuery.isNumeric(response)){
-                        try{
-                        	gadash_trafficchannels=jQuery.parseJSON(response);
+                    	if (jQuery.isArray(response)){
+                        	gadash_trafficchannels=response;
                         	google.setOnLoadCallback(ga_dash_drawtrafficchannels(gadash_trafficchannels));
-                         } catch(e) {
+                         } else {
                          	checknpcounter(0);
                  			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
                  			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
@@ -784,10 +782,10 @@ if (! class_exists('GADASH_Widgets')) {
                 jQuery.post(ajaxurl, {action: "gadashadmin_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "medium",gadashadmin_security_widget_reports: "<?php echo wp_create_nonce('gadashadmin_get_widgetreports'); ?>"}, function(response){
 
                     if (!jQuery.isNumeric(response)){
-                        try{
-                        	gadash_trafficmediums=jQuery.parseJSON(response);
+                    	if (jQuery.isArray(response)){
+                        	gadash_trafficmediums=response;
                    		    google.setOnLoadCallback(ga_dash_drawtrafficmediums(gadash_trafficmediums));                        	
-                         } catch(e) {
+                         } else {
                          	checknpcounter(0);
                  			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
                  			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
@@ -801,10 +799,16 @@ if (! class_exists('GADASH_Widgets')) {
                 });
 
                 jQuery.post(ajaxurl, {action: "gadashadmin_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "visitorType",gadashadmin_security_widget_reports: "<?php echo wp_create_nonce('gadashadmin_get_widgetreports'); ?>"}, function(response){
-
                     if (!jQuery.isNumeric(response)){
-                    	   gadash_traffictype=jQuery.parseJSON(response);
-                		   google.setOnLoadCallback(ga_dash_drawtraffictype(gadash_traffictype));
+                    	if (jQuery.isArray(response)){
+                    		gadash_traffictype=response;
+                    		google.setOnLoadCallback(ga_dash_drawtraffictype(gadash_traffictype));                        	
+                         } else {
+                         	checknpcounter(0);
+                 			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
+                 			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
+                 			console.log("\n********************* GADWP Log ********************* \n\n"+response);
+                 		} 
                 	}else{
                         jQuery("#gadash-traffictype").css({"background-color":"#F7F7F7","height":"auto","padding-top":"80px","padding-bottom":"80px","color":"#000","text-align":"center"});  
                         jQuery("#gadash-traffictype").html("<?php _e("This report is unavailable", 'ga-dash'); ?> ("+response+")");                    	
@@ -815,10 +819,10 @@ if (! class_exists('GADASH_Widgets')) {
                 jQuery.post(ajaxurl, {action: "gadashadmin_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "trafficchannels",gadashadmin_security_widget_reports: "<?php echo wp_create_nonce('gadashadmin_get_widgetreports'); ?>"}, function(response){
 
                     if (!jQuery.isNumeric(response)){
-                        try{
-                        	gadash_trafficchannels=jQuery.parseJSON(response);
+                    	if (jQuery.isArray(response)){
+                        	gadash_trafficchannels=response;
                    		    google.setOnLoadCallback(ga_dash_drawtrafficchannels(gadash_trafficchannels));                        	
-                         } catch(e) {
+                         } else {
                          	checknpcounter(0);
                  			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
                  			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
@@ -834,10 +838,10 @@ if (! class_exists('GADASH_Widgets')) {
                 jQuery.post(ajaxurl, {action: "gadashadmin_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "socialNetwork",gadashadmin_security_widget_reports: "<?php echo wp_create_nonce('gadashadmin_get_widgetreports'); ?>"}, function(response){
 
                     if (!jQuery.isNumeric(response)){
-                        try{
-                        	gadash_socialnetworks=jQuery.parseJSON(response);
+                    	if (jQuery.isArray(response)){
+                        	gadash_socialnetworks=response;
                    		    google.setOnLoadCallback(ga_dash_drawsocialnetworks(gadash_socialnetworks));                        	
-                         } catch(e) {
+                         } else {
                          	checknpcounter(0);
                  			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
                  			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
@@ -854,10 +858,10 @@ if (! class_exists('GADASH_Widgets')) {
                 jQuery.post(ajaxurl, {action: "gadashadmin_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "source",gadashadmin_security_widget_reports: "<?php echo wp_create_nonce('gadashadmin_get_widgetreports'); ?>"}, function(response){
 
                     if (!jQuery.isNumeric(response)){
-                        try{
-                        	gadash_trafficorganic=jQuery.parseJSON(response);
+                    	if (jQuery.isArray(response)){
+                        	gadash_trafficorganic=response;
                         	google.setOnLoadCallback(ga_dash_drawtrafficorganic(gadash_trafficorganic));
-                         } catch(e) {
+                         } else {
                          	checknpcounter(0);
                  			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
                  			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
@@ -976,11 +980,11 @@ if (! class_exists('GADASH_Widgets')) {
                 jQuery.post(ajaxurl, {action: "gadashadmin_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "<?php echo $query; ?>",gadashadmin_security_widget_reports: "<?php echo wp_create_nonce('gadashadmin_get_widgetreports'); ?>"}, function(response){
 
                     if (!jQuery.isNumeric(response)){
-                        try{
-                        	gadash_locations=jQuery.parseJSON(response);
+                    	if (jQuery.isArray(response)){
+                        	gadash_locations=response;
                     		google.setOnLoadCallback(ga_dash_drawmaplocations(gadash_locations));
                     		google.setOnLoadCallback(ga_dash_drawlocations(gadash_locations));                        	
-                         } catch(e) {
+                         } else {
                          	checknpcounter(0);
                  			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
                  			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
@@ -1087,10 +1091,10 @@ if (! class_exists('GADASH_Widgets')) {
     jQuery.post(ajaxurl, {action: "gadashadmin_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "<?php echo $query; ?>",gadashadmin_security_widget_reports: "<?php echo wp_create_nonce('gadashadmin_get_widgetreports'); ?>"}, function(response){
 
         if (!jQuery.isNumeric(response)){
-            try{
-            	gadash_mainchart=jQuery.parseJSON(response);
+            if (jQuery.isArray(response)){
+            	gadash_mainchart=response;
        		    google.setOnLoadCallback(ga_dash_drawmainchart(gadash_mainchart));            	
-             } catch(e) {
+             } else {
              	checknpcounter(0);
      			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
      			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
@@ -1106,10 +1110,10 @@ if (! class_exists('GADASH_Widgets')) {
     jQuery.post(ajaxurl, {action: "gadashadmin_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "bottomstats",gadashadmin_security_widget_reports: "<?php echo wp_create_nonce('gadashadmin_get_widgetreports'); ?>"}, function(response){
 
         if (!jQuery.isNumeric(response)){
-            try{
-            	gadash_bottomstats=jQuery.parseJSON(response);
+        	if (jQuery.isArray(response)){
+            	gadash_bottomstats=response;
        		    ga_dash_drawbottomstats(gadash_bottomstats);
-             } catch(e) {
+             } else {
              	checknpcounter(0);
      			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
      			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");

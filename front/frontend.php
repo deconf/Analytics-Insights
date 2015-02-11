@@ -91,10 +91,10 @@ if (! class_exists('GADASH_Frontend')) {
 									if(typeof ga_dash_drawpagesessions == "function"){
 										jQuery.post("' . admin_url('admin-ajax.php') . '", {action: "gadash_get_frontend_pagereports",gadash_pageurl: "' . $page_url . '",gadash_postid: "' . $post_id . '",query: "pageviews",gadash_security_pagereports: "' . wp_create_nonce('gadash_get_frontend_pagereports') . '"}, function(response){
 										  if (!jQuery.isNumeric(response)){  
-                                            try{
-                                            	gadash_pagesessions = jQuery.parseJSON(response);
+                                            if (jQuery.isArray(response)){
+                                            	gadash_pagesessions = response;
                                        		    google.setOnLoadCallback(ga_dash_drawpagesessions(gadash_pagesessions));
-                                             } catch(e) {
+                                             } else {
                                              	checknpcounter(0);
                                      			jQuery("#gadwp-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red","font-size":"13px"});
                                      			jQuery("#gadwp-progressbar").html("'. __("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'). '");
@@ -110,10 +110,10 @@ if (! class_exists('GADASH_Frontend')) {
 									if(typeof ga_dash_drawpagesearches == "function"){
 										jQuery.post("' . admin_url('admin-ajax.php') . '", {action: "gadash_get_frontend_pagereports",gadash_pageurl: "' . $page_url . '",gadash_postid: "' . $post_id . '",query: "searches",gadash_security_pagereports: "' . wp_create_nonce('gadash_get_frontend_pagereports') . '"}, function(response){
                                             if (!jQuery.isNumeric(response)){										  
-                                              try{
-                                                  gadash_pagesearches = jQuery.parseJSON(response);
+                                              if (jQuery.isArray(response)){
+                                                  gadash_pagesearches = response;
                                            		  google.setOnLoadCallback(ga_dash_drawpagesearches(gadash_pagesearches));
-                                               } catch(e) {
+                                               } else {
                                                   checknpcounter(0);
                                          		  jQuery("#gadwp-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red","font-size":"13px"});
                                          		  jQuery("#gadwp-progressbar").html("'. __("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'). '");
