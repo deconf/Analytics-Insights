@@ -355,7 +355,7 @@ if (! class_exists('GADASH_GAPI')) {
      *          $to
      * @param
      *          $query
-     * @return string|int
+     * @return array|int
      */
     function get_mainreport($projectId, $from, $to, $query)
     {
@@ -461,7 +461,7 @@ if (! class_exists('GADASH_GAPI')) {
      *          $from
      * @param
      *          $to
-     * @return string|int
+     * @return array|int
      */
     function get_contentpages($projectId, $from, $to)
     {
@@ -500,7 +500,7 @@ if (! class_exists('GADASH_GAPI')) {
      *          $from
      * @param
      *          $to
-     * @return string|int
+     * @return array|int
      */
     function get_referrers($projectId, $from, $to)
     {
@@ -540,7 +540,7 @@ if (! class_exists('GADASH_GAPI')) {
      *          $from
      * @param
      *          $to
-     * @return string|int
+     * @return array|int
      */
     function get_searches($projectId, $from, $to)
     {
@@ -550,6 +550,7 @@ if (! class_exists('GADASH_GAPI')) {
       $data = $this->handle_corereports($projectId, $from, $to, $metrics, array(
         'dimensions' => $dimensions,
         'sort' => '-ga:sessions',
+        'filters' => 'ga:keyword!=(not set)',
         'quotaUser' => $this->managequota . 'p' . $projectId
       ), $serial);
       if (is_numeric($data)) {
@@ -580,7 +581,7 @@ if (! class_exists('GADASH_GAPI')) {
      *          $from
      * @param
      *          $to
-     * @return string|int
+     * @return array|int
      */
     function get_locations($projectId, $from, $to)
     {
@@ -646,7 +647,7 @@ if (! class_exists('GADASH_GAPI')) {
      *          $from
      * @param
      *          $to
-     * @return string|int
+     * @return array|int
      */
     function get_trafficchannels($projectId, $from, $to)
     {
@@ -688,7 +689,7 @@ if (! class_exists('GADASH_GAPI')) {
      *          $to
      * @param
      *          $query
-     * @return string|int
+     * @return array|int
      */
     function get_trafficdetails($projectId, $from, $to, $query)
     {
@@ -790,7 +791,7 @@ if (! class_exists('GADASH_GAPI')) {
      *          $page_url
      * @param
      *          $post_id
-     * @return string|int
+     * @return array|int
      */
     function frontend_afterpost_pageviews($projectId, $page_url, $post_id)
     {
@@ -833,7 +834,7 @@ if (! class_exists('GADASH_GAPI')) {
      *          $page_url
      * @param
      *          $post_id
-     * @return string|int
+     * @return array|int
      */
     function frontend_afterpost_searches($projectId, $page_url, $post_id)
     {
@@ -851,7 +852,6 @@ if (! class_exists('GADASH_GAPI')) {
       if (is_numeric($data)) {
         return $data;
       }
-      FB::log($data->getRows());
       $ga_dash_data = array(
         array(
           __("Searches", 'ga-dash'),
@@ -872,7 +872,7 @@ if (! class_exists('GADASH_GAPI')) {
      *
      * @param
      *          $projectId
-     * @return string|int
+     * @return array|int
      */
     function gadash_realtime_data($projectId)
     {

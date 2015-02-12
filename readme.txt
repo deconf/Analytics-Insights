@@ -129,6 +129,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 = 4.4.5 =
 - Enhancement: GAPI requests optimization 
 - Enhancement: server responses improvements
+- Enhancement: filter data through query options
 - Bugfix: additional checks before displaying an error
 - Bugfix: wrong error displayed on IE
 - Bugfix: set correct Content-Type before sending responses
