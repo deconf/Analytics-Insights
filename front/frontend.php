@@ -97,7 +97,7 @@ if (! class_exists('GADASH_Frontend')) {
                                              } else {
                                              	checknpcounter(0);
                                      			jQuery("#gadwp-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red","font-size":"13px"});
-                                     			jQuery("#gadwp-progressbar").html("'. __("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'). '");
+                                     			jQuery("#gadwp-progressbar").html("' . __("Invalid response, more details in JavaScript Console (F12).", 'ga-dash') . '");
                                      			console.log("\n********************* GADWP Log ********************* \n\n"+response);
                                      		} 										  
 										  }else{
@@ -116,7 +116,7 @@ if (! class_exists('GADASH_Frontend')) {
                                                } else {
                                                   checknpcounter(0);
                                          		  jQuery("#gadwp-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red","font-size":"13px"});
-                                         		  jQuery("#gadwp-progressbar").html("'. __("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'). '");
+                                         		  jQuery("#gadwp-progressbar").html("' . __("Invalid response, more details in JavaScript Console (F12).", 'ga-dash') . '");
                                          		  console.log("\n********************* GADWP Log ********************* \n\n"+response);
                                        		   }										    
 											}else{

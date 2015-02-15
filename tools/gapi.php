@@ -556,7 +556,7 @@ if (! class_exists('GADASH_GAPI')) {
       if (is_numeric($data)) {
         return $data;
       }
-
+      
       $ga_dash_data = array(
         array(
           __("Searches", 'ga-dash'),
@@ -719,10 +719,10 @@ if (! class_exists('GADASH_GAPI')) {
         )
       );
       foreach ($data->getRows() as $row) {
-          $ga_dash_data[] = array(
-            str_replace("(none)", "direct", esc_html($row[0])),
-            (int) $row[1]
-          );
+        $ga_dash_data[] = array(
+          str_replace("(none)", "direct", esc_html($row[0])),
+          (int) $row[1]
+        );
       }
       return $ga_dash_data;
     }
@@ -846,7 +846,7 @@ if (! class_exists('GADASH_GAPI')) {
       $data = $this->handle_corereports($projectId, $from, $to, $metrics, array(
         'dimensions' => $dimensions,
         'sort' => '-ga:sessions',
-        'filters' => 'ga:pagePath==' . $page_url .';ga:keyword!=(not set)',
+        'filters' => 'ga:pagePath==' . $page_url . ';ga:keyword!=(not set)',
         'quotaUser' => $this->managequota . 'p' . $projectId
       ), $serial);
       if (is_numeric($data)) {
@@ -859,10 +859,10 @@ if (! class_exists('GADASH_GAPI')) {
         )
       );
       foreach ($data->getRows() as $row) {
-          $ga_dash_data[] = array(
-            $this->prepare_json($row[0]),
-            (int) $row[1]
-          );
+        $ga_dash_data[] = array(
+          $this->prepare_json($row[0]),
+          (int) $row[1]
+        );
       }
       return $ga_dash_data;
     }
