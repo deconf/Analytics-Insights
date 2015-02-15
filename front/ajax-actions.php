@@ -31,12 +31,12 @@ if (! class_exists('GADASH_Frontend_Ajax')) {
     function send_json($response)
     {
       @header('Content-Type: application/json; charset=' . get_option('blog_charset'));
-      echo wp_json_encode($response);
+      echo json_encode($response);
       if (defined('DOING_AJAX') && DOING_AJAX)
         wp_die();
       else
         die();
-    }
+    }    
 
     /**
      * Ajax handler for getting analytics data for frontend Views vs UniqueViews
