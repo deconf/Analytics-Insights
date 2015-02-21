@@ -5,9 +5,9 @@
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
-if (! class_exists('GADASH_Frontend')) {
+if (! class_exists('GADASH_Front_Stats')) {
 
-  final class GADASH_Frontend
+  final class GADASH_Front_Stats
   {
 
     function __construct()
@@ -29,9 +29,9 @@ if (! class_exists('GADASH_Frontend')) {
       if ((! is_page() and ! is_single()) or is_preview() or ! is_user_logged_in()) {
         return;
       }
-      wp_enqueue_style('ga_dash-front', $GADASH_Config->plugin_url . '/front/css/content_stats.css', NULL, GADWP_CURRENT_VERSION);
+      wp_enqueue_style('ga_dash-front', $GADASH_Config->plugin_url . '/front/css/content-stats.css', NULL, GADWP_CURRENT_VERSION);
       wp_enqueue_style('ga_dash-nprogress', $GADASH_Config->plugin_url . '/tools/nprogress/nprogress.css', NULL, GADWP_CURRENT_VERSION);
-      wp_enqueue_script('ga_dash-front', $GADASH_Config->plugin_url . '/front/js/content_stats.js', array(
+      wp_enqueue_script('ga_dash-front', $GADASH_Config->plugin_url . '/front/js/content-stats.js', array(
         'jquery'
       ), GADWP_CURRENT_VERSION);
       wp_enqueue_script('ga_dash-nprogress', $GADASH_Config->plugin_url . '/tools/nprogress/nprogress.js', array(
@@ -195,5 +195,5 @@ if (! class_exists('GADASH_Frontend')) {
   }
 }
 if (! is_admin()) {
-  $GADASH_Frontend = new GADASH_Frontend();
+  $GADASH_Front_Stats = new GADASH_Front_Stats();
 }

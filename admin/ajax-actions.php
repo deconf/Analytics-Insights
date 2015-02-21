@@ -24,16 +24,6 @@ if (! class_exists('GADASH_Backend_Ajax')) {
       ));
     }
 
-    function send_json($response)
-    {
-      @header('Content-Type: application/json; charset=' . get_option('blog_charset'));
-      echo json_encode($response);
-      if (defined('DOING_AJAX') && DOING_AJAX)
-        wp_die();
-      else
-        die();
-    }
-
     /**
      * Ajax handler for getting reports for Admin Widget
      *
@@ -68,37 +58,37 @@ if (! class_exists('GADASH_Backend_Ajax')) {
       }
       switch ($query) {
         case 'referrers':
-          $this->send_json($GADASH_GAPI->get_referrers($projectId, $from, $to));
+          wp_send_json($GADASH_GAPI->get_referrers($projectId, $from, $to));
           break;
         case 'contentpages':
-          $this->send_json($GADASH_GAPI->get_contentpages($projectId, $from, $to));
+          wp_send_json($GADASH_GAPI->get_contentpages($projectId, $from, $to));
           break;
         case 'locations':
-          $this->send_json($GADASH_GAPI->get_locations($projectId, $from, $to));
+          wp_send_json($GADASH_GAPI->get_locations($projectId, $from, $to));
           break;
         case 'bottomstats':
-          $this->send_json($GADASH_GAPI->get_bottomstats($projectId, $from, $to));
+          wp_send_json($GADASH_GAPI->get_bottomstats($projectId, $from, $to));
           break;
         case 'trafficchannels':
-          $this->send_json($GADASH_GAPI->get_trafficchannels($projectId, $from, $to));
+          wp_send_json($GADASH_GAPI->get_trafficchannels($projectId, $from, $to));
           break;
         case 'medium':
-          $this->send_json($GADASH_GAPI->get_trafficdetails($projectId, $from, $to, 'medium'));
+          wp_send_json($GADASH_GAPI->get_trafficdetails($projectId, $from, $to, 'medium'));
           break;
         case 'visitorType':
-          $this->send_json($GADASH_GAPI->get_trafficdetails($projectId, $from, $to, 'visitorType'));
+          wp_send_json($GADASH_GAPI->get_trafficdetails($projectId, $from, $to, 'visitorType'));
           break;
         case 'socialNetwork':
-          $this->send_json($GADASH_GAPI->get_trafficdetails($projectId, $from, $to, 'socialNetwork'));
+          wp_send_json($GADASH_GAPI->get_trafficdetails($projectId, $from, $to, 'socialNetwork'));
           break;
         case 'source':
-          $this->send_json($GADASH_GAPI->get_trafficdetails($projectId, $from, $to, 'source'));
+          wp_send_json($GADASH_GAPI->get_trafficdetails($projectId, $from, $to, 'source'));
           break;
         case 'searches':
-          $this->send_json($GADASH_GAPI->get_searches($projectId, $from, $to));
+          wp_send_json($GADASH_GAPI->get_searches($projectId, $from, $to));
           break;
         default:
-          $this->send_json($GADASH_GAPI->get_mainreport($projectId, $from, $to, $query));
+          wp_send_json($GADASH_GAPI->get_mainreport($projectId, $from, $to, $query));
           break;
       }
     }
@@ -132,7 +122,7 @@ if (! class_exists('GADASH_Backend_Ajax')) {
       } else {
         wp_die(- 24);
       }
-      $this->send_json($GADASH_GAPI->gadash_realtime_data($projectId));
+      wp_send_json($GADASH_GAPI->gadash_realtime_data($projectId));
     }
   }
 }

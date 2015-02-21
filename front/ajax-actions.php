@@ -28,16 +28,6 @@ if (! class_exists('GADASH_Frontend_Ajax')) {
       ));
     }
 
-    function send_json($response)
-    {
-      @header('Content-Type: application/json; charset=' . get_option('blog_charset'));
-      echo json_encode($response);
-      if (defined('DOING_AJAX') && DOING_AJAX)
-        wp_die();
-      else
-        die();
-    }    
-
     /**
      * Ajax handler for getting analytics data for frontend Views vs UniqueViews
      *
@@ -81,10 +71,10 @@ if (! class_exists('GADASH_Frontend_Ajax')) {
       }
       switch ($query) {
         case 'pageviews':
-          $this->send_json($GADASH_GAPI->frontend_afterpost_pageviews($projectId, $page_url, $post_id));
+          wp_send_json($GADASH_GAPI->frontend_afterpost_pageviews($projectId, $page_url, $post_id));
           break;
         default:
-          $this->send_json($GADASH_GAPI->frontend_afterpost_searches($projectId, $page_url, $post_id));
+          wp_send_json($GADASH_GAPI->frontend_afterpost_searches($projectId, $page_url, $post_id));
           break;
       }
     }
@@ -140,7 +130,7 @@ if (! class_exists('GADASH_Frontend_Ajax')) {
       if (! $GADASH_GAPI->client->getAccessToken()) {
         wp_die(- 25);
       }
-      $this->send_json($GADASH_GAPI->frontend_widget_stats($projectId, $period, (int) $instance['anonim']));
+      wp_send_json($GADASH_GAPI->frontend_widget_stats($projectId, $period, (int) $instance['anonim']));
     }
   }
 }

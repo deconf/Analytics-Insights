@@ -1,0 +1,21 @@
+/* Posts & Pages stats */
+
+.column-gadwp_stats { 
+	width: 70px; 
+}
+
+.gadwp-icon{
+	color:#555;
+}
+
+.gadwp-icon:hover{
+	color:#2ea2cc;
+}
+
+.gadwp-icon:selected{
+	color:#0074a2;
+}
+
+.gadwp-icon-oldwp{
+	padding-top:5px;	
+}

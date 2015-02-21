@@ -135,7 +135,11 @@ final class GADASH_Settings
                                     		<?php
       }
     }
-    ?>									</table>
+    ?>									
+									
+									
+									
+									</table>
 								</td>
 							</tr>
 							<tr>
@@ -179,7 +183,11 @@ final class GADASH_Settings
 							</tr>
 						</table>
 						<input type="hidden" name="options[ga_dash_hidden]" value="Y">
-						<?php wp_nonce_field('gadash_form','gadash_security'); ?></form>
+						<?php wp_nonce_field('gadash_form','gadash_security'); ?>
+
+
+
+</form>
 <?php
     self::output_sidebar();
   }
@@ -247,7 +255,11 @@ final class GADASH_Settings
                                     		<?php
       }
     }
-    ?>									</table>
+    ?>									
+									
+									
+									
+									</table>
 								</td>
 							</tr>
 							<tr>
@@ -307,7 +319,11 @@ final class GADASH_Settings
 							</tr>
 						</table>
 						<input type="hidden" name="options[ga_dash_hidden]" value="Y">
-						<?php wp_nonce_field('gadash_form','gadash_security'); ?></form>
+						<?php wp_nonce_field('gadash_form','gadash_security'); ?>
+
+
+
+</form>
 <?php
     self::output_sidebar();
   }
@@ -652,6 +668,10 @@ final class GADASH_Settings
       }
     }
     ?>							
+										
+										
+										
+										
 										</table>
 									</td>
 								</tr>
@@ -668,7 +688,11 @@ final class GADASH_Settings
 							</tr>
 						</table>
 						<input type="hidden" name="options[ga_dash_hidden]" value="Y">
-						<?php wp_nonce_field('gadash_form','gadash_security'); ?></form>
+						<?php wp_nonce_field('gadash_form','gadash_security'); ?>
+
+
+
+</form>
 <?php
     self::output_sidebar();
   }
@@ -732,6 +756,8 @@ final class GADASH_Settings
     ?></pre><br />
 									<hr>
 								</td>
+							
+							
 							<tr>
 						
 						</table>
@@ -1017,22 +1043,24 @@ final class GADASH_Settings
 												</tr>
 												<tr>
 													<td colspan="2"><?php echo "<h2>" . __( "Automatic Updates", 'ga-dash' ) . "</h2>"; ?></td>
-												</tr>												
-                    							<tr>
-                    								<td colspan="2" class="title">
-                    									<div class="onoffswitch">
-                    										<input type="checkbox" name="options[automatic_updates_minorversion]"
-                    											value="1" class="onoffswitch-checkbox"
-                    											id="automatic_updates_minorversion"
-                    											<?php checked( $options['automatic_updates_minorversion'], 1 ); ?>> <label
-                    											class="onoffswitch-label" for="automatic_updates_minorversion">
-                    											<div class="onoffswitch-inner"></div>
-                    											<div class="onoffswitch-switch"></div>
-                    										</label>
-                    									</div>
-                    									<div class="switch-desc"><?php echo " ".__( "automatic updates for minor versions (security patches and bug fixes)", 'ga-dash' );?></div>
-                    								</td>
-                    							</tr>
+												</tr>
+												<tr>
+													<td colspan="2" class="title">
+														<div class="onoffswitch">
+															<input type="checkbox"
+																name="options[automatic_updates_minorversion]" value="1"
+																class="onoffswitch-checkbox"
+																id="automatic_updates_minorversion"
+																<?php checked( $options['automatic_updates_minorversion'], 1 ); ?>>
+															<label class="onoffswitch-label"
+																for="automatic_updates_minorversion">
+																<div class="onoffswitch-inner"></div>
+																<div class="onoffswitch-switch"></div>
+															</label>
+														</div>
+														<div class="switch-desc"><?php echo " ".__( "automatic updates for minor versions (security patches and bug fixes)", 'ga-dash' );?></div>
+													</td>
+												</tr>
 												<tr>
 													<td colspan="2"><hr></td>
 												</tr>
@@ -1464,7 +1492,8 @@ final class GADASH_Settings
 															</h3>
 															<div class="inside">
 																<div class="gadash-title">
-																	<a href="https://deconf.com/wordpress-cdn-speeds-up-your-site/"><img
+																	<a
+																		href="https://deconf.com/wordpress-cdn-speeds-up-your-site/"><img
 																		src="<?php echo plugins_url( 'images/mcdn.png' , __FILE__ ); ?>" /></a>
 																</div>
 																<div class="gadash-desc"><?php echo  __('Speed up your website and plug into a whole', 'ga-dash').' <a href="https://deconf.com/wordpress-cdn-speeds-up-your-site/">'.__('new level of site speed', 'ga-dash').'</a>.'; ?></div>

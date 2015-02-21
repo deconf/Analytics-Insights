@@ -53,17 +53,19 @@ function gadash_init()
   $tools = new GADASH_Tools();
   if (is_admin()) {
     /*
-     * Include backend widgets
+     * Include backend resources
      */
     if ($tools->check_roles($GADASH_Config->options['ga_dash_access_back'])) {
-      include_once (dirname(__FILE__) . '/admin/dashboard_widgets.php');
+      include_once (dirname(__FILE__) . '/admin/setup.php');
+      include_once (dirname(__FILE__) . '/admin/widgets.php');
+      include_once (dirname(__FILE__) . '/admin/content-stats.php');
     }
   } else {
     /*
-     * Include frontend stats
+     * Include frontend resources
      */
     if ($tools->check_roles($GADASH_Config->options['ga_dash_access_front']) and ($GADASH_Config->options['ga_dash_frontend_stats'] or $GADASH_Config->options['ga_dash_frontend_keywords'])) {
-      include_once (dirname(__FILE__) . '/front/frontend.php');
+      include_once (dirname(__FILE__) . '/front/content-stats.php');
     }
     /*
      * Include tracking
@@ -73,7 +75,7 @@ function gadash_init()
     }
   }
   /*
-   * Include frontend widgets
+   * Include frontend widget
    */
   include_once (dirname(__FILE__) . '/front/widgets.php');
   /*
