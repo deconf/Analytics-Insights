@@ -128,7 +128,7 @@ if (! class_exists('GADASH_Back_Setup')) {
       global $GADASH_Config;
       /*
        * GADWP main stylesheet
-       */      
+       */
       wp_enqueue_style('gadwp', $GADASH_Config->plugin_url . '/admin/css/gadwp.css', NULL, GADWP_CURRENT_VERSION);
       /*
        * Dashboard Widgets Styles & Scripts
@@ -157,15 +157,45 @@ if (! class_exists('GADASH_Back_Setup')) {
         'edit.php'
       );
       if (in_array($hook, $contentstats_hooks)) {
-        wp_register_style('gadwp_content-stats', $GADASH_Config->plugin_url . '/admin/css/content-stats.css', NULL, GADWP_CURRENT_VERSION);
-        wp_enqueue_style('gadwp_content-stats');
-        wp_enqueue_script('gadwp_content-stats', plugins_url('js/content-stats.js', __FILE__), array(
-          'jquery'
-        ), GADWP_CURRENT_VERSION);
+        wp_enqueue_style('gadwp_itemreports', $GADASH_Config->plugin_url . '/admin/css/item-stats.css', NULL, GADWP_CURRENT_VERSION);
+        // wp_enqueue_style('gadwp_jquery-ui', $GADASH_Config->plugin_url . '/admin/css/jquery-ui.css', NULL, GADWP_CURRENT_VERSION);
+        wp_enqueue_style("wp-jquery-ui-dialog");
         if (! wp_script_is('googlejsapi')) {
           wp_register_script('googlejsapi', 'https://www.google.com/jsapi');
-          wp_enqueue_script('googlejsapi');
         }
+        wp_enqueue_script('gadwp_itemreports', plugins_url('js/item-stats.js', __FILE__), array(
+          'googlejsapi',
+          'jquery',
+          'jquery-ui-dialog',
+          'jquery-ui-accordion'
+        ), GADWP_CURRENT_VERSION);
+        wp_localize_script('gadwp_itemreports', 'gadash_item_data', 
+          array(
+            'ajaxurl' => admin_url('admin-ajax.php'),
+            'security' => wp_create_nonce('gadash_get_itemreports'),
+            'dateList' => array(
+              'today' => __("Today", 'ga-dash'),
+              'yesterday' => __("Yesterday", 'ga-dash'),
+              '7daysAgo' => __("Last 7 Days", 'ga-dash'),
+              '30daysAgo' => __("Last 30 Days", 'ga-dash'),
+              '90daysAgo' => __("Last 90 Days", 'ga-dash')
+            ),
+            'reportList' => array(
+              'sessions' => __("Sessions", 'ga-dash'),
+              'users' => __("Users", 'ga-dash'),
+              'organicSearches' => __("Organic", 'ga-dash'),
+              'pageviews' => __("Page Views", 'ga-dash'),
+              'visitBounceRate' => __("Bounce Rate", 'ga-dash'),
+              'locations' => __("Location", 'ga-dash'),
+              'contentpages' => __("Pages", 'ga-dash'),
+              'referrers' => __("Referrers", 'ga-dash'),
+              'searches' => __("Searches", 'ga-dash'),
+              'trafficdetails' => __("Traffic Details", 'ga-dash')
+            ),
+            'i18n' => array(
+              __("Apply", 'ga-dash')
+            )
+          ));
       }
       /*
        * Settings Styles & Scripts
@@ -192,7 +222,7 @@ if (! class_exists('GADASH_Back_Setup')) {
 
     /**
      * Add "Settings" link in Plugins List
-     * 
+     *
      * @param
      *          $links
      * @return array

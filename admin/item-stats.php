@@ -29,9 +29,9 @@ if (! class_exists('GADASH_Back_Stats')) {
       global $GADASH_Config, $wp_version;
       
       if (version_compare($wp_version, '3.8.0', '>=')) {
-        echo '<a id="gadwp-' . $post_id . '" href="#' . $post_id . '" class="gadwp-icon dashicons-before dashicons-chart-area"></a>';
+        echo '<a id="gadwp-' . $post_id . '" href="#' . $post_id . '" class="gadwp-icon dashicons-before dashicons-chart-area"></a><div id="gadwp-' . $post_id . '-container"></div>';
       } else {
-        echo '<a id="gadwp-' . $post_id . '" href="#' . $post_id . '"><img class="gadwp-icon-oldwp" src="' . $GADASH_Config->plugin_url . '/admin/images/gadash-icon.png"</a>';
+        echo '<a id="gadwp-' . $post_id . '" href="#' . $post_id . '"><img class="gadwp-icon-oldwp" src="' . $GADASH_Config->plugin_url . '/admin/images/gadash-icon.png"</a><div id="gadwp-' . $post_id . '-container"></div>';
       }
     }
 

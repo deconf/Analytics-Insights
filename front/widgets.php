@@ -26,8 +26,8 @@ class GADSH_Frontend_Widget extends WP_Widget
   function ga_dash_front_enqueue_styles()
   {
     global $GADASH_Config;
-    wp_enqueue_style('ga_dash-front', $GADASH_Config->plugin_url . '/front/css/content-stats.css', NULL, GADWP_CURRENT_VERSION);
-    wp_enqueue_script('ga_dash-front', $GADASH_Config->plugin_url . '/front/js/content-stats.js', array(
+    wp_enqueue_style('ga_dash-front', $GADASH_Config->plugin_url . '/front/css/item-stats.css', NULL, GADWP_CURRENT_VERSION);
+    wp_enqueue_script('ga_dash-front', $GADASH_Config->plugin_url . '/front/js/item-stats.js', array(
       'jquery'
     ), GADWP_CURRENT_VERSION);
     wp_enqueue_script('googlejsapi', 'https://www.google.com/jsapi');

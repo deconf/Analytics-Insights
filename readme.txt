@@ -130,8 +130,18 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Requirements: WordPress 3.5 and above
 - Enhancement: automatic updates for minor versions (security patches and bug fixes)
 - Enhancement: improvements while enqueueing styles & scripts
-- Enhancement: stats per post in Post List
-- Enhancement: stats per page in Page List
+- Enhancement: stats per post in Post List (new feature)
+- Enhancement: stats per page in Page List (new feature)
+- Enhancement: Japanese translation, translated by [塀シスター](https://plus.google.com/u/0/+tk072110)
+- Bugfix: Arabic translation not loading properly
+- Bugfix: initialize timeshift for all API calls
+- Bugfix: include GAPI only when a API call is made
+- Bugfix: keep the percentage numeric while anonymizing data
+- Bugfix: add PHP 5.3 as a requirement when forcing IPv4 
+
+= 4.4.7 =
+- Bugfix: fatal error in plugin settings screen, under certain circumstances
+- Bugfix: fix refresh interval for backend stats
  
 = 4.4.6 =
 - Bugfix: maintain compatibility with WordPress 3.0+

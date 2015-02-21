@@ -58,14 +58,14 @@ function gadash_init()
     if ($tools->check_roles($GADASH_Config->options['ga_dash_access_back'])) {
       include_once (dirname(__FILE__) . '/admin/setup.php');
       include_once (dirname(__FILE__) . '/admin/widgets.php');
-      include_once (dirname(__FILE__) . '/admin/content-stats.php');
+      include_once (dirname(__FILE__) . '/admin/item-stats.php');
     }
   } else {
     /*
      * Include frontend resources
      */
     if ($tools->check_roles($GADASH_Config->options['ga_dash_access_front']) and ($GADASH_Config->options['ga_dash_frontend_stats'] or $GADASH_Config->options['ga_dash_frontend_keywords'])) {
-      include_once (dirname(__FILE__) . '/front/content-stats.php');
+      include_once (dirname(__FILE__) . '/front/item-stats.php');
     }
     /*
      * Include tracking

@@ -38,13 +38,7 @@ if (! class_exists('GADASH_Widgets')) {
     function dashboard_widget()
     {
       global $GADASH_Config;
-      /*
-       * Include GAPI
-       */
-      if ($GADASH_Config->options['ga_dash_token']) {
-        include_once ($GADASH_Config->plugin_path . '/tools/gapi.php');
-        global $GADASH_GAPI;
-      } else {
+      if (empty($GADASH_Config->options['ga_dash_token'])) {
         echo '<p>' . __("This plugin needs an authorization:", 'ga-dash') . '</p><form action="' . menu_page_url('gadash_settings', false) . '" method="POST">' . get_submit_button(__("Authorize Plugin", 'ga-dash'), 'secondary') . '</form>';
         return;
       }
@@ -114,13 +108,6 @@ if (! class_exists('GADASH_Widgets')) {
       if (! ($projectId)) {
         echo '<p>' . __("Something went wrong while retrieving property data. You need to create and properly configure a Google Analytics account:", 'ga-dash') . '</p> <form action="https://deconf.com/how-to-set-up-google-analytics-on-your-website/" method="POST">' . get_submit_button(__("Find out more!", 'ga-dash'), 'secondary') . '</form>';
         return;
-      } else {
-        $profile_info = $tools->get_selected_profile($GADASH_Config->options['ga_dash_profile_list'], $projectId);
-        if (isset($profile_info[4])) {
-          $GADASH_GAPI->timeshift = $profile_info[4];
-        } else {
-          $GADASH_GAPI->timeshift = (int) current_time('timestamp') - time();
-        }
       }
       if (isset($_REQUEST['query'])) {
         $query = $_REQUEST['query'];
@@ -408,7 +395,7 @@ if (! class_exists('GADASH_Widgets')) {
             	 function online_refresh(){
             		if (focusFlag){
             
-            		jQuery.post(ajaxurl, {action: "gadashadmin_get_realtime", projectId: "<?php echo $projectId;?>", gadashadmin_security_widgetrealtime: "<?php echo wp_create_nonce('gadashadmin_get_realtime');?>"}, function(data){
+            		jQuery.post(ajaxurl, {action: "gadash_get_realtime", projectId: "<?php echo $projectId;?>", gadash_security_widgetrealtime: "<?php echo wp_create_nonce('gadash_get_realtime');?>"}, function(data){
             			
                         if (jQuery.isNumeric(data) || typeof data === "undefined"){
                             data = [];
@@ -548,7 +535,7 @@ if (! class_exists('GADASH_Widgets')) {
         		}    
         	    npcounter = 0;
                                      
-                jQuery.post(ajaxurl, {action: "gadashadmin_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "<?php echo $query; ?>",gadashadmin_security_widget_reports: "<?php echo wp_create_nonce('gadashadmin_get_widgetreports'); ?>"}, function(response){
+                jQuery.post(ajaxurl, {action: "gadash_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "<?php echo $query; ?>",gadash_security_widget_reports: "<?php echo wp_create_nonce('gadash_get_widgetreports'); ?>"}, function(response){
                 	   
                     if (!jQuery.isNumeric(response)){
                         if (jQuery.isArray(response)){
@@ -567,7 +554,7 @@ if (! class_exists('GADASH_Widgets')) {
                     }	
                 });
 
-                jQuery.post(ajaxurl, {action: "gadashadmin_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "trafficchannels",gadashadmin_security_widget_reports: "<?php echo wp_create_nonce('gadashadmin_get_widgetreports'); ?>"}, function(response){
+                jQuery.post(ajaxurl, {action: "gadash_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "trafficchannels",gadash_security_widget_reports: "<?php echo wp_create_nonce('gadash_get_widgetreports'); ?>"}, function(response){
                     if (!jQuery.isNumeric(response)){
                     	if (jQuery.isArray(response)){
                         	gadash_trafficchannels=response;
@@ -644,7 +631,7 @@ if (! class_exists('GADASH_Widgets')) {
         		}    
         	    npcounter = 0;            	
                
-                jQuery.post(ajaxurl, {action: "gadashadmin_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "medium",gadashadmin_security_widget_reports: "<?php echo wp_create_nonce('gadashadmin_get_widgetreports'); ?>"}, function(response){
+                jQuery.post(ajaxurl, {action: "gadash_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "medium",gadash_security_widget_reports: "<?php echo wp_create_nonce('gadash_get_widgetreports'); ?>"}, function(response){
 
                     if (!jQuery.isNumeric(response)){
                     	if (jQuery.isArray(response)){
@@ -663,7 +650,7 @@ if (! class_exists('GADASH_Widgets')) {
                     }	
                 });
 
-                jQuery.post(ajaxurl, {action: "gadashadmin_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "visitorType",gadashadmin_security_widget_reports: "<?php echo wp_create_nonce('gadashadmin_get_widgetreports'); ?>"}, function(response){
+                jQuery.post(ajaxurl, {action: "gadash_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "visitorType",gadash_security_widget_reports: "<?php echo wp_create_nonce('gadash_get_widgetreports'); ?>"}, function(response){
                     if (!jQuery.isNumeric(response)){
                     	if (jQuery.isArray(response)){
                     		gadash_traffictype=response;
@@ -681,7 +668,7 @@ if (! class_exists('GADASH_Widgets')) {
                     }	
                 });                
 
-                jQuery.post(ajaxurl, {action: "gadashadmin_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "trafficchannels",gadashadmin_security_widget_reports: "<?php echo wp_create_nonce('gadashadmin_get_widgetreports'); ?>"}, function(response){
+                jQuery.post(ajaxurl, {action: "gadash_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "trafficchannels",gadash_security_widget_reports: "<?php echo wp_create_nonce('gadash_get_widgetreports'); ?>"}, function(response){
 
                     if (!jQuery.isNumeric(response)){
                     	if (jQuery.isArray(response)){
@@ -700,7 +687,7 @@ if (! class_exists('GADASH_Widgets')) {
                     }	
                 });
 
-                jQuery.post(ajaxurl, {action: "gadashadmin_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "socialNetwork",gadashadmin_security_widget_reports: "<?php echo wp_create_nonce('gadashadmin_get_widgetreports'); ?>"}, function(response){
+                jQuery.post(ajaxurl, {action: "gadash_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "socialNetwork",gadash_security_widget_reports: "<?php echo wp_create_nonce('gadash_get_widgetreports'); ?>"}, function(response){
 
                     if (!jQuery.isNumeric(response)){
                     	if (jQuery.isArray(response)){
@@ -720,7 +707,7 @@ if (! class_exists('GADASH_Widgets')) {
                 });  
 
 
-                jQuery.post(ajaxurl, {action: "gadashadmin_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "source",gadashadmin_security_widget_reports: "<?php echo wp_create_nonce('gadashadmin_get_widgetreports'); ?>"}, function(response){
+                jQuery.post(ajaxurl, {action: "gadash_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "source",gadash_security_widget_reports: "<?php echo wp_create_nonce('gadash_get_widgetreports'); ?>"}, function(response){
 
                     if (!jQuery.isNumeric(response)){
                     	if (jQuery.isArray(response)){
@@ -842,7 +829,7 @@ if (! class_exists('GADASH_Widgets')) {
         		}    
         	    npcounter = 0;
                         
-                jQuery.post(ajaxurl, {action: "gadashadmin_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "<?php echo $query; ?>",gadashadmin_security_widget_reports: "<?php echo wp_create_nonce('gadashadmin_get_widgetreports'); ?>"}, function(response){
+                jQuery.post(ajaxurl, {action: "gadash_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "<?php echo $query; ?>",gadash_security_widget_reports: "<?php echo wp_create_nonce('gadash_get_widgetreports'); ?>"}, function(response){
 
                     if (!jQuery.isNumeric(response)){
                     	if (jQuery.isArray(response)){
@@ -872,8 +859,8 @@ if (! class_exists('GADASH_Widgets')) {
             			chartArea: {width: '99%',height: '90%'},	
             			colors: ['<?php echo $light_color; ?>', '<?php echo $dark_color; ?>'],
             			<?php
-              $GADASH_GAPI->getcountrycodes();
-              if ($GADASH_Config->options['ga_target_geomap'] and isset($GADASH_GAPI->country_codes[$GADASH_Config->options['ga_target_geomap']])) {
+              $GADASH_Config->getcountrycodes();
+              if ($GADASH_Config->options['ga_target_geomap'] and isset($GADASH_Config->country_codes[$GADASH_Config->options['ga_target_geomap']])) {
                 ?>
         				region : '<?php echo esc_html($GADASH_Config->options ['ga_target_geomap']); ?>',
         				displayMode : 'markers',
@@ -953,7 +940,7 @@ if (! class_exists('GADASH_Widgets')) {
 	}    
     npcounter = 0;
                 
-    jQuery.post(ajaxurl, {action: "gadashadmin_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "<?php echo $query; ?>",gadashadmin_security_widget_reports: "<?php echo wp_create_nonce('gadashadmin_get_widgetreports'); ?>"}, function(response){
+    jQuery.post(ajaxurl, {action: "gadash_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "<?php echo $query; ?>",gadash_security_widget_reports: "<?php echo wp_create_nonce('gadash_get_widgetreports'); ?>"}, function(response){
 
         if (!jQuery.isNumeric(response)){
             if (jQuery.isArray(response)){
@@ -972,7 +959,7 @@ if (! class_exists('GADASH_Widgets')) {
         }	
     });
 
-    jQuery.post(ajaxurl, {action: "gadashadmin_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "bottomstats",gadashadmin_security_widget_reports: "<?php echo wp_create_nonce('gadashadmin_get_widgetreports'); ?>"}, function(response){
+    jQuery.post(ajaxurl, {action: "gadash_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "bottomstats",gadash_security_widget_reports: "<?php echo wp_create_nonce('gadash_get_widgetreports'); ?>"}, function(response){
 
         if (!jQuery.isNumeric(response)){
         	if (jQuery.isArray(response)){

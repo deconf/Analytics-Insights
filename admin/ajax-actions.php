@@ -13,26 +13,66 @@ if (! class_exists('GADASH_Backend_Ajax')) {
     function __construct()
     {
       // Backend Widget Realtime action
-      add_action('wp_ajax_gadashadmin_get_realtime', array(
+      add_action('wp_ajax_gadash_get_realtime', array(
         $this,
-        'ajax_adminwidget_realtime'
+        'ajax_widget_realtime'
       ));
       // Admin Widget get Reports action
-      add_action('wp_ajax_gadashadmin_get_widgetreports', array(
+      add_action('wp_ajax_gadash_get_widgetreports', array(
         $this,
-        'ajax_adminwidget_reports'
+        'ajax_widget_reports'
       ));
+      // Admin Post/Page List get Reports action
+      add_action('wp_ajax_gadash_get_itemreports', array(
+        $this,
+        'ajax_item_reports'
+      ));
+    }
+
+    /**
+     * Ajax handler for getting reports for Admin Post/Page List
+     *
+     * @return json|int
+     */
+    function ajax_item_reports()
+    {
+      global $GADASH_Config;
+      if (! isset($_REQUEST['gadash_security_item_reports']) or ! wp_verify_nonce($_REQUEST['gadash_security_item_reports'], 'gadash_get_itemreports')) {
+        wp_die(- 30);
+      }
+      $id = $_REQUEST['id'];
+      /*
+       * Include Tools
+       */
+      include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
+      $tools = new GADASH_Tools();
+      if (! $tools->check_roles($GADASH_Config->options['ga_dash_access_back'])) {
+        wp_die(- 31);
+      }
+      if ($GADASH_Config->options['ga_dash_token'] and $GADASH_Config->options['ga_dash_tableid_jail']) {
+        include_once ($GADASH_Config->plugin_path . '/tools/gapi.php');
+        global $GADASH_GAPI;
+      } else {
+        wp_die(- 24);
+      }
+      $profile_info = $tools->get_selected_profile($GADASH_Config->options['ga_dash_profile_list'], $projectId);
+      if (isset($profile_info[4])) {
+        $GADASH_GAPI->timeshift = $profile_info[4];
+      } else {
+        $GADASH_GAPI->timeshift = (int) current_time('timestamp') - time();
+      }
+      wp_send_json('Nice');
     }
 
     /**
      * Ajax handler for getting reports for Admin Widget
      *
-     * @return string|int
+     * @return json|int
      */
-    function ajax_adminwidget_reports()
+    function ajax_widget_reports()
     {
       global $GADASH_Config;
-      if (! isset($_REQUEST['gadashadmin_security_widget_reports']) or ! wp_verify_nonce($_REQUEST['gadashadmin_security_widget_reports'], 'gadashadmin_get_widgetreports')) {
+      if (! isset($_REQUEST['gadash_security_widget_reports']) or ! wp_verify_nonce($_REQUEST['gadash_security_widget_reports'], 'gadash_get_widgetreports')) {
         wp_die(- 30);
       }
       $projectId = $_REQUEST['projectId'];
@@ -55,6 +95,12 @@ if (! class_exists('GADASH_Backend_Ajax')) {
         global $GADASH_GAPI;
       } else {
         wp_die(- 24);
+      }
+      $profile_info = $tools->get_selected_profile($GADASH_Config->options['ga_dash_profile_list'], $projectId);
+      if (isset($profile_info[4])) {
+        $GADASH_GAPI->timeshift = $profile_info[4];
+      } else {
+        $GADASH_GAPI->timeshift = (int) current_time('timestamp') - time();
       }
       switch ($query) {
         case 'referrers':
@@ -96,12 +142,12 @@ if (! class_exists('GADASH_Backend_Ajax')) {
     /**
      * Ajax handler for getting realtime analytics data for Admin widget
      *
-     * @return string|int
+     * @return json|int
      */
-    function ajax_adminwidget_realtime()
+    function ajax_widget_realtime()
     {
       global $GADASH_Config;
-      if (! isset($_REQUEST['gadashadmin_security_widgetrealtime']) or ! wp_verify_nonce($_REQUEST['gadashadmin_security_widgetrealtime'], 'gadashadmin_get_realtime')) {
+      if (! isset($_REQUEST['gadash_security_widgetrealtime']) or ! wp_verify_nonce($_REQUEST['gadash_security_widgetrealtime'], 'gadash_get_realtime')) {
         wp_die(- 30);
       }
       $projectId = $_REQUEST['projectId'];
@@ -122,7 +168,7 @@ if (! class_exists('GADASH_Backend_Ajax')) {
       } else {
         wp_die(- 24);
       }
-      wp_send_json($GADASH_GAPI->gadash_realtime_data($projectId));
+      wp_send_json($GADASH_GAPI->get_realtime_data($projectId));
     }
   }
 }

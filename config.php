@@ -18,6 +18,11 @@ if (! class_exists('GADASH_Config')) {
       'AIzaSymApG7LlUoHc29ZeC_dsShVaBEX15SfRl_WY'
     );
 
+    public function getcountrycodes()
+    {
+      include_once 'tools/iso3166.php';
+    }    
+    
     public function __construct()
     {
       $this->getPluginPath();

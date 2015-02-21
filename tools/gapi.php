@@ -10,9 +10,8 @@ if (! class_exists('GADASH_GAPI')) {
   final class GADASH_GAPI
   {
     public $client, $service;
-    public $country_codes;
     public $timeshift;
-    private $error_timeout;
+    public $error_timeout;
     private $managequota;
 
     function __construct()
@@ -24,7 +23,7 @@ if (! class_exists('GADASH_GAPI')) {
       $config->setCacheClass('Google_Cache_Null');
       if (function_exists('curl_version')) {
         $curlversion = curl_version();
-        if (isset($curlversion['version']) and version_compare($curlversion['version'], '7.10.8') >= 0 and defined('GADWP_IP_VERSION') and GADWP_IP_VERSION) {
+        if (isset($curlversion['version']) and (version_compare(PHP_VERSION, '5.3.0') >= 0) and version_compare($curlversion['version'], '7.10.8') >= 0 and defined('GADWP_IP_VERSION') and GADWP_IP_VERSION) {
           $config->setClassConfig('Google_IO_Curl', array(
             'options' => array(
               CURLOPT_IPRESOLVE => GADWP_IP_VERSION
@@ -599,10 +598,10 @@ if (! class_exists('GADASH_GAPI')) {
       );
       if ($GADASH_Config->options['ga_target_geomap']) {
         $dimensions = 'ga:city, ga:region';
-        $this->getcountrycodes();
-        if (isset($this->country_codes[$GADASH_Config->options['ga_target_geomap']])) {
-          $filters = 'ga:country==' . ($this->country_codes[$GADASH_Config->options['ga_target_geomap']]);
-          $title = __("Cities from", 'ga-dash') . ' ' . __($this->country_codes[$GADASH_Config->options['ga_target_geomap']]);
+        $GADASH_Config->getcountrycodes();
+        if (isset($GADASH_Config->country_codes[$GADASH_Config->options['ga_target_geomap']])) {
+          $filters = 'ga:country==' . ($GADASH_Config->country_codes[$GADASH_Config->options['ga_target_geomap']]);
+          $title = __("Cities from", 'ga-dash') . ' ' . __($GADASH_Config->country_codes[$GADASH_Config->options['ga_target_geomap']]);
           $serial = 'gadash_qr7' . $projectId . $from . $GADASH_Config->options['ga_target_geomap'];
           $options = array(
             'dimensions' => $dimensions,
@@ -772,7 +771,7 @@ if (! class_exists('GADASH_GAPI')) {
       foreach ($data->getRows() as $row) {
         $ga_dash_data[] = array(
           ucfirst(esc_html((__($row[1])))) . ', ' . esc_html(substr_replace(substr_replace($row[0], "-", 4, 0), "-", 7, 0)),
-          ($anonim ? str_replace(",", ".", round($row[2] * 100 / $max, 2)) : (int) $row[2])
+          ($anonim ? round($row[2] * 100 / $max, 2) : (int) $row[2])
         );
       }
       $totals = $data->getTotalsForAllResults();
@@ -874,7 +873,7 @@ if (! class_exists('GADASH_GAPI')) {
      *          $projectId
      * @return array|int
      */
-    function gadash_realtime_data($projectId)
+    function get_realtime_data($projectId)
     {
       $metrics = 'rt:activeUsers';
       $dimensions = 'rt:pagePath,rt:source,rt:keyword,rt:trafficType,rt:visitorType,rt:pageTitle';
@@ -914,11 +913,6 @@ if (! class_exists('GADASH_GAPI')) {
         $i ++;
       }
       return $ga_dash_data;
-    }
-
-    public function getcountrycodes()
-    {
-      include_once 'iso3166.php';
     }
   }
 }
