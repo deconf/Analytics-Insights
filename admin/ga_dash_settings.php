@@ -48,6 +48,7 @@ final class GADASH_Settings
           } else 
             if ($who == 'general') {
               $options['ga_dash_userapi'] = 0;
+              $options['automatic_updates_minorversion'] = 0;
             } else 
               if ($who == 'network') {
                 $options['ga_dash_userapi'] = 0;
@@ -1015,8 +1016,23 @@ final class GADASH_Settings
 													<td colspan="2"><hr></td>
 												</tr>
 												<tr>
-													<td colspan="2"><?php echo __('A new frontend widget is available! To enable it, go to','ga-dash').' <a href="widgets.php">'.__('Appearance -> Widgets').'</a> '.__('and look for Google Analytics Dashboard.','ga-dash').' '.''; ?></td>
-												</tr>
+													<td colspan="2"><?php echo "<h2>" . __( "Automatic Updates", 'ga-dash' ) . "</h2>"; ?></td>
+												</tr>												
+                    							<tr>
+                    								<td colspan="2" class="title">
+                    									<div class="onoffswitch">
+                    										<input type="checkbox" name="options[automatic_updates_minorversion]"
+                    											value="1" class="onoffswitch-checkbox"
+                    											id="automatic_updates_minorversion"
+                    											<?php checked( $options['automatic_updates_minorversion'], 1 ); ?>> <label
+                    											class="onoffswitch-label" for="automatic_updates_minorversion">
+                    											<div class="onoffswitch-inner"></div>
+                    											<div class="onoffswitch-switch"></div>
+                    										</label>
+                    									</div>
+                    									<div class="switch-desc"><?php echo " ".__( "automatic updates for minor versions (security patches and bug fixes)", 'ga-dash' );?></div>
+                    								</td>
+                    							</tr>
 												<tr>
 													<td colspan="2"><hr></td>
 												</tr>

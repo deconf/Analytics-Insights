@@ -55,6 +55,7 @@ class GADASH_Install
       $options['ga_pubyear_dimindex'] = 0;
       $options['ga_aff_tracking'] = 0;
       $options['ga_event_affiliates'] = '/out/';
+      $options['automatic_updates_minorversion'] = 1;
     } else {
       $options = array();
       $options['ga_dash_apikey'] = get_option('ga_dash_apikey');
@@ -101,6 +102,8 @@ class GADASH_Install
       $options['ga_pubyear_dimindex'] = 0;
       $options['ga_event_affiliates'] = '/out/';
       $options['ga_aff_tracking'] = 0;
+      $options['automatic_updates_minorversion'] = 1;
+      
       delete_option('ga_dash_apikey');
       delete_option('ga_dash_clientid');
       delete_option('ga_dash_clientsecret');

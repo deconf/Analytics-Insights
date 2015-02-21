@@ -4,7 +4,7 @@ Donate link: https://deconf.com/donate/
 Tags: google,analytics,google analytics,dashboard,analytics dashboard,google analytics dashboard,google analytics widget,tracking,realtime,wpmu,multisite
 Requires at least: 3.0
 Tested up to: 4.1
-Stable tag: 4.4.6
+Stable tag: 4.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -126,6 +126,9 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 
 == Changelog ==
 
+= 4.5 =
+- Enhancement: automatic updates for minor versions (security patches and bug fixes)
+ 
 = 4.4.6 =
 - Bugfix: maintain compatibility with WordPress 3.0+
 

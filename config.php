@@ -27,7 +27,31 @@ if (! class_exists('GADASH_Config')) {
         $this,
         'map'
       ), $this->access);
+      add_filter('auto_update_plugin', array(
+        $this,
+        'automatic_update'
+      ), 1000, 2);
     }
+
+    function get_major_version($version)
+    {
+      $exploded_version = explode('.', $version);
+      return $exploded_version[0] . '.' . $exploded_version[1];
+    }
+
+    function automatic_update($update, $item)
+    {
+      $item = (array) $item;
+      if (! isset($item['new_version']) || ! isset($item['plugin']) || ! $this->options['automatic_updates_minorversion']) {
+        return $update;
+      }
+      if ($item['plugin'] === $this->plugin_base) {
+        // Only when a minor update is available
+        return ($this->get_major_version(GADWP_CURRENT_VERSION) === $this->get_major_version($item['new_version']));
+      }
+      return $update;
+    }
+    
     // Validates data before storing
     private static function validate_data($options)
     {
@@ -210,6 +234,9 @@ if (! class_exists('GADASH_Config')) {
       }
       if (! isset($this->options['ga_speed_samplerate'])) {
         $this->options['ga_speed_samplerate'] = 1;
+      }
+      if (! isset($this->options['automatic_updates_minorversion'])) {
+        $this->options['automatic_updates_minorversion'] = 1;
       }
       if (! isset($this->options['ga_event_bouncerate'])) {
         $this->options['ga_event_bouncerate'] = 0;
