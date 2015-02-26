@@ -133,6 +133,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Enhancement: stats per post in Post List (new feature)
 - Enhancement: stats per page in Page List (new feature)
 - Enhancement: Japanese translation, translated by [塀シスター](https://plus.google.com/u/0/+tk072110)
+- Enhancement: Dutch translation, translated by [Willem-Jan Meerkerk](https://github.com/WillemJann)
 - Bugfix: Arabic translation not loading properly
 - Bugfix: initialize timeshift for all API calls
 - Bugfix: include GAPI only when a API call is made
