@@ -27,6 +27,11 @@ register_uninstall_hook(__FILE__, array(
 ));
 
 /*
+ * Include Tools
+ */
+include_once (dirname(__FILE__) .  '/tools/tools.php');
+
+/*
  * Include Config
  */
 include_once (dirname(__FILE__) . '/config.php');
@@ -46,10 +51,6 @@ add_action('plugins_loaded', 'gadash_init');
 function gadash_init()
 {
   global $GADASH_Config;
-  /*
-   * Include Tools
-   */
-  include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
   $tools = new GADASH_Tools();
   if (is_admin()) {
     /*
@@ -58,14 +59,14 @@ function gadash_init()
     if ($tools->check_roles($GADASH_Config->options['ga_dash_access_back'])) {
       include_once (dirname(__FILE__) . '/admin/setup.php');
       include_once (dirname(__FILE__) . '/admin/widgets.php');
-      include_once (dirname(__FILE__) . '/admin/item-stats.php');
+      include_once (dirname(__FILE__) . '/admin/item-reports.php');
     }
   } else {
     /*
      * Include frontend resources
      */
     if ($tools->check_roles($GADASH_Config->options['ga_dash_access_front']) and ($GADASH_Config->options['ga_dash_frontend_stats'] or $GADASH_Config->options['ga_dash_frontend_keywords'])) {
-      include_once (dirname(__FILE__) . '/front/item-stats.php');
+      include_once (dirname(__FILE__) . '/front/item-reports.php');
     }
     /*
      * Include tracking

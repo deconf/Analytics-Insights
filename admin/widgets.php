@@ -22,12 +22,8 @@ if (! class_exists('GADASH_Widgets')) {
     function add_widget()
     {
       global $GADASH_Config;
-      /*
-       * Include Tools
-       */
-      include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
       $tools = new GADASH_Tools();
-      if ($tools->check_roles($GADASH_Config->options['ga_dash_access_back'])) {
+      if ($tools->check_roles($GADASH_Config->options['ga_dash_access_back']) and 0 == $GADASH_Config->options['dashboard_widget']) {
         wp_add_dashboard_widget('gadash-widget', __("Google Analytics Dashboard", 'ga-dash'), array(
           $this,
           'dashboard_widget'
@@ -42,10 +38,6 @@ if (! class_exists('GADASH_Widgets')) {
         echo '<p>' . __("This plugin needs an authorization:", 'ga-dash') . '</p><form action="' . menu_page_url('gadash_settings', false) . '" method="POST">' . get_submit_button(__("Authorize Plugin", 'ga-dash'), 'secondary') . '</form>';
         return;
       }
-      /*
-       * Include Tools
-       */
-      include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
       $tools = new GADASH_Tools();
       if (current_user_can('manage_options')) {
         if (isset($_REQUEST['ga_dash_profile_select'])) {
@@ -72,7 +64,7 @@ if (! class_exists('GADASH_Widgets')) {
             if (isset($profile[3])) {
               $profile_switch .= '<option value="' . esc_attr($profile[1]) . '" ';
               $profile_switch .= selected($profile[1], $GADASH_Config->options['ga_dash_tableid'], false);
-              $profile_switch .= ' title="' . __("View Name:", 'ga-dash') . ' ' . esc_attr($profile[0]) . '">' . esc_attr($tools->ga_dash_get_profile_domain($profile[3])) . '</option>';
+              $profile_switch .= ' title="' . __("View Name:", 'ga-dash') . ' ' . esc_attr($profile[0]) . '">' . esc_attr($tools->strip_protocol($profile[3])) . '</option>';
             }
           }
           $profile_switch .= "</select>";
@@ -209,10 +201,6 @@ if (! class_exists('GADASH_Widgets')) {
       } else {
         $formater = '';
       }
-      /*
-       * Include Tools
-       */
-      include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
       $tools = new GADASH_Tools();
       if (isset($GADASH_Config->options['ga_dash_style'])) {
         $light_color = $tools->colourVariator($GADASH_Config->options['ga_dash_style'], 40);
@@ -394,8 +382,8 @@ if (! class_exists('GADASH_Widgets')) {
             
             	 function online_refresh(){
             		if (focusFlag){
-            
-            		jQuery.post(ajaxurl, {action: "gadash_get_realtime", projectId: "<?php echo $projectId;?>", gadash_security_widgetrealtime: "<?php echo wp_create_nonce('gadash_get_realtime');?>"}, function(data){
+
+            		jQuery.post(ajaxurl, {action: "gadash_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: false,to: false,query: "realtime",gadash_security_widget_reports: "<?php echo wp_create_nonce('gadash_get_widgetreports'); ?>"}, function(data){
             			
                         if (jQuery.isNumeric(data) || typeof data === "undefined"){
                             data = [];
@@ -859,8 +847,9 @@ if (! class_exists('GADASH_Widgets')) {
             			chartArea: {width: '99%',height: '90%'},	
             			colors: ['<?php echo $light_color; ?>', '<?php echo $dark_color; ?>'],
             			<?php
-              $GADASH_Config->getcountrycodes();
-              if ($GADASH_Config->options['ga_target_geomap'] and isset($GADASH_Config->country_codes[$GADASH_Config->options['ga_target_geomap']])) {
+              $tools = new GADASH_Tools();			
+              $tools->getcountrycodes();
+              if ($GADASH_Config->options['ga_target_geomap'] and isset($tools->country_codes[$GADASH_Config->options['ga_target_geomap']])) {
                 ?>
         				region : '<?php echo esc_html($GADASH_Config->options ['ga_target_geomap']); ?>',
         				displayMode : 'markers',

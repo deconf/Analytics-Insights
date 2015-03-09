@@ -50,7 +50,7 @@ if (! class_exists('GADASH_GAPI')) {
       $this->service = new Google_Service_Analytics($this->client);
       if ($GADASH_Config->options['ga_dash_token']) {
         $token = $GADASH_Config->options['ga_dash_token'];
-        $token = $this->ga_dash_refresh_token();
+        $token = $this->refresh_token();
         if ($token) {
           $this->client->setAccessToken($token);
         }
@@ -82,7 +82,7 @@ if (! class_exists('GADASH_GAPI')) {
         return FALSE;
       }
       if (isset($errors[1][0]['reason']) and ($errors[1][0]['reason'] == 'invalidCredentials' or $errors[1][0]['reason'] == 'authError' or $errors[1][0]['reason'] == 'insufficientPermissions' or $errors[1][0]['reason'] == 'required' or $errors[1][0]['reason'] == 'keyExpired')) {
-        $this->ga_dash_reset_token(false);
+        $this->reset_token(false);
         return TRUE;
       }
       if (isset($errors[1][0]['reason']) and ($errors[1][0]['reason'] == 'userRateLimitExceeded' or $errors[1][0]['reason'] == 'quotaExceeded')) { // allow retry
@@ -201,7 +201,7 @@ if (! class_exists('GADASH_GAPI')) {
      *
      * @return token|boolean
      */
-    private function ga_dash_refresh_token()
+    private function refresh_token()
     {
       global $GADASH_Config;
       try {
@@ -254,7 +254,7 @@ if (! class_exists('GADASH_GAPI')) {
      * @param
      *          $all
      */
-    function ga_dash_reset_token($all = true)
+    function reset_token($all = true)
     {
       global $GADASH_Config;
       if (is_multisite() && $GADASH_Config->options['ga_dash_network']) {
@@ -312,9 +312,6 @@ if (! class_exists('GADASH_GAPI')) {
         } else {
           $timeouts = 1;
         }
-        if (strlen($serial) > 44) {
-          $serial = substr($serial, 0, 43); // keep a safe length
-        }
         $transient = get_transient($serial);
         if ($transient === false) {
           if ($this->gapi_errors_handler()) {
@@ -344,6 +341,18 @@ if (! class_exists('GADASH_GAPI')) {
     }
 
     /**
+     * Generates serials for transients
+     *
+     * @param
+     *          $serial
+     * @return string
+     */
+    function get_serial($serial)
+    {
+      return sprintf("%u", crc32($serial));
+    }
+
+    /**
      * Analytics data for backend reports (Admin Widget main report)
      *
      * @param
@@ -356,7 +365,7 @@ if (! class_exists('GADASH_GAPI')) {
      *          $query
      * @return array|int
      */
-    function get_mainreport($projectId, $from, $to, $query)
+    function get_mainreport($projectId, $from, $to, $query, $filter = '')
     {
       switch ($query) {
         case 'users':
@@ -382,15 +391,15 @@ if (! class_exists('GADASH_GAPI')) {
         $dimensions = 'ga:date,ga:dayOfWeekName';
         $dayorhour = __("Date", 'ga-dash');
       }
-      $serial = 'gadash_qr2' . str_replace(array(
-        'ga:',
-        ',',
-        '-'
-      ), "", $projectId . $from . $metrics);
-      $data = $this->handle_corereports($projectId, $from, $to, $metrics, array(
+      $options = array(
         'dimensions' => $dimensions,
         'quotaUser' => $this->managequota . 'p' . $projectId
-      ), $serial);
+      );
+      if ($filter) {
+        $options['filters'] = 'ga:pagePath==' . $filter;
+      }
+      $serial = 'gadash_qr2_' . $this->get_serial($projectId . $from . $metrics . $filter);
+      $data = $this->handle_corereports($projectId, $from, $to, $metrics, $options, $serial);
       if (is_numeric($data)) {
         return $data;
       }
@@ -429,14 +438,18 @@ if (! class_exists('GADASH_GAPI')) {
      *          $to
      * @return array|int
      */
-    function get_bottomstats($projectId, $from, $to)
+    function get_bottomstats($projectId, $from, $to, $filter = '')
     {
       $metrics = 'ga:sessions,ga:users,ga:pageviews,ga:BounceRate,ga:organicSearches,ga:pageviewsPerSession';
-      $serial = 'gadash_qr3' . $projectId . $from;
-      $data = $this->handle_corereports($projectId, $from, $to, $metrics, array(
+      $options = array(
         'dimensions' => NULL,
         'quotaUser' => $this->managequota . 'p' . $projectId
-      ), $serial);
+      );
+      if ($filter) {
+        $options['filters'] = 'ga:pagePath==' . $filter;
+      }
+      $serial = 'gadash_qr3_' . $this->get_serial($projectId . $from . $filter);
+      $data = $this->handle_corereports($projectId, $from, $to, $metrics, $options, $serial);
       if (is_numeric($data)) {
         if ($data == - 21) {
           return array_fill(0, 6, 0);
@@ -462,16 +475,20 @@ if (! class_exists('GADASH_GAPI')) {
      *          $to
      * @return array|int
      */
-    function get_contentpages($projectId, $from, $to)
+    function get_contentpages($projectId, $from, $to, $filter = '')
     {
       $metrics = 'ga:pageviews';
       $dimensions = 'ga:pageTitle';
-      $serial = 'gadash_qr4' . $projectId . $from;
-      $data = $this->handle_corereports($projectId, $from, $to, $metrics, array(
+      $options = array(
         'dimensions' => $dimensions,
         'sort' => '-ga:pageviews',
         'quotaUser' => $this->managequota . 'p' . $projectId
-      ), $serial);
+      );
+      if ($filter) {
+        $options['filters'] = 'ga:pagePath==' . $filter;
+      }
+      $serial = 'gadash_qr4_' . $this->get_serial($projectId . $from . $filter);
+      $data = $this->handle_corereports($projectId, $from, $to, $metrics, $options, $serial);
       if (is_numeric($data)) {
         return $data;
       }
@@ -501,17 +518,22 @@ if (! class_exists('GADASH_GAPI')) {
      *          $to
      * @return array|int
      */
-    function get_referrers($projectId, $from, $to)
+    function get_referrers($projectId, $from, $to, $filter = '')
     {
       $metrics = 'ga:sessions';
       $dimensions = 'ga:source';
-      $serial = 'gadash_qr5' . $projectId . $from;
-      $data = $this->handle_corereports($projectId, $from, $to, $metrics, array(
+      $options = array(
         'dimensions' => $dimensions,
         'sort' => '-ga:sessions',
-        'filters' => 'ga:medium==referral',
         'quotaUser' => $this->managequota . 'p' . $projectId
-      ), $serial);
+      );
+      if ($filter) {
+        $options['filters'] = 'ga:medium==referral;ga:pagePath==' . $filter;
+      } else {
+        $options['filters'] = 'ga:medium==referral';
+      }
+      $serial = 'gadash_qr5_' . $this->get_serial($projectId . $from . $filter);
+      $data = $this->handle_corereports($projectId, $from, $to, $metrics, $options, $serial);
       if (is_numeric($data)) {
         return $data;
       }
@@ -541,17 +563,22 @@ if (! class_exists('GADASH_GAPI')) {
      *          $to
      * @return array|int
      */
-    function get_searches($projectId, $from, $to)
+    function get_searches($projectId, $from, $to, $filter = '')
     {
       $metrics = 'ga:sessions';
       $dimensions = 'ga:keyword';
-      $serial = 'gadash_qr6' . $projectId . $from;
-      $data = $this->handle_corereports($projectId, $from, $to, $metrics, array(
+      $options = array(
         'dimensions' => $dimensions,
         'sort' => '-ga:sessions',
-        'filters' => 'ga:keyword!=(not set)',
         'quotaUser' => $this->managequota . 'p' . $projectId
-      ), $serial);
+      );
+      if ($filter) {
+        $options['filters'] = 'ga:keyword!=(not set);ga:pagePath==' . $filter;
+      } else {
+        $options['filters'] = 'ga:keyword!=(not set)';
+      }
+      $serial = 'gadash_qr6_' . $this->get_serial($projectId . $from . $filter);
+      $data = $this->handle_corereports($projectId, $from, $to, $metrics, $options, $serial);
       if (is_numeric($data)) {
         return $data;
       }
@@ -582,33 +609,38 @@ if (! class_exists('GADASH_GAPI')) {
      *          $to
      * @return array|int
      */
-    function get_locations($projectId, $from, $to)
+    function get_locations($projectId, $from, $to, $filter = '')
     {
       global $GADASH_Config;
       $metrics = 'ga:sessions';
       $options = "";
       $title = __("Countries", 'ga-dash');
-      $serial = 'gadash_qr7' . $projectId . $from;
+      $serial = 'gadash_qr7_' . $this->get_serial($projectId . $from . $filter);
       $dimensions = 'ga:country';
-      $filters = "";
+      $local_filter = '';
+      if ($GADASH_Config->options['ga_target_geomap']) {
+        $dimensions = 'ga:city, ga:region';
+        $tools = new GADASH_Tools();
+        $tools->getcountrycodes();
+        if (isset($tools->country_codes[$GADASH_Config->options['ga_target_geomap']])) {
+          $local_filter = 'ga:country==' . ($tools->country_codes[$GADASH_Config->options['ga_target_geomap']]);
+          $title = __("Cities from", 'ga-dash') . ' ' . __($tools->country_codes[$GADASH_Config->options['ga_target_geomap']]);
+          $serial = 'gadash_qr7_' . $this->get_serial($projectId . $from . $GADASH_Config->options['ga_target_geomap'] . $filter);
+        }
+      }
       $options = array(
         'dimensions' => $dimensions,
         'sort' => '-ga:sessions',
         'quotaUser' => $this->managequota . 'p' . $projectId
       );
-      if ($GADASH_Config->options['ga_target_geomap']) {
-        $dimensions = 'ga:city, ga:region';
-        $GADASH_Config->getcountrycodes();
-        if (isset($GADASH_Config->country_codes[$GADASH_Config->options['ga_target_geomap']])) {
-          $filters = 'ga:country==' . ($GADASH_Config->country_codes[$GADASH_Config->options['ga_target_geomap']]);
-          $title = __("Cities from", 'ga-dash') . ' ' . __($GADASH_Config->country_codes[$GADASH_Config->options['ga_target_geomap']]);
-          $serial = 'gadash_qr7' . $projectId . $from . $GADASH_Config->options['ga_target_geomap'];
-          $options = array(
-            'dimensions' => $dimensions,
-            'filters' => $filters,
-            'sort' => '-ga:sessions',
-            'quotaUser' => $this->managequota . 'p' . $projectId
-          );
+      if ($filter) {
+        $options['filters'] = 'ga:pagePath==' . $filter;
+        if ($local_filter) {
+          $options['filters'] .= ';' . $local_filter;
+        }
+      } else {
+        if ($local_filter) {
+          $options['filters'] = $local_filter;
         }
       }
       $data = $this->handle_corereports($projectId, $from, $to, $metrics, $options, $serial);
@@ -648,15 +680,19 @@ if (! class_exists('GADASH_GAPI')) {
      *          $to
      * @return array|int
      */
-    function get_trafficchannels($projectId, $from, $to)
+    function get_trafficchannels($projectId, $from, $to, $filter = '')
     {
       $metrics = 'ga:sessions';
       $dimensions = 'ga:channelGrouping';
-      $serial = 'gadash_qr8' . $projectId . $from;
-      $data = $this->handle_corereports($projectId, $from, $to, $metrics, array(
+      $options = array(
         'dimensions' => $dimensions,
         'quotaUser' => $this->managequota . 'p' . $projectId
-      ), $serial);
+      );
+      if ($filter) {
+        $options['filters'] = 'ga:pagePath==' . $filter;
+      }
+      $serial = 'gadash_qr8_' . $this->get_serial($projectId . $from . $filter);
+      $data = $this->handle_corereports($projectId, $from, $to, $metrics, $options, $serial);
       if (is_numeric($data)) {
         return $data;
       }
@@ -690,23 +726,33 @@ if (! class_exists('GADASH_GAPI')) {
      *          $query
      * @return array|int
      */
-    function get_trafficdetails($projectId, $from, $to, $query)
+    function get_trafficdetails($projectId, $from, $to, $query, $filter = '')
     {
       $metrics = 'ga:sessions';
       $dimensions = 'ga:' . $query;
+      
       if ($query == 'source') {
         $options = array(
           'dimensions' => $dimensions,
-          'filters' => 'ga:medium==organic;ga:keyword!=(not set)',
           'quotaUser' => $this->managequota . 'p' . $projectId
         );
+        if ($filter) {
+          $options['filters'] = 'ga:medium==organic;ga:keyword!=(not set);ga:pagePath==' . $filter;
+        } else {
+          $options['filters'] = 'ga:medium==organic;ga:keyword!=(not set)';
+        }
       } else {
         $options = array(
           'dimensions' => $dimensions,
           'quotaUser' => $this->managequota . 'p' . $projectId
         );
+        if ($filter) {
+          $options['filters'] = 'ga:' . $query . '!=(not set);ga:pagePath==' . $filter;
+        } else {
+          $options['filters'] = 'ga:' . $query . '!=(not set)';
+        }
       }
-      $serial = 'gadash_qr10' . $projectId . $from . $query;
+      $serial = 'gadash_qr10_' . $this->get_serial($projectId . $from . $query . $filter);
       $data = $this->handle_corereports($projectId, $from, $to, $metrics, $options, $serial);
       if (is_numeric($data)) {
         return $data;
@@ -743,15 +789,12 @@ if (! class_exists('GADASH_GAPI')) {
       $to = 'yesterday';
       $metrics = 'ga:sessions';
       $dimensions = 'ga:date,ga:dayOfWeekName';
-      $serial = 'gadash_qr2' . str_replace(array(
-        'ga:',
-        ',',
-        '-'
-      ), "", $projectId . $from . $metrics);
-      $data = $this->handle_corereports($projectId, $from, $to, $metrics, array(
+      $options = array(
         'dimensions' => $dimensions,
         'quotaUser' => $this->managequota . 'p' . $projectId
-      ), $serial);
+      );
+      $serial = 'gadash_qr2_' . $this->get_serial($projectId . $from . $metrics);
+      $data = $this->handle_corereports($projectId, $from, $to, $metrics, $options, $serial);
       if (is_numeric($data)) {
         return $data;
       }
@@ -798,7 +841,7 @@ if (! class_exists('GADASH_GAPI')) {
       $to = 'yesterday';
       $metrics = 'ga:pageviews,ga:uniquePageviews';
       $dimensions = 'ga:date,ga:dayOfWeekName';
-      $serial = 'gadash_qr21' . $post_id . 'stats';
+      $serial = 'gadash_qr21_' . $this->get_serial($post_id . 'stats');
       $data = $this->handle_corereports($projectId, $from, $to, $metrics, array(
         'dimensions' => $dimensions,
         'filters' => 'ga:pagePath==' . $page_url,
@@ -841,7 +884,7 @@ if (! class_exists('GADASH_GAPI')) {
       $to = 'yesterday';
       $metrics = 'ga:sessions';
       $dimensions = 'ga:keyword';
-      $serial = 'gadash_qr22' . $post_id . 'search';
+      $serial = 'gadash_qr22_' . $this->get_serial($post_id . 'search');
       $data = $this->handle_corereports($projectId, $from, $to, $metrics, array(
         'dimensions' => $dimensions,
         'sort' => '-ga:sessions',
@@ -878,7 +921,7 @@ if (! class_exists('GADASH_GAPI')) {
       $metrics = 'rt:activeUsers';
       $dimensions = 'rt:pagePath,rt:source,rt:keyword,rt:trafficType,rt:visitorType,rt:pageTitle';
       try {
-        $serial = "gadash_realtimecache_" . $projectId;
+        $serial = 'gadash_realtimecache_' . $this->get_serial($projectId);
         $transient = get_transient($serial);
         if ($transient === false) {
           if ($this->gapi_errors_handler()) {
@@ -913,6 +956,48 @@ if (! class_exists('GADASH_GAPI')) {
         $i ++;
       }
       return $ga_dash_data;
+    }
+
+    function get($projectId, $query, $from = false, $to = false, $filter = '')
+    {
+      switch ($query) {
+        case 'referrers':
+          wp_send_json($this->get_referrers($projectId, $from, $to, $filter));
+          break;
+        case 'contentpages':
+          wp_send_json($this->get_contentpages($projectId, $from, $to, $filter));
+          break;
+        case 'locations':
+          wp_send_json($this->get_locations($projectId, $from, $to, $filter));
+          break;
+        case 'bottomstats':
+          wp_send_json($this->get_bottomstats($projectId, $from, $to, $filter));
+          break;
+        case 'trafficchannels':
+          wp_send_json($this->get_trafficchannels($projectId, $from, $to, $filter));
+          break;
+        case 'medium':
+          wp_send_json($this->get_trafficdetails($projectId, $from, $to, 'medium', $filter));
+          break;
+        case 'visitorType':
+          wp_send_json($this->get_trafficdetails($projectId, $from, $to, 'visitorType', $filter));
+          break;
+        case 'socialNetwork':
+          wp_send_json($this->get_trafficdetails($projectId, $from, $to, 'socialNetwork', $filter));
+          break;
+        case 'source':
+          wp_send_json($this->get_trafficdetails($projectId, $from, $to, 'source', $filter));
+          break;
+        case 'searches':
+          wp_send_json($this->get_searches($projectId, $from, $to, $filter));
+          break;
+        case 'realtime':
+          wp_send_json($this->get_realtime_data($projectId));
+          break;
+        default:
+          wp_send_json($this->get_mainreport($projectId, $from, $to, $query, $filter));
+          break;
+      }
     }
   }
 }

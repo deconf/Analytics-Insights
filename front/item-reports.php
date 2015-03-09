@@ -29,9 +29,9 @@ if (! class_exists('GADASH_Front_Stats')) {
       if ((! is_page() and ! is_single()) or is_preview() or ! is_user_logged_in()) {
         return;
       }
-      wp_enqueue_style('ga_dash-front', $GADASH_Config->plugin_url . '/front/css/item-stats.css', NULL, GADWP_CURRENT_VERSION);
+      wp_enqueue_style('ga_dash-front', $GADASH_Config->plugin_url . '/front/css/item-reports.css', NULL, GADWP_CURRENT_VERSION);
       wp_enqueue_style('ga_dash-nprogress', $GADASH_Config->plugin_url . '/tools/nprogress/nprogress.css', NULL, GADWP_CURRENT_VERSION);
-      wp_enqueue_script('ga_dash-front', $GADASH_Config->plugin_url . '/front/js/item-stats.js', array(
+      wp_enqueue_script('ga_dash-front', $GADASH_Config->plugin_url . '/front/js/item-reports.js', array(
         'jquery'
       ), GADWP_CURRENT_VERSION);
       wp_enqueue_script('ga_dash-nprogress', $GADASH_Config->plugin_url . '/tools/nprogress/nprogress.js', array(
@@ -44,10 +44,6 @@ if (! class_exists('GADASH_Front_Stats')) {
     {
       global $post;
       global $GADASH_Config;
-      /*
-       * Include Tools
-       */
-      include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
       $tools = new GADASH_Tools();
       if (! $tools->check_roles($GADASH_Config->options['ga_dash_access_front']) or ! ($GADASH_Config->options['ga_dash_frontend_stats'] or $GADASH_Config->options['ga_dash_frontend_keywords'])) {
         return $content;

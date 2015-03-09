@@ -9,6 +9,13 @@ if (! class_exists('GADASH_Tools')) {
 
   class GADASH_Tools
   {
+    public $country_codes;
+
+    public function getcountrycodes()
+    {
+      include_once 'iso3166.php';
+      $this->country_codes = $country_codes;
+    }
 
     function guess_default_domain($profiles)
     {
@@ -47,7 +54,7 @@ if (! class_exists('GADASH_Tools')) {
       return $root;
     }
 
-    function ga_dash_get_profile_domain($domain)
+    function strip_protocol($domain)
     {
       return str_replace(array(
         "https://",
@@ -56,19 +63,11 @@ if (! class_exists('GADASH_Tools')) {
       ), "", $domain);
     }
 
-    function ga_dash_clear_cache()
+    function clear_cache()
     {
       global $wpdb;
       $sqlquery = $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_gadash%%'");
       $sqlquery = $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_timeout_gadash%%'");
-    }
-
-    function ga_dash_safe_get($key)
-    {
-      if (array_key_exists($key, $_POST)) {
-        return $_POST[$key];
-      }
-      return false;
     }
 
     function colourVariator($colour, $per)
@@ -93,6 +92,18 @@ if (! class_exists('GADASH_Tools')) {
         }
       }
       return '#' . $rgb;
+    }
+
+    function variations($base)
+    {
+      $variations[] = $base;
+      $variations[] = self::colourVariator($base, - 10);
+      $variations[] = self::colourVariator($base, + 10);
+      $variations[] = self::colourVariator($base, + 20);
+      $variations[] = self::colourVariator($base, - 20);
+      $variations[] = self::colourVariator($base, + 30);
+      $variations[] = self::colourVariator($base, - 30);
+      return $variations;
     }
 
     function check_roles($access_level, $tracking = false)

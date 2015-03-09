@@ -3,7 +3,7 @@ Contributors: deconf
 Donate link: https://deconf.com/donate/
 Tags: google,analytics,google analytics,dashboard,analytics dashboard,google analytics dashboard,google analytics widget,tracking,realtime,wpmu,multisite
 Requires at least: 3.5
-Tested up to: 4.1
+Tested up to: 4.1.1
 Stable tag: 4.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -28,7 +28,7 @@ Google Analytics reports, in real-time, on your dashboard screen:
 
 = Google Analytics Reports =
 
-The reports you need, in your dashboard and on site's frontend:  
+The reports you need, in your dashboard, in your Posts and Pages List, and on site's frontend:  
 
 - you can access all websites statistics in a single widget (websites within same Google Account)
 - option to choose a default color for your charts, graphs and maps
@@ -36,11 +36,13 @@ The reports you need, in your dashboard and on site's frontend:
 - location reports, displaying visitors by country on a Geo Map and in a table chart
 - local websites and business have an option to display cities, instead of countries, on a regional map and in a table chart
 - traffic overview reports with details about acquisition channels, social networks, search engines, traffic mediums and visitor type 
-- user access level settings for Backend statistics and analytics reports
-- user access level settings for Frontend analytics data and reports
+- per post or page analytics reports in Posts List and Pages List
 - option to display Google Analytics statistics on frontend, at the end of each article
 - frontend widget with website's analytics stats and analytics data anonymization feature
-- localization support, a POT file is available for translations.
+- localization support, a POT file is available for translations
+- user access level settings for Backend statistics and analytics reports
+- user access level settings for Frontend analytics data and reports
+- options to disable certain analytics reports from backend or frontend
 
 = Google Analytics Tracking =
 
@@ -75,7 +77,7 @@ Install the Google Analytics tracking code in less than a minute and customize i
 
 = Translations =
 
-Google Analytics Dashboard has been translated into the following languages: Arabic, English, French, German, Hungarian, Italian, Polish, Portuguese, Spanish
+Google Analytics Dashboard has been translated into the following languages: Arabic, Dutch, English, French, German, Hungarian, Italian, Japanese, Polish, Portuguese, and Spanish.
 
 = Further reading and info =
 
@@ -96,11 +98,11 @@ The documentation, tutorials and a short demo is available here: [Google Analyti
 
 == Frequently Asked Questions == 
 
-= I have several WordPress websites, do I need an API Project for each one? =
+= Errors and fixes for Google Analytics Dashboard =
 
-No, you don't. You can use the same API Project (same API Key, Client Secret and Client ID) for all your websites.
+Here's a list with common errors and how to fix them [Errors in Google Analytics Dashboard](https://deconf.com/error-codes-in-google-analytics-dashboard-for-wordpress/)
 
-= Some settings are missing in your video tutorial ... =
+= Some settings are missing in the video tutorial ... =
 
 We are constantly improving our plugin, sometimes the video tutorial may be a little outdated.
 
@@ -128,17 +130,20 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 
 = 4.5 =
 - Requirements: WordPress 3.5 and above
-- Enhancement: automatic updates for minor versions (security patches and bug fixes)
-- Enhancement: improvements while enqueueing styles & scripts
-- Enhancement: stats per post in Post List (new feature)
-- Enhancement: stats per page in Page List (new feature)
+- Enhancement: automatic updates for minor versions (security and maintenance releases)
+- Enhancement: improvements while enqueuing styles & scripts
+- Enhancement: reports per post in Post List (new feature)
+- Enhancement: reports per page in Page List (new feature)
+- Enhancement: gadwp_backenditem_uri allows URI corrections for backend item reports
+- Enhancement: option to enable/disable the custom dashboard widget
 - Enhancement: Japanese translation, translated by [塀シスター](https://plus.google.com/u/0/+tk072110)
 - Enhancement: Dutch translation, translated by [Willem-Jan Meerkerk](https://github.com/WillemJann)
+- Enhancement: Portuguese (Brazil) translation, updated by [Treed Box](http://treedbox.com.br/)
 - Bugfix: Arabic translation not loading properly
-- Bugfix: initialize timeshift for all API calls
+- Bugfix: initialize time-shift for all API calls
 - Bugfix: include GAPI only when a API call is made
 - Bugfix: keep the percentage numeric while anonymizing data
-- Bugfix: add PHP 5.3 as a requirement when forcing IPv4 
+- Bugfix: add PHP 5.3 as a requirement before forcing IPv4
 
 = 4.4.7 =
 - Bugfix: fatal error in plugin settings screen, under certain circumstances

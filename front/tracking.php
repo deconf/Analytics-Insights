@@ -33,10 +33,6 @@ if (! class_exists('GADASH_Tracking')) {
     function ga_dash_tracking()
     {
       global $GADASH_Config;
-      /*
-       * Include Tools
-       */
-      include_once ($GADASH_Config->plugin_path . '/tools/tools.php');
       $tools = new GADASH_Tools();
       if ($tools->check_roles($GADASH_Config->options['ga_track_exclude'], true) or ($GADASH_Config->options['ga_dash_excludesa'] and current_user_can('manage_network'))) {
         return;

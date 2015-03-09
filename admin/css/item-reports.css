@@ -1,0 +1,103 @@
+/* Posts & Pages stats */
+
+.column-gadwp_stats { 
+	width: 70px; 
+}
+
+.gadwp-icon{
+	color:#555;
+}
+
+.gadwp-icon:hover{
+	color:#2ea2cc;
+}
+
+.gadwp-icon:selected{
+	color:#0074a2;
+}
+
+.gadwp-icon-oldwp{
+	padding-top:5px;	
+}
+
+[id^=gadwp-container]{
+	width:480px;
+}
+
+[id^=gadwp-mainchart]{
+	height:280px;
+}
+
+[id^=gadwp-progressbar]{
+	width: 100%;
+	height: 3px;
+	margin: 5px 0 0px 0;
+}
+
+.gadwp-wrapper {
+	width: 100%;
+}
+
+.gadwp-wrapper .inside {
+	display: table;
+	margin: 0 auto;
+	padding: 0px;
+}
+
+.gadwp-wrapper .inside .small-box {
+	width: 31.2%;
+	float: left;
+	margin: 10px 5px 10px 5px;
+	background: #fff;
+	text-align: center;
+	-moz-box-shadow: 0px 0px 7px 0px #BBB;
+	-webkit-box-shadow: 0px 0px 7px 0px #BBB;
+	box-shadow: 0px 0px 7px 0px #BBB;
+}
+
+.gadwp-wrapper .inside .small-box h3 {
+	font-size: 1em;
+	color: #777;
+	padding: 0px 5px 0px 5px;
+	margin: 0px 0px 0px 0px;
+}
+
+.gadwp-wrapper .inside .small-box p {
+	font-size: 1.2em;
+	margin: 0px 0px 2px 0px;
+}
+
+[id^=gadwp-trafficmediums], [id^=gadwp-traffictype], [id^=gadwp-trafficorganic], [id^=gadwp-socialnetworks]{
+	width: 49.6%;
+	margin: 10px 0 0 0;
+	border-right: 1px solid white;
+	height: 200px;
+	float:left;
+}
+
+[id^=gadwp-locations], [id^=gadwp-prs]{
+	margin: 10px 0 0 0;
+}
+
+.ui-dialog-titlebar{
+   text-overflow:ellipsis;
+   overflow:hidden; 
+}
+
+@media screen and (max-width: 500px) {
+	[id^=gadwp-container]{
+		width:410px;
+	}
+	.gadwp-wrapper .inside .small-box {
+		width: 30.8%;
+	}	
+}
+
+@media screen and (max-width: 410px) {
+	[id^=gadwp-container]{
+		width:260px;
+	}
+	.gadwp-wrapper .inside .small-box {
+		width: 46%;
+	}	
+}
