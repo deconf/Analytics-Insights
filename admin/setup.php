@@ -194,7 +194,7 @@ if (! class_exists('GADASH_Back_Setup')) {
               '90daysAgo' => __("Last 90 Days", 'ga-dash')
             ),
             'reportList' => array(
-              'sessions' => __("Sessions", 'ga-dash'),
+              'uniquePageviews' => __("Unique Views", 'ga-dash'),
               'users' => __("Users", 'ga-dash'),
               'organicSearches' => __("Organic", 'ga-dash'),
               'pageviews' => __("Page Views", 'ga-dash'),
@@ -210,7 +210,7 @@ if (! class_exists('GADASH_Back_Setup')) {
               __( "Visitor Type", 'ga-dash' ),
               __( "Social Networks", 'ga-dash' ),
               __( "Search Engines", 'ga-dash' ),
-              __( "Sessions", 'ga-dash' ),
+              __( "Unique Views", 'ga-dash' ),
               __( "Users", 'ga-dash' ),
               __( "Page Views", 'ga-dash' ),
               __( "Bounce Rate", 'ga-dash' ),

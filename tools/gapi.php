@@ -380,6 +380,9 @@ if (! class_exists('GADASH_GAPI')) {
         case 'organicSearches':
           $title = __("Organic Searches", 'ga-dash');
           break;
+        case 'uniquePageviews':
+          $title = __("Unique Page Views", 'ga-dash');
+          break;
         default:
           $title = __("Sessions", 'ga-dash');
       }
@@ -440,13 +443,15 @@ if (! class_exists('GADASH_GAPI')) {
      */
     function get_bottomstats($projectId, $from, $to, $filter = '')
     {
-      $metrics = 'ga:sessions,ga:users,ga:pageviews,ga:BounceRate,ga:organicSearches,ga:pageviewsPerSession';
       $options = array(
         'dimensions' => NULL,
         'quotaUser' => $this->managequota . 'p' . $projectId
       );
       if ($filter) {
         $options['filters'] = 'ga:pagePath==' . $filter;
+        $metrics = 'ga:uniquePageviews,ga:users,ga:pageviews,ga:BounceRate,ga:organicSearches,ga:pageviewsPerSession';
+      } else {
+        $metrics = 'ga:sessions,ga:users,ga:pageviews,ga:BounceRate,ga:organicSearches,ga:pageviewsPerSession';
       }
       $serial = 'gadash_qr3_' . $this->get_serial($projectId . $from . $filter);
       $data = $this->handle_corereports($projectId, $from, $to, $metrics, $options, $serial);
