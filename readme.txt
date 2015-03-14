@@ -11,9 +11,9 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Displays Google Analytics reports and real-time statistics in your WordPress Dashboard. Inserts the latest tracking code in every page of your site.
 
 == Description ==
-Using a widget, [Google Analytics Dashboard](https://deconf.com/google-analytics-dashboard-wordpress/) displays detailed analytics info and statistics about: number of visits (sessions), number of visitors (users), bounce rates, organic searches, pages per visit directly on your WordPress Dashboard.
+Using a widget, [Google Analytics Dashboard](https://deconf.com/google-analytics-dashboard-wordpress/) displays detailed analytics data and reports about: number of sessions, number of visitors (users), page views, bounce rates, organic searches, pages per visit directly on your WordPress Dashboard.
 
-Authorized users can also view statistics like views, unique views and searches, on frontend, at the end of each article.
+This plugin also inserts the latest version of the Google Analytics tracking code in every page of your site. The tracking code is fully customizable through options and hooks. 
 
 > <strong>Google Analytics Dashboard on GitHub</strong><br>
 > You can submit pull requests, feature requests or bugs on [Google Analytics Dashboard](https://github.com/deconf/Google-Analytics-Dashboard-for-WP) repository.
@@ -98,11 +98,15 @@ The documentation, tutorials and a short demo is available here: [Google Analyti
 
 == Frequently Asked Questions == 
 
-= Errors and fixes for Google Analytics Dashboard =
+= Do I have to insert the Google Analytics tracking code manually? =
+
+No, once the plugin is authorized and a default domain is selected the Google Analytics tracking code is automatically inserted in all webpages.
+   
+= I have an error =
 
 Here's a list with common errors and how to fix them [Errors in Google Analytics Dashboard](https://deconf.com/error-codes-in-google-analytics-dashboard-for-wordpress/)
 
-= Some settings are missing in the video tutorial ... =
+= Some settings are missing in the video tutorial =
 
 We are constantly improving our plugin, sometimes the video tutorial may be a little outdated.
 
