@@ -298,7 +298,6 @@ jQuery.fn.extend({
       },
 
       throwDebug : function(response) {
-        this.checknpcounter(0);
         jQuery("#gadwp-status" + slug).css({
           "margin-top" : "3px",
           "padding-left" : "5px",
@@ -377,6 +376,7 @@ jQuery.fn.extend({
                 reports.checknpcounter(1);
               } else {
                 reports.throwDebug(response);
+                reports.checknpcounter(1);
               }
             } else {
               reports.throwError('#gadwp-trafficchannels' + slug, response, 1, "125px");
@@ -391,6 +391,7 @@ jQuery.fn.extend({
                 reports.checknpcounter(1);
               } else {
                 reports.throwDebug(response);
+                reports.checknpcounter(1);
               }
             } else {
               reports.throwError('#gadwp-prs' + slug, response, 1, "125px");
@@ -409,6 +410,7 @@ jQuery.fn.extend({
                 reports.checknpcounter(4);
               } else {
                 reports.throwDebug(response);
+                reports.checknpcounter(4);                
               }
             } else {
               reports.throwError('#gadwp-trafficchannels' + slug, response, 4, "125px");
@@ -423,6 +425,7 @@ jQuery.fn.extend({
                 reports.checknpcounter(4);
               } else {
                 reports.throwDebug(response);
+                reports.checknpcounter(4);
               }
             } else {
               reports.throwError('#gadwp-trafficmediums' + slug, response, 4, "80px");
@@ -437,6 +440,7 @@ jQuery.fn.extend({
                 reports.checknpcounter(4);
               } else {
                 reports.throwDebug(response);
+                reports.checknpcounter(4);
               }
             } else {
               reports.throwError('#gadwp-traffictype' + slug, response, 4, "80px");
@@ -451,6 +455,7 @@ jQuery.fn.extend({
                 reports.checknpcounter(4);
               } else {
                 reports.throwDebug(response);
+                reports.checknpcounter(4);
               }
             } else {
               reports.throwError('#gadwp-trafficorganic' + slug, response, 4, "80px");
@@ -465,6 +470,7 @@ jQuery.fn.extend({
                 reports.checknpcounter(4);
               } else {
                 reports.throwDebug(response);
+                reports.checknpcounter(4);
               }
             } else {
               reports.throwError('#gadwp-socialnetworks' + slug, response, 4, "80px");
@@ -484,6 +490,7 @@ jQuery.fn.extend({
                 reports.checknpcounter(1);
               } else {
                 reports.throwDebug(response);
+                reports.checknpcounter(1);
               }
             } else {
               reports.throwError('#gadwp-map' + slug, response, 1, "125px");
@@ -503,6 +510,7 @@ jQuery.fn.extend({
                 reports.checknpcounter(1);
               } else {
                 reports.throwDebug(response);
+                reports.checknpcounter(1);
               }
             } else {
               reports.throwError('#gadwp-mainchart' + slug, response, 1, "125px");
@@ -519,6 +527,7 @@ jQuery.fn.extend({
                 reports.checknpcounter(1);
               } else {
                 reports.throwDebug(response);
+                reports.checknpcounter(1);
               }
             } else {
               reports.throwError('#gadwp-bottomstats' + slug, response, response, 1, "40px");
