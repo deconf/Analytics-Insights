@@ -59,13 +59,13 @@ if (! class_exists('GADASH_Backend_Ajax')) {
       } else {
         $GADASH_GAPI->timeshift = (int) current_time('timestamp') - time();
       }
-      //strip the protocol & domain 
-      $uri = str_replace($tools->strip_protocol($profile_info[3]),'',$tools->strip_protocol(get_permalink($filter_id)));
-      //make sure the path starts with '/'
-      if ($uri){
-        $uri = '/'.ltrim($uri,'/');
-      }  
-      //allow URI correction before sending an API request
+      // strip the protocol & domain
+      $uri = str_replace($tools->strip_protocol($profile_info[3]), '', $tools->strip_protocol(get_permalink($filter_id)));
+      // make sure the path starts with '/'
+      if ($uri) {
+        $uri = '/' . ltrim($uri, '/');
+      }
+      // allow URI correction before sending an API request
       $filter = apply_filters('gadwp_backenditem_uri', $uri);
       $GADASH_GAPI->get($projectId, $query, $from, $to, $filter);
     }

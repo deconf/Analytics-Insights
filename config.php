@@ -41,6 +41,9 @@ if (! class_exists('GADASH_Config')) {
     function automatic_update($update, $item)
     {
       $item = (array) $item;
+      if (is_multisite() && ! is_main_site()) {
+        return;
+      }
       if (! isset($item['new_version']) || ! isset($item['plugin']) || ! $this->options['automatic_updates_minorversion']) {
         return $update;
       }
@@ -136,6 +139,7 @@ if (! class_exists('GADASH_Config')) {
             $options['ga_dash_userapi'] = 0;
             $network_options['ga_dash_network'] = $this->options['ga_dash_network'];
             $network_options['ga_dash_excludesa'] = $this->options['ga_dash_excludesa'];
+            $network_options['automatic_updates_minorversion'] = $this->options['automatic_updates_minorversion'];
             unset($options['ga_dash_network']);
             if (isset($this->options['ga_dash_tableid_network'])) {
               $network_options['ga_dash_tableid_network'] = $this->options['ga_dash_tableid_network'];

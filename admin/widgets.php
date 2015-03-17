@@ -847,7 +847,7 @@ if (! class_exists('GADASH_Widgets')) {
             			chartArea: {width: '99%',height: '90%'},	
             			colors: ['<?php echo $light_color; ?>', '<?php echo $dark_color; ?>'],
             			<?php
-              $tools = new GADASH_Tools();			
+              $tools = new GADASH_Tools();
               $tools->getcountrycodes();
               if ($GADASH_Config->options['ga_target_geomap'] and isset($tools->country_codes[$GADASH_Config->options['ga_target_geomap']])) {
                 ?>

@@ -126,7 +126,7 @@ if (! class_exists('GADASH_Back_Setup')) {
     function load_styles_scripts($hook)
     {
       global $GADASH_Config;
-      $tools = new GADASH_Tools();      
+      $tools = new GADASH_Tools();
       /*
        * GADWP main stylesheet
        */
@@ -165,8 +165,8 @@ if (! class_exists('GADASH_Back_Setup')) {
         wp_enqueue_style('gadwp_itemreports', $GADASH_Config->plugin_url . '/admin/css/item-reports.css', NULL, GADWP_CURRENT_VERSION);
         $tools->getcountrycodes();
         if ($GADASH_Config->options['ga_target_geomap'] and isset($tools->country_codes[$GADASH_Config->options['ga_target_geomap']])) {
-          $region = $GADASH_Config->options['ga_target_geomap'];         
-        }else{
+          $region = $GADASH_Config->options['ga_target_geomap'];
+        } else {
           $region = false;
         }
         wp_enqueue_style("wp-jquery-ui-dialog");
@@ -174,8 +174,8 @@ if (! class_exists('GADASH_Back_Setup')) {
           wp_register_script('googlejsapi', 'https://www.google.com/jsapi');
         }
         wp_enqueue_script('gadwp-nprogress', $GADASH_Config->plugin_url . '/tools/nprogress/nprogress.js', array(
-        'jquery'
-          ), GADWP_CURRENT_VERSION);        
+          'jquery'
+        ), GADWP_CURRENT_VERSION);
         wp_enqueue_script('gadwp_itemreports', plugins_url('js/item-reports.js', __FILE__), array(
           'gadwp-nprogress',
           'googlejsapi',
@@ -206,16 +206,16 @@ if (! class_exists('GADASH_Back_Setup')) {
             ),
             'i18n' => array(
               __("A JavaScript Error is blocking plugin resources!", 'ga-dash'),
-              __( "Traffic Mediums", 'ga-dash' ),
-              __( "Visitor Type", 'ga-dash' ),
-              __( "Social Networks", 'ga-dash' ),
-              __( "Search Engines", 'ga-dash' ),
-              __( "Unique Views", 'ga-dash' ),
-              __( "Users", 'ga-dash' ),
-              __( "Page Views", 'ga-dash' ),
-              __( "Bounce Rate", 'ga-dash' ),
-              __( "Organic Search", 'ga-dash' ),
-              __( "Pages/Session", 'ga-dash' ),
+              __("Traffic Mediums", 'ga-dash'),
+              __("Visitor Type", 'ga-dash'),
+              __("Social Networks", 'ga-dash'),
+              __("Search Engines", 'ga-dash'),
+              __("Unique Views", 'ga-dash'),
+              __("Users", 'ga-dash'),
+              __("Page Views", 'ga-dash'),
+              __("Bounce Rate", 'ga-dash'),
+              __("Organic Search", 'ga-dash'),
+              __("Pages/Session", 'ga-dash'),
               __("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'),
               __("Not enough data collected", 'ga-dash'),
               __("This report is unavailable", 'ga-dash'),

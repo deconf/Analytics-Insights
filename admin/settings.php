@@ -141,6 +141,8 @@ final class GADASH_Settings
 									
 									
 									
+									
+									
 									</table>
 								</td>
 							</tr>
@@ -186,6 +188,8 @@ final class GADASH_Settings
 						</table>
 						<input type="hidden" name="options[ga_dash_hidden]" value="Y">
 						<?php wp_nonce_field('gadash_form','gadash_security'); ?>
+
+
 
 
 
@@ -261,6 +265,8 @@ final class GADASH_Settings
 									
 									
 									
+									
+									
 									</table>
 								</td>
 							</tr>
@@ -282,24 +288,22 @@ final class GADASH_Settings
 							<tr>
 								<td colspan="2" class="title">
 									<div class="onoffswitch">
-										<input type="checkbox" name="options[item_reports]"
-											value="1" class="onoffswitch-checkbox"
-											id="item_reports"
+										<input type="checkbox" name="options[item_reports]" value="1"
+											class="onoffswitch-checkbox" id="item_reports"
 											<?php checked( $options['item_reports'], 1 ); ?>> <label
 											class="onoffswitch-label" for="item_reports">
 											<div class="onoffswitch-inner"></div>
 											<div class="onoffswitch-switch"></div>
 										</label>
 									</div>
-									<div class="switch-desc"><?php _e ( "disable stats on Posts List and Pages List", 'ga-dash' );?></div>
+									<div class="switch-desc"><?php _e ( "disable reports on Posts List and Pages List", 'ga-dash' );?></div>
 								</td>
 							</tr>
 							<tr>
 								<td colspan="2" class="title">
 									<div class="onoffswitch">
 										<input type="checkbox" name="options[dashboard_widget]"
-											value="1" class="onoffswitch-checkbox"
-											id="dashboard_widget"
+											value="1" class="onoffswitch-checkbox" id="dashboard_widget"
 											<?php checked( $options['dashboard_widget'], 1 ); ?>> <label
 											class="onoffswitch-label" for="dashboard_widget">
 											<div class="onoffswitch-inner"></div>
@@ -308,7 +312,7 @@ final class GADASH_Settings
 									</div>
 									<div class="switch-desc"><?php _e ( "disable the main Dashboard Widget", 'ga-dash' );?></div>
 								</td>
-							</tr>														
+							</tr>
 							<tr>
 								<td colspan="2"><hr><?php echo "<h2>" . __( "Real-Time Settings", 'ga-dash' ) . "</h2>"; ?></td>
 							</tr>
@@ -352,6 +356,8 @@ final class GADASH_Settings
 						</table>
 						<input type="hidden" name="options[ga_dash_hidden]" value="Y">
 						<?php wp_nonce_field('gadash_form','gadash_security'); ?>
+
+
 
 
 
@@ -700,6 +706,8 @@ final class GADASH_Settings
 										
 										
 										
+										
+										
 										</table>
 									</td>
 								</tr>
@@ -717,6 +725,8 @@ final class GADASH_Settings
 						</table>
 						<input type="hidden" name="options[ga_dash_hidden]" value="Y">
 						<?php wp_nonce_field('gadash_form','gadash_security'); ?>
+
+
 
 
 
@@ -911,7 +921,7 @@ final class GADASH_Settings
       } else {
         $message = "<div class='error'><p>" . __("Cheating Huh?", 'ga-dash') . "</p></div>";
       }
-    }    
+    }
     if (isset($_POST['options']['ga_dash_hidden']) and ! isset($_POST['Clear']) and ! isset($_POST['Reset']) and ! isset($_POST['Reset_Err'])) {
       $message = "<div class='updated'><p>" . __("Settings saved.", 'ga-dash') . "</p></div>";
       if (! (isset($_POST['gadash_security']) && wp_verify_nonce($_POST['gadash_security'], 'gadash_form'))) {
@@ -1016,8 +1026,8 @@ final class GADASH_Settings
 														<?php echo $options['ga_dash_network']?'disabled="disabled"':''; ?> />
 														<input type="submit" name="Clear"
 														class="button button-secondary"
-														value="<?php _e( "Clear Cache", 'ga-dash' ); ?>" />
-														<input type="submit" name="Reset_Err"
+														value="<?php _e( "Clear Cache", 'ga-dash' ); ?>" /> <input
+														type="submit" name="Reset_Err"
 														class="button button-secondary"
 														value="<?php _e( "Reset Errors", 'ga-dash' ); ?>" /></td>
 												</tr>
@@ -1077,6 +1087,7 @@ final class GADASH_Settings
 												<tr>
 													<td colspan="2"><hr></td>
 												</tr>
+												<?php if ( !is_multisite()) {?>												
 												<tr>
 													<td colspan="2"><?php echo "<h2>" . __( "Automatic Updates", 'ga-dash' ) . "</h2>"; ?></td>
 												</tr>
@@ -1094,9 +1105,10 @@ final class GADASH_Settings
 																<div class="onoffswitch-switch"></div>
 															</label>
 														</div>
-														<div class="switch-desc"><?php echo " ".__( "automatic updates for minor versions (security and maintainance releases only)", 'ga-dash' );?></div>
+														<div class="switch-desc"><?php echo " ".__( "automatic updates for minor versions (security and maintenance releases only)", 'ga-dash' );?></div>
 													</td>
 												</tr>
+												<?php }?>
 												<tr>
 													<td colspan="2"><hr></td>
 												</tr>
@@ -1401,7 +1413,27 @@ final class GADASH_Settings
 							<?php
           }
           ?>
-							<tr>
+                    												<tr>
+																		<td colspan="2"><?php echo "<h2>" . __( "Automatic Updates", 'ga-dash' ) . "</h2>"; ?></td>
+																	</tr>
+																	<tr>
+																		<td colspan="2" class="title">
+																			<div class="onoffswitch">
+																				<input type="checkbox"
+																					name="options[automatic_updates_minorversion]"
+																					value="1" class="onoffswitch-checkbox"
+																					id="automatic_updates_minorversion"
+																					<?php checked( $options['automatic_updates_minorversion'], 1 ); ?>>
+																				<label class="onoffswitch-label"
+																					for="automatic_updates_minorversion">
+																					<div class="onoffswitch-inner"></div>
+																					<div class="onoffswitch-switch"></div>
+																				</label>
+																			</div>
+																			<div class="switch-desc"><?php echo " ".__( "automatic updates for minor versions (security and maintenance releases only)", 'ga-dash' );?></div>
+																		</td>
+																	</tr>
+																	<tr>
 																		<td colspan="2"><hr><?php echo "<h2>" . __( "Exclude Tracking", 'ga-dash' ) . "</h2>"; ?></td>
 																	</tr>
 																	<tr>

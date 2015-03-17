@@ -704,15 +704,15 @@ if (! class_exists('GADASH_GAPI')) {
       $title = __("Channels", 'ga-dash');
       $ga_dash_data = array(
         array(
-          '<div style=\\"color:black; font-size:1.1em\\">' . $title . '</div><div style=\\"color:darkblue; font-size:1.2em\\">' . (int) $data['totalsForAllResults']["ga:sessions"] . '</div>',
+          '<div style="color:black; font-size:1.1em">' . $title . '</div><div style="color:darkblue; font-size:1.2em">' . (int) $data['totalsForAllResults']["ga:sessions"] . '</div>',
           ""
         )
       );
       foreach ($data->getRows() as $row) {
         $shrink = explode(" ", $row[0]);
         $ga_dash_data[] = array(
-          '<div style=\\"color:black; font-size:1.1em\\">' . esc_html($shrink[0]) . '</div><div style=\\"color:darkblue; font-size:1.2em\\">' . (int) $row[1] . '</div>',
-          '<div style=\\"color:black; font-size:1.1em\\">' . $title . '</div><div style=\\"color:darkblue; font-size:1.2em\\">' . (int) $data['totalsForAllResults']["ga:sessions"] . '</div>'
+          '<div style="color:black; font-size:1.1em">' . esc_html($shrink[0]) . '</div><div style="color:darkblue; font-size:1.2em">' . (int) $row[1] . '</div>',
+          '<div style="color:black; font-size:1.1em">' . $title . '</div><div style="color:darkblue; font-size:1.2em">' . (int) $data['totalsForAllResults']["ga:sessions"] . '</div>'
         );
       }
       return $ga_dash_data;

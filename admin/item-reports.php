@@ -16,7 +16,7 @@ if (! class_exists('GADASH_Back_Stats')) {
       $tools = new GADASH_Tools();
       if (! $tools->check_roles($GADASH_Config->options['ga_dash_access_back']) or 1 == $GADASH_Config->options['item_reports']) {
         return;
-      }      
+      }
       // Add custom column in Posts List
       add_filter('manage_posts_columns', array(
         $this,
