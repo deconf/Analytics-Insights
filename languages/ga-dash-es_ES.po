@@ -57,7 +57,7 @@ msgstr ""
 #: .././admin/settings.php:92 .././admin/settings.php:211
 #: .././admin/settings.php:378 .././admin/settings.php:737
 #: .././admin/settings.php:943 .././admin/settings.php:1261
-msgid "auhorize the plugin"
+msgid "authorize the plugin"
 msgstr "autorizar aplicación"
 
 #: .././admin/settings.php:98
