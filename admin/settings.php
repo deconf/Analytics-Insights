@@ -50,12 +50,15 @@ final class GADASH_Settings
           } else 
             if ($who == 'general') {
               $options['ga_dash_userapi'] = 0;
-              $options['automatic_updates_minorversion'] = 0;
+              if (!is_multisite()){
+                $options['automatic_updates_minorversion'] = 0;
+              }  
             } else 
               if ($who == 'network') {
                 $options['ga_dash_userapi'] = 0;
                 $options['ga_dash_network'] = 0;
                 $options['ga_dash_excludesa'] = 0;
+                $options['automatic_updates_minorversion'] = 0;                
                 $network_settings = true;
               }
       $options = array_merge($options, $new_options);
@@ -137,12 +140,7 @@ final class GADASH_Settings
                                     		<?php
       }
     }
-    ?>									
-									
-									
-									
-									
-									
+    ?>
 									</table>
 								</td>
 							</tr>
@@ -187,13 +185,7 @@ final class GADASH_Settings
 							</tr>
 						</table>
 						<input type="hidden" name="options[ga_dash_hidden]" value="Y">
-						<?php wp_nonce_field('gadash_form','gadash_security'); ?>
-
-
-
-
-
-</form>
+						<?php wp_nonce_field('gadash_form','gadash_security'); ?></form>
 <?php
     self::output_sidebar();
   }
@@ -261,12 +253,7 @@ final class GADASH_Settings
                                     		<?php
       }
     }
-    ?>									
-									
-									
-									
-									
-									
+    ?>
 									</table>
 								</td>
 							</tr>
@@ -355,13 +342,7 @@ final class GADASH_Settings
 							</tr>
 						</table>
 						<input type="hidden" name="options[ga_dash_hidden]" value="Y">
-						<?php wp_nonce_field('gadash_form','gadash_security'); ?>
-
-
-
-
-
-</form>
+						<?php wp_nonce_field('gadash_form','gadash_security'); ?></form>
 <?php
     self::output_sidebar();
   }
@@ -702,12 +683,6 @@ final class GADASH_Settings
       }
     }
     ?>							
-										
-										
-										
-										
-										
-										
 										</table>
 									</td>
 								</tr>
@@ -724,13 +699,7 @@ final class GADASH_Settings
 							</tr>
 						</table>
 						<input type="hidden" name="options[ga_dash_hidden]" value="Y">
-						<?php wp_nonce_field('gadash_form','gadash_security'); ?>
-
-
-
-
-
-</form>
+						<?php wp_nonce_field('gadash_form','gadash_security'); ?></form>
 <?php
     self::output_sidebar();
   }
