@@ -143,26 +143,27 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Enhancement: Japanese translation, translated by [塀シスター](https://plus.google.com/u/0/+tk072110)
 - Enhancement: Dutch translation, translated by [Willem-Jan Meerkerk](https://github.com/WillemJann)
 - Enhancement: Portuguese (Brazil) translation, updated by [Treed Box](http://treedbox.com.br/)
-- Bugfix: Arabic translation not loading properly
-- Bugfix: initialize time-shift for all API calls
-- Bugfix: include GAPI only when a API call is made
-- Bugfix: keep the percentage numeric while anonymizing data
-- Bugfix: add PHP 5.3 as a requirement before forcing IPv4
+- Bug Fix: Arabic translation not loading properly
+- Bug Fix: initialize time-shift for all API calls
+- Bug Fix: include GAPI only when a API call is made
+- Bug Fix: keep the percentage numeric while anonymizing data
+- Bug Fix: add PHP 5.3 as a requirement before forcing IPv4
+- Bug Fix: typo fix by [Andrew Minion](https://github.com/macbookandrew)
 
 = 4.4.7 =
-- Bugfix: fatal error in plugin settings screen, under certain circumstances
-- Bugfix: fix refresh interval for backend stats
+- Bug Fix: fatal error in plugin settings screen, under certain circumstances
+- Bug Fix: fix refresh interval for backend stats
  
 = 4.4.6 =
-- Bugfix: maintain compatibility with WordPress 3.0+
+- Bug Fix: maintain compatibility with WordPress 3.0+
 
 = 4.4.5 =
 - Enhancement: GAPI requests optimization 
 - Enhancement: server responses improvements
 - Enhancement: filter data through query options
-- Bugfix: additional checks before displaying an error
-- Bugfix: wrong error displayed on IE
-- Bugfix: set correct Content-Type before sending responses
+- Bug Fix: additional checks before displaying an error
+- Bug Fix: wrong error displayed on IE
+- Bug Fix: set correct Content-Type before sending responses
 
 = 4.4.4 =
 - Bug Fix: end tag missing on error message
