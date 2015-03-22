@@ -10,7 +10,7 @@ if (! class_exists('GADASH_Config')) {
   final class GADASH_Config
   {
     public $options;
-    public $plugin_path, $plugin_url;
+    public $plugin_path, $plugin_url, $plugin_base;
     public $access = array(
       '65556128781.apps.googleusercontent.com',
       'Kc7888wgbc_JbeCpbFjnYpwE',

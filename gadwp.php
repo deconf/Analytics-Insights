@@ -35,8 +35,6 @@ include_once (dirname(__FILE__) . '/tools/tools.php');
  * Include Config
  */
 include_once (dirname(__FILE__) . '/config.php');
-// Set plugin base file
-$GADASH_Config->plugin_base = plugin_basename(__FILE__);
 
 /*
  * Add i18n support
@@ -53,6 +51,12 @@ add_action('plugins_loaded', 'gadash_init');
 function gadash_init()
 {
   global $GADASH_Config;
+  if (isset($GADASH_Config)){
+    // Set plugin base file
+    $GADASH_Config->plugin_base = plugin_basename(__FILE__);
+  }else{
+    return;
+  }
   $tools = new GADASH_Tools();
   if (is_admin()) {
     /*

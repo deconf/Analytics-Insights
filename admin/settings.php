@@ -736,7 +736,7 @@ final class GADASH_Settings
 						<table class="options">
 							<tr>
 								<td>
-						              <?php echo __("For errors and/or other issues please check",'ga-dash')." <a href='https://deconf.com/error-codes-in-google-analytics-dashboard-for-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=errors_screen&utm_campaign=gadwp' target='_blank'>". __("the plugin documentation page",'ga-dash')."</a> ".__("and related tutorials",'ga-dash').".";?>
+						              <?php echo __("For errors and/or other issues please check",'ga-dash')." <a href='https://deconf.com/error-codes-in-google-analytics-dashboard-for-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=errors_screen&utm_campaign=gadwp' target='_blank'>". __("this documentation page",'ga-dash')."</a> ".__("and related tutorials",'ga-dash').".";?>
 						        </td>
 							</tr>
 							<tr>

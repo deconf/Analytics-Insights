@@ -307,7 +307,7 @@ msgid "For errors and/or other issues please check"
 msgstr "エラー：および/または　その他の問題を確認してください"
 
 #: .././admin/settings.php:760
-msgid "the plugin documentation page"
+msgid "this documentation page"
 msgstr "プラグインのドキュメントページ"
 
 #: .././admin/settings.php:760
