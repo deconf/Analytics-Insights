@@ -43,7 +43,7 @@ if (! class_exists('GADASH_Backend_Ajax')) {
         ob_clean();
       }
       $tools = new GADASH_Tools();
-      if (! $tools->check_roles($GADASH_Config->options['ga_dash_access_back']) or 1 == $GADASH_Config->options['item_reports']) {
+      if (! $tools->check_roles($GADASH_Config->options['ga_dash_access_back']) or 0 == $GADASH_Config->options['item_reports']) {
         wp_die(- 31);
       }
       if ($GADASH_Config->options['ga_dash_token'] and $GADASH_Config->options['ga_dash_tableid_jail'] and $from and $to) {
@@ -89,7 +89,7 @@ if (! class_exists('GADASH_Backend_Ajax')) {
         ob_clean();
       }
       $tools = new GADASH_Tools();
-      if (! $tools->check_roles($GADASH_Config->options['ga_dash_access_back']) or 1 == $GADASH_Config->options['dashboard_widget']) {
+      if (! $tools->check_roles($GADASH_Config->options['ga_dash_access_back']) or 0 == $GADASH_Config->options['dashboard_widget']) {
         wp_die(- 31);
       }
       if ($GADASH_Config->options['ga_dash_token'] and $projectId and $from and $to) {

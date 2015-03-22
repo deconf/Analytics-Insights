@@ -299,16 +299,27 @@ if (! class_exists('GADASH_Config')) {
         $flag = true;
       }
       if (! isset($this->options['item_reports'])) {
-        $this->options['item_reports'] = 0;
+        $this->options['item_reports'] = 1;
         $flag = true;
       }
       if (! isset($this->options['dashboard_widget'])) {
-        $this->options['dashboard_widget'] = 0;
+        $this->options['dashboard_widget'] = 1;
         $flag = true;
       }
       if (isset($this->options['ga_tracking_code'])) {
         unset($this->options['ga_tracking_code']);
         $flag = true;
+      }
+      if (isset($this->options['ga_dash_jailadmins'])) {
+        if (isset($this->options['ga_dash_jailadmins'])) { // invert disable with enable and change option name
+          $this->options['switch_profile'] = 0;
+          unset($this->options['ga_dash_jailadmins']);
+          $flag = true;
+        } else {
+          $this->options['switch_profile'] = 1;
+          unset($this->options['ga_dash_jailadmins']);
+          $flag = true;
+        }
       }
       if ($flag) {
         $this->set_plugin_options(false);

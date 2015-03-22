@@ -158,7 +158,7 @@ if (! class_exists('GADASH_Back_Setup')) {
         'edit.php'
       );
       if (in_array($hook, $contentstats_hooks)) {
-        if (! $tools->check_roles($GADASH_Config->options['ga_dash_access_back']) or 1 == $GADASH_Config->options['item_reports']) {
+        if (! $tools->check_roles($GADASH_Config->options['ga_dash_access_back']) or 0 == $GADASH_Config->options['item_reports']) {
           return;
         }
         wp_enqueue_style('gadwp-nprogress', $GADASH_Config->plugin_url . '/tools/nprogress/nprogress.css', NULL, GADWP_CURRENT_VERSION);

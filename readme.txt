@@ -143,6 +143,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Enhancement: Japanese translation, translated by [塀シスター](https://plus.google.com/u/0/+tk072110)
 - Enhancement: Dutch translation, translated by [Willem-Jan Meerkerk](https://github.com/WillemJann)
 - Enhancement: Portuguese (Brazil) translation, updated by [Treed Box](http://treedbox.com.br/)
+- Enhancement: UI improvements props by [Paal Joachim Romdahl](https://github.com/paaljoachim)
 - Bug Fix: Arabic translation not loading properly
 - Bug Fix: initialize time-shift for all API calls
 - Bug Fix: include GAPI only when a API call is made

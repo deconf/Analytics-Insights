@@ -23,7 +23,7 @@ if (! class_exists('GADASH_Widgets')) {
     {
       global $GADASH_Config;
       $tools = new GADASH_Tools();
-      if ($tools->check_roles($GADASH_Config->options['ga_dash_access_back']) and 0 == $GADASH_Config->options['dashboard_widget']) {
+      if ($tools->check_roles($GADASH_Config->options['ga_dash_access_back']) and 1 == $GADASH_Config->options['dashboard_widget']) {
         wp_add_dashboard_widget('gadash-widget', __("Google Analytics Dashboard", 'ga-dash'), array(
           $this,
           'dashboard_widget'
@@ -53,7 +53,7 @@ if (! class_exists('GADASH_Widgets')) {
               $GADASH_Config->options['ga_dash_tableid'] = $tools->guess_default_domain($profiles);
             }
           } else 
-            if ($GADASH_Config->options['ga_dash_jailadmins'] and $GADASH_Config->options['ga_dash_tableid_jail']) {
+            if ($GADASH_Config->options['switch_profile'] == 0 and $GADASH_Config->options['ga_dash_tableid_jail']) {
               $GADASH_Config->options['ga_dash_tableid'] = $GADASH_Config->options['ga_dash_tableid_jail'];
             }
           $profile_switch .= '<select id="ga_dash_profile_select" name="ga_dash_profile_select" onchange="this.form.submit()">';
@@ -78,7 +78,7 @@ if (! class_exists('GADASH_Widgets')) {
 <form id="ga-dash" method="POST">
 						<?php
       if (current_user_can('manage_options')) {
-        if ($GADASH_Config->options['ga_dash_jailadmins']) {
+        if ($GADASH_Config->options['switch_profile'] == 0) {
           if ($GADASH_Config->options['ga_dash_tableid_jail']) {
             $projectId = $GADASH_Config->options['ga_dash_tableid_jail'];
           } else {

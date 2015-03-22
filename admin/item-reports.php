@@ -14,7 +14,7 @@ if (! class_exists('GADASH_Back_Stats')) {
     {
       global $GADASH_Config;
       $tools = new GADASH_Tools();
-      if (! $tools->check_roles($GADASH_Config->options['ga_dash_access_back']) or 1 == $GADASH_Config->options['item_reports']) {
+      if (! $tools->check_roles($GADASH_Config->options['ga_dash_access_back']) or 0 == $GADASH_Config->options['item_reports']) {
         return;
       }
       // Add custom column in Posts List

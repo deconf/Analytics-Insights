@@ -34,7 +34,7 @@ final class GADASH_Settings
         }
       } else 
         if ($who == 'backend') {
-          $options['ga_dash_jailadmins'] = 0;
+          $options['switch_profile'] = 0;
           $options['item_reports'] = 0;
           $options['dashboard_widget'] = 0;
           if (empty($new_options['ga_dash_access_back'])) {
@@ -260,16 +260,16 @@ final class GADASH_Settings
 							<tr>
 								<td colspan="2" class="title">
 									<div class="onoffswitch">
-										<input type="checkbox" name="options[ga_dash_jailadmins]"
+										<input type="checkbox" name="options[switch_profile]"
 											value="1" class="onoffswitch-checkbox"
-											id="ga_dash_jailadmins"
-											<?php checked( $options['ga_dash_jailadmins'], 1 ); ?>> <label
-											class="onoffswitch-label" for="ga_dash_jailadmins">
+											id="switch_profile"
+											<?php checked( $options['switch_profile'], 1 ); ?>> <label
+											class="onoffswitch-label" for="switch_profile">
 											<div class="onoffswitch-inner"></div>
 											<div class="onoffswitch-switch"></div>
 										</label>
 									</div>
-									<div class="switch-desc"><?php _e ( "disable Switch Profile/View functionality", 'ga-dash' );?></div>
+									<div class="switch-desc"><?php _e ( "enable Switch Profile/View functionality", 'ga-dash' );?></div>
 								</td>
 							</tr>
 							<tr>
@@ -283,7 +283,7 @@ final class GADASH_Settings
 											<div class="onoffswitch-switch"></div>
 										</label>
 									</div>
-									<div class="switch-desc"><?php _e ( "disable reports on Posts List and Pages List", 'ga-dash' );?></div>
+									<div class="switch-desc"><?php _e ( "enable reports on Posts List and Pages List", 'ga-dash' );?></div>
 								</td>
 							</tr>
 							<tr>
@@ -297,7 +297,7 @@ final class GADASH_Settings
 											<div class="onoffswitch-switch"></div>
 										</label>
 									</div>
-									<div class="switch-desc"><?php _e ( "disable the main Dashboard Widget", 'ga-dash' );?></div>
+									<div class="switch-desc"><?php _e ( "enable the main Dashboard Widget", 'ga-dash' );?></div>
 								</td>
 							</tr>
 							<tr>
