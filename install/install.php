@@ -69,7 +69,7 @@ class GADASH_Install
       $options['ga_dash_tableid_jail'] = get_option('ga_dash_tableid_jail');
       $options['ga_dash_frontend_stats'] = get_option('ga_dash_frontend');
       $options['ga_dash_style'] = '#1e73be';
-      $options['switch_profile'] = get_option('switch_profile');
+      $options['switch_profile'] = get_option('ga_dash_jailadmins');
       $options['ga_dash_cachetime'] = get_option('ga_dash_cachetime');
       if (get_option('ga_dash_tracking') == 4) {
         $options['ga_dash_tracking'] = 0;
@@ -117,7 +117,7 @@ class GADASH_Install
       delete_option('ga_dash_tableid_jail');
       delete_option('ga_dash_frontend');
       delete_option('ga_dash_style');
-      delete_option('switch_profile');
+      delete_option('ga_dash_jailadmins');
       delete_option('ga_dash_cachetime');
       delete_option('ga_dash_tracking');
       delete_option('ga_dash_tracking_type');
