@@ -10,7 +10,7 @@ if (! class_exists('GADASH_Config')) {
   final class GADASH_Config
   {
     public $options;
-    public $plugin_path, $plugin_url, $plugin_base;
+    public $plugin_path, $plugin_url;
     public $access = array(
       '65556128781.apps.googleusercontent.com',
       'Kc7888wgbc_JbeCpbFjnYpwE',
@@ -47,9 +47,9 @@ if (! class_exists('GADASH_Config')) {
       if (! isset($item['new_version']) || ! isset($item['plugin']) || ! $this->options['automatic_updates_minorversion']) {
         return $update;
       }
-      if ($item['plugin'] === $this->plugin_base) {
+      if ($item->slug == 'google-analytics-dashboard-for-wp') {
         // Only when a minor update is available
-        return ($this->get_major_version(GADWP_CURRENT_VERSION) === $this->get_major_version($item['new_version']));
+        return ($this->get_major_version(GADWP_CURRENT_VERSION) == $this->get_major_version($item['new_version']));
       }
       return $update;
     }
