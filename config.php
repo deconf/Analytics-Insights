@@ -29,7 +29,7 @@ if (! class_exists('GADASH_Config')) {
       add_filter('auto_update_plugin', array(
         $this,
         'automatic_update'
-      ), 1000, 2);
+      ), 10, 2);
     }
 
     function get_major_version($version)
