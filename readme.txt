@@ -3,7 +3,7 @@ Contributors: deconf
 Donate link: https://deconf.com/donate/
 Tags: google,analytics,google analytics,dashboard,analytics dashboard,google analytics dashboard,google analytics widget,tracking,realtime,wpmu,multisite
 Requires at least: 3.5
-Tested up to: 4.1.1
+Tested up to: 4.2
 Stable tag: 4.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -148,7 +148,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Bug Fix: initialize time-shift for all API calls
 - Bug Fix: include GAPI only when a API call is made
 - Bug Fix: keep the percentage numeric while anonymizing data
-- Bug Fix: add PHP 5.3 as a requirement before forcing IPv4
+- Bug Fix: add PHP 5.3 as a requirement when forcing IPv4
 - Bug Fix: typo fix by [Andrew Minion](https://github.com/macbookandrew)
 
 = 4.4.7 =
