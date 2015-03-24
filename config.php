@@ -47,7 +47,7 @@ if (! class_exists('GADASH_Config')) {
       if (! isset($item['new_version']) || ! isset($item['plugin']) || ! $this->options['automatic_updates_minorversion']) {
         return $update;
       }
-      if ($item->slug == 'google-analytics-dashboard-for-wp') {
+      if (isset($item['slug']) and $item['slug'] == 'google-analytics-dashboard-for-wp') {
         // Only when a minor update is available
         return ($this->get_major_version(GADWP_CURRENT_VERSION) == $this->get_major_version($item['new_version']));
       }
