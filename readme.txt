@@ -132,6 +132,11 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 
 == Changelog ==
 
+= 4.6 =
+- Bug Fix: inexistent script enqueued in frontend component, reported by [mmokrejs](https://wordpress.org/support/profile/mmokrejs)
+- Bug Fix: i18n improvements, committed by [Hinaloe](https://github.com/hinaloe)
+- Enhancement: Italian translation, updated by [Leo](https://www.facebook.com/leo.thestrategist)
+
 = 4.5.1 =
 - Bug Fix: analytics icons get added to all custom columns, reported by [FTRINITE](https://wordpress.org/support/profile/ftrinite)
 - Bug Fix: unable to switch tabs in plugin options for some languages, reported by [Hinaloe](https://github.com/hinaloe)

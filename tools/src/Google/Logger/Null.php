@@ -24,17 +24,17 @@ require_once realpath(dirname(__FILE__) . '/../../../autoload.php');
 class Google_Logger_Null extends Google_Logger_Abstract
 {
 
-  /**
-   * @ERROR!!!
-   */
-  public function shouldHandle($level)
-  {
-    return false;
-  }
+    /**
+     * @ERROR!!!
+     */
+    public function shouldHandle($level)
+    {
+        return false;
+    }
 
-  /**
-   * @ERROR!!!
-   */
-  protected function write($message, array $context = array())
-  {}
+    /**
+     * @ERROR!!!
+     */
+    protected function write($message, array $context = array())
+    {}
 }
