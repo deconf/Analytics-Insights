@@ -32,7 +32,7 @@ final class GADASH_Settings
         if (empty($new_options['ga_track_exclude'])) {
           $new_options['ga_track_exclude'] = array();
         }
-      } else 
+      } else
         if ($who == 'backend') {
           $options['switch_profile'] = 0;
           $options['item_reports'] = 0;
@@ -40,25 +40,25 @@ final class GADASH_Settings
           if (empty($new_options['ga_dash_access_back'])) {
             $new_options['ga_dash_access_back'][] = 'administrator';
           }
-        } else 
+        } else
           if ($who == 'frontend') {
             $options['ga_dash_frontend_stats'] = 0;
             $options['ga_dash_frontend_keywords'] = 0;
             if (empty($new_options['ga_dash_access_front'])) {
               $new_options['ga_dash_access_front'][] = 'administrator';
             }
-          } else 
+          } else
             if ($who == 'general') {
               $options['ga_dash_userapi'] = 0;
               if (!is_multisite()){
                 $options['automatic_updates_minorversion'] = 0;
-              }  
-            } else 
+              }
+            } else
               if ($who == 'network') {
                 $options['ga_dash_userapi'] = 0;
                 $options['ga_dash_network'] = 0;
                 $options['ga_dash_excludesa'] = 0;
-                $options['automatic_updates_minorversion'] = 0;                
+                $options['automatic_updates_minorversion'] = 0;
                 $network_settings = true;
               }
       $options = array_merge($options, $new_options);
@@ -92,7 +92,14 @@ final class GADASH_Settings
       }
     }
     if (! $GADASH_Config->options['ga_dash_tableid_jail'] or ! $GADASH_Config->options['ga_dash_token']) {
-      $message = "<div class='error'><p>" . __("Something went wrong, check", 'ga-dash') . " <a href='" . menu_page_url('gadash_errors_debugging', false) . "'>" . __('Errors & Debug', 'ga-dash') . "</a> " . __('or', 'ga-dash') . " <a href='" . menu_page_url('gadash_settings', false) . "'>" . __('authorize the plugin', 'ga-dash') . "</a>.</p></div>";
+      $message = sprintf(
+        '<div class="error"><p>%s</p></div>',
+        sprintf(
+          __('Something went wrong, check <a href="%1$s">Errors & Debug</a> or <a href="%2$s">authorize the plugin</a>.', 'ga-dash'),
+          menu_page_url('gadash_errors_debugging', false),
+          menu_page_url('gadash_settings', false)
+        )
+      );
     }
     ?>
 <form name="ga_dash_form" method="post"
@@ -204,7 +211,14 @@ final class GADASH_Settings
       }
     }
     if (! $GADASH_Config->options['ga_dash_tableid_jail'] or ! $GADASH_Config->options['ga_dash_token']) {
-      $message = "<div class='error'><p>" . __("Something went wrong, check", 'ga-dash') . " <a href='" . menu_page_url('gadash_errors_debugging', false) . "'>" . __('Errors & Debug', 'ga-dash') . "</a> " . __('or', 'ga-dash') . " <a href='" . menu_page_url('gadash_settings', false) . "'>" . __('authorize the plugin', 'ga-dash') . "</a>.</p></div>";
+      $message = sprintf(
+        '<div class="error"><p>%s</p></div>',
+        sprintf(
+          __('Something went wrong, check <a href="%1$s">Errors & Debug</a> or <a href="%2$s">authorize the plugin</a>.', 'ga-dash'),
+          menu_page_url('gadash_errors_debugging', false),
+          menu_page_url('gadash_settings', false)
+        )
+      );
     }
     ?>
 <form name="ga_dash_form" method="post"
@@ -362,7 +376,14 @@ final class GADASH_Settings
       }
     }
     if (! $GADASH_Config->options['ga_dash_tableid_jail']) {
-      $message = "<div class='error'><p>" . __("Something went wrong, check", 'ga-dash') . " <a href='" . menu_page_url('gadash_errors_debugging', false) . "'>" . __('Errors & Debug', 'ga-dash') . "</a> " . __('or', 'ga-dash') . " <a href='" . menu_page_url('gadash_settings', false) . "'>" . __('authorize the plugin', 'ga-dash') . "</a>.</p></div>";
+      $message = sprintf(
+        '<div class="error"><p>%s</p></div>',
+        sprintf(
+          __('Something went wrong, check <a href="%1$s">Errors & Debug</a> or <a href="%2$s">authorize the plugin</a>.', 'ga-dash'),
+          menu_page_url('gadash_errors_debugging', false),
+          menu_page_url('gadash_settings', false)
+        )
+      );
     }
     if (! $options['ga_dash_tracking']) {
       $message = "<div class='error'><p>" . __("The tracking component is disabled. You should set", 'ga-dash') . " <strong>" . __("Tracking Options", 'ga-dash') . "</strong> " . __("to", 'ga-dash') . " <strong>" . __("Enabled", 'ga-dash') . "</strong>.</p></div>";
@@ -387,7 +408,7 @@ final class GADASH_Settings
       'advanced' => __("Advanced Settings", 'ga-dash')
     );
     self::navigation_tabs($tabs);
-    ?>						
+    ?>
 					<?php if (isset($message)) echo $message; ?>
 					    <div id="gadwp-basic">
 							<table class="options">
@@ -682,7 +703,7 @@ final class GADASH_Settings
                                     		<?php
       }
     }
-    ?>							
+    ?>
 										</table>
 									</td>
 								</tr>
@@ -713,7 +734,14 @@ final class GADASH_Settings
     }
     $options = self::set_get_options('frontend');
     if (! $GADASH_Config->options['ga_dash_tableid_jail'] or ! $GADASH_Config->options['ga_dash_token']) {
-      $message = "<div class='error'><p>" . __("Something went wrong, check", 'ga-dash') . " <a href='" . menu_page_url('gadash_errors_debugging', false) . "'>" . __('Errors & Debug', 'ga-dash') . "</a> " . __('or', 'ga-dash') . " <a href='" . menu_page_url('gadash_settings', false) . "'>" . __('authorize the plugin', 'ga-dash') . "</a>.</p></div>";
+      $message = sprintf(
+        '<div class="error"><p>%s</p></div>',
+        sprintf(
+          __('Something went wrong, check <a href="%1$s">Errors & Debug</a> or <a href="%2$s">authorize the plugin</a>.', 'ga-dash'),
+          menu_page_url('gadash_errors_debugging', false),
+          menu_page_url('gadash_settings', false)
+        )
+      );
     }
     ?>
 <div class="wrap">
@@ -731,19 +759,28 @@ final class GADASH_Settings
       'config' => __("Plugin Settings", 'ga-dash')
     );
     self::navigation_tabs($tabs);
-    ?>	
+    ?>
 						<div id="gadwp-errors">
 						<table class="options">
 							<tr>
 								<td>
-						              <?php echo __("For errors and/or other issues please check",'ga-dash')." <a href='https://deconf.com/error-codes-in-google-analytics-dashboard-for-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=errors_screen&utm_campaign=gadwp' target='_blank'>". __("this documentation page",'ga-dash')."</a> ".__("and related tutorials",'ga-dash').".";?>
+                          <?php
+                            printf(
+                              __('For errors and/or other issues please check %s and related tutorials.','ga-dash'),
+                              sprintf(
+                                '<a href="%1$s" target="_blank">%2$s</a>',
+                                'https://deconf.com/error-codes-in-google-analytics-dashboard-for-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=errors_screen&utm_campaign=gadwp',
+                                 __('this documentation page','ga-dash')
+                              )
+                            )
+                          ?>
 						        </td>
 							</tr>
 							<tr>
 								<td><?php echo "<h2>" . __( "Last Error detected", 'ga-dash' ) . "</h2>"; ?></td>
 							</tr>
 							<tr>
-								<td> 
+								<td>
                     				<?php
     $errors = esc_html(print_r(get_transient('ga_dash_lasterror'), true)) ? esc_html(print_r(get_transient('ga_dash_lasterror'), true)) : __("None", 'ga-dash');
     echo '<pre class="log_data">Last Error: ';
@@ -755,7 +792,7 @@ final class GADASH_Settings
 								<td colspan="2"><hr><?php echo "<h2>" . __( "Error Details", 'ga-dash' ) . "</h2>"; ?></td>
 							</tr>
 							<tr>
-								<td> 
+								<td>
                     				<?php
     echo '<pre class="log_data">Error Details: ';
     $error_details = esc_html(print_r(get_transient('ga_dash_gapi_errors'), true)) ? "\n" . esc_html(print_r(get_transient('ga_dash_gapi_errors'), true)) : __("None", 'ga-dash');
@@ -763,10 +800,10 @@ final class GADASH_Settings
     ?></pre><br />
 									<hr>
 								</td>
-							
-							
+
+
 							<tr>
-						
+
 						</table>
 					</div>
 					<div id="gadwp-config">
@@ -799,7 +836,7 @@ final class GADASH_Settings
 									<hr></td>
 							</tr>
 						</table>
-					</div>    					
+					</div>
     <?php
     self::output_sidebar();
   }
@@ -919,7 +956,14 @@ final class GADASH_Settings
 								<div class="settings-wrapper">
 									<div class="inside">					<?php
     if ($GADASH_GAPI->gapi_errors_handler()) {
-      $message = "<div class='error'><p>" . __("Something went wrong, check", 'ga-dash') . " <a href='" . menu_page_url('gadash_errors_debugging', false) . "'>" . __('Errors & Debug', 'ga-dash') . "</a> " . __('or', 'ga-dash') . " <a href='" . menu_page_url('gadash_settings', false) . "'>" . __('authorize the plugin', 'ga-dash') . "</a>.</p></div>";
+      $message = sprintf(
+        '<div class="error"><p>%s</p></div>',
+        sprintf(
+          __('Something went wrong, check <a href="%1$s">Errors & Debug</a> or <a href="%2$s">authorize the plugin</a>.', 'ga-dash'),
+          menu_page_url('gadash_errors_debugging', false),
+          menu_page_url('gadash_settings', false)
+        )
+      );
     }
     if (isset($_POST['Authorize'])) {
       $tools->clear_cache();
@@ -939,7 +983,19 @@ final class GADASH_Settings
 												</tr>
 												<tr>
 													<td colspan="2" class="info">
-						<?php echo __("You should watch the",'ga-dash')." <a href='https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=top_video&utm_campaign=gadwp' target='_blank'>". __("video",'ga-dash')."</a> ".__("and read this", 'ga-dash')." <a href='https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=top_tutorial&utm_campaign=gadwp' target='_blank'>". __("tutorial",'ga-dash')."</a> ".__("before proceeding to authorization. This plugin requires a properly configured Google Analytics account", 'ga-dash')."!";?>
+            <?php printf(__('You should watch the %1$s and read this %2$s before proceeding to authorization. This plugin requires a properly configured Google Analytics account!','ga-dash'),
+                          sprintf(
+                            '<a href="%1$s" target="_blank">%2$s</a>',
+                            'https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=top_video&utm_campaign=gadwp',
+                            __("video",'ga-dash')
+                          ),
+                          sprintf(
+                            '<a href="%1$s" target="_blank">%2$s</a>',
+                            'https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=top_tutorial&utm_campaign=gadwp',
+                            __("tutorial",'ga-dash')
+                          )
+
+            ) ?>
 						</td>
 												</tr>
 						<?php
@@ -1056,7 +1112,7 @@ final class GADASH_Settings
 												<tr>
 													<td colspan="2"><hr></td>
 												</tr>
-												<?php if ( !is_multisite()) {?>												
+												<?php if ( !is_multisite()) {?>
 												<tr>
 													<td colspan="2"><?php echo "<h2>" . __( "Automatic Updates", 'ga-dash' ) . "</h2>"; ?></td>
 												</tr>
@@ -1239,7 +1295,14 @@ final class GADASH_Settings
 													<div class="settings-wrapper">
 														<div class="inside">						<?php
     if ($GADASH_GAPI->gapi_errors_handler()) {
-      $message = "<div class='error'><p>" . __("Something went wrong, check", 'ga-dash') . " <a href='" . menu_page_url('gadash_errors_debugging', false) . "'>" . __('Errors & Debug', 'ga-dash') . "</a> " . __('or', 'ga-dash') . " <a href='" . menu_page_url('gadash_settings', false) . "'>" . __('authorize the plugin', 'ga-dash') . "</a>.</p></div>";
+      $message = sprintf(
+        '<div class="error"><p>%s</p></div>',
+        sprintf(
+          __('Something went wrong, check <a href="%1$s">Errors & Debug</a> or <a href="%2$s">authorize the plugin</a>.', 'ga-dash'),
+          menu_page_url('gadash_errors_debugging', false),
+          menu_page_url('gadash_settings', false)
+        )
+      );
     }
     if (isset($_POST['Authorize'])) {
       $tools->clear_cache();
@@ -1489,14 +1552,27 @@ final class GADASH_Settings
 																		href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=support&utm_campaign=gadwp"><img
 																		src="<?php echo plugins_url( 'images/help.png' , __FILE__ ); ?>" /></a>
 																</div>
-																<div class="gadash-desc"><?php echo  __('Plugin documentation and support on', 'ga-dash') . ' <a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=support&utm_campaign=gadwp">deconf.com</a>.'; ?></div>
+																<div class="gadash-desc"><?php
+                                  printf(
+                                    __('Plugin documentation and support on %s', 'ga-dash'),
+                                    '<a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=support&utm_campaign=gadwp">deconf.com</a>'
+                                  );
+                                ?></div>
 																<br />
 																<div class="gadash-title">
 																	<a
 																		href="http://wordpress.org/support/view/plugin-reviews/google-analytics-dashboard-for-wp#plugin-info"><img
 																		src="<?php echo plugins_url( 'images/star.png' , __FILE__ ); ?>" /></a>
 																</div>
-																<div class="gadash-desc"><?php echo  __('Your feedback and review are both important,', 'ga-dash').' <a href="http://wordpress.org/support/view/plugin-reviews/google-analytics-dashboard-for-wp#plugin-info">'.__('rate this plugin', 'ga-dash').'</a>!'; ?></div>
+																<div class="gadash-desc"><?php
+                                  printf(
+                                    __('Your feedback and review are both important, %s!', 'ga-dash'),
+                                    sprintf(
+                                      '<a href="http://wordpress.org/support/view/plugin-reviews/google-analytics-dashboard-for-wp#plugin-info">%s</a>',
+                                      __('rate this plugin', 'ga-dash')
+                                    )
+                                  );
+                                 ?></div>
 															</div>
 														</div>
 														<div class="postbox">
@@ -1509,14 +1585,30 @@ final class GADASH_Settings
 																		href="https://deconf.com/move-website-https-ssl/?utm_source=gadwp_config&utm_medium=link&utm_content=ssl&utm_campaign=gadwp"><img
 																		src="<?php echo plugins_url( 'images/ssl.png' , __FILE__ ); ?>" /></a>
 																</div>
-																<div class="gadash-desc"><?php echo  '<a href="https://deconf.com/move-website-https-ssl/?utm_source=gadwp_config&utm_medium=link&utm_content=ssl&utm_campaign=gadwp">'.__('Improve search rankings', 'ga-dash').'</a> '.__('by moving your website to HTTPS/SSL.', 'ga-dash'); ?></div>
+																<div class="gadash-desc"><?php
+                                  printf(
+                                    __('%s by moving your website to HTTPS/SSL.', 'ga-dash'),
+                                    sprintf(
+                                      '<a href="https://deconf.com/move-website-https-ssl/?utm_source=gadwp_config&utm_medium=link&utm_content=ssl&utm_campaign=gadwp">%s</a>',
+                                      __('Improve search rankings', 'ga-dash')
+                                    )
+                                  );
+                                ?></div>
 																<br />
 																<div class="gadash-title">
 																	<a
 																		href="https://deconf.com/wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=plugins&utm_campaign=gadwp"><img
 																		src="<?php echo plugins_url( 'images/wp.png' , __FILE__ ); ?>" /></a>
 																</div>
-																<div class="gadash-desc"><?php echo  __('Other', 'ga-dash').' <a href="https://deconf.com/wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=plugins&utm_campaign=gadwp">'.__('WordPress Plugins', 'ga-dash').'</a> '.__('written by the same author', 'ga-dash').'.'; ?></div>
+																<div class="gadash-desc"><?php
+                                  printf(
+                                      __('Other %s written by the same author', 'ga-dash'),
+                                      sprintf(
+                                        '<a href="https://deconf.com/wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=plugins&utm_campaign=gadwp">%s</a>',
+                                        __('WordPress Plugins', 'ga-dash')
+                                      )
+                                  );
+                                 ?></div>
 															</div>
 														</div>
 														<div class="postbox">
@@ -1529,14 +1621,30 @@ final class GADASH_Settings
 																		href="https://deconf.com/wordpress-cdn-speeds-up-your-site/"><img
 																		src="<?php echo plugins_url( 'images/mcdn.png' , __FILE__ ); ?>" /></a>
 																</div>
-																<div class="gadash-desc"><?php echo  __('Speed up your website and plug into a whole', 'ga-dash').' <a href="https://deconf.com/wordpress-cdn-speeds-up-your-site/">'.__('new level of site speed', 'ga-dash').'</a>.'; ?></div>
+																<div class="gadash-desc"><?php
+                                    printf(
+                                      __('Speed up your website and plug into a whole %s', 'ga-dash'),
+                                      sprintf(
+                                        '<a href="https://deconf.com/wordpress-cdn-speeds-up-your-site/">%s</a>.',
+                                        __('new level of site speed', 'ga-dash')
+                                      )
+                                    );
+                                 ?></div>
 																<br />
 																<div class="gadash-title">
 																	<a
 																		href="https://deconf.com/clicky-web-analytics-review/?utm_source=gadwp_config&utm_medium=link&utm_content=clicky&utm_campaign=gadwp"><img
 																		src="<?php echo plugins_url( 'images/clicky.png' , __FILE__ ); ?>" /></a>
 																</div>
-																<div class="gadash-desc"><?php echo  '<a href="https://deconf.com/clicky-web-analytics-review/?utm_source=gadwp_config&utm_medium=link&utm_content=clicky&utm_campaign=gadwp">'.__('Web Analytics', 'ga-dash').'</a> '.__('service with users tracking at IP level.', 'ga-dash'); ?></div>
+																<div class="gadash-desc"><?php
+                                  printf(
+                                      __('%s service with users tracking at IP level.', 'ga-dash'),
+                                      sprintf(
+                                        '<a href="https://deconf.com/clicky-web-analytics-review/?utm_source=gadwp_config&utm_medium=link&utm_content=clicky&utm_campaign=gadwp">%s</a>',
+                                        __('Web Analytics', 'ga-dash')
+                                      )
+                                  );
+                                ?></div>
 															</div>
 														</div>
 													</div>
