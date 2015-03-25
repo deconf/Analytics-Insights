@@ -134,7 +134,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 
 = 4.5.1 =
 - Bug Fix: analytics icons get added to all custom columns
-- Bug Fix: unable to switch tabs in pugin options for some languages
+- Bug Fix: unable to switch tabs in plugin options for some languages
 
 = 4.5 =
 - Requirements: WordPress 3.5 and above
