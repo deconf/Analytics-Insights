@@ -43,6 +43,10 @@ if (! class_exists('GADASH_Back_Stats')) {
     {
       global $GADASH_Config, $wp_version;
       
+      if ($column != 'gadwp_stats'){
+        return;
+      }
+      
       if (version_compare($wp_version, '3.8.0', '>=')) {
         echo '<a id="gadwp-' . $id . '" title="' . get_the_title($id) . '" href="#' . $id . '" class="gadwp-icon dashicons-before dashicons-chart-area"></a>';
       } else {
@@ -53,7 +57,7 @@ if (! class_exists('GADASH_Back_Stats')) {
     function add_stats_column($columns)
     {
       return array_merge($columns, array(
-        'gadwp_stats' => __('Analytics', 'ga-dash')
+        'gadwp_stats' => __('Analytics', 'ga-dash'),
       ));
     }
   }
