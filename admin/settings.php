@@ -32,7 +32,7 @@ final class GADASH_Settings
                 if (empty($new_options['ga_track_exclude'])) {
                     $new_options['ga_track_exclude'] = array();
                 }
-            } else 
+            } else
                 if ($who == 'backend') {
                     $options['switch_profile'] = 0;
                     $options['item_reports'] = 0;
@@ -40,20 +40,20 @@ final class GADASH_Settings
                     if (empty($new_options['ga_dash_access_back'])) {
                         $new_options['ga_dash_access_back'][] = 'administrator';
                     }
-                } else 
+                } else
                     if ($who == 'frontend') {
                         $options['ga_dash_frontend_stats'] = 0;
                         $options['ga_dash_frontend_keywords'] = 0;
                         if (empty($new_options['ga_dash_access_front'])) {
                             $new_options['ga_dash_access_front'][] = 'administrator';
                         }
-                    } else 
+                    } else
                         if ($who == 'general') {
                             $options['ga_dash_userapi'] = 0;
                             if (! is_multisite()) {
                                 $options['automatic_updates_minorversion'] = 0;
                             }
-                        } else 
+                        } else
                             if ($who == 'network') {
                                 $options['ga_dash_userapi'] = 0;
                                 $options['ga_dash_network'] = 0;
@@ -306,10 +306,9 @@ final class GADASH_Settings
 									id="ga_realtime_pages"
 									value="<?php echo (int)$options['ga_realtime_pages']; ?>"
 									size="3">
-								<?php echo '('.__("find out more", 'ga-dash')?>	<a
-									href="https://deconf.com/google-analytics-dashboard-real-time-reports/"
-									target="_blank"><?php _e("about this feature", 'ga-dash') ?></a>
-									)
+								(
+                  <?php printf(__('find out more %s', 'ga-dash'),sprintf('<a href="https://deconf.com/google-analytics-dashboard-real-time-reports/">%s</a>',__('about this feature', 'ga-dash'))); ?>
+                )
 								</td>
 							</tr>
 							<tr>
@@ -322,10 +321,9 @@ final class GADASH_Settings
 									name="options[ga_target_geomap]"
 									value="<?php echo esc_attr($options['ga_target_geomap']); ?>"
 									size="3">
-									<?php echo '('.__("find out more", 'ga-dash')?>
-									<a
-									href="https://deconf.com/country-codes-for-google-analytics-dashboard/"
-									target="_blank"><?php _e("about this feature", 'ga-dash') ?></a>
+									(
+                  <?php printf(__('find out more %s'), sprintf('<a
+									href="https://deconf.com/country-codes-for-google-analytics-dashboard/" target="_blank">%s</a>',__("about this feature", 'ga-dash'))); ?>
 									)
 								</td>
 							</tr>
@@ -761,10 +759,10 @@ final class GADASH_Settings
         ?></pre><br />
 									<hr>
 								</td>
-							
-							
+
+
 							<tr>
-						
+
 						</table>
 					</div>
 					<div id="gadwp-config">
@@ -938,7 +936,7 @@ final class GADASH_Settings
 												<tr>
 													<td colspan="2" class="info">
             <?php
-            
+
 printf(__('You should watch the %1$s and read this %2$s before proceeding to authorization. This plugin requires a properly configured Google Analytics account!', 'ga-dash'), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=top_video&utm_campaign=gadwp', __("video", 'ga-dash')), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=top_tutorial&utm_campaign=gadwp', __("tutorial", 'ga-dash')));
 
             ?>
