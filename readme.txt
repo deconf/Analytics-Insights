@@ -133,8 +133,8 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 == Changelog ==
 
 = 4.5.1 =
-- Bug Fix: analytics icons get added to all custom columns
-- Bug Fix: unable to switch tabs in plugin options for some languages
+- Bug Fix: analytics icons get added to all custom columns, reported by [FTRINITE](https://wordpress.org/support/profile/ftrinite)
+- Bug Fix: unable to switch tabs in plugin options for some languages, reported by [Hinaloe](https://github.com/hinaloe)
 
 = 4.5 =
 - Requirements: WordPress 3.5 and above
