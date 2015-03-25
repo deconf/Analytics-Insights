@@ -746,7 +746,6 @@ final class GADASH_Settings
                               )
                             )
                           ?>
-						              <?php echo __("For errors and/or other issues please check",'ga-dash')." <a href='https://deconf.com/error-codes-in-google-analytics-dashboard-for-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=errors_screen&utm_campaign=gadwp' target='_blank'>". __("this documentation page",'ga-dash')."</a> ".__("and related tutorials",'ga-dash').".";?>
 						        </td>
 							</tr>
 							<tr>
@@ -951,7 +950,7 @@ final class GADASH_Settings
 													<td colspan="2" class="info">
             <?php printf(__('You should watch the %1$s and read this %2$s before proceeding to authorization. This plugin requires a properly configured Google Analytics account!','ga-dash'),
                           sprintf(
-                            '<a href="%1$s" target="_blank">%s</a>',
+                            '<a href="%1$s" target="_blank">%2$s</a>',
                             'https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=top_video&utm_campaign=gadwp',
                             __("video",'ga-dash')
                           ),
