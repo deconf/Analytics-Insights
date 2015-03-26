@@ -3,9 +3,9 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/google-analytics-"
 "dashboard-for-wp\n"
-"POT-Creation-Date: 2015-03-26 04:48+0900\n"
-"PO-Revision-Date: 2015-03-26 04:51+0900\n"
-"Last-Translator: hinaloe <hina@hinaloe.net>\n"
+"POT-Creation-Date: 2015-03-26 08:37+0200\n"
+"PO-Revision-Date: 2015-03-26 08:37+0200\n"
+"Last-Translator: Alin Marcu <admin@deconf.com>\n"
 "Language-Team: heysister721 <tk197709141545@gmail.com>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -42,12 +42,21 @@ msgstr "修正しますか？"
 #: .././admin/settings.php:360 .././admin/settings.php:711
 #: .././admin/settings.php:918 .././admin/settings.php:1242
 #, php-format
-msgid ""
-"Something went wrong, check <a href=\"%1$s\">Errors & Debug</a> or <a href="
-"\"%2$s\">authorize the plugin</a>."
+msgid "Something went wrong, check %1$s or %2$s."
 msgstr ""
-"問題が発生しました。<a href=\"%1$s\">エラーとデバッグ</a>または<a href=\"%2$s"
-"\">プラグインを認可</a>。"
+
+#: .././admin/settings.php:95 .././admin/settings.php:206
+#: .././admin/settings.php:360 .././admin/settings.php:711
+#: .././admin/settings.php:918 .././admin/settings.php:1242
+#: .././admin/setup.php:89 .././admin/setup.php:113
+msgid "Errors & Debug"
+msgstr "エラー＆デバッグ"
+
+#: .././admin/settings.php:95 .././admin/settings.php:206
+#: .././admin/settings.php:360 .././admin/settings.php:711
+#: .././admin/settings.php:918 .././admin/settings.php:1242
+msgid "authorize the plugin"
+msgstr ""
 
 #: .././admin/settings.php:101
 msgid "Google Analytics Frontend Settings"
@@ -555,10 +564,6 @@ msgstr "フロントエンド設定"
 msgid "Tracking Code"
 msgstr "トラッキングコード"
 
-#: .././admin/setup.php:89 .././admin/setup.php:113
-msgid "Errors & Debug"
-msgstr "エラー＆デバッグ"
-
 #: .././admin/setup.php:189 .././admin/widgets.php:123
 msgid "Today"
 msgstr "今日"
@@ -905,6 +910,13 @@ msgstr "タイプ"
 #: .././tools/gapi.php:868
 msgid "UniqueViews"
 msgstr "ユニークPV"
+
+#~ msgid ""
+#~ "Something went wrong, check <a href=\"%1$s\">Errors & Debug</a> or <a "
+#~ "href=\"%2$s\">authorize the plugin</a>."
+#~ msgstr ""
+#~ "問題が発生しました。<a href=\"%1$s\">エラーとデバッグ</a>または<a href="
+#~ "\"%2$s\">プラグインを認可</a>。"
 
 #~ msgid "find out more"
 #~ msgstr "もっと詳しく"
