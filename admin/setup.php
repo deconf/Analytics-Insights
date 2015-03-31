@@ -102,7 +102,7 @@ if (! class_exists('GADASH_Back_Setup')) {
             global $wp_version;
             if (current_user_can('manage_netwrok')) {
                 include ($GADASH_Config->plugin_path . '/admin/settings.php');
-                add_menu_page(__("Google Analytics", 'ga-dash'), __("Google Analytics", 'ga-dash'), 'manage_netwrok', 'gadash_settings', array(
+                add_menu_page(__("Google Analytics", 'ga-dash'), "Google Analytics", 'manage_netwrok', 'gadash_settings', array(
                     'GADASH_Settings',
                     'general_settings_network'
                 ), version_compare($wp_version, '3.8.0', '>=') ? 'dashicons-chart-area' : $GADASH_Config->plugin_url . '/admin/images/gadash-icon.png');
