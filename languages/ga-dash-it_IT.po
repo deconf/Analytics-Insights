@@ -1,17 +1,17 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Google Analytics Dashboard for WP 4.5.1\n"
+"Project-Id-Version: Google Analytics Dashboard for WP 4.6\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/google-analytics-"
 "dashboard-for-wp\n"
-"POT-Creation-Date: 2015-03-31 19:20+0200\n"
-"PO-Revision-Date: 2015-03-31 19:40+0200\n"
-"Last-Translator: Alin Marcu <admin@deconf.com>\n"
+"POT-Creation-Date: 2015-03-31 19:14+0200\n"
+"PO-Revision-Date: 2015-04-01 08:45+0100\n"
+"Last-Translator: Leo The Strategist <leoxleox73@gmail.com>\n"
 "Language-Team: L.E.O.X. <leoxleox73@gmail.com>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.5\n"
+"X-Generator: Poedit 1.5.4\n"
 "X-Poedit-KeywordsList: _e;__\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -36,14 +36,14 @@ msgstr "Impostazioni salvate."
 #: .././admin/settings.php:1211 .././admin/settings.php:1217
 #: .././admin/settings.php:1229
 msgid "Cheating Huh?"
-msgstr "Frode?"
+msgstr "Tentativo di frode?"
 
 #: .././admin/settings.php:95 .././admin/settings.php:206
 #: .././admin/settings.php:360 .././admin/settings.php:711
 #: .././admin/settings.php:918 .././admin/settings.php:1242
 #, php-format
 msgid "Something went wrong, check %1$s or %2$s."
-msgstr ""
+msgstr "Qualcosa &egrave; andato male, controlla %1$s o %2$s."
 
 #: .././admin/settings.php:95 .././admin/settings.php:206
 #: .././admin/settings.php:360 .././admin/settings.php:711
@@ -113,7 +113,7 @@ msgstr "Numero massimo di pagine da visualizzare nella scheda in tempo reale:"
 #: .././admin/settings.php:310 .././admin/settings.php:325
 #, php-format
 msgid "find out more %s"
-msgstr ""
+msgstr "per saperne di pi&ugrave; su %s"
 
 #: .././admin/settings.php:310 .././admin/settings.php:326
 msgid "about this feature"
@@ -125,13 +125,15 @@ msgstr "Impostazioni posizione geografica"
 
 #: .././admin/settings.php:319
 msgid "Target Geo Map to country:"
-msgstr "Obiettivo Geo Map per paese:"
+msgstr "Cartina geografica per il paese:"
 
 #: .././admin/settings.php:363
 msgid ""
 "The tracking component is disabled. You should set <strong>Tracking Options</"
 "strong> to <strong>Enabled</strong>"
 msgstr ""
+"Il componente di monitoraggio &egrave; disabilitato. &Egrave; necessario "
+"impostare il <strong>Monitoraggio</strong> su <strong>Abilitato</strong>"
 
 #: .././admin/settings.php:369
 msgid "Google Analytics Tracking Code"
@@ -186,7 +188,7 @@ msgstr "ID monitoraggio:"
 
 #: .././admin/settings.php:407 .././admin/settings.php:1044
 msgid "Default URL:"
-msgstr "URL di default:"
+msgstr "URL predefinito:"
 
 #: .././admin/settings.php:407 .././admin/settings.php:1044
 msgid "Time Zone:"
@@ -292,7 +294,7 @@ msgstr "Errori & Debugging di Google Analytics"
 
 #: .././admin/settings.php:725
 msgid "Errors & Details"
-msgstr "Dettagli errori"
+msgstr "Errori & Dettagli"
 
 #: .././admin/settings.php:726
 msgid "Plugin Settings"
@@ -301,7 +303,7 @@ msgstr "Impostazioni plugin"
 #: .././admin/settings.php:735
 #, php-format
 msgid "For errors and/or other issues please check %s and related tutorials."
-msgstr ""
+msgstr "Per errori e/o altri problemi controlla %s e leggi la guida relativa."
 
 #: .././admin/settings.php:735
 msgid "this documentation page"
@@ -333,7 +335,7 @@ msgstr ""
 
 #: .././admin/settings.php:815
 msgid "Library conflicts between WordPress plugins"
-msgstr ""
+msgstr "Conflitti tra le librerie dei plugins di WordPress"
 
 #: .././admin/settings.php:827 .././admin/settings.php:1142
 msgid "Plugin authorization succeeded."
@@ -385,6 +387,9 @@ msgid ""
 "authorization. This plugin requires a properly configured Google Analytics "
 "account!"
 msgstr ""
+"Dovresti guardare %1$s e leggere questo %2$s prima di procedere con l&#39;"
+"autorizzazione. Questo plugin richiede un account di Google Analytics "
+"correttamente configurato!"
 
 #: .././admin/settings.php:940 .././admin/settings.php:1286
 msgid "video"
@@ -456,8 +461,8 @@ msgstr "Aggiornamenti automatici"
 msgid ""
 "automatic updates for minor versions (security and maintenance releases only)"
 msgstr ""
-"aggiornamenti automatici per le versioni minori (solo release di "
-"manutenzione e sicurezza)"
+"aggiornamenti automatici per le release minori (solo di manutenzione e "
+"sicurezza)"
 
 #: .././admin/settings.php:1097 .././admin/settings.php:1438
 #: .././admin/widgets.php:38
@@ -499,12 +504,12 @@ msgstr "Supporto & Recensioni"
 #: .././admin/settings.php:1493
 #, php-format
 msgid "Plugin documentation and support on %s"
-msgstr ""
+msgstr "Documentazione del plugin e supporto su %s"
 
 #: .././admin/settings.php:1502
 #, php-format
 msgid "Your feedback and review are both important, %s!"
-msgstr ""
+msgstr "Il tuo feedback e la tua recensione sono entrambi importanti, %s!"
 
 #: .././admin/settings.php:1502
 msgid "rate this plugin"
@@ -517,7 +522,7 @@ msgstr "Approfondimenti"
 #: .././admin/settings.php:1517
 #, php-format
 msgid "%s by moving your website to HTTPS/SSL."
-msgstr ""
+msgstr "%s spostando il sito web a HTTPS/SSL."
 
 #: .././admin/settings.php:1517
 msgid "Improve search rankings"
@@ -526,7 +531,7 @@ msgstr "Migliorare le classifiche di ricerca"
 #: .././admin/settings.php:1526
 #, php-format
 msgid "Other %s written by the same author"
-msgstr ""
+msgstr "Altri %s scritti dallo stesso autore"
 
 #: .././admin/settings.php:1526
 msgid "WordPress Plugins"
@@ -539,7 +544,7 @@ msgstr "Altri servizi"
 #: .././admin/settings.php:1541
 #, php-format
 msgid "Speed up your website and plug into a whole %s"
-msgstr ""
+msgstr "Accellera il tuo sito web ad un %s"
 
 #: .././admin/settings.php:1541
 msgid "new level of site speed"
@@ -548,7 +553,7 @@ msgstr "nuovo livello di velocit&agrave;"
 #: .././admin/settings.php:1550
 #, php-format
 msgid "%s service with users tracking at IP level."
-msgstr ""
+msgstr "%s servizio con tracciamento degli utenti a livello IP."
 
 #: .././admin/settings.php:1550
 msgid "Web Analytics"
@@ -594,7 +599,7 @@ msgstr "Ultimi 90 giorni"
 
 #: .././admin/setup.php:196 .././admin/setup.php:212
 msgid "Unique Views"
-msgstr "Visualizzazioni uniche"
+msgstr "Visualizzazioni singole"
 
 #: .././admin/setup.php:197 .././admin/setup.php:213
 #: .././admin/widgets.php:140 .././admin/widgets.php:886
@@ -794,7 +799,7 @@ msgstr "KEYWORDS"
 
 #: .././front/item-reports.php:127
 msgid "Views vs UniqueViews"
-msgstr "Visualizzazioni vs Visualizzazioni uniche"
+msgstr "Visualizzazioni vs Visualizzazioni singole"
 
 #: .././front/item-reports.php:177
 msgid "Google Analytics Reports"
@@ -882,7 +887,7 @@ msgstr "Ricerche organiche"
 
 #: .././tools/gapi.php:390
 msgid "Unique Page Views"
-msgstr "Visualizzazioni pagine uniche"
+msgstr "Visualizzazioni pagine singole"
 
 #: .././tools/gapi.php:398
 msgid "Hour"
@@ -912,31 +917,14 @@ msgstr "Canali"
 msgid "Type"
 msgstr "Tipo"
 
-#: .././tools/gapi.php:868
-msgid "UniqueViews"
-msgstr "Visualizzazioni uniche"
-
-#~ msgid "Something went wrong, check"
-#~ msgstr "Qualcosa è andato male, controlla"
-
 #~ msgid "or"
 #~ msgstr "o"
-
-#~ msgid "find out more"
-#~ msgstr "per saperne di più"
-
-#~ msgid "The tracking component is disabled. You should set"
-#~ msgstr ""
-#~ "Il componente di monitoraggio è disabilitato. È necessario impostare"
 
 #~ msgid "Tracking Options"
 #~ msgstr "Opzioni di monitoraggio"
 
 #~ msgid "to"
 #~ msgstr "a"
-
-#~ msgid "For errors and/or other issues please check"
-#~ msgstr "Per errori e/o altri problemi leggere"
 
 #~ msgid "and related tutorials"
 #~ msgstr "ed i tutorial relativi"
@@ -947,33 +935,11 @@ msgstr "Visualizzazioni uniche"
 #~ msgid "and read this"
 #~ msgstr "e leggere questa"
 
-#~ msgid ""
-#~ "before proceeding to authorization. This plugin requires a properly "
-#~ "configured Google Analytics account"
-#~ msgstr ""
-#~ "prima di procedere con l&#39;autorizzazione. Questo plugin richiede un "
-#~ "account di Google Analytics correttamente configurato"
-
-#~ msgid "Plugin documentation and support on"
-#~ msgstr "Documentazione del plugin e supporto su"
-
-#~ msgid "Your feedback and review are both important,"
-#~ msgstr "Il tuo feedback e la tua recensione sono entrambi importanti,"
-
-#~ msgid "by moving your website to HTTPS/SSL."
-#~ msgstr "spostando il sito web a HTTPS/SSL."
-
 #~ msgid "Other"
 #~ msgstr "Altri"
 
-#~ msgid "written by the same author"
-#~ msgstr "scritti dallo stesso autore"
-
-#~ msgid "Speed up your website and plug into a whole"
-#~ msgstr "Accellera il tuo sito web ad un"
-
-#~ msgid "service with users tracking at IP level."
-#~ msgstr "servizio con tracciamento degli utenti a livello IP."
+#~ msgid "UniqueViews"
+#~ msgstr "Visualizzazioni uniche"
 
 #~ msgid ""
 #~ " (watch this <a href='http://deconf.com/projects/google-analytics-"
