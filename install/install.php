@@ -6,7 +6,12 @@
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
-class GADASH_Install
+
+// Exit if accessed directly
+if (! defined('ABSPATH'))
+    exit();
+
+class GADWP_Install
 {
 
     public static function install()

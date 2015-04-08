@@ -5,9 +5,14 @@
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
-if (! class_exists('GADASH_GAPI')) {
 
-    final class GADASH_GAPI
+// Exit if accessed directly
+if (! defined('ABSPATH'))
+    exit();
+
+if (! class_exists('GADWP_GAPI_Controller')) {
+
+    final class GADWP_GAPI_Controller
     {
 
         public $client;
@@ -19,12 +24,14 @@ if (! class_exists('GADASH_GAPI')) {
         public $error_timeout;
 
         private $managequota;
+        
+        private $gadwp;
 
         public function __construct()
         {
-            global $GADASH_Config;
-            include_once ($GADASH_Config->plugin_path . '/tools/autoload.php');
-            ;
+            $this->gadwp = GADWP();
+            
+            include_once (GADWP_DIR . 'tools/autoload.php');
             $config = new Google_Config();
             $config->setCacheClass('Google_Cache_Null');
             if (function_exists('curl_version')) {
@@ -44,18 +51,18 @@ if (! class_exists('GADASH_GAPI')) {
             $this->client->setRedirectUri('urn:ietf:wg:oauth:2.0:oob');
             $this->set_error_timeout();
             $this->managequota = 'u' . get_current_user_id() . 's' . get_current_blog_id();
-            if ($GADASH_Config->options['ga_dash_userapi']) {
-                $this->client->setClientId($GADASH_Config->options['ga_dash_clientid']);
-                $this->client->setClientSecret($GADASH_Config->options['ga_dash_clientsecret']);
-                $this->client->setDeveloperKey($GADASH_Config->options['ga_dash_apikey']);
+            if ($this->gadwp->config->options['ga_dash_userapi']) {
+                $this->client->setClientId($this->gadwp->config->options['ga_dash_clientid']);
+                $this->client->setClientSecret($this->gadwp->config->options['ga_dash_clientsecret']);
+                $this->client->setDeveloperKey($this->gadwp->config->options['ga_dash_apikey']);
             } else {
-                $this->client->setClientId($GADASH_Config->access[0]);
-                $this->client->setClientSecret($GADASH_Config->access[1]);
-                $this->client->setDeveloperKey($GADASH_Config->access[2]);
+                $this->client->setClientId($this->gadwp->config->access[0]);
+                $this->client->setClientSecret($this->gadwp->config->access[1]);
+                $this->client->setDeveloperKey($this->gadwp->config->access[2]);
             }
             $this->service = new Google_Service_Analytics($this->client);
-            if ($GADASH_Config->options['ga_dash_token']) {
-                $token = $GADASH_Config->options['ga_dash_token'];
+            if ($this->gadwp->config->options['ga_dash_token']) {
+                $token = $this->gadwp->config->options['ga_dash_token'];
                 $token = $this->refresh_token();
                 if ($token) {
                     $this->client->setAccessToken($token);
@@ -162,7 +169,6 @@ if (! class_exists('GADASH_GAPI')) {
          */
         public function refresh_profiles()
         {
-            global $GADASH_Config;
             try {
                 $profiles = $this->service->management_profiles->listManagementProfiles('~all', '~all');
                 $items = $profiles->getItems();
@@ -209,30 +215,29 @@ if (! class_exists('GADASH_GAPI')) {
          */
         private function refresh_token()
         {
-            global $GADASH_Config;
             try {
-                if (is_multisite() && $GADASH_Config->options['ga_dash_network']) {
+                if (is_multisite() && $this->gadwp->config->options['ga_dash_network']) {
                     $transient = get_site_transient("ga_dash_refresh_token");
                 } else {
                     $transient = get_transient("ga_dash_refresh_token");
                 }
                 if ($transient === false) {
-                    if (! $GADASH_Config->options['ga_dash_refresh_token']) {
-                        $google_token = json_decode($GADASH_Config->options['ga_dash_token']);
-                        $GADASH_Config->options['ga_dash_refresh_token'] = $google_token->refresh_token;
+                    if (! $this->gadwp->config->options['ga_dash_refresh_token']) {
+                        $google_token = json_decode($this->gadwp->config->options['ga_dash_token']);
+                        $this->gadwp->config->options['ga_dash_refresh_token'] = $google_token->refresh_token;
                         $this->client->refreshToken($google_token->refresh_token);
                     } else {
-                        $this->client->refreshToken($GADASH_Config->options['ga_dash_refresh_token']);
+                        $this->client->refreshToken($this->gadwp->config->options['ga_dash_refresh_token']);
                     }
                     $token = $this->client->getAccessToken();
                     $google_token = json_decode($token);
-                    $GADASH_Config->options['ga_dash_token'] = $token;
-                    if (is_multisite() && $GADASH_Config->options['ga_dash_network']) {
+                    $this->gadwp->config->options['ga_dash_token'] = $token;
+                    if (is_multisite() && $this->gadwp->config->options['ga_dash_network']) {
                         set_site_transient("ga_dash_refresh_token", $token, $google_token->expires_in);
-                        $GADASH_Config->set_plugin_options(true);
+                        $this->gadwp->config->set_plugin_options(true);
                     } else {
                         set_transient("ga_dash_refresh_token", $token, $google_token->expires_in);
-                        $GADASH_Config->set_plugin_options();
+                        $this->gadwp->config->set_plugin_options();
                     }
                     return $token;
                 } else {
@@ -262,32 +267,31 @@ if (! class_exists('GADASH_GAPI')) {
          */
         public function reset_token($all = true)
         {
-            global $GADASH_Config;
-            if (is_multisite() && $GADASH_Config->options['ga_dash_network']) {
+            if (is_multisite() && $this->gadwp->config->options['ga_dash_network']) {
                 delete_site_transient('ga_dash_refresh_token');
             } else {
                 delete_transient('ga_dash_refresh_token');
             }
-            $GADASH_Config->options['ga_dash_token'] = "";
-            $GADASH_Config->options['ga_dash_refresh_token'] = "";
+            $this->gadwp->config->options['ga_dash_token'] = "";
+            $this->gadwp->config->options['ga_dash_refresh_token'] = "";
             if ($all) {
-                $GADASH_Config->options['ga_dash_tableid'] = "";
-                $GADASH_Config->options['ga_dash_tableid_jail'] = "";
-                $GADASH_Config->options['ga_dash_profile_list'] = "";
+                $this->gadwp->config->options['ga_dash_tableid'] = "";
+                $this->gadwp->config->options['ga_dash_tableid_jail'] = "";
+                $this->gadwp->config->options['ga_dash_profile_list'] = "";
                 try {
                     $this->client->revokeToken();
                 } catch (Exception $e) {
-                    if (is_multisite() && $GADASH_Config->options['ga_dash_network']) {
-                        $GADASH_Config->set_plugin_options(true);
+                    if (is_multisite() && $this->gadwp->config->options['ga_dash_network']) {
+                        $this->gadwp->config->set_plugin_options(true);
                     } else {
-                        $GADASH_Config->set_plugin_options();
+                        $this->gadwp->config->set_plugin_options();
                     }
                 }
             }
-            if (is_multisite() && $GADASH_Config->options['ga_dash_network']) {
-                $GADASH_Config->set_plugin_options(true);
+            if (is_multisite() && $this->gadwp->config->options['ga_dash_network']) {
+                $this->gadwp->config->set_plugin_options(true);
             } else {
-                $GADASH_Config->set_plugin_options();
+                $this->gadwp->config->set_plugin_options();
             }
         }
 
@@ -622,21 +626,20 @@ if (! class_exists('GADASH_GAPI')) {
          */
         public function get_locations($projectId, $from, $to, $filter = '')
         {
-            global $GADASH_Config;
             $metrics = 'ga:sessions';
             $options = "";
             $title = __("Countries", 'ga-dash');
             $serial = 'gadash_qr7_' . $this->get_serial($projectId . $from . $filter);
             $dimensions = 'ga:country';
             $local_filter = '';
-            if ($GADASH_Config->options['ga_target_geomap']) {
+            if ($this->gadwp->config->options['ga_target_geomap']) {
                 $dimensions = 'ga:city, ga:region';
-                $tools = new GADASH_Tools();
-                $tools->getcountrycodes();
-                if (isset($tools->country_codes[$GADASH_Config->options['ga_target_geomap']])) {
-                    $local_filter = 'ga:country==' . ($tools->country_codes[$GADASH_Config->options['ga_target_geomap']]);
-                    $title = __("Cities from", 'ga-dash') . ' ' . __($tools->country_codes[$GADASH_Config->options['ga_target_geomap']]);
-                    $serial = 'gadash_qr7_' . $this->get_serial($projectId . $from . $GADASH_Config->options['ga_target_geomap'] . $filter);
+                
+                $country_codes = GADWP_Tools::get_countrycodes();
+                if (isset($country_codes[$this->gadwp->config->options['ga_target_geomap']])) {
+                    $local_filter = 'ga:country==' . ($country_codes[$this->gadwp->config->options['ga_target_geomap']]);
+                    $title = __("Cities from", 'ga-dash') . ' ' . __($country_codes[$this->gadwp->config->options['ga_target_geomap']]);
+                    $serial = 'gadash_qr7_' . $this->get_serial($projectId . $from . $this->gadwp->config->options['ga_target_geomap'] . $filter);
                 }
             }
             $options = array(
@@ -1011,7 +1014,4 @@ if (! class_exists('GADASH_GAPI')) {
             }
         }
     }
-}
-if (! isset($GLOBALS['GADASH_GAPI'])) {
-    $GLOBALS['GADASH_GAPI'] = new GADASH_GAPI();
 }

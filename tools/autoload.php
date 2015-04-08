@@ -15,6 +15,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+// Exit if accessed directly
+if (! defined('ABSPATH'))
+    exit();
+
 function google_api_php_client_autoload_gadwp($className)
 {
     $classPath = explode('_', $className);

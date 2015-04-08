@@ -5,14 +5,21 @@
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
-if (! class_exists('GADASH_Widgets')) {
 
-    class GADASH_Widgets
+// Exit if accessed directly
+if (! defined('ABSPATH'))
+    exit();
+
+if (! class_exists('GADWP_Backend_Widgets')) {
+
+    class GADWP_Backend_Widgets
     {
+        private $gawp;
 
         public function __construct()
         {
-            global $GADASH_Config;
+            $this->gadwp = GADWP();
+            
             add_action('wp_dashboard_setup', array(
                 $this,
                 'add_widget'
@@ -21,9 +28,8 @@ if (! class_exists('GADASH_Widgets')) {
 
         public function add_widget()
         {
-            global $GADASH_Config;
-            $tools = new GADASH_Tools();
-            if ($tools->check_roles($GADASH_Config->options['ga_dash_access_back']) and 1 == $GADASH_Config->options['dashboard_widget']) {
+            
+            if (GADWP_Tools::check_roles($this->gadwp->config->options['ga_dash_access_back']) and 1 == $this->gadwp->config->options['dashboard_widget']) {
                 wp_add_dashboard_widget('gadash-widget', __("Google Analytics Dashboard", 'ga-dash'), array(
                     $this,
                     'dashboard_widget'
@@ -33,38 +39,37 @@ if (! class_exists('GADASH_Widgets')) {
 
         public function dashboard_widget()
         {
-            global $GADASH_Config;
-            if (empty($GADASH_Config->options['ga_dash_token'])) {
+            if (empty($this->gadwp->config->options['ga_dash_token'])) {
                 echo '<p>' . __("This plugin needs an authorization:", 'ga-dash') . '</p><form action="' . menu_page_url('gadash_settings', false) . '" method="POST">' . get_submit_button(__("Authorize Plugin", 'ga-dash'), 'secondary') . '</form>';
                 return;
             }
-            $tools = new GADASH_Tools();
+            
             if (current_user_can('manage_options')) {
                 if (isset($_REQUEST['ga_dash_profile_select'])) {
-                    $GADASH_Config->options['ga_dash_tableid'] = $_REQUEST['ga_dash_profile_select'];
+                    $this->gadwp->config->options['ga_dash_tableid'] = $_REQUEST['ga_dash_profile_select'];
                 }
-                $profiles = $GADASH_Config->options['ga_dash_profile_list'];
+                $profiles = $this->gadwp->config->options['ga_dash_profile_list'];
                 $profile_switch = '';
                 if (is_array($profiles)) {
-                    if (! $GADASH_Config->options['ga_dash_tableid']) {
-                        if ($GADASH_Config->options['ga_dash_tableid_jail']) {
-                            $GADASH_Config->options['ga_dash_tableid'] = $GADASH_Config->options['ga_dash_tableid_jail'];
+                    if (! $this->gadwp->config->options['ga_dash_tableid']) {
+                        if ($this->gadwp->config->options['ga_dash_tableid_jail']) {
+                            $this->gadwp->config->options['ga_dash_tableid'] = $this->gadwp->config->options['ga_dash_tableid_jail'];
                         } else {
-                            $GADASH_Config->options['ga_dash_tableid'] = $tools->guess_default_domain($profiles);
+                            $this->gadwp->config->options['ga_dash_tableid'] = GADWP_Tools::guess_default_domain($profiles);
                         }
                     } else 
-                        if ($GADASH_Config->options['switch_profile'] == 0 and $GADASH_Config->options['ga_dash_tableid_jail']) {
-                            $GADASH_Config->options['ga_dash_tableid'] = $GADASH_Config->options['ga_dash_tableid_jail'];
+                        if ($this->gadwp->config->options['switch_profile'] == 0 and $this->gadwp->config->options['ga_dash_tableid_jail']) {
+                            $this->gadwp->config->options['ga_dash_tableid'] = $this->gadwp->config->options['ga_dash_tableid_jail'];
                         }
                     $profile_switch .= '<select id="ga_dash_profile_select" name="ga_dash_profile_select" onchange="this.form.submit()">';
                     foreach ($profiles as $profile) {
-                        if (! $GADASH_Config->options['ga_dash_tableid']) {
-                            $GADASH_Config->options['ga_dash_tableid'] = $profile[1];
+                        if (! $this->gadwp->config->options['ga_dash_tableid']) {
+                            $this->gadwp->config->options['ga_dash_tableid'] = $profile[1];
                         }
                         if (isset($profile[3])) {
                             $profile_switch .= '<option value="' . esc_attr($profile[1]) . '" ';
-                            $profile_switch .= selected($profile[1], $GADASH_Config->options['ga_dash_tableid'], false);
-                            $profile_switch .= ' title="' . __("View Name:", 'ga-dash') . ' ' . esc_attr($profile[0]) . '">' . esc_attr($tools->strip_protocol($profile[3])) . '</option>';
+                            $profile_switch .= selected($profile[1], $this->gadwp->config->options['ga_dash_tableid'], false);
+                            $profile_switch .= ' title="' . __("View Name:", 'ga-dash') . ' ' . esc_attr($profile[0]) . '">' . esc_attr(GADWP_Tools::strip_protocol($profile[3])) . '</option>';
                         }
                     }
                     $profile_switch .= "</select>";
@@ -73,25 +78,25 @@ if (! class_exists('GADASH_Widgets')) {
                     return;
                 }
             }
-            $GADASH_Config->set_plugin_options();
+            $this->gadwp->config->set_plugin_options();
             ?>
 <form id="ga-dash" method="POST">
 						<?php
             if (current_user_can('manage_options')) {
-                if ($GADASH_Config->options['switch_profile'] == 0) {
-                    if ($GADASH_Config->options['ga_dash_tableid_jail']) {
-                        $projectId = $GADASH_Config->options['ga_dash_tableid_jail'];
+                if ($this->gadwp->config->options['switch_profile'] == 0) {
+                    if ($this->gadwp->config->options['ga_dash_tableid_jail']) {
+                        $projectId = $this->gadwp->config->options['ga_dash_tableid_jail'];
                     } else {
                         echo '<p>' . __("An admin should asign a default Google Analytics Profile.", 'ga-dash') . '</p><form action="' . menu_page_url('gadash_settings', false) . '" method="POST">' . get_submit_button(__("Select Domain", 'ga-dash'), 'secondary') . '</form>';
                         return;
                     }
                 } else {
                     echo $profile_switch;
-                    $projectId = $GADASH_Config->options['ga_dash_tableid'];
+                    $projectId = $this->gadwp->config->options['ga_dash_tableid'];
                 }
             } else {
-                if ($GADASH_Config->options['ga_dash_tableid_jail']) {
-                    $projectId = $GADASH_Config->options['ga_dash_tableid_jail'];
+                if ($this->gadwp->config->options['ga_dash_tableid_jail']) {
+                    $projectId = $this->gadwp->config->options['ga_dash_tableid_jail'];
                 } else {
                     echo '<p>' . __("An admin should asign a default Google Analytics Profile.", 'ga-dash') . '</p><form action="' . menu_page_url('gadash_settings', false) . '" method="POST">' . get_submit_button(__("Select Domain", 'ga-dash'), 'secondary') . '</form>';
                     return;
@@ -103,17 +108,17 @@ if (! class_exists('GADASH_Widgets')) {
             }
             if (isset($_REQUEST['query'])) {
                 $query = $_REQUEST['query'];
-                $GADASH_Config->options['ga_dash_default_metric'] = $query;
-                $GADASH_Config->set_plugin_options();
+                $this->gadwp->config->options['ga_dash_default_metric'] = $query;
+                $this->gadwp->config->set_plugin_options();
             } else {
-                $query = isset($GADASH_Config->options['ga_dash_default_metric']) ? $GADASH_Config->options['ga_dash_default_metric'] : 'sessions';
+                $query = isset($this->gadwp->config->options['ga_dash_default_metric']) ? $this->gadwp->config->options['ga_dash_default_metric'] : 'sessions';
             }
             if (isset($_REQUEST['period'])) {
                 $period = $_REQUEST['period'];
-                $GADASH_Config->options['ga_dash_default_dimension'] = $period;
-                $GADASH_Config->set_plugin_options();
+                $this->gadwp->config->options['ga_dash_default_dimension'] = $period;
+                $this->gadwp->config->set_plugin_options();
             } else {
-                $period = isset($GADASH_Config->options['ga_dash_default_dimension']) ? $GADASH_Config->options['ga_dash_default_dimension'] : '30daysAgo';
+                $period = isset($this->gadwp->config->options['ga_dash_default_dimension']) ? $this->gadwp->config->options['ga_dash_default_dimension'] : '30daysAgo';
             }
             ?>
 
@@ -201,18 +206,18 @@ if (! class_exists('GADASH_Widgets')) {
             } else {
                 $formater = '';
             }
-            $tools = new GADASH_Tools();
-            if (isset($GADASH_Config->options['ga_dash_style'])) {
-                $light_color = $tools->colourVariator($GADASH_Config->options['ga_dash_style'], 40);
-                $dark_color = $tools->colourVariator($GADASH_Config->options['ga_dash_style'], - 20);
-                $css = "colors:['" . $GADASH_Config->options['ga_dash_style'] . "','" . $tools->colourVariator($GADASH_Config->options['ga_dash_style'], - 20) . "'],";
-                $color = $GADASH_Config->options['ga_dash_style'];
+            
+            if (isset($this->gadwp->config->options['ga_dash_style'])) {
+                $light_color = GADWP_Tools::colourVariator($this->gadwp->config->options['ga_dash_style'], 40);
+                $dark_color = GADWP_Tools::colourVariator($this->gadwp->config->options['ga_dash_style'], - 20);
+                $css = "colors:['" . $this->gadwp->config->options['ga_dash_style'] . "','" . GADWP_Tools::colourVariator($this->gadwp->config->options['ga_dash_style'], - 20) . "'],";
+                $color = $this->gadwp->config->options['ga_dash_style'];
             } else {
                 $css = "";
                 $color = "#3366CC";
             }
             if ($period == 'realtime') {
-                wp_register_style('jquery-ui-tooltip-html', $GADASH_Config->plugin_url . '/realtime/jquery/jquery.ui.tooltip.html.css');
+                wp_register_style('jquery-ui-tooltip-html', GADWP_URL . 'realtime/jquery/jquery.ui.tooltip.html.css');
                 wp_enqueue_style('jquery-ui-tooltip-html');
                 if (! wp_script_is('jquery')) {
                     wp_enqueue_script('jquery');
@@ -229,7 +234,7 @@ if (! class_exists('GADASH_Widgets')) {
                 if (! wp_script_is('jquery-ui-position')) {
                     wp_enqueue_script("jquery-ui-position");
                 }
-                wp_register_script("jquery-ui-tooltip-html", $GADASH_Config->plugin_url . '/realtime/jquery/jquery.ui.tooltip.html.js');
+                wp_register_script("jquery-ui-tooltip-html", GADWP_URL . 'realtime/jquery/jquery.ui.tooltip.html.js');
                 wp_enqueue_script("jquery-ui-tooltip-html");
             }
             if ($period == 'realtime') {
@@ -446,7 +451,7 @@ if (! class_exists('GADASH_Widgets')) {
             
             			var pgstatstable = "";
             			for ( var i = 0; i < upagepathstats.length; i = i + 1 ) {
-            				if (i < <?php echo $GADASH_Config->options['ga_realtime_pages']; ?>){
+            				if (i < <?php echo $this->gadwp->config->options['ga_realtime_pages']; ?>){
             					pgstatstable += '<div class="gadash-pline"><div class="gadash-pleft"><a href="#" title="'+gadash_pagedetails(data, upagepathstats[i].pagepath)+'">'+upagepathstats[i].pagepath.substring(0,70)+'</a></div><div class="gadash-pright">'+upagepathstats[i].count+'</div></div>';
             				}
             			}
@@ -722,7 +727,7 @@ if (! class_exists('GADASH_Widgets')) {
 							legend: 'none',
 							chartArea: {width: '99%',height: '80%'},
 							title: '<?php _e( "Traffic Mediums", 'ga-dash' ); ?>',
-							colors:['<?php echo esc_html($GADASH_Config->options ['ga_dash_style']); ?>','<?php echo esc_html($tools->colourVariator ( $GADASH_Config->options ['ga_dash_style'], - 10 )); ?>','<?php echo esc_html($tools->colourVariator ( $GADASH_Config->options ['ga_dash_style'], + 20 )); ?>','<?php echo esc_html($tools->colourVariator ( $GADASH_Config->options ['ga_dash_style'], + 10 )); ?>','<?php echo esc_html($tools->colourVariator ( $GADASH_Config->options ['ga_dash_style'], - 20 )); ?>']
+							colors:['<?php echo esc_html($this->gadwp->config->options ['ga_dash_style']); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], - 10 )); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], + 20 )); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], + 10 )); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], - 20 )); ?>']
 						};
                 
                 	var chart = new google.visualization.PieChart(document.getElementById('gadash-trafficmediums'));
@@ -738,7 +743,7 @@ if (! class_exists('GADASH_Widgets')) {
 							legend: 'none',
 							chartArea: {width: '99%',height: '80%'},
 							title: '<?php _e( "Visitor Type", 'ga-dash' ); ?>',
-							colors:['<?php echo esc_html($GADASH_Config->options ['ga_dash_style']); ?>','<?php echo esc_html($tools->colourVariator ( $GADASH_Config->options ['ga_dash_style'], - 10 )); ?>','<?php echo esc_html($tools->colourVariator ( $GADASH_Config->options ['ga_dash_style'], + 20 )); ?>','<?php echo esc_html($tools->colourVariator ( $GADASH_Config->options ['ga_dash_style'], + 10 )); ?>','<?php echo esc_html($tools->colourVariator ( $GADASH_Config->options ['ga_dash_style'], - 20 )); ?>']
+							colors:['<?php echo esc_html($this->gadwp->config->options ['ga_dash_style']); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], - 10 )); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], + 20 )); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], + 10 )); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], - 20 )); ?>']
 						};
                 
                 	var chart = new google.visualization.PieChart(document.getElementById('gadash-traffictype'));
@@ -754,7 +759,7 @@ if (! class_exists('GADASH_Widgets')) {
 							legend: 'none',
 							chartArea: {width: '99%',height: '80%'},
 							title: '<?php _e( "Social Networks", 'ga-dash' ); ?>',
-							colors:['<?php echo esc_html($GADASH_Config->options ['ga_dash_style']); ?>','<?php echo esc_html($tools->colourVariator ( $GADASH_Config->options ['ga_dash_style'], - 10 )); ?>','<?php echo esc_html($tools->colourVariator ( $GADASH_Config->options ['ga_dash_style'], + 20 )); ?>','<?php echo esc_html($tools->colourVariator ( $GADASH_Config->options ['ga_dash_style'], + 10 )); ?>','<?php echo esc_html($tools->colourVariator ( $GADASH_Config->options ['ga_dash_style'], - 20 )); ?>']
+							colors:['<?php echo esc_html($this->gadwp->config->options ['ga_dash_style']); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], - 10 )); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], + 20 )); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], + 10 )); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], - 20 )); ?>']
 						};
                 
                 	var chart = new google.visualization.PieChart(document.getElementById('gadash-socialnetworks'));
@@ -770,7 +775,7 @@ if (! class_exists('GADASH_Widgets')) {
 							legend: 'none',
 							chartArea: {width: '99%',height: '80%'},
 							title: '<?php _e( "Search Engines", 'ga-dash' ); ?>',
-							colors:['<?php echo esc_html($GADASH_Config->options ['ga_dash_style']); ?>','<?php echo esc_html($tools->colourVariator ( $GADASH_Config->options ['ga_dash_style'], - 10 )); ?>','<?php echo esc_html($tools->colourVariator ( $GADASH_Config->options ['ga_dash_style'], + 20 )); ?>','<?php echo esc_html($tools->colourVariator ( $GADASH_Config->options ['ga_dash_style'], + 10 )); ?>','<?php echo esc_html($tools->colourVariator ( $GADASH_Config->options ['ga_dash_style'], - 20 )); ?>']
+							colors:['<?php echo esc_html($this->gadwp->config->options ['ga_dash_style']); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], - 10 )); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], + 20 )); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], + 10 )); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], - 20 )); ?>']
 						};
                 
                 	var chart = new google.visualization.PieChart(document.getElementById('gadash-trafficorganic'));
@@ -847,11 +852,11 @@ if (! class_exists('GADASH_Widgets')) {
             			chartArea: {width: '99%',height: '90%'},	
             			colors: ['<?php echo $light_color; ?>', '<?php echo $dark_color; ?>'],
             			<?php
-                            $tools = new GADASH_Tools();
-                            $tools->getcountrycodes();
-                            if ($GADASH_Config->options['ga_target_geomap'] and isset($tools->country_codes[$GADASH_Config->options['ga_target_geomap']])) {
+                            
+                            $country_codes = GADWP_Tools::get_countrycodes();
+                            if ($this->gadwp->config->options['ga_target_geomap'] and isset($country_codes[$this->gadwp->config->options['ga_target_geomap']])) {
                                 ?>
-        				region : '<?php echo esc_html($GADASH_Config->options ['ga_target_geomap']); ?>',
+        				region : '<?php echo esc_html($this->gadwp->config->options ['ga_target_geomap']); ?>',
         				displayMode : 'markers',
         				datalessRegionColor : 'EFEFEF'
             			<?php } ?>
@@ -998,7 +1003,4 @@ if (! class_exists('GADASH_Widgets')) {
                         }
         }
     }
-}
-if (is_admin()) {
-    $GADASH_Widgets = new GADASH_Widgets();
 }

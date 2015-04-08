@@ -397,7 +397,7 @@ jQuery.fn.extend({
               reports.throwError('#gadwp-prs' + slug, response, 1, "125px");
             }
           });
-        } elseif (query == 'trafficdetails') {
+        } else if (query == 'trafficdetails') {
           jQuery('#gadwp-reports' + slug).html('<div id="gadwp-trafficchannels' + slug + '"></div>')
           jQuery('#gadwp-reports' + slug).append('<div class="gadwp-floatwraper"><div id="gadwp-trafficmediums' + slug + '"></div><div id="gadwp-traffictype' + slug + '"></div></div>');
           jQuery('#gadwp-reports' + slug).append('<div class="gadwp-floatwraper"><div id="gadwp-trafficorganic' + slug + '"></div><div id="gadwp-socialnetworks' + slug + '"></div></div>');
@@ -476,7 +476,7 @@ jQuery.fn.extend({
               reports.throwError('#gadwp-socialnetworks' + slug, response, 4, "80px");
             }
           });
-        } elseif (query == 'locations') {
+        } else if (query == 'locations') {
           jQuery('#gadwp-reports' + slug).html('<div id="gadwp-map' + slug + '"></div>')
           jQuery('#gadwp-reports' + slug).append('<div id="gadwp-locations' + slug + '"></div>');
           data.query = query;

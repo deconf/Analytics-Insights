@@ -5,20 +5,23 @@
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
-if (! class_exists('GADASH_Tools')) {
 
-    class GADASH_Tools
+// Exit if accessed directly
+if (! defined('ABSPATH'))
+    exit();
+
+if (! class_exists('GADWP_Tools')) {
+
+    class GADWP_Tools
     {
 
-        public $country_codes;
-
-        public function getcountrycodes()
+        public static function get_countrycodes()
         {
             include_once 'iso3166.php';
-            $this->country_codes = $country_codes;
+            return $country_codes;
         }
 
-        public function guess_default_domain($profiles)
+        public static function guess_default_domain($profiles)
         {
             $domain = get_option('siteurl');
             $domain = str_ireplace(array(
@@ -37,7 +40,7 @@ if (! class_exists('GADASH_Tools')) {
             }
         }
 
-        public function get_selected_profile($profiles, $profile)
+        public static function get_selected_profile($profiles, $profile)
         {
             if (is_array($profiles)) {
                 foreach ($profiles as $item) {
@@ -48,14 +51,14 @@ if (! class_exists('GADASH_Tools')) {
             }
         }
 
-        public function get_root_domain($domain)
+        public static function get_root_domain($domain)
         {
             $root = explode('/', $domain);
             preg_match("/(?P<domain>[a-z0-9][a-z0-9\-]{1,63}\.[a-z\.]{2,6})$/i", str_ireplace('www', '', isset($root[2]) ? $root[2] : $domain), $root);
             return $root;
         }
 
-        public function strip_protocol($domain)
+        public static function strip_protocol($domain)
         {
             return str_replace(array(
                 "https://",
@@ -64,14 +67,14 @@ if (! class_exists('GADASH_Tools')) {
             ), "", $domain);
         }
 
-        public function clear_cache()
+        public static function clear_cache()
         {
             global $wpdb;
             $sqlquery = $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_gadash%%'");
             $sqlquery = $wpdb->query("DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_timeout_gadash%%'");
         }
 
-        public function colourVariator($colour, $per)
+        public static function colourVariator($colour, $per)
         {
             $colour = substr($colour, 1);
             $rgb = '';
@@ -95,7 +98,7 @@ if (! class_exists('GADASH_Tools')) {
             return '#' . $rgb;
         }
 
-        public function variations($base)
+        public static function variations($base)
         {
             $variations[] = $base;
             $variations[] = self::colourVariator($base, - 10);
@@ -107,7 +110,7 @@ if (! class_exists('GADASH_Tools')) {
             return $variations;
         }
 
-        public function check_roles($access_level, $tracking = false)
+        public static function check_roles($access_level, $tracking = false)
         {
             if (is_user_logged_in() && isset($access_level)) {
                 global $current_user;

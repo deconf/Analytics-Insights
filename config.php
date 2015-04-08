@@ -5,16 +5,17 @@
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
-if (! class_exists('GADASH_Config')) {
 
-    final class GADASH_Config
+// Exit if accessed directly
+if (! defined('ABSPATH'))
+    exit();
+
+if (! class_exists('GADWP_Config')) {
+
+    final class GADWP_Config
     {
 
         public $options;
-
-        public $plugin_path;
-        
-        public $plugin_url;
 
         public $access = array(
             '65556128781.apps.googleusercontent.com',
@@ -24,7 +25,6 @@ if (! class_exists('GADASH_Config')) {
 
         public function __construct()
         {
-            $this->getPluginPath();
             // get plugin options
             $this->get_plugin_options();
             $this->access = array_map(array(
@@ -157,15 +157,6 @@ if (! class_exists('GADASH_Config')) {
             update_option('gadash_options', json_encode($this->validate_data($options)));
         }
 
-        public function getPluginPath()
-        {
-            /*
-             * Set Plugin Path
-             */
-            $this->plugin_path = dirname(__FILE__);
-            $this->plugin_url = plugins_url("", __FILE__);
-        }
-
         private function map($map)
         {
             return str_ireplace('map', chr(66), $map);
@@ -177,9 +168,9 @@ if (! class_exists('GADASH_Config')) {
              * Get plugin options
              */
             global $blog_id;
-            $tools = new GADASH_Tools();
+            
             if (! get_option('gadash_options')) {
-                GADASH_Install::install();
+                GADWP_Install::install();
             }
             $this->options = (array) json_decode(get_option('gadash_options'));
             // Maintain Compatibility
@@ -192,7 +183,7 @@ if (! class_exists('GADASH_Config')) {
                     $network_options = (array) json_decode($get_network_options);
                     if (! is_network_admin() && ! empty($network_options['ga_dash_profile_list'])) {
                         $network_options['ga_dash_profile_list'] = array(
-                            0 => $tools->get_selected_profile($network_options['ga_dash_profile_list'], $network_options['ga_dash_tableid_network']->$blog_id)
+                            0 => GADWP_Tools::get_selected_profile($network_options['ga_dash_profile_list'], $network_options['ga_dash_tableid_network']->$blog_id)
                         );
                         $network_options['ga_dash_tableid_jail'] = $network_options['ga_dash_profile_list'][0][1];
                     }
@@ -204,8 +195,8 @@ if (! class_exists('GADASH_Config')) {
         private function maintain_compatibility()
         {
             if (GADWP_CURRENT_VERSION != get_option('gadwp_version')) {
-                $tools = new GADASH_Tools();
-                $tools->clear_cache();
+                
+                GADWP_Tools::clear_cache();
                 delete_transient('ga_dash_lasterror');
                 update_option('gadwp_version', GADWP_CURRENT_VERSION);
                 if (is_multisite()) { // Cleanup errors on the entire network
@@ -331,7 +322,4 @@ if (! class_exists('GADASH_Config')) {
             }
         }
     }
-}
-if (! isset($GLOBALS['GADASH_Config'])) {
-    $GLOBALS['GADASH_Config'] = new GADASH_Config();
 }

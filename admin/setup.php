@@ -5,14 +5,21 @@
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
-if (! class_exists('GADASH_Back_Setup')) {
 
-    final class GADASH_Back_Setup
+// Exit if accessed directly
+if (! defined('ABSPATH'))
+    exit();
+
+if (! class_exists('GADWP_Backend_Setup')) {
+
+    final class GADWP_Backend_Setup
     {
+        private $gadwp;
 
         public function __construct()
         {
-            global $GADASH_Config;
+            $this->gadwp = GADWP(); 
+            
             // Styles & Scripts
             add_action('admin_enqueue_scripts', array(
                 $this,
@@ -29,7 +36,7 @@ if (! class_exists('GADASH_Back_Setup')) {
                 'network_menu'
             ));
             // Settings link
-            add_filter("plugin_action_links_" . plugin_basename($GADASH_Config->plugin_path) . '/gadwp.php', array(
+            add_filter("plugin_action_links_" . plugin_basename(GADWP_DIR) . 'gadwp.php', array(
                 $this,
                 'settings_link'
             ));
@@ -62,32 +69,31 @@ if (! class_exists('GADASH_Back_Setup')) {
          */
         public function site_menu()
         {
-            global $GADASH_Config;
             global $wp_version;
             if (current_user_can('manage_options')) {
-                include ($GADASH_Config->plugin_path . '/admin/settings.php');
+                include (GADWP_DIR . 'admin/settings.php');
                 add_menu_page(__("Google Analytics", 'ga-dash'), 'Google Analytics', 'manage_options', 'gadash_settings', array(
-                    'GADASH_Settings',
+                    'GADWP_Settings',
                     'general_settings'
-                ), version_compare($wp_version, '3.8.0', '>=') ? 'dashicons-chart-area' : $GADASH_Config->plugin_url . '/admin/images/gadash-icon.png');
+                ), version_compare($wp_version, '3.8.0', '>=') ? 'dashicons-chart-area' : GADWP_URL . 'admin/images/gadash-icon.png');
                 add_submenu_page('gadash_settings', __("General Settings", 'ga-dash'), __("General Settings", 'ga-dash'), 'manage_options', 'gadash_settings', array(
-                    'GADASH_Settings',
+                    'GADWP_Settings',
                     'general_settings'
                 ));
                 add_submenu_page('gadash_settings', __("Backend Settings", 'ga-dash'), __("Backend Settings", 'ga-dash'), 'manage_options', 'gadash_backend_settings', array(
-                    'GADASH_Settings',
+                    'GADWP_Settings',
                     'backend_settings'
                 ));
                 add_submenu_page('gadash_settings', __("Frontend Settings", 'ga-dash'), __("Frontend Settings", 'ga-dash'), 'manage_options', 'gadash_frontend_settings', array(
-                    'GADASH_Settings',
+                    'GADWP_Settings',
                     'frontend_settings'
                 ));
                 add_submenu_page('gadash_settings', __("Tracking Code", 'ga-dash'), __("Tracking Code", 'ga-dash'), 'manage_options', 'gadash_tracking_settings', array(
-                    'GADASH_Settings',
+                    'GADWP_Settings',
                     'tracking_settings'
                 ));
                 add_submenu_page('gadash_settings', __("Errors & Debug", 'ga-dash'), __("Errors & Debug", 'ga-dash'), 'manage_options', 'gadash_errors_debugging', array(
-                    'GADASH_Settings',
+                    'GADWP_Settings',
                     'errors_debugging'
                 ));
             }
@@ -98,20 +104,19 @@ if (! class_exists('GADASH_Back_Setup')) {
          */
         public function network_menu()
         {
-            global $GADASH_Config;
             global $wp_version;
             if (current_user_can('manage_netwrok')) {
-                include ($GADASH_Config->plugin_path . '/admin/settings.php');
+                include (GADWP_DIR . 'admin/settings.php');
                 add_menu_page(__("Google Analytics", 'ga-dash'), "Google Analytics", 'manage_netwrok', 'gadash_settings', array(
-                    'GADASH_Settings',
+                    'GADWP_Settings',
                     'general_settings_network'
-                ), version_compare($wp_version, '3.8.0', '>=') ? 'dashicons-chart-area' : $GADASH_Config->plugin_url . '/admin/images/gadash-icon.png');
+                ), version_compare($wp_version, '3.8.0', '>=') ? 'dashicons-chart-area' : GADWP_URL . 'admin/images/gadash-icon.png');
                 add_submenu_page('gadash_settings', __("General Settings", 'ga-dash'), __("General Settings", 'ga-dash'), 'manage_netwrok', 'gadash_settings', array(
-                    'GADASH_Settings',
+                    'GADWP_Settings',
                     'general_settings_network'
                 ));
                 add_submenu_page('gadash_settings', __("Errors & Debug", 'ga-dash'), __("Errors & Debug", 'ga-dash'), 'manage_network', 'gadash_errors_debugging', array(
-                    'GADASH_Settings',
+                    'GADWP_Settings',
                     'errors_debugging'
                 ));
             }
@@ -125,12 +130,12 @@ if (! class_exists('GADASH_Back_Setup')) {
          */
         public function load_styles_scripts($hook)
         {
-            global $GADASH_Config;
-            $tools = new GADASH_Tools();
+
+            
             /*
              * GADWP main stylesheet
              */
-            wp_enqueue_style('gadwp', $GADASH_Config->plugin_url . '/admin/css/gadwp.css', null, GADWP_CURRENT_VERSION);
+            wp_enqueue_style('gadwp', GADWP_URL . 'admin/css/gadwp.css', null, GADWP_CURRENT_VERSION);
             /*
              * Dashboard Widgets Styles & Scripts
              */
@@ -138,8 +143,8 @@ if (! class_exists('GADASH_Back_Setup')) {
                 'index.php'
             );
             if (in_array($hook, $widgets_hooks)) {
-                wp_enqueue_style('gadwp-nprogress', $GADASH_Config->plugin_url . '/tools/nprogress/nprogress.css', null, GADWP_CURRENT_VERSION);
-                wp_enqueue_style('gadwp-admin-widgets', $GADASH_Config->plugin_url . '/admin/css/gadwp.css', null, GADWP_CURRENT_VERSION);
+                wp_enqueue_style('gadwp-nprogress', GADWP_URL. 'tools/nprogress/nprogress.css', null, GADWP_CURRENT_VERSION);
+                wp_enqueue_style('gadwp-admin-widgets', GADWP_URL. 'admin/css/gadwp.css', null, GADWP_CURRENT_VERSION);
                 wp_enqueue_script('gadwp-admin-widgets', plugins_url('js/widgets.js', __FILE__), array(
                     'jquery'
                 ), GADWP_CURRENT_VERSION);
@@ -147,7 +152,7 @@ if (! class_exists('GADASH_Back_Setup')) {
                     wp_register_script('googlejsapi', 'https://www.google.com/jsapi');
                     wp_enqueue_script('googlejsapi');
                 }
-                wp_enqueue_script('gadwp-nprogress', $GADASH_Config->plugin_url . '/tools/nprogress/nprogress.js', array(
+                wp_enqueue_script('gadwp-nprogress', GADWP_URL . 'tools/nprogress/nprogress.js', array(
                     'jquery'
                 ), GADWP_CURRENT_VERSION);
             }
@@ -158,14 +163,14 @@ if (! class_exists('GADASH_Back_Setup')) {
                 'edit.php'
             );
             if (in_array($hook, $contentstats_hooks)) {
-                if (! $tools->check_roles($GADASH_Config->options['ga_dash_access_back']) or 0 == $GADASH_Config->options['item_reports']) {
+                if (! GADWP_Tools::check_roles($this->gadwp->config->options['ga_dash_access_back']) or 0 == $this->gadwp->config->options['item_reports']) {
                     return;
                 }
-                wp_enqueue_style('gadwp-nprogress', $GADASH_Config->plugin_url . '/tools/nprogress/nprogress.css', null, GADWP_CURRENT_VERSION);
-                wp_enqueue_style('gadwp_itemreports', $GADASH_Config->plugin_url . '/admin/css/item-reports.css', null, GADWP_CURRENT_VERSION);
-                $tools->getcountrycodes();
-                if ($GADASH_Config->options['ga_target_geomap'] and isset($tools->country_codes[$GADASH_Config->options['ga_target_geomap']])) {
-                    $region = $GADASH_Config->options['ga_target_geomap'];
+                wp_enqueue_style('gadwp-nprogress', GADWP_URL . 'tools/nprogress/nprogress.css', null, GADWP_CURRENT_VERSION);
+                wp_enqueue_style('gadwp_itemreports', GADWP_URL . 'admin/css/item-reports.css', null, GADWP_CURRENT_VERSION);
+                $country_codes = GADWP_Tools::get_countrycodes();
+                if ($this->gadwp->config->options['ga_target_geomap'] and isset($country_codes[$this->gadwp->config->options['ga_target_geomap']])) {
+                    $region = $this->gadwp->config->options['ga_target_geomap'];
                 } else {
                     $region = false;
                 }
@@ -173,7 +178,7 @@ if (! class_exists('GADASH_Back_Setup')) {
                 if (! wp_script_is('googlejsapi')) {
                     wp_register_script('googlejsapi', 'https://www.google.com/jsapi');
                 }
-                wp_enqueue_script('gadwp-nprogress', $GADASH_Config->plugin_url . '/tools/nprogress/nprogress.js', array(
+                wp_enqueue_script('gadwp-nprogress', GADWP_URL . 'tools/nprogress/nprogress.js', array(
                     'jquery'
                 ), GADWP_CURRENT_VERSION);
                 wp_enqueue_script('gadwp_itemreports', plugins_url('js/item-reports.js', __FILE__), array(
@@ -220,7 +225,7 @@ if (! class_exists('GADASH_Back_Setup')) {
                         __("This report is unavailable", 'ga-dash'),
                         __("report generated by", 'ga-dash')
                     ),
-                    'colorVariations' => $tools->variations($GADASH_Config->options['ga_dash_style']),
+                    'colorVariations' => GADWP_Tools::variations($this->gadwp->config->options['ga_dash_style']),
                     'region' => $region
                 ));
             }
@@ -261,7 +266,4 @@ if (! class_exists('GADASH_Back_Setup')) {
             return $links;
         }
     }
-}
-if (is_admin()) {
-    $GADASH_Back_Setup = new GADASH_Back_Setup();
 }

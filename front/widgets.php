@@ -6,11 +6,19 @@
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
-final class GADSH_Frontend_Widget extends WP_Widget
+
+// Exit if accessed directly
+if (! defined('ABSPATH'))
+    exit();
+
+final class GADWP_Frontend_Widget extends WP_Widget
 {
+    private $gadwp;
 
     public function __construct()
     {
+        $this->gadwp = GADWP();
+        
         parent::__construct('gadash_frontend_widget', __('Google Analytics Dashboard', 'ga-dash'), array(
             'description' => __("Will display your google analytics stats in a widget", 'ga-dash')
         ));
@@ -25,9 +33,8 @@ final class GADSH_Frontend_Widget extends WP_Widget
 
     public function ga_dash_front_enqueue_styles()
     {
-        global $GADASH_Config;
-        wp_enqueue_style('ga_dash-front', $GADASH_Config->plugin_url . '/front/css/item-reports.css', null, GADWP_CURRENT_VERSION);
-        wp_enqueue_script('ga_dash-front', $GADASH_Config->plugin_url . '/front/js/item-reports.js', array(
+        wp_enqueue_style('ga_dash-front', GADWP_URL . 'front/css/item-reports.css', null, GADWP_CURRENT_VERSION);
+        wp_enqueue_script('ga_dash-front', GADWP_URL . 'front/js/item-reports.js', array(
             'jquery'
         ), GADWP_CURRENT_VERSION);
         wp_enqueue_script('googlejsapi', 'https://www.google.com/jsapi');
@@ -35,7 +42,6 @@ final class GADSH_Frontend_Widget extends WP_Widget
 
     public function widget($args, $instance)
     {
-        global $GADASH_Config;
         $widget_title = apply_filters('widget_title', $instance['title']);
         $title = __("Sessions", 'ga-dash') . ($instance['anonim'] ? "' " . __("trend", 'ga-dash') : '');
         echo "\n<!-- BEGIN GADWP v" . GADWP_CURRENT_VERSION . " Widget - https://deconf.com/google-analytics-dashboard-wordpress/ -->\n";
@@ -43,10 +49,10 @@ final class GADSH_Frontend_Widget extends WP_Widget
         if (! empty($widget_title)) {
             echo $args['before_title'] . $widget_title . $args['after_title'];
         }
-        $tools = new GADASH_Tools();
-        if (isset($GADASH_Config->options['ga_dash_style'])) {
-            $css = "colors:['" . $GADASH_Config->options['ga_dash_style'] . "','" . $tools->colourVariator($GADASH_Config->options['ga_dash_style'], - 20) . "'],";
-            $color = $GADASH_Config->options['ga_dash_style'];
+        
+        if (isset($this->gadwp->config->options['ga_dash_style'])) {
+            $css = "colors:['" . $this->gadwp->config->options['ga_dash_style'] . "','" . GADWP_Tools::colourVariator($this->gadwp->config->options['ga_dash_style'], - 20) . "'],";
+            $color = $this->gadwp->config->options['ga_dash_style'];
         } else {
             $css = "";
             $color = "#3366CC";
@@ -202,8 +208,8 @@ final class GADSH_Frontend_Widget extends WP_Widget
     }
 }
 
-function register_GADSH_Frontend_Widget()
+function register_GADWP_Frontend_Widget()
 {
-    register_widget('GADSH_Frontend_Widget');
+    register_widget('GADWP_Frontend_Widget');
 }
-add_action('widgets_init', 'register_GADSH_Frontend_Widget');
+add_action('widgets_init', 'register_GADWP_Frontend_Widget');
