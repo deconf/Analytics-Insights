@@ -136,8 +136,9 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Enhancement: Italian translation, updated by [Leo](https://www.facebook.com/leo.thestrategist)
 - Enhancement: Japanese translation, updated by [Hinaloe](https://github.com/hinaloe)
 - Enhancement: Portuguese (Brazil) translation, updated by [Treed Box](http://treedbox.com.br/)
-- Enhancement: introducing a manager class (a singleton flavour) to keep track of all instances and their references
-- Enhancement: better support for remove_action and wp_dequeue_script 
+- Enhancement: introducing a manager class (singleton flavour) to keep track of all instances and their references
+- Enhancement: better support for remove_action and wp_dequeue_script
+- Enhancement: push the tracking code at the end of head section, props by [Caleb Evans](https://github.com/caleb531)  
 - Bug Fix: in-existent script enqueued in frontend component, reported by [mmokrejs](https://wordpress.org/support/profile/mmokrejs)
 - Bug Fix: i18n improvements, committed by [Hinaloe](https://github.com/hinaloe)
 - Bug Fix: PHP notice when using bbPress, reported by [sheridencharles](https://wordpress.org/support/profile/sheridencharles)
@@ -159,7 +160,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Enhancement: Japanese translation, translated by [塀シスター](https://plus.google.com/u/0/+tk072110)
 - Enhancement: Dutch translation, translated by [Willem-Jan Meerkerk](https://github.com/WillemJann)
 - Enhancement: Portuguese (Brazil) translation, updated by [Treed Box](http://treedbox.com.br/)
-- Enhancement: UI improvements props by [Paal Joachim Romdahl](https://github.com/paaljoachim)
+- Enhancement: UI improvements, props by [Paal Joachim Romdahl](https://github.com/paaljoachim)
 - Bug Fix: Arabic translation not loading properly
 - Bug Fix: initialize time-shift for all API calls
 - Bug Fix: include GAPI only when a API call is made
@@ -273,7 +274,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Enhancement: better escaping to avoid javascript errors
 
 = 4.3.7 =
-- Enhancement: option to exclude Super Administrator tracking for the entire network, suggested by [Marie](https://wordpress.org/support/profile/yamaryam)
+- Enhancement: option to exclude Super Administrator tracking for the entire network, props by [Marie](https://wordpress.org/support/profile/yamaryam)
 - Bug Fix: warning during Network Activate, reported by [JoelStickney](https://wordpress.org/support/profile/joelstickney)
 - Bug Fix: track affiliates while downloads, mailto and outbound links tracking is disabled
 - Bug Fix: avoid reload loops for realtime component
@@ -291,7 +292,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Bug Fix: fixed unicode issue, reported by [Haruka_Suzuki](https://wordpress.org/support/profile/haruka_suzuki)
 - Bug Fix: properly display cities with same name from different regions, reported by [matt6303](https://wordpress.org/support/profile/matt6303)
 - Enhancement: removed image extensions from default download filter
-- Enhancement: add day of week to dashboard dates, suggested by [nethrs](https://deconf.com/ask/author/timnethers/)
+- Enhancement: add day of week to dashboard dates, props by [nethrs](https://deconf.com/ask/author/timnethers/)
 - Enhancement: Arabic translation, translated by [Ahmed Majed](https://deconf.com/ask/author/almobdaa/)
 - Bug Fix: multiple fixes for real time reports
 

@@ -14,7 +14,8 @@ if (! class_exists('GADWP_Tracking')) {
 
     class GADWP_Tracking
     {
-        private$gadwp;
+
+        private $gadwp;
 
         public function __construct()
         {
@@ -23,7 +24,7 @@ if (! class_exists('GADWP_Tracking')) {
             add_action('wp_head', array(
                 $this,
                 'ga_dash_tracking'
-            ));
+            ), 99);
             add_action('wp_enqueue_scripts', array(
                 $this,
                 'ga_dash_enqueue_scripts'
@@ -39,7 +40,6 @@ if (! class_exists('GADWP_Tracking')) {
 
         public function ga_dash_tracking()
         {
-            
             if (GADWP_Tools::check_roles($this->gadwp->config->options['ga_track_exclude'], true) or ($this->gadwp->config->options['ga_dash_excludesa'] and current_user_can('manage_network'))) {
                 return;
             }
