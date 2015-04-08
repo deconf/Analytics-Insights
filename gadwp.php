@@ -215,9 +215,16 @@ if (! class_exists('GADWP_Manager')) {
                  * Backend Setup, Widgets and Item Reports instances
                  */
                 if (GADWP_Tools::check_roles(self::$instance->config->options['ga_dash_access_back'])) {
+                    
                     self::$instance->backend_setup = new GADWP_Backend_Setup();
-                    self::$instance->backend_widgets = new GADWP_Backend_Widgets();
-                    self::$instance->backend_item_reports = new GADWP_Backend_Item_Reports();
+                    
+                    if (self::$instance->config->options['dashboard_widget'] == 1){
+                        self::$instance->backend_widgets = new GADWP_Backend_Widgets();
+                    }
+                    
+                    if (self::$instance->config->options['item_reports'] == 1){    
+                        self::$instance->backend_item_reports = new GADWP_Backend_Item_Reports();
+                    }    
                 }
             } else {
                 /*

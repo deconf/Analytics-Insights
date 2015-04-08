@@ -14,11 +14,12 @@ if (! class_exists('GADWP_Backend_Setup')) {
 
     final class GADWP_Backend_Setup
     {
+
         private $gadwp;
 
         public function __construct()
         {
-            $this->gadwp = GADWP(); 
+            $this->gadwp = GADWP();
             
             // Styles & Scripts
             add_action('admin_enqueue_scripts', array(
@@ -130,12 +131,12 @@ if (! class_exists('GADWP_Backend_Setup')) {
          */
         public function load_styles_scripts($hook)
         {
-
             
             /*
              * GADWP main stylesheet
              */
             wp_enqueue_style('gadwp', GADWP_URL . 'admin/css/gadwp.css', null, GADWP_CURRENT_VERSION);
+            
             /*
              * Dashboard Widgets Styles & Scripts
              */
@@ -143,19 +144,21 @@ if (! class_exists('GADWP_Backend_Setup')) {
                 'index.php'
             );
             if (in_array($hook, $widgets_hooks)) {
-                wp_enqueue_style('gadwp-nprogress', GADWP_URL. 'tools/nprogress/nprogress.css', null, GADWP_CURRENT_VERSION);
-                wp_enqueue_style('gadwp-admin-widgets', GADWP_URL. 'admin/css/gadwp.css', null, GADWP_CURRENT_VERSION);
-                wp_enqueue_script('gadwp-admin-widgets', plugins_url('js/widgets.js', __FILE__), array(
-                    'jquery'
-                ), GADWP_CURRENT_VERSION);
-                if (! wp_script_is('googlejsapi')) {
-                    wp_register_script('googlejsapi', 'https://www.google.com/jsapi');
-                    wp_enqueue_script('googlejsapi');
+                if (GADWP_Tools::check_roles($this->gadwp->config->options['ga_dash_access_back']) and 1 == $this->gadwp->config->options['dashboard_widget']) {
+                    wp_enqueue_style('gadwp-nprogress', GADWP_URL . 'tools/nprogress/nprogress.css', null, GADWP_CURRENT_VERSION);
+                    wp_enqueue_script('gadwp-admin-widgets', plugins_url('js/widgets.js', __FILE__), array(
+                        'jquery'
+                    ), GADWP_CURRENT_VERSION);
+                    if (! wp_script_is('googlejsapi')) {
+                        wp_register_script('googlejsapi', 'https://www.google.com/jsapi');
+                        wp_enqueue_script('googlejsapi');
+                    }
+                    wp_enqueue_script('gadwp-nprogress', GADWP_URL . 'tools/nprogress/nprogress.js', array(
+                        'jquery'
+                    ), GADWP_CURRENT_VERSION);
                 }
-                wp_enqueue_script('gadwp-nprogress', GADWP_URL . 'tools/nprogress/nprogress.js', array(
-                    'jquery'
-                ), GADWP_CURRENT_VERSION);
             }
+            
             /*
              * Posts/Pages List Styles & Scripts
              */
@@ -163,72 +166,73 @@ if (! class_exists('GADWP_Backend_Setup')) {
                 'edit.php'
             );
             if (in_array($hook, $contentstats_hooks)) {
-                if (! GADWP_Tools::check_roles($this->gadwp->config->options['ga_dash_access_back']) or 0 == $this->gadwp->config->options['item_reports']) {
-                    return;
+                if (GADWP_Tools::check_roles($this->gadwp->config->options['ga_dash_access_back']) and 1 == $this->gadwp->config->options['item_reports']) {
+                    
+                    wp_enqueue_style('gadwp-nprogress', GADWP_URL . 'tools/nprogress/nprogress.css', null, GADWP_CURRENT_VERSION);
+                    wp_enqueue_style('gadwp_itemreports', GADWP_URL . 'admin/css/item-reports.css', null, GADWP_CURRENT_VERSION);
+                    $country_codes = GADWP_Tools::get_countrycodes();
+                    if ($this->gadwp->config->options['ga_target_geomap'] and isset($country_codes[$this->gadwp->config->options['ga_target_geomap']])) {
+                        $region = $this->gadwp->config->options['ga_target_geomap'];
+                    } else {
+                        $region = false;
+                    }
+                    wp_enqueue_style("wp-jquery-ui-dialog");
+                    if (! wp_script_is('googlejsapi')) {
+                        wp_register_script('googlejsapi', 'https://www.google.com/jsapi');
+                    }
+                    wp_enqueue_script('gadwp-nprogress', GADWP_URL . 'tools/nprogress/nprogress.js', array(
+                        'jquery'
+                    ), GADWP_CURRENT_VERSION);
+                    wp_enqueue_script('gadwp_itemreports', plugins_url('js/item-reports.js', __FILE__), array(
+                        'gadwp-nprogress',
+                        'googlejsapi',
+                        'jquery',
+                        'jquery-ui-dialog'
+                    ), GADWP_CURRENT_VERSION);
+                    wp_localize_script('gadwp_itemreports', 'gadwp_item_data', array(
+                        'ajaxurl' => admin_url('admin-ajax.php'),
+                        'security' => wp_create_nonce('gadwp_get_itemreports'),
+                        'dateList' => array(
+                            'today' => __("Today", 'ga-dash'),
+                            'yesterday' => __("Yesterday", 'ga-dash'),
+                            '7daysAgo' => __("Last 7 Days", 'ga-dash'),
+                            '30daysAgo' => __("Last 30 Days", 'ga-dash'),
+                            '90daysAgo' => __("Last 90 Days", 'ga-dash')
+                        ),
+                        'reportList' => array(
+                            'uniquePageviews' => __("Unique Views", 'ga-dash'),
+                            'users' => __("Users", 'ga-dash'),
+                            'organicSearches' => __("Organic", 'ga-dash'),
+                            'pageviews' => __("Page Views", 'ga-dash'),
+                            'visitBounceRate' => __("Bounce Rate", 'ga-dash'),
+                            'locations' => __("Location", 'ga-dash'),
+                            'referrers' => __("Referrers", 'ga-dash'),
+                            'searches' => __("Searches", 'ga-dash'),
+                            'trafficdetails' => __("Traffic Details", 'ga-dash')
+                        ),
+                        'i18n' => array(
+                            __("A JavaScript Error is blocking plugin resources!", 'ga-dash'),
+                            __("Traffic Mediums", 'ga-dash'),
+                            __("Visitor Type", 'ga-dash'),
+                            __("Social Networks", 'ga-dash'),
+                            __("Search Engines", 'ga-dash'),
+                            __("Unique Views", 'ga-dash'),
+                            __("Users", 'ga-dash'),
+                            __("Page Views", 'ga-dash'),
+                            __("Bounce Rate", 'ga-dash'),
+                            __("Organic Search", 'ga-dash'),
+                            __("Pages/Session", 'ga-dash'),
+                            __("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'),
+                            __("Not enough data collected", 'ga-dash'),
+                            __("This report is unavailable", 'ga-dash'),
+                            __("report generated by", 'ga-dash')
+                        ),
+                        'colorVariations' => GADWP_Tools::variations($this->gadwp->config->options['ga_dash_style']),
+                        'region' => $region
+                    ));
                 }
-                wp_enqueue_style('gadwp-nprogress', GADWP_URL . 'tools/nprogress/nprogress.css', null, GADWP_CURRENT_VERSION);
-                wp_enqueue_style('gadwp_itemreports', GADWP_URL . 'admin/css/item-reports.css', null, GADWP_CURRENT_VERSION);
-                $country_codes = GADWP_Tools::get_countrycodes();
-                if ($this->gadwp->config->options['ga_target_geomap'] and isset($country_codes[$this->gadwp->config->options['ga_target_geomap']])) {
-                    $region = $this->gadwp->config->options['ga_target_geomap'];
-                } else {
-                    $region = false;
-                }
-                wp_enqueue_style("wp-jquery-ui-dialog");
-                if (! wp_script_is('googlejsapi')) {
-                    wp_register_script('googlejsapi', 'https://www.google.com/jsapi');
-                }
-                wp_enqueue_script('gadwp-nprogress', GADWP_URL . 'tools/nprogress/nprogress.js', array(
-                    'jquery'
-                ), GADWP_CURRENT_VERSION);
-                wp_enqueue_script('gadwp_itemreports', plugins_url('js/item-reports.js', __FILE__), array(
-                    'gadwp-nprogress',
-                    'googlejsapi',
-                    'jquery',
-                    'jquery-ui-dialog'
-                ), GADWP_CURRENT_VERSION);
-                wp_localize_script('gadwp_itemreports', 'gadwp_item_data', array(
-                    'ajaxurl' => admin_url('admin-ajax.php'),
-                    'security' => wp_create_nonce('gadwp_get_itemreports'),
-                    'dateList' => array(
-                        'today' => __("Today", 'ga-dash'),
-                        'yesterday' => __("Yesterday", 'ga-dash'),
-                        '7daysAgo' => __("Last 7 Days", 'ga-dash'),
-                        '30daysAgo' => __("Last 30 Days", 'ga-dash'),
-                        '90daysAgo' => __("Last 90 Days", 'ga-dash')
-                    ),
-                    'reportList' => array(
-                        'uniquePageviews' => __("Unique Views", 'ga-dash'),
-                        'users' => __("Users", 'ga-dash'),
-                        'organicSearches' => __("Organic", 'ga-dash'),
-                        'pageviews' => __("Page Views", 'ga-dash'),
-                        'visitBounceRate' => __("Bounce Rate", 'ga-dash'),
-                        'locations' => __("Location", 'ga-dash'),
-                        'referrers' => __("Referrers", 'ga-dash'),
-                        'searches' => __("Searches", 'ga-dash'),
-                        'trafficdetails' => __("Traffic Details", 'ga-dash')
-                    ),
-                    'i18n' => array(
-                        __("A JavaScript Error is blocking plugin resources!", 'ga-dash'),
-                        __("Traffic Mediums", 'ga-dash'),
-                        __("Visitor Type", 'ga-dash'),
-                        __("Social Networks", 'ga-dash'),
-                        __("Search Engines", 'ga-dash'),
-                        __("Unique Views", 'ga-dash'),
-                        __("Users", 'ga-dash'),
-                        __("Page Views", 'ga-dash'),
-                        __("Bounce Rate", 'ga-dash'),
-                        __("Organic Search", 'ga-dash'),
-                        __("Pages/Session", 'ga-dash'),
-                        __("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'),
-                        __("Not enough data collected", 'ga-dash'),
-                        __("This report is unavailable", 'ga-dash'),
-                        __("report generated by", 'ga-dash')
-                    ),
-                    'colorVariations' => GADWP_Tools::variations($this->gadwp->config->options['ga_dash_style']),
-                    'region' => $region
-                ));
             }
+            
             /*
              * Settings Styles & Scripts
              */

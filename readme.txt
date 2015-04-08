@@ -144,6 +144,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Bug Fix: PHP notice when using bbPress, reported by [sheridencharles](https://wordpress.org/support/profile/sheridencharles)
 - Bug Fix: in-existent script enqueued in frontend component, reported by [mmokrejs](https://wordpress.org/support/profile/mmokrejs)
 - Bug Fix: improved URI detection in Pages and Posts backend reports
+- Bug Fix: color picker and settings page tabs not working when per posts/pages reports are disabled 
 
 = 4.5.1 =
 - Bug Fix: analytics icons get added to all custom columns, reported by [FTRINITE](https://wordpress.org/support/profile/ftrinite)
