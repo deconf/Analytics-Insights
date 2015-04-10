@@ -171,13 +171,18 @@ if (! class_exists('GADWP_Manager')) {
              * Load GAPI Controller class
              */
             include_once (GADWP_DIR . 'tools/gapi.php');
-            
+
             /*
-             * Add i18n support
+             * Load Frontend Widgets
              */
-            add_action('plugins_loaded', array(
+            include_once (GADWP_DIR . 'front/widgets.php');
+                        
+            /*
+             * Add Frontend Widgets
+             */
+            add_action('widgets_init', array(
                 self::$instance,
-                'on_load'
+                'add_frontend_widget'
             ));
             
             /*
@@ -190,19 +195,11 @@ if (! class_exists('GADWP_Manager')) {
         }
 
         /**
-         * Loads widgets and textdomain
+         * Register Frontend Widgets
          */
-        public function on_load()
+        public function add_frontend_widget()
         {
-            /*
-             * Load i18n
-             */
-            load_plugin_textdomain('ga-dash', false, GADWP_DIR . 'languages/');
-            
-            /*
-             * Load frontend widget
-             */
-            include_once (GADWP_DIR . 'front/widgets.php');
+            register_widget('GADWP_Frontend_Widget');
         }
 
         /**
@@ -211,20 +208,24 @@ if (! class_exists('GADWP_Manager')) {
         public function on_init()
         {
             if (is_admin()) {
-                /*
-                 * Backend Setup, Widgets and Item Reports instances
-                 */
                 if (GADWP_Tools::check_roles(self::$instance->config->options['ga_dash_access_back'])) {
-                    
+                    /*
+                     * Backend Setup instance
+                     */
                     self::$instance->backend_setup = new GADWP_Backend_Setup();
                     
-                    if (self::$instance->config->options['dashboard_widget'] == 1){
+                    /*
+                     * Backend Widget instance
+                     */
+                    if (self::$instance->config->options['dashboard_widget']) {
                         self::$instance->backend_widgets = new GADWP_Backend_Widgets();
                     }
-                    
-                    if (self::$instance->config->options['item_reports'] == 1){    
+                    /*
+                     * Backend Item Reports instance
+                     */
+                    if (self::$instance->config->options['item_reports']) {
                         self::$instance->backend_item_reports = new GADWP_Backend_Item_Reports();
-                    }    
+                    }
                 }
             } else {
                 /*
@@ -251,6 +252,11 @@ if (! class_exists('GADWP_Manager')) {
              * Frontend ajax actions instance
              */
             self::$instance->frontend_actions = new GADWP_Frontend_Ajax();
+            
+            /*
+             * Load i18n
+             */
+            load_plugin_textdomain('ga-dash', false, GADWP_DIR . 'languages/');
         }
     }
 }

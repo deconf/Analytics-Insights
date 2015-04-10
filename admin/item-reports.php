@@ -26,26 +26,26 @@ if (! class_exists('GADWP_Backend_Item_Reports')) {
             // Add custom column in Posts List
             add_filter('manage_posts_columns', array(
                 $this,
-                'add_stats_column'
+                'add_columns'
             ));
             // Populate custom column in Posts List
             add_action('manage_posts_custom_column', array(
                 $this,
-                'display_item_stats'
+                'add_icons'
             ), 10, 2);
             // Add custom column in Pages List
             add_filter('manage_pages_columns', array(
                 $this,
-                'add_stats_column'
+                'add_columns'
             ));
             // Populate custom column in Pages List
             add_action('manage_pages_custom_column', array(
                 $this,
-                'display_item_stats'
+                'add_icons'
             ), 10, 2);
         }
 
-        public function display_item_stats($column, $id)
+        public function add_icons($column, $id)
         {
             global $wp_version;
             
@@ -60,7 +60,7 @@ if (! class_exists('GADWP_Backend_Item_Reports')) {
             }
         }
 
-        public function add_stats_column($columns)
+        public function add_columns($columns)
         {
             return array_merge($columns, array(
                 'gadwp_stats' => __('Analytics', 'ga-dash')

@@ -112,6 +112,11 @@ final class GADWP_Settings
 					<?php if (isset($message)) echo $message; ?>
 						<table class="options">
                             <tr>
+                                <td colspan="2">
+                                    <?php printf(__('Read %s for more information about Frontend Features and Options.', 'ga-dash'), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=frontend_screen&utm_campaign=gadwp', __('this documentation page', 'ga-dash')))?>
+						        </td>
+                            </tr>						
+                            <tr>
                                 <td colspan="2"><?php echo "<h2>" . __( "Permissions", 'ga-dash' ) . "</h2>"; ?></td>
                             </tr>
                             <tr>
@@ -215,6 +220,11 @@ final class GADWP_Settings
 					<?php if (isset($message)) echo $message; ?>
 						<table class="options">
                             <tr>
+                                <td colspan="2">
+                                    <?php printf(__('Read %s for more information about Backend Features and Options.', 'ga-dash'), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=backend_screen&utm_campaign=gadwp', __('this documentation page', 'ga-dash')))?>
+						        </td>
+                            </tr>						
+                            <tr>
                                 <td colspan="2"><?php echo "<h2>" . __( "Permissions", 'ga-dash' ) . "</h2>"; ?></td>
                             </tr>
                             <tr>
@@ -290,7 +300,6 @@ final class GADWP_Settings
                             <tr>
                                 <td colspan="2" class="title"> <?php _e("Maximum number of pages to display on real-time tab:", 'ga-dash'); ?>
     								<input type="number" name="options[ga_realtime_pages]" id="ga_realtime_pages" value="<?php echo (int)$options['ga_realtime_pages']; ?>" size="3">
-    								(<?php printf(__('find out more %s', 'ga-dash'),sprintf('<a href="https://deconf.com/google-analytics-dashboard-real-time-reports/">%s</a>',__('about this feature', 'ga-dash'))); ?>)
 								</td>
                             </tr>
                             <tr>
@@ -300,7 +309,6 @@ final class GADWP_Settings
                                 <td colspan="2" class="title">
 									<?php echo __("Target Geo Map to country:", 'ga-dash'); ?>
 									<input type="text" style="text-align: center;" name="options[ga_target_geomap]" value="<?php echo esc_attr($options['ga_target_geomap']); ?>" size="3">
-									(<?php printf(__('find out more %s'), sprintf('<a href="https://deconf.com/country-codes-for-google-analytics-dashboard/" target="_blank">%s</a>', __("about this feature", 'ga-dash')));?>)
 								</td>
                             </tr>
                             <tr>
@@ -358,6 +366,7 @@ final class GADWP_Settings
         );
         self::navigation_tabs($tabs);
         ?>
+        <div class="gadwp-help"><?php printf(__('For more information about Tracking Options read %s.', 'ga-dash'), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/tracking-google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=tracking_screen&utm_campaign=gadwp', __('this documentation page', 'ga-dash')));?></div>
 					<?php if (isset($message)) echo $message; ?>
 					    <div id="gadwp-basic">
                             <table class="options">
@@ -948,10 +957,10 @@ final class GADWP_Settings
                                                         <div class="switch-desc"><?php echo " ".__( "automatic updates for minor versions (security and maintenance releases only)", 'ga-dash' );?></div>
                                                     </td>
                                                 </tr>
-												<?php }?>
 												<tr>
                                                     <td colspan="2"><hr></td>
-                                                </tr>
+                                                </tr>                                                
+												<?php }?>
                                                 <tr>
                                                     <td colspan="2" class="submit"><input type="submit" name="Submit" class="button button-primary" value="<?php _e('Save Changes', 'ga-dash' ) ?>" /></td>
                                                 </tr>		<?php } else {?>

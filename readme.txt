@@ -118,7 +118,7 @@ A dedicated section for WordPress Plugins is available here: [Wordpress Plugins 
 
 1. Google Analytics Dashboard Blue Color
 2. Google Analytics Dashboard Real-Time
-3. Google Analytics Dashboard Settings
+3. Google Analytics Dashboard reports per Posts/Pages
 4. Google Analytics Dashboard Geo Map
 5. Google Analytics Dashboard Top Pages, Top Referrers and Top Searches
 6. Google Analytics Dashboard Traffic Overview

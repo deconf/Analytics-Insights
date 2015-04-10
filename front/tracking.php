@@ -23,22 +23,22 @@ if (! class_exists('GADWP_Tracking')) {
             
             add_action('wp_head', array(
                 $this,
-                'ga_dash_tracking'
+                'tracking_code'
             ), 99);
             add_action('wp_enqueue_scripts', array(
                 $this,
-                'ga_dash_enqueue_scripts'
+                'load_scripts'
             ));
         }
 
-        public function ga_dash_enqueue_scripts()
+        public function load_scripts()
         {
             if ($this->gadwp->config->options['ga_event_tracking'] and ! wp_script_is('jquery')) {
                 wp_enqueue_script('jquery');
             }
         }
 
-        public function ga_dash_tracking()
+        public function tracking_code()
         {
             if (GADWP_Tools::check_roles($this->gadwp->config->options['ga_track_exclude'], true) or ($this->gadwp->config->options['ga_dash_excludesa'] and current_user_can('manage_network'))) {
                 return;

@@ -144,7 +144,7 @@ if (! class_exists('GADWP_Backend_Setup')) {
                 'index.php'
             );
             if (in_array($hook, $widgets_hooks)) {
-                if (GADWP_Tools::check_roles($this->gadwp->config->options['ga_dash_access_back']) and 1 == $this->gadwp->config->options['dashboard_widget']) {
+                if (GADWP_Tools::check_roles($this->gadwp->config->options['ga_dash_access_back']) and $this->gadwp->config->options['dashboard_widget']) {
                     wp_enqueue_style('gadwp-nprogress', GADWP_URL . 'tools/nprogress/nprogress.css', null, GADWP_CURRENT_VERSION);
                     wp_enqueue_script('gadwp-admin-widgets', plugins_url('js/widgets.js', __FILE__), array(
                         'jquery'
@@ -166,7 +166,7 @@ if (! class_exists('GADWP_Backend_Setup')) {
                 'edit.php'
             );
             if (in_array($hook, $contentstats_hooks)) {
-                if (GADWP_Tools::check_roles($this->gadwp->config->options['ga_dash_access_back']) and 1 == $this->gadwp->config->options['item_reports']) {
+                if (GADWP_Tools::check_roles($this->gadwp->config->options['ga_dash_access_back']) and $this->gadwp->config->options['item_reports']) {
                     
                     wp_enqueue_style('gadwp-nprogress', GADWP_URL . 'tools/nprogress/nprogress.css', null, GADWP_CURRENT_VERSION);
                     wp_enqueue_style('gadwp_itemreports', GADWP_URL . 'admin/css/item-reports.css', null, GADWP_CURRENT_VERSION);

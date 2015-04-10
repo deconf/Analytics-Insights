@@ -29,7 +29,7 @@ if (! class_exists('GADWP_Backend_Widgets')) {
         public function add_widget()
         {
             
-            if (GADWP_Tools::check_roles($this->gadwp->config->options['ga_dash_access_back']) and 1 == $this->gadwp->config->options['dashboard_widget']) {
+            if (GADWP_Tools::check_roles($this->gadwp->config->options['ga_dash_access_back']) and $this->gadwp->config->options['dashboard_widget']) {
                 wp_add_dashboard_widget('gadash-widget', __("Google Analytics Dashboard", 'ga-dash'), array(
                     $this,
                     'dashboard_widget'
