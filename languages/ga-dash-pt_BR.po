@@ -4,14 +4,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/google-analytics-"
 "dashboard-for-wp\n"
 "POT-Creation-Date: 2015-04-10 09:32+0200\n"
-"PO-Revision-Date: 2015-04-10 09:32+0200\n"
-"Last-Translator: Alin Marcu <admin@deconf.com>\n"
+"PO-Revision-Date: 2015-04-10 12:54-0300\n"
+"Last-Translator: Treedbox <contato@treedbox.com.br>\n"
 "Language-Team: Treedbox.com <treedbox@gmail.com>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.5\n"
+"X-Generator: Poedit 1.5.4\n"
 "X-Poedit-KeywordsList: _e;__\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -65,7 +65,7 @@ msgstr "Configurações Externas do Google Analytics"
 #: .././admin/settings.php:116
 #, php-format
 msgid "Read %s for more information about Frontend Features and Options."
-msgstr ""
+msgstr "Leia %s para mais informações sobre Características e Opções do Site"
 
 #: .././admin/settings.php:116 .././admin/settings.php:224
 #: .././admin/settings.php:369 .././admin/settings.php:682
@@ -82,11 +82,11 @@ msgstr "Mostrar Status de:"
 
 #: .././admin/settings.php:162
 msgid "show page sessions and users in frontend (after each article)"
-msgstr ""
+msgstr "mostrar sessões de página e usuários no Site (após cada artigo)"
 
 #: .././admin/settings.php:173
 msgid "show page searches (after each article)"
-msgstr ""
+msgstr "Mostram pesquisas da página (após cada artigo)"
 
 #: .././admin/settings.php:180 .././admin/settings.php:318
 #: .././admin/settings.php:617 .././admin/settings.php:965
@@ -102,6 +102,8 @@ msgstr "Configurações de back-end do Google Analytics"
 #, php-format
 msgid "Read %s for more information about Backend Features and Options."
 msgstr ""
+"Leia %s para mais informações sobre Características e Opções da "
+"Administração."
 
 #: .././admin/settings.php:272
 msgid "enable Switch Profile/View functionality"
@@ -167,7 +169,7 @@ msgstr "Configurações avançadas"
 #: .././admin/settings.php:369
 #, php-format
 msgid "For more information about Tracking Options read %s."
-msgstr ""
+msgstr "Para mais informações sobre Opções de Rastreio, leia %s."
 
 #: .././admin/settings.php:374
 msgid "Tracking Settings"
@@ -221,15 +223,15 @@ msgstr "Analytics Universal"
 
 #: .././admin/settings.php:410
 msgid "anonymize IPs while tracking"
-msgstr ""
+msgstr "IPs anônimos ao rastreamento"
 
 #: .././admin/settings.php:421
 msgid "enable remarketing, demographics and interests reports"
-msgstr ""
+msgstr "permitir recolocação, demográficas e relatórios de interesses"
 
 #: .././admin/settings.php:439
 msgid "track downloads, mailto and outbound links"
-msgstr ""
+msgstr "Rastrear Downloads, encaminhamentos para e-mail  e links de saída"
 
 #: .././admin/settings.php:443
 msgid "Downloads Regex:"
@@ -237,7 +239,7 @@ msgstr "Expressões Regulares de Download:"
 
 #: .././admin/settings.php:454
 msgid "track affiliate links matching this regex"
-msgstr ""
+msgstr "Rastrear Links de Afiliados que coincidem com esta expressão regular"
 
 #: .././admin/settings.php:458
 msgid "Affiliates Regex:"
@@ -245,7 +247,7 @@ msgstr "Expressão Regular Afiliada:"
 
 #: .././admin/settings.php:469
 msgid "track fragment identifiers, hashmarks (#) in URI links"
-msgstr ""
+msgstr "rastrear identificadores de fragmento, hash (#) nos links"
 
 #: .././admin/settings.php:480
 msgid "Authors:"
@@ -273,19 +275,19 @@ msgstr "Velocidade de Página SR:"
 
 #: .././admin/settings.php:530
 msgid "exclude events from bounce-rate calculation"
-msgstr ""
+msgstr "Excluir eventos de cálculo de taxa de rejeição"
 
 #: .././admin/settings.php:541
 msgid "enable enhanced link attribution"
-msgstr ""
+msgstr "permitir atribuição de link aprimorada"
 
 #: .././admin/settings.php:552
 msgid "enable AdSense account linking"
-msgstr ""
+msgstr "habilitar link da conta do AdSense"
 
 #: .././admin/settings.php:563
 msgid "enable cross domain tracking"
-msgstr ""
+msgstr "habilitar Rastreio de domínio cruzado"
 
 #: .././admin/settings.php:567
 msgid "Cross Domains:"
@@ -404,7 +406,7 @@ msgstr "tutorial"
 
 #: .././admin/settings.php:873 .././admin/settings.php:1159
 msgid "use your own API Project credentials"
-msgstr ""
+msgstr "usar suas próprias credenciais da API do projeto"
 
 #: .././admin/settings.php:877 .././admin/settings.php:1166
 msgid "API Key:"
@@ -482,7 +484,7 @@ msgstr "Configuração de Rede"
 
 #: .././admin/settings.php:1140
 msgid "use a single Google Analytics account for the entire network"
-msgstr ""
+msgstr "Use uma única conta do Google Analytics para toda a Rede"
 
 #: .././admin/settings.php:1184
 msgid "Refresh Properties"
@@ -494,7 +496,7 @@ msgstr "Propriedades/Ver Definições"
 
 #: .././admin/settings.php:1245
 msgid "exclude Super Admin tracking for the entire network"
-msgstr ""
+msgstr "Excluir rastreamento do Super Administrador para toda a rede"
 
 #: .././admin/settings.php:1290
 msgid "Setup Tutorial & Demo"
@@ -863,7 +865,7 @@ msgstr "Créditos para:"
 
 #: .././gadwp.php:46 .././gadwp.php:55 .././gadwp.php:63
 msgid "This is not allowed, read the documentation!"
-msgstr ""
+msgstr "Isso não é permitido, leia a documentação!"
 
 #: .././tools/gapi.php:141
 msgid "Use this link to get your access code:"
@@ -931,47 +933,62 @@ msgstr "Visualização Única "
 #~ msgid "about this feature"
 #~ msgstr "sobre este recurso"
 
+#, fuzzy
 #~ msgid " show page sessions and users in frontend (after each article)"
-#~ msgstr "mostrar sessões de página e usuários na Frente (após cada artigo)"
+#~ msgstr "mostrar sessões de página e usuários no Site (após cada artigo)"
 
+#, fuzzy
 #~ msgid " show page searches (after each article)"
 #~ msgstr "Mostram pesquisas da página (após cada artigo)"
 
+#, fuzzy
 #~ msgid " anonymize IPs while tracking"
 #~ msgstr "IPs anônimos ao rastreamento"
 
+#, fuzzy
 #~ msgid " enable remarketing, demographics and interests reports"
 #~ msgstr "permitir recolocação, demográficas e relatórios de interesses"
 
+#, fuzzy
 #~ msgid " track downloads, mailto and outbound links"
-#~ msgstr "baixe faixas, e-mail para e links de saída"
+#~ msgstr "Rastrear Downloads, encaminhamentos para e-mail  e links de saída"
 
+#, fuzzy
 #~ msgid " track affiliate links matching this regex"
-#~ msgstr "Link Afiliado de Rastreio que coincidem com esta expressão regular"
+#~ msgstr ""
+#~ "Rastrear Links de Afiliados que coincidem com esta expressão regular"
 
+#, fuzzy
 #~ msgid " track fragment identifiers, hashmarks (#) in URI links"
-#~ msgstr "rastrear identificadores de fragmento, Marcas de hash (#) no link"
+#~ msgstr "rastrear identificadores de fragmento, hash (#) nos links"
 
+#, fuzzy
 #~ msgid " exclude events from bounce-rate calculation"
 #~ msgstr "Excluir eventos de cálculo de taxa de rejeição"
 
+#, fuzzy
 #~ msgid " enable enhanced link attribution"
-#~ msgstr "permitir reforço a atribuição de link"
+#~ msgstr "permitir atribuição de link aprimorada"
 
+#, fuzzy
 #~ msgid " enable AdSense account linking"
 #~ msgstr "habilitar link da conta do AdSense"
 
+#, fuzzy
 #~ msgid " enable cross domain tracking"
 #~ msgstr "habilitar Rastreio de domínio cruzado"
 
+#, fuzzy
 #~ msgid " use your own API Project credentials"
 #~ msgstr "usar suas próprias credenciais da API do projeto"
 
+#, fuzzy
 #~ msgid " use a single Google Analytics account for the entire network"
 #~ msgstr "Use uma única conta do Google Analytics para toda a Rede"
 
+#, fuzzy
 #~ msgid " exclude Super Admin tracking for the entire network"
-#~ msgstr "Excluir rastreamento do Administrador para toda a rede"
+#~ msgstr "Excluir rastreamento do Super Administrador para toda a rede"
 
 #~ msgid "Something went wrong, check"
 #~ msgstr "Algo deu errado, verifique"
