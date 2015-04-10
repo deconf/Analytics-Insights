@@ -22,7 +22,7 @@ $create_options = '{';
 if ($this->gadwp->config->options['ga_speed_samplerate'] != 1) {
     $create_options .= "'siteSpeedSampleRate' : " . (int) $this->gadwp->config->options['ga_speed_samplerate'];
 }
-if ($this->gadwp->config->options['ga_crossdomain_tracking'] and $this->gadwp->config->options['ga_crossdomain_list'] != '') {
+if ($this->gadwp->config->options['ga_crossdomain_tracking'] && $this->gadwp->config->options['ga_crossdomain_list'] != '') {
     if ($create_options != '{') {
         $create_options .= ', ';
     }
@@ -31,7 +31,7 @@ if ($this->gadwp->config->options['ga_crossdomain_tracking'] and $this->gadwp->c
 $create_options .= '}';
 ?>
   ga('create', '<?php echo esc_html($profile[2]); ?>', 'auto'<?php	if ($create_options != '{}') {?>, <?php echo $create_options; }?>);
-<?php if ($this->gadwp->config->options ['ga_crossdomain_tracking'] AND $this->gadwp->config->options ['ga_crossdomain_list']!='') {?>
+<?php if ($this->gadwp->config->options ['ga_crossdomain_tracking'] && $this->gadwp->config->options ['ga_crossdomain_list']!='') {?>
   ga('require', 'linker');
 <?php
     $crossdomain_list = explode(',', $this->gadwp->config->options['ga_crossdomain_list']);
@@ -51,7 +51,7 @@ if ($this->gadwp->config->options['ga_enhanced_links']) {
   ga('require', 'linkid', 'linkid.js');
 <?php
 }
-if ($this->gadwp->config->options['ga_author_dimindex'] and (is_single() or is_page())) {
+if ($this->gadwp->config->options['ga_author_dimindex'] && (is_single() || is_page())) {
     global $post;
     $author_id = $post->post_author;
     $author_name = get_the_author_meta('display_name', $author_id);
@@ -59,19 +59,19 @@ if ($this->gadwp->config->options['ga_author_dimindex'] and (is_single() or is_p
   ga('set', 'dimension<?php echo (int)$this->gadwp->config->options ['ga_author_dimindex']; ?>', '<?php echo $author_name; ?>');
 <?php
 }
-if ($this->gadwp->config->options['ga_pubyear_dimindex'] and is_single()) {
+if ($this->gadwp->config->options['ga_pubyear_dimindex'] && is_single()) {
     global $post;
     $date = get_the_date('Y', $post->ID);
     ?>
   ga('set', 'dimension<?php echo (int)$this->gadwp->config->options ['ga_pubyear_dimindex']; ?>', '<?php echo $date; ?>');
 <?php
 }
-if ($this->gadwp->config->options['ga_category_dimindex'] and is_category()) {
+if ($this->gadwp->config->options['ga_category_dimindex'] && is_category()) {
     ?>
   ga('set', 'dimension<?php echo (int)$this->gadwp->config->options ['ga_category_dimindex']; ?>', '<?php echo single_tag_title(); ?>');
 <?php
 }
-if ($this->gadwp->config->options['ga_category_dimindex'] and is_single()) {
+if ($this->gadwp->config->options['ga_category_dimindex'] && is_single()) {
     global $post;
     $categories = get_the_category($post->ID);
     foreach ($categories as $category) {

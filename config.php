@@ -52,7 +52,7 @@ if (! class_exists('GADWP_Config')) {
             if (! isset($item['new_version']) || ! isset($item['plugin']) || ! $this->options['automatic_updates_minorversion']) {
                 return $update;
             }
-            if (isset($item['slug']) and $item['slug'] == 'google-analytics-dashboard-for-wp') {
+            if (isset($item['slug']) && $item['slug'] == 'google-analytics-dashboard-for-wp') {
                 // Only when a minor update is available
                 return ($this->get_major_version(GADWP_CURRENT_VERSION) == $this->get_major_version($item['new_version']));
             }
@@ -244,12 +244,12 @@ if (! class_exists('GADWP_Config')) {
                 $this->options['ga_event_bouncerate'] = 0;
                 $flag = true;
             }
-            if (! is_array($this->options['ga_dash_access_front']) or empty($this->options['ga_dash_access_front'])) {
+            if (! is_array($this->options['ga_dash_access_front']) || empty($this->options['ga_dash_access_front'])) {
                 $this->options['ga_dash_access_front'] = array();
                 $this->options['ga_dash_access_front'][] = 'administrator';
                 $flag = true;
             }
-            if (! is_array($this->options['ga_dash_access_back']) or empty($this->options['ga_dash_access_back'])) {
+            if (! is_array($this->options['ga_dash_access_back']) || empty($this->options['ga_dash_access_back'])) {
                 $this->options['ga_dash_access_back'] = array();
                 $this->options['ga_dash_access_back'][] = 'administrator';
                 $flag = true;

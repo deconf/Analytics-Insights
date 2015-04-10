@@ -29,7 +29,7 @@ if (! class_exists('GADWP_Backend_Widgets')) {
         public function add_widget()
         {
             
-            if (GADWP_Tools::check_roles($this->gadwp->config->options['ga_dash_access_back']) and $this->gadwp->config->options['dashboard_widget']) {
+            if (GADWP_Tools::check_roles($this->gadwp->config->options['ga_dash_access_back']) && $this->gadwp->config->options['dashboard_widget']) {
                 wp_add_dashboard_widget('gadash-widget', __("Google Analytics Dashboard", 'ga-dash'), array(
                     $this,
                     'dashboard_widget'
@@ -58,7 +58,7 @@ if (! class_exists('GADWP_Backend_Widgets')) {
                             $this->gadwp->config->options['ga_dash_tableid'] = GADWP_Tools::guess_default_domain($profiles);
                         }
                     } else 
-                        if ($this->gadwp->config->options['switch_profile'] == 0 and $this->gadwp->config->options['ga_dash_tableid_jail']) {
+                        if ($this->gadwp->config->options['switch_profile'] == 0 && $this->gadwp->config->options['ga_dash_tableid_jail']) {
                             $this->gadwp->config->options['ga_dash_tableid'] = $this->gadwp->config->options['ga_dash_tableid_jail'];
                         }
                     $profile_switch .= '<select id="ga_dash_profile_select" name="ga_dash_profile_select" onchange="this.form.submit()">';
@@ -854,7 +854,7 @@ if (! class_exists('GADWP_Backend_Widgets')) {
             			<?php
                             
                             $country_codes = GADWP_Tools::get_countrycodes();
-                            if ($this->gadwp->config->options['ga_target_geomap'] and isset($country_codes[$this->gadwp->config->options['ga_target_geomap']])) {
+                            if ($this->gadwp->config->options['ga_target_geomap'] && isset($country_codes[$this->gadwp->config->options['ga_target_geomap']])) {
                                 ?>
         				region : '<?php echo esc_html($this->gadwp->config->options ['ga_target_geomap']); ?>',
         				displayMode : 'markers',

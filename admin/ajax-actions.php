@@ -40,7 +40,7 @@ if (! class_exists('GADWP_Backend_Ajax')) {
          */
         public function ajax_item_reports()
         {
-            if (! isset($_REQUEST['gadwp_security_item_reports']) or ! wp_verify_nonce($_REQUEST['gadwp_security_item_reports'], 'gadwp_get_itemreports')) {
+            if (! isset($_REQUEST['gadwp_security_item_reports']) || ! wp_verify_nonce($_REQUEST['gadwp_security_item_reports'], 'gadwp_get_itemreports')) {
                 wp_die(- 30);
             }
             $from = $_REQUEST['from'];
@@ -51,10 +51,10 @@ if (! class_exists('GADWP_Backend_Ajax')) {
                 ob_clean();
             }
             
-            if (! GADWP_Tools::check_roles($this->gadwp->config->options['ga_dash_access_back']) or 0 == $this->gadwp->config->options['item_reports']) {
+            if (! GADWP_Tools::check_roles($this->gadwp->config->options['ga_dash_access_back']) || 0 == $this->gadwp->config->options['item_reports']) {
                 wp_die(- 31);
             }
-            if ($this->gadwp->config->options['ga_dash_token'] and $this->gadwp->config->options['ga_dash_tableid_jail'] and $from and $to) {
+            if ($this->gadwp->config->options['ga_dash_token'] && $this->gadwp->config->options['ga_dash_tableid_jail'] && $from && $to) {
                 if (null === $this->gadwp->gapi_controller) {
                     $this->gadwp->gapi_controller = new GADWP_GAPI_Controller();
                 }
@@ -89,7 +89,7 @@ if (! class_exists('GADWP_Backend_Ajax')) {
          */
         public function ajax_widget_reports()
         {
-            if (! isset($_REQUEST['gadash_security_widget_reports']) or ! wp_verify_nonce($_REQUEST['gadash_security_widget_reports'], 'gadash_get_widgetreports')) {
+            if (! isset($_REQUEST['gadash_security_widget_reports']) || ! wp_verify_nonce($_REQUEST['gadash_security_widget_reports'], 'gadash_get_widgetreports')) {
                 wp_die(- 30);
             }
             $projectId = $_REQUEST['projectId'];
@@ -100,10 +100,10 @@ if (! class_exists('GADWP_Backend_Ajax')) {
                 ob_clean();
             }
             
-            if (! GADWP_Tools::check_roles($this->gadwp->config->options['ga_dash_access_back']) or 0 == $this->gadwp->config->options['dashboard_widget']) {
+            if (! GADWP_Tools::check_roles($this->gadwp->config->options['ga_dash_access_back']) || 0 == $this->gadwp->config->options['dashboard_widget']) {
                 wp_die(- 31);
             }
-            if ($this->gadwp->config->options['ga_dash_token'] and $projectId and $from and $to) {
+            if ($this->gadwp->config->options['ga_dash_token'] && $projectId && $from && $to) {
                 if (null === $this->gadwp->gapi_controller) {
                     $this->gadwp->gapi_controller = new GADWP_GAPI_Controller();
                 }

@@ -36,7 +36,7 @@ if (! class_exists('GADWP_GAPI_Controller')) {
             $config->setCacheClass('Google_Cache_Null');
             if (function_exists('curl_version')) {
                 $curlversion = curl_version();
-                if (isset($curlversion['version']) and (version_compare(PHP_VERSION, '5.3.0') >= 0) and version_compare($curlversion['version'], '7.10.8') >= 0 and defined('GADWP_IP_VERSION') and GADWP_IP_VERSION) {
+                if (isset($curlversion['version']) && (version_compare(PHP_VERSION, '5.3.0') >= 0) && version_compare($curlversion['version'], '7.10.8') >= 0 && defined('GADWP_IP_VERSION') && GADWP_IP_VERSION) {
                     $config->setClassConfig('Google_IO_Curl', array(
                         'options' => array(
                             CURLOPT_IPRESOLVE => GADWP_IP_VERSION
@@ -91,17 +91,17 @@ if (! class_exists('GADWP_GAPI_Controller')) {
         public function gapi_errors_handler()
         {
             $errors = get_transient('ga_dash_gapi_errors');
-            if ($errors === false or ! isset($errors[0])) { // invalid error
+            if ($errors === false || ! isset($errors[0])) { // invalid error
                 return false;
             }
-            if (isset($errors[1][0]['reason']) and ($errors[1][0]['reason'] == 'invalidCredentials' or $errors[1][0]['reason'] == 'authError' or $errors[1][0]['reason'] == 'insufficientPermissions' or $errors[1][0]['reason'] == 'required' or $errors[1][0]['reason'] == 'keyExpired')) {
+            if (isset($errors[1][0]['reason']) && ($errors[1][0]['reason'] == 'invalidCredentials' || $errors[1][0]['reason'] == 'authError' || $errors[1][0]['reason'] == 'insufficientPermissions' || $errors[1][0]['reason'] == 'required' || $errors[1][0]['reason'] == 'keyExpired')) {
                 $this->reset_token(false);
                 return true;
             }
-            if (isset($errors[1][0]['reason']) and ($errors[1][0]['reason'] == 'userRateLimitExceeded' or $errors[1][0]['reason'] == 'quotaExceeded')) { // allow retry
+            if (isset($errors[1][0]['reason']) && ($errors[1][0]['reason'] == 'userRateLimitExceeded' || $errors[1][0]['reason'] == 'quotaExceeded')) { // allow retry
                 return false;
             }
-            if ($errors[0] == 400 or $errors[0] == 401 or $errors[0] == 403) {
+            if ($errors[0] == 400 || $errors[0] == 401 || $errors[0] == 403) {
                 return true;
             }
             return false;
@@ -397,7 +397,7 @@ if (! class_exists('GADWP_GAPI_Controller')) {
                     $title = __("Sessions", 'ga-dash');
             }
             $metrics = 'ga:' . $query;
-            if ($from == "today" or $from == "yesterday") {
+            if ($from == "today" || $from == "yesterday") {
                 $dimensions = 'ga:hour';
                 $dayorhour = __("Hour", 'ga-dash');
             } else {
@@ -422,7 +422,7 @@ if (! class_exists('GADWP_GAPI_Controller')) {
                     $title
                 )
             );
-            if ($from == "today" or $from == "yesterday") {
+            if ($from == "today" || $from == "yesterday") {
                 foreach ($data->getRows() as $row) {
                     $ga_dash_data[] = array(
                         (int) $row[0] . ':00',

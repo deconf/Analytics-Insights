@@ -20,7 +20,7 @@ if (! class_exists('GADWP_Backend_Item_Reports')) {
         {
             $this->gadwp = GADWP(); 
             
-            if (! GADWP_Tools::check_roles($this->gadwp->config->options['ga_dash_access_back']) or 0 == $this->gadwp->config->options['item_reports']) {
+            if (! GADWP_Tools::check_roles($this->gadwp->config->options['ga_dash_access_back']) || 0 == $this->gadwp->config->options['item_reports']) {
                 return;
             }
             // Add custom column in Posts List

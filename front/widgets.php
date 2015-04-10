@@ -26,12 +26,12 @@ final class GADWP_Frontend_Widget extends WP_Widget
         if (is_active_widget(false, false, $this->id_base, true)) {
             add_action('wp_enqueue_scripts', array(
                 $this,
-                'ga_dash_front_enqueue_styles'
+                'load_styles_scripts'
             ));
         }
     }
 
-    public function ga_dash_front_enqueue_styles()
+    public function load_styles_scripts()
     {
         wp_enqueue_style('ga_dash-front', GADWP_URL . 'front/css/item-reports.css', null, GADWP_CURRENT_VERSION);
         wp_enqueue_script('ga_dash-front', GADWP_URL . 'front/js/item-reports.js', array(

@@ -38,9 +38,9 @@ if (! class_exists('GADWP_Manager')) {
         public $gapi_controller = null;
 
         /**
-         * Construct warning
+         * Construct forbidden
          */
-        public function __construct()
+        private function __construct()
         {
             if (null !== self::$instance) {
                 _doing_it_wrong(__FUNCTION__, __("This is not allowed, read the documentation!", 'ga-dash'), '4.6');
@@ -105,24 +105,6 @@ if (! class_exists('GADWP_Manager')) {
             }
             
             /*
-             * Include Install
-             */
-            include_once (GADWP_DIR . 'install/install.php');
-            register_activation_hook(GADWP_FILE, array(
-                'GADWP_Install',
-                'install'
-            ));
-            
-            /*
-             * Include Uninstall
-             */
-            include_once (GADWP_DIR . 'install/uninstall.php');
-            register_uninstall_hook(GADWP_FILE, array(
-                'GADWP_Uninstall',
-                'uninstall'
-            ));
-            
-            /*
              * Load Tools class
              */
             include_once (GADWP_DIR . 'tools/tools.php');
@@ -133,66 +115,112 @@ if (! class_exists('GADWP_Manager')) {
             include_once (GADWP_DIR . 'config.php');
             
             /*
+             * Load GAPI Controller class
+             */
+            include_once (GADWP_DIR . 'tools/gapi.php');
+            
+            /*
              * Load Frontend Ajax class
              */
             include_once (GADWP_DIR . 'front/ajax-actions.php');
             
             /*
              * Load Backend Ajax class
-             */
+            */
             include_once (GADWP_DIR . 'admin/ajax-actions.php');
-            
-            /*
-             * Load tracking class
-             */
-            include_once (GADWP_DIR . 'front/tracking.php');
-            
-            /*
-             * Load Frontend Item Reports class
-             */
-            include_once (GADWP_DIR . 'front/item-reports.php');
-            
-            /*
-             * Load Backend Setup class
-             */
-            include_once (GADWP_DIR . 'admin/setup.php');
-            
-            /*
-             * Load Backend Widget class
-             */
-            include_once (GADWP_DIR . 'admin/widgets.php');
-            
-            /*
-             * Load Backend Item Reports class
-             */
-            include_once (GADWP_DIR . 'admin/item-reports.php');
-            
-            /*
-             * Load GAPI Controller class
-             */
-            include_once (GADWP_DIR . 'tools/gapi.php');
 
             /*
-             * Load Frontend Widgets
+             * Backend ajax actions instance
              */
-            include_once (GADWP_DIR . 'front/widgets.php');
-                        
-            /*
-             * Add Frontend Widgets
-             */
-            add_action('widgets_init', array(
-                self::$instance,
-                'add_frontend_widget'
-            ));
+            self::$instance->backend_actions = new GADWP_Backend_Ajax();
             
             /*
-             * Plugin Init
+             * Frontend ajax actions instance
+            */
+            self::$instance->frontend_actions = new GADWP_Frontend_Ajax();
+
+            /*
+             * Plugin i18n
              */
             add_action('init', array(
                 self::$instance,
-                'on_init'
-            ));
+                'load_i18n'
+            ));            
+            
+            if (!defined('DOING_AJAX') || (defined('DOING_AJAX') && !DOING_AJAX)) { //Let's keep things lite!
+                
+                /*
+                 * Include Install
+                 */
+                include_once (GADWP_DIR . 'install/install.php');
+                register_activation_hook(GADWP_FILE, array(
+                    'GADWP_Install',
+                    'install'
+                ));
+                
+                /*
+                 * Include Uninstall
+                 */
+                include_once (GADWP_DIR . 'install/uninstall.php');
+                register_uninstall_hook(GADWP_FILE, array(
+                    'GADWP_Uninstall',
+                    'uninstall'
+                ));
+                
+                /*
+                 * Load tracking class
+                 */
+                include_once (GADWP_DIR . 'front/tracking.php');
+                
+                /*
+                 * Load Frontend Item Reports class
+                 */
+                include_once (GADWP_DIR . 'front/item-reports.php');
+                
+                /*
+                 * Load Backend Setup class
+                 */
+                include_once (GADWP_DIR . 'admin/setup.php');
+                
+                /*
+                 * Load Backend Widget class
+                 */
+                include_once (GADWP_DIR . 'admin/widgets.php');
+                
+                /*
+                 * Load Backend Item Reports class
+                 */
+                include_once (GADWP_DIR . 'admin/item-reports.php');
+                
+                /*
+                 * Load Frontend Widgets
+                 */
+                include_once (GADWP_DIR . 'front/widgets.php');
+                
+                /*
+                 * Add Frontend Widgets
+                 */
+                add_action('widgets_init', array(
+                    self::$instance,
+                    'add_frontend_widget'
+                ));
+                
+                /*
+                 * Plugin Init
+                 */
+                add_action('init', array(
+                    self::$instance,
+                    'on_init'
+                ));
+            } 
         }
+        
+        /**
+         * Load i18n
+         */
+        public function load_i18n(){
+            load_plugin_textdomain('ga-dash', false, dirname( plugin_basename( __FILE__ ) ) . '/languages');
+        }            
 
         /**
          * Register Frontend Widgets
@@ -231,32 +259,17 @@ if (! class_exists('GADWP_Manager')) {
                 /*
                  * Frontend Item Reports instance
                  */
-                if (GADWP_Tools::check_roles(self::$instance->config->options['ga_dash_access_front']) and (self::$instance->config->options['ga_dash_frontend_stats'] or self::$instance->config->options['ga_dash_frontend_keywords'])) {
+                if (GADWP_Tools::check_roles(self::$instance->config->options['ga_dash_access_front']) && (self::$instance->config->options['ga_dash_frontend_stats'] || self::$instance->config->options['ga_dash_frontend_keywords'])) {
                     self::$instance->frontend_item_reports = new GADWP_Frontend_Item_Reports();
                 }
                 
                 /*
                  * Tracking instance
                  */
-                if (! GADWP_Tools::check_roles(self::$instance->config->options['ga_track_exclude'], true) and self::$instance->config->options['ga_dash_tracking']) {
+                if (! GADWP_Tools::check_roles(self::$instance->config->options['ga_track_exclude'], true) && self::$instance->config->options['ga_dash_tracking']) {
                     self::$instance->tracking = new GADWP_Tracking();
                 }
             }
-            
-            /*
-             * Backend ajax actions instance
-             */
-            self::$instance->backend_actions = new GADWP_Backend_Ajax();
-            
-            /*
-             * Frontend ajax actions instance
-             */
-            self::$instance->frontend_actions = new GADWP_Frontend_Ajax();
-            
-            /*
-             * Load i18n
-             */
-            load_plugin_textdomain('ga-dash', false, GADWP_DIR . 'languages/');
         }
     }
 }

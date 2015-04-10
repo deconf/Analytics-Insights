@@ -115,7 +115,7 @@ if (! class_exists('GADWP_Tools')) {
             if (is_user_logged_in() && isset($access_level)) {
                 global $current_user;
                 $roles = (array) $current_user->roles;
-                if ((current_user_can('manage_options')) and ! $tracking) {
+                if ((current_user_can('manage_options')) && ! $tracking) {
                     return true;
                 }
                 if (count(array_intersect($roles, $access_level)) > 0) {

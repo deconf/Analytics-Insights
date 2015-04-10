@@ -19,7 +19,7 @@ final class GADWP_Settings
         $gadwp = GADWP();
         $network_settings = false;
         $options = $gadwp->config->options; // Get current options
-        if (isset($_POST['options']['ga_dash_hidden']) and isset($_POST['options']) and (isset($_POST['gadash_security']) && wp_verify_nonce($_POST['gadash_security'], 'gadash_form')) and $who != 'Reset') {
+        if (isset($_POST['options']['ga_dash_hidden']) && isset($_POST['options']) && (isset($_POST['gadash_security']) && wp_verify_nonce($_POST['gadash_security'], 'gadash_form')) && $who != 'Reset') {
             $new_options = $_POST['options'];
             if ($who == 'tracking') {
                 $options['ga_dash_anonim'] = 0;
@@ -96,7 +96,7 @@ final class GADWP_Settings
                 $message = "<div class='error'><p>" . __("Cheating Huh?", 'ga-dash') . "</p></div>";
             }
         }
-        if (! $gadwp->config->options['ga_dash_tableid_jail'] or ! $gadwp->config->options['ga_dash_token']) {
+        if (! $gadwp->config->options['ga_dash_tableid_jail'] || ! $gadwp->config->options['ga_dash_token']) {
             $message = sprintf('<div class="error"><p>%s</p></div>', sprintf(__('Something went wrong, check %1$s or %2$s.', 'ga-dash'), sprintf('<a href="%1$s">%2$s</a>', menu_page_url('gadash_errors_debugging', false), __('Errors & Debug', 'ga-dash')), sprintf('<a href="%1$s">%2$s</a>', menu_page_url('gadash_settings', false), __('authorize the plugin', 'ga-dash'))));
         }
         ?>
@@ -135,7 +135,7 @@ final class GADWP_Settings
             if ($role != 'subscriber') {
                 $i ++;
                 ?>
-		        <td><label> <input type="checkbox" name="options[ga_dash_access_front][]" value="<?php echo $role; ?>" <?php if (in_array($role,$options['ga_dash_access_front']) OR $role=='administrator') echo 'checked="checked"'; if ($role=='administrator') echo 'disabled="disabled"';?> /><?php echo $name; ?>
+		        <td><label> <input type="checkbox" name="options[ga_dash_access_front][]" value="<?php echo $role; ?>" <?php if (in_array($role,$options['ga_dash_access_front']) || $role=='administrator') echo 'checked="checked"'; if ($role=='administrator') echo 'disabled="disabled"';?> /><?php echo $name; ?>
 		          </label></td>
 		                                    <?php
             }
@@ -204,7 +204,7 @@ final class GADWP_Settings
                 $message = "<div class='error'><p>" . __("Cheating Huh?", 'ga-dash') . "</p></div>";
             }
         }
-        if (! $gadwp->config->options['ga_dash_tableid_jail'] or ! $gadwp->config->options['ga_dash_token']) {
+        if (! $gadwp->config->options['ga_dash_tableid_jail'] || ! $gadwp->config->options['ga_dash_token']) {
             $message = sprintf('<div class="error"><p>%s</p></div>', sprintf(__('Something went wrong, check %1$s or %2$s.', 'ga-dash'), sprintf('<a href="%1$s">%2$s</a>', menu_page_url('gadash_errors_debugging', false), __('Errors & Debug', 'ga-dash')), sprintf('<a href="%1$s">%2$s</a>', menu_page_url('gadash_settings', false), __('authorize the plugin', 'ga-dash'))));
         }
         ?>
@@ -244,7 +244,7 @@ final class GADWP_Settings
             if ($role != 'subscriber') {
                 $i ++;
                 ?>
-                                        	<td><label> <input type="checkbox" name="options[ga_dash_access_back][]" value="<?php echo $role; ?>" <?php if (in_array($role,$options['ga_dash_access_back']) OR $role=='administrator') echo 'checked="checked"'; if ($role=='administrator') echo 'disabled="disabled"';?> />
+                                        	<td><label> <input type="checkbox" name="options[ga_dash_access_back][]" value="<?php echo $role; ?>" <?php if (in_array($role,$options['ga_dash_access_back']) || $role=='administrator') echo 'checked="checked"'; if ($role=='administrator') echo 'disabled="disabled"';?> />
                                             	<?php echo $name; ?>
                             				</label></td>
                 <?php
@@ -655,7 +655,7 @@ final class GADWP_Settings
         }
         
         $options = self::update_options('frontend');
-        if (! $gadwp->config->options['ga_dash_tableid_jail'] or ! $gadwp->config->options['ga_dash_token']) {
+        if (! $gadwp->config->options['ga_dash_tableid_jail'] || ! $gadwp->config->options['ga_dash_token']) {
             $message = sprintf('<div class="error"><p>%s</p></div>', sprintf(__('Something went wrong, check %1$s or %2$s.', 'ga-dash'), sprintf('<a href="%1$s">%2$s</a>', menu_page_url('gadash_errors_debugging', false), __('Errors & Debug', 'ga-dash')), sprintf('<a href="%1$s">%2$s</a>', menu_page_url('gadash_settings', false), __('authorize the plugin', 'ga-dash'))));
         }
         ?>
@@ -771,7 +771,7 @@ final class GADWP_Settings
                 $message = "<div class='error'><p>" . __("The access code is <strong>NOT</strong> your <strong>Tracking ID</strong> (UA-XXXXX-X). Try again, and use the red link to get your access code", 'ga-dash') . ".</p></div>";
             }
         }
-        if ($gadwp->config->options['ga_dash_token'] and $gadwp->gapi_controller->client->getAccessToken()) {
+        if ($gadwp->config->options['ga_dash_token'] && $gadwp->gapi_controller->client->getAccessToken()) {
             if ($gadwp->config->options['ga_dash_profile_list']) {
                 $profiles = $gadwp->config->options['ga_dash_profile_list'];
             } else {
@@ -815,7 +815,7 @@ final class GADWP_Settings
                 $message = "<div class='error'><p>" . __("Cheating Huh?", 'ga-dash') . "</p></div>";
             }
         }
-        if (isset($_POST['options']['ga_dash_hidden']) and ! isset($_POST['Clear']) and ! isset($_POST['Reset']) and ! isset($_POST['Reset_Err'])) {
+        if (isset($_POST['options']['ga_dash_hidden']) && ! isset($_POST['Clear']) && ! isset($_POST['Reset']) && ! isset($_POST['Reset_Err'])) {
             $message = "<div class='updated'><p>" . __("Settings saved.", 'ga-dash') . "</p></div>";
             if (! (isset($_POST['gadash_security']) && wp_verify_nonce($_POST['gadash_security'], 'gadash_form'))) {
                 $message = "<div class='error'><p>" . __("Cheating Huh?", 'ga-dash') . "</p></div>";
@@ -868,7 +868,7 @@ final class GADWP_Settings
                                                         <?php printf(__('You should watch the %1$s and read this %2$s before proceeding to authorization. This plugin requires a properly configured Google Analytics account!', 'ga-dash'), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=top_video&utm_campaign=gadwp', __("video", 'ga-dash')), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=top_tutorial&utm_campaign=gadwp', __("tutorial", 'ga-dash')));?>
 						                            </td>
                                                 </tr>
-						                          <?php if (! $options['ga_dash_token'] or $options['ga_dash_userapi']) {?>
+						                          <?php if (! $options['ga_dash_token'] || $options['ga_dash_userapi']) {?>
 						                          <tr>
                                                     <td colspan="2" class="info"><input name="options[ga_dash_userapi]" type="checkbox" id="ga_dash_userapi" value="1" <?php checked( $options['ga_dash_userapi'], 1 ); ?> onchange="this.form.submit()" <?php echo ($options['ga_dash_network'])?'disabled="disabled"':''; ?> /><?php echo " ".__("use your own API Project credentials", 'ga-dash' );?>
 							                            </td>
@@ -1049,7 +1049,7 @@ final class GADWP_Settings
                 $message = "<div class='error'><p>" . __("Cheating Huh?", 'ga-dash') . "</p></div>";
             }
         }
-        if ($gadwp->config->options['ga_dash_token'] and $gadwp->gapi_controller->client->getAccessToken()) {
+        if ($gadwp->config->options['ga_dash_token'] && $gadwp->gapi_controller->client->getAccessToken()) {
             if ($gadwp->config->options['ga_dash_profile_list']) {
                 $profiles = $gadwp->config->options['ga_dash_profile_list'];
             } else {
@@ -1057,7 +1057,7 @@ final class GADWP_Settings
             }
             if ($profiles) {
                 $gadwp->config->options['ga_dash_profile_list'] = $profiles;
-                if (isset($gadwp->config->options['ga_dash_tableid_jail']) and ! $gadwp->config->options['ga_dash_tableid_jail']) {
+                if (isset($gadwp->config->options['ga_dash_tableid_jail']) && ! $gadwp->config->options['ga_dash_tableid_jail']) {
                     $profile = GADWP_Tools::guess_default_domain($profiles);
                     $gadwp->config->options['ga_dash_tableid_jail'] = $profile;
                     $gadwp->config->options['ga_dash_tableid'] = $profile;
@@ -1084,7 +1084,7 @@ final class GADWP_Settings
                 $message = "<div class='error'><p>" . __("Cheating Huh?", 'ga-dash') . "</p></div>";
             }
         }
-        if (isset($_POST['options']['ga_dash_hidden']) and ! isset($_POST['Clear']) and ! isset($_POST['Reset']) and ! isset($_POST['Refresh'])) {
+        if (isset($_POST['options']['ga_dash_hidden']) && ! isset($_POST['Clear']) && ! isset($_POST['Reset']) && ! isset($_POST['Refresh'])) {
             $message = "<div class='updated'><p>" . __("Settings saved.", 'ga-dash') . "</p></div>";
             if (! (isset($_POST['gadash_security']) && wp_verify_nonce($_POST['gadash_security'], 'gadash_form'))) {
                 $message = "<div class='error'><p>" . __("Cheating Huh?", 'ga-dash') . "</p></div>";
@@ -1153,7 +1153,7 @@ final class GADWP_Settings
 							                                             </td>
                                                                     </tr>
 							<?php
-                if (! $options['ga_dash_token'] or $options['ga_dash_userapi']) {
+                if (! $options['ga_dash_token'] || $options['ga_dash_userapi']) {
                     ?>
 							                                        <tr>
                                                                         <td colspan="2" class="info"><input name="options[ga_dash_userapi]" type="checkbox" id="ga_dash_userapi" value="1" <?php checked( $options['ga_dash_userapi'], 1 ); ?> onchange="this.form.submit()" /><?php echo " ".__("use your own API Project credentials", 'ga-dash' );?>

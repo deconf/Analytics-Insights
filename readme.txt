@@ -137,8 +137,9 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Enhancement: Japanese translation, updated by [Hinaloe](https://github.com/hinaloe)
 - Enhancement: Portuguese (Brazil) translation, updated by [Treed Box](http://treedbox.com.br/)
 - Enhancement: introducing a manager class (singleton flavour) to keep track of all instances and their references
+- Enhancement: push the tracking code at the end of head section, props by [Caleb Evans](https://github.com/caleb531)
 - Enhancement: better support for remove_action and wp_dequeue_script
-- Enhancement: push the tracking code at the end of head section, props by [Caleb Evans](https://github.com/caleb531)  
+- Enhancement: ajax calls optimization
 - Bug Fix: in-existent script enqueued in frontend component, reported by [mmokrejs](https://wordpress.org/support/profile/mmokrejs)
 - Bug Fix: i18n improvements, committed by [Hinaloe](https://github.com/hinaloe)
 - Bug Fix: PHP notice when using bbPress, reported by [sheridencharles](https://wordpress.org/support/profile/sheridencharles)
@@ -158,7 +159,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Enhancement: reports per page in Page List (new feature)
 - Enhancement: gadwp_backenditem_uri allows URI corrections for backend item reports
 - Enhancement: option to enable/disable the custom dashboard widget
-- Enhancement: Japanese translation, translated by [塀シスター](https://plus.google.com/u/0/+tk072110)
+- Enhancement: Japanese translation, translated by [ĺˇ€ă‚·ă‚ąă‚żă�Ľ](https://plus.google.com/u/0/+tk072110)
 - Enhancement: Dutch translation, translated by [Willem-Jan Meerkerk](https://github.com/WillemJann)
 - Enhancement: Portuguese (Brazil) translation, updated by [Treed Box](http://treedbox.com.br/)
 - Enhancement: UI improvements, props by [Paal Joachim Romdahl](https://github.com/paaljoachim)

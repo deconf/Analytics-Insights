@@ -21,7 +21,7 @@ $domaindata = GADWP_Tools::get_root_domain(esc_html(get_option('siteurl')));
             $('a[href^="mailto"]').click(function(e) {
                 ga('send','event', 'email', 'send', this.href<?php if(isset($this->gadwp->config->options['ga_event_bouncerate']) && $this->gadwp->config->options['ga_event_bouncerate']){echo ", {'nonInteraction': 1}";}?>);
              });
-            <?php if (isset ( $domaindata ['domain'] ) and $domaindata ['domain']) { ?>
+            <?php if (isset ( $domaindata ['domain'] ) && $domaindata ['domain']) { ?>
 
             //Track Outbound Links
             $('a[href^="http"]').filter(function() {
@@ -33,7 +33,7 @@ $domaindata = GADWP_Tools::get_root_domain(esc_html(get_option('siteurl')));
             });
 		    <?php } ?>
 		<?php } ?>
-        <?php if ($this->gadwp->config->options['ga_event_affiliates'] AND $this->gadwp->config->options['ga_aff_tracking']){ ?>
+        <?php if ($this->gadwp->config->options['ga_event_affiliates'] && $this->gadwp->config->options['ga_aff_tracking']){ ?>
 
             //Track Affiliates
             $('a').filter(function() {
@@ -44,7 +44,7 @@ $domaindata = GADWP_Tools::get_root_domain(esc_html(get_option('siteurl')));
                		ga('send','event', 'affiliates', 'click', this.href<?php if(isset($this->gadwp->config->options['ga_event_bouncerate']) && $this->gadwp->config->options['ga_event_bouncerate']){echo ", {'nonInteraction': 1}";}?>);
             });
         <?php } ?>
-        <?php if (isset ( $domaindata ['domain'] ) and $domaindata ['domain'] AND $this->gadwp->config->options ['ga_hash_tracking']) { ?>
+        <?php if (isset ( $domaindata ['domain'] ) && $domaindata ['domain'] && $this->gadwp->config->options ['ga_hash_tracking']) { ?>
 
             //Track Hashmarks
             $('a').filter(function() {
