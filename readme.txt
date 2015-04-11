@@ -140,6 +140,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Enhancement: push the tracking code at the end of head section, props by [Caleb Evans](https://github.com/caleb531)
 - Enhancement: better support for remove_action and wp_dequeue_script
 - Enhancement: ajax calls optimization
+- Bug Fix: loading bar issues while not all frontend features are enabled
 - Bug Fix: in-existent script enqueued in frontend component, reported by [mmokrejs](https://wordpress.org/support/profile/mmokrejs)
 - Bug Fix: i18n improvements, committed by [Hinaloe](https://github.com/hinaloe)
 - Bug Fix: PHP notice when using bbPress, reported by [sheridencharles](https://wordpress.org/support/profile/sheridencharles)

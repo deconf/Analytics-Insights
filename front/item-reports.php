@@ -54,6 +54,13 @@ if (! class_exists('GADWP_Frontend_Item_Reports')) {
             if (! GADWP_Tools::check_roles($this->gadwp->config->options['ga_dash_access_front']) || ! ($this->gadwp->config->options['ga_dash_frontend_stats'] || $this->gadwp->config->options['ga_dash_frontend_keywords'])) {
                 return $content;
             }
+            
+            if (($this->gadwp->config->options['ga_dash_frontend_stats'] && $this->gadwp->config->options['ga_dash_frontend_keywords'])){
+                $npcounter = 1;
+            }else{
+                $npcounter = 0;
+            }
+            
             if ((is_page() || is_single()) && ! is_preview()) {
                 $page_url = $_SERVER["REQUEST_URI"]; // str_replace(site_url(), "", get_permalink());
                 $post_id = $post->ID;
@@ -102,7 +109,7 @@ if (! class_exists('GADWP_Frontend_Item_Reports')) {
 										  }else{
 									        jQuery("#gadwp-sessions").css({"background-color":"#F7F7F7","height":"auto","padding-top":"30px","padding-bottom":"30px","color":"#000","text-align":"center"});  
 									        jQuery("#gadwp-sessions").html("' . __("This report is unavailable", 'ga-dash') . ' ("+response+")");
-									        checknpcounter(1);    
+									        checknpcounter('.$npcounter.');    
                                           }	
 										});
 									}
@@ -121,7 +128,7 @@ if (! class_exists('GADWP_Frontend_Item_Reports')) {
 											}else{
 										        jQuery("#gadwp-searches").css({"background-color":"#F7F7F7","height":"auto","padding-top":"30px","padding-bottom":"30px","color":"#000","text-align":"center"});
 										        jQuery("#gadwp-searches").html("' . __("This report is unavailable", 'ga-dash') . ' ("+response+")");
-										        checknpcounter(1);
+										        checknpcounter('.$npcounter.');
                                             }	
 										});
 									}
@@ -155,7 +162,7 @@ if (! class_exists('GADWP_Frontend_Item_Reports')) {
 
 			var chart = new google.visualization.AreaChart(document.getElementById("gadwp-sessions"));
 			chart.draw(data, options);
-            checknpcounter(1);      
+            checknpcounter('.$npcounter.');      
 			}';
                 }
                 if ($this->gadwp->config->options['ga_dash_frontend_keywords']) {
@@ -173,7 +180,7 @@ if (! class_exists('GADWP_Frontend_Item_Reports')) {
 
 				var chart = new google.visualization.Table(document.getElementById("gadwp-searches"));
 				chart.draw(datas, options);
-				checknpcounter(1);
+				checknpcounter('.$npcounter.');
 			  }';
                 }
                 $content .= "</script>";

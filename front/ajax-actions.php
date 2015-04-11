@@ -21,11 +21,14 @@ if (! class_exists('GADWP_Frontend_Ajax')) {
         {
             $this->gadwp = GADWP();
             
-            // Frontend Reports/Page action
-            add_action('wp_ajax_gadash_get_frontend_pagereports', array(
-                $this,
-                'ajax_afterpost_reports'
-            ));
+            if (GADWP_Tools::check_roles($this->gadwp->config->options['ga_dash_access_front']) && ($this->gadwp->config->options['ga_dash_frontend_stats'] || $this->gadwp->config->options['ga_dash_frontend_keywords'])) {
+                // Frontend Reports/Page action
+                add_action('wp_ajax_gadash_get_frontend_pagereports', array(
+                    $this,
+                    'ajax_afterpost_reports'
+                ));
+            }
+            
             // Frontend Widget actions
             add_action('wp_ajax_gadash_get_frontendwidget_data', array(
                 $this,

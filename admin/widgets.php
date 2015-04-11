@@ -14,27 +14,26 @@ if (! class_exists('GADWP_Backend_Widgets')) {
 
     class GADWP_Backend_Widgets
     {
+
         private $gawp;
 
         public function __construct()
         {
             $this->gadwp = GADWP();
-            
-            add_action('wp_dashboard_setup', array(
-                $this,
-                'add_widget'
-            ));
+            if (GADWP_Tools::check_roles($this->gadwp->config->options['ga_dash_access_back']) && (1 == $this->gadwp->config->options['dashboard_widget'])) {
+                add_action('wp_dashboard_setup', array(
+                    $this,
+                    'add_widget'
+                ));
+            }
         }
 
         public function add_widget()
         {
-            
-            if (GADWP_Tools::check_roles($this->gadwp->config->options['ga_dash_access_back']) && $this->gadwp->config->options['dashboard_widget']) {
-                wp_add_dashboard_widget('gadash-widget', __("Google Analytics Dashboard", 'ga-dash'), array(
-                    $this,
-                    'dashboard_widget'
-                ), $control_callback = null);
-            }
+            wp_add_dashboard_widget('gadash-widget', __("Google Analytics Dashboard", 'ga-dash'), array(
+                $this,
+                'dashboard_widget'
+            ), $control_callback = null);
         }
 
         public function dashboard_widget()
@@ -123,43 +122,27 @@ if (! class_exists('GADWP_Backend_Widgets')) {
             ?>
 
 	<select id="ga_dash_period" name="period" onchange="this.form.submit()">
-		<option value="realtime"
-			<?php selected ( "realtime", $period, true ); ?>><?php _e("Real-Time",'ga-dash'); ?></option>
-		<option value="today" <?php selected ( "today", $period, true ); ?>><?php _e("Today",'ga-dash'); ?></option>
-		<option value="yesterday"
-			<?php selected ( "yesterday", $period, true ); ?>><?php _e("Yesterday",'ga-dash'); ?></option>
-		<option value="7daysAgo"
-			<?php selected ( "7daysAgo", $period, true ); ?>><?php _e("Last 7 Days",'ga-dash'); ?></option>
-		<option value="14daysAgo"
-			<?php selected ( "14daysAgo", $period, true ); ?>><?php _e("Last 14 Days",'ga-dash'); ?></option>
-		<option value="30daysAgo"
-			<?php selected ( "30daysAgo", $period, true ); ?>><?php _e("Last 30 Days",'ga-dash'); ?></option>
-		<option value="90daysAgo"
-			<?php selected ( "90daysAgo", $period, true ); ?>><?php _e("Last 90 Days",'ga-dash'); ?></option>
-	</select>
+        <option value="realtime" <?php selected ( "realtime", $period, true ); ?>><?php _e("Real-Time",'ga-dash'); ?></option>
+        <option value="today" <?php selected ( "today", $period, true ); ?>><?php _e("Today",'ga-dash'); ?></option>
+        <option value="yesterday" <?php selected ( "yesterday", $period, true ); ?>><?php _e("Yesterday",'ga-dash'); ?></option>
+        <option value="7daysAgo" <?php selected ( "7daysAgo", $period, true ); ?>><?php _e("Last 7 Days",'ga-dash'); ?></option>
+        <option value="14daysAgo" <?php selected ( "14daysAgo", $period, true ); ?>><?php _e("Last 14 Days",'ga-dash'); ?></option>
+        <option value="30daysAgo" <?php selected ( "30daysAgo", $period, true ); ?>><?php _e("Last 30 Days",'ga-dash'); ?></option>
+        <option value="90daysAgo" <?php selected ( "90daysAgo", $period, true ); ?>><?php _e("Last 90 Days",'ga-dash'); ?></option>
+    </select>
 				<?php if ($period != 'realtime') {?>
-				<select id="ga_dash_query" name="query"
-		onchange="this.form.submit()">
-		<option value="sessions"
-			<?php selected ( "sessions", $query, true ); ?>><?php _e("Sessions",'ga-dash'); ?></option>
-		<option value="users" <?php selected ( "users", $query, true ); ?>><?php _e("Users",'ga-dash'); ?></option>
-		<option value="organicSearches"
-			<?php selected ( "organicSearches", $query, true ); ?>><?php _e("Organic",'ga-dash'); ?></option>
-		<option value="pageviews"
-			<?php selected ( "pageviews", $query, true ); ?>><?php _e("Page Views",'ga-dash'); ?></option>
-		<option value="visitBounceRate"
-			<?php selected ( "visitBounceRate", $query, true ); ?>><?php _e("Bounce Rate",'ga-dash'); ?></option>
-		<option value="locations"
-			<?php selected ( "locations", $query, true ); ?>><?php _e("Location",'ga-dash'); ?></option>
-		<option value="contentpages"
-			<?php selected ( "contentpages", $query, true ); ?>><?php _e("Pages",'ga-dash'); ?></option>
-		<option value="referrers"
-			<?php selected ( "referrers", $query, true ); ?>><?php _e("Referrers",'ga-dash'); ?></option>
-		<option value="searches"
-			<?php selected ( "searches", $query, true ); ?>><?php _e("Searches",'ga-dash'); ?></option>
-		<option value="trafficdetails"
-			<?php selected ( "trafficdetails", $query, true ); ?>><?php _e("Traffic Details",'ga-dash'); ?></option>
-	</select>
+				<select id="ga_dash_query" name="query" onchange="this.form.submit()">
+        <option value="sessions" <?php selected ( "sessions", $query, true ); ?>><?php _e("Sessions",'ga-dash'); ?></option>
+        <option value="users" <?php selected ( "users", $query, true ); ?>><?php _e("Users",'ga-dash'); ?></option>
+        <option value="organicSearches" <?php selected ( "organicSearches", $query, true ); ?>><?php _e("Organic",'ga-dash'); ?></option>
+        <option value="pageviews" <?php selected ( "pageviews", $query, true ); ?>><?php _e("Page Views",'ga-dash'); ?></option>
+        <option value="visitBounceRate" <?php selected ( "visitBounceRate", $query, true ); ?>><?php _e("Bounce Rate",'ga-dash'); ?></option>
+        <option value="locations" <?php selected ( "locations", $query, true ); ?>><?php _e("Location",'ga-dash'); ?></option>
+        <option value="contentpages" <?php selected ( "contentpages", $query, true ); ?>><?php _e("Pages",'ga-dash'); ?></option>
+        <option value="referrers" <?php selected ( "referrers", $query, true ); ?>><?php _e("Referrers",'ga-dash'); ?></option>
+        <option value="searches" <?php selected ( "searches", $query, true ); ?>><?php _e("Searches",'ga-dash'); ?></option>
+        <option value="trafficdetails" <?php selected ( "trafficdetails", $query, true ); ?>><?php _e("Traffic Details",'ga-dash'); ?></option>
+    </select>
 				<?php }?>
 	</form>
 <div id="gadash-progressbar"></div>
@@ -240,40 +223,40 @@ if (! class_exists('GADWP_Backend_Widgets')) {
             if ($period == 'realtime') {
                 ?>
 <div class="realtime">
-	<div class="gadash-rt-box">
-		<div class='gadash-tdo-left'>
-			<div class='gadash-online' id='gadash-online'>0</div>
-		</div>
-		<div class='gadash-tdo-right' id='gadash-tdo-right'>
-			<div class="gadash-bigtext">
-				<div class="gadash-bleft"><?php _e( "REFERRAL", 'ga-dash' );?></div>
-				<div class="gadash-bright">0</div>
-			</div>
-			<div class="gadash-bigtext">
-				<div class="gadash-bleft"><?php _e( "ORGANIC", 'ga-dash' );?></div>
-				<div class="gadash-bright">0</div>
-			</div>
-			<div class="gadash-bigtext">
-				<div class="gadash-bleft"><?php _e( "SOCIAL", 'ga-dash' );?></div>
-				<div class="gadash-bright">0</div>
-			</div>
-			<div class="gadash-bigtext">
-				<div class="gadash-bleft"><?php _e( "CAMPAIGN", 'ga-dash' );?></div>
-				<div class="gadash-bright">0</div>
-			</div>
-			<div class="gadash-bigtext">
-				<div class="gadash-bleft"><?php _e( "DIRECT", 'ga-dash' );?></div>
-				<div class="gadash-bright">0</div>
-			</div>
-			<div class="gadash-bigtext">
-				<div class="gadash-bleft"><?php _e( "NEW", 'ga-dash' );?></div>
-				<div class="gadash-bright">0</div>
-			</div>
-		</div>
-	</div>
-	<div>
-		<div id='gadash-pages' class='gadash-pages'>&nbsp;</div>
-	</div>
+    <div class="gadash-rt-box">
+        <div class='gadash-tdo-left'>
+            <div class='gadash-online' id='gadash-online'>0</div>
+        </div>
+        <div class='gadash-tdo-right' id='gadash-tdo-right'>
+            <div class="gadash-bigtext">
+                <div class="gadash-bleft"><?php _e( "REFERRAL", 'ga-dash' );?></div>
+                <div class="gadash-bright">0</div>
+            </div>
+            <div class="gadash-bigtext">
+                <div class="gadash-bleft"><?php _e( "ORGANIC", 'ga-dash' );?></div>
+                <div class="gadash-bright">0</div>
+            </div>
+            <div class="gadash-bigtext">
+                <div class="gadash-bleft"><?php _e( "SOCIAL", 'ga-dash' );?></div>
+                <div class="gadash-bright">0</div>
+            </div>
+            <div class="gadash-bigtext">
+                <div class="gadash-bleft"><?php _e( "CAMPAIGN", 'ga-dash' );?></div>
+                <div class="gadash-bright">0</div>
+            </div>
+            <div class="gadash-bigtext">
+                <div class="gadash-bleft"><?php _e( "DIRECT", 'ga-dash' );?></div>
+                <div class="gadash-bright">0</div>
+            </div>
+            <div class="gadash-bigtext">
+                <div class="gadash-bleft"><?php _e( "NEW", 'ga-dash' );?></div>
+                <div class="gadash-bright">0</div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div id='gadash-pages' class='gadash-pages'>&nbsp;</div>
+    </div>
 </div>
 <script type="text/javascript">
             
@@ -593,12 +576,12 @@ if (! class_exists('GADWP_Backend_Widgets')) {
 <?php } else if ($query == 'trafficdetails') {?>
 <div id="gadash-trafficchannels"></div>
 <div class="gadash-floatwraper">
-	<div id="gadash-trafficmediums"></div>
-	<div id="gadash-traffictype"></div>
+    <div id="gadash-trafficmediums"></div>
+    <div id="gadash-traffictype"></div>
 </div>
 <div class="gadash-floatwraper">
-	<div id="gadash-trafficorganic"></div>
-	<div id="gadash-socialnetworks"></div>
+    <div id="gadash-trafficorganic"></div>
+    <div id="gadash-socialnetworks"></div>
 </div>
 <script type="text/javascript">
             	google.load("visualization", "1", {packages:["corechart","orgchart"]});
@@ -882,32 +865,32 @@ if (! class_exists('GADWP_Backend_Widgets')) {
 <?php } else {?>
 <div id="gadash-mainchart"></div>
 <div id="gadash-bottomstats" class="gadash-wrapper">
-	<div class="inside">
-		<div class="small-box">
-			<h3><?php _e( "Sessions", 'ga-dash' );?></h3>
-			<p id="gdsessions">&nbsp;</p>
-		</div>
-		<div class="small-box">
-			<h3><?php _e( "Users", 'ga-dash' );?></h3>
-			<p id="gdusers">&nbsp;</p>
-		</div>
-		<div class="small-box">
-			<h3><?php _e( "Page Views", 'ga-dash' );?></h3>
-			<p id="gdpageviews">&nbsp;</p>
-		</div>
-		<div class="small-box">
-			<h3><?php _e( "Bounce Rate", 'ga-dash' );?></h3>
-			<p id="gdbouncerate">&nbsp;</p>
-		</div>
-		<div class="small-box">
-			<h3><?php _e( "Organic Search", 'ga-dash' );?></h3>
-			<p id="gdorganicsearch">&nbsp;</p>
-		</div>
-		<div class="small-box">
-			<h3><?php _e( "Pages/Session", 'ga-dash' );?></h3>
-			<p id="gdpagespervisit">&nbsp;</p>
-		</div>
-	</div>
+    <div class="inside">
+        <div class="small-box">
+            <h3><?php _e( "Sessions", 'ga-dash' );?></h3>
+            <p id="gdsessions">&nbsp;</p>
+        </div>
+        <div class="small-box">
+            <h3><?php _e( "Users", 'ga-dash' );?></h3>
+            <p id="gdusers">&nbsp;</p>
+        </div>
+        <div class="small-box">
+            <h3><?php _e( "Page Views", 'ga-dash' );?></h3>
+            <p id="gdpageviews">&nbsp;</p>
+        </div>
+        <div class="small-box">
+            <h3><?php _e( "Bounce Rate", 'ga-dash' );?></h3>
+            <p id="gdbouncerate">&nbsp;</p>
+        </div>
+        <div class="small-box">
+            <h3><?php _e( "Organic Search", 'ga-dash' );?></h3>
+            <p id="gdorganicsearch">&nbsp;</p>
+        </div>
+        <div class="small-box">
+            <h3><?php _e( "Pages/Session", 'ga-dash' );?></h3>
+            <p id="gdpagespervisit">&nbsp;</p>
+        </div>
+    </div>
 </div>
 <script type="text/javascript">
             

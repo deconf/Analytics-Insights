@@ -14,35 +14,36 @@ if (! class_exists('GADWP_Backend_Item_Reports')) {
 
     final class GADWP_Backend_Item_Reports
     {
+
         private $gadwp;
 
         public function __construct()
         {
-            $this->gadwp = GADWP(); 
+            $this->gadwp = GADWP();
             
-            if (! GADWP_Tools::check_roles($this->gadwp->config->options['ga_dash_access_back']) || 0 == $this->gadwp->config->options['item_reports']) {
-                return;
+            if (GADWP_Tools::check_roles($this->gadwp->config->options['ga_dash_access_back']) && 1 == $this->gadwp->config->options['item_reports']) {
+                
+                // Add custom column in Posts List
+                add_filter('manage_posts_columns', array(
+                    $this,
+                    'add_columns'
+                ));
+                // Populate custom column in Posts List
+                add_action('manage_posts_custom_column', array(
+                    $this,
+                    'add_icons'
+                ), 10, 2);
+                // Add custom column in Pages List
+                add_filter('manage_pages_columns', array(
+                    $this,
+                    'add_columns'
+                ));
+                // Populate custom column in Pages List
+                add_action('manage_pages_custom_column', array(
+                    $this,
+                    'add_icons'
+                ), 10, 2);
             }
-            // Add custom column in Posts List
-            add_filter('manage_posts_columns', array(
-                $this,
-                'add_columns'
-            ));
-            // Populate custom column in Posts List
-            add_action('manage_posts_custom_column', array(
-                $this,
-                'add_icons'
-            ), 10, 2);
-            // Add custom column in Pages List
-            add_filter('manage_pages_columns', array(
-                $this,
-                'add_columns'
-            ));
-            // Populate custom column in Pages List
-            add_action('manage_pages_custom_column', array(
-                $this,
-                'add_icons'
-            ), 10, 2);
         }
 
         public function add_icons($column, $id)

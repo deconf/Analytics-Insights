@@ -21,16 +21,21 @@ if (! class_exists('GADWP_Backend_Ajax')) {
         {
             $this->gadwp = GADWP();
             
-            // Admin Widget action
-            add_action('wp_ajax_gadash_get_widgetreports', array(
-                $this,
-                'ajax_widget_reports'
-            ));
-            // Items action
-            add_action('wp_ajax_gadwp_get_ItemReports', array(
-                $this,
-                'ajax_item_reports'
-            ));
+            if (GADWP_Tools::check_roles($this->gadwp->config->options['ga_dash_access_back']) && (1 == $this->gadwp->config->options['dashboard_widget'])) {
+                // Admin Widget action
+                add_action('wp_ajax_gadash_get_widgetreports', array(
+                    $this,
+                    'ajax_widget_reports'
+                ));
+            }
+            
+            if (GADWP_Tools::check_roles($this->gadwp->config->options['ga_dash_access_back']) && (1 == $this->gadwp->config->options['item_reports'])) {
+                // Items action
+                add_action('wp_ajax_gadwp_get_ItemReports', array(
+                    $this,
+                    'ajax_item_reports'
+                ));
+            }
         }
 
         /**

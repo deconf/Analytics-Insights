@@ -167,7 +167,6 @@ if (! class_exists('GADWP_Backend_Setup')) {
             );
             if (in_array($hook, $contentstats_hooks)) {
                 if (GADWP_Tools::check_roles($this->gadwp->config->options['ga_dash_access_back']) && $this->gadwp->config->options['item_reports']) {
-                    
                     wp_enqueue_style('gadwp-nprogress', GADWP_URL . 'tools/nprogress/nprogress.css', null, GADWP_CURRENT_VERSION);
                     wp_enqueue_style('gadwp_itemreports', GADWP_URL . 'admin/css/item-reports.css', null, GADWP_CURRENT_VERSION);
                     $country_codes = GADWP_Tools::get_countrycodes();

@@ -79,7 +79,7 @@ if (! class_exists('GADWP_Manager')) {
         }
 
         /**
-         * Defines constants and loads required classes
+         * Defines constants and loads required resources
          */
         private function setup()
         {
@@ -120,34 +120,22 @@ if (! class_exists('GADWP_Manager')) {
             include_once (GADWP_DIR . 'tools/gapi.php');
             
             /*
-             * Load Frontend Ajax class
-             */
-            include_once (GADWP_DIR . 'front/ajax-actions.php');
-            
-            /*
-             * Load Backend Ajax class
-            */
-            include_once (GADWP_DIR . 'admin/ajax-actions.php');
-
-            /*
-             * Backend ajax actions instance
-             */
-            self::$instance->backend_actions = new GADWP_Backend_Ajax();
-            
-            /*
-             * Frontend ajax actions instance
-            */
-            self::$instance->frontend_actions = new GADWP_Frontend_Ajax();
-
-            /*
              * Plugin i18n
              */
             add_action('init', array(
                 self::$instance,
                 'load_i18n'
-            ));            
+            ));
             
-            if (!defined('DOING_AJAX') || (defined('DOING_AJAX') && !DOING_AJAX)) { //Let's keep things lite!
+            /*
+             * Plugin Init
+             */
+            add_action('init', array(
+                self::$instance,
+                'load'
+            ));
+            
+            if (! defined('DOING_AJAX') || (defined('DOING_AJAX') && ! DOING_AJAX)) { // Let's keep things lite!
                 
                 /*
                  * Include Install
@@ -168,31 +156,6 @@ if (! class_exists('GADWP_Manager')) {
                 ));
                 
                 /*
-                 * Load tracking class
-                 */
-                include_once (GADWP_DIR . 'front/tracking.php');
-                
-                /*
-                 * Load Frontend Item Reports class
-                 */
-                include_once (GADWP_DIR . 'front/item-reports.php');
-                
-                /*
-                 * Load Backend Setup class
-                 */
-                include_once (GADWP_DIR . 'admin/setup.php');
-                
-                /*
-                 * Load Backend Widget class
-                 */
-                include_once (GADWP_DIR . 'admin/widgets.php');
-                
-                /*
-                 * Load Backend Item Reports class
-                 */
-                include_once (GADWP_DIR . 'admin/item-reports.php');
-                
-                /*
                  * Load Frontend Widgets
                  */
                 include_once (GADWP_DIR . 'front/widgets.php');
@@ -204,23 +167,16 @@ if (! class_exists('GADWP_Manager')) {
                     self::$instance,
                     'add_frontend_widget'
                 ));
-                
-                /*
-                 * Plugin Init
-                 */
-                add_action('init', array(
-                    self::$instance,
-                    'on_init'
-                ));
-            } 
+            }
         }
-        
+
         /**
          * Load i18n
          */
-        public function load_i18n(){
-            load_plugin_textdomain('ga-dash', false, dirname( plugin_basename( __FILE__ ) ) . '/languages');
-        }            
+        public function load_i18n()
+        {
+            load_plugin_textdomain('ga-dash', false, dirname(plugin_basename(__FILE__)) . '/languages');
+        }
 
         /**
          * Register Frontend Widgets
@@ -231,42 +187,63 @@ if (! class_exists('GADWP_Manager')) {
         }
 
         /**
-         * Conditional instances creation
+         * Conditional load
          */
-        public function on_init()
+        public function load()
         {
             if (is_admin()) {
-                if (GADWP_Tools::check_roles(self::$instance->config->options['ga_dash_access_back'])) {
-                    /*
-                     * Backend Setup instance
-                     */
-                    self::$instance->backend_setup = new GADWP_Backend_Setup();
+                if (defined('DOING_AJAX') && DOING_AJAX) {
+                    if (GADWP_Tools::check_roles(self::$instance->config->options['ga_dash_access_back'])) {
+                        /*
+                         * Load Backend ajax actions
+                         */
+                        include_once (GADWP_DIR . 'admin/ajax-actions.php');
+                        self::$instance->backend_actions = new GADWP_Backend_Ajax();
+                    }
                     
                     /*
-                     * Backend Widget instance
+                     * Load Frontend ajax actions
                      */
-                    if (self::$instance->config->options['dashboard_widget']) {
-                        self::$instance->backend_widgets = new GADWP_Backend_Widgets();
+                    include_once (GADWP_DIR . 'front/ajax-actions.php');
+                    self::$instance->frontend_actions = new GADWP_Frontend_Ajax();
+                } else 
+                    if (GADWP_Tools::check_roles(self::$instance->config->options['ga_dash_access_back'])) {
+                        /*
+                         * Load Backend Setup
+                         */
+                        include_once (GADWP_DIR . 'admin/setup.php');
+                        self::$instance->backend_setup = new GADWP_Backend_Setup();
+                        
+                        if (self::$instance->config->options['dashboard_widget']) {
+                            /*
+                             * Load Backend Widget
+                             */
+                            include_once (GADWP_DIR . 'admin/widgets.php');
+                            self::$instance->backend_widgets = new GADWP_Backend_Widgets();
+                        }
+                        
+                        if (self::$instance->config->options['item_reports']) {
+                            /*
+                             * Load Backend Item Reports
+                             */
+                            include_once (GADWP_DIR . 'admin/item-reports.php');
+                            self::$instance->backend_item_reports = new GADWP_Backend_Item_Reports();
+                        }
                     }
-                    /*
-                     * Backend Item Reports instance
-                     */
-                    if (self::$instance->config->options['item_reports']) {
-                        self::$instance->backend_item_reports = new GADWP_Backend_Item_Reports();
-                    }
-                }
             } else {
-                /*
-                 * Frontend Item Reports instance
-                 */
                 if (GADWP_Tools::check_roles(self::$instance->config->options['ga_dash_access_front']) && (self::$instance->config->options['ga_dash_frontend_stats'] || self::$instance->config->options['ga_dash_frontend_keywords'])) {
+                    /*
+                     * Load Frontend Item Reports
+                     */
+                    include_once (GADWP_DIR . 'front/item-reports.php');
                     self::$instance->frontend_item_reports = new GADWP_Frontend_Item_Reports();
                 }
                 
-                /*
-                 * Tracking instance
-                 */
                 if (! GADWP_Tools::check_roles(self::$instance->config->options['ga_track_exclude'], true) && self::$instance->config->options['ga_dash_tracking']) {
+                    /*
+                     * Load tracking class
+                     */
+                    include_once (GADWP_DIR . 'front/tracking.php');
                     self::$instance->tracking = new GADWP_Tracking();
                 }
             }
