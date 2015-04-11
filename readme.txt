@@ -136,7 +136,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Enhancement: Italian translation, updated by [Leo](https://www.facebook.com/leo.thestrategist)
 - Enhancement: Japanese translation, updated by [Hinaloe](https://github.com/hinaloe)
 - Enhancement: Portuguese (Brazil) translation, updated by [Treed Box](http://treedbox.com.br/)
-- Enhancement: introducing a manager class (singleton flavour) to keep track of all instances and their references
+- Enhancement: introducing a manager class to keep track of all instances and their references
 - Enhancement: push the tracking code at the end of head section, props by [Caleb Evans](https://github.com/caleb531)
 - Enhancement: better support for remove_action and wp_dequeue_script
 - Enhancement: ajax calls optimization
