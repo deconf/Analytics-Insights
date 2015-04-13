@@ -132,6 +132,9 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 
 == Changelog ==
 
+= 4.7 =
+- Enhancement: Dutch translation, translated by [Willem-Jan Meerkerk](https://github.com/WillemJann)
+
 = 4.6 =
 - Enhancement: Italian translation, updated by [Leo](https://www.facebook.com/leo.thestrategist)
 - Enhancement: Japanese translation, updated by [Hinaloe](https://github.com/hinaloe)
@@ -160,7 +163,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Enhancement: reports per page in Page List (new feature)
 - Enhancement: gadwp_backenditem_uri allows URI corrections for backend item reports
 - Enhancement: option to enable/disable the custom dashboard widget
-- Enhancement: Japanese translation, translated by [ĺˇ€ă‚·ă‚ąă‚żă�Ľ](https://plus.google.com/u/0/+tk072110)
+- Enhancement: Japanese translation, translated by [tk072110](https://plus.google.com/u/0/+tk072110)
 - Enhancement: Dutch translation, translated by [Willem-Jan Meerkerk](https://github.com/WillemJann)
 - Enhancement: Portuguese (Brazil) translation, updated by [Treed Box](http://treedbox.com.br/)
 - Enhancement: UI improvements, props by [Paal Joachim Romdahl](https://github.com/paaljoachim)
