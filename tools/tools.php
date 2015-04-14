@@ -113,7 +113,7 @@ if (! class_exists('GADWP_Tools')) {
         public static function check_roles($access_level, $tracking = false)
         {
             if (is_user_logged_in() && isset($access_level)) {
-                global $current_user;
+                $current_user = wp_get_current_user();
                 $roles = (array) $current_user->roles;
                 if ((current_user_can('manage_options')) && ! $tracking) {
                     return true;
