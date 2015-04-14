@@ -126,7 +126,8 @@ jQuery.fn.extend({
         var options = {
           page : 'enable',
           pageSize : 10,
-          width : '100%'
+          width : '100%',
+          allowHtml: true
         };
 
         var chart = new google.visualization.Table(document.getElementById('gadwp-prs' + slug));

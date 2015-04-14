@@ -78,11 +78,6 @@ if (! class_exists('GADWP_GAPI_Controller')) {
             return;
         }
 
-        private function prepare_json($value)
-        {
-            return esc_html(str_replace('\\', '&#92;', stripslashes($value)));
-        }
-
         /**
          * Handles errors returned by GAPI and allows exponential backoff
          *
@@ -515,7 +510,7 @@ if (! class_exists('GADWP_GAPI_Controller')) {
             );
             foreach ($data->getRows() as $row) {
                 $ga_dash_data[] = array(
-                    $this->prepare_json($row[0]),
+                    esc_html($row[0]),
                     (int) $row[1]
                 );
             }
@@ -560,7 +555,7 @@ if (! class_exists('GADWP_GAPI_Controller')) {
             );
             foreach ($data->getRows() as $row) {
                 $ga_dash_data[] = array(
-                    $this->prepare_json($row[0]),
+                    esc_html($row[0]),
                     (int) $row[1]
                 );
             }
@@ -606,7 +601,7 @@ if (! class_exists('GADWP_GAPI_Controller')) {
             );
             foreach ($data->getRows() as $row) {
                 $ga_dash_data[] = array(
-                    $this->prepare_json($row[0]),
+                    esc_html($row[0]),
                     (int) $row[1]
                 );
             }
@@ -670,12 +665,12 @@ if (! class_exists('GADWP_GAPI_Controller')) {
             foreach ($data->getRows() as $row) {
                 if (isset($row[2])) {
                     $ga_dash_data[] = array(
-                        $this->prepare_json($row[0]) . ', ' . $this->prepare_json($row[1]),
+                        esc_html($row[0]) . ', ' . esc_html($row[1]),
                         (int) $row[2]
                     );
                 } else {
                     $ga_dash_data[] = array(
-                        $this->prepare_json($row[0]),
+                        esc_html($row[0]),
                         (int) $row[1]
                     );
                 }
@@ -916,7 +911,7 @@ if (! class_exists('GADWP_GAPI_Controller')) {
             );
             foreach ($data->getRows() as $row) {
                 $ga_dash_data[] = array(
-                    $this->prepare_json($row[0]),
+                    esc_html($row[0]),
                     (int) $row[1]
                 );
             }
