@@ -553,7 +553,8 @@ if (! class_exists('GADWP_Backend_Widgets')) {
                 	var options = {
                 		page: 'enable',
                 		pageSize: 10,
-                		width: '100%'
+                		width: '100%',
+                        allowHtml: true
                 	};
                 
                 	var chart = new google.visualization.Table(document.getElementById('gadash-prs'));
