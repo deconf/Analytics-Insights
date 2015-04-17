@@ -49,7 +49,7 @@ if (! class_exists('GADWP_Backend_Widgets')) {
                 }
                 $profiles = $this->gadwp->config->options['ga_dash_profile_list'];
                 $profile_switch = '';
-                if (is_array($profiles)) {
+                if (!empty($profiles)) {
                     if (! $this->gadwp->config->options['ga_dash_tableid']) {
                         if ($this->gadwp->config->options['ga_dash_tableid_jail']) {
                             $this->gadwp->config->options['ga_dash_tableid'] = $this->gadwp->config->options['ga_dash_tableid_jail'];

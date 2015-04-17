@@ -136,6 +136,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Enhancement: Dutch translation, translated by [Willem-Jan Meerkerk](https://github.com/WillemJann)
 - Enhancement: using wp_get_current_user() to check users' roles
 - Enhancement: fit longer titles in backend item reports widget
+- Bug Fix: views missing on huge analytics accounts, reported by [thatryan](https://wordpress.org/support/profile/thatryan) 
 
 = 4.6 =
 - Enhancement: Italian translation, updated by [Leo](https://www.facebook.com/leo.thestrategist)

@@ -16,7 +16,7 @@ if (! class_exists('GADWP_GAPI_Controller')) {
     {
 
         public $client;
-        
+
         public $service;
 
         public $timeshift;
@@ -24,7 +24,7 @@ if (! class_exists('GADWP_GAPI_Controller')) {
         public $error_timeout;
 
         private $managequota;
-        
+
         private $gadwp;
 
         public function __construct()
@@ -127,32 +127,24 @@ if (! class_exists('GADWP_GAPI_Controller')) {
         {
             $authUrl = $this->client->createAuthUrl();
             ?>
-<form name="input"
-	action="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>" method="post">
-
-	<table class="options">
-		<tr>
-			<td colspan="2" class="info">
+<form name="input" action="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>" method="post">
+    <table class="options">
+        <tr>
+            <td colspan="2" class="info">
 						<?php echo __( "Use this link to get your access code:", 'ga-dash' ) . ' <a href="' . $authUrl . '" id="gapi-access-code" target="_blank">' . __ ( "Get Access Code", 'ga-dash' ) . '</a>.'; ?>
 					</td>
-		</tr>
-		<tr>
-			<td class="title"><label for="ga_dash_code"
-				title="<?php _e("Use the red link to get your access code!",'ga-dash')?>"><?php echo _e( "Access Code:", 'ga-dash' ); ?></label>
-			</td>
-			<td><input type="text" id="ga_dash_code" name="ga_dash_code" value=""
-				size="61" required="required"
-				title="<?php _e("Use the red link to get your access code!",'ga-dash')?>"></td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr></td>
-		</tr>
-		<tr>
-			<td colspan="2"><input type="submit" class="button button-secondary"
-				name="ga_dash_authorize"
-				value="<?php _e( "Save Access Code", 'ga-dash' ); ?>" /></td>
-		</tr>
-	</table>
+        </tr>
+        <tr>
+            <td class="title"><label for="ga_dash_code" title="<?php _e("Use the red link to get your access code!",'ga-dash')?>"><?php echo _e( "Access Code:", 'ga-dash' ); ?></label></td>
+            <td><input type="text" id="ga_dash_code" name="ga_dash_code" value="" size="61" required="required" title="<?php _e("Use the red link to get your access code!",'ga-dash')?>"></td>
+        </tr>
+        <tr>
+            <td colspan="2"><hr></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" class="button button-secondary" name="ga_dash_authorize" value="<?php _e( "Save Access Code", 'ga-dash' ); ?>" /></td>
+        </tr>
+    </table>
 </form>
 <?php
         }
@@ -165,32 +157,54 @@ if (! class_exists('GADWP_GAPI_Controller')) {
         public function refresh_profiles()
         {
             try {
-                $profiles = $this->service->management_profiles->listManagementProfiles('~all', '~all');
-                $items = $profiles->getItems();
-                if (count($items) != 0) {
-                    $ga_dash_profile_list = array();
-                    foreach ($items as $profile) {
-                        $timetz = new DateTimeZone($profile->getTimezone());
-                        $localtime = new DateTime('now', $timetz);
-                        $timeshift = strtotime($localtime->format('Y-m-d H:i:s')) - time();
-                        $ga_dash_profile_list[] = array(
-                            $profile->getName(),
-                            $profile->getId(),
-                            $profile->getwebPropertyId(),
-                            $profile->getwebsiteUrl(),
-                            $timeshift,
-                            $profile->getTimezone()
-                        );
+                
+                $ga_dash_profile_list = array();
+                $startindex = 1;
+                $totalresults = 65535; //use something big
+                
+                while ($startindex < $totalresults) {
+                    
+                    $profiles = $this->service->management_profiles->listManagementProfiles('~all', '~all', array(
+                        'start-index' => $startindex
+                    ));
+                    
+                    $items = $profiles->getItems();
+                    
+                    $totalresults = $profiles->getTotalResults();
+                    
+                    if ($totalresults > 0) {
+                        
+                        foreach ($items as $profile) {
+                            $timetz = new DateTimeZone($profile->getTimezone());
+                            $localtime = new DateTime('now', $timetz);
+                            $timeshift = strtotime($localtime->format('Y-m-d H:i:s')) - time();
+                            $ga_dash_profile_list[] = array(
+                                $profile->getName(),
+                                $profile->getId(),
+                                $profile->getwebPropertyId(),
+                                $profile->getwebsiteUrl(),
+                                $timeshift,
+                                $profile->getTimezone()
+                            );
+                            
+                            $startindex ++;
+                        }
+                        
                     }
-                    set_transient('ga_dash_lasterror', 'None');
-                    return $ga_dash_profile_list;
-                } else {
-                    set_transient('ga_dash_lasterror', date('Y-m-d H:i:s') . ': No properties were found in this account!', $this->error_timeout);
-                    return '';
+                    
                 }
+                
+                if (empty($ga_dash_profile_list)) {
+                    set_transient('ga_dash_lasterror', date('Y-m-d H:i:s') . ': No properties were found in this account!', $this->error_timeout);
+                } else {
+                    set_transient('ga_dash_lasterror', 'None');
+                }
+                
+                return $ga_dash_profile_list;
+                
             } catch (Google_IO_Exception $e) {
                 set_transient('ga_dash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e), $this->error_timeout);
-                return '';
+                return $ga_dash_profile_list;
             } catch (Google_Service_Exception $e) {
                 set_transient('ga_dash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html("(" . $e->getCode() . ") " . $e->getMessage()), $this->error_timeout);
                 set_transient('ga_dash_gapi_errors', array(
@@ -199,7 +213,7 @@ if (! class_exists('GADWP_GAPI_Controller')) {
                 ), $this->error_timeout);
             } catch (Exception $e) {
                 set_transient('ga_dash_lasterror', date('Y-m-d H:i:s') . ': ' . esc_html($e), $this->error_timeout);
-                return '';
+                return $ga_dash_profile_list;
             }
         }
 
@@ -272,7 +286,7 @@ if (! class_exists('GADWP_GAPI_Controller')) {
             if ($all) {
                 $this->gadwp->config->options['ga_dash_tableid'] = "";
                 $this->gadwp->config->options['ga_dash_tableid_jail'] = "";
-                $this->gadwp->config->options['ga_dash_profile_list'] = "";
+                $this->gadwp->config->options['ga_dash_profile_list'] = array();
                 try {
                     $this->client->revokeToken();
                 } catch (Exception $e) {

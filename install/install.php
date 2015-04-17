@@ -39,7 +39,7 @@ class GADWP_Install
             $options['ga_realtime_pages'] = 10;
             $options['ga_dash_token'] = '';
             $options['ga_dash_refresh_token'] = '';
-            $options['ga_dash_profile_list'] = '';
+            $options['ga_dash_profile_list'] = array();
             $options['ga_dash_tableid'] = '';
             $options['ga_dash_frontend_keywords'] = 0;
             $options['ga_tracking_code'] = '';
