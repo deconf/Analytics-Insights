@@ -4,7 +4,7 @@ Donate link: https://deconf.com/donate/
 Tags: google,analytics,google analytics,dashboard,analytics dashboard,google analytics dashboard,google analytics widget,tracking,realtime,wpmu,multisite
 Requires at least: 3.5
 Tested up to: 4.2
-Stable tag: 4.6.1
+Stable tag: 4.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -132,7 +132,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 
 == Changelog ==
 
-= 4.6.1 =
+= 4.7 =
 - Enhancement: Dutch translation, translated by [Willem-Jan Meerkerk](https://github.com/WillemJann)
 - Enhancement: using wp_get_current_user() to check users' roles
 - Enhancement: fit longer titles in backend item reports widget
