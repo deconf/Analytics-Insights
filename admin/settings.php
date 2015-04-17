@@ -901,8 +901,8 @@ final class GADWP_Settings
                                                     <td colspan="2"><?php echo "<h2>" . __( "General Settings", 'ga-dash' ) . "</h2>"; ?></td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="title"><label for="ga_dash_tableid_jail"><?php _e("Select Domain:", 'ga-dash' ); ?></label></td>
-                                                    <td><select id="ga_dash_tableid_jail" <?php disabled(!empty($options['ga_dash_profile_list']), false); ?> name="options[ga_dash_tableid_jail]">
+                                                    <td class="title"><label for="ga_dash_tableid_jail"><?php _e("Select View:", 'ga-dash' ); ?></label></td>
+                                                    <td><select id="ga_dash_tableid_jail" <?php disabled(empty($options['ga_dash_profile_list']) || 1 == count($options['ga_dash_profile_list']), true); ?> name="options[ga_dash_tableid_jail]">
                                     								<?php
                 if (!empty($options['ga_dash_profile_list'])) {
                     foreach ($options['ga_dash_profile_list'] as $items) {
@@ -917,8 +917,7 @@ final class GADWP_Settings
                 ?>
                                     							</select>                                    							<?php
                 if (count($options['ga_dash_profile_list']) > 1) {
-                    _e("and/or hide all other domains", 'ga-dash');
-                    ?><input type="submit" name="Hide" class="button button-secondary" value="<?php _e( "Hide Now", 'ga-dash' ); ?>" /><?php
+                    ?>&nbsp;<input type="submit" name="Hide" class="button button-secondary" value="<?php _e( "Lock Selection", 'ga-dash' ); ?>" /><?php
                 }
                 ?>
 							                         </td>
