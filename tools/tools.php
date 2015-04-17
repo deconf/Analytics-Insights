@@ -28,7 +28,7 @@ if (! class_exists('GADWP_Tools')) {
                 'http://',
                 'https://'
             ), '', $domain);
-            if (is_array($profiles)) {
+            if (!empty($profiles)) {
                 foreach ($profiles as $items) {
                     if (strpos($items[3], $domain)) {
                         return $items[1];
@@ -42,7 +42,7 @@ if (! class_exists('GADWP_Tools')) {
 
         public static function get_selected_profile($profiles, $profile)
         {
-            if (is_array($profiles)) {
+            if (!empty($profiles)) {
                 foreach ($profiles as $item) {
                     if ($item[1] == $profile) {
                         return $item;

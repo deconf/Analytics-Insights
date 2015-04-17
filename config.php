@@ -249,6 +249,12 @@ if (! class_exists('GADWP_Config')) {
                 $this->options['ga_dash_access_front'][] = 'administrator';
                 $flag = true;
             }
+            
+            if (! is_array($this->options['ga_dash_profile_list'])){
+                $this->options['ga_dash_profile_list'] = array();
+                $flag = true;
+            }
+            
             if (! is_array($this->options['ga_dash_access_back']) || empty($this->options['ga_dash_access_back'])) {
                 $this->options['ga_dash_access_back'] = array();
                 $this->options['ga_dash_access_back'][] = 'administrator';

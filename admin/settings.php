@@ -772,7 +772,7 @@ final class GADWP_Settings
             }
         }
         if ($gadwp->config->options['ga_dash_token'] && $gadwp->gapi_controller->client->getAccessToken()) {
-            if ($gadwp->config->options['ga_dash_profile_list']) {
+            if (!empty($gadwp->config->options['ga_dash_profile_list'])) {
                 $profiles = $gadwp->config->options['ga_dash_profile_list'];
             } else {
                 $profiles = $gadwp->gapi_controller->refresh_profiles();
@@ -901,10 +901,10 @@ final class GADWP_Settings
                                                     <td colspan="2"><?php echo "<h2>" . __( "General Settings", 'ga-dash' ) . "</h2>"; ?></td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="title"><label for="ga_dash_tableid_jail"><?php _e("Select Domain:", 'ga-dash' ); ?></label></td>
-                                                    <td><select id="ga_dash_tableid_jail" <?php disabled(is_array($options['ga_dash_profile_list']), false); ?> name="options[ga_dash_tableid_jail]">
+                                                    <td class="title"><label for="ga_dash_tableid_jail"><?php _e("Select View:", 'ga-dash' ); ?></label></td>
+                                                    <td><select id="ga_dash_tableid_jail" <?php disabled(empty($options['ga_dash_profile_list']) || 1 == count($options['ga_dash_profile_list']), true); ?> name="options[ga_dash_tableid_jail]">
                                     								<?php
-                if (is_array($options['ga_dash_profile_list'])) {
+                if (!empty($options['ga_dash_profile_list'])) {
                     foreach ($options['ga_dash_profile_list'] as $items) {
                         if ($items[3]) {
                             echo '<option value="' . esc_attr($items[1]) . '" ' . selected($items[1], $options['ga_dash_tableid_jail']);
@@ -917,8 +917,7 @@ final class GADWP_Settings
                 ?>
                                     							</select>                                    							<?php
                 if (count($options['ga_dash_profile_list']) > 1) {
-                    _e("and/or hide all other domains", 'ga-dash');
-                    ?><input type="submit" name="Hide" class="button button-secondary" value="<?php _e( "Hide Now", 'ga-dash' ); ?>" /><?php
+                    ?>&nbsp;<input type="submit" name="Hide" class="button button-secondary" value="<?php _e( "Lock Selection", 'ga-dash' ); ?>" /><?php
                 }
                 ?>
 							                         </td>
@@ -1042,7 +1041,7 @@ final class GADWP_Settings
         }
         if (isset($_POST['Refresh'])) {
             if (isset($_POST['gadash_security']) && wp_verify_nonce($_POST['gadash_security'], 'gadash_form')) {
-                $gadwp->config->options['ga_dash_profile_list'] = '';
+                $gadwp->config->options['ga_dash_profile_list'] = array();
                 $message = "<div class='updated'><p>" . __("Properties refreshed.", 'ga-dash') . "</p></div>";
                 $options = self::update_options('network');
             } else {
@@ -1050,7 +1049,7 @@ final class GADWP_Settings
             }
         }
         if ($gadwp->config->options['ga_dash_token'] && $gadwp->gapi_controller->client->getAccessToken()) {
-            if ($gadwp->config->options['ga_dash_profile_list']) {
+            if (!empty($gadwp->config->options['ga_dash_profile_list'])) {
                 $profiles = $gadwp->config->options['ga_dash_profile_list'];
             } else {
                 $profiles = $gadwp->gapi_controller->refresh_profiles();
@@ -1199,9 +1198,9 @@ final class GADWP_Settings
                         ?>
 							                                         <tr>
                                                                         <td class="title-select"><label for="ga_dash_tableid_network"><?php echo '<strong>'.$blog['domain'].$blog['path'].'</strong>: ';?></label></td>
-                                                                        <td><select id="ga_dash_tableid_network" <?php disabled(is_array($options['ga_dash_profile_list']),false);?> name="options[ga_dash_tableid_network][<?php echo $blog['blog_id'];?>]">
+                                                                        <td><select id="ga_dash_tableid_network" <?php disabled(!empty($options['ga_dash_profile_list']),false);?> name="options[ga_dash_tableid_network][<?php echo $blog['blog_id'];?>]">
 									<?php
-                        if (is_array($options['ga_dash_profile_list'])) {
+                        if (!empty($options['ga_dash_profile_list'])) {
                             foreach ($options['ga_dash_profile_list'] as $items) {
                                 if ($items[3]) {
                                     echo '<option value="' . esc_attr($items[1]) . '" ' . selected($items[1], isset($options['ga_dash_tableid_network']->$blog['blog_id']) ? $options['ga_dash_tableid_network']->$blog['blog_id'] : '');
