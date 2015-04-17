@@ -939,7 +939,7 @@ if (! class_exists('GADWP_GAPI_Controller')) {
          *            $projectId
          * @return array|int
          */
-        public function get_realtime_data($projectId)
+        public function get_realtime($projectId)
         {
             $metrics = 'rt:activeUsers';
             $dimensions = 'rt:pagePath,rt:source,rt:keyword,rt:trafficType,rt:visitorType,rt:pageTitle';
@@ -1015,7 +1015,7 @@ if (! class_exists('GADWP_GAPI_Controller')) {
                     wp_send_json($this->get_searches($projectId, $from, $to, $filter));
                     break;
                 case 'realtime':
-                    wp_send_json($this->get_realtime_data($projectId));
+                    wp_send_json($this->get_realtime($projectId));
                     break;
                 default:
                     wp_send_json($this->get_mainreport($projectId, $from, $to, $query, $filter));
