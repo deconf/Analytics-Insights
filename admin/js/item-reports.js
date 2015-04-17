@@ -620,7 +620,7 @@ jQuery.fn.extend({
       fluid : true,
       dialogClass : 'wp-dialog',
       resizable : false,
-      title : jQuery('#gadwp'+slug).attr( "title" ).substring(0,44),
+      title : jQuery('#gadwp'+slug).attr( "title" ),
       position : {
         my : "top",
         at : "top+100",
