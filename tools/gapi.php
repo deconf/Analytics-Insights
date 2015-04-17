@@ -152,7 +152,7 @@ if (! class_exists('GADWP_GAPI_Controller')) {
         /**
          * Retrives all Google Analytics Views with details
          *
-         * @return array|string
+         * @return array
          */
         public function refresh_profiles()
         {
