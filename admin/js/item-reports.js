@@ -618,7 +618,7 @@ jQuery.fn.extend({
       height : 'auto',
       modal : true,
       fluid : true,
-      dialogClass : 'wp-dialog',
+      dialogClass : 'gadwp wp-dialog',
       resizable : false,
       title : jQuery('#gadwp'+slug).attr( "title" ),
       position : {
