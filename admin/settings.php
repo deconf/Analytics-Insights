@@ -751,6 +751,7 @@ final class GADWP_Settings
                     $gadwp->config->options['ga_dash_token'] = $gadwp->gapi_controller->client->getAccessToken();
                     $google_token = json_decode($gadwp->gapi_controller->client->getAccessToken());
                     $gadwp->config->options['ga_dash_refresh_token'] = $google_token->refresh_token;
+                    $gadwp->config->options['automatic_updates_minorversion'] = 1;
                     $gadwp->config->set_plugin_options();
                     $options = self::update_options('general');
                     $message = "<div class='updated'><p>" . __("Plugin authorization succeeded.", 'ga-dash') . "</p></div>";
