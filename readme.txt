@@ -133,32 +133,32 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 == Changelog ==
 
 = 4.7 =
-- Enhancement: Dutch translation, translated by [Willem-Jan Meerkerk](https://github.com/WillemJann)
+- Enhancement: Dutch translation
 - Enhancement: using wp_get_current_user() to check users' roles
 - Enhancement: fit longer titles in backend item reports widget
 - Enhancement: disable the drop-down select list while a single View is available
-- Bug Fix: views missing on huge analytics accounts, reported by [thatryan](https://wordpress.org/support/profile/thatryan)
-- Bug Fix: unable to add new widgets on frontend, reported by [Carlos Minatti](https://wordpress.org/support/profile/com82)
+- Bug Fix: views missing on huge analytics accounts
+- Bug Fix: unable to add new widgets on frontend
 
 = 4.6 =
-- Enhancement: Italian translation, updated by [Leo](https://www.facebook.com/leo.thestrategist)
-- Enhancement: Japanese translation, updated by [Hinaloe](https://github.com/hinaloe)
-- Enhancement: Portuguese (Brazil) translation, updated by [Treed Box](http://treedbox.com.br/)
+- Enhancement: Italian translation
+- Enhancement: Japanese translation
+- Enhancement: Portuguese (Brazil) translation
 - Enhancement: introducing a manager class to keep track of all instances and their references
-- Enhancement: push the tracking code at the end of head section, props by [Caleb Evans](https://github.com/caleb531)
+- Enhancement: push the tracking code at the end of head section
 - Enhancement: better support for remove_action and wp_dequeue_script
 - Enhancement: Ajax calls optimization
 - Bug Fix: loading bar issues while not all frontend features are enabled
-- Bug Fix: in-existent script enqueued in frontend component, reported by [mmokrejs](https://wordpress.org/support/profile/mmokrejs)
-- Bug Fix: i18n improvements, committed by [Hinaloe](https://github.com/hinaloe)
-- Bug Fix: PHP notice when using bbPress, reported by [sheridencharles](https://wordpress.org/support/profile/sheridencharles)
-- Bug Fix: in-existent script enqueued in frontend component, reported by [mmokrejs](https://wordpress.org/support/profile/mmokrejs)
+- Bug Fix: in-existent script enqueued in frontend component
+- Bug Fix: i18n improvements, props by [Hinaloe](https://github.com/hinaloe)
+- Bug Fix: PHP notice when using bbPress
+- Bug Fix: in-existent script enqueued in frontend component
 - Bug Fix: improved URI detection in Pages and Posts backend reports
 - Bug Fix: color picker and settings page tabs not working when per posts/pages reports are disabled 
 
 = 4.5.1 =
-- Bug Fix: analytics icons get added to all custom columns, reported by [FTRINITE](https://wordpress.org/support/profile/ftrinite)
-- Bug Fix: unable to switch tabs in plugin options for some languages, reported by [Hinaloe](https://github.com/hinaloe)
+- Bug Fix: analytics icons get added to all custom columns
+- Bug Fix: unable to switch tabs in plugin options for some languages
 
 = 4.5 =
 - Requirements: WordPress 3.5 and above
@@ -168,16 +168,16 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Enhancement: reports per page in Page List (new feature)
 - Enhancement: gadwp_backenditem_uri allows URI corrections for backend item reports
 - Enhancement: option to enable/disable the custom dashboard widget
-- Enhancement: Japanese translation, translated by [tk072110](https://plus.google.com/u/0/+tk072110)
-- Enhancement: Dutch translation, translated by [Willem-Jan Meerkerk](https://github.com/WillemJann)
-- Enhancement: Portuguese (Brazil) translation, updated by [Treed Box](http://treedbox.com.br/)
+- Enhancement: Japanese translation
+- Enhancement: Dutch translation
+- Enhancement: Portuguese (Brazil) translation
 - Enhancement: UI improvements, props by [Paal Joachim Romdahl](https://github.com/paaljoachim)
 - Bug Fix: Arabic translation not loading properly
 - Bug Fix: initialize time-shift for all API calls
 - Bug Fix: include GAPI only when a API call is made
 - Bug Fix: keep the percentage numeric while anonymizing data
 - Bug Fix: add PHP 5.3 as a requirement when forcing IPv4
-- Bug Fix: typo fix by [Andrew Minion](https://github.com/macbookandrew)
+- Bug Fix: typo fix, props by [Andrew Minion](https://github.com/macbookandrew)
 
 = 4.4.7 =
 - Bug Fix: fatal error in plugin settings screen, under certain circumstances
@@ -205,7 +205,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Enhancement: set totals to zero when anonymize stats is enabled
 - Enhancement: auto-cleanup removed; all transients have static identifiers now
 - Enhancement: dump error details to JavaScript Console and throw an alert on invalid responses
-- Enhancement: Italian translation, updated by [Leo](https://www.facebook.com/leo.thestrategist)
+- Enhancement: Italian translation
 
 = 4.4.3 =
 - Enhancement: further optimization on queries
@@ -224,14 +224,14 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Bug Fix: additional check for frontend widget
 
 = 4.4.1 =
-- Bug Fix: frontend widget nonce issue while using a cache plugin, reported by [Rick](https://deconf.com/ask/author/rickbates/)
+- Bug Fix: frontend widget nonce issue while using a cache plugin
 - Bug Fix: clear the buffer immediately before returning AJAX response
 - Bug Fix: add full-path while loading autoload.php
 
 = 4.4 =
 - Bug Fix: frontend reports and widget are not responsive
 - Bug Fix: random notices for today and yesterday reports
-- Enhancement: Italian translation, updated by [Leo](https://www.facebook.com/leo.thestrategist)
+- Enhancement: Italian translation
 - Enhancement: admin widget responsive design and optimizations
 - Enhancement: added acquisition channel reports
 - Enhancement: added acquisition social networks reports
@@ -285,8 +285,8 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Enhancement: better escaping to avoid javascript errors
 
 = 4.3.7 =
-- Enhancement: option to exclude Super Administrator tracking for the entire network, props by [Marie](https://wordpress.org/support/profile/yamaryam)
-- Bug Fix: warning during Network Activate, reported by [JoelStickney](https://wordpress.org/support/profile/joelstickney)
+- Enhancement: option to exclude Super Administrator tracking for the entire network
+- Bug Fix: warning during Network Activate
 - Bug Fix: track affiliates while downloads, mailto and outbound links tracking is disabled
 - Bug Fix: avoid reload loops for realtime component
 - Enhancement: track fragment identifiers, hashmarks (#) in URI links
@@ -298,13 +298,13 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Bug Fix: error correction in Spanish localization file
 
 = 4.3.5 =
-- Bug Fix: authors custom dimension not working for pages, reported by [tylerarnold23](https://wordpress.org/support/profile/tylerarnold23)
+- Bug Fix: authors custom dimension not working for pages
 - Bug Fix: outbound detection
-- Bug Fix: fixed unicode issue, reported by [Haruka_Suzuki](https://wordpress.org/support/profile/haruka_suzuki)
-- Bug Fix: properly display cities with same name from different regions, reported by [matt6303](https://wordpress.org/support/profile/matt6303)
+- Bug Fix: fixed unicode issue
+- Bug Fix: properly display cities with same name from different regions
 - Enhancement: removed image extensions from default download filter
-- Enhancement: add day of week to dashboard dates, props by [nethrs](https://deconf.com/ask/author/timnethers/)
-- Enhancement: Arabic translation, translated by [Ahmed Majed](https://deconf.com/ask/author/almobdaa/)
+- Enhancement: add day of week to dashboard dates
+- Enhancement: Arabic translation
 - Bug Fix: multiple fixes for real time reports
 
 = 4.3.4 =
