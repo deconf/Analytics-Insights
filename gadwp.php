@@ -135,39 +135,38 @@ if (! class_exists('GADWP_Manager')) {
                 'load'
             ));
             
-            if (! defined('DOING_AJAX') || (defined('DOING_AJAX') && ! DOING_AJAX)) { // Let's keep things lite!
-                
-                /*
-                 * Include Install
-                 */
-                include_once (GADWP_DIR . 'install/install.php');
-                register_activation_hook(GADWP_FILE, array(
-                    'GADWP_Install',
-                    'install'
-                ));
-                
-                /*
-                 * Include Uninstall
-                 */
-                include_once (GADWP_DIR . 'install/uninstall.php');
-                register_uninstall_hook(GADWP_FILE, array(
-                    'GADWP_Uninstall',
-                    'uninstall'
-                ));
-                
-                /*
-                 * Load Frontend Widgets
-                 */
-                include_once (GADWP_DIR . 'front/widgets.php');
-                
-                /*
-                 * Add Frontend Widgets
-                 */
-                add_action('widgets_init', array(
-                    self::$instance,
-                    'add_frontend_widget'
-                ));
-            }
+            /*
+             * Include Install
+             */
+            include_once (GADWP_DIR . 'install/install.php');
+            register_activation_hook(GADWP_FILE, array(
+                'GADWP_Install',
+                'install'
+            ));
+            
+            /*
+             * Include Uninstall
+             */
+            include_once (GADWP_DIR . 'install/uninstall.php');
+            register_uninstall_hook(GADWP_FILE, array(
+                'GADWP_Uninstall',
+                'uninstall'
+            ));
+            
+            /*
+             * Load Frontend Widgets
+             * (needed during ajax)
+             */
+            include_once (GADWP_DIR . 'front/widgets.php');
+            
+            /*
+             * Add Frontend Widgets
+             * (needed during ajax)
+             */
+            add_action('widgets_init', array(
+                self::$instance,
+                'add_frontend_widget'
+            ));
         }
 
         /**
