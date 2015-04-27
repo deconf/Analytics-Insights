@@ -269,7 +269,7 @@ final class GADWP_Settings
                                             <div class="onoffswitch-switch"></div>
                                         </label>
                                     </div>
-                                    <div class="switch-desc"><?php _e ( "enable Switch Profile/View functionality", 'ga-dash' );?></div>
+                                    <div class="switch-desc"><?php _e ( "enable Switch View functionality", 'ga-dash' );?></div>
                                 </td>
                             </tr>
                             <tr>
@@ -366,7 +366,7 @@ final class GADWP_Settings
         );
         self::navigation_tabs($tabs);
         ?>
-        <div class="gadwp-help"><?php printf(__('For more information about Tracking Options read %s.', 'ga-dash'), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/tracking-google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=tracking_screen&utm_campaign=gadwp', __('this documentation page', 'ga-dash')));?></div>
+        <div class="gadwp-help"><?php printf(__('For more information about Tracking Options read %s.', 'ga-dash'), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=tracking_screen&utm_campaign=gadwp', __('this documentation page', 'ga-dash')));?></div>
 					<?php if (isset($message)) echo $message; ?>
 					    <div id="gadwp-basic">
                             <table class="options">
@@ -679,7 +679,7 @@ final class GADWP_Settings
                         <table class="options">
                             <tr>
                                 <td>
-                                    <?php printf(__('For errors and/or other issues please check %s and related tutorials.', 'ga-dash'), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/error-codes-in-google-analytics-dashboard-for-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=errors_screen&utm_campaign=gadwp', __('this documentation page', 'ga-dash')))?>
+                                    <?php printf(__('For errors and/or other issues check %s and related resources.', 'ga-dash'), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=errors_screen&utm_campaign=gadwp', __('this documentation page', 'ga-dash')))?>
 						        </td>
                             </tr>
                             <tr>
@@ -739,7 +739,7 @@ final class GADWP_Settings
             return;
         }
         $options = self::update_options('general');
-        printf('<div id="gapi-warning" class="updated"><p>%1$s <a href="https://deconf.com/error-codes-in-google-analytics-dashboard-for-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=general_screen&utm_campaign=gadwp">%2$s</a></p></div>', __('Loading the required libraries. If this results in a blank screen or a fatal error, try this solution:', "ga-dash"), __('Library conflicts between WordPress plugins', "ga-dash"));
+        printf('<div id="gapi-warning" class="updated"><p>%1$s <a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=general_screen&utm_campaign=gadwp">%2$s</a></p></div>', __('Loading the required libraries. If this results in a blank screen or a fatal error, try this solution:', "ga-dash"), __('Library conflicts between WordPress plugins', "ga-dash"));
         if (null === $gadwp->gapi_controller) {
             $gadwp->gapi_controller = new GADWP_GAPI_Controller();
         }
@@ -997,7 +997,7 @@ final class GADWP_Settings
         /*
          * Include GAPI
          */
-        echo '<div id="gapi-warning" class="updated"><p>' . __('Loading the required libraries. If this results in a blank screen or a fatal error, try this solution:', "ga-dash") . ' <a href="https://deconf.com/error-codes-in-google-analytics-dashboard-for-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=general_screen&utm_campaign=gadwp">Library conflicts between WordPress plugins</a></p></div>';
+        echo '<div id="gapi-warning" class="updated"><p>' . __('Loading the required libraries. If this results in a blank screen or a fatal error, try this solution:', "ga-dash") . ' <a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=general_screen&utm_campaign=gadwp">Library conflicts between WordPress plugins</a></p></div>';
         
         if (null === $gadwp->gapi_controller) {
             $gadwp->gapi_controller = new GADWP_GAPI_Controller();
@@ -1011,6 +1011,7 @@ final class GADWP_Settings
                     $gadwp->config->options['ga_dash_token'] = $gadwp->gapi_controller->client->getAccessToken();
                     $google_token = json_decode($gadwp->gapi_controller->client->getAccessToken());
                     $gadwp->config->options['ga_dash_refresh_token'] = $google_token->refresh_token;
+                    $gadwp->config->options['automatic_updates_minorversion'] = 1;
                     $gadwp->config->set_plugin_options(true);
                     $options = self::update_options('network');
                     $message = "<div class='updated'><p>" . __("Plugin authorization succeeded.", 'ga-dash') . "</p></div>";
