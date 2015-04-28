@@ -13,6 +13,8 @@ Displays Google Analytics reports and real-time statistics in your WordPress Das
 == Description ==
 Using a widget, [Google Analytics Dashboard](https://deconf.com/google-analytics-dashboard-wordpress/) displays detailed analytics data and reports about: number of sessions, number of visitors (users), page views, bounce rates, organic searches, pages per visit directly on your WordPress Dashboard.
 
+In addition, in-depth Page reports and in-depth Post reports allow further segmentation of your analytics data, providing performance details for each post or page from your website.
+
 This plugin also inserts the latest version of the Google Analytics tracking code in every page of your site. The tracking code is fully customizable through options and hooks. 
 
 > <strong>Google Analytics Dashboard on GitHub</strong><br>
