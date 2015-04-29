@@ -138,7 +138,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Enhancement: Italian translation updated
 
 = 4.7 =
-- Enhancement: Dutch translation
+- Enhancement: Dutch translation updated
 - Enhancement: using wp_get_current_user() to check users' roles
 - Enhancement: fit longer titles in backend item reports widget
 - Enhancement: disable the drop-down select list while a single View is available
@@ -146,9 +146,9 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Bug Fix: unable to add new widgets on frontend
 
 = 4.6 =
-- Enhancement: Italian translation
-- Enhancement: Japanese translation
-- Enhancement: Portuguese (Brazil) translation
+- Enhancement: Italian translation updated
+- Enhancement: Japanese translation updated
+- Enhancement: Portuguese (Brazil) translation updated
 - Enhancement: introducing a manager class to keep track of all instances and their references
 - Enhancement: push the tracking code at the end of head section
 - Enhancement: better support for remove_action and wp_dequeue_script
@@ -174,7 +174,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Enhancement: gadwp_backenditem_uri allows URI corrections for backend item reports
 - Enhancement: option to enable/disable the custom dashboard widget
 - Enhancement: Japanese translation
-- Enhancement: Dutch translation
+- Enhancement: Dutch translation updated
 - Enhancement: Portuguese (Brazil) translation
 - Enhancement: UI improvements, props by [Paal Joachim Romdahl](https://github.com/paaljoachim)
 - Bug Fix: Arabic translation not loading properly
