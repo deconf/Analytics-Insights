@@ -134,6 +134,9 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 
 == Changelog ==
 
+= 4.7.1 =
+- Enhancement: Italian translation updated
+
 = 4.7 =
 - Enhancement: Dutch translation
 - Enhancement: using wp_get_current_user() to check users' roles

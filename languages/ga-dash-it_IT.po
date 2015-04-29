@@ -1,17 +1,17 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Google Analytics Dashboard for WP 4.6\n"
+"Project-Id-Version: Google Analytics Dashboard for WP 4.7\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/google-analytics-"
 "dashboard-for-wp\n"
-"POT-Creation-Date: 2015-04-27 19:25+0200\n"
-"PO-Revision-Date: 2015-04-27 19:25+0200\n"
-"Last-Translator: Alin Marcu <admin@deconf.com>\n"
+"POT-Creation-Date: 2015-04-27 19:26+0200\n"
+"PO-Revision-Date: 2015-04-28 10:09+0100\n"
+"Last-Translator: Leo The Strategist <leoxleox73@gmail.com>\n"
 "Language-Team: L.E.O.X. <leoxleox73@gmail.com>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.6\n"
+"X-Generator: Poedit 1.5.4\n"
 "X-Poedit-KeywordsList: _e;__\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -66,6 +66,8 @@ msgstr "Impostazioni Frontend di Google Analytics "
 #, php-format
 msgid "Read %s for more information about Frontend Features and Options."
 msgstr ""
+"Leggi %s per ulteriori informazioni sulle opzioni e funzionalit&agrave; del "
+"frontend."
 
 #: .././admin/settings.php:116 .././admin/settings.php:224
 #: .././admin/settings.php:369 .././admin/settings.php:682
@@ -83,10 +85,12 @@ msgstr "Mostra statistiche a:"
 #: .././admin/settings.php:162
 msgid "show page sessions and users in frontend (after each article)"
 msgstr ""
+"mostra la pagina delle sessioni e degli utenti nel frontend (dopo ogni "
+"articolo)"
 
 #: .././admin/settings.php:173
 msgid "show page searches (after each article)"
-msgstr ""
+msgstr "mostra la pagina delle ricerche (dopo ogni articolo)"
 
 #: .././admin/settings.php:180 .././admin/settings.php:318
 #: .././admin/settings.php:617 .././admin/settings.php:965
@@ -102,10 +106,12 @@ msgstr "Impostazioni Backend di Google Analytics"
 #, php-format
 msgid "Read %s for more information about Backend Features and Options."
 msgstr ""
+"Leggi %s per ulteriori informazioni sulle opzioni e funzionalit&agrave; del "
+"backend."
 
 #: .././admin/settings.php:272
 msgid "enable Switch View functionality"
-msgstr ""
+msgstr "abilita la funzionalit&agrave; Visualizza"
 
 #: .././admin/settings.php:283
 msgid "enable reports on Posts List and Pages List"
@@ -167,7 +173,7 @@ msgstr "Impostazioni avanzate"
 #: .././admin/settings.php:369
 #, php-format
 msgid "For more information about Tracking Options read %s."
-msgstr ""
+msgstr "Per ulteriori informazioni sulle opzioni di monitoraggio leggi %s."
 
 #: .././admin/settings.php:374
 msgid "Tracking Settings"
@@ -221,15 +227,15 @@ msgstr "Universal Analytics"
 
 #: .././admin/settings.php:410
 msgid "anonymize IPs while tracking"
-msgstr ""
+msgstr "rendi anonimi gli indirizzi IP durante il monitoraggio"
 
 #: .././admin/settings.php:421
 msgid "enable remarketing, demographics and interests reports"
-msgstr ""
+msgstr "abilita il remarketing e i rapporti demografici e sugli interessi."
 
 #: .././admin/settings.php:439
 msgid "track downloads, mailto and outbound links"
-msgstr ""
+msgstr "monitora i download, le e-mail e i link in uscita"
 
 #: .././admin/settings.php:443
 msgid "Downloads Regex:"
@@ -237,7 +243,7 @@ msgstr "Abbreviazioni downloads:"
 
 #: .././admin/settings.php:454
 msgid "track affiliate links matching this regex"
-msgstr ""
+msgstr "monitora i link di affiliazione corrispondenti a aquesto regex"
 
 #: .././admin/settings.php:458
 msgid "Affiliates Regex:"
@@ -246,6 +252,7 @@ msgstr "Abbreviazioni associate:"
 #: .././admin/settings.php:469
 msgid "track fragment identifiers, hashmarks (#) in URI links"
 msgstr ""
+"monitora gli identificatori di frammento, hashmarks (#) nei collegamenti URI"
 
 #: .././admin/settings.php:480
 msgid "Authors:"
@@ -273,19 +280,19 @@ msgstr "Page Speed Sample Rate:"
 
 #: .././admin/settings.php:530
 msgid "exclude events from bounce-rate calculation"
-msgstr ""
+msgstr "escludi gli eventi nel calcolo della frequenza di rimbalzo"
 
 #: .././admin/settings.php:541
 msgid "enable enhanced link attribution"
-msgstr ""
+msgstr "abilita l&apos;attribuzione avanzata dei link"
 
 #: .././admin/settings.php:552
 msgid "enable AdSense account linking"
-msgstr ""
+msgstr "abilita AdSense account linking"
 
 #: .././admin/settings.php:563
 msgid "enable cross domain tracking"
-msgstr ""
+msgstr "abilita il monitoraggio cross domain"
 
 #: .././admin/settings.php:567
 msgid "Cross Domains:"
@@ -310,7 +317,7 @@ msgstr "Impostazioni plugin"
 #: .././admin/settings.php:682
 #, php-format
 msgid "For errors and/or other issues check %s and related resources."
-msgstr ""
+msgstr "Per errori e/o altri problemi controlla %s e le risorse relative."
 
 #: .././admin/settings.php:687
 msgid "Last Error detected"
@@ -404,7 +411,7 @@ msgstr "guida"
 
 #: .././admin/settings.php:874 .././admin/settings.php:1160
 msgid "use your own API Project credentials"
-msgstr ""
+msgstr "utilizza le tue credenziali API"
 
 #: .././admin/settings.php:878 .././admin/settings.php:1167
 msgid "API Key:"
@@ -438,7 +445,7 @@ msgstr "Impostazioni generali"
 
 #: .././admin/settings.php:905
 msgid "Select View:"
-msgstr ""
+msgstr "Seleziona vista:"
 
 #: .././admin/settings.php:916 .././admin/settings.php:1213
 msgid "Property not found"
@@ -446,7 +453,7 @@ msgstr "Propriet&agrave; non trovata"
 
 #: .././admin/settings.php:921
 msgid "Lock Selection"
-msgstr ""
+msgstr "Blocca selezione"
 
 #: .././admin/settings.php:939
 msgid "Theme Color:"
@@ -478,7 +485,7 @@ msgstr "Configurazione della rete"
 
 #: .././admin/settings.php:1141
 msgid "use a single Google Analytics account for the entire network"
-msgstr ""
+msgstr "utilizza un unico account di Google Analytics per tutta la rete"
 
 #: .././admin/settings.php:1185
 msgid "Refresh Properties"
@@ -490,7 +497,7 @@ msgstr "Propriet&agrave;/Mostra impostazioni"
 
 #: .././admin/settings.php:1246
 msgid "exclude Super Admin tracking for the entire network"
-msgstr ""
+msgstr "escludi il monitoraggio dell&apos;amministratore su tutta la rete"
 
 #: .././admin/settings.php:1291
 msgid "Setup Tutorial & Demo"
@@ -862,7 +869,7 @@ msgstr "Crediti:"
 
 #: .././gadwp.php:46 .././gadwp.php:55 .././gadwp.php:63
 msgid "This is not allowed, read the documentation!"
-msgstr ""
+msgstr "Questo non &egrave; permesso, leggi la documentazione"
 
 #: .././tools/gapi.php:134
 msgid "Use this link to get your access code:"
