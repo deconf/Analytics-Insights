@@ -49,7 +49,6 @@ if (! class_exists('GADWP_Frontend_Item_Reports')) {
 
         public function add_content($content)
         {
-            global $post;
             
             if (! GADWP_Tools::check_roles($this->gadwp->config->options['ga_dash_access_front']) || ! ($this->gadwp->config->options['ga_dash_frontend_stats'] || $this->gadwp->config->options['ga_dash_frontend_keywords'])) {
                 return $content;
@@ -62,8 +61,12 @@ if (! class_exists('GADWP_Frontend_Item_Reports')) {
             }
             
             if ((is_page() || is_single()) && ! is_preview()) {
-                $page_url = $_SERVER["REQUEST_URI"]; // str_replace(site_url(), "", get_permalink());
-                $post_id = $post->ID;
+                
+                $page_url = $_SERVER["REQUEST_URI"];
+
+                //Encode URL
+                $page_url = rawurlencode($page_url);
+                
                 $content .= '<script type="text/javascript">
                   
                   gadash_firstclick = true;
@@ -95,7 +98,7 @@ if (! class_exists('GADWP_Frontend_Item_Reports')) {
                                 	} 
                                 		    
 									if(typeof ga_dash_drawpagesessions == "function"){
-										jQuery.post("' . admin_url('admin-ajax.php') . '", {action: "gadash_get_frontend_pagereports",gadash_pageurl: "' . $page_url . '",gadash_postid: "' . $post_id . '",query: "pageviews",gadash_security_pagereports: "' . wp_create_nonce('gadash_get_frontend_pagereports') . '"}, function(response){
+										jQuery.post("' . admin_url('admin-ajax.php') . '", {action: "gadash_get_frontend_pagereports",gadash_pageurl: "' . $page_url . '",query: "pageviews",gadash_security_pagereports: "' . wp_create_nonce('gadash_get_frontend_pagereports') . '"}, function(response){
 										  if (!jQuery.isNumeric(response)){  
                                             if (jQuery.isArray(response)){
                                             	gadash_pagesessions = response;
@@ -114,7 +117,7 @@ if (! class_exists('GADWP_Frontend_Item_Reports')) {
 										});
 									}
 									if(typeof ga_dash_drawpagesearches == "function"){
-										jQuery.post("' . admin_url('admin-ajax.php') . '", {action: "gadash_get_frontend_pagereports",gadash_pageurl: "' . $page_url . '",gadash_postid: "' . $post_id . '",query: "searches",gadash_security_pagereports: "' . wp_create_nonce('gadash_get_frontend_pagereports') . '"}, function(response){
+										jQuery.post("' . admin_url('admin-ajax.php') . '", {action: "gadash_get_frontend_pagereports",gadash_pageurl: "' . $page_url . '",query: "searches",gadash_security_pagereports: "' . wp_create_nonce('gadash_get_frontend_pagereports') . '"}, function(response){
                                             if (!jQuery.isNumeric(response)){										  
                                               if (jQuery.isArray(response)){
                                                   gadash_pagesearches = response;

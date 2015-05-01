@@ -124,10 +124,10 @@ class Google_Http_REST
                 if ($paramSpec['location'] == 'query') {
                     if (isset($paramSpec['repeated']) && is_array($paramSpec['value'])) {
                         foreach ($paramSpec['value'] as $value) {
-                            $queryVars[] = $paramName . '=' . rawurlencode($value);
+                            $queryVars[] = $paramName . '=' . rawurlencode(rawurldecode($value));
                         }
                     } else {
-                        $queryVars[] = $paramName . '=' . rawurlencode($paramSpec['value']);
+                        $queryVars[] = $paramName . '=' . rawurlencode(rawurldecode($paramSpec['value']));
                     }
                 }
         }

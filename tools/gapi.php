@@ -854,17 +854,15 @@ if (! class_exists('GADWP_GAPI_Controller')) {
          *            $projectId
          * @param
          *            $page_url
-         * @param
-         *            $post_id
          * @return array|int
          */
-        public function frontend_afterpost_pageviews($projectId, $page_url, $post_id)
+        public function frontend_afterpost_pageviews($projectId, $page_url)
         {
             $from = '30daysAgo';
             $to = 'yesterday';
             $metrics = 'ga:pageviews,ga:uniquePageviews';
             $dimensions = 'ga:date,ga:dayOfWeekName';
-            $serial = 'gadash_qr21_' . $this->get_serial($post_id . 'stats');
+            $serial = 'gadash_qr21_' . $this->get_serial($page_url . 'stats');
             $data = $this->handle_corereports($projectId, $from, $to, $metrics, array(
                 'dimensions' => $dimensions,
                 'filters' => 'ga:pagePath==' . $page_url,
@@ -897,17 +895,15 @@ if (! class_exists('GADWP_GAPI_Controller')) {
          *            $projectId
          * @param
          *            $page_url
-         * @param
-         *            $post_id
          * @return array|int
          */
-        public function frontend_afterpost_searches($projectId, $page_url, $post_id)
+        public function frontend_afterpost_searches($projectId, $page_url)
         {
             $from = '30daysAgo';
             $to = 'yesterday';
             $metrics = 'ga:sessions';
             $dimensions = 'ga:keyword';
-            $serial = 'gadash_qr22_' . $this->get_serial($post_id . 'search');
+            $serial = 'gadash_qr22_' . $this->get_serial($page_url . 'search');
             $data = $this->handle_corereports($projectId, $from, $to, $metrics, array(
                 'dimensions' => $dimensions,
                 'sort' => '-ga:sessions',

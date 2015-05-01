@@ -50,8 +50,8 @@ if (! class_exists('GADWP_Frontend_Ajax')) {
             if (! isset($_REQUEST['gadash_security_pagereports']) || ! wp_verify_nonce($_REQUEST['gadash_security_pagereports'], 'gadash_get_frontend_pagereports')) {
                 wp_die(- 30);
             }
-            $page_url = esc_url($_REQUEST['gadash_pageurl']);
-            $post_id = (int) $_REQUEST['gadash_postid'];
+            $page_url = $_REQUEST['gadash_pageurl'];
+
             $query = $_REQUEST['query'];
             if (ob_get_length()) {
                 ob_clean();
@@ -80,10 +80,10 @@ if (! class_exists('GADWP_Frontend_Ajax')) {
             }
             switch ($query) {
                 case 'pageviews':
-                    wp_send_json($this->gadwp->gapi_controller->frontend_afterpost_pageviews($projectId, $page_url, $post_id));
+                    wp_send_json($this->gadwp->gapi_controller->frontend_afterpost_pageviews($projectId, $page_url));
                     break;
                 default:
-                    wp_send_json($this->gadwp->gapi_controller->frontend_afterpost_searches($projectId, $page_url, $post_id));
+                    wp_send_json($this->gadwp->gapi_controller->frontend_afterpost_searches($projectId, $page_url));
                     break;
             }
         }

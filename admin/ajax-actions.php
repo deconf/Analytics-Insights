@@ -82,8 +82,12 @@ if (! class_exists('GADWP_Backend_Ajax')) {
                 wp_die(- 25);
             }
             
-            // allow URI correction before sending an API request
+            // allow URL correction before sending an API request
             $filter = apply_filters('gadwp_backenditem_uri', $uri);
+            
+            //Encode URL
+            $filter = rawurlencode($filter);
+
             $this->gadwp->gapi_controller->get($projectId, $query, $from, $to, $filter);
         }
 

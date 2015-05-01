@@ -580,10 +580,7 @@ jQuery.fn.extend({
 
         try {
           NProgress.configure({
-            parent : "#gadwp-progressbar" + slug
-          });
-          NProgress.configure({
-            showSpinner : false
+            parent : "#gadwp-progressbar" + slug, showSpinner : false
           });
           NProgress.start();
         } catch (e) {
