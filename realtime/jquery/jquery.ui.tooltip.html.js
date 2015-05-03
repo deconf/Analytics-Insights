@@ -1,7 +1,8 @@
 jQuery(function () {
-      jQuery(document).tooltip({
+      jQuery('#gadash-widget *').tooltip({
+		  items: "[data-tooltip]",
           content: function () {
-              return jQuery(this).prop('title');
+              return jQuery(this).attr("data-tooltip");
           }
       });
   });

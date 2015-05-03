@@ -981,40 +981,40 @@ if (! class_exists('GADWP_GAPI_Controller')) {
         {
             switch ($query) {
                 case 'referrers':
-                    wp_send_json($this->get_referrers($projectId, $from, $to, $filter));
+                    return $this->get_referrers($projectId, $from, $to, $filter);
                     break;
                 case 'contentpages':
-                    wp_send_json($this->get_contentpages($projectId, $from, $to, $filter));
+                    return $this->get_contentpages($projectId, $from, $to, $filter);
                     break;
                 case 'locations':
-                    wp_send_json($this->get_locations($projectId, $from, $to, $filter));
+                    return $this->get_locations($projectId, $from, $to, $filter);
                     break;
                 case 'bottomstats':
-                    wp_send_json($this->get_bottomstats($projectId, $from, $to, $filter));
+                    return $this->get_bottomstats($projectId, $from, $to, $filter);
                     break;
                 case 'trafficchannels':
-                    wp_send_json($this->get_trafficchannels($projectId, $from, $to, $filter));
+                    return $this->get_trafficchannels($projectId, $from, $to, $filter);
                     break;
                 case 'medium':
-                    wp_send_json($this->get_trafficdetails($projectId, $from, $to, 'medium', $filter));
+                    return $this->get_trafficdetails($projectId, $from, $to, 'medium', $filter);
                     break;
                 case 'visitorType':
-                    wp_send_json($this->get_trafficdetails($projectId, $from, $to, 'visitorType', $filter));
+                    return $this->get_trafficdetails($projectId, $from, $to, 'visitorType', $filter);
                     break;
                 case 'socialNetwork':
-                    wp_send_json($this->get_trafficdetails($projectId, $from, $to, 'socialNetwork', $filter));
+                    return $this->get_trafficdetails($projectId, $from, $to, 'socialNetwork', $filter);
                     break;
                 case 'source':
-                    wp_send_json($this->get_trafficdetails($projectId, $from, $to, 'source', $filter));
+                    return $this->get_trafficdetails($projectId, $from, $to, 'source', $filter);
                     break;
                 case 'searches':
-                    wp_send_json($this->get_searches($projectId, $from, $to, $filter));
+                    return $this->get_searches($projectId, $from, $to, $filter);
                     break;
                 case 'realtime':
-                    wp_send_json($this->get_realtime($projectId));
+                    return $this->get_realtime($projectId);
                     break;
                 default:
-                    wp_send_json($this->get_mainreport($projectId, $from, $to, $query, $filter));
+                    return $this->get_mainreport($projectId, $from, $to, $query, $filter);
                     break;
             }
         }

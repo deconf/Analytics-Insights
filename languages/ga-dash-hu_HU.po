@@ -1,17 +1,17 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Google Analytics Dashboard for WP 4.2.20\n"
+"Project-Id-Version: Google Analytics Dashboard for WP 4.7.2\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/google-analytics-"
 "dashboard-for-wp\n"
-"POT-Creation-Date: 2015-04-27 19:24+0200\n"
-"PO-Revision-Date: 2015-04-27 19:24+0200\n"
+"POT-Creation-Date: 2015-05-20 21:45+0200\n"
+"PO-Revision-Date: 2015-05-20 21:45+0200\n"
 "Last-Translator: Alin Marcu <admin@deconf.com>\n"
-"Language-Team: Alin Marcu\n"
+"Language-Team: I love WordPress <info@ilovewp.net>\n"
 "Language: hu_HU\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.6\n"
+"X-Generator: Poedit 1.8\n"
 "X-Poedit-KeywordsList: _e;__\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -20,534 +20,520 @@ msgstr ""
 
 #: .././admin/item-reports.php:67
 msgid "Analytics"
-msgstr ""
+msgstr "Statisztika"
 
-#: .././admin/settings.php:94 .././admin/settings.php:202
-#: .././admin/settings.php:338 .././admin/settings.php:820
-#: .././admin/settings.php:1089
+#: .././admin/settings.php:94 .././admin/settings.php:197
+#: .././admin/settings.php:328 .././admin/settings.php:800
+#: .././admin/settings.php:1069
 msgid "Settings saved."
-msgstr ""
+msgstr "Beállítások mentve."
 
-#: .././admin/settings.php:96 .././admin/settings.php:204
-#: .././admin/settings.php:340 .././admin/settings.php:797
-#: .././admin/settings.php:807 .././admin/settings.php:816
-#: .././admin/settings.php:822 .././admin/settings.php:834
-#: .././admin/settings.php:1050 .././admin/settings.php:1075
-#: .././admin/settings.php:1085 .././admin/settings.php:1091
-#: .././admin/settings.php:1103
+#: .././admin/settings.php:96 .././admin/settings.php:199
+#: .././admin/settings.php:330 .././admin/settings.php:777
+#: .././admin/settings.php:787 .././admin/settings.php:796
+#: .././admin/settings.php:802 .././admin/settings.php:814
+#: .././admin/settings.php:1030 .././admin/settings.php:1055
+#: .././admin/settings.php:1065 .././admin/settings.php:1071
+#: .././admin/settings.php:1083
 msgid "Cheating Huh?"
-msgstr ""
+msgstr "Csalás Huh?"
 
-#: .././admin/settings.php:100 .././admin/settings.php:208
-#: .././admin/settings.php:344 .././admin/settings.php:659
-#: .././admin/settings.php:848 .././admin/settings.php:1116
+#: .././admin/settings.php:100 .././admin/settings.php:203
+#: .././admin/settings.php:334 .././admin/settings.php:644
+#: .././admin/settings.php:828 .././admin/settings.php:1096
 #, php-format
 msgid "Something went wrong, check %1$s or %2$s."
-msgstr ""
+msgstr "Valami rosszul ment, tekintse meg itt: %1$s vagy %2$s."
 
-#: .././admin/settings.php:100 .././admin/settings.php:208
-#: .././admin/settings.php:344 .././admin/settings.php:659
-#: .././admin/settings.php:848 .././admin/settings.php:1116
+#: .././admin/settings.php:100 .././admin/settings.php:203
+#: .././admin/settings.php:334 .././admin/settings.php:644
+#: .././admin/settings.php:828 .././admin/settings.php:1096
 #: .././admin/setup.php:96 .././admin/setup.php:119
 msgid "Errors & Debug"
-msgstr ""
+msgstr "Hibák és hibakeresés"
 
-#: .././admin/settings.php:100 .././admin/settings.php:208
-#: .././admin/settings.php:344 .././admin/settings.php:659
-#: .././admin/settings.php:848 .././admin/settings.php:1116
+#: .././admin/settings.php:100 .././admin/settings.php:203
+#: .././admin/settings.php:334 .././admin/settings.php:644
+#: .././admin/settings.php:828 .././admin/settings.php:1096
 msgid "authorize the plugin"
-msgstr "bővítményt engedélyezni"
+msgstr "engedélyezze a bővítményt"
 
 #: .././admin/settings.php:105
 msgid "Google Analytics Frontend Settings"
 msgstr "Google Analytics weblap beállítások"
 
-#: .././admin/settings.php:116
-#, php-format
-msgid "Read %s for more information about Frontend Features and Options."
-msgstr ""
-
-#: .././admin/settings.php:116 .././admin/settings.php:224
-#: .././admin/settings.php:369 .././admin/settings.php:682
-msgid "this documentation page"
-msgstr ""
-
-#: .././admin/settings.php:120 .././admin/settings.php:228
+#: .././admin/settings.php:115 .././admin/settings.php:218
 msgid "Permissions"
-msgstr ""
+msgstr "Jogosultságok"
 
-#: .././admin/settings.php:123 .././admin/settings.php:231
+#: .././admin/settings.php:118 .././admin/settings.php:221
 msgid "Show stats to:"
-msgstr ""
+msgstr "Statisztikák megjelenítése:"
 
-#: .././admin/settings.php:162
+#: .././admin/settings.php:157
 msgid "show page sessions and users in frontend (after each article)"
 msgstr ""
+"munkamenetek és felhasználók megjelenítése a frontenden (minden cikk után)"
 
-#: .././admin/settings.php:173
+#: .././admin/settings.php:168
 msgid "show page searches (after each article)"
-msgstr ""
+msgstr "keresés megjelenítése (minden cikk után)"
 
-#: .././admin/settings.php:180 .././admin/settings.php:318
-#: .././admin/settings.php:617 .././admin/settings.php:965
-#: .././admin/settings.php:1253
+#: .././admin/settings.php:175 .././admin/settings.php:308
+#: .././admin/settings.php:602 .././admin/settings.php:945
+#: .././admin/settings.php:1233
 msgid "Save Changes"
-msgstr ""
+msgstr "Beállítások mentése"
 
-#: .././admin/settings.php:213
+#: .././admin/settings.php:208
 msgid "Google Analytics Backend Settings"
-msgstr ""
+msgstr "Google Analytics admin beállítások"
 
-#: .././admin/settings.php:224
-#, php-format
-msgid "Read %s for more information about Backend Features and Options."
-msgstr ""
-
-#: .././admin/settings.php:272
+#: .././admin/settings.php:262
 msgid "enable Switch View functionality"
-msgstr ""
+msgstr "nézet átkapcsolásának engedélyezése"
 
-#: .././admin/settings.php:283
+#: .././admin/settings.php:273
 msgid "enable reports on Posts List and Pages List"
-msgstr ""
+msgstr "jelentések engedélyezése a Bejegyzés és Oldalak lista nézetében"
 
-#: .././admin/settings.php:294
+#: .././admin/settings.php:284
 msgid "enable the main Dashboard Widget"
-msgstr ""
+msgstr "fő vezérlőpult widget engedélyezése"
 
-#: .././admin/settings.php:298
+#: .././admin/settings.php:288
 msgid "Real-Time Settings"
 msgstr "Valós idejű beállítások"
 
-#: .././admin/settings.php:301
+#: .././admin/settings.php:291
 msgid "Maximum number of pages to display on real-time tab:"
 msgstr "Maximális oldalszám megjelenítése a valós idejű fülön:"
 
-#: .././admin/settings.php:306
+#: .././admin/settings.php:296
 msgid "Location Settings"
-msgstr ""
+msgstr "Helybeállítások"
 
-#: .././admin/settings.php:310
+#: .././admin/settings.php:300
 msgid "Target Geo Map to country:"
-msgstr ""
+msgstr "Cél földrajzi térkép (ország):"
 
-#: .././admin/settings.php:347
+#: .././admin/settings.php:337
 msgid ""
 "The tracking component is disabled. You should set <strong>Tracking Options</"
 "strong> to <strong>Enabled</strong>"
 msgstr ""
+"A követés le van tiltva. Kapcsolja át a <strong>Követési opciók</strong>-at "
+"<strong>Engedélyezve</strong>-re"
 
-#: .././admin/settings.php:352
+#: .././admin/settings.php:342
 msgid "Google Analytics Tracking Code"
 msgstr "Google Analytics követőkód"
 
-#: .././admin/settings.php:361
+#: .././admin/settings.php:351
 msgid "Basic Settings"
-msgstr ""
+msgstr "Alapbeállítások"
 
-#: .././admin/settings.php:362 .././admin/settings.php:429
+#: .././admin/settings.php:352 .././admin/settings.php:418
 msgid "Events Tracking"
 msgstr "Események követése"
 
-#: .././admin/settings.php:363 .././admin/settings.php:477
+#: .././admin/settings.php:353 .././admin/settings.php:466
 msgid "Custom Definitions"
-msgstr ""
+msgstr "Egyéni meghatározások"
 
-#: .././admin/settings.php:364 .././admin/settings.php:575
-#: .././admin/settings.php:1236
+#: .././admin/settings.php:354 .././admin/settings.php:564
+#: .././admin/settings.php:1216
 msgid "Exclude Tracking"
 msgstr "Követés kizárás"
 
-#: .././admin/settings.php:365
+#: .././admin/settings.php:355
 msgid "Advanced Settings"
-msgstr ""
+msgstr "Speciális beállítások"
 
-#: .././admin/settings.php:369
-#, php-format
-msgid "For more information about Tracking Options read %s."
-msgstr ""
-
-#: .././admin/settings.php:374
+#: .././admin/settings.php:363
 msgid "Tracking Settings"
 msgstr "Követési beállítások"
 
-#: .././admin/settings.php:377
+#: .././admin/settings.php:366
 msgid "Tracking Options:"
-msgstr ""
+msgstr "Követési opciók:"
 
-#: .././admin/settings.php:379
+#: .././admin/settings.php:368
 msgid "Disabled"
 msgstr "Letiltva"
 
-#: .././admin/settings.php:380
+#: .././admin/settings.php:369
 msgid "Enabled"
 msgstr "Engedélyezve"
 
-#: .././admin/settings.php:388 .././admin/settings.php:912
-#: .././admin/settings.php:933 .././admin/settings.php:1209
+#: .././admin/settings.php:377 .././admin/settings.php:892
+#: .././admin/settings.php:913 .././admin/settings.php:1189
 #: .././admin/widgets.php:71
 msgid "View Name:"
-msgstr "Név:"
+msgstr "Nézet neve:"
 
-#: .././admin/settings.php:388 .././admin/settings.php:933
+#: .././admin/settings.php:377 .././admin/settings.php:913
 msgid "Tracking ID:"
 msgstr "Követési azonosító:"
 
-#: .././admin/settings.php:388 .././admin/settings.php:933
+#: .././admin/settings.php:377 .././admin/settings.php:913
 msgid "Default URL:"
 msgstr "Alapértelmezett webcím:"
 
-#: .././admin/settings.php:388 .././admin/settings.php:933
+#: .././admin/settings.php:377 .././admin/settings.php:913
 msgid "Time Zone:"
 msgstr "Időzóna:"
 
-#: .././admin/settings.php:393
-#, fuzzy
+#: .././admin/settings.php:382
 msgid "Basic Tracking"
-msgstr "Események követése"
+msgstr "Alapszintű követés"
 
-#: .././admin/settings.php:396
+#: .././admin/settings.php:385
 msgid "Tracking Type:"
-msgstr ""
+msgstr "Követés típusa:"
 
-#: .././admin/settings.php:398
+#: .././admin/settings.php:387
 msgid "Classic Analytics"
-msgstr "Klasszikus Analytics"
+msgstr "Klasszikus"
+
+#: .././admin/settings.php:388
+msgid "Universal Analytics"
+msgstr "Univerzális"
 
 #: .././admin/settings.php:399
-msgid "Universal Analytics"
-msgstr "Univerzális Analytics"
+msgid "anonymize IPs while tracking"
+msgstr "IP címek anonimizálása követés közben"
 
 #: .././admin/settings.php:410
-msgid "anonymize IPs while tracking"
-msgstr ""
-
-#: .././admin/settings.php:421
 msgid "enable remarketing, demographics and interests reports"
 msgstr ""
+"remarketing, demográfiai és érdeklődési területekre vonatkozó jelentések "
+"engedélyezése"
 
-#: .././admin/settings.php:439
+#: .././admin/settings.php:428
 msgid "track downloads, mailto and outbound links"
-msgstr ""
+msgstr "letöltések, mailto (email) és kimenő linkek követése"
+
+#: .././admin/settings.php:432
+msgid "Downloads Regex:"
+msgstr "Letöltés regex:"
 
 #: .././admin/settings.php:443
-#, fuzzy
-msgid "Downloads Regex:"
-msgstr "Letöltés szűrők:"
-
-#: .././admin/settings.php:454
 msgid "track affiliate links matching this regex"
-msgstr ""
+msgstr "partner linkek követése ennek a regexnek megfelelően"
+
+#: .././admin/settings.php:447
+msgid "Affiliates Regex:"
+msgstr "Partner regex:"
 
 #: .././admin/settings.php:458
-msgid "Affiliates Regex:"
-msgstr ""
+msgid "track fragment identifiers, hashmarks (#) in URI links"
+msgstr "töredékazonosítók követése, hashmark (#) az URI linkekben"
 
 #: .././admin/settings.php:469
-msgid "track fragment identifiers, hashmarks (#) in URI links"
-msgstr ""
-
-#: .././admin/settings.php:480
 msgid "Authors:"
-msgstr ""
+msgstr "Szerzők:"
 
-#: .././admin/settings.php:488
+#: .././admin/settings.php:477
 msgid "Publication Year:"
-msgstr ""
+msgstr "Megjelenés éve:"
 
-#: .././admin/settings.php:496
+#: .././admin/settings.php:485
 msgid "Categories:"
-msgstr ""
+msgstr "Kategóriák:"
 
-#: .././admin/settings.php:504
+#: .././admin/settings.php:493
 msgid "User Type:"
-msgstr ""
+msgstr "Felhasználó típus:"
 
-#: .././admin/settings.php:516
-#, fuzzy
+#: .././admin/settings.php:505
 msgid "Advanced Tracking"
-msgstr "Események követése"
+msgstr "Haladó követés"
+
+#: .././admin/settings.php:508
+msgid "Page Speed SR:"
+msgstr "Page Speed SR:"
 
 #: .././admin/settings.php:519
-#, fuzzy
-msgid "Page Speed SR:"
-msgstr "Oldal / látogató"
+msgid "exclude events from bounce-rate calculation"
+msgstr "események kizárása a visszafordulási arány kiszámításából"
 
 #: .././admin/settings.php:530
-msgid "exclude events from bounce-rate calculation"
-msgstr ""
+msgid "enable enhanced link attribution"
+msgstr "speciális linkhozzárendelés használatának engedélyezése"
 
 #: .././admin/settings.php:541
-msgid "enable enhanced link attribution"
-msgstr ""
+msgid "enable AdSense account linking"
+msgstr "AdSense fiók összekapcsolás engedélyezése"
 
 #: .././admin/settings.php:552
-msgid "enable AdSense account linking"
-msgstr ""
-
-#: .././admin/settings.php:563
 msgid "enable cross domain tracking"
-msgstr ""
+msgstr "cross domain követés engedélyezése"
+
+#: .././admin/settings.php:556
+msgid "Cross Domains:"
+msgstr "Cross domainek:"
 
 #: .././admin/settings.php:567
-msgid "Cross Domains:"
-msgstr ""
-
-#: .././admin/settings.php:578
 msgid "Exclude tracking for:"
-msgstr ""
+msgstr "Követés kizárása a következőkre:"
 
-#: .././admin/settings.php:663
+#: .././admin/settings.php:648
 msgid "Google Analytics Errors & Debugging"
-msgstr ""
+msgstr "Google Analytics hibák és hibakeresés"
 
-#: .././admin/settings.php:673
+#: .././admin/settings.php:658
 msgid "Errors & Details"
-msgstr ""
+msgstr "Hibák és részletek"
 
-#: .././admin/settings.php:674
+#: .././admin/settings.php:659
 msgid "Plugin Settings"
-msgstr ""
+msgstr "Bővítmény beállítások"
 
-#: .././admin/settings.php:682
-#, php-format
-msgid "For errors and/or other issues check %s and related resources."
-msgstr ""
-
-#: .././admin/settings.php:687
+#: .././admin/settings.php:667
 msgid "Last Error detected"
-msgstr ""
+msgstr "Utolsó észlelt hiba"
 
-#: .././admin/settings.php:693 .././admin/settings.php:706
+#: .././admin/settings.php:673 .././admin/settings.php:686
 msgid "None"
-msgstr ""
+msgstr "Semmi"
+
+#: .././admin/settings.php:680
+msgid "Error Details"
+msgstr "Hiba részletek"
 
 #: .././admin/settings.php:700
-msgid "Error Details"
-msgstr ""
-
-#: .././admin/settings.php:720
 msgid "Plugin Configuration"
-msgstr ""
+msgstr "Bővítmény beállítások"
 
-#: .././admin/settings.php:742 .././admin/settings.php:1000
+#: .././admin/settings.php:722 .././admin/settings.php:980
 msgid ""
 "Loading the required libraries. If this results in a blank screen or a fatal "
 "error, try this solution:"
 msgstr ""
+"A szükséges könyvtárak betöltése. Ha az eredmény egy üres képernyő vagy "
+"végzetes hiba, próbálja ki ezt a megoldást:"
 
-#: .././admin/settings.php:742
+#: .././admin/settings.php:722
 msgid "Library conflicts between WordPress plugins"
-msgstr ""
+msgstr "WordPress bővítmények közötti ütközés"
 
-#: .././admin/settings.php:757 .././admin/settings.php:1017
+#: .././admin/settings.php:737 .././admin/settings.php:997
 msgid "Plugin authorization succeeded."
 msgstr "Bővítmény engedélyezése sikeres."
 
-#: .././admin/settings.php:772 .././admin/settings.php:1041
+#: .././admin/settings.php:752 .././admin/settings.php:1021
 msgid ""
 "The access code is <strong>NOT</strong> your <strong>Tracking ID</strong> "
 "(UA-XXXXX-X). Try again, and use the red link to get your access code"
 msgstr ""
+"A hozzáférési kód<strong>NEM</strong> az ön <strong>Követési azonosítója</"
+"strong> (UA-XXXXX-X). Próbálja újból, és használja a piros linket, hogy a "
+"hozzáférési kódot megkapja"
 
-#: .././admin/settings.php:795 .././admin/settings.php:1073
+#: .././admin/settings.php:775 .././admin/settings.php:1053
 msgid "Cleared Cache."
-msgstr "Cache kiűrítve."
+msgstr "Cache kiürítve."
 
-#: .././admin/settings.php:804 .././admin/settings.php:1082
+#: .././admin/settings.php:784 .././admin/settings.php:1062
 msgid "Token Reseted and Revoked."
 msgstr "Token visszaállítva és visszavonva."
 
-#: .././admin/settings.php:814
+#: .././admin/settings.php:794
 msgid "All errors reseted."
-msgstr ""
+msgstr "Összes hiba törölve."
 
-#: .././admin/settings.php:827 .././admin/settings.php:1096
+#: .././admin/settings.php:807 .././admin/settings.php:1076
 msgid "All other domains/properties were removed."
 msgstr "Összes többi domain/tulajdon eltávolításra került."
 
-#: .././admin/settings.php:839 .././admin/settings.php:1108
+#: .././admin/settings.php:819 .././admin/settings.php:1088
 msgid "Google Analytics Settings"
 msgstr "Google Analytics beállítások"
 
-#: .././admin/settings.php:853 .././admin/settings.php:1121
+#: .././admin/settings.php:833 .././admin/settings.php:1101
 msgid "Use the red link (see below) to generate and get your access code!"
 msgstr ""
+"Használja a piros linket (lásd alul), hogy a hozzáférési kódot legenerálja "
+"és megkapja!"
 
-#: .././admin/settings.php:864 .././admin/settings.php:1149
+#: .././admin/settings.php:844 .././admin/settings.php:1129
 msgid "Plugin Authorization"
-msgstr "Bővítmény engedélyezés"
+msgstr "Bővítmény engedélyezése"
 
-#: .././admin/settings.php:869 .././admin/settings.php:1153
+#: .././admin/settings.php:849 .././admin/settings.php:1133
 #, php-format
 msgid ""
 "You should watch the %1$s and read this %2$s before proceeding to "
 "authorization. This plugin requires a properly configured Google Analytics "
 "account!"
 msgstr ""
+"Nézze meg a %1$s és olvassa el az %2$s mielőtt engedélyezné a bővítményt. "
+"Ezt a bővítményt csak helyesen beállított Google Analytics fiókkal lehet "
+"használni!"
 
-#: .././admin/settings.php:869 .././admin/settings.php:1153
+#: .././admin/settings.php:849 .././admin/settings.php:1133
 msgid "video"
 msgstr "videót"
 
-#: .././admin/settings.php:869 .././admin/settings.php:1153
+#: .././admin/settings.php:849 .././admin/settings.php:1133
 msgid "tutorial"
-msgstr "oktatói anyagot"
+msgstr "útmutatót"
 
-#: .././admin/settings.php:874 .././admin/settings.php:1160
+#: .././admin/settings.php:854 .././admin/settings.php:1140
 msgid "use your own API Project credentials"
-msgstr ""
+msgstr "saját API Project adatainak használata"
 
-#: .././admin/settings.php:878 .././admin/settings.php:1167
+#: .././admin/settings.php:858 .././admin/settings.php:1147
 msgid "API Key:"
 msgstr "API key:"
 
-#: .././admin/settings.php:882 .././admin/settings.php:1171
+#: .././admin/settings.php:862 .././admin/settings.php:1151
 msgid "Client ID:"
 msgstr "Client ID:"
 
-#: .././admin/settings.php:886 .././admin/settings.php:1175
+#: .././admin/settings.php:866 .././admin/settings.php:1155
 msgid "Client Secret:"
 msgstr "Client Secret:"
 
-#: .././admin/settings.php:896 .././admin/settings.php:1185
+#: .././admin/settings.php:876 .././admin/settings.php:1165
 msgid "Clear Authorization"
 msgstr "Engedélyezés törlése"
 
-#: .././admin/settings.php:896 .././admin/settings.php:971
-#: .././admin/settings.php:1185 .././admin/settings.php:1260
+#: .././admin/settings.php:876 .././admin/settings.php:951
+#: .././admin/settings.php:1165 .././admin/settings.php:1240
 msgid "Clear Cache"
 msgstr "Cache ürítése"
 
-#: .././admin/settings.php:896
+#: .././admin/settings.php:876
 msgid "Reset Errors"
-msgstr ""
+msgstr "Hibák törlése"
 
-#: .././admin/settings.php:902 .././admin/setup.php:80
+#: .././admin/settings.php:882 .././admin/setup.php:80
 #: .././admin/setup.php:115
 msgid "General Settings"
 msgstr "Általános beállítások"
 
-#: .././admin/settings.php:905
+#: .././admin/settings.php:885
 msgid "Select View:"
-msgstr ""
+msgstr "Nézet kiválasztása:"
 
-#: .././admin/settings.php:916 .././admin/settings.php:1213
+#: .././admin/settings.php:896 .././admin/settings.php:1193
 msgid "Property not found"
-msgstr ""
+msgstr "Tulajdon nem található"
 
-#: .././admin/settings.php:921
+#: .././admin/settings.php:901
 msgid "Lock Selection"
-msgstr ""
+msgstr "Kiválasztás zárolása"
 
-#: .././admin/settings.php:939
+#: .././admin/settings.php:919
 msgid "Theme Color:"
-msgstr ""
+msgstr "Téma színe:"
 
-#: .././admin/settings.php:947 .././admin/settings.php:1222
+#: .././admin/settings.php:927 .././admin/settings.php:1202
 msgid "Automatic Updates"
-msgstr ""
+msgstr "Automatikus frissítések"
 
-#: .././admin/settings.php:957 .././admin/settings.php:1232
+#: .././admin/settings.php:937 .././admin/settings.php:1212
 msgid ""
 "automatic updates for minor versions (security and maintenance releases only)"
 msgstr ""
+"alverziók automatikus frissítései (csak biztonsági és karbantartási kiadások)"
 
-#: .././admin/settings.php:971 .././admin/settings.php:1260
+#: .././admin/settings.php:951 .././admin/settings.php:1240
 #: .././admin/widgets.php:42
 msgid "Authorize Plugin"
 msgstr "Bővítmény engedélyezése"
 
-#: .././admin/settings.php:1047
+#: .././admin/settings.php:1027
 msgid "Properties refreshed."
-msgstr ""
+msgstr "Tulajdon frissítve."
 
-#: .././admin/settings.php:1131
+#: .././admin/settings.php:1111
 msgid "Network Setup"
-msgstr ""
+msgstr "Hálózat beállítása"
 
-#: .././admin/settings.php:1141
+#: .././admin/settings.php:1121
 msgid "use a single Google Analytics account for the entire network"
-msgstr ""
+msgstr "egy Google Analytics fiókot használjon a teljes hálózaton"
 
-#: .././admin/settings.php:1185
+#: .././admin/settings.php:1165
 msgid "Refresh Properties"
-msgstr ""
+msgstr "Tulajdon frissítése"
 
-#: .././admin/settings.php:1191
-#, fuzzy
+#: .././admin/settings.php:1171
 msgid "Properties/Views Settings"
-msgstr "Weblap beállítások"
+msgstr "Tulajdon/Nézet beállítások"
 
-#: .././admin/settings.php:1246
+#: .././admin/settings.php:1226
 msgid "exclude Super Admin tracking for the entire network"
-msgstr ""
+msgstr "Super Admin követésének kizárása a teljes hálózaton"
 
-#: .././admin/settings.php:1291
+#: .././admin/settings.php:1271
 msgid "Setup Tutorial & Demo"
-msgstr "Beállítás oktató anyag és demo"
+msgstr "Telepítési útmutató és demo"
 
-#: .././admin/settings.php:1299
+#: .././admin/settings.php:1279
 msgid "Support & Reviews"
 msgstr "Támogatás és vélemények"
 
-#: .././admin/settings.php:1306
+#: .././admin/settings.php:1286
 #, php-format
 msgid "Plugin documentation and support on %s"
-msgstr ""
+msgstr "Bővítmény dokumentáció és támogatás: %s"
 
-#: .././admin/settings.php:1313
+#: .././admin/settings.php:1293
 #, php-format
 msgid "Your feedback and review are both important, %s!"
-msgstr ""
+msgstr "A visszajelzése és értékelése is fontos számunkra, %s!"
 
-#: .././admin/settings.php:1313
+#: .././admin/settings.php:1293
 msgid "rate this plugin"
 msgstr "értékelje ezt a bővítményt"
 
-#: .././admin/settings.php:1319
+#: .././admin/settings.php:1299
 msgid "Further Reading"
-msgstr "További olvasmány"
+msgstr "További olvasnivaló"
 
-#: .././admin/settings.php:1326
+#: .././admin/settings.php:1306
 #, php-format
 msgid "%s by moving your website to HTTPS/SSL."
-msgstr ""
+msgstr "%s HTTPS/SSL segítségével."
 
-#: .././admin/settings.php:1326
+#: .././admin/settings.php:1306
 msgid "Improve search rankings"
-msgstr ""
+msgstr "Keresési rangsor javítása"
 
-#: .././admin/settings.php:1333
+#: .././admin/settings.php:1313
 #, php-format
 msgid "Other %s written by the same author"
-msgstr ""
+msgstr "További %s ugyanettől a szerzőtől"
 
-#: .././admin/settings.php:1333
+#: .././admin/settings.php:1313
 msgid "WordPress Plugins"
 msgstr "WordPress bővítmények"
 
-#: .././admin/settings.php:1339
+#: .././admin/settings.php:1319
 msgid "Other Services"
-msgstr ""
+msgstr "Egyéb szolgáltatások"
 
-#: .././admin/settings.php:1346
+#: .././admin/settings.php:1326
 #, php-format
 msgid "Speed up your website and plug into a whole %s"
-msgstr ""
+msgstr "Gyorsítsa fel honlapját és emelje egy teljesen %s"
 
-#: .././admin/settings.php:1346
+#: .././admin/settings.php:1326
 msgid "new level of site speed"
-msgstr ""
+msgstr "új szintre a webhely sebességét"
 
-#: .././admin/settings.php:1353
+#: .././admin/settings.php:1333
 #, php-format
 msgid "%s service with users tracking at IP level."
-msgstr ""
+msgstr "%s szolgáltatás felhasználói nyomkövetéssel IP szinten."
 
-#: .././admin/settings.php:1353
+#: .././admin/settings.php:1333
 msgid "Web Analytics"
-msgstr "Web Analitika"
+msgstr "Web Statisztika"
 
 #: .././admin/setup.php:76 .././admin/setup.php:111
 msgid "Google Analytics"
@@ -589,13 +575,13 @@ msgstr "Elmúlt 90 nap"
 
 #: .././admin/setup.php:202 .././admin/setup.php:218
 msgid "Unique Views"
-msgstr ""
+msgstr "Egyedi megtekintések"
 
 #: .././admin/setup.php:203 .././admin/setup.php:219
 #: .././admin/widgets.php:136 .././admin/widgets.php:875
 #: .././tools/gapi.php:391
 msgid "Users"
-msgstr ""
+msgstr "Felhasználók"
 
 #: .././admin/setup.php:204 .././admin/widgets.php:137
 msgid "Organic"
@@ -605,7 +591,7 @@ msgstr "Organikus"
 #: .././admin/widgets.php:138 .././admin/widgets.php:879
 #: .././tools/gapi.php:394
 msgid "Page Views"
-msgstr "Oldalmegtekintések"
+msgstr "Oldal megtekintések"
 
 #: .././admin/setup.php:206 .././admin/setup.php:221
 #: .././admin/widgets.php:139 .././admin/widgets.php:883
@@ -615,64 +601,64 @@ msgstr "Visszafordulási arány"
 
 #: .././admin/setup.php:207 .././admin/widgets.php:140
 msgid "Location"
-msgstr ""
+msgstr "Hely"
 
 #: .././admin/setup.php:208 .././admin/widgets.php:142 .././tools/gapi.php:566
 msgid "Referrers"
-msgstr ""
+msgstr "Hivatkozók"
 
 #: .././admin/setup.php:209 .././admin/widgets.php:143 .././tools/gapi.php:612
-#: .././tools/gapi.php:922
+#: .././tools/gapi.php:918
 msgid "Searches"
-msgstr ""
+msgstr "Keresések"
 
 #: .././admin/setup.php:210 .././admin/widgets.php:144
 msgid "Traffic Details"
-msgstr ""
+msgstr "Forgalmi adatok"
 
 #: .././admin/setup.php:213 .././admin/widgets.php:510
 #: .././admin/widgets.php:607 .././admin/widgets.php:805
-#: .././admin/widgets.php:917 .././front/item-reports.php:94
+#: .././admin/widgets.php:917 .././front/item-reports.php:97
 msgid "A JavaScript Error is blocking plugin resources!"
-msgstr ""
+msgstr "Egy JavaScript hiba blokkolja a bővítmény forrásait!"
 
 #: .././admin/setup.php:214 .././admin/widgets.php:713
 msgid "Traffic Mediums"
-msgstr ""
+msgstr "Forgalmi közeg"
 
 #: .././admin/setup.php:215 .././admin/widgets.php:729
 msgid "Visitor Type"
-msgstr ""
+msgstr "Látogató típus"
 
 #: .././admin/setup.php:216 .././admin/widgets.php:745
 msgid "Social Networks"
-msgstr ""
+msgstr "Közösségi hálózatok"
 
 #: .././admin/setup.php:217 .././admin/widgets.php:761
 msgid "Search Engines"
-msgstr ""
+msgstr "Keresőmotorok"
 
 #: .././admin/setup.php:222 .././admin/widgets.php:887
 msgid "Organic Search"
-msgstr ""
+msgstr "Organikus keresés"
 
 #: .././admin/setup.php:223 .././admin/widgets.php:891
 msgid "Pages/Session"
-msgstr ""
+msgstr "Oldal / munkamenet"
 
 #: .././admin/setup.php:224 .././admin/widgets.php:523
 #: .././admin/widgets.php:541 .././admin/widgets.php:620
 #: .././admin/widgets.php:638 .././admin/widgets.php:657
 #: .././admin/widgets.php:676 .././admin/widgets.php:696
 #: .././admin/widgets.php:819 .././admin/widgets.php:930
-#: .././admin/widgets.php:949 .././front/item-reports.php:106
-#: .././front/item-reports.php:125
+#: .././admin/widgets.php:949 .././front/item-reports.php:109
+#: .././front/item-reports.php:128
 msgid "Invalid response, more details in JavaScript Console (F12)."
-msgstr ""
+msgstr "Érvénytelen válasz, további részletek a JavaScript Konzolban (F12)."
 
 #: .././admin/setup.php:225
 msgid "Not enough data collected"
-msgstr ""
+msgstr "Nincs elegendő összegyűjtött adat"
 
 #: .././admin/setup.php:226 .././admin/widgets.php:528
 #: .././admin/widgets.php:546 .././admin/widgets.php:625
@@ -680,14 +666,14 @@ msgstr ""
 #: .././admin/widgets.php:681 .././admin/widgets.php:701
 #: .././admin/widgets.php:824 .././admin/widgets.php:827
 #: .././admin/widgets.php:935 .././admin/widgets.php:954
-#: .././front/item-reports.php:111 .././front/item-reports.php:130
+#: .././front/item-reports.php:114 .././front/item-reports.php:133
 #: .././front/widgets.php:110
 msgid "This report is unavailable"
-msgstr ""
+msgstr "Ez a jelentés nem elérhető"
 
 #: .././admin/setup.php:227
 msgid "report generated by"
-msgstr ""
+msgstr "jelentést generálta"
 
 #: .././admin/setup.php:267
 msgid "Settings"
@@ -712,7 +698,8 @@ msgstr "További részletek"
 #: .././admin/widgets.php:89 .././admin/widgets.php:100
 msgid "An admin should asign a default Google Analytics Profile."
 msgstr ""
-"Az alapértelmezett  Google Analytics profilt egy admin képes kijelölni."
+"Az alapértelmezett Google Analytics profilt egy adminisztrátornak kell "
+"kijelölnie."
 
 #: .././admin/widgets.php:89 .././admin/widgets.php:100
 msgid "Select Domain"
@@ -723,8 +710,8 @@ msgid ""
 "Something went wrong while retrieving property data. You need to create and "
 "properly configure a Google Analytics account:"
 msgstr ""
-"Valami rosszul ment a tulajdon adat lekérése közben. Egy jól konfigurált "
-"Google Analytics fiókra van szüksége:"
+"Valami rosszul ment a tulajdon lekérése közben. Egy jól konfigurált Google "
+"Analytics fiókra van szüksége:"
 
 #: .././admin/widgets.php:105
 msgid "Find out more!"
@@ -742,13 +729,13 @@ msgstr "Elmúlt 14 nap"
 #: .././admin/widgets.php:135 .././admin/widgets.php:871
 #: .././front/widgets.php:46 .././tools/gapi.php:406 .././tools/gapi.php:567
 #: .././tools/gapi.php:613 .././tools/gapi.php:676 .././tools/gapi.php:786
-#: .././tools/gapi.php:827 .././tools/gapi.php:923
+#: .././tools/gapi.php:827 .././tools/gapi.php:919
 msgid "Sessions"
-msgstr ""
+msgstr "Munkamenetek"
 
 #: .././admin/widgets.php:141 .././tools/gapi.php:521
 msgid "Pages"
-msgstr ""
+msgstr "Oldalak"
 
 #: .././admin/widgets.php:232 .././admin/widgets.php:472
 msgid "REFERRAL"
@@ -766,7 +753,7 @@ msgstr "KÖZÖSSÉGI"
 #: .././admin/widgets.php:244 .././admin/widgets.php:363
 #: .././admin/widgets.php:475
 msgid "CAMPAIGN"
-msgstr ""
+msgstr "KAMPÁNY"
 
 #: .././admin/widgets.php:248 .././admin/widgets.php:366
 #: .././admin/widgets.php:478
@@ -785,13 +772,13 @@ msgstr "HIVATKOZÓK"
 msgid "KEYWORDS"
 msgstr "KULCSSZAVAK"
 
-#: .././front/item-reports.php:140
+#: .././front/item-reports.php:143
 msgid "Views vs UniqueViews"
-msgstr "Látogatások vs egyedi látogatások"
+msgstr "Megtekintések vs egyedi megtekintések"
 
-#: .././front/item-reports.php:190
+#: .././front/item-reports.php:193
 msgid "Google Analytics Reports"
-msgstr ""
+msgstr "Google Analytics jelentések"
 
 #: .././front/widgets.php:23
 msgid "Will display your google analytics stats in a widget"
@@ -799,7 +786,7 @@ msgstr "Megjelenik a Google Analytics statisztika egy widgetben"
 
 #: .././front/widgets.php:46 .././tools/gapi.php:827
 msgid "trend"
-msgstr ""
+msgstr "trend"
 
 #: .././front/widgets.php:133
 msgid "Period:"
@@ -807,7 +794,7 @@ msgstr "Időszak:"
 
 #: .././front/widgets.php:133
 msgid "Sessions:"
-msgstr ""
+msgstr "Munkamenetek:"
 
 #: .././front/widgets.php:137
 msgid "generated by"
@@ -835,11 +822,11 @@ msgstr "Diagram"
 
 #: .././front/widgets.php:167
 msgid "Totals"
-msgstr "Összes"
+msgstr "Összegzés"
 
 #: .././front/widgets.php:171
 msgid "Anonymize stats:"
-msgstr ""
+msgstr "Névtelen statisztika:"
 
 #: .././front/widgets.php:178
 msgid "Stats for:"
@@ -851,7 +838,7 @@ msgstr "Köszönet:"
 
 #: .././gadwp.php:46 .././gadwp.php:55 .././gadwp.php:63
 msgid "This is not allowed, read the documentation!"
-msgstr ""
+msgstr "Ez nem engedélyezett, olvassa el a dokumentációt!"
 
 #: .././tools/gapi.php:134
 msgid "Use this link to get your access code:"
@@ -863,7 +850,7 @@ msgstr "Hozzáférési kód beszerzése"
 
 #: .././tools/gapi.php:138 .././tools/gapi.php:139
 msgid "Use the red link to get your access code!"
-msgstr ""
+msgstr "Használja a piros linket, hogy a hozzáférési kódot megkapja!"
 
 #: .././tools/gapi.php:138
 msgid "Access Code:"
@@ -879,106 +866,60 @@ msgstr "Organikus keresés"
 
 #: .././tools/gapi.php:403
 msgid "Unique Page Views"
-msgstr ""
+msgstr "Egyedi oldalmegtekintések"
 
 #: .././tools/gapi.php:411
 msgid "Hour"
 msgstr "Óra"
 
-#: .././tools/gapi.php:414 .././tools/gapi.php:826 .././tools/gapi.php:878
+#: .././tools/gapi.php:414 .././tools/gapi.php:826 .././tools/gapi.php:876
 msgid "Date"
 msgstr "Dátum"
 
-#: .././tools/gapi.php:522 .././tools/gapi.php:879
+#: .././tools/gapi.php:522 .././tools/gapi.php:877
 msgid "Views"
-msgstr "Látogatások"
+msgstr "Megtekintések"
 
 #: .././tools/gapi.php:640
 msgid "Countries"
-msgstr ""
+msgstr "Országok"
 
 #: .././tools/gapi.php:650
 msgid "Cities from"
-msgstr ""
+msgstr "Városok"
 
 #: .././tools/gapi.php:722
 msgid "Channels"
-msgstr ""
+msgstr "Csatornák"
 
 #: .././tools/gapi.php:785
 msgid "Type"
 msgstr "Típus"
 
-#: .././tools/gapi.php:880
+#: .././tools/gapi.php:878
 msgid "UniqueViews"
-msgstr "Egyedi látogatások"
+msgstr "Egyedi megtekintések"
 
-#~ msgid "and/or hide all other domains"
-#~ msgstr "és/vagy az összes többi domain eltüntetése"
-
-#~ msgid "Hide Now"
-#~ msgstr "Elrejtés most"
-
-#~ msgid "about this feature"
-#~ msgstr "erről a szolgáltatásról"
-
-#~ msgid " show page searches (after each article)"
-#~ msgstr "oldal keresések mutatása (minden cikk után)"
-
-#~ msgid " anonymize IPs while tracking"
-#~ msgstr "nyomon követés közben IP anonimizálása"
-
-#~ msgid " enable remarketing, demographics and interests reports"
-#~ msgstr "lehetővé remarketing, demográfia és érdeklődés jelentések"
-
-#~ msgid " track downloads, mailto and outbound links"
-#~ msgstr "letöltések, mailto és kimenő linkek követése"
-
-#~ msgid " enable enhanced link attribution"
-#~ msgstr "kibővített link tulajdonság engedélyezése"
-
-#~ msgid " use your own API Project credentials"
-#~ msgstr "használja a saját API Project hitelesítő adatait"
-
-#~ msgid "disable Switch Profile/View functionality"
-#~ msgstr "Profil/Nézet Kapcsoló letiltása"
-
-#~ msgid "You should watch the"
-#~ msgstr "Kérjük, nézze meg ezt a"
-
-#~ msgid "and read this"
-#~ msgstr "és olvassa el ezt az"
-
-#~ msgid ""
-#~ "before proceeding to authorization. This plugin requires a properly "
-#~ "configured Google Analytics account"
+#~ msgid "Read %s for more information about Frontend Features and Options."
 #~ msgstr ""
-#~ "mielőtt engedélyezné. Ezt a bővítményt csak helyesen beállított Google "
-#~ "Analytics fiókkal lehet használni"
+#~ "Olvassa el %s további információkért a weblap funkciókról és "
+#~ "beállításokról."
 
-#~ msgid "Your feedback and review are both important,"
-#~ msgstr "Az Ön visszajelzése és értékelése egyaránt fontos számunkra,"
+#~ msgid "this documentation page"
+#~ msgstr "ezt a dokumentációs oldalt"
 
-#~ msgid "Other"
-#~ msgstr "Egyéb"
+#~ msgid "Read %s for more information about Backend Features and Options."
+#~ msgstr ""
+#~ "Olvassa el %s további információkért az admin funkciókról és "
+#~ "beállításokról."
 
-#~ msgid "written by the same author"
-#~ msgstr "ettől a szerzőtől"
+#~ msgid "For more information about Tracking Options read %s."
+#~ msgstr "További információkért a követési beállításokról olvassa el %s."
 
-#~ msgid "Google Analytics Dashboard Settings"
-#~ msgstr "Google Analytics vezérlőpult beállítások"
-
-#~ msgid "A new frontend widget is available! To enable it, go to"
-#~ msgstr "Elérhető egy új frontend widget! Engedélyezéshez, menjen a"
-
-#~ msgid "Appearance -> Widgets"
-#~ msgstr "Megjelenés -> Widgetek"
-
-#~ msgid "and look for Google Analytics Dashboard."
-#~ msgstr "menühöz és keresse a Google Analytics vezérlőpultot."
-
-#~ msgid "Something went wrong, you need to"
-#~ msgstr "Valami rosszul ment, szükséges a "
+#~ msgid "For errors and/or other issues check %s and related resources."
+#~ msgstr ""
+#~ "Hibákért és/vagy egyéb kérdésekért tekintse meg %s és a kapcsolódó "
+#~ "forrásokat."
 
 #~ msgid "or properly configure your"
 #~ msgstr "vagy helyesen beállítani a"
@@ -986,8 +927,14 @@ msgstr "Egyedi látogatások"
 #~ msgid "Google Analytics account"
 #~ msgstr "Google Analytics fiókját"
 
+#~ msgid "Google Analytics Dashboard Settings"
+#~ msgstr "Google Analytics vezérlőpult beállítások"
+
 #~ msgid "(find out more"
 #~ msgstr "(tudjon meg többet"
+
+#~ msgid "about this feature"
+#~ msgstr "erről a szolgáltatásról"
 
 #~ msgid ")"
 #~ msgstr ")"
@@ -995,14 +942,15 @@ msgstr "Egyedi látogatások"
 #~ msgid "Additional Stats & Charts"
 #~ msgstr "További statisztikák és grafikonok"
 
-#~ msgid "Target Geo Map to region:"
-#~ msgstr "Cél földrajzi térkép a régióban:"
+#, fuzzy
+#~ msgid " show Geo Map chart for sessions"
+#~ msgstr "földrajzi adatok mutatása a látogatásokhoz"
 
 #~ msgid "and render top"
 #~ msgstr "és mutassa a top"
 
 #~ msgid "cities (find out more"
-#~ msgstr "várost (tudjon meg többet"
+#~ msgstr "városok (tudjon meg többet"
 
 #~ msgid " show traffic overview"
 #~ msgstr "forgalom áttekintés bekapcsolása"
@@ -1019,6 +967,12 @@ msgstr "Egyedi látogatások"
 #~ msgid "Dumping log data."
 #~ msgstr "Napló adat ürítése."
 
+#, fuzzy
+#~ msgid ""
+#~ "PHP CURL is required. Ask your hosting provider to install/enable PHP "
+#~ "CURL!"
+#~ msgstr "CURL szükséges. Kérjük, telepítse/engedélyezze a CURL-t!"
+
 #~ msgid ""
 #~ "Something went wrong. Please check the Debugging Data section for "
 #~ "possible errors"
@@ -1026,23 +980,46 @@ msgstr "Egyedi látogatások"
 #~ "Valami rosszul ment. Kérjük, ellenőrizze a hibakeresés adatok részben az "
 #~ "esetleges hibákat"
 
+#~ msgid "You should watch the"
+#~ msgstr "Kérjük, nézze meg ezt a"
+
+#~ msgid "and read this"
+#~ msgstr "és olvassa el ezt az"
+
+#~ msgid "and/or hide all other domains"
+#~ msgstr "és/vagy az összes többi domain eltüntetése"
+
+#~ msgid "Hide Now"
+#~ msgstr "Elrejtés most"
+
+#~ msgid "A new frontend widget is available! To enable it, go to"
+#~ msgstr "Elérhető egy új frontend widget! Engedélyezéshez, menjen a"
+
+#~ msgid "Appearance -> Widgets"
+#~ msgstr "Megjelenés -> Widgetek"
+
+#~ msgid "and look for Google Analytics Dashboard."
+#~ msgstr "menühöz és keresse a Google Analytics vezérlőpultot."
+
 #~ msgid "Debugging Data"
 #~ msgstr "Hibakeresés adatok"
 
-#~ msgid "Anonimize chart&#39;s stats:"
-#~ msgstr "Grafikon statisztika anonimizálás:"
+#~ msgid "Other"
+#~ msgstr "Egyéb"
 
 #~ msgid "Top Searches"
 #~ msgstr "Legfőbb keresések"
 
-#~ msgid "Error Log"
-#~ msgstr "Hiba napló"
+#~ msgid ""
+#~ " (watch this <a href='http://deconf.com/projects/google-analytics-"
+#~ "dashboard-for-wordpress/' target='_blank'>Step by step video tutorial</a>)"
+#~ msgstr ""
+#~ " (tekintse meg a <a href='http://deconf.com/projects/google-analytics-"
+#~ "dashboard-for-wordpress/' target='_blank'>Lépésről lépésre videó "
+#~ "bemutató</a>t)"
 
 #~ msgid "Visits"
 #~ msgstr "Látogatások"
-
-#~ msgid "Visitors"
-#~ msgstr "Látogatók"
 
 #~ msgid ""
 #~ "No stats available. Please check the Debugging Data section for possible "
@@ -1051,23 +1028,11 @@ msgstr "Egyedi látogatások"
 #~ "Nincs elérhető statisztika. Kérjük, ellenőrizze a hibakeresés adatok "
 #~ "részben az esetleges hibákat"
 
-#~ msgid "Country/City"
-#~ msgstr "Ország/város"
-
 #~ msgid "Source"
 #~ msgstr "Forrás"
 
-#~ msgid "Traffic Sources"
-#~ msgstr "Forgalmi források"
-
 #~ msgid "New vs. Returning"
 #~ msgstr "Új vagy visszatérő"
-
-#~ msgid "Top Pages"
-#~ msgstr "Legnépszerűbb oldalak"
-
-#~ msgid "Top Referrers"
-#~ msgstr "Leggyakoribb hivatkozók"
 
 #~ msgid "Visits:"
 #~ msgstr "Látogatások:"
@@ -1081,12 +1046,6 @@ msgstr "Egyedi látogatások"
 #~ msgid "Bounce Rate:"
 #~ msgstr "Visszafordulási arány:"
 
-#~ msgid "Organic Search:"
-#~ msgstr "Organikus keresés:"
-
-#~ msgid "Pages per Visit:"
-#~ msgstr "Oldal / látogató"
-
 #~ msgid ""
 #~ "This is a beta feature and is only available when using my Developer Key! "
 #~ "("
@@ -1097,11 +1056,8 @@ msgstr "Egyedi látogatások"
 #~ msgid "more about this feature"
 #~ msgstr "többet erről a szolgáltatásról"
 
-#~ msgid "RETURN"
+#~ msgid "RETURNING"
 #~ msgstr "VISSZATÉRŐ"
-
-#~ msgid "Visits from "
-#~ msgstr "Látogatások innen "
 
 #~ msgid "Visits by Country"
 #~ msgstr "Látogatások országonként"
@@ -1109,58 +1065,8 @@ msgstr "Egyedi látogatások"
 #~ msgid "Traffic Overview"
 #~ msgstr "Forgalom áttekintés"
 
-#~ msgid " show page visits and visitors in frontend (after each article)"
-#~ msgstr ""
-#~ "oldal látogatások és látogatók mutatása a weblapon (minden cikk után)"
-
-#~ msgid " show Geo Map chart for visits"
-#~ msgstr "földrajzi adatok mutatása a látogatásokhoz"
-
-#~ msgid "You can find support on"
-#~ msgstr "A segítséget megtalálhatja itt:"
-
-#~ msgid "service with visitors tracking at IP level."
-#~ msgstr "szolgáltatás látogatók nyomon követésével IP szinten"
-
-#~ msgid "Total Visits:"
-#~ msgstr "Összes látogatás:"
-
-#~ msgid "PHP CURL is required. Please install/enable PHP CURL!"
-#~ msgstr "CURL szükséges. Kérjük, telepítse/engedélyezze a CURL-t!"
-
-#~ msgid "Options saved."
-#~ msgstr "Beállítások mentve."
-
-#~ msgid "Show stats to: "
-#~ msgstr "Statisztikák megjelenítése:"
-
 #~ msgid "Update Options"
 #~ msgstr "Beállítások frissítése"
-
-#~ msgid "Tracking Options: "
-#~ msgstr "Követés beállítások:"
-
-#~ msgid "Tracking Type: "
-#~ msgstr "Követési típus:"
-
-#, fuzzy
-#~ msgid "User Type: "
-#~ msgstr "Követési típus:"
-
-#~ msgid "Exclude tracking for: "
-#~ msgstr "Követés kizárása a következőkre:"
-
-#~ msgid "Select Domain: "
-#~ msgstr "Domain kiválasztása:"
-
-#~ msgid "Theme Color: "
-#~ msgstr "Téma színe:"
-
-#~ msgid "&#39; trend"
-#~ msgstr "&#39; trend"
-
-#~ msgid "DeConf Help Center"
-#~ msgstr "DeConf Help Center"
 
 #~ msgid "Custom Code"
 #~ msgstr "Egyéni kód"
@@ -1168,10 +1074,8 @@ msgstr "Egyedi látogatások"
 #~ msgid "Your Tracking Code:"
 #~ msgstr "Követési kód:"
 
-#~ msgid ""
-#~ " (watch this <a href='http://deconf.com/projects/google-analytics-"
-#~ "dashboard-for-wordpress/' target='_blank'>Step by step video tutorial</a>)"
-#~ msgstr ""
-#~ " (tekintse meg a <a href='http://deconf.com/projects/google-analytics-"
-#~ "dashboard-for-wordpress/' target='_blank'>Lépésről lépésre videó "
-#~ "bemutató</a>t)"
+#~ msgid "DeConf Help Center"
+#~ msgstr "DeConf Help Center"
+
+#~ msgid "Total Visits:"
+#~ msgstr "Összes látogatás:"

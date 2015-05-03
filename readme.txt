@@ -3,7 +3,7 @@ Contributors: deconf
 Donate link: https://deconf.com/donate/
 Tags: google,analytics,google analytics,dashboard,analytics dashboard,google analytics dashboard,google analytics widget,tracking,realtime,wpmu,multisite
 Requires at least: 3.5
-Tested up to: 4.2.1
+Tested up to: 4.2.2
 Stable tag: 4.7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -79,7 +79,7 @@ Install the Google Analytics tracking code in less than a minute and customize i
 
 = Translations =
 
-Google Analytics Dashboard has been translated into the following languages: Arabic, Dutch, English, French, German, Hungarian, Italian, Japanese, Polish, Portuguese, and Spanish.
+Google Analytics Dashboard has been translated and is available in more than 12 languages.
 
 = Further reading and info =
 
@@ -134,10 +134,29 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 
 == Changelog ==
 
+= 4.8 =
+- Enhancement: reduce the number of ajax requests
+- Enhancement: JavaScript code cleanup and optimization
+- Enhancement: memory usage optimization
+- Enhancement: German translation updated
+
+= 4.7.3 =
+- Enhancement: Russian translation
+- Enhancement: Romanian translation
+- Enhancement: Hungarian translation updated
+- Enhancement: UX improvements, props by [Adrian Pop](https://github.com/adipop)
+- Enhancement: settings page cleanup
+
+= 4.7.2 =
+- Enhancement: Czech translation
+- Bug Fix: apply tooltips only on GADWP widget
+- Bug Fix: use a custom data attribute instead of title to attach the tooltip
+
 = 4.7.1 =
 - Enhancement: Italian translation updated
-- Bug Fix: use url-encoding for GAPI filters to avoid generating invalid parameters
+- Bug Fix: use url-encoding for API filters to avoid generating invalid parameters
 - Bug Fix: cache reports for pages and posts with queries in URI
+- Bug Fix: avoid double encoding while doing API requests
 
 = 4.7 =
 - Enhancement: Dutch translation updated

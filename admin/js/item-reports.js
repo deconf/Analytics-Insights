@@ -285,19 +285,7 @@ jQuery.fn.extend({
         jQuery("#gdorganicsearch" + slug).text(gadwp_bottomstats[4]);
         jQuery("#gdpagespervisit" + slug).text(parseFloat(gadwp_bottomstats[5]).toFixed(2));
       },
-
-      checknpcounter : function(max) {
-        try {
-          if (this.npcounter == max) {
-            NProgress.done();
-          } else {
-            this.npcounter++;
-            NProgress.set((1 / (max + 1)) * this.npcounter);
-          }
-        } catch (e) {
-        }
-      },
-
+      
       throwDebug : function(response) {
         jQuery("#gadwp-status" + slug).css({
           "margin-top" : "3px",
@@ -310,7 +298,7 @@ jQuery.fn.extend({
         console.log("\n********************* GADWP Log ********************* \n\n" + response);
       },
 
-      throwError : function(target, response, n, p) {
+      throwError : function(target, response, p) {
         jQuery(target).css({
           "background-color" : "#F7F7F7",
           "height" : "auto",
@@ -324,7 +312,6 @@ jQuery.fn.extend({
         } else {
           jQuery(target).html(gadwp_item_data.i18n[13] + ' (' + response + ')');
         }
-        this.checknpcounter(n);
       },
 
       render : function(period, query) {
@@ -366,173 +353,171 @@ jQuery.fn.extend({
         }
 
         if (jQuery.inArray(query, ['referrers', 'contentpages', 'searches']) > -1) {
+        	
           jQuery('#gadwp-reports' + slug).html('<div id="gadwp-trafficchannels' + slug + '"></div>')
           jQuery('#gadwp-reports' + slug).append('<div id="gadwp-prs' + slug + '"></div>');
-          data.query = 'trafficchannels';
+          
+          data.query = 'trafficchannels,' + query;
+          
           jQuery.post(gadwp_item_data.ajaxurl, data, function(response) {
-            if (!jQuery.isNumeric(response)) {
-              if (jQuery.isArray(response)) {
-                reports.trafficchannels = response;
-                google.setOnLoadCallback(reports.drawtrafficchannels(reports.trafficchannels));
-                reports.checknpcounter(1);
-              } else {
-                reports.throwDebug(response);
-                reports.checknpcounter(1);
-              }
-            } else {
-              reports.throwError('#gadwp-trafficchannels' + slug, response, 1, "125px");
-            }
+			if (jQuery.isArray(response)) {  
+				if (!jQuery.isNumeric(response[0])) {
+				  if (jQuery.isArray(response[0])) {
+				    reports.trafficchannels = response[0];
+				    google.setOnLoadCallback(reports.drawtrafficchannels(reports.trafficchannels));
+				  } else {
+				    reports.throwDebug(response[0]);
+				  }
+				} else {
+				  reports.throwError('#gadwp-trafficchannels' + slug, response[0], "125px");
+				}
+				
+				if (!jQuery.isNumeric(response[1])) {
+				  if (jQuery.isArray(response[1])) {
+				    reports.prs = response[1];
+				    google.setOnLoadCallback(reports.drawprs(reports.prs));
+				  } else {
+				    reports.throwDebug(response[1]);
+				  }
+				} else {
+				  reports.throwError('#gadwp-prs' + slug, response[1], "125px");
+				}
+			} else {
+			    reports.throwDebug(response);
+			}
+			NProgress.done();
           });
-          data.query = query;
-          jQuery.post(gadwp_item_data.ajaxurl, data, function(response) {
-            if (!jQuery.isNumeric(response)) {
-              if (jQuery.isArray(response)) {
-                reports.prs = response;
-                google.setOnLoadCallback(reports.drawprs(reports.prs));
-                reports.checknpcounter(1);
-              } else {
-                reports.throwDebug(response);
-                reports.checknpcounter(1);
-              }
-            } else {
-              reports.throwError('#gadwp-prs' + slug, response, 1, "125px");
-            }
-          });
+          
         } else if (query == 'trafficdetails') {
+        	
           jQuery('#gadwp-reports' + slug).html('<div id="gadwp-trafficchannels' + slug + '"></div>')
           jQuery('#gadwp-reports' + slug).append('<div class="gadwp-floatwraper"><div id="gadwp-trafficmediums' + slug + '"></div><div id="gadwp-traffictype' + slug + '"></div></div>');
           jQuery('#gadwp-reports' + slug).append('<div class="gadwp-floatwraper"><div id="gadwp-trafficorganic' + slug + '"></div><div id="gadwp-socialnetworks' + slug + '"></div></div>');
-          data.query = 'trafficchannels';
+          
+          data.query = 'trafficchannels,medium,visitorType,source,socialNetwork';
+          
           jQuery.post(gadwp_item_data.ajaxurl, data, function(response) {
-            if (!jQuery.isNumeric(response)) {
-              if (jQuery.isArray(response)) {
-                reports.trafficchannels = response;
-                google.setOnLoadCallback(reports.drawtrafficchannels(reports.trafficchannels));
-                reports.checknpcounter(4);
+        	  if (jQuery.isArray(response)) {
+	            if (!jQuery.isNumeric(response[0])) {
+	              if (jQuery.isArray(response[0])) {
+	                reports.trafficchannels = response[0];
+	                google.setOnLoadCallback(reports.drawtrafficchannels(reports.trafficchannels));
+	              } else {
+	                reports.throwDebug(response[0]);
+	              }
+	            } else {
+	              reports.throwError('#gadwp-trafficchannels' + slug, response[0], "125px");
+	            }
+	
+	            if (!jQuery.isNumeric(response[1])) {
+	              if (jQuery.isArray(response[1])) {
+	                reports.trafficmediums = response[1];
+	                google.setOnLoadCallback(reports.drawtrafficmediums(reports.trafficmediums));
+	              } else {
+	                reports.throwDebug(response[1]);
+	              }
+	            } else {
+	              reports.throwError('#gadwp-trafficmediums' + slug, response[1], "80px");
+	            }
+	
+	            if (!jQuery.isNumeric(response[2])) {
+	              if (jQuery.isArray(response[2])) {
+	                reports.traffictype = response[2];
+	                google.setOnLoadCallback(reports.drawtraffictype(reports.traffictype));
+	              } else {
+	                reports.throwDebug(response[2]);
+	              }
+	            } else {
+	              reports.throwError('#gadwp-traffictype' + slug, response[2], "80px");
+	            }
+	
+	            if (!jQuery.isNumeric(response[3])) {
+	              if (jQuery.isArray(response[3])) {
+	                reports.trafficorganic = response[3];
+	                google.setOnLoadCallback(reports.drawtrafficorganic(reports.trafficorganic));
+	              } else {
+	                reports.throwDebug(response[3]);
+	              }
+	            } else {
+	              reports.throwError('#gadwp-trafficorganic' + slug, response[3], "80px");
+	            }
+	
+	            if (!jQuery.isNumeric(response[4])) {
+	              if (jQuery.isArray(response[4])) {
+	                reports.socialnetworks = response[4];
+	                google.setOnLoadCallback(reports.drawsocialnetworks(reports.socialnetworks));
+	              } else {
+	                reports.throwDebug(response[4]);
+	              }
+	            } else {
+	              reports.throwError('#gadwp-socialnetworks' + slug, response[4], "80px");
+	            }
               } else {
                 reports.throwDebug(response);
-                reports.checknpcounter(4);                
-              }
-            } else {
-              reports.throwError('#gadwp-trafficchannels' + slug, response, 4, "125px");
-            }
+	          }
+  		      NProgress.done();        	  
           });
-          data.query = 'medium';
-          jQuery.post(gadwp_item_data.ajaxurl, data, function(response) {
-            if (!jQuery.isNumeric(response)) {
-              if (jQuery.isArray(response)) {
-                reports.trafficmediums = response;
-                google.setOnLoadCallback(reports.drawtrafficmediums(reports.trafficmediums));
-                reports.checknpcounter(4);
-              } else {
-                reports.throwDebug(response);
-                reports.checknpcounter(4);
-              }
-            } else {
-              reports.throwError('#gadwp-trafficmediums' + slug, response, 4, "80px");
-            }
-          });
-          data.query = 'visitorType';
-          jQuery.post(gadwp_item_data.ajaxurl, data, function(response) {
-            if (!jQuery.isNumeric(response)) {
-              if (jQuery.isArray(response)) {
-                reports.traffictype = response;
-                google.setOnLoadCallback(reports.drawtraffictype(reports.traffictype));
-                reports.checknpcounter(4);
-              } else {
-                reports.throwDebug(response);
-                reports.checknpcounter(4);
-              }
-            } else {
-              reports.throwError('#gadwp-traffictype' + slug, response, 4, "80px");
-            }
-          });
-          data.query = 'source';
-          jQuery.post(gadwp_item_data.ajaxurl, data, function(response) {
-            if (!jQuery.isNumeric(response)) {
-              if (jQuery.isArray(response)) {
-                reports.trafficorganic = response;
-                google.setOnLoadCallback(reports.drawtrafficorganic(reports.trafficorganic));
-                reports.checknpcounter(4);
-              } else {
-                reports.throwDebug(response);
-                reports.checknpcounter(4);
-              }
-            } else {
-              reports.throwError('#gadwp-trafficorganic' + slug, response, 4, "80px");
-            }
-          });
-          data.query = 'socialNetwork';
-          jQuery.post(gadwp_item_data.ajaxurl, data, function(response) {
-            if (!jQuery.isNumeric(response)) {
-              if (jQuery.isArray(response)) {
-                reports.socialnetworks = response;
-                google.setOnLoadCallback(reports.drawsocialnetworks(reports.socialnetworks));
-                reports.checknpcounter(4);
-              } else {
-                reports.throwDebug(response);
-                reports.checknpcounter(4);
-              }
-            } else {
-              reports.throwError('#gadwp-socialnetworks' + slug, response, 4, "80px");
-            }
-          });
+          
         } else if (query == 'locations') {
+        	
           jQuery('#gadwp-reports' + slug).html('<div id="gadwp-map' + slug + '"></div>')
           jQuery('#gadwp-reports' + slug).append('<div id="gadwp-locations' + slug + '"></div>');
+          
           data.query = query;
+          
           jQuery.post(gadwp_item_data.ajaxurl, data, function(response) {
-            if (!jQuery.isNumeric(response)) {
-              if (jQuery.isArray(response)) {
-                reports.locations = response;
-                google.setOnLoadCallback(reports.drawmaplocations(reports.locations));
-                reports.checknpcounter(1);
-                google.setOnLoadCallback(reports.drawlocations(reports.locations));
-                reports.checknpcounter(1);
-              } else {
-                reports.throwDebug(response);
-                reports.checknpcounter(1);
-              }
-            } else {
-              reports.throwError('#gadwp-map' + slug, response, 1, "125px");
-              reports.throwError('#gadwp-locations' + slug, response, 1, "125px");
-            }
+        	  if (jQuery.isArray(response)) {        	  
+	            if (!jQuery.isNumeric(response[0])) {
+	              if (jQuery.isArray(response[0])) {
+	                reports.locations = response[0];
+	                google.setOnLoadCallback(reports.drawmaplocations(reports.locations));
+	                google.setOnLoadCallback(reports.drawlocations(reports.locations));
+	              } else {
+	                reports.throwDebug(response[0]);
+	              }
+	            } else {
+	              reports.throwError('#gadwp-map' + slug, response[0], "125px");
+	              reports.throwError('#gadwp-locations' + slug, response[0], "125px");
+	            }
+	         } else {
+	            reports.throwDebug(response);
+             }
+			NProgress.done();            
           });
+
         } else {
+        	
           jQuery('#gadwp-reports' + slug).html('<div id="gadwp-mainchart' + slug + '"></div>')
           jQuery('#gadwp-reports' + slug).append('<div id="gadwp-bottomstats' + slug + '" class="gadwp-wrapper"><div class="inside"><div class="small-box"><h3>' + gadwp_item_data.i18n[5] + '</h3><p id="gdsessions' + slug + '">&nbsp;</p></div><div class="small-box"><h3>' + gadwp_item_data.i18n[6] + '</h3><p id="gdusers' + slug + '">&nbsp;</p></div><div class="small-box"><h3>' + gadwp_item_data.i18n[7] + '</h3><p id="gdpageviews' + slug + '">&nbsp;</p></div><div class="small-box"><h3>' + gadwp_item_data.i18n[8] + '</h3><p id="gdbouncerate' + slug + '">&nbsp;</p></div><div class="small-box"><h3>' + gadwp_item_data.i18n[9] + '</h3><p id="gdorganicsearch' + slug + '">&nbsp;</p></div><div class="small-box"><h3>' + gadwp_item_data.i18n[10] + '</h3><p id="gdpagespervisit' + slug + '">&nbsp;</p></div></div></div>');
 
-          data.query = query;
+          data.query = query + ',bottomstats';
+          
           jQuery.post(gadwp_item_data.ajaxurl, data, function(response) {
-            if (!jQuery.isNumeric(response)) {
-              if (jQuery.isArray(response)) {
-                reports.mainchart = response;
-                google.setOnLoadCallback(reports.drawmainchart(reports.mainchart));
-                reports.checknpcounter(1);
+        	  if (jQuery.isArray(response)) {        	  
+	            if (!jQuery.isNumeric(response[0])) {
+	              if (jQuery.isArray(response[0])) {
+	                reports.mainchart = response[0];
+	                google.setOnLoadCallback(reports.drawmainchart(reports.mainchart));
+	              } else {
+	                reports.throwDebug(response[0]);
+	              }
+	            } else {
+	              reports.throwError('#gadwp-mainchart' + slug, response[0], "125px");
+	            }
+	            if (!jQuery.isNumeric(response[1])) {
+	              if (jQuery.isArray(response[1])) {
+	                reports.bottomstats = response[1];
+	                google.setOnLoadCallback(reports.drawbottomstats(reports.bottomstats));
+	              } else {
+	                reports.throwDebug(response[1]);
+	              }
+	            } else {
+	              reports.throwError('#gadwp-bottomstats' + slug, response[1], "40px");
+	            }
               } else {
-                reports.throwDebug(response);
-                reports.checknpcounter(1);
-              }
-            } else {
-              reports.throwError('#gadwp-mainchart' + slug, response, 1, "125px");
-            }
-          });
-
-          data.query = 'bottomstats';
-          jQuery.post(gadwp_item_data.ajaxurl, data, function(response) {
-
-            if (!jQuery.isNumeric(response)) {
-              if (jQuery.isArray(response)) {
-                reports.bottomstats = response;
-                google.setOnLoadCallback(reports.drawbottomstats(reports.bottomstats));
-                reports.checknpcounter(1);
-              } else {
-                reports.throwDebug(response);
-                reports.checknpcounter(1);
-              }
-            } else {
-              reports.throwError('#gadwp-bottomstats' + slug, response, response, 1, "40px");
-            }
+	            reports.throwDebug(response);
+	          }
+        	  NProgress.done();                
           });
 
         }

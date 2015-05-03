@@ -4,7 +4,7 @@
  * Plugin URI: https://deconf.com
  * Description: Displays Google Analytics Reports and Real-Time Statistics in your Dashboard. Automatically inserts the tracking code in every page of your website.
  * Author: Alin Marcu
- * Version: 4.7.1
+ * Version: 4.8b
  * Author URI: https://deconf.com
  */
 
@@ -83,42 +83,42 @@ if (! class_exists('GADWP_Manager')) {
          */
         private function setup()
         {
-            
+
             // Plugin Version
             if (! defined('GADWP_CURRENT_VERSION')) {
-                define('GADWP_CURRENT_VERSION', '4.7.1');
+                define('GADWP_CURRENT_VERSION', '4.8b');
             }
-            
+
             // Plugin Path
             if (! defined('GADWP_DIR')) {
                 define('GADWP_DIR', plugin_dir_path(__FILE__));
             }
-            
+
             // Plugin URL
             if (! defined('GADWP_URL')) {
                 define('GADWP_URL', plugin_dir_url(__FILE__));
             }
-            
+
             // Plugin main File
             if (! defined('GADWP_FILE')) {
                 define('GADWP_FILE', __FILE__);
             }
-            
+
             /*
              * Load Tools class
              */
             include_once (GADWP_DIR . 'tools/tools.php');
-            
+
             /*
              * Load Config class
              */
             include_once (GADWP_DIR . 'config.php');
-            
+
             /*
              * Load GAPI Controller class
              */
             include_once (GADWP_DIR . 'tools/gapi.php');
-            
+
             /*
              * Plugin i18n
              */
@@ -126,7 +126,7 @@ if (! class_exists('GADWP_Manager')) {
                 self::$instance,
                 'load_i18n'
             ));
-            
+
             /*
              * Plugin Init
              */
@@ -134,7 +134,7 @@ if (! class_exists('GADWP_Manager')) {
                 self::$instance,
                 'load'
             ));
-            
+
             /*
              * Include Install
              */
@@ -143,7 +143,7 @@ if (! class_exists('GADWP_Manager')) {
                 'GADWP_Install',
                 'install'
             ));
-            
+
             /*
              * Include Uninstall
              */
@@ -152,13 +152,13 @@ if (! class_exists('GADWP_Manager')) {
                 'GADWP_Uninstall',
                 'uninstall'
             ));
-            
+
             /*
              * Load Frontend Widgets
              * (needed during ajax)
              */
             include_once (GADWP_DIR . 'front/widgets.php');
-            
+
             /*
              * Add Frontend Widgets
              * (needed during ajax)
@@ -199,20 +199,20 @@ if (! class_exists('GADWP_Manager')) {
                         include_once (GADWP_DIR . 'admin/ajax-actions.php');
                         self::$instance->backend_actions = new GADWP_Backend_Ajax();
                     }
-                    
+
                     /*
                      * Load Frontend ajax actions
                      */
                     include_once (GADWP_DIR . 'front/ajax-actions.php');
                     self::$instance->frontend_actions = new GADWP_Frontend_Ajax();
-                } else 
+                } else
                     if (GADWP_Tools::check_roles(self::$instance->config->options['ga_dash_access_back'])) {
                         /*
                          * Load Backend Setup
                          */
                         include_once (GADWP_DIR . 'admin/setup.php');
                         self::$instance->backend_setup = new GADWP_Backend_Setup();
-                        
+
                         if (self::$instance->config->options['dashboard_widget']) {
                             /*
                              * Load Backend Widget
@@ -220,7 +220,7 @@ if (! class_exists('GADWP_Manager')) {
                             include_once (GADWP_DIR . 'admin/widgets.php');
                             self::$instance->backend_widgets = new GADWP_Backend_Widgets();
                         }
-                        
+
                         if (self::$instance->config->options['item_reports']) {
                             /*
                              * Load Backend Item Reports
@@ -237,7 +237,7 @@ if (! class_exists('GADWP_Manager')) {
                     include_once (GADWP_DIR . 'front/item-reports.php');
                     self::$instance->frontend_item_reports = new GADWP_Frontend_Item_Reports();
                 }
-                
+
                 if (! GADWP_Tools::check_roles(self::$instance->config->options['ga_track_exclude'], true) && self::$instance->config->options['ga_dash_tracking']) {
                     /*
                      * Load tracking class

@@ -1,0 +1,883 @@
+# Copyright (C) 2015 Google Analytics Dashboard for WP
+# This file is distributed under the same license as the Google Analytics Dashboard for WP package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Google Analytics Dashboard for WP\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/google-analytics-dashboard-for-wp\n"
+"POT-Creation-Date: 2015-05-20 21:52+0200\n"
+"PO-Revision-Date: 2015-05-20 21:52+0200\n"
+"Last-Translator: Alin Marcu <admin@deconf.com>\n"
+"Language-Team: SebWeo.com\n"
+"Language: ru_RU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n"
+"%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 1.8\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ../.\n"
+
+#: .././admin/item-reports.php:67
+msgid "Analytics"
+msgstr "Аналитика"
+
+#: .././admin/settings.php:94 .././admin/settings.php:197 .././admin/settings.php:328
+#: .././admin/settings.php:800 .././admin/settings.php:1069
+msgid "Settings saved."
+msgstr "Настройки сохранены."
+
+#: .././admin/settings.php:96 .././admin/settings.php:199 .././admin/settings.php:330
+#: .././admin/settings.php:777 .././admin/settings.php:787 .././admin/settings.php:796
+#: .././admin/settings.php:802 .././admin/settings.php:814 .././admin/settings.php:1030
+#: .././admin/settings.php:1055 .././admin/settings.php:1065 .././admin/settings.php:1071
+#: .././admin/settings.php:1083
+msgid "Cheating Huh?"
+msgstr "Читерство?"
+
+#: .././admin/settings.php:100 .././admin/settings.php:203 .././admin/settings.php:334
+#: .././admin/settings.php:644 .././admin/settings.php:828 .././admin/settings.php:1096
+#, php-format
+msgid "Something went wrong, check %1$s or %2$s."
+msgstr "Что-то пошло не так, проверьте %1$s или %2$s."
+
+#: .././admin/settings.php:100 .././admin/settings.php:203 .././admin/settings.php:334
+#: .././admin/settings.php:644 .././admin/settings.php:828 .././admin/settings.php:1096
+#: .././admin/setup.php:96 .././admin/setup.php:119
+msgid "Errors & Debug"
+msgstr "Ошибки и отладка"
+
+#: .././admin/settings.php:100 .././admin/settings.php:203 .././admin/settings.php:334
+#: .././admin/settings.php:644 .././admin/settings.php:828 .././admin/settings.php:1096
+msgid "authorize the plugin"
+msgstr "авторизация плагина"
+
+#: .././admin/settings.php:105
+msgid "Google Analytics Frontend Settings"
+msgstr "Настройки фронтэнда Google Analytics"
+
+#: .././admin/settings.php:115 .././admin/settings.php:218
+msgid "Permissions"
+msgstr "Разрешение"
+
+#: .././admin/settings.php:118 .././admin/settings.php:221
+msgid "Show stats to:"
+msgstr "Показать статистику для:"
+
+#: .././admin/settings.php:157
+msgid "show page sessions and users in frontend (after each article)"
+msgstr "Показывать сессии страницы и пользователей в интерфейсе (после каждой статьи)"
+
+#: .././admin/settings.php:168
+msgid "show page searches (after each article)"
+msgstr "показать поиски страниц (после каждой статьи)"
+
+#: .././admin/settings.php:175 .././admin/settings.php:308 .././admin/settings.php:602
+#: .././admin/settings.php:945 .././admin/settings.php:1233
+msgid "Save Changes"
+msgstr "Сохранить изменения"
+
+#: .././admin/settings.php:208
+msgid "Google Analytics Backend Settings"
+msgstr "Настройки бекэнда Google Analytics"
+
+#: .././admin/settings.php:262
+msgid "enable Switch View functionality"
+msgstr "включить функциональность Сменить вид"
+
+#: .././admin/settings.php:273
+msgid "enable reports on Posts List and Pages List"
+msgstr "включить отчеты о сообщениях в списке постов и страниц"
+
+#: .././admin/settings.php:284
+msgid "enable the main Dashboard Widget"
+msgstr "включить основной виджет в Консоли"
+
+#: .././admin/settings.php:288
+msgid "Real-Time Settings"
+msgstr "Настройки Реального режима"
+
+#: .././admin/settings.php:291
+msgid "Maximum number of pages to display on real-time tab:"
+msgstr "Максимальное количество страниц для отображения на вкладке в режиме реального времени:"
+
+#: .././admin/settings.php:296
+msgid "Location Settings"
+msgstr "Настройки локации"
+
+#: .././admin/settings.php:300
+msgid "Target Geo Map to country:"
+msgstr "Целевая Geo-карта для страны:"
+
+#: .././admin/settings.php:337
+msgid ""
+"The tracking component is disabled. You should set <strong>Tracking Options</strong> to "
+"<strong>Enabled</strong>"
+msgstr ""
+"Компонент отслеживания отключен. Вы должны установить <strong>Опции трекинга</strong> на "
+"<strong>Включено</strong>"
+
+#: .././admin/settings.php:342
+msgid "Google Analytics Tracking Code"
+msgstr "трекинг-код Google Analytics"
+
+#: .././admin/settings.php:351
+msgid "Basic Settings"
+msgstr "Базовые настройки"
+
+#: .././admin/settings.php:352 .././admin/settings.php:418
+msgid "Events Tracking"
+msgstr "Отслеживание событий"
+
+#: .././admin/settings.php:353 .././admin/settings.php:466
+msgid "Custom Definitions"
+msgstr "Пользовательские Определения"
+
+#: .././admin/settings.php:354 .././admin/settings.php:564 .././admin/settings.php:1216
+msgid "Exclude Tracking"
+msgstr "Исключить отслеживание"
+
+#: .././admin/settings.php:355
+msgid "Advanced Settings"
+msgstr "Расширенные настройки"
+
+#: .././admin/settings.php:363
+msgid "Tracking Settings"
+msgstr "Настройки отслеживания"
+
+#: .././admin/settings.php:366
+msgid "Tracking Options:"
+msgstr "Опции отслеживания:"
+
+#: .././admin/settings.php:368
+msgid "Disabled"
+msgstr "Выключено"
+
+#: .././admin/settings.php:369
+msgid "Enabled"
+msgstr "Включено"
+
+#: .././admin/settings.php:377 .././admin/settings.php:892 .././admin/settings.php:913
+#: .././admin/settings.php:1189 .././admin/widgets.php:71
+msgid "View Name:"
+msgstr "Вид имени:"
+
+#: .././admin/settings.php:377 .././admin/settings.php:913
+msgid "Tracking ID:"
+msgstr "ID отслеживания"
+
+#: .././admin/settings.php:377 .././admin/settings.php:913
+msgid "Default URL:"
+msgstr "URL по умолчанию:"
+
+#: .././admin/settings.php:377 .././admin/settings.php:913
+msgid "Time Zone:"
+msgstr "Временная зона:"
+
+#: .././admin/settings.php:382
+msgid "Basic Tracking"
+msgstr "Базовое отслеживание"
+
+#: .././admin/settings.php:385
+msgid "Tracking Type:"
+msgstr "Тип отслеживания:"
+
+#: .././admin/settings.php:387
+msgid "Classic Analytics"
+msgstr "Классическая аналитика"
+
+#: .././admin/settings.php:388
+msgid "Universal Analytics"
+msgstr "Универсальная аналитика"
+
+#: .././admin/settings.php:399
+msgid "anonymize IPs while tracking"
+msgstr "скрывать IP при отслеживании"
+
+#: .././admin/settings.php:410
+msgid "enable remarketing, demographics and interests reports"
+msgstr "включить ремаркетинг, отчеты по демографии и интересам"
+
+#: .././admin/settings.php:428
+msgid "track downloads, mailto and outbound links"
+msgstr "отслеживать загрузки, mailto и исходящие ссылки"
+
+#: .././admin/settings.php:432
+msgid "Downloads Regex:"
+msgstr "Загрузки Regex:"
+
+#: .././admin/settings.php:443
+msgid "track affiliate links matching this regex"
+msgstr "отслеживать партнерские ссылки, соответствующие этому регулярному выражению"
+
+#: .././admin/settings.php:447
+msgid "Affiliates Regex:"
+msgstr "Аффилиаты:"
+
+#: .././admin/settings.php:458
+msgid "track fragment identifiers, hashmarks (#) in URI links"
+msgstr "отслеживать идентификаторы фрагментов, хештеги (#) в URI ссылках"
+
+#: .././admin/settings.php:469
+msgid "Authors:"
+msgstr "Авторы:"
+
+#: .././admin/settings.php:477
+msgid "Publication Year:"
+msgstr "Год публикации:"
+
+#: .././admin/settings.php:485
+msgid "Categories:"
+msgstr "Категории:"
+
+#: .././admin/settings.php:493
+msgid "User Type:"
+msgstr "Тип пользователя:"
+
+#: .././admin/settings.php:505
+msgid "Advanced Tracking"
+msgstr "Расширенное отслеживание"
+
+#: .././admin/settings.php:508
+msgid "Page Speed SR:"
+msgstr "SR скорости страницы:"
+
+#: .././admin/settings.php:519
+msgid "exclude events from bounce-rate calculation"
+msgstr "исключить показатель отказов из расчета"
+
+#: .././admin/settings.php:530
+msgid "enable enhanced link attribution"
+msgstr "включить повышенную атрибуцию ссылок"
+
+#: .././admin/settings.php:541
+msgid "enable AdSense account linking"
+msgstr "включить связывание учетной записи AdSense"
+
+#: .././admin/settings.php:552
+msgid "enable cross domain tracking"
+msgstr "включить отслеживание поддоменов"
+
+#: .././admin/settings.php:556
+msgid "Cross Domains:"
+msgstr "Поддомены:"
+
+#: .././admin/settings.php:567
+msgid "Exclude tracking for:"
+msgstr "Исключить отслеживание для:"
+
+#: .././admin/settings.php:648
+msgid "Google Analytics Errors & Debugging"
+msgstr "Ошибки и отладка Google Analytics"
+
+#: .././admin/settings.php:658
+msgid "Errors & Details"
+msgstr "Ошибки и Детали"
+
+#: .././admin/settings.php:659
+msgid "Plugin Settings"
+msgstr "Настройки плагина"
+
+#: .././admin/settings.php:667
+msgid "Last Error detected"
+msgstr "Последняя обнаруженная ошибка"
+
+#: .././admin/settings.php:673 .././admin/settings.php:686
+msgid "None"
+msgstr "Нет"
+
+#: .././admin/settings.php:680
+msgid "Error Details"
+msgstr "Детали ошибки"
+
+#: .././admin/settings.php:700
+msgid "Plugin Configuration"
+msgstr "Конфигурация плагина"
+
+#: .././admin/settings.php:722 .././admin/settings.php:980
+msgid ""
+"Loading the required libraries. If this results in a blank screen or a fatal error, try this "
+"solution:"
+msgstr ""
+"Загрузка необходимых библиотек. Если это приводит к пустому экрану или фатальной ошибке, "
+"попробуйте это решение:"
+
+#: .././admin/settings.php:722
+msgid "Library conflicts between WordPress plugins"
+msgstr "Библиотека конфликтов между WordPress плагинами"
+
+#: .././admin/settings.php:737 .././admin/settings.php:997
+msgid "Plugin authorization succeeded."
+msgstr "Авторизация плагин успешна."
+
+#: .././admin/settings.php:752 .././admin/settings.php:1021
+msgid ""
+"The access code is <strong>NOT</strong> your <strong>Tracking ID</strong> (UA-XXXXX-X). Try "
+"again, and use the red link to get your access code"
+msgstr ""
+"Код доступа <strong>НЕ</strong> ваш <strong>ID отслеживания</strong> (UA-XXXXX-X). Попробуйте "
+"еще раз, и используйте красную ссылку, чтобы получить код доступа"
+
+#: .././admin/settings.php:775 .././admin/settings.php:1053
+msgid "Cleared Cache."
+msgstr "Кеш почищен."
+
+#: .././admin/settings.php:784 .././admin/settings.php:1062
+msgid "Token Reseted and Revoked."
+msgstr "Маркер сброшен и отменен."
+
+#: .././admin/settings.php:794
+msgid "All errors reseted."
+msgstr "Все ошибки сброшены."
+
+#: .././admin/settings.php:807 .././admin/settings.php:1076
+msgid "All other domains/properties were removed."
+msgstr "Все остальные домены/свойства были удалены."
+
+#: .././admin/settings.php:819 .././admin/settings.php:1088
+msgid "Google Analytics Settings"
+msgstr "Настройки Google Analytics"
+
+#: .././admin/settings.php:833 .././admin/settings.php:1101
+msgid "Use the red link (see below) to generate and get your access code!"
+msgstr "Используйте красную ссылку (см ниже), чтобы генерировать и получить код доступа!"
+
+#: .././admin/settings.php:844 .././admin/settings.php:1129
+msgid "Plugin Authorization"
+msgstr "Авторизация плагина"
+
+#: .././admin/settings.php:849 .././admin/settings.php:1133
+#, php-format
+msgid ""
+"You should watch the %1$s and read this %2$s before proceeding to authorization. This plugin "
+"requires a properly configured Google Analytics account!"
+msgstr ""
+"Вы должны смотреть %1$s и читать это %2$s, прежде чем приступить к авторизации. Этот плагин "
+"требует правильно настроенного аккаунта Google Analytics!"
+
+#: .././admin/settings.php:849 .././admin/settings.php:1133
+msgid "video"
+msgstr "видео"
+
+#: .././admin/settings.php:849 .././admin/settings.php:1133
+msgid "tutorial"
+msgstr "мануал"
+
+#: .././admin/settings.php:854 .././admin/settings.php:1140
+msgid "use your own API Project credentials"
+msgstr "используйте свои собственные полномочия по API проекта"
+
+#: .././admin/settings.php:858 .././admin/settings.php:1147
+msgid "API Key:"
+msgstr "ключ API:"
+
+#: .././admin/settings.php:862 .././admin/settings.php:1151
+msgid "Client ID:"
+msgstr "ID клиента:"
+
+#: .././admin/settings.php:866 .././admin/settings.php:1155
+msgid "Client Secret:"
+msgstr "Секретный код клиента:"
+
+#: .././admin/settings.php:876 .././admin/settings.php:1165
+msgid "Clear Authorization"
+msgstr "Очистить авторизацию"
+
+#: .././admin/settings.php:876 .././admin/settings.php:951 .././admin/settings.php:1165
+#: .././admin/settings.php:1240
+msgid "Clear Cache"
+msgstr "Очистить кеш"
+
+#: .././admin/settings.php:876
+msgid "Reset Errors"
+msgstr "Сбросить ошибки"
+
+#: .././admin/settings.php:882 .././admin/setup.php:80 .././admin/setup.php:115
+msgid "General Settings"
+msgstr "Общие настройки"
+
+#: .././admin/settings.php:885
+msgid "Select View:"
+msgstr "Выбрать вид:"
+
+#: .././admin/settings.php:896 .././admin/settings.php:1193
+msgid "Property not found"
+msgstr "Свойство не найдено"
+
+#: .././admin/settings.php:901
+msgid "Lock Selection"
+msgstr "Блокировать Выбор"
+
+#: .././admin/settings.php:919
+msgid "Theme Color:"
+msgstr "Цвет темы:"
+
+#: .././admin/settings.php:927 .././admin/settings.php:1202
+msgid "Automatic Updates"
+msgstr "Автоматические обновления"
+
+#: .././admin/settings.php:937 .././admin/settings.php:1212
+msgid "automatic updates for minor versions (security and maintenance releases only)"
+msgstr ""
+"автоматические обновления для ранних версий (только релизы безопасности и техническое "
+"обслуживание)"
+
+#: .././admin/settings.php:951 .././admin/settings.php:1240 .././admin/widgets.php:42
+msgid "Authorize Plugin"
+msgstr "Авторизация плагина"
+
+#: .././admin/settings.php:1027
+msgid "Properties refreshed."
+msgstr "Свойства обновлены."
+
+#: .././admin/settings.php:1111
+msgid "Network Setup"
+msgstr "Настройка сети"
+
+#: .././admin/settings.php:1121
+msgid "use a single Google Analytics account for the entire network"
+msgstr "использовать одну учетную запись Google Analytics для всей сети"
+
+#: .././admin/settings.php:1165
+msgid "Refresh Properties"
+msgstr "Обновить свойства"
+
+#: .././admin/settings.php:1171
+msgid "Properties/Views Settings"
+msgstr "Настройки Свойства/Вид"
+
+#: .././admin/settings.php:1226
+msgid "exclude Super Admin tracking for the entire network"
+msgstr "исключить отслеживание Супер Админ для всей сети"
+
+#: .././admin/settings.php:1271
+msgid "Setup Tutorial & Demo"
+msgstr "Мануал и Демо настройки"
+
+#: .././admin/settings.php:1279
+msgid "Support & Reviews"
+msgstr "Поддержка и Отзывы"
+
+#: .././admin/settings.php:1286
+#, php-format
+msgid "Plugin documentation and support on %s"
+msgstr "Документации и поддержка плагина на %s"
+
+#: .././admin/settings.php:1293
+#, php-format
+msgid "Your feedback and review are both important, %s!"
+msgstr "Ваши отзывы и обзор являются важными, %s!"
+
+#: .././admin/settings.php:1293
+msgid "rate this plugin"
+msgstr "оцените этот плагин"
+
+#: .././admin/settings.php:1299
+msgid "Further Reading"
+msgstr "Дальнейшее Чтение"
+
+#: .././admin/settings.php:1306
+#, php-format
+msgid "%s by moving your website to HTTPS/SSL."
+msgstr "%s по перемещению вашего сайта на HTTPS/SSL."
+
+#: .././admin/settings.php:1306
+msgid "Improve search rankings"
+msgstr "Улучшение рейтинга в поиске"
+
+#: .././admin/settings.php:1313
+#, php-format
+msgid "Other %s written by the same author"
+msgstr "Другие %s написанные тем же автором"
+
+#: .././admin/settings.php:1313
+msgid "WordPress Plugins"
+msgstr "Плагины WordPress"
+
+#: .././admin/settings.php:1319
+msgid "Other Services"
+msgstr "Другие сервисы"
+
+#: .././admin/settings.php:1326
+#, php-format
+msgid "Speed up your website and plug into a whole %s"
+msgstr "Ускорьте ваш сайт вцелом %s"
+
+#: .././admin/settings.php:1326
+msgid "new level of site speed"
+msgstr "новый уровень скорости сайта"
+
+#: .././admin/settings.php:1333
+#, php-format
+msgid "%s service with users tracking at IP level."
+msgstr "%s услуги с пользовательским отслеживанием на уровне IP."
+
+#: .././admin/settings.php:1333
+msgid "Web Analytics"
+msgstr "Web аналитика"
+
+#: .././admin/setup.php:76 .././admin/setup.php:111
+msgid "Google Analytics"
+msgstr "Google аналитика"
+
+#: .././admin/setup.php:84
+msgid "Backend Settings"
+msgstr "Настройки бекэнда"
+
+#: .././admin/setup.php:88
+msgid "Frontend Settings"
+msgstr "Настройки фронтэнда"
+
+#: .././admin/setup.php:92
+msgid "Tracking Code"
+msgstr "Код отслеживания"
+
+#: .././admin/setup.php:195 .././admin/widgets.php:126
+msgid "Today"
+msgstr "Сегодня"
+
+#: .././admin/setup.php:196 .././admin/widgets.php:127
+msgid "Yesterday"
+msgstr "Вчера"
+
+#: .././admin/setup.php:197 .././admin/widgets.php:128 .././front/widgets.php:74
+#: .././front/widgets.php:182
+msgid "Last 7 Days"
+msgstr "Последние 7 дней"
+
+#: .././admin/setup.php:198 .././admin/widgets.php:130 .././front/widgets.php:80
+#: .././front/widgets.php:184
+msgid "Last 30 Days"
+msgstr "Последние 30 дней"
+
+#: .././admin/setup.php:199 .././admin/widgets.php:131
+msgid "Last 90 Days"
+msgstr "Последние 90 дней"
+
+#: .././admin/setup.php:202 .././admin/setup.php:218
+msgid "Unique Views"
+msgstr "Уникальные просмотры"
+
+#: .././admin/setup.php:203 .././admin/setup.php:219 .././admin/widgets.php:136
+#: .././admin/widgets.php:875 .././tools/gapi.php:391
+msgid "Users"
+msgstr "Пользователи"
+
+#: .././admin/setup.php:204 .././admin/widgets.php:137
+msgid "Organic"
+msgstr "Органический"
+
+#: .././admin/setup.php:205 .././admin/setup.php:220 .././admin/widgets.php:138
+#: .././admin/widgets.php:879 .././tools/gapi.php:394
+msgid "Page Views"
+msgstr "Просмотры страницы"
+
+#: .././admin/setup.php:206 .././admin/setup.php:221 .././admin/widgets.php:139
+#: .././admin/widgets.php:883 .././tools/gapi.php:397
+msgid "Bounce Rate"
+msgstr "Показатель отказов"
+
+#: .././admin/setup.php:207 .././admin/widgets.php:140
+msgid "Location"
+msgstr "Расположение"
+
+#: .././admin/setup.php:208 .././admin/widgets.php:142 .././tools/gapi.php:566
+msgid "Referrers"
+msgstr "Реферальные"
+
+#: .././admin/setup.php:209 .././admin/widgets.php:143 .././tools/gapi.php:612
+#: .././tools/gapi.php:918
+msgid "Searches"
+msgstr "Поисковые"
+
+#: .././admin/setup.php:210 .././admin/widgets.php:144
+msgid "Traffic Details"
+msgstr "Детали трафика"
+
+#: .././admin/setup.php:213 .././admin/widgets.php:510 .././admin/widgets.php:607
+#: .././admin/widgets.php:805 .././admin/widgets.php:917 .././front/item-reports.php:97
+msgid "A JavaScript Error is blocking plugin resources!"
+msgstr "Ошибки JavaScript блокируют ресурсы плагина!"
+
+#: .././admin/setup.php:214 .././admin/widgets.php:713
+msgid "Traffic Mediums"
+msgstr "Среднее по трафику"
+
+#: .././admin/setup.php:215 .././admin/widgets.php:729
+msgid "Visitor Type"
+msgstr "Тип посетителей"
+
+#: .././admin/setup.php:216 .././admin/widgets.php:745
+msgid "Social Networks"
+msgstr "Социальные сети"
+
+#: .././admin/setup.php:217 .././admin/widgets.php:761
+msgid "Search Engines"
+msgstr "Поисковые системы"
+
+#: .././admin/setup.php:222 .././admin/widgets.php:887
+msgid "Organic Search"
+msgstr "Органический поиск"
+
+#: .././admin/setup.php:223 .././admin/widgets.php:891
+msgid "Pages/Session"
+msgstr "Страниц/Сессию"
+
+#: .././admin/setup.php:224 .././admin/widgets.php:523 .././admin/widgets.php:541
+#: .././admin/widgets.php:620 .././admin/widgets.php:638 .././admin/widgets.php:657
+#: .././admin/widgets.php:676 .././admin/widgets.php:696 .././admin/widgets.php:819
+#: .././admin/widgets.php:930 .././admin/widgets.php:949 .././front/item-reports.php:109
+#: .././front/item-reports.php:128
+msgid "Invalid response, more details in JavaScript Console (F12)."
+msgstr "Неверный ответ, подробнее в консоли JavaScript (F12)."
+
+#: .././admin/setup.php:225
+msgid "Not enough data collected"
+msgstr "Недостаточно данных собрано"
+
+#: .././admin/setup.php:226 .././admin/widgets.php:528 .././admin/widgets.php:546
+#: .././admin/widgets.php:625 .././admin/widgets.php:643 .././admin/widgets.php:662
+#: .././admin/widgets.php:681 .././admin/widgets.php:701 .././admin/widgets.php:824
+#: .././admin/widgets.php:827 .././admin/widgets.php:935 .././admin/widgets.php:954
+#: .././front/item-reports.php:114 .././front/item-reports.php:133 .././front/widgets.php:110
+msgid "This report is unavailable"
+msgstr "Этот отчет недоступен"
+
+#: .././admin/setup.php:227
+msgid "report generated by"
+msgstr "Отчет сгенерирован"
+
+#: .././admin/setup.php:267
+msgid "Settings"
+msgstr "Настройки"
+
+#: .././admin/widgets.php:33 .././front/widgets.php:22
+msgid "Google Analytics Dashboard"
+msgstr "Консоль Google Analytics"
+
+#: .././admin/widgets.php:42
+msgid "This plugin needs an authorization:"
+msgstr "Этому плагину необходима авторизация:"
+
+#: .././admin/widgets.php:76
+msgid "Something went wrong while retrieving profiles list."
+msgstr "Что-то пошло не так во время получения списка профилей."
+
+#: .././admin/widgets.php:76
+msgid "More details"
+msgstr "Больше деталей"
+
+#: .././admin/widgets.php:89 .././admin/widgets.php:100
+msgid "An admin should asign a default Google Analytics Profile."
+msgstr "Админ должен быть подписан на профиль Google Analytics по умолчанию."
+
+#: .././admin/widgets.php:89 .././admin/widgets.php:100
+msgid "Select Domain"
+msgstr "Выбрать домен"
+
+#: .././admin/widgets.php:105
+msgid ""
+"Something went wrong while retrieving property data. You need to create and properly configure a "
+"Google Analytics account:"
+msgstr ""
+"Что-то пошло не так во время извлечения данных. Вам нужно создать и должным образом настроить "
+"учетную запись Google Analytics:"
+
+#: .././admin/widgets.php:105
+msgid "Find out more!"
+msgstr "Узнать больше!"
+
+#: .././admin/widgets.php:125
+msgid "Real-Time"
+msgstr "В реальном времени"
+
+#: .././admin/widgets.php:129 .././front/widgets.php:77 .././front/widgets.php:183
+msgid "Last 14 Days"
+msgstr "Последние 14 дней"
+
+#: .././admin/widgets.php:135 .././admin/widgets.php:871 .././front/widgets.php:46
+#: .././tools/gapi.php:406 .././tools/gapi.php:567 .././tools/gapi.php:613 .././tools/gapi.php:676
+#: .././tools/gapi.php:786 .././tools/gapi.php:827 .././tools/gapi.php:919
+msgid "Sessions"
+msgstr "Сессии"
+
+#: .././admin/widgets.php:141 .././tools/gapi.php:521
+msgid "Pages"
+msgstr "Страницы"
+
+#: .././admin/widgets.php:232 .././admin/widgets.php:472
+msgid "REFERRAL"
+msgstr "РЕФЕРАЛЬНЫЙ"
+
+#: .././admin/widgets.php:236 .././admin/widgets.php:473
+msgid "ORGANIC"
+msgstr "ОРГАНИЧЕСКИЙ"
+
+#: .././admin/widgets.php:240 .././admin/widgets.php:360 .././admin/widgets.php:474
+msgid "SOCIAL"
+msgstr "СОЦИАЛЬНЫЙ"
+
+#: .././admin/widgets.php:244 .././admin/widgets.php:363 .././admin/widgets.php:475
+msgid "CAMPAIGN"
+msgstr "КАМПАНИЯ"
+
+#: .././admin/widgets.php:248 .././admin/widgets.php:366 .././admin/widgets.php:478
+msgid "DIRECT"
+msgstr "ПРЯМОЙ"
+
+#: .././admin/widgets.php:252 .././admin/widgets.php:479
+msgid "NEW"
+msgstr "НОВЫЙ"
+
+#: .././admin/widgets.php:354
+msgid "REFERRALS"
+msgstr "РЕФЕРАЛЫ"
+
+#: .././admin/widgets.php:357
+msgid "KEYWORDS"
+msgstr "КЛЮЧЕВЫЕ СЛОВА"
+
+#: .././front/item-reports.php:143
+msgid "Views vs UniqueViews"
+msgstr "Просмотры против Уникальные просмотры"
+
+#: .././front/item-reports.php:193
+msgid "Google Analytics Reports"
+msgstr "Отчеты Google Analytics"
+
+#: .././front/widgets.php:23
+msgid "Will display your google analytics stats in a widget"
+msgstr "Покажет вашу статистику Google Analytics в виджете"
+
+#: .././front/widgets.php:46 .././tools/gapi.php:827
+msgid "trend"
+msgstr "тренд"
+
+#: .././front/widgets.php:133
+msgid "Period:"
+msgstr "Период:"
+
+#: .././front/widgets.php:133
+msgid "Sessions:"
+msgstr "Сессии:"
+
+#: .././front/widgets.php:137
+msgid "generated by"
+msgstr "сгенерировано"
+
+#: .././front/widgets.php:147
+msgid "Google Analytics Stats"
+msgstr "Статистика Google Analytics"
+
+#: .././front/widgets.php:154
+msgid "Title:"
+msgstr "Заголовок:"
+
+#: .././front/widgets.php:161
+msgid "Display:"
+msgstr "Отображение:"
+
+#: .././front/widgets.php:165
+msgid "Chart & Totals"
+msgstr "График и Всего"
+
+#: .././front/widgets.php:166
+msgid "Chart"
+msgstr "График"
+
+#: .././front/widgets.php:167
+msgid "Totals"
+msgstr "Всего"
+
+#: .././front/widgets.php:171
+msgid "Anonymize stats:"
+msgstr "Анонимная статистика:"
+
+#: .././front/widgets.php:178
+msgid "Stats for:"
+msgstr "Статистика для:"
+
+#: .././front/widgets.php:188
+msgid "Give credits:"
+msgstr "Оцените:"
+
+#: .././gadwp.php:46 .././gadwp.php:55 .././gadwp.php:63
+msgid "This is not allowed, read the documentation!"
+msgstr "Это не допускается, прочитайте документацию!"
+
+#: .././tools/gapi.php:134
+msgid "Use this link to get your access code:"
+msgstr "Используйте эту ссылку, чтобы получить код доступа:"
+
+#: .././tools/gapi.php:134
+msgid "Get Access Code"
+msgstr "Получить код доступа"
+
+#: .././tools/gapi.php:138 .././tools/gapi.php:139
+msgid "Use the red link to get your access code!"
+msgstr "Используйте красную ссылку, чтобы получить код доступа!"
+
+#: .././tools/gapi.php:138
+msgid "Access Code:"
+msgstr "Код доступа:"
+
+#: .././tools/gapi.php:145
+msgid "Save Access Code"
+msgstr "Сохранить код доступа"
+
+#: .././tools/gapi.php:400
+msgid "Organic Searches"
+msgstr "Органические запросы поиска"
+
+#: .././tools/gapi.php:403
+msgid "Unique Page Views"
+msgstr "Уникальные просмотры страниц"
+
+#: .././tools/gapi.php:411
+msgid "Hour"
+msgstr "Час"
+
+#: .././tools/gapi.php:414 .././tools/gapi.php:826 .././tools/gapi.php:876
+msgid "Date"
+msgstr "Дата"
+
+#: .././tools/gapi.php:522 .././tools/gapi.php:877
+msgid "Views"
+msgstr "Просмотры"
+
+#: .././tools/gapi.php:640
+msgid "Countries"
+msgstr "Страны"
+
+#: .././tools/gapi.php:650
+msgid "Cities from"
+msgstr "Из городов"
+
+#: .././tools/gapi.php:722
+msgid "Channels"
+msgstr "Каналы"
+
+#: .././tools/gapi.php:785
+msgid "Type"
+msgstr "Тип"
+
+#: .././tools/gapi.php:878
+msgid "UniqueViews"
+msgstr "Уникальные просмотры"
+
+#~ msgid "Read %s for more information about Frontend Features and Options."
+#~ msgstr "Читайте %s для дополнительной информации об особенностях и опциях."
+
+#~ msgid "this documentation page"
+#~ msgstr "это страница документации"
+
+#~ msgid "Read %s for more information about Backend Features and Options."
+#~ msgstr "Читайте %s для более подробной информации об особенностях интерфейса и параметрах."
+
+#~ msgid "For more information about Tracking Options read %s."
+#~ msgstr "Для получения более подробной информации о Настройках отслеживания читайте %s."
+
+#~ msgid "For errors and/or other issues check %s and related resources."
+#~ msgstr "По ошибкам и/или другим вопросам проверяйте %s и соответствующие ресурсы."

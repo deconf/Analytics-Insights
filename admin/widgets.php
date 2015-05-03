@@ -271,7 +271,7 @@ if (! class_exists('GADWP_Backend_Widgets')) {
             	});
             
             	jQuery(function() {
-            		jQuery( document ).tooltip();
+            		jQuery('#gadash-widget *').tooltip();
             	});
             
             	function onlyUniqueValues(value, index, self) {
@@ -435,7 +435,7 @@ if (! class_exists('GADWP_Backend_Widgets')) {
             			var pgstatstable = "";
             			for ( var i = 0; i < upagepathstats.length; i = i + 1 ) {
             				if (i < <?php echo $this->gadwp->config->options['ga_realtime_pages']; ?>){
-            					pgstatstable += '<div class="gadash-pline"><div class="gadash-pleft"><a href="#" title="'+gadash_pagedetails(data, upagepathstats[i].pagepath)+'">'+upagepathstats[i].pagepath.substring(0,70)+'</a></div><div class="gadash-pright">'+upagepathstats[i].count+'</div></div>';
+            					pgstatstable += '<div class="gadash-pline"><div class="gadash-pleft"><a href="#" data-tooltip="'+gadash_pagedetails(data, upagepathstats[i].pagepath)+'">'+upagepathstats[i].pagepath.substring(0,70)+'</a></div><div class="gadash-pright">'+upagepathstats[i].count+'</div></div>';
             				}
             			}
             			document.getElementById("gadash-pages").innerHTML='<br /><div class="gadash-pg">'+pgstatstable+'</div>';
@@ -469,10 +469,10 @@ if (! class_exists('GADWP_Backend_Widgets')) {
             			ucustomstats.sort( function(a,b){ return b.count - a.count } );            			
             
             			var uvisittype = ["REFERRAL","ORGANIC","SOCIAL","CUSTOM"];
-            			document.getElementById("gadash-tdo-right").innerHTML = '<div class="gadash-bigtext"><a href="#" title="'+gadash_generatetooltip(ureferralsstats)+'"><div class="gadash-bleft">'+'<?php _e("REFERRAL", 'ga-dash');?>'+'</a></div><div class="gadash-bright">'+countsessions(data,uvisittype[0])+'</div></div>';
-            			document.getElementById("gadash-tdo-right").innerHTML += '<div class="gadash-bigtext"><a href="#" title="'+gadash_generatetooltip(ukeywordsstats)+'"><div class="gadash-bleft">'+'<?php _e("ORGANIC", 'ga-dash');?>'+'</a></div><div class="gadash-bright">'+countsessions(data,uvisittype[1])+'</div></div>';
-            			document.getElementById("gadash-tdo-right").innerHTML += '<div class="gadash-bigtext"><a href="#" title="'+gadash_generatetooltip(usocialstats)+'"><div class="gadash-bleft">'+'<?php _e("SOCIAL", 'ga-dash');?>'+'</a></div><div class="gadash-bright">'+countsessions(data,uvisittype[2])+'</div></div>';
-            			document.getElementById("gadash-tdo-right").innerHTML += '<div class="gadash-bigtext"><a href="#" title="'+gadash_generatetooltip(ucustomstats)+'"><div class="gadash-bleft">'+'<?php _e("CAMPAIGN", 'ga-dash');?>'+'</a></div><div class="gadash-bright">'+countsessions(data,uvisittype[3])+'</div></div>';
+            			document.getElementById("gadash-tdo-right").innerHTML = '<div class="gadash-bigtext"><a href="#" data-tooltip="'+gadash_generatetooltip(ureferralsstats)+'"><div class="gadash-bleft">'+'<?php _e("REFERRAL", 'ga-dash');?>'+'</a></div><div class="gadash-bright">'+countsessions(data,uvisittype[0])+'</div></div>';
+            			document.getElementById("gadash-tdo-right").innerHTML += '<div class="gadash-bigtext"><a href="#" data-tooltip="'+gadash_generatetooltip(ukeywordsstats)+'"><div class="gadash-bleft">'+'<?php _e("ORGANIC", 'ga-dash');?>'+'</a></div><div class="gadash-bright">'+countsessions(data,uvisittype[1])+'</div></div>';
+            			document.getElementById("gadash-tdo-right").innerHTML += '<div class="gadash-bigtext"><a href="#" data-tooltip="'+gadash_generatetooltip(usocialstats)+'"><div class="gadash-bleft">'+'<?php _e("SOCIAL", 'ga-dash');?>'+'</a></div><div class="gadash-bright">'+countsessions(data,uvisittype[2])+'</div></div>';
+            			document.getElementById("gadash-tdo-right").innerHTML += '<div class="gadash-bigtext"><a href="#" data-tooltip="'+gadash_generatetooltip(ucustomstats)+'"><div class="gadash-bleft">'+'<?php _e("CAMPAIGN", 'ga-dash');?>'+'</a></div><div class="gadash-bright">'+countsessions(data,uvisittype[3])+'</div></div>';
             
             			var uvisitortype = ["DIRECT","NEW"];
             			document.getElementById("gadash-tdo-right").innerHTML += '<div class="gadash-bigtext"><div class="gadash-bleft">'+'<?php _e("DIRECT", 'ga-dash');?>'+'</div><div class="gadash-bright">'+countsessions(data,uvisitortype[0])+'</div></div>';

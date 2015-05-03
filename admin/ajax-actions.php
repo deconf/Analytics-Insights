@@ -87,8 +87,17 @@ if (! class_exists('GADWP_Backend_Ajax')) {
             
             //Encode URL
             $filter = rawurlencode($filter);
+            
+            $queries = explode(',',$query);
+            
+            $results = [];
+            
+            foreach ($queries as $value){
+                $results[] = $this->gadwp->gapi_controller->get($projectId, $value, $from, $to, $filter);
+            }
 
-            $this->gadwp->gapi_controller->get($projectId, $query, $from, $to, $filter);
+            wp_send_json($results);
+            
         }
 
         /**
