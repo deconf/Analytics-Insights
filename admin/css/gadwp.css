@@ -77,10 +77,14 @@ td.roles {
 	color: red !important;
 }
 
+#poststuff h2 {
+	padding-bottom:0;
+}
+
 /* Options pages ON/OFF Switch */
 .onoffswitch {
 	position: relative;
-	width: 55px;
+	width: 50px;
 	float: left;
 	-webkit-user-select: none;
 	-moz-user-select: none;
@@ -91,12 +95,18 @@ td.roles {
 	display: none !important;
 }
 
+.onoffswitch:hover {
+  border-color: #5b9dd9;
+  -webkit-box-shadow: 0 0 2px rgba(30,140,190,.8);
+  box-shadow: 0 0 2px rgba(30,140,190,.8);
+}
+
 .onoffswitch-label {
 	display: block;
 	overflow: hidden;
 	cursor: pointer;
-	border: 2px solid #C9C9C9;
-	border-radius: 5px;
+	border: 1px solid #ddd;
+	border-radius: 2px;
 }
 
 .onoffswitch-inner {
@@ -111,43 +121,43 @@ td.roles {
 .onoffswitch-inner:before, .onoffswitch-inner:after {
 	float: left;
 	width: 50%;
-	height: 18px;
+	height: 22px;
 	padding: 0;
-	line-height: 18px;
+	line-height: 22px;
 	font-size: 12px;
 	color: white;
 	font-family: Trebuchet, Arial, sans-serif;
-	font-weight: bold;
+	font-weight: normal;
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
 
 .onoffswitch-inner:before {
-	content: "ON";
-	padding-left: 6px;
-	background-color: #1269BA;
-	color: #FFFFFF;
+	content: "On";
+	padding-left: 5px;
+	background-color: #00a0d2;
+	color: #fff;
 }
 
 .onoffswitch-inner:after {
-	content: "OFF";
-	padding-right: 6px;
-	background-color: #EEEEEE;
-	color: #999999;
+	content: "Off";
+	padding-right: 5px;
+	background-color: #fff;
+	color: #999;
 	text-align: right;
 }
 
 .onoffswitch-switch {
-	width: 18px;
+	width: 22px;
 	margin: 0px;
-	background: #FFFFFF;
-	border: 2px solid #C9C9C9;
-	border-radius: 5px;
+	background: #fff;
+	border: 1px solid #ddd;
+	border-radius: 2px;
 	position: absolute;
 	top: 0;
 	bottom: 0;
-	right: 33px;
+	right: 26px;
 	-moz-transition: all 0.3s ease-in 0s;
 	-webkit-transition: all 0.3s ease-in 0s;
 	-o-transition: all 0.3s ease-in 0s;
