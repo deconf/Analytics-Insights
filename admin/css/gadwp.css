@@ -86,6 +86,13 @@ td.roles {
 	position: relative;
 	width: 50px;
 	float: left;
+	border: none !important;
+	padding: 0 !important;
+	height: 22px !important;
+	-moz-box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	-o-box-shadow: none !important;
+	box-shadow: none !important;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
@@ -95,16 +102,11 @@ td.roles {
 	display: none !important;
 }
 
-.onoffswitch:hover {
-  border-color: #5b9dd9;
-  -webkit-box-shadow: 0 0 2px rgba(30,140,190,.8);
-  box-shadow: 0 0 2px rgba(30,140,190,.8);
-}
-
 .onoffswitch-label {
 	display: block;
 	overflow: hidden;
 	cursor: pointer;
+	background: transparent;
 	border: 1px solid #ddd;
 	border-radius: 2px;
 }
@@ -112,64 +114,74 @@ td.roles {
 .onoffswitch-inner {
 	width: 200%;
 	margin-left: -100%;
-	-moz-transition: margin 0.3s ease-in 0s;
-	-webkit-transition: margin 0.3s ease-in 0s;
-	-o-transition: margin 0.3s ease-in 0s;
-	transition: margin 0.3s ease-in 0s;
+	border-radius: 2px;
+	-moz-transition: margin 0.2s ease-in 0s;
+	-webkit-transition: margin 0.2s ease-in 0s;
+	-o-transition: margin 0.2s ease-in 0s;
+	transition: margin 0.2s ease-in 0s;
 }
 
 .onoffswitch-inner:before, .onoffswitch-inner:after {
 	float: left;
 	width: 50%;
-	height: 22px;
-	padding: 0;
-	line-height: 22px;
-	font-size: 12px;
-	color: white;
-	font-family: Trebuchet, Arial, sans-serif;
 	font-weight: normal;
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
+	-o-box-sizing: border-box;
 	box-sizing: border-box;
+	height: 22px;
+	line-height: 22px;
+	font-size: 12px;
 }
 
 .onoffswitch-inner:before {
 	content: "On";
 	padding-left: 5px;
-	background-color: #00a0d2;
-	color: #fff;
+	border-bottom:none;
+/*	background-color: #00a0d2;
+	color: #fff;  /* inherit from button props */
 }
 
 .onoffswitch-inner:after {
 	content: "Off";
 	padding-right: 5px;
-	background-color: #fff;
-	color: #999;
+	background-color: #ddd;
 	text-align: right;
 }
 
 .onoffswitch-switch {
 	width: 22px;
-	margin: 0px;
+	height: 22px;
 	background: #fff;
+	color: #ddd;
 	border: 1px solid #ddd;
 	border-radius: 2px;
 	position: absolute;
 	top: 0;
-	bottom: 0;
-	right: 26px;
-	-moz-transition: all 0.3s ease-in 0s;
-	-webkit-transition: all 0.3s ease-in 0s;
-	-o-transition: all 0.3s ease-in 0s;
-	transition: all 0.3s ease-in 0s;
-	background-image: -moz-linear-gradient(center top, rgba(0, 0, 0, 0.1) 0%,
-		rgba(0, 0, 0, 0) 100%);
-	background-image: -webkit-linear-gradient(center top, rgba(0, 0, 0, 0.1)
-		0%, rgba(0, 0, 0, 0) 100%);
-	background-image: -o-linear-gradient(center top, rgba(0, 0, 0, 0.1) 0%,
-		rgba(0, 0, 0, 0) 100%);
-	background-image: linear-gradient(center top, rgba(0, 0, 0, 0.1) 0%,
-		rgba(0, 0, 0, 0) 100%);
+	bottom:0;
+	right: 27px;
+	-moz-transition: all 0.2s ease-in 0s;
+	-webkit-transition: all 0.2s ease-in 0s;
+	-o-transition: all 0.2s ease-in 0s;
+	transition: all 0.2s ease-in 0s;
+}
+
+.onoffswitch-switch:hover {
+	color: #aaa;
+	border-color: #aaa;
+}
+
+.onoffswitch-switch:after {
+	margin: 0;
+	outline:0;
+	display: inline-block;
+	font: 400 16px/16px dashicons;
+	content: "\f228";
+	padding: 3px 0 0 3px;
+	text-align:left;
+	text-decoration: none;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 .onoffswitch-checkbox:checked+.onoffswitch-label .onoffswitch-inner {
