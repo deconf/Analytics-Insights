@@ -139,6 +139,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Enhancement: JavaScript code cleanup and optimization
 - Enhancement: memory usage optimization
 - Enhancement: German translation updated
+- Enhancement: small assets fixes 
 
 = 4.7.3 =
 - Enhancement: Russian translation
