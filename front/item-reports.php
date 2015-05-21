@@ -19,7 +19,7 @@ if (! class_exists('GADWP_Frontend_Item_Reports')) {
         public function __construct()
         {
             $this->gadwp = GADWP();
-            
+
             add_filter('the_content', array(
                 $this,
                 'add_content'
@@ -49,28 +49,28 @@ if (! class_exists('GADWP_Frontend_Item_Reports')) {
 
         public function add_content($content)
         {
-            
+
             if (! GADWP_Tools::check_roles($this->gadwp->config->options['ga_dash_access_front']) || ! ($this->gadwp->config->options['ga_dash_frontend_stats'] || $this->gadwp->config->options['ga_dash_frontend_keywords'])) {
                 return $content;
             }
-            
+
             if (($this->gadwp->config->options['ga_dash_frontend_stats'] && $this->gadwp->config->options['ga_dash_frontend_keywords'])){
                 $npcounter = 1;
             }else{
                 $npcounter = 0;
             }
-            
+
             if ((is_page() || is_single()) && ! is_preview()) {
-                
+
                 $page_url = $_SERVER["REQUEST_URI"];
 
                 //Encode URL
-                $page_url = rawurlencode($page_url);
-                
+                $page_url = rawurlencode(rawurldecode($page_url));
+
                 $content .= '<script type="text/javascript">
-                  
+
                   gadash_firstclick = true;
-                    
+
                   function checknpcounter(max) {
                     	try {
                     		if (npcounter == max) {
@@ -79,15 +79,15 @@ if (! class_exists('GADWP_Frontend_Item_Reports')) {
                     			npcounter++;
                     			NProgress.set((1/(max+1))*npcounter);
                     		}
-                    	} catch(e) {}		
+                    	} catch(e) {}
                     }
 
                     npcounter = 0;
-                    
+
 					jQuery(document).ready(function(){
 					 	jQuery("#gadwp-title").click(function(){
 							  	if (gadash_firstclick){
-                                        
+
                                 	try {
                                     	NProgress.configure({ parent: "#gadwp-progressbar" });
                                         NProgress.configure({ showSpinner: false });
@@ -95,11 +95,11 @@ if (! class_exists('GADWP_Frontend_Item_Reports')) {
                                 	} catch(e) {
                                 		jQuery("#gadwp-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red","font-size":"13px"});
                                 		jQuery("#gadwp-progressbar").html("' . __("A JavaScript Error is blocking plugin resources!", 'ga-dash') . '");
-                                	} 
-                                		    
+                                	}
+
 									if(typeof ga_dash_drawpagesessions == "function"){
 										jQuery.post("' . admin_url('admin-ajax.php') . '", {action: "gadash_get_frontend_pagereports",gadash_pageurl: "' . $page_url . '",query: "pageviews",gadash_security_pagereports: "' . wp_create_nonce('gadash_get_frontend_pagereports') . '"}, function(response){
-										  if (!jQuery.isNumeric(response)){  
+										  if (!jQuery.isNumeric(response)){
                                             if (jQuery.isArray(response)){
                                             	gadash_pagesessions = response;
                                        		    google.setOnLoadCallback(ga_dash_drawpagesessions(gadash_pagesessions));
@@ -108,17 +108,17 @@ if (! class_exists('GADWP_Frontend_Item_Reports')) {
                                      			jQuery("#gadwp-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red","font-size":"13px"});
                                      			jQuery("#gadwp-progressbar").html("' . __("Invalid response, more details in JavaScript Console (F12).", 'ga-dash') . '");
                                      			console.log("\n********************* GADWP Log ********************* \n\n"+response);
-                                     		} 										  
+                                     		}
 										  }else{
-									        jQuery("#gadwp-sessions").css({"background-color":"#F7F7F7","height":"auto","padding-top":"30px","padding-bottom":"30px","color":"#000","text-align":"center"});  
+									        jQuery("#gadwp-sessions").css({"background-color":"#F7F7F7","height":"auto","padding-top":"30px","padding-bottom":"30px","color":"#000","text-align":"center"});
 									        jQuery("#gadwp-sessions").html("' . __("This report is unavailable", 'ga-dash') . ' ("+response+")");
-									        checknpcounter('.$npcounter.');    
-                                          }	
+									        checknpcounter('.$npcounter.');
+                                          }
 										});
 									}
 									if(typeof ga_dash_drawpagesearches == "function"){
 										jQuery.post("' . admin_url('admin-ajax.php') . '", {action: "gadash_get_frontend_pagereports",gadash_pageurl: "' . $page_url . '",query: "searches",gadash_security_pagereports: "' . wp_create_nonce('gadash_get_frontend_pagereports') . '"}, function(response){
-                                            if (!jQuery.isNumeric(response)){										  
+                                            if (!jQuery.isNumeric(response)){
                                               if (jQuery.isArray(response)){
                                                   gadash_pagesearches = response;
                                            		  google.setOnLoadCallback(ga_dash_drawpagesearches(gadash_pagesearches));
@@ -127,12 +127,12 @@ if (! class_exists('GADWP_Frontend_Item_Reports')) {
                                          		  jQuery("#gadwp-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red","font-size":"13px"});
                                          		  jQuery("#gadwp-progressbar").html("' . __("Invalid response, more details in JavaScript Console (F12).", 'ga-dash') . '");
                                          		  console.log("\n********************* GADWP Log ********************* \n\n"+response);
-                                       		   }										    
+                                       		   }
 											}else{
 										        jQuery("#gadwp-searches").css({"background-color":"#F7F7F7","height":"auto","padding-top":"30px","padding-bottom":"30px","color":"#000","text-align":"center"});
 										        jQuery("#gadwp-searches").html("' . __("This report is unavailable", 'ga-dash') . ' ("+response+")");
 										        checknpcounter('.$npcounter.');
-                                            }	
+                                            }
 										});
 									}
     							gadash_firstclick = false;
@@ -151,7 +151,7 @@ if (! class_exists('GADWP_Frontend_Item_Reports')) {
                     $content .= '
 			google.load("visualization", "1", {packages:["corechart"]});
 			function ga_dash_drawpagesessions(gadash_pagesessions) {
-	
+
 			var data = google.visualization.arrayToDataTable(gadash_pagesessions);
 
 			var options = {
@@ -165,7 +165,7 @@ if (! class_exists('GADWP_Frontend_Item_Reports')) {
 
 			var chart = new google.visualization.AreaChart(document.getElementById("gadwp-sessions"));
 			chart.draw(data, options);
-            checknpcounter('.$npcounter.');      
+            checknpcounter('.$npcounter.');
 			}';
                 }
                 if ($this->gadwp->config->options['ga_dash_frontend_keywords']) {
@@ -192,7 +192,7 @@ if (! class_exists('GADWP_Frontend_Item_Reports')) {
 									<div id="gadwp-title">
 									<a href="#gadwp">' . __('Google Analytics Reports', "ga-dash") . ' <span id="gadwp-arrow">&#x25BC;</span></a>
 									</div>
-									<div id="gadwp-progressbar"></div>    
+									<div id="gadwp-progressbar"></div>
 									<div id="gadwp-content">
 										' . ($this->gadwp->config->options['ga_dash_frontend_stats'] ? '<div id="gadwp-sessions"></div>' : '') . ($this->gadwp->config->options['ga_dash_frontend_keywords'] ? '<div id="gadwp-searches" class="gadwp-spinner"></div>' : '') . '
 									</div>

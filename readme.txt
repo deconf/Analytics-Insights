@@ -139,7 +139,9 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Enhancement: JavaScript code cleanup and optimization
 - Enhancement: memory usage optimization
 - Enhancement: German translation updated
-- Enhancement: small assets fixes 
+- Enhancement: Romanian translation updated
+- Enhancement: small assets fixes, UX improvements, props by [Adrian Pop](https://github.com/adipop) 
+- Bug Fix: avoid double encoding for UTF-8 URIs
 
 = 4.7.3 =
 - Enhancement: Russian translation
