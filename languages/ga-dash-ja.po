@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/google-analytics-"
 "dashboard-for-wp\n"
-"POT-Creation-Date: 2015-05-20 21:46+0200\n"
-"PO-Revision-Date: 2015-05-20 21:46+0200\n"
+"POT-Creation-Date: 2015-05-21 19:47+0200\n"
+"PO-Revision-Date: 2015-05-21 19:47+0200\n"
 "Last-Translator: Alin Marcu <admin@deconf.com>\n"
 "Language-Team: heysister721 <tk197709141545@gmail.com>\n"
 "Language: ja\n"
@@ -18,43 +18,43 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-SearchPath-0: ../.\n"
 
-#: .././admin/item-reports.php:67
+#: .././admin/item-reports.php:52
 msgid "Analytics"
 msgstr "アナリティクス"
 
 #: .././admin/settings.php:94 .././admin/settings.php:197
-#: .././admin/settings.php:328 .././admin/settings.php:800
-#: .././admin/settings.php:1069
+#: .././admin/settings.php:328 .././admin/settings.php:803
+#: .././admin/settings.php:1079
 msgid "Settings saved."
 msgstr "設定を保存しました。"
 
 #: .././admin/settings.php:96 .././admin/settings.php:199
-#: .././admin/settings.php:330 .././admin/settings.php:777
-#: .././admin/settings.php:787 .././admin/settings.php:796
-#: .././admin/settings.php:802 .././admin/settings.php:814
-#: .././admin/settings.php:1030 .././admin/settings.php:1055
-#: .././admin/settings.php:1065 .././admin/settings.php:1071
-#: .././admin/settings.php:1083
+#: .././admin/settings.php:330 .././admin/settings.php:780
+#: .././admin/settings.php:790 .././admin/settings.php:799
+#: .././admin/settings.php:805 .././admin/settings.php:817
+#: .././admin/settings.php:1040 .././admin/settings.php:1065
+#: .././admin/settings.php:1075 .././admin/settings.php:1081
+#: .././admin/settings.php:1093
 msgid "Cheating Huh?"
 msgstr "修正しますか？"
 
 #: .././admin/settings.php:100 .././admin/settings.php:203
-#: .././admin/settings.php:334 .././admin/settings.php:644
-#: .././admin/settings.php:828 .././admin/settings.php:1096
+#: .././admin/settings.php:334 .././admin/settings.php:647
+#: .././admin/settings.php:832 .././admin/settings.php:1107
 #, php-format
 msgid "Something went wrong, check %1$s or %2$s."
 msgstr "問題が発生しました。%2$sするか、%1$sを確認してください。"
 
 #: .././admin/settings.php:100 .././admin/settings.php:203
-#: .././admin/settings.php:334 .././admin/settings.php:644
-#: .././admin/settings.php:828 .././admin/settings.php:1096
-#: .././admin/setup.php:96 .././admin/setup.php:119
+#: .././admin/settings.php:334 .././admin/settings.php:647
+#: .././admin/settings.php:832 .././admin/settings.php:1107
+#: .././admin/setup.php:82 .././admin/setup.php:101
 msgid "Errors & Debug"
 msgstr "エラー＆デバッグ"
 
 #: .././admin/settings.php:100 .././admin/settings.php:203
-#: .././admin/settings.php:334 .././admin/settings.php:644
-#: .././admin/settings.php:828 .././admin/settings.php:1096
+#: .././admin/settings.php:334 .././admin/settings.php:647
+#: .././admin/settings.php:832 .././admin/settings.php:1107
 msgid "authorize the plugin"
 msgstr "プラグインを認可"
 
@@ -79,8 +79,8 @@ msgid "show page searches (after each article)"
 msgstr ""
 
 #: .././admin/settings.php:175 .././admin/settings.php:308
-#: .././admin/settings.php:602 .././admin/settings.php:945
-#: .././admin/settings.php:1233
+#: .././admin/settings.php:605 .././admin/settings.php:952
+#: .././admin/settings.php:1245
 msgid "Save Changes"
 msgstr "変更を保存"
 
@@ -130,16 +130,16 @@ msgstr "Google Analytics トラッキングコード"
 msgid "Basic Settings"
 msgstr "基本設定"
 
-#: .././admin/settings.php:352 .././admin/settings.php:418
+#: .././admin/settings.php:352 .././admin/settings.php:417
 msgid "Events Tracking"
 msgstr "追跡イベント"
 
-#: .././admin/settings.php:353 .././admin/settings.php:466
+#: .././admin/settings.php:353 .././admin/settings.php:465
 msgid "Custom Definitions"
 msgstr "カスタム定義"
 
-#: .././admin/settings.php:354 .././admin/settings.php:564
-#: .././admin/settings.php:1216
+#: .././admin/settings.php:354 .././admin/settings.php:563
+#: .././admin/settings.php:1228
 msgid "Exclude Tracking"
 msgstr "追跡を除外する"
 
@@ -147,161 +147,161 @@ msgstr "追跡を除外する"
 msgid "Advanced Settings"
 msgstr "拡張設定"
 
-#: .././admin/settings.php:363
+#: .././admin/settings.php:362
 msgid "Tracking Settings"
 msgstr "トラッキング設定"
 
-#: .././admin/settings.php:366
+#: .././admin/settings.php:365
 msgid "Tracking Options:"
 msgstr "オプションのトラッキング："
 
-#: .././admin/settings.php:368
+#: .././admin/settings.php:367
 msgid "Disabled"
 msgstr "無効"
 
-#: .././admin/settings.php:369
+#: .././admin/settings.php:368
 msgid "Enabled"
 msgstr "有効"
 
-#: .././admin/settings.php:377 .././admin/settings.php:892
-#: .././admin/settings.php:913 .././admin/settings.php:1189
+#: .././admin/settings.php:376 .././admin/settings.php:897
+#: .././admin/settings.php:919 .././admin/settings.php:1201
 #: .././admin/widgets.php:71
 msgid "View Name:"
 msgstr "ビュー名："
 
-#: .././admin/settings.php:377 .././admin/settings.php:913
+#: .././admin/settings.php:376 .././admin/settings.php:919
 msgid "Tracking ID:"
 msgstr "トラッキング ID:"
 
-#: .././admin/settings.php:377 .././admin/settings.php:913
+#: .././admin/settings.php:376 .././admin/settings.php:919
 msgid "Default URL:"
 msgstr "デフォルトのURL："
 
-#: .././admin/settings.php:377 .././admin/settings.php:913
+#: .././admin/settings.php:376 .././admin/settings.php:919
 msgid "Time Zone:"
 msgstr "タイムゾーン:"
 
-#: .././admin/settings.php:382
+#: .././admin/settings.php:381
 msgid "Basic Tracking"
 msgstr "基本的なトラッキング"
 
-#: .././admin/settings.php:385
+#: .././admin/settings.php:384
 msgid "Tracking Type:"
 msgstr "トラッキングの種類："
 
-#: .././admin/settings.php:387
+#: .././admin/settings.php:386
 msgid "Classic Analytics"
 msgstr "クラシックアナリティクス"
 
-#: .././admin/settings.php:388
+#: .././admin/settings.php:387
 msgid "Universal Analytics"
 msgstr "ユニバーサルアナリティクス"
 
-#: .././admin/settings.php:399
+#: .././admin/settings.php:398
 msgid "anonymize IPs while tracking"
 msgstr ""
 
-#: .././admin/settings.php:410
+#: .././admin/settings.php:409
 msgid "enable remarketing, demographics and interests reports"
 msgstr ""
 
-#: .././admin/settings.php:428
+#: .././admin/settings.php:427
 msgid "track downloads, mailto and outbound links"
 msgstr ""
 
-#: .././admin/settings.php:432
+#: .././admin/settings.php:431
 msgid "Downloads Regex:"
 msgstr "ダウンロードの正規表現："
 
-#: .././admin/settings.php:443
+#: .././admin/settings.php:442
 msgid "track affiliate links matching this regex"
 msgstr ""
 
-#: .././admin/settings.php:447
+#: .././admin/settings.php:446
 msgid "Affiliates Regex:"
 msgstr "アフィリエイトの正規表現："
 
-#: .././admin/settings.php:458
+#: .././admin/settings.php:457
 msgid "track fragment identifiers, hashmarks (#) in URI links"
 msgstr ""
 
-#: .././admin/settings.php:469
+#: .././admin/settings.php:468
 msgid "Authors:"
 msgstr "作者："
 
-#: .././admin/settings.php:477
+#: .././admin/settings.php:476
 msgid "Publication Year:"
 msgstr "発行年："
 
-#: .././admin/settings.php:485
+#: .././admin/settings.php:484
 msgid "Categories:"
 msgstr "カテゴリー："
 
-#: .././admin/settings.php:493
+#: .././admin/settings.php:492
 msgid "User Type:"
 msgstr "ユーザータイプ："
 
-#: .././admin/settings.php:505
+#: .././admin/settings.php:504
 msgid "Advanced Tracking"
 msgstr "高度なトラッキング"
 
-#: .././admin/settings.php:508
+#: .././admin/settings.php:507
 msgid "Page Speed SR:"
 msgstr "ページスピードSR："
 
-#: .././admin/settings.php:519
+#: .././admin/settings.php:518
 msgid "exclude events from bounce-rate calculation"
 msgstr ""
 
-#: .././admin/settings.php:530
+#: .././admin/settings.php:529
 msgid "enable enhanced link attribution"
 msgstr ""
 
-#: .././admin/settings.php:541
+#: .././admin/settings.php:540
 msgid "enable AdSense account linking"
 msgstr ""
 
-#: .././admin/settings.php:552
+#: .././admin/settings.php:551
 msgid "enable cross domain tracking"
 msgstr ""
 
-#: .././admin/settings.php:556
+#: .././admin/settings.php:555
 msgid "Cross Domains:"
 msgstr "クロスドメイン:"
 
-#: .././admin/settings.php:567
+#: .././admin/settings.php:566
 msgid "Exclude tracking for:"
 msgstr "トラッキング対象外:"
 
-#: .././admin/settings.php:648
+#: .././admin/settings.php:651
 msgid "Google Analytics Errors & Debugging"
 msgstr "Google Analyticsのエラーとデバッグ"
 
-#: .././admin/settings.php:658
+#: .././admin/settings.php:661
 msgid "Errors & Details"
 msgstr "エラーとデバッグ"
 
-#: .././admin/settings.php:659
+#: .././admin/settings.php:662
 msgid "Plugin Settings"
 msgstr "プラグイン設定"
 
-#: .././admin/settings.php:667
+#: .././admin/settings.php:670
 msgid "Last Error detected"
 msgstr "エラーを検出"
 
-#: .././admin/settings.php:673 .././admin/settings.php:686
+#: .././admin/settings.php:676 .././admin/settings.php:689
 msgid "None"
 msgstr "なし"
 
-#: .././admin/settings.php:680
+#: .././admin/settings.php:683
 msgid "Error Details"
 msgstr "エラーの詳細"
 
-#: .././admin/settings.php:700
+#: .././admin/settings.php:703
 msgid "Plugin Configuration"
 msgstr "プラグインの設定"
 
-#: .././admin/settings.php:722 .././admin/settings.php:980
+#: .././admin/settings.php:725 .././admin/settings.php:990
 msgid ""
 "Loading the required libraries. If this results in a blank screen or a fatal "
 "error, try this solution:"
@@ -309,15 +309,15 @@ msgstr ""
 "必要なライブラリをロードしています。空白の画面または致命的なエラーが発生した"
 "場合は、このソリューションを試してみてください:"
 
-#: .././admin/settings.php:722
+#: .././admin/settings.php:725
 msgid "Library conflicts between WordPress plugins"
 msgstr ""
 
-#: .././admin/settings.php:737 .././admin/settings.php:997
+#: .././admin/settings.php:740 .././admin/settings.php:1007
 msgid "Plugin authorization succeeded."
 msgstr "プラグインの認可が成功しました。"
 
-#: .././admin/settings.php:752 .././admin/settings.php:1021
+#: .././admin/settings.php:755 .././admin/settings.php:1031
 msgid ""
 "The access code is <strong>NOT</strong> your <strong>Tracking ID</strong> "
 "(UA-XXXXX-X). Try again, and use the red link to get your access code"
@@ -326,35 +326,35 @@ msgstr ""
 "りません</strong>。アクセスコードを取得するためには赤いリンクを使用して、再度"
 "実行してください。"
 
-#: .././admin/settings.php:775 .././admin/settings.php:1053
+#: .././admin/settings.php:778 .././admin/settings.php:1063
 msgid "Cleared Cache."
 msgstr "キャッシュをクリアしました。"
 
-#: .././admin/settings.php:784 .././admin/settings.php:1062
+#: .././admin/settings.php:787 .././admin/settings.php:1072
 msgid "Token Reseted and Revoked."
 msgstr "トークンをリセットし失効させました。"
 
-#: .././admin/settings.php:794
+#: .././admin/settings.php:797
 msgid "All errors reseted."
 msgstr "全てのエラーをリセットしました。"
 
-#: .././admin/settings.php:807 .././admin/settings.php:1076
+#: .././admin/settings.php:810 .././admin/settings.php:1086
 msgid "All other domains/properties were removed."
 msgstr "全ての他のドメイン/プロパティが削除されました。"
 
-#: .././admin/settings.php:819 .././admin/settings.php:1088
+#: .././admin/settings.php:822 .././admin/settings.php:1098
 msgid "Google Analytics Settings"
 msgstr "Google アナリティクスの設定"
 
-#: .././admin/settings.php:833 .././admin/settings.php:1101
+#: .././admin/settings.php:837 .././admin/settings.php:1112
 msgid "Use the red link (see below) to generate and get your access code!"
 msgstr "アクセスコードを取得するには、赤リンク（下記参照）を使用してください！"
 
-#: .././admin/settings.php:844 .././admin/settings.php:1129
+#: .././admin/settings.php:848 .././admin/settings.php:1140
 msgid "Plugin Authorization"
 msgstr "プラグインを認可"
 
-#: .././admin/settings.php:849 .././admin/settings.php:1133
+#: .././admin/settings.php:853 .././admin/settings.php:1144
 #, php-format
 msgid ""
 "You should watch the %1$s and read this %2$s before proceeding to "
@@ -364,251 +364,250 @@ msgstr ""
 "プラグインを認可する前に%1$sを視聴し、%2$sを一読ください。 このプラグインを利"
 "用するにはGoogle アナリティクスのアカウントの適切な設定が必要です。"
 
-#: .././admin/settings.php:849 .././admin/settings.php:1133
+#: .././admin/settings.php:853 .././admin/settings.php:1144
 msgid "video"
 msgstr "動画"
 
-#: .././admin/settings.php:849 .././admin/settings.php:1133
+#: .././admin/settings.php:853 .././admin/settings.php:1144
 msgid "tutorial"
 msgstr "チュートリアル"
 
-#: .././admin/settings.php:854 .././admin/settings.php:1140
+#: .././admin/settings.php:858 .././admin/settings.php:1151
 msgid "use your own API Project credentials"
 msgstr ""
 
-#: .././admin/settings.php:858 .././admin/settings.php:1147
+#: .././admin/settings.php:863 .././admin/settings.php:1159
 msgid "API Key:"
 msgstr "API キー:"
 
-#: .././admin/settings.php:862 .././admin/settings.php:1151
+#: .././admin/settings.php:867 .././admin/settings.php:1163
 msgid "Client ID:"
 msgstr "クライアント ID:"
 
-#: .././admin/settings.php:866 .././admin/settings.php:1155
+#: .././admin/settings.php:871 .././admin/settings.php:1167
 msgid "Client Secret:"
 msgstr "クライアント Secret:"
 
-#: .././admin/settings.php:876 .././admin/settings.php:1165
+#: .././admin/settings.php:881 .././admin/settings.php:1177
 msgid "Clear Authorization"
 msgstr "認可のクリア"
 
-#: .././admin/settings.php:876 .././admin/settings.php:951
-#: .././admin/settings.php:1165 .././admin/settings.php:1240
+#: .././admin/settings.php:881 .././admin/settings.php:959
+#: .././admin/settings.php:1177 .././admin/settings.php:1254
 msgid "Clear Cache"
 msgstr "キャッシュを消去"
 
-#: .././admin/settings.php:876
+#: .././admin/settings.php:881
 msgid "Reset Errors"
 msgstr "エラーをリセット"
 
-#: .././admin/settings.php:882 .././admin/setup.php:80
-#: .././admin/setup.php:115
+#: .././admin/settings.php:887 .././admin/setup.php:70 .././admin/setup.php:98
 msgid "General Settings"
 msgstr "一般設定"
 
-#: .././admin/settings.php:885
+#: .././admin/settings.php:890
 msgid "Select View:"
 msgstr ""
 
-#: .././admin/settings.php:896 .././admin/settings.php:1193
+#: .././admin/settings.php:901 .././admin/settings.php:1205
 msgid "Property not found"
 msgstr "プロパティが見つかりません"
 
-#: .././admin/settings.php:901
+#: .././admin/settings.php:907
 msgid "Lock Selection"
 msgstr ""
 
-#: .././admin/settings.php:919
+#: .././admin/settings.php:926
 msgid "Theme Color:"
 msgstr "テーマカラー："
 
-#: .././admin/settings.php:927 .././admin/settings.php:1202
+#: .././admin/settings.php:934 .././admin/settings.php:1214
 msgid "Automatic Updates"
 msgstr "自動アップデート"
 
-#: .././admin/settings.php:937 .././admin/settings.php:1212
+#: .././admin/settings.php:944 .././admin/settings.php:1224
 msgid ""
 "automatic updates for minor versions (security and maintenance releases only)"
 msgstr ""
 "マイナーバージョンの自動アップデート(セキュリティ&メンテナンスリリースのみ)"
 
-#: .././admin/settings.php:951 .././admin/settings.php:1240
+#: .././admin/settings.php:959 .././admin/settings.php:1254
 #: .././admin/widgets.php:42
 msgid "Authorize Plugin"
 msgstr "プラグインを認可"
 
-#: .././admin/settings.php:1027
+#: .././admin/settings.php:1037
 msgid "Properties refreshed."
 msgstr "プロパティを更新しました。"
 
-#: .././admin/settings.php:1111
+#: .././admin/settings.php:1122
 msgid "Network Setup"
 msgstr "ネットワーク設定"
 
-#: .././admin/settings.php:1121
+#: .././admin/settings.php:1132
 msgid "use a single Google Analytics account for the entire network"
 msgstr ""
 
-#: .././admin/settings.php:1165
+#: .././admin/settings.php:1177
 msgid "Refresh Properties"
 msgstr "プロパティを最新の情報に更新"
 
-#: .././admin/settings.php:1171
+#: .././admin/settings.php:1183
 msgid "Properties/Views Settings"
 msgstr "プロパティ/ビューの設定"
 
-#: .././admin/settings.php:1226
+#: .././admin/settings.php:1238
 msgid "exclude Super Admin tracking for the entire network"
 msgstr ""
 
-#: .././admin/settings.php:1271
+#: .././admin/settings.php:1285
 msgid "Setup Tutorial & Demo"
 msgstr "セットアップ：チュートリアル＆デモ"
 
-#: .././admin/settings.php:1279
+#: .././admin/settings.php:1293
 msgid "Support & Reviews"
 msgstr "サポート＆レビュー"
 
-#: .././admin/settings.php:1286
+#: .././admin/settings.php:1300
 #, php-format
 msgid "Plugin documentation and support on %s"
 msgstr ""
 
-#: .././admin/settings.php:1293
+#: .././admin/settings.php:1307
 #, php-format
 msgid "Your feedback and review are both important, %s!"
 msgstr "フィードバックやレビューはどちらも大切です。%sしてください！"
 
-#: .././admin/settings.php:1293
+#: .././admin/settings.php:1307
 msgid "rate this plugin"
 msgstr "このプラグインを評価"
 
-#: .././admin/settings.php:1299
+#: .././admin/settings.php:1313
 msgid "Further Reading"
 msgstr "参考文献"
 
-#: .././admin/settings.php:1306
+#: .././admin/settings.php:1320
 #, php-format
 msgid "%s by moving your website to HTTPS/SSL."
 msgstr "ウェブサイトをHTTPS/SSLに移行し%s。"
 
-#: .././admin/settings.php:1306
+#: .././admin/settings.php:1320
 msgid "Improve search rankings"
 msgstr "検索ランキングを向上させる"
 
-#: .././admin/settings.php:1313
+#: .././admin/settings.php:1327
 #, php-format
 msgid "Other %s written by the same author"
 msgstr "同じ作者の他の%s"
 
-#: .././admin/settings.php:1313
+#: .././admin/settings.php:1327
 msgid "WordPress Plugins"
 msgstr "WordPressのプラグイン"
 
-#: .././admin/settings.php:1319
+#: .././admin/settings.php:1333
 msgid "Other Services"
 msgstr "その他のサービス"
 
-#: .././admin/settings.php:1326
+#: .././admin/settings.php:1340
 #, php-format
 msgid "Speed up your website and plug into a whole %s"
 msgstr ""
 
-#: .././admin/settings.php:1326
+#: .././admin/settings.php:1340
 msgid "new level of site speed"
 msgstr "新しいレベルのサイト速度"
 
-#: .././admin/settings.php:1333
+#: .././admin/settings.php:1347
 #, php-format
 msgid "%s service with users tracking at IP level."
 msgstr "IPレベルでのユーザートラッキングのできる%s。"
 
-#: .././admin/settings.php:1333
+#: .././admin/settings.php:1347
 msgid "Web Analytics"
 msgstr "ウェブ解析"
 
-#: .././admin/setup.php:76 .././admin/setup.php:111
+#: .././admin/setup.php:67 .././admin/setup.php:95
 msgid "Google Analytics"
 msgstr "Google アナリティクス"
 
-#: .././admin/setup.php:84
+#: .././admin/setup.php:73
 msgid "Backend Settings"
 msgstr "バックエンド設定"
 
-#: .././admin/setup.php:88
+#: .././admin/setup.php:76
 msgid "Frontend Settings"
 msgstr "フロントエンド設定"
 
-#: .././admin/setup.php:92
+#: .././admin/setup.php:79
 msgid "Tracking Code"
 msgstr "トラッキングコード"
 
-#: .././admin/setup.php:195 .././admin/widgets.php:126
+#: .././admin/setup.php:169 .././admin/widgets.php:126
 msgid "Today"
 msgstr "今日"
 
-#: .././admin/setup.php:196 .././admin/widgets.php:127
+#: .././admin/setup.php:170 .././admin/widgets.php:127
 msgid "Yesterday"
 msgstr "昨日"
 
-#: .././admin/setup.php:197 .././admin/widgets.php:128
+#: .././admin/setup.php:171 .././admin/widgets.php:128
 #: .././front/widgets.php:74 .././front/widgets.php:182
 msgid "Last 7 Days"
 msgstr "1週間"
 
-#: .././admin/setup.php:198 .././admin/widgets.php:130
+#: .././admin/setup.php:172 .././admin/widgets.php:130
 #: .././front/widgets.php:80 .././front/widgets.php:184
 msgid "Last 30 Days"
 msgstr "30日間"
 
-#: .././admin/setup.php:199 .././admin/widgets.php:131
+#: .././admin/setup.php:173 .././admin/widgets.php:131
 msgid "Last 90 Days"
 msgstr "90日間"
 
-#: .././admin/setup.php:202 .././admin/setup.php:218
+#: .././admin/setup.php:175 .././admin/setup.php:190
 msgid "Unique Views"
 msgstr "ユニークPV"
 
-#: .././admin/setup.php:203 .././admin/setup.php:219
+#: .././admin/setup.php:176 .././admin/setup.php:191
 #: .././admin/widgets.php:136 .././admin/widgets.php:875
 #: .././tools/gapi.php:391
 msgid "Users"
 msgstr "ユーザー"
 
-#: .././admin/setup.php:204 .././admin/widgets.php:137
+#: .././admin/setup.php:177 .././admin/widgets.php:137
 msgid "Organic"
 msgstr "オーガニック検索"
 
-#: .././admin/setup.php:205 .././admin/setup.php:220
+#: .././admin/setup.php:178 .././admin/setup.php:192
 #: .././admin/widgets.php:138 .././admin/widgets.php:879
 #: .././tools/gapi.php:394
 msgid "Page Views"
 msgstr "PV"
 
-#: .././admin/setup.php:206 .././admin/setup.php:221
+#: .././admin/setup.php:179 .././admin/setup.php:193
 #: .././admin/widgets.php:139 .././admin/widgets.php:883
 #: .././tools/gapi.php:397
 msgid "Bounce Rate"
 msgstr "直帰率"
 
-#: .././admin/setup.php:207 .././admin/widgets.php:140
+#: .././admin/setup.php:180 .././admin/widgets.php:140
 msgid "Location"
 msgstr "地域"
 
-#: .././admin/setup.php:208 .././admin/widgets.php:142 .././tools/gapi.php:566
+#: .././admin/setup.php:181 .././admin/widgets.php:142 .././tools/gapi.php:566
 msgid "Referrers"
 msgstr "リファラー"
 
-#: .././admin/setup.php:209 .././admin/widgets.php:143 .././tools/gapi.php:612
+#: .././admin/setup.php:182 .././admin/widgets.php:143 .././tools/gapi.php:612
 #: .././tools/gapi.php:918
 msgid "Searches"
 msgstr "検索結果"
 
-#: .././admin/setup.php:210 .././admin/widgets.php:144
+#: .././admin/setup.php:183 .././admin/widgets.php:144
 msgid "Traffic Details"
 msgstr "トラフィック詳細"
 
-#: .././admin/setup.php:213 .././admin/widgets.php:510
+#: .././admin/setup.php:185 .././admin/widgets.php:510
 #: .././admin/widgets.php:607 .././admin/widgets.php:805
 #: .././admin/widgets.php:917 .././front/item-reports.php:97
 msgid "A JavaScript Error is blocking plugin resources!"
@@ -616,31 +615,31 @@ msgstr ""
 "JavaScriptのエラーが、プラグインのリソースをブロックしている可能性がありま"
 "す。"
 
-#: .././admin/setup.php:214 .././admin/widgets.php:713
+#: .././admin/setup.php:186 .././admin/widgets.php:713
 msgid "Traffic Mediums"
 msgstr "トラフィック平均"
 
-#: .././admin/setup.php:215 .././admin/widgets.php:729
+#: .././admin/setup.php:187 .././admin/widgets.php:729
 msgid "Visitor Type"
 msgstr "訪問者"
 
-#: .././admin/setup.php:216 .././admin/widgets.php:745
+#: .././admin/setup.php:188 .././admin/widgets.php:745
 msgid "Social Networks"
 msgstr "SNS"
 
-#: .././admin/setup.php:217 .././admin/widgets.php:761
+#: .././admin/setup.php:189 .././admin/widgets.php:761
 msgid "Search Engines"
 msgstr "検索エンジン"
 
-#: .././admin/setup.php:222 .././admin/widgets.php:887
+#: .././admin/setup.php:194 .././admin/widgets.php:887
 msgid "Organic Search"
 msgstr "オーガニック検索"
 
-#: .././admin/setup.php:223 .././admin/widgets.php:891
+#: .././admin/setup.php:195 .././admin/widgets.php:891
 msgid "Pages/Session"
 msgstr "ページ/セッション"
 
-#: .././admin/setup.php:224 .././admin/widgets.php:523
+#: .././admin/setup.php:196 .././admin/widgets.php:523
 #: .././admin/widgets.php:541 .././admin/widgets.php:620
 #: .././admin/widgets.php:638 .././admin/widgets.php:657
 #: .././admin/widgets.php:676 .././admin/widgets.php:696
@@ -651,11 +650,11 @@ msgid "Invalid response, more details in JavaScript Console (F12)."
 msgstr ""
 "応答がありません。JavaScriptコンソールでの詳細（F12）をご確認ください。"
 
-#: .././admin/setup.php:225
+#: .././admin/setup.php:197
 msgid "Not enough data collected"
 msgstr "充分なデータがありません"
 
-#: .././admin/setup.php:226 .././admin/widgets.php:528
+#: .././admin/setup.php:198 .././admin/widgets.php:528
 #: .././admin/widgets.php:546 .././admin/widgets.php:625
 #: .././admin/widgets.php:643 .././admin/widgets.php:662
 #: .././admin/widgets.php:681 .././admin/widgets.php:701
@@ -666,11 +665,11 @@ msgstr "充分なデータがありません"
 msgid "This report is unavailable"
 msgstr "このレポートは使用できません。"
 
-#: .././admin/setup.php:227
+#: .././admin/setup.php:199
 msgid "report generated by"
 msgstr "report generated by"
 
-#: .././admin/setup.php:267
+#: .././admin/setup.php:233
 msgid "Settings"
 msgstr "設定"
 

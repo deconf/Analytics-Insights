@@ -43,7 +43,7 @@ msgstr ""
 #: .././admin/settings.php:848 .././admin/settings.php:1116
 #, php-format
 msgid "Something went wrong, check %1$s or %2$s."
-msgstr "Etwas ist schief gelaufen. Überprüfen Sie %1$s oder %2$s."
+msgstr "Etwas ist schief gelaufen. ÃœberprÃ¼fen Sie %1$s oder %2$s."
 
 #: .././admin/settings.php:100 .././admin/settings.php:208
 #: .././admin/settings.php:344 .././admin/settings.php:659
@@ -66,7 +66,7 @@ msgstr "Google Analytics Frontend Einstellungen"
 #, php-format
 msgid "Read %s for more information about Frontend Features and Options."
 msgstr ""
-"Lesen Sie %s für weitere Informationen über die Frontend-Funktionen und -"
+"Lesen Sie %s fÃ¼r weitere Informationen Ã¼ber die Frontend-Funktionen und -"
 "Einstellungen"
 
 #: .././admin/settings.php:116 .././admin/settings.php:224
@@ -80,7 +80,7 @@ msgstr "Rechte"
 
 #: .././admin/settings.php:123 .././admin/settings.php:231
 msgid "Show stats to:"
-msgstr "Statistiken anzeigen für:"
+msgstr "Statistiken anzeigen fÃ¼r:"
 
 #: .././admin/settings.php:162
 msgid "show page sessions and users in frontend (after each article)"
@@ -104,13 +104,13 @@ msgstr "Google Analytics Backend Einstellungen"
 #, php-format
 msgid "Read %s for more information about Backend Features and Options."
 msgstr ""
-"Lesen Sie %s für weitere Informationen über die Backend-Funktionen und -"
+"Lesen Sie %s fÃ¼r weitere Informationen Ã¼ber die Backend-Funktionen und -"
 "Einstellungen"
 
 #: .././admin/settings.php:272
 #, fuzzy
 msgid "enable Switch View functionality"
-msgstr "aktiviere die Ansicht-Ändern-Funktionalität"
+msgstr "aktiviere die Ansicht-Ã„ndern-FunktionalitÃ¤t"
 
 #: .././admin/settings.php:283
 msgid "enable reports on Posts List and Pages List"
@@ -174,7 +174,7 @@ msgstr "Erweiterte Einstellungen"
 #: .././admin/settings.php:369
 #, php-format
 msgid "For more information about Tracking Options read %s."
-msgstr "Für weitere Informationen über die Tracking Optionen lesen Sie %s."
+msgstr "FÃ¼r weitere Informationen Ã¼ber die Tracking Optionen lesen Sie %s."
 
 #: .././admin/settings.php:374
 msgid "Tracking Settings"
@@ -245,7 +245,7 @@ msgstr "Download Filter (RegEx):"
 
 #: .././admin/settings.php:454
 msgid "track affiliate links matching this regex"
-msgstr "tracke Affiliate-Links mithilfe dieses regulären Ausdrucks"
+msgstr "tracke Affiliate-Links mithilfe dieses regulÃ¤ren Ausdrucks"
 
 #: .././admin/settings.php:458
 msgid "Affiliates Regex:"
@@ -262,7 +262,7 @@ msgstr "Autoren:"
 
 #: .././admin/settings.php:488
 msgid "Publication Year:"
-msgstr "Veröffentlichungsjahr:"
+msgstr "VerÃ¶ffentlichungsjahr:"
 
 #: .././admin/settings.php:496
 msgid "Categories:"
@@ -282,7 +282,7 @@ msgstr "Seiten pro Besuch:"
 
 #: .././admin/settings.php:530
 msgid "exclude events from bounce-rate calculation"
-msgstr "berechne Events für die Berechnung der Absprungrate nicht mit"
+msgstr "berechne Events fÃ¼r die Berechnung der Absprungrate nicht mit"
 
 #: .././admin/settings.php:541
 msgid "enable enhanced link attribution"
@@ -320,7 +320,7 @@ msgstr "Plugin Einstellungen"
 #, php-format
 msgid "For errors and/or other issues check %s and related resources."
 msgstr ""
-"Für Fehler und/oder andere Probleme schauen Sie in %s und weiterführende "
+"FÃ¼r Fehler und/oder andere Probleme schauen Sie in %s und weiterfÃ¼hrende "
 "Themen."
 
 #: .././admin/settings.php:687
@@ -368,11 +368,11 @@ msgstr "Cache geleert."
 
 #: .././admin/settings.php:804 .././admin/settings.php:1082
 msgid "Token Reseted and Revoked."
-msgstr "Token zurückgesetzt und entzogen."
+msgstr "Token zurÃ¼ckgesetzt und entzogen."
 
 #: .././admin/settings.php:814
 msgid "All errors reseted."
-msgstr "Alle Fehler zurückgesetzt."
+msgstr "Alle Fehler zurÃ¼ckgesetzt."
 
 #: .././admin/settings.php:827 .././admin/settings.php:1096
 msgid "All other domains/properties were removed."
@@ -399,7 +399,7 @@ msgid ""
 "account!"
 msgstr ""
 "Sie sollten sich das %1$s und das %2$s bevor Sie mit Autorisierung beginnen. "
-"Das Plugin benötigt einen richtig konfigurierten Google Analytics Account!"
+"Das Plugin benÃ¶tigt einen richtig konfigurierten Google Analytics Account!"
 
 #: .././admin/settings.php:869 .././admin/settings.php:1153
 msgid "video"
@@ -427,7 +427,7 @@ msgstr "Client Secret:"
 
 #: .././admin/settings.php:896 .././admin/settings.php:1185
 msgid "Clear Authorization"
-msgstr "Autorisierung zurücksetzen"
+msgstr "Autorisierung zurÃ¼cksetzen"
 
 #: .././admin/settings.php:896 .././admin/settings.php:971
 #: .././admin/settings.php:1185 .././admin/settings.php:1260
@@ -436,7 +436,7 @@ msgstr "Cache leeren"
 
 #: .././admin/settings.php:896
 msgid "Reset Errors"
-msgstr "Fehler zurücksetzen"
+msgstr "Fehler zurÃ¼cksetzen"
 
 #: .././admin/settings.php:902 .././admin/setup.php:80
 #: .././admin/setup.php:115
@@ -445,7 +445,7 @@ msgstr "Allgemeine Einstellungen"
 
 #: .././admin/settings.php:905
 msgid "Select View:"
-msgstr "Wähle Ansicht:"
+msgstr "WÃ¤hle Ansicht:"
 
 #: .././admin/settings.php:916 .././admin/settings.php:1213
 msgid "Property not found"
@@ -467,7 +467,7 @@ msgstr "Automatische Updates"
 msgid ""
 "automatic updates for minor versions (security and maintenance releases only)"
 msgstr ""
-"Automatische Updates für Punkt-Releases (Sicherheits- und "
+"Automatische Updates fÃ¼r Punkt-Releases (Sicherheits- und "
 "Wartungsaktualisierungen)"
 
 #: .././admin/settings.php:971 .././admin/settings.php:1260
@@ -699,7 +699,7 @@ msgstr "Nicht genug Daten vorhanden"
 #: .././front/item-reports.php:111 .././front/item-reports.php:130
 #: .././front/widgets.php:110
 msgid "This report is unavailable"
-msgstr "Der Bericht ist nicht verfügbar"
+msgstr "Der Bericht ist nicht verfÃ¼gbar"
 
 #: .././admin/setup.php:227
 msgid "report generated by"
@@ -715,7 +715,7 @@ msgstr "Google Analytics Dashboard"
 
 #: .././admin/widgets.php:42
 msgid "This plugin needs an authorization:"
-msgstr "Diese Plugin benötigt eine Autorisierung:"
+msgstr "Diese Plugin benÃ¶tigt eine Autorisierung:"
 
 #: .././admin/widgets.php:76
 msgid "Something went wrong while retrieving profiles list."
@@ -732,7 +732,7 @@ msgstr "Ein Admin sollte ein Standardprofil festlegen."
 
 #: .././admin/widgets.php:89 .././admin/widgets.php:100
 msgid "Select Domain"
-msgstr "Wähle eine Domain aus."
+msgstr "WÃ¤hle eine Domain aus."
 
 #: .././admin/widgets.php:105
 msgid ""
@@ -859,7 +859,7 @@ msgstr ""
 
 #: .././front/widgets.php:178
 msgid "Stats for:"
-msgstr "Statistiken für:"
+msgstr "Statistiken fÃ¼r:"
 
 #: .././front/widgets.php:188
 msgid "Give credits:"
@@ -911,15 +911,15 @@ msgstr "Aufrufe"
 
 #: .././tools/gapi.php:640
 msgid "Countries"
-msgstr "Länder"
+msgstr "LÃ¤nder"
 
 #: .././tools/gapi.php:650
 msgid "Cities from"
-msgstr "Städte von"
+msgstr "StÃ¤dte von"
 
 #: .././tools/gapi.php:722
 msgid "Channels"
-msgstr "Kanäle"
+msgstr "KanÃ¤le"
 
 #: .././tools/gapi.php:785
 msgid "Type"
@@ -936,13 +936,13 @@ msgstr "Einmalige Aufrufe"
 #~ msgstr "Jetzt verbergen"
 
 #~ msgid "about this feature"
-#~ msgstr "über diese Funktion"
+#~ msgstr "Ã¼ber diese Funktion"
 
 #~ msgid " show page searches (after each article)"
 #~ msgstr "Suchen (nach jedem Artikel)"
 
 #~ msgid " anonymize IPs while tracking"
-#~ msgstr "Anonymisiere die IPs während des Trackings"
+#~ msgstr "Anonymisiere die IPs wÃ¤hrend des Trackings"
 
 #~ msgid " enable remarketing, demographics and interests reports"
 #~ msgstr "Aktiviere remarketing, demografische und interessen berichte"
@@ -957,7 +957,7 @@ msgstr "Einmalige Aufrufe"
 #~ msgstr "Nutze deinen eigenen API Projekt Berechtigungsnachweis"
 
 #~ msgid "disable Switch Profile/View functionality"
-#~ msgstr "Deaktiviere bzw. ändere das Profil/Zeige die Funktionalität"
+#~ msgstr "Deaktiviere bzw. Ã¤ndere das Profil/Zeige die FunktionalitÃ¤t"
 
 #~ msgid "You should watch the"
 #~ msgstr "Du solltest dir das folgende"
@@ -969,7 +969,7 @@ msgstr "Einmalige Aufrufe"
 #~ "before proceeding to authorization. This plugin requires a properly "
 #~ "configured Google Analytics account"
 #~ msgstr ""
-#~ "bevor du die Autorisierung fortsetzt. Hinweis: Dieses Plugin benötigt "
+#~ "bevor du die Autorisierung fortsetzt. Hinweis: Dieses Plugin benÃ¶tigt "
 #~ "einen fertig konfigurierten Google Analytics Account"
 
 #~ msgid "Your feedback and review are both important,"
@@ -986,7 +986,7 @@ msgstr "Einmalige Aufrufe"
 
 #~ msgid "A new frontend widget is available! To enable it, go to"
 #~ msgstr ""
-#~ "Ein neues Frontend Widget ist verfügbar! Um es zu aktivieren, gehe zu"
+#~ "Ein neues Frontend Widget ist verfÃ¼gbar! Um es zu aktivieren, gehe zu"
 
 #~ msgid "Appearance -> Widgets"
 #~ msgstr "Design -> Widgets"
@@ -1010,7 +1010,7 @@ msgstr "Einmalige Aufrufe"
 #~ msgstr ")"
 
 #~ msgid "Additional Stats & Charts"
-#~ msgstr "Zusätzliche Statistiken und Listen"
+#~ msgstr "ZusÃ¤tzliche Statistiken und Listen"
 
 #~ msgid "Target Geo Map to region:"
 #~ msgstr "Bestimme die Geomap Region"
@@ -1019,10 +1019,10 @@ msgstr "Einmalige Aufrufe"
 #~ msgstr "und gebe den Rekord aus"
 
 #~ msgid "cities (find out more"
-#~ msgstr "Städte (finde mehr heraus"
+#~ msgstr "StÃ¤dte (finde mehr heraus"
 
 #~ msgid " show traffic overview"
-#~ msgstr "Zeige die Übersicht des Datenverkehrs"
+#~ msgstr "Zeige die Ãœbersicht des Datenverkehrs"
 
 #~ msgid " show top pages"
 #~ msgstr "Zeige die besten Seiten"
@@ -1034,13 +1034,13 @@ msgstr "Einmalige Aufrufe"
 #~ msgstr "Zeige die besten Suchen"
 
 #~ msgid "Dumping log data."
-#~ msgstr "Setze die Logs zurück."
+#~ msgstr "Setze die Logs zurÃ¼ck."
 
 #~ msgid ""
 #~ "Something went wrong. Please check the Debugging Data section for "
 #~ "possible errors"
 #~ msgstr ""
-#~ "Ein Fehler ist aufgetreten. Bitte überprüfe den Debug Log, um mögliche "
+#~ "Ein Fehler ist aufgetreten. Bitte Ã¼berprÃ¼fe den Debug Log, um mÃ¶gliche "
 #~ "Fehler anzuzeigen."
 
 #~ msgid "Debugging Data"
@@ -1065,8 +1065,8 @@ msgstr "Einmalige Aufrufe"
 #~ "No stats available. Please check the Debugging Data section for possible "
 #~ "errors"
 #~ msgstr ""
-#~ "Es stehen keine Statistiken zur Verfügung. Bitte überprüfe den Debug Log, "
-#~ "um mögliche Fehler anzuzeigen."
+#~ "Es stehen keine Statistiken zur VerfÃ¼gung. Bitte Ã¼berprÃ¼fe den Debug Log, "
+#~ "um mÃ¶gliche Fehler anzuzeigen."
 
 #~ msgid "Country/City"
 #~ msgstr "Land/Stadt"
@@ -1109,10 +1109,10 @@ msgstr "Einmalige Aufrufe"
 #~ "("
 #~ msgstr ""
 #~ "Dies ist eine Beta Funktion, welche nur bei der Benutzung meines "
-#~ "Entwicklerschlüssels verfügbar ist! ("
+#~ "EntwicklerschlÃ¼ssels verfÃ¼gbar ist! ("
 
 #~ msgid "more about this feature"
-#~ msgstr "Mehr über diese Funktion"
+#~ msgstr "Mehr Ã¼ber diese Funktion"
 
 #~ msgid "RETURN"
 #~ msgstr "WIEDERKEHRENDE"
@@ -1124,13 +1124,13 @@ msgstr "Einmalige Aufrufe"
 #~ msgstr "Besuche nach Land"
 
 #~ msgid "Traffic Overview"
-#~ msgstr "Übersicht des Datenverkehrs"
+#~ msgstr "Ãœbersicht des Datenverkehrs"
 
 #~ msgid " show page visits and visitors in frontend (after each article)"
 #~ msgstr "Seitenbesuche und Besucher im Frontend (nach jedem Artikel)"
 
 #~ msgid " show Geo Map chart for visits"
-#~ msgstr "Zeige die Geomap Liste für die Besuche"
+#~ msgstr "Zeige die Geomap Liste fÃ¼r die Besuche"
 
 #~ msgid "You can find support on"
 #~ msgstr "Du findest Support im"
@@ -1142,7 +1142,7 @@ msgstr "Einmalige Aufrufe"
 #~ msgstr "Gesamte Besuche:"
 
 #~ msgid "PHP CURL is required. Please install/enable PHP CURL!"
-#~ msgstr "CURL wird benötigt. Bitte installiere/aktiviere CURL!"
+#~ msgstr "CURL wird benÃ¶tigt. Bitte installiere/aktiviere CURL!"
 
 #~ msgid "Options saved."
 #~ msgstr "Optionen gespeichert."
@@ -1151,7 +1151,7 @@ msgstr "Einmalige Aufrufe"
 #~ msgstr "Zeige die Statistiken der:"
 
 #~ msgid "Update Options"
-#~ msgstr "Einstellungen übernehmen"
+#~ msgstr "Einstellungen Ã¼bernehmen"
 
 #~ msgid "Tracking Options: "
 #~ msgstr "Tracking Optionen"
@@ -1163,10 +1163,10 @@ msgstr "Einmalige Aufrufe"
 #~ msgstr "User Type: "
 
 #~ msgid "Exclude tracking for: "
-#~ msgstr "Exkludiere Tracking für:"
+#~ msgstr "Exkludiere Tracking fÃ¼r:"
 
 #~ msgid "Select Domain: "
-#~ msgstr "Wähle die Domain aus:"
+#~ msgstr "WÃ¤hle die Domain aus:"
 
 #~ msgid "Theme Color: "
 #~ msgstr "Farbe des Designs:"
