@@ -37,7 +37,7 @@ final class GADWP_Settings
                 if (empty($new_options['ga_track_exclude'])) {
                     $new_options['ga_track_exclude'] = array();
                 }
-            } else
+            } else 
                 if ($who == 'backend') {
                     $options['switch_profile'] = 0;
                     $options['item_reports'] = 0;
@@ -45,20 +45,20 @@ final class GADWP_Settings
                     if (empty($new_options['ga_dash_access_back'])) {
                         $new_options['ga_dash_access_back'][] = 'administrator';
                     }
-                } else
+                } else 
                     if ($who == 'frontend') {
                         $options['ga_dash_frontend_stats'] = 0;
                         $options['ga_dash_frontend_keywords'] = 0;
                         if (empty($new_options['ga_dash_access_front'])) {
                             $new_options['ga_dash_access_front'][] = 'administrator';
                         }
-                    } else
+                    } else 
                         if ($who == 'general') {
                             $options['ga_dash_userapi'] = 0;
                             if (! is_multisite()) {
                                 $options['automatic_updates_minorversion'] = 0;
                             }
-                        } else
+                        } else 
                             if ($who == 'network') {
                                 $options['ga_dash_userapi'] = 0;
                                 $options['ga_dash_network'] = 0;
@@ -112,6 +112,11 @@ final class GADWP_Settings
 					<?php if (isset($message)) echo $message; ?>
 						<table class="options">
                             <tr>
+                                <td colspan="2">
+                                    <?php printf(__('Read %s for more information about Frontend Features and Options.', 'ga-dash'), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=frontend_screen&utm_campaign=gadwp', __('this documentation page', 'ga-dash')))?>
+						        </td>
+                            </tr>						
+                            <tr>
                                 <td colspan="2"><?php echo "<h2>" . __( "Permissions", 'ga-dash' ) . "</h2>"; ?></td>
                             </tr>
                             <tr>
@@ -122,7 +127,7 @@ final class GADWP_Settings
             $wp_roles = new WP_Roles();
         }
         $i = 0;
-        ?>
+        ?>                      
                                 <table>
                                         <tr>
 		<?php
@@ -142,13 +147,13 @@ final class GADWP_Settings
             }
         }
         ?>
-
+                                    
                                     </table>
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="2" class="title">
-                                    <div class="onoffswitch">
+                                    <div class="button-primary onoffswitch">
                                         <input type="checkbox" name="options[ga_dash_frontend_stats]" value="1" class="onoffswitch-checkbox" id="ga_dash_frontend_stats" <?php checked( $options['ga_dash_frontend_stats'], 1 ); ?>> <label class="onoffswitch-label" for="ga_dash_frontend_stats">
                                             <div class="onoffswitch-inner"></div>
                                             <div class="onoffswitch-switch"></div>
@@ -159,7 +164,7 @@ final class GADWP_Settings
                             </tr>
                             <tr>
                                 <td colspan="2" class="title">
-                                    <div class="onoffswitch">
+                                    <div class="button-primary onoffswitch">
                                         <input type="checkbox" name="options[ga_dash_frontend_keywords]" value="1" class="onoffswitch-checkbox" id="ga_dash_frontend_keywords" <?php checked( $options['ga_dash_frontend_keywords'], 1 ); ?>> <label class="onoffswitch-label" for="ga_dash_frontend_keywords">
                                             <div class="onoffswitch-inner"></div>
                                             <div class="onoffswitch-switch"></div>
@@ -215,6 +220,11 @@ final class GADWP_Settings
 					<?php if (isset($message)) echo $message; ?>
 						<table class="options">
                             <tr>
+                                <td colspan="2">
+                                    <?php printf(__('Read %s for more information about Backend Features and Options.', 'ga-dash'), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=backend_screen&utm_campaign=gadwp', __('this documentation page', 'ga-dash')))?>
+						        </td>
+                            </tr>						
+                            <tr>
                                 <td colspan="2"><?php echo "<h2>" . __( "Permissions", 'ga-dash' ) . "</h2>"; ?></td>
                             </tr>
                             <tr>
@@ -229,7 +239,7 @@ final class GADWP_Settings
 									<table>
                                         <tr>
         <?php
-
+        
         foreach ($wp_roles->role_names as $role => $name) {
             if ($role != 'subscriber') {
                 $i ++;
@@ -247,13 +257,13 @@ final class GADWP_Settings
             }
         }
         ?>
-
+                                    
                                     </table>
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="2" class="title">
-                                    <div class="onoffswitch">
+                                    <div class="button-primary onoffswitch">
                                         <input type="checkbox" name="options[switch_profile]" value="1" class="onoffswitch-checkbox" id="switch_profile" <?php checked( $options['switch_profile'], 1 ); ?>> <label class="onoffswitch-label" for="switch_profile">
                                             <div class="onoffswitch-inner"></div>
                                             <div class="onoffswitch-switch"></div>
@@ -264,7 +274,7 @@ final class GADWP_Settings
                             </tr>
                             <tr>
                                 <td colspan="2" class="title">
-                                    <div class="onoffswitch">
+                                    <div class="button-primary onoffswitch">
                                         <input type="checkbox" name="options[item_reports]" value="1" class="onoffswitch-checkbox" id="item_reports" <?php checked( $options['item_reports'], 1 ); ?>> <label class="onoffswitch-label" for="item_reports">
                                             <div class="onoffswitch-inner"></div>
                                             <div class="onoffswitch-switch"></div>
@@ -275,7 +285,7 @@ final class GADWP_Settings
                             </tr>
                             <tr>
                                 <td colspan="2" class="title">
-                                    <div class="onoffswitch">
+                                    <div class="button-primary onoffswitch">
                                         <input type="checkbox" name="options[dashboard_widget]" value="1" class="onoffswitch-checkbox" id="dashboard_widget" <?php checked( $options['dashboard_widget'], 1 ); ?>> <label class="onoffswitch-label" for="dashboard_widget">
                                             <div class="onoffswitch-inner"></div>
                                             <div class="onoffswitch-switch"></div>
@@ -319,7 +329,7 @@ final class GADWP_Settings
     public static function tracking_settings()
     {
         $gadwp = GADWP();
-
+        
         if (! current_user_can('manage_options')) {
             return;
         }
@@ -356,6 +366,7 @@ final class GADWP_Settings
         );
         self::navigation_tabs($tabs);
         ?>
+        <div class="gadwp-help"><?php printf(__('For more information about Tracking Options read %s.', 'ga-dash'), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=tracking_screen&utm_campaign=gadwp', __('this documentation page', 'ga-dash')));?></div>
 					<?php if (isset($message)) echo $message; ?>
 					    <div id="gadwp-basic">
                             <table class="options">
@@ -390,7 +401,7 @@ final class GADWP_Settings
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="title">
-                                        <div class="onoffswitch">
+                                        <div class="button-primary onoffswitch">
                                             <input type="checkbox" name="options[ga_dash_anonim]" value="1" class="onoffswitch-checkbox" id="ga_dash_anonim" <?php checked( $options['ga_dash_anonim'], 1 ); ?>> <label class="onoffswitch-label" for="ga_dash_anonim">
                                                 <div class="onoffswitch-inner"></div>
                                                 <div class="onoffswitch-switch"></div>
@@ -401,7 +412,7 @@ final class GADWP_Settings
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="title">
-                                        <div class="onoffswitch">
+                                        <div class="button-primary onoffswitch">
                                             <input type="checkbox" name="options[ga_dash_remarketing]" value="1" class="onoffswitch-checkbox" id="ga_dash_remarketing" <?php checked( $options['ga_dash_remarketing'], 1 ); ?>> <label class="onoffswitch-label" for="ga_dash_remarketing">
                                                 <div class="onoffswitch-inner"></div>
                                                 <div class="onoffswitch-switch"></div>
@@ -419,7 +430,7 @@ final class GADWP_Settings
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="title">
-                                        <div class="onoffswitch">
+                                        <div class="button-primary onoffswitch">
                                             <input type="checkbox" name="options[ga_event_tracking]" value="1" class="onoffswitch-checkbox" id="ga_event_tracking" <?php checked( $options['ga_event_tracking'], 1 ); ?>> <label class="onoffswitch-label" for="ga_event_tracking">
                                                 <div class="onoffswitch-inner"></div>
                                                 <div class="onoffswitch-switch"></div>
@@ -434,7 +445,7 @@ final class GADWP_Settings
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="title">
-                                        <div class="onoffswitch">
+                                        <div class="button-primary onoffswitch">
                                             <input type="checkbox" name="options[ga_aff_tracking]" value="1" class="onoffswitch-checkbox" id="ga_aff_tracking" <?php checked( $options['ga_aff_tracking'], 1 ); ?>> <label class="onoffswitch-label" for="ga_aff_tracking">
                                                 <div class="onoffswitch-inner"></div>
                                                 <div class="onoffswitch-switch"></div>
@@ -449,7 +460,7 @@ final class GADWP_Settings
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="title">
-                                        <div class="onoffswitch">
+                                        <div class="button-primary onoffswitch">
                                             <input type="checkbox" name="options[ga_hash_tracking]" value="1" class="onoffswitch-checkbox" id="ga_hash_tracking" <?php checked( $options['ga_hash_tracking'], 1 ); ?>> <label class="onoffswitch-label" for="ga_hash_tracking">
                                                 <div class="onoffswitch-inner"></div>
                                                 <div class="onoffswitch-switch"></div>
@@ -510,7 +521,7 @@ final class GADWP_Settings
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="title">
-                                        <div class="onoffswitch">
+                                        <div class="button-primary onoffswitch">
                                             <input type="checkbox" name="options[ga_event_bouncerate]" value="1" class="onoffswitch-checkbox" id="ga_event_bouncerate" <?php checked( $options['ga_event_bouncerate'], 1 ); ?>> <label class="onoffswitch-label" for="ga_event_bouncerate">
                                                 <div class="onoffswitch-inner"></div>
                                                 <div class="onoffswitch-switch"></div>
@@ -521,7 +532,7 @@ final class GADWP_Settings
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="title">
-                                        <div class="onoffswitch">
+                                        <div class="button-primary onoffswitch">
                                             <input type="checkbox" name="options[ga_enhanced_links]" value="1" class="onoffswitch-checkbox" id="ga_enhanced_links" <?php checked( $options['ga_enhanced_links'], 1 ); ?>> <label class="onoffswitch-label" for="ga_enhanced_links">
                                                 <div class="onoffswitch-inner"></div>
                                                 <div class="onoffswitch-switch"></div>
@@ -532,7 +543,7 @@ final class GADWP_Settings
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="title">
-                                        <div class="onoffswitch">
+                                        <div class="button-primary onoffswitch">
                                             <input type="checkbox" name="options[ga_dash_adsense]" value="1" class="onoffswitch-checkbox" id="ga_dash_adsense" <?php checked( $options['ga_dash_adsense'], 1 ); ?>> <label class="onoffswitch-label" for="ga_dash_adsense">
                                                 <div class="onoffswitch-inner"></div>
                                                 <div class="onoffswitch-switch"></div>
@@ -543,7 +554,7 @@ final class GADWP_Settings
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="title">
-                                        <div class="onoffswitch">
+                                        <div class="button-primary onoffswitch">
                                             <input type="checkbox" name="options[ga_crossdomain_tracking]" value="1" class="onoffswitch-checkbox" id="ga_crossdomain_tracking" <?php checked( $options['ga_crossdomain_tracking'], 1 ); ?>> <label class="onoffswitch-label" for="ga_crossdomain_tracking">
                                                 <div class="onoffswitch-inner"></div>
                                                 <div class="onoffswitch-switch"></div>
@@ -589,6 +600,10 @@ final class GADWP_Settings
             }
         }
         ?>
+                                        
+                                        
+                                        
+                                        
                                         </table>
                                     </td>
                                 </tr>
@@ -613,13 +628,13 @@ final class GADWP_Settings
     public static function errors_debugging()
     {
         global $wp_version;
-
+        
         $gadwp = GADWP();
-
+        
         if (! current_user_can('manage_options')) {
             return;
         }
-
+        
         $anonim = $gadwp->config->options;
         $anonim['wp_version'] = $wp_version;
         $anonim['gadwp_version'] = GADWP_CURRENT_VERSION;
@@ -638,7 +653,7 @@ final class GADWP_Settings
         if ($anonim['ga_dash_apikey']) {
             $anonim['ga_dash_apikey'] = 'HIDDEN';
         }
-
+        
         $options = self::update_options('frontend');
         if (! $gadwp->config->options['ga_dash_tableid_jail'] || ! $gadwp->config->options['ga_dash_token']) {
             $message = sprintf('<div class="error"><p>%s</p></div>', sprintf(__('Something went wrong, check %1$s or %2$s.', 'ga-dash'), sprintf('<a href="%1$s">%2$s</a>', menu_page_url('gadash_errors_debugging', false), __('Errors & Debug', 'ga-dash')), sprintf('<a href="%1$s">%2$s</a>', menu_page_url('gadash_settings', false), __('authorize the plugin', 'ga-dash'))));
@@ -662,6 +677,11 @@ final class GADWP_Settings
         ?>
 						<div id="gadwp-errors">
                         <table class="options">
+                            <tr>
+                                <td>
+                                    <?php printf(__('For errors and/or other issues check %s and related resources.', 'ga-dash'), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=errors_screen&utm_campaign=gadwp', __('this documentation page', 'ga-dash')))?>
+						        </td>
+                            </tr>
                             <tr>
                                 <td>
                                     <?php echo "<h2>" . __( "Last Error detected", 'ga-dash' ) . "</h2>"; ?>
@@ -688,10 +708,10 @@ final class GADWP_Settings
         ?></pre><br />
                                     <hr>
                                 </td>
-
-
+                            
+                            
                             <tr>
-
+                        
                         </table>
                     </div>
                     <div id="gadwp-config">
@@ -712,9 +732,9 @@ final class GADWP_Settings
     public static function general_settings()
     {
         $gadwp = GADWP();
-
+        
         global $wp_version;
-
+        
         if (! current_user_can('manage_options')) {
             return;
         }
@@ -932,7 +952,7 @@ final class GADWP_Settings
                                                 </tr>
                                                 <tr>
                                                     <td colspan="2" class="title">
-                                                        <div class="onoffswitch">
+                                                        <div class="button-primary onoffswitch">
                                                             <input type="checkbox" name="options[automatic_updates_minorversion]" value="1" class="onoffswitch-checkbox" id="automatic_updates_minorversion" <?php checked( $options['automatic_updates_minorversion'], 1 ); ?>> <label class="onoffswitch-label" for="automatic_updates_minorversion">
                                                                 <div class="onoffswitch-inner"></div>
                                                                 <div class="onoffswitch-switch"></div>
@@ -943,7 +963,7 @@ final class GADWP_Settings
                                                 </tr>
 												<tr>
                                                     <td colspan="2"><hr></td>
-                                                </tr>
+                                                </tr>                                                
 												<?php }?>
                                                 <tr>
                                                     <td colspan="2" class="submit"><input type="submit" name="Submit" class="button button-primary" value="<?php _e('Save Changes', 'ga-dash' ) ?>" /></td>
@@ -976,7 +996,7 @@ final class GADWP_Settings
     {
         $gadwp = GADWP();
         global $wp_version;
-
+        
         if (! current_user_can('manage_network_options')) {
             return;
         }
@@ -985,11 +1005,11 @@ final class GADWP_Settings
          * Include GAPI
          */
         echo '<div id="gapi-warning" class="updated"><p>' . __('Loading the required libraries. If this results in a blank screen or a fatal error, try this solution:', "ga-dash") . ' <a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=general_screen&utm_campaign=gadwp">Library conflicts between WordPress plugins</a></p></div>';
-
+        
         if (null === $gadwp->gapi_controller) {
             $gadwp->gapi_controller = new GADWP_GAPI_Controller();
         }
-
+        
         echo '<script type="text/javascript">jQuery("#gapi-warning").hide()</script>';
         if (isset($_POST['ga_dash_code'])) {
             if (! stripos('x' . $_POST['ga_dash_code'], 'UA-', 1) == 1) {
@@ -1120,7 +1140,7 @@ final class GADWP_Settings
                                                                     </tr>
                                                                     <tr>
                                                                         <td colspan="2" class="title">
-                                                                            <div class="onoffswitch">
+                                                                            <div class="button-primary onoffswitch">
                                                                                 <input type="checkbox" name="options[ga_dash_network]" value="1" class="onoffswitch-checkbox" id="ga_dash_network" <?php checked( $options['ga_dash_network'], 1); ?> onchange="this.form.submit()"> <label class="onoffswitch-label" for="ga_dash_network">
                                                                                     <div class="onoffswitch-inner"></div>
                                                                                     <div class="onoffswitch-switch"></div>
@@ -1212,7 +1232,7 @@ final class GADWP_Settings
                                                                     </tr>
                                                                     <tr>
                                                                         <td colspan="2" class="title">
-                                                                            <div class="onoffswitch">
+                                                                            <div class="button-primary onoffswitch">
                                                                                 <input type="checkbox" name="options[automatic_updates_minorversion]" value="1" class="onoffswitch-checkbox" id="automatic_updates_minorversion" <?php checked( $options['automatic_updates_minorversion'], 1 ); ?>> <label class="onoffswitch-label" for="automatic_updates_minorversion">
                                                                                     <div class="onoffswitch-inner"></div>
                                                                                     <div class="onoffswitch-switch"></div>
@@ -1226,7 +1246,7 @@ final class GADWP_Settings
                                                                     </tr>
                                                                     <tr>
                                                                         <td colspan="2" class="title">
-                                                                            <div class="onoffswitch">
+                                                                            <div class="button-primary onoffswitch">
                                                                                 <input type="checkbox" name="options[ga_dash_excludesa]" value="1" class="onoffswitch-checkbox" id="ga_dash_excludesa"<?php checked( $options['ga_dash_excludesa'], 1); ?>"> <label class="onoffswitch-label" for="ga_dash_excludesa">
                                                                                     <div class="onoffswitch-inner"></div>
                                                                                     <div class="onoffswitch-switch"></div>
