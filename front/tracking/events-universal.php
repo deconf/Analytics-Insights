@@ -1,9 +1,9 @@
 <?php
 // Exit if accessed directly
-if (! defined('ABSPATH'))
-    exit();
+if ( ! defined( 'ABSPATH' ) )
+	exit();
 
-$domaindata = GADWP_Tools::get_root_domain(esc_html(get_option('siteurl')));
+$domaindata = GADWP_Tools::get_root_domain( esc_html( get_option( 'siteurl' ) ) );
 ?>
 <script type="text/javascript">
 (function($){

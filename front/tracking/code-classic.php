@@ -7,10 +7,10 @@
  */
 
 // Exit if accessed directly
-if (! defined('ABSPATH'))
-    exit();
+if ( ! defined( 'ABSPATH' ) )
+	exit();
 
-$profile = GADWP_Tools::get_selected_profile($this->gadwp->config->options['ga_dash_profile_list'], $this->gadwp->config->options['ga_dash_tableid_jail']);
+$profile = GADWP_Tools::get_selected_profile( $this->gadwp->config->options['ga_dash_profile_list'], $this->gadwp->config->options['ga_dash_tableid_jail'] );
 ?>
 <script type="text/javascript">
   var _gaq = _gaq || [];

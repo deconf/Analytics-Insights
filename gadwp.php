@@ -31,6 +31,8 @@ if (! class_exists('GADWP_Manager')) {
 
         public $backend_setup = null;
 
+        public $frontend_setup = null;
+
         public $backend_widgets = null;
 
         public $backend_item_reports = null;
@@ -221,7 +223,7 @@ if (! class_exists('GADWP_Manager')) {
                             self::$instance->backend_widgets = new GADWP_Backend_Widgets();
                         }
 
-                        if (self::$instance->config->options['item_reports']) {
+                        if (self::$instance->config->options['backend_item_reports']) {
                             /*
                              * Load Backend Item Reports
                              */
@@ -230,8 +232,13 @@ if (! class_exists('GADWP_Manager')) {
                         }
                     }
             } else {
-                if (GADWP_Tools::check_roles(self::$instance->config->options['ga_dash_access_front']) && (self::$instance->config->options['ga_dash_frontend_stats'] || self::$instance->config->options['ga_dash_frontend_keywords'])) {
-                    /*
+                if (GADWP_Tools::check_roles(self::$instance->config->options['ga_dash_access_front']) && self::$instance->config->options['frontend_item_reports']) {
+                	/*
+                	 * Load Frontend Setup
+                	 */
+                	include_once (GADWP_DIR . 'front/setup.php');
+                	self::$instance->frontend_setup = new GADWP_Frontend_Setup();
+                	/*
                      * Load Frontend Item Reports
                      */
                     include_once (GADWP_DIR . 'front/item-reports.php');
