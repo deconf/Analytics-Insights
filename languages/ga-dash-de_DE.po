@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/google-analytics-"
 "dashboard-for-wp\n"
 "POT-Creation-Date: 2015-04-27 19:25+0200\n"
-"PO-Revision-Date: 2015-05-21 01:38+0100\n"
+"PO-Revision-Date: 2015-05-24 20:15+0100\n"
 "Last-Translator: Benjamin Scheide <benni.s@slideup.de>\n"
 "Language-Team: Alin Marcu\n"
 "Language: de\n"
@@ -36,7 +36,7 @@ msgstr "Einstellungen gespeichert."
 #: .././admin/settings.php:1085 .././admin/settings.php:1091
 #: .././admin/settings.php:1103
 msgid "Cheating Huh?"
-msgstr ""
+msgstr "Nicht schummeln ;)"
 
 #: .././admin/settings.php:100 .././admin/settings.php:208
 #: .././admin/settings.php:344 .././admin/settings.php:659
@@ -108,7 +108,6 @@ msgstr ""
 "Einstellungen"
 
 #: .././admin/settings.php:272
-#, fuzzy
 msgid "enable Switch View functionality"
 msgstr "aktiviere die Ansicht-Ändern-Funktionalität"
 
@@ -231,7 +230,6 @@ msgid "anonymize IPs while tracking"
 msgstr "IP-Adresse anonymisieren"
 
 #: .././admin/settings.php:421
-#, fuzzy
 msgid "enable remarketing, demographics and interests reports"
 msgstr "aktiviere Remarketing-, demografische und Interessen-Berichte"
 
@@ -252,9 +250,8 @@ msgid "Affiliates Regex:"
 msgstr "Affiliates Filter (RegEx):"
 
 #: .././admin/settings.php:469
-#, fuzzy
 msgid "track fragment identifiers, hashmarks (#) in URI links"
-msgstr "tracke Fragment Identifiers und Hashmarks (#) in URI-Links"
+msgstr "tracke Fragmentbezeichner und Hashmarks (#) in URI-Links"
 
 #: .././admin/settings.php:480
 msgid "Authors:"
@@ -286,19 +283,19 @@ msgstr "berechne Events für die Berechnung der Absprungrate nicht mit"
 
 #: .././admin/settings.php:541
 msgid "enable enhanced link attribution"
-msgstr ""
+msgstr "aktiviere erweiterte Link-Zuordnung"
 
 #: .././admin/settings.php:552
 msgid "enable AdSense account linking"
-msgstr ""
+msgstr "aktiviere AdSense-Account Verknüpfung"
 
 #: .././admin/settings.php:563
 msgid "enable cross domain tracking"
-msgstr ""
+msgstr "aktiviere domainübergreifendes Tracking."
 
 #: .././admin/settings.php:567
 msgid "Cross Domains:"
-msgstr ""
+msgstr "Domainübergreifend:"
 
 #: .././admin/settings.php:578
 msgid "Exclude tracking for:"
@@ -344,10 +341,12 @@ msgid ""
 "Loading the required libraries. If this results in a blank screen or a fatal "
 "error, try this solution:"
 msgstr ""
+"Lade die benötigten Bibliotheken... Wenn Sie einen leeren Bildschirm sehen "
+"oder einen fatalen Fehler erscheint, versuchen Sie die folgende Lösung:"
 
 #: .././admin/settings.php:742
 msgid "Library conflicts between WordPress plugins"
-msgstr ""
+msgstr "Die Bibliotheken stehen im Konflikt mit anderen WordPress-Plugins"
 
 #: .././admin/settings.php:757 .././admin/settings.php:1017
 msgid "Plugin authorization succeeded."
@@ -411,7 +410,7 @@ msgstr "Tutorial lesen"
 
 #: .././admin/settings.php:874 .././admin/settings.php:1160
 msgid "use your own API Project credentials"
-msgstr ""
+msgstr "eigene API-Projekt-Zugangsdaten verwenden"
 
 #: .././admin/settings.php:878 .././admin/settings.php:1167
 msgid "API Key:"
@@ -449,11 +448,11 @@ msgstr "Wähle Ansicht:"
 
 #: .././admin/settings.php:916 .././admin/settings.php:1213
 msgid "Property not found"
-msgstr ""
+msgstr "Eigenschaft nicht gefunden"
 
 #: .././admin/settings.php:921
 msgid "Lock Selection"
-msgstr ""
+msgstr "Auswahl sperren"
 
 #: .././admin/settings.php:939
 msgid "Theme Color:"
@@ -477,19 +476,19 @@ msgstr "Plugin autorisieren"
 
 #: .././admin/settings.php:1047
 msgid "Properties refreshed."
-msgstr ""
+msgstr "Eigenschaften neugeladen."
 
 #: .././admin/settings.php:1131
 msgid "Network Setup"
-msgstr ""
+msgstr "Netzwerk-Einrichtung"
 
 #: .././admin/settings.php:1141
 msgid "use a single Google Analytics account for the entire network"
-msgstr ""
+msgstr "ein Google-Analytics-Konto für das gesamte Netzwerk verwenden"
 
 #: .././admin/settings.php:1185
 msgid "Refresh Properties"
-msgstr ""
+msgstr "Eigenschaften neuladen"
 
 #: .././admin/settings.php:1191
 msgid "Properties/Views Settings"
@@ -497,7 +496,7 @@ msgstr "Frontend Einstellungen"
 
 #: .././admin/settings.php:1246
 msgid "exclude Super Admin tracking for the entire network"
-msgstr ""
+msgstr "den Super-Admin im gesamten Netzwerk nicht tracken"
 
 #: .././admin/settings.php:1291
 msgid "Setup Tutorial & Demo"
@@ -510,12 +509,12 @@ msgstr "Support & Bewertungen"
 #: .././admin/settings.php:1306
 #, php-format
 msgid "Plugin documentation and support on %s"
-msgstr ""
+msgstr "Plugin-Dokumentation und Hilfe unter %s"
 
 #: .././admin/settings.php:1313
 #, php-format
 msgid "Your feedback and review are both important, %s!"
-msgstr ""
+msgstr "Ihre Bewertung und Rezension sind beide wichtig, %s!"
 
 #: .././admin/settings.php:1313
 msgid "rate this plugin"
@@ -528,16 +527,16 @@ msgstr "Mehr erfahren"
 #: .././admin/settings.php:1326
 #, php-format
 msgid "%s by moving your website to HTTPS/SSL."
-msgstr ""
+msgstr "%s durch Umschalten der Webseite auf HTTPS/SSL."
 
 #: .././admin/settings.php:1326
 msgid "Improve search rankings"
-msgstr ""
+msgstr "Verbessern Sie Ihren Rang in den Suchergebnissen"
 
 #: .././admin/settings.php:1333
 #, php-format
 msgid "Other %s written by the same author"
-msgstr ""
+msgstr "Andere %s von diesem Autor"
 
 #: .././admin/settings.php:1333
 msgid "WordPress Plugins"
@@ -545,21 +544,21 @@ msgstr "WordPress Plugins"
 
 #: .././admin/settings.php:1339
 msgid "Other Services"
-msgstr ""
+msgstr "Andere Dienste"
 
 #: .././admin/settings.php:1346
 #, php-format
 msgid "Speed up your website and plug into a whole %s"
-msgstr ""
+msgstr "Beschleunigen Sie Ihre Webseite und begeben Sie sich in ein %s"
 
 #: .././admin/settings.php:1346
 msgid "new level of site speed"
-msgstr ""
+msgstr "neues Level Seitenladegeschwindigkeit."
 
 #: .././admin/settings.php:1353
 #, php-format
 msgid "%s service with users tracking at IP level."
-msgstr ""
+msgstr "%s Service mit Nutzer-Tracking auf IP-Ebene."
 
 #: .././admin/settings.php:1353
 msgid "Web Analytics"
@@ -650,7 +649,7 @@ msgstr "Traffic Details"
 #: .././admin/widgets.php:607 .././admin/widgets.php:805
 #: .././admin/widgets.php:917 .././front/item-reports.php:94
 msgid "A JavaScript Error is blocking plugin resources!"
-msgstr ""
+msgstr "Ein JavaScript-Fehler blockiert die Plugin-Ressourcen!"
 
 #: .././admin/setup.php:214 .././admin/widgets.php:713
 msgid "Traffic Mediums"
@@ -685,6 +684,7 @@ msgstr "Seiten/Sitzung"
 #: .././front/item-reports.php:125
 msgid "Invalid response, more details in JavaScript Console (F12)."
 msgstr ""
+"ungültige Antwort. Weitere Details finden Sie in der JavaScript-Konsole (F12)"
 
 #: .././admin/setup.php:225
 msgid "Not enough data collected"
@@ -815,7 +815,7 @@ msgstr "Zeigt deine Google Analytics Statistik in einem Widget an"
 
 #: .././front/widgets.php:46 .././tools/gapi.php:827
 msgid "trend"
-msgstr ""
+msgstr "Entwicklung"
 
 #: .././front/widgets.php:133
 msgid "Period:"
@@ -855,7 +855,7 @@ msgstr "Bilanz"
 
 #: .././front/widgets.php:171
 msgid "Anonymize stats:"
-msgstr ""
+msgstr "anonymisiere Statistiken:"
 
 #: .././front/widgets.php:178
 msgid "Stats for:"
