@@ -35,9 +35,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			if ( function_exists( 'curl_version' ) ) {
 				$curlversion = curl_version();
 				if ( isset( $curlversion['version'] ) && ( version_compare( PHP_VERSION, '5.3.0' ) >= 0 ) && version_compare( $curlversion['version'], '7.10.8' ) >= 0 && defined( 'GADWP_IP_VERSION' ) && GADWP_IP_VERSION ) {
-					$config->setClassConfig( 'Google_IO_Curl', array(
-						'options' => array(
-							CURLOPT_IPRESOLVE => GADWP_IP_VERSION ) ) ); // Force CURL_IPRESOLVE_V4 or CURL_IPRESOLVE_V6
+					$config->setClassConfig( 'Google_IO_Curl', array( 'options' => array( CURLOPT_IPRESOLVE => GADWP_IP_VERSION ) ) ); // Force CURL_IPRESOLVE_V4 or CURL_IPRESOLVE_V6
 				}
 			}
 			$this->client = new Google_Client( $config );
@@ -88,7 +86,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				return true;
 			}
 			if ( isset( $errors[1][0]['reason'] ) && ( $errors[1][0]['reason'] == 'userRateLimitExceeded' || $errors[1][0]['reason'] == 'quotaExceeded' ) ) { // allow
-			                                                                                                                                            // retry
+			                                                                                                                                                  // retry
 				return false;
 			}
 			if ( $errors[0] == 400 || $errors[0] == 401 || $errors[0] == 403 ) {
@@ -156,8 +154,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 
 				while ( $startindex < $totalresults ) {
 
-					$profiles = $this->service->management_profiles->listManagementProfiles( '~all', '~all', array(
-						'start-index' => $startindex ) );
+					$profiles = $this->service->management_profiles->listManagementProfiles( '~all', '~all', array( 'start-index' => $startindex ) );
 
 					$items = $profiles->getItems();
 
@@ -169,13 +166,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 							$timetz = new DateTimeZone( $profile->getTimezone() );
 							$localtime = new DateTime( 'now', $timetz );
 							$timeshift = strtotime( $localtime->format( 'Y-m-d H:i:s' ) ) - time();
-							$ga_dash_profile_list[] = array(
-								$profile->getName(),
-								$profile->getId(),
-								$profile->getwebPropertyId(),
-								$profile->getwebsiteUrl(),
-								$timeshift,
-								$profile->getTimezone() );
+							$ga_dash_profile_list[] = array( $profile->getName(), $profile->getId(), $profile->getwebPropertyId(), $profile->getwebsiteUrl(), $timeshift, $profile->getTimezone() );
 
 							$startindex++;
 						}
@@ -194,9 +185,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				return $ga_dash_profile_list;
 			} catch ( Google_Service_Exception $e ) {
 				set_transient( 'ga_dash_lasterror', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( "(" . $e->getCode() . ") " . $e->getMessage() ), $this->error_timeout );
-				set_transient( 'ga_dash_gapi_errors', array(
-					$e->getCode(),
-					(array) $e->getErrors() ), $this->error_timeout );
+				set_transient( 'ga_dash_gapi_errors', array( $e->getCode(), (array) $e->getErrors() ), $this->error_timeout );
 			} catch ( Exception $e ) {
 				set_transient( 'ga_dash_lasterror', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $this->error_timeout );
 				return $ga_dash_profile_list;
@@ -242,9 +231,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				return false;
 			} catch ( Google_Service_Exception $e ) {
 				set_transient( 'ga_dash_lasterror', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( "(" . $e->getCode() . ") " . $e->getMessage() ), $this->error_timeout );
-				set_transient( 'ga_dash_gapi_errors', array(
-					$e->getCode(),
-					(array) $e->getErrors() ), $this->error_timeout );
+				set_transient( 'ga_dash_gapi_errors', array( $e->getCode(), (array) $e->getErrors() ), $this->error_timeout );
 				return $e->getCode();
 			} catch ( Exception $e ) {
 				set_transient( 'ga_dash_lasterror', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $this->error_timeout );
@@ -325,9 +312,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				}
 			} catch ( Google_Service_Exception $e ) {
 				set_transient( 'ga_dash_lasterror', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( "(" . $e->getCode() . ") " . $e->getMessage() ), $this->error_timeout );
-				set_transient( 'ga_dash_gapi_errors', array(
-					$e->getCode(),
-					(array) $e->getErrors() ), $this->error_timeout );
+				set_transient( 'ga_dash_gapi_errors', array( $e->getCode(), (array) $e->getErrors() ), $this->error_timeout );
 				return $e->getCode();
 			} catch ( Exception $e ) {
 				set_transient( 'ga_dash_lasterror', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $this->error_timeout );
@@ -392,9 +377,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				$dimensions = 'ga:date,ga:dayOfWeekName';
 				$dayorhour = __( "Date", 'ga-dash' );
 			}
-			$options = array(
-				'dimensions' => $dimensions,
-				'quotaUser' => $this->managequota . 'p' . $projectId );
+			$options = array( 'dimensions' => $dimensions, 'quotaUser' => $this->managequota . 'p' . $projectId );
 			if ( $filter ) {
 				$options['filters'] = 'ga:pagePath==' . $filter;
 			}
@@ -403,24 +386,17 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
-			$ga_dash_data = array(
-				array(
-					$dayorhour,
-					$title ) );
+			$gadwp_data = array( array( $dayorhour, $title ) );
 			if ( $from == "today" || $from == "yesterday" ) {
 				foreach ( $data->getRows() as $row ) {
-					$ga_dash_data[] = array(
-						(int) $row[0] . ':00',
-						round( $row[1], 2 ) );
+					$gadwp_data[] = array( (int) $row[0] . ':00', round( $row[1], 2 ) );
 				}
 			} else {
 				foreach ( $data->getRows() as $row ) {
-					$ga_dash_data[] = array(
-						esc_html( ucfirst( __( $row[1] ) ) ) . ',' . esc_html( substr_replace( substr_replace( $row[0], "-", 4, 0 ), "-", 7, 0 ) ),
-						round( $row[2], 2 ) );
+					$gadwp_data[] = array( esc_html( ucfirst( __( $row[1] ) ) ) . ',' . esc_html( substr_replace( substr_replace( $row[0], "-", 4, 0 ), "-", 7, 0 ) ), round( $row[2], 2 ) );
 				}
 			}
-			return $ga_dash_data;
+			return $gadwp_data;
 		}
 
 		/**
@@ -435,9 +411,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 		 * @return array|int
 		 */
 		public function get_bottomstats( $projectId, $from, $to, $filter = '' ) {
-			$options = array(
-				'dimensions' => null,
-				'quotaUser' => $this->managequota . 'p' . $projectId );
+			$options = array( 'dimensions' => null, 'quotaUser' => $this->managequota . 'p' . $projectId );
 			if ( $filter ) {
 				$options['filters'] = 'ga:pagePath==' . $filter;
 				$metrics = 'ga:uniquePageviews,ga:users,ga:pageviews,ga:BounceRate,ga:organicSearches,ga:pageviewsPerSession';
@@ -453,11 +427,11 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 					return $data;
 				}
 			}
-			$ga_dash_data = array();
+			$gadwp_data = array();
 			foreach ( $data->getRows() as $row ) {
-				$ga_dash_data = array_map( 'floatval', $row );
+				$gadwp_data = array_map( 'floatval', $row );
 			}
-			return $ga_dash_data;
+			return $gadwp_data;
 		}
 
 		/**
@@ -474,10 +448,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 		public function get_contentpages( $projectId, $from, $to, $filter = '' ) {
 			$metrics = 'ga:pageviews';
 			$dimensions = 'ga:pageTitle';
-			$options = array(
-				'dimensions' => $dimensions,
-				'sort' => '-ga:pageviews',
-				'quotaUser' => $this->managequota . 'p' . $projectId );
+			$options = array( 'dimensions' => $dimensions, 'sort' => '-ga:pageviews', 'quotaUser' => $this->managequota . 'p' . $projectId );
 			if ( $filter ) {
 				$options['filters'] = 'ga:pagePath==' . $filter;
 			}
@@ -486,16 +457,11 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
-			$ga_dash_data = array(
-				array(
-					__( "Pages", 'ga-dash' ),
-					__( "Views", 'ga-dash' ) ) );
+			$gadwp_data = array( array( __( "Pages", 'ga-dash' ), __( "Views", 'ga-dash' ) ) );
 			foreach ( $data->getRows() as $row ) {
-				$ga_dash_data[] = array(
-					esc_html( $row[0] ),
-					(int) $row[1] );
+				$gadwp_data[] = array( esc_html( $row[0] ), (int) $row[1] );
 			}
-			return $ga_dash_data;
+			return $gadwp_data;
 		}
 
 		/**
@@ -512,10 +478,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 		public function get_referrers( $projectId, $from, $to, $filter = '' ) {
 			$metrics = 'ga:sessions';
 			$dimensions = 'ga:source';
-			$options = array(
-				'dimensions' => $dimensions,
-				'sort' => '-ga:sessions',
-				'quotaUser' => $this->managequota . 'p' . $projectId );
+			$options = array( 'dimensions' => $dimensions, 'sort' => '-ga:sessions', 'quotaUser' => $this->managequota . 'p' . $projectId );
 			if ( $filter ) {
 				$options['filters'] = 'ga:medium==referral;ga:pagePath==' . $filter;
 			} else {
@@ -526,16 +489,11 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
-			$ga_dash_data = array(
-				array(
-					__( "Referrers", 'ga-dash' ),
-					__( "Sessions", 'ga-dash' ) ) );
+			$gadwp_data = array( array( __( "Referrers", 'ga-dash' ), __( "Sessions", 'ga-dash' ) ) );
 			foreach ( $data->getRows() as $row ) {
-				$ga_dash_data[] = array(
-					esc_html( $row[0] ),
-					(int) $row[1] );
+				$gadwp_data[] = array( esc_html( $row[0] ), (int) $row[1] );
 			}
-			return $ga_dash_data;
+			return $gadwp_data;
 		}
 
 		/**
@@ -552,10 +510,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 		public function get_searches( $projectId, $from, $to, $filter = '' ) {
 			$metrics = 'ga:sessions';
 			$dimensions = 'ga:keyword';
-			$options = array(
-				'dimensions' => $dimensions,
-				'sort' => '-ga:sessions',
-				'quotaUser' => $this->managequota . 'p' . $projectId );
+			$options = array( 'dimensions' => $dimensions, 'sort' => '-ga:sessions', 'quotaUser' => $this->managequota . 'p' . $projectId );
 			if ( $filter ) {
 				$options['filters'] = 'ga:keyword!=(not set);ga:pagePath==' . $filter;
 			} else {
@@ -567,16 +522,11 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				return $data;
 			}
 
-			$ga_dash_data = array(
-				array(
-					__( "Searches", 'ga-dash' ),
-					__( "Sessions", 'ga-dash' ) ) );
+			$gadwp_data = array( array( __( "Searches", 'ga-dash' ), __( "Sessions", 'ga-dash' ) ) );
 			foreach ( $data->getRows() as $row ) {
-				$ga_dash_data[] = array(
-					esc_html( $row[0] ),
-					(int) $row[1] );
+				$gadwp_data[] = array( esc_html( $row[0] ), (int) $row[1] );
 			}
-			return $ga_dash_data;
+			return $gadwp_data;
 		}
 
 		/**
@@ -607,10 +557,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 					$serial = 'gadash_qr7_' . $this->get_serial( $projectId . $from . $this->gadwp->config->options['ga_target_geomap'] . $filter );
 				}
 			}
-			$options = array(
-				'dimensions' => $dimensions,
-				'sort' => '-ga:sessions',
-				'quotaUser' => $this->managequota . 'p' . $projectId );
+			$options = array( 'dimensions' => $dimensions, 'sort' => '-ga:sessions', 'quotaUser' => $this->managequota . 'p' . $projectId );
 			if ( $filter ) {
 				$options['filters'] = 'ga:pagePath==' . $filter;
 				if ( $local_filter ) {
@@ -625,22 +572,15 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
-			$ga_dash_data = array(
-				array(
-					$title,
-					__( "Sessions", 'ga-dash' ) ) );
+			$gadwp_data = array( array( $title, __( "Sessions", 'ga-dash' ) ) );
 			foreach ( $data->getRows() as $row ) {
 				if ( isset( $row[2] ) ) {
-					$ga_dash_data[] = array(
-						esc_html( $row[0] ) . ', ' . esc_html( $row[1] ),
-						(int) $row[2] );
+					$gadwp_data[] = array( esc_html( $row[0] ) . ', ' . esc_html( $row[1] ), (int) $row[2] );
 				} else {
-					$ga_dash_data[] = array(
-						esc_html( $row[0] ),
-						(int) $row[1] );
+					$gadwp_data[] = array( esc_html( $row[0] ), (int) $row[1] );
 				}
 			}
-			return $ga_dash_data;
+			return $gadwp_data;
 		}
 
 		/**
@@ -657,9 +597,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 		public function get_trafficchannels( $projectId, $from, $to, $filter = '' ) {
 			$metrics = 'ga:sessions';
 			$dimensions = 'ga:channelGrouping';
-			$options = array(
-				'dimensions' => $dimensions,
-				'quotaUser' => $this->managequota . 'p' . $projectId );
+			$options = array( 'dimensions' => $dimensions, 'quotaUser' => $this->managequota . 'p' . $projectId );
 			if ( $filter ) {
 				$options['filters'] = 'ga:pagePath==' . $filter;
 			}
@@ -669,17 +607,12 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				return $data;
 			}
 			$title = __( "Channels", 'ga-dash' );
-			$ga_dash_data = array(
-				array(
-					'<div style="color:black; font-size:1.1em">' . $title . '</div><div style="color:darkblue; font-size:1.2em">' . (int) $data['totalsForAllResults']["ga:sessions"] . '</div>',
-					"" ) );
+			$gadwp_data = array( array( '<div style="color:black; font-size:1.1em">' . $title . '</div><div style="color:darkblue; font-size:1.2em">' . (int) $data['totalsForAllResults']["ga:sessions"] . '</div>', "" ) );
 			foreach ( $data->getRows() as $row ) {
 				$shrink = explode( " ", $row[0] );
-				$ga_dash_data[] = array(
-					'<div style="color:black; font-size:1.1em">' . esc_html( $shrink[0] ) . '</div><div style="color:darkblue; font-size:1.2em">' . (int) $row[1] . '</div>',
-					'<div style="color:black; font-size:1.1em">' . $title . '</div><div style="color:darkblue; font-size:1.2em">' . (int) $data['totalsForAllResults']["ga:sessions"] . '</div>' );
+				$gadwp_data[] = array( '<div style="color:black; font-size:1.1em">' . esc_html( $shrink[0] ) . '</div><div style="color:darkblue; font-size:1.2em">' . (int) $row[1] . '</div>', '<div style="color:black; font-size:1.1em">' . $title . '</div><div style="color:darkblue; font-size:1.2em">' . (int) $data['totalsForAllResults']["ga:sessions"] . '</div>' );
 			}
-			return $ga_dash_data;
+			return $gadwp_data;
 		}
 
 		/**
@@ -700,18 +633,14 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			$dimensions = 'ga:' . $query;
 
 			if ( $query == 'source' ) {
-				$options = array(
-					'dimensions' => $dimensions,
-					'quotaUser' => $this->managequota . 'p' . $projectId );
+				$options = array( 'dimensions' => $dimensions, 'quotaUser' => $this->managequota . 'p' . $projectId );
 				if ( $filter ) {
 					$options['filters'] = 'ga:medium==organic;ga:keyword!=(not set);ga:pagePath==' . $filter;
 				} else {
 					$options['filters'] = 'ga:medium==organic;ga:keyword!=(not set)';
 				}
 			} else {
-				$options = array(
-					'dimensions' => $dimensions,
-					'quotaUser' => $this->managequota . 'p' . $projectId );
+				$options = array( 'dimensions' => $dimensions, 'quotaUser' => $this->managequota . 'p' . $projectId );
 				if ( $filter ) {
 					$options['filters'] = 'ga:' . $query . '!=(not set);ga:pagePath==' . $filter;
 				} else {
@@ -723,16 +652,11 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
-			$ga_dash_data = array(
-				array(
-					__( "Type", 'ga-dash' ),
-					__( "Sessions", 'ga-dash' ) ) );
+			$gadwp_data = array( array( __( "Type", 'ga-dash' ), __( "Sessions", 'ga-dash' ) ) );
 			foreach ( $data->getRows() as $row ) {
-				$ga_dash_data[] = array(
-					str_replace( "(none)", "direct", esc_html( $row[0] ) ),
-					(int) $row[1] );
+				$gadwp_data[] = array( str_replace( "(none)", "direct", esc_html( $row[0] ) ), (int) $row[1] );
 			}
-			return $ga_dash_data;
+			return $gadwp_data;
 		}
 
 		/**
@@ -751,18 +675,13 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			$to = 'yesterday';
 			$metrics = 'ga:sessions';
 			$dimensions = 'ga:date,ga:dayOfWeekName';
-			$options = array(
-				'dimensions' => $dimensions,
-				'quotaUser' => $this->managequota . 'p' . $projectId );
+			$options = array( 'dimensions' => $dimensions, 'quotaUser' => $this->managequota . 'p' . $projectId );
 			$serial = 'gadash_qr2_' . $this->get_serial( $projectId . $from . $metrics );
 			$data = $this->handle_corereports( $projectId, $from, $to, $metrics, $options, $serial );
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
-			$ga_dash_data = array(
-				array(
-					__( "Date", 'ga-dash' ),
-					__( "Sessions", 'ga-dash' ) . ( $anonim ? "' " . __( "trend", 'ga-dash' ) : '' ) ) );
+			$gadwp_data = array( array( __( "Date", 'ga-dash' ), __( "Sessions", 'ga-dash' ) . ( $anonim ? "' " . __( "trend", 'ga-dash' ) : '' ) ) );
 			if ( $anonim ) {
 				$max_array = array();
 				foreach ( $data->getRows() as $item ) {
@@ -771,14 +690,10 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				$max = max( $max_array ) ? max( $max_array ) : 1;
 			}
 			foreach ( $data->getRows() as $row ) {
-				$ga_dash_data[] = array(
-					ucfirst( esc_html( ( __( $row[1] ) ) ) ) . ', ' . esc_html( substr_replace( substr_replace( $row[0], "-", 4, 0 ), "-", 7, 0 ) ),
-					( $anonim ? round( $row[2] * 100 / $max, 2 ) : (int) $row[2] ) );
+				$gadwp_data[] = array( ucfirst( esc_html( ( __( $row[1] ) ) ) ) . ', ' . esc_html( substr_replace( substr_replace( $row[0], "-", 4, 0 ), "-", 7, 0 ) ), ( $anonim ? round( $row[2] * 100 / $max, 2 ) : (int) $row[2] ) );
 			}
 			$totals = $data->getTotalsForAllResults();
-			return array(
-				$ga_dash_data,
-				$anonim ? 0 : $totals['ga:sessions'] );
+			return array( $gadwp_data, $anonim ? 0 : $totals['ga:sessions'] );
 		}
 
 		/**
@@ -798,18 +713,14 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 					if ( $this->gapi_errors_handler() ) {
 						return - 23;
 					}
-					$data = $this->service->data_realtime->get( 'ga:' . $projectId, $metrics, array(
-						'dimensions' => $dimensions,
-						'quotaUser' => $this->managequota . 'p' . $projectId ) );
+					$data = $this->service->data_realtime->get( 'ga:' . $projectId, $metrics, array( 'dimensions' => $dimensions, 'quotaUser' => $this->managequota . 'p' . $projectId ) );
 					set_transient( $serial, $data, 55 );
 				} else {
 					$data = $transient;
 				}
 			} catch ( Google_Service_Exception $e ) {
 				set_transient( 'ga_dash_lasterror', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( "(" . $e->getCode() . ") " . $e->getMessage() ), $this->error_timeout );
-				set_transient( 'ga_dash_gapi_errors', array(
-					$e->getCode(),
-					(array) $e->getErrors() ), $this->error_timeout );
+				set_transient( 'ga_dash_gapi_errors', array( $e->getCode(), (array) $e->getErrors() ), $this->error_timeout );
 				return $e->getCode();
 			} catch ( Exception $e ) {
 				set_transient( 'ga_dash_lasterror', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $this->error_timeout );
@@ -819,12 +730,12 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				return - 21;
 			}
 			$i = 0;
-			$ga_dash_data = $data;
+			$gadwp_data = $data;
 			foreach ( $data->getRows() as $row ) {
-				$ga_dash_data->rows[$i] = array_map( 'esc_html', $row );
+				$gadwp_data->rows[$i] = array_map( 'esc_html', $row );
 				$i++;
 			}
-			return $ga_dash_data;
+			return $gadwp_data;
 		}
 
 		public function get( $projectId, $query, $from = false, $to = false, $filter = '' ) {

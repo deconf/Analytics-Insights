@@ -18,20 +18,16 @@ final class GADWP_Frontend_Widget extends WP_Widget {
 	public function __construct() {
 		$this->gadwp = GADWP();
 
-		parent::__construct( 'gadash_frontend_widget', __( 'Google Analytics Dashboard', 'ga-dash' ), array(
-			'description' => __( "Will display your google analytics stats in a widget", 'ga-dash' ) ) );
+		parent::__construct( 'gadash_frontend_widget', __( 'Google Analytics Dashboard', 'ga-dash' ), array( 'description' => __( "Will display your google analytics stats in a widget", 'ga-dash' ) ) );
 		// Frontend Styles
 		if ( is_active_widget( false, false, $this->id_base, true ) ) {
-			add_action( 'wp_enqueue_scripts', array(
-				$this,
-				'load_styles_scripts' ) );
+			add_action( 'wp_enqueue_scripts', array( $this, 'load_styles_scripts' ) );
 		}
 	}
 
 	public function load_styles_scripts() {
 		wp_enqueue_style( 'ga_dash-front', GADWP_URL . 'front/css/widgets.css', null, GADWP_CURRENT_VERSION );
-		wp_enqueue_script( 'ga_dash-front', GADWP_URL . 'front/js/widgets.js', array(
-			'jquery' ), GADWP_CURRENT_VERSION );
+		wp_enqueue_script( 'ga_dash-front', GADWP_URL . 'front/js/widgets.js', array( 'jquery' ), GADWP_CURRENT_VERSION );
 		wp_enqueue_script( 'googlejsapi', 'https://www.google.com/jsapi' );
 	}
 
@@ -142,31 +138,33 @@ final class GADWP_Frontend_Widget extends WP_Widget {
 		$display = ( isset( $instance['display'] ) ? $instance['display'] : 1 );
 		$give_credits = ( isset( $instance['give_credits'] ) ? $instance['give_credits'] : 1 );
 		$anonim = ( isset( $instance['anonim'] ) ? $instance['anonim'] : 0 );
+		/* @formatter:off */
 		?>
-<p>
-    <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( "Title:",'ga-dash' ); ?></label> <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $widget_title ); ?>">
-</p>
-<p>
-    <label for="<?php echo $this->get_field_id( 'display' ); ?>"><?php _e( "Display:",'ga-dash' ); ?></label> <select id="<?php echo $this->get_field_id('display'); ?>" class="widefat" name="<?php   echo $this->get_field_name( 'display' ); ?>">
-        <option value="1" <?php selected( $display, 1 ); ?>><?php _e('Chart & Totals', 'ga-dash');?></option>
-        <option value="2" <?php selected( $display, 2 ); ?>><?php _e('Chart', 'ga-dash');?></option>
-        <option value="3" <?php selected( $display, 3 ); ?>><?php _e('Totals', 'ga-dash');?></option>
-    </select>
-</p>
-<p>
-    <label for="<?php echo $this->get_field_id( 'anonim' ); ?>"><?php _e( "Anonymize stats:",'ga-dash' ); ?></label> <input class="widefat" id="<?php echo $this->get_field_id( 'anonim' ); ?>" name="<?php echo $this->get_field_name( 'anonim' ); ?>" type="checkbox" <?php checked( $anonim, 1 ); ?> value="1">
-</p>
-<p>
-    <label for="<?php echo $this->get_field_id( 'period' ); ?>"><?php _e( "Stats for:",'ga-dash' ); ?></label> <select id="<?php echo $this->get_field_id('period'); ?>" class="widefat" name="<?php   echo $this->get_field_name( 'period' ); ?>">
-        <option value="7daysAgo" <?php selected( $period, '7daysAgo' ); ?>><?php _e('Last 7 Days', 'ga-dash');?></option>
-        <option value="14daysAgo" <?php selected( $period, '14daysAgo' ); ?>><?php _e('Last 14 Days', 'ga-dash');?></option>
-        <option value="30daysAgo" <?php selected( $period, '30daysAgo' ); ?>><?php _e('Last 30 Days', 'ga-dash');?></option>
-    </select>
-</p>
-<p>
-    <label for="<?php echo $this->get_field_id( 'give_credits' ); ?>"><?php _e( "Give credits:",'ga-dash' ); ?></label> <input class="widefat" id="<?php echo $this->get_field_id( 'give_credits' ); ?>" name="<?php echo $this->get_field_name( 'give_credits' ); ?>" type="checkbox" <?php checked( $give_credits, 1 ); ?> value="1">
-</p>
-<?php
+		<p>
+		    <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( "Title:",'ga-dash' ); ?></label> <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $widget_title ); ?>">
+		</p>
+		<p>
+		    <label for="<?php echo $this->get_field_id( 'display' ); ?>"><?php _e( "Display:",'ga-dash' ); ?></label> <select id="<?php echo $this->get_field_id('display'); ?>" class="widefat" name="<?php   echo $this->get_field_name( 'display' ); ?>">
+		        <option value="1" <?php selected( $display, 1 ); ?>><?php _e('Chart & Totals', 'ga-dash');?></option>
+		        <option value="2" <?php selected( $display, 2 ); ?>><?php _e('Chart', 'ga-dash');?></option>
+		        <option value="3" <?php selected( $display, 3 ); ?>><?php _e('Totals', 'ga-dash');?></option>
+		    </select>
+		</p>
+		<p>
+		    <label for="<?php echo $this->get_field_id( 'anonim' ); ?>"><?php _e( "Anonymize stats:",'ga-dash' ); ?></label> <input class="widefat" id="<?php echo $this->get_field_id( 'anonim' ); ?>" name="<?php echo $this->get_field_name( 'anonim' ); ?>" type="checkbox" <?php checked( $anonim, 1 ); ?> value="1">
+		</p>
+		<p>
+		    <label for="<?php echo $this->get_field_id( 'period' ); ?>"><?php _e( "Stats for:",'ga-dash' ); ?></label> <select id="<?php echo $this->get_field_id('period'); ?>" class="widefat" name="<?php   echo $this->get_field_name( 'period' ); ?>">
+		        <option value="7daysAgo" <?php selected( $period, '7daysAgo' ); ?>><?php _e('Last 7 Days', 'ga-dash');?></option>
+		        <option value="14daysAgo" <?php selected( $period, '14daysAgo' ); ?>><?php _e('Last 14 Days', 'ga-dash');?></option>
+		        <option value="30daysAgo" <?php selected( $period, '30daysAgo' ); ?>><?php _e('Last 30 Days', 'ga-dash');?></option>
+		    </select>
+		</p>
+		<p>
+		    <label for="<?php echo $this->get_field_id( 'give_credits' ); ?>"><?php _e( "Give credits:",'ga-dash' ); ?></label> <input class="widefat" id="<?php echo $this->get_field_id( 'give_credits' ); ?>" name="<?php echo $this->get_field_name( 'give_credits' ); ?>" type="checkbox" <?php checked( $give_credits, 1 ); ?> value="1">
+		</p>
+		<?php
+		/* @formatter:on */
 	}
 
 	public function update( $new_instance, $old_instance ) {

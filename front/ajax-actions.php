@@ -20,7 +20,7 @@ if ( ! class_exists( 'GADWP_Frontend_Ajax' ) ) {
 			$this->gadwp = GADWP();
 
 			if ( GADWP_Tools::check_roles( $this->gadwp->config->options['ga_dash_access_front'] ) && $this->gadwp->config->options['frontend_item_reports'] ) {
-				// Items action
+				// Item Reports action
 				add_action( 'wp_ajax_gadwp_frontend_item_reports', array( $this, 'ajax_item_reports' ) );
 			}
 

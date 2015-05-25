@@ -196,6 +196,7 @@ td.roles {
 .switch-desc {
 	float: left;
 	margin-left: 10px;
+	line-height: 20px;
 }
 
 /* Admin Widget & Real-Time Stats*/
