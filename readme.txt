@@ -146,7 +146,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Bug Fix: avoid double encoding for UTF-8 URIs
 
 = 4.7.4 =
-- Bug Fix: Settings action unavailable on Plugins List screen
+- Bug Fix: Settings action unavailable on Installed Plugins screen
 
 = 4.7.3 =
 - Enhancement: Russian translation
