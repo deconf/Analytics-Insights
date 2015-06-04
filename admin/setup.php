@@ -26,7 +26,7 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 			// Network Menu
 			add_action( 'network_admin_menu', array( $this, 'network_menu' ) );
 			// Settings link
-			add_filter( "plugin_action_links_" . plugin_basename( GADWP_DIR ) . 'gadwp.php', array( $this, 'settings_link' ) );
+			add_filter( "plugin_action_links_" . plugin_basename( GADWP_DIR . 'gadwp.php' ), array( $this, 'settings_link' ) );
 			// Error bubble
 			add_action( 'admin_print_scripts', array( $this, 'draw_error_bubble' ), 10000 );
 		}
@@ -203,7 +203,7 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 		 * @return array
 		 */
 		public function settings_link( $links ) {
-			$settings_link = '<a href="' . get_admin_url( null, 'admin.php?page=gadash_settings' ) . '">' . __( "Settings", 'ga-dash' ) . '</a>';
+			$settings_link = '<a href="' . esc_url( get_admin_url( null, 'admin.php?page=gadash_settings' ) ) . '">' . __( "Settings", 'ga-dash' ) . '</a>';
 			array_unshift( $links, $settings_link );
 			return $links;
 		}
