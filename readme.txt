@@ -145,6 +145,9 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Enhancement: new reports for frontend webpages (new feature) 
 - Bug Fix: avoid double encoding for UTF-8 URIs
 
+= 4.7.4 =
+- Bug Fix: Settings action unavailable on Plugins List screen
+
 = 4.7.3 =
 - Enhancement: Russian translation
 - Enhancement: Romanian translation
