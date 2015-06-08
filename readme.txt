@@ -139,7 +139,8 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Enhancement: JavaScript code cleanup and optimization
 - Enhancement: memory usage optimization
 - Enhancement: small assets fixes, UX improvements, props by [Adrian Pop](https://github.com/adipop)
-- Enhancement: reports for all frontend webpages (new feature) 
+- Enhancement: reports for all frontend webpages (new feature)
+- Enhancement: gadwp_frontenditem_uri allows URI corrections for frontend item reports
 - Bug Fix: avoid double encoding for UTF-8 URIs
 
 = 4.7.4 =

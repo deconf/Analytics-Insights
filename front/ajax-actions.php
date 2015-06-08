@@ -48,7 +48,7 @@ if ( ! class_exists( 'GADWP_Frontend_Ajax' ) ) {
 			$uri = '/' . ltrim($uri,'/');
 
 			// allow URL correction before sending an API request
-			$filter = apply_filters( 'gadwp_frontend_uri', $uri );
+			$filter = apply_filters( 'gadwp_frontenditem_uri', $uri );
 			$filter = rawurlencode( rawurldecode( $filter ) );
 
 			$query = $_REQUEST['query'];
