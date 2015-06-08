@@ -101,10 +101,12 @@ if ( ! class_exists( 'GADWP_Backend_Ajax' ) ) {
 			if ( ! isset( $_REQUEST['gadash_security_widget_reports'] ) || ! wp_verify_nonce( $_REQUEST['gadash_security_widget_reports'], 'gadash_get_widgetreports' ) ) {
 				wp_die( - 30 );
 			}
+
 			$projectId = $_REQUEST['projectId'];
 			$from = $_REQUEST['from'];
 			$to = $_REQUEST['to'];
 			$query = $_REQUEST['query'];
+
 			if ( ob_get_length() ) {
 				ob_clean();
 			}
@@ -112,6 +114,7 @@ if ( ! class_exists( 'GADWP_Backend_Ajax' ) ) {
 			if ( ! GADWP_Tools::check_roles( $this->gadwp->config->options['ga_dash_access_back'] ) || 0 == $this->gadwp->config->options['dashboard_widget'] ) {
 				wp_die( - 31 );
 			}
+
 			if ( $this->gadwp->config->options['ga_dash_token'] && $projectId && $from && $to ) {
 				if ( null === $this->gadwp->gapi_controller ) {
 					$this->gadwp->gapi_controller = new GADWP_GAPI_Controller();
@@ -119,13 +122,24 @@ if ( ! class_exists( 'GADWP_Backend_Ajax' ) ) {
 			} else {
 				wp_die( - 24 );
 			}
+
 			$profile_info = GADWP_Tools::get_selected_profile( $this->gadwp->config->options['ga_dash_profile_list'], $projectId );
+
 			if ( isset( $profile_info[4] ) ) {
 				$this->gadwp->gapi_controller->timeshift = $profile_info[4];
 			} else {
 				$this->gadwp->gapi_controller->timeshift = (int) current_time( 'timestamp' ) - time();
 			}
-			$this->gadwp->gapi_controller->get( $projectId, $query, $from, $to );
+
+			$queries = explode( ',', $query );
+
+			$results = [];
+
+			foreach ( $queries as $value ) {
+				$results[] = $this->gadwp->gapi_controller->get( $projectId, $value, $from, $to );
+			}
+
+			wp_send_json( $results );
 		}
 	}
 }

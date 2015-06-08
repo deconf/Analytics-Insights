@@ -151,7 +151,7 @@ final class GADWP_Settings {
                                             <div class="onoffswitch-switch"></div>
                                         </label>
                                     </div>
-                                    <div class="switch-desc"><?php echo " ".__("show page sessions and users in frontend (after each article)", 'ga-dash' );?></div>
+                                    <div class="switch-desc"><?php echo " ".__("enable web page reports on frontend", 'ga-dash' );?></div>
                                 </td>
                             </tr>
                             <tr>

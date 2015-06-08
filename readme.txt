@@ -135,18 +135,18 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 == Changelog ==
 
 = 4.8 =
-- Enhancement: reduce the number of ajax requests
+- Enhancement: minimize the number of ajax requests
 - Enhancement: JavaScript code cleanup and optimization
 - Enhancement: memory usage optimization
-- Enhancement: German translation updated
-- Enhancement: Romanian translation updated
-- Enhancement: Dutch translation updated
 - Enhancement: small assets fixes, UX improvements, props by [Adrian Pop](https://github.com/adipop)
-- Enhancement: new reports for frontend webpages (new feature) 
+- Enhancement: reports for all frontend webpages (new feature) 
 - Bug Fix: avoid double encoding for UTF-8 URIs
 
 = 4.7.4 =
 - Bug Fix: Settings action unavailable on Installed Plugins screen
+- Enhancement: German translation updated
+- Enhancement: Romanian translation updated
+- Enhancement: Dutch translation updated
 
 = 4.7.3 =
 - Enhancement: Russian translation

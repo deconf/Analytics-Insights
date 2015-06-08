@@ -19,15 +19,15 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 		public function __construct() {
 			$this->gadwp = GADWP();
 			if ( GADWP_Tools::check_roles( $this->gadwp->config->options['ga_dash_access_back'] ) && ( 1 == $this->gadwp->config->options['dashboard_widget'] ) ) {
-				add_action( 'wp_dashboard_setup', array( 
-					$this, 
+				add_action( 'wp_dashboard_setup', array(
+					$this,
 					'add_widget' ) );
 			}
 		}
 
 		public function add_widget() {
-			wp_add_dashboard_widget( 'gadash-widget', __( "Google Analytics Dashboard", 'ga-dash' ), array( 
-				$this, 
+			wp_add_dashboard_widget( 'gadash-widget', __( "Google Analytics Dashboard", 'ga-dash' ), array(
+				$this,
 				'dashboard_widget' ), $control_callback = null );
 		}
 
@@ -36,7 +36,7 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 				echo '<p>' . __( "This plugin needs an authorization:", 'ga-dash' ) . '</p><form action="' . menu_page_url( 'gadash_settings', false ) . '" method="POST">' . get_submit_button( __( "Authorize Plugin", 'ga-dash' ), 'secondary' ) . '</form>';
 				return;
 			}
-			
+
 			if ( current_user_can( 'manage_options' ) ) {
 				if ( isset( $_REQUEST['ga_dash_profile_select'] ) ) {
 					$this->gadwp->config->options['ga_dash_tableid'] = $_REQUEST['ga_dash_profile_select'];
@@ -50,7 +50,7 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 						} else {
 							$this->gadwp->config->options['ga_dash_tableid'] = GADWP_Tools::guess_default_domain( $profiles );
 						}
-					} else 
+					} else
 						if ( $this->gadwp->config->options['switch_profile'] == 0 && $this->gadwp->config->options['ga_dash_tableid_jail'] ) {
 							$this->gadwp->config->options['ga_dash_tableid'] = $this->gadwp->config->options['ga_dash_tableid_jail'];
 						}
@@ -178,12 +178,12 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 				  pattern: '#,##%',
 				  fractionDigits: 2
 				});
-            
+
 				formatter.format(data, 1);	";
 			} else {
 				$formater = '';
 			}
-			
+
 			if ( isset( $this->gadwp->config->options['ga_dash_style'] ) ) {
 				$light_color = GADWP_Tools::colourVariator( $this->gadwp->config->options['ga_dash_style'], 40 );
 				$dark_color = GADWP_Tools::colourVariator( $this->gadwp->config->options['ga_dash_style'], - 20 );
@@ -253,9 +253,9 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
     </div>
 </div>
 <script type="text/javascript">
-            
+
             var focusFlag = 1;
-            
+
             	jQuery(document).ready(function(){
             		jQuery(window).bind("focus",function(event){
             			focusFlag = 1;
@@ -263,15 +263,15 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
             			focusFlag = 0;
             		});
             	});
-            
+
             	jQuery(function() {
             		jQuery('#gadash-widget *').tooltip();
             	});
-            
+
             	function onlyUniqueValues(value, index, self) {
             		return self.indexOf(value) === index;
             	 }
-            
+
             	function countsessions(data, searchvalue) {
             		var count = 0;
             		for ( var i = 0; i < data["rows"].length; i = i + 1 ) {
@@ -281,7 +281,7 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
             		}
             		return count;
             	 }
-            
+
             	function gadash_generatetooltip(data) {
             		var count = 0;
             		var table = "";
@@ -295,7 +295,7 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
             			return("");
             		}
             	}
-            
+
             	function gadash_pagedetails(data, searchvalue) {
             		var newdata = [];
             		for ( var i = 0; i < data["rows"].length; i = i + 1 ){
@@ -310,7 +310,7 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
             				newdata.push(data["rows"][i].slice());
             			}
             		}
-            
+
             		var countrfr = 0;
             		var countkwd = 0;
             		var countdrt = 0;
@@ -324,9 +324,9 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
             		for ( var i = 0; i < newdata.length; i = i + 1 ) {
             			if (newdata[i][0] == searchvalue){
             				var pagetitle = newdata[i][5];
-            				
+
             				switch (newdata[i][3]){
-            				
+
             					case "REFERRAL": 	countrfr += parseInt(newdata[ i ][6]);
             										tablerfr +=	"<tr><td class='gadash-pgdetailsl'>"+newdata[i][1]+"</td><td class='gadash-pgdetailsr'>"+newdata[ i ][6]+"</td></tr>";
             										break;
@@ -338,7 +338,7 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
             										break;
             					case "CUSTOM": 		countcpg += parseInt(newdata[ i ][6]);
                     								tablecpg +=	"<tr><td class='gadash-pgdetailsl'>"+newdata[i][1]+"</td><td class='gadash-pgdetailsr'>"+newdata[ i ][6]+"</td></tr>";
-                    								break;            										
+                    								break;
             					case "DIRECT": 		countdrt += parseInt(newdata[ i ][6]);
             										break;
             				};
@@ -355,25 +355,25 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
             		}
             		if (countcpg){
             			tablecpg = "<table><tr><td><?php _e("CAMPAIGN", 'ga-dash');?> ("+countcpg+")</td></tr>"+tablecpg+"</table><br />";
-            		}            		
+            		}
             		if (countdrt){
             			tabledrt = "<table><tr><td><?php _e("DIRECT", 'ga-dash');?> ("+countdrt+")</td></tr></table><br />";
             		}
             		return ("<p><center><strong>"+pagetitle+"</strong></center></p>"+tablerfr+tablekwd+tablescl+tablecpg+tabledrt);
             	 }
-            
+
             	 function online_refresh(){
             		if (focusFlag){
 
             		jQuery.post(ajaxurl, {action: "gadash_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: false,to: false,query: "realtime",gadash_security_widget_reports: "<?php echo wp_create_nonce('gadash_get_widgetreports'); ?>"}, function(data){
-            			
+
                         if (jQuery.isNumeric(data) || typeof data === "undefined"){
                             data = [];
                             data["totalsForAllResults"] = []
                             data["totalsForAllResults"]["rt:activeUsers"] = "0";
                             data["rows"]= [];
                         }
-                                    
+
             			if (data["totalsForAllResults"]["rt:activeUsers"]!==document.getElementById("gadash-online").innerHTML){
             				jQuery("#gadash-online").fadeOut("slow");
             				jQuery("#gadash-online").fadeOut(500);
@@ -391,11 +391,11 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
             					jQuery("#gadash-online").css({'background-color' : '#FFFFFF'});
             				});
             			};
-            
+
             			if (data["totalsForAllResults"]["rt:activeUsers"] == 0){
             				data["rows"]= [];
             			};
-            
+
             			var pagepath = [];
             			var referrals = [];
             			var keywords = [];
@@ -415,7 +415,7 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
             				}
             				if (data["rows"][i][3]=="CUSTOM"){
             					custom.push( data["rows"][ i ][1] );
-            				}            				
+            				}
             				visittype.push( data["rows"][ i ][3] );
             			}
 
@@ -425,7 +425,7 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
             				upagepathstats[i]={"pagepath":upagepath[i],"count":countsessions(data,upagepath[i])};
             			}
             			upagepathstats.sort( function(a,b){ return b.count - a.count } );
-            
+
             			var pgstatstable = "";
             			for ( var i = 0; i < upagepathstats.length; i = i + 1 ) {
             				if (i < <?php echo $this->gadwp->config->options['ga_realtime_pages']; ?>){
@@ -433,21 +433,21 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
             				}
             			}
             			document.getElementById("gadash-pages").innerHTML='<br /><div class="gadash-pg">'+pgstatstable+'</div>';
-            
+
             			var ureferralsstats = [];
             			var ureferrals = referrals.filter(onlyUniqueValues);
             			for ( var i = 0; i < ureferrals.length; i = i + 1 ) {
             				ureferralsstats[i]={"value":ureferrals[i],"count":countsessions(data,ureferrals[i])};
             			}
             			ureferralsstats.sort( function(a,b){ return b.count - a.count } );
-            
+
             			var ukeywordsstats = [];
             			var ukeywords = keywords.filter(onlyUniqueValues);
             			for ( var i = 0; i < ukeywords.length; i = i + 1 ) {
             				ukeywordsstats[i]={"value":ukeywords[i],"count":countsessions(data,ukeywords[i])};
             			}
             			ukeywordsstats.sort( function(a,b){ return b.count - a.count } );
-            
+
             			var usocialstats = [];
             			var usocial = social.filter(onlyUniqueValues);
             			for ( var i = 0; i < usocial.length; i = i + 1 ) {
@@ -460,18 +460,18 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
             			for ( var i = 0; i < ucustom.length; i = i + 1 ) {
             				ucustomstats[i]={"value":ucustom[i],"count":countsessions(data,ucustom[i])};
             			}
-            			ucustomstats.sort( function(a,b){ return b.count - a.count } );            			
-            
+            			ucustomstats.sort( function(a,b){ return b.count - a.count } );
+
             			var uvisittype = ["REFERRAL","ORGANIC","SOCIAL","CUSTOM"];
             			document.getElementById("gadash-tdo-right").innerHTML = '<div class="gadash-bigtext"><a href="#" data-tooltip="'+gadash_generatetooltip(ureferralsstats)+'"><div class="gadash-bleft">'+'<?php _e("REFERRAL", 'ga-dash');?>'+'</a></div><div class="gadash-bright">'+countsessions(data,uvisittype[0])+'</div></div>';
             			document.getElementById("gadash-tdo-right").innerHTML += '<div class="gadash-bigtext"><a href="#" data-tooltip="'+gadash_generatetooltip(ukeywordsstats)+'"><div class="gadash-bleft">'+'<?php _e("ORGANIC", 'ga-dash');?>'+'</a></div><div class="gadash-bright">'+countsessions(data,uvisittype[1])+'</div></div>';
             			document.getElementById("gadash-tdo-right").innerHTML += '<div class="gadash-bigtext"><a href="#" data-tooltip="'+gadash_generatetooltip(usocialstats)+'"><div class="gadash-bleft">'+'<?php _e("SOCIAL", 'ga-dash');?>'+'</a></div><div class="gadash-bright">'+countsessions(data,uvisittype[2])+'</div></div>';
             			document.getElementById("gadash-tdo-right").innerHTML += '<div class="gadash-bigtext"><a href="#" data-tooltip="'+gadash_generatetooltip(ucustomstats)+'"><div class="gadash-bleft">'+'<?php _e("CAMPAIGN", 'ga-dash');?>'+'</a></div><div class="gadash-bright">'+countsessions(data,uvisittype[3])+'</div></div>';
-            
+
             			var uvisitortype = ["DIRECT","NEW"];
             			document.getElementById("gadash-tdo-right").innerHTML += '<div class="gadash-bigtext"><div class="gadash-bleft">'+'<?php _e("DIRECT", 'ga-dash');?>'+'</div><div class="gadash-bright">'+countsessions(data,uvisitortype[0])+'</div></div>';
             			document.getElementById("gadash-tdo-right").innerHTML += '<div class="gadash-bigtext"><div class="gadash-bleft">'+'<?php _e("NEW", 'ga-dash');?>'+'</div><div class="gadash-bright">'+countsessions(data,uvisitortype[1])+'</div></div>';
-            
+
             		});
                };
                };
@@ -484,17 +484,6 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 <script type="text/javascript">
             	google.load("visualization", "1", {packages:["table","orgchart"]});
 
-            	function checknpcounter(max) {
-            		try {
-            			if (npcounter == max) {
-            				NProgress.done();
-            			} else {
-            				npcounter++;
-            				NProgress.set((1/(max+1))*npcounter);
-            			}
-            		} catch(e) {}		
-            	}
-            	            	
         		try {
         	    	NProgress.configure({ parent: "#gadash-progressbar" });
         	        NProgress.configure({ showSpinner: false });
@@ -502,44 +491,45 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
         		} catch(e) {
         			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
         			jQuery("#gadash-progressbar").html("<?php _e("A JavaScript Error is blocking plugin resources!", 'ga-dash'); ?>");
-        		}    
-        	    npcounter = 0;
-                                     
-                jQuery.post(ajaxurl, {action: "gadash_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "<?php echo $query; ?>",gadash_security_widget_reports: "<?php echo wp_create_nonce('gadash_get_widgetreports'); ?>"}, function(response){
-                	   
-                    if (!jQuery.isNumeric(response)){
-                        if (jQuery.isArray(response)){
-                    	   gadash_prs=response;
-                    	   google.setOnLoadCallback(ga_dash_drawprs(gadash_prs));
-                        } else {
-                        	checknpcounter(0);
-                			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
-                			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
-                			console.log("\n********************* GADWP Log ********************* \n\n"+response);
-                		}    
-                	}else{
-                        jQuery("#gadash-prs").css({"background-color":"#F7F7F7","height":"auto","padding-top":"125px","padding-bottom":"125px","color":"#000","text-align":"center"});  
-                        jQuery("#gadash-prs").html("<?php _e("This report is unavailable", 'ga-dash'); ?> ("+response+")");                    	
-                        checknpcounter(1);
-                    }	
-                });
+        		}
 
-                jQuery.post(ajaxurl, {action: "gadash_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "trafficchannels",gadash_security_widget_reports: "<?php echo wp_create_nonce('gadash_get_widgetreports'); ?>"}, function(response){
-                    if (!jQuery.isNumeric(response)){
-                    	if (jQuery.isArray(response)){
-                        	gadash_trafficchannels=response;
-                        	google.setOnLoadCallback(ga_dash_drawtrafficchannels(gadash_trafficchannels));
-                         } else {
-                         	checknpcounter(0);
-                 			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
-                 			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
-                 			console.log("\n********************* GADWP Log ********************* \n\n"+response);
-                 		}   
-                	}else{
-                        jQuery("#gadash-trafficchannels").css({"background-color":"#F7F7F7","height":"auto","padding-top":"125px","padding-bottom":"125px","color":"#000","text-align":"center"});  
-                        jQuery("#gadash-trafficchannels").html("<?php _e("This report is unavailable", 'ga-dash'); ?> ("+response+")");                    	
-                        checknpcounter(1);
-                    }	
+                jQuery.post(ajaxurl, {action: "gadash_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "<?php echo 'trafficchannels,' . $query; ?>",gadash_security_widget_reports: "<?php echo wp_create_nonce('gadash_get_widgetreports'); ?>"}, function(response){
+                	if ( jQuery.isArray( response ) ) {
+
+                        if (!jQuery.isNumeric(response[0])){
+                        	if (jQuery.isArray(response[0])){
+                            	gadash_trafficchannels=response[0];
+                            	google.setOnLoadCallback(ga_dash_drawtrafficchannels(gadash_trafficchannels));
+                             } else {
+                     			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
+                     			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
+                     			console.log("\n********************* GADWP Log ********************* \n\n"+response[0]);
+                     		}
+                    	}else{
+                            jQuery("#gadash-trafficchannels").css({"background-color":"#F7F7F7","height":"auto","padding-top":"125px","padding-bottom":"125px","color":"#000","text-align":"center"});
+                            jQuery("#gadash-trafficchannels").html("<?php _e("This report is unavailable", 'ga-dash'); ?> ("+response[0]+")");
+                        }
+
+	                    if (!jQuery.isNumeric(response[1])){
+	                        if (jQuery.isArray(response[1])){
+	                    	   gadash_prs=response[1];
+	                    	   google.setOnLoadCallback(ga_dash_drawprs(gadash_prs));
+	                        } else {
+	                			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
+	                			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
+	                			console.log("\n********************* GADWP Log ********************* \n\n"+response[1]);
+	                		}
+	                	}else{
+	                        jQuery("#gadash-prs").css({"background-color":"#F7F7F7","height":"auto","padding-top":"125px","padding-bottom":"125px","color":"#000","text-align":"center"});
+	                        jQuery("#gadash-prs").html("<?php _e("This report is unavailable", 'ga-dash'); ?> ("+response[1]+")");
+	                    }
+
+                    }else{
+             			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
+             			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
+             			console.log("\n********************* GADWP Log ********************* \n\n"+response);
+                    }
+					NProgress.done();
                 });
 
             	function ga_dash_drawprs(gadash_prs) {
@@ -550,11 +540,10 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
                 		width: '100%',
                         allowHtml: true
                 	};
-                
+
                 	var chart = new google.visualization.Table(document.getElementById('gadash-prs'));
                 	chart.draw(data, options);
-                	checknpcounter(1);
-            	};                                              	
+            	};
 
             	function ga_dash_drawtrafficchannels(gadash_trafficchannels) {
                 	var data = google.visualization.arrayToDataTable(gadash_trafficchannels);
@@ -562,10 +551,9 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
                 	    allowCollapse:true,
                 		allowHtml:true
                 	};
-                
+
                 	var chart = new google.visualization.OrgChart(document.getElementById('gadash-trafficchannels'));
                 	chart.draw(data, options);
-                	checknpcounter(1);
             	};
             </script>
 <?php } else if ($query == 'trafficdetails') {?>
@@ -581,17 +569,6 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 <script type="text/javascript">
             	google.load("visualization", "1", {packages:["corechart","orgchart"]});
 
-            	function checknpcounter(max) {
-            		try {
-            			if (npcounter == max) {
-            				NProgress.done();
-            			} else {
-            				npcounter++;
-            				NProgress.set((1/(max+1))*npcounter);
-            			}
-            		} catch(e) {}		
-            	}
-            	            	
         		try {
         	    	NProgress.configure({ parent: "#gadash-progressbar" });
         	        NProgress.configure({ showSpinner: false });
@@ -599,103 +576,88 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
         		} catch(e) {
         			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
         			jQuery("#gadash-progressbar").html("<?php _e("A JavaScript Error is blocking plugin resources!", 'ga-dash'); ?>");
-        		}    
-        	    npcounter = 0;            	
-               
-                jQuery.post(ajaxurl, {action: "gadash_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "medium",gadash_security_widget_reports: "<?php echo wp_create_nonce('gadash_get_widgetreports'); ?>"}, function(response){
+        		}
 
-                    if (!jQuery.isNumeric(response)){
-                    	if (jQuery.isArray(response)){
-                        	gadash_trafficmediums=response;
-                   		    google.setOnLoadCallback(ga_dash_drawtrafficmediums(gadash_trafficmediums));                        	
-                         } else {
-                         	checknpcounter(0);
-                 			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
-                 			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
-                 			console.log("\n********************* GADWP Log ********************* \n\n"+response);
-                 		} 
-                	}else{
-                        jQuery("#gadash-trafficmediums").css({"background-color":"#F7F7F7","height":"auto","padding-top":"80px","padding-bottom":"80px","color":"#000","text-align":"center"});  
-                        jQuery("#gadash-trafficmediums").html("<?php _e("This report is unavailable", 'ga-dash'); ?> ("+response+")");                    	
-                        checknpcounter(4);
-                    }	
+                jQuery.post(ajaxurl, {action: "gadash_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "trafficchannels,medium,visitorType,source,socialNetwork",gadash_security_widget_reports: "<?php echo wp_create_nonce('gadash_get_widgetreports'); ?>"}, function(response){
+                	if ( jQuery.isArray( response ) ) {
+
+	                    if (!jQuery.isNumeric(response[0])){
+	                    	if (jQuery.isArray(response[0])){
+	                        	gadash_trafficchannels=response[0];
+	                   		    google.setOnLoadCallback(ga_dash_drawtrafficchannels(gadash_trafficchannels));
+	                         } else {
+	                 			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
+	                 			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
+	                 			console.log("\n********************* GADWP Log ********************* \n\n"+response[0]);
+	                 		}
+	                	}else{
+	                        jQuery("#gadash-trafficchannels").css({"background-color":"#F7F7F7","height":"auto","padding-top":"125px","padding-bottom":"125px","color":"#000","text-align":"center"});
+	                        jQuery("#gadash-trafficchannels").html("<?php _e("This report is unavailable", 'ga-dash'); ?> ("+response[0]+")");
+	                    }
+
+	                    if (!jQuery.isNumeric(response[1])){
+	                    	if (jQuery.isArray(response[1])){
+	                        	gadash_trafficmediums=response[1];
+	                   		    google.setOnLoadCallback(ga_dash_drawtrafficmediums(gadash_trafficmediums));
+	                         } else {
+	                 			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
+	                 			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
+	                 			console.log("\n********************* GADWP Log ********************* \n\n"+response[1]);
+	                 		}
+	                	}else{
+	                        jQuery("#gadash-trafficmediums").css({"background-color":"#F7F7F7","height":"auto","padding-top":"80px","padding-bottom":"80px","color":"#000","text-align":"center"});
+	                        jQuery("#gadash-trafficmediums").html("<?php _e("This report is unavailable", 'ga-dash'); ?> ("+response[1]+")");
+	                    }
+
+	                    if (!jQuery.isNumeric(response[2])){
+	                    	if (jQuery.isArray(response[2])){
+	                    		gadash_traffictype=response[2];
+	                    		google.setOnLoadCallback(ga_dash_drawtraffictype(gadash_traffictype));
+	                         } else {
+	                 			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
+	                 			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
+	                 			console.log("\n********************* GADWP Log ********************* \n\n"+response[2]);
+	                 		}
+	                	}else{
+	                        jQuery("#gadash-traffictype").css({"background-color":"#F7F7F7","height":"auto","padding-top":"80px","padding-bottom":"80px","color":"#000","text-align":"center"});
+	                        jQuery("#gadash-traffictype").html("<?php _e("This report is unavailable", 'ga-dash'); ?> ("+response[2]+")");
+	                    }
+
+	                    if (!jQuery.isNumeric(response[3])){
+	                    	if (jQuery.isArray(response[3])){
+	                        	gadash_trafficorganic=response[3];
+	                        	google.setOnLoadCallback(ga_dash_drawtrafficorganic(gadash_trafficorganic));
+	                         } else {
+	                 			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
+	                 			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
+	                 			console.log("\n********************* GADWP Log ********************* \n\n"+response[3]);
+	                 		}
+	                	}else{
+	                        jQuery("#gadash-trafficorganic").css({"background-color":"#F7F7F7","height":"auto","padding-top":"80px","padding-bottom":"80px","color":"#000","text-align":"center"});
+	                        jQuery("#gadash-trafficorganic").html("<?php _e("This report is unavailable", 'ga-dash'); ?> ("+response[3]+")");
+	                    }
+
+	                    if (!jQuery.isNumeric(response[4])){
+	                    	if (jQuery.isArray(response[4])){
+	                        	gadash_socialnetworks=response[4];
+	                   		    google.setOnLoadCallback(ga_dash_drawsocialnetworks(gadash_socialnetworks));
+	                         } else {
+	                 			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
+	                 			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
+	                 			console.log("\n********************* GADWP Log ********************* \n\n"+response[4]);
+	                 		}
+	                	}else{
+	                        jQuery("#gadash-socialnetworks").css({"background-color":"#F7F7F7","height":"auto","padding-top":"80px","padding-bottom":"80px","color":"#000","text-align":"center"});
+	                        jQuery("#gadash-socialnetworks").html("<?php _e("This report is unavailable", 'ga-dash'); ?> ("+response[4]+")");
+	                    }
+
+                    }else{
+             			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
+             			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
+             			console.log("\n********************* GADWP Log ********************* \n\n"+response);
+                    }
+					NProgress.done();
                 });
-
-                jQuery.post(ajaxurl, {action: "gadash_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "visitorType",gadash_security_widget_reports: "<?php echo wp_create_nonce('gadash_get_widgetreports'); ?>"}, function(response){
-                    if (!jQuery.isNumeric(response)){
-                    	if (jQuery.isArray(response)){
-                    		gadash_traffictype=response;
-                    		google.setOnLoadCallback(ga_dash_drawtraffictype(gadash_traffictype));                        	
-                         } else {
-                         	checknpcounter(0);
-                 			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
-                 			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
-                 			console.log("\n********************* GADWP Log ********************* \n\n"+response);
-                 		} 
-                	}else{
-                        jQuery("#gadash-traffictype").css({"background-color":"#F7F7F7","height":"auto","padding-top":"80px","padding-bottom":"80px","color":"#000","text-align":"center"});  
-                        jQuery("#gadash-traffictype").html("<?php _e("This report is unavailable", 'ga-dash'); ?> ("+response+")");                    	
-                        checknpcounter(4);
-                    }	
-                });                
-
-                jQuery.post(ajaxurl, {action: "gadash_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "trafficchannels",gadash_security_widget_reports: "<?php echo wp_create_nonce('gadash_get_widgetreports'); ?>"}, function(response){
-
-                    if (!jQuery.isNumeric(response)){
-                    	if (jQuery.isArray(response)){
-                        	gadash_trafficchannels=response;
-                   		    google.setOnLoadCallback(ga_dash_drawtrafficchannels(gadash_trafficchannels));                        	
-                         } else {
-                         	checknpcounter(0);
-                 			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
-                 			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
-                 			console.log("\n********************* GADWP Log ********************* \n\n"+response);
-                 		} 
-                	}else{
-                        jQuery("#gadash-trafficchannels").css({"background-color":"#F7F7F7","height":"auto","padding-top":"125px","padding-bottom":"125px","color":"#000","text-align":"center"});  
-                        jQuery("#gadash-trafficchannels").html("<?php _e("This report is unavailable", 'ga-dash'); ?> ("+response+")");                    	
-                        checknpcounter(4);
-                    }	
-                });
-
-                jQuery.post(ajaxurl, {action: "gadash_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "socialNetwork",gadash_security_widget_reports: "<?php echo wp_create_nonce('gadash_get_widgetreports'); ?>"}, function(response){
-
-                    if (!jQuery.isNumeric(response)){
-                    	if (jQuery.isArray(response)){
-                        	gadash_socialnetworks=response;
-                   		    google.setOnLoadCallback(ga_dash_drawsocialnetworks(gadash_socialnetworks));                        	
-                         } else {
-                         	checknpcounter(0);
-                 			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
-                 			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
-                 			console.log("\n********************* GADWP Log ********************* \n\n"+response);
-                 		}                         
-                	}else{
-                        jQuery("#gadash-socialnetworks").css({"background-color":"#F7F7F7","height":"auto","padding-top":"80px","padding-bottom":"80px","color":"#000","text-align":"center"});  
-                        jQuery("#gadash-socialnetworks").html("<?php _e("This report is unavailable", 'ga-dash'); ?> ("+response+")");                    	
-                        checknpcounter(4);
-                    }	
-                });  
-
-
-                jQuery.post(ajaxurl, {action: "gadash_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "source",gadash_security_widget_reports: "<?php echo wp_create_nonce('gadash_get_widgetreports'); ?>"}, function(response){
-
-                    if (!jQuery.isNumeric(response)){
-                    	if (jQuery.isArray(response)){
-                        	gadash_trafficorganic=response;
-                        	google.setOnLoadCallback(ga_dash_drawtrafficorganic(gadash_trafficorganic));
-                         } else {
-                         	checknpcounter(0);
-                 			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
-                 			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
-                 			console.log("\n********************* GADWP Log ********************* \n\n"+response);
-                 		}                        
-                	}else{
-                        jQuery("#gadash-trafficorganic").css({"background-color":"#F7F7F7","height":"auto","padding-top":"80px","padding-bottom":"80px","color":"#000","text-align":"center"});  
-                        jQuery("#gadash-trafficorganic").html("<?php _e("This report is unavailable", 'ga-dash'); ?> ("+response+")");                    	
-                        checknpcounter(4);
-                    }	
-                });                                
 
             	function ga_dash_drawtrafficmediums(gadash_trafficmediums) {
                 	var data = google.visualization.arrayToDataTable(gadash_trafficmediums);
@@ -707,10 +669,9 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 							title: '<?php _e( "Traffic Mediums", 'ga-dash' ); ?>',
 							colors:['<?php echo esc_html($this->gadwp->config->options ['ga_dash_style']); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], - 10 )); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], + 20 )); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], + 10 )); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], - 20 )); ?>']
 						};
-                
+
                 	var chart = new google.visualization.PieChart(document.getElementById('gadash-trafficmediums'));
                 	chart.draw(data, options);
-                	checknpcounter(4);
             	};
 
             	function ga_dash_drawtraffictype(gadash_traffictype) {
@@ -723,10 +684,9 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 							title: '<?php _e( "Visitor Type", 'ga-dash' ); ?>',
 							colors:['<?php echo esc_html($this->gadwp->config->options ['ga_dash_style']); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], - 10 )); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], + 20 )); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], + 10 )); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], - 20 )); ?>']
 						};
-                
+
                 	var chart = new google.visualization.PieChart(document.getElementById('gadash-traffictype'));
                 	chart.draw(data, options);
-                	checknpcounter(4);
             	};
 
             	function ga_dash_drawsocialnetworks(gadash_socialnetworks) {
@@ -739,11 +699,10 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 							title: '<?php _e( "Social Networks", 'ga-dash' ); ?>',
 							colors:['<?php echo esc_html($this->gadwp->config->options ['ga_dash_style']); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], - 10 )); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], + 20 )); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], + 10 )); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], - 20 )); ?>']
 						};
-                
+
                 	var chart = new google.visualization.PieChart(document.getElementById('gadash-socialnetworks'));
                 	chart.draw(data, options);
-                	checknpcounter(4);
-            	}; 
+            	};
 
             	function ga_dash_drawtrafficorganic(gadash_trafficorganic) {
                 	var data = google.visualization.arrayToDataTable(gadash_trafficorganic);
@@ -755,11 +714,10 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 							title: '<?php _e( "Search Engines", 'ga-dash' ); ?>',
 							colors:['<?php echo esc_html($this->gadwp->config->options ['ga_dash_style']); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], - 10 )); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], + 20 )); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], + 10 )); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], - 20 )); ?>']
 						};
-                
+
                 	var chart = new google.visualization.PieChart(document.getElementById('gadash-trafficorganic'));
                 	chart.draw(data, options);
-                	checknpcounter(4);
-            	};             	           	 
+            	};
 
             	function ga_dash_drawtrafficchannels(gadash_trafficchannels) {
                 	var data = google.visualization.arrayToDataTable(gadash_trafficchannels);
@@ -767,10 +725,9 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
                 	    allowCollapse:true,
                 		allowHtml:true
                 	};
-                
+
                 	var chart = new google.visualization.OrgChart(document.getElementById('gadash-trafficchannels'));
                 	chart.draw(data, options);
-                	checknpcounter(4);
             	};
             </script>
 <?php } else if ($query == 'locations') {?>
@@ -779,17 +736,6 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 <script type="text/javascript">
             	google.load("visualization", "1", {packages:["geochart","table"]});
 
-            	function checknpcounter(max) {
-            		try {
-            			if (npcounter == max) {
-            				NProgress.done();
-            			} else {
-            				npcounter++;
-            				NProgress.set((1/(max+1))*npcounter);
-            			}
-            		} catch(e) {}		
-            	}
-            	
         		try {
         	    	NProgress.configure({ parent: "#gadash-progressbar" });
         	        NProgress.configure({ showSpinner: false });
@@ -797,40 +743,45 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
         		} catch(e) {
         			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
         			jQuery("#gadash-progressbar").html("<?php _e("A JavaScript Error is blocking plugin resources!", 'ga-dash'); ?>");
-        		}    
-        	    npcounter = 0;
-                        
+        		}
+
                 jQuery.post(ajaxurl, {action: "gadash_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "<?php echo $query; ?>",gadash_security_widget_reports: "<?php echo wp_create_nonce('gadash_get_widgetreports'); ?>"}, function(response){
 
-                    if (!jQuery.isNumeric(response)){
-                    	if (jQuery.isArray(response)){
-                        	gadash_locations=response;
-                    		google.setOnLoadCallback(ga_dash_drawmaplocations(gadash_locations));
-                    		google.setOnLoadCallback(ga_dash_drawlocations(gadash_locations));                        	
-                         } else {
-                         	checknpcounter(0);
-                 			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
-                 			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
-                 			console.log("\n********************* GADWP Log ********************* \n\n"+response);
-                 		}                        
-                	}else{
-                        jQuery("#gadash-map").css({"background-color":"#F7F7F7","height":"auto","padding-top":"125px","padding-bottom":"125px","color":"#000","text-align":"center"});  
-                        jQuery("#gadash-map").html("<?php _e("This report is unavailable", 'ga-dash'); ?> ("+response+")");
-                        checknpcounter(1);                    	
-                        jQuery("#gadash-locations").css({"background-color":"#F7F7F7","height":"auto","padding-top":"125px","padding-bottom":"125px","color":"#000","text-align":"center"});  
-                        jQuery("#gadash-locations").html("<?php _e("This report is unavailable", 'ga-dash'); ?> ("+response+")");
-                        checknpcounter(1);
-                    }	
-                });            	
+                	if ( jQuery.isArray( response ) ) {
+	                    if (!jQuery.isNumeric(response[0])){
+	                    	if (jQuery.isArray(response[0])){
+	                        	gadash_locations=response[0];
+	                    		google.setOnLoadCallback(ga_dash_drawmaplocations(gadash_locations));
+	                    		google.setOnLoadCallback(ga_dash_drawlocations(gadash_locations));
+	                         } else {
+	                 			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
+	                 			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
+	                 			console.log("\n********************* GADWP Log ********************* \n\n"+response[0]);
+	                 		}
+	                	}else{
+	                        jQuery("#gadash-map").css({"background-color":"#F7F7F7","height":"auto","padding-top":"125px","padding-bottom":"125px","color":"#000","text-align":"center"});
+	                        jQuery("#gadash-map").html("<?php _e("This report is unavailable", 'ga-dash'); ?> ("+response[0]+")");
+	                        jQuery("#gadash-locations").css({"background-color":"#F7F7F7","height":"auto","padding-top":"125px","padding-bottom":"125px","color":"#000","text-align":"center"});
+	                        jQuery("#gadash-locations").html("<?php _e("This report is unavailable", 'ga-dash'); ?> ("+response[0]+")");
+	                    }
+
+                    }else{
+             			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
+             			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
+             			console.log("\n********************* GADWP Log ********************* \n\n"+response);
+                    }
+					NProgress.done();
+                });
+
             	function ga_dash_drawmaplocations(gadash_locations) {
-                	
+
             		var data = google.visualization.arrayToDataTable(gadash_locations);
-            	    
+
             		var options = {
-            			chartArea: {width: '99%',height: '90%'},	
+            			chartArea: {width: '99%',height: '90%'},
             			colors: ['<?php echo $light_color; ?>', '<?php echo $dark_color; ?>'],
             			<?php
-							
+
 							$country_codes = GADWP_Tools::get_countrycodes();
 							if ( $this->gadwp->config->options['ga_target_geomap'] && isset( $country_codes[$this->gadwp->config->options['ga_target_geomap']] ) ) {
 								?>
@@ -841,7 +792,6 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
             			}
             		var chart = new google.visualization.GeoChart(document.getElementById('gadash-map'));
             		chart.draw(data, options);
-            		checknpcounter(1);
             	}
 
             	function ga_dash_drawlocations(gadash_locations) {
@@ -851,10 +801,9 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
                 		pageSize: 10,
                 		width: '100%'
                 	};
-                
+
                 	var chart = new google.visualization.Table(document.getElementById('gadash-locations'));
                 	chart.draw(data, options);
-                	checknpcounter(1);
             	};
             </script>
 <?php } else {?>
@@ -888,20 +837,9 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
     </div>
 </div>
 <script type="text/javascript">
-            
+
     google.load("visualization", "1", {packages:["corechart"]});
 
-    function checknpcounter(max) {
-    	try {
-    		if (npcounter == max) {
-    			NProgress.done();
-    		} else {
-    			npcounter++;
-    			NProgress.set((1/(max+1))*npcounter);
-    		}
-    	} catch(e) {}		
-    }
-        
 	try {
     	NProgress.configure({ parent: "#gadash-progressbar" });
         NProgress.configure({ showSpinner: false });
@@ -909,45 +847,45 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 	} catch(e) {
 		jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
 		jQuery("#gadash-progressbar").html("<?php _e("A JavaScript Error is blocking plugin resources!", 'ga-dash'); ?>");
-	}    
-    npcounter = 0;
-                
-    jQuery.post(ajaxurl, {action: "gadash_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "<?php echo $query; ?>",gadash_security_widget_reports: "<?php echo wp_create_nonce('gadash_get_widgetreports'); ?>"}, function(response){
+	}
 
-        if (!jQuery.isNumeric(response)){
-            if (jQuery.isArray(response)){
-            	gadash_mainchart=response;
-       		    google.setOnLoadCallback(ga_dash_drawmainchart(gadash_mainchart));            	
-             } else {
-             	checknpcounter(0);
-     			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
-     			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
-     			console.log("\n********************* GADWP Log ********************* \n\n"+response);
-     		}             
-    	}else{
-            jQuery("#gadash-mainchart").css({"background-color":"#F7F7F7","height":"auto","padding-top":"125px","padding-bottom":"125px","color":"#000","text-align":"center"});  
-            jQuery("#gadash-mainchart").html("<?php _e("This report is unavailable", 'ga-dash'); ?> ("+response+")");
-            checknpcounter(1);
-        }	
-    });
+    jQuery.post(ajaxurl, {action: "gadash_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "<?php echo $query . ',bottomstats'; ?>",gadash_security_widget_reports: "<?php echo wp_create_nonce('gadash_get_widgetreports'); ?>"}, function(response){
+    	if ( jQuery.isArray( response ) ) {
 
-    jQuery.post(ajaxurl, {action: "gadash_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "bottomstats",gadash_security_widget_reports: "<?php echo wp_create_nonce('gadash_get_widgetreports'); ?>"}, function(response){
+	        if (!jQuery.isNumeric(response[0])){
+	            if (jQuery.isArray(response[0])){
+	            	gadash_mainchart=response[0];
+	       		    google.setOnLoadCallback(ga_dash_drawmainchart(gadash_mainchart));
+	             } else {
+	     			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
+	     			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
+	     			console.log("\n********************* GADWP Log ********************* \n\n"+response[0]);
+	     		}
+	    	}else{
+	            jQuery("#gadash-mainchart").css({"background-color":"#F7F7F7","height":"auto","padding-top":"125px","padding-bottom":"125px","color":"#000","text-align":"center"});
+	            jQuery("#gadash-mainchart").html("<?php _e("This report is unavailable", 'ga-dash'); ?> ("+response[0]+")");
+	        }
 
-        if (!jQuery.isNumeric(response)){
-        	if (jQuery.isArray(response)){
-            	gadash_bottomstats=response;
-       		    ga_dash_drawbottomstats(gadash_bottomstats);
-             } else {
-             	checknpcounter(0);
-     			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
-     			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
-     			console.log("\n********************* GADWP Log ********************* \n\n"+response);
-     		}              
-    	}else{
-            jQuery("#gadash-bottomstats").css({"background-color":"#F7F7F7","height":"auto","padding-top":"40px","padding-bottom":"40px","color":"#000","text-align":"center","width": "98%"});  
-            jQuery("#gadash-bottomstats").html("<?php _e("This report is unavailable", 'ga-dash'); ?> ("+response+")");
-            checknpcounter(1);
-        }	
+	        if (!jQuery.isNumeric(response[1])){
+	        	if (jQuery.isArray(response[1])){
+	            	gadash_bottomstats=response[1];
+	       		    ga_dash_drawbottomstats(gadash_bottomstats);
+	             } else {
+	     			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
+	     			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
+	     			console.log("\n********************* GADWP Log ********************* \n\n"+response[1]);
+	     		}
+	    	}else{
+	            jQuery("#gadash-bottomstats").css({"background-color":"#F7F7F7","height":"auto","padding-top":"40px","padding-bottom":"40px","color":"#000","text-align":"center","width": "98%"});
+	            jQuery("#gadash-bottomstats").html("<?php _e("This report is unavailable", 'ga-dash'); ?> ("+response[1]+")");
+	        }
+
+        }else{
+ 			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
+ 			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
+ 			console.log("\n********************* GADWP Log ********************* \n\n"+response);
+        }
+		NProgress.done();
     });
 
 	function ga_dash_drawbottomstats(gadash_bottomstats) {
@@ -957,11 +895,10 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 		jQuery("#gadash-bottomstats #gdbouncerate").text(parseFloat(gadash_bottomstats[3]).toFixed(2)+"%");
 		jQuery("#gadash-bottomstats #gdorganicsearch").text(gadash_bottomstats[4]);
 		jQuery("#gadash-bottomstats #gdpagespervisit").text(parseFloat(gadash_bottomstats[5]).toFixed(2));
-		checknpcounter(1);
-	}	       
-                            
+	}
+
 	function ga_dash_drawmainchart(gadash_mainchart) {
-		
+
     var data = google.visualization.arrayToDataTable(gadash_mainchart);
 
     var options = {
@@ -974,7 +911,6 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 	<?php echo $formater?>
     var chart = new google.visualization.AreaChart(document.getElementById('gadash-mainchart'));
 	chart.draw(data, options);
-	checknpcounter(1);
 	};
 </script>
 <?php
