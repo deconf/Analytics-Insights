@@ -56,19 +56,19 @@ if ( $this->gadwp->config->options['ga_author_dimindex'] && ( is_single() || is_
 	$author_id = $post->post_author;
 	$author_name = get_the_author_meta( 'display_name', $author_id );
 	?>
-  ga('set', 'dimension<?php echo (int)$this->gadwp->config->options ['ga_author_dimindex']; ?>', '<?php echo $author_name; ?>');
+  ga('set', 'dimension<?php echo (int)$this->gadwp->config->options ['ga_author_dimindex']; ?>', '<?php echo esc_attr($author_name); ?>');
 <?php
 }
 if ( $this->gadwp->config->options['ga_pubyear_dimindex'] && is_single() ) {
 	global $post;
 	$date = get_the_date( 'Y', $post->ID );
 	?>
-  ga('set', 'dimension<?php echo (int)$this->gadwp->config->options ['ga_pubyear_dimindex']; ?>', '<?php echo $date; ?>');
+  ga('set', 'dimension<?php echo (int)$this->gadwp->config->options ['ga_pubyear_dimindex']; ?>', '<?php echo (int)$date; ?>');
 <?php
 }
 if ( $this->gadwp->config->options['ga_category_dimindex'] && is_category() ) {
 	?>
-  ga('set', 'dimension<?php echo (int)$this->gadwp->config->options ['ga_category_dimindex']; ?>', '<?php echo single_tag_title(); ?>');
+  ga('set', 'dimension<?php echo (int)$this->gadwp->config->options ['ga_category_dimindex']; ?>', '<?php echo esc_attr(single_tag_title()); ?>');
 <?php
 }
 if ( $this->gadwp->config->options['ga_category_dimindex'] && is_single() ) {
@@ -76,7 +76,7 @@ if ( $this->gadwp->config->options['ga_category_dimindex'] && is_single() ) {
 	$categories = get_the_category( $post->ID );
 	foreach ( $categories as $category ) {
 		?>
-  ga('set', 'dimension<?php echo (int)$this->gadwp->config->options ['ga_category_dimindex']; ?>', '<?php echo $category->name; ?>');
+  ga('set', 'dimension<?php echo (int)$this->gadwp->config->options ['ga_category_dimindex']; ?>', '<?php echo esc_attr($category->name); ?>');
 <?php
 		break;
 	}

@@ -143,6 +143,9 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Enhancement: gadwp_frontenditem_uri allows URI corrections for frontend item reports
 - Bug Fix: avoid double encoding for UTF-8 URIs
 
+= 4.7.5 =
+- Bug Fix: html encode single quotes for custom dimensions 
+
 = 4.7.4 =
 - Bug Fix: Settings action unavailable on Installed Plugins screen
 - Enhancement: German translation updated
