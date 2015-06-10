@@ -4,7 +4,7 @@ Donate link: https://deconf.com/donate/
 Tags: google,analytics,google analytics,dashboard,analytics dashboard,google analytics dashboard,google analytics widget,tracking,realtime,wpmu,multisite
 Requires at least: 3.5
 Tested up to: 4.2.2
-Stable tag: 4.7.1
+Stable tag: 4.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -111,10 +111,6 @@ Here's a list with common errors and how to fix them [Errors in Google Analytics
 = Some settings are missing in the video tutorial =
 
 We are constantly improving our plugin, sometimes the video tutorial may be a little outdated.
-
-= More Questions? =
-
-A dedicated section for WordPress Plugins is available here: [Wordpress Plugins Support](https://deconf.com/ask/)
 
 == Screenshots ==
 

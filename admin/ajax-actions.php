@@ -83,7 +83,7 @@ if ( ! class_exists( 'GADWP_Backend_Ajax' ) ) {
 
 			$queries = explode( ',', $query );
 
-			$results = [];
+			$results = array();
 
 			foreach ( $queries as $value ) {
 				$results[] = $this->gadwp->gapi_controller->get( $projectId, $value, $from, $to, $filter );
@@ -133,7 +133,7 @@ if ( ! class_exists( 'GADWP_Backend_Ajax' ) ) {
 
 			$queries = explode( ',', $query );
 
-			$results = [];
+			$results = array();
 
 			foreach ( $queries as $value ) {
 				$results[] = $this->gadwp->gapi_controller->get( $projectId, $value, $from, $to );

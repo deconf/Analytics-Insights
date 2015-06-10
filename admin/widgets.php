@@ -365,7 +365,9 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
             	 function online_refresh(){
             		if (focusFlag){
 
-            		jQuery.post(ajaxurl, {action: "gadash_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: false,to: false,query: "realtime",gadash_security_widget_reports: "<?php echo wp_create_nonce('gadash_get_widgetreports'); ?>"}, function(data){
+            		jQuery.post(ajaxurl, {action: "gadash_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: false,to: false,query: "realtime",gadash_security_widget_reports: "<?php echo wp_create_nonce('gadash_get_widgetreports'); ?>"}, function(results){
+
+						data = results[0];
 
                         if (jQuery.isNumeric(data) || typeof data === "undefined"){
                             data = [];
