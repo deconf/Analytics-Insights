@@ -39,7 +39,7 @@ The reports you need, in your dashboard, in your Posts and Pages List, and on si
 - local websites and business have an option to display cities, instead of countries, on a regional map and in a table chart
 - traffic overview reports with details about acquisition channels, social networks, search engines, traffic mediums and visitor type 
 - per post or page analytics reports in Posts List and Pages List
-- option to display Google Analytics statistics on frontend, at the end of each article
+- option to display Google Analytics reports on frontend; available for each web page
 - frontend widget with website's analytics stats and analytics data anonymization feature
 - localization support, a POT file is available for translations
 - user access level settings for Backend statistics and analytics reports
@@ -89,28 +89,30 @@ Google Analytics Dashboard has been translated and is available in more than 12 
 
 == Installation ==
 
-1. Upload the full directory into your wp-content/plugins directory
-2. Activate the plugin at the plugin administration page
+1. Upload the full directory into your wp-content/plugins directory.
+2. Activate the plugin at the plugin administration page.
 3. Open the plugin configuration page, which is located under "Google Analytics" menu (optionally enter your API Key, Client Secret and Client ID).
-4. Authorize the plugin using the 'Authorize Plugin' button
+4. Authorize the plugin using the 'Authorize Plugin' button.
 5. Go back to the plugin configuration page, which is located under "Google Analytics" menu to update/set your settings.
-6. Use Google Analytics Tracking options to configure/enable/disable tracking
-
-The documentation, tutorials and a short demo is available here: [Google Analytics Dashboard video tutorial](https://deconf.com/google-analytics-dashboard-wordpress/)
+6. Use Google Analytics Tracking options to configure/enable/disable tracking.
 
 == Frequently Asked Questions == 
 
 = Do I have to insert the Google Analytics tracking code manually? =
 
 No, once the plugin is authorized and a default domain is selected the Google Analytics tracking code is automatically inserted in all webpages.
-   
-= I have an error =
-
-Here's a list with common errors and how to fix them [Errors in Google Analytics Dashboard](https://deconf.com/error-codes-in-google-analytics-dashboard-for-wordpress/)
 
 = Some settings are missing in the video tutorial =
 
 We are constantly improving our plugin, sometimes the video tutorial may be a little outdated.
+
+= How can I make suggest a new feature, contribute or report a bug? =
+
+You can submit pull requests, feature requests, translations or bug reports on [our GitHub repository](https://github.com/deconf/Google-Analytics-Dashboard-for-WP).
+
+= Documentation, Tutorials and FAQ =
+
+For documentation, tutorials, FAQ and videos check out: [Google Analytics Dashboard Help](https://deconf.com/google-analytics-dashboard-wordpress/).
 
 == Screenshots ==
 
@@ -131,13 +133,13 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 == Changelog ==
 
 = 4.8 =
-- Enhancement: minimize the number of ajax requests
+- Enhancement: optimize the number of ajax requests
 - Enhancement: JavaScript code cleanup and optimization
 - Enhancement: memory usage optimization
 - Enhancement: small assets fixes, UX improvements, props by [Adrian Pop](https://github.com/adipop)
-- Enhancement: reports for all frontend webpages (new feature)
-- Enhancement: gadwp_frontenditem_uri allows URI corrections for frontend item reports
-- Bug Fix: avoid double encoding for UTF-8 URIs
+- Enhancement: reports for all frontend web pages (new feature)
+- Enhancement: gadwp_frontenditem_uri filter to allow URI corrections for frontend item reports
+- Bug Fix: avoid double encoding of UTF-8 URIs
 
 = 4.7.5 =
 - Bug Fix: html encode single quotes for custom dimensions 
