@@ -1,7 +1,7 @@
 === Google Analytics Dashboard for WP ===
 Contributors: deconf
 Donate link: https://deconf.com/donate/
-Tags: google,analytics,google analytics,dashboard,analytics dashboard,google analytics dashboard,google analytics widget,tracking,realtime,wpmu,multisite
+Tags: google,analytics,google analytics,dashboard,analytics dashboard,google analytics dashboard,google analytics widget,tracking,realtime,wpmu,multisite,gadwp
 Requires at least: 3.5
 Tested up to: 4.2.2
 Stable tag: 4.8
@@ -11,14 +11,14 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Displays Google Analytics reports and real-time statistics in your WordPress Dashboard. Inserts the latest tracking code in every page of your site.
 
 == Description ==
-Using a widget, [Google Analytics Dashboard](https://deconf.com/google-analytics-dashboard-wordpress/) displays detailed analytics data and reports about: number of sessions, number of visitors (users), page views, bounce rates, organic searches, pages per visit directly on your WordPress Dashboard.
+Using a widget, [Google Analytics Dashboard for WP](https://deconf.com/google-analytics-dashboard-wordpress/) displays detailed analytics data and reports about: number of sessions, number of visitors (users), page views, bounce rates, organic searches, pages per visit directly on your WordPress Dashboard.
 
 In addition, in-depth Page reports and in-depth Post reports allow further segmentation of your analytics data, providing performance details for each post or page from your website.
 
 This plugin also inserts the latest version of the Google Analytics tracking code in every page of your site. The tracking code is fully customizable through options and hooks. 
 
-> <strong>Google Analytics Dashboard on GitHub</strong><br>
-> You can submit pull requests, feature requests or bugs on [Google Analytics Dashboard](https://github.com/deconf/Google-Analytics-Dashboard-for-WP) repository.
+> <strong>Google Analytics Dashboard for WP on GitHub</strong><br>
+> You can submit pull requests, feature requests or bugs on [Google Analytics Dashboard for WP](https://github.com/deconf/Google-Analytics-Dashboard-for-WP) repository.
 
 = Google Analytics Real-Time =
 
@@ -79,7 +79,7 @@ Install the Google Analytics tracking code in less than a minute and customize i
 
 = Translations =
 
-Google Analytics Dashboard has been translated and is available in more than 12 languages.
+Google Analytics Dashboard for WP has been translated and is available in more than 12 languages.
 
 = Further reading and info =
 
@@ -112,7 +112,7 @@ You can submit pull requests, feature requests, translations or bug reports on [
 
 = Documentation, Tutorials and FAQ =
 
-For documentation, tutorials, FAQ and videos check out: [Google Analytics Dashboard Help](https://deconf.com/google-analytics-dashboard-wordpress/).
+For documentation, tutorials, FAQ and videos check out: [Google Analytics Dashboard Documentation](https://deconf.com/google-analytics-dashboard-wordpress/).
 
 == Screenshots ==
 
@@ -134,10 +134,11 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 
 = 4.8 =
 - Enhancement: optimize the number of ajax requests
+- Enhancement: new versioning standard with automatic updates only on minor versions (M.M.m.u) 
 - Enhancement: JavaScript code cleanup and optimization
 - Enhancement: memory usage optimization
 - Enhancement: small assets fixes, UX improvements, props by [Adrian Pop](https://github.com/adipop)
-- Enhancement: reports for all frontend web pages (new feature)
+- Enhancement: introducing reports for all frontend web pages (new feature)
 - Enhancement: gadwp_frontenditem_uri filter to allow URI corrections for frontend item reports
 - Bug Fix: avoid double encoding of UTF-8 URIs
 

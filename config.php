@@ -40,7 +40,11 @@ if (! class_exists('GADWP_Config')) {
         public function get_major_version($version)
         {
             $exploded_version = explode('.', $version);
-            return $exploded_version[0] . '.' . $exploded_version[1];
+            if (isset($exploded_version[2])){
+            	return $exploded_version[0] . '.' . $exploded_version[1] . '.' . $exploded_version[2];
+            }else{
+            	return $exploded_version[0] . '.' . $exploded_version[1] . '.0';
+            }
         }
 
         public function automatic_update($update, $item)

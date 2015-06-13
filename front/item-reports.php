@@ -19,13 +19,18 @@ if ( ! class_exists( 'GADWP_Frontend_Item_Reports' ) ) {
 		public function __construct() {
 			$this->gadwp = GADWP();
 
-			add_action( 'admin_bar_menu', array( $this, 'custom_adminbar_menu' ), 999 );
+			add_action( 'admin_bar_menu', array( $this, 'custom_adminbar_node' ), 999 );
 		}
 
-		function custom_adminbar_menu( $meta = TRUE ) {
-			global $wp_admin_bar;
+		function custom_adminbar_node( $wp_admin_bar ) {
 			if ( GADWP_Tools::check_roles( $this->gadwp->config->options['ga_dash_access_front'] ) && $this->gadwp->config->options['frontend_item_reports'] ) {
-				$wp_admin_bar->add_menu( array( 'id' => 'gadwp-1', 'title' => '<span class="ab-icon"></span><span class="ab-label">' . __( "Analytics", 'ga-dash' ) . '</span>', 'href' => '#1', 'meta' => array( 'title' => __( "Analytics", 'ga-dash' ) ) ) );
+				/* @formatter:off */
+				$args = array( 	'id' => 'gadwp-1',
+								'title' => '<span class="ab-icon"></span><span class="">' . __( "Analytics", 'ga-dash' ) . '</span>',
+								'href' => '#1',
+								);
+				/* @formatter:on */
+				$wp_admin_bar->add_node( $args );
 			}
 		}
 	}
