@@ -1281,7 +1281,7 @@ final class GADWP_Settings {
                                                             <div class="inside">
                                                                 <div class="gadash-desc">
 																	<div style="margin-left:-10px;">
-																		<div class="g-page" data-width="273" data-href="//plus.google.com/u/0/114149166432576972465" data-layout="landscape" data-showtagline="false" data-showcoverphoto="false" data-rel="publisher"></div>
+																		<div class="g-page" data-width="273" data-href="//plus.google.com/+Deconfcom" data-layout="landscape" data-showtagline="false" data-showcoverphoto="false" data-rel="publisher"></div>
 																	</div>
 
 																	<script type="text/javascript">

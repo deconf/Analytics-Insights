@@ -3,22 +3,22 @@ msgstr ""
 "Project-Id-Version: Google Analytics Dashboard for WP\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/google-analytics-"
 "dashboard-for-wp\n"
-"POT-Creation-Date: 2015-05-25 09:06+0200\n"
-"PO-Revision-Date: 2015-05-25 09:07+0200\n"
+"POT-Creation-Date: 2015-06-14 17:31+0200\n"
+"PO-Revision-Date: 2015-06-14 17:31+0200\n"
 "Last-Translator: Alin Marcu <admin@deconf.com>\n"
 "Language-Team: Alin Marcu\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8\n"
+"X-Generator: Poedit 1.8.1\n"
 "X-Poedit-KeywordsList: _e;__\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-SearchPath-0: ../.\n"
 
-#: .././admin/item-reports.php:61 .././front/item-reports.php:28
+#: .././admin/item-reports.php:61 .././front/item-reports.php:29
 msgid "Analytics"
 msgstr "Analytics"
 
@@ -71,8 +71,8 @@ msgid "Show stats to:"
 msgstr "Statistiken anzeigen für:"
 
 #: .././admin/settings.php:154
-msgid "show page sessions and users in frontend (after each article)"
-msgstr "zeige die Seiten-Sitzungen und Nutzer im Frontend (nach jedem Artikel)"
+msgid "enable web page reports on frontend"
+msgstr ""
 
 #: .././admin/settings.php:161 .././admin/settings.php:297
 #: .././admin/settings.php:598 .././admin/settings.php:943
@@ -467,64 +467,59 @@ msgid "Setup Tutorial & Demo"
 msgstr "Setup Tutorial & Demo"
 
 #: .././admin/settings.php:1279
-msgid "Support & Reviews"
-msgstr "Support & Bewertungen"
+msgid "Follow & Review"
+msgstr ""
 
-#: .././admin/settings.php:1286
-#, php-format
-msgid "Plugin documentation and support on %s"
-msgstr "Plugin-Dokumentation und Hilfe unter %s"
-
-#: .././admin/settings.php:1293
+#: .././admin/settings.php:1305
 #, php-format
 msgid "Your feedback and review are both important, %s!"
 msgstr "Ihre Bewertung und Rezension sind beide wichtig, %s!"
 
-#: .././admin/settings.php:1293
+#: .././admin/settings.php:1305
 msgid "rate this plugin"
 msgstr "Bewerte dieses Plugin"
 
-#: .././admin/settings.php:1299
+#: .././admin/settings.php:1311
 msgid "Further Reading"
 msgstr "Mehr erfahren"
 
-#: .././admin/settings.php:1306
+#: .././admin/settings.php:1318
 #, php-format
 msgid "%s by moving your website to HTTPS/SSL."
 msgstr "%s durch Umschalten der Webseite auf HTTPS/SSL."
 
-#: .././admin/settings.php:1306
+#: .././admin/settings.php:1318
 msgid "Improve search rankings"
 msgstr "Verbessern Sie Ihren Rang in den Suchergebnissen"
 
-#: .././admin/settings.php:1313
+#: .././admin/settings.php:1325
 #, php-format
 msgid "Other %s written by the same author"
 msgstr "Andere %s von diesem Autor"
 
-#: .././admin/settings.php:1313
+#: .././admin/settings.php:1325
 msgid "WordPress Plugins"
 msgstr "WordPress Plugins"
 
-#: .././admin/settings.php:1319
+#: .././admin/settings.php:1331
 msgid "Other Services"
 msgstr "Andere Dienste"
 
-#: .././admin/settings.php:1326
+#: .././admin/settings.php:1338
 #, php-format
 msgid "Speed up your website and plug into a whole %s"
 msgstr "Beschleunigen Sie Ihre Webseite und begeben Sie sich in ein %s"
 
-#: .././admin/settings.php:1326
+#: .././admin/settings.php:1338
 msgid "new level of site speed"
 msgstr "neues Level Seitenladegeschwindigkeit."
 
-#: .././admin/settings.php:1333
+#: .././admin/settings.php:1345
 #, php-format
 msgid "%s service with users tracking at IP level."
 msgstr "%s Service mit Nutzer-Tracking auf IP-Ebene."
 
-#: .././admin/settings.php:1333
+#: .././admin/settings.php:1345
 msgid "Web Analytics"
 msgstr "Web Analyse"
 
@@ -572,7 +567,7 @@ msgid "Unique Views"
 msgstr "Einmalige Aufrufe"
 
 #: .././admin/setup.php:154 .././admin/setup.php:169
-#: .././admin/widgets.php:130 .././admin/widgets.php:869
+#: .././admin/widgets.php:130 .././admin/widgets.php:820
 #: .././front/setup.php:78 .././front/setup.php:93 .././tools/gapi.php:355
 msgid "Users"
 msgstr "Nutzer"
@@ -582,13 +577,13 @@ msgid "Organic"
 msgstr "Organisch"
 
 #: .././admin/setup.php:156 .././admin/setup.php:170
-#: .././admin/widgets.php:132 .././admin/widgets.php:873
+#: .././admin/widgets.php:132 .././admin/widgets.php:824
 #: .././front/setup.php:80 .././front/setup.php:94 .././tools/gapi.php:358
 msgid "Page Views"
 msgstr "Seitenaufrufe"
 
 #: .././admin/setup.php:157 .././admin/setup.php:171
-#: .././admin/widgets.php:133 .././admin/widgets.php:877
+#: .././admin/widgets.php:133 .././admin/widgets.php:828
 #: .././front/setup.php:81 .././front/setup.php:95 .././tools/gapi.php:361
 msgid "Bounce Rate"
 msgstr "Absprungrate"
@@ -611,42 +606,44 @@ msgstr "Suchen"
 msgid "Traffic Details"
 msgstr "Traffic Details"
 
-#: .././admin/setup.php:163 .././admin/widgets.php:504
-#: .././admin/widgets.php:601 .././admin/widgets.php:799
-#: .././admin/widgets.php:911 .././front/setup.php:87
+#: .././admin/setup.php:163 .././admin/widgets.php:495
+#: .././admin/widgets.php:580 .././admin/widgets.php:747
+#: .././admin/widgets.php:851 .././front/setup.php:87
 msgid "A JavaScript Error is blocking plugin resources!"
 msgstr "Ein JavaScript-Fehler blockiert die Plugin-Ressourcen!"
 
-#: .././admin/setup.php:164 .././admin/widgets.php:707 .././front/setup.php:88
+#: .././admin/setup.php:164 .././admin/widgets.php:671 .././front/setup.php:88
 msgid "Traffic Mediums"
 msgstr "Medium"
 
-#: .././admin/setup.php:165 .././admin/widgets.php:723 .././front/setup.php:89
+#: .././admin/setup.php:165 .././admin/widgets.php:686 .././front/setup.php:89
 msgid "Visitor Type"
 msgstr "Nutzertyp"
 
-#: .././admin/setup.php:166 .././admin/widgets.php:739 .././front/setup.php:90
+#: .././admin/setup.php:166 .././admin/widgets.php:701 .././front/setup.php:90
 msgid "Social Networks"
 msgstr "soziale Netzwerke"
 
-#: .././admin/setup.php:167 .././admin/widgets.php:755 .././front/setup.php:91
+#: .././admin/setup.php:167 .././admin/widgets.php:716 .././front/setup.php:91
 msgid "Search Engines"
 msgstr "Suchmaschinen"
 
-#: .././admin/setup.php:172 .././admin/widgets.php:881 .././front/setup.php:96
+#: .././admin/setup.php:172 .././admin/widgets.php:832 .././front/setup.php:96
 msgid "Organic Search"
 msgstr "Organische Suche"
 
-#: .././admin/setup.php:173 .././admin/widgets.php:885 .././front/setup.php:97
+#: .././admin/setup.php:173 .././admin/widgets.php:836 .././front/setup.php:97
 msgid "Pages/Session"
 msgstr "Seiten/Sitzung"
 
-#: .././admin/setup.php:174 .././admin/widgets.php:517
-#: .././admin/widgets.php:535 .././admin/widgets.php:614
-#: .././admin/widgets.php:632 .././admin/widgets.php:651
-#: .././admin/widgets.php:670 .././admin/widgets.php:690
-#: .././admin/widgets.php:813 .././admin/widgets.php:924
-#: .././admin/widgets.php:943 .././front/setup.php:98
+#: .././admin/setup.php:174 .././admin/widgets.php:507
+#: .././admin/widgets.php:521 .././admin/widgets.php:531
+#: .././admin/widgets.php:592 .././admin/widgets.php:606
+#: .././admin/widgets.php:620 .././admin/widgets.php:634
+#: .././admin/widgets.php:648 .././admin/widgets.php:658
+#: .././admin/widgets.php:760 .././admin/widgets.php:772
+#: .././admin/widgets.php:863 .././admin/widgets.php:877
+#: .././admin/widgets.php:887 .././front/setup.php:98
 msgid "Invalid response, more details in JavaScript Console (F12)."
 msgstr ""
 "ungültige Antwort. Weitere Details finden Sie in der JavaScript-Konsole (F12)"
@@ -655,12 +652,12 @@ msgstr ""
 msgid "Not enough data collected"
 msgstr "Nicht genug Daten vorhanden"
 
-#: .././admin/setup.php:176 .././admin/widgets.php:522
-#: .././admin/widgets.php:540 .././admin/widgets.php:619
-#: .././admin/widgets.php:637 .././admin/widgets.php:656
-#: .././admin/widgets.php:675 .././admin/widgets.php:695
-#: .././admin/widgets.php:818 .././admin/widgets.php:821
-#: .././admin/widgets.php:929 .././admin/widgets.php:948
+#: .././admin/setup.php:176 .././admin/widgets.php:512
+#: .././admin/widgets.php:526 .././admin/widgets.php:597
+#: .././admin/widgets.php:611 .././admin/widgets.php:625
+#: .././admin/widgets.php:639 .././admin/widgets.php:653
+#: .././admin/widgets.php:765 .././admin/widgets.php:767
+#: .././admin/widgets.php:868 .././admin/widgets.php:882
 #: .././front/setup.php:100 .././front/widgets.php:100
 msgid "This report is unavailable"
 msgstr "Der Bericht ist nicht verfügbar"
@@ -719,7 +716,7 @@ msgstr "Echtzeit"
 msgid "Last 14 Days"
 msgstr "Letzte 14 Tage"
 
-#: .././admin/widgets.php:129 .././admin/widgets.php:865
+#: .././admin/widgets.php:129 .././admin/widgets.php:816
 #: .././front/widgets.php:36 .././tools/gapi.php:370 .././tools/gapi.php:492
 #: .././tools/gapi.php:525 .././tools/gapi.php:575 .././tools/gapi.php:655
 #: .././tools/gapi.php:684
@@ -730,30 +727,30 @@ msgstr "Sitzungen"
 msgid "Pages"
 msgstr "Seiten"
 
-#: .././admin/widgets.php:226 .././admin/widgets.php:466
+#: .././admin/widgets.php:226 .././admin/widgets.php:468
 msgid "REFERRAL"
 msgstr "VERWEISUNG"
 
-#: .././admin/widgets.php:230 .././admin/widgets.php:467
+#: .././admin/widgets.php:230 .././admin/widgets.php:469
 msgid "ORGANIC"
 msgstr "ORGANISCH"
 
 #: .././admin/widgets.php:234 .././admin/widgets.php:354
-#: .././admin/widgets.php:468
+#: .././admin/widgets.php:470
 msgid "SOCIAL"
 msgstr "SOZIAL"
 
 #: .././admin/widgets.php:238 .././admin/widgets.php:357
-#: .././admin/widgets.php:469
+#: .././admin/widgets.php:471
 msgid "CAMPAIGN"
 msgstr "KAMPANIE"
 
 #: .././admin/widgets.php:242 .././admin/widgets.php:360
-#: .././admin/widgets.php:472
+#: .././admin/widgets.php:474
 msgid "DIRECT"
 msgstr "DIREKT"
 
-#: .././admin/widgets.php:246 .././admin/widgets.php:473
+#: .././admin/widgets.php:246 .././admin/widgets.php:475
 msgid "NEW"
 msgstr "NEUE"
 
@@ -880,6 +877,16 @@ msgstr "Kanäle"
 #: .././tools/gapi.php:655
 msgid "Type"
 msgstr "Typ"
+
+#~ msgid "show page sessions and users in frontend (after each article)"
+#~ msgstr ""
+#~ "zeige die Seiten-Sitzungen und Nutzer im Frontend (nach jedem Artikel)"
+
+#~ msgid "Support & Reviews"
+#~ msgstr "Support & Bewertungen"
+
+#~ msgid "Plugin documentation and support on %s"
+#~ msgstr "Plugin-Dokumentation und Hilfe unter %s"
 
 #~ msgid "Read %s for more information about Frontend Features and Options."
 #~ msgstr ""

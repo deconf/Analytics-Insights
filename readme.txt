@@ -134,13 +134,14 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 
 = 4.8 =
 - Enhancement: optimize the number of ajax requests
-- Enhancement: new versioning standard with automatic updates only on minor versions (M.M.m.u) 
+- Enhancement: new versioning standard for a better management of automatic updates (M.M.m.u) 
 - Enhancement: JavaScript code cleanup and optimization
 - Enhancement: memory usage optimization
 - Enhancement: small assets fixes, UX improvements, props by [Adrian Pop](https://github.com/adipop)
 - Enhancement: introducing reports for all frontend web pages (new feature)
 - Enhancement: gadwp_frontenditem_uri filter to allow URI corrections for frontend item reports
 - Bug Fix: avoid double encoding of UTF-8 URIs
+- Bug Fix: 100% number formatting issue on bounce rate report
 
 = 4.7.5 =
 - Bug Fix: html encode single quotes for custom dimensions 
