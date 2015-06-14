@@ -132,6 +132,9 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 
 == Changelog ==
 
+= 4.9 =
+- Enhancement: French translation updated
+
 = 4.8 =
 - Enhancement: optimize the number of ajax requests
 - Enhancement: new versioning standard for a better management of automatic updates (M.M.m.u) 
