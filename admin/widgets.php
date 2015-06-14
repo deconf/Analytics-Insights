@@ -175,7 +175,7 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 			}
 			if ( $query == 'visitBounceRate' ) {
 				$formater = "var formatter = new google.visualization.NumberFormat({
-				  pattern: '#,##%',
+				  suffix: '%',
 				  fractionDigits: 2
 				});
 

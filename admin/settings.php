@@ -1276,14 +1276,26 @@ final class GADWP_Settings {
                                                         </div>
                                                         <div class="postbox">
                                                             <h3>
-                                                                <span><?php _e("Support & Reviews",'ga-dash')?></span>
+                                                                <span><?php _e("Follow & Review",'ga-dash')?></span>
                                                             </h3>
                                                             <div class="inside">
-                                                                <div class="gadash-title">
-                                                                    <a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=support&utm_campaign=gadwp"><img src="<?php echo plugins_url( 'images/help.png' , __FILE__ ); ?>" /></a>
-                                                                </div>
                                                                 <div class="gadash-desc">
-                                                                    <?php printf(__('Plugin documentation and support on %s', 'ga-dash'), '<a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=support&utm_campaign=gadwp">deconf.com</a>');?>
+																	<div style="margin-left:-10px;">
+																		<div class="g-page" data-width="273" data-href="//plus.google.com/u/0/114149166432576972465" data-layout="landscape" data-showtagline="false" data-showcoverphoto="false" data-rel="publisher"></div>
+																	</div>
+
+																	<script type="text/javascript">
+																	  (function() {
+																	    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+																	    po.src = 'https://apis.google.com/js/platform.js';
+																	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+																	  })();
+																	</script>
+                                                                </div>
+                                                                <br />
+                                                                <div class="gadash-desc">
+                                                                	<a href="https://twitter.com/deconfcom" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @deconfcom</a>
+																	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
                                                                 </div>
                                                                 <br />
                                                                 <div class="gadash-title">
