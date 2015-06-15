@@ -135,7 +135,8 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 = 4.9 =
 - Enhancement: French translation updated
 - Enhancement: Romanian translation updated
-- Bug Fix: add % suffix to bouncerate item reports  
+- Bug Fix: add % suffix to bouncerate item reports
+- Enhancement: display an admin notice after manual or atuomatic updates  
 
 = 4.8 =
 - Enhancement: optimize the number of ajax requests

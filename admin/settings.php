@@ -1350,5 +1350,8 @@ final class GADWP_Settings {
                                                 </div>
                                             </div>
                                         </div>
-<?php }
+<?php
+		//Dismiss the admin update notice
+		delete_option('gadwp_got_updated');
+	}
 }

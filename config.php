@@ -199,12 +199,14 @@ if (! class_exists('GADWP_Config')) {
         private function maintain_compatibility()
         {
             $flag = false;
+
             if (GADWP_CURRENT_VERSION != get_option('gadwp_version')) {
                 GADWP_Tools::clear_cache();
                 $flag = true;
                 $this->options['automatic_updates_minorversion'] = 1;
                 delete_transient('ga_dash_lasterror');
                 update_option('gadwp_version', GADWP_CURRENT_VERSION);
+                update_option('gadwp_got_updated', true);
                 if (is_multisite()) { // Cleanup errors on the entire network
                     foreach (wp_get_sites(array(
                         'limit' => apply_filters('gadwp_sites_limit', 100)

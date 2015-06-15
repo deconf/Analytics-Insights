@@ -29,6 +29,8 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 			add_filter( "plugin_action_links_" . plugin_basename( GADWP_DIR . 'gadwp.php' ), array( $this, 'settings_link' ) );
 			// Error bubble
 			add_action( 'admin_print_scripts', array( $this, 'draw_error_bubble' ), 10000 );
+			// Updated admin notice
+			add_action( 'admin_notices', array( $this, 'admin_notice' ) );
 		}
 
 		/**
@@ -206,6 +208,19 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 			$settings_link = '<a href="' . esc_url( get_admin_url( null, 'admin.php?page=gadash_settings' ) ) . '">' . __( "Settings", 'ga-dash' ) . '</a>';
 			array_unshift( $links, $settings_link );
 			return $links;
+		}
+
+		/**
+		 *  Add an admin notice after a manual or atuomatic update
+		 */
+		function admin_notice() {
+			if ( get_option( 'gadwp_got_updated' ) ) {
+				?>
+				<div class="updated">
+				    <p><?php echo __( 'Google Analytics Dashboard for WP has been updated to version', 'ga-dash' ).' '.GADWP_CURRENT_VERSION.'. '.__('For details, check out the').sprintf(' <a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_notice&utm_medium=link&utm_content=release_notice&utm_campaign=gadwp">%s</a> ', __('documentation page', 'ga-dash') ). __('and the plugin&#39;s settings page', 'ga-dash').'.'; ?></p>
+				</div>
+				<?php
+			}
 		}
 	}
 }
