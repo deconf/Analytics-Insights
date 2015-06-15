@@ -252,10 +252,19 @@ jQuery.fn.extend( {
 				chart.draw( data, options );
 			},
 
-			drawmainchart : function ( gadwp_mainchart ) {
+			drawmainchart : function ( gadwp_mainchart, format ) {
 
 				var data = google.visualization.arrayToDataTable( gadwp_mainchart );
-
+				
+				if ( format ) {
+					var formatter = new google.visualization.NumberFormat({
+						  suffix: '%',
+						  fractionDigits: 2
+						});
+	
+					formatter.format(data, 1);
+				}
+				
 				var options = {
 					legend : {
 						position : 'none'
@@ -498,7 +507,11 @@ jQuery.fn.extend( {
 							if ( !jQuery.isNumeric( response[ 0 ] ) ) {
 								if ( jQuery.isArray( response[ 0 ] ) ) {
 									reports.mainchart = response[ 0 ];
-									google.setOnLoadCallback( reports.drawmainchart( reports.mainchart ) );
+									if ( query == 'visitBounceRate' ) {
+										google.setOnLoadCallback( reports.drawmainchart( reports.mainchart, true ) );
+									} else {
+										google.setOnLoadCallback( reports.drawmainchart( reports.mainchart, false ) );
+									}	
 								} else {
 									reports.throwDebug( response[ 0 ] );
 								}
