@@ -11,14 +11,12 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Displays Google Analytics reports and real-time statistics in your WordPress Dashboard. Inserts the latest tracking code in every page of your site.
 
 == Description ==
-Using a widget, [Google Analytics Dashboard for WP](https://deconf.com/google-analytics-dashboard-wordpress/) displays detailed analytics data and reports about: number of sessions, number of visitors (users), page views, bounce rates, organic searches, pages per visit directly on your WordPress Dashboard.
+This Google Analytics plugin for WordPress enables you to track your site using the latest Google Analytics tracking code and allows you to view the analytics reports in your 
+WordPress install.
 
-In addition, in-depth Page reports and in-depth Post reports allow further segmentation of your analytics data, providing performance details for each post or page from your website.
+In addition to a set of general reports, in-depth Page reports and in-depth Post reports allow further segmentation of your analytics data, providing performance details for each post or page from your website.
 
-This plugin also inserts the latest version of the Google Analytics tracking code in every page of your site. The tracking code is fully customizable through options and hooks. 
-
-> <strong>Google Analytics Dashboard for WP on GitHub</strong><br>
-> You can submit pull requests, feature requests or bugs on [Google Analytics Dashboard for WP](https://github.com/deconf/Google-Analytics-Dashboard-for-WP) repository.
+The tracking code is fully customizable through options and hooks, allows you to collect data using custom dimensions and enables you to track downloads, outbound links, affiliate links, and fragment identifiers.    
 
 = Google Analytics Real-Time =
 
@@ -77,9 +75,8 @@ Install the Google Analytics tracking code in less than a minute and customize i
 	* <em>Mode 3:</em> network deactivated allowing each site owner to activate and authorize the plugin
 * option to exclude Super Admins from tracking 
 
-= Translations =
-
-Google Analytics Dashboard for WP has been translated and is available in more than 12 languages.
+> <strong>Google Analytics Dashboard for WP on GitHub</strong><br>
+> You can submit pull requests, feature requests or bugs on [Google Analytics Dashboard for WP](https://github.com/deconf/Google-Analytics-Dashboard-for-WP) repository.
 
 = Further reading and info =
 
@@ -136,7 +133,7 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Enhancement: French translation updated
 - Enhancement: Romanian translation updated
 - Bug Fix: add % suffix to bouncerate item reports
-- Enhancement: display an admin notice after manual or atuomatic updates  
+- Enhancement: display an admin notice after each manual or atuomatic update  
 
 = 4.8 =
 - Enhancement: optimize the number of ajax requests
