@@ -56,7 +56,7 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 			global $wp_version;
 			if ( current_user_can( 'manage_options' ) ) {
 				include ( GADWP_DIR . 'admin/settings.php' );
-				add_menu_page( __( "Google Analytics", 'ga-dash' ), 'Google Analytics', 'manage_options', 'gadash_settings', array( 'GADWP_Settings', 'general_settings' ), version_compare( $wp_version, '3.8.0', '>=' ) ? 'dashicons-chart-area' : GADWP_URL . 'admin/images/gadash-icon.png' );
+				add_menu_page( __( "Google Analytics", 'ga-dash' ), __( "Google Analytics", 'ga-dash' ), 'manage_options', 'gadash_settings', array( 'GADWP_Settings', 'general_settings' ), version_compare( $wp_version, '3.8.0', '>=' ) ? 'dashicons-chart-area' : GADWP_URL . 'admin/images/gadash-icon.png' );
 				add_submenu_page( 'gadash_settings', __( "General Settings", 'ga-dash' ), __( "General Settings", 'ga-dash' ), 'manage_options', 'gadash_settings', array( 'GADWP_Settings', 'general_settings' ) );
 				add_submenu_page( 'gadash_settings', __( "Backend Settings", 'ga-dash' ), __( "Backend Settings", 'ga-dash' ), 'manage_options', 'gadash_backend_settings', array( 'GADWP_Settings', 'backend_settings' ) );
 				add_submenu_page( 'gadash_settings', __( "Frontend Settings", 'ga-dash' ), __( "Frontend Settings", 'ga-dash' ), 'manage_options', 'gadash_frontend_settings', array( 'GADWP_Settings', 'frontend_settings' ) );
@@ -86,6 +86,14 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 		 */
 		public function load_styles_scripts( $hook ) {
 
+			$new_hook = explode('_page_', $hook);
+
+			if (isset($new_hook[1])){
+				$new_hook = '_page_'.$new_hook[1];
+			}else{
+				$new_hook = $hook;
+			}
+
 			/*
 			 * GADWP main stylesheet
 			 */
@@ -96,7 +104,7 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 			 */
 			$widgets_hooks = array( 'index.php' );
 
-			if ( in_array( $hook, $widgets_hooks ) ) {
+			if ( in_array( $new_hook, $widgets_hooks ) ) {
 				if ( GADWP_Tools::check_roles( $this->gadwp->config->options['ga_dash_access_back'] ) && $this->gadwp->config->options['dashboard_widget'] ) {
 
 					wp_enqueue_style( 'gadwp-nprogress', GADWP_URL . 'tools/nprogress/nprogress.css', null, GADWP_CURRENT_VERSION );
@@ -187,9 +195,9 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 			/*
 			 * Settings Styles & Scripts
 			 */
-			$settings_hooks = array( 'toplevel_page_gadash_settings', 'google-analytics_page_gadash_backend_settings', 'google-analytics_page_gadash_frontend_settings', 'google-analytics_page_gadash_tracking_settings', 'google-analytics_page_gadash_errors_debugging' );
+			$settings_hooks = array( '_page_gadash_settings', '_page_gadash_backend_settings', '_page_gadash_frontend_settings', '_page_gadash_tracking_settings', '_page_gadash_errors_debugging' );
 
-			if ( in_array( $hook, $settings_hooks ) ) {
+			if ( in_array( $new_hook, $settings_hooks ) ) {
 				wp_enqueue_style( 'wp-color-picker' );
 				wp_enqueue_script( 'wp-color-picker' );
 				wp_enqueue_script( 'wp-color-picker-script-handle', plugins_url( 'js/wp-color-picker-script.js', __FILE__ ), array( 'wp-color-picker' ), false, true );
@@ -217,7 +225,7 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 			if ( get_option( 'gadwp_got_updated' ) ) {
 				?>
 				<div class="updated">
-				    <p><?php echo __( 'Google Analytics Dashboard for WP has been updated to version', 'ga-dash' ).' '.GADWP_CURRENT_VERSION.'. '.__('For details, check out the').sprintf(' <a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_notice&utm_medium=link&utm_content=release_notice&utm_campaign=gadwp">%s</a> ', __('documentation page', 'ga-dash') ). __('and the plugin&#39;s settings page', 'ga-dash').'.'; ?></p>
+				    <p><?php echo __( 'Google Analytics Dashboard for WP has been updated to version', 'ga-dash' ).' '.GADWP_CURRENT_VERSION.'. '.__('For details, check out the').sprintf(' <a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_notice&utm_medium=link&utm_content=release_notice&utm_campaign=gadwp">%s</a> ', __('documentation page', 'ga-dash') ). __('and the', 'ga-dash').sprintf(' <a href="%1$s">%2$s</a>', esc_url( get_admin_url( null, 'admin.php?page=gadash_settings' ) ), __('plugin&#39;s settings page', 'ga-dash') ).'.'; ?></p>
 				</div>
 				<?php
 			}
