@@ -132,7 +132,8 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 = 4.8.1 =
 - Bug Fix: add % suffix to bouncerate item reports
 - Bug Fix: add query string support to frontend item reports
-- Bug Fix: make the main menu translatable 
+- Bug Fix: make the main menu translatable
+- Bug Fix: PHP notice while no View is assigned to a new network site  
 - Enhancement: French translation updated
 - Enhancement: Romanian translation updated
 - Enhancement: display an admin notice after manual and automatic updates  
