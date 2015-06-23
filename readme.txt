@@ -4,14 +4,14 @@ Donate link: https://deconf.com/donate/
 Tags: google,analytics,google analytics,dashboard,analytics dashboard,google analytics dashboard,google analytics widget,tracking,realtime,wpmu,multisite,gadwp
 Requires at least: 3.5
 Tested up to: 4.2.2
-Stable tag: 4.8
+Stable tag: 4.8.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Displays Google Analytics reports and real-time statistics in your WordPress Dashboard. Inserts the latest tracking code in every page of your site.
 
 == Description ==
-This Google Analytics plugin for WordPress enables you to track your site using the latest Google Analytics tracking code and allows you to view the analytics reports in your 
+This Google Analytics for WordPress plugin enables you to track your site using the latest Google Analytics tracking code and allows you to view the analytics reports in your 
 WordPress install.
 
 In addition to a set of general reports, in-depth Page reports and in-depth Post reports allow further segmentation of your analytics data, providing performance details for each post or page from your website.
@@ -129,11 +129,12 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 
 == Changelog ==
 
-= 4.9 =
+= 4.8.1 =
+- Bug Fix: add % suffix to bouncerate item reports
+- Bug Fix: add query string support to frontend item reports
 - Enhancement: French translation updated
 - Enhancement: Romanian translation updated
-- Bug Fix: add % suffix to bouncerate item reports
-- Enhancement: display an admin notice after each manual or atuomatic update  
+- Enhancement: display an admin notice after manual and automatic updates  
 
 = 4.8 =
 - Enhancement: optimize the number of ajax requests
