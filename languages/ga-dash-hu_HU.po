@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: Google Analytics Dashboard for WP 4.7.2\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/google-analytics-"
 "dashboard-for-wp\n"
-"POT-Creation-Date: 2015-06-14 17:32+0200\n"
-"PO-Revision-Date: 2015-06-14 17:32+0200\n"
+"POT-Creation-Date: 2015-06-24 09:03+0200\n"
+"PO-Revision-Date: 2015-06-24 09:04+0200\n"
 "Last-Translator: Alin Marcu <admin@deconf.com>\n"
 "Language-Team: I love WordPress <info@ilovewp.net>\n"
 "Language: hu_HU\n"
@@ -48,7 +48,7 @@ msgstr "Valami rosszul ment, tekintse meg itt: %1$s vagy %2$s."
 #: .././admin/settings.php:95 .././admin/settings.php:190
 #: .././admin/settings.php:324 .././admin/settings.php:641
 #: .././admin/settings.php:823 .././admin/settings.php:1095
-#: .././admin/setup.php:62 .././admin/setup.php:75
+#: .././admin/setup.php:64 .././admin/setup.php:77
 msgid "Errors & Debug"
 msgstr "Hibák és hibakeresés"
 
@@ -404,7 +404,7 @@ msgstr "Cache ürítése"
 msgid "Reset Errors"
 msgstr "Hibák törlése"
 
-#: .././admin/settings.php:878 .././admin/setup.php:58 .././admin/setup.php:74
+#: .././admin/settings.php:878 .././admin/setup.php:60 .././admin/setup.php:76
 msgid "General Settings"
 msgstr "Általános beállítások"
 
@@ -524,120 +524,120 @@ msgstr "%s szolgáltatás felhasználói nyomkövetéssel IP szinten."
 msgid "Web Analytics"
 msgstr "Web Statisztika"
 
-#: .././admin/setup.php:57 .././admin/setup.php:73
+#: .././admin/setup.php:59 .././admin/setup.php:75
 msgid "Google Analytics"
 msgstr "Google Analytics"
 
-#: .././admin/setup.php:59
+#: .././admin/setup.php:61
 msgid "Backend Settings"
 msgstr "Admin beállítások"
 
-#: .././admin/setup.php:60
+#: .././admin/setup.php:62
 msgid "Frontend Settings"
 msgstr "Weblap beállítások"
 
-#: .././admin/setup.php:61
+#: .././admin/setup.php:63
 msgid "Tracking Code"
 msgstr "Követőkód"
 
-#: .././admin/setup.php:147 .././admin/widgets.php:120 .././front/setup.php:71
+#: .././admin/setup.php:157 .././admin/widgets.php:120 .././front/setup.php:71
 msgid "Today"
 msgstr "Ma"
 
-#: .././admin/setup.php:148 .././admin/widgets.php:121 .././front/setup.php:72
+#: .././admin/setup.php:158 .././admin/widgets.php:121 .././front/setup.php:72
 msgid "Yesterday"
 msgstr "Tegnap"
 
-#: .././admin/setup.php:149 .././admin/widgets.php:122 .././front/setup.php:73
+#: .././admin/setup.php:159 .././admin/widgets.php:122 .././front/setup.php:73
 #: .././front/widgets.php:64 .././front/widgets.php:158
 msgid "Last 7 Days"
 msgstr "Elmúlt 7 nap"
 
-#: .././admin/setup.php:150 .././admin/widgets.php:124 .././front/setup.php:74
+#: .././admin/setup.php:160 .././admin/widgets.php:124 .././front/setup.php:74
 #: .././front/widgets.php:70 .././front/widgets.php:160
 msgid "Last 30 Days"
 msgstr "Elmúlt 30 nap"
 
-#: .././admin/setup.php:151 .././admin/widgets.php:125 .././front/setup.php:75
+#: .././admin/setup.php:161 .././admin/widgets.php:125 .././front/setup.php:75
 msgid "Last 90 Days"
 msgstr "Elmúlt 90 nap"
 
-#: .././admin/setup.php:153 .././admin/setup.php:168 .././front/setup.php:77
+#: .././admin/setup.php:163 .././admin/setup.php:178 .././front/setup.php:77
 #: .././front/setup.php:92
 msgid "Unique Views"
 msgstr "Egyedi megtekintések"
 
-#: .././admin/setup.php:154 .././admin/setup.php:169
+#: .././admin/setup.php:164 .././admin/setup.php:179
 #: .././admin/widgets.php:130 .././admin/widgets.php:820
 #: .././front/setup.php:78 .././front/setup.php:93 .././tools/gapi.php:355
 msgid "Users"
 msgstr "Felhasználók"
 
-#: .././admin/setup.php:155 .././admin/widgets.php:131 .././front/setup.php:79
+#: .././admin/setup.php:165 .././admin/widgets.php:131 .././front/setup.php:79
 msgid "Organic"
 msgstr "Organikus"
 
-#: .././admin/setup.php:156 .././admin/setup.php:170
+#: .././admin/setup.php:166 .././admin/setup.php:180
 #: .././admin/widgets.php:132 .././admin/widgets.php:824
 #: .././front/setup.php:80 .././front/setup.php:94 .././tools/gapi.php:358
 msgid "Page Views"
 msgstr "Oldal megtekintések"
 
-#: .././admin/setup.php:157 .././admin/setup.php:171
+#: .././admin/setup.php:167 .././admin/setup.php:181
 #: .././admin/widgets.php:133 .././admin/widgets.php:828
 #: .././front/setup.php:81 .././front/setup.php:95 .././tools/gapi.php:361
 msgid "Bounce Rate"
 msgstr "Visszafordulási arány"
 
-#: .././admin/setup.php:158 .././admin/widgets.php:134 .././front/setup.php:82
+#: .././admin/setup.php:168 .././admin/widgets.php:134 .././front/setup.php:82
 msgid "Location"
 msgstr "Hely"
 
-#: .././admin/setup.php:159 .././admin/widgets.php:136 .././front/setup.php:83
+#: .././admin/setup.php:169 .././admin/widgets.php:136 .././front/setup.php:83
 #: .././tools/gapi.php:492
 msgid "Referrers"
 msgstr "Hivatkozók"
 
-#: .././admin/setup.php:160 .././admin/widgets.php:137 .././front/setup.php:84
+#: .././admin/setup.php:170 .././admin/widgets.php:137 .././front/setup.php:84
 #: .././tools/gapi.php:525
 msgid "Searches"
 msgstr "Keresések"
 
-#: .././admin/setup.php:161 .././admin/widgets.php:138 .././front/setup.php:85
+#: .././admin/setup.php:171 .././admin/widgets.php:138 .././front/setup.php:85
 msgid "Traffic Details"
 msgstr "Forgalmi adatok"
 
-#: .././admin/setup.php:163 .././admin/widgets.php:495
+#: .././admin/setup.php:173 .././admin/widgets.php:495
 #: .././admin/widgets.php:580 .././admin/widgets.php:747
 #: .././admin/widgets.php:851 .././front/setup.php:87
 msgid "A JavaScript Error is blocking plugin resources!"
 msgstr "Egy JavaScript hiba blokkolja a bővítmény forrásait!"
 
-#: .././admin/setup.php:164 .././admin/widgets.php:671 .././front/setup.php:88
+#: .././admin/setup.php:174 .././admin/widgets.php:671 .././front/setup.php:88
 msgid "Traffic Mediums"
 msgstr "Forgalmi közeg"
 
-#: .././admin/setup.php:165 .././admin/widgets.php:686 .././front/setup.php:89
+#: .././admin/setup.php:175 .././admin/widgets.php:686 .././front/setup.php:89
 msgid "Visitor Type"
 msgstr "Látogató típus"
 
-#: .././admin/setup.php:166 .././admin/widgets.php:701 .././front/setup.php:90
+#: .././admin/setup.php:176 .././admin/widgets.php:701 .././front/setup.php:90
 msgid "Social Networks"
 msgstr "Közösségi hálózatok"
 
-#: .././admin/setup.php:167 .././admin/widgets.php:716 .././front/setup.php:91
+#: .././admin/setup.php:177 .././admin/widgets.php:716 .././front/setup.php:91
 msgid "Search Engines"
 msgstr "Keresőmotorok"
 
-#: .././admin/setup.php:172 .././admin/widgets.php:832 .././front/setup.php:96
+#: .././admin/setup.php:182 .././admin/widgets.php:832 .././front/setup.php:96
 msgid "Organic Search"
 msgstr "Organikus keresés"
 
-#: .././admin/setup.php:173 .././admin/widgets.php:836 .././front/setup.php:97
+#: .././admin/setup.php:183 .././admin/widgets.php:836 .././front/setup.php:97
 msgid "Pages/Session"
 msgstr "Oldal / munkamenet"
 
-#: .././admin/setup.php:174 .././admin/widgets.php:507
+#: .././admin/setup.php:184 .././admin/widgets.php:507
 #: .././admin/widgets.php:521 .././admin/widgets.php:531
 #: .././admin/widgets.php:592 .././admin/widgets.php:606
 #: .././admin/widgets.php:620 .././admin/widgets.php:634
@@ -648,11 +648,11 @@ msgstr "Oldal / munkamenet"
 msgid "Invalid response, more details in JavaScript Console (F12)."
 msgstr "Érvénytelen válasz, további részletek a JavaScript Konzolban (F12)."
 
-#: .././admin/setup.php:175 .././front/setup.php:99
+#: .././admin/setup.php:185 .././front/setup.php:99
 msgid "Not enough data collected"
 msgstr "Nincs elegendő összegyűjtött adat"
 
-#: .././admin/setup.php:176 .././admin/widgets.php:512
+#: .././admin/setup.php:186 .././admin/widgets.php:512
 #: .././admin/widgets.php:526 .././admin/widgets.php:597
 #: .././admin/widgets.php:611 .././admin/widgets.php:625
 #: .././admin/widgets.php:639 .././admin/widgets.php:653
@@ -662,13 +662,31 @@ msgstr "Nincs elegendő összegyűjtött adat"
 msgid "This report is unavailable"
 msgstr "Ez a jelentés nem elérhető"
 
-#: .././admin/setup.php:177 .././front/setup.php:101
+#: .././admin/setup.php:187 .././front/setup.php:101
 msgid "report generated by"
 msgstr "jelentést generálta"
 
-#: .././admin/setup.php:206
+#: .././admin/setup.php:216
 msgid "Settings"
 msgstr "Beállítások"
+
+#: .././admin/setup.php:228
+#, php-format
+msgid "Google Analytics Dashboard for WP has been updated to version %s."
+msgstr ""
+
+#: .././admin/setup.php:228
+#, php-format
+msgid "For details, check out %1$s and %2$s."
+msgstr ""
+
+#: .././admin/setup.php:228
+msgid "the documentation page"
+msgstr ""
+
+#: .././admin/setup.php:228
+msgid "the plugin&#39;s settings page"
+msgstr ""
 
 #: .././admin/widgets.php:29 .././front/widgets.php:21
 msgid "Google Analytics Dashboard"

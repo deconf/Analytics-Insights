@@ -82,7 +82,7 @@ if ( ! class_exists( 'GADWP_Manager' ) ) {
 
 			// Plugin Version
 			if ( ! defined( 'GADWP_CURRENT_VERSION' ) ) {
-				define( 'GADWP_CURRENT_VERSION', '4.8.1' );
+				define( 'GADWP_CURRENT_VERSION', '4.9' );
 			}
 
 			// Plugin Path

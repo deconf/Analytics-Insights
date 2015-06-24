@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Google Analytics Dashboard for WP\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/google-analytics-dashboard-for-wp\n"
-"POT-Creation-Date: 2015-06-14 17:31+0200\n"
-"PO-Revision-Date: 2015-06-14 17:31+0200\n"
+"POT-Creation-Date: 2015-06-24 09:03+0200\n"
+"PO-Revision-Date: 2015-06-24 09:03+0200\n"
 "Last-Translator: Alin Marcu <admin@deconf.com>\n"
 "Language-Team: Alin Marcu\n"
 "Language: cs_CZ\n"
@@ -44,7 +44,7 @@ msgstr "Něco je špatně, zkontroluj %1$s nebo %2$s."
 
 #: .././admin/settings.php:95 .././admin/settings.php:190 .././admin/settings.php:324
 #: .././admin/settings.php:641 .././admin/settings.php:823 .././admin/settings.php:1095
-#: .././admin/setup.php:62 .././admin/setup.php:75
+#: .././admin/setup.php:64 .././admin/setup.php:77
 msgid "Errors & Debug"
 msgstr "Chyby a ladění"
 
@@ -389,7 +389,7 @@ msgstr "Smazat dočasnou paměť (cache)."
 msgid "Reset Errors"
 msgstr "Smazat chyby"
 
-#: .././admin/settings.php:878 .././admin/setup.php:58 .././admin/setup.php:74
+#: .././admin/settings.php:878 .././admin/setup.php:60 .././admin/setup.php:76
 msgid "General Settings"
 msgstr "Hlavní Nastavení"
 
@@ -506,119 +506,119 @@ msgstr "Služba %s se sledováním uživatelů na úrovni IP."
 msgid "Web Analytics"
 msgstr "Web Analýza"
 
-#: .././admin/setup.php:57 .././admin/setup.php:73
+#: .././admin/setup.php:59 .././admin/setup.php:75
 msgid "Google Analytics"
 msgstr "Google Analytics"
 
-#: .././admin/setup.php:59
+#: .././admin/setup.php:61
 msgid "Backend Settings"
 msgstr "Nastavení Pozadí"
 
-#: .././admin/setup.php:60
+#: .././admin/setup.php:62
 msgid "Frontend Settings"
 msgstr "Nastavení Popředí"
 
-#: .././admin/setup.php:61
+#: .././admin/setup.php:63
 msgid "Tracking Code"
 msgstr "Sledovací kód"
 
-#: .././admin/setup.php:147 .././admin/widgets.php:120 .././front/setup.php:71
+#: .././admin/setup.php:157 .././admin/widgets.php:120 .././front/setup.php:71
 msgid "Today"
 msgstr "Dnes"
 
-#: .././admin/setup.php:148 .././admin/widgets.php:121 .././front/setup.php:72
+#: .././admin/setup.php:158 .././admin/widgets.php:121 .././front/setup.php:72
 msgid "Yesterday"
 msgstr "Včera"
 
-#: .././admin/setup.php:149 .././admin/widgets.php:122 .././front/setup.php:73
+#: .././admin/setup.php:159 .././admin/widgets.php:122 .././front/setup.php:73
 #: .././front/widgets.php:64 .././front/widgets.php:158
 msgid "Last 7 Days"
 msgstr "Posledních 7 dní"
 
-#: .././admin/setup.php:150 .././admin/widgets.php:124 .././front/setup.php:74
+#: .././admin/setup.php:160 .././admin/widgets.php:124 .././front/setup.php:74
 #: .././front/widgets.php:70 .././front/widgets.php:160
 msgid "Last 30 Days"
 msgstr "Posledních 30 dní"
 
-#: .././admin/setup.php:151 .././admin/widgets.php:125 .././front/setup.php:75
+#: .././admin/setup.php:161 .././admin/widgets.php:125 .././front/setup.php:75
 msgid "Last 90 Days"
 msgstr "Posledních 90 dní"
 
-#: .././admin/setup.php:153 .././admin/setup.php:168 .././front/setup.php:77
+#: .././admin/setup.php:163 .././admin/setup.php:178 .././front/setup.php:77
 #: .././front/setup.php:92
 msgid "Unique Views"
 msgstr "Unikátní shlédnutí"
 
-#: .././admin/setup.php:154 .././admin/setup.php:169 .././admin/widgets.php:130
+#: .././admin/setup.php:164 .././admin/setup.php:179 .././admin/widgets.php:130
 #: .././admin/widgets.php:820 .././front/setup.php:78 .././front/setup.php:93
 #: .././tools/gapi.php:355
 msgid "Users"
 msgstr "Uživatelé"
 
-#: .././admin/setup.php:155 .././admin/widgets.php:131 .././front/setup.php:79
+#: .././admin/setup.php:165 .././admin/widgets.php:131 .././front/setup.php:79
 msgid "Organic"
 msgstr "Přírodní"
 
-#: .././admin/setup.php:156 .././admin/setup.php:170 .././admin/widgets.php:132
+#: .././admin/setup.php:166 .././admin/setup.php:180 .././admin/widgets.php:132
 #: .././admin/widgets.php:824 .././front/setup.php:80 .././front/setup.php:94
 #: .././tools/gapi.php:358
 msgid "Page Views"
 msgstr "Zobrazení Stránek"
 
-#: .././admin/setup.php:157 .././admin/setup.php:171 .././admin/widgets.php:133
+#: .././admin/setup.php:167 .././admin/setup.php:181 .././admin/widgets.php:133
 #: .././admin/widgets.php:828 .././front/setup.php:81 .././front/setup.php:95
 #: .././tools/gapi.php:361
 msgid "Bounce Rate"
 msgstr "Míra opuštění"
 
-#: .././admin/setup.php:158 .././admin/widgets.php:134 .././front/setup.php:82
+#: .././admin/setup.php:168 .././admin/widgets.php:134 .././front/setup.php:82
 msgid "Location"
 msgstr "Poloha"
 
-#: .././admin/setup.php:159 .././admin/widgets.php:136 .././front/setup.php:83
+#: .././admin/setup.php:169 .././admin/widgets.php:136 .././front/setup.php:83
 #: .././tools/gapi.php:492
 msgid "Referrers"
 msgstr "Odkazy"
 
-#: .././admin/setup.php:160 .././admin/widgets.php:137 .././front/setup.php:84
+#: .././admin/setup.php:170 .././admin/widgets.php:137 .././front/setup.php:84
 #: .././tools/gapi.php:525
 msgid "Searches"
 msgstr "Vyhledávání"
 
-#: .././admin/setup.php:161 .././admin/widgets.php:138 .././front/setup.php:85
+#: .././admin/setup.php:171 .././admin/widgets.php:138 .././front/setup.php:85
 msgid "Traffic Details"
 msgstr "Detail provozu"
 
-#: .././admin/setup.php:163 .././admin/widgets.php:495 .././admin/widgets.php:580
+#: .././admin/setup.php:173 .././admin/widgets.php:495 .././admin/widgets.php:580
 #: .././admin/widgets.php:747 .././admin/widgets.php:851 .././front/setup.php:87
 msgid "A JavaScript Error is blocking plugin resources!"
 msgstr "Chyva JavaScriptu blokuje zdroje modulu."
 
-#: .././admin/setup.php:164 .././admin/widgets.php:671 .././front/setup.php:88
+#: .././admin/setup.php:174 .././admin/widgets.php:671 .././front/setup.php:88
 msgid "Traffic Mediums"
 msgstr "Dopravní Media"
 
-#: .././admin/setup.php:165 .././admin/widgets.php:686 .././front/setup.php:89
+#: .././admin/setup.php:175 .././admin/widgets.php:686 .././front/setup.php:89
 msgid "Visitor Type"
 msgstr "Druh Návštěvníka"
 
-#: .././admin/setup.php:166 .././admin/widgets.php:701 .././front/setup.php:90
+#: .././admin/setup.php:176 .././admin/widgets.php:701 .././front/setup.php:90
 msgid "Social Networks"
 msgstr "Sociální sítě"
 
-#: .././admin/setup.php:167 .././admin/widgets.php:716 .././front/setup.php:91
+#: .././admin/setup.php:177 .././admin/widgets.php:716 .././front/setup.php:91
 msgid "Search Engines"
 msgstr "Vyhledávače"
 
-#: .././admin/setup.php:172 .././admin/widgets.php:832 .././front/setup.php:96
+#: .././admin/setup.php:182 .././admin/widgets.php:832 .././front/setup.php:96
 msgid "Organic Search"
 msgstr "Přírodní vyhledávání"
 
-#: .././admin/setup.php:173 .././admin/widgets.php:836 .././front/setup.php:97
+#: .././admin/setup.php:183 .././admin/widgets.php:836 .././front/setup.php:97
 msgid "Pages/Session"
 msgstr "Stránky/Návštěvy"
 
-#: .././admin/setup.php:174 .././admin/widgets.php:507 .././admin/widgets.php:521
+#: .././admin/setup.php:184 .././admin/widgets.php:507 .././admin/widgets.php:521
 #: .././admin/widgets.php:531 .././admin/widgets.php:592 .././admin/widgets.php:606
 #: .././admin/widgets.php:620 .././admin/widgets.php:634 .././admin/widgets.php:648
 #: .././admin/widgets.php:658 .././admin/widgets.php:760 .././admin/widgets.php:772
@@ -627,11 +627,11 @@ msgstr "Stránky/Návštěvy"
 msgid "Invalid response, more details in JavaScript Console (F12)."
 msgstr "Neplatná odpověď, více detailů v konzoli JavaScriptu (F12)."
 
-#: .././admin/setup.php:175 .././front/setup.php:99
+#: .././admin/setup.php:185 .././front/setup.php:99
 msgid "Not enough data collected"
 msgstr "Nedostatečné množství dat"
 
-#: .././admin/setup.php:176 .././admin/widgets.php:512 .././admin/widgets.php:526
+#: .././admin/setup.php:186 .././admin/widgets.php:512 .././admin/widgets.php:526
 #: .././admin/widgets.php:597 .././admin/widgets.php:611 .././admin/widgets.php:625
 #: .././admin/widgets.php:639 .././admin/widgets.php:653 .././admin/widgets.php:765
 #: .././admin/widgets.php:767 .././admin/widgets.php:868 .././admin/widgets.php:882
@@ -639,13 +639,31 @@ msgstr "Nedostatečné množství dat"
 msgid "This report is unavailable"
 msgstr "Toto hlášení není dostupné"
 
-#: .././admin/setup.php:177 .././front/setup.php:101
+#: .././admin/setup.php:187 .././front/setup.php:101
 msgid "report generated by"
 msgstr "hlášení vytvořené  s pomocí"
 
-#: .././admin/setup.php:206
+#: .././admin/setup.php:216
 msgid "Settings"
 msgstr "Nastavení"
+
+#: .././admin/setup.php:228
+#, php-format
+msgid "Google Analytics Dashboard for WP has been updated to version %s."
+msgstr ""
+
+#: .././admin/setup.php:228
+#, php-format
+msgid "For details, check out %1$s and %2$s."
+msgstr ""
+
+#: .././admin/setup.php:228
+msgid "the documentation page"
+msgstr ""
+
+#: .././admin/setup.php:228
+msgid "the plugin&#39;s settings page"
+msgstr ""
 
 #: .././admin/widgets.php:29 .././front/widgets.php:21
 msgid "Google Analytics Dashboard"
