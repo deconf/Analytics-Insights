@@ -175,7 +175,9 @@ if ( ! class_exists( 'GADWP_Manager' ) ) {
 						 * Load Backend ajax actions
 						 */
 						include_once ( GADWP_DIR . 'admin/ajax-actions.php' );
+						include_once ( GADWP_DIR . 'admin/ajax-actions-ui.php' );
 						self::$instance->backend_actions = new GADWP_Backend_Ajax();
+						new GADWP_UI_Ajax();
 					}
 
 					/*

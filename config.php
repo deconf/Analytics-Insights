@@ -206,7 +206,7 @@ if (! class_exists('GADWP_Config')) {
                 $this->options['automatic_updates_minorversion'] = 1;
                 delete_transient('ga_dash_lasterror');
                 update_option('gadwp_version', GADWP_CURRENT_VERSION);
-                update_option('gadwp_got_updated', true);
+               	update_option('gadwp_got_updated', true);
                 if (is_multisite()) { // Cleanup errors on the entire network
                     foreach (wp_get_sites(array(
                         'limit' => apply_filters('gadwp_sites_limit', 100)
@@ -310,6 +310,14 @@ if (! class_exists('GADWP_Config')) {
             if (! isset($this->options['backend_item_reports'])) { //v4.8
                 $this->options['backend_item_reports'] = 1;
                 $flag = true;
+            }
+            if (! isset($this->options['gadwp_ir_default_metric'])) { //v4.8.1
+            	$this->options['gadwp_ir_default_metric'] = 'uniquePageviews';
+            	$flag = true;
+            }
+            if (! isset($this->options['gadwp_ir_default_dimension'])) { //v4.8.1
+            	$this->options['gadwp_ir_default_dimension'] = '30daysAgo';
+            	$flag = true;
             }
             if (isset($this->options['item_reports'])) { //v4.8
             	$this->options['backend_item_reports'] = $this->options['item_reports'];

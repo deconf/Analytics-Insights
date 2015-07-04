@@ -1,14 +1,14 @@
 === Google Analytics Dashboard for WP ===
 Contributors: deconf
 Donate link: https://deconf.com/donate/
-Tags: google,analytics,google analytics,dashboard,analytics dashboard,google analytics dashboard,google analytics widget,tracking,realtime,wpmu,multisite,gadwp
+Tags: google,analytics,google analytics,dashboard,analytics dashboard,google analytics dashboard,google analytics plugin,google analytics widget,tracking,realtime,wpmu,multisite,gadwp
 Requires at least: 3.5
 Tested up to: 4.2.2
 Stable tag: 4.8.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Displays Google Analytics reports and real-time statistics in your WordPress Dashboard. Inserts the latest tracking code in every page of your site.
+Displays Google Analytics reports and real-time statistics in your WordPress Dashboard. Inserts the latest Google Analytics tracking code in every page of your site.
 
 == Description ==
 This Google Analytics for WordPress plugin enables you to track your site using the latest Google Analytics tracking code and allows you to view the analytics reports in your 
@@ -23,12 +23,12 @@ The tracking code is fully customizable through options and hooks, allows you to
 Google Analytics reports, in real-time, on your dashboard screen:
 
 - displays the total number of visitors in real-time 
-- real-time statistics about your acquisition channels
+- real-time reports about your acquisition channels
 - per page real-time reports with traffic sources details 
 
 = Google Analytics Reports =
 
-The reports you need, in your dashboard, in your Posts and Pages List, and on site's frontend:  
+The analytics reports you need, in your dashboard, in your All Posts and All Pages screens, and on site's frontend:  
 
 - you can access all websites statistics in a single widget (websites within same Google Account)
 - option to choose a default color for your charts, graphs and maps
@@ -36,30 +36,28 @@ The reports you need, in your dashboard, in your Posts and Pages List, and on si
 - location reports, displaying visitors by country on a Geo Map and in a table chart
 - local websites and business have an option to display cities, instead of countries, on a regional map and in a table chart
 - traffic overview reports with details about acquisition channels, social networks, search engines, traffic mediums and visitor type 
-- per post or page analytics reports in Posts List and Pages List
+- per post or page Google Analytics reports in All Posts and All Pages screens
 - option to display Google Analytics reports on frontend; available for each web page
-- frontend widget with website's analytics stats and analytics data anonymization feature
-- localization support, a POT file is available for translations
-- user access level settings for Backend statistics and analytics reports
-- user access level settings for Frontend analytics data and reports
-- options to disable certain analytics reports from backend or frontend
+- frontend widget with website's analytics stats and analytics report anonymization feature
+- option to share your backend and frontend Google Analytics reports with specified user roles 
+- options to disable certain Google Analytics reports from backend or frontend
 
 = Google Analytics Tracking =
 
 Install the Google Analytics tracking code in less than a minute and customize it as you wish:
 
-- enable/disable google analytics tracking code
-- switch between universal analytics and classic analytics tracking methods
-- supports analytics.js tracking for compatibility with Universal Analytics web property  
-- supports ga.js tracking for compatibility with Classic Analytics web property
+- enable/disable the Google Analytics tracking code
+- switch between Universal Google Analytics and Classic Google Analytics tracking methods
+- supports analytics.js tracking for compatibility with Universal Google Analytics web property  
+- supports ga.js tracking for compatibility with Classic Google Analytics web property
 - automatically generates and inserts the Google Analytics tracking code
 - IP address anonymization feature
 - enhanced link attribution feature
 - remarketing, demographics and interests tracking
 - Google AdSense account linking
 - page speed sampling rate customization
-- track events feature: track downloads, emails and outbound links
-- exclude traffic based on user roles
+- track events feature: track downloads, emails and outbound links with Google Analytics
+- exclude tracking based on user roles
 - option to exclude event tracking from bounce-rate calculation
 - multiple domains / cross domain tracking
 - action hook for code customization
@@ -136,7 +134,11 @@ This plugin it's released under the GPLv2, you can use it free of charge on your
 - Bug Fix: PHP notice while no View is assigned to a new network site  
 - Enhancement: French translation updated
 - Enhancement: Romanian translation updated
-- Enhancement: display an admin notice after manual and automatic updates  
+- Enhancement: display an admin notice after manual and automatic updates
+- Enhancement: small I18N tweaks and POT file update
+- Enhancement: introducing last 14 days range in items reports
+- Enhancement: introducing last 365 days range for all reports
+- Enhancement: set the last selected report and date range as default for subsequent requests 
 
 = 4.8 =
 - Enhancement: optimize the number of ajax requests

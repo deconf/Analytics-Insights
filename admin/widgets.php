@@ -19,16 +19,12 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 		public function __construct() {
 			$this->gadwp = GADWP();
 			if ( GADWP_Tools::check_roles( $this->gadwp->config->options['ga_dash_access_back'] ) && ( 1 == $this->gadwp->config->options['dashboard_widget'] ) ) {
-				add_action( 'wp_dashboard_setup', array(
-					$this,
-					'add_widget' ) );
+				add_action( 'wp_dashboard_setup', array( $this, 'add_widget' ) );
 			}
 		}
 
 		public function add_widget() {
-			wp_add_dashboard_widget( 'gadash-widget', __( "Google Analytics Dashboard", 'ga-dash' ), array(
-				$this,
-				'dashboard_widget' ), $control_callback = null );
+			wp_add_dashboard_widget( 'gadash-widget', __( "Google Analytics Dashboard", 'ga-dash' ), array( $this, 'dashboard_widget' ), $control_callback = null );
 		}
 
 		public function dashboard_widget() {
@@ -101,17 +97,19 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 			}
 			if ( isset( $_REQUEST['query'] ) ) {
 				$query = $_REQUEST['query'];
-				$this->gadwp->config->options['ga_dash_default_metric'] = $query;
+				GADWP_Tools::set_cookie( 'default_metric', $query );
 				$this->gadwp->config->set_plugin_options();
 			} else {
-				$query = isset( $this->gadwp->config->options['ga_dash_default_metric'] ) ? $this->gadwp->config->options['ga_dash_default_metric'] : 'sessions';
+				$default_metric = GADWP_Tools::get_cookie( 'default_metric' );
+				$query = $default_metric ? esc_html( $default_metric ) : 'sessions';
 			}
 			if ( isset( $_REQUEST['period'] ) ) {
 				$period = $_REQUEST['period'];
-				$this->gadwp->config->options['ga_dash_default_dimension'] = $period;
+				GADWP_Tools::set_cookie( 'default_dimension', $period );
 				$this->gadwp->config->set_plugin_options();
 			} else {
-				$period = isset( $this->gadwp->config->options['ga_dash_default_dimension'] ) ? $this->gadwp->config->options['ga_dash_default_dimension'] : '30daysAgo';
+				$default_dimension = GADWP_Tools::get_cookie( 'default_dimension' );
+				$period = $default_dimension ? esc_html( $default_dimension ) : '30daysAgo';
 			}
 			?>
 
@@ -119,10 +117,11 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
         <option value="realtime" <?php selected ( "realtime", $period, true ); ?>><?php _e("Real-Time",'ga-dash'); ?></option>
         <option value="today" <?php selected ( "today", $period, true ); ?>><?php _e("Today",'ga-dash'); ?></option>
         <option value="yesterday" <?php selected ( "yesterday", $period, true ); ?>><?php _e("Yesterday",'ga-dash'); ?></option>
-        <option value="7daysAgo" <?php selected ( "7daysAgo", $period, true ); ?>><?php _e("Last 7 Days",'ga-dash'); ?></option>
-        <option value="14daysAgo" <?php selected ( "14daysAgo", $period, true ); ?>><?php _e("Last 14 Days",'ga-dash'); ?></option>
-        <option value="30daysAgo" <?php selected ( "30daysAgo", $period, true ); ?>><?php _e("Last 30 Days",'ga-dash'); ?></option>
-        <option value="90daysAgo" <?php selected ( "90daysAgo", $period, true ); ?>><?php _e("Last 90 Days",'ga-dash'); ?></option>
+        <option value="7daysAgo" <?php selected ( "7daysAgo", $period, true ); ?>><?php printf( __( "Last %d Days", 'ga-dash' ), 7 ); ?></option>
+        <option value="14daysAgo" <?php selected ( "14daysAgo", $period, true ); ?>><?php printf( __( "Last %d Days", 'ga-dash' ), 14 ); ?></option>
+        <option value="30daysAgo" <?php selected ( "30daysAgo", $period, true ); ?>><?php printf( __( "Last %d Days", 'ga-dash' ), 30 ); ?></option>
+        <option value="90daysAgo" <?php selected ( "90daysAgo", $period, true ); ?>><?php printf( __( "Last %d Days", 'ga-dash' ), 90 ); ?></option>
+        <option value="365daysAgo" <?php selected ( "365daysAgo", $period, true ); ?>><?php printf( __( "Last %d Days", 'ga-dash' ), 365 ); ?></option>
     </select>
 				<?php if ($period != 'realtime') {?>
 				<select id="ga_dash_query" name="query" onchange="this.form.submit()">
@@ -162,15 +161,20 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 					$to = 'yesterday';
 					$haxis = 3;
 					break;
-				case '30daysAgo' :
-					$from = '30daysAgo';
+				case '90daysAgo' :
+					$from = '90daysAgo';
+					$to = 'yesterday';
+					$haxis = 16;
+					break;
+				case '365daysAgo' :
+					$from = '365daysAgo';
 					$to = 'yesterday';
 					$haxis = 5;
 					break;
 				default :
-					$from = '90daysAgo';
+					$from = '30daysAgo';
 					$to = 'yesterday';
-					$haxis = 16;
+					$haxis = 5;
 					break;
 			}
 			if ( $query == 'visitBounceRate' ) {

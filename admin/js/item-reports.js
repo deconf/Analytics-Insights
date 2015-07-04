@@ -67,15 +67,49 @@ function () {
 jQuery.fn.extend( {
 	gadwpItemReport : function ( slug, item_id ) {
 
+		var tools = {
+			set_cookie : function ( name, value ) {
+				var date_item = new Date();
+				date_item.setTime( date_item.getTime() + ( 24 * 60 * 60 * 1000 * 365 * 10 ) );
+				var expires = "expires=" + date_item.toUTCString();
+				document.cookie = "gadwp_ir_" + name + "=" + value + "; " + expires + "; path=/";
+			},
+			get_cookie : function ( name ) {
+				var name = "gadwp_ir_" + name + "=";
+				var cookies_array = document.cookie.split( ';' );
+				for ( var i = 0; i < cookies_array.length; i++ ) {
+					var cookie = cookies_array[ i ];
+					while ( cookie.charAt( 0 ) == ' ' )
+						cookie = cookie.substring( 1 );
+					if ( cookie.indexOf( name ) == 0 )
+						return this.escape(cookie.substring( name.length, cookie.length ));
+				}
+				return false;
+			},
+			escape : function ( str ) {
+				var div = document.createElement( 'div' );
+				div.appendChild( document.createTextNode( str ) );
+				return div.innerHTML;
+			},			
+		}
+
 		var template = {
 
 			data : '<div id="gadwp-container' + slug + '"><select id="gadwp-sel-period' + slug + '"></select> <select id="gadwp-sel-report' + slug + '"></select><div id="gadwp-progressbar' + slug + '"></div><div id="gadwp-status' + slug + '"></div><div id="gadwp-reports' + slug + '"></div><div style="text-align:right;width:100%;font-size:0.8em;clear:both;margin-right:5px;margin-top:10px;">' + gadwp_item_data.i18n[ 14 ] + ' <a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_report&utm_medium=link&utm_content=back_report&utm_campaign=gadwp" rel="nofollow" style="text-decoration:none;font-size:1em;">GADWP</a>&nbsp;</div></div>',
 
 			addOptions : function ( id, list ) {
-
+				var default_metric, default_dimension;
 				var output = [];
 				jQuery.each( list, function ( key, value ) {
-					if ( key == '30daysAgo' || key == 'sessions' ) {
+					if ( !tools.get_cookie( 'default_metric' ) || !tools.get_cookie( 'default_dimension' ) ) {
+						default_metric = 'uniquePageviews';
+						default_dimension = '30daysAgo';
+					} else {
+						default_metric = tools.get_cookie( 'default_metric' );
+						default_dimension = tools.get_cookie( 'default_dimension' );
+					}
+
+					if ( key == default_metric || key == default_dimension ) {
 						output.push( '<option value="' + key + '" selected="selected">' + value + '</option>' );
 					} else {
 						output.push( '<option value="' + key + '">' + value + '</option>' );
@@ -139,7 +173,7 @@ jQuery.fn.extend( {
 				var options = {
 					allowCollapse : true,
 					allowHtml : true,
-					height: '100%'
+					height : '100%'
 				};
 
 				var chart = new google.visualization.OrgChart( document.getElementById( 'gadwp-trafficchannels' + slug ) );
@@ -255,16 +289,16 @@ jQuery.fn.extend( {
 			drawmainchart : function ( gadwp_mainchart, format ) {
 
 				var data = google.visualization.arrayToDataTable( gadwp_mainchart );
-				
+
 				if ( format ) {
-					var formatter = new google.visualization.NumberFormat({
-						  suffix: '%',
-						  fractionDigits: 2
-						});
-	
-					formatter.format(data, 1);
+					var formatter = new google.visualization.NumberFormat( {
+						suffix : '%',
+						fractionDigits : 2
+					} );
+
+					formatter.format( data, 1 );
 				}
-				
+
 				var options = {
 					legend : {
 						position : 'none'
@@ -348,18 +382,25 @@ jQuery.fn.extend( {
 						from = '90daysAgo';
 						to = 'yesterday';
 						break;
+					case '365daysAgo':
+						from = '365daysAgo';
+						to = 'yesterday';
+						break;							
 					default:
 						from = '30daysAgo';
 						to = 'yesterday';
 						break;
 				}
 
+				tools.set_cookie( 'default_metric', query );
+				tools.set_cookie( 'default_dimension', period );
+
 				var data = {
 					action : 'gadwp_backend_item_reports',
 					gadwp_security_backend_item_reports : gadwp_item_data.security,
 					from : from,
 					to : to,
-					filter : item_id
+					filter : item_id,
 				}
 
 				if ( jQuery.inArray( query, [ 'referrers', 'contentpages', 'searches' ] ) > -1 ) {
@@ -511,7 +552,7 @@ jQuery.fn.extend( {
 										google.setOnLoadCallback( reports.drawmainchart( reports.mainchart, true ) );
 									} else {
 										google.setOnLoadCallback( reports.drawmainchart( reports.mainchart, false ) );
-									}	
+									}
 								} else {
 									reports.throwDebug( response[ 0 ] );
 								}

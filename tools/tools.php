@@ -21,9 +21,7 @@ if ( ! class_exists( 'GADWP_Tools' ) ) {
 
 		public static function guess_default_domain( $profiles ) {
 			$domain = get_option( 'siteurl' );
-			$domain = str_ireplace( array(
-				'http://',
-				'https://' ), '', $domain );
+			$domain = str_ireplace( array( 'http://', 'https://' ), '', $domain );
 			if ( ! empty( $profiles ) ) {
 				foreach ( $profiles as $items ) {
 					if ( strpos( $items[3], $domain ) ) {
@@ -53,10 +51,7 @@ if ( ! class_exists( 'GADWP_Tools' ) ) {
 		}
 
 		public static function strip_protocol( $domain ) {
-			return str_replace( array(
-				"https://",
-				"http://",
-				" " ), "", $domain );
+			return str_replace( array( "https://", "http://", " " ), "", $domain );
 		}
 
 		public static function clear_cache() {
@@ -111,6 +106,20 @@ if ( ! class_exists( 'GADWP_Tools' ) ) {
 				} else {
 					return false;
 				}
+			}
+		}
+
+		public static function set_cookie( $name, $value ) {
+			$name = 'gadwp_' . $name;
+			setcookie( $name, $value, time() + 60 * 60 * 24 * 365 * 10, '/', COOKIE_DOMAIN, false );
+		}
+
+		public static function get_cookie( $name ) {
+			$name = 'gadwp_' . $name;
+			if ( isset( $_COOKIE[$name] ) ) {
+				return $_COOKIE[$name];
+			} else {
+				return false;
 			}
 		}
 	}

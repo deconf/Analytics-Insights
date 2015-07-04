@@ -3,15 +3,15 @@ msgstr ""
 "Project-Id-Version: Google Analytics Dashboard for WP\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/google-analytics-"
 "dashboard-for-wp\n"
-"POT-Creation-Date: 2015-06-24 09:03+0200\n"
-"PO-Revision-Date: 2015-06-24 09:03+0200\n"
+"POT-Creation-Date: 2015-07-04 09:05+0300\n"
+"PO-Revision-Date: 2015-07-04 09:05+0300\n"
 "Last-Translator: Alin Marcu <admin@deconf.com>\n"
 "Language-Team: Ahmed Majed <admin@almobdaa.com>\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.1\n"
+"X-Generator: Poedit 1.8.2\n"
 "X-Poedit-KeywordsList: _e;__\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -526,151 +526,150 @@ msgstr "اعدادات الظهور"
 msgid "Tracking Code"
 msgstr "كود التعقب"
 
-#: .././admin/setup.php:157 .././admin/widgets.php:120 .././front/setup.php:71
+#: .././admin/setup.php:156 .././admin/widgets.php:120 .././front/setup.php:71
 msgid "Today"
 msgstr "اليوم"
 
-#: .././admin/setup.php:158 .././admin/widgets.php:121 .././front/setup.php:72
+#: .././admin/setup.php:157 .././admin/widgets.php:121 .././front/setup.php:72
 msgid "Yesterday"
 msgstr "البارحة"
 
-#: .././admin/setup.php:159 .././admin/widgets.php:122 .././front/setup.php:73
-#: .././front/widgets.php:64 .././front/widgets.php:158
-msgid "Last 7 Days"
-msgstr "اخر ٧ ايام"
+#: .././admin/setup.php:158 .././admin/setup.php:159 .././admin/setup.php:160
+#: .././admin/setup.php:161 .././admin/widgets.php:122
+#: .././admin/widgets.php:123 .././admin/widgets.php:124
+#: .././admin/widgets.php:125 .././front/setup.php:73 .././front/setup.php:74
+#: .././front/setup.php:75 .././front/setup.php:76 .././front/widgets.php:64
+#: .././front/widgets.php:67 .././front/widgets.php:70
+#: .././front/widgets.php:158 .././front/widgets.php:159
+#: .././front/widgets.php:160
+#, php-format
+msgid "Last %d Days"
+msgstr ""
 
-#: .././admin/setup.php:160 .././admin/widgets.php:124 .././front/setup.php:74
-#: .././front/widgets.php:70 .././front/widgets.php:160
-msgid "Last 30 Days"
-msgstr "اخر ٣٠ يوم"
-
-#: .././admin/setup.php:161 .././admin/widgets.php:125 .././front/setup.php:75
-msgid "Last 90 Days"
-msgstr "أخر ٩٠ يوم"
-
-#: .././admin/setup.php:163 .././admin/setup.php:178 .././front/setup.php:77
-#: .././front/setup.php:92
+#: .././admin/setup.php:164 .././admin/setup.php:180 .././front/setup.php:79
+#: .././front/setup.php:95
 msgid "Unique Views"
 msgstr ""
 
-#: .././admin/setup.php:164 .././admin/setup.php:179
+#: .././admin/setup.php:165 .././admin/setup.php:181
 #: .././admin/widgets.php:130 .././admin/widgets.php:820
-#: .././front/setup.php:78 .././front/setup.php:93 .././tools/gapi.php:355
+#: .././front/setup.php:80 .././front/setup.php:96 .././tools/gapi.php:355
 msgid "Users"
 msgstr ""
 
-#: .././admin/setup.php:165 .././admin/widgets.php:131 .././front/setup.php:79
+#: .././admin/setup.php:166 .././admin/widgets.php:131 .././front/setup.php:81
 msgid "Organic"
 msgstr "عضوي"
 
-#: .././admin/setup.php:166 .././admin/setup.php:180
+#: .././admin/setup.php:167 .././admin/setup.php:182
 #: .././admin/widgets.php:132 .././admin/widgets.php:824
-#: .././front/setup.php:80 .././front/setup.php:94 .././tools/gapi.php:358
+#: .././front/setup.php:82 .././front/setup.php:97 .././tools/gapi.php:358
 msgid "Page Views"
 msgstr "مشاهدات الصفحة"
 
-#: .././admin/setup.php:167 .././admin/setup.php:181
+#: .././admin/setup.php:168 .././admin/setup.php:183
 #: .././admin/widgets.php:133 .././admin/widgets.php:828
-#: .././front/setup.php:81 .././front/setup.php:95 .././tools/gapi.php:361
+#: .././front/setup.php:83 .././front/setup.php:98 .././tools/gapi.php:361
 msgid "Bounce Rate"
 msgstr "نسبة القفز"
 
-#: .././admin/setup.php:168 .././admin/widgets.php:134 .././front/setup.php:82
+#: .././admin/setup.php:169 .././admin/widgets.php:134 .././front/setup.php:84
 msgid "Location"
 msgstr ""
 
-#: .././admin/setup.php:169 .././admin/widgets.php:136 .././front/setup.php:83
+#: .././admin/setup.php:170 .././admin/widgets.php:136 .././front/setup.php:85
 #: .././tools/gapi.php:492
 msgid "Referrers"
 msgstr ""
 
-#: .././admin/setup.php:170 .././admin/widgets.php:137 .././front/setup.php:84
+#: .././admin/setup.php:171 .././admin/widgets.php:137 .././front/setup.php:86
 #: .././tools/gapi.php:525
 msgid "Searches"
 msgstr ""
 
-#: .././admin/setup.php:171 .././admin/widgets.php:138 .././front/setup.php:85
+#: .././admin/setup.php:172 .././admin/widgets.php:138 .././front/setup.php:87
 msgid "Traffic Details"
 msgstr ""
 
-#: .././admin/setup.php:173 .././admin/widgets.php:495
+#: .././admin/setup.php:175 .././admin/widgets.php:495
 #: .././admin/widgets.php:580 .././admin/widgets.php:747
-#: .././admin/widgets.php:851 .././front/setup.php:87
+#: .././admin/widgets.php:851 .././front/setup.php:90
 msgid "A JavaScript Error is blocking plugin resources!"
 msgstr ""
 
-#: .././admin/setup.php:174 .././admin/widgets.php:671 .././front/setup.php:88
+#: .././admin/setup.php:176 .././admin/widgets.php:671 .././front/setup.php:91
 msgid "Traffic Mediums"
 msgstr ""
 
-#: .././admin/setup.php:175 .././admin/widgets.php:686 .././front/setup.php:89
+#: .././admin/setup.php:177 .././admin/widgets.php:686 .././front/setup.php:92
 msgid "Visitor Type"
 msgstr ""
 
-#: .././admin/setup.php:176 .././admin/widgets.php:701 .././front/setup.php:90
+#: .././admin/setup.php:178 .././admin/widgets.php:701 .././front/setup.php:93
 msgid "Social Networks"
 msgstr ""
 
-#: .././admin/setup.php:177 .././admin/widgets.php:716 .././front/setup.php:91
+#: .././admin/setup.php:179 .././admin/widgets.php:716 .././front/setup.php:94
 msgid "Search Engines"
 msgstr ""
 
-#: .././admin/setup.php:182 .././admin/widgets.php:832 .././front/setup.php:96
+#: .././admin/setup.php:184 .././admin/widgets.php:832 .././front/setup.php:99
 msgid "Organic Search"
 msgstr ""
 
-#: .././admin/setup.php:183 .././admin/widgets.php:836 .././front/setup.php:97
+#: .././admin/setup.php:185 .././admin/widgets.php:836
+#: .././front/setup.php:100
 msgid "Pages/Session"
 msgstr ""
 
-#: .././admin/setup.php:184 .././admin/widgets.php:507
+#: .././admin/setup.php:186 .././admin/widgets.php:507
 #: .././admin/widgets.php:521 .././admin/widgets.php:531
 #: .././admin/widgets.php:592 .././admin/widgets.php:606
 #: .././admin/widgets.php:620 .././admin/widgets.php:634
 #: .././admin/widgets.php:648 .././admin/widgets.php:658
 #: .././admin/widgets.php:760 .././admin/widgets.php:772
 #: .././admin/widgets.php:863 .././admin/widgets.php:877
-#: .././admin/widgets.php:887 .././front/setup.php:98
+#: .././admin/widgets.php:887 .././front/setup.php:101
 msgid "Invalid response, more details in JavaScript Console (F12)."
 msgstr ""
 
-#: .././admin/setup.php:185 .././front/setup.php:99
+#: .././admin/setup.php:187 .././front/setup.php:102
 msgid "Not enough data collected"
 msgstr ""
 
-#: .././admin/setup.php:186 .././admin/widgets.php:512
+#: .././admin/setup.php:188 .././admin/widgets.php:512
 #: .././admin/widgets.php:526 .././admin/widgets.php:597
 #: .././admin/widgets.php:611 .././admin/widgets.php:625
 #: .././admin/widgets.php:639 .././admin/widgets.php:653
 #: .././admin/widgets.php:765 .././admin/widgets.php:767
 #: .././admin/widgets.php:868 .././admin/widgets.php:882
-#: .././front/setup.php:100 .././front/widgets.php:100
+#: .././front/setup.php:103 .././front/widgets.php:100
 msgid "This report is unavailable"
 msgstr ""
 
-#: .././admin/setup.php:187 .././front/setup.php:101
+#: .././admin/setup.php:189 .././front/setup.php:104
 msgid "report generated by"
 msgstr ""
 
-#: .././admin/setup.php:216
+#: .././admin/setup.php:220
 msgid "Settings"
 msgstr "الاعدادات"
 
-#: .././admin/setup.php:228
+#: .././admin/setup.php:232
 #, php-format
 msgid "Google Analytics Dashboard for WP has been updated to version %s."
 msgstr ""
 
-#: .././admin/setup.php:228
+#: .././admin/setup.php:232
 #, php-format
 msgid "For details, check out %1$s and %2$s."
 msgstr ""
 
-#: .././admin/setup.php:228
+#: .././admin/setup.php:232
 msgid "the documentation page"
 msgstr ""
 
-#: .././admin/setup.php:228
+#: .././admin/setup.php:232
 msgid "the plugin&#39;s settings page"
 msgstr ""
 
@@ -713,11 +712,6 @@ msgstr "اعرف أكثر!"
 #: .././admin/widgets.php:119
 msgid "Real-Time"
 msgstr "الوقت الحقيقي"
-
-#: .././admin/widgets.php:123 .././front/widgets.php:67
-#: .././front/widgets.php:159
-msgid "Last 14 Days"
-msgstr "أخر ١٤ يوم"
 
 #: .././admin/widgets.php:129 .././admin/widgets.php:816
 #: .././front/widgets.php:36 .././tools/gapi.php:370 .././tools/gapi.php:492
@@ -880,6 +874,18 @@ msgstr ""
 #: .././tools/gapi.php:655
 msgid "Type"
 msgstr "النوع"
+
+#~ msgid "Last 7 Days"
+#~ msgstr "اخر ٧ ايام"
+
+#~ msgid "Last 14 Days"
+#~ msgstr "أخر ١٤ يوم"
+
+#~ msgid "Last 30 Days"
+#~ msgstr "اخر ٣٠ يوم"
+
+#~ msgid "Last 90 Days"
+#~ msgstr "أخر ٩٠ يوم"
 
 #~ msgid "Support & Reviews"
 #~ msgstr "الدعم والتقييم"

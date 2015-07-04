@@ -1259,6 +1259,8 @@ final class GADWP_Settings {
 	}
 
 	public static function output_sidebar() {
+		global $wp_version;
+
 		$gadwp = GADWP();
 		?>
                                                         </div>
@@ -1352,6 +1354,8 @@ final class GADWP_Settings {
                                         </div>
 <?php
 		//Dismiss the admin update notice
-		delete_option('gadwp_got_updated');
+		if ( version_compare( $wp_version, '4.2', '<' ) && current_user_can('manage_options') ) {
+			delete_option('gadwp_got_updated');
+		}
 	}
 }

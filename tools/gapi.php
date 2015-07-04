@@ -35,7 +35,10 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			if ( function_exists( 'curl_version' ) ) {
 				$curlversion = curl_version();
 				if ( isset( $curlversion['version'] ) && ( version_compare( PHP_VERSION, '5.3.0' ) >= 0 ) && version_compare( $curlversion['version'], '7.10.8' ) >= 0 && defined( 'GADWP_IP_VERSION' ) && GADWP_IP_VERSION ) {
-					$config->setClassConfig( 'Google_IO_Curl', array( 'options' => array( CURLOPT_IPRESOLVE => GADWP_IP_VERSION ) ) ); // Force CURL_IPRESOLVE_V4 or CURL_IPRESOLVE_V6
+					$config->setClassConfig( 'Google_IO_Curl', array( 'options' => array( CURLOPT_IPRESOLVE => GADWP_IP_VERSION ) ) ); // Force
+					                                                                                                                   // CURL_IPRESOLVE_V4
+					                                                                                                                   // or
+					                                                                                                                   // CURL_IPRESOLVE_V6
 				}
 			}
 			$this->client = new Google_Client( $config );
@@ -373,10 +376,14 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			if ( $from == "today" || $from == "yesterday" ) {
 				$dimensions = 'ga:hour';
 				$dayorhour = __( "Hour", 'ga-dash' );
-			} else {
-				$dimensions = 'ga:date,ga:dayOfWeekName';
-				$dayorhour = __( "Date", 'ga-dash' );
-			}
+			} else
+				if ( $from == "365daysAgo" ) {
+					$dimensions = 'ga:yearMonth, ga:month';
+					$dayorhour = __( "Date", 'ga-dash' );
+				} else {
+					$dimensions = 'ga:date,ga:dayOfWeekName';
+					$dayorhour = __( "Date", 'ga-dash' );
+				}
 			$options = array( 'dimensions' => $dimensions, 'quotaUser' => $this->managequota . 'p' . $projectId );
 			if ( $filter ) {
 				$options['filters'] = 'ga:pagePath==' . $filter;
@@ -391,9 +398,13 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				foreach ( $data->getRows() as $row ) {
 					$gadwp_data[] = array( (int) $row[0] . ':00', round( $row[1], 2 ) );
 				}
-			} else {
+			} else if ( $from == "365daysAgo" ) {
 				foreach ( $data->getRows() as $row ) {
-					$gadwp_data[] = array( esc_html( ucfirst( __( $row[1] ) ) ) . ',' . esc_html( substr_replace( substr_replace( $row[0], "-", 4, 0 ), "-", 7, 0 ) ), round( $row[2], 2 ) );
+					$gadwp_data[] = array( date('F', mktime(0, 0, 0, $row[1], 10)) . ', ' . esc_html( substr_replace( $row[0], "-", 4, 0 ) ), round( $row[2], 2 ) );
+				}
+			}else{
+				foreach ( $data->getRows() as $row ) {
+					$gadwp_data[] = array( esc_html( ucfirst( __( $row[1] ) ) ) . ', ' . esc_html( substr_replace( substr_replace( $row[0], "-", 4, 0 ), "-", 7, 0 ) ), round( $row[2], 2 ) );
 				}
 			}
 			return $gadwp_data;

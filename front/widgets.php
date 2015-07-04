@@ -61,13 +61,13 @@ final class GADWP_Frontend_Widget extends WP_Widget {
 		$periodtext = "";
 		switch ( $instance['period'] ) {
 			case '7daysAgo' :
-				$periodtext = __( 'Last 7 Days', 'ga-dash' );
+				$periodtext = sprintf( __( 'Last %d Days', 'ga-dash' ), 7 );
 				break;
 			case '14daysAgo' :
-				$periodtext = __( 'Last 14 Days', 'ga-dash' );
+				$periodtext = sprintf( __( 'Last %d Days', 'ga-dash' ), 14 );
 				break;
 			case '30daysAgo' :
-				$periodtext = __( 'Last 30 Days', 'ga-dash' );
+				$periodtext = sprintf( __( 'Last %d Days', 'ga-dash' ), 30 );
 				break;
 			default :
 				$periodtext = "";
@@ -140,30 +140,30 @@ final class GADWP_Frontend_Widget extends WP_Widget {
 		$anonim = ( isset( $instance['anonim'] ) ? $instance['anonim'] : 0 );
 		/* @formatter:off */
 		?>
-		<p>
-		    <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( "Title:",'ga-dash' ); ?></label> <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $widget_title ); ?>">
-		</p>
-		<p>
-		    <label for="<?php echo $this->get_field_id( 'display' ); ?>"><?php _e( "Display:",'ga-dash' ); ?></label> <select id="<?php echo $this->get_field_id('display'); ?>" class="widefat" name="<?php   echo $this->get_field_name( 'display' ); ?>">
-		        <option value="1" <?php selected( $display, 1 ); ?>><?php _e('Chart & Totals', 'ga-dash');?></option>
-		        <option value="2" <?php selected( $display, 2 ); ?>><?php _e('Chart', 'ga-dash');?></option>
-		        <option value="3" <?php selected( $display, 3 ); ?>><?php _e('Totals', 'ga-dash');?></option>
-		    </select>
-		</p>
-		<p>
-		    <label for="<?php echo $this->get_field_id( 'anonim' ); ?>"><?php _e( "Anonymize stats:",'ga-dash' ); ?></label> <input class="widefat" id="<?php echo $this->get_field_id( 'anonim' ); ?>" name="<?php echo $this->get_field_name( 'anonim' ); ?>" type="checkbox" <?php checked( $anonim, 1 ); ?> value="1">
-		</p>
-		<p>
-		    <label for="<?php echo $this->get_field_id( 'period' ); ?>"><?php _e( "Stats for:",'ga-dash' ); ?></label> <select id="<?php echo $this->get_field_id('period'); ?>" class="widefat" name="<?php   echo $this->get_field_name( 'period' ); ?>">
-		        <option value="7daysAgo" <?php selected( $period, '7daysAgo' ); ?>><?php _e('Last 7 Days', 'ga-dash');?></option>
-		        <option value="14daysAgo" <?php selected( $period, '14daysAgo' ); ?>><?php _e('Last 14 Days', 'ga-dash');?></option>
-		        <option value="30daysAgo" <?php selected( $period, '30daysAgo' ); ?>><?php _e('Last 30 Days', 'ga-dash');?></option>
-		    </select>
-		</p>
-		<p>
-		    <label for="<?php echo $this->get_field_id( 'give_credits' ); ?>"><?php _e( "Give credits:",'ga-dash' ); ?></label> <input class="widefat" id="<?php echo $this->get_field_id( 'give_credits' ); ?>" name="<?php echo $this->get_field_name( 'give_credits' ); ?>" type="checkbox" <?php checked( $give_credits, 1 ); ?> value="1">
-		</p>
-		<?php
+<p>
+    <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( "Title:",'ga-dash' ); ?></label> <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $widget_title ); ?>">
+</p>
+<p>
+    <label for="<?php echo $this->get_field_id( 'display' ); ?>"><?php _e( "Display:",'ga-dash' ); ?></label> <select id="<?php echo $this->get_field_id('display'); ?>" class="widefat" name="<?php   echo $this->get_field_name( 'display' ); ?>">
+        <option value="1" <?php selected( $display, 1 ); ?>><?php _e('Chart & Totals', 'ga-dash');?></option>
+        <option value="2" <?php selected( $display, 2 ); ?>><?php _e('Chart', 'ga-dash');?></option>
+        <option value="3" <?php selected( $display, 3 ); ?>><?php _e('Totals', 'ga-dash');?></option>
+    </select>
+</p>
+<p>
+    <label for="<?php echo $this->get_field_id( 'anonim' ); ?>"><?php _e( "Anonymize stats:",'ga-dash' ); ?></label> <input class="widefat" id="<?php echo $this->get_field_id( 'anonim' ); ?>" name="<?php echo $this->get_field_name( 'anonim' ); ?>" type="checkbox" <?php checked( $anonim, 1 ); ?> value="1">
+</p>
+<p>
+    <label for="<?php echo $this->get_field_id( 'period' ); ?>"><?php _e( "Stats for:",'ga-dash' ); ?></label> <select id="<?php echo $this->get_field_id('period'); ?>" class="widefat" name="<?php   echo $this->get_field_name( 'period' ); ?>">
+        <option value="7daysAgo" <?php selected( $period, '7daysAgo' ); ?>><?php printf( __('Last %d Days', 'ga-dash'), 7 );?></option>
+        <option value="14daysAgo" <?php selected( $period, '14daysAgo' ); ?>><?php printf( __('Last %d Days', 'ga-dash'), 14 );?></option>
+        <option value="30daysAgo" <?php selected( $period, '30daysAgo' ); ?>><?php printf( __('Last %d Days', 'ga-dash'), 30 );?></option>
+    </select>
+</p>
+<p>
+    <label for="<?php echo $this->get_field_id( 'give_credits' ); ?>"><?php _e( "Give credits:",'ga-dash' ); ?></label> <input class="widefat" id="<?php echo $this->get_field_id( 'give_credits' ); ?>" name="<?php echo $this->get_field_name( 'give_credits' ); ?>" type="checkbox" <?php checked( $give_credits, 1 ); ?> value="1">
+</p>
+<?php
 		/* @formatter:on */
 	}
 
