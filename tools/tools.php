@@ -111,7 +111,7 @@ if ( ! class_exists( 'GADWP_Tools' ) ) {
 
 		public static function set_cookie( $name, $value ) {
 			$name = 'gadwp_' . $name;
-			setcookie( $name, $value, time() + 60 * 60 * 24 * 365 * 10, '/', COOKIE_DOMAIN, false );
+			setcookie( $name, $value, time() + 60 * 60 * 24 * 365 * 10, '/');
 		}
 
 		public static function get_cookie( $name ) {

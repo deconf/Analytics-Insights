@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: Google Analytics Dashboard for WP 4.7.2\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/google-analytics-"
 "dashboard-for-wp\n"
-"POT-Creation-Date: 2015-07-05 16:08+0300\n"
-"PO-Revision-Date: 2015-07-05 16:08+0300\n"
+"POT-Creation-Date: 2015-07-05 18:34+0300\n"
+"PO-Revision-Date: 2015-07-05 18:34+0300\n"
 "Last-Translator: Alin Marcu <admin@deconf.com>\n"
 "Language-Team: I love WordPress <info@ilovewp.net>\n"
 "Language: hu_HU\n"
@@ -12,7 +12,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.2\n"
-"X-Poedit-KeywordsList: __;_e;_n;_x;_ex;_nx;esc_attr__;esc_attr_e;esc_attr_x;esc_html__;esc_html_e;esc_html_x;_n_noop;_nx_noop\n"
+"X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
+"__:1;_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;__ngettext_noop:1,2;"
+"_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
+"esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
+"esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -540,18 +544,18 @@ msgstr "Weblap beállítások"
 msgid "Tracking Code"
 msgstr "Követőkód"
 
-#: .././admin/setup.php:159 .././admin/widgets.php:117 .././front/setup.php:71
+#: .././admin/setup.php:159 .././admin/widgets.php:113 .././front/setup.php:71
 msgid "Today"
 msgstr "Ma"
 
-#: .././admin/setup.php:160 .././admin/widgets.php:118 .././front/setup.php:72
+#: .././admin/setup.php:160 .././admin/widgets.php:114 .././front/setup.php:72
 msgid "Yesterday"
 msgstr "Tegnap"
 
 #: .././admin/setup.php:161 .././admin/setup.php:162 .././admin/setup.php:163
-#: .././admin/setup.php:164 .././admin/widgets.php:119
-#: .././admin/widgets.php:120 .././admin/widgets.php:121
-#: .././admin/widgets.php:122 .././front/setup.php:73 .././front/setup.php:74
+#: .././admin/setup.php:164 .././admin/widgets.php:115
+#: .././admin/widgets.php:116 .././admin/widgets.php:117
+#: .././admin/widgets.php:118 .././front/setup.php:73 .././front/setup.php:74
 #: .././front/setup.php:75 .././front/setup.php:76 .././front/widgets.php:64
 #: .././front/widgets.php:67 .././front/widgets.php:70
 #: .././front/widgets.php:158 .././front/widgets.php:159
@@ -561,17 +565,19 @@ msgid "Last %d Days"
 msgstr "Elmúlt %d nap"
 
 #: .././admin/setup.php:165 .././admin/setup.php:166
-#: .././admin/widgets.php:123 .././admin/widgets.php:124
+#: .././admin/widgets.php:119 .././admin/widgets.php:120
 #: .././front/setup.php:77 .././front/setup.php:78
 #, php-format
 msgid "%s Year"
-msgstr ""
+msgid_plural "%s Years"
+msgstr[0] ""
+msgstr[1] ""
 
-#: .././admin/setup.php:165 .././admin/widgets.php:123 .././front/setup.php:77
+#: .././admin/setup.php:165 .././admin/widgets.php:119 .././front/setup.php:77
 msgid "One"
 msgstr ""
 
-#: .././admin/setup.php:166 .././admin/widgets.php:124 .././front/setup.php:78
+#: .././admin/setup.php:166 .././admin/widgets.php:120 .././front/setup.php:78
 msgid "Three"
 msgstr ""
 
@@ -581,85 +587,85 @@ msgid "Unique Views"
 msgstr "Egyedi megtekintések"
 
 #: .././admin/setup.php:170 .././admin/setup.php:186
-#: .././admin/widgets.php:130 .././admin/widgets.php:830
+#: .././admin/widgets.php:126 .././admin/widgets.php:826
 #: .././front/setup.php:82 .././front/setup.php:98 .././tools/gapi.php:358
 msgid "Users"
 msgstr "Felhasználók"
 
-#: .././admin/setup.php:171 .././admin/widgets.php:131 .././front/setup.php:83
+#: .././admin/setup.php:171 .././admin/widgets.php:127 .././front/setup.php:83
 msgid "Organic"
 msgstr "Organikus"
 
 #: .././admin/setup.php:172 .././admin/setup.php:187
-#: .././admin/widgets.php:132 .././admin/widgets.php:834
+#: .././admin/widgets.php:128 .././admin/widgets.php:830
 #: .././front/setup.php:84 .././front/setup.php:99 .././tools/gapi.php:361
 msgid "Page Views"
 msgstr "Oldal megtekintések"
 
 #: .././admin/setup.php:173 .././admin/setup.php:188
-#: .././admin/widgets.php:133 .././admin/widgets.php:838
+#: .././admin/widgets.php:129 .././admin/widgets.php:834
 #: .././front/setup.php:85 .././front/setup.php:100 .././tools/gapi.php:364
 msgid "Bounce Rate"
 msgstr "Visszafordulási arány"
 
-#: .././admin/setup.php:174 .././admin/widgets.php:134 .././front/setup.php:86
+#: .././admin/setup.php:174 .././admin/widgets.php:130 .././front/setup.php:86
 msgid "Location"
 msgstr "Hely"
 
-#: .././admin/setup.php:175 .././admin/widgets.php:136 .././front/setup.php:87
+#: .././admin/setup.php:175 .././admin/widgets.php:132 .././front/setup.php:87
 #: .././tools/gapi.php:503
 msgid "Referrers"
 msgstr "Hivatkozók"
 
-#: .././admin/setup.php:176 .././admin/widgets.php:137 .././front/setup.php:88
+#: .././admin/setup.php:176 .././admin/widgets.php:133 .././front/setup.php:88
 #: .././tools/gapi.php:536
 msgid "Searches"
 msgstr "Keresések"
 
-#: .././admin/setup.php:177 .././admin/widgets.php:138 .././front/setup.php:89
+#: .././admin/setup.php:177 .././admin/widgets.php:134 .././front/setup.php:89
 msgid "Traffic Details"
 msgstr "Forgalmi adatok"
 
-#: .././admin/setup.php:180 .././admin/widgets.php:505
-#: .././admin/widgets.php:590 .././admin/widgets.php:757
-#: .././admin/widgets.php:861 .././front/setup.php:92
+#: .././admin/setup.php:180 .././admin/widgets.php:501
+#: .././admin/widgets.php:586 .././admin/widgets.php:753
+#: .././admin/widgets.php:857 .././front/setup.php:92
 msgid "A JavaScript Error is blocking plugin resources!"
 msgstr "Egy JavaScript hiba blokkolja a bővítmény forrásait!"
 
-#: .././admin/setup.php:181 .././admin/widgets.php:681 .././front/setup.php:93
+#: .././admin/setup.php:181 .././admin/widgets.php:677 .././front/setup.php:93
 msgid "Traffic Mediums"
 msgstr "Forgalmi közeg"
 
-#: .././admin/setup.php:182 .././admin/widgets.php:696 .././front/setup.php:94
+#: .././admin/setup.php:182 .././admin/widgets.php:692 .././front/setup.php:94
 msgid "Visitor Type"
 msgstr "Látogató típus"
 
-#: .././admin/setup.php:183 .././admin/widgets.php:711 .././front/setup.php:95
+#: .././admin/setup.php:183 .././admin/widgets.php:707 .././front/setup.php:95
 msgid "Social Networks"
 msgstr "Közösségi hálózatok"
 
-#: .././admin/setup.php:184 .././admin/widgets.php:726 .././front/setup.php:96
+#: .././admin/setup.php:184 .././admin/widgets.php:722 .././front/setup.php:96
 msgid "Search Engines"
 msgstr "Keresőmotorok"
 
-#: .././admin/setup.php:189 .././admin/widgets.php:842
+#: .././admin/setup.php:189 .././admin/widgets.php:838
 #: .././front/setup.php:101
 msgid "Organic Search"
 msgstr "Organikus keresés"
 
-#: .././admin/setup.php:190 .././admin/widgets.php:846
+#: .././admin/setup.php:190 .././admin/widgets.php:842
 #: .././front/setup.php:102
 msgid "Pages/Session"
 msgstr "Oldal / munkamenet"
 
-#: .././admin/setup.php:191 .././admin/widgets.php:517
-#: .././admin/widgets.php:531 .././admin/widgets.php:541
-#: .././admin/widgets.php:602 .././admin/widgets.php:616
-#: .././admin/widgets.php:630 .././admin/widgets.php:644
-#: .././admin/widgets.php:658 .././admin/widgets.php:668
-#: .././admin/widgets.php:770 .././admin/widgets.php:782
-#: .././admin/widgets.php:873 .././admin/widgets.php:887
-#: .././admin/widgets.php:897 .././front/setup.php:103
+#: .././admin/setup.php:191 .././admin/widgets.php:513
+#: .././admin/widgets.php:527 .././admin/widgets.php:537
+#: .././admin/widgets.php:598 .././admin/widgets.php:612
+#: .././admin/widgets.php:626 .././admin/widgets.php:640
+#: .././admin/widgets.php:654 .././admin/widgets.php:664
+#: .././admin/widgets.php:766 .././admin/widgets.php:778
+#: .././admin/widgets.php:869 .././admin/widgets.php:883
+#: .././admin/widgets.php:893 .././front/setup.php:103
 msgid "Invalid response, more details in JavaScript Console (F12)."
 msgstr "Érvénytelen válasz, további részletek a JavaScript Konzolban (F12)."
 
@@ -667,12 +673,12 @@ msgstr "Érvénytelen válasz, további részletek a JavaScript Konzolban (F12).
 msgid "Not enough data collected"
 msgstr "Nincs elegendő összegyűjtött adat"
 
-#: .././admin/setup.php:193 .././admin/widgets.php:522
-#: .././admin/widgets.php:536 .././admin/widgets.php:607
-#: .././admin/widgets.php:621 .././admin/widgets.php:635
-#: .././admin/widgets.php:649 .././admin/widgets.php:663
-#: .././admin/widgets.php:775 .././admin/widgets.php:777
-#: .././admin/widgets.php:878 .././admin/widgets.php:892
+#: .././admin/setup.php:193 .././admin/widgets.php:518
+#: .././admin/widgets.php:532 .././admin/widgets.php:603
+#: .././admin/widgets.php:617 .././admin/widgets.php:631
+#: .././admin/widgets.php:645 .././admin/widgets.php:659
+#: .././admin/widgets.php:771 .././admin/widgets.php:773
+#: .././admin/widgets.php:874 .././admin/widgets.php:888
 #: .././front/setup.php:105 .././front/widgets.php:100
 msgid "This report is unavailable"
 msgstr "Ez a jelentés nem elérhető"
@@ -741,53 +747,53 @@ msgstr ""
 msgid "Find out more!"
 msgstr "Tudjon meg többet!"
 
-#: .././admin/widgets.php:116
+#: .././admin/widgets.php:112
 msgid "Real-Time"
 msgstr "Valós idejű"
 
-#: .././admin/widgets.php:129 .././admin/widgets.php:826
+#: .././admin/widgets.php:125 .././admin/widgets.php:822
 #: .././front/widgets.php:36 .././tools/gapi.php:373 .././tools/gapi.php:503
 #: .././tools/gapi.php:536 .././tools/gapi.php:586 .././tools/gapi.php:666
 #: .././tools/gapi.php:695
 msgid "Sessions"
 msgstr "Munkamenetek"
 
-#: .././admin/widgets.php:135 .././tools/gapi.php:471
+#: .././admin/widgets.php:131 .././tools/gapi.php:471
 msgid "Pages"
 msgstr "Oldalak"
 
-#: .././admin/widgets.php:236 .././admin/widgets.php:478
+#: .././admin/widgets.php:232 .././admin/widgets.php:474
 msgid "REFERRAL"
 msgstr "HIVATKOZÓ"
 
-#: .././admin/widgets.php:240 .././admin/widgets.php:479
+#: .././admin/widgets.php:236 .././admin/widgets.php:475
 msgid "ORGANIC"
 msgstr "ORGANIKUS"
 
-#: .././admin/widgets.php:244 .././admin/widgets.php:364
-#: .././admin/widgets.php:480
+#: .././admin/widgets.php:240 .././admin/widgets.php:360
+#: .././admin/widgets.php:476
 msgid "SOCIAL"
 msgstr "KÖZÖSSÉGI"
 
-#: .././admin/widgets.php:248 .././admin/widgets.php:367
-#: .././admin/widgets.php:481
+#: .././admin/widgets.php:244 .././admin/widgets.php:363
+#: .././admin/widgets.php:477
 msgid "CAMPAIGN"
 msgstr "KAMPÁNY"
 
-#: .././admin/widgets.php:252 .././admin/widgets.php:370
-#: .././admin/widgets.php:484
+#: .././admin/widgets.php:248 .././admin/widgets.php:366
+#: .././admin/widgets.php:480
 msgid "DIRECT"
 msgstr "KÖZVETLEN"
 
-#: .././admin/widgets.php:256 .././admin/widgets.php:485
+#: .././admin/widgets.php:252 .././admin/widgets.php:481
 msgid "NEW"
 msgstr "ÚJ"
 
-#: .././admin/widgets.php:358
+#: .././admin/widgets.php:354
 msgid "REFERRALS"
 msgstr "HIVATKOZÓK"
 
-#: .././admin/widgets.php:361
+#: .././admin/widgets.php:357
 msgid "KEYWORDS"
 msgstr "KULCSSZAVAK"
 

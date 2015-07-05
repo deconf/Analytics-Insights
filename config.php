@@ -27,6 +27,7 @@ if (! class_exists('GADWP_Config')) {
         {
             // get plugin options
             $this->get_plugin_options();
+			$this->set_default_report();
             $this->access = array_map(array(
                 $this,
                 'map'
@@ -36,6 +37,15 @@ if (! class_exists('GADWP_Config')) {
                 'automatic_update'
             ), 10, 2);
         }
+
+		private function set_default_report(){
+			if ( isset( $_REQUEST['period'] ) ) {
+				GADWP_Tools::set_cookie( 'default_dimension', $_REQUEST['period'] );
+			}
+			if ( isset( $_REQUEST['query'] ) ) {
+				GADWP_Tools::set_cookie( 'default_metric', $_REQUEST['query'] );
+			}
+		}
 
         public function get_major_version($version)
         {

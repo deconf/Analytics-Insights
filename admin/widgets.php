@@ -97,19 +97,15 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 			}
 			if ( isset( $_REQUEST['query'] ) ) {
 				$query = $_REQUEST['query'];
-				GADWP_Tools::set_cookie( 'default_metric', $query );
-				$this->gadwp->config->set_plugin_options();
 			} else {
 				$default_metric = GADWP_Tools::get_cookie( 'default_metric' );
-				$query = $default_metric ? esc_html( $default_metric ) : 'sessions';
+				$query = $default_metric ? $default_metric : 'sessions';
 			}
 			if ( isset( $_REQUEST['period'] ) ) {
 				$period = $_REQUEST['period'];
-				GADWP_Tools::set_cookie( 'default_dimension', $period );
-				$this->gadwp->config->set_plugin_options();
 			} else {
 				$default_dimension = GADWP_Tools::get_cookie( 'default_dimension' );
-				$period = $default_dimension ? esc_html( $default_dimension ) : '30daysAgo';
+				$period = $default_dimension ? $default_dimension : '30daysAgo';
 			}
 			?>
 				<select id="ga_dash_period" name="period" onchange="this.form.submit()">

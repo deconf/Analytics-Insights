@@ -86,7 +86,7 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 
 			if ( get_transient( 'ga_dash_gapi_errors' ) ) {
 				$ed_bubble = '!';
-			}else{
+			} else {
 				$ed_bubble = '';
 			}
 
@@ -232,11 +232,11 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 		 */
 		function admin_notice() {
 			if ( get_option( 'gadwp_got_updated' ) ) :
-			?>
+				?>
 				<div id="gadwp-notice" class="notice is-dismissible">
-				    <p><?php echo sprintf( __('Google Analytics Dashboard for WP has been updated to version %s.', 'ga-dash' ), GADWP_CURRENT_VERSION).' '.sprintf(__('For details, check out %1$s and %2$s.'),sprintf(' <a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_notice&utm_medium=link&utm_content=release_notice&utm_campaign=gadwp">%s</a> ', __('the documentation page', 'ga-dash') ), sprintf(' <a href="%1$s">%2$s</a>', esc_url( get_admin_url( null, 'admin.php?page=gadash_settings' ) ), __('the plugin&#39;s settings page', 'ga-dash') )); ?></p>
+				    <p><?php echo sprintf( __('Google Analytics Dashboard for WP has been updated to version %s.', 'ga-dash' ), GADWP_CURRENT_VERSION).' '.sprintf( __('For details, check out %1$s and %2$s.'), sprintf(' <a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_notice&utm_medium=link&utm_content=release_notice&utm_campaign=gadwp">%s</a> ', __('the documentation page', 'ga-dash') ), sprintf(' <a href="%1$s">%2$s</a>', esc_url( get_admin_url( null, 'admin.php?page=gadash_settings' ) ), __('the plugin&#39;s settings page', 'ga-dash') ) ); ?></p>
 				</div>
-			<?php
+				<?php
 			endif;
 		}
 	}
