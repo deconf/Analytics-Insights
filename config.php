@@ -311,12 +311,21 @@ if (! class_exists('GADWP_Config')) {
                 $this->options['backend_item_reports'] = 1;
                 $flag = true;
             }
+<<<<<<< HEAD
+            if ( isset($this->options['ga_dash_default_metric'])) { //v4.8.1
+            	unset($this->options['ga_dash_default_metric']);
+            	$flag = true;
+            }
+            if ( isset($this->options['ga_dash_default_dimension'])) { //v4.8.1
+            	unset($this->options['ga_dash_default_dimension']);
+=======
             if (! isset($this->options['gadwp_ir_default_metric'])) { //v4.8.1
             	$this->options['gadwp_ir_default_metric'] = 'uniquePageviews';
             	$flag = true;
             }
             if (! isset($this->options['gadwp_ir_default_dimension'])) { //v4.8.1
             	$this->options['gadwp_ir_default_dimension'] = '30daysAgo';
+>>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
             	$flag = true;
             }
             if (isset($this->options['item_reports'])) { //v4.8

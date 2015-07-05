@@ -112,8 +112,7 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 				$period = $default_dimension ? esc_html( $default_dimension ) : '30daysAgo';
 			}
 			?>
-
-	<select id="ga_dash_period" name="period" onchange="this.form.submit()">
+				<select id="ga_dash_period" name="period" onchange="this.form.submit()">
         <option value="realtime" <?php selected ( "realtime", $period, true ); ?>><?php _e("Real-Time",'ga-dash'); ?></option>
         <option value="today" <?php selected ( "today", $period, true ); ?>><?php _e("Today",'ga-dash'); ?></option>
         <option value="yesterday" <?php selected ( "yesterday", $period, true ); ?>><?php _e("Yesterday",'ga-dash'); ?></option>
@@ -121,10 +120,16 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
         <option value="14daysAgo" <?php selected ( "14daysAgo", $period, true ); ?>><?php printf( __( "Last %d Days", 'ga-dash' ), 14 ); ?></option>
         <option value="30daysAgo" <?php selected ( "30daysAgo", $period, true ); ?>><?php printf( __( "Last %d Days", 'ga-dash' ), 30 ); ?></option>
         <option value="90daysAgo" <?php selected ( "90daysAgo", $period, true ); ?>><?php printf( __( "Last %d Days", 'ga-dash' ), 90 ); ?></option>
+<<<<<<< HEAD
+        <option value="365daysAgo" <?php selected ( "365daysAgo", $period, true ); ?>><?php printf( _n( "%s Year", "%s Years", 1, 'ga-dash' ), __('One', 'ga-dash') ); ?></option>
+        <option value="1095daysAgo" <?php selected ( "1095daysAgo", $period, true ); ?>><?php printf( _n( "%s Year", "%s Years", 3, 'ga-dash' ), __('Three', 'ga-dash') ); ?></option>
+=======
         <option value="365daysAgo" <?php selected ( "365daysAgo", $period, true ); ?>><?php printf( __( "Last %d Days", 'ga-dash' ), 365 ); ?></option>
+>>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
     </select>
+
 				<?php if ($period != 'realtime') {?>
-				<select id="ga_dash_query" name="query" onchange="this.form.submit()">
+					<select id="ga_dash_query" name="query" onchange="this.form.submit()">
         <option value="sessions" <?php selected ( "sessions", $query, true ); ?>><?php _e("Sessions",'ga-dash'); ?></option>
         <option value="users" <?php selected ( "users", $query, true ); ?>><?php _e("Users",'ga-dash'); ?></option>
         <option value="organicSearches" <?php selected ( "organicSearches", $query, true ); ?>><?php _e("Organic",'ga-dash'); ?></option>
@@ -168,6 +173,14 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 					break;
 				case '365daysAgo' :
 					$from = '365daysAgo';
+<<<<<<< HEAD
+					$to = 'yesterday';
+					$haxis = 5;
+					break;
+				case '1095daysAgo' :
+					$from = '1095daysAgo';
+=======
+>>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 					$to = 'yesterday';
 					$haxis = 5;
 					break;
