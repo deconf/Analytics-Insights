@@ -128,6 +128,9 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 
 == Changelog ==
 
+= 4.8.1.2 =
+- Enhancement: set the cookies to expire in 7 days 
+
 = 4.8.1.1 =
 - Bug Fix: headers already sent warning on main dashboard widget
 - Bug Fix: plural form fix for a string in translation PO files 

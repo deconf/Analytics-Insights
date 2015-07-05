@@ -70,7 +70,7 @@ jQuery.fn.extend( {
 		var tools = {
 			set_cookie : function ( name, value ) {
 				var date_item = new Date();
-				date_item.setTime( date_item.getTime() + ( 24 * 60 * 60 * 1000 * 365 * 10 ) );
+				date_item.setTime( date_item.getTime() + ( 24 * 60 * 60 * 1000 * 7 ) );
 				var expires = "expires=" + date_item.toUTCString();
 				document.cookie = "gadwp_ir_" + name + "=" + value + "; " + expires + "; path=/";
 			},
