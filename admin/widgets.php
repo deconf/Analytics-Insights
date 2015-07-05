@@ -107,6 +107,7 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 				$default_dimension = GADWP_Tools::get_cookie( 'default_dimension' );
 				$period = $default_dimension ? $default_dimension : '30daysAgo';
 			}
+
 			?>
 				<select id="ga_dash_period" name="period" onchange="this.form.submit()">
         <option value="realtime" <?php selected ( "realtime", $period, true ); ?>><?php _e("Real-Time",'ga-dash'); ?></option>
