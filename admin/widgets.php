@@ -120,12 +120,8 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
         <option value="14daysAgo" <?php selected ( "14daysAgo", $period, true ); ?>><?php printf( __( "Last %d Days", 'ga-dash' ), 14 ); ?></option>
         <option value="30daysAgo" <?php selected ( "30daysAgo", $period, true ); ?>><?php printf( __( "Last %d Days", 'ga-dash' ), 30 ); ?></option>
         <option value="90daysAgo" <?php selected ( "90daysAgo", $period, true ); ?>><?php printf( __( "Last %d Days", 'ga-dash' ), 90 ); ?></option>
-<<<<<<< HEAD
         <option value="365daysAgo" <?php selected ( "365daysAgo", $period, true ); ?>><?php printf( _n( "%s Year", "%s Years", 1, 'ga-dash' ), __('One', 'ga-dash') ); ?></option>
         <option value="1095daysAgo" <?php selected ( "1095daysAgo", $period, true ); ?>><?php printf( _n( "%s Year", "%s Years", 3, 'ga-dash' ), __('Three', 'ga-dash') ); ?></option>
-=======
-        <option value="365daysAgo" <?php selected ( "365daysAgo", $period, true ); ?>><?php printf( __( "Last %d Days", 'ga-dash' ), 365 ); ?></option>
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
     </select>
 
 				<?php if ($period != 'realtime') {?>
@@ -173,14 +169,11 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 					break;
 				case '365daysAgo' :
 					$from = '365daysAgo';
-<<<<<<< HEAD
 					$to = 'yesterday';
 					$haxis = 5;
 					break;
 				case '1095daysAgo' :
 					$from = '1095daysAgo';
-=======
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 					$to = 'yesterday';
 					$haxis = 5;
 					break;

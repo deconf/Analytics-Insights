@@ -82,7 +82,6 @@ jQuery.fn.extend( {
 					while ( cookie.charAt( 0 ) == ' ' )
 						cookie = cookie.substring( 1 );
 					if ( cookie.indexOf( name ) == 0 )
-<<<<<<< HEAD
 						return cookie.substring( name.length, cookie.length );
 				}
 				return false;
@@ -92,17 +91,6 @@ jQuery.fn.extend( {
 				div.appendChild( document.createTextNode( str ) );
 				return div.innerHTML;
 			},
-=======
-						return this.escape(cookie.substring( name.length, cookie.length ));
-				}
-				return false;
-			},
-			escape : function ( str ) {
-				var div = document.createElement( 'div' );
-				div.appendChild( document.createTextNode( str ) );
-				return div.innerHTML;
-			},			
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 		}
 
 		var template = {
@@ -398,15 +386,11 @@ jQuery.fn.extend( {
 					case '365daysAgo':
 						from = '365daysAgo';
 						to = 'yesterday';
-<<<<<<< HEAD
 						break;
 					case '1095daysAgo':
 						from = '1095daysAgo';
 						to = 'yesterday';
 						break;
-=======
-						break;							
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 					default:
 						from = '30daysAgo';
 						to = 'yesterday';

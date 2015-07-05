@@ -1,22 +1,14 @@
 === Google Analytics Dashboard for WP ===
 Contributors: deconf
 Donate link: https://deconf.com/donate/
-<<<<<<< HEAD
 Tags: google,analytics,google analytics,dashboard,analytics dashboard,google analytics dashboard,google analytics plugin,google analytics widget,tracking,universal analytics,realtime,multisite,gadwp
-=======
-Tags: google,analytics,google analytics,dashboard,analytics dashboard,google analytics dashboard,google analytics plugin,google analytics widget,tracking,realtime,wpmu,multisite,gadwp
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 Requires at least: 3.5
 Tested up to: 4.2.2
 Stable tag: 4.8.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-<<<<<<< HEAD
 Displays Google Analytics reports in your WordPress Dashboard. Inserts the latest Google Analytics tracking code in your pages.
-=======
-Displays Google Analytics reports and real-time statistics in your WordPress Dashboard. Inserts the latest Google Analytics tracking code in every page of your site.
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 
 == Description ==
 This Google Analytics for WordPress plugin enables you to track your site using the latest Google Analytics tracking code and allows you to view key Google Analytics reports in your WordPress install.
@@ -29,48 +21,23 @@ The Google Analytics tracking code is fully customizable through options and hoo
 
 Google Analytics reports, in real-time, in your dashboard screen:
 
-<<<<<<< HEAD
 - Real-time number of visitors 
 - Real-time acquisition channels
 - Real-time traffic sources details 
-=======
-- displays the total number of visitors in real-time 
-- real-time reports about your acquisition channels
-- per page real-time reports with traffic sources details 
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 
 = Google Analytics Reports =
 
-<<<<<<< HEAD
 The Google Analytics reports you need, on your dashboard, in your All Posts and All Pages screens, and on site's frontend:  
-=======
-The analytics reports you need, in your dashboard, in your All Posts and All Pages screens, and on site's frontend:  
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 
-<<<<<<< HEAD
 - Sessions, organic searches, page views, bounce rate analytics reports
 - Locations, pages, referrers, keywords analytics reports
 - Traffic channels, social networks, traffic mediums, search engines analytics reports
 - User access control over analytics reports
-=======
-- you can access all websites statistics in a single widget (websites within same Google Account)
-- option to choose a default color for your charts, graphs and maps
-- visitors by pages, referrers and searches reports
-- location reports, displaying visitors by country on a Geo Map and in a table chart
-- local websites and business have an option to display cities, instead of countries, on a regional map and in a table chart
-- traffic overview reports with details about acquisition channels, social networks, search engines, traffic mediums and visitor type 
-- per post or page Google Analytics reports in All Posts and All Pages screens
-- option to display Google Analytics reports on frontend; available for each web page
-- frontend widget with website's analytics stats and analytics report anonymization feature
-- option to share your backend and frontend Google Analytics reports with specified user roles 
-- options to disable certain Google Analytics reports from backend or frontend
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 
 = Google Analytics Basic Tracking =
 
 Installs the latest Google Analytics tracking code and allows full code customization:
 
-<<<<<<< HEAD
 - Switch between Universal Google Analytics and Classic Google Analytics code
 - IP address anonymization
 - Enhanced link attribution
@@ -79,26 +46,6 @@ Installs the latest Google Analytics tracking code and allows full code customiz
 - Page Speed sampling rate control
 - Cross domain tracking
 - Exclude user roles from tracking
-=======
-- enable/disable the Google Analytics tracking code
-- switch between Universal Google Analytics and Classic Google Analytics tracking methods
-- supports analytics.js tracking for compatibility with Universal Google Analytics web property  
-- supports ga.js tracking for compatibility with Classic Google Analytics web property
-- automatically generates and inserts the Google Analytics tracking code
-- IP address anonymization feature
-- enhanced link attribution feature
-- remarketing, demographics and interests tracking
-- Google AdSense account linking
-- page speed sampling rate customization
-- track events feature: track downloads, emails and outbound links with Google Analytics
-- exclude tracking based on user roles
-- option to exclude event tracking from bounce-rate calculation
-- multiple domains / cross domain tracking
-- action hook for code customization
-- track authors, publication year, categories and user engagement using Google Analytics custom dimensions
-- affiliate links tracking using Google Analytics events
-- track fragment identifiers, hash marks (#) in URI links
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 
 = Google Analytics Event Tracking =
 
@@ -191,11 +138,7 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 - Enhancement: display an admin notice after manual and automatic updates
 - Enhancement: small I18N tweaks and POT file update
 - Enhancement: introducing last 14 days range in items reports
-<<<<<<< HEAD
 - Enhancement: introducing One Year and Three Years range for all google analytics reports
-=======
-- Enhancement: introducing last 365 days range for all reports
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 - Enhancement: set the last selected report and date range as default for subsequent requests 
 
 = 4.8 =

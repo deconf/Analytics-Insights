@@ -377,11 +377,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				$dimensions = 'ga:hour';
 				$dayorhour = __( "Hour", 'ga-dash' );
 			} else
-<<<<<<< HEAD
 				if ( $from == "365daysAgo" || $from == "1095daysAgo" ) {
-=======
-				if ( $from == "365daysAgo" ) {
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 					$dimensions = 'ga:yearMonth, ga:month';
 					$dayorhour = __( "Date", 'ga-dash' );
 				} else {
@@ -402,11 +398,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				foreach ( $data->getRows() as $row ) {
 					$gadwp_data[] = array( (int) $row[0] . ':00', round( $row[1], 2 ) );
 				}
-<<<<<<< HEAD
 			} else if ( $from == "365daysAgo" || $from == "1095daysAgo" ) {
-=======
-			} else if ( $from == "365daysAgo" ) {
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 				foreach ( $data->getRows() as $row ) {
 					$gadwp_data[] = array( date('F', mktime(0, 0, 0, $row[1], 10)) . ', ' . esc_html( substr_replace( $row[0], "-", 4, 0 ) ), round( $row[2], 2 ) );
 				}

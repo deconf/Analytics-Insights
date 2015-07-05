@@ -74,12 +74,8 @@ if ( ! class_exists( 'GADWP_Frontend_Setup' ) ) {
 						'14daysAgo' => sprintf( __( "Last %d Days", 'ga-dash' ), 14 ),
 						'30daysAgo' =>  sprintf( __( "Last %d Days", 'ga-dash' ), 30 ),
 						'90daysAgo' =>  sprintf( __( "Last %d Days", 'ga-dash' ), 90 ),
-<<<<<<< HEAD
 						'365daysAgo' =>  sprintf( _n( "%s Year", "%s Years", 1, 'ga-dash' ), __('One', 'ga-dash') ),
 						'1095daysAgo' =>  sprintf( _n( "%s Year", "%s Years", 3, 'ga-dash' ), __('Three', 'ga-dash') ),
-=======
-						'365daysAgo' =>  sprintf( __( "Last %d Days", 'ga-dash' ), 365 ),
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 					),
 					'reportList' => array(
 						'uniquePageviews' => __( "Unique Views", 'ga-dash' ),

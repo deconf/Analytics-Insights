@@ -3,13 +3,8 @@ msgstr ""
 "Project-Id-Version: Google Analytics Dashboard for WP\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/google-analytics-"
 "dashboard-for-wp\n"
-<<<<<<< HEAD
 "POT-Creation-Date: 2015-07-05 16:08+0300\n"
 "PO-Revision-Date: 2015-07-05 16:08+0300\n"
-=======
-"POT-Creation-Date: 2015-07-04 09:08+0300\n"
-"PO-Revision-Date: 2015-07-04 09:08+0300\n"
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 "Last-Translator: Alin Marcu <admin@deconf.com>\n"
 "Language-Team: Willem-Jan Meerkerk <info@bs-webdevelopment.nl>\n"
 "Language: nl_NL\n"
@@ -17,11 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.2\n"
-<<<<<<< HEAD
 "X-Poedit-KeywordsList: __;_e;_n;_x;_ex;_nx;esc_attr__;esc_attr_e;esc_attr_x;esc_html__;esc_html_e;esc_html_x;_n_noop;_nx_noop\n"
-=======
-"X-Poedit-KeywordsList: _e;__\n"
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -547,33 +538,18 @@ msgstr "Frontend instellingen"
 msgid "Tracking Code"
 msgstr "Trackingcode"
 
-<<<<<<< HEAD
 #: .././admin/setup.php:159 .././admin/widgets.php:117 .././front/setup.php:71
-=======
-#: .././admin/setup.php:156 .././admin/widgets.php:120 .././front/setup.php:71
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 msgid "Today"
 msgstr "Vandaag"
 
-<<<<<<< HEAD
 #: .././admin/setup.php:160 .././admin/widgets.php:118 .././front/setup.php:72
-=======
-#: .././admin/setup.php:157 .././admin/widgets.php:121 .././front/setup.php:72
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 msgid "Yesterday"
 msgstr "Gisteren"
 
-<<<<<<< HEAD
 #: .././admin/setup.php:161 .././admin/setup.php:162 .././admin/setup.php:163
 #: .././admin/setup.php:164 .././admin/widgets.php:119
 #: .././admin/widgets.php:120 .././admin/widgets.php:121
 #: .././admin/widgets.php:122 .././front/setup.php:73 .././front/setup.php:74
-=======
-#: .././admin/setup.php:158 .././admin/setup.php:159 .././admin/setup.php:160
-#: .././admin/setup.php:161 .././admin/widgets.php:122
-#: .././admin/widgets.php:123 .././admin/widgets.php:124
-#: .././admin/widgets.php:125 .././front/setup.php:73 .././front/setup.php:74
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 #: .././front/setup.php:75 .././front/setup.php:76 .././front/widgets.php:64
 #: .././front/widgets.php:67 .././front/widgets.php:70
 #: .././front/widgets.php:158 .././front/widgets.php:159
@@ -582,7 +558,6 @@ msgstr "Gisteren"
 msgid "Last %d Days"
 msgstr "Afgelopen %d dagen"
 
-<<<<<<< HEAD
 #: .././admin/setup.php:165 .././admin/setup.php:166
 #: .././admin/widgets.php:123 .././admin/widgets.php:124
 #: .././front/setup.php:77 .././front/setup.php:78
@@ -600,157 +575,81 @@ msgstr ""
 
 #: .././admin/setup.php:169 .././admin/setup.php:185 .././front/setup.php:81
 #: .././front/setup.php:97
-=======
-#: .././admin/setup.php:164 .././admin/setup.php:180 .././front/setup.php:79
-#: .././front/setup.php:95
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 msgid "Unique Views"
 msgstr "Unieke weergaven"
 
-<<<<<<< HEAD
 #: .././admin/setup.php:170 .././admin/setup.php:186
 #: .././admin/widgets.php:130 .././admin/widgets.php:830
 #: .././front/setup.php:82 .././front/setup.php:98 .././tools/gapi.php:358
-=======
-#: .././admin/setup.php:165 .././admin/setup.php:181
-#: .././admin/widgets.php:130 .././admin/widgets.php:820
-#: .././front/setup.php:80 .././front/setup.php:96 .././tools/gapi.php:355
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 msgid "Users"
 msgstr "Bezoekers"
 
-<<<<<<< HEAD
 #: .././admin/setup.php:171 .././admin/widgets.php:131 .././front/setup.php:83
-=======
-#: .././admin/setup.php:166 .././admin/widgets.php:131 .././front/setup.php:81
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 msgid "Organic"
 msgstr "Via zoekmachines"
 
-<<<<<<< HEAD
 #: .././admin/setup.php:172 .././admin/setup.php:187
 #: .././admin/widgets.php:132 .././admin/widgets.php:834
 #: .././front/setup.php:84 .././front/setup.php:99 .././tools/gapi.php:361
-=======
-#: .././admin/setup.php:167 .././admin/setup.php:182
-#: .././admin/widgets.php:132 .././admin/widgets.php:824
-#: .././front/setup.php:82 .././front/setup.php:97 .././tools/gapi.php:358
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 msgid "Page Views"
 msgstr "Paginaweergaven"
 
-<<<<<<< HEAD
 #: .././admin/setup.php:173 .././admin/setup.php:188
 #: .././admin/widgets.php:133 .././admin/widgets.php:838
 #: .././front/setup.php:85 .././front/setup.php:100 .././tools/gapi.php:364
-=======
-#: .././admin/setup.php:168 .././admin/setup.php:183
-#: .././admin/widgets.php:133 .././admin/widgets.php:828
-#: .././front/setup.php:83 .././front/setup.php:98 .././tools/gapi.php:361
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 msgid "Bounce Rate"
 msgstr "Bouncepercentage"
 
-<<<<<<< HEAD
 #: .././admin/setup.php:174 .././admin/widgets.php:134 .././front/setup.php:86
-=======
-#: .././admin/setup.php:169 .././admin/widgets.php:134 .././front/setup.php:84
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 msgid "Location"
 msgstr "Locaties"
 
-<<<<<<< HEAD
 #: .././admin/setup.php:175 .././admin/widgets.php:136 .././front/setup.php:87
 #: .././tools/gapi.php:503
-=======
-#: .././admin/setup.php:170 .././admin/widgets.php:136 .././front/setup.php:85
-#: .././tools/gapi.php:492
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 msgid "Referrers"
 msgstr "Beste verwijzingen"
 
-<<<<<<< HEAD
 #: .././admin/setup.php:176 .././admin/widgets.php:137 .././front/setup.php:88
 #: .././tools/gapi.php:536
-=======
-#: .././admin/setup.php:171 .././admin/widgets.php:137 .././front/setup.php:86
-#: .././tools/gapi.php:525
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 msgid "Searches"
 msgstr "Beste zoekopdrachten"
 
-<<<<<<< HEAD
 #: .././admin/setup.php:177 .././admin/widgets.php:138 .././front/setup.php:89
-=======
-#: .././admin/setup.php:172 .././admin/widgets.php:138 .././front/setup.php:87
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 msgid "Traffic Details"
 msgstr "Verkeer"
 
-<<<<<<< HEAD
 #: .././admin/setup.php:180 .././admin/widgets.php:505
 #: .././admin/widgets.php:590 .././admin/widgets.php:757
 #: .././admin/widgets.php:861 .././front/setup.php:92
-=======
-#: .././admin/setup.php:175 .././admin/widgets.php:495
-#: .././admin/widgets.php:580 .././admin/widgets.php:747
-#: .././admin/widgets.php:851 .././front/setup.php:90
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 msgid "A JavaScript Error is blocking plugin resources!"
 msgstr "Een Javascript fout blokkeert plugin bestanden!"
 
-<<<<<<< HEAD
 #: .././admin/setup.php:181 .././admin/widgets.php:681 .././front/setup.php:93
-=======
-#: .././admin/setup.php:176 .././admin/widgets.php:671 .././front/setup.php:91
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 msgid "Traffic Mediums"
 msgstr "Verkeersbronnen"
 
-<<<<<<< HEAD
 #: .././admin/setup.php:182 .././admin/widgets.php:696 .././front/setup.php:94
-=======
-#: .././admin/setup.php:177 .././admin/widgets.php:686 .././front/setup.php:92
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 msgid "Visitor Type"
 msgstr "Nieuw vs. terugkerend"
 
-<<<<<<< HEAD
 #: .././admin/setup.php:183 .././admin/widgets.php:711 .././front/setup.php:95
-=======
-#: .././admin/setup.php:178 .././admin/widgets.php:701 .././front/setup.php:93
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 msgid "Social Networks"
 msgstr "Sociale netwerken"
 
-<<<<<<< HEAD
 #: .././admin/setup.php:184 .././admin/widgets.php:726 .././front/setup.php:96
-=======
-#: .././admin/setup.php:179 .././admin/widgets.php:716 .././front/setup.php:94
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 msgid "Search Engines"
 msgstr "Zoekmachines"
 
-<<<<<<< HEAD
 #: .././admin/setup.php:189 .././admin/widgets.php:842
 #: .././front/setup.php:101
-=======
-#: .././admin/setup.php:184 .././admin/widgets.php:832 .././front/setup.php:99
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 msgid "Organic Search"
 msgstr "Zoekopdrachten"
 
-<<<<<<< HEAD
 #: .././admin/setup.php:190 .././admin/widgets.php:846
 #: .././front/setup.php:102
-=======
-#: .././admin/setup.php:185 .././admin/widgets.php:836
-#: .././front/setup.php:100
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 msgid "Pages/Session"
 msgstr "Pagina's/bezoek"
 
-<<<<<<< HEAD
 #: .././admin/setup.php:191 .././admin/widgets.php:517
 #: .././admin/widgets.php:531 .././admin/widgets.php:541
 #: .././admin/widgets.php:602 .././admin/widgets.php:616
@@ -759,28 +658,13 @@ msgstr "Pagina's/bezoek"
 #: .././admin/widgets.php:770 .././admin/widgets.php:782
 #: .././admin/widgets.php:873 .././admin/widgets.php:887
 #: .././admin/widgets.php:897 .././front/setup.php:103
-=======
-#: .././admin/setup.php:186 .././admin/widgets.php:507
-#: .././admin/widgets.php:521 .././admin/widgets.php:531
-#: .././admin/widgets.php:592 .././admin/widgets.php:606
-#: .././admin/widgets.php:620 .././admin/widgets.php:634
-#: .././admin/widgets.php:648 .././admin/widgets.php:658
-#: .././admin/widgets.php:760 .././admin/widgets.php:772
-#: .././admin/widgets.php:863 .././admin/widgets.php:877
-#: .././admin/widgets.php:887 .././front/setup.php:101
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 msgid "Invalid response, more details in JavaScript Console (F12)."
 msgstr "Ongeldige response, zie voor meer details de Javascript console (F12)"
 
-<<<<<<< HEAD
 #: .././admin/setup.php:192 .././front/setup.php:104
-=======
-#: .././admin/setup.php:187 .././front/setup.php:102
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 msgid "Not enough data collected"
 msgstr "Niet voldoende data verzameld"
 
-<<<<<<< HEAD
 #: .././admin/setup.php:193 .././admin/widgets.php:522
 #: .././admin/widgets.php:536 .././admin/widgets.php:607
 #: .././admin/widgets.php:621 .././admin/widgets.php:635
@@ -788,65 +672,32 @@ msgstr "Niet voldoende data verzameld"
 #: .././admin/widgets.php:775 .././admin/widgets.php:777
 #: .././admin/widgets.php:878 .././admin/widgets.php:892
 #: .././front/setup.php:105 .././front/widgets.php:100
-=======
-#: .././admin/setup.php:188 .././admin/widgets.php:512
-#: .././admin/widgets.php:526 .././admin/widgets.php:597
-#: .././admin/widgets.php:611 .././admin/widgets.php:625
-#: .././admin/widgets.php:639 .././admin/widgets.php:653
-#: .././admin/widgets.php:765 .././admin/widgets.php:767
-#: .././admin/widgets.php:868 .././admin/widgets.php:882
-#: .././front/setup.php:103 .././front/widgets.php:100
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 msgid "This report is unavailable"
 msgstr "Dit rapport is niet beschikbaar"
 
-<<<<<<< HEAD
 #: .././admin/setup.php:194 .././front/setup.php:106
-=======
-#: .././admin/setup.php:189 .././front/setup.php:104
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 msgid "report generated by"
 msgstr "rapport gegenereerd door"
 
-<<<<<<< HEAD
 #: .././admin/setup.php:225
-=======
-#: .././admin/setup.php:220
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 msgid "Settings"
 msgstr "Instellingen"
 
-<<<<<<< HEAD
 #: .././admin/setup.php:237
-=======
-#: .././admin/setup.php:232
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 #, php-format
 msgid "Google Analytics Dashboard for WP has been updated to version %s."
 msgstr ""
 
-<<<<<<< HEAD
 #: .././admin/setup.php:237
-=======
-#: .././admin/setup.php:232
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 #, php-format
 msgid "For details, check out %1$s and %2$s."
 msgstr ""
 
-<<<<<<< HEAD
 #: .././admin/setup.php:237
-=======
-#: .././admin/setup.php:232
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 msgid "the documentation page"
 msgstr ""
 
-<<<<<<< HEAD
 #: .././admin/setup.php:237
-=======
-#: .././admin/setup.php:232
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 msgid "the plugin&#39;s settings page"
 msgstr ""
 
@@ -891,17 +742,10 @@ msgstr "Lees meer..."
 msgid "Real-Time"
 msgstr "Realtime"
 
-<<<<<<< HEAD
 #: .././admin/widgets.php:129 .././admin/widgets.php:826
 #: .././front/widgets.php:36 .././tools/gapi.php:373 .././tools/gapi.php:503
 #: .././tools/gapi.php:536 .././tools/gapi.php:586 .././tools/gapi.php:666
 #: .././tools/gapi.php:695
-=======
-#: .././admin/widgets.php:129 .././admin/widgets.php:816
-#: .././front/widgets.php:36 .././tools/gapi.php:370 .././tools/gapi.php:492
-#: .././tools/gapi.php:525 .././tools/gapi.php:575 .././tools/gapi.php:655
-#: .././tools/gapi.php:684
->>>>>>> branch 'master' of https://github.com/deconf/Google-Analytics-Dashboard-for-WP.git
 msgid "Sessions"
 msgstr "Bezoeken"
 
