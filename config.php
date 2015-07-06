@@ -221,7 +221,6 @@ if (! class_exists('GADWP_Config')) {
             if (GADWP_CURRENT_VERSION != get_option('gadwp_version')) {
                 GADWP_Tools::clear_cache();
                 $flag = true;
-                $this->options['automatic_updates_minorversion'] = 1;
                 delete_transient('ga_dash_lasterror');
                 update_option('gadwp_version', GADWP_CURRENT_VERSION);
                	update_option('gadwp_got_updated', true);
