@@ -107,6 +107,7 @@ if ( ! class_exists( 'GADWP_Frontend_Setup' ) ) {
 					),
 					'colorVariations' => GADWP_Tools::variations( $this->gadwp->config->options['ga_dash_style'] ),
 					'region' => $region,
+					'filter' => $_SERVER["REQUEST_URI"]
 				 )
 				);
 				/* @formatter:on */

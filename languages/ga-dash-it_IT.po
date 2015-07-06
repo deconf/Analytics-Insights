@@ -1,22 +1,18 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Google Analytics Dashboard for WP 4.7\n"
+"Project-Id-Version: Google Analytics Dashboard for WP 4.8.1.1\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/google-analytics-"
 "dashboard-for-wp\n"
-"POT-Creation-Date: 2015-07-05 18:34+0300\n"
-"PO-Revision-Date: 2015-07-05 18:34+0300\n"
-"Last-Translator: Alin Marcu <admin@deconf.com>\n"
-"Language-Team: L.E.O.X. <leoxleox73@gmail.com>\n"
-"Language: it\n"
+"POT-Creation-Date: 2015-07-05 18:36+0300\n"
+"PO-Revision-Date: 2015-07-06 15:33+0100\n"
+"Last-Translator: Leo The Strategist <leoxleox73@gmail.com>\n"
+"Language-Team: LTS <leoxleox73@gmail.com>\n"
+"Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.2\n"
-"X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
-"__:1;_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;__ngettext_noop:1,2;"
-"_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
-"esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
-"esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-KeywordsList: _e;__\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -76,7 +72,7 @@ msgstr "Mostra statistiche a:"
 
 #: .././admin/settings.php:154
 msgid "enable web page reports on frontend"
-msgstr ""
+msgstr "abilita i rapporti sulle pagine web nel frontend"
 
 #: .././admin/settings.php:161 .././admin/settings.php:297
 #: .././admin/settings.php:598 .././admin/settings.php:943
@@ -473,7 +469,7 @@ msgstr "Guida all&apos;installazione & Demo"
 
 #: .././admin/settings.php:1281
 msgid "Follow & Review"
-msgstr ""
+msgstr "Supporto & Recensioni"
 
 #: .././admin/settings.php:1307
 #, php-format
@@ -570,16 +566,16 @@ msgstr "Ultimi %d giorni"
 #, php-format
 msgid "%s Year"
 msgid_plural "%s Years"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%s anno"
+msgstr[1] "%s anni"
 
 #: .././admin/setup.php:165 .././admin/widgets.php:119 .././front/setup.php:77
 msgid "One"
-msgstr ""
+msgstr "Uno"
 
 #: .././admin/setup.php:166 .././admin/widgets.php:120 .././front/setup.php:78
 msgid "Three"
-msgstr ""
+msgstr "Tre"
 
 #: .././admin/setup.php:169 .././admin/setup.php:185 .././front/setup.php:81
 #: .././front/setup.php:97
@@ -695,20 +691,20 @@ msgstr "Impostazioni"
 #: .././admin/setup.php:237
 #, php-format
 msgid "Google Analytics Dashboard for WP has been updated to version %s."
-msgstr ""
+msgstr "Google Analytics Dashboard for Wp è stato aggiornato alla versione %s."
 
 #: .././admin/setup.php:237
 #, php-format
 msgid "For details, check out %1$s and %2$s."
-msgstr ""
+msgstr "Per dettagli, guarda %1$s e %2$s."
 
 #: .././admin/setup.php:237
 msgid "the documentation page"
-msgstr ""
+msgstr "la pagina della documentazione del plugin"
 
 #: .././admin/setup.php:237
 msgid "the plugin&#39;s settings page"
-msgstr ""
+msgstr "La pagina delle impostazioni del plugin"
 
 #: .././admin/widgets.php:27 .././front/widgets.php:21
 msgid "Google Analytics Dashboard"
@@ -914,17 +910,10 @@ msgstr "Canali"
 msgid "Type"
 msgstr "Tipo"
 
-#~ msgid "Last 7 Days"
-#~ msgstr "Ultimi 7 giorni"
-
-#~ msgid "Last 14 Days"
-#~ msgstr "Ultimi 14 giorni"
-
-#~ msgid "Last 30 Days"
-#~ msgstr "Ultimi 30 giorni"
-
-#~ msgid "Last 90 Days"
-#~ msgstr "Ultimi 90 giorni"
+#~ msgid "Read %s for more information about Frontend Features and Options."
+#~ msgstr ""
+#~ "Leggi %s per ulteriori informazioni sulle opzioni e funzionalit&agrave; "
+#~ "del frontend."
 
 #~ msgid "show page sessions and users in frontend (after each article)"
 #~ msgstr ""
@@ -933,29 +922,6 @@ msgstr "Tipo"
 
 #~ msgid "show page searches (after each article)"
 #~ msgstr "mostra la pagina delle ricerche (dopo ogni articolo)"
-
-#~ msgid "Support & Reviews"
-#~ msgstr "Supporto & Recensioni"
-
-#~ msgid "Plugin documentation and support on %s"
-#~ msgstr "Documentazione del plugin e supporto su %s"
-
-#~ msgid "Views vs UniqueViews"
-#~ msgstr "Visualizzazioni vs Visualizzazioni singole"
-
-#~ msgid "Google Analytics Reports"
-#~ msgstr "Rapporti di Google Analytics"
-
-#~ msgid "UniqueViews"
-#~ msgstr "Visualizzazioni uniche"
-
-#~ msgid "Read %s for more information about Frontend Features and Options."
-#~ msgstr ""
-#~ "Leggi %s per ulteriori informazioni sulle opzioni e funzionalit&agrave; "
-#~ "del frontend."
-
-#~ msgid "this documentation page"
-#~ msgstr "la pagina della documentazione del plugin"
 
 #~ msgid "Read %s for more information about Backend Features and Options."
 #~ msgstr ""
@@ -967,6 +933,27 @@ msgstr "Tipo"
 
 #~ msgid "For errors and/or other issues check %s and related resources."
 #~ msgstr "Per errori e/o altri problemi controlla %s e le risorse relative."
+
+#~ msgid "Plugin documentation and support on %s"
+#~ msgstr "Documentazione del plugin e supporto su %s"
+
+#~ msgid "Last 30 Days"
+#~ msgstr "Ultimi 30 giorni"
+
+#~ msgid "Last 90 Days"
+#~ msgstr "Ultimi 90 giorni"
+
+#~ msgid "Last 14 Days"
+#~ msgstr "Ultimi 14 giorni"
+
+#~ msgid "Views vs UniqueViews"
+#~ msgstr "Visualizzazioni vs Visualizzazioni singole"
+
+#~ msgid "Google Analytics Reports"
+#~ msgstr "Rapporti di Google Analytics"
+
+#~ msgid "UniqueViews"
+#~ msgstr "Visualizzazioni uniche"
 
 #~ msgid "enable Switch Profile/View functionality"
 #~ msgstr "abilita Cambia profilo/Mostra funzionalit&agrave;"
@@ -1065,9 +1052,6 @@ msgstr "Tipo"
 #~ msgstr ""
 #~ " (watch this <a href='http://deconf.com/projects/google-analytics-"
 #~ "dashboard-for-wordpress/' target='_blank'>Step by step video tutorial</a>)"
-
-#~ msgid "Google Analytics Dashboard Settings"
-#~ msgstr "Impostazioni Backend di Google Analytics"
 
 #~ msgid "A new frontend widget is available! To enable it, go to"
 #~ msgstr ""

@@ -43,7 +43,7 @@ if ( ! class_exists( 'GADWP_Frontend_Ajax' ) ) {
 			$from = $_REQUEST['from'];
 			$to = $_REQUEST['to'];
 			$query = $_REQUEST['query'];
-			$uri = $_REQUEST['uri'];
+			$uri = $_REQUEST['filter'];
 
 			$uri = '/' . ltrim($uri,'/');
 
