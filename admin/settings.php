@@ -819,7 +819,7 @@ final class GADWP_Settings {
                                 <div class="settings-wrapper">
                                     <div class="inside">
 <?php
-		if ( $gadwp->gapi_controller->gapi_errors_handler() ) {
+		if ( $gadwp->gapi_controller->gapi_errors_handler() || get_transient('ga_dash_lasterror') ) {
 			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'ga-dash' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_errors_debugging', false ), __( 'Errors & Debug', 'ga-dash' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_settings', false ), __( 'authorize the plugin', 'ga-dash' ) ) ) );
 		}
 		if ( isset( $_POST['Authorize'] ) ) {
@@ -827,8 +827,9 @@ final class GADWP_Settings {
 			$gadwp->gapi_controller->token_request();
 			echo "<div class='updated'><p>" . __( "Use the red link (see below) to generate and get your access code!", 'ga-dash' ) . "</p></div>";
 		} else {
-			if ( isset( $message ) )
+			if ( isset( $message ) ){
 				echo $message;
+			}
 			?>
 					<form name="ga_dash_form" method="post" action="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>">
                                             <input type="hidden" name="options[ga_dash_hidden]" value="Y">
@@ -1091,7 +1092,7 @@ final class GADWP_Settings {
                                                     <div class="settings-wrapper">
                                                         <div class="inside">
 						<?php
-		if ( $gadwp->gapi_controller->gapi_errors_handler() ) {
+		if ( $gadwp->gapi_controller->gapi_errors_handler() || get_transient('ga_dash_lasterror')) {
 			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'ga-dash' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_errors_debugging', false ), __( 'Errors & Debug', 'ga-dash' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_settings', false ), __( 'authorize the plugin', 'ga-dash' ) ) ) );
 		}
 		if ( isset( $_POST['Authorize'] ) ) {
@@ -1099,8 +1100,9 @@ final class GADWP_Settings {
 			$gadwp->gapi_controller->token_request();
 			echo "<div class='updated'><p>" . __( "Use the red link (see below) to generate and get your access code!", 'ga-dash' ) . "</p></div>";
 		} else {
-			if ( isset( $message ) )
+			if ( isset( $message ) ){
 				echo $message;
+			}
 			?>
 						<form name="ga_dash_form" method="post" action="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>">
                                                                 <input type="hidden" name="options[ga_dash_hidden]" value="Y">

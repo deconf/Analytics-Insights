@@ -55,6 +55,9 @@
 	color: #777;
 	padding: 0px 5px 0px 5px;
 	margin: 0px 0px 0px 0px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;		
 }
 
 .gadwp-wrapper .inside .small-box p {

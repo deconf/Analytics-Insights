@@ -46,12 +46,12 @@ if (! class_exists('GADWP_Config')) {
 				return;
 			}
 
-			if ( isset( $_REQUEST['period'] ) ) {
-				GADWP_Tools::set_cookie( 'default_dimension', $_REQUEST['period'] );
+			if ( isset( $_REQUEST['gadwpperiod'] ) ) {
+				GADWP_Tools::set_cookie( 'default_dimension', $_REQUEST['gadwpperiod'] );
 			}
 
-			if ( isset( $_REQUEST['query'] ) ) {
-				GADWP_Tools::set_cookie( 'default_metric', $_REQUEST['query'] );
+			if ( isset( $_REQUEST['gadwpquery'] ) ) {
+				GADWP_Tools::set_cookie( 'default_metric', $_REQUEST['gadwpquery'] );
 			}
 		}
 

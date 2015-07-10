@@ -179,7 +179,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				if ( empty( $ga_dash_profile_list ) ) {
 					set_transient( 'ga_dash_lasterror', date( 'Y-m-d H:i:s' ) . ': No properties were found in this account!', $this->error_timeout );
 				} else {
-					set_transient( 'ga_dash_lasterror', 'None' );
+					delete_transient( 'ga_dash_lasterror' );
 				}
 
 				return $ga_dash_profile_list;

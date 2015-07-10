@@ -34,8 +34,8 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 			}
 
 			if ( current_user_can( 'manage_options' ) ) {
-				if ( isset( $_REQUEST['ga_dash_profile_select'] ) ) {
-					$this->gadwp->config->options['ga_dash_tableid'] = $_REQUEST['ga_dash_profile_select'];
+				if ( isset( $_REQUEST['gadwp_selected_profile'] ) ) {
+					$this->gadwp->config->options['ga_dash_tableid'] = $_REQUEST['gadwp_selected_profile'];
 				}
 				$profiles = $this->gadwp->config->options['ga_dash_profile_list'];
 				$profile_switch = '';
@@ -50,7 +50,7 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 						if ( $this->gadwp->config->options['switch_profile'] == 0 && $this->gadwp->config->options['ga_dash_tableid_jail'] ) {
 							$this->gadwp->config->options['ga_dash_tableid'] = $this->gadwp->config->options['ga_dash_tableid_jail'];
 						}
-					$profile_switch .= '<select id="ga_dash_profile_select" name="ga_dash_profile_select" onchange="this.form.submit()">';
+					$profile_switch .= '<select id="gadwp_selected_profile" name="gadwp_selected_profile" onchange="this.form.submit()">';
 					foreach ( $profiles as $profile ) {
 						if ( ! $this->gadwp->config->options['ga_dash_tableid'] ) {
 							$this->gadwp->config->options['ga_dash_tableid'] = $profile[1];
@@ -95,21 +95,21 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 				echo '<p>' . __( "Something went wrong while retrieving property data. You need to create and properly configure a Google Analytics account:", 'ga-dash' ) . '</p> <form action="https://deconf.com/how-to-set-up-google-analytics-on-your-website/" method="POST">' . get_submit_button( __( "Find out more!", 'ga-dash' ), 'secondary' ) . '</form>';
 				return;
 			}
-			if ( isset( $_REQUEST['query'] ) ) {
-				$query = $_REQUEST['query'];
+			if ( isset( $_REQUEST['gadwpquery'] ) ) {
+				$query = $_REQUEST['gadwpquery'];
 			} else {
 				$default_metric = GADWP_Tools::get_cookie( 'default_metric' );
 				$query = $default_metric ? $default_metric : 'sessions';
 			}
-			if ( isset( $_REQUEST['period'] ) ) {
-				$period = $_REQUEST['period'];
+			if ( isset( $_REQUEST['gadwpperiod'] ) ) {
+				$period = $_REQUEST['gadwpperiod'];
 			} else {
 				$default_dimension = GADWP_Tools::get_cookie( 'default_dimension' );
 				$period = $default_dimension ? $default_dimension : '30daysAgo';
 			}
 
 			?>
-				<select id="ga_dash_period" name="period" onchange="this.form.submit()">
+				<select id="ga_dash_period" name="gadwpperiod" onchange="this.form.submit()">
         <option value="realtime" <?php selected ( "realtime", $period, true ); ?>><?php _e("Real-Time",'ga-dash'); ?></option>
         <option value="today" <?php selected ( "today", $period, true ); ?>><?php _e("Today",'ga-dash'); ?></option>
         <option value="yesterday" <?php selected ( "yesterday", $period, true ); ?>><?php _e("Yesterday",'ga-dash'); ?></option>
@@ -122,7 +122,7 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
     </select>
 
 				<?php if ($period != 'realtime') {?>
-					<select id="ga_dash_query" name="query" onchange="this.form.submit()">
+					<select id="ga_dash_query" name="gadwpquery" onchange="this.form.submit()">
         <option value="sessions" <?php selected ( "sessions", $query, true ); ?>><?php _e("Sessions",'ga-dash'); ?></option>
         <option value="users" <?php selected ( "users", $query, true ); ?>><?php _e("Users",'ga-dash'); ?></option>
         <option value="organicSearches" <?php selected ( "organicSearches", $query, true ); ?>><?php _e("Organic",'ga-dash'); ?></option>
