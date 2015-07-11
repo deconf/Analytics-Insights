@@ -42,7 +42,7 @@ if ( ! class_exists( 'GADWP_Frontend_Setup' ) ) {
 
 			if ( GADWP_Tools::check_roles( $this->gadwp->config->options['ga_dash_access_front'] ) && $this->gadwp->config->options['frontend_item_reports'] ) {
 
-				wp_enqueue_style( 'gadwp-nprogress', GADWP_URL . 'tools/nprogress/nprogress.css', null, GADWP_CURRENT_VERSION );
+				wp_enqueue_style( 'gadwp-nprogress', GADWP_URL . 'includes/nprogress/nprogress.css', null, GADWP_CURRENT_VERSION );
 
 				wp_enqueue_style( 'gadwp_frontend_item_reports', GADWP_URL . 'front/css/item-reports.css', null, GADWP_CURRENT_VERSION );
 
@@ -59,9 +59,9 @@ if ( ! class_exists( 'GADWP_Frontend_Setup' ) ) {
 					wp_register_script( 'googlejsapi', 'https://www.google.com/jsapi' );
 				}
 
-				wp_enqueue_script( 'gadwp-nprogress', GADWP_URL . 'tools/nprogress/nprogress.js', array( 'jquery' ), GADWP_CURRENT_VERSION );
+				wp_enqueue_script( 'gadwp-nprogress', GADWP_URL . 'includes/nprogress/nprogress.js', array( 'jquery' ), GADWP_CURRENT_VERSION );
 
-				wp_enqueue_script( 'gadwp_frontend_item_reports', plugins_url( 'js/item-reports.js', __FILE__ ), array( 'gadwp-nprogress', 'googlejsapi', 'jquery', 'jquery-ui-dialog' ), GADWP_CURRENT_VERSION );
+				wp_enqueue_script( 'gadwp_frontend_item_reports', GADWP_URL . 'includes/js/item-reports.js', array( 'gadwp-nprogress', 'googlejsapi', 'jquery', 'jquery-ui-dialog' ), GADWP_CURRENT_VERSION );
 
 				/* @formatter:off */
 				wp_localize_script( 'gadwp_frontend_item_reports', 'gadwp_item_data', array(
@@ -107,7 +107,8 @@ if ( ! class_exists( 'GADWP_Frontend_Setup' ) ) {
 					),
 					'colorVariations' => GADWP_Tools::variations( $this->gadwp->config->options['ga_dash_style'] ),
 					'region' => $region,
-					'filter' => $_SERVER["REQUEST_URI"]
+					'filter' => $_SERVER["REQUEST_URI"],
+					'scope' => 'front',
 				 )
 				);
 				/* @formatter:on */

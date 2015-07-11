@@ -29,7 +29,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 		public function __construct() {
 			$this->gadwp = GADWP();
 
-			include_once ( GADWP_DIR . 'tools/autoload.php' );
+			include_once ( GADWP_DIR . 'includes/autoload.php' );
 			$config = new Google_Config();
 			$config->setCacheClass( 'Google_Cache_Null' );
 			if ( function_exists( 'curl_version' ) ) {

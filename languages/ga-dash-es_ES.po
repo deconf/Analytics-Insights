@@ -590,7 +590,7 @@ msgstr ""
 
 #: .././admin/setup.php:170 .././admin/setup.php:186
 #: .././admin/widgets.php:126 .././admin/widgets.php:826
-#: .././front/setup.php:82 .././front/setup.php:98 .././tools/gapi.php:358
+#: .././front/setup.php:82 .././front/setup.php:98 .././includes/gapi.php:358
 msgid "Users"
 msgstr ""
 
@@ -600,13 +600,13 @@ msgstr "Búsquedas orgánicas"
 
 #: .././admin/setup.php:172 .././admin/setup.php:187
 #: .././admin/widgets.php:128 .././admin/widgets.php:830
-#: .././front/setup.php:84 .././front/setup.php:99 .././tools/gapi.php:361
+#: .././front/setup.php:84 .././front/setup.php:99 .././includes/gapi.php:361
 msgid "Page Views"
 msgstr "Páginas vistas"
 
 #: .././admin/setup.php:173 .././admin/setup.php:188
 #: .././admin/widgets.php:129 .././admin/widgets.php:834
-#: .././front/setup.php:85 .././front/setup.php:100 .././tools/gapi.php:364
+#: .././front/setup.php:85 .././front/setup.php:100 .././includes/gapi.php:364
 msgid "Bounce Rate"
 msgstr "Porcenaje de rebote"
 
@@ -615,12 +615,12 @@ msgid "Location"
 msgstr ""
 
 #: .././admin/setup.php:175 .././admin/widgets.php:132 .././front/setup.php:87
-#: .././tools/gapi.php:503
+#: .././includes/gapi.php:503
 msgid "Referrers"
 msgstr ""
 
 #: .././admin/setup.php:176 .././admin/widgets.php:133 .././front/setup.php:88
-#: .././tools/gapi.php:536
+#: .././includes/gapi.php:536
 msgid "Searches"
 msgstr ""
 
@@ -752,13 +752,13 @@ msgid "Real-Time"
 msgstr "Tiempo real"
 
 #: .././admin/widgets.php:125 .././admin/widgets.php:822
-#: .././front/widgets.php:36 .././tools/gapi.php:373 .././tools/gapi.php:503
-#: .././tools/gapi.php:536 .././tools/gapi.php:586 .././tools/gapi.php:666
-#: .././tools/gapi.php:695
+#: .././front/widgets.php:36 .././includes/gapi.php:373 .././includes/gapi.php:503
+#: .././includes/gapi.php:536 .././includes/gapi.php:586 .././includes/gapi.php:666
+#: .././includes/gapi.php:695
 msgid "Sessions"
 msgstr ""
 
-#: .././admin/widgets.php:131 .././tools/gapi.php:471
+#: .././admin/widgets.php:131 .././includes/gapi.php:471
 msgid "Pages"
 msgstr ""
 
@@ -801,7 +801,7 @@ msgstr ""
 msgid "Will display your google analytics stats in a widget"
 msgstr ""
 
-#: .././front/widgets.php:36 .././tools/gapi.php:695
+#: .././front/widgets.php:36 .././includes/gapi.php:695
 msgid "trend"
 msgstr ""
 
@@ -857,59 +857,59 @@ msgstr ""
 msgid "This is not allowed, read the documentation!"
 msgstr ""
 
-#: .././tools/gapi.php:128
+#: .././includes/gapi.php:128
 msgid "Use this link to get your access code:"
 msgstr ""
 
-#: .././tools/gapi.php:128
+#: .././includes/gapi.php:128
 msgid "Get Access Code"
 msgstr ""
 
-#: .././tools/gapi.php:132 .././tools/gapi.php:133
+#: .././includes/gapi.php:132 .././includes/gapi.php:133
 msgid "Use the red link to get your access code!"
 msgstr ""
 
-#: .././tools/gapi.php:132
+#: .././includes/gapi.php:132
 msgid "Access Code:"
 msgstr "Código de acceso:"
 
-#: .././tools/gapi.php:139
+#: .././includes/gapi.php:139
 msgid "Save Access Code"
 msgstr ""
 
-#: .././tools/gapi.php:367
+#: .././includes/gapi.php:367
 msgid "Organic Searches"
 msgstr "Búsquedas orgánicas"
 
-#: .././tools/gapi.php:370
+#: .././includes/gapi.php:370
 msgid "Unique Page Views"
 msgstr ""
 
-#: .././tools/gapi.php:378
+#: .././includes/gapi.php:378
 msgid "Hour"
 msgstr "Hora"
 
-#: .././tools/gapi.php:382 .././tools/gapi.php:385 .././tools/gapi.php:695
+#: .././includes/gapi.php:382 .././includes/gapi.php:385 .././includes/gapi.php:695
 msgid "Date"
 msgstr "Fecha"
 
-#: .././tools/gapi.php:471
+#: .././includes/gapi.php:471
 msgid "Views"
 msgstr "Vistas"
 
-#: .././tools/gapi.php:557
+#: .././includes/gapi.php:557
 msgid "Countries"
 msgstr ""
 
-#: .././tools/gapi.php:567
+#: .././includes/gapi.php:567
 msgid "Cities from"
 msgstr ""
 
-#: .././tools/gapi.php:620
+#: .././includes/gapi.php:620
 msgid "Channels"
 msgstr ""
 
-#: .././tools/gapi.php:666
+#: .././includes/gapi.php:666
 msgid "Type"
 msgstr "Tipo"
 

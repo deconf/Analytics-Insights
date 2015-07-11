@@ -6,9 +6,15 @@ google.load( "visualization", "1", {
 
 jQuery( document ).ready(
 
-function () {
-	jQuery( 'a[id^="gadwp-"]' ).click( function ( e ) {
+function ( target ) {
 
+	if ( gadwp_item_data.scope == 'admin' ) {
+		var selector = 'a[id^="gadwp-"]';
+	} else {
+		var selector = 'li[id^="wp-admin-bar-gadwp"]';
+	}
+
+	jQuery( selector ).click( function ( e ) {
 		var item_id = getID( this );
 		var slug = "-" + item_id;
 
@@ -19,13 +25,24 @@ function () {
 	} );
 
 	function getID ( item ) {
-		if ( typeof item.id == "undefined" ) {
-			return 0
-		}
-		if ( item.id.split( '-' )[ 1 ] == "undefined" ) {
-			return 0;
+		if ( gadwp_item_data.scope == 'admin' ) {
+			if ( typeof item.id == "undefined" ) {
+				return 0
+			}
+			if ( item.id.split( '-' )[ 1 ] == "undefined" ) {
+				return 0;
+			} else {
+				return item.id.split( '-' )[ 1 ];
+			}
 		} else {
-			return item.id.split( '-' )[ 1 ];
+			if ( typeof item.id == "undefined" ) {
+				return 1;
+			}
+			if ( item.id.split( '-' )[ 4 ] == "undefined" ) {
+				return 1;
+			} else {
+				return item.id.split( '-' )[ 4 ];
+			}
 		}
 	}
 
@@ -361,6 +378,7 @@ jQuery.fn.extend( {
 
 			render : function ( period, query ) {
 				var from, to;
+
 				jQuery( '#gadwp-status' + slug ).html( '' );
 				switch ( period ) {
 					case 'today':
@@ -400,12 +418,22 @@ jQuery.fn.extend( {
 				tools.set_cookie( 'default_metric', query );
 				tools.set_cookie( 'default_dimension', period );
 
-				var data = {
-					action : 'gadwp_backend_item_reports',
-					gadwp_security_backend_item_reports : gadwp_item_data.security,
-					from : from,
-					to : to,
-					filter : item_id,
+				if ( gadwp_item_data.scope == 'admin' ) {
+					var data = {
+						action : 'gadwp_backend_item_reports',
+						gadwp_security_backend_item_reports : gadwp_item_data.security,
+						from : from,
+						to : to,
+						filter : item_id,
+					}
+				} else {
+					var data = {
+						action : 'gadwp_frontend_item_reports',
+						gadwp_security_frontend_item_reports : gadwp_item_data.security,
+						from : from,
+						to : to,
+						filter : gadwp_item_data.filter,
+					}
 				}
 
 				if ( jQuery.inArray( query, [ 'referrers', 'contentpages', 'searches' ] ) > -1 ) {
