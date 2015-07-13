@@ -103,7 +103,7 @@ if ( ! class_exists( 'GADWP_Manager' ) ) {
 			/*
 			 * Load Tools class
 			 */
-			include_once ( GADWP_DIR . 'includes/tools.php' );
+			include_once ( GADWP_DIR . 'tools/tools.php' );
 
 			/*
 			 * Load Config class
@@ -113,7 +113,7 @@ if ( ! class_exists( 'GADWP_Manager' ) ) {
 			/*
 			 * Load GAPI Controller class
 			 */
-			include_once ( GADWP_DIR . 'includes/gapi.php' );
+			include_once ( GADWP_DIR . 'tools/gapi.php' );
 
 			/*
 			 * Plugin i18n
