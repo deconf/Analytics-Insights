@@ -169,8 +169,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 							$timetz = new DateTimeZone( $profile->getTimezone() );
 							$localtime = new DateTime( 'now', $timetz );
 							$timeshift = strtotime( $localtime->format( 'Y-m-d H:i:s' ) ) - time();
-							$ga_dash_profile_list[] = array( $profile->getName(), $profile->getId(), $profile->getwebPropertyId(), $profile->getwebsiteUrl(), $timeshift, $profile->getTimezone() );
-
+							$ga_dash_profile_list[] = array( $profile->getName(), $profile->getId(), $profile->getwebPropertyId(), $profile->getwebsiteUrl(), $timeshift, $profile->getTimezone(), $profile->getDefaultPage() );
 							$startindex++;
 						}
 					}

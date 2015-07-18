@@ -135,6 +135,7 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 - Bug Fix: rename query args to something more unique to avoid conflicts with other plugins
 - Bug Fix: Italian translation small fix
 - Bug Fix: add text domain and domain path in plugin's header
+- Bug Fix: avoid empty item reports while the URI ends with a slash and a Default Page is set in View settings (requires re-authorization)
 
 = 4.8.1.2 =
 - Bug Fix: fixes automatic update switched on after each update
