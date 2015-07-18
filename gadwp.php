@@ -6,6 +6,8 @@
  * Author: Alin Marcu
  * Version: 4.8.1.3
  * Author URI: https://deconf.com
+ * Text Domain: ga-dash
+ * Domain Path: /languages
  */
 
 // Exit if accessed directly

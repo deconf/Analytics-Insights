@@ -357,7 +357,7 @@ jQuery.fn.extend( {
 					"border-left" : "5px solid red"
 				} );
 				if (response == '-24'){
-					jQuery( "#gadwp-status" + slug ).html( gadwp_item_data.authorization_prompt );
+					jQuery( "#gadwp-status" + slug ).html( gadwp_item_data.i18n[ 15 ] );
 				} else {
 					jQuery( "#gadwp-status" + slug ).html( gadwp_item_data.i18n[ 11 ] );
 					console.log( "\n********************* GADWP Log ********************* \n\n" + response );					
