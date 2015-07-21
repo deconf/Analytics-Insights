@@ -58,7 +58,7 @@ if ( ! class_exists( 'GADWP_Backend_Item_Reports' ) ) {
 
 		public function add_columns( $columns ) {
 			return array_merge( $columns, array(
-				'gadwp_stats' => __( 'Analytics', 'ga-dash' ) ) );
+				'gadwp_stats' => __( 'Analytics', 'google-analytics-dashboard-for-wp' ) ) );
 		}
 	}
 }

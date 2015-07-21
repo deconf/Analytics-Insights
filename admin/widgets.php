@@ -24,12 +24,12 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 		}
 
 		public function add_widget() {
-			wp_add_dashboard_widget( 'gadash-widget', __( "Google Analytics Dashboard", 'ga-dash' ), array( $this, 'dashboard_widget' ), $control_callback = null );
+			wp_add_dashboard_widget( 'gadash-widget', __( "Google Analytics Dashboard", 'google-analytics-dashboard-for-wp' ), array( $this, 'dashboard_widget' ), $control_callback = null );
 		}
 
 		public function dashboard_widget() {
 			if ( empty( $this->gadwp->config->options['ga_dash_token'] ) ) {
-				echo '<p>' . __( "This plugin needs an authorization:", 'ga-dash' ) . '</p><form action="' . menu_page_url( 'gadash_settings', false ) . '" method="POST">' . get_submit_button( __( "Authorize Plugin", 'ga-dash' ), 'secondary' ) . '</form>';
+				echo '<p>' . __( "This plugin needs an authorization:", 'google-analytics-dashboard-for-wp' ) . '</p><form action="' . menu_page_url( 'gadash_settings', false ) . '" method="POST">' . get_submit_button( __( "Authorize Plugin", 'google-analytics-dashboard-for-wp' ), 'secondary' ) . '</form>';
 				return;
 			}
 
@@ -58,12 +58,12 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 						if ( isset( $profile[3] ) ) {
 							$profile_switch .= '<option value="' . esc_attr( $profile[1] ) . '" ';
 							$profile_switch .= selected( $profile[1], $this->gadwp->config->options['ga_dash_tableid'], false );
-							$profile_switch .= ' title="' . __( "View Name:", 'ga-dash' ) . ' ' . esc_attr( $profile[0] ) . '">' . esc_attr( GADWP_Tools::strip_protocol( $profile[3] ) ) . '</option>';
+							$profile_switch .= ' title="' . __( "View Name:", 'google-analytics-dashboard-for-wp' ) . ' ' . esc_attr( $profile[0] ) . '">' . esc_attr( GADWP_Tools::strip_protocol( $profile[3] ) ) . '</option>';
 						}
 					}
 					$profile_switch .= "</select>";
 				} else {
-					echo '<p>' . __( "Something went wrong while retrieving profiles list.", 'ga-dash' ) . '</p><form action="' . menu_page_url( 'gadash_settings', false ) . '" method="POST">' . get_submit_button( __( "More details", 'ga-dash' ), 'secondary' ) . '</form>';
+					echo '<p>' . __( "Something went wrong while retrieving profiles list.", 'google-analytics-dashboard-for-wp' ) . '</p><form action="' . menu_page_url( 'gadash_settings', false ) . '" method="POST">' . get_submit_button( __( "More details", 'google-analytics-dashboard-for-wp' ), 'secondary' ) . '</form>';
 					return;
 				}
 			}
@@ -76,7 +76,7 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 					if ( $this->gadwp->config->options['ga_dash_tableid_jail'] ) {
 						$projectId = $this->gadwp->config->options['ga_dash_tableid_jail'];
 					} else {
-						echo '<p>' . __( "An admin should asign a default Google Analytics Profile.", 'ga-dash' ) . '</p><form action="' . menu_page_url( 'gadash_settings', false ) . '" method="POST">' . get_submit_button( __( "Select Domain", 'ga-dash' ), 'secondary' ) . '</form>';
+						echo '<p>' . __( "An admin should asign a default Google Analytics Profile.", 'google-analytics-dashboard-for-wp' ) . '</p><form action="' . menu_page_url( 'gadash_settings', false ) . '" method="POST">' . get_submit_button( __( "Select Domain", 'google-analytics-dashboard-for-wp' ), 'secondary' ) . '</form>';
 						return;
 					}
 				} else {
@@ -87,12 +87,12 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 				if ( $this->gadwp->config->options['ga_dash_tableid_jail'] ) {
 					$projectId = $this->gadwp->config->options['ga_dash_tableid_jail'];
 				} else {
-					echo '<p>' . __( "An admin should asign a default Google Analytics Profile.", 'ga-dash' ) . '</p><form action="' . menu_page_url( 'gadash_settings', false ) . '" method="POST">' . get_submit_button( __( "Select Domain", 'ga-dash' ), 'secondary' ) . '</form>';
+					echo '<p>' . __( "An admin should asign a default Google Analytics Profile.", 'google-analytics-dashboard-for-wp' ) . '</p><form action="' . menu_page_url( 'gadash_settings', false ) . '" method="POST">' . get_submit_button( __( "Select Domain", 'google-analytics-dashboard-for-wp' ), 'secondary' ) . '</form>';
 					return;
 				}
 			}
 			if ( ! ( $projectId ) ) {
-				echo '<p>' . __( "Something went wrong while retrieving property data. You need to create and properly configure a Google Analytics account:", 'ga-dash' ) . '</p> <form action="https://deconf.com/how-to-set-up-google-analytics-on-your-website/" method="POST">' . get_submit_button( __( "Find out more!", 'ga-dash' ), 'secondary' ) . '</form>';
+				echo '<p>' . __( "Something went wrong while retrieving property data. You need to create and properly configure a Google Analytics account:", 'google-analytics-dashboard-for-wp' ) . '</p> <form action="https://deconf.com/how-to-set-up-google-analytics-on-your-website/" method="POST">' . get_submit_button( __( "Find out more!", 'google-analytics-dashboard-for-wp' ), 'secondary' ) . '</form>';
 				return;
 			}
 			if ( isset( $_REQUEST['gadwpquery'] ) ) {
@@ -110,29 +110,29 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 
 			?>
 				<select id="ga_dash_period" name="gadwpperiod" onchange="this.form.submit()">
-        <option value="realtime" <?php selected ( "realtime", $period, true ); ?>><?php _e("Real-Time",'ga-dash'); ?></option>
-        <option value="today" <?php selected ( "today", $period, true ); ?>><?php _e("Today",'ga-dash'); ?></option>
-        <option value="yesterday" <?php selected ( "yesterday", $period, true ); ?>><?php _e("Yesterday",'ga-dash'); ?></option>
-        <option value="7daysAgo" <?php selected ( "7daysAgo", $period, true ); ?>><?php printf( __( "Last %d Days", 'ga-dash' ), 7 ); ?></option>
-        <option value="14daysAgo" <?php selected ( "14daysAgo", $period, true ); ?>><?php printf( __( "Last %d Days", 'ga-dash' ), 14 ); ?></option>
-        <option value="30daysAgo" <?php selected ( "30daysAgo", $period, true ); ?>><?php printf( __( "Last %d Days", 'ga-dash' ), 30 ); ?></option>
-        <option value="90daysAgo" <?php selected ( "90daysAgo", $period, true ); ?>><?php printf( __( "Last %d Days", 'ga-dash' ), 90 ); ?></option>
-        <option value="365daysAgo" <?php selected ( "365daysAgo", $period, true ); ?>><?php printf( _n( "%s Year", "%s Years", 1, 'ga-dash' ), __('One', 'ga-dash') ); ?></option>
-        <option value="1095daysAgo" <?php selected ( "1095daysAgo", $period, true ); ?>><?php printf( _n( "%s Year", "%s Years", 3, 'ga-dash' ), __('Three', 'ga-dash') ); ?></option>
+        <option value="realtime" <?php selected ( "realtime", $period, true ); ?>><?php _e("Real-Time",'google-analytics-dashboard-for-wp'); ?></option>
+        <option value="today" <?php selected ( "today", $period, true ); ?>><?php _e("Today",'google-analytics-dashboard-for-wp'); ?></option>
+        <option value="yesterday" <?php selected ( "yesterday", $period, true ); ?>><?php _e("Yesterday",'google-analytics-dashboard-for-wp'); ?></option>
+        <option value="7daysAgo" <?php selected ( "7daysAgo", $period, true ); ?>><?php printf( __( "Last %d Days", 'google-analytics-dashboard-for-wp' ), 7 ); ?></option>
+        <option value="14daysAgo" <?php selected ( "14daysAgo", $period, true ); ?>><?php printf( __( "Last %d Days", 'google-analytics-dashboard-for-wp' ), 14 ); ?></option>
+        <option value="30daysAgo" <?php selected ( "30daysAgo", $period, true ); ?>><?php printf( __( "Last %d Days", 'google-analytics-dashboard-for-wp' ), 30 ); ?></option>
+        <option value="90daysAgo" <?php selected ( "90daysAgo", $period, true ); ?>><?php printf( __( "Last %d Days", 'google-analytics-dashboard-for-wp' ), 90 ); ?></option>
+        <option value="365daysAgo" <?php selected ( "365daysAgo", $period, true ); ?>><?php printf( _n( "%s Year", "%s Years", 1, 'google-analytics-dashboard-for-wp' ), __('One', 'google-analytics-dashboard-for-wp') ); ?></option>
+        <option value="1095daysAgo" <?php selected ( "1095daysAgo", $period, true ); ?>><?php printf( _n( "%s Year", "%s Years", 3, 'google-analytics-dashboard-for-wp' ), __('Three', 'google-analytics-dashboard-for-wp') ); ?></option>
     </select>
 
 				<?php if ($period != 'realtime') {?>
 					<select id="ga_dash_query" name="gadwpquery" onchange="this.form.submit()">
-        <option value="sessions" <?php selected ( "sessions", $query, true ); ?>><?php _e("Sessions",'ga-dash'); ?></option>
-        <option value="users" <?php selected ( "users", $query, true ); ?>><?php _e("Users",'ga-dash'); ?></option>
-        <option value="organicSearches" <?php selected ( "organicSearches", $query, true ); ?>><?php _e("Organic",'ga-dash'); ?></option>
-        <option value="pageviews" <?php selected ( "pageviews", $query, true ); ?>><?php _e("Page Views",'ga-dash'); ?></option>
-        <option value="visitBounceRate" <?php selected ( "visitBounceRate", $query, true ); ?>><?php _e("Bounce Rate",'ga-dash'); ?></option>
-        <option value="locations" <?php selected ( "locations", $query, true ); ?>><?php _e("Location",'ga-dash'); ?></option>
-        <option value="contentpages" <?php selected ( "contentpages", $query, true ); ?>><?php _e("Pages",'ga-dash'); ?></option>
-        <option value="referrers" <?php selected ( "referrers", $query, true ); ?>><?php _e("Referrers",'ga-dash'); ?></option>
-        <option value="searches" <?php selected ( "searches", $query, true ); ?>><?php _e("Searches",'ga-dash'); ?></option>
-        <option value="trafficdetails" <?php selected ( "trafficdetails", $query, true ); ?>><?php _e("Traffic Details",'ga-dash'); ?></option>
+        <option value="sessions" <?php selected ( "sessions", $query, true ); ?>><?php _e("Sessions",'google-analytics-dashboard-for-wp'); ?></option>
+        <option value="users" <?php selected ( "users", $query, true ); ?>><?php _e("Users",'google-analytics-dashboard-for-wp'); ?></option>
+        <option value="organicSearches" <?php selected ( "organicSearches", $query, true ); ?>><?php _e("Organic",'google-analytics-dashboard-for-wp'); ?></option>
+        <option value="pageviews" <?php selected ( "pageviews", $query, true ); ?>><?php _e("Page Views",'google-analytics-dashboard-for-wp'); ?></option>
+        <option value="visitBounceRate" <?php selected ( "visitBounceRate", $query, true ); ?>><?php _e("Bounce Rate",'google-analytics-dashboard-for-wp'); ?></option>
+        <option value="locations" <?php selected ( "locations", $query, true ); ?>><?php _e("Location",'google-analytics-dashboard-for-wp'); ?></option>
+        <option value="contentpages" <?php selected ( "contentpages", $query, true ); ?>><?php _e("Pages",'google-analytics-dashboard-for-wp'); ?></option>
+        <option value="referrers" <?php selected ( "referrers", $query, true ); ?>><?php _e("Referrers",'google-analytics-dashboard-for-wp'); ?></option>
+        <option value="searches" <?php selected ( "searches", $query, true ); ?>><?php _e("Searches",'google-analytics-dashboard-for-wp'); ?></option>
+        <option value="trafficdetails" <?php selected ( "trafficdetails", $query, true ); ?>><?php _e("Traffic Details",'google-analytics-dashboard-for-wp'); ?></option>
     </select>
 				<?php }?>
 	</form>
@@ -230,27 +230,27 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
         </div>
         <div class='gadash-tdo-right' id='gadash-tdo-right'>
             <div class="gadash-bigtext">
-                <div class="gadash-bleft"><?php _e( "REFERRAL", 'ga-dash' );?></div>
+                <div class="gadash-bleft"><?php _e( "REFERRAL", 'google-analytics-dashboard-for-wp' );?></div>
                 <div class="gadash-bright">0</div>
             </div>
             <div class="gadash-bigtext">
-                <div class="gadash-bleft"><?php _e( "ORGANIC", 'ga-dash' );?></div>
+                <div class="gadash-bleft"><?php _e( "ORGANIC", 'google-analytics-dashboard-for-wp' );?></div>
                 <div class="gadash-bright">0</div>
             </div>
             <div class="gadash-bigtext">
-                <div class="gadash-bleft"><?php _e( "SOCIAL", 'ga-dash' );?></div>
+                <div class="gadash-bleft"><?php _e( "SOCIAL", 'google-analytics-dashboard-for-wp' );?></div>
                 <div class="gadash-bright">0</div>
             </div>
             <div class="gadash-bigtext">
-                <div class="gadash-bleft"><?php _e( "CAMPAIGN", 'ga-dash' );?></div>
+                <div class="gadash-bleft"><?php _e( "CAMPAIGN", 'google-analytics-dashboard-for-wp' );?></div>
                 <div class="gadash-bright">0</div>
             </div>
             <div class="gadash-bigtext">
-                <div class="gadash-bleft"><?php _e( "DIRECT", 'ga-dash' );?></div>
+                <div class="gadash-bleft"><?php _e( "DIRECT", 'google-analytics-dashboard-for-wp' );?></div>
                 <div class="gadash-bright">0</div>
             </div>
             <div class="gadash-bigtext">
-                <div class="gadash-bleft"><?php _e( "NEW", 'ga-dash' );?></div>
+                <div class="gadash-bleft"><?php _e( "NEW", 'google-analytics-dashboard-for-wp' );?></div>
                 <div class="gadash-bright">0</div>
             </div>
         </div>
@@ -352,19 +352,19 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
             			};
             		};
             		if (countrfr){
-            			tablerfr = "<table><tr><td><?php _e("REFERRALS", 'ga-dash');?> ("+countrfr+")</td></tr>"+tablerfr+"</table><br />";
+            			tablerfr = "<table><tr><td><?php _e("REFERRALS", 'google-analytics-dashboard-for-wp');?> ("+countrfr+")</td></tr>"+tablerfr+"</table><br />";
             		}
             		if (countkwd){
-            			tablekwd = "<table><tr><td><?php _e("KEYWORDS", 'ga-dash');?> ("+countkwd+")</td></tr>"+tablekwd+"</table><br />";
+            			tablekwd = "<table><tr><td><?php _e("KEYWORDS", 'google-analytics-dashboard-for-wp');?> ("+countkwd+")</td></tr>"+tablekwd+"</table><br />";
             		}
             		if (countscl){
-            			tablescl = "<table><tr><td><?php _e("SOCIAL", 'ga-dash');?> ("+countscl+")</td></tr>"+tablescl+"</table><br />";
+            			tablescl = "<table><tr><td><?php _e("SOCIAL", 'google-analytics-dashboard-for-wp');?> ("+countscl+")</td></tr>"+tablescl+"</table><br />";
             		}
             		if (countcpg){
-            			tablecpg = "<table><tr><td><?php _e("CAMPAIGN", 'ga-dash');?> ("+countcpg+")</td></tr>"+tablecpg+"</table><br />";
+            			tablecpg = "<table><tr><td><?php _e("CAMPAIGN", 'google-analytics-dashboard-for-wp');?> ("+countcpg+")</td></tr>"+tablecpg+"</table><br />";
             		}
             		if (countdrt){
-            			tabledrt = "<table><tr><td><?php _e("DIRECT", 'ga-dash');?> ("+countdrt+")</td></tr></table><br />";
+            			tabledrt = "<table><tr><td><?php _e("DIRECT", 'google-analytics-dashboard-for-wp');?> ("+countdrt+")</td></tr></table><br />";
             		}
             		return ("<p><center><strong>"+pagetitle+"</strong></center></p>"+tablerfr+tablekwd+tablescl+tablecpg+tabledrt);
             	 }
@@ -472,14 +472,14 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
             			ucustomstats.sort( function(a,b){ return b.count - a.count } );
 
             			var uvisittype = ["REFERRAL","ORGANIC","SOCIAL","CUSTOM"];
-            			document.getElementById("gadash-tdo-right").innerHTML = '<div class="gadash-bigtext"><a href="#" data-tooltip="'+gadash_generatetooltip(ureferralsstats)+'"><div class="gadash-bleft">'+'<?php _e("REFERRAL", 'ga-dash');?>'+'</a></div><div class="gadash-bright">'+countsessions(data,uvisittype[0])+'</div></div>';
-            			document.getElementById("gadash-tdo-right").innerHTML += '<div class="gadash-bigtext"><a href="#" data-tooltip="'+gadash_generatetooltip(ukeywordsstats)+'"><div class="gadash-bleft">'+'<?php _e("ORGANIC", 'ga-dash');?>'+'</a></div><div class="gadash-bright">'+countsessions(data,uvisittype[1])+'</div></div>';
-            			document.getElementById("gadash-tdo-right").innerHTML += '<div class="gadash-bigtext"><a href="#" data-tooltip="'+gadash_generatetooltip(usocialstats)+'"><div class="gadash-bleft">'+'<?php _e("SOCIAL", 'ga-dash');?>'+'</a></div><div class="gadash-bright">'+countsessions(data,uvisittype[2])+'</div></div>';
-            			document.getElementById("gadash-tdo-right").innerHTML += '<div class="gadash-bigtext"><a href="#" data-tooltip="'+gadash_generatetooltip(ucustomstats)+'"><div class="gadash-bleft">'+'<?php _e("CAMPAIGN", 'ga-dash');?>'+'</a></div><div class="gadash-bright">'+countsessions(data,uvisittype[3])+'</div></div>';
+            			document.getElementById("gadash-tdo-right").innerHTML = '<div class="gadash-bigtext"><a href="#" data-tooltip="'+gadash_generatetooltip(ureferralsstats)+'"><div class="gadash-bleft">'+'<?php _e("REFERRAL", 'google-analytics-dashboard-for-wp');?>'+'</a></div><div class="gadash-bright">'+countsessions(data,uvisittype[0])+'</div></div>';
+            			document.getElementById("gadash-tdo-right").innerHTML += '<div class="gadash-bigtext"><a href="#" data-tooltip="'+gadash_generatetooltip(ukeywordsstats)+'"><div class="gadash-bleft">'+'<?php _e("ORGANIC", 'google-analytics-dashboard-for-wp');?>'+'</a></div><div class="gadash-bright">'+countsessions(data,uvisittype[1])+'</div></div>';
+            			document.getElementById("gadash-tdo-right").innerHTML += '<div class="gadash-bigtext"><a href="#" data-tooltip="'+gadash_generatetooltip(usocialstats)+'"><div class="gadash-bleft">'+'<?php _e("SOCIAL", 'google-analytics-dashboard-for-wp');?>'+'</a></div><div class="gadash-bright">'+countsessions(data,uvisittype[2])+'</div></div>';
+            			document.getElementById("gadash-tdo-right").innerHTML += '<div class="gadash-bigtext"><a href="#" data-tooltip="'+gadash_generatetooltip(ucustomstats)+'"><div class="gadash-bleft">'+'<?php _e("CAMPAIGN", 'google-analytics-dashboard-for-wp');?>'+'</a></div><div class="gadash-bright">'+countsessions(data,uvisittype[3])+'</div></div>';
 
             			var uvisitortype = ["DIRECT","NEW"];
-            			document.getElementById("gadash-tdo-right").innerHTML += '<div class="gadash-bigtext"><div class="gadash-bleft">'+'<?php _e("DIRECT", 'ga-dash');?>'+'</div><div class="gadash-bright">'+countsessions(data,uvisitortype[0])+'</div></div>';
-            			document.getElementById("gadash-tdo-right").innerHTML += '<div class="gadash-bigtext"><div class="gadash-bleft">'+'<?php _e("NEW", 'ga-dash');?>'+'</div><div class="gadash-bright">'+countsessions(data,uvisitortype[1])+'</div></div>';
+            			document.getElementById("gadash-tdo-right").innerHTML += '<div class="gadash-bigtext"><div class="gadash-bleft">'+'<?php _e("DIRECT", 'google-analytics-dashboard-for-wp');?>'+'</div><div class="gadash-bright">'+countsessions(data,uvisitortype[0])+'</div></div>';
+            			document.getElementById("gadash-tdo-right").innerHTML += '<div class="gadash-bigtext"><div class="gadash-bleft">'+'<?php _e("NEW", 'google-analytics-dashboard-for-wp');?>'+'</div><div class="gadash-bright">'+countsessions(data,uvisitortype[1])+'</div></div>';
 
             		});
                };
@@ -499,7 +499,7 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
         	        NProgress.start();
         		} catch(e) {
         			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
-        			jQuery("#gadash-progressbar").html("<?php _e("A JavaScript Error is blocking plugin resources!", 'ga-dash'); ?>");
+        			jQuery("#gadash-progressbar").html("<?php _e("A JavaScript Error is blocking plugin resources!", 'google-analytics-dashboard-for-wp'); ?>");
         		}
 
                 jQuery.post(ajaxurl, {action: "gadash_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "<?php echo 'trafficchannels,' . $query; ?>",gadash_security_widget_reports: "<?php echo wp_create_nonce('gadash_get_widgetreports'); ?>"}, function(response){
@@ -511,12 +511,12 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
                             	google.setOnLoadCallback(ga_dash_drawtrafficchannels(gadash_trafficchannels));
                              } else {
                      			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
-                     			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
+                     			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'google-analytics-dashboard-for-wp'); ?>");
                      			console.log("\n********************* GADWP Log ********************* \n\n"+response[0]);
                      		}
                     	}else{
                             jQuery("#gadash-trafficchannels").css({"background-color":"#F7F7F7","height":"auto","padding-top":"125px","padding-bottom":"125px","color":"#000","text-align":"center"});
-                            jQuery("#gadash-trafficchannels").html("<?php _e("This report is unavailable", 'ga-dash'); ?> ("+response[0]+")");
+                            jQuery("#gadash-trafficchannels").html("<?php _e("This report is unavailable", 'google-analytics-dashboard-for-wp'); ?> ("+response[0]+")");
                         }
 
 	                    if (!jQuery.isNumeric(response[1])){
@@ -525,17 +525,17 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 	                    	   google.setOnLoadCallback(ga_dash_drawprs(gadash_prs));
 	                        } else {
 	                			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
-	                			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
+	                			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'google-analytics-dashboard-for-wp'); ?>");
 	                			console.log("\n********************* GADWP Log ********************* \n\n"+response[1]);
 	                		}
 	                	}else{
 	                        jQuery("#gadash-prs").css({"background-color":"#F7F7F7","height":"auto","padding-top":"125px","padding-bottom":"125px","color":"#000","text-align":"center"});
-	                        jQuery("#gadash-prs").html("<?php _e("This report is unavailable", 'ga-dash'); ?> ("+response[1]+")");
+	                        jQuery("#gadash-prs").html("<?php _e("This report is unavailable", 'google-analytics-dashboard-for-wp'); ?> ("+response[1]+")");
 	                    }
 
                     }else{
              			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
-             			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
+             			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'google-analytics-dashboard-for-wp'); ?>");
              			console.log("\n********************* GADWP Log ********************* \n\n"+response);
                     }
 					NProgress.done();
@@ -584,7 +584,7 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
         	        NProgress.start();
         		} catch(e) {
         			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
-        			jQuery("#gadash-progressbar").html("<?php _e("A JavaScript Error is blocking plugin resources!", 'ga-dash'); ?>");
+        			jQuery("#gadash-progressbar").html("<?php _e("A JavaScript Error is blocking plugin resources!", 'google-analytics-dashboard-for-wp'); ?>");
         		}
 
                 jQuery.post(ajaxurl, {action: "gadash_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "trafficchannels,medium,visitorType,source,socialNetwork",gadash_security_widget_reports: "<?php echo wp_create_nonce('gadash_get_widgetreports'); ?>"}, function(response){
@@ -596,12 +596,12 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 	                   		    google.setOnLoadCallback(ga_dash_drawtrafficchannels(gadash_trafficchannels));
 	                         } else {
 	                 			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
-	                 			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
+	                 			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'google-analytics-dashboard-for-wp'); ?>");
 	                 			console.log("\n********************* GADWP Log ********************* \n\n"+response[0]);
 	                 		}
 	                	}else{
 	                        jQuery("#gadash-trafficchannels").css({"background-color":"#F7F7F7","height":"auto","padding-top":"125px","padding-bottom":"125px","color":"#000","text-align":"center"});
-	                        jQuery("#gadash-trafficchannels").html("<?php _e("This report is unavailable", 'ga-dash'); ?> ("+response[0]+")");
+	                        jQuery("#gadash-trafficchannels").html("<?php _e("This report is unavailable", 'google-analytics-dashboard-for-wp'); ?> ("+response[0]+")");
 	                    }
 
 	                    if (!jQuery.isNumeric(response[1])){
@@ -610,12 +610,12 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 	                   		    google.setOnLoadCallback(ga_dash_drawtrafficmediums(gadash_trafficmediums));
 	                         } else {
 	                 			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
-	                 			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
+	                 			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'google-analytics-dashboard-for-wp'); ?>");
 	                 			console.log("\n********************* GADWP Log ********************* \n\n"+response[1]);
 	                 		}
 	                	}else{
 	                        jQuery("#gadash-trafficmediums").css({"background-color":"#F7F7F7","height":"auto","padding-top":"80px","padding-bottom":"80px","color":"#000","text-align":"center"});
-	                        jQuery("#gadash-trafficmediums").html("<?php _e("This report is unavailable", 'ga-dash'); ?> ("+response[1]+")");
+	                        jQuery("#gadash-trafficmediums").html("<?php _e("This report is unavailable", 'google-analytics-dashboard-for-wp'); ?> ("+response[1]+")");
 	                    }
 
 	                    if (!jQuery.isNumeric(response[2])){
@@ -624,12 +624,12 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 	                    		google.setOnLoadCallback(ga_dash_drawtraffictype(gadash_traffictype));
 	                         } else {
 	                 			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
-	                 			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
+	                 			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'google-analytics-dashboard-for-wp'); ?>");
 	                 			console.log("\n********************* GADWP Log ********************* \n\n"+response[2]);
 	                 		}
 	                	}else{
 	                        jQuery("#gadash-traffictype").css({"background-color":"#F7F7F7","height":"auto","padding-top":"80px","padding-bottom":"80px","color":"#000","text-align":"center"});
-	                        jQuery("#gadash-traffictype").html("<?php _e("This report is unavailable", 'ga-dash'); ?> ("+response[2]+")");
+	                        jQuery("#gadash-traffictype").html("<?php _e("This report is unavailable", 'google-analytics-dashboard-for-wp'); ?> ("+response[2]+")");
 	                    }
 
 	                    if (!jQuery.isNumeric(response[3])){
@@ -638,12 +638,12 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 	                        	google.setOnLoadCallback(ga_dash_drawtrafficorganic(gadash_trafficorganic));
 	                         } else {
 	                 			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
-	                 			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
+	                 			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'google-analytics-dashboard-for-wp'); ?>");
 	                 			console.log("\n********************* GADWP Log ********************* \n\n"+response[3]);
 	                 		}
 	                	}else{
 	                        jQuery("#gadash-trafficorganic").css({"background-color":"#F7F7F7","height":"auto","padding-top":"80px","padding-bottom":"80px","color":"#000","text-align":"center"});
-	                        jQuery("#gadash-trafficorganic").html("<?php _e("This report is unavailable", 'ga-dash'); ?> ("+response[3]+")");
+	                        jQuery("#gadash-trafficorganic").html("<?php _e("This report is unavailable", 'google-analytics-dashboard-for-wp'); ?> ("+response[3]+")");
 	                    }
 
 	                    if (!jQuery.isNumeric(response[4])){
@@ -652,17 +652,17 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 	                   		    google.setOnLoadCallback(ga_dash_drawsocialnetworks(gadash_socialnetworks));
 	                         } else {
 	                 			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
-	                 			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
+	                 			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'google-analytics-dashboard-for-wp'); ?>");
 	                 			console.log("\n********************* GADWP Log ********************* \n\n"+response[4]);
 	                 		}
 	                	}else{
 	                        jQuery("#gadash-socialnetworks").css({"background-color":"#F7F7F7","height":"auto","padding-top":"80px","padding-bottom":"80px","color":"#000","text-align":"center"});
-	                        jQuery("#gadash-socialnetworks").html("<?php _e("This report is unavailable", 'ga-dash'); ?> ("+response[4]+")");
+	                        jQuery("#gadash-socialnetworks").html("<?php _e("This report is unavailable", 'google-analytics-dashboard-for-wp'); ?> ("+response[4]+")");
 	                    }
 
                     }else{
              			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
-             			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
+             			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'google-analytics-dashboard-for-wp'); ?>");
              			console.log("\n********************* GADWP Log ********************* \n\n"+response);
                     }
 					NProgress.done();
@@ -675,7 +675,7 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 							tooltipText: 'percentage',
 							legend: 'none',
 							chartArea: {width: '99%',height: '80%'},
-							title: '<?php _e( "Traffic Mediums", 'ga-dash' ); ?>',
+							title: '<?php _e( "Traffic Mediums", 'google-analytics-dashboard-for-wp' ); ?>',
 							colors:['<?php echo esc_html($this->gadwp->config->options ['ga_dash_style']); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], - 10 )); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], + 20 )); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], + 10 )); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], - 20 )); ?>']
 						};
 
@@ -690,7 +690,7 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 							tooltipText: 'percentage',
 							legend: 'none',
 							chartArea: {width: '99%',height: '80%'},
-							title: '<?php _e( "Visitor Type", 'ga-dash' ); ?>',
+							title: '<?php _e( "Visitor Type", 'google-analytics-dashboard-for-wp' ); ?>',
 							colors:['<?php echo esc_html($this->gadwp->config->options ['ga_dash_style']); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], - 10 )); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], + 20 )); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], + 10 )); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], - 20 )); ?>']
 						};
 
@@ -705,7 +705,7 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 							tooltipText: 'percentage',
 							legend: 'none',
 							chartArea: {width: '99%',height: '80%'},
-							title: '<?php _e( "Social Networks", 'ga-dash' ); ?>',
+							title: '<?php _e( "Social Networks", 'google-analytics-dashboard-for-wp' ); ?>',
 							colors:['<?php echo esc_html($this->gadwp->config->options ['ga_dash_style']); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], - 10 )); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], + 20 )); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], + 10 )); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], - 20 )); ?>']
 						};
 
@@ -720,7 +720,7 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 							tooltipText: 'percentage',
 							legend: 'none',
 							chartArea: {width: '99%',height: '80%'},
-							title: '<?php _e( "Search Engines", 'ga-dash' ); ?>',
+							title: '<?php _e( "Search Engines", 'google-analytics-dashboard-for-wp' ); ?>',
 							colors:['<?php echo esc_html($this->gadwp->config->options ['ga_dash_style']); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], - 10 )); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], + 20 )); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], + 10 )); ?>','<?php echo esc_html(GADWP_Tools::colourVariator ( $this->gadwp->config->options ['ga_dash_style'], - 20 )); ?>']
 						};
 
@@ -751,7 +751,7 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
         	        NProgress.start();
         		} catch(e) {
         			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
-        			jQuery("#gadash-progressbar").html("<?php _e("A JavaScript Error is blocking plugin resources!", 'ga-dash'); ?>");
+        			jQuery("#gadash-progressbar").html("<?php _e("A JavaScript Error is blocking plugin resources!", 'google-analytics-dashboard-for-wp'); ?>");
         		}
 
                 jQuery.post(ajaxurl, {action: "gadash_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "<?php echo $query; ?>",gadash_security_widget_reports: "<?php echo wp_create_nonce('gadash_get_widgetreports'); ?>"}, function(response){
@@ -764,19 +764,19 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 	                    		google.setOnLoadCallback(ga_dash_drawlocations(gadash_locations));
 	                         } else {
 	                 			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
-	                 			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
+	                 			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'google-analytics-dashboard-for-wp'); ?>");
 	                 			console.log("\n********************* GADWP Log ********************* \n\n"+response[0]);
 	                 		}
 	                	}else{
 	                        jQuery("#gadash-map").css({"background-color":"#F7F7F7","height":"auto","padding-top":"125px","padding-bottom":"125px","color":"#000","text-align":"center"});
-	                        jQuery("#gadash-map").html("<?php _e("This report is unavailable", 'ga-dash'); ?> ("+response[0]+")");
+	                        jQuery("#gadash-map").html("<?php _e("This report is unavailable", 'google-analytics-dashboard-for-wp'); ?> ("+response[0]+")");
 	                        jQuery("#gadash-locations").css({"background-color":"#F7F7F7","height":"auto","padding-top":"125px","padding-bottom":"125px","color":"#000","text-align":"center"});
-	                        jQuery("#gadash-locations").html("<?php _e("This report is unavailable", 'ga-dash'); ?> ("+response[0]+")");
+	                        jQuery("#gadash-locations").html("<?php _e("This report is unavailable", 'google-analytics-dashboard-for-wp'); ?> ("+response[0]+")");
 	                    }
 
                     }else{
              			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
-             			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
+             			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'google-analytics-dashboard-for-wp'); ?>");
              			console.log("\n********************* GADWP Log ********************* \n\n"+response);
                     }
 					NProgress.done();
@@ -820,27 +820,27 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 <div id="gadash-bottomstats" class="gadash-wrapper">
     <div class="inside">
         <div class="small-box">
-            <h3><?php _e( "Sessions", 'ga-dash' );?></h3>
+            <h3><?php _e( "Sessions", 'google-analytics-dashboard-for-wp' );?></h3>
             <p id="gdsessions">&nbsp;</p>
         </div>
         <div class="small-box">
-            <h3><?php _e( "Users", 'ga-dash' );?></h3>
+            <h3><?php _e( "Users", 'google-analytics-dashboard-for-wp' );?></h3>
             <p id="gdusers">&nbsp;</p>
         </div>
         <div class="small-box">
-            <h3><?php _e( "Page Views", 'ga-dash' );?></h3>
+            <h3><?php _e( "Page Views", 'google-analytics-dashboard-for-wp' );?></h3>
             <p id="gdpageviews">&nbsp;</p>
         </div>
         <div class="small-box">
-            <h3><?php _e( "Bounce Rate", 'ga-dash' );?></h3>
+            <h3><?php _e( "Bounce Rate", 'google-analytics-dashboard-for-wp' );?></h3>
             <p id="gdbouncerate">&nbsp;</p>
         </div>
         <div class="small-box">
-            <h3><?php _e( "Organic Search", 'ga-dash' );?></h3>
+            <h3><?php _e( "Organic Search", 'google-analytics-dashboard-for-wp' );?></h3>
             <p id="gdorganicsearch">&nbsp;</p>
         </div>
         <div class="small-box">
-            <h3><?php _e( "Pages/Session", 'ga-dash' );?></h3>
+            <h3><?php _e( "Pages/Session", 'google-analytics-dashboard-for-wp' );?></h3>
             <p id="gdpagespervisit">&nbsp;</p>
         </div>
     </div>
@@ -855,7 +855,7 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
         NProgress.start();
 	} catch(e) {
 		jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
-		jQuery("#gadash-progressbar").html("<?php _e("A JavaScript Error is blocking plugin resources!", 'ga-dash'); ?>");
+		jQuery("#gadash-progressbar").html("<?php _e("A JavaScript Error is blocking plugin resources!", 'google-analytics-dashboard-for-wp'); ?>");
 	}
 
     jQuery.post(ajaxurl, {action: "gadash_get_widgetreports",projectId: "<?php echo $projectId; ?>",from: "<?php echo $from; ?>",to: "<?php echo $to; ?>",query: "<?php echo $query . ',bottomstats'; ?>",gadash_security_widget_reports: "<?php echo wp_create_nonce('gadash_get_widgetreports'); ?>"}, function(response){
@@ -867,12 +867,12 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 	       		    google.setOnLoadCallback(ga_dash_drawmainchart(gadash_mainchart));
 	             } else {
 	     			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
-	     			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
+	     			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'google-analytics-dashboard-for-wp'); ?>");
 	     			console.log("\n********************* GADWP Log ********************* \n\n"+response[0]);
 	     		}
 	    	}else{
 	            jQuery("#gadash-mainchart").css({"background-color":"#F7F7F7","height":"auto","padding-top":"125px","padding-bottom":"125px","color":"#000","text-align":"center"});
-	            jQuery("#gadash-mainchart").html("<?php _e("This report is unavailable", 'ga-dash'); ?> ("+response[0]+")");
+	            jQuery("#gadash-mainchart").html("<?php _e("This report is unavailable", 'google-analytics-dashboard-for-wp'); ?> ("+response[0]+")");
 	        }
 
 	        if (!jQuery.isNumeric(response[1])){
@@ -881,17 +881,17 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 	       		    ga_dash_drawbottomstats(gadash_bottomstats);
 	             } else {
 	     			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
-	     			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
+	     			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'google-analytics-dashboard-for-wp'); ?>");
 	     			console.log("\n********************* GADWP Log ********************* \n\n"+response[1]);
 	     		}
 	    	}else{
 	            jQuery("#gadash-bottomstats").css({"background-color":"#F7F7F7","height":"auto","padding-top":"40px","padding-bottom":"40px","color":"#000","text-align":"center","width": "98%"});
-	            jQuery("#gadash-bottomstats").html("<?php _e("This report is unavailable", 'ga-dash'); ?> ("+response[1]+")");
+	            jQuery("#gadash-bottomstats").html("<?php _e("This report is unavailable", 'google-analytics-dashboard-for-wp'); ?> ("+response[1]+")");
 	        }
 
         }else{
  			jQuery("#gadash-progressbar").css({"margin-top":"3px","padding-left":"5px","height":"auto","color":"#000","border-left":"5px solid red"});
- 			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'ga-dash'); ?>");
+ 			jQuery("#gadash-progressbar").html("<?php _e("Invalid response, more details in JavaScript Console (F12).", 'google-analytics-dashboard-for-wp'); ?>");
  			console.log("\n********************* GADWP Log ********************* \n\n"+response);
         }
 		NProgress.done();

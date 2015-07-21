@@ -38,12 +38,12 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 			global $wp_version;
 			if ( current_user_can( 'manage_options' ) ) {
 				include ( GADWP_DIR . 'admin/settings.php' );
-				add_menu_page( __( "Google Analytics", 'ga-dash' ), __( "Google Analytics", 'ga-dash' ), 'manage_options', 'gadash_settings', array( 'GADWP_Settings', 'general_settings' ), version_compare( $wp_version, '3.8.0', '>=' ) ? 'dashicons-chart-area' : GADWP_URL . 'admin/images/gadash-icon.png' );
-				add_submenu_page( 'gadash_settings', __( "General Settings", 'ga-dash' ), __( "General Settings", 'ga-dash' ), 'manage_options', 'gadash_settings', array( 'GADWP_Settings', 'general_settings' ) );
-				add_submenu_page( 'gadash_settings', __( "Backend Settings", 'ga-dash' ), __( "Backend Settings", 'ga-dash' ), 'manage_options', 'gadash_backend_settings', array( 'GADWP_Settings', 'backend_settings' ) );
-				add_submenu_page( 'gadash_settings', __( "Frontend Settings", 'ga-dash' ), __( "Frontend Settings", 'ga-dash' ), 'manage_options', 'gadash_frontend_settings', array( 'GADWP_Settings', 'frontend_settings' ) );
-				add_submenu_page( 'gadash_settings', __( "Tracking Code", 'ga-dash' ), __( "Tracking Code", 'ga-dash' ), 'manage_options', 'gadash_tracking_settings', array( 'GADWP_Settings', 'tracking_settings' ) );
-				add_submenu_page( 'gadash_settings', __( "Errors & Debug", 'ga-dash' ), __( "Errors & Debug", 'ga-dash' ), 'manage_options', 'gadash_errors_debugging', array( 'GADWP_Settings', 'errors_debugging' ) );
+				add_menu_page( __( "Google Analytics", 'google-analytics-dashboard-for-wp' ), __( "Google Analytics", 'google-analytics-dashboard-for-wp' ), 'manage_options', 'gadash_settings', array( 'GADWP_Settings', 'general_settings' ), version_compare( $wp_version, '3.8.0', '>=' ) ? 'dashicons-chart-area' : GADWP_URL . 'admin/images/gadash-icon.png' );
+				add_submenu_page( 'gadash_settings', __( "General Settings", 'google-analytics-dashboard-for-wp' ), __( "General Settings", 'google-analytics-dashboard-for-wp' ), 'manage_options', 'gadash_settings', array( 'GADWP_Settings', 'general_settings' ) );
+				add_submenu_page( 'gadash_settings', __( "Backend Settings", 'google-analytics-dashboard-for-wp' ), __( "Backend Settings", 'google-analytics-dashboard-for-wp' ), 'manage_options', 'gadash_backend_settings', array( 'GADWP_Settings', 'backend_settings' ) );
+				add_submenu_page( 'gadash_settings', __( "Frontend Settings", 'google-analytics-dashboard-for-wp' ), __( "Frontend Settings", 'google-analytics-dashboard-for-wp' ), 'manage_options', 'gadash_frontend_settings', array( 'GADWP_Settings', 'frontend_settings' ) );
+				add_submenu_page( 'gadash_settings', __( "Tracking Code", 'google-analytics-dashboard-for-wp' ), __( "Tracking Code", 'google-analytics-dashboard-for-wp' ), 'manage_options', 'gadash_tracking_settings', array( 'GADWP_Settings', 'tracking_settings' ) );
+				add_submenu_page( 'gadash_settings', __( "Errors & Debug", 'google-analytics-dashboard-for-wp' ), __( "Errors & Debug", 'google-analytics-dashboard-for-wp' ), 'manage_options', 'gadash_errors_debugging', array( 'GADWP_Settings', 'errors_debugging' ) );
 			}
 		}
 
@@ -54,9 +54,9 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 			global $wp_version;
 			if ( current_user_can( 'manage_netwrok' ) ) {
 				include ( GADWP_DIR . 'admin/settings.php' );
-				add_menu_page( __( "Google Analytics", 'ga-dash' ), "Google Analytics", 'manage_netwrok', 'gadash_settings', array( 'GADWP_Settings', 'general_settings_network' ), version_compare( $wp_version, '3.8.0', '>=' ) ? 'dashicons-chart-area' : GADWP_URL . 'admin/images/gadash-icon.png' );
-				add_submenu_page( 'gadash_settings', __( "General Settings", 'ga-dash' ), __( "General Settings", 'ga-dash' ), 'manage_netwrok', 'gadash_settings', array( 'GADWP_Settings', 'general_settings_network' ) );
-				add_submenu_page( 'gadash_settings', __( "Errors & Debug", 'ga-dash' ), __( "Errors & Debug", 'ga-dash' ), 'manage_network', 'gadash_errors_debugging', array( 'GADWP_Settings', 'errors_debugging' ) );
+				add_menu_page( __( "Google Analytics", 'google-analytics-dashboard-for-wp' ), "Google Analytics", 'manage_netwrok', 'gadash_settings', array( 'GADWP_Settings', 'general_settings_network' ), version_compare( $wp_version, '3.8.0', '>=' ) ? 'dashicons-chart-area' : GADWP_URL . 'admin/images/gadash-icon.png' );
+				add_submenu_page( 'gadash_settings', __( "General Settings", 'google-analytics-dashboard-for-wp' ), __( "General Settings", 'google-analytics-dashboard-for-wp' ), 'manage_netwrok', 'gadash_settings', array( 'GADWP_Settings', 'general_settings_network' ) );
+				add_submenu_page( 'gadash_settings', __( "Errors & Debug", 'google-analytics-dashboard-for-wp' ), __( "Errors & Debug", 'google-analytics-dashboard-for-wp' ), 'manage_network', 'gadash_errors_debugging', array( 'GADWP_Settings', 'errors_debugging' ) );
 			}
 		}
 
@@ -156,43 +156,43 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 						'ajaxurl' => admin_url( 'admin-ajax.php' ),
 						'security' => wp_create_nonce( 'gadwp_backend_item_reports' ),
 						'dateList' => array(
-							'today' => __( "Today", 'ga-dash' ),
-							'yesterday' => __( "Yesterday", 'ga-dash' ),
-							'7daysAgo' => sprintf( __( "Last %d Days", 'ga-dash' ), 7 ),
-							'14daysAgo' => sprintf( __( "Last %d Days", 'ga-dash' ), 14 ),
-							'30daysAgo' => sprintf( __( "Last %d Days", 'ga-dash' ), 30 ),
-							'90daysAgo' => sprintf( __( "Last %d Days", 'ga-dash' ), 90 ),
-							'365daysAgo' =>  sprintf( _n( "%s Year", "%s Years", 1, 'ga-dash' ), __('One', 'ga-dash') ),
-							'1095daysAgo' =>  sprintf( _n( "%s Year", "%s Years", 3, 'ga-dash' ), __('Three', 'ga-dash') ),
+							'today' => __( "Today", 'google-analytics-dashboard-for-wp' ),
+							'yesterday' => __( "Yesterday", 'google-analytics-dashboard-for-wp' ),
+							'7daysAgo' => sprintf( __( "Last %d Days", 'google-analytics-dashboard-for-wp' ), 7 ),
+							'14daysAgo' => sprintf( __( "Last %d Days", 'google-analytics-dashboard-for-wp' ), 14 ),
+							'30daysAgo' => sprintf( __( "Last %d Days", 'google-analytics-dashboard-for-wp' ), 30 ),
+							'90daysAgo' => sprintf( __( "Last %d Days", 'google-analytics-dashboard-for-wp' ), 90 ),
+							'365daysAgo' =>  sprintf( _n( "%s Year", "%s Years", 1, 'google-analytics-dashboard-for-wp' ), __('One', 'google-analytics-dashboard-for-wp') ),
+							'1095daysAgo' =>  sprintf( _n( "%s Year", "%s Years", 3, 'google-analytics-dashboard-for-wp' ), __('Three', 'google-analytics-dashboard-for-wp') ),
 						),
 						'reportList' => array(
-							'uniquePageviews' => __( "Unique Views", 'ga-dash' ),
-							'users' => __( "Users", 'ga-dash' ),
-							'organicSearches' => __( "Organic", 'ga-dash' ),
-							'pageviews' => __( "Page Views", 'ga-dash' ),
-							'visitBounceRate' => __( "Bounce Rate", 'ga-dash' ),
-							'locations' => __( "Location", 'ga-dash' ),
-							'referrers' => __( "Referrers", 'ga-dash' ),
-							'searches' => __( "Searches", 'ga-dash' ),
-							'trafficdetails' => __( "Traffic Details", 'ga-dash' )
+							'uniquePageviews' => __( "Unique Views", 'google-analytics-dashboard-for-wp' ),
+							'users' => __( "Users", 'google-analytics-dashboard-for-wp' ),
+							'organicSearches' => __( "Organic", 'google-analytics-dashboard-for-wp' ),
+							'pageviews' => __( "Page Views", 'google-analytics-dashboard-for-wp' ),
+							'visitBounceRate' => __( "Bounce Rate", 'google-analytics-dashboard-for-wp' ),
+							'locations' => __( "Location", 'google-analytics-dashboard-for-wp' ),
+							'referrers' => __( "Referrers", 'google-analytics-dashboard-for-wp' ),
+							'searches' => __( "Searches", 'google-analytics-dashboard-for-wp' ),
+							'trafficdetails' => __( "Traffic Details", 'google-analytics-dashboard-for-wp' )
 						),
 						'i18n' => array(
-							__( "A JavaScript Error is blocking plugin resources!", 'ga-dash' ), //0
-							__( "Traffic Mediums", 'ga-dash' ),
-							__( "Visitor Type", 'ga-dash' ),
-							__( "Social Networks", 'ga-dash' ),
-							__( "Search Engines", 'ga-dash' ),
-							__( "Unique Views", 'ga-dash' ),
-							__( "Users", 'ga-dash' ),
-							__( "Page Views", 'ga-dash' ),
-							__( "Bounce Rate", 'ga-dash' ),
-							__( "Organic Search", 'ga-dash' ),
-							__( "Pages/Session", 'ga-dash' ),
-							__( "Invalid response, more details in JavaScript Console (F12).", 'ga-dash' ),
-							__( "Not enough data collected", 'ga-dash' ),
-							__( "This report is unavailable", 'ga-dash' ),
-							__( "report generated by", 'ga-dash' ), //14
-							__( "This plugin needs an authorization:", 'ga-dash' ) . ' <a href="' . menu_page_url( 'gadash_settings', false ) . '">' . __( "authorize the plugin", 'ga-dash' ) . '</a>.',
+							__( "A JavaScript Error is blocking plugin resources!", 'google-analytics-dashboard-for-wp' ), //0
+							__( "Traffic Mediums", 'google-analytics-dashboard-for-wp' ),
+							__( "Visitor Type", 'google-analytics-dashboard-for-wp' ),
+							__( "Social Networks", 'google-analytics-dashboard-for-wp' ),
+							__( "Search Engines", 'google-analytics-dashboard-for-wp' ),
+							__( "Unique Views", 'google-analytics-dashboard-for-wp' ),
+							__( "Users", 'google-analytics-dashboard-for-wp' ),
+							__( "Page Views", 'google-analytics-dashboard-for-wp' ),
+							__( "Bounce Rate", 'google-analytics-dashboard-for-wp' ),
+							__( "Organic Search", 'google-analytics-dashboard-for-wp' ),
+							__( "Pages/Session", 'google-analytics-dashboard-for-wp' ),
+							__( "Invalid response, more details in JavaScript Console (F12).", 'google-analytics-dashboard-for-wp' ),
+							__( "Not enough data collected", 'google-analytics-dashboard-for-wp' ),
+							__( "This report is unavailable", 'google-analytics-dashboard-for-wp' ),
+							__( "report generated by", 'google-analytics-dashboard-for-wp' ), //14
+							__( "This plugin needs an authorization:", 'google-analytics-dashboard-for-wp' ) . ' <a href="' . menu_page_url( 'gadash_settings', false ) . '">' . __( "authorize the plugin", 'google-analytics-dashboard-for-wp' ) . '</a>.',
 						),
 						'colorVariations' => GADWP_Tools::variations( $this->gadwp->config->options['ga_dash_style'] ),
 						'region' => $region,
@@ -224,7 +224,7 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 		 * @return array
 		 */
 		public function settings_link( $links ) {
-			$settings_link = '<a href="' . esc_url( get_admin_url( null, 'admin.php?page=gadash_settings' ) ) . '">' . __( "Settings", 'ga-dash' ) . '</a>';
+			$settings_link = '<a href="' . esc_url( get_admin_url( null, 'admin.php?page=gadash_settings' ) ) . '">' . __( "Settings", 'google-analytics-dashboard-for-wp' ) . '</a>';
 			array_unshift( $links, $settings_link );
 			return $links;
 		}
@@ -236,7 +236,7 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 			if ( get_option( 'gadwp_got_updated' ) ) :
 				?>
 <div id="gadwp-notice" class="notice is-dismissible">
-    <p><?php echo sprintf( __('Google Analytics Dashboard for WP has been updated to version %s.', 'ga-dash' ), GADWP_CURRENT_VERSION).' '.sprintf( __('For details, check out %1$s and %2$s.', 'ga-dash' ), sprintf(' <a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_notice&utm_medium=link&utm_content=release_notice&utm_campaign=gadwp">%s</a> ', __('the documentation page', 'ga-dash') ), sprintf(' <a href="%1$s">%2$s</a>', esc_url( get_admin_url( null, 'admin.php?page=gadash_settings' ) ), __('the plugin&#39;s settings page', 'ga-dash') ) ); ?></p>
+    <p><?php echo sprintf( __('Google Analytics Dashboard for WP has been updated to version %s.', 'google-analytics-dashboard-for-wp' ), GADWP_CURRENT_VERSION).' '.sprintf( __('For details, check out %1$s and %2$s.', 'google-analytics-dashboard-for-wp' ), sprintf(' <a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_notice&utm_medium=link&utm_content=release_notice&utm_campaign=gadwp">%s</a> ', __('the documentation page', 'google-analytics-dashboard-for-wp') ), sprintf(' <a href="%1$s">%2$s</a>', esc_url( get_admin_url( null, 'admin.php?page=gadash_settings' ) ), __('the plugin&#39;s settings page', 'google-analytics-dashboard-for-wp') ) ); ?></p>
 </div>
 
 			<?php

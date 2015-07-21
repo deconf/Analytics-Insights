@@ -86,18 +86,18 @@ final class GADWP_Settings {
 		}
 		$options = self::update_options( 'frontend' );
 		if ( isset( $_POST['options']['ga_dash_hidden'] ) ) {
-			$message = "<div class='updated'><p>" . __( "Settings saved.", 'ga-dash' ) . "</p></div>";
+			$message = "<div class='updated'><p>" . __( "Settings saved.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			if ( ! ( isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' ) ) ) {
-				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'ga-dash' ) . "</p></div>";
+				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
 		if ( ! $gadwp->config->options['ga_dash_tableid_jail'] || ! $gadwp->config->options['ga_dash_token'] ) {
-			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'ga-dash' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_errors_debugging', false ), __( 'Errors & Debug', 'ga-dash' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_settings', false ), __( 'authorize the plugin', 'ga-dash' ) ) ) );
+			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'google-analytics-dashboard-for-wp' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_errors_debugging', false ), __( 'Errors & Debug', 'google-analytics-dashboard-for-wp' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_settings', false ), __( 'authorize the plugin', 'google-analytics-dashboard-for-wp' ) ) ) );
 		}
 		?>
 <form name="ga_dash_form" method="post" action="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>">
     <div class="wrap">
-	<?php echo "<h2>" . __( "Google Analytics Frontend Settings", 'ga-dash' ) . "</h2>"; ?><hr>
+	<?php echo "<h2>" . __( "Google Analytics Frontend Settings", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?><hr>
     </div>
     <div id="poststuff">
         <div id="post-body" class="metabox-holder columns-2">
@@ -107,10 +107,10 @@ final class GADWP_Settings {
 					<?php if (isset($message)) echo $message; ?>
 						<table class="options">
                             <tr>
-                                <td colspan="2"><?php echo "<h2>" . __( "Permissions", 'ga-dash' ) . "</h2>"; ?></td>
+                                <td colspan="2"><?php echo "<h2>" . __( "Permissions", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
                             </tr>
                             <tr>
-                                <td class="roles title"><label for="ga_dash_access_front"><?php _e("Show stats to:", 'ga-dash' ); ?></label></td>
+                                <td class="roles title"><label for="ga_dash_access_front"><?php _e("Show stats to:", 'google-analytics-dashboard-for-wp' ); ?></label></td>
                                 <td class="roles">
                                		<?php
 		if ( ! isset( $wp_roles ) ) {
@@ -151,14 +151,14 @@ final class GADWP_Settings {
                                             <div class="onoffswitch-switch"></div>
                                         </label>
                                     </div>
-                                    <div class="switch-desc"><?php echo " ".__("enable web page reports on frontend", 'ga-dash' );?></div>
+                                    <div class="switch-desc"><?php echo " ".__("enable web page reports on frontend", 'google-analytics-dashboard-for-wp' );?></div>
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="2"><hr></td>
                             </tr>
                             <tr>
-                                <td colspan="2" class="submit"><input type="submit" name="Submit" class="button button-primary" value="<?php _e('Save Changes', 'ga-dash' ) ?>" /></td>
+                                <td colspan="2" class="submit"><input type="submit" name="Submit" class="button button-primary" value="<?php _e('Save Changes', 'google-analytics-dashboard-for-wp' ) ?>" /></td>
                             </tr>
                         </table>
                         <input type="hidden" name="options[ga_dash_hidden]" value="Y">
@@ -181,18 +181,18 @@ final class GADWP_Settings {
 		}
 		$options = self::update_options( 'backend' );
 		if ( isset( $_POST['options']['ga_dash_hidden'] ) ) {
-			$message = "<div class='updated'><p>" . __( "Settings saved.", 'ga-dash' ) . "</p></div>";
+			$message = "<div class='updated'><p>" . __( "Settings saved.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			if ( ! ( isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' ) ) ) {
-				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'ga-dash' ) . "</p></div>";
+				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
 		if ( ! $gadwp->config->options['ga_dash_tableid_jail'] || ! $gadwp->config->options['ga_dash_token'] ) {
-			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'ga-dash' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_errors_debugging', false ), __( 'Errors & Debug', 'ga-dash' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_settings', false ), __( 'authorize the plugin', 'ga-dash' ) ) ) );
+			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'google-analytics-dashboard-for-wp' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_errors_debugging', false ), __( 'Errors & Debug', 'google-analytics-dashboard-for-wp' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_settings', false ), __( 'authorize the plugin', 'google-analytics-dashboard-for-wp' ) ) ) );
 		}
 		?>
 <form name="ga_dash_form" method="post" action="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>">
     <div class="wrap">
-			<?php echo "<h2>" . __( "Google Analytics Backend Settings", 'ga-dash' ) . "</h2>"; ?><hr>
+			<?php echo "<h2>" . __( "Google Analytics Backend Settings", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?><hr>
     </div>
     <div id="poststuff">
         <div id="post-body" class="metabox-holder columns-2">
@@ -202,10 +202,10 @@ final class GADWP_Settings {
 					<?php if (isset($message)) echo $message; ?>
 						<table class="options">
                             <tr>
-                                <td colspan="2"><?php echo "<h2>" . __( "Permissions", 'ga-dash' ) . "</h2>"; ?></td>
+                                <td colspan="2"><?php echo "<h2>" . __( "Permissions", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
                             </tr>
                             <tr>
-                                <td class="roles title"><label for="ga_dash_access_back"><?php _e("Show stats to:", 'ga-dash' ); ?></label></td>
+                                <td class="roles title"><label for="ga_dash_access_back"><?php _e("Show stats to:", 'google-analytics-dashboard-for-wp' ); ?></label></td>
                                 <td class="roles">
 									<?php
 		if ( ! isset( $wp_roles ) ) {
@@ -248,7 +248,7 @@ final class GADWP_Settings {
                                             <div class="onoffswitch-switch"></div>
                                         </label>
                                     </div>
-                                    <div class="switch-desc"><?php _e ( "enable Switch View functionality", 'ga-dash' );?></div>
+                                    <div class="switch-desc"><?php _e ( "enable Switch View functionality", 'google-analytics-dashboard-for-wp' );?></div>
                                 </td>
                             </tr>
                             <tr>
@@ -259,7 +259,7 @@ final class GADWP_Settings {
                                             <div class="onoffswitch-switch"></div>
                                         </label>
                                     </div>
-                                    <div class="switch-desc"><?php _e ( "enable reports on Posts List and Pages List", 'ga-dash' );?></div>
+                                    <div class="switch-desc"><?php _e ( "enable reports on Posts List and Pages List", 'google-analytics-dashboard-for-wp' );?></div>
                                 </td>
                             </tr>
                             <tr>
@@ -270,23 +270,23 @@ final class GADWP_Settings {
                                             <div class="onoffswitch-switch"></div>
                                         </label>
                                     </div>
-                                    <div class="switch-desc"><?php _e ( "enable the main Dashboard Widget", 'ga-dash' );?></div>
+                                    <div class="switch-desc"><?php _e ( "enable the main Dashboard Widget", 'google-analytics-dashboard-for-wp' );?></div>
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="2"><hr><?php echo "<h2>" . __( "Real-Time Settings", 'ga-dash' ) . "</h2>"; ?></td>
+                                <td colspan="2"><hr><?php echo "<h2>" . __( "Real-Time Settings", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
                             </tr>
                             <tr>
-                                <td colspan="2" class="title"> <?php _e("Maximum number of pages to display on real-time tab:", 'ga-dash'); ?>
+                                <td colspan="2" class="title"> <?php _e("Maximum number of pages to display on real-time tab:", 'google-analytics-dashboard-for-wp'); ?>
     								<input type="number" name="options[ga_realtime_pages]" id="ga_realtime_pages" value="<?php echo (int)$options['ga_realtime_pages']; ?>" size="3">
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="2"><hr><?php echo "<h2>" . __( "Location Settings", 'ga-dash' ) . "</h2>"; ?></td>
+                                <td colspan="2"><hr><?php echo "<h2>" . __( "Location Settings", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
                             </tr>
                             <tr>
                                 <td colspan="2" class="title">
-									<?php echo __("Target Geo Map to country:", 'ga-dash'); ?>
+									<?php echo __("Target Geo Map to country:", 'google-analytics-dashboard-for-wp'); ?>
 									<input type="text" style="text-align: center;" name="options[ga_target_geomap]" value="<?php echo esc_attr($options['ga_target_geomap']); ?>" size="3">
                                 </td>
                             </tr>
@@ -294,7 +294,7 @@ final class GADWP_Settings {
                                 <td colspan="2"><hr></td>
                             </tr>
                             <tr>
-                                <td colspan="2" class="submit"><input type="submit" name="Submit" class="button button-primary" value="<?php _e('Save Changes', 'ga-dash' ) ?>" /></td>
+                                <td colspan="2" class="submit"><input type="submit" name="Submit" class="button button-primary" value="<?php _e('Save Changes', 'google-analytics-dashboard-for-wp' ) ?>" /></td>
                             </tr>
                         </table>
                         <input type="hidden" name="options[ga_dash_hidden]" value="Y">
@@ -315,21 +315,21 @@ final class GADWP_Settings {
 		}
 		$options = self::update_options( 'tracking' );
 		if ( isset( $_POST['options']['ga_dash_hidden'] ) ) {
-			$message = "<div class='updated'><p>" . __( "Settings saved.", 'ga-dash' ) . "</p></div>";
+			$message = "<div class='updated'><p>" . __( "Settings saved.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			if ( ! ( isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' ) ) ) {
-				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'ga-dash' ) . "</p></div>";
+				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
 		if ( ! $gadwp->config->options['ga_dash_tableid_jail'] ) {
-			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'ga-dash' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_errors_debugging', false ), __( 'Errors & Debug', 'ga-dash' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_settings', false ), __( 'authorize the plugin', 'ga-dash' ) ) ) );
+			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'google-analytics-dashboard-for-wp' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_errors_debugging', false ), __( 'Errors & Debug', 'google-analytics-dashboard-for-wp' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_settings', false ), __( 'authorize the plugin', 'google-analytics-dashboard-for-wp' ) ) ) );
 		}
 		if ( ! $options['ga_dash_tracking'] ) {
-			$message = "<div class='error'><p>" . __( "The tracking component is disabled. You should set <strong>Tracking Options</strong> to <strong>Enabled</strong>", 'ga-dash' ) . ".</p></div>";
+			$message = "<div class='error'><p>" . __( "The tracking component is disabled. You should set <strong>Tracking Options</strong> to <strong>Enabled</strong>", 'google-analytics-dashboard-for-wp' ) . ".</p></div>";
 		}
 		?>
 <form name="ga_dash_form" method="post" action="<?php  esc_url($_SERVER['REQUEST_URI']); ?>">
     <div class="wrap">
-			<?php echo "<h2>" . __( "Google Analytics Tracking Code", 'ga-dash' ) . "</h2>"; ?>
+			<?php echo "<h2>" . __( "Google Analytics Tracking Code", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?>
 	</div>
     <div id="poststuff">
         <div id="post-body" class="metabox-holder columns-2">
@@ -338,11 +338,11 @@ final class GADWP_Settings {
                     <div class="inside">
                     <?php
 		$tabs = array(
-			'basic' => __( "Basic Settings", 'ga-dash' ),
-			'events' => __( "Events Tracking", 'ga-dash' ),
-			'custom' => __( "Custom Definitions", 'ga-dash' ),
-			'exclude' => __( "Exclude Tracking", 'ga-dash' ),
-			'advanced' => __( "Advanced Settings", 'ga-dash' ) );
+			'basic' => __( "Basic Settings", 'google-analytics-dashboard-for-wp' ),
+			'events' => __( "Events Tracking", 'google-analytics-dashboard-for-wp' ),
+			'custom' => __( "Custom Definitions", 'google-analytics-dashboard-for-wp' ),
+			'exclude' => __( "Exclude Tracking", 'google-analytics-dashboard-for-wp' ),
+			'advanced' => __( "Advanced Settings", 'google-analytics-dashboard-for-wp' ) );
 		self::navigation_tabs( $tabs );
 		if ( isset( $message ) )
 			echo $message;
@@ -350,13 +350,13 @@ final class GADWP_Settings {
 					    <div id="gadwp-basic">
                             <table class="options">
                                 <tr>
-                                    <td colspan="2"><?php echo "<h2>" . __( "Tracking Settings", 'ga-dash' ) . "</h2>"; ?></td>
+                                    <td colspan="2"><?php echo "<h2>" . __( "Tracking Settings", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
                                 </tr>
                                 <tr>
-                                    <td class="title"><label for="ga_dash_tracking"><?php _e("Tracking Options:", 'ga-dash' ); ?></label></td>
+                                    <td class="title"><label for="ga_dash_tracking"><?php _e("Tracking Options:", 'google-analytics-dashboard-for-wp' ); ?></label></td>
                                     <td><select id="ga_dash_tracking" name="options[ga_dash_tracking]" onchange="this.form.submit()">
-                                            <option value="0" <?php selected( $options['ga_dash_tracking'], 0 ); ?>><?php _e("Disabled", 'ga-dash');?></option>
-                                            <option value="1" <?php selected( $options['ga_dash_tracking'], 1 ); ?>><?php _e("Enabled", 'ga-dash');?></option>
+                                            <option value="0" <?php selected( $options['ga_dash_tracking'], 0 ); ?>><?php _e("Disabled", 'google-analytics-dashboard-for-wp');?></option>
+                                            <option value="1" <?php selected( $options['ga_dash_tracking'], 1 ); ?>><?php _e("Enabled", 'google-analytics-dashboard-for-wp');?></option>
                                     </select></td>
                                 </tr>
 								<?php if ($options['ga_dash_tracking']) {?>
@@ -364,18 +364,18 @@ final class GADWP_Settings {
                                     <td class="title"></td>
                                     <td>
                                         <?php $profile_info = GADWP_Tools::get_selected_profile($gadwp->config->options['ga_dash_profile_list'], $gadwp->config->options['ga_dash_tableid_jail']); ?>
-                                        <?php echo '<pre>' . __("View Name:", 'ga-dash') . "\t" . esc_html($profile_info[0]) . "<br />" . __("Tracking ID:", 'ga-dash') . "\t" . esc_html($profile_info[2]) . "<br />" . __("Default URL:", 'ga-dash') . "\t" . esc_html($profile_info[3]) . "<br />" . __("Time Zone:", 'ga-dash') . "\t" . esc_html($profile_info[5]) . '</pre>';?>
+                                        <?php echo '<pre>' . __("View Name:", 'google-analytics-dashboard-for-wp') . "\t" . esc_html($profile_info[0]) . "<br />" . __("Tracking ID:", 'google-analytics-dashboard-for-wp') . "\t" . esc_html($profile_info[2]) . "<br />" . __("Default URL:", 'google-analytics-dashboard-for-wp') . "\t" . esc_html($profile_info[3]) . "<br />" . __("Time Zone:", 'google-analytics-dashboard-for-wp') . "\t" . esc_html($profile_info[5]) . '</pre>';?>
                                     </td>
                                 </tr>
 								<?php }?>
 								<tr>
-                                    <td colspan="2"><hr><?php echo "<h2>" . __( "Basic Tracking", 'ga-dash' ) . "</h2>"; ?></td>
+                                    <td colspan="2"><hr><?php echo "<h2>" . __( "Basic Tracking", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
                                 </tr>
                                 <tr>
-                                    <td class="title"><label for="ga_dash_tracking_type"><?php _e("Tracking Type:", 'ga-dash' ); ?></label></td>
+                                    <td class="title"><label for="ga_dash_tracking_type"><?php _e("Tracking Type:", 'google-analytics-dashboard-for-wp' ); ?></label></td>
                                     <td><select id="ga_dash_tracking_type" name="options[ga_dash_tracking_type]">
-                                            <option value="classic" <?php selected( $options['ga_dash_tracking_type'], 'classic' ); ?>><?php _e("Classic Analytics", 'ga-dash');?></option>
-                                            <option value="universal" <?php selected( $options['ga_dash_tracking_type'], 'universal' ); ?>><?php _e("Universal Analytics", 'ga-dash');?></option>
+                                            <option value="classic" <?php selected( $options['ga_dash_tracking_type'], 'classic' ); ?>><?php _e("Classic Analytics", 'google-analytics-dashboard-for-wp');?></option>
+                                            <option value="universal" <?php selected( $options['ga_dash_tracking_type'], 'universal' ); ?>><?php _e("Universal Analytics", 'google-analytics-dashboard-for-wp');?></option>
                                     </select></td>
                                 </tr>
                                 <tr>
@@ -386,7 +386,7 @@ final class GADWP_Settings {
                                                 <div class="onoffswitch-switch"></div>
                                             </label>
                                         </div>
-                                        <div class="switch-desc"><?php echo " ".__("anonymize IPs while tracking", 'ga-dash' );?></div>
+                                        <div class="switch-desc"><?php echo " ".__("anonymize IPs while tracking", 'google-analytics-dashboard-for-wp' );?></div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -397,7 +397,7 @@ final class GADWP_Settings {
                                                 <div class="onoffswitch-switch"></div>
                                             </label>
                                         </div>
-                                        <div class="switch-desc"><?php echo " ".__("enable remarketing, demographics and interests reports", 'ga-dash' );?></div>
+                                        <div class="switch-desc"><?php echo " ".__("enable remarketing, demographics and interests reports", 'google-analytics-dashboard-for-wp' );?></div>
                                     </td>
                                 </tr>
                             </table>
@@ -405,7 +405,7 @@ final class GADWP_Settings {
                         <div id="gadwp-events">
                             <table class="options">
                                 <tr>
-                                    <td colspan="2"><?php echo "<h2>" . __( "Events Tracking", 'ga-dash' ) . "</h2>"; ?></td>
+                                    <td colspan="2"><?php echo "<h2>" . __( "Events Tracking", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="title">
@@ -415,11 +415,11 @@ final class GADWP_Settings {
                                                 <div class="onoffswitch-switch"></div>
                                             </label>
                                         </div>
-                                        <div class="switch-desc"><?php echo " ".__("track downloads, mailto and outbound links", 'ga-dash' ); ?></div>
+                                        <div class="switch-desc"><?php echo " ".__("track downloads, mailto and outbound links", 'google-analytics-dashboard-for-wp' ); ?></div>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="title"><label for="ga_event_downloads"><?php _e("Downloads Regex:", 'ga-dash'); ?></label></td>
+                                    <td class="title"><label for="ga_event_downloads"><?php _e("Downloads Regex:", 'google-analytics-dashboard-for-wp'); ?></label></td>
                                     <td><input type="text" id="ga_event_downloads" name="options[ga_event_downloads]" value="<?php echo esc_attr($options['ga_event_downloads']); ?>" size="50"></td>
                                 </tr>
                                 <tr>
@@ -430,11 +430,11 @@ final class GADWP_Settings {
                                                 <div class="onoffswitch-switch"></div>
                                             </label>
                                         </div>
-                                        <div class="switch-desc"><?php echo " ".__("track affiliate links matching this regex", 'ga-dash' ); ?></div>
+                                        <div class="switch-desc"><?php echo " ".__("track affiliate links matching this regex", 'google-analytics-dashboard-for-wp' ); ?></div>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="title"><label for="ga_event_affiliates"><?php _e("Affiliates Regex:", 'ga-dash'); ?></label></td>
+                                    <td class="title"><label for="ga_event_affiliates"><?php _e("Affiliates Regex:", 'google-analytics-dashboard-for-wp'); ?></label></td>
                                     <td><input type="text" id="ga_event_affiliates" name="options[ga_event_affiliates]" value="<?php echo esc_attr($options['ga_event_affiliates']); ?>" size="50"></td>
                                 </tr>
                                 <tr>
@@ -445,7 +445,7 @@ final class GADWP_Settings {
                                                 <div class="onoffswitch-switch"></div>
                                             </label>
                                         </div>
-                                        <div class="switch-desc"><?php echo " ".__("track fragment identifiers, hashmarks (#) in URI links", 'ga-dash' ); ?></div>
+                                        <div class="switch-desc"><?php echo " ".__("track fragment identifiers, hashmarks (#) in URI links", 'google-analytics-dashboard-for-wp' ); ?></div>
                                     </td>
                                 </tr>
                             </table>
@@ -453,10 +453,10 @@ final class GADWP_Settings {
                         <div id="gadwp-custom">
                             <table class="options">
                                 <tr>
-                                    <td colspan="2"><?php echo "<h2>" . __( "Custom Definitions", 'ga-dash' ) . "</h2>"; ?></td>
+                                    <td colspan="2"><?php echo "<h2>" . __( "Custom Definitions", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
                                 </tr>
                                 <tr>
-                                    <td class="title"><label for="ga_author_dimindex"><?php _e("Authors:", 'ga-dash' ); ?></label></td>
+                                    <td class="title"><label for="ga_author_dimindex"><?php _e("Authors:", 'google-analytics-dashboard-for-wp' ); ?></label></td>
                                     <td><select id="ga_author_dimindex" name="options[ga_author_dimindex]">
 										<?php for ($i=0;$i<21;$i++){?>
 										<option value="<?php echo $i;?>" <?php selected( $options['ga_author_dimindex'], $i ); ?>><?php echo $i==0?'Disabled':'dimension '.$i; ?></option>
@@ -464,7 +464,7 @@ final class GADWP_Settings {
 								</select></td>
                                 </tr>
                                 <tr>
-                                    <td class="title"><label for="ga_pubyear_dimindex"><?php _e("Publication Year:", 'ga-dash' ); ?></label></td>
+                                    <td class="title"><label for="ga_pubyear_dimindex"><?php _e("Publication Year:", 'google-analytics-dashboard-for-wp' ); ?></label></td>
                                     <td><select id="ga_pubyear_dimindex" name="options[ga_pubyear_dimindex]">
 										<?php for ($i=0;$i<21;$i++){?>
 										<option value="<?php echo $i;?>" <?php selected( $options['ga_pubyear_dimindex'], $i ); ?>><?php echo $i==0?'Disabled':'dimension '.$i; ?></option>
@@ -472,7 +472,7 @@ final class GADWP_Settings {
 								</select></td>
                                 </tr>
                                 <tr>
-                                    <td class="title"><label for="ga_category_dimindex"><?php _e("Categories:", 'ga-dash' ); ?></label></td>
+                                    <td class="title"><label for="ga_category_dimindex"><?php _e("Categories:", 'google-analytics-dashboard-for-wp' ); ?></label></td>
                                     <td><select id="ga_category_dimindex" name="options[ga_category_dimindex]">
 										<?php for ($i=0;$i<21;$i++){?>
 										<option value="<?php echo $i;?>" <?php selected( $options['ga_category_dimindex'], $i ); ?>><?php echo $i==0?'Disabled':'dimension '.$i; ?></option>
@@ -480,7 +480,7 @@ final class GADWP_Settings {
 								</select></td>
                                 </tr>
                                 <tr>
-                                    <td class="title"><label for="ga_user_dimindex"><?php _e("User Type:", 'ga-dash' ); ?></label></td>
+                                    <td class="title"><label for="ga_user_dimindex"><?php _e("User Type:", 'google-analytics-dashboard-for-wp' ); ?></label></td>
                                     <td><select id="ga_user_dimindex" name="options[ga_user_dimindex]">
 										<?php for ($i=0;$i<21;$i++){?>
 										<option value="<?php echo $i;?>" <?php selected( $options['ga_user_dimindex'], $i ); ?>><?php echo $i==0?'Disabled':'dimension '.$i; ?></option>
@@ -492,10 +492,10 @@ final class GADWP_Settings {
                         <div id="gadwp-advanced">
                             <table class="options">
                                 <tr>
-                                    <td colspan="2"><?php echo "<h2>" . __( "Advanced Tracking", 'ga-dash' ) . "</h2>"; ?></td>
+                                    <td colspan="2"><?php echo "<h2>" . __( "Advanced Tracking", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
                                 </tr>
                                 <tr>
-                                    <td class="title"><label for="ga_speed_samplerate"><?php _e("Page Speed SR:", 'ga-dash'); ?></label></td>
+                                    <td class="title"><label for="ga_speed_samplerate"><?php _e("Page Speed SR:", 'google-analytics-dashboard-for-wp'); ?></label></td>
                                     <td><input type="number" id="ga_speed_samplerate" name="options[ga_speed_samplerate]" value="<?php echo (int)($options['ga_speed_samplerate']); ?>" max="100" min="1"> %</td>
                                 </tr>
                                 <tr>
@@ -506,7 +506,7 @@ final class GADWP_Settings {
                                                 <div class="onoffswitch-switch"></div>
                                             </label>
                                         </div>
-                                        <div class="switch-desc"><?php echo " ".__("exclude events from bounce-rate calculation", 'ga-dash' );?></div>
+                                        <div class="switch-desc"><?php echo " ".__("exclude events from bounce-rate calculation", 'google-analytics-dashboard-for-wp' );?></div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -517,7 +517,7 @@ final class GADWP_Settings {
                                                 <div class="onoffswitch-switch"></div>
                                             </label>
                                         </div>
-                                        <div class="switch-desc"><?php echo " ".__("enable enhanced link attribution", 'ga-dash' );?></div>
+                                        <div class="switch-desc"><?php echo " ".__("enable enhanced link attribution", 'google-analytics-dashboard-for-wp' );?></div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -528,7 +528,7 @@ final class GADWP_Settings {
                                                 <div class="onoffswitch-switch"></div>
                                             </label>
                                         </div>
-                                        <div class="switch-desc"><?php echo " ".__("enable AdSense account linking", 'ga-dash' );?></div>
+                                        <div class="switch-desc"><?php echo " ".__("enable AdSense account linking", 'google-analytics-dashboard-for-wp' );?></div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -539,11 +539,11 @@ final class GADWP_Settings {
                                                 <div class="onoffswitch-switch"></div>
                                             </label>
                                         </div>
-                                        <div class="switch-desc"><?php echo " ".__("enable cross domain tracking", 'ga-dash' ); ?></div>
+                                        <div class="switch-desc"><?php echo " ".__("enable cross domain tracking", 'google-analytics-dashboard-for-wp' ); ?></div>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="title"><label for="ga_crossdomain_list"><?php _e("Cross Domains:", 'ga-dash'); ?></label></td>
+                                    <td class="title"><label for="ga_crossdomain_list"><?php _e("Cross Domains:", 'google-analytics-dashboard-for-wp'); ?></label></td>
                                     <td><input type="text" id="ga_crossdomain_list" name="options[ga_crossdomain_list]" value="<?php echo esc_attr($options['ga_crossdomain_list']); ?>" size="50"></td>
                                 </tr>
                             </table>
@@ -551,10 +551,10 @@ final class GADWP_Settings {
                         <div id="gadwp-exclude">
                             <table class="options">
                                 <tr>
-                                    <td colspan="2"><?php echo "<h2>" . __( "Exclude Tracking", 'ga-dash' ) . "</h2>"; ?></td>
+                                    <td colspan="2"><?php echo "<h2>" . __( "Exclude Tracking", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
                                 </tr>
                                 <tr>
-                                    <td class="roles title"><label for="ga_track_exclude"><?php _e("Exclude tracking for:", 'ga-dash' ); ?></label></td>
+                                    <td class="roles title"><label for="ga_track_exclude"><?php _e("Exclude tracking for:", 'google-analytics-dashboard-for-wp' ); ?></label></td>
                                     <td class="roles">
                                		<?php
 		if ( ! isset( $wp_roles ) ) {
@@ -595,7 +595,7 @@ final class GADWP_Settings {
                                 <td colspan="2"><hr></td>
                             </tr>
                             <tr>
-                                <td colspan="2" class="submit"><input type="submit" name="Submit" class="button button-primary" value="<?php _e('Save Changes', 'ga-dash' ) ?>" /></td>
+                                <td colspan="2" class="submit"><input type="submit" name="Submit" class="button button-primary" value="<?php _e('Save Changes', 'google-analytics-dashboard-for-wp' ) ?>" /></td>
                             </tr>
                         </table>
                         <input type="hidden" name="options[ga_dash_hidden]" value="Y">
@@ -638,11 +638,11 @@ final class GADWP_Settings {
 
 		$options = self::update_options( 'frontend' );
 		if ( ! $gadwp->config->options['ga_dash_tableid_jail'] || ! $gadwp->config->options['ga_dash_token'] ) {
-			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'ga-dash' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_errors_debugging', false ), __( 'Errors & Debug', 'ga-dash' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_settings', false ), __( 'authorize the plugin', 'ga-dash' ) ) ) );
+			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'google-analytics-dashboard-for-wp' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_errors_debugging', false ), __( 'Errors & Debug', 'google-analytics-dashboard-for-wp' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_settings', false ), __( 'authorize the plugin', 'google-analytics-dashboard-for-wp' ) ) ) );
 		}
 		?>
 <div class="wrap">
-    	<?php echo "<h2>" . __( "Google Analytics Errors & Debugging", 'ga-dash' ) . "</h2>"; ?>
+    	<?php echo "<h2>" . __( "Google Analytics Errors & Debugging", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?>
     	</div>
 <div id="poststuff">
     <div id="post-body" class="metabox-holder columns-2">
@@ -652,34 +652,34 @@ final class GADWP_Settings {
     					<?php if (isset($message)) echo $message; ?>
     					<?php
 		$tabs = array(
-			'errors' => __( "Errors & Details", 'ga-dash' ),
-			'config' => __( "Plugin Settings", 'ga-dash' ) );
+			'errors' => __( "Errors & Details", 'google-analytics-dashboard-for-wp' ),
+			'config' => __( "Plugin Settings", 'google-analytics-dashboard-for-wp' ) );
 		self::navigation_tabs( $tabs );
 		?>
 						<div id="gadwp-errors">
                         <table class="options">
                             <tr>
                                 <td>
-                                    <?php echo "<h2>" . __( "Last Error detected", 'ga-dash' ) . "</h2>"; ?>
+                                    <?php echo "<h2>" . __( "Last Error detected", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                     				<?php
-		$errors = esc_html( print_r( get_transient( 'ga_dash_lasterror' ), true ) ) ? esc_html( print_r( get_transient( 'ga_dash_lasterror' ), true ) ) : __( "None", 'ga-dash' );
+		$errors = esc_html( print_r( get_transient( 'ga_dash_lasterror' ), true ) ) ? esc_html( print_r( get_transient( 'ga_dash_lasterror' ), true ) ) : __( "None", 'google-analytics-dashboard-for-wp' );
 		echo '<pre class="log_data">Last Error: ';
 		echo $errors;
 		?></pre>
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="2"><hr><?php echo "<h2>" . __( "Error Details", 'ga-dash' ) . "</h2>"; ?></td>
+                                <td colspan="2"><hr><?php echo "<h2>" . __( "Error Details", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
                             </tr>
                             <tr>
                                 <td>
                     				<?php
 		echo '<pre class="log_data">Error Details: ';
-		$error_details = esc_html( print_r( get_transient( 'ga_dash_gapi_errors' ), true ) ) ? "\n" . esc_html( print_r( get_transient( 'ga_dash_gapi_errors' ), true ) ) : __( "None", 'ga-dash' );
+		$error_details = esc_html( print_r( get_transient( 'ga_dash_gapi_errors' ), true ) ) ? "\n" . esc_html( print_r( get_transient( 'ga_dash_gapi_errors' ), true ) ) : __( "None", 'google-analytics-dashboard-for-wp' );
 		echo $error_details;
 		?></pre><br />
                                     <hr>
@@ -693,7 +693,7 @@ final class GADWP_Settings {
                     <div id="gadwp-config">
                         <table class="options">
                             <tr>
-                                <td><?php echo "<h2>" . __( "Plugin Configuration", 'ga-dash' ) . "</h2>"; ?></td>
+                                <td><?php echo "<h2>" . __( "Plugin Configuration", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
                             </tr>
                             <tr>
                                 <td><pre class="log_data"><?php echo esc_html(print_r($anonim, true));?></pre><br />
@@ -714,7 +714,7 @@ final class GADWP_Settings {
 			return;
 		}
 		$options = self::update_options( 'general' );
-		printf( '<div id="gapi-warning" class="updated"><p>%1$s <a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=general_screen&utm_campaign=gadwp">%2$s</a></p></div>', __( 'Loading the required libraries. If this results in a blank screen or a fatal error, try this solution:', "ga-dash" ), __( 'Library conflicts between WordPress plugins', "ga-dash" ) );
+		printf( '<div id="gapi-warning" class="updated"><p>%1$s <a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=general_screen&utm_campaign=gadwp">%2$s</a></p></div>', __( 'Loading the required libraries. If this results in a blank screen or a fatal error, try this solution:', 'google-analytics-dashboard-for-wp' ), __( 'Library conflicts between WordPress plugins', 'google-analytics-dashboard-for-wp' ) );
 		if ( null === $gadwp->gapi_controller ) {
 			$gadwp->gapi_controller = new GADWP_GAPI_Controller();
 		}
@@ -729,7 +729,7 @@ final class GADWP_Settings {
 					$gadwp->config->options['automatic_updates_minorversion'] = 1;
 					$gadwp->config->set_plugin_options();
 					$options = self::update_options( 'general' );
-					$message = "<div class='updated'><p>" . __( "Plugin authorization succeeded.", 'ga-dash' ) . "</p></div>";
+					$message = "<div class='updated'><p>" . __( "Plugin authorization succeeded.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 					delete_transient( 'ga_dash_gapi_errors' );
 					delete_transient( 'ga_dash_lasterror' );
 				} catch ( Google_IO_Exception $e ) {
@@ -744,7 +744,7 @@ final class GADWP_Settings {
 					$gadwp->gapi_controller->reset_token( false );
 				}
 			} else {
-				$message = "<div class='error'><p>" . __( "The access code is <strong>NOT</strong> your <strong>Tracking ID</strong> (UA-XXXXX-X). Try again, and use the red link to get your access code", 'ga-dash' ) . ".</p></div>";
+				$message = "<div class='error'><p>" . __( "The access code is <strong>NOT</strong> your <strong>Tracking ID</strong> (UA-XXXXX-X). Try again, and use the red link to get your access code", 'google-analytics-dashboard-for-wp' ) . ".</p></div>";
 			}
 		}
 		if ( $gadwp->config->options['ga_dash_token'] && $gadwp->gapi_controller->client->getAccessToken() ) {
@@ -767,50 +767,50 @@ final class GADWP_Settings {
 		if ( isset( $_POST['Clear'] ) ) {
 			if ( isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' ) ) {
 				GADWP_Tools::clear_cache();
-				$message = "<div class='updated'><p>" . __( "Cleared Cache.", 'ga-dash' ) . "</p></div>";
+				$message = "<div class='updated'><p>" . __( "Cleared Cache.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			} else {
-				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'ga-dash' ) . "</p></div>";
+				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
 		if ( isset( $_POST['Reset'] ) ) {
 			if ( isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' ) ) {
 				$gadwp->gapi_controller->reset_token( true );
 				GADWP_Tools::clear_cache();
-				$message = "<div class='updated'><p>" . __( "Token Reseted and Revoked.", 'ga-dash' ) . "</p></div>";
+				$message = "<div class='updated'><p>" . __( "Token Reseted and Revoked.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 				$options = self::update_options( 'Reset' );
 			} else {
-				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'ga-dash' ) . "</p></div>";
+				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
 		if ( isset( $_POST['Reset_Err'] ) ) {
 			if ( isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' ) ) {
 				delete_transient( 'ga_dash_lasterror' );
 				delete_transient( 'ga_dash_gapi_errors' );
-				$message = "<div class='updated'><p>" . __( "All errors reseted.", 'ga-dash' ) . "</p></div>";
+				$message = "<div class='updated'><p>" . __( "All errors reseted.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			} else {
-				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'ga-dash' ) . "</p></div>";
+				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
 		if ( isset( $_POST['options']['ga_dash_hidden'] ) && ! isset( $_POST['Clear'] ) && ! isset( $_POST['Reset'] ) && ! isset( $_POST['Reset_Err'] ) ) {
-			$message = "<div class='updated'><p>" . __( "Settings saved.", 'ga-dash' ) . "</p></div>";
+			$message = "<div class='updated'><p>" . __( "Settings saved.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			if ( ! ( isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' ) ) ) {
-				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'ga-dash' ) . "</p></div>";
+				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
 		if ( isset( $_POST['Hide'] ) ) {
 			if ( isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' ) ) {
-				$message = "<div class='updated'><p>" . __( "All other domains/properties were removed.", 'ga-dash' ) . "</p></div>";
+				$message = "<div class='updated'><p>" . __( "All other domains/properties were removed.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 				$lock_profile = GADWP_Tools::get_selected_profile( $gadwp->config->options['ga_dash_profile_list'], $gadwp->config->options['ga_dash_tableid_jail'] );
 				$gadwp->config->options['ga_dash_profile_list'] = array(
 					$lock_profile );
 				$options = self::update_options( 'general' );
 			} else {
-				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'ga-dash' ) . "</p></div>";
+				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
 		?>
     <div class="wrap">
-	<?php echo "<h2>" . __( "Google Analytics Settings", 'ga-dash' ) . "</h2>"; ?>
+	<?php echo "<h2>" . __( "Google Analytics Settings", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?>
 	                <hr>
                     </div>
                     <div id="poststuff">
@@ -820,12 +820,12 @@ final class GADWP_Settings {
                                     <div class="inside">
 <?php
 		if ( $gadwp->gapi_controller->gapi_errors_handler() || get_transient('ga_dash_lasterror') ) {
-			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'ga-dash' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_errors_debugging', false ), __( 'Errors & Debug', 'ga-dash' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_settings', false ), __( 'authorize the plugin', 'ga-dash' ) ) ) );
+			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'google-analytics-dashboard-for-wp' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_errors_debugging', false ), __( 'Errors & Debug', 'google-analytics-dashboard-for-wp' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_settings', false ), __( 'authorize the plugin', 'google-analytics-dashboard-for-wp' ) ) ) );
 		}
 		if ( isset( $_POST['Authorize'] ) ) {
 			GADWP_Tools::clear_cache();
 			$gadwp->gapi_controller->token_request();
-			echo "<div class='updated'><p>" . __( "Use the red link (see below) to generate and get your access code!", 'ga-dash' ) . "</p></div>";
+			echo "<div class='updated'><p>" . __( "Use the red link (see below) to generate and get your access code!", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 		} else {
 			if ( isset( $message ) ){
 				echo $message;
@@ -837,30 +837,30 @@ final class GADWP_Settings {
 						<table class="options">
                                                 <tr>
                                                     <td colspan="2">
-                                                        <?php echo "<h2>" . __( "Plugin Authorization", 'ga-dash' ) . "</h2>";?>
+                                                        <?php echo "<h2>" . __( "Plugin Authorization", 'google-analytics-dashboard-for-wp' ) . "</h2>";?>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="2" class="info">
-                                                        <?php printf(__('You should watch the %1$s and read this %2$s before proceeding to authorization. This plugin requires a properly configured Google Analytics account!', 'ga-dash'), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=top_video&utm_campaign=gadwp', __("video", 'ga-dash')), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=top_tutorial&utm_campaign=gadwp', __("tutorial", 'ga-dash')));?>
+                                                        <?php printf(__('You should watch the %1$s and read this %2$s before proceeding to authorization. This plugin requires a properly configured Google Analytics account!', 'google-analytics-dashboard-for-wp'), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=top_video&utm_campaign=gadwp', __("video", 'google-analytics-dashboard-for-wp')), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=top_tutorial&utm_campaign=gadwp', __("tutorial", 'google-analytics-dashboard-for-wp')));?>
 						                            </td>
                                                 </tr>
 						                          <?php if (! $options['ga_dash_token'] || $options['ga_dash_userapi']) {?>
 						                          <tr>
-                                                    <td colspan="2" class="info"><input name="options[ga_dash_userapi]" type="checkbox" id="ga_dash_userapi" value="1" <?php checked( $options['ga_dash_userapi'], 1 ); ?> onchange="this.form.submit()" <?php echo ($options['ga_dash_network'])?'disabled="disabled"':''; ?> /><?php echo " ".__("use your own API Project credentials", 'ga-dash' );?>
+                                                    <td colspan="2" class="info"><input name="options[ga_dash_userapi]" type="checkbox" id="ga_dash_userapi" value="1" <?php checked( $options['ga_dash_userapi'], 1 ); ?> onchange="this.form.submit()" <?php echo ($options['ga_dash_network'])?'disabled="disabled"':''; ?> /><?php echo " ".__("use your own API Project credentials", 'google-analytics-dashboard-for-wp' );?>
 							                            </td>
                                                 </tr>
                                 				  <?php } if ($options['ga_dash_userapi']) { ?>
 						                        <tr>
-                                                    <td class="title"><label for="options[ga_dash_apikey]"><?php _e("API Key:", 'ga-dash'); ?></label></td>
+                                                    <td class="title"><label for="options[ga_dash_apikey]"><?php _e("API Key:", 'google-analytics-dashboard-for-wp'); ?></label></td>
                                                     <td><input type="text" name="options[ga_dash_apikey]" value="<?php echo esc_attr($options['ga_dash_apikey']); ?>" size="40" required="required"></td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="title"><label for="options[ga_dash_clientid]"><?php _e("Client ID:", 'ga-dash'); ?></label></td>
+                                                    <td class="title"><label for="options[ga_dash_clientid]"><?php _e("Client ID:", 'google-analytics-dashboard-for-wp'); ?></label></td>
                                                     <td><input type="text" name="options[ga_dash_clientid]" value="<?php echo esc_attr($options['ga_dash_clientid']); ?>" size="40" required="required"></td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="title"><label for="options[ga_dash_clientsecret]"><?php _e("Client Secret:", 'ga-dash'); ?></label></td>
+                                                    <td class="title"><label for="options[ga_dash_clientsecret]"><?php _e("Client Secret:", 'google-analytics-dashboard-for-wp'); ?></label></td>
                                                     <td><input type="text" name="options[ga_dash_clientsecret]" value="<?php echo esc_attr($options['ga_dash_clientsecret']); ?>" size="40" required="required"> <input type="hidden" name="options[ga_dash_hidden]" value="Y">
 									                    <?php wp_nonce_field('gadash_form','gadash_security'); ?>
 								                    </td>
@@ -870,33 +870,33 @@ final class GADWP_Settings {
 			if ( $options['ga_dash_token'] ) {
 				?>
 					                            <tr>
-                                                    <td colspan="2"><input type="submit" name="Reset" class="button button-secondary" value="<?php _e( "Clear Authorization", 'ga-dash' ); ?>" <?php echo $options['ga_dash_network']?'disabled="disabled"':''; ?> /> <input type="submit" name="Clear" class="button button-secondary" value="<?php _e( "Clear Cache", 'ga-dash' ); ?>" /> <input type="submit" name="Reset_Err" class="button button-secondary" value="<?php _e( "Reset Errors", 'ga-dash' ); ?>" /></td>
+                                                    <td colspan="2"><input type="submit" name="Reset" class="button button-secondary" value="<?php _e( "Clear Authorization", 'google-analytics-dashboard-for-wp' ); ?>" <?php echo $options['ga_dash_network']?'disabled="disabled"':''; ?> /> <input type="submit" name="Clear" class="button button-secondary" value="<?php _e( "Clear Cache", 'google-analytics-dashboard-for-wp' ); ?>" /> <input type="submit" name="Reset_Err" class="button button-secondary" value="<?php _e( "Reset Errors", 'google-analytics-dashboard-for-wp' ); ?>" /></td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="2"><hr></td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="2"><?php echo "<h2>" . __( "General Settings", 'ga-dash' ) . "</h2>"; ?></td>
+                                                    <td colspan="2"><?php echo "<h2>" . __( "General Settings", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="title"><label for="ga_dash_tableid_jail"><?php _e("Select View:", 'ga-dash' ); ?></label></td>
+                                                    <td class="title"><label for="ga_dash_tableid_jail"><?php _e("Select View:", 'google-analytics-dashboard-for-wp' ); ?></label></td>
                                                     <td><select id="ga_dash_tableid_jail" <?php disabled(empty($options['ga_dash_profile_list']) || 1 == count($options['ga_dash_profile_list']), true); ?> name="options[ga_dash_tableid_jail]">
                                     								<?php
 				if ( ! empty( $options['ga_dash_profile_list'] ) ) {
 					foreach ( $options['ga_dash_profile_list'] as $items ) {
 						if ( $items[3] ) {
 							echo '<option value="' . esc_attr( $items[1] ) . '" ' . selected( $items[1], $options['ga_dash_tableid_jail'] );
-							echo ' title="' . __( "View Name:", 'ga-dash' ) . ' ' . esc_attr( $items[0] ) . '">' . esc_html( GADWP_Tools::strip_protocol( $items[3] ) ) . ' &#8658; ' . esc_attr( $items[0] ) . '</option>';
+							echo ' title="' . __( "View Name:", 'google-analytics-dashboard-for-wp' ) . ' ' . esc_attr( $items[0] ) . '">' . esc_html( GADWP_Tools::strip_protocol( $items[3] ) ) . ' &#8658; ' . esc_attr( $items[0] ) . '</option>';
 						}
 					}
 				} else {
-					echo '<option value="">' . __( "Property not found", 'ga-dash' ) . '</option>';
+					echo '<option value="">' . __( "Property not found", 'google-analytics-dashboard-for-wp' ) . '</option>';
 				}
 				?>
                                     							</select>
                                     							<?php
 				if ( count( $options['ga_dash_profile_list'] ) > 1 ) {
-					?>&nbsp;<input type="submit" name="Hide" class="button button-secondary" value="<?php _e( "Lock Selection", 'ga-dash' ); ?>" /><?php
+					?>&nbsp;<input type="submit" name="Hide" class="button button-secondary" value="<?php _e( "Lock Selection", 'google-analytics-dashboard-for-wp' ); ?>" /><?php
 				}
 				?>
 							                         </td>
@@ -908,14 +908,14 @@ final class GADWP_Settings {
                                                     <td class="title"></td>
                                                     <td><?php
 					$profile_info = GADWP_Tools::get_selected_profile( $gadwp->config->options['ga_dash_profile_list'], $gadwp->config->options['ga_dash_tableid_jail'] );
-					echo '<pre>' . __( "View Name:", 'ga-dash' ) . "\t" . esc_html( $profile_info[0] ) . "<br />" . __( "Tracking ID:", 'ga-dash' ) . "\t" . esc_html( $profile_info[2] ) . "<br />" . __( "Default URL:", 'ga-dash' ) . "\t" . esc_html( $profile_info[3] ) . "<br />" . __( "Time Zone:", 'ga-dash' ) . "\t" . esc_html( $profile_info[5] ) . '</pre>';
+					echo '<pre>' . __( "View Name:", 'google-analytics-dashboard-for-wp' ) . "\t" . esc_html( $profile_info[0] ) . "<br />" . __( "Tracking ID:", 'google-analytics-dashboard-for-wp' ) . "\t" . esc_html( $profile_info[2] ) . "<br />" . __( "Default URL:", 'google-analytics-dashboard-for-wp' ) . "\t" . esc_html( $profile_info[3] ) . "<br />" . __( "Time Zone:", 'google-analytics-dashboard-for-wp' ) . "\t" . esc_html( $profile_info[5] ) . '</pre>';
 					?></td>
                                                 </tr>
 							<?php
 				}
 				?>
 							                     <tr>
-                                                    <td class="title"><label for="ga_dash_style"><?php _e("Theme Color:", 'ga-dash' ); ?></label></td>
+                                                    <td class="title"><label for="ga_dash_style"><?php _e("Theme Color:", 'google-analytics-dashboard-for-wp' ); ?></label></td>
                                                     <td><input type="text" id="ga_dash_style" class="ga_dash_style" name="options[ga_dash_style]" value="<?php echo esc_attr($options['ga_dash_style']); ?>" size="10"></td>
                                                 </tr>
                                                 <tr>
@@ -923,7 +923,7 @@ final class GADWP_Settings {
                                                 </tr>
 												<?php if ( !is_multisite()) {?>
 												<tr>
-                                                    <td colspan="2"><?php echo "<h2>" . __( "Automatic Updates", 'ga-dash' ) . "</h2>"; ?></td>
+                                                    <td colspan="2"><?php echo "<h2>" . __( "Automatic Updates", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="2" class="title">
@@ -933,7 +933,7 @@ final class GADWP_Settings {
                                                                 <div class="onoffswitch-switch"></div>
                                                             </label>
                                                         </div>
-                                                        <div class="switch-desc"><?php echo " ".__( "automatic updates for minor versions (security and maintenance releases only)", 'ga-dash' );?></div>
+                                                        <div class="switch-desc"><?php echo " ".__( "automatic updates for minor versions (security and maintenance releases only)", 'google-analytics-dashboard-for-wp' );?></div>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -941,14 +941,14 @@ final class GADWP_Settings {
                                                 </tr>
 												<?php }?>
                                                 <tr>
-                                                    <td colspan="2" class="submit"><input type="submit" name="Submit" class="button button-primary" value="<?php _e('Save Changes', 'ga-dash' ) ?>" /></td>
+                                                    <td colspan="2" class="submit"><input type="submit" name="Submit" class="button button-primary" value="<?php _e('Save Changes', 'google-analytics-dashboard-for-wp' ) ?>" /></td>
                                                 </tr>
 		<?php } else {?>
 							                    <tr>
                                                     <td colspan="2"><hr></td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="2"><input type="submit" name="Authorize" class="button button-secondary" id="authorize" value="<?php _e( "Authorize Plugin", 'ga-dash' ); ?>" <?php echo $options['ga_dash_network']?'disabled="disabled"':''; ?> /> <input type="submit" name="Clear" class="button button-secondary" value="<?php _e( "Clear Cache", 'ga-dash' ); ?>" /></td>
+                                                    <td colspan="2"><input type="submit" name="Authorize" class="button button-secondary" id="authorize" value="<?php _e( "Authorize Plugin", 'google-analytics-dashboard-for-wp' ); ?>" <?php echo $options['ga_dash_network']?'disabled="disabled"':''; ?> /> <input type="submit" name="Clear" class="button button-secondary" value="<?php _e( "Clear Cache", 'google-analytics-dashboard-for-wp' ); ?>" /></td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="2"><hr></td>
@@ -978,7 +978,7 @@ final class GADWP_Settings {
 		/*
 		 * Include GAPI
 		 */
-		echo '<div id="gapi-warning" class="updated"><p>' . __( 'Loading the required libraries. If this results in a blank screen or a fatal error, try this solution:', "ga-dash" ) . ' <a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=general_screen&utm_campaign=gadwp">Library conflicts between WordPress plugins</a></p></div>';
+		echo '<div id="gapi-warning" class="updated"><p>' . __( 'Loading the required libraries. If this results in a blank screen or a fatal error, try this solution:', 'google-analytics-dashboard-for-wp' ) . ' <a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=general_screen&utm_campaign=gadwp">Library conflicts between WordPress plugins</a></p></div>';
 
 		if ( null === $gadwp->gapi_controller ) {
 			$gadwp->gapi_controller = new GADWP_GAPI_Controller();
@@ -995,7 +995,7 @@ final class GADWP_Settings {
 					$gadwp->config->options['automatic_updates_minorversion'] = 1;
 					$gadwp->config->set_plugin_options( true );
 					$options = self::update_options( 'network' );
-					$message = "<div class='updated'><p>" . __( "Plugin authorization succeeded.", 'ga-dash' ) . "</p></div>";
+					$message = "<div class='updated'><p>" . __( "Plugin authorization succeeded.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 					if ( is_multisite() ) { // Cleanup errors on the entire network
 						foreach ( wp_get_sites( array(
 							'limit' => apply_filters( 'gadwp_sites_limit', 100 ) ) ) as $blog ) {
@@ -1018,16 +1018,16 @@ final class GADWP_Settings {
 					$gadwp->gapi_controller->reset_token( false );
 				}
 			} else {
-				$message = "<div class='error'><p>" . __( "The access code is <strong>NOT</strong> your <strong>Tracking ID</strong> (UA-XXXXX-X). Try again, and use the red link to get your access code", 'ga-dash' ) . ".</p></div>";
+				$message = "<div class='error'><p>" . __( "The access code is <strong>NOT</strong> your <strong>Tracking ID</strong> (UA-XXXXX-X). Try again, and use the red link to get your access code", 'google-analytics-dashboard-for-wp' ) . ".</p></div>";
 			}
 		}
 		if ( isset( $_POST['Refresh'] ) ) {
 			if ( isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' ) ) {
 				$gadwp->config->options['ga_dash_profile_list'] = array();
-				$message = "<div class='updated'><p>" . __( "Properties refreshed.", 'ga-dash' ) . "</p></div>";
+				$message = "<div class='updated'><p>" . __( "Properties refreshed.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 				$options = self::update_options( 'network' );
 			} else {
-				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'ga-dash' ) . "</p></div>";
+				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
 		if ( $gadwp->config->options['ga_dash_token'] && $gadwp->gapi_controller->client->getAccessToken() ) {
@@ -1050,41 +1050,41 @@ final class GADWP_Settings {
 		if ( isset( $_POST['Clear'] ) ) {
 			if ( isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' ) ) {
 				GADWP_Tools::clear_cache();
-				$message = "<div class='updated'><p>" . __( "Cleared Cache.", 'ga-dash' ) . "</p></div>";
+				$message = "<div class='updated'><p>" . __( "Cleared Cache.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			} else {
-				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'ga-dash' ) . "</p></div>";
+				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
 		if ( isset( $_POST['Reset'] ) ) {
 			if ( isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' ) ) {
 				$gadwp->gapi_controller->reset_token( true );
 				GADWP_Tools::clear_cache();
-				$message = "<div class='updated'><p>" . __( "Token Reseted and Revoked.", 'ga-dash' ) . "</p></div>";
+				$message = "<div class='updated'><p>" . __( "Token Reseted and Revoked.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 				$options = self::update_options( 'Reset' );
 			} else {
-				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'ga-dash' ) . "</p></div>";
+				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
 		if ( isset( $_POST['options']['ga_dash_hidden'] ) && ! isset( $_POST['Clear'] ) && ! isset( $_POST['Reset'] ) && ! isset( $_POST['Refresh'] ) ) {
-			$message = "<div class='updated'><p>" . __( "Settings saved.", 'ga-dash' ) . "</p></div>";
+			$message = "<div class='updated'><p>" . __( "Settings saved.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			if ( ! ( isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' ) ) ) {
-				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'ga-dash' ) . "</p></div>";
+				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
 		if ( isset( $_POST['Hide'] ) ) {
 			if ( isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' ) ) {
-				$message = "<div class='updated'><p>" . __( "All other domains/properties were removed.", 'ga-dash' ) . "</p></div>";
+				$message = "<div class='updated'><p>" . __( "All other domains/properties were removed.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 				$lock_profile = GADWP_Tools::get_selected_profile( $gadwp->config->options['ga_dash_profile_list'], $gadwp->config->options['ga_dash_tableid_jail'] );
 				$gadwp->config->options['ga_dash_profile_list'] = array(
 					$lock_profile );
 				$options = self::update_options( 'network' );
 			} else {
-				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'ga-dash' ) . "</p></div>";
+				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
 		?>
 	<div class="wrap">
-		<?php echo "<h2>" . __( "Google Analytics Settings", 'ga-dash' ) . "</h2>"; ?><hr>
+		<?php echo "<h2>" . __( "Google Analytics Settings", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?><hr>
                                         </div>
                                         <div id="poststuff">
                                             <div id="post-body" class="metabox-holder columns-2">
@@ -1093,12 +1093,12 @@ final class GADWP_Settings {
                                                         <div class="inside">
 						<?php
 		if ( $gadwp->gapi_controller->gapi_errors_handler() || get_transient('ga_dash_lasterror')) {
-			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'ga-dash' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_errors_debugging', false ), __( 'Errors & Debug', 'ga-dash' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_settings', false ), __( 'authorize the plugin', 'ga-dash' ) ) ) );
+			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'google-analytics-dashboard-for-wp' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_errors_debugging', false ), __( 'Errors & Debug', 'google-analytics-dashboard-for-wp' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_settings', false ), __( 'authorize the plugin', 'google-analytics-dashboard-for-wp' ) ) ) );
 		}
 		if ( isset( $_POST['Authorize'] ) ) {
 			GADWP_Tools::clear_cache();
 			$gadwp->gapi_controller->token_request();
-			echo "<div class='updated'><p>" . __( "Use the red link (see below) to generate and get your access code!", 'ga-dash' ) . "</p></div>";
+			echo "<div class='updated'><p>" . __( "Use the red link (see below) to generate and get your access code!", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 		} else {
 			if ( isset( $message ) ){
 				echo $message;
@@ -1109,7 +1109,7 @@ final class GADWP_Settings {
 							<?php wp_nonce_field('gadash_form','gadash_security'); ?>
 							<table class="options">
                                                                     <tr>
-                                                                        <td colspan="2"><?php echo "<h2>" . __( "Network Setup", 'ga-dash' ) . "</h2>"; ?></td>
+                                                                        <td colspan="2"><?php echo "<h2>" . __( "Network Setup", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td colspan="2" class="title">
@@ -1119,7 +1119,7 @@ final class GADWP_Settings {
                                                                                     <div class="onoffswitch-switch"></div>
                                                                                 </label>
                                                                             </div>
-                                                                            <div class="switch-desc"><?php echo " ".__("use a single Google Analytics account for the entire network", 'ga-dash' );?></div>
+                                                                            <div class="switch-desc"><?php echo " ".__("use a single Google Analytics account for the entire network", 'google-analytics-dashboard-for-wp' );?></div>
                                                                         </td>
                                                                     </tr>
 								<?php if ($options['ga_dash_network']){  //Network Mode check?>
@@ -1127,18 +1127,18 @@ final class GADWP_Settings {
                                                                         <td colspan="2"><hr></td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td colspan="2"><?php echo "<h2>" . __( "Plugin Authorization", 'ga-dash' ) . "</h2>"; ?></td>
+                                                                        <td colspan="2"><?php echo "<h2>" . __( "Plugin Authorization", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td colspan="2" class="info">
-							                                                 <?php printf(__('You should watch the %1$s and read this %2$s before proceeding to authorization. This plugin requires a properly configured Google Analytics account!', 'ga-dash'), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=top_video&utm_campaign=gadwp', __("video", 'ga-dash')), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=top_tutorial&utm_campaign=gadwp', __("tutorial", 'ga-dash')));?>
+							                                                 <?php printf(__('You should watch the %1$s and read this %2$s before proceeding to authorization. This plugin requires a properly configured Google Analytics account!', 'google-analytics-dashboard-for-wp'), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=top_video&utm_campaign=gadwp', __("video", 'google-analytics-dashboard-for-wp')), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=top_tutorial&utm_campaign=gadwp', __("tutorial", 'google-analytics-dashboard-for-wp')));?>
 							                                             </td>
                                                                     </tr>
 							<?php
 				if ( ! $options['ga_dash_token'] || $options['ga_dash_userapi'] ) {
 					?>
 							                                        <tr>
-                                                                        <td colspan="2" class="info"><input name="options[ga_dash_userapi]" type="checkbox" id="ga_dash_userapi" value="1" <?php checked( $options['ga_dash_userapi'], 1 ); ?> onchange="this.form.submit()" /><?php echo " ".__("use your own API Project credentials", 'ga-dash' );?>
+                                                                        <td colspan="2" class="info"><input name="options[ga_dash_userapi]" type="checkbox" id="ga_dash_userapi" value="1" <?php checked( $options['ga_dash_userapi'], 1 ); ?> onchange="this.form.submit()" /><?php echo " ".__("use your own API Project credentials", 'google-analytics-dashboard-for-wp' );?>
 								                                        </td>
                                                                     </tr>
 							<?php
@@ -1146,15 +1146,15 @@ final class GADWP_Settings {
 				if ( $options['ga_dash_userapi'] ) {
 					?>
 							                                        <tr>
-                                                                        <td class="title"><label for="options[ga_dash_apikey]"><?php _e("API Key:", 'ga-dash'); ?></label></td>
+                                                                        <td class="title"><label for="options[ga_dash_apikey]"><?php _e("API Key:", 'google-analytics-dashboard-for-wp'); ?></label></td>
                                                                         <td><input type="text" name="options[ga_dash_apikey]" value="<?php echo esc_attr($options['ga_dash_apikey']); ?>" size="40" required="required"></td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td class="title"><label for="options[ga_dash_clientid]"><?php _e("Client ID:", 'ga-dash'); ?></label></td>
+                                                                        <td class="title"><label for="options[ga_dash_clientid]"><?php _e("Client ID:", 'google-analytics-dashboard-for-wp'); ?></label></td>
                                                                         <td><input type="text" name="options[ga_dash_clientid]" value="<?php echo esc_attr($options['ga_dash_clientid']); ?>" size="40" required="required"></td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td class="title"><label for="options[ga_dash_clientsecret]"><?php _e("Client Secret:", 'ga-dash'); ?></label></td>
+                                                                        <td class="title"><label for="options[ga_dash_clientsecret]"><?php _e("Client Secret:", 'google-analytics-dashboard-for-wp'); ?></label></td>
                                                                         <td><input type="text" name="options[ga_dash_clientsecret]" value="<?php echo esc_attr($options['ga_dash_clientsecret']); ?>" size="40" required="required"> <input type="hidden" name="options[ga_dash_hidden]" value="Y">
 										<?php wp_nonce_field('gadash_form','gadash_security'); ?>
 									</td>
@@ -1164,13 +1164,13 @@ final class GADWP_Settings {
 				if ( $options['ga_dash_token'] ) {
 					?>
 						<tr>
-                                                                        <td colspan="2"><input type="submit" name="Reset" class="button button-secondary" value="<?php _e( "Clear Authorization", 'ga-dash' ); ?>" /> <input type="submit" name="Clear" class="button button-secondary" value="<?php _e( "Clear Cache", 'ga-dash' ); ?>" /> <input type="submit" name="Refresh" class="button button-secondary" value="<?php _e( "Refresh Properties", 'ga-dash' ); ?>" /></td>
+                                                                        <td colspan="2"><input type="submit" name="Reset" class="button button-secondary" value="<?php _e( "Clear Authorization", 'google-analytics-dashboard-for-wp' ); ?>" /> <input type="submit" name="Clear" class="button button-secondary" value="<?php _e( "Clear Cache", 'google-analytics-dashboard-for-wp' ); ?>" /> <input type="submit" name="Refresh" class="button button-secondary" value="<?php _e( "Refresh Properties", 'google-analytics-dashboard-for-wp' ); ?>" /></td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td colspan="2"><hr></td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td colspan="2"><?php echo "<h2>" . __( "Properties/Views Settings", 'ga-dash' ) . "</h2>"; ?></td>
+                                                                        <td colspan="2"><?php echo "<h2>" . __( "Properties/Views Settings", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
                                                                     </tr>
 								<?php
 					if ( isset( $options['ga_dash_tableid_network'] ) ) {
@@ -1187,11 +1187,11 @@ final class GADWP_Settings {
 							foreach ( $options['ga_dash_profile_list'] as $items ) {
 								if ( $items[3] ) {
 									echo '<option value="' . esc_attr( $items[1] ) . '" ' . selected( $items[1], isset( $options['ga_dash_tableid_network']->$blog['blog_id'] ) ? $options['ga_dash_tableid_network']->$blog['blog_id'] : '' );
-									echo ' title="' . __( "View Name:", 'ga-dash' ) . ' ' . esc_attr( $items[0] ) . '">' . esc_html( GADWP_Tools::strip_protocol( $items[3] ) ) . ' &#8658; ' . esc_attr( $items[0] ) . '</option>';
+									echo ' title="' . __( "View Name:", 'google-analytics-dashboard-for-wp' ) . ' ' . esc_attr( $items[0] ) . '">' . esc_html( GADWP_Tools::strip_protocol( $items[3] ) ) . ' &#8658; ' . esc_attr( $items[0] ) . '</option>';
 								}
 							}
 						} else {
-							echo '<option value="">' . __( "Property not found", 'ga-dash' ) . '</option>';
+							echo '<option value="">' . __( "Property not found", 'google-analytics-dashboard-for-wp' ) . '</option>';
 						}
 						?>
     								                                    </select> <br /></td>
@@ -1200,7 +1200,7 @@ final class GADWP_Settings {
 					}
 					?>
                     												<tr>
-                                                                        <td colspan="2"><?php echo "<h2>" . __( "Automatic Updates", 'ga-dash' ) . "</h2>"; ?></td>
+                                                                        <td colspan="2"><?php echo "<h2>" . __( "Automatic Updates", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td colspan="2" class="title">
@@ -1210,11 +1210,11 @@ final class GADWP_Settings {
                                                                                     <div class="onoffswitch-switch"></div>
                                                                                 </label>
                                                                             </div>
-                                                                            <div class="switch-desc"><?php echo " ".__( "automatic updates for minor versions (security and maintenance releases only)", 'ga-dash' );?></div>
+                                                                            <div class="switch-desc"><?php echo " ".__( "automatic updates for minor versions (security and maintenance releases only)", 'google-analytics-dashboard-for-wp' );?></div>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td colspan="2"><hr><?php echo "<h2>" . __( "Exclude Tracking", 'ga-dash' ) . "</h2>"; ?></td>
+                                                                        <td colspan="2"><hr><?php echo "<h2>" . __( "Exclude Tracking", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td colspan="2" class="title">
@@ -1224,14 +1224,14 @@ final class GADWP_Settings {
                                                                                     <div class="onoffswitch-switch"></div>
                                                                                 </label>
                                                                             </div>
-                                                                            <div class="switch-desc"><?php echo " ".__("exclude Super Admin tracking for the entire network", 'ga-dash' );?></div>
+                                                                            <div class="switch-desc"><?php echo " ".__("exclude Super Admin tracking for the entire network", 'google-analytics-dashboard-for-wp' );?></div>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td colspan="2"><hr></td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td colspan="2" class="submit"><input type="submit" name="Submit" class="button button-primary" value="<?php _e('Save Changes', 'ga-dash' ) ?>" /></td>
+                                                                        <td colspan="2" class="submit"><input type="submit" name="Submit" class="button button-primary" value="<?php _e('Save Changes', 'google-analytics-dashboard-for-wp' ) ?>" /></td>
                                                                     </tr>
 			<?php
 				} else {
@@ -1240,7 +1240,7 @@ final class GADWP_Settings {
                                                                         <td colspan="2"><hr></td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td colspan="2"><input type="submit" name="Authorize" class="button button-secondary" id="authorize" value="<?php _e( "Authorize Plugin", 'ga-dash' ); ?>" /> <input type="submit" name="Clear" class="button button-secondary" value="<?php _e( "Clear Cache", 'ga-dash' ); ?>" /></td>
+                                                                        <td colspan="2"><input type="submit" name="Authorize" class="button button-secondary" id="authorize" value="<?php _e( "Authorize Plugin", 'google-analytics-dashboard-for-wp' ); ?>" /> <input type="submit" name="Clear" class="button button-secondary" value="<?php _e( "Clear Cache", 'google-analytics-dashboard-for-wp' ); ?>" /></td>
                                                                     </tr>
 								   <?php }  //Network Mode check?>
 									                                <tr>
@@ -1272,7 +1272,7 @@ final class GADWP_Settings {
                                                     <div class="meta-box-sortables">
                                                         <div class="postbox">
                                                             <h3>
-                                                                <span><?php _e("Setup Tutorial & Demo",'ga-dash') ?></span>
+                                                                <span><?php _e("Setup Tutorial & Demo",'google-analytics-dashboard-for-wp') ?></span>
                                                             </h3>
                                                             <div class="inside">
                                                                 <a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=video&utm_campaign=gadwp" target="_blank"><img src="<?php echo plugins_url( 'images/google-analytics-dashboard.png' , __FILE__ );?>" width="100%" alt="" /></a>
@@ -1280,7 +1280,7 @@ final class GADWP_Settings {
                                                         </div>
                                                         <div class="postbox">
                                                             <h3>
-                                                                <span><?php _e("Follow & Review",'ga-dash')?></span>
+                                                                <span><?php _e("Follow & Review",'google-analytics-dashboard-for-wp')?></span>
                                                             </h3>
                                                             <div class="inside">
                                                                 <div class="gadash-desc">
@@ -1306,47 +1306,47 @@ final class GADWP_Settings {
                                                                     <a href="http://wordpress.org/support/view/plugin-reviews/google-analytics-dashboard-for-wp#plugin-info"><img src="<?php echo plugins_url( 'images/star.png' , __FILE__ ); ?>" /></a>
                                                                 </div>
                                                                 <div class="gadash-desc">
-                                                                    <?php printf(__('Your feedback and review are both important, %s!', 'ga-dash'), sprintf('<a href="http://wordpress.org/support/view/plugin-reviews/google-analytics-dashboard-for-wp#plugin-info">%s</a>', __('rate this plugin', 'ga-dash')));?>
+                                                                    <?php printf(__('Your feedback and review are both important, %s!', 'google-analytics-dashboard-for-wp'), sprintf('<a href="http://wordpress.org/support/view/plugin-reviews/google-analytics-dashboard-for-wp#plugin-info">%s</a>', __('rate this plugin', 'google-analytics-dashboard-for-wp')));?>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="postbox">
                                                             <h3>
-                                                                <span><?php _e("Further Reading",'ga-dash')?></span>
+                                                                <span><?php _e("Further Reading",'google-analytics-dashboard-for-wp')?></span>
                                                             </h3>
                                                             <div class="inside">
                                                                 <div class="gadash-title">
                                                                     <a href="https://deconf.com/move-website-https-ssl/?utm_source=gadwp_config&utm_medium=link&utm_content=ssl&utm_campaign=gadwp"><img src="<?php echo plugins_url( 'images/ssl.png' , __FILE__ ); ?>" /></a>
                                                                 </div>
                                                                 <div class="gadash-desc">
-                                                                    <?php printf(__('%s by moving your website to HTTPS/SSL.', 'ga-dash'), sprintf('<a href="https://deconf.com/move-website-https-ssl/?utm_source=gadwp_config&utm_medium=link&utm_content=ssl&utm_campaign=gadwp">%s</a>', __('Improve search rankings', 'ga-dash')));?>
+                                                                    <?php printf(__('%s by moving your website to HTTPS/SSL.', 'google-analytics-dashboard-for-wp'), sprintf('<a href="https://deconf.com/move-website-https-ssl/?utm_source=gadwp_config&utm_medium=link&utm_content=ssl&utm_campaign=gadwp">%s</a>', __('Improve search rankings', 'google-analytics-dashboard-for-wp')));?>
                                                                 </div>
                                                                 <br />
                                                                 <div class="gadash-title">
                                                                     <a href="https://deconf.com/wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=plugins&utm_campaign=gadwp"><img src="<?php echo plugins_url( 'images/wp.png' , __FILE__ ); ?>" /></a>
                                                                 </div>
                                                                 <div class="gadash-desc">
-                                                                    <?php printf(__('Other %s written by the same author', 'ga-dash'), sprintf('<a href="https://deconf.com/wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=plugins&utm_campaign=gadwp">%s</a>', __('WordPress Plugins', 'ga-dash')));?>
+                                                                    <?php printf(__('Other %s written by the same author', 'google-analytics-dashboard-for-wp'), sprintf('<a href="https://deconf.com/wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=plugins&utm_campaign=gadwp">%s</a>', __('WordPress Plugins', 'google-analytics-dashboard-for-wp')));?>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="postbox">
                                                             <h3>
-                                                                <span><?php _e("Other Services",'ga-dash')?></span>
+                                                                <span><?php _e("Other Services",'google-analytics-dashboard-for-wp')?></span>
                                                             </h3>
                                                             <div class="inside">
                                                                 <div class="gadash-title">
                                                                     <a href="https://deconf.com/wordpress-cdn-speeds-up-your-site/"><img src="<?php echo plugins_url( 'images/mcdn.png' , __FILE__ ); ?>" /></a>
                                                                 </div>
                                                                 <div class="gadash-desc">
-                                                                    <?php printf(__('Speed up your website and plug into a whole %s', 'ga-dash'), sprintf('<a href="https://deconf.com/wordpress-cdn-speeds-up-your-site/?utm_source=gadwp_config&utm_medium=link&utm_content=maxcdn&utm_campaign=gadwp">%s</a>.', __('new level of site speed', 'ga-dash')));?>
+                                                                    <?php printf(__('Speed up your website and plug into a whole %s', 'google-analytics-dashboard-for-wp'), sprintf('<a href="https://deconf.com/wordpress-cdn-speeds-up-your-site/?utm_source=gadwp_config&utm_medium=link&utm_content=maxcdn&utm_campaign=gadwp">%s</a>.', __('new level of site speed', 'google-analytics-dashboard-for-wp')));?>
                                                                 </div>
                                                                 <br />
                                                                 <div class="gadash-title">
                                                                     <a href="https://deconf.com/clicky-web-analytics-review/?utm_source=gadwp_config&utm_medium=link&utm_content=clicky&utm_campaign=gadwp"><img src="<?php echo plugins_url( 'images/clicky.png' , __FILE__ ); ?>" /></a>
                                                                 </div>
                                                                 <div class="gadash-desc">
-                                                                    <?php printf(__('%s service with users tracking at IP level.', 'ga-dash'), sprintf('<a href="https://deconf.com/clicky-web-analytics-review/?utm_source=gadwp_config&utm_medium=link&utm_content=clicky&utm_campaign=gadwp">%s</a>', __('Web Analytics', 'ga-dash')));?>
+                                                                    <?php printf(__('%s service with users tracking at IP level.', 'google-analytics-dashboard-for-wp'), sprintf('<a href="https://deconf.com/clicky-web-analytics-review/?utm_source=gadwp_config&utm_medium=link&utm_content=clicky&utm_campaign=gadwp">%s</a>', __('Web Analytics', 'google-analytics-dashboard-for-wp')));?>
                                                                 </div>
                                                             </div>
                                                         </div>
