@@ -898,12 +898,13 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
     });
 
 	function ga_dash_drawbottomstats(gadash_bottomstats) {
-		jQuery("#gadash-bottomstats #gdsessions").text(gadash_bottomstats[0]);
-		jQuery("#gadash-bottomstats #gdusers").text(gadash_bottomstats[1]);
-		jQuery("#gadash-bottomstats #gdpageviews").text(gadash_bottomstats[2]);
-		jQuery("#gadash-bottomstats #gdbouncerate").text(parseFloat(gadash_bottomstats[3]).toFixed(2)+"%");
-		jQuery("#gadash-bottomstats #gdorganicsearch").text(gadash_bottomstats[4]);
-		jQuery("#gadash-bottomstats #gdpagespervisit").text(parseFloat(gadash_bottomstats[5]).toFixed(2));
+		<?php $lang = "'" . get_bloginfo( 'language' ) . "'"; ?>
+        jQuery("#gadash-bottomstats #gdsessions").text(gadash_bottomstats[0].toLocaleString(<?php echo $lang ?>));
+        jQuery("#gadash-bottomstats #gdusers").text(gadash_bottomstats[1].toLocaleString(<?php echo $lang ?>));
+        jQuery("#gadash-bottomstats #gdpageviews").text(gadash_bottomstats[2].toLocaleString(<?php echo $lang ?>));
+        jQuery("#gadash-bottomstats #gdbouncerate").text(parseFloat(gadash_bottomstats[3]).toLocaleString(<?php echo $lang ?>, {minimumFractionDigits: 2, maximumFractionDigits: 2}) + "%");
+        jQuery("#gadash-bottomstats #gdorganicsearch").text(gadash_bottomstats[4].toLocaleString(<?php echo $lang ?>));
+        jQuery("#gadash-bottomstats #gdpagespervisit").text(parseFloat(gadash_bottomstats[5]).toLocaleString(<?php echo $lang ?>, {minimumFractionDigits: 2, maximumFractionDigits: 2}));
 	}
 
 	function ga_dash_drawmainchart(gadash_mainchart) {
