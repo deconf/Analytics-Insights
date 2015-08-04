@@ -1,7 +1,8 @@
 "use strict";
 
 google.load( "visualization", "1", {
-	packages : [ "corechart", "table", "orgchart", "geochart" ]
+	packages : [ "corechart", "table", "orgchart", "geochart" ],
+	'language': gadwp_item_data.language
 } );
 
 jQuery( document ).ready(
