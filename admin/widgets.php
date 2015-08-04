@@ -847,7 +847,7 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 </div>
 <script type="text/javascript">
 
-    google.load("visualization", "1", {packages:["corechart"]});
+    google.load("visualization", "1", {packages:["corechart"], 'language': '<?php echo get_bloginfo( 'language' ); ?>'});
 
 	try {
     	NProgress.configure({ parent: "#gadash-progressbar" });
