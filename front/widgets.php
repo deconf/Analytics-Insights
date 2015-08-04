@@ -33,7 +33,7 @@ final class GADWP_Frontend_Widget extends WP_Widget {
 
 	public function widget( $args, $instance ) {
 		$widget_title = apply_filters( 'widget_title', $instance['title'] );
-		$title = __( "Sessions", 'google-analytics-dashboard-for-wp' ) . ( $instance['anonim'] ? "' " . __( "trend", 'google-analytics-dashboard-for-wp' ) : '' );
+		$title = __( "Sessions", 'google-analytics-dashboard-for-wp' );
 		echo "\n<!-- BEGIN GADWP v" . GADWP_CURRENT_VERSION . " Widget - https://deconf.com/google-analytics-dashboard-wordpress/ -->\n";
 		echo $args['before_widget'];
 		if ( ! empty( $widget_title ) ) {

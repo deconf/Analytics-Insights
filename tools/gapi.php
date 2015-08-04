@@ -691,7 +691,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
-			$gadwp_data = array( array( __( "Date", 'google-analytics-dashboard-for-wp' ), __( "Sessions", 'google-analytics-dashboard-for-wp' ) . ( $anonim ? "' " . __( "trend", 'google-analytics-dashboard-for-wp' ) : '' ) ) );
+			$gadwp_data = array( array( __( "Date", 'google-analytics-dashboard-for-wp' ), __( "Sessions", 'google-analytics-dashboard-for-wp' ) ) );
 			if ( $anonim ) {
 				$max_array = array();
 				foreach ( $data->getRows() as $item ) {

@@ -4,22 +4,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Google Analytics Dashboard for WP\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/google-analytics-dashboard-for-wp\n"
-"POT-Creation-Date: 2015-07-22 17:21+0300\n"
-"PO-Revision-Date: 2015-07-22 20:01+0300\n"
-"Last-Translator: Kostas Asargiotakis <kwstas_gr@hotmail.gr>\n"
+"POT-Creation-Date: 2015-08-04 16:53+0300\n"
+"PO-Revision-Date: 2015-08-04 16:53+0300\n"
+"Last-Translator: Alin Marcu <admin@deconf.com>\n"
 "Language-Team: Alin Marcu\n"
+"Language: el_GR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.2\n"
+"X-Generator: Poedit 1.8.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;__:1;_e:1;_c:1;_n:1,2;"
 "_n_noop:1,2;_nc:1,2;__ngettext:1,2;__ngettext_noop:1,2;_x:1,2c;_ex:1,2c;_nx:1,2,4c;"
 "_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;"
 "esc_attr_x:1,2c;esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
 "X-Poedit-Basepath: .\n"
-"Language: el_GR\n"
 "X-Poedit-SearchPath-0: ../.\n"
 
 #: .././admin/item-reports.php:61 .././front/item-reports.php:29
@@ -27,32 +27,33 @@ msgid "Analytics"
 msgstr "Αναλυτικά Δεδομένα"
 
 #: .././admin/settings.php:89 .././admin/settings.php:184 .././admin/settings.php:318
-#: .././admin/settings.php:795 .././admin/settings.php:1068
+#: .././admin/settings.php:795 .././admin/settings.php:1069
 msgid "Settings saved."
 msgstr "Οι ρυθμίσεις αποθηκεύθηκαν"
 
 #: .././admin/settings.php:91 .././admin/settings.php:186 .././admin/settings.php:320
 #: .././admin/settings.php:772 .././admin/settings.php:782 .././admin/settings.php:791
-#: .././admin/settings.php:797 .././admin/settings.php:808 .././admin/settings.php:1029
-#: .././admin/settings.php:1054 .././admin/settings.php:1064 .././admin/settings.php:1070
-#: .././admin/settings.php:1081
+#: .././admin/settings.php:797 .././admin/settings.php:808 .././admin/settings.php:1030
+#: .././admin/settings.php:1055 .././admin/settings.php:1065 .././admin/settings.php:1071
+#: .././admin/settings.php:1082
 msgid "Cheating Huh?"
 msgstr "Εξαπάτηση ?"
 
 #: .././admin/settings.php:95 .././admin/settings.php:190 .././admin/settings.php:324
-#: .././admin/settings.php:641 .././admin/settings.php:823 .././admin/settings.php:1095
+#: .././admin/settings.php:641 .././admin/settings.php:823 .././admin/settings.php:1096
 #, php-format
 msgid "Something went wrong, check %1$s or %2$s."
 msgstr "Κάτι πήγε στραβά, ελέγξτε %1$s ή %2$s.."
 
 #: .././admin/settings.php:95 .././admin/settings.php:190 .././admin/settings.php:324
-#: .././admin/settings.php:641 .././admin/settings.php:823 .././admin/settings.php:1095
+#: .././admin/settings.php:641 .././admin/settings.php:823 .././admin/settings.php:1096
 #: .././admin/setup.php:46 .././admin/setup.php:59
 msgid "Errors & Debug"
 msgstr "Σφάλματα & εντοπισμού σφαλμάτων"
 
 #: .././admin/settings.php:95 .././admin/settings.php:190 .././admin/settings.php:324
-#: .././admin/settings.php:641 .././admin/settings.php:823 .././admin/settings.php:1095
+#: .././admin/settings.php:641 .././admin/settings.php:823 .././admin/settings.php:1096
+#: .././admin/setup.php:195 .././front/setup.php:107
 msgid "authorize the plugin"
 msgstr "να εγκρίθει το plugin"
 
@@ -73,7 +74,7 @@ msgid "enable web page reports on frontend"
 msgstr "ενεργοποίηση των αναφορών στο frontend της ιστοσελίδας"
 
 #: .././admin/settings.php:161 .././admin/settings.php:297 .././admin/settings.php:598
-#: .././admin/settings.php:943 .././admin/settings.php:1232
+#: .././admin/settings.php:944 .././admin/settings.php:1234
 msgid "Save Changes"
 msgstr "Αποθήκευση Αλλαγών"
 
@@ -133,7 +134,7 @@ msgstr "Παρακολούθηση Συμβάντων"
 msgid "Custom Definitions"
 msgstr "Προσαρμοσμένοι Ορισμοί"
 
-#: .././admin/settings.php:344 .././admin/settings.php:554 .././admin/settings.php:1215
+#: .././admin/settings.php:344 .././admin/settings.php:554 .././admin/settings.php:1217
 msgid "Exclude Tracking"
 msgstr "Αποκλεισμός Εντοπισμού"
 
@@ -157,20 +158,20 @@ msgstr "Απενεργοποιημένο"
 msgid "Enabled"
 msgstr "Ενεργοποιημένο"
 
-#: .././admin/settings.php:367 .././admin/settings.php:888 .././admin/settings.php:910
-#: .././admin/settings.php:1188 .././admin/widgets.php:61
+#: .././admin/settings.php:367 .././admin/settings.php:889 .././admin/settings.php:911
+#: .././admin/settings.php:1190 .././admin/widgets.php:61
 msgid "View Name:"
 msgstr "Προβολή Ονόματος:"
 
-#: .././admin/settings.php:367 .././admin/settings.php:910
+#: .././admin/settings.php:367 .././admin/settings.php:911
 msgid "Tracking ID:"
 msgstr "Tracking ID:"
 
-#: .././admin/settings.php:367 .././admin/settings.php:910
+#: .././admin/settings.php:367 .././admin/settings.php:911
 msgid "Default URL:"
 msgstr "Προκαθορισμένο URL:"
 
-#: .././admin/settings.php:367 .././admin/settings.php:910
+#: .././admin/settings.php:367 .././admin/settings.php:911
 msgid "Time Zone:"
 msgstr "Ζώνη Ώρας"
 
@@ -294,7 +295,7 @@ msgstr "Λεπτομέρεις Σφάλματος"
 msgid "Plugin Configuration"
 msgstr "Προσομοίωωση Plugin"
 
-#: .././admin/settings.php:717 .././admin/settings.php:980
+#: .././admin/settings.php:717 .././admin/settings.php:981
 msgid ""
 "Loading the required libraries. If this results in a blank screen or a fatal error, try this "
 "solution:"
@@ -306,11 +307,11 @@ msgstr ""
 msgid "Library conflicts between WordPress plugins"
 msgstr "Η βιβλιοθήκη αντιτίθεται με plugins του WordPress"
 
-#: .././admin/settings.php:732 .././admin/settings.php:997
+#: .././admin/settings.php:732 .././admin/settings.php:998
 msgid "Plugin authorization succeeded."
 msgstr "Η επικύρωση του Plugin πέτυχε."
 
-#: .././admin/settings.php:747 .././admin/settings.php:1020
+#: .././admin/settings.php:747 .././admin/settings.php:1021
 msgid ""
 "The access code is <strong>NOT</strong> your <strong>Tracking ID</strong> (UA-XXXXX-X). Try "
 "again, and use the red link to get your access code"
@@ -319,11 +320,11 @@ msgstr ""
 "XXXXX-X). Προσπαθήστε ξανά, και χρησιμοποιήστε τον κόκκινο σύνδεσμο για να πάρετε τον κωδικό "
 "πρόσβασής σας."
 
-#: .././admin/settings.php:770 .././admin/settings.php:1052
+#: .././admin/settings.php:770 .././admin/settings.php:1053
 msgid "Cleared Cache."
 msgstr "Η Cache εκκαθαρίστηκε."
 
-#: .././admin/settings.php:779 .././admin/settings.php:1061
+#: .././admin/settings.php:779 .././admin/settings.php:1062
 msgid "Token Reseted and Revoked."
 msgstr "Το Token Επαναπροσδιορίστηκε και Ανακλήθηκε."
 
@@ -331,25 +332,25 @@ msgstr "Το Token Επαναπροσδιορίστηκε και Ανακλήθ�
 msgid "All errors reseted."
 msgstr "Όλα τα σφάλματα επαναπροσδιορίστηκαν."
 
-#: .././admin/settings.php:802 .././admin/settings.php:1075
+#: .././admin/settings.php:802 .././admin/settings.php:1076
 msgid "All other domains/properties were removed."
 msgstr "Όλα τα άλλα domains/ιδιότητες έχουν απομακρυνθεί."
 
-#: .././admin/settings.php:813 .././admin/settings.php:1086
+#: .././admin/settings.php:813 .././admin/settings.php:1087
 msgid "Google Analytics Settings"
 msgstr "Ρυθμίσεις Google Analytics "
 
-#: .././admin/settings.php:828 .././admin/settings.php:1100
+#: .././admin/settings.php:828 .././admin/settings.php:1101
 msgid "Use the red link (see below) to generate and get your access code!"
 msgstr ""
 "Χρησιμοποιήστε τον κόκκινο σύνδεσμο (βλέπετε παρακάτω) για να δημιουργήσετε και να αποκτήσετε "
 "τον δικό σας κωδικό πρόσβασης!"
 
-#: .././admin/settings.php:839 .././admin/settings.php:1128
+#: .././admin/settings.php:840 .././admin/settings.php:1130
 msgid "Plugin Authorization"
 msgstr "Εξουσιοδότηση Plugin"
 
-#: .././admin/settings.php:844 .././admin/settings.php:1132
+#: .././admin/settings.php:845 .././admin/settings.php:1134
 #, php-format
 msgid ""
 "You should watch the %1$s and read this %2$s before proceeding to authorization. This plugin "
@@ -358,157 +359,157 @@ msgstr ""
 "Πρέπει να δείτε το  the %1$s και να διαβάσετε αυτό το%2$s πρίν προχωρήσετε στην εξουσιοδότηση. "
 "Αυτό το plugin απαιτεί ένα λογαριασμό Google Analytics  κατάλληλα ρυθμισμένο!"
 
-#: .././admin/settings.php:844 .././admin/settings.php:1132
+#: .././admin/settings.php:845 .././admin/settings.php:1134
 msgid "video"
 msgstr "video"
 
-#: .././admin/settings.php:844 .././admin/settings.php:1132
+#: .././admin/settings.php:845 .././admin/settings.php:1134
 msgid "tutorial"
 msgstr "οδηγός"
 
-#: .././admin/settings.php:849 .././admin/settings.php:1139
+#: .././admin/settings.php:850 .././admin/settings.php:1141
 msgid "use your own API Project credentials"
 msgstr "χρησιμοποιήστε το δικό σας εργό πιστοποιητικών API"
 
-#: .././admin/settings.php:854 .././admin/settings.php:1147
+#: .././admin/settings.php:855 .././admin/settings.php:1149
 msgid "API Key:"
 msgstr "Κλειδί ΑΡΙ :"
 
-#: .././admin/settings.php:858 .././admin/settings.php:1151
+#: .././admin/settings.php:859 .././admin/settings.php:1153
 msgid "Client ID:"
 msgstr "ΙD πελάτη:"
 
-#: .././admin/settings.php:862 .././admin/settings.php:1155
+#: .././admin/settings.php:863 .././admin/settings.php:1157
 msgid "Client Secret:"
 msgstr "Κρυφό Πελάτη:"
 
-#: .././admin/settings.php:872 .././admin/settings.php:1165
+#: .././admin/settings.php:873 .././admin/settings.php:1167
 msgid "Clear Authorization"
 msgstr "Εκκαθάριση Εξουσιοδότησης"
 
-#: .././admin/settings.php:872 .././admin/settings.php:950 .././admin/settings.php:1165
-#: .././admin/settings.php:1241
+#: .././admin/settings.php:873 .././admin/settings.php:951 .././admin/settings.php:1167
+#: .././admin/settings.php:1243
 msgid "Clear Cache"
 msgstr "Εκκαθάριση Cache"
 
-#: .././admin/settings.php:872
+#: .././admin/settings.php:873
 msgid "Reset Errors"
 msgstr "Επαναπροσδιορισμός Σφαλμάτων"
 
-#: .././admin/settings.php:878 .././admin/setup.php:42 .././admin/setup.php:58
+#: .././admin/settings.php:879 .././admin/setup.php:42 .././admin/setup.php:58
 msgid "General Settings"
 msgstr "Γεινκές Ρυθμίσεις"
 
-#: .././admin/settings.php:881
+#: .././admin/settings.php:882
 msgid "Select View:"
 msgstr "Επιλέξτε Όψη:"
 
-#: .././admin/settings.php:892 .././admin/settings.php:1192
+#: .././admin/settings.php:893 .././admin/settings.php:1194
 msgid "Property not found"
 msgstr "Η ιδιότητα δεν βρέθηκε"
 
-#: .././admin/settings.php:898
+#: .././admin/settings.php:899
 msgid "Lock Selection"
 msgstr "Κλείδωμα Επιλογής"
 
-#: .././admin/settings.php:917
+#: .././admin/settings.php:918
 msgid "Theme Color:"
 msgstr "Χρώμα Θέματος:"
 
-#: .././admin/settings.php:925 .././admin/settings.php:1201
+#: .././admin/settings.php:926 .././admin/settings.php:1203
 msgid "Automatic Updates"
 msgstr "Αυτόματη Αναβάθμιση"
 
-#: .././admin/settings.php:935 .././admin/settings.php:1211
+#: .././admin/settings.php:936 .././admin/settings.php:1213
 msgid "automatic updates for minor versions (security and maintenance releases only)"
 msgstr "αυτόματη αναβαθμιση για μερικές εκδόσεις (ασφάλειας και συντήρησης εκδόσεις μόνο)"
 
-#: .././admin/settings.php:950 .././admin/settings.php:1241 .././admin/widgets.php:32
+#: .././admin/settings.php:951 .././admin/settings.php:1243 .././admin/widgets.php:32
 msgid "Authorize Plugin"
 msgstr "Εξουσιοδότηση Plugin"
 
-#: .././admin/settings.php:1026
+#: .././admin/settings.php:1027
 msgid "Properties refreshed."
 msgstr "Οι ιδιότητες ανανεώθηκαν."
 
-#: .././admin/settings.php:1110
+#: .././admin/settings.php:1112
 msgid "Network Setup"
 msgstr "Ρύθμιση Δικτύου"
 
-#: .././admin/settings.php:1120
+#: .././admin/settings.php:1122
 msgid "use a single Google Analytics account for the entire network"
 msgstr "χρησιμοποιήστε ένα μόνο λογαριασμό Google Analytics για το υπόλοιπο δίκτυο"
 
-#: .././admin/settings.php:1165
+#: .././admin/settings.php:1167
 msgid "Refresh Properties"
 msgstr "Ανανεώστε τις Ιδιότητες"
 
-#: .././admin/settings.php:1171
+#: .././admin/settings.php:1173
 msgid "Properties/Views Settings"
 msgstr "Ρυθμίσεις Ιδιοτήτων/Προβολών"
 
-#: .././admin/settings.php:1225
+#: .././admin/settings.php:1227
 msgid "exclude Super Admin tracking for the entire network"
 msgstr "αποκλεισμός παρακολούθησης Υπερ Διαχειριστή για το υπόλοιπο δίκτυο"
 
-#: .././admin/settings.php:1273
+#: .././admin/settings.php:1275
 msgid "Setup Tutorial & Demo"
 msgstr "Ρύθμιση Οδηγού & Demo "
 
-#: .././admin/settings.php:1281
+#: .././admin/settings.php:1283
 msgid "Follow & Review"
 msgstr "Ακολουθήστε & Αναθεωρήστε"
 
-#: .././admin/settings.php:1307
+#: .././admin/settings.php:1309
 #, php-format
 msgid "Your feedback and review are both important, %s!"
 msgstr "Η ανατροφοδότηση και η αναθεώρηση είναι εξίσου σημαντικές,  %s!"
 
-#: .././admin/settings.php:1307
+#: .././admin/settings.php:1309
 msgid "rate this plugin"
 msgstr "βαθμολογήστε αυτο το plugin"
 
-#: .././admin/settings.php:1313
+#: .././admin/settings.php:1315
 msgid "Further Reading"
 msgstr "Περαιτέρω Διάβασμα"
 
-#: .././admin/settings.php:1320
+#: .././admin/settings.php:1322
 #, php-format
 msgid "%s by moving your website to HTTPS/SSL."
 msgstr "%s μεταφέροντας τον διαδικτυακό σας τόπο σε ΗΤΤΡ/SSL."
 
-#: .././admin/settings.php:1320
+#: .././admin/settings.php:1322
 msgid "Improve search rankings"
 msgstr "Βελτιώστε τις βαθμολογίες αναζήτησες"
 
-#: .././admin/settings.php:1327
+#: .././admin/settings.php:1329
 #, php-format
 msgid "Other %s written by the same author"
 msgstr "Υπάρχει %s γραμμένο απο τον ίδιο συγγραφέα"
 
-#: .././admin/settings.php:1327
+#: .././admin/settings.php:1329
 msgid "WordPress Plugins"
 msgstr "WordPress Plugins"
 
-#: .././admin/settings.php:1333
+#: .././admin/settings.php:1335
 msgid "Other Services"
 msgstr "Άλλες Υπηρεσίες"
 
-#: .././admin/settings.php:1340
+#: .././admin/settings.php:1342
 #, php-format
 msgid "Speed up your website and plug into a whole %s"
 msgstr "Αυξήστε την συνολική ταχύτητα του διαδικτυακού σας τόπου συνδέωντας το σε  %s"
 
-#: .././admin/settings.php:1340
+#: .././admin/settings.php:1342
 msgid "new level of site speed"
 msgstr "νέο επίπεδο ταχύτητας site "
 
-#: .././admin/settings.php:1347
+#: .././admin/settings.php:1349
 #, php-format
 msgid "%s service with users tracking at IP level."
 msgstr " %s υπηρεσία με χρήστες που παρακολουθούν σε επίπεδο ΙΡ."
 
-#: .././admin/settings.php:1347
+#: .././admin/settings.php:1349
 msgid "Web Analytics"
 msgstr "Web Analytics"
 
@@ -528,17 +529,17 @@ msgstr "Ρυθμίσεις Frontend "
 msgid "Tracking Code"
 msgstr "Κώδικας Παρακολούθησης"
 
-#: .././admin/setup.php:159 .././admin/widgets.php:113 .././front/setup.php:71
+#: .././admin/setup.php:159 .././admin/widgets.php:114 .././front/setup.php:71
 msgid "Today"
 msgstr "Σήμερα"
 
-#: .././admin/setup.php:160 .././admin/widgets.php:114 .././front/setup.php:72
+#: .././admin/setup.php:160 .././admin/widgets.php:115 .././front/setup.php:72
 msgid "Yesterday"
 msgstr "Χθές"
 
 #: .././admin/setup.php:161 .././admin/setup.php:162 .././admin/setup.php:163
-#: .././admin/setup.php:164 .././admin/widgets.php:115 .././admin/widgets.php:116
-#: .././admin/widgets.php:117 .././admin/widgets.php:118 .././front/setup.php:73
+#: .././admin/setup.php:164 .././admin/widgets.php:116 .././admin/widgets.php:117
+#: .././admin/widgets.php:118 .././admin/widgets.php:119 .././front/setup.php:73
 #: .././front/setup.php:74 .././front/setup.php:75 .././front/setup.php:76
 #: .././front/widgets.php:64 .././front/widgets.php:67 .././front/widgets.php:70
 #: .././front/widgets.php:158 .././front/widgets.php:159 .././front/widgets.php:160
@@ -546,19 +547,19 @@ msgstr "Χθές"
 msgid "Last %d Days"
 msgstr "Τελευταίες %d Μέρες"
 
-#: .././admin/setup.php:165 .././admin/setup.php:166 .././admin/widgets.php:119
-#: .././admin/widgets.php:120 .././front/setup.php:77 .././front/setup.php:78
+#: .././admin/setup.php:165 .././admin/setup.php:166 .././admin/widgets.php:120
+#: .././admin/widgets.php:121 .././front/setup.php:77 .././front/setup.php:78
 #, php-format
 msgid "%s Year"
 msgid_plural "%s Years"
 msgstr[0] "%s Χρόνο"
 msgstr[1] "%s Χρόνια"
 
-#: .././admin/setup.php:165 .././admin/widgets.php:119 .././front/setup.php:77
+#: .././admin/setup.php:165 .././admin/widgets.php:120 .././front/setup.php:77
 msgid "One"
 msgstr "Ένα"
 
-#: .././admin/setup.php:166 .././admin/widgets.php:120 .././front/setup.php:78
+#: .././admin/setup.php:166 .././admin/widgets.php:121 .././front/setup.php:78
 msgid "Three"
 msgstr "Τρία"
 
@@ -567,80 +568,80 @@ msgstr "Τρία"
 msgid "Unique Views"
 msgstr "Μοναδικές προβολές"
 
-#: .././admin/setup.php:170 .././admin/setup.php:186 .././admin/widgets.php:126
-#: .././admin/widgets.php:826 .././front/setup.php:82 .././front/setup.php:98
-#: .././tools/gapi.php:358
+#: .././admin/setup.php:170 .././admin/setup.php:186 .././admin/widgets.php:127
+#: .././admin/widgets.php:827 .././front/setup.php:82 .././front/setup.php:98
+#: .././tools/gapi.php:357
 msgid "Users"
 msgstr "Χρήστες"
 
-#: .././admin/setup.php:171 .././admin/widgets.php:127 .././front/setup.php:83
+#: .././admin/setup.php:171 .././admin/widgets.php:128 .././front/setup.php:83
 msgid "Organic"
 msgstr "Οργανικό"
 
-#: .././admin/setup.php:172 .././admin/setup.php:187 .././admin/widgets.php:128
-#: .././admin/widgets.php:830 .././front/setup.php:84 .././front/setup.php:99
-#: .././tools/gapi.php:361
+#: .././admin/setup.php:172 .././admin/setup.php:187 .././admin/widgets.php:129
+#: .././admin/widgets.php:831 .././front/setup.php:84 .././front/setup.php:99
+#: .././tools/gapi.php:360
 msgid "Page Views"
 msgstr "Προβολές Σελίδας"
 
-#: .././admin/setup.php:173 .././admin/setup.php:188 .././admin/widgets.php:129
-#: .././admin/widgets.php:834 .././front/setup.php:85 .././front/setup.php:100
-#: .././tools/gapi.php:364
+#: .././admin/setup.php:173 .././admin/setup.php:188 .././admin/widgets.php:130
+#: .././admin/widgets.php:835 .././front/setup.php:85 .././front/setup.php:100
+#: .././tools/gapi.php:363
 msgid "Bounce Rate"
 msgstr "Bounce Rate"
 
-#: .././admin/setup.php:174 .././admin/widgets.php:130 .././front/setup.php:86
+#: .././admin/setup.php:174 .././admin/widgets.php:131 .././front/setup.php:86
 msgid "Location"
 msgstr "Τοποθεσία"
 
-#: .././admin/setup.php:175 .././admin/widgets.php:132 .././front/setup.php:87
-#: .././tools/gapi.php:503
+#: .././admin/setup.php:175 .././admin/widgets.php:133 .././front/setup.php:87
+#: .././tools/gapi.php:502
 msgid "Referrers"
 msgstr "Αναφέρεται"
 
-#: .././admin/setup.php:176 .././admin/widgets.php:133 .././front/setup.php:88
-#: .././tools/gapi.php:536
+#: .././admin/setup.php:176 .././admin/widgets.php:134 .././front/setup.php:88
+#: .././tools/gapi.php:535
 msgid "Searches"
 msgstr "Αναζητά"
 
-#: .././admin/setup.php:177 .././admin/widgets.php:134 .././front/setup.php:89
+#: .././admin/setup.php:177 .././admin/widgets.php:135 .././front/setup.php:89
 msgid "Traffic Details"
 msgstr "Λεπτομέρειες Κίνησης"
 
-#: .././admin/setup.php:180 .././admin/widgets.php:501 .././admin/widgets.php:586
-#: .././admin/widgets.php:753 .././admin/widgets.php:857 .././front/setup.php:92
+#: .././admin/setup.php:180 .././admin/widgets.php:502 .././admin/widgets.php:587
+#: .././admin/widgets.php:754 .././admin/widgets.php:858 .././front/setup.php:92
 msgid "A JavaScript Error is blocking plugin resources!"
 msgstr "Ένα JavaScript  Σφάλμα εμποδίζει τους πόρους του plugin!"
 
-#: .././admin/setup.php:181 .././admin/widgets.php:677 .././front/setup.php:93
+#: .././admin/setup.php:181 .././admin/widgets.php:678 .././front/setup.php:93
 msgid "Traffic Mediums"
 msgstr "Traffic Mediums"
 
-#: .././admin/setup.php:182 .././admin/widgets.php:692 .././front/setup.php:94
+#: .././admin/setup.php:182 .././admin/widgets.php:693 .././front/setup.php:94
 msgid "Visitor Type"
 msgstr "Τύπος Επισκέπτη"
 
-#: .././admin/setup.php:183 .././admin/widgets.php:707 .././front/setup.php:95
+#: .././admin/setup.php:183 .././admin/widgets.php:708 .././front/setup.php:95
 msgid "Social Networks"
 msgstr "Κοινωνικά Δίκτυα"
 
-#: .././admin/setup.php:184 .././admin/widgets.php:722 .././front/setup.php:96
+#: .././admin/setup.php:184 .././admin/widgets.php:723 .././front/setup.php:96
 msgid "Search Engines"
 msgstr "Μηχανές Αναζήτησης"
 
-#: .././admin/setup.php:189 .././admin/widgets.php:838 .././front/setup.php:101
+#: .././admin/setup.php:189 .././admin/widgets.php:839 .././front/setup.php:101
 msgid "Organic Search"
 msgstr "Οργανική Αναζήτηση"
 
-#: .././admin/setup.php:190 .././admin/widgets.php:842 .././front/setup.php:102
+#: .././admin/setup.php:190 .././admin/widgets.php:843 .././front/setup.php:102
 msgid "Pages/Session"
 msgstr "Σελίδες/Τομείς"
 
-#: .././admin/setup.php:191 .././admin/widgets.php:513 .././admin/widgets.php:527
-#: .././admin/widgets.php:537 .././admin/widgets.php:598 .././admin/widgets.php:612
-#: .././admin/widgets.php:626 .././admin/widgets.php:640 .././admin/widgets.php:654
-#: .././admin/widgets.php:664 .././admin/widgets.php:766 .././admin/widgets.php:778
-#: .././admin/widgets.php:869 .././admin/widgets.php:883 .././admin/widgets.php:893
+#: .././admin/setup.php:191 .././admin/widgets.php:514 .././admin/widgets.php:528
+#: .././admin/widgets.php:538 .././admin/widgets.php:599 .././admin/widgets.php:613
+#: .././admin/widgets.php:627 .././admin/widgets.php:641 .././admin/widgets.php:655
+#: .././admin/widgets.php:665 .././admin/widgets.php:767 .././admin/widgets.php:779
+#: .././admin/widgets.php:870 .././admin/widgets.php:884 .././admin/widgets.php:894
 #: .././front/setup.php:103
 msgid "Invalid response, more details in JavaScript Console (F12)."
 msgstr "Μη έγκυρη απάντηση. περισσότερες λεπτομέρειες στην Κονσόλα JavaScript (F12)."
@@ -649,10 +650,10 @@ msgstr "Μη έγκυρη απάντηση. περισσότερες λεπτο�
 msgid "Not enough data collected"
 msgstr "Δεν συλλέχθηκαν αρκετά δεδομένα"
 
-#: .././admin/setup.php:193 .././admin/widgets.php:518 .././admin/widgets.php:532
-#: .././admin/widgets.php:603 .././admin/widgets.php:617 .././admin/widgets.php:631
-#: .././admin/widgets.php:645 .././admin/widgets.php:659 .././admin/widgets.php:771
-#: .././admin/widgets.php:773 .././admin/widgets.php:874 .././admin/widgets.php:888
+#: .././admin/setup.php:193 .././admin/widgets.php:519 .././admin/widgets.php:533
+#: .././admin/widgets.php:604 .././admin/widgets.php:618 .././admin/widgets.php:632
+#: .././admin/widgets.php:646 .././admin/widgets.php:660 .././admin/widgets.php:772
+#: .././admin/widgets.php:774 .././admin/widgets.php:875 .././admin/widgets.php:889
 #: .././front/setup.php:105 .././front/widgets.php:100
 msgid "This report is unavailable"
 msgstr "Αυτή η αναφορά δεν είναι διαθέσιμη"
@@ -661,35 +662,35 @@ msgstr "Αυτή η αναφορά δεν είναι διαθέσιμη"
 msgid "report generated by"
 msgstr "η αναφορά δημιουργήθηκε απο"
 
-#: .././admin/setup.php:225
+#: .././admin/setup.php:195 .././admin/widgets.php:32 .././front/setup.php:107
+msgid "This plugin needs an authorization:"
+msgstr "Το plugin χρειάζεται εξουσιοδότηση:"
+
+#: .././admin/setup.php:227
 msgid "Settings"
 msgstr "Ρυθμίσεις"
 
-#: .././admin/setup.php:237
+#: .././admin/setup.php:239
 #, php-format
 msgid "Google Analytics Dashboard for WP has been updated to version %s."
 msgstr "Το Ταμπλό του Google Analytics για το WP έχει αναβαθμιστεί στην έκδοση %s."
 
-#: .././admin/setup.php:237
+#: .././admin/setup.php:239
 #, php-format
 msgid "For details, check out %1$s and %2$s."
 msgstr "Για λεπτομέρειες, ελέγξτε %1$s και %2$s."
 
-#: .././admin/setup.php:237
+#: .././admin/setup.php:239
 msgid "the documentation page"
 msgstr "η σελίδα τεκμηρίωσης"
 
-#: .././admin/setup.php:237
+#: .././admin/setup.php:239
 msgid "the plugin&#39;s settings page"
 msgstr "η σελίδα ρυθμίσεων του plugin &#39"
 
 #: .././admin/widgets.php:27 .././front/widgets.php:21
 msgid "Google Analytics Dashboard"
 msgstr "Ταμπλό Google Analytics"
-
-#: .././admin/widgets.php:32
-msgid "This plugin needs an authorization:"
-msgstr "Το plugin χρειάζεται εξουσιοδότηση:"
 
 #: .././admin/widgets.php:66
 msgid "Something went wrong while retrieving profiles list."
@@ -719,59 +720,55 @@ msgstr ""
 msgid "Find out more!"
 msgstr "Μάθετε περισσότερα!"
 
-#: .././admin/widgets.php:112
+#: .././admin/widgets.php:113
 msgid "Real-Time"
 msgstr "Πραγματικός- Χρόνος"
 
-#: .././admin/widgets.php:125 .././admin/widgets.php:822 .././front/widgets.php:36
-#: .././tools/gapi.php:373 .././tools/gapi.php:503 .././tools/gapi.php:536 .././tools/gapi.php:586
-#: .././tools/gapi.php:666 .././tools/gapi.php:695
+#: .././admin/widgets.php:126 .././admin/widgets.php:823 .././front/widgets.php:36
+#: .././tools/gapi.php:372 .././tools/gapi.php:502 .././tools/gapi.php:535 .././tools/gapi.php:585
+#: .././tools/gapi.php:665 .././tools/gapi.php:694
 msgid "Sessions"
 msgstr "Τομείς"
 
-#: .././admin/widgets.php:131 .././tools/gapi.php:471
+#: .././admin/widgets.php:132 .././tools/gapi.php:470
 msgid "Pages"
 msgstr "Σελίδες"
 
-#: .././admin/widgets.php:232 .././admin/widgets.php:474
+#: .././admin/widgets.php:233 .././admin/widgets.php:475
 msgid "REFERRAL"
 msgstr "ΠΑΡΑΠΟΜΠΗΣ"
 
-#: .././admin/widgets.php:236 .././admin/widgets.php:475
+#: .././admin/widgets.php:237 .././admin/widgets.php:476
 msgid "ORGANIC"
 msgstr "ΟΡΓΑΝΙΚΟ"
 
-#: .././admin/widgets.php:240 .././admin/widgets.php:360 .././admin/widgets.php:476
+#: .././admin/widgets.php:241 .././admin/widgets.php:361 .././admin/widgets.php:477
 msgid "SOCIAL"
 msgstr "ΚΟΙΝΩΝΙΚΟ"
 
-#: .././admin/widgets.php:244 .././admin/widgets.php:363 .././admin/widgets.php:477
+#: .././admin/widgets.php:245 .././admin/widgets.php:364 .././admin/widgets.php:478
 msgid "CAMPAIGN"
 msgstr "ΚΑΜΠΑΝΙΑ"
 
-#: .././admin/widgets.php:248 .././admin/widgets.php:366 .././admin/widgets.php:480
+#: .././admin/widgets.php:249 .././admin/widgets.php:367 .././admin/widgets.php:481
 msgid "DIRECT"
 msgstr "ΑΜΕΣΟ"
 
-#: .././admin/widgets.php:252 .././admin/widgets.php:481
+#: .././admin/widgets.php:253 .././admin/widgets.php:482
 msgid "NEW"
 msgstr "ΝΕΟ"
 
-#: .././admin/widgets.php:354
+#: .././admin/widgets.php:355
 msgid "REFERRALS"
 msgstr "ΠΑΡΑΠΟΜΠΕΣ"
 
-#: .././admin/widgets.php:357
+#: .././admin/widgets.php:358
 msgid "KEYWORDS"
 msgstr "ΛΕΞΕΙΣ ΚΛΕΙΔΙΑ"
 
 #: .././front/widgets.php:21
 msgid "Will display your google analytics stats in a widget"
 msgstr "Θα προβάλει τα στατιστικά του google analytics σε ένα widget"
-
-#: .././front/widgets.php:36 .././tools/gapi.php:695
-msgid "trend"
-msgstr "τείνω"
 
 #: .././front/widgets.php:123
 msgid "Period:"
@@ -821,7 +818,7 @@ msgstr "Στατιστικά για:"
 msgid "Give credits:"
 msgstr "Δώστε πιστώσεις:"
 
-#: .././gadwp.php:46 .././gadwp.php:54 .././gadwp.php:61
+#: .././gadwp.php:48 .././gadwp.php:56 .././gadwp.php:63
 msgid "This is not allowed, read the documentation!"
 msgstr "Αυτό δεν επιτρέπεται, διαβάστε την τεκμηρίωση!"
 
@@ -845,38 +842,41 @@ msgstr "Κωδικός Πρόσβασης:"
 msgid "Save Access Code"
 msgstr "Αποθηκεύστε τον Κωδικό Πρόσβασης"
 
-#: .././tools/gapi.php:367
+#: .././tools/gapi.php:366
 msgid "Organic Searches"
 msgstr "Οργανικές Αναζητήσεις"
 
-#: .././tools/gapi.php:370
+#: .././tools/gapi.php:369
 msgid "Unique Page Views"
 msgstr "Μοναδικές προβολές σελίδας"
 
-#: .././tools/gapi.php:378
+#: .././tools/gapi.php:377
 msgid "Hour"
 msgstr "Ώρα"
 
-#: .././tools/gapi.php:382 .././tools/gapi.php:385 .././tools/gapi.php:695
+#: .././tools/gapi.php:381 .././tools/gapi.php:384 .././tools/gapi.php:694
 msgid "Date"
 msgstr "Ημερομηνία"
 
-#: .././tools/gapi.php:471
+#: .././tools/gapi.php:470
 msgid "Views"
 msgstr "Προβολές"
 
-#: .././tools/gapi.php:557
+#: .././tools/gapi.php:556
 msgid "Countries"
 msgstr "Χώρες"
 
-#: .././tools/gapi.php:567
+#: .././tools/gapi.php:566
 msgid "Cities from"
 msgstr "Πόλεις απο"
 
-#: .././tools/gapi.php:620
+#: .././tools/gapi.php:619
 msgid "Channels"
 msgstr "Κανάλια"
 
-#: .././tools/gapi.php:666
+#: .././tools/gapi.php:665
 msgid "Type"
 msgstr "Τύπος"
+
+#~ msgid "trend"
+#~ msgstr "τείνω"
