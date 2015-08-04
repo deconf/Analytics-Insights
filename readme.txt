@@ -132,12 +132,13 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 - Bug Fix: truncate long translation strings in google analytics reports
 - Bug Fix: rename query args to something more unique to avoid conflicts with other plugins
 - Bug Fix: Italian translation small fix
-- Bug Fix: add text domain and domain path in plugin's header; switch to default text domain; other i18n improvements
+- Bug Fix: add text domain and domain path in plugin's header; switch to default text domain
 - Bug Fix: avoid empty item reports while the URI ends with a slash and a Default Page is set in View settings (requires re-authorization)
 - Enhancement: throw an error in the General Settings screen (even if it's not a blocker) to acknowledge the user
 - Enhancement: item reports improvements, more suggestive error messages in item reports, hide unnecessary item reports divs on critical errors
-- Enhancement: Greek translation
+- Enhancement: Greek translation, props by [Kostas Asargiotakis](https://www.facebook.com/kwstas.as)
 - Enhancement: Spanish translation updated
+- Enhancement: i18n improvements, props by [Ivan Ridao Freitas](http://ivanrf.com)
 
 = 4.8.1.2 =
 - Bug Fix: fixes automatic update switched on after each update
