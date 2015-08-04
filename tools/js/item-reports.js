@@ -340,12 +340,12 @@ jQuery.fn.extend( {
 			},
 
 			drawbottomstats : function ( gadwp_bottomstats ) {
-				jQuery( "#gdsessions" + slug ).text( gadwp_bottomstats[ 0 ] );
-				jQuery( "#gdusers" + slug ).text( gadwp_bottomstats[ 1 ] );
-				jQuery( "#gdpageviews" + slug ).text( gadwp_bottomstats[ 2 ] );
-				jQuery( "#gdbouncerate" + slug ).text( parseFloat( gadwp_bottomstats[ 3 ] ).toFixed( 2 ) + "%" );
-				jQuery( "#gdorganicsearch" + slug ).text( gadwp_bottomstats[ 4 ] );
-				jQuery( "#gdpagespervisit" + slug ).text( parseFloat( gadwp_bottomstats[ 5 ] ).toFixed( 2 ) );
+				jQuery( "#gdsessions" + slug ).text( gadwp_bottomstats[ 0 ].toLocaleString(gadwp_item_data.language) );
+				jQuery( "#gdusers" + slug ).text( gadwp_bottomstats[ 1 ].toLocaleString(gadwp_item_data.language) );
+				jQuery( "#gdpageviews" + slug ).text( gadwp_bottomstats[ 2 ].toLocaleString(gadwp_item_data.language) );
+				jQuery( "#gdbouncerate" + slug ).text( parseFloat( gadwp_bottomstats[ 3 ] ).toLocaleString(gadwp_item_data.language, {minimumFractionDigits: 2, maximumFractionDigits: 2}) + "%" );
+				jQuery( "#gdorganicsearch" + slug ).text( gadwp_bottomstats[ 4 ].toLocaleString(gadwp_item_data.language) );
+				jQuery( "#gdpagespervisit" + slug ).text( parseFloat( gadwp_bottomstats[ 5 ] ).toLocaleString(gadwp_item_data.language, {minimumFractionDigits: 2, maximumFractionDigits: 2}) );
 			},
 
 			throwDebug : function ( response ) {
