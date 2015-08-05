@@ -399,7 +399,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				}
 			} else if ( $from == "365daysAgo" || $from == "1095daysAgo" ) {
 				foreach ( $data->getRows() as $row ) {
-					$gadwp_data[] = array( date('F', mktime(0, 0, 0, $row[1], 10)) . ', ' . esc_html( substr_replace( $row[0], "-", 4, 0 ) ), round( $row[2], 2 ) );
+					$gadwp_data[] = array( __( date('F', mktime(0, 0, 0, $row[1], 10)) ) . ', ' . esc_html( substr_replace( $row[0], "-", 4, 0 ) ), round( $row[2], 2 ) );
 				}
 			}else{
 				foreach ( $data->getRows() as $row ) {
