@@ -399,7 +399,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				}
 			} else if ( $from == "365daysAgo" || $from == "1095daysAgo" ) {
 				foreach ( $data->getRows() as $row ) {
-					$gadwp_data[] = array( __( date('F', mktime(0, 0, 0, $row[1], 10)) ) . ', ' . esc_html( substr_replace( $row[0], "-", 4, 0 ) ), round( $row[2], 2 ) );
+					$gadwp_data[] = array( ucfirst( __( date('F', mktime(0, 0, 0, $row[1], 10) ) ) ) . ', ' . esc_html( substr_replace( $row[0], "-", 4, 0 ) ), round( $row[2], 2 ) );
 				}
 			}else{
 				foreach ( $data->getRows() as $row ) {
@@ -441,6 +441,15 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			foreach ( $data->getRows() as $row ) {
 				$gadwp_data = array_map( 'floatval', $row );
 			}
+
+			//i18n support
+			$gadwp_data[0] = number_format_i18n( $gadwp_data[0] );
+			$gadwp_data[1] = number_format_i18n( $gadwp_data[1] );
+			$gadwp_data[2] = number_format_i18n( $gadwp_data[2] );
+			$gadwp_data[3] = number_format_i18n( $gadwp_data[3], 2 );
+			$gadwp_data[4] = number_format_i18n( $gadwp_data[4] );
+			$gadwp_data[5] = number_format_i18n( $gadwp_data[5], 2 );
+
 			return $gadwp_data;
 		}
 
