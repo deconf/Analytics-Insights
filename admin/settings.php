@@ -732,6 +732,23 @@ final class GADWP_Settings {
 					$message = "<div class='updated'><p>" . __( "Plugin authorization succeeded.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 					delete_transient( 'ga_dash_gapi_errors' );
 					delete_transient( 'ga_dash_lasterror' );
+					if ( $gadwp->config->options['ga_dash_token'] && $gadwp->gapi_controller->client->getAccessToken() ) {
+						if ( ! empty( $gadwp->config->options['ga_dash_profile_list'] ) ) {
+							$profiles = $gadwp->config->options['ga_dash_profile_list'];
+						} else {
+							$profiles = $gadwp->gapi_controller->refresh_profiles();
+						}
+						if ( $profiles ) {
+							$gadwp->config->options['ga_dash_profile_list'] = $profiles;
+							if ( ! $gadwp->config->options['ga_dash_tableid_jail'] ) {
+								$profile = GADWP_Tools::guess_default_domain( $profiles );
+								$gadwp->config->options['ga_dash_tableid_jail'] = $profile;
+								$gadwp->config->options['ga_dash_tableid'] = $profile;
+							}
+							$gadwp->config->set_plugin_options();
+							$options = self::update_options( 'general' );
+						}
+					}
 				} catch ( Google_IO_Exception $e ) {
 					set_transient( 'ga_dash_lasterror', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $gadwp->gapi_controller->error_timeout );
 					return false;
@@ -745,23 +762,6 @@ final class GADWP_Settings {
 				}
 			} else {
 				$message = "<div class='error'><p>" . __( "The access code is <strong>NOT</strong> your <strong>Tracking ID</strong> (UA-XXXXX-X). Try again, and use the red link to get your access code", 'google-analytics-dashboard-for-wp' ) . ".</p></div>";
-			}
-		}
-		if ( $gadwp->config->options['ga_dash_token'] && $gadwp->gapi_controller->client->getAccessToken() ) {
-			if ( ! empty( $gadwp->config->options['ga_dash_profile_list'] ) ) {
-				$profiles = $gadwp->config->options['ga_dash_profile_list'];
-			} else {
-				$profiles = $gadwp->gapi_controller->refresh_profiles();
-			}
-			if ( $profiles ) {
-				$gadwp->config->options['ga_dash_profile_list'] = $profiles;
-				if ( ! $gadwp->config->options['ga_dash_tableid_jail'] ) {
-					$profile = GADWP_Tools::guess_default_domain( $profiles );
-					$gadwp->config->options['ga_dash_tableid_jail'] = $profile;
-					$gadwp->config->options['ga_dash_tableid'] = $profile;
-				}
-				$gadwp->config->set_plugin_options();
-				$options = self::update_options( 'general' );
 			}
 		}
 		if ( isset( $_POST['Clear'] ) ) {
@@ -1006,6 +1006,23 @@ final class GADWP_Settings {
 					} else {
 						delete_transient( 'ga_dash_gapi_errors' );
 					}
+					if ( $gadwp->config->options['ga_dash_token'] && $gadwp->gapi_controller->client->getAccessToken() ) {
+						if ( ! empty( $gadwp->config->options['ga_dash_profile_list'] ) ) {
+							$profiles = $gadwp->config->options['ga_dash_profile_list'];
+						} else {
+							$profiles = $gadwp->gapi_controller->refresh_profiles();
+						}
+						if ( $profiles ) {
+							$gadwp->config->options['ga_dash_profile_list'] = $profiles;
+							if ( isset( $gadwp->config->options['ga_dash_tableid_jail'] ) && ! $gadwp->config->options['ga_dash_tableid_jail'] ) {
+								$profile = GADWP_Tools::guess_default_domain( $profiles );
+								$gadwp->config->options['ga_dash_tableid_jail'] = $profile;
+								$gadwp->config->options['ga_dash_tableid'] = $profile;
+							}
+							$gadwp->config->set_plugin_options( true );
+							$options = self::update_options( 'network' );
+						}
+					}
 				} catch ( Google_IO_Exception $e ) {
 					set_transient( 'ga_dash_lasterror', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $gadwp->gapi_controller->error_timeout );
 					return false;
@@ -1026,25 +1043,25 @@ final class GADWP_Settings {
 				$gadwp->config->options['ga_dash_profile_list'] = array();
 				$message = "<div class='updated'><p>" . __( "Properties refreshed.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 				$options = self::update_options( 'network' );
+				if ( $gadwp->config->options['ga_dash_token'] && $gadwp->gapi_controller->client->getAccessToken() ) {
+					if ( ! empty( $gadwp->config->options['ga_dash_profile_list'] ) ) {
+						$profiles = $gadwp->config->options['ga_dash_profile_list'];
+					} else {
+						$profiles = $gadwp->gapi_controller->refresh_profiles();
+					}
+					if ( $profiles ) {
+						$gadwp->config->options['ga_dash_profile_list'] = $profiles;
+						if ( isset( $gadwp->config->options['ga_dash_tableid_jail'] ) && ! $gadwp->config->options['ga_dash_tableid_jail'] ) {
+							$profile = GADWP_Tools::guess_default_domain( $profiles );
+							$gadwp->config->options['ga_dash_tableid_jail'] = $profile;
+							$gadwp->config->options['ga_dash_tableid'] = $profile;
+						}
+						$gadwp->config->set_plugin_options( true );
+						$options = self::update_options( 'network' );
+					}
+				}
 			} else {
 				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
-			}
-		}
-		if ( $gadwp->config->options['ga_dash_token'] && $gadwp->gapi_controller->client->getAccessToken() ) {
-			if ( ! empty( $gadwp->config->options['ga_dash_profile_list'] ) ) {
-				$profiles = $gadwp->config->options['ga_dash_profile_list'];
-			} else {
-				$profiles = $gadwp->gapi_controller->refresh_profiles();
-			}
-			if ( $profiles ) {
-				$gadwp->config->options['ga_dash_profile_list'] = $profiles;
-				if ( isset( $gadwp->config->options['ga_dash_tableid_jail'] ) && ! $gadwp->config->options['ga_dash_tableid_jail'] ) {
-					$profile = GADWP_Tools::guess_default_domain( $profiles );
-					$gadwp->config->options['ga_dash_tableid_jail'] = $profile;
-					$gadwp->config->options['ga_dash_tableid'] = $profile;
-				}
-				$gadwp->config->set_plugin_options( true );
-				$options = self::update_options( 'network' );
 			}
 		}
 		if ( isset( $_POST['Clear'] ) ) {

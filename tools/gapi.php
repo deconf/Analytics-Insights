@@ -161,10 +161,6 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				$startindex = 1;
 				$totalresults = 65535; // use something big
 
-				if ( $this->gapi_errors_handler() ) {
-					return $ga_dash_profile_list;
-				}
-
 				while ( $startindex < $totalresults ) {
 
 					$profiles = $this->service->management_profiles->listManagementProfiles( '~all', '~all', array( 'start-index' => $startindex ) );
