@@ -350,6 +350,10 @@ if (! class_exists('GADWP_Config')) {
                 $this->options['dashboard_widget'] = 1;
                 $flag = true;
             }
+            if (! isset($this->options['api_backoff'])) { //v4.7
+            	$this->options['api_backoff'] = 0;
+            	$flag = true;
+            }
             if (isset($this->options['ga_tracking_code'])) {
                 unset($this->options['ga_tracking_code']);
                 $flag = true;
