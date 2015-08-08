@@ -140,7 +140,8 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 - Enhancement: Greek translation, props by [Kostas Asargiotakis](https://www.facebook.com/kwstas.as)
 - Enhancement: i18n improvements, props by [Ivan Ridao Freitas](http://ivanrf.com)
 - Enhancement: all Google Analytics API requests need to pass additional validity checks and must be sent through get() method  
-
+- Enhancement: unset default dimension and default metric cookies after a plugin update
+ 
 = 4.8.1.2 =
 - Bug Fix: fixes automatic update switched on after each update
 - Bug Fix: add missing domain to an i18n string

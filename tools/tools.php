@@ -122,5 +122,10 @@ if ( ! class_exists( 'GADWP_Tools' ) ) {
 				return false;
 			}
 		}
+
+		public static function unset_cookie( $name ){
+			$name = 'gadwp_' . $name;
+			setcookie( $name, '', time() - 3600, '/');
+		}
 	}
 }
