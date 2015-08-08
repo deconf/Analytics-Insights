@@ -666,7 +666,7 @@ final class GADWP_Settings {
                             <tr>
                                 <td>
                     				<?php
-		$errors = esc_html( print_r( get_transient( 'ga_dash_lasterror' ), true ) ) ? esc_html( print_r( get_transient( 'ga_dash_lasterror' ), true ) ) : __( "None", 'google-analytics-dashboard-for-wp' );
+		$errors = print_r( get_transient( 'ga_dash_lasterror' ), true ) ? esc_html( str_replace( $gadwp->config->access[2], '' , print_r( get_transient( 'ga_dash_lasterror' ), true ) ) ) : __( "None", 'google-analytics-dashboard-for-wp' );
 		echo '<pre class="log_data">Last Error: ';
 		echo $errors;
 		?></pre>
@@ -679,7 +679,7 @@ final class GADWP_Settings {
                                 <td>
                     				<?php
 		echo '<pre class="log_data">Error Details: ';
-		$error_details = esc_html( print_r( get_transient( 'ga_dash_gapi_errors' ), true ) ) ? "\n" . esc_html( print_r( get_transient( 'ga_dash_gapi_errors' ), true ) ) : __( "None", 'google-analytics-dashboard-for-wp' );
+		$error_details = print_r( get_transient( 'ga_dash_gapi_errors' ), true ) ? "\n" . esc_html( str_replace( $gadwp->config->access[2], '' , print_r( get_transient( 'ga_dash_lasterror' ), true ) ) ) : __( "None", 'google-analytics-dashboard-for-wp' );
 		echo $error_details;
 		?></pre><br />
                                     <hr>
