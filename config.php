@@ -350,7 +350,7 @@ if (! class_exists('GADWP_Config')) {
                 $this->options['dashboard_widget'] = 1;
                 $flag = true;
             }
-            if (! isset($this->options['api_backoff'])) { //v4.7
+            if (! isset($this->options['api_backoff'])) { //v4.8.1.3
             	$this->options['api_backoff'] = 0;
             	$flag = true;
             }

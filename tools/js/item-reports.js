@@ -2,7 +2,7 @@
 
 google.load( "visualization", "1", {
 	packages : [ "corechart", "table", "orgchart", "geochart" ],
-	'language': gadwp_item_data.language
+	'language' : gadwp_item_data.language
 } );
 
 jQuery( document ).ready(
@@ -84,6 +84,13 @@ function ( target ) {
 
 jQuery.fn.extend( {
 	gadwpItemReport : function ( slug, item_id ) {
+		var dialog_title;
+		
+		if ( gadwp_item_data.scope == 'admin' ) {
+			dialog_title = jQuery( '#gadwp' + slug ).attr( "title" );
+		} else {
+			dialog_title = document.getElementsByTagName( "title" )[ 0 ].innerHTML;
+		}
 
 		var tools = {
 			set_cookie : function ( name, value ) {
@@ -357,12 +364,12 @@ jQuery.fn.extend( {
 					"color" : "#000",
 					"border-left" : "5px solid red"
 				} );
-				if (response == '-24'){
+				if ( response == '-24' ) {
 					jQuery( "#gadwp-status" + slug ).html( gadwp_item_data.i18n[ 15 ] );
 				} else {
 					jQuery( "#gadwp-status" + slug ).html( gadwp_item_data.i18n[ 11 ] );
-					console.log( "\n********************* GADWP Log ********************* \n\n" + response );					
-				}	
+					console.log( "\n********************* GADWP Log ********************* \n\n" + response );
+				}
 			},
 
 			throwError : function ( target, response, p ) {
@@ -460,7 +467,7 @@ jQuery.fn.extend( {
 									reports.throwDebug( response[ 0 ] );
 								}
 							} else {
-								jQuery( '#gadwp-reports' + slug ).show();								
+								jQuery( '#gadwp-reports' + slug ).show();
 								reports.throwError( '#gadwp-trafficchannels' + slug, response[ 0 ], "125px" );
 							}
 
@@ -493,66 +500,66 @@ jQuery.fn.extend( {
 						if ( jQuery.isArray( response ) ) {
 							if ( !jQuery.isNumeric( response[ 0 ] ) ) {
 								if ( jQuery.isArray( response[ 0 ] ) ) {
-									jQuery( '#gadwp-reports' + slug ).show();									
+									jQuery( '#gadwp-reports' + slug ).show();
 									reports.trafficchannels = response[ 0 ];
 									google.setOnLoadCallback( reports.drawtrafficchannels( reports.trafficchannels ) );
 								} else {
 									reports.throwDebug( response[ 0 ] );
 								}
 							} else {
-								jQuery( '#gadwp-reports' + slug ).show();								
+								jQuery( '#gadwp-reports' + slug ).show();
 								reports.throwError( '#gadwp-trafficchannels' + slug, response[ 0 ], "125px" );
 							}
 
 							if ( !jQuery.isNumeric( response[ 1 ] ) ) {
 								if ( jQuery.isArray( response[ 1 ] ) ) {
-									jQuery( '#gadwp-reports' + slug ).show();									
+									jQuery( '#gadwp-reports' + slug ).show();
 									reports.trafficmediums = response[ 1 ];
 									google.setOnLoadCallback( reports.drawtrafficmediums( reports.trafficmediums ) );
 								} else {
 									reports.throwDebug( response[ 1 ] );
 								}
 							} else {
-								jQuery( '#gadwp-reports' + slug ).show();								
+								jQuery( '#gadwp-reports' + slug ).show();
 								reports.throwError( '#gadwp-trafficmediums' + slug, response[ 1 ], "80px" );
 							}
 
 							if ( !jQuery.isNumeric( response[ 2 ] ) ) {
 								if ( jQuery.isArray( response[ 2 ] ) ) {
-									jQuery( '#gadwp-reports' + slug ).show();									
+									jQuery( '#gadwp-reports' + slug ).show();
 									reports.traffictype = response[ 2 ];
 									google.setOnLoadCallback( reports.drawtraffictype( reports.traffictype ) );
 								} else {
 									reports.throwDebug( response[ 2 ] );
 								}
 							} else {
-								jQuery( '#gadwp-reports' + slug ).show();								
+								jQuery( '#gadwp-reports' + slug ).show();
 								reports.throwError( '#gadwp-traffictype' + slug, response[ 2 ], "80px" );
 							}
 
 							if ( !jQuery.isNumeric( response[ 3 ] ) ) {
 								if ( jQuery.isArray( response[ 3 ] ) ) {
-									jQuery( '#gadwp-reports' + slug ).show();									
+									jQuery( '#gadwp-reports' + slug ).show();
 									reports.trafficorganic = response[ 3 ];
 									google.setOnLoadCallback( reports.drawtrafficorganic( reports.trafficorganic ) );
 								} else {
 									reports.throwDebug( response[ 3 ] );
 								}
 							} else {
-								jQuery( '#gadwp-reports' + slug ).show();								
+								jQuery( '#gadwp-reports' + slug ).show();
 								reports.throwError( '#gadwp-trafficorganic' + slug, response[ 3 ], "80px" );
 							}
 
 							if ( !jQuery.isNumeric( response[ 4 ] ) ) {
 								if ( jQuery.isArray( response[ 4 ] ) ) {
-									jQuery( '#gadwp-reports' + slug ).show();									
+									jQuery( '#gadwp-reports' + slug ).show();
 									reports.socialnetworks = response[ 4 ];
 									google.setOnLoadCallback( reports.drawsocialnetworks( reports.socialnetworks ) );
 								} else {
 									reports.throwDebug( response[ 4 ] );
 								}
 							} else {
-								jQuery( '#gadwp-reports' + slug ).show();								
+								jQuery( '#gadwp-reports' + slug ).show();
 								reports.throwError( '#gadwp-socialnetworks' + slug, response[ 4 ], "80px" );
 							}
 						} else {
@@ -573,7 +580,7 @@ jQuery.fn.extend( {
 						if ( jQuery.isArray( response ) ) {
 							if ( !jQuery.isNumeric( response[ 0 ] ) ) {
 								if ( jQuery.isArray( response[ 0 ] ) ) {
-									jQuery( '#gadwp-reports' + slug ).show();									
+									jQuery( '#gadwp-reports' + slug ).show();
 									reports.locations = response[ 0 ];
 									google.setOnLoadCallback( reports.drawmaplocations( reports.locations ) );
 									google.setOnLoadCallback( reports.drawlocations( reports.locations ) );
@@ -581,7 +588,7 @@ jQuery.fn.extend( {
 									reports.throwDebug( response[ 0 ] );
 								}
 							} else {
-								jQuery( '#gadwp-reports' + slug ).show();								
+								jQuery( '#gadwp-reports' + slug ).show();
 								reports.throwError( '#gadwp-map' + slug, response[ 0 ], "125px" );
 								reports.throwError( '#gadwp-locations' + slug, response[ 0 ], "125px" );
 							}
@@ -603,7 +610,7 @@ jQuery.fn.extend( {
 						if ( jQuery.isArray( response ) ) {
 							if ( !jQuery.isNumeric( response[ 0 ] ) ) {
 								if ( jQuery.isArray( response[ 0 ] ) ) {
-									jQuery( '#gadwp-reports' + slug ).show();									
+									jQuery( '#gadwp-reports' + slug ).show();
 									reports.mainchart = response[ 0 ];
 									if ( query == 'visitBounceRate' ) {
 										google.setOnLoadCallback( reports.drawmainchart( reports.mainchart, true ) );
@@ -614,19 +621,19 @@ jQuery.fn.extend( {
 									reports.throwDebug( response[ 0 ] );
 								}
 							} else {
-								jQuery( '#gadwp-reports' + slug ).show();								
+								jQuery( '#gadwp-reports' + slug ).show();
 								reports.throwError( '#gadwp-mainchart' + slug, response[ 0 ], "125px" );
 							}
 							if ( !jQuery.isNumeric( response[ 1 ] ) ) {
 								if ( jQuery.isArray( response[ 1 ] ) ) {
-									jQuery( '#gadwp-reports' + slug ).show();									
+									jQuery( '#gadwp-reports' + slug ).show();
 									reports.bottomstats = response[ 1 ];
 									google.setOnLoadCallback( reports.drawbottomstats( reports.bottomstats ) );
 								} else {
 									reports.throwDebug( response[ 1 ] );
 								}
 							} else {
-								jQuery( '#gadwp-reports' + slug ).show();								
+								jQuery( '#gadwp-reports' + slug ).show();
 								reports.throwError( '#gadwp-bottomstats' + slug, response[ 1 ], "40px" );
 							}
 						} else {
@@ -718,7 +725,7 @@ jQuery.fn.extend( {
 			fluid : true,
 			dialogClass : 'gadwp wp-dialog',
 			resizable : false,
-			title : jQuery( '#gadwp' + slug ).attr( "title" ),
+			title : dialog_title,
 			position : {
 				my : "top",
 				at : "top+100",
