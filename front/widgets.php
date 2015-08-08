@@ -100,7 +100,7 @@ final class GADWP_Frontend_Widget extends WP_Widget {
 				        jQuery("#gadwp-widgetchart").html("' . __( "This report is unavailable", 'google-analytics-dashboard-for-wp' ) . ' ("+response+")");
                     }
 				});';
-		echo 'google.load("visualization", "1", {packages:["corechart"]});
+		echo 'google.load("visualization", "1", {packages:["corechart"], "language" : "'. get_bloginfo( 'language' ) . '"});
 					function ga_dash_drawfwidgetsessions(response) {
     					var data = google.visualization.arrayToDataTable(response);
     					var options = {

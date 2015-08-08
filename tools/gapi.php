@@ -716,10 +716,10 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				$max = max( $max_array ) ? max( $max_array ) : 1;
 			}
 			foreach ( $data->getRows() as $row ) {
-				$gadwp_data[] = array( ucfirst( esc_html( ( __( $row[1] ) ) ) ) . ', ' . esc_html( substr_replace( substr_replace( $row[0], "-", 4, 0 ), "-", 7, 0 ) ), ( $anonim ? round( $row[2] * 100 / $max, 2 ) : (int) $row[2] ) );
+				$gadwp_data[] = array( date_i18n( 'l, ' . __( 'F j, Y' ), strtotime( $row[0] ) ), ( $anonim ? round( $row[2] * 100 / $max, 2 ) : (int) $row[2] ) );
 			}
 			$totals = $data->getTotalsForAllResults();
-			return array( $gadwp_data, $anonim ? 0 : $totals['ga:sessions'] );
+			return array( $gadwp_data, $anonim ? 0 : number_format_i18n( $totals['ga:sessions'] ) );
 		}
 
 		/**
