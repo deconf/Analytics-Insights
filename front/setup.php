@@ -110,7 +110,7 @@ if ( ! class_exists( 'GADWP_Frontend_Setup' ) ) {
 					'region' => $region,
 					'language' => get_bloginfo( 'language' ),
 					'filter' => $_SERVER["REQUEST_URI"],
-					'scope' => 'front',
+					'scope' => 'front-item',
 				 )
 				);
 				/* @formatter:on */

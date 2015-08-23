@@ -5,21 +5,21 @@
 }
 
 /* Options pages */
-table.options {
+table.gadwp-settings-options {
 	padding-left: 10px;
 	width: 100%;
 }
 
-.options td {
+.gadwp-settings-options td {
 	padding: 0px 5px 5px 5px;
 }
 
-td.title, td.info {
+td.gadwp-settings-title, td.info {
 	width: 130px;
 	padding-left: 20px;
 }
 
-td.title-select {
+td.gadwp-settings-title-s {
 	width: 300px;
 }
 
@@ -27,15 +27,11 @@ td.title-select {
 	padding-left: 15px;
 }
 
-td.debugging {
-	width: 300px;
-}
-
-td.info {
+td.gadwp-settings-info {
 	padding-bottom: 15px;
 }
 
-td.title label {
+td.gadwp-settings-title label {
 	font-weight: bold;
 }
 
@@ -54,15 +50,11 @@ td.title label {
 	vertical-align: top;
 }
 
-pre.gadash {
-	
-}
-
-pre.log_data {
+pre.gadwp-settings-logdata {
 	white-space: pre-wrap;
 }
 
-td.roles {
+td.gadwp-settings-roles {
 	padding-bottom: 15px;
 }
 
@@ -70,20 +62,16 @@ td.roles {
 	width: 50px;
 }
 
-.event-option, .event-option-desc {
-	float: left;
-}
-
 #gapi-access-code {
 	color: red !important;
 }
 
-#poststuff h2 {
+#poststuff.gadwp h2 {
 	padding-bottom: 0;
 }
 
 /* Options pages ON/OFF Switch */
-.onoffswitch {
+.gadwp-settings-switchoo {
 	position: relative;
 	width: 50px;
 	float: left;
@@ -99,11 +87,11 @@ td.roles {
 	-ms-user-select: none;
 }
 
-.onoffswitch-checkbox {
+.gadwp-settings-switchoo-checkbox {
 	display: none !important;
 }
 
-.onoffswitch-label {
+.gadwp-settings-switchoo-label {
 	display: block;
 	overflow: hidden;
 	cursor: pointer;
@@ -112,7 +100,7 @@ td.roles {
 	border-radius: 2px;
 }
 
-.onoffswitch-inner {
+.gadwp-settings-switchoo-inner {
 	width: 200%;
 	margin-left: -100%;
 	border-radius: 2px;
@@ -122,7 +110,7 @@ td.roles {
 	transition: margin 0.2s ease-in 0s;
 }
 
-.onoffswitch-inner:before, .onoffswitch-inner:after {
+.gadwp-settings-switchoo-inner:before, .gadwp-settings-switchoo-inner:after {
 	float: left;
 	width: 50%;
 	font-weight: normal;
@@ -135,7 +123,7 @@ td.roles {
 	font-size: 12px;
 }
 
-.onoffswitch-inner:before {
+.gadwp-settings-switchoo-inner:before {
 	content: "On";
 	padding-left: 5px;
 	border-bottom: none;
@@ -143,14 +131,14 @@ td.roles {
 	color: #fff;  /* inherit from button props */
 }
 
-.onoffswitch-inner:after {
+.gadwp-settings-switchoo-inner:after {
 	content: "Off";
 	padding-right: 5px;
 	background-color: #ddd;
 	text-align: right;
 }
 
-.onoffswitch-switch {
+.gadwp-settings-switchoo-switch {
 	width: 22px;
 	height: 22px;
 	background: #fff;
@@ -167,12 +155,12 @@ td.roles {
 	transition: all 0.2s ease-in 0s;
 }
 
-.onoffswitch-switch:hover {
+.gadwp-settings-switchoo-switch:hover {
 	color: #aaa;
 	border-color: #aaa;
 }
 
-.onoffswitch-switch:after {
+.gadwp-settings-switchoo-switch:after {
 	margin: 0;
 	outline: 0;
 	display: inline-block;
@@ -185,11 +173,11 @@ td.roles {
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.onoffswitch-checkbox:checked+.onoffswitch-label .onoffswitch-inner {
+.gadwp-settings-switchoo-checkbox:checked+.gadwp-settings-switchoo-label .gadwp-settings-switchoo-inner {
 	margin-left: 0;
 }
 
-.onoffswitch-checkbox:checked+.onoffswitch-label .onoffswitch-switch {
+.gadwp-settings-switchoo-checkbox:checked+.gadwp-settings-switchoo-label .gadwp-settings-switchoo-switch {
 	right: 0px;
 }
 

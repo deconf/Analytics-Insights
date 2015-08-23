@@ -16,13 +16,10 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 
 		public $options;
 
-		public $access = array( '65556128781.apps.googleusercontent.com', 'Kc7888wgbc_JbeCpbFjnYpwE', 'AIzaSymApG7LlUoHc29ZeC_dsShVaBEX15SfRl_WY' );
-
 		public function __construct() {
 			// get plugin options
 			$this->get_plugin_options();
 			$this->last_requested_report();
-			$this->access = array_map( array( $this, 'map' ), $this->access );
 			add_filter( 'auto_update_plugin', array( $this, 'automatic_update' ), 10, 2 );
 		}
 
@@ -161,10 +158,6 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 				}
 			}
 			update_option( 'gadash_options', json_encode( $this->validate_data( $options ) ) );
-		}
-
-		private function map( $map ) {
-			return str_ireplace( 'map', chr( 66 ), $map );
 		}
 
 		private function get_plugin_options() {
@@ -331,6 +324,10 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 			}
 			if ( ! isset( $this->options['api_backoff'] ) ) { // v4.8.1.3
 				$this->options['api_backoff'] = 0;
+				$flag = true;
+			}
+			if ( !isset( $this->options['old_api'] ) ) { // v4.9
+				$this->options['old_api'] = 2;
 				$flag = true;
 			}
 			if ( isset( $this->options['ga_tracking_code'] ) ) {

@@ -26,6 +26,8 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 
 		private $gadwp;
 
+		private $access = array( '65556128781-dc9etofi9hmqnfnnevmapcldo8fjpiv2pg.apps.googleusercontent.com', '2TfsVyw4RriUhNNflL8AdMApoG', '65556128781.apps.googleusercontent.com', 'Kc7888wgbc_JbeCmApbFjnYpwE' );
+
 		public function __construct() {
 			$this->gadwp = GADWP();
 
@@ -35,10 +37,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			if ( function_exists( 'curl_version' ) ) {
 				$curlversion = curl_version();
 				if ( isset( $curlversion['version'] ) && ( version_compare( PHP_VERSION, '5.3.0' ) >= 0 ) && version_compare( $curlversion['version'], '7.10.8' ) >= 0 && defined( 'GADWP_IP_VERSION' ) && GADWP_IP_VERSION ) {
-					$config->setClassConfig( 'Google_IO_Curl', array( 'options' => array( CURLOPT_IPRESOLVE => GADWP_IP_VERSION ) ) ); // Force
-					                                                                                                                   // CURL_IPRESOLVE_V4
-					                                                                                                                   // or
-					                                                                                                                   // CURL_IPRESOLVE_V6
+					$config->setClassConfig( 'Google_IO_Curl', array( 'options' => array( CURLOPT_IPRESOLVE => GADWP_IP_VERSION ) ) ); // Force CURL_IPRESOLVE_V4 or CURL_IPRESOLVE_V6
 				}
 			}
 			$this->client = new Google_Client( $config );
@@ -48,14 +47,14 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			$this->client->setRedirectUri( 'urn:ietf:wg:oauth:2.0:oob' );
 			$this->set_error_timeout();
 			$this->managequota = 'u' . get_current_user_id() . 's' . get_current_blog_id();
+			$this->access = array_map( array( $this, 'map' ), $this->access );
 			if ( $this->gadwp->config->options['ga_dash_userapi'] ) {
 				$this->client->setClientId( $this->gadwp->config->options['ga_dash_clientid'] );
 				$this->client->setClientSecret( $this->gadwp->config->options['ga_dash_clientsecret'] );
 				$this->client->setDeveloperKey( $this->gadwp->config->options['ga_dash_apikey'] );
 			} else {
-				$this->client->setClientId( $this->gadwp->config->access[0] );
-				$this->client->setClientSecret( $this->gadwp->config->access[1] );
-				$this->client->setDeveloperKey( $this->gadwp->config->access[2] );
+				$this->client->setClientId( $this->access[$this->gadwp->config->options['old_api']] );
+				$this->client->setClientSecret( $this->access[$this->gadwp->config->options['old_api'] + 1] );
 			}
 			$this->service = new Google_Service_Analytics( $this->client );
 			if ( $this->gadwp->config->options['ga_dash_token'] ) {
@@ -89,7 +88,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				return true;
 			}
 			if ( isset( $errors[1][0]['reason'] ) && ( $errors[1][0]['reason'] == 'userRateLimitExceeded' || $errors[1][0]['reason'] == 'quotaExceeded' ) ) {
-				if ($this->gadwp->config->options['api_backoff'] <= 5) {
+				if ( $this->gadwp->config->options['api_backoff'] <= 5 ) {
 					usleep( rand( 100000, 1500000 ) );
 					$this->gadwp->config->options['api_backoff'] = $this->gadwp->config->options['api_backoff'] + 1;
 					$this->gadwp->config->set_plugin_options();
@@ -128,14 +127,14 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			$authUrl = $this->client->createAuthUrl();
 			?>
 <form name="input" action="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>" method="post">
-    <table class="options">
+    <table class="gadwp-settings-options">
         <tr>
-            <td colspan="2" class="info">
+            <td colspan="2" class="gadwp-settings-info">
 						<?php echo __( "Use this link to get your access code:", 'google-analytics-dashboard-for-wp' ) . ' <a href="' . $authUrl . '" id="gapi-access-code" target="_blank">' . __ ( "Get Access Code", 'google-analytics-dashboard-for-wp' ) . '</a>.'; ?>
 					</td>
         </tr>
         <tr>
-            <td class="title"><label for="ga_dash_code" title="<?php _e("Use the red link to get your access code!",'google-analytics-dashboard-for-wp')?>"><?php echo _e( "Access Code:", 'google-analytics-dashboard-for-wp' ); ?></label></td>
+            <td class="gadwp-settings-title"><label for="ga_dash_code" title="<?php _e("Use the red link to get your access code!",'google-analytics-dashboard-for-wp')?>"><?php echo _e( "Access Code:", 'google-analytics-dashboard-for-wp' ); ?></label></td>
             <td><input type="text" id="ga_dash_code" name="ga_dash_code" value="" size="61" required="required" title="<?php _e("Use the red link to get your access code!",'google-analytics-dashboard-for-wp')?>"></td>
         </tr>
         <tr>
@@ -260,6 +259,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			}
 			$this->gadwp->config->options['ga_dash_token'] = "";
 			$this->gadwp->config->options['ga_dash_refresh_token'] = "";
+			$this->gadwp->config->options['old_api'] = 0;
 			if ( $all ) {
 				$this->gadwp->config->options['ga_dash_tableid'] = "";
 				$this->gadwp->config->options['ga_dash_tableid_jail'] = "";
@@ -402,17 +402,18 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				foreach ( $data->getRows() as $row ) {
 					$gadwp_data[] = array( (int) $row[0] . ':00', round( $row[1], 2 ) );
 				}
-			} else if ( $from == "365daysAgo" || $from == "1095daysAgo" ) {
-				foreach ( $data->getRows() as $row ) {
- 					//$row[0] contains 'yyyyMM', '01' is added to make it a valid date format
-				    $gadwp_data[] = array( date_i18n( 'F, Y', strtotime( $row[0] . '01' ) ), round( $row[2], 2 ) );
+			} else
+				if ( $from == "365daysAgo" || $from == "1095daysAgo" ) {
+					foreach ( $data->getRows() as $row ) {
+						// $row[0] contains 'yyyyMM', '01' is added to make it a valid date format
+						$gadwp_data[] = array( date_i18n( 'F, Y', strtotime( $row[0] . '01' ) ), round( $row[2], 2 ) );
+					}
+				} else {
+					foreach ( $data->getRows() as $row ) {
+						// $row[0] contains 'yyyyMMdd'
+						$gadwp_data[] = array( date_i18n( 'l, ' . __( 'F j, Y' ), strtotime( $row[0] ) ), round( $row[2], 2 ) );
+					}
 				}
-			}else{
-				foreach ( $data->getRows() as $row ) {
-				    // $row[0] contains 'yyyyMMdd'
-				    $gadwp_data[] = array( date_i18n( 'l, ' . __( 'F j, Y' ), strtotime( $row[0] ) ), round( $row[2], 2 ) );
-				}
-			}
 			return $gadwp_data;
 		}
 
@@ -449,7 +450,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				$gadwp_data = array_map( 'floatval', $row );
 			}
 
-			//i18n support
+			// i18n support
 			$gadwp_data[0] = number_format_i18n( $gadwp_data[0] );
 			$gadwp_data[1] = number_format_i18n( $gadwp_data[1] );
 			$gadwp_data[2] = number_format_i18n( $gadwp_data[2] );
@@ -764,6 +765,10 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				$i++;
 			}
 			return $gadwp_data;
+		}
+
+		private function map( $map ) {
+			return str_ireplace( 'map', chr( 112 ), $map );
 		}
 
 		public function get( $projectId, $query, $from = false, $to = false, $filter = '' ) {

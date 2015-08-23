@@ -5,92 +5,84 @@ google.load( "visualization", "1", {
 	'language' : gadwp_item_data.language
 } );
 
-jQuery( document ).ready(
-
-function ( target ) {
-
-	if ( gadwp_item_data.scope == 'admin' ) {
-		var selector = 'a[id^="gadwp-"]';
-	} else {
-		var selector = 'li[id^="wp-admin-bar-gadwp"]';
-	}
-
-	jQuery( selector ).click( function ( e ) {
-		var item_id = getID( this );
-		var slug = "-" + item_id;
-
-		if ( !jQuery( "#gadwp-window" + slug ).length > 0 ) {
-			jQuery( "body" ).append( '<div id="gadwp-window' + slug + '"></div>' );
+//Get the numeric ID
+gadwp_item_data.getID	= function ( item ) {
+	if ( gadwp_item_data.scope == 'admin-item' ) {
+		if ( typeof item.id == "undefined" ) {
+			return 0
 		}
-		jQuery( '#gadwp-window' + slug ).gadwpItemReport( slug, item_id );
-	} );
-
-	function getID ( item ) {
-		if ( gadwp_item_data.scope == 'admin' ) {
-			if ( typeof item.id == "undefined" ) {
-				return 0
-			}
-			if ( item.id.split( '-' )[ 1 ] == "undefined" ) {
-				return 0;
-			} else {
-				return item.id.split( '-' )[ 1 ];
-			}
+		if ( item.id.split( '-' )[ 1 ] == "undefined" ) {
+			return 0;
 		} else {
-			if ( typeof item.id == "undefined" ) {
-				return 1;
-			}
-			if ( item.id.split( '-' )[ 4 ] == "undefined" ) {
-				return 1;
-			} else {
-				return item.id.split( '-' )[ 4 ];
-			}
+			return item.id.split( '-' )[ 1 ];
+		}
+	} else {
+		if ( typeof item.id == "undefined" ) {
+			return 1;
+		}
+		if ( item.id.split( '-' )[ 4 ] == "undefined" ) {
+			return 1;
+		} else {
+			return item.id.split( '-' )[ 4 ];
 		}
 	}
+}
+
+//Get the selector
+gadwp_item_data.getSelector	= function ( scope ) {
+	if ( scope == 'admin-item' ) {
+		return 'a[id^="gadwp-"]';
+	} else {
+		return 'li[id^="wp-admin-bar-gadwp"]';
+	}	
+}
+
+gadwp_item_data.responsiveDialog = function () {
+	var visible = jQuery( ".ui-dialog:visible" );
+	// on each visible dialog
+	visible.each( function () {
+		var $this = jQuery( this );
+		var dialog = $this.find( ".ui-dialog-content" ).data( "ui-dialog" );
+		// on each fluid dialog
+		if ( dialog.options.fluid ) {
+			var wWidth = jQuery( window ).width();
+			// window width vs dialog width
+			if ( wWidth < ( parseInt( dialog.options.maxWidth ) + 50 ) ) {
+				// don't fill the entire screen
+				$this.css( "max-width", "90%" );
+			} else {
+				// maxWidth bug fix
+				$this.css( "max-width", dialog.options.maxWidth + "px" );
+			}
+			// change dialog position
+			dialog.option( "position", dialog.options.position );
+		}
+	} );
+}
+
+jQuery( document ).ready( function () {
+	jQuery( gadwp_item_data.getSelector( gadwp_item_data.scope ) ).click( function ( e ) {
+		if ( !jQuery( "#gadwp-window-" + gadwp_item_data.getID( this ) ).length > 0 ) {
+			jQuery( "body" ).append( '<div id="gadwp-window-' + gadwp_item_data.getID( this ) + '"></div>' );
+		}
+		jQuery( '#gadwp-window-' + gadwp_item_data.getID( this ) ).gadwpItemReport( gadwp_item_data.getID( this ) );
+	} );
 
 	// on window resize
 	jQuery( window ).resize( function () {
-		fluidDialog();
+		gadwp_item_data.responsiveDialog();
 	} );
 
 	// dialog width larger than viewport
 	jQuery( document ).on( "dialogopen", ".ui-dialog", function ( event, ui ) {
-		fluidDialog();
+		gadwp_item_data.responsiveDialog();
 	} );
-
-	function fluidDialog () {
-		var visible = jQuery( ".ui-dialog:visible" );
-		// on each visible dialog
-		visible.each( function () {
-			var $this = jQuery( this );
-			var dialog = $this.find( ".ui-dialog-content" ).data( "ui-dialog" );
-			// on each fluid dialog
-			if ( dialog.options.fluid ) {
-				var wWidth = jQuery( window ).width();
-				// window width vs dialog width
-				if ( wWidth < ( parseInt( dialog.options.maxWidth ) + 50 ) ) {
-					// don't fill the entire screen
-					$this.css( "max-width", "90%" );
-				} else {
-					// maxWidth bug fix
-					$this.css( "max-width", dialog.options.maxWidth + "px" );
-				}
-				// change dialog position
-				dialog.option( "position", dialog.options.position );
-			}
-		} );
-
-	}
 } );
 
 jQuery.fn.extend( {
-	gadwpItemReport : function ( slug, item_id ) {
+	gadwpItemReport : function ( item_id ) {
+		var slug = "-" + item_id;
 		var dialog_title;
-		
-		if ( gadwp_item_data.scope == 'admin' ) {
-			dialog_title = jQuery( '#gadwp' + slug ).attr( "title" );
-		} else {
-			dialog_title = document.getElementsByTagName( "title" )[ 0 ].innerHTML;
-		}
 
 		var tools = {
 			set_cookie : function ( name, value ) {
@@ -170,6 +162,14 @@ jQuery.fn.extend( {
 			mainchart : '',
 			bottomstats : '',
 
+			getTitle : function ( scope ) {
+				if ( scope == 'admin-item' ) {
+					return jQuery( '#gadwp' + slug ).attr( "title" );
+				} else {
+					return document.getElementsByTagName( "title" )[ 0 ].innerHTML;
+				}				
+			},
+			
 			alertMessage : function ( msg ) {
 				jQuery( "#gadwp-status" + slug ).css( {
 					"margin-top" : "3px",
@@ -430,7 +430,7 @@ jQuery.fn.extend( {
 				tools.set_cookie( 'default_metric', query );
 				tools.set_cookie( 'default_dimension', period );
 
-				if ( gadwp_item_data.scope == 'admin' ) {
+				if ( gadwp_item_data.scope == 'admin-item' ) {
 					var data = {
 						action : 'gadwp_backend_item_reports',
 						gadwp_security_backend_item_reports : gadwp_item_data.security,
@@ -725,7 +725,7 @@ jQuery.fn.extend( {
 			fluid : true,
 			dialogClass : 'gadwp wp-dialog',
 			resizable : false,
-			title : dialog_title,
+			title : reports.getTitle( gadwp_item_data.scope ),
 			position : {
 				my : "top",
 				at : "top+100",

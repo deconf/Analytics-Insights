@@ -197,7 +197,7 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 						'colorVariations' => GADWP_Tools::variations( $this->gadwp->config->options['ga_dash_style'] ),
 						'region' => $region,
 						'language' => get_bloginfo( 'language' ),
-						'scope' => 'admin',
+						'scope' => 'admin-item',
 						)
 					);
 					/* @formatter:on */
