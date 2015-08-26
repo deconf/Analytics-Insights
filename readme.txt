@@ -130,6 +130,7 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 
 = 4.8.2 =
 - Bug Fix: use only unique CSS selectors to avoid conflicts with other plugins
+- Bug Fix: don't load unneeded CSS on frontend
   
 = 4.8.1.3 =
 - Bug Fix: truncate long translation strings in google analytics reports

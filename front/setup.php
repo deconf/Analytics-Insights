@@ -32,11 +32,6 @@ if ( ! class_exists( 'GADWP_Frontend_Setup' ) ) {
 		public function load_styles_scripts() {
 
 			/*
-			 * GADWP main stylesheet
-			 */
-			wp_enqueue_style( 'ga_dash-front', GADWP_URL . 'front/css/item-reports.css', null, GADWP_CURRENT_VERSION );
-
-			/*
 			 * Item reports Styles & Scripts
 			 */
 
