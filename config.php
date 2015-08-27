@@ -132,8 +132,6 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 				if ( $network_settings ) { // Retrieve network options, clear blog options, store both to db
 					$network_options['ga_dash_token'] = $this->options['ga_dash_token'];
 					$options['ga_dash_token'] = '';
-					$network_options['ga_dash_refresh_token'] = $this->options['ga_dash_refresh_token'];
-					$options['ga_dash_refresh_token'] = '';
 					if ( is_network_admin() ) {
 						$network_options['ga_dash_profile_list'] = $this->options['ga_dash_profile_list'];
 						$options['ga_dash_profile_list'] = array();
@@ -191,19 +189,28 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 			$flag = false;
 
 			if ( GADWP_CURRENT_VERSION != get_option( 'gadwp_version' ) ) {
+				if ( isset( $this->options['ga_dash_refresh_token'] ) ) { // v4.8.2
+					$rebuild_token = json_decode( $this->options['ga_dash_token'] );
+					$rebuild_token->refresh_token = $this->options['ga_dash_refresh_token'];
+					$rebuild_token->token_type = "Bearer";
+					$this->options['ga_dash_token'] = json_encode($rebuild_token);
+					unset( $this->options['ga_dash_refresh_token'] );
+					$this->set_plugin_options( true );
+				}
 				GADWP_Tools::clear_cache();
+				GADWP_Tools::clear_transients(); // 4.8.3 to be removed after a few months
 				$flag = true;
-				delete_transient( 'ga_dash_lasterror' );
+				GADWP_Tools::delete_cache( 'last_error' );
 				update_option( 'gadwp_version', GADWP_CURRENT_VERSION );
 				update_option( 'gadwp_got_updated', true );
 				if ( is_multisite() ) { // Cleanup errors and cookies on the entire network
 					foreach ( wp_get_sites( array( 'limit' => apply_filters( 'gadwp_sites_limit', 100 ) ) ) as $blog ) {
 						switch_to_blog( $blog['blog_id'] );
-						delete_transient( 'ga_dash_gapi_errors' );
+						GADWP_Tools::delete_cache( 'gapi_errors' );
 						restore_current_blog();
 					}
 				} else {
-					delete_transient( 'ga_dash_gapi_errors' );
+					GADWP_Tools::delete_cache( 'gapi_errors' );
 				}
 				GADWP_Tools::unset_cookie( 'default_metric' );
 				GADWP_Tools::unset_cookie( 'default_dimension' );
@@ -324,10 +331,6 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 			}
 			if ( ! isset( $this->options['api_backoff'] ) ) { // v4.8.1.3
 				$this->options['api_backoff'] = 0;
-				$flag = true;
-			}
-			if ( !isset( $this->options['old_api'] ) ) { // v4.9
-				$this->options['old_api'] = 2;
 				$flag = true;
 			}
 			if ( isset( $this->options['ga_tracking_code'] ) ) {

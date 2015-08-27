@@ -14,7 +14,7 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 
 	class GADWP_Backend_Widgets {
 
-		private $gawp;
+		private $gadwp;
 
 		public function __construct() {
 			$this->gadwp = GADWP();

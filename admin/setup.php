@@ -84,7 +84,7 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 			 * GADWP UI
 			 */
 
-			if ( get_transient( 'ga_dash_gapi_errors' ) ) {
+			if ( GADWP_Tools::get_cache( 'gapi_errors' ) ) {
 				$ed_bubble = '!';
 			} else {
 				$ed_bubble = '';
