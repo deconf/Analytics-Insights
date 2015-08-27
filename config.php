@@ -120,6 +120,12 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 				}
 				$options['ga_event_affiliates'] = sanitize_text_field( $options['ga_event_affiliates'] );
 			}
+
+			$token = json_decode( $options['ga_dash_token'] ); // v4.8.2
+			if ( isset( $token->token_type ) && isset( $options['ga_dash_refresh_token'] ) ) {
+				unset( $options['ga_dash_refresh_token'] );
+			}
+
 			return $options;
 		}
 
@@ -193,7 +199,7 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 					$rebuild_token = json_decode( $this->options['ga_dash_token'] );
 					$rebuild_token->refresh_token = $this->options['ga_dash_refresh_token'];
 					$rebuild_token->token_type = "Bearer";
-					$this->options['ga_dash_token'] = json_encode($rebuild_token);
+					$this->options['ga_dash_token'] = json_encode( $rebuild_token );
 					unset( $this->options['ga_dash_refresh_token'] );
 					$this->set_plugin_options( true );
 				}
@@ -219,7 +225,7 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 				$this->options['ga_enhanced_links'] = 0;
 				$flag = true;
 			}
-			if ( ! isset( $this->options['ga_enhanced_network'] ) ) {
+			if ( ! isset( $this->options['ga_dash_network'] ) ) {
 				$this->options['ga_dash_network'] = 0;
 				$flag = true;
 			}
