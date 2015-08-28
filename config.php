@@ -122,7 +122,7 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 			}
 
 			$token = json_decode( $options['ga_dash_token'] ); // v4.8.2
-			if ( isset( $token->token_type ) && isset( $options['ga_dash_refresh_token'] ) ) {
+			if ( isset( $token->token_type ) || !$options['ga_dash_refresh_token'] ) {
 				unset( $options['ga_dash_refresh_token'] );
 			}
 
@@ -195,14 +195,18 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 			$flag = false;
 
 			if ( GADWP_CURRENT_VERSION != get_option( 'gadwp_version' ) ) {
-				if ( isset( $this->options['ga_dash_refresh_token'] ) ) { // v4.8.2
-					$rebuild_token = json_decode( $this->options['ga_dash_token'] );
+
+				$rebuild_token = json_decode( $this->options['ga_dash_token'] ); // v4.8.2
+				if ( is_object( $rebuild_token ) && ! isset( $rebuild_token->token_type ) && $this->options['ga_dash_refresh_token'] ) {
 					$rebuild_token->refresh_token = $this->options['ga_dash_refresh_token'];
 					$rebuild_token->token_type = "Bearer";
 					$this->options['ga_dash_token'] = json_encode( $rebuild_token );
 					unset( $this->options['ga_dash_refresh_token'] );
 					$this->set_plugin_options( true );
+				} else {
+					unset( $this->options['ga_dash_refresh_token'] );
 				}
+
 				GADWP_Tools::clear_cache();
 				GADWP_Tools::clear_transients(); // 4.8.3 to be removed after a few months
 				$flag = true;
