@@ -133,6 +133,7 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 - Bug Fix: don't load unneeded CSS styles on frontend
 - Bug Fix: switch to a new custom made cache system to avoid issues with broken transients
 - Enhancement: rebuild and roll-back to a bearer token
+- Enhancement: Greek translation updated
   
 = 4.8.1.3 =
 - Bug Fix: truncate long translation strings in google analytics reports
