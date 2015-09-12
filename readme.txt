@@ -122,6 +122,24 @@ For documentation, tutorials, FAQ and videos check out: [Google Analytics Dashbo
 8. Google Analytics Dashboard for WP cities on region map
 9. Google Analytics Dashboard for WP Widget
 
+== Localization ==
+
+You can help translating this plugin on [translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/google-analytics-dashboard-for-wp).
+
+= GADWP Translation Editors =
+
+Arabic - [Ahmed Majid](https://profiles.wordpress.org/ahmedalttai/)
+Czech - [lordrak](https://profiles.wordpress.org/lordrak/)
+French - [benjam04](https://profiles.wordpress.org/benjam04/), [youpain](https://profiles.wordpress.org/youpain/)
+Greek - [kwstasepp](https://profiles.wordpress.org/kwstasepp/)
+Hungarian - [ilovewp.net](https://profiles.wordpress.org/ilovewp.net/)
+Italian - [Lion73](https://profiles.wordpress.org/Lion73/)
+Romanian - [Adrian Pop](https://profiles.wordpress.org/adrianpop/)
+Russian - [ZAnatoly](https://profiles.wordpress.org/ZAnatoly/)
+Ukrainian - [ZAnatoly](https://profiles.wordpress.org/ZAnatoly/)
+
+For support and requests regarding plugin's localization [use this forum](https://wordpress.org/support/plugin/google-analytics-dashboard-for-wp). 
+
 == License ==
 
 Google Analytics Dashboard for WP it's released under the GPLv2, you can use it free of charge on your personal or commercial website.
@@ -130,6 +148,8 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 
 = 4.8.2.1 =
 - Enhancement: Italian translation updated
+- Enhancement: new Localization section
+- Enhancement: small UI updates
 
 = 4.8.2 =
 - Bug Fix: use only unique CSS selectors to avoid conflicts with other plugins

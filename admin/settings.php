@@ -1326,6 +1326,13 @@ final class GADWP_Settings {
                                                             </h3>
                                                             <div class="inside">
                                                                 <div class="gadash-title">
+                                                                    <a href="https://deconf.com/clicky-web-analytics-review/?utm_source=gadwp_config&utm_medium=link&utm_content=clicky&utm_campaign=gadwp"><img src="<?php echo plugins_url( 'images/clicky.png' , __FILE__ ); ?>" /></a>
+                                                                </div>
+                                                                <div class="gadash-desc">
+                                                                    <?php printf(__('%s service with users tracking at IP level.', 'google-analytics-dashboard-for-wp'), sprintf('<a href="https://deconf.com/clicky-web-analytics-review/?utm_source=gadwp_config&utm_medium=link&utm_content=clicky&utm_campaign=gadwp">%s</a>', __('Web Analytics', 'google-analytics-dashboard-for-wp')));?>
+                                                                </div>
+                                                                <br />
+                                                                <div class="gadash-title">
                                                                     <a href="https://deconf.com/move-website-https-ssl/?utm_source=gadwp_config&utm_medium=link&utm_content=ssl&utm_campaign=gadwp"><img src="<?php echo plugins_url( 'images/ssl.png' , __FILE__ ); ?>" /></a>
                                                                 </div>
                                                                 <div class="gadash-desc">
@@ -1337,26 +1344,6 @@ final class GADWP_Settings {
                                                                 </div>
                                                                 <div class="gadash-desc">
                                                                     <?php printf(__('Other %s written by the same author', 'google-analytics-dashboard-for-wp'), sprintf('<a href="https://deconf.com/wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=plugins&utm_campaign=gadwp">%s</a>', __('WordPress Plugins', 'google-analytics-dashboard-for-wp')));?>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="postbox">
-                                                            <h3>
-                                                                <span><?php _e("Other Services",'google-analytics-dashboard-for-wp')?></span>
-                                                            </h3>
-                                                            <div class="inside">
-                                                                <div class="gadash-title">
-                                                                    <a href="https://deconf.com/wordpress-cdn-speeds-up-your-site/"><img src="<?php echo plugins_url( 'images/mcdn.png' , __FILE__ ); ?>" /></a>
-                                                                </div>
-                                                                <div class="gadash-desc">
-                                                                    <?php printf(__('Speed up your website and plug into a whole %s', 'google-analytics-dashboard-for-wp'), sprintf('<a href="https://deconf.com/wordpress-cdn-speeds-up-your-site/?utm_source=gadwp_config&utm_medium=link&utm_content=maxcdn&utm_campaign=gadwp">%s</a>.', __('new level of site speed', 'google-analytics-dashboard-for-wp')));?>
-                                                                </div>
-                                                                <br />
-                                                                <div class="gadash-title">
-                                                                    <a href="https://deconf.com/clicky-web-analytics-review/?utm_source=gadwp_config&utm_medium=link&utm_content=clicky&utm_campaign=gadwp"><img src="<?php echo plugins_url( 'images/clicky.png' , __FILE__ ); ?>" /></a>
-                                                                </div>
-                                                                <div class="gadash-desc">
-                                                                    <?php printf(__('%s service with users tracking at IP level.', 'google-analytics-dashboard-for-wp'), sprintf('<a href="https://deconf.com/clicky-web-analytics-review/?utm_source=gadwp_config&utm_medium=link&utm_content=clicky&utm_campaign=gadwp">%s</a>', __('Web Analytics', 'google-analytics-dashboard-for-wp')));?>
                                                                 </div>
                                                             </div>
                                                         </div>
