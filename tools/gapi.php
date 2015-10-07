@@ -60,8 +60,19 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			if ( $this->gadwp->config->options['ga_dash_token'] ) {
 				$token = $this->gadwp->config->options['ga_dash_token'];
 				if ( $token ) {
-					$this->client->setAccessToken( $token );
-					$gadwp->config->options['ga_dash_token'] = $this->client->getAccessToken();
+					try {
+						$this->client->setAccessToken( $token );
+						$gadwp->config->options['ga_dash_token'] = $this->client->getAccessToken();
+					} catch ( Google_IO_Exception $e ) {
+						GADWP_Tools::set_cache( 'ga_dash_lasterror', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $this->error_timeout );
+					} catch ( Google_Service_Exception $e ) {
+						GADWP_Tools::set_cache( 'ga_dash_lasterror', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( "(" . $e->getCode() . ") " . $e->getMessage() ), $this->error_timeout );
+						GADWP_Tools::set_cache( 'ga_dash_gapi_errors', array( $e->getCode(), (array) $e->getErrors() ), $this->error_timeout );
+						$this->reset_token();
+					} catch ( Exception $e ) {
+						GADWP_Tools::set_cache( 'ga_dash_lasterror', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $this->error_timeout );
+						$this->reset_token();
+					}						
 					if ( is_multisite() && $this->gadwp->config->options['ga_dash_network'] ) {
 						$this->gadwp->config->set_plugin_options( true );
 					} else {
@@ -308,6 +319,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 		 * @return array|int
 		 */
 		private function get_mainreport( $projectId, $from, $to, $query, $filter = '' ) {
+			$date_format = get_option( 'date_format' );
 			switch ( $query ) {
 				case 'users' :
 					$title = __( "Users", 'google-analytics-dashboard-for-wp' );
@@ -362,7 +374,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				} else {
 					foreach ( $data->getRows() as $row ) {
 						// $row[0] contains 'yyyyMMdd'
-						$gadwp_data[] = array( date_i18n( 'l, ' . __( 'F j, Y' ), strtotime( $row[0] ) ), round( $row[2], 2 ) );
+						$gadwp_data[] = array( date_i18n( 'l, ' . $date_format, strtotime( $row[0] ) ), round( $row[2], 2 ) );
 					}
 				}
 			return $gadwp_data;
@@ -649,6 +661,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 		 * @return array|int
 		 */
 		public function frontend_widget_stats( $projectId, $from, $anonim ) {
+			$date_format = get_option( 'date_format' );
 			$content = '';
 			$to = 'yesterday';
 			$metrics = 'ga:sessions';
@@ -668,7 +681,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				$max = max( $max_array ) ? max( $max_array ) : 1;
 			}
 			foreach ( $data->getRows() as $row ) {
-				$gadwp_data[] = array( date_i18n( 'l, ' . __( 'F j, Y' ), strtotime( $row[0] ) ), ( $anonim ? round( $row[2] * 100 / $max, 2 ) : (int) $row[2] ) );
+				$gadwp_data[] = array( date_i18n( 'l, ' . $date_format, strtotime( $row[0] ) ), ( $anonim ? round( $row[2] * 100 / $max, 2 ) : (int) $row[2] ) );
 			}
 			$totals = $data->getTotalsForAllResults();
 			return array( $gadwp_data, $anonim ? 0 : number_format_i18n( $totals['ga:sessions'] ) );
