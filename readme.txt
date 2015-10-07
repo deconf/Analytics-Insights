@@ -132,6 +132,9 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 
 == Changelog ==
 
+= 4.8.3 = 
+- Enhancement: switching to translate.wordpress.org, you can find [more details here](https://deconf.com/moving-translations-to-wordpress-org/)
+
 = 4.8.2.1 =
 - Bug Fix: blank page on General Settings screen after failing to rebuild the bearer token
 - Enhancement: Italian, Portuguese (Brazil), Hungarian, Arabic, Russian, English (Canada), Romanian translations updated
