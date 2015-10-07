@@ -37,9 +37,9 @@ if ( ! class_exists( 'GADWP_Frontend_Setup' ) ) {
 
 			if ( GADWP_Tools::check_roles( $this->gadwp->config->options['ga_dash_access_front'] ) && $this->gadwp->config->options['frontend_item_reports'] ) {
 
-				wp_enqueue_style( 'gadwp-nprogress', GADWP_URL . 'tools/nprogress/nprogress.css', null, GADWP_CURRENT_VERSION );
+				wp_enqueue_style( 'gadwp-nprogress', GADWP_URL . 'common/nprogress/nprogress.css', null, GADWP_CURRENT_VERSION );
 
-				wp_enqueue_style( 'gadwp_frontend_item_reports', GADWP_URL . 'front/css/item-reports.css', null, GADWP_CURRENT_VERSION );
+				wp_enqueue_style( 'gadwp-frontend-item-reports', GADWP_URL . 'front/css/item-reports.css', null, GADWP_CURRENT_VERSION );
 
 				$country_codes = GADWP_Tools::get_countrycodes();
 				if ( $this->gadwp->config->options['ga_target_geomap'] && isset( $country_codes[$this->gadwp->config->options['ga_target_geomap']] ) ) {
@@ -54,12 +54,12 @@ if ( ! class_exists( 'GADWP_Frontend_Setup' ) ) {
 					wp_register_script( 'googlejsapi', 'https://www.google.com/jsapi' );
 				}
 
-				wp_enqueue_script( 'gadwp-nprogress', GADWP_URL . 'tools/nprogress/nprogress.js', array( 'jquery' ), GADWP_CURRENT_VERSION );
+				wp_enqueue_script( 'gadwp-nprogress', GADWP_URL . 'common/nprogress/nprogress.js', array( 'jquery' ), GADWP_CURRENT_VERSION );
 
-				wp_enqueue_script( 'gadwp_frontend_item_reports', GADWP_URL . 'tools/js/item-reports.js', array( 'gadwp-nprogress', 'googlejsapi', 'jquery', 'jquery-ui-dialog' ), GADWP_CURRENT_VERSION );
+				wp_enqueue_script( 'gadwp-frontend-item-reports', GADWP_URL . 'common/js/reports.js', array( 'gadwp-nprogress', 'googlejsapi', 'jquery', 'jquery-ui-dialog' ), GADWP_CURRENT_VERSION );
 
 				/* @formatter:off */
-				wp_localize_script( 'gadwp_frontend_item_reports', 'gadwp_item_data', array(
+				wp_localize_script( 'gadwp-frontend-item-reports', 'gadwp_item_data', array(
 					'ajaxurl' => admin_url( 'admin-ajax.php' ),
 					'security' => wp_create_nonce( 'gadwp_frontend_item_reports' ),
 					'dateList' => array(

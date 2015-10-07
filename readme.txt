@@ -4,7 +4,7 @@ Donate link: https://deconf.com/donate/
 Tags: google,analytics,google analytics,dashboard,analytics dashboard,google analytics dashboard,google analytics plugin,google analytics widget,tracking,universal google analytics,realtime,multisite,gadwp
 Requires at least: 3.5
 Tested up to: 4.3
-Stable tag: 4.8.2.1
+Stable tag: 4.8.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -108,7 +108,7 @@ You can submit pull requests, feature requests, translations or bug reports on [
 
 = Documentation, Tutorials and FAQ =
 
-For documentation, tutorials, FAQ and videos check out: [Google Analytics Dashboard for WP Documentation](https://deconf.com/google-analytics-dashboard-wordpress/).
+For documentation, tutorials, FAQ and videos check out: [Google Analytics Dashboard for WP documentation](https://deconf.com/google-analytics-dashboard-wordpress/).
 
 == Screenshots ==
 
@@ -126,13 +126,35 @@ For documentation, tutorials, FAQ and videos check out: [Google Analytics Dashbo
 
 You can help translating this plugin on [translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/google-analytics-dashboard-for-wp).
 
+= GADWP Translation Editors =
+
+Arabic - [Ahmed Majid](https://profiles.wordpress.org/ahmedalttai/)
+Catalan - [cubells](https://profiles.wordpress.org/cubells/)
+Czech - [lordrak](https://profiles.wordpress.org/lordrak/)
+Hungarian - [ilovewp.net](https://profiles.wordpress.org/ilovewp.net/)
+Italian - [Lion73](https://profiles.wordpress.org/Lion73/)
+Portuguese (Brazil) - [treedbox](https://profiles.wordpress.org/treedbox/)
+Romanian - [Adrian Pop](https://profiles.wordpress.org/adrianpop/)
+Russian - [ZAnatoly](https://profiles.wordpress.org/ZAnatoly/)
+Ukrainian - [ZAnatoly](https://profiles.wordpress.org/ZAnatoly/)
+
+= GADWP Translation Contributors =
+
+For support and requests regarding plugin's localization [use this forum](https://wordpress.org/support/plugin/google-analytics-dashboard-for-wp). 
+
 == License ==
 
 Google Analytics Dashboard for WP it's released under the GPLv2, you can use it free of charge on your personal or commercial website.
 
 == Changelog ==
 
-= 4.8.3 = 
+= 4.8.4 =
+- Bug Fix: add an unique class to jQuery UI Tooltips to avoid conflicts
+- Bug Fix: multiple CSS improvements
+- Enhancement: no more page re-loads on admin dashboard widget when switching between reports
+- Enhancement: unified reporting system with real-time capabilities
+
+= 4.8.3 =
 - Enhancement: switching to translate.wordpress.org, you can find [more details here](https://deconf.com/moving-translations-to-wordpress-org/)
 
 = 4.8.2.1 =

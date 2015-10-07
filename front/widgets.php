@@ -26,8 +26,8 @@ final class GADWP_Frontend_Widget extends WP_Widget {
 	}
 
 	public function load_styles_scripts() {
-		wp_enqueue_style( 'ga_dash-front', GADWP_URL . 'front/css/widgets.css', null, GADWP_CURRENT_VERSION );
-		wp_enqueue_script( 'ga_dash-front', GADWP_URL . 'front/js/widgets.js', array( 'jquery' ), GADWP_CURRENT_VERSION );
+		wp_enqueue_style( 'gadwp-front-widget', GADWP_URL . 'front/css/widgets.css', null, GADWP_CURRENT_VERSION );
+		wp_enqueue_script( 'gadwp-front-widget', GADWP_URL . 'front/js/widgets.js', array( 'jquery' ), GADWP_CURRENT_VERSION );
 		wp_enqueue_script( 'googlejsapi', 'https://www.google.com/jsapi' );
 	}
 

@@ -19,25 +19,7 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 		public function __construct() {
 			// get plugin options
 			$this->get_plugin_options();
-			$this->last_requested_report();
 			add_filter( 'auto_update_plugin', array( $this, 'automatic_update' ), 10, 2 );
-		}
-
-		/*
-		 * Stores the last requested dimension and metric in cookies
-		 */
-		private function last_requested_report() {
-			if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) { // Don't store queries while doing ajax
-				return;
-			}
-
-			if ( isset( $_REQUEST['gadwpperiod'] ) ) {
-				GADWP_Tools::set_cookie( 'default_dimension', $_REQUEST['gadwpperiod'] );
-			}
-
-			if ( isset( $_REQUEST['gadwpquery'] ) ) {
-				GADWP_Tools::set_cookie( 'default_metric', $_REQUEST['gadwpquery'] );
-			}
 		}
 
 		public function get_major_version( $version ) {

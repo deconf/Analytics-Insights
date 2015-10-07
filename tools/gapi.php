@@ -72,7 +72,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 					} catch ( Exception $e ) {
 						GADWP_Tools::set_cache( 'ga_dash_lasterror', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $this->error_timeout );
 						$this->reset_token();
-					}						
+					}
 					if ( is_multisite() && $this->gadwp->config->options['ga_dash_network'] ) {
 						$this->gadwp->config->set_plugin_options( true );
 					} else {
@@ -319,7 +319,6 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 		 * @return array|int
 		 */
 		private function get_mainreport( $projectId, $from, $to, $query, $filter = '' ) {
-			$date_format = get_option( 'date_format' );
 			switch ( $query ) {
 				case 'users' :
 					$title = __( "Users", 'google-analytics-dashboard-for-wp' );
@@ -343,14 +342,13 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			if ( $from == "today" || $from == "yesterday" ) {
 				$dimensions = 'ga:hour';
 				$dayorhour = __( "Hour", 'google-analytics-dashboard-for-wp' );
-			} else
-				if ( $from == "365daysAgo" || $from == "1095daysAgo" ) {
-					$dimensions = 'ga:yearMonth, ga:month';
-					$dayorhour = __( "Date", 'google-analytics-dashboard-for-wp' );
-				} else {
-					$dimensions = 'ga:date,ga:dayOfWeekName';
-					$dayorhour = __( "Date", 'google-analytics-dashboard-for-wp' );
-				}
+			} else if ( $from == "365daysAgo" || $from == "1095daysAgo" ) {
+				$dimensions = 'ga:yearMonth, ga:month';
+				$dayorhour = __( "Date", 'google-analytics-dashboard-for-wp' );
+			} else {
+				$dimensions = 'ga:date,ga:dayOfWeekName';
+				$dayorhour = __( "Date", 'google-analytics-dashboard-for-wp' );
+			}
 			$options = array( 'dimensions' => $dimensions, 'quotaUser' => $this->managequota . 'p' . $projectId );
 			if ( $filter ) {
 				$options['filters'] = 'ga:pagePath==' . $filter;
@@ -365,18 +363,17 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				foreach ( $data->getRows() as $row ) {
 					$gadwp_data[] = array( (int) $row[0] . ':00', round( $row[1], 2 ) );
 				}
-			} else
-				if ( $from == "365daysAgo" || $from == "1095daysAgo" ) {
-					foreach ( $data->getRows() as $row ) {
-						// $row[0] contains 'yyyyMM', '01' is added to make it a valid date format
-						$gadwp_data[] = array( date_i18n( 'F, Y', strtotime( $row[0] . '01' ) ), round( $row[2], 2 ) );
-					}
-				} else {
-					foreach ( $data->getRows() as $row ) {
-						// $row[0] contains 'yyyyMMdd'
-						$gadwp_data[] = array( date_i18n( 'l, ' . $date_format, strtotime( $row[0] ) ), round( $row[2], 2 ) );
-					}
+			} else if ( $from == "365daysAgo" || $from == "1095daysAgo" ) {
+				foreach ( $data->getRows() as $row ) {
+					// $row[0] contains 'yyyyMM', '01' is added to make it a valid date format
+					$gadwp_data[] = array( date_i18n( 'F, Y', strtotime( $row[0] . '01' ) ), round( $row[2], 2 ) );
 				}
+			} else {
+				foreach ( $data->getRows() as $row ) {
+					// $row[0] contains 'yyyyMMdd'
+					$gadwp_data[] = array( date_i18n( 'l, ' . __( 'F j, Y' ), strtotime( $row[0] ) ), round( $row[2], 2 ) );
+				}
+			}
 			return $gadwp_data;
 		}
 
@@ -661,7 +658,6 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 		 * @return array|int
 		 */
 		public function frontend_widget_stats( $projectId, $from, $anonim ) {
-			$date_format = get_option( 'date_format' );
 			$content = '';
 			$to = 'yesterday';
 			$metrics = 'ga:sessions';
@@ -681,7 +677,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				$max = max( $max_array ) ? max( $max_array ) : 1;
 			}
 			foreach ( $data->getRows() as $row ) {
-				$gadwp_data[] = array( date_i18n( 'l, ' . $date_format, strtotime( $row[0] ) ), ( $anonim ? round( $row[2] * 100 / $max, 2 ) : (int) $row[2] ) );
+				$gadwp_data[] = array( date_i18n( 'l, ' . __( 'F j, Y' ), strtotime( $row[0] ) ), ( $anonim ? round( $row[2] * 100 / $max, 2 ) : (int) $row[2] ) );
 			}
 			$totals = $data->getTotalsForAllResults();
 			return array( $gadwp_data, $anonim ? 0 : number_format_i18n( $totals['ga:sessions'] ) );
@@ -728,7 +724,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				$gadwp_data->rows[$i] = array_map( 'esc_html', $row );
 				$i++;
 			}
-			return $gadwp_data;
+			return array( $gadwp_data );
 		}
 
 		private function map( $map ) {
