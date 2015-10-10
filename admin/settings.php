@@ -71,7 +71,6 @@ final class GADWP_Settings {
 	}
 
 	private static function navigation_tabs( $tabs ) {
-		echo '<div id="icon-themes" class="icon32"><br></div>';
 		echo '<h2 class="nav-tab-wrapper">';
 		foreach ( $tabs as $tab => $name ) {
 			echo "<a class='nav-tab' id='tab-$tab' href='#top#gadwp-$tab'>$name</a>";
@@ -240,6 +239,7 @@ final class GADWP_Settings {
                                     </table>
                                 </td>
                             </tr>
+                            <!--
                             <tr>
                                 <td colspan="2" class="gadwp-settings-title">
                                     <div class="button-primary gadwp-settings-switchoo">
@@ -251,6 +251,7 @@ final class GADWP_Settings {
                                     <div class="switch-desc"><?php _e ( "enable Switch View functionality", 'google-analytics-dashboard-for-wp' );?></div>
                                 </td>
                             </tr>
+                            -->
                             <tr>
                                 <td colspan="2" class="gadwp-settings-title">
                                     <div class="button-primary gadwp-settings-switchoo">

@@ -68,27 +68,37 @@ td.gadwp-settings-roles {
 
 #poststuff.gadwp h2 {
 	padding-bottom: 0;
+	font-size: 19.5px;
+	font-weight: normal;
+	padding: 0;
+	margin: 20px 0 15px 0;
+	
+}
+
+#poststuff.gadwp h2.nav-tab-wrapper {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0;
 }
 
 /* Options pages ON/OFF Switch */
-.gadwp-settings-switchoo {
+.button-primary.gadwp-settings-switchoo {
 	position: relative;
 	width: 50px;
 	float: left;
-	border: none !important;
-	padding: 0 !important;
-	height: 22px !important;
-	-moz-box-shadow: none !important;
-	-webkit-box-shadow: none !important;
-	-o-box-shadow: none !important;
-	box-shadow: none !important;
+	border: none;
+	padding: 0;
+	height: 22px;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	-o-box-shadow: none;
+	box-shadow: none;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 }
 
-.gadwp-settings-switchoo-checkbox {
-	display: none !important;
+input.gadwp-settings-switchoo-checkbox {
+	display: none;
 }
 
 .gadwp-settings-switchoo-label {
@@ -98,6 +108,7 @@ td.gadwp-settings-roles {
 	background: transparent;
 	border: 1px solid #ddd;
 	border-radius: 2px;
+	text-shadow: none;	
 }
 
 .gadwp-settings-switchoo-inner {
@@ -121,6 +132,7 @@ td.gadwp-settings-roles {
 	height: 22px;
 	line-height: 22px;
 	font-size: 12px;
+	text-shadow: none;
 }
 
 .gadwp-settings-switchoo-inner:before {

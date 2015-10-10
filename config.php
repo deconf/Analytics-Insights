@@ -17,9 +17,14 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 		public $options;
 
 		public function __construct() {
-			// get plugin options
+			// Get plugin options
 			$this->get_plugin_options();
+			// Automatic updates
 			add_filter( 'auto_update_plugin', array( $this, 'automatic_update' ), 10, 2 );
+			// Provide language packs for all available Network languages
+			if ( is_multisite() ) {
+				add_filter( 'plugins_update_check_locales', array( $this, 'translation_updates' ), 10, 1 );
+			}
 		}
 
 		public function get_major_version( $version ) {
@@ -44,6 +49,11 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 				return ( $this->get_major_version( GADWP_CURRENT_VERSION ) == $this->get_major_version( $item['new_version'] ) );
 			}
 			return $update;
+		}
+
+		public function translation_updates( $locales ) {
+			$languages = get_available_languages();
+			return array_values( $languages );
 		}
 
 		// Validates data before storing
