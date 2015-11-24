@@ -106,13 +106,13 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 			if ( isset( $options['ga_aff_tracking'] ) ) {
 				$options['ga_aff_tracking'] = (int) $options['ga_aff_tracking'];
 			}
-			if ( ! isset( $options['ga_cookiedomain'] ) ) { // v4.8.4
+			if ( isset( $options['ga_cookiedomain'] ) ) { // v4.8.4
 				$options['ga_cookiedomain'] = sanitize_text_field( $options['ga_cookiedomain'] );
 			}
-			if ( ! isset( $options['ga_cookiename'] ) ) { // v4.8.4
+			if ( isset( $options['ga_cookiename'] ) ) { // v4.8.4
 				$options['ga_cookiename'] = sanitize_text_field( $options['ga_cookiename'] );
 			}
-			if ( ! isset( $options['ga_cookieexpires'] ) && $options['ga_cookieexpires'] ) { // v4.8.4
+			if ( isset( $options['ga_cookieexpires'] ) && $options['ga_cookieexpires'] ) { // v4.8.4
 				$options['ga_cookieexpires'] = (int) $options['ga_cookieexpires'];
 			}
 			if ( isset( $options['ga_event_affiliates'] ) ) {

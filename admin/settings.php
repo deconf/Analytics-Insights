@@ -239,7 +239,6 @@ final class GADWP_Settings {
                                     </table>
                                 </td>
                             </tr>
-                            <!--
                             <tr>
                                 <td colspan="2" class="gadwp-settings-title">
                                     <div class="button-primary gadwp-settings-switchoo">
@@ -251,7 +250,6 @@ final class GADWP_Settings {
                                     <div class="switch-desc"><?php _e ( "enable Switch View functionality", 'google-analytics-dashboard-for-wp' );?></div>
                                 </td>
                             </tr>
-                            -->
                             <tr>
                                 <td colspan="2" class="gadwp-settings-title">
                                     <div class="button-primary gadwp-settings-switchoo">
@@ -533,6 +531,9 @@ final class GADWP_Settings {
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td colspan="2"><?php echo "<h2>" . __( "Cross-domain Tracking", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
+                                </tr>
+                                <tr>
                                     <td colspan="2" class="gadwp-settings-title">
                                         <div class="button-primary gadwp-settings-switchoo">
                                             <input type="checkbox" name="options[ga_crossdomain_tracking]" value="1" class="gadwp-settings-switchoo-checkbox" id="ga_crossdomain_tracking" <?php checked( $options['ga_crossdomain_tracking'], 1 ); ?>> <label class="gadwp-settings-switchoo-label" for="ga_crossdomain_tracking">
@@ -546,6 +547,9 @@ final class GADWP_Settings {
                                 <tr>
                                     <td class="gadwp-settings-title"><label for="ga_crossdomain_list"><?php _e("Cross Domains:", 'google-analytics-dashboard-for-wp'); ?></label></td>
                                     <td><input type="text" id="ga_crossdomain_list" name="options[ga_crossdomain_list]" value="<?php echo esc_attr($options['ga_crossdomain_list']); ?>" size="50"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><?php echo "<h2>" . __( "Cookie Customization", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
                                 </tr>
                                 <tr>
                                     <td class="gadwp-settings-title"><label for="ga_cookiedomain"><?php _e("Cookie Domain:", 'google-analytics-dashboard-for-wp'); ?></label></td>
