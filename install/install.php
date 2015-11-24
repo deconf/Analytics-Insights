@@ -60,6 +60,9 @@ class GADWP_Install {
 			$options['frontend_item_reports'] = 0;
 			$options['dashboard_widget'] = 1;
 			$options['api_backoff'] = 0;
+			$options['ga_cookiedomain'] = '';
+			$options['ga_cookiename'] = '';
+			$options['ga_cookieexpires'] = '';
 		} else {
 			$options = array();
 			$options['ga_dash_apikey'] = get_option( 'ga_dash_apikey' );
@@ -108,6 +111,9 @@ class GADWP_Install {
 			$options['frontend_item_reports'] = 0;
 			$options['dashboard_widget'] = 1;
 			$options['api_backoff'] = 0;
+			$options['ga_cookiedomain'] = '';
+			$options['ga_cookiename'] = '';
+			$options['ga_cookieexpires'] = '';
 
 			delete_option( 'ga_dash_apikey' );
 			delete_option( 'ga_dash_clientid' );
