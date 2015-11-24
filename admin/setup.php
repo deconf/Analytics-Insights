@@ -107,6 +107,17 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 				$region = false;
 			}
 
+			if ( $this->gadwp->config->options['switch_profile'] && count($this->gadwp->config->options['ga_dash_profile_list'])>1 ) {
+				$views = array();
+				foreach ( $this->gadwp->config->options['ga_dash_profile_list'] as $items ) {
+					if ( $items[3] ) {
+						$views[$items[1]] = esc_js( GADWP_Tools::strip_protocol( $items[3] )  . ' &#8658; ' . $items[0] );
+					}
+				}
+			} else {
+				$views = false;
+			}
+
 			/*
 			 * Main Dashboard Widgets Styles & Scripts
 			 */
@@ -189,6 +200,7 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 						'colorVariations' => GADWP_Tools::variations( $this->gadwp->config->options['ga_dash_style'] ),
 						'region' => $region,
 						'language' => get_bloginfo( 'language' ),
+						'viewsList' => $views,
 						'scope' => 'admin-widgets',
 					)
 					);
@@ -265,6 +277,7 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 						'colorVariations' => GADWP_Tools::variations( $this->gadwp->config->options['ga_dash_style'] ),
 						'region' => $region,
 						'language' => get_bloginfo( 'language' ),
+						'viewsList' => false,
 						'scope' => 'admin-item',
 						)
 					);

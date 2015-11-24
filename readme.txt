@@ -153,9 +153,10 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 - Bug Fix: multiple CSS improvements
 - Enhancement: no more page re-loads on admin dashboard widget when switching between reports
 - Enhancement: unified reporting system with real-time capabilities
+- Enhancement: new tracking options enabling you to customize cookieName, cookieDomain, cookieExpires; props by [Martins Sipenko](https://github.com/martinssipenko) 
 - Enhancement: display update notices only to admins
 - Enhancement: force language packs updates for all available languages on a Network
-- Enhancement: new tracking options enabling you to customize cookieName, cookieDomain, cookieExpires; props by [Martins Sipenko](https://github.com/martinssipenko) 
+- Enhancement: added View switch capabilities
 
 = 4.8.3 =
 - Enhancement: switching to translate.wordpress.org, you can find [more details here](https://deconf.com/moving-translations-to-wordpress-org/)
