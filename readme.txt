@@ -124,23 +124,7 @@ For documentation, tutorials, FAQ and videos check out: [Google Analytics Dashbo
 
 == Localization ==
 
-You can help translating this plugin on [translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/google-analytics-dashboard-for-wp).
-
-= GADWP Translation Editors =
-
-Arabic - [Ahmed Majid](https://profiles.wordpress.org/ahmedalttai/)
-Catalan - [cubells](https://profiles.wordpress.org/cubells/)
-Czech - [lordrak](https://profiles.wordpress.org/lordrak/)
-Hungarian - [ilovewp.net](https://profiles.wordpress.org/ilovewp.net/)
-Italian - [Lion73](https://profiles.wordpress.org/Lion73/)
-Portuguese (Brazil) - [treedbox](https://profiles.wordpress.org/treedbox/)
-Romanian - [Adrian Pop](https://profiles.wordpress.org/adrianpop/)
-Russian - [ZAnatoly](https://profiles.wordpress.org/ZAnatoly/)
-Ukrainian - [ZAnatoly](https://profiles.wordpress.org/ZAnatoly/)
-
-= GADWP Translation Contributors =
-
-For support and requests regarding plugin's localization [use this forum](https://wordpress.org/support/plugin/google-analytics-dashboard-for-wp). 
+You can translate this plugin on [translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/google-analytics-dashboard-for-wp).
 
 == License ==
 
