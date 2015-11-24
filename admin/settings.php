@@ -546,6 +546,18 @@ final class GADWP_Settings {
                                     <td class="gadwp-settings-title"><label for="ga_crossdomain_list"><?php _e("Cross Domains:", 'google-analytics-dashboard-for-wp'); ?></label></td>
                                     <td><input type="text" id="ga_crossdomain_list" name="options[ga_crossdomain_list]" value="<?php echo esc_attr($options['ga_crossdomain_list']); ?>" size="50"></td>
                                 </tr>
+                                <tr>
+                                    <td class="gadwp-settings-title"><label for="ga_cookiedomain"><?php _e("Cookie Domain:", 'google-analytics-dashboard-for-wp'); ?></label></td>
+                                    <td><input type="text" id="ga_cookiedomain" name="options[ga_cookiedomain]" value="<?php echo esc_attr($options['ga_cookiedomain']); ?>" size="50"></td>
+                                </tr>
+                                <tr>
+                                    <td class="gadwp-settings-title"><label for="ga_cookiename"><?php _e("Cookie Name:", 'google-analytics-dashboard-for-wp'); ?></label></td>
+                                    <td><input type="text" id="ga_cookiename" name="options[ga_cookiename]" value="<?php echo esc_attr($options['ga_cookiename']); ?>" size="50"></td>
+                                </tr>
+                                <tr>
+                                    <td class="gadwp-settings-title"><label for="ga_cookieexpires"><?php _e("Cookie Expires:", 'google-analytics-dashboard-for-wp'); ?></label></td>
+                                    <td><input type="text" id="ga_cookieexpires" name="options[ga_cookieexpires]" value="<?php echo esc_attr($options['ga_cookieexpires']); ?>" size="10"> seconds</td>
+                                </tr>
                             </table>
                         </div>
                         <div id="gadwp-exclude">
