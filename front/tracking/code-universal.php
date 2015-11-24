@@ -29,8 +29,23 @@ if ( $this->gadwp->config->options['ga_crossdomain_tracking'] && $this->gadwp->c
 	$create_options .= "'allowLinker' : true";
 }
 $create_options .= '}';
+
+$options = "'auto'";
+$optionsArray = array();
+if ( !empty( $this->gadwp->config->options['ga_cookiedomain'] ) ) {
+    $optionsArray['cookieDomain'] = $this->gadwp->config->options['ga_cookiedomain'];
+}
+if ( !empty( $this->gadwp->config->options['ga_cookiename'] ) ) {
+    $optionsArray['cookieName'] = $this->gadwp->config->options['ga_cookiename'];
+}
+if ( !empty( $this->gadwp->config->options['ga_cookieexpires'] ) ) {
+    $optionsArray['cookieExpires'] = (int) $this->gadwp->config->options['ga_cookieexpires'];
+}
+if (!empty($optionsArray)) {
+    $options = json_encode($optionsArray);
+}
 ?>
-  ga('create', '<?php echo esc_html($profile[2]); ?>', 'auto'<?php	if ($create_options != '{}') {?>, <?php echo $create_options; }?>);
+  ga('create', '<?php echo esc_html($profile[2]); ?>', <?php echo $options; ?><?php	if ($create_options != '{}') {?>, <?php echo $create_options; }?>);
 <?php if ($this->gadwp->config->options ['ga_crossdomain_tracking'] && $this->gadwp->config->options ['ga_crossdomain_list']!='') {?>
   ga('require', 'linker');
 <?php
