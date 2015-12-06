@@ -31,15 +31,19 @@ if ( ! class_exists( 'GADWP_Backend_Ajax' ) ) {
 		 * @return json|int
 		 */
 		public function ajax_item_reports() {
-			if ( ! isset( $_REQUEST['gadwp_security_backend_item_reports'] ) || ! wp_verify_nonce( $_REQUEST['gadwp_security_backend_item_reports'], 'gadwp_backend_item_reports' ) ) {
+			if ( ! isset( $_POST['gadwp_security_backend_item_reports'] ) || ! wp_verify_nonce( $_POST['gadwp_security_backend_item_reports'], 'gadwp_backend_item_reports' ) ) {
 				wp_die( - 30 );
 			}
-
-			$from = $_REQUEST['from'];
-			$to = $_REQUEST['to'];
-			$query = $_REQUEST['query'];
-			if ( isset( $_REQUEST['filter'] ) ) {
-				$filter_id = $_REQUEST['filter'];
+			if ( isset( $_POST['projectId'] ) && $this->gadwp->config->options['switch_profile'] && $_POST['projectId'] !== 'false' ) {
+				$projectId = $_POST['projectId'];
+			} else {
+				$projectId = false;
+			}
+			$from = $_POST['from'];
+			$to = $_POST['to'];
+			$query = $_POST['query'];
+			if ( isset( $_POST['filter'] ) ) {
+				$filter_id = $_POST['filter'];
 			} else {
 				$filter_id = false;
 			}
@@ -57,7 +61,9 @@ if ( ! class_exists( 'GADWP_Backend_Ajax' ) ) {
 			} else {
 				wp_die( - 24 );
 			}
-			$projectId = $this->gadwp->config->options['ga_dash_tableid_jail'];
+			if ( $projectId == false ) {
+				$projectId = $this->gadwp->config->options['ga_dash_tableid_jail'];
+			}
 			$profile_info = GADWP_Tools::get_selected_profile( $this->gadwp->config->options['ga_dash_profile_list'], $projectId );
 			if ( isset( $profile_info[4] ) ) {
 				$this->gadwp->gapi_controller->timeshift = $profile_info[4];

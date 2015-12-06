@@ -88,6 +88,7 @@ jQuery( document ).ready( function () {
 
 jQuery.fn.extend( {
 	gadwpItemReport : function ( item_id ) {
+		var post_data;
 		var slug = "-" + item_id;
 		var dialog_title;
 		var tools = {
@@ -137,7 +138,12 @@ jQuery.fn.extend( {
 			addOptions : function ( id, list ) {
 				var default_metric;
 				var default_dimension;
+				var default_view;
 				var output = [];
+				
+				if ( list == false ) {
+					return;
+				}
 
 				if ( !tools.get_cookie( 'default_metric' ) || !tools.get_cookie( 'default_dimension' ) ) {
 					if ( gadwp_item_data.scope == 'admin-widgets' ) {
@@ -149,10 +155,11 @@ jQuery.fn.extend( {
 				} else {
 					default_metric = tools.get_cookie( 'default_metric' );
 					default_dimension = tools.get_cookie( 'default_dimension' );
+					default_view = tools.get_cookie( 'default_view' ); 
 				}
 
 				jQuery.each( list, function ( key, value ) {
-					if ( key == default_metric || key == default_dimension ) {
+					if ( key == default_metric || key == default_dimension || key == default_view ) {
 						output.push( '<option value="' + key + '" selected="selected">' + value + '</option>' );
 					} else {
 						output.push( '<option value="' + key + '">' + value + '</option>' );
@@ -173,6 +180,9 @@ jQuery.fn.extend( {
 				}
 
 				tpl =  '<div id="gadwp-container' + slug + '">';
+				if ( gadwp_item_data.viewList != false ) {
+					tpl +=   '<select id="gadwp-sel-view' + slug + '"></select>';					
+				}				
 				tpl +=   '<select id="gadwp-sel-period' + slug + '"></select> ';
 				tpl +=   '<select id="gadwp-sel-report' + slug + '"></select>';
 				tpl +=   '<div id="gadwp-progressbar' + slug + '"></div>';
@@ -186,6 +196,7 @@ jQuery.fn.extend( {
 				
 				jQuery( '#gadwp-window' + slug ).append( tpl );
 
+				template.addOptions( '#gadwp-sel-view' + slug, gadwp_item_data.viewList );
 				template.addOptions( '#gadwp-sel-period' + slug, gadwp_item_data.dateList );
 				template.addOptions( '#gadwp-sel-report' + slug, gadwp_item_data.reportList );
 
@@ -193,7 +204,6 @@ jQuery.fn.extend( {
 		}
 
 		var reports = {
-
 			npcounter : 0,
 			prs : '',
 			trafficchannels : '',
@@ -227,7 +237,7 @@ jQuery.fn.extend( {
 			},
 
 			drawprs : function ( gadwp_prs ) {
-				var data = google.visualization.arrayToDataTable( gadwp_prs );
+				var chart_data= google.visualization.arrayToDataTable( gadwp_prs );
 				var options = {
 					page : 'enable',
 					pageSize : 10,
@@ -236,11 +246,11 @@ jQuery.fn.extend( {
 				};
 				var chart = new google.visualization.Table( document.getElementById( 'gadwp-prs' + slug ) );
 				
-				chart.draw( data, options );
+				chart.draw( chart_data, options );
 			},
 
 			drawtrafficchannels : function ( gadwp_trafficchannels ) {
-				var data = google.visualization.arrayToDataTable( gadwp_trafficchannels );
+				var chart_data = google.visualization.arrayToDataTable( gadwp_trafficchannels );
 				var options = {
 					allowCollapse : true,
 					allowHtml : true,
@@ -248,11 +258,11 @@ jQuery.fn.extend( {
 				};
 				var chart = new google.visualization.OrgChart( document.getElementById( 'gadwp-trafficchannels' + slug ) );
 				
-				chart.draw( data, options );
+				chart.draw( chart_data, options );
 			},
 
 			drawtrafficmediums : function ( gadwp_trafficmediums ) {
-				var data = google.visualization.arrayToDataTable( gadwp_trafficmediums );
+				var chart_data = google.visualization.arrayToDataTable( gadwp_trafficmediums );
 				var options = {
 					is3D : false,
 					tooltipText : 'percentage',
@@ -266,11 +276,11 @@ jQuery.fn.extend( {
 				};
 				var chart = new google.visualization.PieChart( document.getElementById( 'gadwp-trafficmediums' + slug ) );
 				
-				chart.draw( data, options );
+				chart.draw( chart_data, options );
 			},
 
 			drawtraffictype : function ( gadwp_traffictype ) {
-				var data = google.visualization.arrayToDataTable( gadwp_traffictype );
+				var chart_data = google.visualization.arrayToDataTable( gadwp_traffictype );
 				var options = {
 					is3D : false,
 					tooltipText : 'percentage',
@@ -284,11 +294,11 @@ jQuery.fn.extend( {
 				};
 				var chart = new google.visualization.PieChart( document.getElementById( 'gadwp-traffictype' + slug ) );
 				
-				chart.draw( data, options );
+				chart.draw( chart_data, options );
 			},
 
 			drawsocialnetworks : function ( gadwp_socialnetworks ) {
-				var data = google.visualization.arrayToDataTable( gadwp_socialnetworks );
+				var chart_data = google.visualization.arrayToDataTable( gadwp_socialnetworks );
 				var options = {
 					is3D : false,
 					tooltipText : 'percentage',
@@ -302,11 +312,11 @@ jQuery.fn.extend( {
 				};
 				var chart = new google.visualization.PieChart( document.getElementById( 'gadwp-socialnetworks' + slug ) );
 				
-				chart.draw( data, options );
+				chart.draw( chart_data, options );
 			},
 
 			drawtrafficorganic : function ( gadwp_trafficorganic ) {
-				var data = google.visualization.arrayToDataTable( gadwp_trafficorganic );
+				var chart_data = google.visualization.arrayToDataTable( gadwp_trafficorganic );
 				var options = {
 					is3D : false,
 					tooltipText : 'percentage',
@@ -320,11 +330,11 @@ jQuery.fn.extend( {
 				};
 				var chart = new google.visualization.PieChart( document.getElementById( 'gadwp-trafficorganic' + slug ) );
 				
-				chart.draw( data, options );
+				chart.draw( chart_data, options );
 			},
 
 			drawlocations : function ( gadwp_locations ) {
-				var data = google.visualization.arrayToDataTable( gadwp_locations );
+				var chart_data = google.visualization.arrayToDataTable( gadwp_locations );
 				var options = {
 					page : 'enable',
 					pageSize : 10,
@@ -332,11 +342,11 @@ jQuery.fn.extend( {
 				};
 				var chart = new google.visualization.Table( document.getElementById( 'gadwp-locations' + slug ) );
 				
-				chart.draw( data, options );
+				chart.draw( chart_data, options );
 			},
 
 			drawmaplocations : function ( gadwp_locations ) {
-				var data = google.visualization.arrayToDataTable( gadwp_locations );
+				chart_data = google.visualization.arrayToDataTable( gadwp_locations );
 				var options = {
 					chartArea : {
 						width : '99%',
@@ -345,17 +355,17 @@ jQuery.fn.extend( {
 					colors : [ gadwp_item_data.colorVariations[ 5 ], gadwp_item_data.colorVariations[ 4 ] ]
 				}
 				if ( gadwp_item_data.region ) {
-					options.region = gadwp_item_data.region;
+					opchart_datas.region = gadwp_item_data.region;
 					options.displayMode = 'markers';
 					options.datalessRegionColor = 'EFEFEF';
 				}
 				var chart = new google.visualization.GeoChart( document.getElementById( 'gadwp-map' + slug ) );
 				
-				chart.draw( data, options );
+				chart.draw( chart_data, options );
 			},
 
 			drawmainchart : function ( gadwp_mainchart, format ) {
-				var data = google.visualization.arrayToDataTable( gadwp_mainchart );
+				var chart_data = google.visualization.arrayToDataTable( gadwp_mainchart );
 				var formatter;
 				
 				if ( format ) {
@@ -364,7 +374,7 @@ jQuery.fn.extend( {
 						fractionDigits : 2
 					} );
 
-					formatter.format( data, 1 );
+					formatter.format( chart_data, 1 );
 				}
 				
 				var options = {
@@ -387,7 +397,7 @@ jQuery.fn.extend( {
 				};
 				var chart = new google.visualization.AreaChart( document.getElementById( 'gadwp-mainchart' + slug ) );
 				
-				chart.draw( data, options );
+				chart.draw( chart_data, options );
 			},
 
 			drawbottomstats : function ( gadwp_bottomstats ) {
@@ -405,6 +415,7 @@ jQuery.fn.extend( {
 			
 			rt_countsessions : function ( gadwp_realtime, searchvalue ) {
 				var count = 0;
+				var i = 0;
 				
 				for ( i = 0; i < gadwp_realtime[ "rows" ].length; i = i + 1 ) {
 					if ( jQuery.inArray( searchvalue, gadwp_realtime[ "rows" ][ i ] ) > -1 ) {
@@ -417,6 +428,7 @@ jQuery.fn.extend( {
 			rt_generatetooltip : function  ( gadwp_realtime ) {
 				var count = 0;
 				var table = "";
+				var i = 0;
 
 				for ( i = 0; i < gadwp_realtime.length; i = i + 1 ) {
 					count += parseInt( gadwp_realtime[ i ].count );
@@ -447,25 +459,6 @@ jQuery.fn.extend( {
 				var tablescl = "";
 				var tablecpg = "";
 				var tabledrt = "";
-				var pagepath = [];
-				var referrals = [];
-				var keywords = [];
-				var social = [];
-				var visittype = [];
-				var custom = [];
-				var upagepathstats = [];
-				var upagepath;					
-				var pgstatstable = "";
-				var ureferralsstats = [];
-				var ureferrals;
-				var ukeywordsstats = [];
-				var ukeywords;
-				var usocialstats = [];
-				var usocial;
-				var ucustomstats = [];
-				var ucustom;
-				var uvisittype = [ "REFERRAL", "ORGANIC", "SOCIAL", "CUSTOM" ];
-				var uvisitortype = [ "DIRECT", "NEW" ];
 				var pagetitle;
 				var pgstatstable;
 				
@@ -533,10 +526,10 @@ jQuery.fn.extend( {
 			
 			rt_refresh : function ( focusFlag ) {
 				if ( focusFlag ) {
-					data.from = false;
-					data.to = false;
-					data.query = 'realtime';
-					jQuery.post( gadwp_item_data.ajaxurl, data, function ( response ) {
+					post_data.from = false;
+					post_data.to = false;
+					post_data.query = 'realtime';
+					jQuery.post( gadwp_item_data.ajaxurl, post_data, function ( response ) {
 						if ( jQuery.isArray( response ) ) {
 							jQuery( '#gadwp-reports' + slug ).show();
 							reports.realtime = response[ 0 ];
@@ -554,7 +547,27 @@ jQuery.fn.extend( {
 			
 			
 			drawrealtime : function ( gadwp_realtime ) {
-
+				var i = 0;
+				var pagepath = [];
+				var referrals = [];
+				var keywords = [];
+				var social = [];
+				var visittype = [];
+				var custom = [];
+				var upagepathstats = [];
+				var upagepath;					
+				var pgstatstable = "";
+				var ureferralsstats = [];
+				var ureferrals;
+				var ukeywordsstats = [];
+				var ukeywords;
+				var usocialstats = [];
+				var usocial;
+				var ucustomstats = [];
+				var ucustom;
+				var uvisittype = [ "REFERRAL", "ORGANIC", "SOCIAL", "CUSTOM" ];
+				var uvisitortype = [ "DIRECT", "NEW" ];
+				
 				jQuery( function () {
 					jQuery( '#gadwp-widget *' ).tooltip( {
 						tooltipClass : "gadwp"
@@ -720,7 +733,8 @@ jQuery.fn.extend( {
 				}
 			},
 
-			render : function ( period, query ) {
+			render : function ( view, period, query ) {
+				var projectId;
 				var from;
 				var to;
 				var tpl;
@@ -772,8 +786,15 @@ jQuery.fn.extend( {
 				tools.set_cookie( 'default_metric', query );
 				tools.set_cookie( 'default_dimension', period );
 
+				if ( typeof view !== 'undefined') {
+					tools.set_cookie( 'default_view', view );
+					projectId = view;
+				} else {
+					projectId = false;
+				}
+
 				if ( gadwp_item_data.scope == 'admin-item' ) {
-					var data = {
+					post_data = {
 						action : 'gadwp_backend_item_reports',
 						gadwp_security_backend_item_reports : gadwp_item_data.security,
 						from : from,
@@ -781,7 +802,7 @@ jQuery.fn.extend( {
 						filter : item_id
 					}
 				} else if ( gadwp_item_data.scope == 'front-item' ) {
-					var data = {
+					post_data = {
 						action : 'gadwp_frontend_item_reports',
 						gadwp_security_frontend_item_reports : gadwp_item_data.security,
 						from : from,
@@ -789,9 +810,10 @@ jQuery.fn.extend( {
 						filter : gadwp_item_data.filter
 					}
 				} else {
-					var data = {
+					post_data = {
 						action : 'gadwp_backend_item_reports',
 						gadwp_security_backend_item_reports : gadwp_item_data.security,
+						projectId : projectId,						
 						from : from,
 						to : to
 					}
@@ -859,9 +881,9 @@ jQuery.fn.extend( {
 						jQuery( '#gadwp-reports' + slug ).html( tpl );
 						jQuery( '#gadwp-reports' + slug ).hide();
 
-						data.query = 'trafficchannels,' + query;
+						post_data.query = 'trafficchannels,' + query;
 
-						jQuery.post( gadwp_item_data.ajaxurl, data, function ( response ) {
+						jQuery.post( gadwp_item_data.ajaxurl, post_data, function ( response ) {
 							if ( jQuery.isArray( response ) ) {
 								if ( !jQuery.isNumeric( response[ 0 ] ) ) {
 									if ( jQuery.isArray( response[ 0 ] ) ) {
@@ -907,9 +929,9 @@ jQuery.fn.extend( {
 						jQuery( '#gadwp-reports' + slug ).html( tpl );
 						jQuery( '#gadwp-reports' + slug ).hide();
 
-						data.query = 'trafficchannels,medium,visitorType,source,socialNetwork';
+						post_data.query = 'trafficchannels,medium,visitorType,source,socialNetwork';
 
-						jQuery.post( gadwp_item_data.ajaxurl, data, function ( response ) {
+						jQuery.post( gadwp_item_data.ajaxurl, post_data, function ( response ) {
 							if ( jQuery.isArray( response ) ) {
 								if ( !jQuery.isNumeric( response[ 0 ] ) ) {
 									if ( jQuery.isArray( response[ 0 ] ) ) {
@@ -989,9 +1011,9 @@ jQuery.fn.extend( {
 						jQuery( '#gadwp-reports' + slug ).html( tpl );
 						jQuery( '#gadwp-reports' + slug ).hide();
 
-						data.query = query;
+						post_data.query = query;
 
-						jQuery.post( gadwp_item_data.ajaxurl, data, function ( response ) {
+						jQuery.post( gadwp_item_data.ajaxurl, post_data, function ( response ) {
 							if ( jQuery.isArray( response ) ) {
 								if ( !jQuery.isNumeric( response[ 0 ] ) ) {
 									if ( jQuery.isArray( response[ 0 ] ) ) {
@@ -1030,9 +1052,9 @@ jQuery.fn.extend( {
 						jQuery( '#gadwp-reports' + slug ).html( tpl );
 						jQuery( '#gadwp-reports' + slug ).hide();
 
-						data.query = query + ',bottomstats';
+						post_data.query = query + ',bottomstats';
 
-						jQuery.post( gadwp_item_data.ajaxurl, data, function ( response ) {
+						jQuery.post( gadwp_item_data.ajaxurl, post_data, function ( response ) {
 							if ( jQuery.isArray( response ) ) {
 								if ( !jQuery.isNumeric( response[ 0 ] ) ) {
 									if ( jQuery.isArray( response[ 0 ] ) ) {
@@ -1127,7 +1149,7 @@ jQuery.fn.extend( {
 					reports.alertMessage( gadwp_item_data.i18n[ 0 ] );
 				}
 
-				reports.render( jQuery( '#gadwp-sel-period' + slug ).val(), jQuery( '#gadwp-sel-report' + slug ).val() );
+				reports.render( jQuery( '#gadwp-sel-view' + slug ).val(), jQuery( '#gadwp-sel-period' + slug ).val(), jQuery( '#gadwp-sel-report' + slug ).val() );
 
 				jQuery( window ).resize( function () {
 					reports.refresh();
@@ -1139,6 +1161,11 @@ jQuery.fn.extend( {
 
 		reports.init();
 
+		jQuery( '#gadwp-sel-view' + slug ).change( function () {
+			jQuery( '#gadwp-reports' + slug ).html( '' );
+			reports.init();
+		} );		
+		
 		jQuery( '#gadwp-sel-period' + slug ).change( function () {
 			jQuery( '#gadwp-reports' + slug ).html( '' );
 			reports.init();

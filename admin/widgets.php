@@ -28,46 +28,12 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 		}
 
 		public function dashboard_widget() {
+			$projectId = 0;
+
 			if ( empty( $this->gadwp->config->options['ga_dash_token'] ) ) {
 				echo '<p>' . __( "This plugin needs an authorization:", 'google-analytics-dashboard-for-wp' ) . '</p><form action="' . menu_page_url( 'gadash_settings', false ) . '" method="POST">' . get_submit_button( __( "Authorize Plugin", 'google-analytics-dashboard-for-wp' ), 'secondary' ) . '</form>';
 				return;
 			}
-
-			if ( current_user_can( 'manage_options' ) ) {
-				if ( isset( $_REQUEST['gadwp_selected_profile'] ) ) {
-					$this->gadwp->config->options['ga_dash_tableid'] = $_REQUEST['gadwp_selected_profile'];
-				}
-				$profiles = $this->gadwp->config->options['ga_dash_profile_list'];
-				$profile_switch = '';
-				if ( ! empty( $profiles ) ) {
-					if ( ! $this->gadwp->config->options['ga_dash_tableid'] ) {
-						if ( $this->gadwp->config->options['ga_dash_tableid_jail'] ) {
-							$this->gadwp->config->options['ga_dash_tableid'] = $this->gadwp->config->options['ga_dash_tableid_jail'];
-						} else {
-							$this->gadwp->config->options['ga_dash_tableid'] = GADWP_Tools::guess_default_domain( $profiles );
-						}
-					} else
-						if ( $this->gadwp->config->options['switch_profile'] == 0 && $this->gadwp->config->options['ga_dash_tableid_jail'] ) {
-							$this->gadwp->config->options['ga_dash_tableid'] = $this->gadwp->config->options['ga_dash_tableid_jail'];
-						}
-					$profile_switch .= '<select id="gadwp_selected_profile" name="gadwp_selected_profile" onchange="this.form.submit()">';
-					foreach ( $profiles as $profile ) {
-						if ( ! $this->gadwp->config->options['ga_dash_tableid'] ) {
-							$this->gadwp->config->options['ga_dash_tableid'] = $profile[1];
-						}
-						if ( isset( $profile[3] ) ) {
-							$profile_switch .= '<option value="' . esc_attr( $profile[1] ) . '" ';
-							$profile_switch .= selected( $profile[1], $this->gadwp->config->options['ga_dash_tableid'], false );
-							$profile_switch .= ' title="' . __( "View Name:", 'google-analytics-dashboard-for-wp' ) . ' ' . esc_attr( $profile[0] ) . '">' . esc_attr( GADWP_Tools::strip_protocol( $profile[3] ) ) . '</option>';
-						}
-					}
-					$profile_switch .= "</select>";
-				} else {
-					echo '<p>' . __( "Something went wrong while retrieving profiles list.", 'google-analytics-dashboard-for-wp' ) . '</p><form action="' . menu_page_url( 'gadash_settings', false ) . '" method="POST">' . get_submit_button( __( "More details", 'google-analytics-dashboard-for-wp' ), 'secondary' ) . '</form>';
-					return;
-				}
-			}
-			$this->gadwp->config->set_plugin_options();
 
 			if ( current_user_can( 'manage_options' ) ) {
 				if ( $this->gadwp->config->options['switch_profile'] == 0 ) {
@@ -78,7 +44,6 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 						return;
 					}
 				} else {
-					echo $profile_switch;
 					$projectId = $this->gadwp->config->options['ga_dash_tableid'];
 				}
 			} else {
@@ -89,13 +54,16 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 					return;
 				}
 			}
+
 			if ( ! ( $projectId ) ) {
 				echo '<p>' . __( "Something went wrong while retrieving property data. You need to create and properly configure a Google Analytics account:", 'google-analytics-dashboard-for-wp' ) . '</p> <form action="https://deconf.com/how-to-set-up-google-analytics-on-your-website/" method="POST">' . get_submit_button( __( "Find out more!", 'google-analytics-dashboard-for-wp' ), 'secondary' ) . '</form>';
 				return;
 			}
-		?>
-		<div id="gadwp-window-1"></div>
-		<?php
+
+			?>
+			<div id="gadwp-window-1"></div>
+			<?php
+
 		}
 	}
 }

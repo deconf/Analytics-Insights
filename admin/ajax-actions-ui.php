@@ -27,7 +27,7 @@ if ( ! class_exists( 'GADWP_UI_Ajax' ) ) {
 		 * @return json|int
 		 */
 		public function ajax_dismiss_notices() {
-			if ( ! isset( $_REQUEST['gadwp_security_dismiss_notices'] ) || ! wp_verify_nonce( $_REQUEST['gadwp_security_dismiss_notices'], 'gadwp_dismiss_notices' ) ) {
+			if ( ! isset( $_POST['gadwp_security_dismiss_notices'] ) || ! wp_verify_nonce( $_POST['gadwp_security_dismiss_notices'], 'gadwp_dismiss_notices' ) ) {
 				wp_die( - 30 );
 			}
 
