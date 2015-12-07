@@ -355,7 +355,7 @@ jQuery.fn.extend( {
 					colors : [ gadwp_item_data.colorVariations[ 5 ], gadwp_item_data.colorVariations[ 4 ] ]
 				}
 				if ( gadwp_item_data.region ) {
-					opchart_datas.region = gadwp_item_data.region;
+					options.region = gadwp_item_data.region;
 					options.displayMode = 'markers';
 					options.datalessRegionColor = 'EFEFEF';
 				}

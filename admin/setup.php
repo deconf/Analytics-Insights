@@ -101,12 +101,6 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 			);
 			/* @formatter:on */
 
-			if ( $this->gadwp->config->options['ga_target_geomap'] && isset( $country_codes[$this->gadwp->config->options['ga_target_geomap']] ) ) {
-				$region = $this->gadwp->config->options['ga_target_geomap'];
-			} else {
-				$region = false;
-			}
-
 			if ( $this->gadwp->config->options['switch_profile'] && count($this->gadwp->config->options['ga_dash_profile_list']) > 1 ) {
 				$views = array();
 				foreach ( $this->gadwp->config->options['ga_dash_profile_list'] as $items ) {
@@ -125,6 +119,17 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 
 			if ( in_array( $new_hook, $widgets_hooks ) ) {
 				if ( GADWP_Tools::check_roles( $this->gadwp->config->options['ga_dash_access_back'] ) && $this->gadwp->config->options['dashboard_widget'] ) {
+
+					if ( $this->gadwp->config->options['ga_target_geomap'] ) {
+						$country_codes = GADWP_Tools::get_countrycodes();
+						if ( isset( $country_codes[$this->gadwp->config->options['ga_target_geomap']] ) ){
+							$region = $this->gadwp->config->options['ga_target_geomap'];
+						} else {
+							$region = false;
+						}
+					} else {
+						$region = false;
+					}
 
 					wp_enqueue_style( 'gadwp-nprogress', GADWP_URL . 'common/nprogress/nprogress.css', null, GADWP_CURRENT_VERSION );
 
@@ -215,11 +220,20 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 			if ( in_array( $hook, $contentstats_hooks ) ) {
 				if ( GADWP_Tools::check_roles( $this->gadwp->config->options['ga_dash_access_back'] ) && $this->gadwp->config->options['backend_item_reports'] ) {
 
+					if ( $this->gadwp->config->options['ga_target_geomap'] ) {
+						$country_codes = GADWP_Tools::get_countrycodes();
+						if ( isset( $country_codes[$this->gadwp->config->options['ga_target_geomap']] ) ){
+							$region = $this->gadwp->config->options['ga_target_geomap'];
+						} else {
+							$region = false;
+						}
+					} else {
+						$region = false;
+					}
+
 					wp_enqueue_style( 'gadwp-nprogress', GADWP_URL . 'common/nprogress/nprogress.css', null, GADWP_CURRENT_VERSION );
 
 					wp_enqueue_style( 'gadwp-backend-item-reports', GADWP_URL . 'admin/css/item-reports.css', null, GADWP_CURRENT_VERSION );
-
-					$country_codes = GADWP_Tools::get_countrycodes();
 
 					wp_enqueue_style( "wp-jquery-ui-dialog" );
 

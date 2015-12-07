@@ -137,6 +137,7 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 - Bug Fix: multiple CSS improvements
 - Bug Fix: invalid localized date formats
 - Bug Fix: switching between multisite modes doesn't propagate the new network status on all sites
+- Bug Fix: Location Settings ignored in posts/pages reports
 - Enhancement: unset cookies while revoking the authorization or clearing the cache 
 - Enhancement: no more page re-loads on admin dashboard widget when switching between reports
 - Enhancement: unified reporting system with real-time capabilities
