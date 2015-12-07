@@ -755,7 +755,7 @@ final class GADWP_Settings {
 							if ( ! $gadwp->config->options['ga_dash_tableid_jail'] ) {
 								$profile = GADWP_Tools::guess_default_domain( $profiles );
 								$gadwp->config->options['ga_dash_tableid_jail'] = $profile;
-								$gadwp->config->options['ga_dash_tableid'] = $profile;
+								//$gadwp->config->options['ga_dash_tableid'] = $profile;
 							}
 							$gadwp->config->set_plugin_options();
 							$options = self::update_options( 'general' );
@@ -1027,7 +1027,7 @@ final class GADWP_Settings {
 							if ( isset( $gadwp->config->options['ga_dash_tableid_jail'] ) && ! $gadwp->config->options['ga_dash_tableid_jail'] ) {
 								$profile = GADWP_Tools::guess_default_domain( $profiles );
 								$gadwp->config->options['ga_dash_tableid_jail'] = $profile;
-								$gadwp->config->options['ga_dash_tableid'] = $profile;
+								//$gadwp->config->options['ga_dash_tableid'] = $profile;
 							}
 							$gadwp->config->set_plugin_options( true );
 							$options = self::update_options( 'network' );
@@ -1064,7 +1064,7 @@ final class GADWP_Settings {
 						if ( isset( $gadwp->config->options['ga_dash_tableid_jail'] ) && ! $gadwp->config->options['ga_dash_tableid_jail'] ) {
 							$profile = GADWP_Tools::guess_default_domain( $profiles );
 							$gadwp->config->options['ga_dash_tableid_jail'] = $profile;
-							$gadwp->config->options['ga_dash_tableid'] = $profile;
+							//$gadwp->config->options['ga_dash_tableid'] = $profile;
 						}
 						$gadwp->config->set_plugin_options( true );
 						$options = self::update_options( 'network' );

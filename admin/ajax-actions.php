@@ -91,6 +91,8 @@ if ( ! class_exists( 'GADWP_Backend_Ajax' ) ) {
 
 				// Encode URL
 				$filter = rawurlencode( rawurldecode( $filter ) );
+			} else {
+				$filter = false;
 			}
 
 			$queries = explode( ',', $query );

@@ -132,10 +132,12 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 
 == Changelog ==
 
-= 4.8.4 =
+= 4.9 =
 - Bug Fix: add an unique class to jQuery UI Tooltips to avoid conflicts
 - Bug Fix: multiple CSS improvements
 - Bug Fix: invalid localized date formats
+- Bug Fix: switching between multisite modes doesn't propagate the new network status on all sites
+- Enhancement: unset cookies while revoking the authorization or clearing the cache 
 - Enhancement: no more page re-loads on admin dashboard widget when switching between reports
 - Enhancement: unified reporting system with real-time capabilities
 - Enhancement: new tracking options enabling you to customize cookieName, cookieDomain, cookieExpires; props by [Martins Sipenko](https://github.com/martinssipenko) 

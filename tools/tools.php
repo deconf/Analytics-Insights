@@ -168,6 +168,9 @@ if ( ! class_exists( 'GADWP_Tools' ) ) {
 		public static function clear_cache() {
 			global $wpdb;
 			$sqlquery = $wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'gadwp_cache_qr%%'" );
+			GADWP_Tools::unset_cookie( 'default_metric' );
+			GADWP_Tools::unset_cookie( 'default_dimension' );
+			GADWP_Tools::unset_cookie( 'default_view' );
 		}
 	}
 }

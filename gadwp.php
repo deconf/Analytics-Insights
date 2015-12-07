@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) )
 
 // Plugin Version
 if ( ! defined( 'GADWP_CURRENT_VERSION' ) ) {
-	define( 'GADWP_CURRENT_VERSION', '4.9.1' );
+	define( 'GADWP_CURRENT_VERSION', '4.9' );
 }
 
 if ( ! class_exists( 'GADWP_Manager' ) ) {

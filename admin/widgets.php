@@ -36,15 +36,11 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 			}
 
 			if ( current_user_can( 'manage_options' ) ) {
-				if ( $this->gadwp->config->options['switch_profile'] == 0 ) {
-					if ( $this->gadwp->config->options['ga_dash_tableid_jail'] ) {
-						$projectId = $this->gadwp->config->options['ga_dash_tableid_jail'];
-					} else {
-						echo '<p>' . __( "An admin should asign a default Google Analytics Profile.", 'google-analytics-dashboard-for-wp' ) . '</p><form action="' . menu_page_url( 'gadash_settings', false ) . '" method="POST">' . get_submit_button( __( "Select Domain", 'google-analytics-dashboard-for-wp' ), 'secondary' ) . '</form>';
-						return;
-					}
+				if ( $this->gadwp->config->options['ga_dash_tableid_jail'] ) {
+					$projectId = $this->gadwp->config->options['ga_dash_tableid_jail'];
 				} else {
-					$projectId = $this->gadwp->config->options['ga_dash_tableid'];
+					echo '<p>' . __( "An admin should asign a default Google Analytics Profile.", 'google-analytics-dashboard-for-wp' ) . '</p><form action="' . menu_page_url( 'gadash_settings', false ) . '" method="POST">' . get_submit_button( __( "Select Domain", 'google-analytics-dashboard-for-wp' ), 'secondary' ) . '</form>';
+					return;
 				}
 			} else {
 				if ( $this->gadwp->config->options['ga_dash_tableid_jail'] ) {
@@ -61,9 +57,8 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 			}
 
 			?>
-			<div id="gadwp-window-1"></div>
-			<?php
-
+<div id="gadwp-window-1"></div>
+<?php
 		}
 	}
 }

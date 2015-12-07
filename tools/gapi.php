@@ -223,7 +223,6 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 		public function reset_token( $all = true ) {
 			$this->gadwp->config->options['ga_dash_token'] = "";
 			if ( $all ) {
-				$this->gadwp->config->options['ga_dash_tableid'] = "";
 				$this->gadwp->config->options['ga_dash_tableid_jail'] = "";
 				$this->gadwp->config->options['ga_dash_profile_list'] = array();
 				try {
@@ -241,6 +240,9 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			} else {
 				$this->gadwp->config->set_plugin_options();
 			}
+			GADWP_Tools::unset_cookie( 'default_metric' );
+			GADWP_Tools::unset_cookie( 'default_dimension' );
+			GADWP_Tools::unset_cookie( 'default_view' );
 		}
 
 		/**

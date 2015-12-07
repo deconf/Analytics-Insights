@@ -106,13 +106,13 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 			if ( isset( $options['ga_aff_tracking'] ) ) {
 				$options['ga_aff_tracking'] = (int) $options['ga_aff_tracking'];
 			}
-			if ( isset( $options['ga_cookiedomain'] ) ) { // v4.8.4
+			if ( isset( $options['ga_cookiedomain'] ) ) { // v4.9
 				$options['ga_cookiedomain'] = sanitize_text_field( $options['ga_cookiedomain'] );
 			}
-			if ( isset( $options['ga_cookiename'] ) ) { // v4.8.4
+			if ( isset( $options['ga_cookiename'] ) ) { // v4.9
 				$options['ga_cookiename'] = sanitize_text_field( $options['ga_cookiename'] );
 			}
-			if ( isset( $options['ga_cookieexpires'] ) && $options['ga_cookieexpires'] ) { // v4.8.4
+			if ( isset( $options['ga_cookieexpires'] ) && $options['ga_cookieexpires'] ) { // v4.9
 				$options['ga_cookieexpires'] = (int) $options['ga_cookieexpires'];
 			}
 			if ( isset( $options['ga_event_affiliates'] ) ) {
@@ -182,12 +182,13 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 				$get_network_options = get_site_option( 'gadash_network_options' );
 				$network_options = (array) json_decode( $get_network_options );
 				if ( isset( $network_options['ga_dash_network'] ) && ( $network_options['ga_dash_network'] ) ) {
-					$network_options = (array) json_decode( $get_network_options );
 					if ( ! is_network_admin() && ! empty( $network_options['ga_dash_profile_list'] ) && isset( $network_options['ga_dash_tableid_network']->$blog_id ) ) {
 						$network_options['ga_dash_profile_list'] = array( 0 => GADWP_Tools::get_selected_profile( $network_options['ga_dash_profile_list'], $network_options['ga_dash_tableid_network']->$blog_id ) );
 						$network_options['ga_dash_tableid_jail'] = $network_options['ga_dash_profile_list'][0][1];
 					}
 					$this->options = array_merge( $this->options, $network_options );
+				} else {
+					$this->options['ga_dash_network'] = 0;
 				}
 			}
 		}
@@ -225,8 +226,6 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 				} else {
 					GADWP_Tools::delete_cache( 'gapi_errors' );
 				}
-				GADWP_Tools::unset_cookie( 'default_metric' );
-				GADWP_Tools::unset_cookie( 'default_dimension' );
 			}
 			if ( ! isset( $this->options['ga_enhanced_links'] ) ) {
 				$this->options['ga_enhanced_links'] = 0;
@@ -350,6 +349,10 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 				unset( $this->options['ga_tracking_code'] );
 				$flag = true;
 			}
+			if ( isset( $this->options['ga_dash_tableid'] ) ) { // v4.9
+				unset( $this->options['ga_dash_tableid'] );
+				$flag = true;
+			}
 			if ( isset( $this->options['ga_dash_frontend_keywords'] ) ) { // v4.8
 				unset( $this->options['ga_dash_frontend_keywords'] );
 				$flag = true;
@@ -369,15 +372,15 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 				$this->options['ga_cookiedomain'] = '';
 				$flag = true;
 			}
-			if ( ! isset( $this->options['ga_cookiedomain'] ) ) { // v4.8.4
+			if ( ! isset( $this->options['ga_cookiedomain'] ) ) { // v4.9
 				$this->options['ga_cookiedomain'] = '';
 				$flag = true;
 			}
-			if ( ! isset( $this->options['ga_cookiename'] ) ) { // v4.8.4
+			if ( ! isset( $this->options['ga_cookiename'] ) ) { // v4.9
 				$this->options['ga_cookiename'] = '';
 				$flag = true;
 			}
-			if ( ! isset( $this->options['ga_cookieexpires'] ) ) { // v4.8.4
+			if ( ! isset( $this->options['ga_cookieexpires'] ) ) { // v4.9
 				$this->options['ga_cookieexpires'] = '';
 				$flag = true;
 			}

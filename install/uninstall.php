@@ -27,5 +27,8 @@ class GADWP_Uninstall {
 			$sqlquery = $wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'gadwp_cache_%%'" );
 			delete_option( 'gadash_options' );
 		}
+		GADWP_Tools::unset_cookie( 'default_metric' );
+		GADWP_Tools::unset_cookie( 'default_dimension' );
+		GADWP_Tools::unset_cookie( 'default_view' );
 	}
 }

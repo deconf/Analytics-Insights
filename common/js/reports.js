@@ -346,7 +346,7 @@ jQuery.fn.extend( {
 			},
 
 			drawmaplocations : function ( gadwp_locations ) {
-				chart_data = google.visualization.arrayToDataTable( gadwp_locations );
+				var chart_data = google.visualization.arrayToDataTable( gadwp_locations );
 				var options = {
 					chartArea : {
 						width : '99%',
