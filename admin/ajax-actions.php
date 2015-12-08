@@ -51,7 +51,7 @@ if ( ! class_exists( 'GADWP_Backend_Ajax' ) ) {
 				ob_clean();
 			}
 
-			if ( ! GADWP_Tools::check_roles( $this->gadwp->config->options['ga_dash_access_back'] ) || 0 == $this->gadwp->config->options['backend_item_reports'] ) {
+			if ( ! ( GADWP_Tools::check_roles( $this->gadwp->config->options['ga_dash_access_back'] ) && ( ( 1 == $this->gadwp->config->options['backend_item_reports'] ) || ( 1 == $this->gadwp->config->options['dashboard_widget'] ) ) ) ) {
 				wp_die( - 31 );
 			}
 			if ( $this->gadwp->config->options['ga_dash_token'] && $this->gadwp->config->options['ga_dash_tableid_jail'] && $from && $to ) {
