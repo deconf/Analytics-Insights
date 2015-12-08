@@ -171,6 +171,7 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 							'pageviews' => __( "Page Views", 'google-analytics-dashboard-for-wp' ),
 							'visitBounceRate' => __( "Bounce Rate", 'google-analytics-dashboard-for-wp' ),
 							'locations' => __( "Location", 'google-analytics-dashboard-for-wp' ),
+							'contentpages' =>  __( "Pages", 'google-analytics-dashboard-for-wp' ),
 							'referrers' => __( "Referrers", 'google-analytics-dashboard-for-wp' ),
 							'searches' => __( "Searches", 'google-analytics-dashboard-for-wp' ),
 							'trafficdetails' => __( "Traffic Details", 'google-analytics-dashboard-for-wp' )

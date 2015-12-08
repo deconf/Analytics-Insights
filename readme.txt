@@ -132,6 +132,9 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 
 == Changelog ==
 
+= 4.9.0.1 =
+- Bug Fix: Pages report missing from admin dashboard widget
+
 = 4.9 =
 - Bug Fix: add an unique class to jQuery UI Tooltips to avoid conflicts
 - Bug Fix: multiple CSS improvements
