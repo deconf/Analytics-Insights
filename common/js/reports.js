@@ -505,8 +505,8 @@ jQuery.fn.extend( {
 				return ( "<p><center><strong>" + pagetitle + "</strong></center></p>" + tablerfr + tablekwd + tablescl + tablecpg + tabledrt );
 			},
 
-			rt_refresh : function ( focusFlag ) {
-				if ( focusFlag ) {
+			rt_refresh : function ( ) {
+				if ( reports.render.focusFlag ) {
 					post_data.from = false;
 					post_data.to = false;
 					post_data.query = 'realtime';
@@ -522,7 +522,6 @@ jQuery.fn.extend( {
 						NProgress.done();
 
 					} );
-
 				}
 			},
 
@@ -798,12 +797,13 @@ jQuery.fn.extend( {
 					}
 				}
 				if ( period == 'realtime' ) {
-					focusFlag = 1;
+					
+					reports.render.focusFlag = 1;
 
 					jQuery( window ).bind( "focus", function ( event ) {
-						focusFlag = 1;
+						reports.render.focusFlag = 1;
 					} ).bind( "blur", function ( event ) {
-						focusFlag = 0;
+						reports.render.focusFlag = 0;
 					} );
 
 					tpl = '<div id="gadwp-realtime' + slug + '">';
@@ -844,10 +844,10 @@ jQuery.fn.extend( {
 					tpl += '</div>';
 
 					jQuery( '#gadwp-reports' + slug ).html( tpl );
+					
+					reports.rt_refresh( reports.render.focusFlag );
 
-					reports.rt_refresh( focusFlag );
-
-					reports.realtime_running = setInterval( reports.rt_refresh.bind( focusFlag ), 6000 );
+					reports.realtime_running = setInterval( reports.rt_refresh, 55000 );
 
 				} else {
 					if ( jQuery.inArray( query, [ 'referrers', 'contentpages', 'searches' ] ) > -1 ) {
