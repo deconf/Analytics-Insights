@@ -2,7 +2,8 @@
 
 google.load( "visualization", "1", {
 	packages : [ "corechart", "table", "orgchart", "geochart" ],
-	'language' : gadwp_item_data.language
+	'language' : gadwp_item_data.language,
+	'callback' : GADWPLoad
 } );
 
 // Get the numeric ID
@@ -41,7 +42,7 @@ gadwp_item_data.responsiveDialog = function () {
 	var dialog;
 	var wWidth;
 	var visible = jQuery( ".ui-dialog:visible" );
-	
+
 	// on each visible dialog
 	visible.each( function () {
 		dialog = jQuery( this ).find( ".ui-dialog-content" ).data( "ui-dialog" );
@@ -62,30 +63,6 @@ gadwp_item_data.responsiveDialog = function () {
 	} );
 }
 
-jQuery( document ).ready( function () {
-
-	if ( gadwp_item_data.scope == 'admin-widgets' ) {
-		jQuery( '#gadwp-window-1' ).gadwpItemReport( 1 );
-	} else {
-		jQuery( gadwp_item_data.getSelector( gadwp_item_data.scope ) ).click( function () {
-			if ( !jQuery( "#gadwp-window-" + gadwp_item_data.getID( this ) ).length > 0 ) {
-				jQuery( "body" ).append( '<div id="gadwp-window-' + gadwp_item_data.getID( this ) + '"></div>' );
-			}
-			jQuery( '#gadwp-window-' + gadwp_item_data.getID( this ) ).gadwpItemReport( gadwp_item_data.getID( this ) );
-		} );
-	}
-
-	// on window resize
-	jQuery( window ).resize( function () {
-		gadwp_item_data.responsiveDialog();
-	} );
-
-	// dialog width larger than viewport
-	jQuery( document ).on( "dialogopen", ".ui-dialog", function ( event, ui ) {
-		gadwp_item_data.responsiveDialog();
-	} );
-} );
-
 jQuery.fn.extend( {
 	gadwpItemReport : function ( item_id ) {
 		var post_data;
@@ -95,7 +72,7 @@ jQuery.fn.extend( {
 			set_cookie : function ( name, value ) {
 				var expires;
 				var date_item = new Date();
-				
+
 				if ( gadwp_item_data.scope == 'admin-widgets' ) {
 					name = "gadwp_wg_" + name;
 				} else {
@@ -110,7 +87,7 @@ jQuery.fn.extend( {
 				var cookie;
 				var cookies_array;
 				var div;
-				
+
 				if ( gadwp_item_data.scope == 'admin-widgets' ) {
 					name = "gadwp_wg_" + name + "=";
 				} else {
@@ -140,7 +117,7 @@ jQuery.fn.extend( {
 				var default_dimension;
 				var default_view;
 				var output = [];
-				
+
 				if ( list == false ) {
 					return;
 				}
@@ -155,7 +132,7 @@ jQuery.fn.extend( {
 				} else {
 					default_metric = tools.get_cookie( 'default_metric' );
 					default_dimension = tools.get_cookie( 'default_dimension' );
-					default_view = tools.get_cookie( 'default_view' ); 
+					default_view = tools.get_cookie( 'default_view' );
 				}
 
 				jQuery.each( list, function ( key, value ) {
@@ -169,7 +146,7 @@ jQuery.fn.extend( {
 			},
 
 			init : function () {
-				var tpl;				
+				var tpl;
 
 				if ( !jQuery( '#gadwp-window' + slug ).length ) {
 					return;
@@ -179,21 +156,21 @@ jQuery.fn.extend( {
 					return;
 				}
 
-				tpl =  '<div id="gadwp-container' + slug + '">';
+				tpl = '<div id="gadwp-container' + slug + '">';
 				if ( gadwp_item_data.viewList != false ) {
-					tpl +=   '<select id="gadwp-sel-view' + slug + '"></select>';					
-				}				
-				tpl +=   '<select id="gadwp-sel-period' + slug + '"></select> ';
-				tpl +=   '<select id="gadwp-sel-report' + slug + '"></select>';
-				tpl +=   '<div id="gadwp-progressbar' + slug + '"></div>';
-				tpl +=   '<div id="gadwp-status' + slug + '"></div>';
-				tpl +=   '<div id="gadwp-reports' + slug + '"></div>';
-				tpl +=   '<div style="text-align:right;width:100%;font-size:0.8em;clear:both;margin-right:5px;margin-top:10px;">';
-				tpl +=      gadwp_item_data.i18n[ 14 ];
-				tpl +=      ' <a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_report&utm_medium=link&utm_content=back_report&utm_campaign=gadwp" rel="nofollow" style="text-decoration:none;font-size:1em;">GADWP</a>&nbsp;';
-				tpl +=   '</div>';
+					tpl += '<select id="gadwp-sel-view' + slug + '"></select>';
+				}
+				tpl += '<select id="gadwp-sel-period' + slug + '"></select> ';
+				tpl += '<select id="gadwp-sel-report' + slug + '"></select>';
+				tpl += '<div id="gadwp-progressbar' + slug + '"></div>';
+				tpl += '<div id="gadwp-status' + slug + '"></div>';
+				tpl += '<div id="gadwp-reports' + slug + '"></div>';
+				tpl += '<div style="text-align:right;width:100%;font-size:0.8em;clear:both;margin-right:5px;margin-top:10px;">';
+				tpl += gadwp_item_data.i18n[ 14 ];
+				tpl += ' <a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_report&utm_medium=link&utm_content=back_report&utm_campaign=gadwp" rel="nofollow" style="text-decoration:none;font-size:1em;">GADWP</a>&nbsp;';
+				tpl += '</div>';
 				tpl += '</div>',
-				
+
 				jQuery( '#gadwp-window' + slug ).append( tpl );
 
 				template.addOptions( '#gadwp-sel-view' + slug, gadwp_item_data.viewList );
@@ -237,7 +214,7 @@ jQuery.fn.extend( {
 			},
 
 			drawprs : function ( gadwp_prs ) {
-				var chart_data= google.visualization.arrayToDataTable( gadwp_prs );
+				var chart_data = google.visualization.arrayToDataTable( gadwp_prs );
 				var options = {
 					page : 'enable',
 					pageSize : 10,
@@ -245,7 +222,7 @@ jQuery.fn.extend( {
 					allowHtml : true
 				};
 				var chart = new google.visualization.Table( document.getElementById( 'gadwp-prs' + slug ) );
-				
+
 				chart.draw( chart_data, options );
 			},
 
@@ -257,7 +234,7 @@ jQuery.fn.extend( {
 					height : '100%'
 				};
 				var chart = new google.visualization.OrgChart( document.getElementById( 'gadwp-trafficchannels' + slug ) );
-				
+
 				chart.draw( chart_data, options );
 			},
 
@@ -275,7 +252,7 @@ jQuery.fn.extend( {
 					colors : gadwp_item_data.colorVariations
 				};
 				var chart = new google.visualization.PieChart( document.getElementById( 'gadwp-trafficmediums' + slug ) );
-				
+
 				chart.draw( chart_data, options );
 			},
 
@@ -293,7 +270,7 @@ jQuery.fn.extend( {
 					colors : gadwp_item_data.colorVariations
 				};
 				var chart = new google.visualization.PieChart( document.getElementById( 'gadwp-traffictype' + slug ) );
-				
+
 				chart.draw( chart_data, options );
 			},
 
@@ -311,7 +288,7 @@ jQuery.fn.extend( {
 					colors : gadwp_item_data.colorVariations
 				};
 				var chart = new google.visualization.PieChart( document.getElementById( 'gadwp-socialnetworks' + slug ) );
-				
+
 				chart.draw( chart_data, options );
 			},
 
@@ -329,7 +306,7 @@ jQuery.fn.extend( {
 					colors : gadwp_item_data.colorVariations
 				};
 				var chart = new google.visualization.PieChart( document.getElementById( 'gadwp-trafficorganic' + slug ) );
-				
+
 				chart.draw( chart_data, options );
 			},
 
@@ -341,7 +318,7 @@ jQuery.fn.extend( {
 					width : '100%'
 				};
 				var chart = new google.visualization.Table( document.getElementById( 'gadwp-locations' + slug ) );
-				
+
 				chart.draw( chart_data, options );
 			},
 
@@ -360,14 +337,14 @@ jQuery.fn.extend( {
 					options.datalessRegionColor = 'EFEFEF';
 				}
 				var chart = new google.visualization.GeoChart( document.getElementById( 'gadwp-map' + slug ) );
-				
+
 				chart.draw( chart_data, options );
 			},
 
 			drawmainchart : function ( gadwp_mainchart, format ) {
 				var chart_data = google.visualization.arrayToDataTable( gadwp_mainchart );
 				var formatter;
-				
+
 				if ( format ) {
 					formatter = new google.visualization.NumberFormat( {
 						suffix : '%',
@@ -376,7 +353,7 @@ jQuery.fn.extend( {
 
 					formatter.format( chart_data, 1 );
 				}
-				
+
 				var options = {
 					legend : {
 						position : 'none'
@@ -396,7 +373,7 @@ jQuery.fn.extend( {
 					}
 				};
 				var chart = new google.visualization.AreaChart( document.getElementById( 'gadwp-mainchart' + slug ) );
-				
+
 				chart.draw( chart_data, options );
 			},
 
@@ -412,11 +389,11 @@ jQuery.fn.extend( {
 			rt_onlyUniqueValues : function ( value, index, self ) {
 				return self.indexOf( value ) === index;
 			},
-			
+
 			rt_countsessions : function ( gadwp_realtime, searchvalue ) {
 				var count = 0;
 				var i = 0;
-				
+
 				for ( i = 0; i < gadwp_realtime[ "rows" ].length; i = i + 1 ) {
 					if ( jQuery.inArray( searchvalue, gadwp_realtime[ "rows" ][ i ] ) > -1 ) {
 						count += parseInt( gadwp_realtime[ "rows" ][ i ][ 6 ] );
@@ -424,8 +401,8 @@ jQuery.fn.extend( {
 				}
 				return count;
 			},
-			
-			rt_generatetooltip : function  ( gadwp_realtime ) {
+
+			rt_generatetooltip : function ( gadwp_realtime ) {
 				var count = 0;
 				var table = "";
 				var i = 0;
@@ -441,8 +418,8 @@ jQuery.fn.extend( {
 					return ( "" );
 				}
 			},
-			
-			rt_pagedetails : function  ( gadwp_realtime, searchvalue ) {
+
+			rt_pagedetails : function ( gadwp_realtime, searchvalue ) {
 				var sant;
 				var i = 0;
 				var j = 0;
@@ -461,13 +438,17 @@ jQuery.fn.extend( {
 				var tabledrt = "";
 				var pagetitle;
 				var pgstatstable;
-				
+
 				for ( i = 0; i < gadwp_realtime[ "rows" ].length; i = i + 1 ) {
 					sant = 1;
 					for ( j = 0; j < newgadwp_realtime.length; j = j + 1 ) {
-						jQuery.each(gadwp_realtime[ "rows" ][ i ],function(){sum+=parseFloat(this) || 0; });
-						jQuery.each(newgadwp_realtime[ j ],function(){newsum+=parseFloat(this) || 0; });
-						if (  sum == newsum ) {
+						jQuery.each( gadwp_realtime[ "rows" ][ i ], function () {
+							sum += parseFloat( this ) || 0;
+						} );
+						jQuery.each( newgadwp_realtime[ j ], function () {
+							newsum += parseFloat( this ) || 0;
+						} );
+						if ( sum == newsum ) {
 							newgadwp_realtime[ j ][ 6 ] = parseInt( newgadwp_realtime[ j ][ 6 ] ) + parseInt( gadwp_realtime[ "rows" ][ i ][ 6 ] );
 							sant = 0;
 						}
@@ -505,7 +486,7 @@ jQuery.fn.extend( {
 						}
 					}
 				}
-				
+
 				if ( countrfr ) {
 					tablerfr = "<table><tr><td>" + gadwp_item_data.i18n_realtime[ 0 ] + "(" + countrfr + ")</td></tr>" + tablerfr + "</table><br />";
 				}
@@ -523,7 +504,7 @@ jQuery.fn.extend( {
 				}
 				return ( "<p><center><strong>" + pagetitle + "</strong></center></p>" + tablerfr + tablekwd + tablescl + tablecpg + tabledrt );
 			},
-			
+
 			rt_refresh : function ( focusFlag ) {
 				if ( focusFlag ) {
 					post_data.from = false;
@@ -543,9 +524,8 @@ jQuery.fn.extend( {
 					} );
 
 				}
-			},			
-			
-			
+			},
+
 			drawrealtime : function ( gadwp_realtime ) {
 				var i = 0;
 				var pagepath = [];
@@ -555,7 +535,7 @@ jQuery.fn.extend( {
 				var visittype = [];
 				var custom = [];
 				var upagepathstats = [];
-				var upagepath;					
+				var upagepath;
 				var pgstatstable = "";
 				var ureferralsstats = [];
 				var ureferrals;
@@ -567,13 +547,12 @@ jQuery.fn.extend( {
 				var ucustom;
 				var uvisittype = [ "REFERRAL", "ORGANIC", "SOCIAL", "CUSTOM" ];
 				var uvisitortype = [ "DIRECT", "NEW" ];
-				
+
 				jQuery( function () {
 					jQuery( '#gadwp-widget *' ).tooltip( {
 						tooltipClass : "gadwp"
 					} );
 				} );
-
 
 				gadwp_realtime = gadwp_realtime[ 0 ];
 
@@ -738,7 +717,7 @@ jQuery.fn.extend( {
 				var from;
 				var to;
 				var tpl;
-				var focusFlag;				
+				var focusFlag;
 
 				if ( period == 'realtime' ) {
 					jQuery( '#gadwp-sel-report' + slug ).hide();
@@ -786,7 +765,7 @@ jQuery.fn.extend( {
 				tools.set_cookie( 'default_metric', query );
 				tools.set_cookie( 'default_dimension', period );
 
-				if ( typeof view !== 'undefined') {
+				if ( typeof view !== 'undefined' ) {
 					tools.set_cookie( 'default_view', view );
 					projectId = view;
 				} else {
@@ -813,7 +792,7 @@ jQuery.fn.extend( {
 					post_data = {
 						action : 'gadwp_backend_item_reports',
 						gadwp_security_backend_item_reports : gadwp_item_data.security,
-						projectId : projectId,						
+						projectId : projectId,
 						from : from,
 						to : to
 					}
@@ -821,50 +800,48 @@ jQuery.fn.extend( {
 				if ( period == 'realtime' ) {
 					focusFlag = 1;
 
-					jQuery( document ).ready( function () {
-						jQuery( window ).bind( "focus", function ( event ) {
-							focusFlag = 1;
-						} ).bind( "blur", function ( event ) {
-							focusFlag = 0;
-						} );
+					jQuery( window ).bind( "focus", function ( event ) {
+						focusFlag = 1;
+					} ).bind( "blur", function ( event ) {
+						focusFlag = 0;
 					} );
-					
+
 					tpl = '<div id="gadwp-realtime' + slug + '">';
-					tpl +=  '<div class="gadwp-rt-box">';
-					tpl +=    '<div class="gadwp-tdo-left">';
-					tpl +=        '<div class="gadwp-online" id="gadwp-online">0</div>';
-					tpl +=    '</div>';
-					tpl +=    '<div class="gadwp-tdo-right" id="gadwp-tdo-right">';
-					tpl +=        '<div class="gadwp-bigtext">';
-					tpl +=            '<div class="gadwp-bleft">' + gadwp_item_data.i18n_realtime[ 0 ] + '</div>';
-					tpl +=            '<div class="gadwp-bright">0</div>';
-					tpl +=        '</div>';
-					tpl +=        '<div class="gadwp-bigtext">';
-					tpl +=            '<div class="gadwp-bleft">' + gadwp_item_data.i18n_realtime[ 1 ] + '</div>';
-					tpl +=            '<div class="gadwp-bright">0</div>';
-					tpl +=        '</div>';
-					tpl +=        '<div class="gadwp-bigtext">';
-					tpl +=            '<div class="gadwp-bleft">' + gadwp_item_data.i18n_realtime[ 2 ] + '</div>';
-					tpl +=            '<div class="gadwp-bright">0</div>';
-					tpl +=        '</div>';
-					tpl +=        '<div class="gadwp-bigtext">';
-					tpl +=            '<div class="gadwp-bleft">' + gadwp_item_data.i18n_realtime[ 3 ] + '</div>';
-					tpl +=            '<div class="gadwp-bright">0</div>';
-					tpl +=        '</div>';
-					tpl +=        '<div class="gadwp-bigtext">';
-					tpl +=            '<div class="gadwp-bleft">' + gadwp_item_data.i18n_realtime[ 4 ] + '</div>';
-					tpl +=            '<div class="gadwp-bright">0</div>';
-					tpl +=        '</div>';
-					tpl +=        '<div class="gadwp-bigtext">';
-					tpl +=            '<div class="gadwp-bleft">' + gadwp_item_data.i18n_realtime[ 5 ] + '</div>';
-					tpl +=            '<div class="gadwp-bright">0</div>';
-					tpl +=        '</div>';
-					tpl +=    '</div>';
-					tpl +=  '</div>';
-					tpl +=  '<div>';
-					tpl +=    '<div id="gadwp-pages" class="gadwp-pages">&nbsp;</div>';
-					tpl +=  '</div>';
-					tpl += '</div>'; 
+					tpl += '<div class="gadwp-rt-box">';
+					tpl += '<div class="gadwp-tdo-left">';
+					tpl += '<div class="gadwp-online" id="gadwp-online">0</div>';
+					tpl += '</div>';
+					tpl += '<div class="gadwp-tdo-right" id="gadwp-tdo-right">';
+					tpl += '<div class="gadwp-bigtext">';
+					tpl += '<div class="gadwp-bleft">' + gadwp_item_data.i18n_realtime[ 0 ] + '</div>';
+					tpl += '<div class="gadwp-bright">0</div>';
+					tpl += '</div>';
+					tpl += '<div class="gadwp-bigtext">';
+					tpl += '<div class="gadwp-bleft">' + gadwp_item_data.i18n_realtime[ 1 ] + '</div>';
+					tpl += '<div class="gadwp-bright">0</div>';
+					tpl += '</div>';
+					tpl += '<div class="gadwp-bigtext">';
+					tpl += '<div class="gadwp-bleft">' + gadwp_item_data.i18n_realtime[ 2 ] + '</div>';
+					tpl += '<div class="gadwp-bright">0</div>';
+					tpl += '</div>';
+					tpl += '<div class="gadwp-bigtext">';
+					tpl += '<div class="gadwp-bleft">' + gadwp_item_data.i18n_realtime[ 3 ] + '</div>';
+					tpl += '<div class="gadwp-bright">0</div>';
+					tpl += '</div>';
+					tpl += '<div class="gadwp-bigtext">';
+					tpl += '<div class="gadwp-bleft">' + gadwp_item_data.i18n_realtime[ 4 ] + '</div>';
+					tpl += '<div class="gadwp-bright">0</div>';
+					tpl += '</div>';
+					tpl += '<div class="gadwp-bigtext">';
+					tpl += '<div class="gadwp-bleft">' + gadwp_item_data.i18n_realtime[ 5 ] + '</div>';
+					tpl += '<div class="gadwp-bright">0</div>';
+					tpl += '</div>';
+					tpl += '</div>';
+					tpl += '</div>';
+					tpl += '<div>';
+					tpl += '<div id="gadwp-pages" class="gadwp-pages">&nbsp;</div>';
+					tpl += '</div>';
+					tpl += '</div>';
 
 					jQuery( '#gadwp-reports' + slug ).html( tpl );
 
@@ -875,9 +852,9 @@ jQuery.fn.extend( {
 				} else {
 					if ( jQuery.inArray( query, [ 'referrers', 'contentpages', 'searches' ] ) > -1 ) {
 
-						tpl =  '<div id="gadwp-trafficchannels' + slug + '"></div>';
+						tpl = '<div id="gadwp-trafficchannels' + slug + '"></div>';
 						tpl += '<div id="gadwp-prs' + slug + '"></div>';
-						
+
 						jQuery( '#gadwp-reports' + slug ).html( tpl );
 						jQuery( '#gadwp-reports' + slug ).hide();
 
@@ -889,7 +866,7 @@ jQuery.fn.extend( {
 									if ( jQuery.isArray( response[ 0 ] ) ) {
 										jQuery( '#gadwp-reports' + slug ).show();
 										reports.trafficchannels = response[ 0 ];
-										google.setOnLoadCallback( reports.drawtrafficchannels( reports.trafficchannels ) );
+										reports.drawtrafficchannels( reports.trafficchannels );
 									} else {
 										reports.throwDebug( response[ 0 ] );
 									}
@@ -901,7 +878,7 @@ jQuery.fn.extend( {
 								if ( !jQuery.isNumeric( response[ 1 ] ) ) {
 									if ( jQuery.isArray( response[ 1 ] ) ) {
 										reports.prs = response[ 1 ];
-										google.setOnLoadCallback( reports.drawprs( reports.prs ) );
+										reports.drawprs( reports.prs );
 									} else {
 										reports.throwDebug( response[ 1 ] );
 									}
@@ -915,17 +892,17 @@ jQuery.fn.extend( {
 						} );
 
 					} else if ( query == 'trafficdetails' ) {
-						
-						tpl =  '<div id="gadwp-trafficchannels' + slug + '"></div>';
+
+						tpl = '<div id="gadwp-trafficchannels' + slug + '"></div>';
 						tpl += '<div class="gadwp-floatwraper">';
-						tpl +=   '<div id="gadwp-trafficmediums' + slug + '"></div>';
-						tpl +=   '<div id="gadwp-traffictype' + slug + '"></div>';
+						tpl += '<div id="gadwp-trafficmediums' + slug + '"></div>';
+						tpl += '<div id="gadwp-traffictype' + slug + '"></div>';
 						tpl += '</div>';
 						tpl += '<div class="gadwp-floatwraper">';
-						tpl +=   '<div id="gadwp-trafficorganic' + slug + '"></div>';
-						tpl +=   '<div id="gadwp-socialnetworks' + slug + '"></div>';
+						tpl += '<div id="gadwp-trafficorganic' + slug + '"></div>';
+						tpl += '<div id="gadwp-socialnetworks' + slug + '"></div>';
 						tpl += '</div>';
-						
+
 						jQuery( '#gadwp-reports' + slug ).html( tpl );
 						jQuery( '#gadwp-reports' + slug ).hide();
 
@@ -937,7 +914,7 @@ jQuery.fn.extend( {
 									if ( jQuery.isArray( response[ 0 ] ) ) {
 										jQuery( '#gadwp-reports' + slug ).show();
 										reports.trafficchannels = response[ 0 ];
-										google.setOnLoadCallback( reports.drawtrafficchannels( reports.trafficchannels ) );
+										reports.drawtrafficchannels( reports.trafficchannels );
 									} else {
 										reports.throwDebug( response[ 0 ] );
 									}
@@ -950,7 +927,7 @@ jQuery.fn.extend( {
 									if ( jQuery.isArray( response[ 1 ] ) ) {
 										jQuery( '#gadwp-reports' + slug ).show();
 										reports.trafficmediums = response[ 1 ];
-										google.setOnLoadCallback( reports.drawtrafficmediums( reports.trafficmediums ) );
+										reports.drawtrafficmediums( reports.trafficmediums );
 									} else {
 										reports.throwDebug( response[ 1 ] );
 									}
@@ -963,7 +940,7 @@ jQuery.fn.extend( {
 									if ( jQuery.isArray( response[ 2 ] ) ) {
 										jQuery( '#gadwp-reports' + slug ).show();
 										reports.traffictype = response[ 2 ];
-										google.setOnLoadCallback( reports.drawtraffictype( reports.traffictype ) );
+										reports.drawtraffictype( reports.traffictype );
 									} else {
 										reports.throwDebug( response[ 2 ] );
 									}
@@ -976,7 +953,7 @@ jQuery.fn.extend( {
 									if ( jQuery.isArray( response[ 3 ] ) ) {
 										jQuery( '#gadwp-reports' + slug ).show();
 										reports.trafficorganic = response[ 3 ];
-										google.setOnLoadCallback( reports.drawtrafficorganic( reports.trafficorganic ) );
+										reports.drawtrafficorganic( reports.trafficorganic );
 									} else {
 										reports.throwDebug( response[ 3 ] );
 									}
@@ -989,7 +966,7 @@ jQuery.fn.extend( {
 									if ( jQuery.isArray( response[ 4 ] ) ) {
 										jQuery( '#gadwp-reports' + slug ).show();
 										reports.socialnetworks = response[ 4 ];
-										google.setOnLoadCallback( reports.drawsocialnetworks( reports.socialnetworks ) );
+										reports.drawsocialnetworks( reports.socialnetworks );
 									} else {
 										reports.throwDebug( response[ 4 ] );
 									}
@@ -1004,10 +981,10 @@ jQuery.fn.extend( {
 						} );
 
 					} else if ( query == 'locations' ) {
-						
-						tpl =  '<div id="gadwp-map' + slug + '"></div>';
+
+						tpl = '<div id="gadwp-map' + slug + '"></div>';
 						tpl += '<div id="gadwp-locations' + slug + '"></div>';
-						
+
 						jQuery( '#gadwp-reports' + slug ).html( tpl );
 						jQuery( '#gadwp-reports' + slug ).hide();
 
@@ -1019,8 +996,8 @@ jQuery.fn.extend( {
 									if ( jQuery.isArray( response[ 0 ] ) ) {
 										jQuery( '#gadwp-reports' + slug ).show();
 										reports.locations = response[ 0 ];
-										google.setOnLoadCallback( reports.drawmaplocations( reports.locations ) );
-										google.setOnLoadCallback( reports.drawlocations( reports.locations ) );
+										reports.drawmaplocations( reports.locations );
+										reports.drawlocations( reports.locations );
 									} else {
 										reports.throwDebug( response[ 0 ] );
 									}
@@ -1036,19 +1013,19 @@ jQuery.fn.extend( {
 						} );
 
 					} else {
-						
-						tpl =  '<div id="gadwp-mainchart' + slug + '"></div>';
+
+						tpl = '<div id="gadwp-mainchart' + slug + '"></div>';
 						tpl += '<div id="gadwp-bottomstats' + slug + '" class="gadwp-wrapper">';
-						tpl +=   '<div class="inside">';
-						tpl +=     '<div class="small-box"><h3>' + gadwp_item_data.i18n[ 5 ] + '</h3><p id="gdsessions' + slug + '">&nbsp;</p></div>';
-						tpl +=     '<div class="small-box"><h3>' + gadwp_item_data.i18n[ 6 ] + '</h3><p id="gdusers' + slug + '">&nbsp;</p></div>';
-						tpl +=     '<div class="small-box"><h3>' + gadwp_item_data.i18n[ 7 ] + '</h3><p id="gdpageviews' + slug + '">&nbsp;</p></div>';
-						tpl +=     '<div class="small-box"><h3>' + gadwp_item_data.i18n[ 8 ] + '</h3><p id="gdbouncerate' + slug + '">&nbsp;</p></div>';
-						tpl +=     '<div class="small-box"><h3>' + gadwp_item_data.i18n[ 9 ] + '</h3><p id="gdorganicsearch' + slug + '">&nbsp;</p></div>';
-						tpl +=     '<div class="small-box"><h3>' + gadwp_item_data.i18n[ 10 ] + '</h3><p id="gdpagespervisit' + slug + '">&nbsp;</p></div>';
-						tpl +=   '</div>';
-						tpl += '</div>';						
-						
+						tpl += '<div class="inside">';
+						tpl += '<div class="small-box"><h3>' + gadwp_item_data.i18n[ 5 ] + '</h3><p id="gdsessions' + slug + '">&nbsp;</p></div>';
+						tpl += '<div class="small-box"><h3>' + gadwp_item_data.i18n[ 6 ] + '</h3><p id="gdusers' + slug + '">&nbsp;</p></div>';
+						tpl += '<div class="small-box"><h3>' + gadwp_item_data.i18n[ 7 ] + '</h3><p id="gdpageviews' + slug + '">&nbsp;</p></div>';
+						tpl += '<div class="small-box"><h3>' + gadwp_item_data.i18n[ 8 ] + '</h3><p id="gdbouncerate' + slug + '">&nbsp;</p></div>';
+						tpl += '<div class="small-box"><h3>' + gadwp_item_data.i18n[ 9 ] + '</h3><p id="gdorganicsearch' + slug + '">&nbsp;</p></div>';
+						tpl += '<div class="small-box"><h3>' + gadwp_item_data.i18n[ 10 ] + '</h3><p id="gdpagespervisit' + slug + '">&nbsp;</p></div>';
+						tpl += '</div>';
+						tpl += '</div>';
+
 						jQuery( '#gadwp-reports' + slug ).html( tpl );
 						jQuery( '#gadwp-reports' + slug ).hide();
 
@@ -1061,9 +1038,9 @@ jQuery.fn.extend( {
 										jQuery( '#gadwp-reports' + slug ).show();
 										reports.mainchart = response[ 0 ];
 										if ( query == 'visitBounceRate' ) {
-											google.setOnLoadCallback( reports.drawmainchart( reports.mainchart, true ) );
+											reports.drawmainchart( reports.mainchart, true );
 										} else {
-											google.setOnLoadCallback( reports.drawmainchart( reports.mainchart, false ) );
+											reports.drawmainchart( reports.mainchart, false );
 										}
 									} else {
 										reports.throwDebug( response[ 0 ] );
@@ -1076,7 +1053,7 @@ jQuery.fn.extend( {
 									if ( jQuery.isArray( response[ 1 ] ) ) {
 										jQuery( '#gadwp-reports' + slug ).show();
 										reports.bottomstats = response[ 1 ];
-										google.setOnLoadCallback( reports.drawbottomstats( reports.bottomstats ) );
+										reports.drawbottomstats( reports.bottomstats );
 									} else {
 										reports.throwDebug( response[ 1 ] );
 									}
@@ -1164,8 +1141,8 @@ jQuery.fn.extend( {
 		jQuery( '#gadwp-sel-view' + slug ).change( function () {
 			jQuery( '#gadwp-reports' + slug ).html( '' );
 			reports.init();
-		} );		
-		
+		} );
+
 		jQuery( '#gadwp-sel-period' + slug ).change( function () {
 			jQuery( '#gadwp-reports' + slug ).html( '' );
 			reports.init();
@@ -1197,3 +1174,26 @@ jQuery.fn.extend( {
 		}
 	}
 } );
+
+function GADWPLoad () {
+	if ( gadwp_item_data.scope == 'admin-widgets' ) {
+		jQuery( '#gadwp-window-1' ).gadwpItemReport( 1 );
+	} else {
+		jQuery( gadwp_item_data.getSelector( gadwp_item_data.scope ) ).click( function () {
+			if ( !jQuery( "#gadwp-window-" + gadwp_item_data.getID( this ) ).length > 0 ) {
+				jQuery( "body" ).append( '<div id="gadwp-window-' + gadwp_item_data.getID( this ) + '"></div>' );
+			}
+			jQuery( '#gadwp-window-' + gadwp_item_data.getID( this ) ).gadwpItemReport( gadwp_item_data.getID( this ) );
+		} );
+	}
+
+	// on window resize
+	jQuery( window ).resize( function () {
+		gadwp_item_data.responsiveDialog();
+	} );
+
+	// dialog width larger than viewport
+	jQuery( document ).on( "dialogopen", ".ui-dialog", function ( event, ui ) {
+		gadwp_item_data.responsiveDialog();
+	} );
+}

@@ -210,7 +210,9 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 				} else {
 					unset( $this->options['ga_dash_refresh_token'] );
 				}
-
+				GADWP_Tools::unset_cookie( 'default_metric' );
+				GADWP_Tools::unset_cookie( 'default_dimension' );
+				GADWP_Tools::unset_cookie( 'default_view' );
 				GADWP_Tools::clear_cache();
 				GADWP_Tools::clear_transients(); // 4.8.3 to be removed after a few months
 				$flag = true;
