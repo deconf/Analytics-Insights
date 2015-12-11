@@ -370,14 +370,14 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 					/* translators:
 					 * Example: 'F, Y' will become 'November, 2015'
 					 * For details see: http://php.net/manual/en/function.date.php#refsect1-function.date-parameters */
-					$gadwp_data[] = array( date_i18n( __('F, Y'), strtotime( $row[0] . '01' ) ), round( $row[2], 2 ) );
+					$gadwp_data[] = array( date_i18n( __('F, Y', 'google-analytics-dashboard-for-wp'), strtotime( $row[0] . '01' ) ), round( $row[2], 2 ) );
 				}
 			} else {
 				foreach ( $data->getRows() as $row ) {
 					/* translators:
 					 * Example: 'l, F j, Y' will become 'Thusday, November 17, 2015'
 					 * For details see: http://php.net/manual/en/function.date.php#refsect1-function.date-parameters */
-					$gadwp_data[] = array( date_i18n( __( 'l, F j, Y' ), strtotime( $row[0] ) ), round( $row[2], 2 ) );
+					$gadwp_data[] = array( date_i18n( __( 'l, F j, Y', 'google-analytics-dashboard-for-wp' ), strtotime( $row[0] ) ), round( $row[2], 2 ) );
 				}
 			}
 			return $gadwp_data;
@@ -683,7 +683,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				$max = max( $max_array ) ? max( $max_array ) : 1;
 			}
 			foreach ( $data->getRows() as $row ) {
-				$gadwp_data[] = array( date_i18n( __( 'l, F j, Y' ), strtotime( $row[0] ) ), ( $anonim ? round( $row[2] * 100 / $max, 2 ) : (int) $row[2] ) );
+				$gadwp_data[] = array( date_i18n( __( 'l, F j, Y', 'google-analytics-dashboard-for-wp' ), strtotime( $row[0] ) ), ( $anonim ? round( $row[2] * 100 / $max, 2 ) : (int) $row[2] ) );
 			}
 			$totals = $data->getTotalsForAllResults();
 			return array( $gadwp_data, $anonim ? 0 : number_format_i18n( $totals['ga:sessions'] ) );
