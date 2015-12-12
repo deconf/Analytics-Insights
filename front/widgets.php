@@ -28,7 +28,7 @@ final class GADWP_Frontend_Widget extends WP_Widget {
 	public function load_styles_scripts() {
 		wp_enqueue_style( 'gadwp-front-widget', GADWP_URL . 'front/css/widgets.css', null, GADWP_CURRENT_VERSION );
 		wp_enqueue_script( 'gadwp-front-widget', GADWP_URL . 'front/js/widgets.js', array( 'jquery' ), GADWP_CURRENT_VERSION );
-		wp_enqueue_script( 'googlejsapi', 'https://www.google.com/jsapi' );
+		wp_enqueue_script( 'gadwp-jsapi', 'https://www.google.com/jsapi' );
 	}
 
 	public function widget( $args, $instance ) {
@@ -85,7 +85,7 @@ final class GADWP_Frontend_Widget extends WP_Widget {
 				break;
 		}
 		echo '<script type="text/javascript">
-
+			jQuery( function () {
 				jQuery.post("' . admin_url( 'admin-ajax.php' ) . '", {action: "gadash_get_frontendwidget_data",gadash_number: "' . $this->number . '",gadash_optionname: "' . $this->option_name . '"}, function(response){
 				    if (!jQuery.isNumeric(response) && jQuery.isArray(response)){
 				        if (jQuery("#gadwp-widgetchart")[0]){
@@ -99,7 +99,7 @@ final class GADWP_Frontend_Widget extends WP_Widget {
 				        jQuery("#gadwp-widgetchart").css({"background-color":"#F7F7F7","height":"auto","padding-top":"50px","padding-bottom":"50px","color":"#000","text-align":"center"});
 				        jQuery("#gadwp-widgetchart").html("' . __( "This report is unavailable", 'google-analytics-dashboard-for-wp' ) . ' ("+response+")");
                     }
-				});';
+				});});';
 		echo 'google.load("visualization", "1", {packages:["corechart"], "language" : "'. get_bloginfo( 'language' ) . '"});
 					function ga_dash_drawfwidgetsessions(response) {
     					var data = google.visualization.arrayToDataTable(response);

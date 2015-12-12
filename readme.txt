@@ -135,7 +135,8 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 = 4.9.1.1 =
 - Bug Fix: focusFlag preventing Real-Time reports from refreshing properly
 - Bug Fix: date format is not properly localized in daily/monthly reports
-- Bug Fix: reports loading issue in admin widget
+- Bug Fix: reports loading issues in backend admin widget
+- Bug Fix: reports loading issues in frontend widget
 
 = 4.9.1 =
 - Bug Fix: clear_cache method is generating PHP warnings on certain conditions 
