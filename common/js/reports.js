@@ -1,9 +1,11 @@
 "use strict";
 
-google.load( "visualization", "1", {
-	packages : [ "corechart", "table", "orgchart", "geochart" ],
-	'language' : gadwp_item_data.language,
-	'callback' : GADWPLoad
+jQuery( function () {
+	google.load( "visualization", "1", {
+		packages : [ "corechart", "table", "orgchart", "geochart" ],
+		'language' : gadwp_item_data.language,
+		'callback' : GADWPLoad
+	} );
 } );
 
 // Get the numeric ID
