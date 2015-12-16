@@ -4,7 +4,7 @@ Donate link: https://deconf.com/donate/
 Tags: google,analytics,google analytics,dashboard,analytics dashboard,google analytics dashboard,google analytics plugin,google analytics widget,tracking,universal google analytics,realtime,multisite,gadwp
 Requires at least: 3.5
 Tested up to: 4.4
-Stable tag: 4.9.1.1
+Stable tag: 4.9.1.2b
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -131,6 +131,12 @@ You can translate this plugin on [translate.wordpress.org](https://translate.wor
 Google Analytics Dashboard for WP it's released under the GPLv2, you can use it free of charge on your personal or commercial website.
 
 == Changelog ==
+
+= 4.9.1.2 =
+- Bug Fix: multiple CSS fixes for frontend widget
+- Bug Fix: clean-up output for View selection list
+- Bug Fix: try to fix Google Charts conflicts with other plugins
+- Bug Fix: prevent PHP warnings during authorization and while revoking tokens
 
 = 4.9.1.1 =
 - Bug Fix: focusFlag preventing Real-Time reports from refreshing properly

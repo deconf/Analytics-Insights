@@ -152,7 +152,7 @@
 	padding: 0px;
 }
 
-.gadwp-wrapper .inside .small-box {
+#gadwp-widget .inside .small-box {
 	width: 30%;
 	float: left;
 	margin: 0 5px 10px 5px;
@@ -163,7 +163,7 @@
 	box-shadow: 0px 0px 7px 0px #BBB;
 }
 
-.gadwp-wrapper .inside .small-box h3 {
+#gadwp-widget .inside .small-box h3 {
 	font-size: 1em;
 	color: #777;
 	padding: 0px 5px 0px 5px;
@@ -173,7 +173,7 @@
 	white-space: nowrap;	
 }
 
-.gadwp-wrapper .inside .small-box p {
+#gadwp-widget .inside .small-box p {
 	font-size: 1.2em;
 	margin: 0px 0px 2px 0px;
 }

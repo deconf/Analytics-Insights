@@ -240,9 +240,6 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			} else {
 				$this->gadwp->config->set_plugin_options();
 			}
-			GADWP_Tools::unset_cookie( 'default_metric' );
-			GADWP_Tools::unset_cookie( 'default_dimension' );
-			GADWP_Tools::unset_cookie( 'default_view' );
 		}
 
 		/**
