@@ -11,13 +11,13 @@ function GADWPLoad () {
 
 	jQuery( function () {
 		if ( gadwp_item_data.scope == 'admin-widgets' ) {
-			jQuery( '#gadwp-window-1' ).gadwpItemReport( 1, google );
+			jQuery( '#gadwp-window-1' ).gadwpItemReport( 1 );
 		} else {
 			jQuery( gadwp_item_data.getSelector( gadwp_item_data.scope ) ).click( function () {
 				if ( !jQuery( "#gadwp-window-" + gadwp_item_data.getID( this ) ).length > 0 ) {
 					jQuery( "body" ).append( '<div id="gadwp-window-' + gadwp_item_data.getID( this ) + '"></div>' );
 				}
-				jQuery( '#gadwp-window-' + gadwp_item_data.getID( this ) ).gadwpItemReport( gadwp_item_data.getID( this ), google );
+				jQuery( '#gadwp-window-' + gadwp_item_data.getID( this ) ).gadwpItemReport( gadwp_item_data.getID( this ) );
 			} );
 		}
 
@@ -91,7 +91,7 @@ gadwp_item_data.responsiveDialog = function () {
 }
 
 jQuery.fn.extend( {
-	gadwpItemReport : function ( item_id, google ) {
+	gadwpItemReport : function ( item_id ) {
 		var post_data;
 		var slug = "-" + item_id;
 		var dialog_title;
