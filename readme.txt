@@ -104,7 +104,7 @@ We are constantly improving Google Analytics Dashboard for WP, sometimes the vid
 
 = How can I suggest a new feature, contribute or report a bug? =
 
-You can submit pull requests, feature requests, translations or bug reports on [our GitHub repository](https://github.com/deconf/Google-Analytics-Dashboard-for-WP).
+You can submit pull requests, feature requests and bug reports on [our GitHub repository](https://github.com/deconf/Google-Analytics-Dashboard-for-WP).
 
 = Documentation, Tutorials and FAQ =
 
