@@ -646,10 +646,6 @@ final class GADWP_Settings {
 		if ( $anonim['ga_dash_clientsecret'] ) {
 			$anonim['ga_dash_clientsecret'] = 'HIDDEN';
 		}
-		if ( $anonim['ga_dash_apikey'] ) {
-			$anonim['ga_dash_apikey'] = 'HIDDEN';
-		}
-
 		$options = self::update_options( 'frontend' );
 		if ( ! $gadwp->config->options['ga_dash_tableid_jail'] || ! $gadwp->config->options['ga_dash_token'] ) {
 			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'google-analytics-dashboard-for-wp' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_errors_debugging', false ), __( 'Errors & Debug', 'google-analytics-dashboard-for-wp' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_settings', false ), __( 'authorize the plugin', 'google-analytics-dashboard-for-wp' ) ) ) );
@@ -863,10 +859,6 @@ final class GADWP_Settings {
 							                            </td>
                                                 </tr>
                                 				  <?php } if ($options['ga_dash_userapi']) { ?>
-						                        <tr>
-                                                    <td class="gadwp-settings-title"><label for="options[ga_dash_apikey]"><?php _e("API Key:", 'google-analytics-dashboard-for-wp'); ?></label></td>
-                                                    <td><input type="text" name="options[ga_dash_apikey]" value="<?php echo esc_attr($options['ga_dash_apikey']); ?>" size="40" required="required"></td>
-                                                </tr>
                                                 <tr>
                                                     <td class="gadwp-settings-title"><label for="options[ga_dash_clientid]"><?php _e("Client ID:", 'google-analytics-dashboard-for-wp'); ?></label></td>
                                                     <td><input type="text" name="options[ga_dash_clientid]" value="<?php echo esc_attr($options['ga_dash_clientid']); ?>" size="40" required="required"></td>
@@ -1172,10 +1164,6 @@ final class GADWP_Settings {
 				}
 				if ( $options['ga_dash_userapi'] ) {
 					?>
-							                                        <tr>
-                                                                        <td class="gadwp-settings-title"><label for="options[ga_dash_apikey]"><?php _e("API Key:", 'google-analytics-dashboard-for-wp'); ?></label></td>
-                                                                        <td><input type="text" name="options[ga_dash_apikey]" value="<?php echo esc_attr($options['ga_dash_apikey']); ?>" size="40" required="required"></td>
-                                                                    </tr>
                                                                     <tr>
                                                                         <td class="gadwp-settings-title"><label for="options[ga_dash_clientid]"><?php _e("Client ID:", 'google-analytics-dashboard-for-wp'); ?></label></td>
                                                                         <td><input type="text" name="options[ga_dash_clientid]" value="<?php echo esc_attr($options['ga_dash_clientid']); ?>" size="40" required="required"></td>

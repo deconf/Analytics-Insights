@@ -1,6 +1,6 @@
 "use strict";
 
-//Get the numeric ID
+// Get the numeric ID
 gadwp_item_data.getID = function ( item ) {
 	if ( gadwp_item_data.scope == 'admin-item' ) {
 		if ( typeof item.id == "undefined" ) {
@@ -1169,34 +1169,25 @@ jQuery.fn.extend( {
 	}
 } );
 
-google.load( "visualization", "1", {
-	packages : [ "corechart", "table", "orgchart" ],
-	'language' : gadwp_item_data.language,
-} );
-
-google.setOnLoadCallback( GADWPLoad );
-
-function GADWPLoad () {
-	jQuery( function () {
-		if ( gadwp_item_data.scope == 'admin-widgets' ) {
-			jQuery( '#gadwp-window-1' ).gadwpItemReport( 1 );
-		} else {
-			jQuery( gadwp_item_data.getSelector( gadwp_item_data.scope ) ).click( function () {
-				if ( !jQuery( "#gadwp-window-" + gadwp_item_data.getID( this ) ).length > 0 ) {
-					jQuery( "body" ).append( '<div id="gadwp-window-' + gadwp_item_data.getID( this ) + '"></div>' );
-				}
-				jQuery( '#gadwp-window-' + gadwp_item_data.getID( this ) ).gadwpItemReport( gadwp_item_data.getID( this ) );
-			} );
-		}
-
-		// on window resize
-		jQuery( window ).resize( function () {
-			gadwp_item_data.responsiveDialog();
+jQuery( function () {
+	if ( gadwp_item_data.scope == 'admin-widgets' ) {
+		jQuery( '#gadwp-window-1' ).gadwpItemReport( 1 );
+	} else {
+		jQuery( gadwp_item_data.getSelector( gadwp_item_data.scope ) ).click( function () {
+			if ( !jQuery( "#gadwp-window-" + gadwp_item_data.getID( this ) ).length > 0 ) {
+				jQuery( "body" ).append( '<div id="gadwp-window-' + gadwp_item_data.getID( this ) + '"></div>' );
+			}
+			jQuery( '#gadwp-window-' + gadwp_item_data.getID( this ) ).gadwpItemReport( gadwp_item_data.getID( this ) );
 		} );
+	}
 
-		// dialog width larger than viewport
-		jQuery( document ).on( "dialogopen", ".ui-dialog", function ( event, ui ) {
-			gadwp_item_data.responsiveDialog();
-		} );
+	// on window resize
+	jQuery( window ).resize( function () {
+		gadwp_item_data.responsiveDialog();
 	} );
-}
+
+	// dialog width larger than viewport
+	jQuery( document ).on( "dialogopen", ".ui-dialog", function ( event, ui ) {
+		gadwp_item_data.responsiveDialog();
+	} );
+} );

@@ -16,7 +16,6 @@ class GADWP_Install {
 	public static function install() {
 		if ( ! get_option( 'ga_dash_token' ) ) {
 			$options = array();
-			$options['ga_dash_apikey'] = '';
 			$options['ga_dash_clientid'] = '';
 			$options['ga_dash_clientsecret'] = '';
 			$options['ga_dash_access_front'][] = 'administrator';
@@ -64,7 +63,6 @@ class GADWP_Install {
 			$options['ga_cookieexpires'] = '';
 		} else {
 			$options = array();
-			$options['ga_dash_apikey'] = get_option( 'ga_dash_apikey' );
 			$options['ga_dash_clientid'] = get_option( 'ga_dash_clientid' );
 			$options['ga_dash_clientsecret'] = get_option( 'ga_dash_clientsecret' );
 			$options['ga_dash_access'] = get_option( 'ga_dash_access' );
@@ -113,7 +111,6 @@ class GADWP_Install {
 			$options['ga_cookiename'] = '';
 			$options['ga_cookieexpires'] = '';
 
-			delete_option( 'ga_dash_apikey' );
 			delete_option( 'ga_dash_clientid' );
 			delete_option( 'ga_dash_clientsecret' );
 			delete_option( 'ga_dash_access' );

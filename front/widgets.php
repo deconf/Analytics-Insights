@@ -28,7 +28,7 @@ final class GADWP_Frontend_Widget extends WP_Widget {
 	public function load_styles_scripts() {
 		wp_enqueue_style( 'gadwp-front-widget', GADWP_URL . 'front/css/widgets.css', null, GADWP_CURRENT_VERSION );
 		wp_enqueue_script( 'gadwp-front-widget', GADWP_URL . 'front/js/widgets.js', array( 'jquery' ), GADWP_CURRENT_VERSION );
-		wp_enqueue_script( 'gadwp-jsapi', 'https://www.google.com/jsapi' );
+		wp_enqueue_script( 'googlejsapi', 'https://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22visualization%22%2C%22version%22%3A%221%22%2C%22packages%22%3A%5B%22corechart%22%2C%20%22table%22%2C%20%22orgchart%22%2C%20%22geochart%22%5D%7D%5D%7D%27', array(), null );
 	}
 
 	public function widget( $args, $instance ) {
@@ -90,7 +90,7 @@ final class GADWP_Frontend_Widget extends WP_Widget {
 				    if (!jQuery.isNumeric(response) && jQuery.isArray(response)){
 				        if (jQuery("#gadwp-widgetchart")[0]){
 				           gadash_widgetsessions=response[0];
-						   google.setOnLoadCallback(ga_dash_drawfwidgetsessions(gadash_widgetsessions));
+						   ga_dash_drawfwidgetsessions(gadash_widgetsessions);
 				        }
 				        if (jQuery("#gadwp-widgettotals")[0]){
 						   ga_dash_drawtotalsstats(response[1]);
@@ -100,8 +100,7 @@ final class GADWP_Frontend_Widget extends WP_Widget {
 				        jQuery("#gadwp-widgetchart").html("' . __( "This report is unavailable", 'google-analytics-dashboard-for-wp' ) . ' ("+response+")");
                     }
 				});});';
-		echo 'google.load("visualization", "1", {packages:["corechart"], "language" : "'. get_bloginfo( 'language' ) . '"});
-					function ga_dash_drawfwidgetsessions(response) {
+		echo 'function ga_dash_drawfwidgetsessions(response) {
     					var data = google.visualization.arrayToDataTable(response);
     					var options = {
     					  legend: {position: "none"},

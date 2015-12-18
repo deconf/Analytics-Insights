@@ -142,7 +142,7 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 					wp_register_script( 'jquery-ui-tooltip-html', GADWP_URL . 'common/realtime/jquery.ui.tooltip.html.js' );
 
 					if ( ! wp_script_is( 'googlejsapi' ) ) {
-						wp_register_script( 'googlejsapi', 'https://www.google.com/jsapi' );
+						wp_register_script( 'googlejsapi', 'https://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22visualization%22%2C%22version%22%3A%221%22%2C%22packages%22%3A%5B%22corechart%22%2C%20%22table%22%2C%20%22orgchart%22%2C%20%22geochart%22%5D%7D%5D%7D%27', array(), null );
 					}
 
 					wp_enqueue_script( 'gadwp-nprogress', GADWP_URL . 'common/nprogress/nprogress.js', array( 'jquery' ), GADWP_CURRENT_VERSION );
@@ -239,7 +239,7 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 					wp_enqueue_style( "wp-jquery-ui-dialog" );
 
 					if ( ! wp_script_is( 'googlejsapi' ) ) {
-						wp_register_script( 'googlejsapi', 'https://www.google.com/jsapi' );
+						wp_register_script( 'googlejsapi', 'https://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22visualization%22%2C%22version%22%3A%221%22%2C%22packages%22%3A%5B%22corechart%22%2C%20%22table%22%2C%20%22orgchart%22%2C%20%22geochart%22%5D%7D%5D%7D%27', array(), null );
 					}
 
 					wp_enqueue_script( 'gadwp-nprogress', GADWP_URL . 'common/nprogress/nprogress.js', array( 'jquery' ), GADWP_CURRENT_VERSION );

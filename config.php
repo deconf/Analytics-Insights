@@ -67,9 +67,6 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 			if ( isset( $options['ga_crossdomain_list'] ) ) {
 				$options['ga_crossdomain_list'] = sanitize_text_field( $options['ga_crossdomain_list'] );
 			}
-			if ( isset( $options['ga_dash_apikey'] ) ) {
-				$options['ga_dash_apikey'] = sanitize_text_field( $options['ga_dash_apikey'] );
-			}
 			if ( isset( $options['ga_dash_clientid'] ) ) {
 				$options['ga_dash_clientid'] = sanitize_text_field( $options['ga_dash_clientid'] );
 			}
@@ -142,8 +139,6 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 					if ( is_network_admin() ) {
 						$network_options['ga_dash_profile_list'] = $this->options['ga_dash_profile_list'];
 						$options['ga_dash_profile_list'] = array();
-						$network_options['ga_dash_apikey'] = $this->options['ga_dash_apikey'];
-						$options['ga_dash_apikey'] = '';
 						$network_options['ga_dash_clientid'] = $this->options['ga_dash_clientid'];
 						$options['ga_dash_clientid'] = '';
 						$network_options['ga_dash_clientsecret'] = $this->options['ga_dash_clientsecret'];
@@ -199,7 +194,7 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 			if ( GADWP_CURRENT_VERSION != get_option( 'gadwp_version' ) ) {
 				$flag = true;
 				update_option( 'gadwp_version', GADWP_CURRENT_VERSION );
-				update_option( 'gadwp_got_updated', true );				
+				update_option( 'gadwp_got_updated', true );
 				$rebuild_token = json_decode( $this->options['ga_dash_token'] ); // v4.8.2
 				if ( is_object( $rebuild_token ) && ! isset( $rebuild_token->token_type ) ) {
 					if ( isset( $this->options['ga_dash_refresh_token'] ) ) {
@@ -225,7 +220,7 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 				}
 				GADWP_Tools::unset_cookie( 'default_metric' );
 				GADWP_Tools::unset_cookie( 'default_dimension' );
-				GADWP_Tools::unset_cookie( 'default_view' );				
+				GADWP_Tools::unset_cookie( 'default_view' );
 			}
 			if ( ! isset( $this->options['ga_enhanced_links'] ) ) {
 				$this->options['ga_enhanced_links'] = 0;
@@ -355,6 +350,10 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 			}
 			if ( isset( $this->options['ga_dash_frontend_keywords'] ) ) { // v4.8
 				unset( $this->options['ga_dash_frontend_keywords'] );
+				$flag = true;
+			}
+			if ( isset( $this->options['ga_dash_apikey'] ) ) { // v4.9.1.3
+				unset( $this->options['ga_dash_apikey'] );
 				$flag = true;
 			}
 			if ( isset( $this->options['ga_dash_jailadmins'] ) ) { // v4.7

@@ -132,6 +132,10 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 
 == Changelog ==
 
+= 4.9.2b =
+- Enhancement: improve charts loading speed
+- Enhancement: removing API Key option, since is not needed anymore
+
 = 4.9.1.2 =
 - Bug Fix: multiple CSS fixes for frontend widget
 - Bug Fix: clean-up output for View selection list

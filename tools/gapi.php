@@ -51,7 +51,6 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			if ( $this->gadwp->config->options['ga_dash_userapi'] ) {
 				$this->client->setClientId( $this->gadwp->config->options['ga_dash_clientid'] );
 				$this->client->setClientSecret( $this->gadwp->config->options['ga_dash_clientsecret'] );
-				$this->client->setDeveloperKey( $this->gadwp->config->options['ga_dash_apikey'] );
 			} else {
 				$this->client->setClientId( $this->access[0] );
 				$this->client->setClientSecret( $this->access[1] );
