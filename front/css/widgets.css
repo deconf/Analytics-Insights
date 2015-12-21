@@ -62,3 +62,7 @@
 	float: left;
 	font-style: italic;
 }
+
+.widget_gadwp-frontwidget-report h2.widget-title {
+	margin-bottom: 0px;
+}

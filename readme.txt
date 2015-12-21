@@ -130,13 +130,20 @@ You can translate this plugin on [translate.wordpress.org](https://translate.wor
 
 Google Analytics Dashboard for WP it's released under the GPLv2, you can use it free of charge on your personal or commercial website.
 
+== Upgrade Notice ==
+
+= 4.9.2 =
+We've made some changes to Frontend Widget. The update may disable the widget. You can enable it back from Appearance -> Widgets screen.
+
 == Changelog ==
 
-= 4.9.2b =
-- Enhancement: improve charts loading speed
+= 4.9.2 =
+- Enhancement: improve charts loading speed and add autoloading for Charts Library to allow dequeue on conflicts
 - Enhancement: removing API Key option, since is not needed anymore
+- Bug Fix: multiple fixes for frontend widget
 
 = 4.9.1.2 =
+!!!!! chart localization
 - Bug Fix: multiple CSS fixes for frontend widget
 - Bug Fix: clean-up output for View selection list
 - Bug Fix: try to fix Google Charts conflicts with other plugins

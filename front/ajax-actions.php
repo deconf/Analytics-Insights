@@ -25,8 +25,8 @@ if ( ! class_exists( 'GADWP_Frontend_Ajax' ) ) {
 			}
 
 			// Frontend Widget actions
-			add_action( 'wp_ajax_gadash_get_frontendwidget_data', array( $this, 'ajax_frontend_widget' ) );
-			add_action( 'wp_ajax_nopriv_gadash_get_frontendwidget_data', array( $this, 'ajax_frontend_widget' ) );
+			add_action( 'wp_ajax_ajax_frontwidget_report', array( $this, 'ajax_frontend_widget' ) );
+			add_action( 'wp_ajax_nopriv_ajax_frontwidget_report', array( $this, 'ajax_frontend_widget' ) );
 		}
 
 		/**
@@ -109,11 +109,11 @@ if ( ! class_exists( 'GADWP_Frontend_Ajax' ) ) {
 		 * @return string|int
 		 */
 		public function ajax_frontend_widget() {
-			if ( ! isset( $_POST['gadash_number'] ) || ! isset( $_POST['gadash_optionname'] ) || ! is_active_widget( false, false, 'gadash_frontend_widget' ) ) {
+			if ( ! isset( $_POST['gadwp_number'] ) || ! isset( $_POST['gadwp_optionname'] ) || ! is_active_widget( false, false, 'gadwp-frontwidget-report' ) ) {
 				wp_die( - 30 );
 			}
-			$widget_index = $_POST['gadash_number'];
-			$option_name = $_POST['gadash_optionname'];
+			$widget_index = $_POST['gadwp_number'];
+			$option_name = $_POST['gadwp_optionname'];
 			$options = get_option( $option_name );
 			if ( isset( $options[$widget_index] ) ) {
 				$instance = $options[$widget_index];
