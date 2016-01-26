@@ -798,7 +798,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			if ( empty( $projectId ) || ! is_numeric( $projectId ) ) {
 				return - 25;
 			}
-			if ( in_array( $query, array( 'sessions', 'users', 'organicSearches', 'pageviews', 'uniquePageviews') ) ) {
+			if ( in_array( $query, array( 'sessions', 'users', 'organicSearches', 'visitBounceRate', 'pageviews', 'uniquePageviews') ) ) {
 				return $this->get_areachart_data( $projectId, $from, $to, $query, $filter );
 			}
 			if ( $query == 'bottomstats' ) {
