@@ -1,8 +1,8 @@
 <?php
-
 /**
  * Author: Alin Marcu
  * Author URI: https://deconf.com
+ * Copyright 2013 Alin Marcu 
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -90,11 +90,11 @@ final class GADWP_Frontend_Widget extends WP_Widget {
 		jQuery.post("<?php echo admin_url( 'admin-ajax.php' ); ?>", {action: "ajax_frontwidget_report", gadwp_number: "<?php echo $this->number; ?>", gadwp_optionname: "<?php  echo $this->option_name; ?>" }, function(response){
 			if (!jQuery.isNumeric(response) && jQuery.isArray(response)){
 				if (jQuery("#gadwp-widgetchart")[0]){
-					gadash_widgetsessions=response[0];
-					ga_dash_drawfwidgetsessions(gadash_widgetsessions);
+					gadwpFrontWidgetData = response[0];
+					gadwp_drawFrontWidgetChart(gadwpFrontWidgetData);
 				}
 				if (jQuery("#gadwp-widgettotals")[0]){
-					ga_dash_drawtotalsstats(response[1]);
+					gadwp_drawFrontWidgetTotals(response[1]);
 				}
 			}else{
 				jQuery("#gadwp-widgetchart").css({"background-color":"#F7F7F7","height":"auto","padding-top":"50px","padding-bottom":"50px","color":"#000","text-align":"center"});
@@ -102,7 +102,7 @@ final class GADWP_Frontend_Widget extends WP_Widget {
 			}
 		});
 	});
-	function ga_dash_drawfwidgetsessions(response) {
+	function gadwp_drawFrontWidgetChart(response) {
 		var data = google.visualization.arrayToDataTable(response);
 		var options = {
 			legend: { position: "none" },
@@ -117,7 +117,7 @@ final class GADWP_Frontend_Widget extends WP_Widget {
 		<?php echo $formater; ?>
 		chart.draw(data, options);
 	}
-	function ga_dash_drawtotalsstats(response) {
+	function gadwp_drawFrontWidgetTotals(response) {
 		if (response == null){
 			response = 0;
 		}
@@ -132,8 +132,10 @@ final class GADWP_Frontend_Widget extends WP_Widget {
 		<?php
 		endif;
 		$widget_content = ob_get_contents();
-		ob_end_clean();
-		echo apply_filters( 'widget_html_content', $widget_content );
+		if ( ob_get_length() ) {
+			ob_end_clean();
+		}
+		echo $widget_content;
 		echo $args['after_widget'];
 		echo "\n<!-- END GADWP Widget -->\n";
 	}

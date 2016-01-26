@@ -29,6 +29,8 @@ if ( ! class_exists( 'GADWP_Manager' ) ) {
 
 		public $frontend_actions = null;
 
+		public $common_actions = null;
+
 		public $backend_actions = null;
 
 		public $tracking = null;
@@ -177,9 +179,7 @@ if ( ! class_exists( 'GADWP_Manager' ) ) {
 						 * Load Backend ajax actions
 						 */
 						include_once ( GADWP_DIR . 'admin/ajax-actions.php' );
-						include_once ( GADWP_DIR . 'admin/ajax-actions-ui.php' );
 						self::$instance->backend_actions = new GADWP_Backend_Ajax();
-						new GADWP_UI_Ajax();
 					}
 
 					/*
@@ -187,6 +187,13 @@ if ( ! class_exists( 'GADWP_Manager' ) ) {
 					 */
 					include_once ( GADWP_DIR . 'front/ajax-actions.php' );
 					self::$instance->frontend_actions = new GADWP_Frontend_Ajax();
+
+					/*
+					 * Load Common ajax actions
+					 */
+					include_once ( GADWP_DIR . 'common/ajax-actions.php' );
+					self::$instance->common_actions = new GADWP_Common_Ajax();
+
 				} else
 					if ( GADWP_Tools::check_roles( self::$instance->config->options['ga_dash_access_back'] ) ) {
 						/*

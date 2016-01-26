@@ -1,7 +1,8 @@
 <?php
 /**
  * Author: Alin Marcu
- * Author URI: http://deconf.com
+ * Author URI: https://deconf.com
+ * Copyright 2013 Alin Marcu
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -22,6 +23,10 @@ if ( ! class_exists( 'GADWP_Backend_Ajax' ) ) {
 			if ( GADWP_Tools::check_roles( $this->gadwp->config->options['ga_dash_access_back'] ) && ( ( 1 == $this->gadwp->config->options['backend_item_reports'] ) || ( 1 == $this->gadwp->config->options['dashboard_widget'] ) ) ) {
 				// Items action
 				add_action( 'wp_ajax_gadwp_backend_item_reports', array( $this, 'ajax_item_reports' ) );
+			}
+			if ( current_user_can( 'manage_options' ) ) {
+				// Admin Widget action
+				add_action( 'wp_ajax_gadwp_dismiss_notices', array( $this, 'ajax_dismiss_notices' ) );
 			}
 		}
 
@@ -104,6 +109,25 @@ if ( ! class_exists( 'GADWP_Backend_Ajax' ) ) {
 			}
 
 			wp_send_json( $results );
+		}
+
+		/**
+		 * Ajax handler for dismissing Admin notices
+		 *
+		 * @return json|int
+		 */
+		public function ajax_dismiss_notices() {
+			if ( ! isset( $_POST['gadwp_security_dismiss_notices'] ) || ! wp_verify_nonce( $_POST['gadwp_security_dismiss_notices'], 'gadwp_dismiss_notices' ) ) {
+				wp_die( - 30 );
+			}
+
+			if ( !current_user_can( 'manage_options' ) ) {
+				wp_die( - 31 );
+			}
+
+			delete_option( 'gadwp_got_updated' );
+
+			wp_die();
 		}
 	}
 }

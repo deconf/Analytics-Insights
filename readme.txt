@@ -3,7 +3,7 @@ Contributors: deconf
 Donate link: https://deconf.com/donate/
 Tags: google,analytics,google analytics,dashboard,analytics dashboard,google analytics dashboard,google analytics plugin,google analytics widget,tracking,universal google analytics,realtime,multisite,gadwp
 Requires at least: 3.5
-Tested up to: 4.4
+Tested up to: 4.4.1
 Stable tag: 4.9.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -32,6 +32,7 @@ The Google Analytics reports you need, on your dashboard, in your All Posts and 
 - Sessions, organic searches, page views, bounce rate analytics reports
 - Locations, pages, referrers, keywords analytics reports
 - Traffic channels, social networks, traffic mediums, search engines analytics reports
+- Device categories, browsers, operating systems, screen resolutions, mobile brands analytics reports 
 - User access control over analytics reports
 
 = Google Analytics Basic Tracking =
@@ -124,7 +125,7 @@ For documentation, tutorials, FAQ and videos check out: [Google Analytics Dashbo
 
 == Localization ==
 
-You can translate this plugin on [translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/google-analytics-dashboard-for-wp).
+You can translate Google Analytics Dashboard for WP on [translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/google-analytics-dashboard-for-wp).
 
 == License ==
 
@@ -133,17 +134,26 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 == Upgrade Notice ==
 
 = 4.9.2 =
-We've made some changes to Frontend Widget. The update may disable the widget. You can enable it back from Appearance -> Widgets screen.
+In case of errors refresh your page or clear your browser cache, as a first step. The Frontend Widget can be re-enabled from Appearance -> Widgets screen.
 
 == Changelog ==
 
 = 4.9.2 =
-- Enhancement: improve charts loading speed and add autoloading for Charts Library to allow dequeue on conflicts
-- Enhancement: removing API Key option, since is not needed anymore
-- Bug Fix: multiple fixes for frontend widget
+<em>Enhancements</em> 
+- improved loading speed for charts
+- add autoloading for Charts Library to allow dequeue on conflicts
+- removed API Key option, since is not needed anymore
+- display session values in Pie Chart slices
+- improved data accuracy for Pie Charts 
+
+<em>Bug Fixes</em>
+- multiple fixes for frontend widget
+- page title missing in Realtime report
+
+<em>New Features</em>
+- brand new Technology Reports with details about Device Categories, Browsers, Operating Systems, Screen Resolutions and Device Brands  
 
 = 4.9.1.2 =
-!!!!! chart localization
 - Bug Fix: multiple CSS fixes for frontend widget
 - Bug Fix: clean-up output for View selection list
 - Bug Fix: try to fix Google Charts conflicts with other plugins
@@ -175,21 +185,5 @@ We've made some changes to Frontend Widget. The update may disable the widget. Y
 - Enhancement: display update notices only to admins and only on dashboard
 - Enhancement: force language packs updates for all available languages on a Network
 - Enhancement: added View switch capabilities
-
-= 4.8.3 =
-- Enhancement: switching to translate.wordpress.org, you can find [more details here](https://deconf.com/moving-translations-to-wordpress-org/)
-
-= 4.8.2.1 =
-- Bug Fix: blank page on General Settings screen after failing to rebuild the bearer token
-- Enhancement: Italian, Portuguese (Brazil), Hungarian, Arabic, Russian, English (Canada), Romanian translations updated
-- Enhancement: new Localization section
-- Enhancement: small UI updates
-
-= 4.8.2 =
-- Bug Fix: use only unique CSS selectors to avoid conflicts with other plugins
-- Bug Fix: don't load unneeded CSS styles on frontend
-- Bug Fix: switch to a new custom made cache system to avoid issues with broken transients
-- Enhancement: rebuild and roll-back to a bearer token
-- Enhancement: Greek translation updated
 
 The full changelog is [available here](https://deconf.com/changelog-google-analytics-dashboard-for-wp/).

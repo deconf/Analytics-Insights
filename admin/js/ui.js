@@ -8,9 +8,7 @@ jQuery( document ).ready( function () {
 	}
 
 	jQuery( "#gadwp-notice .notice-dismiss" ).click( function () {
-		jQuery.post( gadwp_ui_data.ajaxurl, gadwp_ui, function ( response ) {
-			return true;
-		} );
+		jQuery.post( gadwp_ui_data.ajaxurl, gadwp_ui );
 	} );
 	
 	if (gadwp_ui_data.ed_bubble != ''){

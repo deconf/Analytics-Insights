@@ -1,8 +1,8 @@
 <?php
-
 /**
  * Author: Alin Marcu
  * Author URI: https://deconf.com
+ * Copyright 2013 Alin Marcu
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -676,7 +676,7 @@ final class GADWP_Settings {
                             <tr>
                                 <td>
                     				<?php
-		$errors = print_r( GADWP_Tools::get_cache( 'last_error' ), true ) ? esc_html( str_replace( $gadwp->config->access[2], '' , print_r( GADWP_Tools::get_cache( 'last_error' ), true ) ) ) : __( "None", 'google-analytics-dashboard-for-wp' );
+		$errors = print_r( GADWP_Tools::get_cache( 'last_error' ), true ) ? esc_html( print_r( GADWP_Tools::get_cache( 'last_error' ), true ) ) : __( "None", 'google-analytics-dashboard-for-wp' );
 		echo '<pre class="gadwp-settings-logdata">Last Error: ';
 		echo $errors;
 		?></pre>
@@ -689,7 +689,7 @@ final class GADWP_Settings {
                                 <td>
                     				<?php
 		echo '<pre class="gadwp-settings-logdata">Error Details: ';
-		$error_details = print_r( GADWP_Tools::get_cache( 'gapi_errors' ), true ) ? "\n" . esc_html( str_replace( $gadwp->config->access[2], '' , print_r( GADWP_Tools::get_cache( 'last_error' ), true ) ) ) : __( "None", 'google-analytics-dashboard-for-wp' );
+		$error_details = print_r( GADWP_Tools::get_cache( 'gapi_errors' ), true ) ? "\n" . esc_html( print_r( GADWP_Tools::get_cache( 'last_error' ), true ) ) : __( "None", 'google-analytics-dashboard-for-wp' );
 		echo $error_details;
 		?></pre><br />
                                     <hr>
