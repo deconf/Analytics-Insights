@@ -2,7 +2,7 @@
 /**
  * Author: Alin Marcu
  * Author URI: https://deconf.com
- * Copyright 2013 Alin Marcu 
+ * Copyright 2013 Alin Marcu
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -26,9 +26,17 @@ final class GADWP_Frontend_Widget extends WP_Widget {
 	}
 
 	public function load_styles_scripts() {
+		$lang = get_bloginfo( 'language' );
+		$lang = explode( '-', $lang );
+		if ( $lang[0] ) {
+			$lang = $lang[0];
+		} else {
+			$lang = 'en';
+		}
+
 		wp_enqueue_style( 'gadwp-front-widget', GADWP_URL . 'front/css/widgets.css', null, GADWP_CURRENT_VERSION );
 		wp_enqueue_script( 'gadwp-front-widget', GADWP_URL . 'front/js/widgets.js', array( 'jquery' ), GADWP_CURRENT_VERSION );
-		wp_enqueue_script( 'googlejsapi', 'https://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22visualization%22%2C%22version%22%3A%221%22%2C%22packages%22%3A%5B%22corechart%22%2C%20%22table%22%2C%20%22orgchart%22%2C%20%22geochart%22%5D%7D%5D%7D%27', array(), null );
+		wp_enqueue_script( 'googlejsapi', 'https://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22visualization%22%2C%22version%22%3A%221%22%2C%22language%22%3A%22'.$lang.'%22%2C%22packages%22%3A%5B%22corechart%22%2C%20%22table%22%2C%20%22orgchart%22%2C%20%22geochart%22%5D%7D%5D%7D%27', array(), null );
 	}
 
 	public function widget( $args, $instance ) {
