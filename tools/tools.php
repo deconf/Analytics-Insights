@@ -1,8 +1,8 @@
 <?php
 /**
- * Author: Alin Marcu 
+ * Author: Alin Marcu
  * Author URI: https://deconf.com
- * Copyright 2013 Alin Marcu 
+ * Copyright 2013 Alin Marcu
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -120,7 +120,7 @@ if ( ! class_exists( 'GADWP_Tools' ) ) {
 		}
 
 		public static function set_cache( $name, $value, $expiration = 0 ) {
-			$option = array( 'value' => $value, 'expires' => time() + (int)$expiration );
+			$option = array( 'value' => $value, 'expires' => time() + (int) $expiration );
 			update_option( 'gadwp_cache_' . $name, $option );
 		}
 
@@ -144,7 +144,7 @@ if ( ! class_exists( 'GADWP_Tools' ) ) {
 		}
 
 		public static function set_site_cache( $name, $value, $expiration = 0 ) {
-			$option = array( 'value' => $value, 'expires' => time() + (int)$expiration );
+			$option = array( 'value' => $value, 'expires' => time() + (int) $expiration );
 			update_site_option( 'gadwp_cache_' . $name, $option );
 		}
 
@@ -166,6 +166,7 @@ if ( ! class_exists( 'GADWP_Tools' ) ) {
 				return $option['value'];
 			}
 		}
+
 		public static function clear_cache() {
 			global $wpdb;
 			$sqlquery = $wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'gadwp_cache_qr%%'" );

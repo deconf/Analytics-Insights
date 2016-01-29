@@ -1,8 +1,8 @@
 <?php
 /**
- * Author: Alin Marcu 
+ * Author: Alin Marcu
  * Author URI: https://deconf.com
- * Copyright 2013 Alin Marcu 
+ * Copyright 2013 Alin Marcu
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -11,6 +11,7 @@
 if ( ! defined( 'ABSPATH' ) )
 	exit();
 
+	/* @formatter:off */
 $country_codes = array(
 	'AD' => 'Andorra',
 	'AE' => 'United Arab Emirates',
@@ -251,3 +252,4 @@ $country_codes = array(
 	'ZA' => 'South Africa',
 	'ZM' => 'Zambia',
 	'ZW' => 'Zimbabwe' );
+	/* @formatter:on */

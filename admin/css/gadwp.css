@@ -5,10 +5,9 @@
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
- 
+
 /* Tab navigation */
-#gadwp-events, #gadwp-custom, #gadwp-advanced, #gadwp-exclude,
-	#gadwp-config {
+#gadwp-events, #gadwp-custom, #gadwp-advanced, #gadwp-exclude, #gadwp-config {
 	display: none;
 }
 
@@ -80,12 +79,11 @@ td.gadwp-settings-roles {
 	font-weight: normal;
 	padding: 0;
 	margin: 20px 0 15px 0;
-	
 }
 
 #poststuff.gadwp h2.nav-tab-wrapper {
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 0;
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 0;
 }
 
 /* Options pages ON/OFF Switch */
@@ -116,7 +114,7 @@ input.gadwp-settings-switchoo-checkbox {
 	background: transparent;
 	border: 1px solid #ddd;
 	border-radius: 2px;
-	text-shadow: none;	
+	text-shadow: none;
 }
 
 .gadwp-settings-switchoo-inner {

@@ -19,12 +19,12 @@ if ( ! class_exists( 'GADWP_Frontend_Ajax' ) ) {
 
 		public function __construct() {
 			$this->gadwp = GADWP();
-
+			
 			if ( GADWP_Tools::check_roles( $this->gadwp->config->options['ga_dash_access_front'] ) && $this->gadwp->config->options['frontend_item_reports'] ) {
 				// Item Reports action
 				add_action( 'wp_ajax_gadwp_frontend_item_reports', array( $this, 'ajax_item_reports' ) );
 			}
-
+			
 			// Frontend Widget actions
 			add_action( 'wp_ajax_ajax_frontwidget_report', array( $this, 'ajax_frontend_widget' ) );
 			add_action( 'wp_ajax_nopriv_ajax_frontwidget_report', array( $this, 'ajax_frontend_widget' ) );
@@ -36,25 +36,24 @@ if ( ! class_exists( 'GADWP_Frontend_Ajax' ) ) {
 		 * @return string|int
 		 */
 		public function ajax_item_reports() {
-
 			if ( ! isset( $_POST['gadwp_security_frontend_item_reports'] ) || ! wp_verify_nonce( $_POST['gadwp_security_frontend_item_reports'], 'gadwp_frontend_item_reports' ) ) {
 				wp_die( - 30 );
 			}
-
+			
 			$from = $_POST['from'];
 			$to = $_POST['to'];
 			$query = $_POST['query'];
 			$uri = $_POST['filter'];
-
+			
 			$query = $_POST['query'];
 			if ( ob_get_length() ) {
 				ob_clean();
 			}
-
+			
 			if ( ! GADWP_Tools::check_roles( $this->gadwp->config->options['ga_dash_access_front'] ) || 0 == $this->gadwp->config->options['frontend_item_reports'] ) {
 				wp_die( - 31 );
 			}
-
+			
 			if ( $this->gadwp->config->options['ga_dash_token'] && $this->gadwp->config->options['ga_dash_tableid_jail'] ) {
 				if ( null === $this->gadwp->gapi_controller ) {
 					$this->gadwp->gapi_controller = new GADWP_GAPI_Controller();
@@ -62,47 +61,45 @@ if ( ! class_exists( 'GADWP_Frontend_Ajax' ) ) {
 			} else {
 				wp_die( - 24 );
 			}
-
+			
 			if ( $this->gadwp->config->options['ga_dash_tableid_jail'] ) {
 				$projectId = $this->gadwp->config->options['ga_dash_tableid_jail'];
 			} else {
 				wp_die( - 25 );
 			}
-
+			
 			$profile_info = GADWP_Tools::get_selected_profile( $this->gadwp->config->options['ga_dash_profile_list'], $projectId );
-
+			
 			if ( isset( $profile_info[4] ) ) {
 				$this->gadwp->gapi_controller->timeshift = $profile_info[4];
 			} else {
 				$this->gadwp->gapi_controller->timeshift = (int) current_time( 'timestamp' ) - time();
 			}
-
-			$uri = '/' . ltrim($uri,'/');
-
+			
+			$uri = '/' . ltrim( $uri, '/' );
+			
 			// allow URL correction before sending an API request
 			$filter = apply_filters( 'gadwp_frontenditem_uri', $uri );
-
+			
 			$lastchar = substr( $filter, - 1 );
-
+			
 			if ( isset( $profile_info[6] ) && $profile_info[6] && $lastchar == '/' ) {
 				$filter = $filter . $profile_info[6];
 			}
-
+			
 			// Encode URL
 			$filter = rawurlencode( rawurldecode( $filter ) );
-
+			
 			$queries = explode( ',', $query );
-
+			
 			$results = array();
-
+			
 			foreach ( $queries as $value ) {
 				$results[] = $this->gadwp->gapi_controller->get( $projectId, $value, $from, $to, $filter );
 			}
-
+			
 			wp_send_json( $results );
-
 		}
-
 
 		/**
 		 * Ajax handler for getting analytics data for frontend Widget

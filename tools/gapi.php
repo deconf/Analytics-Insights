@@ -610,7 +610,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 		 */
 		private function get_orgchart_data( $projectId, $from, $to, $query, $filter = '' ) {
 			$metrics = 'ga:sessions';
-			$dimensions = 'ga:'.$query;
+			$dimensions = 'ga:' . $query;
 			$options = array( 'dimensions' => $dimensions, 'sort' => '-ga:sessions', 'quotaUser' => $this->managequota . 'p' . $projectId );
 			if ( $filter ) {
 				$options['filters'] = 'ga:pagePath==' . $filter;
@@ -620,7 +620,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
-			$block = ($query == 'channelGrouping') ? __( "Channels", 'google-analytics-dashboard-for-wp' ) : __( "Devices", 'google-analytics-dashboard-for-wp' );
+			$block = ( $query == 'channelGrouping' ) ? __( "Channels", 'google-analytics-dashboard-for-wp' ) : __( "Devices", 'google-analytics-dashboard-for-wp' );
 			$gadwp_data = array( array( '<div style="color:black; font-size:1.1em">' . $block . '</div><div style="color:darkblue; font-size:1.2em">' . (int) $data['totalsForAllResults']["ga:sessions"] . '</div>', "" ) );
 			foreach ( $data->getRows() as $row ) {
 				$shrink = explode( " ", $row[0] );
@@ -672,7 +672,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			$i = 0;
 			$included = 0;
 			foreach ( $data->getRows() as $row ) {
-				if ($i < 20) {
+				if ( $i < 20 ) {
 					$gadwp_data[] = array( str_replace( "(none)", "direct", esc_html( $row[0] ) ), (int) $row[1] );
 					$included += $row[1];
 					$i++;
@@ -681,9 +681,9 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				}
 			}
 			$totals = $data->getTotalsForAllResults();
-			$others =  $totals['ga:sessions'] - $included;
-			if ($others > 0){
-				$gadwp_data[] = array( __('Other', 'google-analytics-dashboard-for-wp'), $others );
+			$others = $totals['ga:sessions'] - $included;
+			if ( $others > 0 ) {
+				$gadwp_data[] = array( __( 'Other', 'google-analytics-dashboard-for-wp' ), $others );
 			}
 
 			return $gadwp_data;
@@ -798,7 +798,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			if ( empty( $projectId ) || ! is_numeric( $projectId ) ) {
 				return - 25;
 			}
-			if ( in_array( $query, array( 'sessions', 'users', 'organicSearches', 'visitBounceRate', 'pageviews', 'uniquePageviews') ) ) {
+			if ( in_array( $query, array( 'sessions', 'users', 'organicSearches', 'visitBounceRate', 'pageviews', 'uniquePageviews' ) ) ) {
 				return $this->get_areachart_data( $projectId, $from, $to, $query, $filter );
 			}
 			if ( $query == 'bottomstats' ) {

@@ -20,12 +20,8 @@ if ( ! class_exists( 'GADWP_Tracking' ) ) {
 		public function __construct() {
 			$this->gadwp = GADWP();
 			
-			add_action( 'wp_head', array( 
-				$this, 
-				'tracking_code' ), 99 );
-			add_action( 'wp_enqueue_scripts', array( 
-				$this, 
-				'load_scripts' ) );
+			add_action( 'wp_head', array( $this, 'tracking_code' ), 99 );
+			add_action( 'wp_enqueue_scripts', array( $this, 'load_scripts' ) );
 		}
 
 		public function load_scripts() {

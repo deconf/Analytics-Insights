@@ -5,7 +5,7 @@
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
- 
+
 /* Backend Item Reports */
 .column-gadwp_stats {
 	width: 70px;
@@ -59,14 +59,14 @@
 }
 
 [id^=gadwp-bottomstats-] .inside .small-box h3 {
-	font-family: 'Open Sans', sans-serif;	
+	font-family: 'Open Sans', sans-serif;
 	font-size: 1em;
 	color: #777;
 	padding: 0px 5px 0px 5px;
 	margin: 0px 0px 0px 0px;
 	text-overflow: ellipsis;
 	overflow: hidden;
-	white-space: nowrap;		
+	white-space: nowrap;
 }
 
 [id^=gadwp-bottomstats-] .inside .small-box p {

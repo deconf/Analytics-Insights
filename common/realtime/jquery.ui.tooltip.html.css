@@ -27,16 +27,14 @@ body .ui-tooltip.gadwp {
 	font-size: 1em;
 }
 
-.ui-widget.gadwp input, .ui-widget.gadwp select, .ui-widget.gadwp textarea, .ui-widget.gadwp button
-	{
+.ui-widget.gadwp input, .ui-widget.gadwp select, .ui-widget.gadwp textarea, .ui-widget.gadwp button {
 	font-family: Verdana, Arial, sans-serif;
 	font-size: 1em;
 }
 
 .ui-widget-content.gadwp {
 	border: 1px solid #aaaaaa;
-	background: #ffffff url(images/ui-bg_flat_75_ffffff_40x100.png) 50% 50%
-		repeat-x;
+	background: #ffffff url(images/ui-bg_flat_75_ffffff_40x100.png) 50% 50% repeat-x;
 	color: #222222;
 }
 
@@ -46,8 +44,7 @@ body .ui-tooltip.gadwp {
 
 .gadwp .ui-widget-header {
 	border: 1px solid #aaaaaa;
-	background: #cccccc url(images/ui-bg_highlight-soft_75_cccccc_1x100.png)
-		50% 50% repeat-x;
+	background: #cccccc url(images/ui-bg_highlight-soft_75_cccccc_1x100.png) 50% 50% repeat-x;
 	color: #222222;
 	font-weight: bold;
 }

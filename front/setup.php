@@ -19,7 +19,7 @@ if ( ! class_exists( 'GADWP_Frontend_Setup' ) ) {
 
 		public function __construct() {
 			$this->gadwp = GADWP();
-
+			
 			// Styles & Scripts
 			add_action( 'wp_enqueue_scripts', array( $this, 'load_styles_scripts' ) );
 		}
@@ -31,40 +31,36 @@ if ( ! class_exists( 'GADWP_Frontend_Setup' ) ) {
 		 *            $hook
 		 */
 		public function load_styles_scripts() {
-
 			$lang = get_bloginfo( 'language' );
 			$lang = explode( '-', $lang );
-			if ( $lang[0] ) {
-				$lang = $lang[0];
-			} else {
-				$lang = 'en';
-			}
+			$lang = $lang[0];
+			
 			/*
 			 * Item reports Styles & Scripts
 			 */
 			if ( GADWP_Tools::check_roles( $this->gadwp->config->options['ga_dash_access_front'] ) && $this->gadwp->config->options['frontend_item_reports'] ) {
-
+				
 				wp_enqueue_style( 'gadwp-nprogress', GADWP_URL . 'common/nprogress/nprogress.css', null, GADWP_CURRENT_VERSION );
-
+				
 				wp_enqueue_style( 'gadwp-frontend-item-reports', GADWP_URL . 'front/css/item-reports.css', null, GADWP_CURRENT_VERSION );
-
+				
 				$country_codes = GADWP_Tools::get_countrycodes();
 				if ( $this->gadwp->config->options['ga_target_geomap'] && isset( $country_codes[$this->gadwp->config->options['ga_target_geomap']] ) ) {
 					$region = $this->gadwp->config->options['ga_target_geomap'];
 				} else {
 					$region = false;
 				}
-
+				
 				wp_enqueue_style( "wp-jquery-ui-dialog" );
-
+				
 				if ( ! wp_script_is( 'googlejsapi' ) ) {
 					wp_register_script( 'googlejsapi', 'https://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22visualization%22%2C%22version%22%3A%221%22%2C%22language%22%3A%22' . $lang . '%22%2C%22packages%22%3A%5B%22corechart%22%2C%20%22table%22%2C%20%22orgchart%22%2C%20%22geochart%22%5D%7D%5D%7D%27', array(), null );
 				}
-
+				
 				wp_enqueue_script( 'gadwp-nprogress', GADWP_URL . 'common/nprogress/nprogress.js', array( 'jquery' ), GADWP_CURRENT_VERSION );
-
+				
 				wp_enqueue_script( 'gadwp-frontend-item-reports', GADWP_URL . 'common/js/reports.js', array( 'gadwp-nprogress', 'googlejsapi', 'jquery', 'jquery-ui-dialog' ), GADWP_CURRENT_VERSION );
-
+				
 				/* @formatter:off */
 				wp_localize_script( 'gadwp-frontend-item-reports', 'gadwpItemData', array(
 					'ajaxurl' => admin_url( 'admin-ajax.php' ),

@@ -30,12 +30,12 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 
 		public function dashboard_widget() {
 			$projectId = 0;
-
+			
 			if ( empty( $this->gadwp->config->options['ga_dash_token'] ) ) {
 				echo '<p>' . __( "This plugin needs an authorization:", 'google-analytics-dashboard-for-wp' ) . '</p><form action="' . menu_page_url( 'gadash_settings', false ) . '" method="POST">' . get_submit_button( __( "Authorize Plugin", 'google-analytics-dashboard-for-wp' ), 'secondary' ) . '</form>';
 				return;
 			}
-
+			
 			if ( current_user_can( 'manage_options' ) ) {
 				if ( $this->gadwp->config->options['ga_dash_tableid_jail'] ) {
 					$projectId = $this->gadwp->config->options['ga_dash_tableid_jail'];
@@ -51,12 +51,12 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 					return;
 				}
 			}
-
+			
 			if ( ! ( $projectId ) ) {
 				echo '<p>' . __( "Something went wrong while retrieving property data. You need to create and properly configure a Google Analytics account:", 'google-analytics-dashboard-for-wp' ) . '</p> <form action="https://deconf.com/how-to-set-up-google-analytics-on-your-website/" method="POST">' . get_submit_button( __( "Find out more!", 'google-analytics-dashboard-for-wp' ), 'secondary' ) . '</form>';
 				return;
 			}
-
+			
 			?>
 <div id="gadwp-window-1"></div>
 <?php

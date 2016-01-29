@@ -193,31 +193,29 @@ if ( ! class_exists( 'GADWP_Manager' ) ) {
 					 */
 					include_once ( GADWP_DIR . 'common/ajax-actions.php' );
 					self::$instance->common_actions = new GADWP_Common_Ajax();
+				} else if ( GADWP_Tools::check_roles( self::$instance->config->options['ga_dash_access_back'] ) ) {
+					/*
+					 * Load Backend Setup
+					 */
+					include_once ( GADWP_DIR . 'admin/setup.php' );
+					self::$instance->backend_setup = new GADWP_Backend_Setup();
 
-				} else
-					if ( GADWP_Tools::check_roles( self::$instance->config->options['ga_dash_access_back'] ) ) {
+					if ( self::$instance->config->options['dashboard_widget'] ) {
 						/*
-						 * Load Backend Setup
+						 * Load Backend Widget
 						 */
-						include_once ( GADWP_DIR . 'admin/setup.php' );
-						self::$instance->backend_setup = new GADWP_Backend_Setup();
-
-						if ( self::$instance->config->options['dashboard_widget'] ) {
-							/*
-							 * Load Backend Widget
-							 */
-							include_once ( GADWP_DIR . 'admin/widgets.php' );
-							self::$instance->backend_widgets = new GADWP_Backend_Widgets();
-						}
-
-						if ( self::$instance->config->options['backend_item_reports'] ) {
-							/*
-							 * Load Backend Item Reports
-							 */
-							include_once ( GADWP_DIR . 'admin/item-reports.php' );
-							self::$instance->backend_item_reports = new GADWP_Backend_Item_Reports();
-						}
+						include_once ( GADWP_DIR . 'admin/widgets.php' );
+						self::$instance->backend_widgets = new GADWP_Backend_Widgets();
 					}
+
+					if ( self::$instance->config->options['backend_item_reports'] ) {
+						/*
+						 * Load Backend Item Reports
+						 */
+						include_once ( GADWP_DIR . 'admin/item-reports.php' );
+						self::$instance->backend_item_reports = new GADWP_Backend_Item_Reports();
+					}
+				}
 			} else {
 				if ( GADWP_Tools::check_roles( self::$instance->config->options['ga_dash_access_front'] ) ) {
 					/*

@@ -19,7 +19,7 @@ if ( ! class_exists( 'GADWP_Frontend_Item_Reports' ) ) {
 
 		public function __construct() {
 			$this->gadwp = GADWP();
-
+			
 			add_action( 'admin_bar_menu', array( $this, 'custom_adminbar_node' ), 999 );
 		}
 

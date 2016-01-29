@@ -19,7 +19,7 @@ if ( ! class_exists( 'GADWP_Backend_Ajax' ) ) {
 
 		public function __construct() {
 			$this->gadwp = GADWP();
-
+			
 			if ( GADWP_Tools::check_roles( $this->gadwp->config->options['ga_dash_access_back'] ) && ( ( 1 == $this->gadwp->config->options['backend_item_reports'] ) || ( 1 == $this->gadwp->config->options['dashboard_widget'] ) ) ) {
 				// Items action
 				add_action( 'wp_ajax_gadwp_backend_item_reports', array( $this, 'ajax_item_reports' ) );
@@ -55,7 +55,7 @@ if ( ! class_exists( 'GADWP_Backend_Ajax' ) ) {
 			if ( ob_get_length() ) {
 				ob_clean();
 			}
-
+			
 			if ( ! ( GADWP_Tools::check_roles( $this->gadwp->config->options['ga_dash_access_back'] ) && ( ( 1 == $this->gadwp->config->options['backend_item_reports'] ) || ( 1 == $this->gadwp->config->options['dashboard_widget'] ) ) ) ) {
 				wp_die( - 31 );
 			}
@@ -75,39 +75,39 @@ if ( ! class_exists( 'GADWP_Backend_Ajax' ) ) {
 			} else {
 				$this->gadwp->gapi_controller->timeshift = (int) current_time( 'timestamp' ) - time();
 			}
-
+			
 			if ( $filter_id ) {
 				$uri_parts = explode( '/', get_permalink( $filter_id ), 4 );
-
+				
 				if ( isset( $uri_parts[3] ) ) {
 					$uri = '/' . $uri_parts[3];
 				} else {
 					wp_die( - 25 );
 				}
-
+				
 				// allow URL correction before sending an API request
 				$filter = apply_filters( 'gadwp_backenditem_uri', $uri );
-
+				
 				$lastchar = substr( $filter, - 1 );
-
+				
 				if ( isset( $profile_info[6] ) && $profile_info[6] && $lastchar == '/' ) {
 					$filter = $filter . $profile_info[6];
 				}
-
+				
 				// Encode URL
 				$filter = rawurlencode( rawurldecode( $filter ) );
 			} else {
 				$filter = false;
 			}
-
+			
 			$queries = explode( ',', $query );
-
+			
 			$results = array();
-
+			
 			foreach ( $queries as $value ) {
 				$results[] = $this->gadwp->gapi_controller->get( $projectId, $value, $from, $to, $filter );
 			}
-
+			
 			wp_send_json( $results );
 		}
 
@@ -120,13 +120,13 @@ if ( ! class_exists( 'GADWP_Backend_Ajax' ) ) {
 			if ( ! isset( $_POST['gadwp_security_dismiss_notices'] ) || ! wp_verify_nonce( $_POST['gadwp_security_dismiss_notices'], 'gadwp_dismiss_notices' ) ) {
 				wp_die( - 30 );
 			}
-
-			if ( !current_user_can( 'manage_options' ) ) {
+			
+			if ( ! current_user_can( 'manage_options' ) ) {
 				wp_die( - 31 );
 			}
-
+			
 			delete_option( 'gadwp_got_updated' );
-
+			
 			wp_die();
 		}
 	}
