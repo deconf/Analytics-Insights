@@ -693,6 +693,17 @@ jQuery.fn.extend( {
 				if ( response == '-24' ) {
 					jQuery( "#gadwp-status" + slug ).html( gadwpItemData.i18n[ 15 ] );
 				} else {
+					jQuery( "#gadwp-reports" + slug ).css( {
+						"background-color" : "#F7F7F7",
+						"height" : "auto",
+						"margin-top" : "10px",
+						"padding-top" : "50px",
+						"padding-bottom" : "50px",
+						"color" : "#000",
+						"text-align" : "center"
+					} );
+					jQuery( "#gadwp-reports" + slug ).html ( response );
+					jQuery( "#gadwp-reports" + slug ).show();
 					jQuery( "#gadwp-status" + slug ).html( gadwpItemData.i18n[ 11 ] );
 					console.log( "\n********************* GADWP Log ********************* \n\n" + response );
 					postData = {
@@ -1032,7 +1043,7 @@ jQuery.fn.extend( {
 	}
 } );
 
-jQuery( window ).load (function () {
+jQuery( document ).ready( function () {
 	if ( gadwpItemData.scope == 'admin-widgets' ) {
 		jQuery( '#gadwp-window-1' ).gadwpItemReport( 1 );
 	} else {

@@ -796,7 +796,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 		 */
 		public function get( $projectId, $query, $from = false, $to = false, $filter = '' ) {
 			if ( empty( $projectId ) || ! is_numeric( $projectId ) ) {
-				return - 26;
+				wp_die( - 26 );
 			}
 			if ( in_array( $query, array( 'sessions', 'users', 'organicSearches', 'visitBounceRate', 'pageviews', 'uniquePageviews' ) ) ) {
 				return $this->get_areachart_data( $projectId, $from, $to, $query, $filter );
@@ -825,7 +825,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			if ( in_array( $query, array( 'medium', 'visitorType', 'socialNetwork', 'source', 'browser', 'operatingSystem', 'screenResolution', 'mobileDeviceBranding' ) ) ) {
 				return $this->get_piechart_data( $projectId, $from, $to, $query, $filter );
 			}
-			return - 27;
+			wp_die( - 27 );
 		}
 	}
 }

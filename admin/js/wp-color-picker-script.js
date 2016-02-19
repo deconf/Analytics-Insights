@@ -6,6 +6,6 @@
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
 
-jQuery(document).ready(function($){
-    $('.ga_dash_style').wpColorPicker();
-});
+jQuery( document ).ready( function () {
+	jQuery( '.ga_dash_style' ).wpColorPicker();
+} );
