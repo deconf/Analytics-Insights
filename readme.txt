@@ -141,7 +141,9 @@ In case of errors refresh your page or clear your browser cache, as a first step
 = 4.9.2.1 =
 * Enhancements: 
 	* implement more specific error codes
-
+	* files cleanup
+	* move reports.js script in footer
+	
 * Bug Fixes:
 
 * New Features:

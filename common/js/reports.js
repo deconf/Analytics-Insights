@@ -1032,7 +1032,7 @@ jQuery.fn.extend( {
 	}
 } );
 
-jQuery( function () {
+jQuery( window ).load (function () {
 	if ( gadwpItemData.scope == 'admin-widgets' ) {
 		jQuery( '#gadwp-window-1' ).gadwpItemReport( 1 );
 	} else {
