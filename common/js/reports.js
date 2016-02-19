@@ -1,5 +1,9 @@
-/**
- * Author: Alin Marcu Author URI: https://deconf.com Copyright 2013 Alin Marcu License: GPLv2 or later License URI: http://www.gnu.org/licenses/gpl-2.0.html
+/*-
+ * Author: Alin Marcu 
+ * Author URI: https://deconf.com 
+ * Copyright 2013 Alin Marcu 
+ * License: GPLv2 or later 
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
 
 "use strict";
@@ -363,7 +367,7 @@ jQuery.fn.extend( {
 						height : '80%'
 					},
 					title : title,
-					pieSliceText: 'value',
+					pieSliceText : 'value',
 					colors : gadwpItemData.colorVariations
 				};
 				chart = new google.visualization.PieChart( document.getElementById( 'gadwp-' + id + slug ) );

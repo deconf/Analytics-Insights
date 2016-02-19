@@ -138,20 +138,28 @@ In case of errors refresh your page or clear your browser cache, as a first step
 
 == Changelog ==
 
+= 4.9.2.1 =
+* Enhancements: 
+	* implement more specific error codes
+
+* Bug Fixes:
+
+* New Features:
+	
 = 4.9.2 =
-<em>Enhancements</em> 
-- improved loading speed for charts
-- add autoloading for Charts Library to allow dequeue on conflicts
-- removed API Key option, since is not needed anymore
-- display session values in Pie Chart slices
-- improved data accuracy for Pie Charts 
+* Enhancements: 
+	* improved loading speed for charts
+	* add autoloading for Charts Library to allow dequeue on conflicts
+	* removed API Key option, since is not needed anymore
+	* display session values in Pie Chart slices
+	* improved data accuracy for Pie Charts 
 
-<em>Bug Fixes</em>
-- multiple fixes for frontend widget
-- page title missing in Realtime report
+* Bug Fixes:
+	* multiple fixes for frontend widget
+	* page title missing in Realtime report
 
-<em>New Features</em>
-- brand new Technology Reports with details about Device Categories, Browsers, Operating Systems, Screen Resolutions and Device Brands  
+* New Features:
+	* brand new Technology Reports with details about Device Categories, Browsers, Operating Systems, Screen Resolutions and Device Brands  
 
 = 4.9.1.2 =
 - Bug Fix: multiple CSS fixes for frontend widget
