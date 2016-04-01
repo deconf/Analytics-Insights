@@ -2,7 +2,7 @@
 /**
  * Author: Alin Marcu
  * Author URI: https://deconf.com
- * Copyright 2013 Alin Marcu 
+ * Copyright 2013 Alin Marcu
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -49,6 +49,7 @@ class GADWP_Install {
 			$options['ga_crossdomain_list'] = '';
 			$options['ga_author_dimindex'] = 0;
 			$options['ga_category_dimindex'] = 0;
+			$options['ga_tag_dimindex'] = 0;
 			$options['ga_user_dimindex'] = 0;
 			$options['ga_pubyear_dimindex'] = 0;
 			$options['ga_aff_tracking'] = 0;
@@ -98,6 +99,7 @@ class GADWP_Install {
 			$options['ga_crossdomain_list'] = '';
 			$options['ga_author_dimindex'] = 0;
 			$options['ga_category_dimindex'] = 0;
+			$options['ga_tag_dimindex'] = 0;
 			$options['ga_user_dimindex'] = 0;
 			$options['ga_pubyear_dimindex'] = 0;
 			$options['ga_event_affiliates'] = '/out/';
@@ -110,7 +112,7 @@ class GADWP_Install {
 			$options['ga_cookiedomain'] = '';
 			$options['ga_cookiename'] = '';
 			$options['ga_cookieexpires'] = '';
-			
+
 			delete_option( 'ga_dash_clientid' );
 			delete_option( 'ga_dash_clientsecret' );
 			delete_option( 'ga_dash_access' );

@@ -135,8 +135,8 @@ final class GADWP_Settings {
 
 
 
-                                    
-                                    
+
+
                                     </table>
                                 </td>
                             </tr>
@@ -215,7 +215,7 @@ final class GADWP_Settings {
 									<table>
                                         <tr>
         <?php
-		
+
 		foreach ( $wp_roles->role_names as $role => $name ) {
 			if ( $role != 'subscriber' ) {
 				$i++;
@@ -236,8 +236,8 @@ final class GADWP_Settings {
 
 
 
-                                    
-                                    
+
+
                                     </table>
                                 </td>
                             </tr>
@@ -312,7 +312,7 @@ final class GADWP_Settings {
 
 	public static function tracking_settings() {
 		$gadwp = GADWP();
-		
+
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
@@ -477,6 +477,14 @@ final class GADWP_Settings {
 										<?php }?>
 								</select></td>
                                 </tr>
+																<tr>
+																	<td class="gadwp-settings-title"><label for="ga_tag_dimindex"><?php _e("Tags:", 'google-analytics-dashboard-for-wp' ); ?></label></td>
+																	<td><select id="ga_tag_dimindex" name="options[ga_tag_dimindex]">
+									<?php for ($i=0;$i<21;$i++){?>
+									<option value="<?php echo $i;?>" <?php selected( $options['ga_tag_dimindex'], $i ); ?>><?php echo $i==0?'Disabled':'dimension '.$i; ?></option>
+									<?php }?>
+							</select></td>
+															</tr>
                                 <tr>
                                     <td class="gadwp-settings-title"><label for="ga_user_dimindex"><?php _e("User Type:", 'google-analytics-dashboard-for-wp' ); ?></label></td>
                                     <td><select id="ga_user_dimindex" name="options[ga_user_dimindex]">
@@ -601,8 +609,8 @@ final class GADWP_Settings {
 
 
 
-                                        
-                                        
+
+
                                         </table>
                                     </td>
                                 </tr>
@@ -630,13 +638,13 @@ final class GADWP_Settings {
 
 	public static function errors_debugging() {
 		global $wp_version;
-		
+
 		$gadwp = GADWP();
-		
+
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
-		
+
 		$anonim = $gadwp->config->options;
 		$anonim['wp_version'] = $wp_version;
 		$anonim['gadwp_version'] = GADWP_CURRENT_VERSION;
@@ -695,10 +703,10 @@ final class GADWP_Settings {
 		?></pre><br />
                                     <hr>
                                 </td>
-                            
-                            
+
+
                             <tr>
-                        
+
                         </table>
                     </div>
                     <div id="gadwp-config">
@@ -718,9 +726,9 @@ final class GADWP_Settings {
 
 	public static function general_settings() {
 		$gadwp = GADWP();
-		
+
 		global $wp_version;
-		
+
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
@@ -974,7 +982,7 @@ final class GADWP_Settings {
 	public static function general_settings_network() {
 		$gadwp = GADWP();
 		global $wp_version;
-		
+
 		if ( ! current_user_can( 'manage_network_options' ) ) {
 			return;
 		}
@@ -983,11 +991,11 @@ final class GADWP_Settings {
 		 * Include GAPI
 		 */
 		echo '<div id="gapi-warning" class="updated"><p>' . __( 'Loading the required libraries. If this results in a blank screen or a fatal error, try this solution:', 'google-analytics-dashboard-for-wp' ) . ' <a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=general_screen&utm_campaign=gadwp">Library conflicts between WordPress plugins</a></p></div>';
-		
+
 		if ( null === $gadwp->gapi_controller ) {
 			$gadwp->gapi_controller = new GADWP_GAPI_Controller();
 		}
-		
+
 		echo '<script type="text/javascript">jQuery("#gapi-warning").hide()</script>';
 		if ( isset( $_POST['ga_dash_code'] ) ) {
 			if ( ! stripos( 'x' . $_POST['ga_dash_code'], 'UA-', 1 ) == 1 ) {
@@ -1274,7 +1282,7 @@ final class GADWP_Settings {
 
 	public static function output_sidebar() {
 		global $wp_version;
-		
+
 		$gadwp = GADWP();
 		?>
                                                         </div>

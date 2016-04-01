@@ -95,6 +95,9 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 			if ( isset( $options['ga_category_dimindex'] ) ) {
 				$options['ga_category_dimindex'] = (int) $options['ga_category_dimindex'];
 			}
+			if ( isset( $options['ga_tag_dimindex'] ) ) {
+				$options['ga_tag_dimindex'] = (int) $options['ga_tag_dimindex'];
+			}
 			if ( isset( $options['ga_user_dimindex'] ) ) {
 				$options['ga_user_dimindex'] = (int) $options['ga_user_dimindex'];
 			}
