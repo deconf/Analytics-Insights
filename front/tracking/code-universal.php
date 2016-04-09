@@ -1,8 +1,8 @@
 <?php
 /**
- * Author: Alin Marcu 
+ * Author: Alin Marcu
  * Author URI: https://deconf.com
- * Copyright 2013 Alin Marcu 
+ * Copyright 2013 Alin Marcu
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -85,6 +85,11 @@ if ( $this->gadwp->config->options['ga_pubyear_dimindex'] && is_single() ) {
 if ( $this->gadwp->config->options['ga_category_dimindex'] && is_category() ) {
 	?>
   ga('set', 'dimension<?php echo (int)$this->gadwp->config->options ['ga_category_dimindex']; ?>', '<?php echo esc_attr(single_tag_title()); ?>');
+<?php
+}
+if ( $this->gadwp->config->options['ga_tag_dimindex'] && is_tag() ) {
+?>
+  ga('set', 'dimension<?php echo (int)$this->gadwp->config->options ['ga_tag_dimindex']; ?>', '<?php echo esc_attr(single_tag_title()); ?>');
 <?php
 }
 if ( $this->gadwp->config->options['ga_category_dimindex'] && is_single() ) {
