@@ -3,8 +3,8 @@ Contributors: deconf
 Donate link: https://deconf.com/donate/
 Tags: google,analytics,google analytics,dashboard,analytics dashboard,google analytics dashboard,google analytics plugin,google analytics widget,tracking,universal google analytics,realtime,multisite,gadwp
 Requires at least: 3.5
-Tested up to: 4.4.2
-Stable tag: 4.9.2.1
+Tested up to: 4.5
+Stable tag: 4.9.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -138,12 +138,14 @@ In case of errors refresh your page or clear your browser cache, as a first step
 
 == Changelog ==
 
-= 4.9.2.1 =
+= 4.9.3 =
 * Enhancements: 
 	* implement more specific error codes
 	* files cleanup
 	* move reports.js and other scripts to footer
 	* on-screen errors instead of using console
+* New Features:
+	* adding custom dimensions support for Tags	
 	
 = 4.9.2 =
 * Enhancements: 

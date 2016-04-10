@@ -290,10 +290,15 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 				$this->options['ga_author_dimindex'] = 0;
 				$flag = true;
 			}
+			if ( ! isset( $this->options['ga_tag_dimindex'] ) ) {
+				$this->options['ga_tag_dimindex'] = 0;
+				$flag = true;
+			}
 			if ( ! isset( $this->options['ga_category_dimindex'] ) ) {
 				$this->options['ga_category_dimindex'] = 0;
 				$flag = true;
 			}
+			$options['ga_tag_dimindex'] = 0;
 			if ( ! isset( $this->options['ga_user_dimindex'] ) ) {
 				$this->options['ga_user_dimindex'] = 0;
 				$flag = true;

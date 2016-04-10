@@ -87,10 +87,21 @@ if ( $this->gadwp->config->options['ga_category_dimindex'] && is_category() ) {
   ga('set', 'dimension<?php echo (int)$this->gadwp->config->options ['ga_category_dimindex']; ?>', '<?php echo esc_attr(single_tag_title()); ?>');
 <?php
 }
-if ( $this->gadwp->config->options['ga_tag_dimindex'] && is_tag() ) {
-?>
-  ga('set', 'dimension<?php echo (int)$this->gadwp->config->options ['ga_tag_dimindex']; ?>', '<?php echo esc_attr(single_tag_title()); ?>');
+if ( $this->gadwp->config->options['ga_tag_dimindex'] && is_single() ) {
+	global $post;
+	$post_tags_list = '';
+	$post_tags_array = get_the_tags( $post->ID );
+	if ( $post_tags_array ) {
+		foreach ( $post_tags_array as $tag ) {
+			$post_tags_list .= $tag->name . ', ';
+		}
+	}
+	$post_tags_list = rtrim( $post_tags_list, ', ' );
+	if ( $post_tags_list ) {
+	?>
+  ga('set', 'dimension<?php echo (int)$this->gadwp->config->options ['ga_tag_dimindex']; ?>', '<?php echo esc_attr($post_tags_list); ?>');
 <?php
+	}
 }
 if ( $this->gadwp->config->options['ga_category_dimindex'] && is_single() ) {
 	global $post;

@@ -132,11 +132,6 @@ final class GADWP_Settings {
 			}
 		}
 		?>
-
-
-
-
-
                                     </table>
                                 </td>
                             </tr>
@@ -160,14 +155,6 @@ final class GADWP_Settings {
                         </table>
                         <input type="hidden" name="options[ga_dash_hidden]" value="Y">
 						<?php wp_nonce_field('gadash_form','gadash_security');?>
-
-
-
-
-
-
-
-
 </form>
 <?php
 		self::output_sidebar();
@@ -233,11 +220,6 @@ final class GADWP_Settings {
 			}
 		}
 		?>
-
-
-
-
-
                                     </table>
                                 </td>
                             </tr>
@@ -300,10 +282,6 @@ final class GADWP_Settings {
                         </table>
                         <input type="hidden" name="options[ga_dash_hidden]" value="Y">
 						<?php wp_nonce_field('gadash_form','gadash_security'); ?>
-
-
-
-
 
 </form>
 <?php
@@ -477,14 +455,6 @@ final class GADWP_Settings {
 										<?php }?>
 								</select></td>
                                 </tr>
-																<tr>
-																	<td class="gadwp-settings-title"><label for="ga_tag_dimindex"><?php _e("Tags:", 'google-analytics-dashboard-for-wp' ); ?></label></td>
-																	<td><select id="ga_tag_dimindex" name="options[ga_tag_dimindex]">
-									<?php for ($i=0;$i<21;$i++){?>
-									<option value="<?php echo $i;?>" <?php selected( $options['ga_tag_dimindex'], $i ); ?>><?php echo $i==0?'Disabled':'dimension '.$i; ?></option>
-									<?php }?>
-							</select></td>
-															</tr>
                                 <tr>
                                     <td class="gadwp-settings-title"><label for="ga_user_dimindex"><?php _e("User Type:", 'google-analytics-dashboard-for-wp' ); ?></label></td>
                                     <td><select id="ga_user_dimindex" name="options[ga_user_dimindex]">
@@ -492,6 +462,14 @@ final class GADWP_Settings {
 										<option value="<?php echo $i;?>" <?php selected( $options['ga_user_dimindex'], $i ); ?>><?php echo $i==0?'Disabled':'dimension '.$i; ?></option>
 										<?php }?>
 								</select></td>
+                                </tr>
+                                <tr>
+                                    <td class="gadwp-settings-title"><label for="ga_tag_dimindex"><?php _e("Tags:", 'google-analytics-dashboard-for-wp' ); ?></label></td>
+                                    <td><select id="ga_tag_dimindex" name="options[ga_tag_dimindex]">
+									<?php for ($i=0;$i<21;$i++){?>
+									<option value="<?php echo $i;?>" <?php selected( $options['ga_tag_dimindex'], $i ); ?>><?php echo $i==0?'Disabled':'dimension '.$i; ?></option>
+									<?php }?>
+							</select></td>
                                 </tr>
                             </table>
                         </div>
@@ -603,14 +581,6 @@ final class GADWP_Settings {
 			}
 		}
 		?>
-
-
-
-
-
-
-
-
                                         </table>
                                     </td>
                                 </tr>
@@ -626,11 +596,6 @@ final class GADWP_Settings {
                         </table>
                         <input type="hidden" name="options[ga_dash_hidden]" value="Y">
 						<?php wp_nonce_field('gadash_form','gadash_security'); ?>
-
-
-
-
-
 </form>
 <?php
 		self::output_sidebar();
