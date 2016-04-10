@@ -145,7 +145,7 @@ In case of errors refresh your page or clear your browser cache, as a first step
 	* move reports.js and other scripts to footer
 	* on-screen errors instead of using console
 * New Features:
-	* adding custom dimensions support for Tags	
+	* custom dimensions support for Tags	
 	
 = 4.9.2 =
 * Enhancements: 
