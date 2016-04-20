@@ -434,12 +434,12 @@ jQuery.fn.extend( {
 			},
 
 			drawBottomStats : function ( data ) {
-				jQuery( "#gdsessions" + slug ).text( data[ 0 ] );
-				jQuery( "#gdusers" + slug ).text( data[ 1 ] );
-				jQuery( "#gdpageviews" + slug ).text( data[ 2 ] );
-				jQuery( "#gdbouncerate" + slug ).text( data[ 3 ] + "%" );
-				jQuery( "#gdorganicsearch" + slug ).text( data[ 4 ] );
-				jQuery( "#gdpagespervisit" + slug ).text( data[ 5 ] );
+				jQuery( "#gdsessions" + slug ).html( data[ 0 ] );
+				jQuery( "#gdusers" + slug ).html( data[ 1 ] );
+				jQuery( "#gdpageviews" + slug ).html( data[ 2 ] );
+				jQuery( "#gdbouncerate" + slug ).html( data[ 3 ] + "%" );
+				jQuery( "#gdorganicsearch" + slug ).html( data[ 4 ] );
+				jQuery( "#gdpagespervisit" + slug ).html( data[ 5 ] );
 			},
 
 			rtOnlyUniqueValues : function ( value, index, self ) {
