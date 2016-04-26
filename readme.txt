@@ -136,6 +136,10 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 
 == Changelog ==
 
+= 4.9.4 =
+* Enhancements: 
+	* add forceSSL option for tracking code 
+
 = 4.9.3.1 =
 * Bug Fixes:
 	* fixing a bug where &nbsp was displayed instead of a blank space on localized sites

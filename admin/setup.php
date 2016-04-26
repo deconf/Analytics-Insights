@@ -148,6 +148,8 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 
 					wp_register_script( 'googlejsapi', 'https://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22visualization%22%2C%22version%22%3A%221%22%2C%22language%22%3A%22' . $lang . '%22%2C%22packages%22%3A%5B%22corechart%22%2C%20%22table%22%2C%20%22orgchart%22%2C%20%22geochart%22%5D%7D%5D%7D%27', array(), null );
 
+					wp_register_script( 'googlejsapi', 'https://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22visualization%22%2C%22version%22%3A%221%22%2C%22language%22%3A%22%27%20.%20%24lang%20.%20%27%22%2C%22packages%22%3A%5B%22bar%22%5D%7D%5D%7D%27', array(), null );
+
 					wp_enqueue_script( 'gadwp-nprogress', GADWP_URL . 'common/nprogress/nprogress.js', array( 'jquery' ), GADWP_CURRENT_VERSION );
 
 					wp_enqueue_script( 'gadwp-backend-dashboard-reports', GADWP_URL . 'common/js/reports.js', array( 'jquery', 'googlejsapi', 'gadwp-nprogress', 'jquery-ui-tooltip', 'jquery-ui-core', 'jquery-ui-position', 'jquery-ui-tooltip-html' ), GADWP_CURRENT_VERSION, true );

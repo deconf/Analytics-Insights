@@ -392,7 +392,10 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 				$this->options['ga_cookieexpires'] = '';
 				$flag = true;
 			}
-
+			if ( ! isset( $this->options['ga_forcessl'] ) ) { // v4.9.4
+				$this->options['ga_forcessl'] = 0;
+				$flag = true;
+			}
 			if ( $flag ) {
 				$this->set_plugin_options( false );
 			}
