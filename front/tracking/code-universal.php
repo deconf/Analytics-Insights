@@ -118,10 +118,6 @@ if ( $this->gadwp->config->options['ga_user_dimindex'] ) {
   ga('set', 'dimension<?php echo (int)$this->gadwp->config->options ['ga_user_dimindex']; ?>', '<?php echo is_user_logged_in()?'registered':'guest'; ?>');
 <?php
 }
-if ( $this->gadwp->config->options['ga_forcessl'] ) {
-	?>  ga('set', 'forceSSL', true);
-<?php
-}
 do_action( 'ga_dash_addtrackingcode' );
 if ( $this->gadwp->config->options['ga_dash_anonim'] ) {
 	?>  ga('send', 'pageview', {'anonymizeIp': true});<?php } else {?>  ga('send', 'pageview');

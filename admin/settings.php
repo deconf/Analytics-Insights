@@ -25,7 +25,6 @@ final class GADWP_Settings {
 				$options['ga_enhanced_links'] = 0;
 				$options['ga_dash_remarketing'] = 0;
 				$options['ga_dash_adsense'] = 0;
-				$options['ga_forcessl'] = 0;
 				$options['ga_event_bouncerate'] = 0;
 				$options['ga_crossdomain_tracking'] = 0;
 				$options['ga_aff_tracking'] = 0;
@@ -514,17 +513,6 @@ final class GADWP_Settings {
                                             </label>
                                         </div>
                                         <div class="switch-desc"><?php echo " ".__("enable AdSense account linking", 'google-analytics-dashboard-for-wp' );?></div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2" class="gadwp-settings-title">
-                                        <div class="button-primary gadwp-settings-switchoo">
-                                            <input type="checkbox" name="options[ga_forcessl]" value="1" class="gadwp-settings-switchoo-checkbox" id="ga_forcessl" <?php checked( $options['ga_forcessl'], 1 ); ?>> <label class="gadwp-settings-switchoo-label" for="ga_forcessl">
-                                                <div class="gadwp-settings-switchoo-inner"></div>
-                                                <div class="gadwp-settings-switchoo-switch"></div>
-                                            </label>
-                                        </div>
-                                        <div class="switch-desc"><?php echo " ".__("enable forceSSL (send data over HTTPS)", 'google-analytics-dashboard-for-wp' );?></div>
                                     </td>
                                 </tr>
                                 <tr>

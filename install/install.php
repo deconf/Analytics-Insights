@@ -59,7 +59,6 @@ class GADWP_Install {
 			$options['frontend_item_reports'] = 0;
 			$options['dashboard_widget'] = 1;
 			$options['api_backoff'] = 0;
-			$options['ga_forcessl'] = 0;
 			$options['ga_cookiedomain'] = '';
 			$options['ga_cookiename'] = '';
 			$options['ga_cookieexpires'] = '';
@@ -113,7 +112,7 @@ class GADWP_Install {
 			$options['ga_cookiedomain'] = '';
 			$options['ga_cookiename'] = '';
 			$options['ga_cookieexpires'] = '';
-			$options['ga_forcessl'] = 0;
+
 			delete_option( 'ga_dash_clientid' );
 			delete_option( 'ga_dash_clientsecret' );
 			delete_option( 'ga_dash_access' );
