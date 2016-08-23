@@ -82,6 +82,13 @@ if ( $this->gadwp->config->options['ga_pubyear_dimindex'] && is_single() ) {
   ga('set', 'dimension<?php echo (int)$this->gadwp->config->options ['ga_pubyear_dimindex']; ?>', '<?php echo (int)$date; ?>');
 <?php
 }
+if ( $this->gadwp->config->options['ga_pubyearmonth_dimindex'] && is_single() ) {
+	global $post;
+	$date = get_the_date( 'Y-m', $post->ID );
+	?>
+  ga('set', 'dimension<?php echo (int)$this->gadwp->config->options ['ga_pubyearmonth_dimindex']; ?>', '<?php echo $date; ?>');
+<?php
+}
 if ( $this->gadwp->config->options['ga_category_dimindex'] && is_category() ) {
 	?>
   ga('set', 'dimension<?php echo (int)$this->gadwp->config->options ['ga_category_dimindex']; ?>', '<?php echo esc_attr(single_tag_title()); ?>');

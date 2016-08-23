@@ -469,6 +469,14 @@ final class GADWP_Settings {
 										<?php }?>
 								</select></td>
                                 </tr>
+								<tr>
+                                    <td class="gadwp-settings-title"><label for="ga_pubyearmonth_dimindex"><?php _e("Publication Year:Month:", 'google-analytics-dashboard-for-wp' ); ?></label></td>
+                                    <td><select id="ga_pubyearmonth_dimindex" name="options[ga_pubyearmonth_dimindex]">
+										<?php for ($i=0;$i<21;$i++){?>
+										<option value="<?php echo $i;?>" <?php selected( $options['ga_pubyearmonth_dimindex'], $i ); ?>><?php echo $i==0?'Disabled':'dimension '.$i; ?></option>
+										<?php }?>
+								</select></td>
+                                </tr>
                                 <tr>
                                     <td class="gadwp-settings-title"><label for="ga_category_dimindex"><?php _e("Categories:", 'google-analytics-dashboard-for-wp' ); ?></label></td>
                                     <td><select id="ga_category_dimindex" name="options[ga_category_dimindex]">

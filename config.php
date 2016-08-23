@@ -104,6 +104,9 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 			if ( isset( $options['ga_pubyear_dimindex'] ) ) {
 				$options['ga_pubyear_dimindex'] = (int) $options['ga_pubyear_dimindex'];
 			}
+			if ( isset( $options['ga_pubyearmonth_dimindex'] ) ) {
+				$options['ga_pubyearmonth_dimindex'] = (int) $options['ga_pubyearmonth_dimindex'];
+			}
 			if ( isset( $options['ga_aff_tracking'] ) ) {
 				$options['ga_aff_tracking'] = (int) $options['ga_aff_tracking'];
 			}
@@ -300,6 +303,10 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 			}
 			if ( ! isset( $this->options['ga_pubyear_dimindex'] ) ) {
 				$this->options['ga_pubyear_dimindex'] = 0;
+				$flag = true;
+			}
+			if ( ! isset( $this->options['ga_pubyearmonth_dimindex'] ) ) {
+				$this->options['ga_pubyearmonth_dimindex'] = 0;
 				$flag = true;
 			}
 			if ( ! isset( $this->options['ga_event_affiliates'] ) ) {
