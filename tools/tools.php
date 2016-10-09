@@ -173,10 +173,14 @@ if ( ! class_exists( 'GADWP_Tools' ) ) {
 		}
 
 		public static function get_sites( $args ){ // Use wp_get_sites() if WP version is lower than 4.6.0
+			global $wp_version;
 			if ( version_compare( $wp_version, '4.6.0', '<' ) ) {
 				return wp_get_sites( $args );
 			} else {
-				return get_sites( $args );
+				foreach ( get_sites( $args ) as $blog ) {
+					$blogs[] = (array)$blog; //Convert WP_Site object to array
+				}
+				return $blogs;
 			}
 		}
 	}
