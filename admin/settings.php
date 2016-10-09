@@ -1171,7 +1171,8 @@ final class GADWP_Settings {
 						if ( ! empty( $options['ga_dash_profile_list'] ) ) {
 							foreach ( $options['ga_dash_profile_list'] as $items ) {
 								if ( $items[3] ) {
-									echo '<option value="' . esc_attr( $items[1] ) . '" ' . selected( $items[1], isset( $options['ga_dash_tableid_network']->$blog['blog_id'] ) ? $options['ga_dash_tableid_network']->$blog['blog_id'] : '', false );
+									$temp_id = $blog['blog_id'];
+									echo '<option value="' . esc_attr( $items[1] ) . '" ' . selected( $items[1], isset( $options['ga_dash_tableid_network']->$temp_id ) ? $options['ga_dash_tableid_network']->$temp_id : '', false );
 									echo ' title="' . __( "View Name:", 'google-analytics-dashboard-for-wp' ) . ' ' . esc_attr( $items[0] ) . '">' . esc_html( GADWP_Tools::strip_protocol( $items[3] ) ) . ' &#8658; ' . esc_attr( $items[0] ) . '</option>';
 								}
 							}

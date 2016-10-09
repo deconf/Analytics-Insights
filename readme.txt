@@ -142,7 +142,8 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 * New Features:
 	* 
 * Bug Fixes:
-	* switch to get_sites while maintaining compatibility with older WP Installs		
+	* switch to get_sites while maintaining compatibility with older WP Installs
+	* fix for multisite installs, Properties/Views Settings list was not properly displayed on PHP7 		
 
 = 4.9.3.2 =
 * Enhancements: 
