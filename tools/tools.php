@@ -121,7 +121,7 @@ if ( ! class_exists( 'GADWP_Tools' ) ) {
 
 		public static function set_cache( $name, $value, $expiration = 0 ) {
 			$option = array( 'value' => $value, 'expires' => time() + (int) $expiration );
-			update_option( 'gadwp_cache_' . $name, $option );
+			update_option( 'gadwp_cache_' . $name, $option, 'no' );
 		}
 
 		public static function delete_cache( $name ) {
