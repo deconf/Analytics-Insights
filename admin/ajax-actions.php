@@ -86,7 +86,7 @@ if ( ! class_exists( 'GADWP_Backend_Ajax' ) ) {
 				}
 
 				// allow URL correction before sending an API request
-				$filter = apply_filters( 'gadwp_backenditem_uri', $uri );
+				$filter = apply_filters( 'gadwp_backenditem_uri', $uri, $filter_id );
 
 				$lastchar = substr( $filter, - 1 );
 

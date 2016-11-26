@@ -139,11 +139,13 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 = 4.9.4 =
 * Enhancements: 
 	* always load analytics.js over SSL
+	* gadwp_backenditem_uri filter passes post ID as an additional variable
 * New Features:
-	* 
+	* a new year-month dimension is now available, to allow further segmentation of the most successful publication years, by month; props by [Antoine Girard](https://github.com/thetoine)
 * Bug Fixes:
 	* switch to get_sites() while maintaining compatibility with older WP installs
-	* fix for multisite installs, Properties/Views Settings list was not properly displayed on PHP7 		
+	* fix for multisite installs, Properties/Views Settings list was not properly displayed on PHP7
+	* prevent autoloading of reports' cache entries; props by [Alex Bradaric](https://github.com/bradaric) 		
 
 = 4.9.3.2 =
 * Enhancements: 
