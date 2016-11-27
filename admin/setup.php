@@ -179,6 +179,7 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 							'searches' => __( "Searches", 'google-analytics-dashboard-for-wp' ),
 							'trafficdetails' => __( "Traffic", 'google-analytics-dashboard-for-wp' ),
 							'technologydetails' => __( "Technology", 'google-analytics-dashboard-for-wp' ),
+							'404errors' => __( "404 Errors", 'google-analytics-dashboard-for-wp' ),
 						),
 						'i18n' => array(
 							__( "A JavaScript Error is blocking plugin resources!", 'google-analytics-dashboard-for-wp' ), //0
@@ -265,7 +266,7 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 							'1095daysAgo' =>  sprintf( _n( "%s Year", "%s Years", 3, 'google-analytics-dashboard-for-wp' ), __('Three', 'google-analytics-dashboard-for-wp') ),
 						),
 						'reportList' => array(
-							'uniquePageviews' => __( "Unique Views", 'google-analytics-dashboard-for-wp' ),
+							'sessions' => __( "Sessions", 'google-analytics-dashboard-for-wp' ),
 							'users' => __( "Users", 'google-analytics-dashboard-for-wp' ),
 							'organicSearches' => __( "Organic", 'google-analytics-dashboard-for-wp' ),
 							'pageviews' => __( "Page Views", 'google-analytics-dashboard-for-wp' ),
@@ -282,7 +283,7 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 							__( "Visitor Type", 'google-analytics-dashboard-for-wp' ),
 							__( "Social Networks", 'google-analytics-dashboard-for-wp' ),
 							__( "Search Engines", 'google-analytics-dashboard-for-wp' ),
-							__( "Unique Views", 'google-analytics-dashboard-for-wp' ),
+							__( "Sessions", 'google-analytics-dashboard-for-wp' ),
 							__( "Users", 'google-analytics-dashboard-for-wp' ),
 							__( "Page Views", 'google-analytics-dashboard-for-wp' ),
 							__( "Bounce Rate", 'google-analytics-dashboard-for-wp' ),

@@ -336,9 +336,6 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				case 'organicSearches' :
 					$title = __( "Organic Searches", 'google-analytics-dashboard-for-wp' );
 					break;
-				case 'uniquePageviews' :
-					$title = __( "Unique Page Views", 'google-analytics-dashboard-for-wp' );
-					break;
 				default :
 					$title = __( "Sessions", 'google-analytics-dashboard-for-wp' );
 			}
@@ -407,7 +404,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			$options = array( 'dimensions' => null, 'quotaUser' => $this->managequota . 'p' . $projectId );
 			if ( $filter ) {
 				$options['filters'] = 'ga:pagePath==' . $filter;
-				$metrics = 'ga:uniquePageviews,ga:users,ga:pageviews,ga:BounceRate,ga:organicSearches,ga:pageviewsPerSession';
+				$metrics = 'ga:sessions,ga:users,ga:pageviews,ga:BounceRate,ga:organicSearches,ga:pageviewsPerSession';
 			} else {
 				$metrics = 'ga:sessions,ga:users,ga:pageviews,ga:BounceRate,ga:organicSearches,ga:pageviewsPerSession';
 			}
@@ -450,9 +447,9 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 		 * @return array|int
 		 */
 		private function get_contentpages( $projectId, $from, $to, $filter = '' ) {
-			$metrics = 'ga:pageviews';
+			$metrics = 'ga:sessions';
 			$dimensions = 'ga:pageTitle';
-			$options = array( 'dimensions' => $dimensions, 'sort' => '-ga:pageviews', 'quotaUser' => $this->managequota . 'p' . $projectId );
+			$options = array( 'dimensions' => $dimensions, 'sort' => '-ga:sessions', 'quotaUser' => $this->managequota . 'p' . $projectId );
 			if ( $filter ) {
 				$options['filters'] = 'ga:pagePath==' . $filter;
 			}
@@ -461,9 +458,39 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
-			$gadwp_data = array( array( __( "Pages", 'google-analytics-dashboard-for-wp' ), __( "Views", 'google-analytics-dashboard-for-wp' ) ) );
+			$gadwp_data = array( array( __( "Pages", 'google-analytics-dashboard-for-wp' ), __( "Sessions", 'google-analytics-dashboard-for-wp' ) ) );
 			foreach ( $data->getRows() as $row ) {
 				$gadwp_data[] = array( esc_html( $row[0] ), (int) $row[1] );
+			}
+			return $gadwp_data;
+		}
+
+		/**
+		 * Analytics data for 404 Errors
+		 *
+		 * @param
+		 *            $projectId
+		 * @param
+		 *            $from
+		 * @param
+		 *            $to
+		 * @return array|int
+		 */
+		private function get_404errors( $projectId, $from, $to, $filter = "Page Not Found" ) {
+			$metrics = 'ga:sessions';
+			$dimensions = 'ga:pagePath,ga:fullReferrer';
+			$options = array( 'dimensions' => $dimensions, 'sort' => '-ga:sessions', 'quotaUser' => $this->managequota . 'p' . $projectId );
+			$options['filters'] = 'ga:pageTitle=@' . $filter;
+			$serial = 'qr4_' . $this->get_serial( $projectId . $from . $filter );
+			$data = $this->handle_corereports( $projectId, $from, $to, $metrics, $options, $serial );
+			if ( is_numeric( $data ) ) {
+				return $data;
+			}
+			$gadwp_data = array( array( __( "404 Errors", 'google-analytics-dashboard-for-wp' ), __( "Sessions", 'google-analytics-dashboard-for-wp' ) ) );
+			foreach ( $data->getRows() as $row ) {
+				$path = esc_html( $row[0] );
+				$source = esc_html( $row[1] );
+				$gadwp_data[] = array( "<strong>" . __( "URI:", 'google-analytics-dashboard-for-wp' ) . "</strong> " . $path . "<br><strong>" . __( "Referrer:", 'google-analytics-dashboard-for-wp' ) . "</strong> " . $source, (int) $row[2] );
 			}
 			return $gadwp_data;
 		}
@@ -798,7 +825,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			if ( empty( $projectId ) || ! is_numeric( $projectId ) ) {
 				wp_die( - 26 );
 			}
-			if ( in_array( $query, array( 'sessions', 'users', 'organicSearches', 'visitBounceRate', 'pageviews', 'uniquePageviews' ) ) ) {
+			if ( in_array( $query, array( 'sessions', 'users', 'organicSearches', 'visitBounceRate', 'pageviews') ) ) {
 				return $this->get_areachart_data( $projectId, $from, $to, $query, $filter );
 			}
 			if ( $query == 'bottomstats' ) {
@@ -812,6 +839,10 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			}
 			if ( $query == 'contentpages' ) {
 				return $this->get_contentpages( $projectId, $from, $to, $filter );
+			}
+			if ( $query == '404errors' ) {
+				$filter = "Page Not Found";
+				return $this->get_404errors( $projectId, $from, $to, $filter );
 			}
 			if ( $query == 'searches' ) {
 				return $this->get_searches( $projectId, $from, $to, $filter );

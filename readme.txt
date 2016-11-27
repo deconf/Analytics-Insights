@@ -3,7 +3,7 @@ Contributors: deconf
 Donate link: https://deconf.com/donate/
 Tags: google,analytics,google analytics,dashboard,analytics dashboard,google analytics dashboard,google analytics plugin,google analytics widget,tracking,universal google analytics,realtime,multisite,gadwp
 Requires at least: 3.5
-Tested up to: 4.6.1
+Tested up to: 4.7
 Stable tag: 4.9.3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -142,10 +142,11 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 	* gadwp_backenditem_uri filter passes post ID as an additional variable
 * New Features:
 	* a new year-month dimension is now available, to allow further segmentation of the most successful publication years, by month; props by [Antoine Girard](https://github.com/thetoine)
+	* a new 404 Errors report designed to analyze and easily identify the source of 404 errors
 * Bug Fixes:
 	* switch to get_sites() while maintaining compatibility with older WP installs
 	* fix for multisite installs, Properties/Views Settings list was not properly displayed on PHP7
-	* prevent autoloading of reports' cache entries; props by [Alex Bradaric](https://github.com/bradaric) 		
+	* prevent autoloading of reports' cache entries; props by [Alex Bradaric](https://github.com/bradaric)
 
 = 4.9.3.2 =
 * Enhancements: 

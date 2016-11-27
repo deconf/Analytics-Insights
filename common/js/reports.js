@@ -117,11 +117,7 @@ jQuery.fn.extend( {
 				}
 
 				if ( !tools.getCookie( 'default_metric' ) || !tools.getCookie( 'default_dimension' ) ) {
-					if ( gadwpItemData.scope == 'admin-widgets' ) {
-						defaultMetric = 'sessions';
-					} else {
-						defaultMetric = 'uniquePageviews';
-					}
+					defaultMetric = 'sessions';
 					defaultDimension = '30daysAgo';
 				} else {
 					defaultMetric = tools.getCookie( 'default_metric' );
@@ -176,6 +172,7 @@ jQuery.fn.extend( {
 
 		reports = {
 			orgChartTableChartData : '',
+			tableChartData : '',
 			orgChartPieChartsData : '',
 			geoChartTableChartData : '',
 			areaChartBottomStatsData : '',
@@ -325,6 +322,26 @@ jQuery.fn.extend( {
 				NProgress.done();
 			},
 
+			tableChart : function ( response ) {
+				reports.tableChartData = response
+				if ( jQuery.isArray( response ) ) {
+					if ( !jQuery.isNumeric( response[ 0 ] ) ) {
+						if ( jQuery.isArray( response[ 0 ] ) ) {
+							jQuery( '#gadwp-reports' + slug ).show();
+							reports.drawTableChart( response[ 0 ] );
+						} else {
+							reports.throwDebug( response[ 0 ] );
+						}
+					} else {
+						jQuery( '#gadwp-reports' + slug ).show();
+						reports.throwError( '#gadwp-tablechart' + slug, response[ 0 ], "125px" );
+					}
+				} else {
+					reports.throwDebug( response );
+				}
+				NProgress.done();
+			},			
+			
 			drawTableChart : function ( data ) {
 				var chartData, options, chart;
 
@@ -883,7 +900,18 @@ jQuery.fn.extend( {
 						jQuery.post( gadwpItemData.ajaxurl, postData, function ( response ) {
 							reports.orgChartTableChart( response );
 						} );
+					} else if ( query == '404errors' ) {	
 
+						tpl = '<div id="gadwp-tablechart' + slug + '"></div>';
+
+						jQuery( '#gadwp-reports' + slug ).html( tpl );
+						jQuery( '#gadwp-reports' + slug ).hide();
+
+						postData.query = query;
+
+						jQuery.post( gadwpItemData.ajaxurl, postData, function ( response ) {
+							reports.tableChart( response );
+						} );
 					} else if ( query == 'trafficdetails' || query == 'technologydetails' ) {
 
 						tpl = '<div id="gadwp-orgchartpiecharts' + slug + '">';
@@ -972,6 +1000,9 @@ jQuery.fn.extend( {
 				if ( jQuery( '#gadwp-orgcharttablechart' + slug ).length > 0 && jQuery.isArray( reports.orgChartTableChartData ) ) {
 					reports.orgChartTableChart( reports.orgChartTableChartData );
 				}
+				if ( jQuery( '#gadwp-tablechart' + slug ).length > 0 && jQuery.isArray( reports.tableChartData ) ) {
+					reports.tableChart( reports.tableChartData );
+				}				
 			},
 
 			init : function () {

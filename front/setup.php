@@ -74,7 +74,7 @@ if ( ! class_exists( 'GADWP_Frontend_Setup' ) ) {
 						'1095daysAgo' =>  sprintf( _n( "%s Year", "%s Years", 3, 'google-analytics-dashboard-for-wp' ), __('Three', 'google-analytics-dashboard-for-wp') ),
 					),
 					'reportList' => array(
-						'uniquePageviews' => __( "Unique Views", 'google-analytics-dashboard-for-wp' ),
+						'sessions' => __( "Sessions", 'google-analytics-dashboard-for-wp' ),
 						'users' => __( "Users", 'google-analytics-dashboard-for-wp' ),
 						'organicSearches' => __( "Organic", 'google-analytics-dashboard-for-wp' ),
 						'pageviews' => __( "Page Views", 'google-analytics-dashboard-for-wp' ),
@@ -91,7 +91,7 @@ if ( ! class_exists( 'GADWP_Frontend_Setup' ) ) {
 							__( "Visitor Type", 'google-analytics-dashboard-for-wp' ),
 							__( "Search Engines", 'google-analytics-dashboard-for-wp' ),
 							__( "Social Networks", 'google-analytics-dashboard-for-wp' ),
-							__( "Unique Views", 'google-analytics-dashboard-for-wp' ),
+							__( "Sessions", 'google-analytics-dashboard-for-wp' ),
 							__( "Users", 'google-analytics-dashboard-for-wp' ),
 							__( "Page Views", 'google-analytics-dashboard-for-wp' ),
 							__( "Bounce Rate", 'google-analytics-dashboard-for-wp' ),
