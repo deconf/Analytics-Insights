@@ -490,7 +490,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			foreach ( $data->getRows() as $row ) {
 				$path = esc_html( $row[0] );
 				$source = esc_html( $row[1] );
-				$gadwp_data[] = array( "<strong>" . __( "URI:", 'google-analytics-dashboard-for-wp' ) . "</strong> " . $path . "<br><strong>" . __( "Referrer:", 'google-analytics-dashboard-for-wp' ) . "</strong> " . $source, (int) $row[2] );
+				$gadwp_data[] = array( "<strong>" . __( "URI:", 'google-analytics-dashboard-for-wp' ) . "</strong> " . $path . "<br><strong>" . __( "Source:", 'google-analytics-dashboard-for-wp' ) . "</strong> " . $source, (int) $row[2] );
 			}
 			return $gadwp_data;
 		}
@@ -841,7 +841,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				return $this->get_contentpages( $projectId, $from, $to, $filter );
 			}
 			if ( $query == '404errors' ) {
-				$filter = "Page Not Found";
+				$filter = $this->gadwp->config->options['pagetitle_404'];
 				return $this->get_404errors( $projectId, $from, $to, $filter );
 			}
 			if ( $query == 'searches' ) {

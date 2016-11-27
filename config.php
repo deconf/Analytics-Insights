@@ -116,6 +116,9 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 			if ( isset( $options['ga_cookiename'] ) ) { // v4.9
 				$options['ga_cookiename'] = sanitize_text_field( $options['ga_cookiename'] );
 			}
+			if ( isset( $options['pagetitle_404'] ) ) { // v4.9
+				$options['pagetitle_404'] = sanitize_text_field( $options['pagetitle_404'] );
+			}
 			if ( isset( $options['ga_cookieexpires'] ) && $options['ga_cookieexpires'] ) { // v4.9
 				$options['ga_cookieexpires'] = (int) $options['ga_cookieexpires'];
 			}
@@ -354,6 +357,10 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 			}
 			if ( ! isset( $this->options['api_backoff'] ) ) { // v4.8.1.3
 				$this->options['api_backoff'] = 0;
+				$flag = true;
+			}
+			if ( ! isset( $this->options['pagetitle_404'] ) ) { // v4.9.4
+				$this->options['pagetitle_404'] = 'Page Not Found';
 				$flag = true;
 			}
 			if ( isset( $this->options['ga_tracking_code'] ) ) {

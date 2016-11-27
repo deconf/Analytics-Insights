@@ -274,6 +274,15 @@ final class GADWP_Settings {
                                 </td>
                             </tr>
                             <tr>
+                                <td colspan="2"><hr><?php echo "<h2>" . __( "404 Errors Report", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="gadwp-settings-title">
+									<?php echo __("404 Page Title contains:", 'google-analytics-dashboard-for-wp'); ?>
+									<input type="text" style="text-align: center;" name="options[pagetitle_404]" value="<?php echo esc_attr($options['pagetitle_404']); ?>" size="20">
+                                </td>
+                            </tr>
+                            <tr>
                                 <td colspan="2"><hr></td>
                             </tr>
                             <tr>
