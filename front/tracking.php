@@ -1,8 +1,8 @@
 <?php
 /**
- * Author: Alin Marcu 
+ * Author: Alin Marcu
  * Author URI: https://deconf.com
- * Copyright 2013 Alin Marcu 
+ * Copyright 2013 Alin Marcu
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -19,13 +19,16 @@ if ( ! class_exists( 'GADWP_Tracking' ) ) {
 
 		public function __construct() {
 			$this->gadwp = GADWP();
-			
+
 			add_action( 'wp_head', array( $this, 'tracking_code' ), 99 );
 			add_action( 'wp_enqueue_scripts', array( $this, 'load_scripts' ) );
 		}
 
 		public function load_scripts() {
-			if ( $this->gadwp->config->options['ga_event_tracking'] && ! wp_script_is( 'jquery' ) ) {
+			if ( $this->gadwp->config->options['ga_event_tracking'] ) {
+				if ( wp_script_is( 'jquery' ) ) {
+					wp_dequeue_script( 'jquery' );
+				}
 				wp_enqueue_script( 'jquery' );
 			}
 		}
