@@ -30,7 +30,7 @@ Google Analytics reports, in real-time, in your dashboard screen:
 The Google Analytics reports you need, on your dashboard, in your All Posts and All Pages screens, and on site's frontend:  
 
 - Sessions, organic searches, page views, bounce rate analytics reports
-- Locations, pages, referrers, keywords analytics reports
+- Locations, pages, referrers, keywords, 404 errors analytics reports
 - Traffic channels, social networks, traffic mediums, search engines analytics reports
 - Device categories, browsers, operating systems, screen resolutions, mobile brands analytics reports 
 - User access control over analytics reports
@@ -64,6 +64,7 @@ With Google Analytics Dashboard for WP you can use custom dimensions to track:
 
 - Authors
 - Publication year
+- Publication month
 - Categories
 - Tags
 - User engagement
