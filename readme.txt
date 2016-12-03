@@ -137,6 +137,10 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 
 == Changelog ==
 
+= 4.9.4.1 =
+* Bug Fixes
+	* Correction of some files that have mixed endings, thanks to: http://www.github.com/edwarddekker
+
 = 4.9.4 =
 * Enhancements: 
 	* always load analytics.js over SSL
