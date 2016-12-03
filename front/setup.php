@@ -53,11 +53,11 @@ if ( ! class_exists( 'GADWP_Frontend_Setup' ) ) {
 
 				wp_enqueue_style( "wp-jquery-ui-dialog" );
 
-				wp_register_script( 'googlejsapi', 'https://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22visualization%22%2C%22version%22%3A%221%22%2C%22language%22%3A%22' . $lang . '%22%2C%22packages%22%3A%5B%22corechart%22%2C%20%22table%22%2C%20%22orgchart%22%2C%20%22geochart%22%5D%7D%5D%7D%27', array(), null );
+				wp_register_script( 'googlecharts', 'https://www.gstatic.com/charts/loader.js', array(), null );
 
 				wp_enqueue_script( 'gadwp-nprogress', GADWP_URL . 'common/nprogress/nprogress.js', array( 'jquery' ), GADWP_CURRENT_VERSION );
 
-				wp_enqueue_script( 'gadwp-frontend-item-reports', GADWP_URL . 'common/js/reports.js', array( 'gadwp-nprogress', 'googlejsapi', 'jquery', 'jquery-ui-dialog' ), GADWP_CURRENT_VERSION, true );
+				wp_enqueue_script( 'gadwp-frontend-item-reports', GADWP_URL . 'common/js/reports.js', array( 'gadwp-nprogress', 'googlecharts', 'jquery', 'jquery-ui-dialog' ), GADWP_CURRENT_VERSION, true );
 
 				/* @formatter:off */
 				wp_localize_script( 'gadwp-frontend-item-reports', 'gadwpItemData', array(
@@ -109,6 +109,7 @@ if ( ! class_exists( 'GADWP_Frontend_Setup' ) ) {
 					),
 					'colorVariations' => GADWP_Tools::variations( $this->gadwp->config->options['ga_dash_style'] ),
 					'region' => $region,
+					'mapsApiKey' => $this->gadwp->config->options['maps_api_key'],
 					'language' => get_bloginfo( 'language' ),
 					'filter' => $_SERVER["REQUEST_URI"],
 					'viewList' => false,

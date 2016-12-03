@@ -116,8 +116,11 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 			if ( isset( $options['ga_cookiename'] ) ) { // v4.9
 				$options['ga_cookiename'] = sanitize_text_field( $options['ga_cookiename'] );
 			}
-			if ( isset( $options['pagetitle_404'] ) ) { // v4.9
+			if ( isset( $options['pagetitle_404'] ) ) { // v4.9.4
 				$options['pagetitle_404'] = sanitize_text_field( $options['pagetitle_404'] );
+			}
+			if ( isset( $options['maps_api_key'] ) ) { // v4.9.4
+				$options['maps_api_key'] = sanitize_text_field( $options['maps_api_key'] );
 			}
 			if ( isset( $options['ga_cookieexpires'] ) && $options['ga_cookieexpires'] ) { // v4.9
 				$options['ga_cookieexpires'] = (int) $options['ga_cookieexpires'];
@@ -361,6 +364,10 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 			}
 			if ( ! isset( $this->options['pagetitle_404'] ) ) { // v4.9.4
 				$this->options['pagetitle_404'] = 'Page Not Found';
+				$flag = true;
+			}
+			if ( ! isset( $this->options['maps_api_key'] ) ) { // v4.9.4
+				$this->options['maps_api_key'] = '';
 				$flag = true;
 			}
 			if ( isset( $this->options['ga_tracking_code'] ) ) {

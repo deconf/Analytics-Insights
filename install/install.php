@@ -64,6 +64,8 @@ class GADWP_Install {
 			$options['ga_cookiename'] = '';
 			$options['ga_cookieexpires'] = '';
 			$option['pagetitle_404'] = 'Page Not Found';
+			$option['maps_api_key'] = '';
+
 		} else {
 			$options = array();
 			$options['ga_dash_clientid'] = get_option( 'ga_dash_clientid' );
@@ -116,6 +118,7 @@ class GADWP_Install {
 			$options['ga_cookiename'] = '';
 			$options['ga_cookieexpires'] = '';
 			$option['pagetitle_404'] = 'Page Not Found';
+			$option['maps_api_key'] = '';
 
 			delete_option( 'ga_dash_clientid' );
 			delete_option( 'ga_dash_clientsecret' );

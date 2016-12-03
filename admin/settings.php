@@ -274,6 +274,12 @@ final class GADWP_Settings {
                                 </td>
                             </tr>
                             <tr>
+                                <td colspan="2" class="gadwp-settings-title">
+									<?php echo __("Maps API Key:", 'google-analytics-dashboard-for-wp'); ?>
+									<input type="text" style="text-align: center;" name="options[maps_api_key]" value="<?php echo esc_attr($options['maps_api_key']); ?>" size="50">
+                                </td>
+                            </tr>
+                            <tr>
                                 <td colspan="2"><hr><?php echo "<h2>" . __( "404 Errors Report", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
                             </tr>
                             <tr>

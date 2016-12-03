@@ -140,6 +140,7 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 * Enhancements: 
 	* always load analytics.js over SSL
 	* gadwp_backenditem_uri filter passes post ID as an additional variable
+	* added support for Google Maps API key
 * New Features:
 	* a new year-month dimension is now available, to allow further segmentation of the most successful publication years, by month; props by [Antoine Girard](https://github.com/thetoine)
 	* a new 404 Errors report designed to analyze and easily identify the source of 404 errors

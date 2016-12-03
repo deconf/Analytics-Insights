@@ -17,7 +17,7 @@ final class GADWP_Frontend_Widget extends WP_Widget {
 
 	public function __construct() {
 		$this->gadwp = GADWP();
-		
+
 		parent::__construct( 'gadwp-frontwidget-report', __( 'Google Analytics Dashboard', 'google-analytics-dashboard-for-wp' ), array( 'description' => __( "Will display your google analytics stats in a widget", 'google-analytics-dashboard-for-wp' ) ) );
 		// Frontend Styles
 		if ( is_active_widget( false, false, $this->id_base, true ) ) {
@@ -29,10 +29,10 @@ final class GADWP_Frontend_Widget extends WP_Widget {
 		$lang = get_bloginfo( 'language' );
 		$lang = explode( '-', $lang );
 		$lang = $lang[0];
-		
+
 		wp_enqueue_style( 'gadwp-front-widget', GADWP_URL . 'front/css/widgets.css', null, GADWP_CURRENT_VERSION );
 		wp_enqueue_script( 'gadwp-front-widget', GADWP_URL . 'front/js/widgets.js', array( 'jquery' ), GADWP_CURRENT_VERSION );
-		wp_enqueue_script( 'googlejsapi', 'https://www.google.com/jsapi?autoload=%7B%22modules%22%3A%5B%7B%22name%22%3A%22visualization%22%2C%22version%22%3A%221%22%2C%22language%22%3A%22' . $lang . '%22%2C%22packages%22%3A%5B%22corechart%22%2C%20%22table%22%2C%20%22orgchart%22%2C%20%22geochart%22%5D%7D%5D%7D%27', array(), null );
+		wp_enqueue_script( 'googlecharts', 'https://www.gstatic.com/charts/loader.js', array(), null );
 	}
 
 	public function widget( $args, $instance ) {
@@ -43,7 +43,7 @@ final class GADWP_Frontend_Widget extends WP_Widget {
 		if ( ! empty( $widget_title ) ) {
 			echo $args['before_title'] . $widget_title . $args['after_title'];
 		}
-		
+
 		if ( isset( $this->gadwp->config->options['ga_dash_style'] ) ) {
 			$css = "colors:['" . $this->gadwp->config->options['ga_dash_style'] . "','" . GADWP_Tools::colourVariator( $this->gadwp->config->options['ga_dash_style'], - 20 ) . "'],";
 			$color = $this->gadwp->config->options['ga_dash_style'];
@@ -90,7 +90,9 @@ final class GADWP_Frontend_Widget extends WP_Widget {
 		}
 		?>
 <script type="text/javascript">
-	jQuery( function () {
+	google.charts.load('current', {mapsApiKey: '<?php echo $this->gadwp->config->options['maps_api_key']; ?>', 'packages':['corechart']});
+	google.charts.setOnLoadCallback( GADWPWidgetLoad );
+	function GADWPWidgetLoad (){
 		jQuery.post("<?php echo admin_url( 'admin-ajax.php' ); ?>", {action: "ajax_frontwidget_report", gadwp_number: "<?php echo $this->number; ?>", gadwp_optionname: "<?php  echo $this->option_name; ?>" }, function(response){
 			if (!jQuery.isNumeric(response) && jQuery.isArray(response)){
 				if (jQuery("#gadwp-widgetchart")[0]){
@@ -105,7 +107,7 @@ final class GADWP_Frontend_Widget extends WP_Widget {
 				jQuery("#gadwp-widgetchart").html("<?php __( "This report is unavailable", 'google-analytics-dashboard-for-wp' ); ?> ("+response+")");
 			}
 		});
-	});
+	}
 	function gadwp_drawFrontWidgetChart(response) {
 		var data = google.visualization.arrayToDataTable(response);
 		var options = {

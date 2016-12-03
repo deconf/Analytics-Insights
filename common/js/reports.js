@@ -8,6 +8,9 @@
 
 "use strict";
 
+google.charts.load('current', {mapsApiKey: gadwpItemData.mapsApiKey, 'packages':['corechart', 'table', 'orgchart', 'geochart']});
+google.charts.setOnLoadCallback( GADWPReportLoad );
+
 // Get the numeric ID
 gadwpItemData.getID = function ( item ) {
 	if ( gadwpItemData.scope == 'admin-item' ) {
@@ -171,6 +174,7 @@ jQuery.fn.extend( {
 		}
 
 		reports = {
+			oldViewPort: 0,	
 			orgChartTableChartData : '',
 			tableChartData : '',
 			orgChartPieChartsData : '',
@@ -901,8 +905,9 @@ jQuery.fn.extend( {
 							reports.orgChartTableChart( response );
 						} );
 					} else if ( query == '404errors' ) {	
-
-						tpl = '<div id="gadwp-tablechart' + slug + '"></div>';
+						tpl = '<div id="gadwp-404tablechart' + slug + '">';	
+						tpl += '<div id="gadwp-tablechart' + slug + '"></div>';
+						tpl += '</div>';
 
 						jQuery( '#gadwp-reports' + slug ).html( tpl );
 						jQuery( '#gadwp-reports' + slug ).hide();
@@ -1000,7 +1005,7 @@ jQuery.fn.extend( {
 				if ( jQuery( '#gadwp-orgcharttablechart' + slug ).length > 0 && jQuery.isArray( reports.orgChartTableChartData ) ) {
 					reports.orgChartTableChart( reports.orgChartTableChartData );
 				}
-				if ( jQuery( '#gadwp-tablechart' + slug ).length > 0 && jQuery.isArray( reports.tableChartData ) ) {
+				if ( jQuery( '#gadwp-404tablechart' + slug ).length > 0 && jQuery.isArray( reports.tableChartData ) ) {
 					reports.tableChart( reports.tableChartData );
 				}				
 			},
@@ -1028,7 +1033,11 @@ jQuery.fn.extend( {
 				reports.render( jQuery( '#gadwp-sel-view' + slug ).val(), jQuery( '#gadwp-sel-period' + slug ).val(), jQuery( '#gadwp-sel-report' + slug ).val() );
 
 				jQuery( window ).resize( function () {
-					reports.refresh();
+					var diff = jQuery(window).width() - reports.oldViewPort; 
+					if ( ( diff < -5 ) || ( diff > 5 ) ) {
+						reports.oldViewPort = jQuery(window).width();
+						reports.refresh(); //refresh only on over 5px viewport width changes
+					}
 				} );
 			}
 		}
@@ -1074,7 +1083,7 @@ jQuery.fn.extend( {
 	}
 } );
 
-jQuery( document ).ready( function () {
+function GADWPReportLoad () {
 	if ( gadwpItemData.scope == 'admin-widgets' ) {
 		jQuery( '#gadwp-window-1' ).gadwpItemReport( 1 );
 	} else {
@@ -1095,4 +1104,4 @@ jQuery( document ).ready( function () {
 	jQuery( document ).on( "dialogopen", ".ui-dialog", function ( event, ui ) {
 		gadwpItemData.responsiveDialog();
 	} );
-} );
+}
