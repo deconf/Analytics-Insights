@@ -140,6 +140,7 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 = 4.9.4.1 =
 * Bug Fixes
 	* correction of some files with mixed endings, props by [Edward Dekker](http://www.github.com/edwarddekker) 
+	* only load the necessary resources for frontend widget
 
 = 4.9.4 =
 * Enhancements: 
