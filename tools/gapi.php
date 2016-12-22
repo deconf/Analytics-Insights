@@ -37,8 +37,13 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			$config->setCacheClass( 'Google_Cache_Null' );
 			if ( function_exists( 'curl_version' ) ) {
 				$curlversion = curl_version();
+				$curl_options = array();
 				if ( isset( $curlversion['version'] ) && ( version_compare( PHP_VERSION, '5.3.0' ) >= 0 ) && version_compare( $curlversion['version'], '7.10.8' ) >= 0 && defined( 'GADWP_IP_VERSION' ) && GADWP_IP_VERSION ) {
-					$config->setClassConfig( 'Google_IO_Curl', array( 'options' => array( CURLOPT_IPRESOLVE => GADWP_IP_VERSION ) ) ); // Force CURL_IPRESOLVE_V4 or CURL_IPRESOLVE_V6
+					$curl_options[CURLOPT_IPRESOLVE] = GADWP_IP_VERSION; // Force CURL_IPRESOLVE_V4 or CURL_IPRESOLVE_V6
+				}
+				$curl_options = apply_filters( 'gadwp_curl_options', array() );
+				if ( !empty( $curl_options ) ) {
+					$config->setClassConfig( 'Google_IO_Curl', array( 'options' => $curl_options ) );
 				}
 			}
 			$this->client = new Google_Client( $config );
