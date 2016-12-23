@@ -41,7 +41,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				if ( isset( $curlversion['version'] ) && ( version_compare( PHP_VERSION, '5.3.0' ) >= 0 ) && version_compare( $curlversion['version'], '7.10.8' ) >= 0 && defined( 'GADWP_IP_VERSION' ) && GADWP_IP_VERSION ) {
 					$curl_options[CURLOPT_IPRESOLVE] = GADWP_IP_VERSION; // Force CURL_IPRESOLVE_V4 or CURL_IPRESOLVE_V6
 				}
-				$curl_options = apply_filters( 'gadwp_curl_options', array() );
+				$curl_options = apply_filters( 'gadwp_curl_options', $curl_options );
 				if ( !empty( $curl_options ) ) {
 					$config->setClassConfig( 'Google_IO_Curl', array( 'options' => $curl_options ) );
 				}
