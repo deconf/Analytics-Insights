@@ -141,6 +141,8 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 * Bug Fixes
 	* correction of some files with mixed endings, props by [Edward Dekker](http://www.github.com/edwarddekker) 
 	* only load the necessary resources for frontend widget
+* Enhancements:
+	* introducing the <strong>gadwp_curl_options</strong> filter to allow changes on CURL options for the Google_IO_Curl class, props by [Alexandre Simard](https://github.com/brocheafoin)  	
 
 = 4.9.4 =
 * Enhancements: 
