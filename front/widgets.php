@@ -90,7 +90,7 @@ final class GADWP_Frontend_Widget extends WP_Widget {
 		}
 		?>
 <script type="text/javascript">
-	google.charts.load('current', 'packages':['corechart']});
+	google.charts.load('current', {'packages':['corechart']});
 	google.charts.setOnLoadCallback( GADWPWidgetLoad );
 	function GADWPWidgetLoad (){
 		jQuery.post("<?php echo admin_url( 'admin-ajax.php' ); ?>", {action: "ajax_frontwidget_report", gadwp_number: "<?php echo $this->number; ?>", gadwp_optionname: "<?php  echo $this->option_name; ?>" }, function(response){
