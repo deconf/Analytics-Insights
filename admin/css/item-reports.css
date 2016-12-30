@@ -59,8 +59,8 @@
 }
 
 [id^=gadwp-bottomstats-] .inside .small-box h3 {
-	font-family: 'Open Sans', sans-serif;
 	font-size: 1em;
+	font-weight: normal;
 	color: #777;
 	padding: 0px 5px 0px 5px;
 	margin: 0px 0px 0px 0px;
@@ -72,6 +72,7 @@
 [id^=gadwp-bottomstats-] .inside .small-box p {
 	font-size: 1.2em;
 	margin: 0px 0px 2px 0px;
+	color: black;
 }
 
 .gadwp-floatwraper {

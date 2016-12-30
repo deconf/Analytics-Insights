@@ -137,6 +137,10 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 
 == Changelog ==
 
+= 4.9.6 =
+* Enhancements:
+	* introducing average time on page, average page load time, average exit rate, and average session duration metrics
+	
 = 4.9.5 =
 * Enhancements:
 	* introducing the <strong>gadwp_curl_options</strong> filter to allow changes on CURL options for the Google_IO_Curl class, props by [Alexandre Simard](https://github.com/brocheafoin)  	

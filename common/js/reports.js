@@ -458,9 +458,12 @@ jQuery.fn.extend( {
 				jQuery( "#gdsessions" + slug ).html( data[ 0 ] );
 				jQuery( "#gdusers" + slug ).html( data[ 1 ] );
 				jQuery( "#gdpageviews" + slug ).html( data[ 2 ] );
-				jQuery( "#gdbouncerate" + slug ).html( data[ 3 ] + "%" );
+				jQuery( "#gdbouncerate" + slug ).html( data[ 3 ] );
 				jQuery( "#gdorganicsearch" + slug ).html( data[ 4 ] );
 				jQuery( "#gdpagespervisit" + slug ).html( data[ 5 ] );
+				jQuery( "#gdpagetime" + slug ).html( data[ 6 ] );
+				jQuery( "#gdpageload" + slug ).html( data[ 7 ] );
+				jQuery( "#gdsessionduration" + slug ).html( data[ 8 ] );
 			},
 
 			rtOnlyUniqueValues : function ( value, index, self ) {
@@ -973,6 +976,9 @@ jQuery.fn.extend( {
 						tpl += '<div class="small-box"><h3>' + gadwpItemData.i18n[ 8 ] + '</h3><p id="gdbouncerate' + slug + '">&nbsp;</p></div>';
 						tpl += '<div class="small-box"><h3>' + gadwpItemData.i18n[ 9 ] + '</h3><p id="gdorganicsearch' + slug + '">&nbsp;</p></div>';
 						tpl += '<div class="small-box"><h3>' + gadwpItemData.i18n[ 10 ] + '</h3><p id="gdpagespervisit' + slug + '">&nbsp;</p></div>';
+						tpl += '<div class="small-box"><h3>' + gadwpItemData.i18n[ 26 ] + '</h3><p id="gdpagetime' + slug + '">&nbsp;</p></div>';
+						tpl += '<div class="small-box"><h3>' + gadwpItemData.i18n[ 27 ] + '</h3><p id="gdpageload' + slug + '">&nbsp;</p></div>';
+						tpl += '<div class="small-box"><h3>' + gadwpItemData.i18n[ 28 ] + '</h3><p id="gdsessionduration' + slug + '">&nbsp;</p></div>';
 						tpl += '</div>';
 						tpl += '</div>';
 						tpl += '</div>';

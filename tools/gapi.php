@@ -341,6 +341,9 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				case 'organicSearches' :
 					$title = __( "Organic Searches", 'google-analytics-dashboard-for-wp' );
 					break;
+				case 'uniquePageviews' :
+					$title = __( "Unique Page Views", 'google-analytics-dashboard-for-wp' );
+					break;
 				default :
 					$title = __( "Sessions", 'google-analytics-dashboard-for-wp' );
 			}
@@ -409,15 +412,15 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			$options = array( 'dimensions' => null, 'quotaUser' => $this->managequota . 'p' . $projectId );
 			if ( $filter ) {
 				$options['filters'] = 'ga:pagePath==' . $filter;
-				$metrics = 'ga:sessions,ga:users,ga:pageviews,ga:BounceRate,ga:organicSearches,ga:pageviewsPerSession';
+				$metrics = 'ga:uniquePageviews,ga:users,ga:pageviews,ga:BounceRate,ga:organicSearches,ga:pageviewsPerSession,ga:avgTimeOnPage,ga:avgPageLoadTime,ga:exitRate';
 			} else {
-				$metrics = 'ga:sessions,ga:users,ga:pageviews,ga:BounceRate,ga:organicSearches,ga:pageviewsPerSession';
+				$metrics = 'ga:sessions,ga:users,ga:pageviews,ga:BounceRate,ga:organicSearches,ga:pageviewsPerSession,ga:avgTimeOnPage,ga:avgPageLoadTime,ga:avgSessionDuration';
 			}
 			$serial = 'qr3_' . $this->get_serial( $projectId . $from . $filter );
 			$data = $this->handle_corereports( $projectId, $from, $to, $metrics, $options, $serial );
 			if ( is_numeric( $data ) ) {
 				if ( $data == - 21 ) {
-					return array_fill( 0, 6, 0 );
+					return array_fill( 0, 9, 0 );
 				} else {
 					return $data;
 				}
@@ -431,10 +434,17 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			$gadwp_data[0] = number_format_i18n( $gadwp_data[0] );
 			$gadwp_data[1] = number_format_i18n( $gadwp_data[1] );
 			$gadwp_data[2] = number_format_i18n( $gadwp_data[2] );
-			$gadwp_data[3] = number_format_i18n( $gadwp_data[3], 2 );
+			$gadwp_data[3] = number_format_i18n( $gadwp_data[3], 2 ) . '%';
 			$gadwp_data[4] = number_format_i18n( $gadwp_data[4] );
 			$gadwp_data[5] = number_format_i18n( $gadwp_data[5], 2 );
-
+			$gadwp_data[6] = gmdate("H:i:s", $gadwp_data[6] );
+			$gadwp_data[7] = gmdate("H:i:s", $gadwp_data[7] );
+			if ( $filter ) {
+				$gadwp_data[8] = number_format_i18n( $gadwp_data[8], 2 ) . '%';
+			} else {
+				$gadwp_data[8] = gmdate("H:i:s", $gadwp_data[8] );
+			}
+			
 			return $gadwp_data;
 		}
 
@@ -830,7 +840,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			if ( empty( $projectId ) || ! is_numeric( $projectId ) ) {
 				wp_die( - 26 );
 			}
-			if ( in_array( $query, array( 'sessions', 'users', 'organicSearches', 'visitBounceRate', 'pageviews') ) ) {
+			if ( in_array( $query, array( 'sessions', 'users', 'organicSearches', 'visitBounceRate', 'pageviews', 'uniquePageviews' ) ) ) {
 				return $this->get_areachart_data( $projectId, $from, $to, $query, $filter );
 			}
 			if ( $query == 'bottomstats' ) {
