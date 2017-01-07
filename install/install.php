@@ -42,7 +42,6 @@ class GADWP_Install {
 			$options['ga_dash_remarketing'] = 0;
 			$options['ga_dash_frontend_stats'] = 0;
 			$options['ga_dash_network'] = 0;
-			$options['ga_dash_adsense'] = 0;
 			$options['ga_speed_samplerate'] = 1;
 			$options['ga_event_bouncerate'] = 0;
 			$options['ga_crossdomain_tracking'] = 0;

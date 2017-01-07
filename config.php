@@ -251,10 +251,6 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 				$this->options['ga_dash_remarketing'] = 0;
 				$flag = true;
 			}
-			if ( ! isset( $this->options['ga_dash_adsense'] ) ) {
-				$this->options['ga_dash_adsense'] = 0;
-				$flag = true;
-			}
 			if ( ! isset( $this->options['ga_speed_samplerate'] ) ) {
 				$this->options['ga_speed_samplerate'] = 1;
 				$flag = true;
@@ -411,6 +407,10 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 			}
 			if ( ! isset( $this->options['ga_cookieexpires'] ) ) { // v4.9
 				$this->options['ga_cookieexpires'] = '';
+				$flag = true;
+			}
+			if ( isset( $this->options['ga_dash_adsense'] ) ) { // v5.0
+				unset( $this->options['ga_dash_adsense'] );
 				$flag = true;
 			}
 

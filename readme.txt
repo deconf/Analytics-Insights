@@ -43,7 +43,6 @@ Installs the latest Google Analytics tracking code and allows full code customiz
 - IP address anonymization
 - Enhanced link attribution
 - Remarketing, demographics and interests tracking
-- Google AdSense linking
 - Page Speed sampling rate control
 - Cross domain tracking
 - Exclude user roles from tracking
@@ -137,9 +136,18 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 
 == Changelog ==
 
-= 4.9.6 =
+= 5.0 =
 * Enhancements:
-	* introducing average time on page, average page load time, average exit rate, and average session duration metrics
+	* complete redesign of the tracking component
+	* AdSense Linking feature was removed since the new linking procedure does not require a special code anymore
+	* dropping support for Classic Analytics (ga.js) since all properties were transfered to Universal Analytics
+	* Events are now tracked using a JS file instead of in-line JavaScript
+	* multiple improvements for events tracking accuracy 
+* New Features:
+
+= 4.9.6 =
+* New Features:
+	* introducing average time on page, average page load time, average exit rate, and average session duration
 	
 = 4.9.5 =
 * Enhancements:
