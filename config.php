@@ -58,78 +58,68 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 		}
 
 		// Validates data before storing
-		private static function validate_data( $options ) {
-			if ( isset( $options['ga_realtime_pages'] ) ) {
-				$options['ga_realtime_pages'] = (int) $options['ga_realtime_pages'];
-			}
-			if ( isset( $options['ga_crossdomain_tracking'] ) ) {
-				$options['ga_crossdomain_tracking'] = (int) $options['ga_crossdomain_tracking'];
-			}
-			if ( isset( $options['ga_crossdomain_list'] ) ) {
-				$options['ga_crossdomain_list'] = sanitize_text_field( $options['ga_crossdomain_list'] );
-			}
-			if ( isset( $options['ga_dash_clientid'] ) ) {
-				$options['ga_dash_clientid'] = sanitize_text_field( $options['ga_dash_clientid'] );
-			}
-			if ( isset( $options['ga_dash_clientsecret'] ) ) {
-				$options['ga_dash_clientsecret'] = sanitize_text_field( $options['ga_dash_clientsecret'] );
-			}
-			if ( isset( $options['ga_dash_style'] ) ) {
-				$options['ga_dash_style'] = sanitize_text_field( $options['ga_dash_style'] );
-			}
-			if ( isset( $options['ga_event_downloads'] ) ) {
-				if ( empty( $options['ga_event_downloads'] ) ) {
-					$options['ga_event_downloads'] = 'zip|mp3*|mpe*g|pdf|docx*|pptx*|xlsx*|rar*';
+		private function validate_data( $options ) {
+			/* @formatter:off */
+			$numerics = array( 	'ga_realtime_pages',
+								'ga_crossdomain_tracking',
+								'ga_author_dimindex',
+								'ga_category_dimindex',
+								'ga_tag_dimindex',
+								'ga_user_dimindex',
+								'ga_pubyear_dimindex',
+								'ga_pubyearmonth_dimindex',
+								'tm_author_var',
+								'tm_category_var',
+								'tm_tag_var',
+								'tm_user_var',
+								'tm_pubyear_var',
+								'tm_pubyearmonth_var',
+								'ga_aff_tracking',
+						);
+			foreach ( $numerics as $key ) {
+				if ( isset( $options[$key] ) ) {
+					$options[$key] = (int) $options[$key];
 				}
-				$options['ga_event_downloads'] = sanitize_text_field( $options['ga_event_downloads'] );
 			}
+
+			$texts = array( 'ga_crossdomain_list',
+							'ga_dash_clientid',
+							'ga_dash_clientsecret',
+							'ga_dash_style',
+							'ga_target_geomap',
+							'ga_cookiedomain',
+							'ga_cookiename',
+							'pagetitle_404',
+							'maps_api_key',
+							'tm_containerid',
+							'ga_event_downloads',
+							'ga_event_affiliates',
+					);
+			foreach ( $texts as $key ) {
+				if ( isset( $options[$key] ) ) {
+					$options[$key] = sanitize_text_field( $options[$key] );
+				}
+			}
+			/* @formatter:on */
+
+			if ( isset( $options['ga_event_downloads'] ) && empty( $options['ga_event_downloads'] ) ) {
+				$options['ga_event_downloads'] = 'zip|mp3*|mpe*g|pdf|docx*|pptx*|xlsx*|rar*';
+			}
+
+			if ( isset( $options['pagetitle_404'] ) && empty( $options['pagetitle_404'] ) ) {
+				$options['pagetitle_404'] = 'Page Not Found';
+			}
+
+			if ( isset( $options['ga_event_affiliates'] ) && empty( $options['ga_event_affiliates'] ) ) {
+				$options['ga_event_affiliates'] = '/out/';
+			}
+
 			if ( isset( $options['ga_speed_samplerate'] ) && ( $options['ga_speed_samplerate'] < 1 || $options['ga_speed_samplerate'] > 100 ) ) {
 				$options['ga_speed_samplerate'] = 1;
 			}
-			if ( isset( $options['ga_target_geomap'] ) ) {
-				$options['ga_target_geomap'] = sanitize_text_field( $options['ga_target_geomap'] );
-			}
-			if ( isset( $options['ga_author_dimindex'] ) ) {
-				$options['ga_author_dimindex'] = (int) $options['ga_author_dimindex'];
-			}
-			if ( isset( $options['ga_category_dimindex'] ) ) {
-				$options['ga_category_dimindex'] = (int) $options['ga_category_dimindex'];
-			}
-			if ( isset( $options['ga_tag_dimindex'] ) ) {
-				$options['ga_tag_dimindex'] = (int) $options['ga_tag_dimindex'];
-			}
-			if ( isset( $options['ga_user_dimindex'] ) ) {
-				$options['ga_user_dimindex'] = (int) $options['ga_user_dimindex'];
-			}
-			if ( isset( $options['ga_pubyear_dimindex'] ) ) {
-				$options['ga_pubyear_dimindex'] = (int) $options['ga_pubyear_dimindex'];
-			}
-			if ( isset( $options['ga_pubyearmonth_dimindex'] ) ) {
-				$options['ga_pubyearmonth_dimindex'] = (int) $options['ga_pubyearmonth_dimindex'];
-			}
-			if ( isset( $options['ga_aff_tracking'] ) ) {
-				$options['ga_aff_tracking'] = (int) $options['ga_aff_tracking'];
-			}
-			if ( isset( $options['ga_cookiedomain'] ) ) { // v4.9
-				$options['ga_cookiedomain'] = sanitize_text_field( $options['ga_cookiedomain'] );
-			}
-			if ( isset( $options['ga_cookiename'] ) ) { // v4.9
-				$options['ga_cookiename'] = sanitize_text_field( $options['ga_cookiename'] );
-			}
-			if ( isset( $options['pagetitle_404'] ) ) { // v4.9.4
-				$options['pagetitle_404'] = sanitize_text_field( $options['pagetitle_404'] );
-			}
-			if ( isset( $options['maps_api_key'] ) ) { // v4.9.4
-				$options['maps_api_key'] = sanitize_text_field( $options['maps_api_key'] );
-			}
+
 			if ( isset( $options['ga_cookieexpires'] ) && $options['ga_cookieexpires'] ) { // v4.9
 				$options['ga_cookieexpires'] = (int) $options['ga_cookieexpires'];
-			}
-			if ( isset( $options['ga_event_affiliates'] ) ) {
-				if ( empty( $options['ga_event_affiliates'] ) ) {
-					$options['ga_event_affiliates'] = '/out/';
-				}
-				$options['ga_event_affiliates'] = sanitize_text_field( $options['ga_event_affiliates'] );
 			}
 
 			$token = json_decode( $options['ga_dash_token'] ); // v4.8.2
@@ -235,182 +225,124 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 				GADWP_Tools::unset_cookie( 'default_dimension' );
 				GADWP_Tools::unset_cookie( 'default_view' );
 			}
-			if ( ! isset( $this->options['ga_enhanced_links'] ) ) {
-				$this->options['ga_enhanced_links'] = 0;
-				$flag = true;
+
+			/* @formatter:off */
+			$zeros = array( 	'ga_enhanced_links',
+								'ga_dash_network',
+								'ga_enhanced_excludesa',
+								'ga_dash_remarketing',
+								'ga_event_bouncerate',
+								'ga_author_dimindex',
+								'ga_tag_dimindex',
+								'ga_category_dimindex',
+								'ga_user_dimindex',
+								'ga_pubyear_dimindex',
+								'ga_pubyearmonth_dimindex',
+								'tm_author_var', // v5.0
+								'tm_category_var', // v5.0
+								'tm_tag_var', // v5.0
+								'tm_user_var', // v5.0
+								'tm_pubyear_var', // v5.0
+								'tm_pubyearmonth_var', // v5.0
+								'ga_crossdomain_tracking',
+								'api_backoff',  // v4.8.1.3
+								'ga_aff_tracking',
+								'ga_hash_tracking',
+								'switch_profile', // V4.7
+						);
+			foreach ( $zeros as $key ) {
+				if ( ! isset( $this->options[$key] ) ) {
+					$this->options[$key] = 0;
+					$flag = true;
+				}
 			}
-			if ( ! isset( $this->options['ga_dash_network'] ) ) {
-				$this->options['ga_dash_network'] = 0;
-				$flag = true;
+
+			if ( isset( $this->options['item_reports'] ) ) { // v4.8
+				$this->options['backend_item_reports'] = $this->options['item_reports'];
 			}
-			if ( ! isset( $this->options['ga_enhanced_excludesa'] ) ) {
-				$this->options['ga_dash_excludesa'] = 0;
-				$flag = true;
+			if ( isset( $this->options['ga_dash_frontend_stats'] ) ) { // v4.8
+				$this->options['frontend_item_reports'] = $this->options['ga_dash_frontend_stats'];
 			}
-			if ( ! isset( $this->options['ga_dash_remarketing'] ) ) {
-				$this->options['ga_dash_remarketing'] = 0;
-				$flag = true;
+			$unsets = array( 	'ga_dash_jailadmins', // v4.7
+								'ga_tracking_code',
+								'ga_dash_tableid', // v4.9
+								'ga_dash_frontend_keywords', // v4.8
+								'ga_dash_apikey', // v4.9.1.3
+								'ga_dash_default_metric', // v4.8.1
+								'ga_dash_default_dimension', // v4.8.1
+								'ga_dash_adsense', // v5.0
+								'ga_dash_frontend_stats', // v4.8
+								'item_reports', // v4.8
+			);
+			foreach ( $unsets as $key ) {
+				if ( isset( $this->options[$key] ) ) {
+					unset( $this->options[$key] );
+					$flag = true;
+				}
 			}
-			if ( ! isset( $this->options['ga_speed_samplerate'] ) ) {
-				$this->options['ga_speed_samplerate'] = 1;
-				$flag = true;
+
+			$empties = array( 	'ga_crossdomain_list',
+								'ga_cookiedomain',  // v4.9.4
+								'ga_cookiename',  // v4.9.4
+								'ga_cookieexpires',  // v4.9.4
+								'maps_api_key',  // v4.9.4
+								'tm_containerid', // v5.0
+			);
+			foreach ( $empties as $key ) {
+				if ( isset( $this->options[$key] ) ) {
+					$this->options[$key] = '';
+					$flag = true;
+				}
 			}
-			if ( ! isset( $this->options['automatic_updates_minorversion'] ) ) {
-				$this->options['automatic_updates_minorversion'] = 1;
-				$flag = true;
+
+			$ones = array( 	'ga_speed_samplerate',
+							'automatic_updates_minorversion',
+							'backend_item_reports', // v4.8
+							'dashboard_widget', // v4.7
+			);
+			foreach ( $ones as $key ) {
+				if ( isset( $this->options[$key] ) ) {
+					$this->options[$key] = 1;
+					$flag = true;
+				}
 			}
-			if ( ! isset( $this->options['ga_event_bouncerate'] ) ) {
-				$this->options['ga_event_bouncerate'] = 0;
-				$flag = true;
+
+			$arrays = array( 	'ga_dash_access_front',
+								'ga_dash_access_back',
+								'ga_dash_profile_list',
+								'ga_track_exclude',
+			);
+			foreach ( $arrays as $key ) {
+				if ( ! is_array( $this->options[$key] ) ) {
+					$this->options[$key] = array();
+					$flag = true;
+				}
 			}
-			if ( ! is_array( $this->options['ga_dash_access_front'] ) || empty( $this->options['ga_dash_access_front'] ) ) {
-				$this->options['ga_dash_access_front'] = array();
+			if ( empty( $this->options['ga_dash_access_front'] ) ) {
 				$this->options['ga_dash_access_front'][] = 'administrator';
-				$flag = true;
 			}
-
-			if ( ! is_array( $this->options['ga_dash_profile_list'] ) ) {
-				$this->options['ga_dash_profile_list'] = array();
-				$flag = true;
-			}
-
-			if ( ! is_array( $this->options['ga_dash_access_back'] ) || empty( $this->options['ga_dash_access_back'] ) ) {
-				$this->options['ga_dash_access_back'] = array();
+			if ( empty( $this->options['ga_dash_access_back'] ) ) {
 				$this->options['ga_dash_access_back'][] = 'administrator';
-				$flag = true;
 			}
-			if ( ! is_array( $this->options['ga_track_exclude'] ) ) {
-				$this->options['ga_track_exclude'] = array();
-				$flag = true;
-			}
-			if ( ! isset( $this->options['ga_crossdomain_tracking'] ) ) {
-				$this->options['ga_crossdomain_tracking'] = 0;
-				$flag = true;
-			}
-			if ( ! isset( $this->options['ga_crossdomain_list'] ) ) {
-				$this->options['ga_crossdomain_list'] = '';
-				$flag = true;
-			}
-			if ( ! isset( $this->options['ga_author_dimindex'] ) ) {
-				$this->options['ga_author_dimindex'] = 0;
-				$flag = true;
-			}
-			if ( ! isset( $this->options['ga_tag_dimindex'] ) ) {
-				$this->options['ga_tag_dimindex'] = 0;
-				$flag = true;
-			}
-			if ( ! isset( $this->options['ga_category_dimindex'] ) ) {
-				$this->options['ga_category_dimindex'] = 0;
-				$flag = true;
-			}
-			$options['ga_tag_dimindex'] = 0;
-			if ( ! isset( $this->options['ga_user_dimindex'] ) ) {
-				$this->options['ga_user_dimindex'] = 0;
-				$flag = true;
-			}
-			if ( ! isset( $this->options['ga_pubyear_dimindex'] ) ) {
-				$this->options['ga_pubyear_dimindex'] = 0;
-				$flag = true;
-			}
-			if ( ! isset( $this->options['ga_pubyearmonth_dimindex'] ) ) {
-				$this->options['ga_pubyearmonth_dimindex'] = 0;
-				$flag = true;
-			}
+			/* @formatter:on */
+
 			if ( ! isset( $this->options['ga_event_affiliates'] ) ) {
 				$this->options['ga_event_affiliates'] = '/out/';
 				$flag = true;
 			}
-			if ( ! isset( $this->options['ga_aff_tracking'] ) ) {
-				$this->options['ga_aff_tracking'] = 0;
+
+			if ( ! isset( $this->options['ga_event_downloads'] ) ) {
+				$this->options['ga_event_downloads'] = 'zip|mp3*|mpe*g|pdf|docx*|pptx*|xlsx*|rar*';
 				$flag = true;
 			}
-			if ( ! isset( $this->options['ga_hash_tracking'] ) ) {
-				$this->options['ga_hash_tracking'] = 0;
-				$flag = true;
-			}
-			if ( ! isset( $this->options['backend_item_reports'] ) ) { // v4.8
-				$this->options['backend_item_reports'] = 1;
-				$flag = true;
-			}
-			if ( isset( $this->options['ga_dash_default_metric'] ) ) { // v4.8.1
-				unset( $this->options['ga_dash_default_metric'] );
-				$flag = true;
-			}
-			if ( isset( $this->options['ga_dash_default_dimension'] ) ) { // v4.8.1
-				unset( $this->options['ga_dash_default_dimension'] );
-				$flag = true;
-			}
-			if ( isset( $this->options['item_reports'] ) ) { // v4.8
-				$this->options['backend_item_reports'] = $this->options['item_reports'];
-				unset( $this->options['item_reports'] );
-				$flag = true;
-			}
-			if ( isset( $this->options['ga_dash_frontend_stats'] ) ) { // v4.8
-				$this->options['frontend_item_reports'] = $this->options['ga_dash_frontend_stats'];
-				unset( $this->options['ga_dash_frontend_stats'] );
-				$flag = true;
-			}
-			if ( ! isset( $this->options['dashboard_widget'] ) ) { // v4.7
-				$this->options['dashboard_widget'] = 1;
-				$flag = true;
-			}
-			if ( ! isset( $this->options['api_backoff'] ) ) { // v4.8.1.3
-				$this->options['api_backoff'] = 0;
-				$flag = true;
-			}
+
 			if ( ! isset( $this->options['pagetitle_404'] ) ) { // v4.9.4
 				$this->options['pagetitle_404'] = 'Page Not Found';
 				$flag = true;
 			}
-			if ( ! isset( $this->options['maps_api_key'] ) ) { // v4.9.4
-				$this->options['maps_api_key'] = '';
-				$flag = true;
-			}
-			if ( isset( $this->options['ga_tracking_code'] ) ) {
-				unset( $this->options['ga_tracking_code'] );
-				$flag = true;
-			}
-			if ( isset( $this->options['ga_dash_tableid'] ) ) { // v4.9
-				unset( $this->options['ga_dash_tableid'] );
-				$flag = true;
-			}
-			if ( isset( $this->options['ga_dash_frontend_keywords'] ) ) { // v4.8
-				unset( $this->options['ga_dash_frontend_keywords'] );
-				$flag = true;
-			}
-			if ( isset( $this->options['ga_dash_apikey'] ) ) { // v4.9.1.3
-				unset( $this->options['ga_dash_apikey'] );
-				$flag = true;
-			}
-			if ( isset( $this->options['ga_dash_jailadmins'] ) ) { // v4.7
-				if ( isset( $this->options['ga_dash_jailadmins'] ) ) {
-					$this->options['switch_profile'] = 0;
-					unset( $this->options['ga_dash_jailadmins'] );
-					$flag = true;
-				} else {
-					$this->options['switch_profile'] = 1;
-					unset( $this->options['ga_dash_jailadmins'] );
-					$flag = true;
-				}
-			}
-			if ( ! isset( $this->options['ga_cookiedomain'] ) ) {
-				$this->options['ga_cookiedomain'] = '';
-				$flag = true;
-			}
-			if ( ! isset( $this->options['ga_cookiedomain'] ) ) { // v4.9
-				$this->options['ga_cookiedomain'] = '';
-				$flag = true;
-			}
-			if ( ! isset( $this->options['ga_cookiename'] ) ) { // v4.9
-				$this->options['ga_cookiename'] = '';
-				$flag = true;
-			}
-			if ( ! isset( $this->options['ga_cookieexpires'] ) ) { // v4.9
-				$this->options['ga_cookieexpires'] = '';
-				$flag = true;
-			}
-			if ( isset( $this->options['ga_dash_adsense'] ) ) { // v5.0
-				unset( $this->options['ga_dash_adsense'] );
+
+			if ( $this->options['ga_dash_tracking_type'] == "classic" ) { // v5.0
+				$this->options['ga_dash_tracking_type'] = "universal";
 				$flag = true;
 			}
 

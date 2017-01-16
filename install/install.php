@@ -64,6 +64,13 @@ class GADWP_Install {
 			$options['ga_cookieexpires'] = '';
 			$option['pagetitle_404'] = 'Page Not Found';
 			$option['maps_api_key'] = '';
+			$options['tm_author_var'] = 0;
+			$options['tm_category_var'] = 0;
+			$options['tm_tag_var'] = 0;
+			$options['tm_user_var'] = 0;
+			$option['tm_pubyear_var'] = 0;
+			$option['tm_pubyearmonth_var'] = 0;
+			$option['tm_containerid'] = '';
 
 		} else {
 			$options = array();
@@ -118,6 +125,13 @@ class GADWP_Install {
 			$options['ga_cookieexpires'] = '';
 			$option['pagetitle_404'] = 'Page Not Found';
 			$option['maps_api_key'] = '';
+			$options['tm_author_var'] = 0;
+			$options['tm_category_var'] = 0;
+			$options['tm_tag_var'] = 0;
+			$options['tm_user_var'] = 0;
+			$option['tm_pubyear_var'] = 0;
+			$option['tm_pubyearmonth_var'] = 0;
+			$option['tm_containerid'] = '';
 
 			delete_option( 'ga_dash_clientid' );
 			delete_option( 'ga_dash_clientsecret' );
