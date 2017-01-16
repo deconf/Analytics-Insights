@@ -8,7 +8,12 @@
 
 "use strict";
 
-google.charts.load('current', {mapsApiKey: gadwpItemData.mapsApiKey, 'packages':['corechart', 'table', 'orgchart', 'geochart']});
+if ( gadwpItemData.mapsApiKey ) {
+	google.charts.load('current', {mapsApiKey: gadwpItemData.mapsApiKey, 'packages':['corechart', 'table', 'orgchart', 'geochart']});	
+} else {
+	google.charts.load('current', {'packages':['corechart', 'table', 'orgchart', 'geochart']});
+}
+
 google.charts.setOnLoadCallback( GADWPReportLoad );
 
 // Get the numeric ID
