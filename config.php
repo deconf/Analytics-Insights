@@ -223,7 +223,7 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 				GADWP_Tools::clear_cache();
 				GADWP_Tools::delete_cache( 'last_error' );
 				if ( is_multisite() ) { // Cleanup errors and cookies on the entire network
-					foreach ( GADWP_Tools::get_sites( array( 'limit' => apply_filters( 'gadwp_sites_limit', 100 ) ) ) as $blog ) {
+					foreach ( GADWP_Tools::get_sites( array( 'number' => apply_filters( 'gadwp_sites_limit', 100 ) ) ) as $blog ) {
 						switch_to_blog( $blog['blog_id'] );
 						GADWP_Tools::delete_cache( 'gapi_errors' );
 						restore_current_blog();
