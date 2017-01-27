@@ -150,6 +150,7 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 	* introducing average time on page, average page load time, average exit rate, and average session duration metrics
 * Bug Fixes:
 	* use Google Maps API key only if available
+	* fixes gadwp_sites_limit filter
 	
 = 4.9.5 =
 * Enhancements:
