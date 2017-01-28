@@ -263,6 +263,7 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 			if ( isset( $this->options['ga_dash_frontend_stats'] ) ) { // v4.8
 				$this->options['frontend_item_reports'] = $this->options['ga_dash_frontend_stats'];
 			}
+
 			$unsets = array( 	'ga_dash_jailadmins', // v4.7
 								'ga_tracking_code',
 								'ga_dash_tableid', // v4.9
@@ -289,7 +290,7 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 								'tm_containerid', // v5.0
 			);
 			foreach ( $empties as $key ) {
-				if ( isset( $this->options[$key] ) ) {
+				if ( ! isset( $this->options[$key] ) ) {
 					$this->options[$key] = '';
 					$flag = true;
 				}
@@ -301,7 +302,7 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 							'dashboard_widget', // v4.7
 			);
 			foreach ( $ones as $key ) {
-				if ( isset( $this->options[$key] ) ) {
+				if ( ! isset( $this->options[$key] ) ) {
 					$this->options[$key] = 1;
 					$flag = true;
 				}
