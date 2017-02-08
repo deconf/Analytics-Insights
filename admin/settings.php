@@ -326,9 +326,6 @@ final class GADWP_Settings {
 		if ( ! $gadwp->config->options['ga_dash_tableid_jail'] ) {
 			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'google-analytics-dashboard-for-wp' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_errors_debugging', false ), __( 'Errors & Debug', 'google-analytics-dashboard-for-wp' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_settings', false ), __( 'authorize the plugin', 'google-analytics-dashboard-for-wp' ) ) ) );
 		}
-		if ( ! $options['ga_dash_tracking'] ) {
-			$message = "<div class='error'><p>" . __( "The tracking component is disabled. You should set <strong>Tracking Options</strong> to <strong>Enabled</strong>", 'google-analytics-dashboard-for-wp' ) . ".</p></div>";
-		}
 		?>
 <form name="ga_dash_form" method="post" action="<?php  esc_url($_SERVER['REQUEST_URI']); ?>">
     <div class="wrap">
@@ -339,7 +336,13 @@ final class GADWP_Settings {
             <div id="post-body-content">
                 <div class="settings-wrapper">
                     <div class="inside">
+                    	<?php if ( $options['ga_dash_tracking_type'] == 'universal' ) :?>
 						<?php $tabs = array( 'basic' => __( "Basic Settings", 'google-analytics-dashboard-for-wp' ), 'events' => __( "Events Tracking", 'google-analytics-dashboard-for-wp' ), 'custom' => __( "Custom Definitions", 'google-analytics-dashboard-for-wp' ), 'exclude' => __( "Exclude Tracking", 'google-analytics-dashboard-for-wp' ), 'advanced' => __( "Advanced Settings", 'google-analytics-dashboard-for-wp' ) );?>
+						<?php elseif ( $options['ga_dash_tracking_type'] == 'tagmanager' ) :?>
+						<?php $tabs = array( 'basic' => __( "Basic Settings", 'google-analytics-dashboard-for-wp' ), 'datalayervars' => __( "DataLayer Variables", 'google-analytics-dashboard-for-wp' ) );?>
+						<?php else :?>
+						<?php $tabs = array( 'basic' => __( "Basic Settings", 'google-analytics-dashboard-for-wp' ) );?>
+						<?php endif; ?>
 						<?php self::navigation_tabs( $tabs ); ?>
 						<?php if ( isset( $message ) ) : ?>
 							<?php echo $message; ?>
@@ -351,17 +354,18 @@ final class GADWP_Settings {
                                 </tr>
                                 <tr>
                                     <td class="gadwp-settings-title">
-                                        <label for="ga_dash_tracking"><?php _e("Tracking Options:", 'google-analytics-dashboard-for-wp' ); ?>
-	                                    </label>
+                                        <label for="ga_dash_tracking_type"><?php _e("Tracking Type:", 'google-analytics-dashboard-for-wp' ); ?>
+                                    	</label>
                                     </td>
                                     <td>
-                                        <select id="ga_dash_tracking" name="options[ga_dash_tracking]" onchange="this.form.submit()">
-                                            <option value="0" <?php selected( $options['ga_dash_tracking'], 0 ); ?>><?php _e("Disabled", 'google-analytics-dashboard-for-wp');?></option>
-                                            <option value="1" <?php selected( $options['ga_dash_tracking'], 1 ); ?>><?php _e("Enabled", 'google-analytics-dashboard-for-wp');?></option>
+                                        <select id="ga_dash_tracking_type" name="options[ga_dash_tracking_type]" onchange="this.form.submit()">
+                                        	<option value="universal" <?php selected( $options['ga_dash_tracking_type'], 'universal' ); ?>><?php _e("Analytics", 'google-analytics-dashboard-for-wp');?></option>
+                                            <option value="tagmanager" <?php selected( $options['ga_dash_tracking_type'], 'tagmanager' ); ?>><?php _e("Tag Manager", 'google-analytics-dashboard-for-wp');?></option>
+                                            <option value="disabled" <?php selected( $options['ga_dash_tracking_type'], 'disabled' ); ?>><?php _e("Disabled", 'google-analytics-dashboard-for-wp');?></option>
                                         </select>
                                     </td>
                                 </tr>
-								<?php if ($options['ga_dash_tracking']) : ?>
+								<?php if ($options['ga_dash_tracking_type'] != 'disabled') : ?>
 								<tr>
                                     <td class="gadwp-settings-title"></td>
                                     <td>
@@ -370,46 +374,6 @@ final class GADWP_Settings {
                                     </td>
                                 </tr>
 								<?php endif; ?>
-								<tr>
-                                    <td colspan="2">
-                                        <hr><?php echo "<h2>" . __( "Basic Tracking", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
-                                </tr>
-                                <tr>
-                                    <td class="gadwp-settings-title">
-                                        <label for="ga_dash_tracking_type"><?php _e("Tracking Type:", 'google-analytics-dashboard-for-wp' ); ?>
-                                    	</label>
-                                    </td>
-                                    <td>
-                                        <select id="ga_dash_tracking_type" name="options[ga_dash_tracking_type]">
-                                            <option value="classic" <?php selected( $options['ga_dash_tracking_type'], 'classic' ); ?>><?php _e("Classic Analytics", 'google-analytics-dashboard-for-wp');?></option>
-                                            <option value="universal" <?php selected( $options['ga_dash_tracking_type'], 'universal' ); ?>><?php _e("Universal Analytics", 'google-analytics-dashboard-for-wp');?></option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2" class="gadwp-settings-title">
-                                        <div class="button-primary gadwp-settings-switchoo">
-                                            <input type="checkbox" name="options[ga_dash_anonim]" value="1" class="gadwp-settings-switchoo-checkbox" id="ga_dash_anonim" <?php checked( $options['ga_dash_anonim'], 1 ); ?>>
-                                            <label class="gadwp-settings-switchoo-label" for="ga_dash_anonim">
-                                                <div class="gadwp-settings-switchoo-inner"></div>
-                                                <div class="gadwp-settings-switchoo-switch"></div>
-                                            </label>
-                                        </div>
-                                        <div class="switch-desc"><?php echo " ".__("anonymize IPs while tracking", 'google-analytics-dashboard-for-wp' );?></div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2" class="gadwp-settings-title">
-                                        <div class="button-primary gadwp-settings-switchoo">
-                                            <input type="checkbox" name="options[ga_dash_remarketing]" value="1" class="gadwp-settings-switchoo-checkbox" id="ga_dash_remarketing" <?php checked( $options['ga_dash_remarketing'], 1 ); ?>>
-                                            <label class="gadwp-settings-switchoo-label" for="ga_dash_remarketing">
-                                                <div class="gadwp-settings-switchoo-inner"></div>
-                                                <div class="gadwp-settings-switchoo-switch"></div>
-                                            </label>
-                                        </div>
-                                        <div class="switch-desc"><?php echo " ".__("enable remarketing, demographics and interests reports", 'google-analytics-dashboard-for-wp' );?></div>
-                                    </td>
-                                </tr>
                             </table>
                         </div>
                         <div id="gadwp-events">
@@ -571,6 +535,30 @@ final class GADWP_Settings {
                                     <td>
                                         <input type="number" id="ga_speed_samplerate" name="options[ga_speed_samplerate]" value="<?php echo (int)($options['ga_speed_samplerate']); ?>" max="100" min="1">
                                         %
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="gadwp-settings-title">
+                                        <div class="button-primary gadwp-settings-switchoo">
+                                            <input type="checkbox" name="options[ga_dash_anonim]" value="1" class="gadwp-settings-switchoo-checkbox" id="ga_dash_anonim" <?php checked( $options['ga_dash_anonim'], 1 ); ?>>
+                                            <label class="gadwp-settings-switchoo-label" for="ga_dash_anonim">
+                                                <div class="gadwp-settings-switchoo-inner"></div>
+                                                <div class="gadwp-settings-switchoo-switch"></div>
+                                            </label>
+                                        </div>
+                                        <div class="switch-desc"><?php echo " ".__("anonymize IPs while tracking", 'google-analytics-dashboard-for-wp' );?></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="gadwp-settings-title">
+                                        <div class="button-primary gadwp-settings-switchoo">
+                                            <input type="checkbox" name="options[ga_dash_remarketing]" value="1" class="gadwp-settings-switchoo-checkbox" id="ga_dash_remarketing" <?php checked( $options['ga_dash_remarketing'], 1 ); ?>>
+                                            <label class="gadwp-settings-switchoo-label" for="ga_dash_remarketing">
+                                                <div class="gadwp-settings-switchoo-inner"></div>
+                                                <div class="gadwp-settings-switchoo-switch"></div>
+                                            </label>
+                                        </div>
+                                        <div class="switch-desc"><?php echo " ".__("enable remarketing, demographics and interests reports", 'google-analytics-dashboard-for-wp' );?></div>
                                     </td>
                                 </tr>
                                 <tr>

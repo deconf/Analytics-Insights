@@ -24,7 +24,6 @@ class GADWP_Install {
 			$options['ga_dash_style'] = '#1e73be';
 			$options['switch_profile'] = 0;
 			$options['ga_dash_cachetime'] = 3600;
-			$options['ga_dash_tracking'] = 1;
 			$options['ga_dash_tracking_type'] = 'universal';
 			$options['ga_dash_default_ua'] = '';
 			$options['ga_dash_anonim'] = 0;
@@ -84,11 +83,6 @@ class GADWP_Install {
 			$options['ga_dash_style'] = '#1e73be';
 			$options['switch_profile'] = get_option( 'ga_dash_jailadmins' );
 			$options['ga_dash_cachetime'] = get_option( 'ga_dash_cachetime' );
-			if ( get_option( 'ga_dash_tracking' ) == 4 ) {
-				$options['ga_dash_tracking'] = 0;
-			} else {
-				$options['ga_dash_tracking'] = 1;
-			}
 			$options['ga_dash_tracking_type'] = get_option( 'ga_dash_tracking_type' );
 			$options['ga_dash_default_ua'] = get_option( 'ga_dash_default_ua' );
 			$options['ga_dash_anonim'] = get_option( 'ga_dash_anonim' );

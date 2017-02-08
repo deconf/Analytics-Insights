@@ -33,23 +33,18 @@ if ( ! class_exists( 'GADWP_Tracking' ) ) {
 				return;
 			}
 
-			// check if tracking is disabled
-			if ( $this->gadwp->config->options['ga_dash_tracking'] > 0 ) {
+			if ( $this->gadwp->config->options['ga_dash_tracking_type'] == "universal" && $this->gadwp->config->options['ga_dash_tableid_jail'] ) {
 
-				if ( $this->gadwp->config->options['ga_dash_tracking_type'] == "universal" && $this->gadwp->config->options['ga_dash_tableid_jail'] ) {
+				// Analytics
+				require_once 'tracking/analytics.php';
+				$this->analytics = new GADWP_Tracking_Analytics( $this->gadwp->config->options );
+			}
 
-					// Analytics
-					require_once 'tracking/analytics.php';
-					$this->analytics = new GADWP_Tracking_Analytics( $this->gadwp->config->options );
-				}
+			if ( $this->gadwp->config->options['ga_dash_tracking_type'] == "tagmanager" ) {
 
-				if ( $this->gadwp->config->options['ga_dash_tracking_type'] == "tagmanager" ) {
-
-					// Tag Manager
-					require_once 'tracking/tagmanager.php';
-					$this->tagmanager = new GADWP_Tracking_TagManager( $this->gadwp->config->options );
-				}
-
+				// Tag Manager
+				require_once 'tracking/tagmanager.php';
+				$this->tagmanager = new GADWP_Tracking_TagManager( $this->gadwp->config->options );
 			}
 		}
 	}

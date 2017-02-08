@@ -274,6 +274,7 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 								'ga_dash_adsense', // v5.0
 								'ga_dash_frontend_stats', // v4.8
 								'item_reports', // v4.8
+								'ga_dash_tracking', // v5.0
 			);
 			foreach ( $unsets as $key ) {
 				if ( isset( $this->options[$key] ) ) {
