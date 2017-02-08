@@ -4,7 +4,7 @@ Donate link: https://deconf.com/donate/
 Tags: stats,analytics,google analytics,dashboard,analytics dashboard,google analytics dashboard,google analytics plugin,google analytics widget,tracking,universal google analytics,realtime,multisite,gadwp
 Requires at least: 3.5
 Tested up to: 4.7.2
-Stable tag: 4.9.6
+Stable tag: 4.9.6.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -137,6 +137,10 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 
 == Changelog ==
 
+= 4.9.6.1 =
+* Enhancements:
+	* enable anonimization for all hits instead of single hits to avoid false-positives from IP Anonymization checking tools
+	
 = 4.9.6 =
 * Enhancements:
 	* introducing average time on page, average page load time, average exit rate, and average session duration metrics

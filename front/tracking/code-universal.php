@@ -125,11 +125,15 @@ if ( $this->gadwp->config->options['ga_user_dimindex'] ) {
   ga('set', 'dimension<?php echo (int)$this->gadwp->config->options ['ga_user_dimindex']; ?>', '<?php echo is_user_logged_in()?'registered':'guest'; ?>');
 <?php
 }
-do_action( 'ga_dash_addtrackingcode' );
 if ( $this->gadwp->config->options['ga_dash_anonim'] ) {
-	?>  ga('send', 'pageview', {'anonymizeIp': true});<?php } else {?>  ga('send', 'pageview');
+	?>
+  ga('set', 'anonymizeIp', true);
 <?php
 }
+do_action( 'ga_dash_addtrackingcode' );
+?>
+  ga('send', 'pageview');
+<?php
 if ( $this->gadwp->config->options['ga_dash_adsense'] ) {
 	?>
 
