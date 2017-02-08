@@ -145,6 +145,10 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 	* multiple improvements for events tracking accuracy 
 * New Features:
 
+= 4.9.6.1 =
+* Enhancements:
+	* enable anonimization for all hits instead of single hits to avoid false-positives from IP Anonymization checking tools
+
 = 4.9.6 =
 * Enhancements:
 	* introducing average time on page, average page load time, average exit rate, and average session duration metrics
