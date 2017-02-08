@@ -139,7 +139,7 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 
 = 4.9.6.1 =
 * Enhancements:
-	* enable anonimization for all hits instead of single hits to avoid false-positives from IP Anonymization checking tools
+	* enable anonymization for all hits instead of single hits to avoid false-positives from IP Anonymization checking tools
 	
 = 4.9.6 =
 * Enhancements:
