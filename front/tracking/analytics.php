@@ -73,31 +73,24 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 			$profile = GADWP_Tools::get_selected_profile( $options['ga_dash_profile_list'], $options['ga_dash_tableid_jail'] );
 
 			$parameters = array();
-
 			$parameters['trackingId'] = esc_html( $profile[2] );
-
 			if ( $options['ga_speed_samplerate'] != 1 ) {
 				$parameters['siteSpeedSampleRate'] = (int) $options['ga_speed_samplerate'];
 			}
-
 			if ( $options['ga_crossdomain_tracking'] && $options['ga_crossdomain_list'] != '' ) {
 				$parameters['allowLinker'] = 'true';
 			}
-
 			if ( ! empty( $options['ga_cookiedomain'] ) ) {
 				$parameters['cookieDomain'] = $options['ga_cookiedomain'];
 			} else {
 				$parameters['cookieDomain'] = 'auto';
 			}
-
 			if ( ! empty( $options['ga_cookiename'] ) ) {
 				$parameters['cookieName'] = $options['ga_cookiename'];
 			}
-
 			if ( ! empty( $options['ga_cookieexpires'] ) ) {
 				$parameters['cookieExpires'] = (int) $options['ga_cookieexpires'];
 			}
-
 			$this->add( 'create', $parameters );
 
 			if ( $options['ga_crossdomain_tracking'] && $options['ga_crossdomain_list'] != '' ) {
@@ -170,13 +163,13 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 				$index = 'dimension' . (int) $options['ga_user_dimindex'];
 				$parameters[$index] = is_user_logged_in() ? 'registered' : 'guest';
 			}
+			if ( $options['ga_dash_anonim'] ) {
+				$parameters['anonymizeIp'] = 'true';
+			}
 			$this->add( 'set', $parameters );
 
 			$parameters = array();
 			$parameters['hitType'] = 'pageview';
-			if ( $options['ga_dash_anonim'] ) {
-				$parameters['anonymizeIp'] = 'true';
-			}
 			$this->add( 'send', $parameters );
 
 			do_action( 'gadwp_analytics_commands' );
