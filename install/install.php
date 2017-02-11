@@ -69,7 +69,10 @@ class GADWP_Install {
 			$options['tm_user_var'] = 0;
 			$option['tm_pubyear_var'] = 0;
 			$option['tm_pubyearmonth_var'] = 0;
-			$option['tm_containerid'] = '';
+			$option['web_containerid'] = '';
+			$option['amp_containerid'] = '';
+			$option['amp_tracking_tagmanager'] = 0;
+			$option['amp_tracking_analytics'] = 0;
 
 		} else {
 			$options = array();
@@ -125,7 +128,10 @@ class GADWP_Install {
 			$options['tm_user_var'] = 0;
 			$option['tm_pubyear_var'] = 0;
 			$option['tm_pubyearmonth_var'] = 0;
-			$option['tm_containerid'] = '';
+			$option['web_containerid'] = '';
+			$option['amp_containerid'] = '';
+			$option['amp_tracking_tagmanager'] = 0;
+			$option['amp_tracking_analytics'] = 0;
 
 			delete_option( 'ga_dash_clientid' );
 			delete_option( 'ga_dash_clientsecret' );

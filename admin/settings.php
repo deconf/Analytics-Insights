@@ -28,6 +28,8 @@ final class GADWP_Settings {
 				$options['ga_crossdomain_tracking'] = 0;
 				$options['ga_aff_tracking'] = 0;
 				$options['ga_hash_tracking'] = 0;
+				$options['amp_tracking_analytics'] = 0;
+				$options['amp_tracking_tagmanager'] = 0;
 				if ( isset( $_POST['options']['ga_tracking_code'] ) ) {
 					$new_options['ga_tracking_code'] = trim( $new_options['ga_tracking_code'], "\t" );
 				}
@@ -339,7 +341,7 @@ final class GADWP_Settings {
                     	<?php if ( $options['ga_dash_tracking_type'] == 'universal' ) :?>
 						<?php $tabs = array( 'basic' => __( "Basic Settings", 'google-analytics-dashboard-for-wp' ), 'events' => __( "Events Tracking", 'google-analytics-dashboard-for-wp' ), 'custom' => __( "Custom Definitions", 'google-analytics-dashboard-for-wp' ), 'exclude' => __( "Exclude Tracking", 'google-analytics-dashboard-for-wp' ), 'advanced' => __( "Advanced Settings", 'google-analytics-dashboard-for-wp' ) );?>
 						<?php elseif ( $options['ga_dash_tracking_type'] == 'tagmanager' ) :?>
-						<?php $tabs = array( 'basic' => __( "Basic Settings", 'google-analytics-dashboard-for-wp' ), 'tmdatalayervars' => __( "DataLayer Variables", 'google-analytics-dashboard-for-wp' ), 'exclude' => __( "Exclude Tracking", 'google-analytics-dashboard-for-wp' ) );?>
+						<?php $tabs = array( 'basic' => __( "Basic Settings", 'google-analytics-dashboard-for-wp' ), 'tmdatalayervars' => __( "DataLayer Variables", 'google-analytics-dashboard-for-wp' ), 'exclude' => __( "Exclude Tracking", 'google-analytics-dashboard-for-wp' ), 'tmadvanced' => __( "Advanced Settings", 'google-analytics-dashboard-for-wp' ) );?>
 						<?php else :?>
 						<?php $tabs = array( 'basic' => __( "Basic Settings", 'google-analytics-dashboard-for-wp' ) );?>
 						<?php endif; ?>
@@ -376,11 +378,11 @@ final class GADWP_Settings {
                                 <?php elseif ($options['ga_dash_tracking_type'] == 'tagmanager') : ?>
                                 <tr>
                                     <td class="gadwp-settings-title">
-                                        <label for="ga_dash_tracking_type"><?php _e("Container ID:", 'google-analytics-dashboard-for-wp' ); ?>
+                                        <label for="ga_dash_tracking_type"><?php _e("Web Container ID:", 'google-analytics-dashboard-for-wp' ); ?>
                                     	</label>
                                     </td>
                                     <td>
-										<input type="text" name="options[tm_containerid]" value="<?php echo esc_attr($options['tm_containerid']); ?>" size="11">
+										<input type="text" name="options[web_containerid]" value="<?php echo esc_attr($options['web_containerid']); ?>" size="15">
                                     </td>
                                 </tr>
 								<?php endif; ?>
@@ -675,6 +677,21 @@ final class GADWP_Settings {
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td colspan="2"><?php echo "<h2>" . __( "Accelerated Mobile Pages (AMP)", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="gadwp-settings-title">
+                                        <div class="button-primary gadwp-settings-switchoo">
+                                            <input type="checkbox" name="options[amp_tracking_analytics]" value="1" class="gadwp-settings-switchoo-checkbox" id="amp_tracking_analytics" <?php checked( $options['amp_tracking_analytics'], 1 ); ?>>
+                                            <label class="gadwp-settings-switchoo-label" for="amp_tracking_analytics">
+                                                <div class="gadwp-settings-switchoo-inner"></div>
+                                                <div class="gadwp-settings-switchoo-switch"></div>
+                                            </label>
+                                        </div>
+                                        <div class="switch-desc"><?php echo " ".__("enable tracking for Accelerated Mobile Pages (AMP)", 'google-analytics-dashboard-for-wp' );?></div>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td colspan="2"><?php echo "<h2>" . __( "Cross-domain Tracking", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
                                 </tr>
                                 <tr>
@@ -727,6 +744,34 @@ final class GADWP_Settings {
                                     <td>
                                         <input type="text" id="ga_cookieexpires" name="options[ga_cookieexpires]" value="<?php echo esc_attr($options['ga_cookieexpires']); ?>" size="10">
                                         seconds
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="gadwp-tmadvanced">
+                            <table class="gadwp-settings-options">
+                                <tr>
+                                    <td colspan="2"><?php echo "<h2>" . __( "Accelerated Mobile Pages (AMP)", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="gadwp-settings-title">
+                                        <div class="button-primary gadwp-settings-switchoo">
+                                            <input type="checkbox" name="options[amp_tracking_tagmanager]" value="1" class="gadwp-settings-switchoo-checkbox" id="amp_tracking_tagmanager" <?php checked( $options['amp_tracking_tagmanager'], 1 ); ?>>
+                                            <label class="gadwp-settings-switchoo-label" for="amp_tracking_tagmanager">
+                                                <div class="gadwp-settings-switchoo-inner"></div>
+                                                <div class="gadwp-settings-switchoo-switch"></div>
+                                            </label>
+                                        </div>
+                                        <div class="switch-desc"><?php echo " ".__("enable tracking for Accelerated Mobile Pages (AMP)", 'google-analytics-dashboard-for-wp' );?></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="gadwp-settings-title">
+                                        <label for="ga_dash_tracking_type"><?php _e("AMP Container ID:", 'google-analytics-dashboard-for-wp' ); ?>
+                                    	</label>
+                                    </td>
+                                    <td>
+										<input type="text" name="options[amp_containerid]" value="<?php echo esc_attr($options['amp_containerid']); ?>" size="15">
                                     </td>
                                 </tr>
                             </table>

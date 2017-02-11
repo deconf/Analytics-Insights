@@ -15,16 +15,19 @@ if ( ! class_exists( 'GADWP_Tracking_TagManager' ) ) {
 
 	class GADWP_Tracking_TagManager {
 
-		private $containerid;
+		private $gadwp;
 
 		private $datalayer;
 
-		public function __construct( $options ) {
-			$this->options = $options;
-
-			$this->containerid = $this->options['tm_containerid'];
-
+		public function __construct() {
+			$this->gadwp = GADWP();
+			$this->gadwp->config->options['amp_containerid'] = "GTM-MDK2CZK";
 			add_action( 'wp_head', array( $this, 'output' ), 99 );
+
+			if ( $this->gadwp->config->options['amp_tracking_tagmanager'] && $this->gadwp->config->options['amp_containerid'] ) {
+				add_action( 'amp_post_template_head', array( $this, 'amp_add_analytics_script' ) );
+				add_action( 'amp_post_template_footer', array( $this, 'amp_output' ) );
+			}
 		}
 
 		private function add_var( $name, $value ) {
@@ -34,29 +37,29 @@ if ( ! class_exists( 'GADWP_Tracking_TagManager' ) ) {
 		private function build_datalayer() {
 			global $post;
 
-			if ( $this->options['tm_author_var'] && ( is_single() || is_page() ) ) {
+			if ( $this->gadwp->config->options['tm_author_var'] && ( is_single() || is_page() ) ) {
 				global $post;
 				$author_id = $post->post_author;
 				$author_name = get_the_author_meta( 'display_name', $author_id );
 				$this->add_var( 'gadwpAuthor', esc_attr( $author_name ) );
 			}
 
-			if ( $this->options['tm_pubyear_var'] && is_single() ) {
+			if ( $this->gadwp->config->options['tm_pubyear_var'] && is_single() ) {
 				global $post;
 				$date = get_the_date( 'Y', $post->ID );
 				$this->add_var( 'gadwpPublicationYear', (int) $date );
 			}
 
-			if ( $this->options['tm_pubyearmonth_var'] && is_single() ) {
+			if ( $this->gadwp->config->options['tm_pubyearmonth_var'] && is_single() ) {
 				global $post;
 				$date = get_the_date( 'Y-m', $post->ID );
 				$this->add_var( 'gadwpPublicationYearMonth', esc_attr( $date ) );
 			}
 
-			if ( $this->options['tm_category_var'] && is_category() ) {
+			if ( $this->gadwp->config->options['tm_category_var'] && is_category() ) {
 				$this->add_var( 'gadwpCategory', esc_attr( single_tag_title() ) );
 			}
-			if ( $this->options['tm_category_var'] && is_single() ) {
+			if ( $this->gadwp->config->options['tm_category_var'] && is_single() ) {
 				global $post;
 				$categories = get_the_category( $post->ID );
 				foreach ( $categories as $category ) {
@@ -65,7 +68,7 @@ if ( ! class_exists( 'GADWP_Tracking_TagManager' ) ) {
 				}
 			}
 
-			if ( $this->options['tm_tag_var'] && is_single() ) {
+			if ( $this->gadwp->config->options['tm_tag_var'] && is_single() ) {
 				global $post;
 				$post_tags_list = '';
 				$post_tags_array = get_the_tags( $post->ID );
@@ -80,7 +83,7 @@ if ( ! class_exists( 'GADWP_Tracking_TagManager' ) ) {
 				}
 			}
 
-			if ( $this->options['tm_user_var'] ) {
+			if ( $this->gadwp->config->options['tm_user_var'] ) {
 				$usertype = is_user_logged_in() ? 'registered' : 'guest';
 				$this->add_var( 'gadwpUser', $usertype );
 			}
@@ -89,7 +92,6 @@ if ( ! class_exists( 'GADWP_Tracking_TagManager' ) ) {
 		}
 
 		public function output() {
-
 			$this->build_datalayer();
 
 			?>
@@ -113,10 +115,18 @@ if ( ! class_exists( 'GADWP_Tracking_TagManager' ) ) {
 	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-	})(window,document,'script','dataLayer','<?php echo $this->containerid; ?>');
+	})(window,document,'script','dataLayer','<?php echo $this->gadwp->config->options['web_containerid']; ?>');
 </script>
 <!-- END GADWP Tag Manager Tracking -->
 <?php
+		}
+
+		public function amp_add_analytics_script() {
+			?><script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script><?php
+		}
+
+		public function amp_output() {
+			?><amp-analytics config="https://www.googletagmanager.com/amp.json?id=<?php echo $this->gadwp->config->options['amp_containerid']; ?>&gtm.url=SOURCE_URL" data-credentials="include"></amp-analytics><?php
 		}
 	}
 }

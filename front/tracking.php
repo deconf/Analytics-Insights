@@ -19,6 +19,8 @@ if ( ! class_exists( 'GADWP_Tracking' ) ) {
 
 		public $analytics;
 
+		public $amp;
+
 		public $tagmanager;
 
 		public function __construct() {
@@ -37,14 +39,14 @@ if ( ! class_exists( 'GADWP_Tracking' ) ) {
 
 				// Analytics
 				require_once 'tracking/analytics.php';
-				$this->analytics = new GADWP_Tracking_Analytics( $this->gadwp->config->options );
+				$this->analytics = new GADWP_Tracking_Analytics();
 			}
 
-			if ( $this->gadwp->config->options['ga_dash_tracking_type'] == "tagmanager" && $this->gadwp->config->options['tm_containerid'] ) {
+			if ( $this->gadwp->config->options['ga_dash_tracking_type'] == "tagmanager" && $this->gadwp->config->options['web_containerid'] ) {
 
 				// Tag Manager
 				require_once 'tracking/tagmanager.php';
-				$this->tagmanager = new GADWP_Tracking_TagManager( $this->gadwp->config->options );
+				$this->tagmanager = new GADWP_Tracking_TagManager();
 			}
 		}
 	}
