@@ -40,7 +40,7 @@ if ( ! class_exists( 'GADWP_Tracking' ) ) {
 				$this->analytics = new GADWP_Tracking_Analytics( $this->gadwp->config->options );
 			}
 
-			if ( $this->gadwp->config->options['ga_dash_tracking_type'] == "tagmanager" ) {
+			if ( $this->gadwp->config->options['ga_dash_tracking_type'] == "tagmanager" && $this->gadwp->config->options['tm_containerid'] ) {
 
 				// Tag Manager
 				require_once 'tracking/tagmanager.php';

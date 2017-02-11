@@ -56,7 +56,7 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 			$languages = get_available_languages();
 			return array_values( $languages );
 		}
-
+		
 		// Validates data before storing
 		private function validate_data( $options ) {
 			/* @formatter:off */
@@ -97,36 +97,36 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 					);
 			foreach ( $texts as $key ) {
 				if ( isset( $options[$key] ) ) {
-					$options[$key] = sanitize_text_field( $options[$key] );
+					$options[$key] = trim (sanitize_text_field( $options[$key] ));
 				}
 			}
 			/* @formatter:on */
-
+			
 			if ( isset( $options['ga_event_downloads'] ) && empty( $options['ga_event_downloads'] ) ) {
 				$options['ga_event_downloads'] = 'zip|mp3*|mpe*g|pdf|docx*|pptx*|xlsx*|rar*';
 			}
-
+			
 			if ( isset( $options['pagetitle_404'] ) && empty( $options['pagetitle_404'] ) ) {
 				$options['pagetitle_404'] = 'Page Not Found';
 			}
-
+			
 			if ( isset( $options['ga_event_affiliates'] ) && empty( $options['ga_event_affiliates'] ) ) {
 				$options['ga_event_affiliates'] = '/out/';
 			}
-
+			
 			if ( isset( $options['ga_speed_samplerate'] ) && ( $options['ga_speed_samplerate'] < 1 || $options['ga_speed_samplerate'] > 100 ) ) {
 				$options['ga_speed_samplerate'] = 1;
 			}
-
+			
 			if ( isset( $options['ga_cookieexpires'] ) && $options['ga_cookieexpires'] ) { // v4.9
 				$options['ga_cookieexpires'] = (int) $options['ga_cookieexpires'];
 			}
-
+			
 			$token = json_decode( $options['ga_dash_token'] ); // v4.8.2
 			if ( isset( $token->token_type ) ) {
 				unset( $options['ga_dash_refresh_token'] );
 			}
-
+			
 			return $options;
 		}
 
@@ -168,7 +168,7 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 			 * Get plugin options
 			 */
 			global $blog_id;
-
+			
 			if ( ! get_option( 'gadash_options' ) ) {
 				GADWP_Install::install();
 			}
@@ -193,7 +193,7 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 
 		private function maintain_compatibility() {
 			$flag = false;
-
+			
 			if ( GADWP_CURRENT_VERSION != get_option( 'gadwp_version' ) ) {
 				$flag = true;
 				update_option( 'gadwp_version', GADWP_CURRENT_VERSION );
@@ -225,7 +225,7 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 				GADWP_Tools::unset_cookie( 'default_dimension' );
 				GADWP_Tools::unset_cookie( 'default_view' );
 			}
-
+			
 			/* @formatter:off */
 			$zeros = array( 	'ga_enhanced_links',
 								'ga_dash_network',
@@ -327,27 +327,27 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 				$this->options['ga_dash_access_back'][] = 'administrator';
 			}
 			/* @formatter:on */
-
+			
 			if ( ! isset( $this->options['ga_event_affiliates'] ) ) {
 				$this->options['ga_event_affiliates'] = '/out/';
 				$flag = true;
 			}
-
+			
 			if ( ! isset( $this->options['ga_event_downloads'] ) ) {
 				$this->options['ga_event_downloads'] = 'zip|mp3*|mpe*g|pdf|docx*|pptx*|xlsx*|rar*';
 				$flag = true;
 			}
-
+			
 			if ( ! isset( $this->options['pagetitle_404'] ) ) { // v4.9.4
 				$this->options['pagetitle_404'] = 'Page Not Found';
 				$flag = true;
 			}
-
+			
 			if ( $this->options['ga_dash_tracking_type'] == "classic" ) { // v5.0
 				$this->options['ga_dash_tracking_type'] = "universal";
 				$flag = true;
 			}
-
+			
 			if ( $flag ) {
 				$this->set_plugin_options( false );
 			}

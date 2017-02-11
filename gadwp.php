@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Google Analytics Dashboard for WP
+ * Plugin Name: GADWP - Google Analytics Dashboard for WP
  * Plugin URI: https://deconf.com
  * Description: Displays Google Analytics Reports and Real-Time Statistics in your Dashboard. Automatically inserts the tracking code in every page of your website.
  * Author: Alin Marcu

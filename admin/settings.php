@@ -80,9 +80,9 @@ final class GADWP_Settings {
 		}
 		$options = self::update_options( 'frontend' );
 		if ( isset( $_POST['options']['ga_dash_hidden'] ) ) {
-			$message = "<div class='updated'><p>" . __( "Settings saved.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
+			$message = "<div class='updated' id='gadwp-autodismiss'><p>" . __( "Settings saved.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			if ( ! ( isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' ) ) ) {
-				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
+				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
 		if ( ! $gadwp->config->options['ga_dash_tableid_jail'] || ! $gadwp->config->options['ga_dash_token'] ) {
@@ -169,9 +169,9 @@ final class GADWP_Settings {
 		}
 		$options = self::update_options( 'backend' );
 		if ( isset( $_POST['options']['ga_dash_hidden'] ) ) {
-			$message = "<div class='updated'><p>" . __( "Settings saved.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
+			$message = "<div class='updated' id='gadwp-autodismiss'><p>" . __( "Settings saved.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			if ( ! ( isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' ) ) ) {
-				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
+				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
 		if ( ! $gadwp->config->options['ga_dash_tableid_jail'] || ! $gadwp->config->options['ga_dash_token'] ) {
@@ -318,9 +318,9 @@ final class GADWP_Settings {
 		}
 		$options = self::update_options( 'tracking' );
 		if ( isset( $_POST['options']['ga_dash_hidden'] ) ) {
-			$message = "<div class='updated'><p>" . __( "Settings saved.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
+			$message = "<div class='updated' id='gadwp-autodismiss'><p>" . __( "Settings saved.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			if ( ! ( isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' ) ) ) {
-				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
+				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
 		if ( ! $gadwp->config->options['ga_dash_tableid_jail'] ) {
@@ -339,7 +339,7 @@ final class GADWP_Settings {
                     	<?php if ( $options['ga_dash_tracking_type'] == 'universal' ) :?>
 						<?php $tabs = array( 'basic' => __( "Basic Settings", 'google-analytics-dashboard-for-wp' ), 'events' => __( "Events Tracking", 'google-analytics-dashboard-for-wp' ), 'custom' => __( "Custom Definitions", 'google-analytics-dashboard-for-wp' ), 'exclude' => __( "Exclude Tracking", 'google-analytics-dashboard-for-wp' ), 'advanced' => __( "Advanced Settings", 'google-analytics-dashboard-for-wp' ) );?>
 						<?php elseif ( $options['ga_dash_tracking_type'] == 'tagmanager' ) :?>
-						<?php $tabs = array( 'basic' => __( "Basic Settings", 'google-analytics-dashboard-for-wp' ), 'datalayervars' => __( "DataLayer Variables", 'google-analytics-dashboard-for-wp' ) );?>
+						<?php $tabs = array( 'basic' => __( "Basic Settings", 'google-analytics-dashboard-for-wp' ), 'tmdatalayervars' => __( "DataLayer Variables", 'google-analytics-dashboard-for-wp' ), 'exclude' => __( "Exclude Tracking", 'google-analytics-dashboard-for-wp' ) );?>
 						<?php else :?>
 						<?php $tabs = array( 'basic' => __( "Basic Settings", 'google-analytics-dashboard-for-wp' ) );?>
 						<?php endif; ?>
@@ -365,12 +365,22 @@ final class GADWP_Settings {
                                         </select>
                                     </td>
                                 </tr>
-								<?php if ($options['ga_dash_tracking_type'] != 'disabled') : ?>
+								<?php if ($options['ga_dash_tracking_type'] == 'universal') : ?>
 								<tr>
                                     <td class="gadwp-settings-title"></td>
                                     <td>
                                         <?php $profile_info = GADWP_Tools::get_selected_profile($gadwp->config->options['ga_dash_profile_list'], $gadwp->config->options['ga_dash_tableid_jail']); ?>
                                         <?php echo '<pre>' . __("View Name:", 'google-analytics-dashboard-for-wp') . "\t" . esc_html($profile_info[0]) . "<br />" . __("Tracking ID:", 'google-analytics-dashboard-for-wp') . "\t" . esc_html($profile_info[2]) . "<br />" . __("Default URL:", 'google-analytics-dashboard-for-wp') . "\t" . esc_html($profile_info[3]) . "<br />" . __("Time Zone:", 'google-analytics-dashboard-for-wp') . "\t" . esc_html($profile_info[5]) . '</pre>';?>
+                                    </td>
+                                </tr>
+                                <?php elseif ($options['ga_dash_tracking_type'] == 'tagmanager') : ?>
+                                <tr>
+                                    <td class="gadwp-settings-title">
+                                        <label for="ga_dash_tracking_type"><?php _e("Container ID:", 'google-analytics-dashboard-for-wp' ); ?>
+                                    	</label>
+                                    </td>
+                                    <td>
+										<input type="text" name="options[tm_containerid]" value="<?php echo esc_attr($options['tm_containerid']); ?>" size="11">
                                     </td>
                                 </tr>
 								<?php endif; ?>
@@ -440,7 +450,7 @@ final class GADWP_Settings {
                         <div id="gadwp-custom">
                             <table class="gadwp-settings-options">
                                 <tr>
-                                    <td colspan="2"><?php echo "<h2>" . __( "Custom Definitions", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
+                                    <td colspan="2"><?php echo "<h2>" . __( "Custom Dimensions", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
                                 </tr>
                                 <tr>
                                     <td class="gadwp-settings-title">
@@ -517,6 +527,85 @@ final class GADWP_Settings {
 										<?php for ($i=0;$i<21;$i++) : ?>
 										<option value="<?php echo $i;?>" <?php selected( $options['ga_tag_dimindex'], $i ); ?>><?php echo $i==0?'Disabled':'dimension '.$i; ?></option>
 										<?php endfor; ?>
+										</select>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="gadwp-tmdatalayervars">
+                            <table class="gadwp-settings-options">
+                                <tr>
+                                    <td colspan="2"><?php echo "<h2>" . __( "Assign Variables", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
+                                </tr>
+                                <tr>
+                                    <td class="gadwp-settings-title">
+                                        <label for="tm_author_var"><?php _e("Authors:", 'google-analytics-dashboard-for-wp' ); ?>
+                                    	</label>
+                                    </td>
+                                    <td>
+                                        <select id="tm_author_var" name="options[tm_author_var]">
+											<option value="1" <?php selected( $options['tm_author_var'], 1 ); ?>>gadwpAuthor</option>
+											<option value="0" <?php selected( $options['tm_author_var'], 0 ); ?>><?php _e( "Disabled", 'google-analytics-dashboard-for-wp' ); ?></option>
+										</select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="gadwp-settings-title">
+                                        <label for="tm_pubyear_var"><?php _e("Publication Year:", 'google-analytics-dashboard-for-wp' ); ?>
+                                    	</label>
+                                    </td>
+                                    <td>
+                                        <select id="tm_pubyear_var" name="options[tm_pubyear_var]">
+											<option value="1" <?php selected( $options['tm_pubyear_var'], 1 ); ?>>gadwpPublicationYear</option>
+											<option value="0" <?php selected( $options['tm_pubyear_var'], 0 ); ?>><?php _e( "Disabled", 'google-analytics-dashboard-for-wp' ); ?></option>
+										</select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="gadwp-settings-title">
+                                        <label for="tm_pubyearmonth_var"><?php _e("Publication Month:", 'google-analytics-dashboard-for-wp' ); ?>
+                                    	</label>
+                                    </td>
+                                    <td>
+                                        <select id="tm_pubyearmonth_var" name="options[tm_pubyearmonth_var]">
+											<option value="1" <?php selected( $options['tm_pubyearmonth_var'], 1 ); ?>>gadwpPublicationYearMonth</option>
+											<option value="0" <?php selected( $options['tm_pubyearmonth_var'], 0 ); ?>><?php _e( "Disabled", 'google-analytics-dashboard-for-wp' ); ?></option>
+										</select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="gadwp-settings-title">
+                                        <label for="tm_category_var"><?php _e("Categories:", 'google-analytics-dashboard-for-wp' ); ?>
+                                    	</label>
+                                    </td>
+                                    <td>
+                                        <select id="tm_category_var" name="options[tm_category_var]">
+											<option value="1" <?php selected( $options['tm_category_var'], 1 ); ?>>gadwpCategory</option>
+											<option value="0" <?php selected( $options['tm_category_var'], 0 ); ?>><?php _e( "Disabled", 'google-analytics-dashboard-for-wp' ); ?></option>
+										</select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="gadwp-settings-title">
+                                        <label for="tm_user_var"><?php _e("User Type:", 'google-analytics-dashboard-for-wp' ); ?>
+                                    	</label>
+                                    </td>
+                                    <td>
+                                        <select id="tm_user_var" name="options[tm_user_var]">
+											<option value="1" <?php selected( $options['tm_user_var'], 1 ); ?>>gadwpUser</option>
+											<option value="0" <?php selected( $options['tm_user_var'], 0 ); ?>><?php _e( "Disabled", 'google-analytics-dashboard-for-wp' ); ?></option>
+										</select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="gadwp-settings-title">
+                                        <label for="tm_tag_var"><?php _e("Tags:", 'google-analytics-dashboard-for-wp' ); ?>
+                                    	</label>
+                                    </td>
+                                    <td>
+                                        <select id="tm_tag_var" name="options[tm_tag_var]">
+											<option value="1" <?php selected( $options['tm_tag_var'], 1 ); ?>>gadwpTag</option>
+											<option value="0" <?php selected( $options['tm_tag_var'], 0 ); ?>><?php _e( "Disabled", 'google-analytics-dashboard-for-wp' ); ?></option>
 										</select>
                                     </td>
                                 </tr>
@@ -802,7 +891,7 @@ final class GADWP_Settings {
 					$gadwp->config->options['automatic_updates_minorversion'] = 1;
 					$gadwp->config->set_plugin_options();
 					$options = self::update_options( 'general' );
-					$message = "<div class='updated'><p>" . __( "Plugin authorization succeeded.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
+					$message = "<div class='updated' id='gadwp-autodismiss'><p>" . __( "Plugin authorization succeeded.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 					GADWP_Tools::delete_cache( 'gapi_errors' );
 					GADWP_Tools::delete_cache( 'last_error' );
 					if ( $gadwp->config->options['ga_dash_token'] && $gadwp->gapi_controller->client->getAccessToken() ) {
@@ -834,50 +923,50 @@ final class GADWP_Settings {
 					$gadwp->gapi_controller->reset_token( false );
 				}
 			} else {
-				$message = "<div class='error'><p>" . __( "The access code is <strong>NOT</strong> your <strong>Tracking ID</strong> (UA-XXXXX-X). Try again, and use the red link to get your access code", 'google-analytics-dashboard-for-wp' ) . ".</p></div>";
+				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "The access code is <strong>NOT</strong> your <strong>Tracking ID</strong> (UA-XXXXX-X). Try again, and use the red link to get your access code", 'google-analytics-dashboard-for-wp' ) . ".</p></div>";
 			}
 		}
 		if ( isset( $_POST['Clear'] ) ) {
 			if ( isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' ) ) {
 				GADWP_Tools::clear_cache();
-				$message = "<div class='updated'><p>" . __( "Cleared Cache.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
+				$message = "<div class='updated' id='gadwp-autodismiss'><p>" . __( "Cleared Cache.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			} else {
-				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
+				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
 		if ( isset( $_POST['Reset'] ) ) {
 			if ( isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' ) ) {
 				$gadwp->gapi_controller->reset_token( true );
 				GADWP_Tools::clear_cache();
-				$message = "<div class='updated'><p>" . __( "Token Reseted and Revoked.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
+				$message = "<div class='updated' id='gadwp-autodismiss'><p>" . __( "Token Reseted and Revoked.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 				$options = self::update_options( 'Reset' );
 			} else {
-				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
+				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
 		if ( isset( $_POST['Reset_Err'] ) ) {
 			if ( isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' ) ) {
 				GADWP_Tools::delete_cache( 'last_error' );
 				GADWP_Tools::delete_cache( 'gapi_errors' );
-				$message = "<div class='updated'><p>" . __( "All errors reseted.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
+				$message = "<div class='updated' id='gadwp-autodismiss'><p>" . __( "All errors reseted.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			} else {
-				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
+				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
 		if ( isset( $_POST['options']['ga_dash_hidden'] ) && ! isset( $_POST['Clear'] ) && ! isset( $_POST['Reset'] ) && ! isset( $_POST['Reset_Err'] ) ) {
-			$message = "<div class='updated'><p>" . __( "Settings saved.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
+			$message = "<div class='updated' id='gadwp-autodismiss'><p>" . __( "Settings saved.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			if ( ! ( isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' ) ) ) {
-				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
+				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
 		if ( isset( $_POST['Hide'] ) ) {
 			if ( isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' ) ) {
-				$message = "<div class='updated'><p>" . __( "All other domains/properties were removed.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
+				$message = "<div class='updated' id='gadwp-action'><p>" . __( "All other domains/properties were removed.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 				$lock_profile = GADWP_Tools::get_selected_profile( $gadwp->config->options['ga_dash_profile_list'], $gadwp->config->options['ga_dash_tableid_jail'] );
 				$gadwp->config->options['ga_dash_profile_list'] = array( $lock_profile );
 				$options = self::update_options( 'general' );
 			} else {
-				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
+				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
 		?>
@@ -1089,7 +1178,7 @@ final class GADWP_Settings {
 					$gadwp->config->options['automatic_updates_minorversion'] = 1;
 					$gadwp->config->set_plugin_options( true );
 					$options = self::update_options( 'network' );
-					$message = "<div class='updated'><p>" . __( "Plugin authorization succeeded.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
+					$message = "<div class='updated' id='gadwp-action'><p>" . __( "Plugin authorization succeeded.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 					if ( is_multisite() ) { // Cleanup errors on the entire network
 						foreach ( GADWP_Tools::get_sites( array( 'number' => apply_filters( 'gadwp_sites_limit', 100 ) ) ) as $blog ) {
 							switch_to_blog( $blog['blog_id'] );
@@ -1128,13 +1217,13 @@ final class GADWP_Settings {
 					$gadwp->gapi_controller->reset_token( false );
 				}
 			} else {
-				$message = "<div class='error'><p>" . __( "The access code is <strong>NOT</strong> your <strong>Tracking ID</strong> (UA-XXXXX-X). Try again, and use the red link to get your access code", 'google-analytics-dashboard-for-wp' ) . ".</p></div>";
+				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "The access code is <strong>NOT</strong> your <strong>Tracking ID</strong> (UA-XXXXX-X). Try again, and use the red link to get your access code", 'google-analytics-dashboard-for-wp' ) . ".</p></div>";
 			}
 		}
 		if ( isset( $_POST['Refresh'] ) ) {
 			if ( isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' ) ) {
 				$gadwp->config->options['ga_dash_profile_list'] = array();
-				$message = "<div class='updated'><p>" . __( "Properties refreshed.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
+				$message = "<div class='updated' id='gadwp-autodismiss'><p>" . __( "Properties refreshed.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 				$options = self::update_options( 'network' );
 				if ( $gadwp->config->options['ga_dash_token'] && $gadwp->gapi_controller->client->getAccessToken() ) {
 					if ( ! empty( $gadwp->config->options['ga_dash_profile_list'] ) ) {
@@ -1154,41 +1243,41 @@ final class GADWP_Settings {
 					}
 				}
 			} else {
-				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
+				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
 		if ( isset( $_POST['Clear'] ) ) {
 			if ( isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' ) ) {
 				GADWP_Tools::clear_cache();
-				$message = "<div class='updated'><p>" . __( "Cleared Cache.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
+				$message = "<div class='updated' id='gadwp-autodismiss'><p>" . __( "Cleared Cache.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			} else {
-				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
+				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
 		if ( isset( $_POST['Reset'] ) ) {
 			if ( isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' ) ) {
 				$gadwp->gapi_controller->reset_token( true );
 				GADWP_Tools::clear_cache();
-				$message = "<div class='updated'><p>" . __( "Token Reseted and Revoked.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
+				$message = "<div class='updated' id='gadwp-autodismiss'><p>" . __( "Token Reseted and Revoked.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 				$options = self::update_options( 'Reset' );
 			} else {
-				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
+				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
 		if ( isset( $_POST['options']['ga_dash_hidden'] ) && ! isset( $_POST['Clear'] ) && ! isset( $_POST['Reset'] ) && ! isset( $_POST['Refresh'] ) ) {
-			$message = "<div class='updated'><p>" . __( "Settings saved.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
+			$message = "<div class='updated' id='gadwp-autodismiss'><p>" . __( "Settings saved.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			if ( ! ( isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' ) ) ) {
-				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
+				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
 		if ( isset( $_POST['Hide'] ) ) {
 			if ( isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' ) ) {
-				$message = "<div class='updated'><p>" . __( "All other domains/properties were removed.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
+				$message = "<div class='updated' id='gadwp-autodismiss'><p>" . __( "All other domains/properties were removed.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 				$lock_profile = GADWP_Tools::get_selected_profile( $gadwp->config->options['ga_dash_profile_list'], $gadwp->config->options['ga_dash_tableid_jail'] );
 				$gadwp->config->options['ga_dash_profile_list'] = array( $lock_profile );
 				$options = self::update_options( 'network' );
 			} else {
-				$message = "<div class='error'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
+				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}?>
 <div class="wrap">
