@@ -139,7 +139,7 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 
 = 4.9.6.2 =
 * Enhancements:
-	* switching sampling level to higher precision to increase the accuracy of reports 
+	* switching sampling level to higher precision to increase the accuracy of reports
 	
 = 4.9.6.1 =
 * Enhancements:
