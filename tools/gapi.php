@@ -279,6 +279,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 					if ( $this->gapi_errors_handler() ) {
 						return - 23;
 					}
+					$options['samplingLevel'] = 'HIGHER_PRECISION';
 					$data = $this->service->data_ga->get( 'ga:' . $projectId, $from, $to, $metrics, $options );
 					GADWP_Tools::set_cache( $serial, $data, $this->get_timeouts( $timeouts ) );
 					$this->gadwp->config->options['api_backoff'] = 0;
@@ -444,7 +445,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			} else {
 				$gadwp_data[8] = gmdate("H:i:s", $gadwp_data[8] );
 			}
-			
+
 			return $gadwp_data;
 		}
 
