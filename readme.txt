@@ -4,7 +4,7 @@ Donate link: https://deconf.com/donate/
 Tags: stats,analytics,google analytics,dashboard,analytics dashboard,google analytics dashboard,google analytics plugin,google analytics widget,tracking,universal google analytics,realtime,multisite,gadwp
 Requires at least: 3.5
 Tested up to: 4.7.2
-Stable tag: 4.9.5
+Stable tag: 4.9.6.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -144,6 +144,8 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 	* Events are now tracked using a JS file instead of in-line JavaScript
 	* multiple improvements for events tracking accuracy 
 * New Features:
+	* ability to use Google Tag Manager in addition to Google Analytics tracking
+	* added Accelerated Mobile Pages (AMP) support for Google Analytics and Google Tag Manager tracking
 
 = 4.9.6.2 =
 * Enhancements:

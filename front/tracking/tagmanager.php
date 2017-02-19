@@ -117,7 +117,7 @@ if ( ! class_exists( 'GADWP_Tracking_TagManager' ) ) {
 	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 	})(window,document,'script','dataLayer','<?php echo $this->gadwp->config->options['web_containerid']; ?>');
 </script>
-<!-- END GADWP Tag Manager Tracking -->
+<!-- END GADWP Tag Manager -->
 <?php
 		}
 

@@ -115,6 +115,7 @@ if ( ! class_exists( 'GADWP_Frontend_Setup' ) ) {
 							__( "Time on Page", 'google-analytics-dashboard-for-wp' ),
 							__( "Page Load Time", 'google-analytics-dashboard-for-wp' ),
 							__( "Exit Rate", 'google-analytics-dashboard-for-wp' ),
+							__( "Precision: ", 'google-analytics-dashboard-for-wp' ), //29
 					),
 					'colorVariations' => GADWP_Tools::variations( $this->gadwp->config->options['ga_dash_style'] ),
 					'region' => $region,

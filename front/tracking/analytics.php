@@ -217,7 +217,7 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 			}
 			?>
 </script>
-<!-- END GADWP Universal Tracking -->
+<!-- END GADWP Universal Analytics -->
 <?php
 		}
 
