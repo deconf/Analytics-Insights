@@ -751,7 +751,7 @@ final class GADWP_Settings {
                                     </td>
                                     <td>
                                         <input type="text" id="ga_cookieexpires" name="options[ga_cookieexpires]" value="<?php echo esc_attr($options['ga_cookieexpires']); ?>" size="10">
-                                        seconds
+                                        <?php _e("seconds", 'google-analytics-dashboard-for-wp' ); ?>
                                     </td>
                                 </tr>
                             </table>
@@ -889,7 +889,7 @@ final class GADWP_Settings {
                             <tr>
                                 <td>
                     				<?php $errors = print_r( GADWP_Tools::get_cache( 'last_error' ), true ) ? esc_html( print_r( GADWP_Tools::get_cache( 'last_error' ), true ) ) : __( "None", 'google-analytics-dashboard-for-wp' ); ?>
-									<pre class="gadwp-settings-logdata">Last Error:	<?php echo $errors;	?></pre>
+									<pre class="gadwp-settings-logdata"><?php echo __("Last Error: ", 'google-analytics-dashboard-for-wp') . $errors;?></pre>
                                 </td>
                             </tr>
                             <tr>
@@ -898,7 +898,7 @@ final class GADWP_Settings {
                             </tr>
                             <tr>
                                 <td>
-                                    <pre class="gadwp-settings-logdata">Error Details: <?php $error_details = print_r( GADWP_Tools::get_cache( 'gapi_errors' ), true ) ? "\n" . esc_html( print_r( GADWP_Tools::get_cache( 'last_error' ), true ) ) : __( "None", 'google-analytics-dashboard-for-wp' ); echo $error_details; ?></pre>
+                                    <pre class="gadwp-settings-logdata"><?php _e("Error Details: ", 'google-analytics-dashboard-for-wp'); $error_details = print_r( GADWP_Tools::get_cache( 'gapi_errors' ), true ) ? "\n" . esc_html( print_r( GADWP_Tools::get_cache( 'last_error' ), true ) ) : __( "None", 'google-analytics-dashboard-for-wp' ); echo $error_details; ?></pre>
                                     <br />
                                     <hr>
                                 </td>
@@ -1592,12 +1592,12 @@ final class GADWP_Settings {
                                                                         <div class="g-page" data-width="273" data-href="//plus.google.com/+Deconfcom" data-layout="landscape" data-showtagline="false" data-showcoverphoto="false" data-rel="publisher"></div>
                                                                     </div>
                                                                     <script type="text/javascript">
-							  (function() {
-							    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-							    po.src = 'https://apis.google.com/js/platform.js';
-							    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-							  })();
-							</script>
+																	  (function() {
+																	    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+																	    po.src = 'https://apis.google.com/js/platform.js';
+																	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+																	  })();
+																	</script>
                                                                 </div>
                                                                 <br />
                                                                 <div class="gadash-desc">
@@ -1609,8 +1609,8 @@ final class GADWP_Settings {
                                                                     <a href="http://wordpress.org/support/view/plugin-reviews/google-analytics-dashboard-for-wp#plugin-info"><img src="<?php echo plugins_url( 'images/star.png' , __FILE__ ); ?>" /></a>
                                                                 </div>
                                                                 <div class="gadash-desc">
-                            <?php printf(__('Your feedback and review are both important, %s!', 'google-analytics-dashboard-for-wp'), sprintf('<a href="http://wordpress.org/support/view/plugin-reviews/google-analytics-dashboard-for-wp#plugin-info">%s</a>', __('rate this plugin', 'google-analytics-dashboard-for-wp')));?>
-                        </div>
+										                            <?php printf(__('Your feedback and review are both important, %s!', 'google-analytics-dashboard-for-wp'), sprintf('<a href="http://wordpress.org/support/view/plugin-reviews/google-analytics-dashboard-for-wp#plugin-info">%s</a>', __('rate this plugin', 'google-analytics-dashboard-for-wp')));?>
+										                        </div>
                                                             </div>
                                                         </div>
                                                         <div class="postbox">
@@ -1622,23 +1622,23 @@ final class GADWP_Settings {
                                                                     <a href="https://deconf.com/clicky-web-analytics-review/?utm_source=gadwp_config&utm_medium=link&utm_content=clicky&utm_campaign=gadwp"><img src="<?php echo plugins_url( 'images/clicky.png' , __FILE__ ); ?>" /></a>
                                                                 </div>
                                                                 <div class="gadash-desc">
-                            <?php printf(__('%s service with users tracking at IP level.', 'google-analytics-dashboard-for-wp'), sprintf('<a href="https://deconf.com/clicky-web-analytics-review/?utm_source=gadwp_config&utm_medium=link&utm_content=clicky&utm_campaign=gadwp">%s</a>', __('Web Analytics', 'google-analytics-dashboard-for-wp')));?>
-                        </div>
+										                            <?php printf(__('%s service with users tracking at IP level.', 'google-analytics-dashboard-for-wp'), sprintf('<a href="https://deconf.com/clicky-web-analytics-review/?utm_source=gadwp_config&utm_medium=link&utm_content=clicky&utm_campaign=gadwp">%s</a>', __('Web Analytics', 'google-analytics-dashboard-for-wp')));?>
+										                        </div>
                                                                 <br />
                                                                 <div class="gadash-title">
                                                                     <a href="https://deconf.com/move-website-https-ssl/?utm_source=gadwp_config&utm_medium=link&utm_content=ssl&utm_campaign=gadwp"><img src="<?php echo plugins_url( 'images/ssl.png' , __FILE__ ); ?>" /></a>
                                                                 </div>
                                                                 <div class="gadash-desc">
-                            <?php printf(__('%s by moving your website to HTTPS/SSL.', 'google-analytics-dashboard-for-wp'), sprintf('<a href="https://deconf.com/move-website-https-ssl/?utm_source=gadwp_config&utm_medium=link&utm_content=ssl&utm_campaign=gadwp">%s</a>', __('Improve search rankings', 'google-analytics-dashboard-for-wp')));?>
-                        </div>
+										                            <?php printf(__('%s by moving your website to HTTPS/SSL.', 'google-analytics-dashboard-for-wp'), sprintf('<a href="https://deconf.com/move-website-https-ssl/?utm_source=gadwp_config&utm_medium=link&utm_content=ssl&utm_campaign=gadwp">%s</a>', __('Improve search rankings', 'google-analytics-dashboard-for-wp')));?>
+										                        </div>
                                                                 <br />
                                                                 <div class="gadash-title">
                                                                     <a href="https://deconf.com/wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=plugins&utm_campaign=gadwp"><img src="<?php echo plugins_url( 'images/wp.png' , __FILE__ ); ?>" /></a>
                                                                 </div>
                                                                 <div class="gadash-desc">
-                            <?php printf(__('Other %s written by the same author', 'google-analytics-dashboard-for-wp'), sprintf('<a href="https://deconf.com/wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=plugins&utm_campaign=gadwp">%s</a>', __('WordPress Plugins', 'google-analytics-dashboard-for-wp')));?>
-                        </div>
-                                                            </div>
+										                            <?php printf(__('Other %s written by the same author', 'google-analytics-dashboard-for-wp'), sprintf('<a href="https://deconf.com/wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=plugins&utm_campaign=gadwp">%s</a>', __('WordPress Plugins', 'google-analytics-dashboard-for-wp')));?>
+										                        </div>
+										                   </div>
                                                         </div>
                                                     </div>
                                                 </div>
