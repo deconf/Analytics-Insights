@@ -35,19 +35,18 @@ The Google Analytics reports you need, on your dashboard, in your All Posts and 
 - Device categories, browsers, operating systems, screen resolutions, mobile brands analytics reports 
 - User access control over analytics reports
 
-= Google Analytics Basic Tracking =
+= Google Analytics Tracking =
 
 Installs the latest Google Analytics tracking code and allows full code customization:
 
-- Switch between Universal Google Analytics and Classic Google Analytics code
+- Universal Google Analytics tracking code
 - IP address anonymization
 - Enhanced link attribution
 - Remarketing, demographics and interests tracking
 - Page Speed sampling rate control
 - Cross domain tracking
 - Exclude user roles from tracking
-
-= Google Analytics Event Tracking =
+- Accelerated Mobile Pages (AMP) support for Google Analytics 
 
 Google Analytics Dashboard for WP enables you to easily track events like:
  
@@ -57,8 +56,6 @@ Google Analytics Dashboard for WP enables you to easily track events like:
 - Affiliate links
 - Fragment identifiers
 
-= Google Analytics Custom Dimensions =
-
 With Google Analytics Dashboard for WP you can use custom dimensions to track:
 
 - Authors
@@ -67,6 +64,15 @@ With Google Analytics Dashboard for WP you can use custom dimensions to track:
 - Categories
 - Tags
 - User engagement
+
+= Google Tag Manager Tracking =
+
+As an alternative to Google Analytics, you can use Google Tag Manager for tracking:
+
+- Google Tag Manager code
+- Data Layer variables for authors, publication year, publication month, categories, tags, user type
+- Exclude user roles from tracking
+- Accelerated Mobile Pages (AMP) support for Google Tag Manager 
 
 = Google Analytics Dashboard for WP on Multisite =
 
