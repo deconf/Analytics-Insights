@@ -152,6 +152,7 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 * New Features:
 	* ability to use Google Tag Manager in addition to Google Analytics tracking
 	* added Accelerated Mobile Pages (AMP) support for Google Analytics and Google Tag Manager tracking
+	* users can now switch the position of the tracking page from head to body through an option
 
 = 4.9.6.2 =
 * Enhancements:

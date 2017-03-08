@@ -73,7 +73,7 @@ class GADWP_Install {
 			$option['amp_containerid'] = '';
 			$option['amp_tracking_tagmanager'] = 0;
 			$option['amp_tracking_analytics'] = 0;
-
+			$option['trackingcode_infooter'] = 0;
 		} else {
 			$options = array();
 			$options['ga_dash_clientid'] = get_option( 'ga_dash_clientid' );
@@ -132,6 +132,7 @@ class GADWP_Install {
 			$option['amp_containerid'] = '';
 			$option['amp_tracking_tagmanager'] = 0;
 			$option['amp_tracking_analytics'] = 0;
+			$option['trackingcode_infooter'] = 0;
 
 			delete_option( 'ga_dash_clientid' );
 			delete_option( 'ga_dash_clientsecret' );

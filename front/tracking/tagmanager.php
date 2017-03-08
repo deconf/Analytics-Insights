@@ -22,7 +22,12 @@ if ( ! class_exists( 'GADWP_Tracking_TagManager' ) ) {
 		public function __construct() {
 			$this->gadwp = GADWP();
 			$this->gadwp->config->options['amp_containerid'] = "GTM-MDK2CZK";
-			add_action( 'wp_head', array( $this, 'output' ), 99 );
+
+			if ($this->gadwp->config->options['trackingcode_infooter']) {
+				add_action( 'wp_footer', array( $this, 'output' ), 99 );
+			} else {
+				add_action( 'wp_head', array( $this, 'output' ), 99 );
+			}
 
 			if ( $this->gadwp->config->options['amp_tracking_tagmanager'] && $this->gadwp->config->options['amp_containerid'] ) {
 				add_action( 'amp_post_template_head', array( $this, 'amp_add_analytics_script' ) );

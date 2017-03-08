@@ -78,6 +78,7 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 								'ga_aff_tracking',
 								'amp_tracking_analytics',
 								'amp_tracking_tagmanager',
+								'trackingcode_infooter',
 						);
 			foreach ( $numerics as $key ) {
 				if ( isset( $options[$key] ) ) {
@@ -255,6 +256,7 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 								'switch_profile', // V4.7
 								'amp_tracking_analytics', //v5.0
 								'amp_tracking_tagmanager', //v5.0
+								'trackingcode_infooter', //v5.0
 						);
 			foreach ( $zeros as $key ) {
 				if ( ! isset( $this->options[$key] ) ) {

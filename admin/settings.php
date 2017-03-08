@@ -30,6 +30,7 @@ final class GADWP_Settings {
 				$options['ga_hash_tracking'] = 0;
 				$options['amp_tracking_analytics'] = 0;
 				$options['amp_tracking_tagmanager'] = 0;
+				$options['trackingcode_infooter'] = 0;
 				if ( isset( $_POST['options']['ga_tracking_code'] ) ) {
 					$new_options['ga_tracking_code'] = trim( $new_options['ga_tracking_code'], "\t" );
 				}
@@ -394,6 +395,18 @@ final class GADWP_Settings {
                                     </td>
                                 </tr>
 								<?php endif; ?>
+                                <tr>
+                                    <td class="gadwp-settings-title">
+                                        <label for="trackingcode_infooter"><?php _e("Code Placement:", 'google-analytics-dashboard-for-wp' ); ?>
+                                    	</label>
+                                    </td>
+                                    <td>
+                                        <select id="trackingcode_infooter" name="options[trackingcode_infooter]">
+                                            <option value="0" <?php selected( $options['trackingcode_infooter'], 0 ); ?>><?php _e("Head", 'google-analytics-dashboard-for-wp');?></option>
+                                            <option value="1" <?php selected( $options['trackingcode_infooter'], 1 ); ?>><?php _e("Footer", 'google-analytics-dashboard-for-wp');?></option>
+                                        </select>
+                                    </td>
+                                </tr>
                             </table>
                         </div>
                         <div id="gadwp-events">

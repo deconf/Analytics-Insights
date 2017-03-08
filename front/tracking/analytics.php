@@ -30,7 +30,11 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 
 			$this->load_scripts();
 
-			add_action( 'wp_head', array( $this, 'output' ), 99 );
+			if ($this->gadwp->config->options['trackingcode_infooter']) {
+				add_action( 'wp_footer', array( $this, 'output' ), 99 );
+			} else {
+				add_action( 'wp_head', array( $this, 'output' ), 99 );
+			}
 
 			if ( $this->gadwp->config->options['amp_tracking_analytics'] ) {
 				add_action( 'amp_post_template_head', array( $this, 'amp_add_analytics_script' ) );
@@ -44,7 +48,7 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 				$domaindata = GADWP_Tools::get_root_domain( esc_html( get_option( 'siteurl' ) ) );
 				$root_domain = $domaindata['domain'];
 
-				wp_enqueue_script( 'gadwp-tracking-analytics-events', GADWP_URL . 'front/tracking/js/analytics-events.js', array( 'jquery' ), GADWP_CURRENT_VERSION );
+				wp_enqueue_script( 'gadwp-tracking-analytics-events', GADWP_URL . 'front/tracking/js/analytics-events.js', array( 'jquery' ), GADWP_CURRENT_VERSION, $this->gadwp->config->options['trackingcode_infooter'] );
 
 				/* @formatter:off */
 				wp_localize_script( 'gadwp-tracking-analytics-events', 'gadwpUAEventsData', array(
@@ -227,7 +231,6 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
 <?php
 			foreach ( $this->commands as $set ) {
 				$command = $set['command'];
