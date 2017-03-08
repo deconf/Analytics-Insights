@@ -64,8 +64,8 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 			}
 		}
 
-		private function add( $command, $parameters ) {
-			$this->commands[] = array( $command, $parameters );
+		private function add( $command, $fields, $fieldsobject = null ) {
+			$this->commands[] = array( 'command' => $command, 'fields' => $fields, 'fieldsobject' => $fieldsobject );
 		}
 
 		private function filter( $value ) {
@@ -81,80 +81,104 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 		}
 
 		private function build_commands() {
-			$parameters = array();
-			$parameters['trackingId'] = $this->uaid;
+			$fields = array();
+			$fieldsobject = array();
+			$fields['trackingId'] = $this->uaid;
 			if ( $this->gadwp->config->options['ga_speed_samplerate'] != 1 ) {
-				$parameters['siteSpeedSampleRate'] = (int) $this->gadwp->config->options['ga_speed_samplerate'];
+				$fieldsobject['siteSpeedSampleRate'] = (int) $this->gadwp->config->options['ga_speed_samplerate'];
 			}
 			if ( $this->gadwp->config->options['ga_crossdomain_tracking'] && $this->gadwp->config->options['ga_crossdomain_list'] != '' ) {
-				$parameters['allowLinker'] = 'true';
+				$fieldsobject['allowLinker'] = 'true';
 			}
 			if ( ! empty( $this->gadwp->config->options['ga_cookiedomain'] ) ) {
-				$parameters['cookieDomain'] = $this->gadwp->config->options['ga_cookiedomain'];
+				$fieldsobject['cookieDomain'] = $this->gadwp->config->options['ga_cookiedomain'];
 			} else {
-				$parameters['cookieDomain'] = 'auto';
+				$fields['cookieDomain'] = 'auto';
 			}
 			if ( ! empty( $this->gadwp->config->options['ga_cookiename'] ) ) {
-				$parameters['cookieName'] = $this->gadwp->config->options['ga_cookiename'];
+				$fieldsobject['cookieName'] = $this->gadwp->config->options['ga_cookiename'];
 			}
 			if ( ! empty( $this->gadwp->config->options['ga_cookieexpires'] ) ) {
-				$parameters['cookieExpires'] = (int) $this->gadwp->config->options['ga_cookieexpires'];
+				$fieldsobject['cookieExpires'] = (int) $this->gadwp->config->options['ga_cookieexpires'];
 			}
-			$this->add( 'create', $parameters );
+			$this->add( 'create', $fields, $fieldsobject );
 
 			if ( $this->gadwp->config->options['ga_crossdomain_tracking'] && $this->gadwp->config->options['ga_crossdomain_list'] != '' ) {
-				$parameters = '';
-				$parameters = explode( ',', $this->gadwp->config->options['ga_crossdomain_list'] );
-				$parameters = array_map( 'trim', $parameters );
-				$parameters = strip_tags( implode( "','", $parameters ) );
-				$parameters = "['" . $parameters . "']";
-				$this->add( 'require', 'linker' );
-				$this->add( 'linker:autoLink', $parameters );
+				$fields = array();
+				$fields['plugin'] = 'linker';
+				$this->add( 'require', $fields );
+
+				$fields = array();
+				$domains = '';
+				$domains = explode( ',', $this->gadwp->config->options['ga_crossdomain_list'] );
+				$domains = array_map( 'trim', $domains );
+				$domains = strip_tags( implode( "','", $domains ) );
+				$domains = "['" . $domains . "']";
+				$fields['domains'] = $domains;
+				$this->add( 'linker:autoLink', $fields );
 			}
 
 			if ( $this->gadwp->config->options['ga_dash_remarketing'] ) {
-				$this->add( 'require', 'displayfeatures' );
+				$fields = array();
+				$fields['plugin'] = 'displayfeatures';
+				$this->add( 'require', $fields );
 			}
 
 			if ( $this->gadwp->config->options['ga_enhanced_links'] ) {
-				$this->add( 'require', 'linkid' );
+				$fields = array();
+				$fields['plugin'] = 'linkid';
+				$this->add( 'require', $fields );
 			}
 
-			$parameters = array();
 			if ( $this->gadwp->config->options['ga_author_dimindex'] && ( is_single() || is_page() ) ) {
+				$fields = array();
 				global $post;
 				$author_id = $post->post_author;
 				$author_name = get_the_author_meta( 'display_name', $author_id );
-				$index = 'dimension' . (int) $this->gadwp->config->options['ga_author_dimindex'];
-				$parameters[$index] = esc_attr( $author_name );
+				$fields['dimension'] = 'dimension' . (int) $this->gadwp->config->options['ga_author_dimindex'];
+				$fields['value'] = esc_attr( $author_name );
+				$this->add( 'set', $fields );
 			}
+
 			if ( $this->gadwp->config->options['ga_pubyear_dimindex'] && is_single() ) {
+				$fields = array();
 				global $post;
 				$date = get_the_date( 'Y', $post->ID );
-				$index = 'dimension' . (int) $this->gadwp->config->options['ga_pubyear_dimindex'];
-				$parameters[$index] = (int) $date;
+				$fields['dimension'] = 'dimension' . (int) $this->gadwp->config->options['ga_pubyear_dimindex'];
+				$fields['value'] = (int) $date;
+				$this->add( 'set', $fields );
 			}
+
 			if ( $this->gadwp->config->options['ga_pubyearmonth_dimindex'] && is_single() ) {
+				$fields = array();
 				global $post;
 				$date = get_the_date( 'Y-m', $post->ID );
-				$index = 'dimension' . (int) $this->gadwp->config->options['ga_pubyearmonth_dimindex'];
-				$parameters[$index] = esc_attr( $date );
+				$fields['dimension'] = 'dimension' . (int) $this->gadwp->config->options['ga_pubyearmonth_dimindex'];
+				$fields['value'] = esc_attr( $date );
+				$this->add( 'set', $fields );
 			}
+
 			if ( $this->gadwp->config->options['ga_category_dimindex'] && is_category() ) {
-				$index = 'dimension' . (int) $this->gadwp->config->options['ga_category_dimindex'];
-				$parameters[$index] = esc_attr( single_tag_title() );
+				$fields = array();
+				$fields['dimension'] =  'dimension' . (int) $this->gadwp->config->options['ga_category_dimindex'];
+				$fields['value'] = esc_attr( single_tag_title() );
+				$this->add( 'set', $fields );
 			}
 			if ( $this->gadwp->config->options['ga_category_dimindex'] && is_single() ) {
+				$fields = array();
 				global $post;
 				$categories = get_the_category( $post->ID );
 				foreach ( $categories as $category ) {
-					$index = 'dimension' . (int) $this->gadwp->config->options['ga_category_dimindex'];
-					$parameters[$index] = esc_attr( $category->name );
+					$fields['dimension'] = 'dimension' . (int) $this->gadwp->config->options['ga_category_dimindex'];
+					$fields['value'] = esc_attr( $category->name );
+					$this->add( 'set', $fields );
 					break;
 				}
 			}
+
 			if ( $this->gadwp->config->options['ga_tag_dimindex'] && is_single() ) {
 				global $post;
+				$fields = array();
 				$post_tags_list = '';
 				$post_tags_array = get_the_tags( $post->ID );
 				if ( $post_tags_array ) {
@@ -164,22 +188,29 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 				}
 				$post_tags_list = rtrim( $post_tags_list, ', ' );
 				if ( $post_tags_list ) {
-					$index = 'dimension' . (int) $this->gadwp->config->options['ga_tag_dimindex'];
-					$parameters[$index] = esc_attr( $post_tags_list );
+					$fields['dimension'] = 'dimension' . (int) $this->gadwp->config->options['ga_tag_dimindex'];
+					$fields['value'] = esc_attr( $post_tags_list );
+					$this->add( 'set', $fields );
 				}
 			}
-			if ( $this->gadwp->config->options['ga_user_dimindex'] ) {
-				$index = 'dimension' . (int) $this->gadwp->config->options['ga_user_dimindex'];
-				$parameters[$index] = is_user_logged_in() ? 'registered' : 'guest';
-			}
-			if ( $this->gadwp->config->options['ga_dash_anonim'] ) {
-				$parameters['anonymizeIp'] = 'true';
-			}
-			$this->add( 'set', $parameters );
 
-			$parameters = array();
-			$parameters['hitType'] = 'pageview';
-			$this->add( 'send', $parameters );
+			if ( $this->gadwp->config->options['ga_user_dimindex'] ) {
+				$fields = array();
+				$fields['dimension'] = 'dimension' . (int) $this->gadwp->config->options['ga_user_dimindex'];
+				$fields['value'] = is_user_logged_in() ? 'registered' : 'guest';
+				$this->add( 'set', $fields );
+			}
+
+			if ( $this->gadwp->config->options['ga_dash_anonim'] ) {
+				$fields = array();
+				$fields['option'] = 'anonymizeIp';
+				$fields['value'] = 'true';
+				$this->add( 'set', $fields );
+			}
+
+			$fields = array();
+			$fields['hitType'] = 'pageview';
+			$this->add( 'send', $fields );
 
 			do_action( 'gadwp_analytics_commands' );
 		}
@@ -199,20 +230,26 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 
 <?php
 			foreach ( $this->commands as $set ) {
-				$command = $set[0];
-				$parameters = $set[1];
-				if ( is_array( $parameters ) ) {
-					$fieldsobject = "{";
-					foreach ( $parameters as $fieldkey => $fieldvalue ) {
+				$command = $set['command'];
+
+				$fields = '';
+				foreach ( $set['fields'] as $fieldkey => $fieldvalue ) {
+					$fieldvalue = $this->filter( $fieldvalue );
+					$fields .= ", " . $fieldvalue;
+				}
+
+				if ( $set['fieldsobject'] ) {
+					$fieldsobject = ", {";
+					foreach ( $set['fieldsobject'] as $fieldkey => $fieldvalue ) {
 						$fieldvalue = $this->filter( $fieldvalue );
+						$fieldkey = $this->filter( $fieldkey );
 						$fieldsobject .= $fieldkey . ": " . $fieldvalue . ", ";
 					}
 					$fieldsobject = rtrim( $fieldsobject, ", " );
 					$fieldsobject .= "}";
-					echo "  ga('" . $command . "', " . $fieldsobject . ");\n";
+					echo "  ga('" . $command . "'" . $fields . $fieldsobject . ");\n";
 				} else {
-					$parameters = $this->filter( $parameters );
-					echo "  ga('" . $command . "', " . $parameters . ");\n";
+					echo "  ga('" . $command . "'" . $fields . ");\n";
 				}
 			}
 			?>

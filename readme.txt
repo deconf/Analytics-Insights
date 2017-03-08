@@ -1,7 +1,7 @@
 === GADWP - Google Analytics Dashboard for WP ===
 Contributors: deconf
 Donate link: https://deconf.com/donate/
-Tags: stats,analytics,google analytics,dashboard,analytics dashboard,google analytics dashboard,google analytics plugin,google analytics widget,tracking,universal google analytics,realtime,multisite,gadwp
+Tags: stats,google analytics,google analytics dashboard,google analytics plugin,google analytics widget,analytics,dashboard,tracking,analytics dashboard,universal google analytics,realtime,multisite,gadwp
 Requires at least: 3.5
 Tested up to: 4.7.2
 Stable tag: 4.9.6.2
@@ -13,11 +13,11 @@ Displays Google Analytics stats in your WordPress Dashboard. Inserts the latest 
 == Description ==
 This Google Analytics for WordPress plugin enables you to track your site using the latest Google Analytics tracking code and allows you to view key Google Analytics stats in your WordPress install.
 
-In addition to a set of general Google Analytics reports, in-depth Page reports and in-depth Post reports allow further segmentation of your analytics data, providing performance details for each post or page from your website.
+In addition to a set of general Google Analytics stats, in-depth Page reports and in-depth Post reports allow further segmentation of your analytics data, providing performance details for each post or page from your website.
 
 The Google Analytics tracking code is fully customizable through options and hooks, allowing advanced data collection using custom dimensions and events.    
 
-= Google Analytics Real-Time =
+= Google Analytics Real-Time Stats =
 
 Google Analytics reports, in real-time, in your dashboard screen:
 
@@ -29,10 +29,10 @@ Google Analytics reports, in real-time, in your dashboard screen:
 
 The Google Analytics reports you need, on your dashboard, in your All Posts and All Pages screens, and on site's frontend:  
 
-- Sessions, organic searches, page views, bounce rate analytics reports
-- Locations, pages, referrers, keywords, 404 errors analytics reports
-- Traffic channels, social networks, traffic mediums, search engines analytics reports
-- Device categories, browsers, operating systems, screen resolutions, mobile brands analytics reports 
+- Sessions, organic searches, page views, bounce rate analytics stats
+- Locations, pages, referrers, keywords, 404 errors analytics stats
+- Traffic channels, social networks, traffic mediums, search engines analytics stats
+- Device categories, browsers, operating systems, screen resolutions, mobile brands analytics stats
 - User access control over analytics reports
 
 = Google Analytics Tracking =
@@ -67,10 +67,10 @@ With Google Analytics Dashboard for WP you can use custom dimensions to track:
 
 = Google Tag Manager Tracking =
 
-As an alternative to Google Analytics, you can use Google Tag Manager for tracking:
+As an alternative to Google Analytics tracking code, you can use Google Tag Manager for tracking:
 
 - Google Tag Manager code
-- Data Layer variables for authors, publication year, publication month, categories, tags, user type
+- Data Layer variables: authors, publication year, publication month, categories, tags, user type
 - Exclude user roles from tracking
 - Accelerated Mobile Pages (AMP) support for Google Tag Manager 
 
