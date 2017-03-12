@@ -39,7 +39,7 @@ if ( ! class_exists( 'GADWP_Backend_Ajax' ) ) {
 			if ( ! isset( $_POST['gadwp_security_backend_item_reports'] ) || ! wp_verify_nonce( $_POST['gadwp_security_backend_item_reports'], 'gadwp_backend_item_reports' ) ) {
 				wp_die( - 30 );
 			}
-			if ( isset( $_POST['projectId'] ) && $this->gadwp->config->options['switch_profile'] && $_POST['projectId'] !== 'false' ) {
+			if ( isset( $_POST['projectId'] ) && $this->gadwp->config->options['switch_profile'] && 'false' !== $_POST['projectId']) {
 				$projectId = $_POST['projectId'];
 			} else {
 				$projectId = false;
@@ -66,7 +66,7 @@ if ( ! class_exists( 'GADWP_Backend_Ajax' ) ) {
 			} else {
 				wp_die( - 24 );
 			}
-			if ( $projectId == false ) {
+			if ( false == $projectId ) {
 				$projectId = $this->gadwp->config->options['ga_dash_tableid_jail'];
 			}
 			$profile_info = GADWP_Tools::get_selected_profile( $this->gadwp->config->options['ga_dash_profile_list'], $projectId );
@@ -90,7 +90,7 @@ if ( ! class_exists( 'GADWP_Backend_Ajax' ) ) {
 
 				$lastchar = substr( $filter, - 1 );
 
-				if ( isset( $profile_info[6] ) && $profile_info[6] && $lastchar == '/' ) {
+				if ( isset( $profile_info[6] ) && $profile_info[6] && '/' == $lastchar ) {
 					$filter = $filter . $profile_info[6];
 				}
 

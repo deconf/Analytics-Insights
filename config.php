@@ -45,7 +45,7 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 			if ( ! isset( $item['new_version'] ) || ! isset( $item['plugin'] ) || ! $this->options['automatic_updates_minorversion'] ) {
 				return $update;
 			}
-			if ( isset( $item['slug'] ) && $item['slug'] == 'google-analytics-dashboard-for-wp' ) {
+			if ( isset( $item['slug'] ) && 'google-analytics-dashboard-for-wp' == $item['slug'] ) {
 				// Only when a minor update is available
 				return ( $this->get_major_version( GADWP_CURRENT_VERSION ) == $this->get_major_version( $item['new_version'] ) );
 			}
@@ -78,7 +78,11 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 								'ga_aff_tracking',
 								'amp_tracking_analytics',
 								'amp_tracking_tagmanager',
+								'optimize_tracking',
+								'optimize_pagehiding',
 								'trackingcode_infooter',
+								'trackingevents_infooter',
+								'ga_formsubmit_tracking',
 						);
 			foreach ( $numerics as $key ) {
 				if ( isset( $options[$key] ) ) {
@@ -97,8 +101,11 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 							'maps_api_key',
 							'web_containerid',
 							'amp_containerid',
+							'optimize_containerid',
 							'ga_event_downloads',
 							'ga_event_affiliates',
+							'ecommerce_mode',
+							'ga_dash_tracking_type',
 					);
 			foreach ( $texts as $key ) {
 				if ( isset( $options[$key] ) ) {
@@ -255,8 +262,12 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 								'ga_hash_tracking',
 								'switch_profile', // V4.7
 								'amp_tracking_analytics', //v5.0
+								'optimize_tracking', //v5.0
+								'optimize_pagehiding', //v5.0
 								'amp_tracking_tagmanager', //v5.0
 								'trackingcode_infooter', //v5.0
+								'trackingevents_infooter', //v5.0
+								'ga_formsubmit_tracking', //v5.0
 						);
 			foreach ( $zeros as $key ) {
 				if ( ! isset( $this->options[$key] ) ) {
@@ -298,6 +309,7 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 								'maps_api_key',  // v4.9.4
 								'web_containerid', // v5.0
 								'amp_containerid', // v5.0
+								'optimize_containerid', // v5.0
 			);
 			foreach ( $empties as $key ) {
 				if ( ! isset( $this->options[$key] ) ) {
@@ -352,8 +364,13 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 				$flag = true;
 			}
 
-			if ( $this->options['ga_dash_tracking_type'] == "classic" ) { // v5.0
-				$this->options['ga_dash_tracking_type'] = "universal";
+			if ( ! isset( $this->options['ecommerce_mode'] ) ) { // v5.0
+				$this->options['ecommerce_mode'] = 'disabled';
+				$flag = true;
+			}
+
+			if ( 'classic' == $this->options['ga_dash_tracking_type'] ) { // v5.0
+				$this->options['ga_dash_tracking_type'] = 'universal';
 				$flag = true;
 			}
 

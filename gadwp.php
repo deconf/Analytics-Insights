@@ -233,7 +233,7 @@ if ( ! class_exists( 'GADWP_Manager' ) ) {
 					}
 				}
 
-				if ( ! GADWP_Tools::check_roles( self::$instance->config->options['ga_track_exclude'], true ) && self::$instance->config->options['ga_dash_tracking_type'] != 'disabled' ) {
+				if ( ! GADWP_Tools::check_roles( self::$instance->config->options['ga_track_exclude'], true ) && 'disabled' != self::$instance->config->options['ga_dash_tracking_type'] ) {
 					/*
 					 * Load tracking class
 					 */

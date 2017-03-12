@@ -83,7 +83,7 @@ if ( ! class_exists( 'GADWP_Frontend_Ajax' ) ) {
 
 			$lastchar = substr( $filter, - 1 );
 
-			if ( isset( $profile_info[6] ) && $profile_info[6] && $lastchar == '/' ) {
+			if ( isset( $profile_info[6] ) && $profile_info[6] && '/' == $lastchar ) {
 				$filter = $filter . $profile_info[6];
 			}
 

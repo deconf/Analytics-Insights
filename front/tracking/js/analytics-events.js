@@ -16,6 +16,17 @@ function gadwpRedirect () {
 	document.location.href = gadwpRedirectLink;
 }
 
+var gadwpSubmitObject;
+var gadwpSubmitCalled = false;
+
+function gadwpSubmit () {
+	if ( gadwpSubmitCalled ) {
+		return;
+	}
+	gadwpSubmitCalled = true;
+	jQuery( gadwpSubmitObject ).parents( 'form' ).submit();
+}
+
 ( function ( $ ) {
 	$( window ).load( function () {
 		if ( gadwpUAEventsData.options[ 'event_tracking' ] ) {
@@ -130,6 +141,28 @@ function gadwpRedirect () {
 					} );
 				}
 				setTimeout( gadwpRedirect, gadwpUAEventsData.options[ 'event_timeout' ] );
+				return false;
+			} );
+		}
+
+		if ( gadwpUAEventsData.options[ 'event_formsubmit' ] ) {
+
+			// Track Form Submit
+			$( 'input[type="submit"]' ).click( function ( e ) {
+				gadwpSubmitCalled = false;
+				gadwpSubmitObject = this;
+				var label = jQuery( gadwpSubmitObject ).parents( 'form' ).attr('action');
+				if ( gadwpUAEventsData.options[ 'event_formsubmit' ] ) {
+					ga( 'send', 'event', 'form', 'submit', label, {
+						'nonInteraction' : 1,
+						'hitCallback' : gadwpSubmit
+					} );
+				} else {
+					ga( 'send', 'event', 'form', 'submit', label, {
+						'hitCallback' : gadwpSubmit
+					} );
+				}
+				setTimeout( gadwpSubmit, gadwpUAEventsData.options[ 'event_timeout' ] );
 				return false;
 			} );
 		}

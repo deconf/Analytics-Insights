@@ -101,14 +101,14 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 		 */
 		public function gapi_errors_handler() {
 			$errors = GADWP_Tools::get_cache( 'gapi_errors' );
-			if ( $errors === false || ! isset( $errors[0] ) ) { // invalid error
+			if ( false === $errors || ! isset( $errors[0] ) ) { // invalid error
 				return false;
 			}
-			if ( isset( $errors[1][0]['reason'] ) && ( $errors[1][0]['reason'] == 'invalidCredentials' || $errors[1][0]['reason'] == 'authError' || $errors[1][0]['reason'] == 'insufficientPermissions' || $errors[1][0]['reason'] == 'required' || $errors[1][0]['reason'] == 'keyExpired' ) ) {
+			if ( isset( $errors[1][0]['reason'] ) && ( 'invalidCredentials' == $errors[1][0]['reason'] || 'authError' == $errors[1][0]['reason'] || 'insufficientPermissions' == $errors[1][0]['reason'] || 'required' == $errors[1][0]['reason'] || 'keyExpired' == $errors[1][0]['reason'] ) ) {
 				$this->reset_token( false );
 				return true;
 			}
-			if ( isset( $errors[1][0]['reason'] ) && ( $errors[1][0]['reason'] == 'userRateLimitExceeded' || $errors[1][0]['reason'] == 'quotaExceeded' ) ) {
+			if ( isset( $errors[1][0]['reason'] ) && ( 'userRateLimitExceeded' == $errors[1][0]['reason'] || 'quotaExceeded' == $errors[1][0]['reason'] ) ) {
 				if ( $this->gadwp->config->options['api_backoff'] <= 5 ) {
 					usleep( rand( 100000, 1500000 ) );
 					$this->gadwp->config->options['api_backoff'] = $this->gadwp->config->options['api_backoff'] + 1;
@@ -118,7 +118,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 					return true;
 				}
 			}
-			if ( $errors[0] == 400 || $errors[0] == 401 || $errors[0] == 403 ) {
+			if ( 400 == $errors[0] || 401 == $errors[0] || 403 == $errors[0] ) {
 				return true;
 			}
 			return false;
@@ -277,13 +277,13 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 		 */
 		private function handle_corereports( $projectId, $from, $to, $metrics, $options, $serial ) {
 			try {
-				if ( $from == "today" ) {
+				if ( 'today' == $from  ) {
 					$daily = 0;
 				} else {
 					$daily = 1;
 				}
 				$transient = GADWP_Tools::get_cache( $serial );
-				if ( $transient === false ) {
+				if ( false === $transient ) {
 					if ( $this->gapi_errors_handler() ) {
 						return - 23;
 					}
@@ -365,10 +365,10 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 					$title = __( "Sessions", 'google-analytics-dashboard-for-wp' );
 			}
 			$metrics = 'ga:' . $query;
-			if ( $from == "today" || $from == "yesterday" ) {
+			if ( 'today' == $from || 'yesterday' == $from ) {
 				$dimensions = 'ga:hour';
 				$dayorhour = __( "Hour", 'google-analytics-dashboard-for-wp' );
-			} else if ( $from == "365daysAgo" || $from == "1095daysAgo" ) {
+			} else if ( '365daysAgo' == $from || '1095daysAgo' == $from ) {
 				$dimensions = 'ga:yearMonth, ga:month';
 				$dayorhour = __( "Date", 'google-analytics-dashboard-for-wp' );
 			} else {
@@ -385,11 +385,11 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				return $data;
 			}
 			$gadwp_data = array( array( $dayorhour, $title ) );
-			if ( $from == "today" || $from == "yesterday" ) {
+			if ( 'today' == $from || 'yesterday' == $from ) {
 				foreach ( $data->getRows() as $row ) {
 					$gadwp_data[] = array( (int) $row[0] . ':00', round( $row[1], 2 ) );
 				}
-			} else if ( $from == "365daysAgo" || $from == "1095daysAgo" ) {
+			} else if ( '365daysAgo' == $from || '1095daysAgo' == $from ) {
 				foreach ( $data->getRows() as $row ) {
 					/*
 					 * translators:
@@ -436,7 +436,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			$serial = 'qr3_' . $this->get_serial( $projectId . $from . $filter );
 			$data = $this->handle_corereports( $projectId, $from, $to, $metrics, $options, $serial );
 			if ( is_numeric( $data ) ) {
-				if ( $data == - 21 ) {
+				if ( - 21 == $data ) {
 					return array_fill( 0, 9, 0 );
 				} else {
 					return $data;
@@ -679,7 +679,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
-			$block = ( $query == 'channelGrouping' ) ? __( "Channels", 'google-analytics-dashboard-for-wp' ) : __( "Devices", 'google-analytics-dashboard-for-wp' );
+			$block = ( 'channelGrouping' == $query ) ? __( "Channels", 'google-analytics-dashboard-for-wp' ) : __( "Devices", 'google-analytics-dashboard-for-wp' );
 			$gadwp_data = array( array( '<div style="color:black; font-size:1.1em">' . $block . '</div><div style="color:darkblue; font-size:1.2em">' . (int) $data['totalsForAllResults']["ga:sessions"] . '</div>', "" ) );
 			foreach ( $data->getRows() as $row ) {
 				$shrink = explode( " ", $row[0] );
@@ -707,7 +707,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			$metrics = 'ga:sessions';
 			$dimensions = 'ga:' . $query;
 
-			if ( $query == 'source' ) {
+			if ( 'source' == $query ) {
 				$options = array( 'dimensions' => $dimensions, 'sort' => '-ga:sessions', 'quotaUser' => $this->managequota . 'p' . $projectId );
 				if ( $filter ) {
 					$options['filters'] = 'ga:medium==organic;ga:keyword!=(not set);ga:pagePath==' . $filter;
@@ -798,7 +798,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			try {
 				$serial = 'qr_realtimecache_' . $this->get_serial( $projectId );
 				$transient = GADWP_Tools::get_cache( $serial );
-				if ( $transient === false ) {
+				if ( false === $transient ) {
 					if ( $this->gapi_errors_handler() ) {
 						return - 23;
 					}
@@ -860,29 +860,29 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			if ( in_array( $query, array( 'sessions', 'users', 'organicSearches', 'visitBounceRate', 'pageviews', 'uniquePageviews' ) ) ) {
 				return $this->get_areachart_data( $projectId, $from, $to, $query, $filter );
 			}
-			if ( $query == 'bottomstats' ) {
+			if ( 'bottomstats' == $query ) {
 				return $this->get_bottomstats( $projectId, $from, $to, $filter );
 			}
-			if ( $query == 'locations' ) {
+			if ( 'locations' == $query  ) {
 				return $this->get_locations( $projectId, $from, $to, $filter );
 			}
-			if ( $query == 'referrers' ) {
+			if ( 'referrers' == $query ) {
 				return $this->get_referrers( $projectId, $from, $to, $filter );
 			}
-			if ( $query == 'contentpages' ) {
+			if ( 'contentpages' == $query ) {
 				return $this->get_contentpages( $projectId, $from, $to, $filter );
 			}
-			if ( $query == '404errors' ) {
+			if ( '404errors' == $query ) {
 				$filter = $this->gadwp->config->options['pagetitle_404'];
 				return $this->get_404errors( $projectId, $from, $to, $filter );
 			}
-			if ( $query == 'searches' ) {
+			if ( 'searches' == $query ) {
 				return $this->get_searches( $projectId, $from, $to, $filter );
 			}
-			if ( $query == 'realtime' ) {
+			if ( 'realtime' == $query ) {
 				return $this->get_realtime( $projectId );
 			}
-			if ( $query == 'channelGrouping' || $query == 'deviceCategory' ) {
+			if ( 'channelGrouping' == $query || 'deviceCategory' == $query ) {
 				return $this->get_orgchart_data( $projectId, $from, $to, $query, $filter );
 			}
 			if ( in_array( $query, array( 'medium', 'visitorType', 'socialNetwork', 'source', 'browser', 'operatingSystem', 'screenResolution', 'mobileDeviceBranding' ) ) ) {

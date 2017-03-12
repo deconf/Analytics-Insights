@@ -30,6 +30,10 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 
 			$this->load_scripts();
 
+			if ( $this->gadwp->config->options['optimize_tracking'] && $this->gadwp->config->options['optimize_pagehiding'] && $this->gadwp->config->options['optimize_containerid'] ){
+				add_action( 'wp_head', array( $this, 'optimize_output' ), 99 );
+			}
+
 			if ($this->gadwp->config->options['trackingcode_infooter']) {
 				add_action( 'wp_footer', array( $this, 'output' ), 99 );
 			} else {
@@ -48,7 +52,7 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 				$domaindata = GADWP_Tools::get_root_domain( esc_html( get_option( 'siteurl' ) ) );
 				$root_domain = $domaindata['domain'];
 
-				wp_enqueue_script( 'gadwp-tracking-analytics-events', GADWP_URL . 'front/tracking/js/analytics-events.js', array( 'jquery' ), GADWP_CURRENT_VERSION, $this->gadwp->config->options['trackingcode_infooter'] );
+				wp_enqueue_script( 'gadwp-tracking-analytics-events', GADWP_URL . 'front/tracking/js/analytics-events.js', array( 'jquery' ), GADWP_CURRENT_VERSION, $this->gadwp->config->options['trackingevents_infooter'] );
 
 				/* @formatter:off */
 				wp_localize_script( 'gadwp-tracking-analytics-events', 'gadwpUAEventsData', array(
@@ -61,6 +65,7 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 						'hash_tracking' =>  $this->gadwp->config->options ['ga_hash_tracking'],
 						'root_domain' => $root_domain,
 						'event_timeout' => apply_filters( 'gadwp_uaevent_timeout', 100 ),
+						'event_formsubmit' =>  $this->gadwp->config->options ['ga_formsubmit_tracking'],
 					),
 				)
 				);
@@ -73,7 +78,7 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 		}
 
 		private function filter( $value ) {
-			if ( $value == 'true' || $value == 'false' ) {
+			if ( 'true' == $value || 'false' == $value ) {
 				return $value;
 			}
 
@@ -88,10 +93,10 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 			$fields = array();
 			$fieldsobject = array();
 			$fields['trackingId'] = $this->uaid;
-			if ( $this->gadwp->config->options['ga_speed_samplerate'] != 1 ) {
+			if ( 1 != $this->gadwp->config->options['ga_speed_samplerate'] ) {
 				$fieldsobject['siteSpeedSampleRate'] = (int) $this->gadwp->config->options['ga_speed_samplerate'];
 			}
-			if ( $this->gadwp->config->options['ga_crossdomain_tracking'] && $this->gadwp->config->options['ga_crossdomain_list'] != '' ) {
+			if ( $this->gadwp->config->options['ga_crossdomain_tracking'] && '' != $this->gadwp->config->options['ga_crossdomain_list'] ) {
 				$fieldsobject['allowLinker'] = 'true';
 			}
 			if ( ! empty( $this->gadwp->config->options['ga_cookiedomain'] ) ) {
@@ -107,7 +112,7 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 			}
 			$this->add( 'create', $fields, $fieldsobject );
 
-			if ( $this->gadwp->config->options['ga_crossdomain_tracking'] && $this->gadwp->config->options['ga_crossdomain_list'] != '' ) {
+			if ( $this->gadwp->config->options['ga_crossdomain_tracking'] && '' != $this->gadwp->config->options['ga_crossdomain_list'] ) {
 				$fields = array();
 				$fields['plugin'] = 'linker';
 				$this->add( 'require', $fields );
@@ -165,7 +170,7 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 			if ( $this->gadwp->config->options['ga_category_dimindex'] && is_category() ) {
 				$fields = array();
 				$fields['dimension'] =  'dimension' . (int) $this->gadwp->config->options['ga_category_dimindex'];
-				$fields['value'] = esc_attr( single_tag_title() );
+				$fields['value'] = esc_attr( single_tag_title( '', false ) );
 				$this->add( 'set', $fields );
 			}
 			if ( $this->gadwp->config->options['ga_category_dimindex'] && is_single() ) {
@@ -212,11 +217,44 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 				$this->add( 'set', $fields );
 			}
 
+			if ( 'enhanced' == $this->gadwp->config->options['ecommerce_mode'] ) {
+				$fields = array();
+				$fields['plugin'] = 'ec';
+				$this->add( 'require', $fields );
+			} else if ( 'standard' == $this->gadwp->config->options['ecommerce_mode'] ) {
+				$fields = array();
+				$fields['plugin'] = 'ecommerce';
+				$this->add( 'require', $fields );
+			}
+
+			if ( $this->gadwp->config->options['optimize_tracking'] && $this->gadwp->config->options['optimize_containerid'] ) {
+				$fields = array();
+				$fields['plugin'] = esc_attr( $this->gadwp->config->options['optimize_containerid'] );
+				$this->add( 'require', $fields );
+			}
+
 			$fields = array();
 			$fields['hitType'] = 'pageview';
 			$this->add( 'send', $fields );
 
 			do_action( 'gadwp_analytics_commands' );
+		}
+
+		public function optimize_output() {
+			?>
+<style>
+.async-hide {
+	opacity: 0 !important
+}
+</style>
+<script>
+(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
+h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
+(a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
+})(window,document.documentElement,'async-hide','dataLayer',4000,
+{'<?php echo $this->gadwp->config->options['optimize_containerid']; ?>':true});
+</script>
+<?php
 		}
 
 		public function output() {
