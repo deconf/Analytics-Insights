@@ -64,7 +64,7 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 						'event_affiliates' =>  esc_js($this->gadwp->config->options['ga_event_affiliates']),
 						'hash_tracking' =>  $this->gadwp->config->options ['ga_hash_tracking'],
 						'root_domain' => $root_domain,
-						'event_timeout' => apply_filters( 'gadwp_uaevent_timeout', 100 ),
+						'event_timeout' => apply_filters( 'gadwp_analyticsevents_timeout', 100 ),
 						'event_formsubmit' =>  $this->gadwp->config->options ['ga_formsubmit_tracking'],
 					),
 				)
