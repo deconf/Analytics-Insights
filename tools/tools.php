@@ -184,7 +184,7 @@ if ( ! class_exists( 'GADWP_Tools' ) ) {
 			}
 		}
 
-		public static function sort_by_name_field ( $a, $b ) {
+		public static function sort_by_name_field( $a, $b ) {
 			return strcasecmp( $a['name'], $b['name'] );
 		}
 	}
