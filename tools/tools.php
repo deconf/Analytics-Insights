@@ -183,5 +183,9 @@ if ( ! class_exists( 'GADWP_Tools' ) ) {
 				return $blogs;
 			}
 		}
+
+		public static function sort_by_name_field ( $a, $b ) {
+			return strcasecmp( $a['name'], $b['name'] );
+		}
 	}
 }
