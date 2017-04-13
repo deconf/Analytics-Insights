@@ -198,8 +198,8 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 
 					$items = $profiles->getItems();
 
-					usort($items, function($a, $b){
-						return strcasecmp($a['name'], $b['name']);
+					usort( $items, function( $a, $b ) {
+						return strcasecmp( $a['name'], $b['name'] );
 					});
 
 					$totalresults = $profiles->getTotalResults();
