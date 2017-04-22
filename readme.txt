@@ -151,7 +151,6 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 	* Events are now tracked using a JS file instead of in-line JavaScript
 	* multiple improvements for events tracking accuracy
 	* ability to switch between sessions, users and pageviews metrics on reports like Location, Traffic, Searches.
-	* sort Views by name, props [Shawn Drake](https://github.com/shawndrake2)   
 * New Features:
 	* ability to use Google Tag Manager instead of Google Analytics tracking
 	* added Accelerated Mobile Pages (AMP) support for Google Analytics and Google Tag Manager tracking
