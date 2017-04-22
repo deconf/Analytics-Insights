@@ -39,7 +39,7 @@ if ( ! class_exists( 'GADWP_Backend_Ajax' ) ) {
 			if ( ! isset( $_POST['gadwp_security_backend_item_reports'] ) || ! wp_verify_nonce( $_POST['gadwp_security_backend_item_reports'], 'gadwp_backend_item_reports' ) ) {
 				wp_die( - 30 );
 			}
-			if ( isset( $_POST['projectId'] ) && $this->gadwp->config->options['switch_profile'] && $_POST['projectId'] !== 'false' ) {
+			if ( isset( $_POST['projectId'] ) && $this->gadwp->config->options['switch_profile'] && 'false' !== $_POST['projectId'] ) {
 				$projectId = $_POST['projectId'];
 			} else {
 				$projectId = false;
@@ -52,6 +52,16 @@ if ( ! class_exists( 'GADWP_Backend_Ajax' ) ) {
 			} else {
 				$filter_id = false;
 			}
+			if ( isset( $_POST['metric'] ) ) {
+				$metric = $_POST['metric'];
+			} else {
+				$metric = 'sessions';
+			}
+
+			if ( $filter_id && $metric == 'sessions' ) { // Sessions metric is not available for item reports
+				$metric = 'pageviews';
+			}
+
 			if ( ob_get_length() ) {
 				ob_clean();
 			}
@@ -66,7 +76,7 @@ if ( ! class_exists( 'GADWP_Backend_Ajax' ) ) {
 			} else {
 				wp_die( - 24 );
 			}
-			if ( $projectId == false ) {
+			if ( false == $projectId ) {
 				$projectId = $this->gadwp->config->options['ga_dash_tableid_jail'];
 			}
 			$profile_info = GADWP_Tools::get_selected_profile( $this->gadwp->config->options['ga_dash_profile_list'], $projectId );
@@ -90,7 +100,7 @@ if ( ! class_exists( 'GADWP_Backend_Ajax' ) ) {
 
 				$lastchar = substr( $filter, - 1 );
 
-				if ( isset( $profile_info[6] ) && $profile_info[6] && $lastchar == '/' ) {
+				if ( isset( $profile_info[6] ) && $profile_info[6] && '/' == $lastchar ) {
 					$filter = $filter . $profile_info[6];
 				}
 
@@ -105,7 +115,7 @@ if ( ! class_exists( 'GADWP_Backend_Ajax' ) ) {
 			$results = array();
 
 			foreach ( $queries as $value ) {
-				$results[] = $this->gadwp->gapi_controller->get( $projectId, $value, $from, $to, $filter );
+				$results[] = $this->gadwp->gapi_controller->get( $projectId, $value, $from, $to, $filter, $metric );
 			}
 
 			wp_send_json( $results );

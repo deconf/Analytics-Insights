@@ -7,7 +7,7 @@
  */
 
 /* Tab navigation */
-#gadwp-events, #gadwp-custom, #gadwp-advanced, #gadwp-exclude, #gadwp-config {
+#gadwp-events, #gadwp-custom, #gadwp-advanced, #gadwp-exclude, #gadwp-config, #gadwp-tmdatalayervars, #gadwp-tmintegration, #gadwp-integration {
 	display: none;
 }
 
@@ -22,7 +22,7 @@ table.gadwp-settings-options {
 }
 
 td.gadwp-settings-title, td.info {
-	width: 130px;
+	width: 140px;
 	padding-left: 20px;
 }
 
@@ -39,7 +39,7 @@ td.gadwp-settings-info {
 }
 
 td.gadwp-settings-title label {
-	font-weight: bold;
+	font-size: 1.1em;
 }
 
 .gadash-title {

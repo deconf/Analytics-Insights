@@ -1,7 +1,7 @@
-=== Google Analytics Dashboard for WP ===
+=== GADWP - Google Analytics Dashboard for WP ===
 Contributors: deconf
 Donate link: https://deconf.com/donate/
-Tags: stats,analytics,google analytics,dashboard,analytics dashboard,google analytics dashboard,google analytics plugin,google analytics widget,tracking,universal google analytics,realtime,multisite,gadwp
+Tags: stats,google analytics,google analytics dashboard,google analytics plugin,google analytics widget,analytics,dashboard,tracking,analytics dashboard,universal google analytics,realtime,multisite,gadwp
 Requires at least: 3.5
 Tested up to: 4.7.4
 Stable tag: 4.9.6.2
@@ -13,11 +13,11 @@ Displays Google Analytics stats in your WordPress Dashboard. Inserts the latest 
 == Description ==
 This Google Analytics for WordPress plugin enables you to track your site using the latest Google Analytics tracking code and allows you to view key Google Analytics stats in your WordPress install.
 
-In addition to a set of general Google Analytics reports, in-depth Page reports and in-depth Post reports allow further segmentation of your analytics data, providing performance details for each post or page from your website.
+In addition to a set of general Google Analytics stats, in-depth Page reports and in-depth Post reports allow further segmentation of your analytics data, providing performance details for each post or page from your website.
 
 The Google Analytics tracking code is fully customizable through options and hooks, allowing advanced data collection using custom dimensions and events.    
 
-= Google Analytics Real-Time =
+= Google Analytics Real-Time Stats =
 
 Google Analytics reports, in real-time, in your dashboard screen:
 
@@ -29,26 +29,25 @@ Google Analytics reports, in real-time, in your dashboard screen:
 
 The Google Analytics reports you need, on your dashboard, in your All Posts and All Pages screens, and on site's frontend:  
 
-- Sessions, organic searches, page views, bounce rate analytics reports
-- Locations, pages, referrers, keywords, 404 errors analytics reports
-- Traffic channels, social networks, traffic mediums, search engines analytics reports
-- Device categories, browsers, operating systems, screen resolutions, mobile brands analytics reports 
+- Sessions, organic searches, page views, bounce rate analytics stats
+- Locations, pages, referrers, keywords, 404 errors analytics stats
+- Traffic channels, social networks, traffic mediums, search engines analytics stats
+- Device categories, browsers, operating systems, screen resolutions, mobile brands analytics stats
 - User access control over analytics reports
 
-= Google Analytics Basic Tracking =
+= Google Analytics Tracking =
 
 Installs the latest Google Analytics tracking code and allows full code customization:
 
-- Switch between Universal Google Analytics and Classic Google Analytics code
+- Universal Google Analytics tracking code
 - IP address anonymization
 - Enhanced link attribution
 - Remarketing, demographics and interests tracking
-- Google AdSense linking
 - Page Speed sampling rate control
 - Cross domain tracking
 - Exclude user roles from tracking
-
-= Google Analytics Event Tracking =
+- Accelerated Mobile Pages (AMP) support for Google Analytics
+- Ecommerce support for Google Analytics
 
 Google Analytics Dashboard for WP enables you to easily track events like:
  
@@ -58,8 +57,6 @@ Google Analytics Dashboard for WP enables you to easily track events like:
 - Affiliate links
 - Fragment identifiers
 
-= Google Analytics Custom Dimensions =
-
 With Google Analytics Dashboard for WP you can use custom dimensions to track:
 
 - Authors
@@ -68,6 +65,15 @@ With Google Analytics Dashboard for WP you can use custom dimensions to track:
 - Categories
 - Tags
 - User engagement
+
+= Google Tag Manager Tracking =
+
+As an alternative to Google Analytics tracking code, you can use Google Tag Manager for tracking:
+
+- Google Tag Manager code
+- Data Layer variables: authors, publication year, publication month, categories, tags, user type
+- Exclude user roles from tracking
+- Accelerated Mobile Pages (AMP) support for Google Tag Manager 
 
 = Google Analytics Dashboard for WP on Multisite =
 
@@ -137,6 +143,7 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 
 == Changelog ==
 
+<<<<<<< HEAD
 = 4.9.6.2 =
 * Enhancements:
 	* switching sampling level to higher precision to increase the accuracy of reports
@@ -145,12 +152,45 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 * Enhancements:
 	* enable anonymization for all hits instead of single hits to avoid false-positives from IP Anonymization checking tools
 	
+=======
+= 5.0 =
+* Enhancements:
+	* complete redesign of the tracking component
+	* AdSense Linking feature was removed since the new linking procedure does not require a special code anymore
+	* dropping support for Classic Analytics (ga.js) since all properties were transfered to Universal Analytics
+	* Events are now tracked using a JS file instead of in-line JavaScript
+	* multiple improvements for events tracking accuracy
+	* ability to switch between sessions, users and pageviews metrics on reports like Location, Traffic, Searches.
+	* sort Views by name, props [Shawn Drake](https://github.com/shawndrake2)   
+* New Features:
+	* ability to use Google Tag Manager instead of Google Analytics tracking
+	* added Accelerated Mobile Pages (AMP) support for Google Analytics and Google Tag Manager tracking
+	* users can now switch the position of the tracking codes from head to body through options
+	* option to load Ecommerce or Enhanced Ecommerce plug-ins for analytics.js 
+	* option to select the placement of the tracking code (head or footer)
+	* events tracking for form submit actions
+	* events tracking for telephone calls
+	* full support for experiments with Optimize
+
+= 4.9.6.2 =
+* Enhancements:
+	* switching sampling level to higher precision to increase the accuracy of reports
+
+= 4.9.6.1 =
+* Enhancements:
+	* enable anonimization for all hits instead of single hits to avoid false-positives from IP Anonymization checking tools
+
+>>>>>>> refs/heads/advanced-tracking-component
 = 4.9.6 =
 * Enhancements:
 	* introducing average time on page, average page load time, average exit rate, and average session duration metrics
 * Bug Fixes:
 	* use Google Maps API key only if available
+<<<<<<< HEAD
 	* fixes gadwp_sites_limit filter 
+=======
+	* fixes gadwp_sites_limit filter
+>>>>>>> refs/heads/advanced-tracking-component
 	
 = 4.9.5 =
 * Enhancements:
