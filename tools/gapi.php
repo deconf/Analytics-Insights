@@ -198,8 +198,6 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 
 					$items = $profiles->getItems();
 
-					usort( $items, array( 'GADWP_Tools', 'sort_by_name_field' ) );
-
 					$totalresults = $profiles->getTotalResults();
 
 					if ( $totalresults > 0 ) {

@@ -143,16 +143,6 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 
 == Changelog ==
 
-<<<<<<< HEAD
-= 4.9.6.2 =
-* Enhancements:
-	* switching sampling level to higher precision to increase the accuracy of reports
-	
-= 4.9.6.1 =
-* Enhancements:
-	* enable anonymization for all hits instead of single hits to avoid false-positives from IP Anonymization checking tools
-	
-=======
 = 5.0 =
 * Enhancements:
 	* complete redesign of the tracking component
@@ -180,17 +170,12 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 * Enhancements:
 	* enable anonimization for all hits instead of single hits to avoid false-positives from IP Anonymization checking tools
 
->>>>>>> refs/heads/advanced-tracking-component
 = 4.9.6 =
 * Enhancements:
 	* introducing average time on page, average page load time, average exit rate, and average session duration metrics
 * Bug Fixes:
 	* use Google Maps API key only if available
-<<<<<<< HEAD
-	* fixes gadwp_sites_limit filter 
-=======
 	* fixes gadwp_sites_limit filter
->>>>>>> refs/heads/advanced-tracking-component
 	
 = 4.9.5 =
 * Enhancements:
