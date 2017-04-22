@@ -149,7 +149,8 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 	* AdSense Linking feature was removed since the new linking procedure does not require a special code anymore
 	* dropping support for Classic Analytics (ga.js) since all properties were transfered to Universal Analytics
 	* Events are now tracked using a JS file instead of in-line JavaScript
-	* multiple improvements for events tracking accuracy 
+	* multiple improvements for events tracking accuracy
+	* ability to switch between sessions, users and pageviews metrics on reports like Location, Traffic, Searches.   
 * New Features:
 	* ability to use Google Tag Manager instead of Google Analytics tracking
 	* added Accelerated Mobile Pages (AMP) support for Google Analytics and Google Tag Manager tracking

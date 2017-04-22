@@ -44,7 +44,7 @@ gadwpItemData.getSelector = function ( scope ) {
 	if ( scope == 'admin-item' ) {
 		return 'a[id^="gadwp-"]';
 	} else {
-		return 'li[id^="wp-admin-bar-gadwp"]';
+		return 'li[id^="wp-admin-bar-gadwp"] a';
 	}
 }
 
@@ -75,7 +75,7 @@ gadwpItemData.responsiveDialog = function () {
 
 jQuery.fn.extend( {
 	gadwpItemReport : function ( itemId ) {
-		var postData, tools, template, reports, refresh, init, slug = "-" + itemId;
+		var postData, tools, template, reports, refresh, init, swmetric, slug = "-" + itemId;
 
 		tools = {
 			setCookie : function ( name, value ) {
@@ -120,27 +120,44 @@ jQuery.fn.extend( {
 			addOptions : function ( id, list ) {
 				var defaultMetric, defaultDimension, defaultView, output = [];
 
-				if ( list == false ) {
-					return;
-				}
-
-				if ( !tools.getCookie( 'default_metric' ) || !tools.getCookie( 'default_dimension' ) ) {
+				if ( !tools.getCookie( 'default_metric' ) || !tools.getCookie( 'default_dimension' )  || !tools.getCookie( 'default_swmetric' ) ) {
 					defaultMetric = 'sessions';
 					defaultDimension = '30daysAgo';
+					if ( gadwpItemData.scope == 'front-item' || gadwpItemData.scope == 'admin-item' ) {
+						swmetric = 'pageviews';
+					} else {
+						swmetric = 'sessions';
+					}	
 				} else {
 					defaultMetric = tools.getCookie( 'default_metric' );
 					defaultDimension = tools.getCookie( 'default_dimension' );
 					defaultView = tools.getCookie( 'default_view' );
+					swmetric = tools.getCookie( 'default_swmetric' );
 				}
 
-				jQuery.each( list, function ( key, value ) {
-					if ( key == defaultMetric || key == defaultDimension || key == defaultView ) {
-						output.push( '<option value="' + key + '" selected="selected">' + value + '</option>' );
+				if ( list == false ) {
+					if ( gadwpItemData.scope == 'front-item' || gadwpItemData.scope == 'admin-item' ) {
+						output = ''; // Remove Sessions metric selection on item reports						
 					} else {
-						output.push( '<option value="' + key + '">' + value + '</option>' );
+						output = '<span id="gadwp-swmetric-sessions" class="dashicons dashicons-clock" style="font-size:22px;padding:4px;"></span>';
 					}
-				} );
-				jQuery( id ).html( output.join( '' ) );
+					
+					output += '<span id="gadwp-swmetric-users" class="dashicons dashicons-admin-users" style="font-size:22px;padding:4px;"></span>';
+					output += '<span id="gadwp-swmetric-pageviews" class="dashicons dashicons-admin-page" style="font-size:22px;padding:4px;"></span>';
+
+					jQuery( id ).html( output );
+					
+					jQuery( '#gadwp-swmetric-' + swmetric ).css( "color", "#008ec2" );
+				} else {
+					jQuery.each( list, function ( key, value ) {
+						if ( key == defaultMetric || key == defaultDimension || key == defaultView ) {
+							output.push( '<option value="' + key + '" selected="selected">' + value + '</option>' );
+						} else {
+							output.push( '<option value="' + key + '">' + value + '</option>' );
+						}
+					} );
+					jQuery( id ).html( output.join( '' ) );
+				}
 			},
 
 			init : function () {
@@ -160,6 +177,8 @@ jQuery.fn.extend( {
 				}
 				tpl += '<select id="gadwp-sel-period' + slug + '"></select> ';
 				tpl += '<select id="gadwp-sel-report' + slug + '"></select>';
+				tpl += '<div id="gadwp-sel-metric' + slug + '" style="float:right;display:none;">';
+				tpl += '</div>';
 				tpl += '<div id="gadwp-progressbar' + slug + '"></div>';
 				tpl += '<div id="gadwp-status' + slug + '"></div>';
 				tpl += '<div id="gadwp-reports' + slug + '"></div>';
@@ -174,7 +193,7 @@ jQuery.fn.extend( {
 				template.addOptions( '#gadwp-sel-view' + slug, gadwpItemData.viewList );
 				template.addOptions( '#gadwp-sel-period' + slug, gadwpItemData.dateList );
 				template.addOptions( '#gadwp-sel-report' + slug, gadwpItemData.reportList );
-
+				template.addOptions( '#gadwp-sel-metric' + slug, false );
 			}
 		}
 
@@ -906,8 +925,10 @@ jQuery.fn.extend( {
 
 						jQuery( '#gadwp-reports' + slug ).html( tpl );
 						jQuery( '#gadwp-reports' + slug ).hide();
+						jQuery( '#gadwp-sel-metric' + slug ).show();
 
 						postData.query = 'channelGrouping,' + query;
+						postData.metric = swmetric;
 
 						jQuery.post( gadwpItemData.ajaxurl, postData, function ( response ) {
 							reports.orgChartTableChart( response );
@@ -919,8 +940,10 @@ jQuery.fn.extend( {
 
 						jQuery( '#gadwp-reports' + slug ).html( tpl );
 						jQuery( '#gadwp-reports' + slug ).hide();
+						jQuery( '#gadwp-sel-metric' + slug ).show();
 
 						postData.query = query;
+						postData.metric = swmetric;						
 
 						jQuery.post( gadwpItemData.ajaxurl, postData, function ( response ) {
 							reports.tableChart( response );
@@ -941,6 +964,8 @@ jQuery.fn.extend( {
 
 						jQuery( '#gadwp-reports' + slug ).html( tpl );
 						jQuery( '#gadwp-reports' + slug ).hide();
+						jQuery( '#gadwp-sel-metric' + slug ).show();
+						
 						if ( query == 'trafficdetails' ) {
 							postData.query = 'channelGrouping,medium,visitorType,source,socialNetwork';
 							reports.i18n = gadwpItemData.i18n.slice( 0, 5 );
@@ -948,6 +973,7 @@ jQuery.fn.extend( {
 							reports.i18n = gadwpItemData.i18n.slice( 15, 20 );
 							postData.query = 'deviceCategory,browser,operatingSystem,screenResolution,mobileDeviceBranding';
 						}
+						postData.metric = swmetric;
 
 						jQuery.post( gadwpItemData.ajaxurl, postData, function ( response ) {
 							reports.orgChartPieCharts( response )
@@ -962,8 +988,10 @@ jQuery.fn.extend( {
 
 						jQuery( '#gadwp-reports' + slug ).html( tpl );
 						jQuery( '#gadwp-reports' + slug ).hide();
+						jQuery( '#gadwp-sel-metric' + slug ).show();
 
 						postData.query = query;
+						postData.metric = swmetric;
 
 						jQuery.post( gadwpItemData.ajaxurl, postData, function ( response ) {
 							reports.geoChartTableChart( response );
@@ -1068,10 +1096,23 @@ jQuery.fn.extend( {
 		} );
 
 		jQuery( '#gadwp-sel-report' + slug ).change( function () {
+			jQuery( '#gadwp-sel-metric' + slug ).hide();
 			jQuery( '#gadwp-reports' + slug ).html( '' );
 			reports.init();
 		} );
-
+		
+		jQuery( '[id^=gadwp-swmetric-]' ).click( function () {
+			swmetric = this.id.replace( 'gadwp-swmetric-', '' );
+			tools.setCookie( 'default_swmetric', swmetric );
+			jQuery( '#gadwp-swmetric-sessions' ).css( "color", "#444" );
+			jQuery( '#gadwp-swmetric-users' ).css( "color", "#444" );
+			jQuery( '#gadwp-swmetric-pageviews' ).css( "color", "#444" );
+			jQuery( '#' + this.id ).css( "color", "#008ec2" );			
+			
+			jQuery( '#gadwp-reports' + slug ).html( '' );
+			reports.init();
+		} );		
+		
 		if ( gadwpItemData.scope == 'admin-widgets' ) {
 			return;
 		} else {

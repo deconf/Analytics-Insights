@@ -277,7 +277,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 		 */
 		private function handle_corereports( $projectId, $from, $to, $metrics, $options, $serial ) {
 			try {
-				if ( 'today' == $from  ) {
+				if ( 'today' == $from ) {
 					$daily = 0;
 				} else {
 					$daily = 1;
@@ -478,19 +478,19 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 		 *            $filter
 		 * @return array|int
 		 */
-		private function get_contentpages( $projectId, $from, $to, $filter = '' ) {
-			$metrics = 'ga:sessions';
+		private function get_contentpages( $projectId, $from, $to, $filter = '', $metric ) {
+			$metrics = 'ga:' . $metric;
 			$dimensions = 'ga:pageTitle';
-			$options = array( 'dimensions' => $dimensions, 'sort' => '-ga:sessions', 'quotaUser' => $this->managequota . 'p' . $projectId );
+			$options = array( 'dimensions' => $dimensions, 'sort' => '-' . $metrics, 'quotaUser' => $this->managequota . 'p' . $projectId );
 			if ( $filter ) {
 				$options['filters'] = 'ga:pagePath==' . $filter;
 			}
-			$serial = 'qr4_' . $this->get_serial( $projectId . $from . $filter );
+			$serial = 'qr4_' . $this->get_serial( $projectId . $from . $filter . $metric );
 			$data = $this->handle_corereports( $projectId, $from, $to, $metrics, $options, $serial );
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
-			$gadwp_data = array( array( __( "Pages", 'google-analytics-dashboard-for-wp' ), __( "Sessions", 'google-analytics-dashboard-for-wp' ) ) );
+			$gadwp_data = array( array( __( "Pages", 'google-analytics-dashboard-for-wp' ), __( ucfirst($metric), 'google-analytics-dashboard-for-wp' ) ) );
 			foreach ( $data->getRows() as $row ) {
 				$gadwp_data[] = array( esc_html( $row[0] ), (int) $row[1] );
 			}
@@ -508,17 +508,17 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 		 *            $to
 		 * @return array|int
 		 */
-		private function get_404errors( $projectId, $from, $to, $filter = "Page Not Found" ) {
-			$metrics = 'ga:sessions';
+		private function get_404errors( $projectId, $from, $to, $filter = "Page Not Found", $metric ) {
+			$metrics = 'ga:' . $metric;
 			$dimensions = 'ga:pagePath,ga:fullReferrer';
-			$options = array( 'dimensions' => $dimensions, 'sort' => '-ga:sessions', 'quotaUser' => $this->managequota . 'p' . $projectId );
+			$options = array( 'dimensions' => $dimensions, 'sort' => '-' . $metrics, 'quotaUser' => $this->managequota . 'p' . $projectId );
 			$options['filters'] = 'ga:pageTitle=@' . $filter;
-			$serial = 'qr4_' . $this->get_serial( $projectId . $from . $filter );
+			$serial = 'qr4_' . $this->get_serial( $projectId . $from . $filter . $metric );
 			$data = $this->handle_corereports( $projectId, $from, $to, $metrics, $options, $serial );
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
-			$gadwp_data = array( array( __( "404 Errors", 'google-analytics-dashboard-for-wp' ), __( "Sessions", 'google-analytics-dashboard-for-wp' ) ) );
+			$gadwp_data = array( array( __( "404 Errors", 'google-analytics-dashboard-for-wp' ), __( ucfirst($metric), 'google-analytics-dashboard-for-wp' ) ) );
 			foreach ( $data->getRows() as $row ) {
 				$path = esc_html( $row[0] );
 				$source = esc_html( $row[1] );
@@ -540,21 +540,21 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 		 *            $filter
 		 * @return array|int
 		 */
-		private function get_referrers( $projectId, $from, $to, $filter = '' ) {
-			$metrics = 'ga:sessions';
+		private function get_referrers( $projectId, $from, $to, $filter = '', $metric ) {
+			$metrics = 'ga:' . $metric;
 			$dimensions = 'ga:source';
-			$options = array( 'dimensions' => $dimensions, 'sort' => '-ga:sessions', 'quotaUser' => $this->managequota . 'p' . $projectId );
+			$options = array( 'dimensions' => $dimensions, 'sort' => '-' . $metrics, 'quotaUser' => $this->managequota . 'p' . $projectId );
 			if ( $filter ) {
 				$options['filters'] = 'ga:medium==referral;ga:pagePath==' . $filter;
 			} else {
 				$options['filters'] = 'ga:medium==referral';
 			}
-			$serial = 'qr5_' . $this->get_serial( $projectId . $from . $filter );
+			$serial = 'qr5_' . $this->get_serial( $projectId . $from . $filter . $metric );
 			$data = $this->handle_corereports( $projectId, $from, $to, $metrics, $options, $serial );
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
-			$gadwp_data = array( array( __( "Referrers", 'google-analytics-dashboard-for-wp' ), __( "Sessions", 'google-analytics-dashboard-for-wp' ) ) );
+			$gadwp_data = array( array( __( "Referrers", 'google-analytics-dashboard-for-wp' ), __( ucfirst($metric), 'google-analytics-dashboard-for-wp' ) ) );
 			foreach ( $data->getRows() as $row ) {
 				$gadwp_data[] = array( esc_html( $row[0] ), (int) $row[1] );
 			}
@@ -574,22 +574,22 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 		 *            $filter
 		 * @return array|int
 		 */
-		private function get_searches( $projectId, $from, $to, $filter = '' ) {
-			$metrics = 'ga:sessions';
+		private function get_searches( $projectId, $from, $to, $filter = '', $metric ) {
+			$metrics = 'ga:' . $metric;
 			$dimensions = 'ga:keyword';
-			$options = array( 'dimensions' => $dimensions, 'sort' => '-ga:sessions', 'quotaUser' => $this->managequota . 'p' . $projectId );
+			$options = array( 'dimensions' => $dimensions, 'sort' => '-' . $metrics, 'quotaUser' => $this->managequota . 'p' . $projectId );
 			if ( $filter ) {
 				$options['filters'] = 'ga:keyword!=(not set);ga:pagePath==' . $filter;
 			} else {
 				$options['filters'] = 'ga:keyword!=(not set)';
 			}
-			$serial = 'qr6_' . $this->get_serial( $projectId . $from . $filter );
+			$serial = 'qr6_' . $this->get_serial( $projectId . $from . $filter . $metric );
 			$data = $this->handle_corereports( $projectId, $from, $to, $metrics, $options, $serial );
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
 
-			$gadwp_data = array( array( __( "Searches", 'google-analytics-dashboard-for-wp' ), __( "Sessions", 'google-analytics-dashboard-for-wp' ) ) );
+			$gadwp_data = array( array( __( "Searches", 'google-analytics-dashboard-for-wp' ), __( ucfirst($metric), 'google-analytics-dashboard-for-wp' ) ) );
 			foreach ( $data->getRows() as $row ) {
 				$gadwp_data[] = array( esc_html( $row[0] ), (int) $row[1] );
 			}
@@ -609,8 +609,8 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 		 *            $filter
 		 * @return array|int
 		 */
-		private function get_locations( $projectId, $from, $to, $filter = '' ) {
-			$metrics = 'ga:sessions';
+		private function get_locations( $projectId, $from, $to, $filter = '', $metric ) {
+			$metrics = 'ga:' . $metric;
 			$options = "";
 			$title = __( "Countries", 'google-analytics-dashboard-for-wp' );
 			$serial = 'qr7_' . $this->get_serial( $projectId . $from . $filter );
@@ -623,10 +623,10 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				if ( isset( $country_codes[$this->gadwp->config->options['ga_target_geomap']] ) ) {
 					$local_filter = 'ga:country==' . ( $country_codes[$this->gadwp->config->options['ga_target_geomap']] );
 					$title = __( "Cities from", 'google-analytics-dashboard-for-wp' ) . ' ' . __( $country_codes[$this->gadwp->config->options['ga_target_geomap']] );
-					$serial = 'qr7_' . $this->get_serial( $projectId . $from . $this->gadwp->config->options['ga_target_geomap'] . $filter );
+					$serial = 'qr7_' . $this->get_serial( $projectId . $from . $this->gadwp->config->options['ga_target_geomap'] . $filter . $metric );
 				}
 			}
-			$options = array( 'dimensions' => $dimensions, 'sort' => '-ga:sessions', 'quotaUser' => $this->managequota . 'p' . $projectId );
+			$options = array( 'dimensions' => $dimensions, 'sort' => '-' . $metrics, 'quotaUser' => $this->managequota . 'p' . $projectId );
 			if ( $filter ) {
 				$options['filters'] = 'ga:pagePath==' . $filter;
 				if ( $local_filter ) {
@@ -641,7 +641,8 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
-			$gadwp_data = array( array( $title, __( "Sessions", 'google-analytics-dashboard-for-wp' ) ) );
+
+			$gadwp_data = array( array( $title, __( ucfirst( $metric ), 'google-analytics-dashboard-for-wp' ) ) );
 			foreach ( $data->getRows() as $row ) {
 				if ( isset( $row[2] ) ) {
 					$gadwp_data[] = array( esc_html( $row[0] ) . ', ' . esc_html( $row[1] ), (int) $row[2] );
@@ -667,23 +668,23 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 		 *            $filter
 		 * @return array|int
 		 */
-		private function get_orgchart_data( $projectId, $from, $to, $query, $filter = '' ) {
-			$metrics = 'ga:sessions';
+		private function get_orgchart_data( $projectId, $from, $to, $query, $filter = '', $metric ) {
+			$metrics = 'ga:' . $metric;
 			$dimensions = 'ga:' . $query;
-			$options = array( 'dimensions' => $dimensions, 'sort' => '-ga:sessions', 'quotaUser' => $this->managequota . 'p' . $projectId );
+			$options = array( 'dimensions' => $dimensions, 'sort' => '-' . $metrics, 'quotaUser' => $this->managequota . 'p' . $projectId );
 			if ( $filter ) {
 				$options['filters'] = 'ga:pagePath==' . $filter;
 			}
-			$serial = 'qr8_' . $this->get_serial( $projectId . $from . $query . $filter );
+			$serial = 'qr8_' . $this->get_serial( $projectId . $from . $query . $filter . $metric );
 			$data = $this->handle_corereports( $projectId, $from, $to, $metrics, $options, $serial );
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
 			$block = ( 'channelGrouping' == $query ) ? __( "Channels", 'google-analytics-dashboard-for-wp' ) : __( "Devices", 'google-analytics-dashboard-for-wp' );
-			$gadwp_data = array( array( '<div style="color:black; font-size:1.1em">' . $block . '</div><div style="color:darkblue; font-size:1.2em">' . (int) $data['totalsForAllResults']["ga:sessions"] . '</div>', "" ) );
+			$gadwp_data = array( array( '<div style="color:black; font-size:1.1em">' . $block . '</div><div style="color:darkblue; font-size:1.2em">' . (int) $data['totalsForAllResults'][$metrics] . '</div>', "" ) );
 			foreach ( $data->getRows() as $row ) {
 				$shrink = explode( " ", $row[0] );
-				$gadwp_data[] = array( '<div style="color:black; font-size:1.1em">' . esc_html( $shrink[0] ) . '</div><div style="color:darkblue; font-size:1.2em">' . (int) $row[1] . '</div>', '<div style="color:black; font-size:1.1em">' . $block . '</div><div style="color:darkblue; font-size:1.2em">' . (int) $data['totalsForAllResults']["ga:sessions"] . '</div>' );
+				$gadwp_data[] = array( '<div style="color:black; font-size:1.1em">' . esc_html( $shrink[0] ) . '</div><div style="color:darkblue; font-size:1.2em">' . (int) $row[1] . '</div>', '<div style="color:black; font-size:1.1em">' . $block . '</div><div style="color:darkblue; font-size:1.2em">' . (int) $data['totalsForAllResults'][$metrics] . '</div>' );
 			}
 			return $gadwp_data;
 		}
@@ -703,31 +704,31 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 		 *            $filter
 		 * @return array|int
 		 */
-		private function get_piechart_data( $projectId, $from, $to, $query, $filter = '' ) {
-			$metrics = 'ga:sessions';
+		private function get_piechart_data( $projectId, $from, $to, $query, $filter = '', $metric ) {
+			$metrics = 'ga:' . $metric;
 			$dimensions = 'ga:' . $query;
 
 			if ( 'source' == $query ) {
-				$options = array( 'dimensions' => $dimensions, 'sort' => '-ga:sessions', 'quotaUser' => $this->managequota . 'p' . $projectId );
+				$options = array( 'dimensions' => $dimensions, 'sort' => '-' . $metrics, 'quotaUser' => $this->managequota . 'p' . $projectId );
 				if ( $filter ) {
 					$options['filters'] = 'ga:medium==organic;ga:keyword!=(not set);ga:pagePath==' . $filter;
 				} else {
 					$options['filters'] = 'ga:medium==organic;ga:keyword!=(not set)';
 				}
 			} else {
-				$options = array( 'dimensions' => $dimensions, 'sort' => '-ga:sessions', 'quotaUser' => $this->managequota . 'p' . $projectId );
+				$options = array( 'dimensions' => $dimensions, 'sort' => '-' . $metrics, 'quotaUser' => $this->managequota . 'p' . $projectId );
 				if ( $filter ) {
 					$options['filters'] = 'ga:' . $query . '!=(not set);ga:pagePath==' . $filter;
 				} else {
 					$options['filters'] = 'ga:' . $query . '!=(not set)';
 				}
 			}
-			$serial = 'qr10_' . $this->get_serial( $projectId . $from . $query . $filter );
+			$serial = 'qr10_' . $this->get_serial( $projectId . $from . $query . $filter . $metric );
 			$data = $this->handle_corereports( $projectId, $from, $to, $metrics, $options, $serial );
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
-			$gadwp_data = array( array( __( "Type", 'google-analytics-dashboard-for-wp' ), __( "Sessions", 'google-analytics-dashboard-for-wp' ) ) );
+			$gadwp_data = array( array( __( "Type", 'google-analytics-dashboard-for-wp' ), __( ucfirst($metric), 'google-analytics-dashboard-for-wp' ) ) );
 			$i = 0;
 			$included = 0;
 			foreach ( $data->getRows() as $row ) {
@@ -853,7 +854,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 		 * 		$filter
 		 * @return number|Google_Service_Analytics_GaData
 		 */
-		public function get( $projectId, $query, $from = false, $to = false, $filter = '' ) {
+		public function get( $projectId, $query, $from = false, $to = false, $filter = '', $metric = 'sessions' ) {
 			if ( empty( $projectId ) || ! is_numeric( $projectId ) ) {
 				wp_die( - 26 );
 			}
@@ -863,30 +864,30 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			if ( 'bottomstats' == $query ) {
 				return $this->get_bottomstats( $projectId, $from, $to, $filter );
 			}
-			if ( 'locations' == $query  ) {
-				return $this->get_locations( $projectId, $from, $to, $filter );
+			if ( 'locations' == $query ) {
+				return $this->get_locations( $projectId, $from, $to, $filter, $metric );
 			}
 			if ( 'referrers' == $query ) {
-				return $this->get_referrers( $projectId, $from, $to, $filter );
+				return $this->get_referrers( $projectId, $from, $to, $filter, $metric );
 			}
 			if ( 'contentpages' == $query ) {
-				return $this->get_contentpages( $projectId, $from, $to, $filter );
+				return $this->get_contentpages( $projectId, $from, $to, $filter, $metric );
 			}
 			if ( '404errors' == $query ) {
 				$filter = $this->gadwp->config->options['pagetitle_404'];
-				return $this->get_404errors( $projectId, $from, $to, $filter );
+				return $this->get_404errors( $projectId, $from, $to, $filter, $metric );
 			}
 			if ( 'searches' == $query ) {
-				return $this->get_searches( $projectId, $from, $to, $filter );
+				return $this->get_searches( $projectId, $from, $to, $filter, $metric );
 			}
 			if ( 'realtime' == $query ) {
 				return $this->get_realtime( $projectId );
 			}
 			if ( 'channelGrouping' == $query || 'deviceCategory' == $query ) {
-				return $this->get_orgchart_data( $projectId, $from, $to, $query, $filter );
+				return $this->get_orgchart_data( $projectId, $from, $to, $query, $filter, $metric );
 			}
 			if ( in_array( $query, array( 'medium', 'visitorType', 'socialNetwork', 'source', 'browser', 'operatingSystem', 'screenResolution', 'mobileDeviceBranding' ) ) ) {
-				return $this->get_piechart_data( $projectId, $from, $to, $query, $filter );
+				return $this->get_piechart_data( $projectId, $from, $to, $query, $filter, $metric );
 			}
 			wp_die( - 27 );
 		}

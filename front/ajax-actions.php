@@ -44,6 +44,11 @@ if ( ! class_exists( 'GADWP_Frontend_Ajax' ) ) {
 			$to = $_POST['to'];
 			$query = $_POST['query'];
 			$uri = $_POST['filter'];
+			if ( isset( $_POST['metric'] ) ) {
+				$metric = $_POST['metric'];
+			} else {
+				$metric = 'pageviews';
+			}
 
 			$query = $_POST['query'];
 			if ( ob_get_length() ) {
@@ -95,7 +100,7 @@ if ( ! class_exists( 'GADWP_Frontend_Ajax' ) ) {
 			$results = array();
 
 			foreach ( $queries as $value ) {
-				$results[] = $this->gadwp->gapi_controller->get( $projectId, $value, $from, $to, $filter );
+				$results[] = $this->gadwp->gapi_controller->get( $projectId, $value, $from, $to, $filter, $metric );
 			}
 
 			wp_send_json( $results );
