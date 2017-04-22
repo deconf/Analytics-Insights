@@ -1091,6 +1091,7 @@ jQuery.fn.extend( {
 		} );
 
 		jQuery( '#gadwp-sel-period' + slug ).change( function () {
+			jQuery( '#gadwp-sel-metric' + slug ).hide();
 			jQuery( '#gadwp-reports' + slug ).html( '' );
 			reports.init();
 		} );

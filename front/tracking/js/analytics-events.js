@@ -58,6 +58,25 @@ function gadwpRedirect () {
 				setTimeout( gadwpRedirect, gadwpUAEventsData.options[ 'event_timeout' ] );
 				return false;
 			} );
+			
+			// Track telephone calls
+			$( 'a[href^="tel"]' ).click( function ( e ) {
+				gadwpRedirectCalled = false;
+				gadwpRedirectLink = this.href;
+				if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
+					ga( 'send', 'event', 'telephone', 'call', this.href, {
+						'nonInteraction' : 1,
+						'hitCallback' : gadwpRedirect
+					} );
+				} else {
+					ga( 'send', 'event', 'telephone', 'call', this.href, {
+						'hitCallback' : gadwpRedirect
+					} );
+				}
+				setTimeout( gadwpRedirect, gadwpUAEventsData.options[ 'event_timeout' ] );
+				return false;
+			} );			
+			
 			if ( gadwpUAEventsData.options[ 'root_domain' ] ) {
 
 				// Track Outbound Links
