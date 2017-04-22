@@ -1,4 +1,4 @@
-=== GADWP - Google Analytics Dashboard for WP ===
+=== Google Analytics Dashboard for WP (GADWP) ===
 Contributors: deconf
 Donate link: https://deconf.com/donate/
 Tags: stats,google analytics,google analytics dashboard,google analytics plugin,google analytics widget,analytics,dashboard,tracking,analytics dashboard,universal google analytics,realtime,multisite,gadwp
