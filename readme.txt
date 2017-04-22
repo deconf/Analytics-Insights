@@ -3,7 +3,7 @@ Contributors: deconf
 Donate link: https://deconf.com/donate/
 Tags: stats,analytics,google analytics,dashboard,analytics dashboard,google analytics dashboard,google analytics plugin,google analytics widget,tracking,universal google analytics,realtime,multisite,gadwp
 Requires at least: 3.5
-Tested up to: 4.7.2
+Tested up to: 4.7.4
 Stable tag: 4.9.6.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -139,7 +139,7 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 
 = 4.9.6.2 =
 * Enhancements:
-	* switching sampling level to higher precision to increase the accuracy of reports 
+	* switching sampling level to higher precision to increase the accuracy of reports
 	
 = 4.9.6.1 =
 * Enhancements:
