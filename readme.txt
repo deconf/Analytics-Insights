@@ -8,14 +8,14 @@ Stable tag: 4.9.6.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Displays Google Analytics stats in your WordPress Dashboard. Inserts the latest Google Analytics tracking code in your pages.
+Connects Google Analytics with your WordPress site. Displays stats to help you understand your users and site content on a whole new level!
 
 == Description ==
 This Google Analytics for WordPress plugin enables you to track your site using the latest Google Analytics tracking code and allows you to view key Google Analytics stats in your WordPress install.
 
 In addition to a set of general Google Analytics stats, in-depth Page reports and in-depth Post reports allow further segmentation of your analytics data, providing performance details for each post or page from your website.
 
-The Google Analytics tracking code is fully customizable through options and hooks, allowing advanced data collection using custom dimensions and events.    
+The Google Analytics tracking code is fully customizable through options and hooks, allowing advanced data collection like custom dimensions and events.    
 
 = Google Analytics Real-Time Stats =
 
@@ -33,7 +33,8 @@ The Google Analytics reports you need, on your dashboard, in your All Posts and 
 - Locations, pages, referrers, keywords, 404 errors analytics stats
 - Traffic channels, social networks, traffic mediums, search engines analytics stats
 - Device categories, browsers, operating systems, screen resolutions, mobile brands analytics stats
-- User access control over analytics reports
+
+In addition, you can control who can view specific Google Analytics reports by setting permissions based on user roles.
 
 = Google Analytics Tracking =
 
@@ -48,6 +49,8 @@ Installs the latest Google Analytics tracking code and allows full code customiz
 - Exclude user roles from tracking
 - Accelerated Mobile Pages (AMP) support for Google Analytics
 - Ecommerce support for Google Analytics
+
+In addition, actions and filters are available for further Google Analytics tracking code customization.
 
 Google Analytics Dashboard for WP enables you to easily track events like:
  
