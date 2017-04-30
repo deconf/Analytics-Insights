@@ -139,11 +139,11 @@ jQuery.fn.extend( {
 					if ( gadwpItemData.scope == 'front-item' || gadwpItemData.scope == 'admin-item' ) {
 						output = ''; // Remove Sessions metric selection on item reports						
 					} else {
-						output = '<span id="gadwp-swmetric-sessions" class="dashicons dashicons-clock" style="font-size:22px;padding:4px;"></span>';
+						output = '<span id="gadwp-swmetric-sessions" title="' + gadwpItemData.i18n[ 5 ] + '" class="dashicons dashicons-clock" style="font-size:22px;padding:4px;"></span>';
 					}
 					
-					output += '<span id="gadwp-swmetric-users" class="dashicons dashicons-admin-users" style="font-size:22px;padding:4px;"></span>';
-					output += '<span id="gadwp-swmetric-pageviews" class="dashicons dashicons-admin-page" style="font-size:22px;padding:4px;"></span>';
+					output += '<span id="gadwp-swmetric-users" title="' + gadwpItemData.i18n[ 6 ] + '" class="dashicons dashicons-admin-users" style="font-size:22px;padding:4px;"></span>';
+					output += '<span id="gadwp-swmetric-pageviews" title="' + gadwpItemData.i18n[ 7 ] + '" class="dashicons dashicons-admin-page" style="font-size:22px;padding:4px;"></span>';
 
 					jQuery( id ).html( output );
 					

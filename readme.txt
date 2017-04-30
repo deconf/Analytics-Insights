@@ -56,6 +56,7 @@ Google Analytics Dashboard for WP enables you to easily track events like:
 - Outbound links
 - Affiliate links
 - Fragment identifiers
+- Telephone
 
 With Google Analytics Dashboard for WP you can use custom dimensions to track:
 
