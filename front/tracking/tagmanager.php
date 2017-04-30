@@ -34,18 +34,33 @@ if ( ! class_exists( 'GADWP_Tracking_TagManager' ) ) {
 			}
 		}
 
+		/**
+		 * Retrieves the datalayer variables
+		 */
 		public function get() {
 			return $this->datalayer;
 		}
 
+		/**
+		 * Stores the datalayer variables
+		 * @param array $datalayer
+		 */
 		public function set( $datalayer ) {
 			$this->datalayer = $datalayer;
 		}
 
+		/**
+		 * Adds a variable to the datalayer
+		 * @param string $name
+		 * @param string $value
+		 */
 		private function add_var( $name, $value ) {
 			$this->datalayer[$name] = $value;
 		}
 
+		/**
+		 * Builds the datalayer based on user's options
+		 */
 		private function build_datalayer() {
 			global $post;
 
@@ -103,6 +118,9 @@ if ( ! class_exists( 'GADWP_Tracking_TagManager' ) ) {
 			do_action( 'gadwp_tagmanager_datalayer', $this );
 		}
 
+		/**
+		 * Outputs the Google Tag Manager tracking code
+		 */
 		public function output() {
 			$this->build_datalayer();
 
@@ -133,10 +151,16 @@ if ( ! class_exists( 'GADWP_Tracking_TagManager' ) ) {
 <?php
 		}
 
+		/**
+		 * Inserts the Analytics AMP script in the head section
+		 */
 		public function amp_add_analytics_script() {
 			?><script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script><?php
 		}
 
+		/**
+		 * Outputs the Tag Manager code for AMP
+		 */
 		public function amp_output() {
 			?><amp-analytics config="https://www.googletagmanager.com/amp.json?id=<?php echo $this->gadwp->config->options['amp_containerid']; ?>&gtm.url=SOURCE_URL" data-credentials="include"></amp-analytics><?php
 		}

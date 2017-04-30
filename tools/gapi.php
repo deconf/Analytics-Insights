@@ -741,7 +741,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				}
 			}
 			$totals = $data->getTotalsForAllResults();
-			$others = $totals['ga:sessions'] - $included;
+			$others = $totals[$metrics] - $included;
 			if ( $others > 0 ) {
 				$gadwp_data[] = array( __( 'Other', 'google-analytics-dashboard-for-wp' ), $others );
 			}

@@ -50,8 +50,6 @@ Installs the latest Google Analytics tracking code and allows full code customiz
 - Accelerated Mobile Pages (AMP) support for Google Analytics
 - Ecommerce support for Google Analytics
 
-In addition, actions and filters are available for further Google Analytics tracking code customization.
-
 Google Analytics Dashboard for WP enables you to easily track events like:
  
 - Downloads
@@ -69,6 +67,8 @@ With Google Analytics Dashboard for WP you can use custom dimensions to track:
 - Categories
 - Tags
 - User engagement
+
+Actions and filters are available for further Google Analytics tracking code customization.
 
 = Google Tag Manager Tracking =
 
@@ -164,41 +164,5 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 	* events tracking for form submit actions
 	* events tracking for telephone calls
 	* full support for experiments with Optimize
-
-= 4.9.6.2 =
-* Enhancements:
-	* switching sampling level to higher precision to increase the accuracy of reports
-
-= 4.9.6.1 =
-* Enhancements:
-	* enable anonimization for all hits instead of single hits to avoid false-positives from IP Anonymization checking tools
-
-= 4.9.6 =
-* Enhancements:
-	* introducing average time on page, average page load time, average exit rate, and average session duration metrics
-* Bug Fixes:
-	* use Google Maps API key only if available
-	* fixes gadwp_sites_limit filter
-	
-= 4.9.5 =
-* Enhancements:
-	* introducing the <strong>gadwp_curl_options</strong> filter to allow changes on CURL options for the Google_IO_Curl class, props by [Alexandre Simard](https://github.com/brocheafoin)  	
-* Bug Fixes:
-	* correction of some files with mixed endings, props by [Edward Dekker](http://www.github.com/edwarddekker) 
-	* only load the necessary resources for frontend widget
-	* corrected a JavaScript error on frontend sidebar widget
-
-= 4.9.4 =
-* Enhancements: 
-	* always load analytics.js over SSL
-	* gadwp_backenditem_uri filter passes post ID as an additional variable
-	* option to use a Google Maps API key for the Locations report
-* New Features:
-	* a new year-month dimension is now available, to allow further segmentation of the most successful publication years, by month; props by [Antoine Girard](https://github.com/thetoine)
-	* a new 404 Errors report designed to analyze and easily identify the source of 404 errors
-* Bug Fixes:
-	* switch to get_sites() while maintaining compatibility with older WP installs
-	* fix for multisite installs, Properties/Views Settings list was not properly displayed on PHP7
-	* prevent autoloading of reports' cache entries; props by [Alex Bradaric](https://github.com/bradaric)
 
 The full changelog is [available here](https://deconf.com/changelog-google-analytics-dashboard-for-wp/).

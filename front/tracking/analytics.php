@@ -46,18 +46,35 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 			}
 		}
 
+		/**
+		 * Retrieves the commands
+		 */
 		public function get() {
 			return $this->commands;
 		}
 
+		/**
+		 * Stores the commands
+		 * @param array $commands
+		 */
 		public function set( $commands ) {
 			$this->commands = $commands;
 		}
 
+		/**
+		 * Formats the command before being added to the commands
+		 * @param string $command
+		 * @param array $fields
+		 * @param string $fieldsobject
+		 * @return array
+		 */
 		public function prepare( $command, $fields, $fieldsobject = null ) {
 			return array( 'command' => $command, 'fields' => $fields, 'fieldsobject' => $fieldsobject );
 		}
 
+		/**
+		 * Styles & Scripts load
+		 */
 		private function load_scripts() {
 			if ( $this->gadwp->config->options['ga_event_tracking'] || $this->gadwp->config->options['ga_aff_tracking'] || $this->gadwp->config->options['ga_hash_tracking'] ) {
 
@@ -85,10 +102,21 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 			}
 		}
 
+		/**
+		 * Adds a formatted command to commands
+		 * @param string $command
+		 * @param array $fields
+		 * @param string $fieldsobject
+		 */
 		private function add( $command, $fields, $fieldsobject = null ) {
 			$this->commands[] = $this->prepare( $command, $fields, $fieldsobject = null );
 		}
 
+		/**
+		 * Sanitizes the output of commands in the tracking code
+		 * @param string $value
+		 * @return string
+		 */
 		private function filter( $value ) {
 			if ( 'true' == $value || 'false' == $value ) {
 				return $value;
@@ -101,6 +129,9 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 			return "'" . $value . "'";
 		}
 
+		/**
+		 * Builds the commands based on user's options
+		 */
 		private function build_commands() {
 			$fields = array();
 			$fieldsobject = array();
@@ -252,6 +283,9 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 			do_action( 'gadwp_analytics_commands', $this );
 		}
 
+		/**
+		 * Outputs the Google Optimize tracking code
+		 */
 		public function optimize_output() {
 			?>
 <style>
@@ -269,6 +303,9 @@ h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
 <?php
 		}
 
+		/**
+		 * Outputs the Google Analytics tracking code
+		 */
 		public function output() {
 			$this->commands = array();
 
@@ -311,10 +348,16 @@ h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
 <?php
 		}
 
+		/**
+		 * Inserts the Analytics AMP script in the head section
+		 */
 		public function amp_add_analytics_script() {
 			?><script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script><?php
 		}
 
+		/**
+		 * Outputs the Google Analytics tracking code for AMP
+		 */
 		public function amp_output() {
 			?><amp-analytics type="googleanalytics" id="gadwp-googleanalytics"> <script type="application/json">{"vars": { "account" : "<?php echo $this->uaid; ?>"}, "triggers": { "trackPageview": { "on": "visible", "request": "pageview" }}}</script> </amp-analytics><?php
 		}
