@@ -83,6 +83,7 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 								'trackingcode_infooter',
 								'trackingevents_infooter',
 								'ga_formsubmit_tracking',
+								'ga_dash_excludesa',
 						);
 			foreach ( $numerics as $key ) {
 				if ( isset( $options[$key] ) ) {
@@ -268,6 +269,7 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 								'trackingcode_infooter', //v5.0
 								'trackingevents_infooter', //v5.0
 								'ga_formsubmit_tracking', //v5.0
+								'ga_dash_excludesa',
 						);
 			foreach ( $zeros as $key ) {
 				if ( ! isset( $this->options[$key] ) ) {

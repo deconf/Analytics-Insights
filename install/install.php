@@ -80,7 +80,7 @@ class GADWP_Install {
 			$options['optimize_tracking'] = 0;
 			$options['optimize_containerid'] = '';
 			$options['optimize_pagehiding'] = '';
-
+			$options['ga_dash_excludesa'] = 0;
 		} else {
 			$options = array();
 			$options['ga_dash_clientid'] = get_option( 'ga_dash_clientid' );
@@ -146,6 +146,7 @@ class GADWP_Install {
 			$options['optimize_tracking'] = 0;
 			$options['optimize_containerid'] = '';
 			$options['optimize_pagehiding'] = '';
+			$options['ga_dash_excludesa'] = 0;
 
 			delete_option( 'ga_dash_clientid' );
 			delete_option( 'ga_dash_clientsecret' );

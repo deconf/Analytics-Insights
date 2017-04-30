@@ -30,11 +30,11 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 
 			$this->load_scripts();
 
-			if ( $this->gadwp->config->options['optimize_tracking'] && $this->gadwp->config->options['optimize_pagehiding'] && $this->gadwp->config->options['optimize_containerid'] ){
+			if ( $this->gadwp->config->options['optimize_tracking'] && $this->gadwp->config->options['optimize_pagehiding'] && $this->gadwp->config->options['optimize_containerid'] ) {
 				add_action( 'wp_head', array( $this, 'optimize_output' ), 99 );
 			}
 
-			if ($this->gadwp->config->options['trackingcode_infooter']) {
+			if ( $this->gadwp->config->options['trackingcode_infooter'] ) {
 				add_action( 'wp_footer', array( $this, 'output' ), 99 );
 			} else {
 				add_action( 'wp_head', array( $this, 'output' ), 99 );
@@ -44,6 +44,18 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 				add_action( 'amp_post_template_head', array( $this, 'amp_add_analytics_script' ) );
 				add_action( 'amp_post_template_footer', array( $this, 'amp_output' ) );
 			}
+		}
+
+		public function get() {
+			return $this->commands;
+		}
+
+		public function set( $commands ) {
+			$this->commands = $commands;
+		}
+
+		public function prepare( $command, $fields, $fieldsobject = null ) {
+			return array( 'command' => $command, 'fields' => $fields, 'fieldsobject' => $fieldsobject );
 		}
 
 		private function load_scripts() {
@@ -74,7 +86,7 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 		}
 
 		private function add( $command, $fields, $fieldsobject = null ) {
-			$this->commands[] = array( 'command' => $command, 'fields' => $fields, 'fieldsobject' => $fieldsobject );
+			$this->commands[] = $this->prepare( $command, $fields, $fieldsobject = null );
 		}
 
 		private function filter( $value ) {
@@ -169,7 +181,7 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 
 			if ( $this->gadwp->config->options['ga_category_dimindex'] && is_category() ) {
 				$fields = array();
-				$fields['dimension'] =  'dimension' . (int) $this->gadwp->config->options['ga_category_dimindex'];
+				$fields['dimension'] = 'dimension' . (int) $this->gadwp->config->options['ga_category_dimindex'];
 				$fields['value'] = esc_attr( single_tag_title( '', false ) );
 				$this->add( 'set', $fields );
 			}
@@ -237,7 +249,7 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 			$fields['hitType'] = 'pageview';
 			$this->add( 'send', $fields );
 
-			do_action( 'gadwp_analytics_commands' );
+			do_action( 'gadwp_analytics_commands', $this );
 		}
 
 		public function optimize_output() {
