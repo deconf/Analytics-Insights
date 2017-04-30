@@ -427,7 +427,7 @@ final class GADWP_Settings {
                                                 <div class="gadwp-settings-switchoo-switch"></div>
                                             </label>
                                         </div>
-                                        <div class="switch-desc"><?php echo " ".__("track downloads, mailto and outbound links", 'google-analytics-dashboard-for-wp' ); ?></div>
+                                        <div class="switch-desc"><?php echo " ".__("track downloads, mailto, telephone and outbound links", 'google-analytics-dashboard-for-wp' ); ?></div>
                                     </td>
                                 </tr>
                                 <tr>
