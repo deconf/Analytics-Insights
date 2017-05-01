@@ -30,3 +30,19 @@ For support and other questions use these dedicated forums:
  * support on <a href="https://wordpress.org/support/plugin/google-analytics-dashboard-for-wp" title="Google Analytics Dashboard for WordPress support">wordpress.org forums</a>
 
 You can also find Google Analytics Dashboard for WP on <a href="http://wordpress.org/plugins/google-analytics-dashboard-for-wp/">wordpress.org</a>
+
+Hooks
+-----
+
+1. Filters
+
+* gadwp_sites_limit
+* gadwp_backenditem_uri
+* gadwp_frontenditem_uri
+* gadwp_analyticsevents_timeout
+* gadwp_curl_options
+
+2. Actions
+
+* gadwp_tagmanager_datalayer
+* gadwp_analytics_commands
