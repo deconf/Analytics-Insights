@@ -58,6 +58,7 @@ Google Analytics Dashboard for WP enables you to easily track events like:
 - Affiliate links
 - Fragment identifiers
 - Telephone
+- Page Scrolling Depth
 
 With Google Analytics Dashboard for WP you can use custom dimensions to track:
 
@@ -76,6 +77,7 @@ As an alternative to Google Analytics tracking code, you can use Google Tag Mana
 
 - Google Tag Manager code
 - Data Layer variables: authors, publication year, publication month, categories, tags, user type
+- Additional Data Layer variables for page scrolling depth
 - Exclude user roles from tracking
 - Accelerated Mobile Pages (AMP) support for Google Tag Manager 
 
@@ -163,6 +165,7 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 	* option to select the placement of the tracking code (head or footer)
 	* events tracking for form submit actions
 	* events tracking for telephone calls
+	* events tracking for page scrolling depth
 	* full support for experiments with Optimize
 
 The full changelog is [available here](https://deconf.com/changelog-google-analytics-dashboard-for-wp/).

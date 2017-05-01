@@ -58,7 +58,7 @@ function gadwpRedirect () {
 				setTimeout( gadwpRedirect, gadwpUAEventsData.options[ 'event_timeout' ] );
 				return false;
 			} );
-			
+
 			// Track telephone calls
 			$( 'a[href^="tel"]' ).click( function ( e ) {
 				gadwpRedirectCalled = false;
@@ -75,8 +75,8 @@ function gadwpRedirect () {
 				}
 				setTimeout( gadwpRedirect, gadwpUAEventsData.options[ 'event_timeout' ] );
 				return false;
-			} );			
-			
+			} );
+
 			if ( gadwpUAEventsData.options[ 'root_domain' ] ) {
 
 				// Track Outbound Links
@@ -168,5 +168,17 @@ function gadwpRedirect () {
 				}
 			} );
 		}
+
+		if ( gadwpUAEventsData.options[ 'pagescrolldepth_tracking' ] ) {
+			// Track Page Scroll Depth
+			$.scrollDepth( {
+				percentage : true,
+				userTiming : false,
+				pixelDepth : false,
+				gtmOverride : true,
+				nonInteraction : gadwpUAEventsData.options[ 'event_formsubmit' ],
+			} );
+		}
+
 	} );
 } )( jQuery );

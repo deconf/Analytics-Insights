@@ -76,12 +76,16 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 		 * Styles & Scripts load
 		 */
 		private function load_scripts() {
-			if ( $this->gadwp->config->options['ga_event_tracking'] || $this->gadwp->config->options['ga_aff_tracking'] || $this->gadwp->config->options['ga_hash_tracking'] ) {
+			if ( $this->gadwp->config->options['ga_event_tracking'] || $this->gadwp->config->options['ga_aff_tracking'] || $this->gadwp->config->options['ga_hash_tracking'] || $this->gadwp->config->options['pagescrolldepth_tracking'] ) {
 
 				$domaindata = GADWP_Tools::get_root_domain( esc_html( get_option( 'siteurl' ) ) );
 				$root_domain = $domaindata['domain'];
 
-				wp_enqueue_script( 'gadwp-tracking-analytics-events', GADWP_URL . 'front/tracking/js/analytics-events.js', array( 'jquery' ), GADWP_CURRENT_VERSION, $this->gadwp->config->options['trackingevents_infooter'] );
+				wp_enqueue_script( 'gadwp-tracking-analytics-events', GADWP_URL . 'front/js/tracking-analytics-events.js', array( 'jquery' ), GADWP_CURRENT_VERSION, $this->gadwp->config->options['trackingevents_infooter'] );
+
+				if ( $this->gadwp->config->options['pagescrolldepth_tracking'] ) {
+					wp_enqueue_script( 'gadwp-pagescrolldepth-tracking', GADWP_URL . 'front/js/tracking-scrolldepth.js', array( 'jquery' ), GADWP_CURRENT_VERSION, true );
+				}
 
 				/* @formatter:off */
 				wp_localize_script( 'gadwp-tracking-analytics-events', 'gadwpUAEventsData', array(
@@ -95,6 +99,7 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 						'root_domain' => $root_domain,
 						'event_timeout' => apply_filters( 'gadwp_analyticsevents_timeout', 100 ),
 						'event_formsubmit' =>  $this->gadwp->config->options ['ga_formsubmit_tracking'],
+						'pagescrolldepth_tracking' => $this->gadwp->config->options['pagescrolldepth_tracking'],
 					),
 				)
 				);
@@ -287,20 +292,7 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 		 * Outputs the Google Optimize tracking code
 		 */
 		public function optimize_output() {
-			?>
-<style>
-.async-hide {
-	opacity: 0 !important
-}
-</style>
-<script>
-(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
-h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
-(a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
-})(window,document.documentElement,'async-hide','dataLayer',4000,
-{'<?php echo $this->gadwp->config->options['optimize_containerid']; ?>':true});
-</script>
-<?php
+			GADWP_Tools::load_view( 'front/views/optimize-code.php', array( 'containerid' => $this->gadwp->config->options['optimize_containerid'] ) );
 		}
 
 		/**
@@ -311,14 +303,8 @@ h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
 
 			$this->build_commands();
 
-			?>
-<!-- BEGIN GADWP v<?php echo GADWP_CURRENT_VERSION; ?> Universal Analytics - https://deconf.com/google-analytics-dashboard-wordpress/ -->
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-<?php
+			$trackingcode = '';
+
 			foreach ( $this->commands as $set ) {
 				$command = $set['command'];
 
@@ -337,15 +323,13 @@ h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
 					}
 					$fieldsobject = rtrim( $fieldsobject, ", " );
 					$fieldsobject .= "}";
-					echo "  ga('" . $command . "'" . $fields . $fieldsobject . ");\n";
+					$trackingcode .= "  ga('" . $command . "'" . $fields . $fieldsobject . ");\n";
 				} else {
-					echo "  ga('" . $command . "'" . $fields . ");\n";
+					$trackingcode .= "  ga('" . $command . "'" . $fields . ");\n";
 				}
 			}
-			?>
-</script>
-<!-- END GADWP Universal Analytics -->
-<?php
+
+			GADWP_Tools::load_view( 'front/views/analytics-code.php', array( 'trackingcode' => $trackingcode ) );
 		}
 
 		/**

@@ -38,14 +38,14 @@ if ( ! class_exists( 'GADWP_Tracking' ) ) {
 			if ( 'universal' == $this->gadwp->config->options['ga_dash_tracking_type'] && $this->gadwp->config->options['ga_dash_tableid_jail'] ) {
 
 				// Analytics
-				require_once 'tracking/analytics.php';
+				require_once 'tracking-analytics.php';
 				$this->analytics = new GADWP_Tracking_Analytics();
 			}
 
 			if ( 'tagmanager' == $this->gadwp->config->options['ga_dash_tracking_type'] && $this->gadwp->config->options['web_containerid'] ) {
 
 				// Tag Manager
-				require_once 'tracking/tagmanager.php';
+				require_once 'tracking-tagmanager.php';
 				$this->tagmanager = new GADWP_Tracking_TagManager();
 			}
 		}

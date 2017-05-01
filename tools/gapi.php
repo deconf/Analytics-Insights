@@ -490,7 +490,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
-			$gadwp_data = array( array( __( "Pages", 'google-analytics-dashboard-for-wp' ), __( ucfirst($metric), 'google-analytics-dashboard-for-wp' ) ) );
+			$gadwp_data = array( array( __( "Pages", 'google-analytics-dashboard-for-wp' ), __( ucfirst( $metric ), 'google-analytics-dashboard-for-wp' ) ) );
 			foreach ( $data->getRows() as $row ) {
 				$gadwp_data[] = array( esc_html( $row[0] ), (int) $row[1] );
 			}
@@ -518,7 +518,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
-			$gadwp_data = array( array( __( "404 Errors", 'google-analytics-dashboard-for-wp' ), __( ucfirst($metric), 'google-analytics-dashboard-for-wp' ) ) );
+			$gadwp_data = array( array( __( "404 Errors", 'google-analytics-dashboard-for-wp' ), __( ucfirst( $metric ), 'google-analytics-dashboard-for-wp' ) ) );
 			foreach ( $data->getRows() as $row ) {
 				$path = esc_html( $row[0] );
 				$source = esc_html( $row[1] );
@@ -554,7 +554,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
-			$gadwp_data = array( array( __( "Referrers", 'google-analytics-dashboard-for-wp' ), __( ucfirst($metric), 'google-analytics-dashboard-for-wp' ) ) );
+			$gadwp_data = array( array( __( "Referrers", 'google-analytics-dashboard-for-wp' ), __( ucfirst( $metric ), 'google-analytics-dashboard-for-wp' ) ) );
 			foreach ( $data->getRows() as $row ) {
 				$gadwp_data[] = array( esc_html( $row[0] ), (int) $row[1] );
 			}
@@ -589,7 +589,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				return $data;
 			}
 
-			$gadwp_data = array( array( __( "Searches", 'google-analytics-dashboard-for-wp' ), __( ucfirst($metric), 'google-analytics-dashboard-for-wp' ) ) );
+			$gadwp_data = array( array( __( "Searches", 'google-analytics-dashboard-for-wp' ), __( ucfirst( $metric ), 'google-analytics-dashboard-for-wp' ) ) );
 			foreach ( $data->getRows() as $row ) {
 				$gadwp_data[] = array( esc_html( $row[0] ), (int) $row[1] );
 			}
@@ -728,7 +728,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
-			$gadwp_data = array( array( __( "Type", 'google-analytics-dashboard-for-wp' ), __( ucfirst($metric), 'google-analytics-dashboard-for-wp' ) ) );
+			$gadwp_data = array( array( __( "Type", 'google-analytics-dashboard-for-wp' ), __( ucfirst( $metric ), 'google-analytics-dashboard-for-wp' ) ) );
 			$i = 0;
 			$included = 0;
 			foreach ( $data->getRows() as $row ) {

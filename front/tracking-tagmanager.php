@@ -22,6 +22,8 @@ if ( ! class_exists( 'GADWP_Tracking_TagManager' ) ) {
 		public function __construct() {
 			$this->gadwp = GADWP();
 
+			$this->load_scripts();
+
 			if ( $this->gadwp->config->options['trackingcode_infooter'] ) {
 				add_action( 'wp_footer', array( $this, 'output' ), 99 );
 			} else {
@@ -31,6 +33,16 @@ if ( ! class_exists( 'GADWP_Tracking_TagManager' ) ) {
 			if ( $this->gadwp->config->options['amp_tracking_tagmanager'] && $this->gadwp->config->options['amp_containerid'] ) {
 				add_action( 'amp_post_template_head', array( $this, 'amp_add_analytics_script' ) );
 				add_action( 'amp_post_template_footer', array( $this, 'amp_output' ) );
+			}
+		}
+
+		/**
+		 * Styles & Scripts load
+		 */
+		private function load_scripts() {
+			if ( $this->gadwp->config->options['pagescrolldepth_tracking'] ) {
+				wp_enqueue_script( 'gadwp-pagescrolldepth-tracking', GADWP_URL . 'front/js/tracking-scrolldepth.js', array( 'jquery' ), GADWP_CURRENT_VERSION, true );
+				wp_enqueue_script( 'gadwp-tracking-tagmanager-events', GADWP_URL . 'front/js/tracking-tagmanager-events.js', array( 'jquery', 'gadwp-pagescrolldepth-tracking' ), GADWP_CURRENT_VERSION, true );
 			}
 		}
 
@@ -124,9 +136,6 @@ if ( ! class_exists( 'GADWP_Tracking_TagManager' ) ) {
 		public function output() {
 			$this->build_datalayer();
 
-			?>
-<!-- BEGIN GADWP v<?php echo GADWP_CURRENT_VERSION; ?> Tag Manager - https://deconf.com/google-analytics-dashboard-wordpress/ -->
-<?php
 			if ( is_array( $this->datalayer ) ) {
 				$vars = "{";
 				foreach ( $this->datalayer as $var => $value ) {
@@ -134,21 +143,11 @@ if ( ! class_exists( 'GADWP_Tracking_TagManager' ) ) {
 				}
 				$vars = rtrim( $vars, ", " );
 				$vars .= "}";
-				?>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push(<?php echo $vars; ?>);
-</script>
-<?php } ?>
-<script>
-(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-	})(window,document,'script','dataLayer','<?php echo $this->gadwp->config->options['web_containerid']; ?>');
-</script>
-<!-- END GADWP Tag Manager -->
-<?php
+			} else {
+				$vars = "{}";
+			}
+
+			GADWP_Tools::load_view( 'front/views/tagmanager-code.php', array( 'containerid' => $this->gadwp->config->options['web_containerid'], 'vars' => $vars ) );
 		}
 
 		/**
