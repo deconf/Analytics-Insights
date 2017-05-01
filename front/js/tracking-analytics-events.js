@@ -176,7 +176,7 @@ function gadwpRedirect () {
 				userTiming : false,
 				pixelDepth : false,
 				gtmOverride : true,
-				nonInteraction : gadwpUAEventsData.options[ 'event_formsubmit' ],
+				nonInteraction : gadwpUAEventsData.options[ 'event_bouncerate' ],
 			} );
 		}
 
