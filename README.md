@@ -34,15 +34,15 @@ You can also find Google Analytics Dashboard for WP on <a href="http://wordpress
 Hooks
 -----
 
-1. Filters
+* Filters
 
-* gadwp_sites_limit
-* gadwp_backenditem_uri
-* gadwp_frontenditem_uri
-* gadwp_analyticsevents_timeout
-* gadwp_curl_options
+** gadwp_sites_limit
+** gadwp_backenditem_uri
+** gadwp_frontenditem_uri
+** gadwp_analyticsevents_timeout
+** gadwp_curl_options
 
-2. Actions
+* Actions
 
-* gadwp_tagmanager_datalayer
-* gadwp_analytics_commands
+** gadwp_tagmanager_datalayer
+** gadwp_analytics_commands
