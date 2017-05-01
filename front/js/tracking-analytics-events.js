@@ -18,63 +18,43 @@ function gadwpRedirect () {
 
 ( function ( $ ) {
 	$( window ).load( function () {
-		if ( gadwpUAEventsData.options[ 'event_tracking' ] ) {
 
+		if ( gadwpUAEventsData.options[ 'event_tracking' ] ) {
 			// Track Downloads
 			$( 'a' ).filter( function () {
 				var reg = new RegExp( '.*\\.(' + gadwpUAEventsData.options[ 'event_downloads' ] + ')(\\?.*)?$' );
 				return this.href.match( reg );
 			} ).click( function ( e ) {
-				gadwpRedirectCalled = false;
-				gadwpRedirectLink = this.href;
 				if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
 					ga( 'send', 'event', 'download', 'click', this.href, {
-						'nonInteraction' : 1,
-						'hitCallback' : gadwpRedirect
+						'nonInteraction' : 1
 					} );
 				} else {
-					ga( 'send', 'event', 'download', 'click', this.href, {
-						'hitCallback' : gadwpRedirect
-					} );
+					ga( 'send', 'event', 'download', 'click', this.href );
 				}
-				setTimeout( gadwpRedirect, gadwpUAEventsData.options[ 'event_timeout' ] );
-				return false;
 			} );
 
 			// Track Mailto
 			$( 'a[href^="mailto"]' ).click( function ( e ) {
-				gadwpRedirectCalled = false;
-				gadwpRedirectLink = this.href;
 				if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
 					ga( 'send', 'event', 'email', 'send', this.href, {
-						'nonInteraction' : 1,
-						'hitCallback' : gadwpRedirect
+						'nonInteraction' : 1
 					} );
 				} else {
-					ga( 'send', 'event', 'email', 'send', this.href, {
-						'hitCallback' : gadwpRedirect
-					} );
+					ga( 'send', 'event', 'email', 'send', this.href );
 				}
-				setTimeout( gadwpRedirect, gadwpUAEventsData.options[ 'event_timeout' ] );
-				return false;
 			} );
 
 			// Track telephone calls
 			$( 'a[href^="tel"]' ).click( function ( e ) {
-				gadwpRedirectCalled = false;
-				gadwpRedirectLink = this.href;
 				if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
 					ga( 'send', 'event', 'telephone', 'call', this.href, {
-						'nonInteraction' : 1,
-						'hitCallback' : gadwpRedirect
+						'nonInteraction' : 1
 					} );
 				} else {
-					ga( 'send', 'event', 'telephone', 'call', this.href, {
-						'hitCallback' : gadwpRedirect
-					} );
+					ga( 'send', 'event', 'telephone', 'call', this.href );
 				}
-				setTimeout( gadwpRedirect, gadwpUAEventsData.options[ 'event_timeout' ] );
-				return false;
+
 			} );
 
 			if ( gadwpUAEventsData.options[ 'root_domain' ] ) {
@@ -99,11 +79,16 @@ function gadwpRedirect () {
 							'hitCallback' : gadwpRedirect
 						} );
 					}
-					setTimeout( gadwpRedirect, gadwpUAEventsData.options[ 'event_timeout' ] );
-					return false;
+					if ( this.target != '_blank' ) {
+						setTimeout( gadwpRedirect, gadwpUAEventsData.options[ 'event_timeout' ] );
+						return false;
+					} else {
+						gadwpRedirectCalled = true;
+					}
 				} );
 			}
 		}
+
 		if ( gadwpUAEventsData.options[ 'event_affiliates' ] && gadwpUAEventsData.options[ 'aff_tracking' ] ) {
 
 			// Track Affiliates
@@ -125,10 +110,15 @@ function gadwpRedirect () {
 						'hitCallback' : gadwpRedirect
 					} );
 				}
-				setTimeout( gadwpRedirect, gadwpUAEventsData.options[ 'event_timeout' ] );
-				return false;
+				if ( this.target != '_blank' ) {
+					setTimeout( gadwpRedirect, gadwpUAEventsData.options[ 'event_timeout' ] );
+					return false;
+				} else {
+					gadwpRedirectCalled = true;
+				}
 			} );
 		}
+
 		if ( gadwpUAEventsData.options[ 'root_domain' ] && gadwpUAEventsData.options[ 'hash_tracking' ] ) {
 
 			// Track Hashmarks
@@ -136,20 +126,13 @@ function gadwpRedirect () {
 				if ( this.href.indexOf( gadwpUAEventsData.options[ 'root_domain' ] ) != -1 || this.href.indexOf( '://' ) == -1 )
 					return this.hash;
 			} ).click( function ( e ) {
-				gadwpRedirectCalled = false;
-				gadwpRedirectLink = this.href;
 				if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
 					ga( 'send', 'event', 'hashmark', 'click', this.href, {
-						'nonInteraction' : 1,
-						'hitCallback' : gadwpRedirect
+						'nonInteraction' : 1
 					} );
 				} else {
-					ga( 'send', 'event', 'hashmark', 'click', this.href, {
-						'hitCallback' : gadwpRedirect
-					} );
+					ga( 'send', 'event', 'hashmark', 'click', this.href );
 				}
-				setTimeout( gadwpRedirect, gadwpUAEventsData.options[ 'event_timeout' ] );
-				return false;
 			} );
 		}
 
