@@ -76,15 +76,15 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 		 * Styles & Scripts load
 		 */
 		private function load_scripts() {
-			if ( $this->gadwp->config->options['ga_event_tracking'] || $this->gadwp->config->options['ga_aff_tracking'] || $this->gadwp->config->options['ga_hash_tracking'] || $this->gadwp->config->options['pagescrolldepth_tracking'] ) {
+			if ( $this->gadwp->config->options['ga_event_tracking'] || $this->gadwp->config->options['ga_aff_tracking'] || $this->gadwp->config->options['ga_hash_tracking'] || $this->gadwp->config->options['ga_pagescrolldepth_tracking'] ) {
 
 				$domaindata = GADWP_Tools::get_root_domain( esc_html( get_option( 'siteurl' ) ) );
 				$root_domain = $domaindata['domain'];
 
 				wp_enqueue_script( 'gadwp-tracking-analytics-events', GADWP_URL . 'front/js/tracking-analytics-events.js', array( 'jquery' ), GADWP_CURRENT_VERSION, $this->gadwp->config->options['trackingevents_infooter'] );
 
-				if ( $this->gadwp->config->options['pagescrolldepth_tracking'] ) {
-					wp_enqueue_script( 'gadwp-pagescrolldepth-tracking', GADWP_URL . 'front/js/tracking-scrolldepth.js', array( 'jquery' ), GADWP_CURRENT_VERSION, true );
+				if ( $this->gadwp->config->options['ga_pagescrolldepth_tracking'] ) {
+					wp_enqueue_script( 'gadwp-pagescrolldepth-tracking', GADWP_URL . 'front/js/tracking-scrolldepth.js', array( 'jquery' ), GADWP_CURRENT_VERSION, $this->gadwp->config->options['trackingevents_infooter'] );
 				}
 
 				/* @formatter:off */
@@ -99,7 +99,7 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 						'root_domain' => $root_domain,
 						'event_timeout' => apply_filters( 'gadwp_analyticsevents_timeout', 100 ),
 						'event_formsubmit' =>  $this->gadwp->config->options ['ga_formsubmit_tracking'],
-						'pagescrolldepth_tracking' => $this->gadwp->config->options['pagescrolldepth_tracking'],
+						'ga_pagescrolldepth_tracking' => $this->gadwp->config->options['ga_pagescrolldepth_tracking'],
 					),
 				)
 				);

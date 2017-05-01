@@ -169,7 +169,7 @@ function gadwpRedirect () {
 			} );
 		}
 
-		if ( gadwpUAEventsData.options[ 'pagescrolldepth_tracking' ] ) {
+		if ( gadwpUAEventsData.options[ 'ga_pagescrolldepth_tracking' ] ) {
 			// Track Page Scroll Depth
 			$.scrollDepth( {
 				percentage : true,

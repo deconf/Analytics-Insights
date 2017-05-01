@@ -40,9 +40,9 @@ if ( ! class_exists( 'GADWP_Tracking_TagManager' ) ) {
 		 * Styles & Scripts load
 		 */
 		private function load_scripts() {
-			if ( $this->gadwp->config->options['pagescrolldepth_tracking'] ) {
-				wp_enqueue_script( 'gadwp-pagescrolldepth-tracking', GADWP_URL . 'front/js/tracking-scrolldepth.js', array( 'jquery' ), GADWP_CURRENT_VERSION, true );
-				wp_enqueue_script( 'gadwp-tracking-tagmanager-events', GADWP_URL . 'front/js/tracking-tagmanager-events.js', array( 'jquery', 'gadwp-pagescrolldepth-tracking' ), GADWP_CURRENT_VERSION, true );
+			if ( $this->gadwp->config->options['tm_pagescrolldepth_tracking'] ) {
+				wp_enqueue_script( 'gadwp-pagescrolldepth-tracking', GADWP_URL . 'front/js/tracking-scrolldepth.js', array( 'jquery' ), GADWP_CURRENT_VERSION, $this->gadwp->config->options['trackingcode_infooter'] );
+				wp_enqueue_script( 'gadwp-tracking-tagmanager-events', GADWP_URL . 'front/js/tracking-tagmanager-events.js', array( 'jquery', 'gadwp-pagescrolldepth-tracking' ), GADWP_CURRENT_VERSION, $this->gadwp->config->options['trackingcode_infooter'] );
 			}
 		}
 

@@ -29,7 +29,8 @@ final class GADWP_Settings {
 				$options['ga_aff_tracking'] = 0;
 				$options['ga_hash_tracking'] = 0;
 				$options['ga_formsubmit_tracking'] = 0;
-				$options['pagescrolldepth_tracking'] = 0;
+				$options['ga_pagescrolldepth_tracking'] = 0;
+				$options['tm_pagescrolldepth_tracking'] = 0;
 				$options['amp_tracking_analytics'] = 0;
 				$options['amp_tracking_tagmanager'] = 0;
 				$options['optimize_pagehiding'] = 0;
@@ -470,8 +471,8 @@ final class GADWP_Settings {
                                 <tr>
                                     <td colspan="2" class="gadwp-settings-title">
                                         <div class="button-primary gadwp-settings-switchoo">
-                                            <input type="checkbox" name="options[pagescrolldepth_tracking]" value="1" class="gadwp-settings-switchoo-checkbox" id="pagescrolldepth_tracking" <?php checked( $options['pagescrolldepth_tracking'], 1 ); ?>>
-                                            <label class="gadwp-settings-switchoo-label" for="pagescrolldepth_tracking">
+                                            <input type="checkbox" name="options[ga_pagescrolldepth_tracking]" value="1" class="gadwp-settings-switchoo-checkbox" id="ga_pagescrolldepth_tracking" <?php checked( $options['ga_pagescrolldepth_tracking'], 1 ); ?>>
+                                            <label class="gadwp-settings-switchoo-label" for="ga_pagescrolldepth_tracking">
                                                 <div class="gadwp-settings-switchoo-inner"></div>
                                                 <div class="gadwp-settings-switchoo-switch"></div>
                                             </label>
@@ -599,7 +600,7 @@ final class GADWP_Settings {
                         <div id="gadwp-tmdatalayervars">
                             <table class="gadwp-settings-options">
                                 <tr>
-                                    <td colspan="2"><?php echo "<h2>" . __( "Assign Variables", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
+                                    <td colspan="2"><?php echo "<h2>" . __( "Main Variables", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
                                 </tr>
                                 <tr>
                                     <td class="gadwp-settings-title">
@@ -674,18 +675,18 @@ final class GADWP_Settings {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2"><?php echo "<h2>" . __( "Page Scrolling Depth Vars", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
+                                    <td colspan="2"><?php echo "<h2>" . __( "Page Scrolling Depth Variables", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="gadwp-settings-title">
                                         <div class="button-primary gadwp-settings-switchoo">
-                                            <input type="checkbox" name="options[pagescrolldepth_tracking]" value="1" class="gadwp-settings-switchoo-checkbox" id="pagescrolldepth_tracking" <?php checked( $options['pagescrolldepth_tracking'], 1 ); ?>>
-                                            <label class="gadwp-settings-switchoo-label" for="pagescrolldepth_tracking">
+                                            <input type="checkbox" name="options[tm_pagescrolldepth_tracking]" value="1" class="gadwp-settings-switchoo-checkbox" id="tm_pagescrolldepth_tracking" <?php checked( $options['tm_pagescrolldepth_tracking'], 1 ); ?>>
+                                            <label class="gadwp-settings-switchoo-label" for="tm_pagescrolldepth_tracking">
                                                 <div class="gadwp-settings-switchoo-inner"></div>
                                                 <div class="gadwp-settings-switchoo-switch"></div>
                                             </label>
                                         </div>
-                                        <div class="switch-desc"><?php echo " ".__("track page scrolling depth; available vars:", 'google-analytics-dashboard-for-wp' ) . "<strong> ScrollDistance, ScrollTiming, {{eventCategory}}, {{eventAction}}, {{eventLabel}}, {{eventValue}}, {{eventNonInteraction}}</strong>"?></div>
+                                        <div class="switch-desc"><?php echo " ".__("enable page scrolling depth variables: ", 'google-analytics-dashboard-for-wp' ) . "<strong>{{event}} = ScrollDistance, {{eventCategory}}, {{eventAction}}, {{eventLabel}}, {{eventValue}}, {{eventNonInteraction}}</strong>"?></div>
                                     </td>
                                 </tr>
                             </table>
