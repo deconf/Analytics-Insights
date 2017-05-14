@@ -20,38 +20,17 @@ if (!class_exists('Google_Client')) {
 }
 
 /**
- * A blank storage class, for cases where caching is not
- * required.
+ * Interface for checking how many times a given task can be retried following
+ * a failure.
  */
-class Google_Cache_Null extends Google_Cache_Abstract
+interface Google_Task_Retryable
 {
-  public function __construct(Google_Client $client)
-  {
-
-  }
-
-   /**
-   * @inheritDoc
-   */
-  public function get($key, $expiration = false)
-  {
-    return false;
-  }
-
   /**
-   * @inheritDoc
+   * Gets the number of times the associated task can be retried.
+   *
+   * NOTE: -1 is returned if the task can be retried indefinitely
+   *
+   * @return integer
    */
-  public function set($key, $value)
-  {
-    // Nop.
-  }
-
-  /**
-   * @inheritDoc
-   * @param String $key
-   */
-  public function delete($key)
-  {
-    // Nop.
-  }
+  public function allowedRetries();
 }

@@ -1218,7 +1218,7 @@ final class GADWP_Settings {
 						                          <?php if (! $options['ga_dash_token'] || $options['ga_dash_userapi']) : ?>
 						                          <tr>
                                                     <td colspan="2" class="gadwp-settings-info">
-                                                        <input name="options[ga_dash_userapi]" type="checkbox" id="ga_dash_userapi" value="1" <?php checked( $options['ga_dash_userapi'], 1 ); ?> onchange="this.form.submit()" <?php echo ($options['ga_dash_network'])?'disabled="disabled"':''; ?> /><?php echo " ".__("use your own API Project credentials", 'google-analytics-dashboard-for-wp' );?>
+                                                        <input name="options[ga_dash_userapi]" type="checkbox" id="ga_dash_userapi" value="1" <?php checked( $options['ga_dash_userapi'], 1 ); ?> onchange="this.form.submit()" <?php echo ($options['ga_dash_network'])?'disabled="disabled"':''; ?> /><?php echo " ".__("developer mode (requires advanced API knowledge)", 'google-analytics-dashboard-for-wp' );?>
 							                            </td>
                                                 </tr>
                                 				  <?php endif; ?>
@@ -1549,7 +1549,7 @@ final class GADWP_Settings {
 							<?php if ( ! $options['ga_dash_token'] || $options['ga_dash_userapi'] ) : ?>
 						    <tr>
                                                                         <td colspan="2" class="gadwp-settings-info">
-                                                                            <input name="options[ga_dash_userapi]" type="checkbox" id="ga_dash_userapi" value="1" <?php checked( $options['ga_dash_userapi'], 1 ); ?> onchange="this.form.submit()" /><?php echo " ".__("use your own API Project credentials", 'google-analytics-dashboard-for-wp' );?>
+                                                                            <input name="options[ga_dash_userapi]" type="checkbox" id="ga_dash_userapi" value="1" <?php checked( $options['ga_dash_userapi'], 1 ); ?> onchange="this.form.submit()" /><?php echo " ".__("developer mode (requires advanced API knowledge)", 'google-analytics-dashboard-for-wp' );?>
 								</td>
                                                                     </tr>
 							<?php endif; ?>

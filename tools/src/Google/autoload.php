@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright 2014 Google Inc.
  *
@@ -7,7 +6,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,23 +15,17 @@
  * limitations under the License.
  */
 
-// Exit if accessed directly
-if (! defined('ABSPATH'))
-    exit();
-
 function google_api_php_client_autoload_gadwp($className)
 {
-    $classPath = explode('_', $className);
-    if ($classPath[0] != 'Google') {
-        return;
-    }
-    if (count($classPath) > 3) {
-        // Maximum class file path depth in this project is 3.
-        $classPath = array_slice($classPath, 0, 3);
-    }
-    $filePath = dirname(__FILE__) . '/src/' . implode('/', $classPath) . '.php';
-    if (file_exists($filePath)) {
-        require_once ($filePath);
-    }
+  $classPath = explode('_', $className);
+  if ($classPath[0] != 'Google') {
+    return;
+  }
+  // Drop 'Google', and maximum class file path depth in this project is 3.
+  $classPath = array_slice($classPath, 1, 2);
+  $filePath = dirname(__FILE__) . '/' . implode('/', $classPath) . '.php';
+  if (file_exists($filePath)) {
+    require_once($filePath);
+  }
 }
 spl_autoload_register('google_api_php_client_autoload_gadwp');
