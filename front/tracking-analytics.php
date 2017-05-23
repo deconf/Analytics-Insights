@@ -114,7 +114,7 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 		 * @param string $fieldsobject
 		 */
 		private function add( $command, $fields, $fieldsobject = null ) {
-			$this->commands[] = $this->prepare( $command, $fields, $fieldsobject = null );
+			$this->commands[] = $this->prepare( $command, $fields, $fieldsobject );
 		}
 
 		/**

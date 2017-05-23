@@ -127,7 +127,10 @@ jQuery.fn.extend( {
 						swmetric = 'pageviews';
 					} else {
 						swmetric = 'sessions';
-					}	
+					}
+					tools.setCookie( 'default_metric', defaultMetric );
+					tools.setCookie( 'default_dimension', defaultDimension );
+					tools.setCookie( 'default_swmetric', swmetric );
 				} else {
 					defaultMetric = tools.getCookie( 'default_metric' );
 					defaultDimension = tools.getCookie( 'default_dimension' );

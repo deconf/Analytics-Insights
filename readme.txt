@@ -151,7 +151,13 @@ This is a major update, please read the [release notes](https://deconf.com/googl
 
 == Changelog ==
 
+= 5.0.0.1 =
+* Bug Fixes:
+	* filedsObject is missing for the create command
+	* display the last accessed report instead of the default one
+
 = 5.0 =
+* Release notes: [GADWP 5.0](https://deconf.com/google-analytics-dashboard-for-wp-5-0-release-notes/)
 * Enhancements:
 	* complete redesign of the tracking component
 	* AdSense Linking feature was removed since the new linking procedure does not require a special code anymore
