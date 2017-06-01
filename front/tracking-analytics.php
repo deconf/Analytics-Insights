@@ -78,8 +78,7 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 		private function load_scripts() {
 			if ( $this->gadwp->config->options['ga_event_tracking'] || $this->gadwp->config->options['ga_aff_tracking'] || $this->gadwp->config->options['ga_hash_tracking'] || $this->gadwp->config->options['ga_pagescrolldepth_tracking'] ) {
 
-				$domaindata = GADWP_Tools::get_root_domain( esc_html( get_option( 'siteurl' ) ) );
-				$root_domain = $domaindata['domain'];
+				$root_domain = GADWP_Tools::get_root_domain();
 
 				wp_enqueue_script( 'gadwp-tracking-analytics-events', GADWP_URL . 'front/js/tracking-analytics-events.js', array( 'jquery' ), GADWP_CURRENT_VERSION, $this->gadwp->config->options['trackingevents_infooter'] );
 

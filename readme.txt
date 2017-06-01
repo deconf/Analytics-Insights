@@ -151,6 +151,10 @@ This is a major update, please read the [release notes](https://deconf.com/googl
 
 == Changelog ==
 
+= 5.0.0.2 =
+* Enhancements:
+	* use site_url() to determine the main domain name
+	
 = 5.0.0.1 =
 * Bug Fixes:
 	* filedsObject is missing for the create command

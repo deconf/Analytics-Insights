@@ -45,10 +45,15 @@ if ( ! class_exists( 'GADWP_Tools' ) ) {
 			}
 		}
 
-		public static function get_root_domain( $domain ) {
-			$root = explode( '/', $domain );
-			preg_match( "/(?P<domain>[a-z0-9][a-z0-9\-]{1,63}\.[a-z\.]{2,6})$/i", str_ireplace( 'www', '', isset( $root[2] ) ? $root[2] : $domain ), $root );
-			return $root;
+		public static function get_root_domain() {
+			$url = site_url();
+			$root = explode( '/', $url );
+			preg_match( "/(?P<domain>[a-z0-9][a-z0-9\-]{1,63}\.[a-z\.]{2,6})$/i", str_ireplace( 'www', '', isset( $root[2] ) ? $root[2] : $url ), $root );
+			if ( isset( $root['domain'] ) ) {
+				return $root['domain'];
+			} else {
+				return '';
+			}
 		}
 
 		public static function strip_protocol( $domain ) {
