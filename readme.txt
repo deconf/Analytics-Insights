@@ -154,6 +154,7 @@ This is a major update, please read the [release notes](https://deconf.com/googl
 = 5.0.0.2 =
 * Enhancements:
 	* use site_url() to determine the main domain name
+	* display the page load time in seconds with two decimals
 	
 = 5.0.0.1 =
 * Bug Fixes:

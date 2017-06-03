@@ -47,7 +47,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				}
 			}
 			$this->client = new Google_Client( $config );
-			$this->client->setScopes( 'https://www.googleapis.com/auth/analytics.readonly' );
+			$this->client->setScopes( array( 'https://www.googleapis.com/auth/analytics.readonly', 'https://www.googleapis.com/auth/analytics.edit' ) );
 			$this->client->setAccessType( 'offline' );
 			$this->client->setApplicationName( 'Google Analytics Dashboard' );
 			$this->client->setRedirectUri( 'urn:ietf:wg:oauth:2.0:oob' );
@@ -151,31 +151,31 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			$authUrl = $this->client->createAuthUrl();
 			?>
 <form name="input" action="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>" method="post">
-    <table class="gadwp-settings-options">
-        <tr>
-            <td colspan="2" class="gadwp-settings-info">
+	<table class="gadwp-settings-options">
+		<tr>
+			<td colspan="2" class="gadwp-settings-info">
 						<?php echo __( "Use this link to get your access code:", 'google-analytics-dashboard-for-wp' ) . ' <a href="' . $authUrl . '" id="gapi-access-code" target="_blank">' . __ ( "Get Access Code", 'google-analytics-dashboard-for-wp' ) . '</a>.'; ?>
 					</td>
-        </tr>
-        <tr>
-            <td class="gadwp-settings-title">
-                <label for="ga_dash_code" title="<?php _e("Use the red link to get your access code!",'google-analytics-dashboard-for-wp')?>"><?php echo _e( "Access Code:", 'google-analytics-dashboard-for-wp' ); ?></label>
-            </td>
-            <td>
-                <input type="text" id="ga_dash_code" name="ga_dash_code" value="" size="61" required="required" title="<?php _e("Use the red link to get your access code!",'google-analytics-dashboard-for-wp')?>">
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <hr>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <input type="submit" class="button button-secondary" name="ga_dash_authorize" value="<?php _e( "Save Access Code", 'google-analytics-dashboard-for-wp' ); ?>" />
-            </td>
-        </tr>
-    </table>
+		</tr>
+		<tr>
+			<td class="gadwp-settings-title">
+				<label for="ga_dash_code" title="<?php _e("Use the red link to get your access code!",'google-analytics-dashboard-for-wp')?>"><?php echo _e( "Access Code:", 'google-analytics-dashboard-for-wp' ); ?></label>
+			</td>
+			<td>
+				<input type="text" id="ga_dash_code" name="ga_dash_code" value="" size="61" required="required" title="<?php _e("Use the red link to get your access code!",'google-analytics-dashboard-for-wp')?>">
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<hr>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<input type="submit" class="button button-secondary" name="ga_dash_authorize" value="<?php _e( "Save Access Code", 'google-analytics-dashboard-for-wp' ); ?>" />
+			</td>
+		</tr>
+	</table>
 </form>
 <?php
 		}
@@ -455,7 +455,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			$gadwp_data[4] = number_format_i18n( $gadwp_data[4] );
 			$gadwp_data[5] = number_format_i18n( $gadwp_data[5], 2 );
 			$gadwp_data[6] = gmdate( "H:i:s", $gadwp_data[6] );
-			$gadwp_data[7] = gmdate( "H:i:s", $gadwp_data[7] );
+			$gadwp_data[7] = number_format_i18n( $gadwp_data[7], 2 );
 			if ( $filter ) {
 				$gadwp_data[8] = number_format_i18n( $gadwp_data[8], 2 ) . '%';
 			} else {
