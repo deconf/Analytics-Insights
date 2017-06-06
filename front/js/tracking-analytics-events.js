@@ -7,13 +7,18 @@
  */
 var gadwpRedirectLink;
 var gadwpRedirectCalled = false;
+var gadwpDefaultPrevented = false;
 
 function gadwpRedirect () {
 	if ( gadwpRedirectCalled ) {
 		return;
 	}
 	gadwpRedirectCalled = true;
-	document.location.href = gadwpRedirectLink;
+	if ( ! gadwpDefaultPrevented ) {
+		document.location.href = gadwpRedirectLink;
+	} else {
+		gadwpDefaultPrevented = false;
+	}	
 }
 
 ( function ( $ ) {
@@ -25,34 +30,43 @@ function gadwpRedirect () {
 				var reg = new RegExp( '.*\\.(' + gadwpUAEventsData.options[ 'event_downloads' ] + ')(\\?.*)?$' );
 				return this.href.match( reg );
 			} ).click( function ( e ) {
+				var category = this.getAttribute('data-ga-category') || 'download';
+				var action = this.getAttribute('data-ga-action') || 'click';
+				var label = this.getAttribute('data-ga-label') || this.href;	
 				if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
-					ga( 'send', 'event', 'download', 'click', this.href, {
+					ga( 'send', 'event', category, action, label, {
 						'nonInteraction' : 1
 					} );
 				} else {
-					ga( 'send', 'event', 'download', 'click', this.href );
+					ga( 'send', 'event', category, action, label );
 				}
 			} );
 
 			// Track Mailto
 			$( 'a[href^="mailto"]' ).click( function ( e ) {
+				var category = this.getAttribute('data-ga-category') || 'email';
+				var action = this.getAttribute('data-ga-action') || 'send';
+				var label = this.getAttribute('data-ga-label') || this.href;					
 				if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
-					ga( 'send', 'event', 'email', 'send', this.href, {
+					ga( 'send', 'event', category, action, label, {
 						'nonInteraction' : 1
 					} );
 				} else {
-					ga( 'send', 'event', 'email', 'send', this.href );
+					ga( 'send', 'event', category, action, label );
 				}
 			} );
 
 			// Track telephone calls
 			$( 'a[href^="tel"]' ).click( function ( e ) {
 				if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
-					ga( 'send', 'event', 'telephone', 'call', this.href, {
+					var category = this.getAttribute('data-ga-category') || 'telephone';
+					var action = this.getAttribute('data-ga-action') || 'call';
+					var label = this.getAttribute('data-ga-label') || this.href;						
+					ga( 'send', 'event', category, action, label, {
 						'nonInteraction' : 1
 					} );
 				} else {
-					ga( 'send', 'event', 'telephone', 'call', this.href );
+					ga( 'send', 'event', category, action, label );
 				}
 
 			} );
@@ -69,17 +83,23 @@ function gadwpRedirect () {
 				} ).click( function ( e ) {
 					gadwpRedirectCalled = false;
 					gadwpRedirectLink = this.href;
+					var category = this.getAttribute('data-ga-category') || 'outbound';
+					var action = this.getAttribute('data-ga-action') || 'click';
+					var label = this.getAttribute('data-ga-label') || this.href;						
 					if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
-						ga( 'send', 'event', 'outbound', 'click', this.href, {
+						ga( 'send', 'event', category, action, label, {
 							'nonInteraction' : 1,
 							'hitCallback' : gadwpRedirect
 						} );
 					} else {
-						ga( 'send', 'event', 'outbound', 'click', this.href, {
+						ga( 'send', 'event', category, action, label, {
 							'hitCallback' : gadwpRedirect
 						} );
 					}
 					if ( this.target != '_blank' ) {
+						if (e.isDefaultPrevented()){
+							gadwpDefaultPrevented = true;
+						}
 						setTimeout( gadwpRedirect, gadwpUAEventsData.options[ 'event_timeout' ] );
 						return false;
 					} else {
@@ -100,17 +120,23 @@ function gadwpRedirect () {
 			} ).click( function ( event ) {
 				gadwpRedirectCalled = false;
 				gadwpRedirectLink = this.href;
+				var category = this.getAttribute('data-ga-category') || 'affiliates';
+				var action = this.getAttribute('data-ga-action') || 'click';
+				var label = this.getAttribute('data-ga-label') || this.href;				
 				if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
-					ga( 'send', 'event', 'affiliates', 'click', this.href, {
+					ga( 'send', 'event', category, action, label, {
 						'nonInteraction' : 1,
 						'hitCallback' : gadwpRedirect
 					} );
 				} else {
-					ga( 'send', 'event', 'affiliates', 'click', this.href, {
+					ga( 'send', 'event', category, action, label, {
 						'hitCallback' : gadwpRedirect
 					} );
 				}
 				if ( this.target != '_blank' ) {
+					if (e.isDefaultPrevented()){
+						gadwpDefaultPrevented = true;
+					}					
 					setTimeout( gadwpRedirect, gadwpUAEventsData.options[ 'event_timeout' ] );
 					return false;
 				} else {
@@ -126,12 +152,15 @@ function gadwpRedirect () {
 				if ( this.href.indexOf( gadwpUAEventsData.options[ 'root_domain' ] ) != -1 || this.href.indexOf( '://' ) == -1 )
 					return this.hash;
 			} ).click( function ( e ) {
+				var category = this.getAttribute('data-ga-category') || 'hashmark';
+				var action = this.getAttribute('data-ga-action') || 'click';
+				var label = this.getAttribute('data-ga-label') || this.href;					
 				if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
-					ga( 'send', 'event', 'hashmark', 'click', this.href, {
+					ga( 'send', 'event', category, action, label, {
 						'nonInteraction' : 1
 					} );
 				} else {
-					ga( 'send', 'event', 'hashmark', 'click', this.href );
+					ga( 'send', 'event', category, action, label );
 				}
 			} );
 		}
@@ -141,9 +170,11 @@ function gadwpRedirect () {
 			// Track Form Submit
 			$( 'input[type="submit"]' ).click( function ( e ) {
 				gadwpSubmitObject = this;
-				var label = gadwpSubmitObject.value;
+				var category = gadwpSubmitObject.getAttribute('data-ga-category') || 'form';
+				var action = gadwpSubmitObject.getAttribute('data-ga-action') || 'submit';
+				var label = gadwpSubmitObject.getAttribute('data-ga-label') || gadwpSubmitObject.name || gadwpSubmitObject.value;
 				if ( gadwpUAEventsData.options[ 'event_formsubmit' ] ) {
-					ga( 'send', 'event', 'form', 'submit', label, {
+					ga( 'send', 'event', category, action, label, {
 						'nonInteraction' : 1
 					} );
 				} else {

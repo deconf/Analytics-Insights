@@ -4,7 +4,7 @@ Donate link: https://deconf.com/donate/
 Tags: analytics,google analytics,google analytics dashboard,google analytics plugin,google analytics widget
 Requires at least: 3.5
 Tested up to: 4.8
-Stable tag: 5.0.0.1
+Stable tag: 5.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -153,14 +153,18 @@ This is a major update, please read the [release notes](https://deconf.com/googl
 
 = 5.0.1 =
 * Enhancements:
-	* use site_url() to determine the main domain name
+	* use site_url() to find the main domain name
 	* display the page load time in seconds with two decimals
+	* add custom categories, custom actions, and custom labels support for events tracking using <em>data-ga-*</em> attributes; props by [Timo Schneider](https://github.com/tschneid)
+	* display the update notice only on automatic updates
+* Bug Fixes:
+	* prevent the default action of the click event to be triggered if the anchor click event was already prevented by other scripts 
 	
 = 5.0.0.1 =
 * Bug Fixes:
 	* filedsObject is missing for the create command
 	* display the last accessed report instead of the default one
-
+	
 = 5.0 =
 * Release notes: [GADWP 5.0](https://deconf.com/google-analytics-dashboard-for-wp-5-0-release-notes/)
 * Enhancements:

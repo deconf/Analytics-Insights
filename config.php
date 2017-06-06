@@ -47,7 +47,10 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 			}
 			if ( isset( $item['slug'] ) && 'google-analytics-dashboard-for-wp' == $item['slug'] ) {
 				// Only when a minor update is available
-				return ( $this->get_major_version( GADWP_CURRENT_VERSION ) == $this->get_major_version( $item['new_version'] ) );
+				if ($this->get_major_version( GADWP_CURRENT_VERSION ) == $this->get_major_version( $item['new_version'] )){
+					update_option( 'gadwp_got_updated', true );
+					return ( $this->get_major_version( GADWP_CURRENT_VERSION ) == $this->get_major_version( $item['new_version'] ) );
+				}
 			}
 			return $update;
 		}
@@ -212,7 +215,6 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 			if ( GADWP_CURRENT_VERSION != get_option( 'gadwp_version' ) ) {
 				$flag = true;
 				update_option( 'gadwp_version', GADWP_CURRENT_VERSION );
-				update_option( 'gadwp_got_updated', true );
 				$rebuild_token = json_decode( $this->options['ga_dash_token'] ); // v4.8.2
 				if ( is_object( $rebuild_token ) && ! isset( $rebuild_token->token_type ) ) {
 					if ( isset( $this->options['ga_dash_refresh_token'] ) ) {
