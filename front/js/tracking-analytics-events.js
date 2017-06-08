@@ -5,6 +5,9 @@
  * License: GPLv2 or later 
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
+
+"use strict";
+
 var gadwpRedirectLink;
 var gadwpRedirectCalled = false;
 var gadwpDefaultPrevented = false;
@@ -22,7 +25,7 @@ function gadwpRedirect () {
 }
 
 ( function ( $ ) {
-	$( window ).load( function () {
+	$( window ).on('load', function () {
 
 		if ( gadwpUAEventsData.options[ 'event_tracking' ] ) {
 			// Track Downloads

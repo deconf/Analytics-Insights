@@ -1,5 +1,5 @@
 ( function ( $ ) {
-	$( window ).load( function () {
+	$( window ).on('load', function () {
 		// Track Page Scroll Depth
 		$.scrollDepth( {
 			percentage : true,
