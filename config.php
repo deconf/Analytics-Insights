@@ -47,7 +47,7 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 			}
 			if ( isset( $item['slug'] ) && 'google-analytics-dashboard-for-wp' == $item['slug'] ) {
 				// Only when a minor update is available
-				if ($this->get_major_version( GADWP_CURRENT_VERSION ) == $this->get_major_version( $item['new_version'] )){
+				if ( $this->get_major_version( GADWP_CURRENT_VERSION ) == $this->get_major_version( $item['new_version'] ) ) {
 					update_option( 'gadwp_got_updated', true );
 					return ( $this->get_major_version( GADWP_CURRENT_VERSION ) == $this->get_major_version( $item['new_version'] ) );
 				}
@@ -289,6 +289,11 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 			}
 			if ( isset( $this->options['ga_dash_frontend_stats'] ) ) { // v4.8
 				$this->options['frontend_item_reports'] = $this->options['ga_dash_frontend_stats'];
+			}
+
+			if ( isset($this->options['ga_dash_tracking']) && 0 == $this->options['ga_dash_tracking'] ) { // v5.0.1
+				$this->options['ga_dash_tracking_type'] = 'disabled';
+				$flag = true;
 			}
 
 			$unsets = array( 	'ga_dash_jailadmins', // v4.7
