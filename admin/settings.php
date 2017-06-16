@@ -1099,10 +1099,10 @@ final class GADWP_Settings {
 							$options = self::update_options( 'general' );
 						}
 					}
-				} catch ( Google_IO_Exception $e ) {
+				} catch ( GADWPAPI_IO_Exception $e ) {
 					GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $gadwp->gapi_controller->error_timeout );
 					return false;
-				} catch ( Google_Service_Exception $e ) {
+				} catch ( GADWPAPI_Service_Exception $e ) {
 					GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( "(" . $e->getCode() . ") " . $e->getMessage() ), $gadwp->gapi_controller->error_timeout );
 					GADWP_Tools::set_cache( 'gapi_errors', $e->getErrors(), $gadwp->gapi_controller->error_timeout );
 					return $e->getCode();
@@ -1393,10 +1393,10 @@ final class GADWP_Settings {
 							$options = self::update_options( 'network' );
 						}
 					}
-				} catch ( Google_IO_Exception $e ) {
+				} catch ( GADWPAPI_IO_Exception $e ) {
 					GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $gadwp->gapi_controller->error_timeout );
 					return false;
-				} catch ( Google_Service_Exception $e ) {
+				} catch ( GADWPAPI_Service_Exception $e ) {
 					GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( "(" . $e->getCode() . ") " . $e->getMessage() ), $gadwp->gapi_controller->error_timeout );
 					GADWP_Tools::set_cache( 'gapi_errors', $e->getErrors(), $gadwp->gapi_controller->error_timeout );
 					return $e->getCode();

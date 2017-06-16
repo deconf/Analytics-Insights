@@ -4,7 +4,7 @@ Donate link: https://deconf.com/donate/
 Tags: analytics,google analytics,google analytics dashboard,google analytics plugin,google analytics widget
 Requires at least: 3.5
 Tested up to: 4.8
-Stable tag: 5.0.1.1
+Stable tag: 5.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -151,9 +151,11 @@ This is a major update, please read the [release notes](https://deconf.com/googl
 
 == Changelog ==
 
-= 5.0.1.1 =
+= 5.1 =
 * Bug Fixes:
 	* keep tracking disabled while upgrading from versions lower than 5.0
+	* switch to a customized version of GAPI to avoid conflicts with other plugins
+	* fixes the undeclared variable gadwpSubmitObject error on submitted forms 
 	
 = 5.0.1 =
 * Enhancements:
