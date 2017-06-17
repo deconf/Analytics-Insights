@@ -28,6 +28,10 @@ if ( ! class_exists( 'GADWP_Tracking' ) ) {
 
 			$this->init();
 		}
+		
+		public function tracking_code() {
+			_doing_it_wrong( __FUNCTION__, __( "This method is deprecated, read the documentation!", 'google-analytics-dashboard-for-wp' ), '5.0' );
+		}
 
 		public function init() {
 			// excluded roles

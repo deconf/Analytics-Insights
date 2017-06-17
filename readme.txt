@@ -155,7 +155,8 @@ This is a major update, please read the [release notes](https://deconf.com/googl
 * Bug Fixes:
 	* keep tracking disabled while upgrading from versions lower than 5.0
 	* switch to a customized version of GAPI to avoid conflicts with other plugins
-	* fixes the undeclared variable gadwpSubmitObject error on submitted forms 
+	* fixes the undeclared variable gadwpSubmitObject error on submitted forms
+	* added deprecation warning for tracking_code method
 	
 = 5.0.1 =
 * Enhancements:
