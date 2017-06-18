@@ -19,7 +19,7 @@ if ( ! class_exists( 'GADWP_Tracking' ) ) {
 
 		public $analytics;
 
-		public $amp;
+		public $analytics_amp;
 
 		public $tagmanager;
 
@@ -28,9 +28,9 @@ if ( ! class_exists( 'GADWP_Tracking' ) ) {
 
 			$this->init();
 		}
-		
-		public function tracking_code() {
-			_doing_it_wrong( __FUNCTION__, __( "This method is deprecated, read the documentation!", 'google-analytics-dashboard-for-wp' ), '5.0' );
+
+		public function tracking_code() { // Removed since 5.0
+			GADWP_Tools::doing_it_wrong( __METHOD__, __( "This method is deprecated, read the documentation!", 'google-analytics-dashboard-for-wp' ), '5.0' );
 		}
 
 		public function init() {
@@ -44,6 +44,11 @@ if ( ! class_exists( 'GADWP_Tracking' ) ) {
 				// Analytics
 				require_once 'tracking-analytics.php';
 				$this->analytics = new GADWP_Tracking_Analytics();
+
+				if ( $this->gadwp->config->options['amp_tracking_analytics'] ) {
+					$this->analytics_amp = new GADWP_Tracking_Analytics_AMP();
+				}
+
 			}
 
 			if ( 'tagmanager' == $this->gadwp->config->options['ga_dash_tracking_type'] && $this->gadwp->config->options['web_containerid'] ) {

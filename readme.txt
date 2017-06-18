@@ -153,10 +153,15 @@ This is a major update, please read the [release notes](https://deconf.com/googl
 
 = 5.1 =
 * Bug Fixes:
-	* keep tracking disabled while upgrading from versions lower than 5.0
-	* switch to a customized version of GAPI to avoid conflicts with other plugins
+	* if tracking is disabled it keeps it that way while upgrading from versions lower than 5.0
 	* fixes the undeclared variable gadwpSubmitObject error on submitted forms
 	* added deprecation warning for tracking_code method
+* Enhancements:
+	* switch to a customized version of GAPI to avoid conflicts with other plugins
+* New Features:
+	* custom dimensions tracking support for AMP
+	* scrolling depth tracking support for AMP
+	* sampleRate support for web analytics and AMP	
 	
 = 5.0.1 =
 * Enhancements:

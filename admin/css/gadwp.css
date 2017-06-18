@@ -65,7 +65,7 @@ td.gadwp-settings-roles {
 	padding-bottom: 15px;
 }
 
-#ga_speed_samplerate, #ga_realtime_pages {
+#ga_speed_samplerate, #ga_user_samplerate, #ga_realtime_pages {
 	width: 50px;
 }
 

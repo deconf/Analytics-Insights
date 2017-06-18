@@ -311,7 +311,6 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $this->error_timeout );
 				return $e->getCode();
 			}
-			error_log(print_r($data,true));
 			if ( $data->getRows() > 0 ) {
 				return $data;
 			} else {

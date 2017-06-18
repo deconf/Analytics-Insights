@@ -11,15 +11,13 @@
 if ( ! defined( 'ABSPATH' ) )
 	exit();
 
-if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
+if ( ! class_exists( 'GADWP_Tracking_Analytics_Base' ) ) {
 
-	class GADWP_Tracking_Analytics {
+	class GADWP_Tracking_Analytics_Base {
 
-		private $gadwp;
+		protected $gadwp;
 
-		private $uaid;
-
-		private $commands;
+		protected $uaid;
 
 		public function __construct() {
 			$this->gadwp = GADWP();
@@ -27,6 +25,85 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 			$profile = GADWP_Tools::get_selected_profile( $this->gadwp->config->options['ga_dash_profile_list'], $this->gadwp->config->options['ga_dash_tableid_jail'] );
 
 			$this->uaid = esc_html( $profile[2] );
+		}
+
+		protected function bulid_custom_dimensions() {
+			$custom_dimensions = array();
+
+			if ( $this->gadwp->config->options['ga_author_dimindex'] && ( is_single() || is_page() ) ) {
+				global $post;
+				$author_id = $post->post_author;
+				$author_name = get_the_author_meta( 'display_name', $author_id );
+				$index = (int) $this->gadwp->config->options['ga_author_dimindex'];
+				$custom_dimensions[$index] = esc_attr( $author_name );
+			}
+
+			if ( $this->gadwp->config->options['ga_pubyear_dimindex'] && is_single() ) {
+				global $post;
+				$date = get_the_date( 'Y', $post->ID );
+				$index = (int) $this->gadwp->config->options['ga_pubyear_dimindex'];
+				$custom_dimensions[$index] = (int) $date;
+			}
+
+			if ( $this->gadwp->config->options['ga_pubyearmonth_dimindex'] && is_single() ) {
+				global $post;
+				$date = get_the_date( 'Y-m', $post->ID );
+				$index = (int) $this->gadwp->config->options['ga_pubyearmonth_dimindex'];
+				$custom_dimensions[$index] = esc_attr( $date );
+			}
+
+			if ( $this->gadwp->config->options['ga_category_dimindex'] && is_category() ) {
+				$fields = array();
+				$index = (int) $this->gadwp->config->options['ga_category_dimindex'];
+				$custom_dimensions[$index] = esc_attr( single_tag_title( '', false ) );
+			}
+
+			if ( $this->gadwp->config->options['ga_category_dimindex'] && is_single() ) {
+				global $post;
+				$categories = get_the_category( $post->ID );
+				foreach ( $categories as $category ) {
+					$index = (int) $this->gadwp->config->options['ga_category_dimindex'];
+					$custom_dimensions[$index] = esc_attr( $category->name );
+					break;
+				}
+			}
+
+			if ( $this->gadwp->config->options['ga_tag_dimindex'] && is_single() ) {
+				global $post;
+				$fields = array();
+				$post_tags_list = '';
+				$post_tags_array = get_the_tags( $post->ID );
+				if ( $post_tags_array ) {
+					foreach ( $post_tags_array as $tag ) {
+						$post_tags_list .= $tag->name . ', ';
+					}
+				}
+				$post_tags_list = rtrim( $post_tags_list, ', ' );
+				if ( $post_tags_list ) {
+					$index = (int) $this->gadwp->config->options['ga_tag_dimindex'];
+					$custom_dimensions[$index] = esc_attr( $post_tags_list );
+				}
+			}
+
+			if ( $this->gadwp->config->options['ga_user_dimindex'] ) {
+				$fields = array();
+				$index = (int) $this->gadwp->config->options['ga_user_dimindex'];
+				$custom_dimensions[$index] = is_user_logged_in() ? 'registered' : 'guest';
+			}
+
+			return $custom_dimensions;
+		}
+	}
+}
+
+if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
+
+	class GADWP_Tracking_Analytics extends GADWP_Tracking_Analytics_Base {
+
+		private $commands;
+
+		public function __construct() {
+			parent::__construct();
 
 			$this->load_scripts();
 
@@ -38,11 +115,6 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 				add_action( 'wp_footer', array( $this, 'output' ), 99 );
 			} else {
 				add_action( 'wp_head', array( $this, 'output' ), 99 );
-			}
-
-			if ( $this->gadwp->config->options['amp_tracking_analytics'] ) {
-				add_action( 'amp_post_template_head', array( $this, 'amp_add_analytics_script' ) );
-				add_action( 'amp_post_template_footer', array( $this, 'amp_output' ) );
 			}
 		}
 
@@ -143,6 +215,9 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 			if ( 1 != $this->gadwp->config->options['ga_speed_samplerate'] ) {
 				$fieldsobject['siteSpeedSampleRate'] = (int) $this->gadwp->config->options['ga_speed_samplerate'];
 			}
+			if ( 100 != $this->gadwp->config->options['ga_user_samplerate'] ) {
+				$fieldsobject['sampleRate'] = (int) $this->gadwp->config->options['ga_user_samplerate'];
+			}
 			if ( $this->gadwp->config->options['ga_crossdomain_tracking'] && '' != $this->gadwp->config->options['ga_crossdomain_list'] ) {
 				$fieldsobject['allowLinker'] = 'true';
 			}
@@ -186,75 +261,14 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 				$this->add( 'require', $fields );
 			}
 
-			if ( $this->gadwp->config->options['ga_author_dimindex'] && ( is_single() || is_page() ) ) {
-				$fields = array();
-				global $post;
-				$author_id = $post->post_author;
-				$author_name = get_the_author_meta( 'display_name', $author_id );
-				$fields['dimension'] = 'dimension' . (int) $this->gadwp->config->options['ga_author_dimindex'];
-				$fields['value'] = esc_attr( $author_name );
-				$this->add( 'set', $fields );
-			}
-
-			if ( $this->gadwp->config->options['ga_pubyear_dimindex'] && is_single() ) {
-				$fields = array();
-				global $post;
-				$date = get_the_date( 'Y', $post->ID );
-				$fields['dimension'] = 'dimension' . (int) $this->gadwp->config->options['ga_pubyear_dimindex'];
-				$fields['value'] = (int) $date;
-				$this->add( 'set', $fields );
-			}
-
-			if ( $this->gadwp->config->options['ga_pubyearmonth_dimindex'] && is_single() ) {
-				$fields = array();
-				global $post;
-				$date = get_the_date( 'Y-m', $post->ID );
-				$fields['dimension'] = 'dimension' . (int) $this->gadwp->config->options['ga_pubyearmonth_dimindex'];
-				$fields['value'] = esc_attr( $date );
-				$this->add( 'set', $fields );
-			}
-
-			if ( $this->gadwp->config->options['ga_category_dimindex'] && is_category() ) {
-				$fields = array();
-				$fields['dimension'] = 'dimension' . (int) $this->gadwp->config->options['ga_category_dimindex'];
-				$fields['value'] = esc_attr( single_tag_title( '', false ) );
-				$this->add( 'set', $fields );
-			}
-			if ( $this->gadwp->config->options['ga_category_dimindex'] && is_single() ) {
-				$fields = array();
-				global $post;
-				$categories = get_the_category( $post->ID );
-				foreach ( $categories as $category ) {
-					$fields['dimension'] = 'dimension' . (int) $this->gadwp->config->options['ga_category_dimindex'];
-					$fields['value'] = esc_attr( $category->name );
-					$this->add( 'set', $fields );
-					break;
-				}
-			}
-
-			if ( $this->gadwp->config->options['ga_tag_dimindex'] && is_single() ) {
-				global $post;
-				$fields = array();
-				$post_tags_list = '';
-				$post_tags_array = get_the_tags( $post->ID );
-				if ( $post_tags_array ) {
-					foreach ( $post_tags_array as $tag ) {
-						$post_tags_list .= $tag->name . ', ';
-					}
-				}
-				$post_tags_list = rtrim( $post_tags_list, ', ' );
-				if ( $post_tags_list ) {
-					$fields['dimension'] = 'dimension' . (int) $this->gadwp->config->options['ga_tag_dimindex'];
-					$fields['value'] = esc_attr( $post_tags_list );
+			$custom_dimensions = $this->bulid_custom_dimensions();
+			if ( ! empty( $custom_dimensions ) ) {
+				foreach ( $custom_dimensions as $index => $value ) {
+					$fields = array();
+					$fields['dimension'] = 'dimension' . $index;
+					$fields['value'] = $value;
 					$this->add( 'set', $fields );
 				}
-			}
-
-			if ( $this->gadwp->config->options['ga_user_dimindex'] ) {
-				$fields = array();
-				$fields['dimension'] = 'dimension' . (int) $this->gadwp->config->options['ga_user_dimindex'];
-				$fields['value'] = is_user_logged_in() ? 'registered' : 'guest';
-				$this->add( 'set', $fields );
 			}
 
 			if ( $this->gadwp->config->options['ga_dash_anonim'] ) {
@@ -330,19 +344,114 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 
 			GADWP_Tools::load_view( 'front/views/analytics-code.php', array( 'trackingcode' => $trackingcode ) );
 		}
+	}
+}
+
+if ( ! class_exists( 'GADWP_Tracking_Analytics_AMP' ) ) {
+
+	class GADWP_Tracking_Analytics_AMP extends GADWP_Tracking_Analytics_Base {
+
+		private $config;
+
+		public function __construct() {
+			parent::__construct();
+
+			add_action( 'amp_post_template_head', array( $this, 'load_scripts' ) );
+			add_action( 'amp_post_template_footer', array( $this, 'output' ) );
+		}
 
 		/**
 		 * Inserts the Analytics AMP script in the head section
 		 */
-		public function amp_add_analytics_script() {
+		public function load_scripts() {
 			?><script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script><?php
+		}
+
+		/**
+		 * Retrieves the AMP config array
+		 */
+		public function get() {
+			return $this->config;
+		}
+
+		/**
+		 * Stores the AMP config array
+		 * @param array $config
+		 */
+		public function set( $config ) {
+			$this->config = $config;
+		}
+
+		private function build_json() {
+			$this->config = array();
+
+			// Set the Tracking ID
+			$this->config['vars'] = array( 'account' => $this->uaid );
+
+			// Set Custom Dimensions as extraUrlParams
+			$custom_dimensions = $this->bulid_custom_dimensions();
+
+			if ( ! empty( $custom_dimensions ) ) {
+				foreach ( $custom_dimensions as $index => $value ) {
+					$dimension = 'cd' . $index;
+					$this->config['extraUrlParams'][$dimension] = $value;
+				}
+			}
+
+			// Set Triggers
+			/* @formatter:off */
+			$this->config['triggers']['trackPageviewWithCustomData'] = array(
+				'on' => 'visible',
+				'request' => 'pageview'
+			);
+			/* @formatter:on */
+
+			// Set Sampling Rate only if lower than 100%
+			if ( 100 != $this->gadwp->config->options['ga_user_samplerate'] ) {
+				/* @formatter:off */
+				$this->config['triggers']['trackPageviewWithCustomData']['sampleSpec'] = array(
+					'sampleOn' => '${clientId}',
+					'threshold' => (int) $this->gadwp->config->options['ga_user_samplerate']
+				);
+				/* @formatter:on */
+			}
+
+			// Set Scroll events
+			if ( $this->gadwp->config->options['ga_pagescrolldepth_tracking'] ) {
+				/* @formatter:off */
+				$this->config['triggers']['scrollPings'] = array (
+					'on' => 'scroll',
+					'scrollSpec' => array(
+						'verticalBoundaries' => [25, 50, 75, 100]
+					),
+					'request' => 'event',
+					'vars' => array(
+						'eventCategory' => 'Scroll Depth',
+						'eventAction' => 'Percentage',
+						'eventLabel' => '${verticalScrollBoundary}%'
+					)
+				);
+				/* @formatter:on */
+			}
+
+			do_action( 'gadwp_analytics_amp_config', $this );
 		}
 
 		/**
 		 * Outputs the Google Analytics tracking code for AMP
 		 */
-		public function amp_output() {
-			?><amp-analytics type="googleanalytics" id="gadwp-googleanalytics"> <script type="application/json">{"vars": { "account" : "<?php echo $this->uaid; ?>"}, "triggers": { "trackPageview": { "on": "visible", "request": "pageview" }}}</script> </amp-analytics><?php
+		public function output() {
+			$this->build_json();
+
+			if ( version_compare( phpversion(), '5.4.0', '<' ) ) {
+				$json = json_encode( $this->config );
+			} else {
+				$json = json_encode( $this->config, JSON_PRETTY_PRINT );
+			}
+
+			$data = array( 'json' => $json );
+
+			GADWP_Tools::load_view( 'front/views/analytics-amp-code.php', $data );
 		}
 	}
 }

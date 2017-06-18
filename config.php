@@ -89,6 +89,8 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 								'ga_dash_excludesa',
 								'ga_pagescrolldepth_tracking',
 								'tm_pagescrolldepth_tracking',
+								'ga_speed_samplerate',
+								'ga_user_samplerate',
 						);
 			foreach ( $numerics as $key ) {
 				if ( isset( $options[$key] ) ) {
@@ -134,6 +136,10 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 
 			if ( isset( $options['ga_speed_samplerate'] ) && ( $options['ga_speed_samplerate'] < 1 || $options['ga_speed_samplerate'] > 100 ) ) {
 				$options['ga_speed_samplerate'] = 1;
+			}
+
+			if ( isset( $options['ga_user_samplerate'] ) && ( $options['ga_user_samplerate'] < 1 || $options['ga_user_samplerate'] > 100 ) ) {
+				$options['ga_user_samplerate'] = 100;
 			}
 
 			if ( isset( $options['ga_cookieexpires'] ) && $options['ga_cookieexpires'] ) { // v4.9
@@ -365,6 +371,10 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 			if ( ! isset( $this->options['ga_event_affiliates'] ) ) {
 				$this->options['ga_event_affiliates'] = '/out/';
 				$flag = true;
+			}
+
+			if ( ! isset( $this->options['ga_user_samplerate'] ) ) {
+				$this->options['ga_user_samplerate'] = 100;
 			}
 
 			if ( ! isset( $this->options['ga_event_downloads'] ) ) {

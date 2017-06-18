@@ -199,11 +199,25 @@ if ( ! class_exists( 'GADWP_Tools' ) ) {
 		 * @return boolean - If template file was found
 		 **/
 		public static function load_view( $path, $data = array() ) {
-			if( file_exists( GADWP_DIR . $path ) ) {
-				require_once( GADWP_DIR . $path );
+			if ( file_exists( GADWP_DIR . $path ) ) {
+				require_once ( GADWP_DIR . $path );
 				return true;
 			}
 			return false;
+		}
+
+		public static function doing_it_wrong( $function, $message, $version ) {
+			if ( WP_DEBUG && apply_filters( 'doing_it_wrong_trigger_error', true ) ) {
+				if ( is_null( $version ) ) {
+					$version = '';
+				} else {
+					/* translators: %s: version number */
+					$version = sprintf( __( 'This message was added in version %s.', 'google-analytics-dashboard-for-wp' ), $version );
+				}
+
+				/* translators: Developer debugging message. 1: PHP function name, 2: Explanatory message, 3: Version information message */
+				trigger_error( sprintf( __( '%1$s was called <strong>incorrectly</strong>. %2$s %3$s', 'google-analytics-dashboard-for-wp' ), $function, $message, $version ) );
+			}
 		}
 	}
 }

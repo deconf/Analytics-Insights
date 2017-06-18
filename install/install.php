@@ -42,6 +42,7 @@ class GADWP_Install {
 			$options['ga_dash_frontend_stats'] = 0;
 			$options['ga_dash_network'] = 0;
 			$options['ga_speed_samplerate'] = 1;
+			$options['ga_user_samplerate'] = 100;
 			$options['ga_event_bouncerate'] = 0;
 			$options['ga_crossdomain_tracking'] = 0;
 			$options['ga_crossdomain_list'] = '';
@@ -151,6 +152,8 @@ class GADWP_Install {
 			$options['ga_dash_excludesa'] = 0;
 			$options['ga_pagescrolldepth_tracking'] = 0;
 			$options['tm_pagescrolldepth_tracking'] = 0;
+			$options['ga_speed_samplerate'] = 1;
+			$options['ga_user_samplerate'] = 100;
 
 			delete_option( 'ga_dash_clientid' );
 			delete_option( 'ga_dash_clientsecret' );

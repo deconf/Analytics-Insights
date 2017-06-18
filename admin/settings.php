@@ -691,11 +691,21 @@ final class GADWP_Settings {
 								</tr>
 								<tr>
 									<td class="gadwp-settings-title">
-										<label for="ga_speed_samplerate"><?php _e("Page Speed SR:", 'google-analytics-dashboard-for-wp'); ?>
+										<label for="ga_speed_samplerate"><?php _e("Speed Sample Rate:", 'google-analytics-dashboard-for-wp'); ?>
 										</label>
 									</td>
 									<td>
 										<input type="number" id="ga_speed_samplerate" name="options[ga_speed_samplerate]" value="<?php echo (int)($options['ga_speed_samplerate']); ?>" max="100" min="1">
+										%
+									</td>
+								</tr>
+								<tr>
+									<td class="gadwp-settings-title">
+										<label for="ga_user_samplerate"><?php _e("User Sample Rate:", 'google-analytics-dashboard-for-wp'); ?>
+										</label>
+									</td>
+									<td>
+										<input type="number" id="ga_user_samplerate" name="options[ga_user_samplerate]" value="<?php echo (int)($options['ga_user_samplerate']); ?>" max="100" min="1">
 										%
 									</td>
 								</tr>
