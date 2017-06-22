@@ -402,7 +402,10 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics_AMP' ) ) {
 			/* @formatter:off */
 			$this->config['triggers']['trackPageviewWithCustomData'] = array(
 				'on' => 'visible',
-				'request' => 'pageview'
+				'request' => 'pageview',
+				'vars' => array(
+					'documentLocation' => '${canonicalUrl}'
+				)
 			);
 			/* @formatter:on */
 
@@ -428,7 +431,8 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics_AMP' ) ) {
 					'vars' => array(
 						'eventCategory' => 'Scroll Depth',
 						'eventAction' => 'Percentage',
-						'eventLabel' => '${verticalScrollBoundary}%'
+						'eventLabel' => '${verticalScrollBoundary}%',
+						'documentLocation' => '${canonicalUrl}'
 					)
 				);
 				/* @formatter:on */

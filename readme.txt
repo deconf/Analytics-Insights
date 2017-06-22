@@ -156,6 +156,7 @@ This is a major update, please read the [release notes](https://deconf.com/googl
 	* if tracking is disabled it keeps it that way while upgrading from versions lower than 5.0
 	* fixes the undeclared variable gadwpSubmitObject error on submitted forms
 	* added deprecation warning for tracking_code method
+	* fix network admin menu capabilities, props by [Maxime Culea](https://github.com/MaximeCulea)
 * Enhancements:
 	* switch to a customized version of GAPI to avoid conflicts with other plugins
 * New Features:
