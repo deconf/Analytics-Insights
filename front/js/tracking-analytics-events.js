@@ -32,9 +32,9 @@ jQuery( window ).on( 'load', function () {
 			var reg = new RegExp( '.*\\.(' + gadwpUAEventsData.options[ 'event_downloads' ] + ')(\\?.*)?$' );
 			return this.href.match( reg );
 		} ).click( function ( e ) {
-			var category = this.getAttribute( 'data-ga-category' ) || 'download';
-			var action = this.getAttribute( 'data-ga-action' ) || 'click';
-			var label = this.getAttribute( 'data-ga-label' ) || this.href;
+			var category = this.getAttribute( 'data-vars-ga-category' ) || 'download';
+			var action = this.getAttribute( 'data-vars-ga-action' ) || 'click';
+			var label = this.getAttribute( 'data-vars-ga-label' ) || this.href;
 			if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
 				ga( 'send', 'event', category, action, label, {
 					'nonInteraction' : 1
@@ -46,9 +46,9 @@ jQuery( window ).on( 'load', function () {
 
 		// Track Mailto
 		jQuery( 'a[href^="mailto"]' ).click( function ( e ) {
-			var category = this.getAttribute( 'data-ga-category' ) || 'email';
-			var action = this.getAttribute( 'data-ga-action' ) || 'send';
-			var label = this.getAttribute( 'data-ga-label' ) || this.href;
+			var category = this.getAttribute( 'data-vars-ga-category' ) || 'email';
+			var action = this.getAttribute( 'data-vars-ga-action' ) || 'send';
+			var label = this.getAttribute( 'data-vars-ga-label' ) || this.href;
 			if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
 				ga( 'send', 'event', category, action, label, {
 					'nonInteraction' : 1
@@ -61,9 +61,9 @@ jQuery( window ).on( 'load', function () {
 		// Track telephone calls
 		jQuery( 'a[href^="tel"]' ).click( function ( e ) {
 			if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
-				var category = this.getAttribute( 'data-ga-category' ) || 'telephone';
-				var action = this.getAttribute( 'data-ga-action' ) || 'call';
-				var label = this.getAttribute( 'data-ga-label' ) || this.href;
+				var category = this.getAttribute( 'data-vars-ga-category' ) || 'telephone';
+				var action = this.getAttribute( 'data-vars-ga-action' ) || 'call';
+				var label = this.getAttribute( 'data-vars-ga-label' ) || this.href;
 				ga( 'send', 'event', category, action, label, {
 					'nonInteraction' : 1
 				} );
@@ -85,9 +85,9 @@ jQuery( window ).on( 'load', function () {
 			} ).click( function ( e ) {
 				gadwpRedirectCalled = false;
 				gadwpRedirectLink = this.href;
-				var category = this.getAttribute( 'data-ga-category' ) || 'outbound';
-				var action = this.getAttribute( 'data-ga-action' ) || 'click';
-				var label = this.getAttribute( 'data-ga-label' ) || this.href;
+				var category = this.getAttribute( 'data-vars-ga-category' ) || 'outbound';
+				var action = this.getAttribute( 'data-vars-ga-action' ) || 'click';
+				var label = this.getAttribute( 'data-vars-ga-label' ) || this.href;
 				if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
 					ga( 'send', 'event', category, action, label, {
 						'nonInteraction' : 1,
@@ -122,9 +122,9 @@ jQuery( window ).on( 'load', function () {
 		} ).click( function ( event ) {
 			gadwpRedirectCalled = false;
 			gadwpRedirectLink = this.href;
-			var category = this.getAttribute( 'data-ga-category' ) || 'affiliates';
-			var action = this.getAttribute( 'data-ga-action' ) || 'click';
-			var label = this.getAttribute( 'data-ga-label' ) || this.href;
+			var category = this.getAttribute( 'data-vars-ga-category' ) || 'affiliates';
+			var action = this.getAttribute( 'data-vars-ga-action' ) || 'click';
+			var label = this.getAttribute( 'data-vars-ga-label' ) || this.href;
 			if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
 				ga( 'send', 'event', category, action, label, {
 					'nonInteraction' : 1,
@@ -154,9 +154,9 @@ jQuery( window ).on( 'load', function () {
 			if ( this.href.indexOf( gadwpUAEventsData.options[ 'root_domain' ] ) != -1 || this.href.indexOf( '://' ) == -1 )
 				return this.hash;
 		} ).click( function ( e ) {
-			var category = this.getAttribute( 'data-ga-category' ) || 'hashmark';
-			var action = this.getAttribute( 'data-ga-action' ) || 'click';
-			var label = this.getAttribute( 'data-ga-label' ) || this.href;
+			var category = this.getAttribute( 'data-vars-ga-category' ) || 'hashmark';
+			var action = this.getAttribute( 'data-vars-ga-action' ) || 'click';
+			var label = this.getAttribute( 'data-vars-ga-label' ) || this.href;
 			if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
 				ga( 'send', 'event', category, action, label, {
 					'nonInteraction' : 1
@@ -172,15 +172,15 @@ jQuery( window ).on( 'load', function () {
 		// Track Form Submit
 		jQuery( 'input[type="submit"]' ).click( function ( e ) {
 			var gadwpSubmitObject = this;
-			var category = gadwpSubmitObject.getAttribute( 'data-ga-category' ) || 'form';
-			var action = gadwpSubmitObject.getAttribute( 'data-ga-action' ) || 'submit';
-			var label = gadwpSubmitObject.getAttribute( 'data-ga-label' ) || gadwpSubmitObject.name || gadwpSubmitObject.value;
+			var category = gadwpSubmitObject.getAttribute( 'data-vars-ga-category' ) || 'form';
+			var action = gadwpSubmitObject.getAttribute( 'data-vars-ga-action' ) || 'submit';
+			var label = gadwpSubmitObject.getAttribute( 'data-vars-ga-label' ) || gadwpSubmitObject.name || gadwpSubmitObject.value;
 			if ( gadwpUAEventsData.options[ 'event_formsubmit' ] ) {
 				ga( 'send', 'event', category, action, label, {
 					'nonInteraction' : 1
 				} );
 			} else {
-				ga( 'send', 'event', 'form', 'submit', label );
+				ga( 'send', 'event', category, action, label );
 			}
 		} );
 	}

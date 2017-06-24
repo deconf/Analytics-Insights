@@ -386,7 +386,7 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics_AMP' ) ) {
 			$this->config = array();
 
 			// Set the Tracking ID
-			$this->config['vars'] = array( 'account' => $this->uaid );
+			$this->config['vars'] = array( 'account' => $this->uaid, 'documentLocation' => '${canonicalUrl}' );
 
 			// Set Custom Dimensions as extraUrlParams
 			$custom_dimensions = $this->bulid_custom_dimensions();
@@ -400,19 +400,16 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics_AMP' ) ) {
 
 			// Set Triggers
 			/* @formatter:off */
-			$this->config['triggers']['trackPageviewWithCustomData'] = array(
+			$this->config['triggers']['gadwpTrackPageview'] = array(
 				'on' => 'visible',
 				'request' => 'pageview',
-				'vars' => array(
-					'documentLocation' => '${canonicalUrl}'
-				)
 			);
 			/* @formatter:on */
 
 			// Set Sampling Rate only if lower than 100%
 			if ( 100 != $this->gadwp->config->options['ga_user_samplerate'] ) {
 				/* @formatter:off */
-				$this->config['triggers']['trackPageviewWithCustomData']['sampleSpec'] = array(
+				$this->config['triggers']['gadwpTrackPageview']['sampleSpec'] = array(
 					'sampleOn' => '${clientId}',
 					'threshold' => (int) $this->gadwp->config->options['ga_user_samplerate']
 				);
@@ -422,7 +419,7 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics_AMP' ) ) {
 			// Set Scroll events
 			if ( $this->gadwp->config->options['ga_pagescrolldepth_tracking'] ) {
 				/* @formatter:off */
-				$this->config['triggers']['scrollPings'] = array (
+				$this->config['triggers']['gadwpScrollPings'] = array (
 					'on' => 'scroll',
 					'scrollSpec' => array(
 						'verticalBoundaries' => [25, 50, 75, 100]
@@ -431,8 +428,38 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics_AMP' ) ) {
 					'vars' => array(
 						'eventCategory' => 'Scroll Depth',
 						'eventAction' => 'Percentage',
-						'eventLabel' => '${verticalScrollBoundary}%',
-						'documentLocation' => '${canonicalUrl}'
+						'eventLabel' => '${verticalScrollBoundary}%'
+					)
+				);
+				/* @formatter:on */
+			}
+
+			// Set downloads, outbound links, affiliate links, hashmarks, email, telephone events
+			if ( $this->gadwp->config->options['ga_event_tracking'] ) {
+				/* @formatter:off */
+				$this->config['triggers']['gadwpEventTracking'] = array (
+					'on' => 'click',
+					'selector' => 'a',
+					'request' => 'event',
+					'vars' => array(
+						'eventCategory' => '${gaCategory}',
+						'eventAction' => '${gaAction}',
+						'eventLabel' => '${gaLabel}'
+					)
+				);
+				/* @formatter:on */
+			}
+			// Set form submit event
+			if ( $this->gadwp->config->options['ga_formsubmit_tracking'] ) {
+				/* @formatter:off */
+				$this->config['triggers']['gadwpFormSubmit'] = array (
+					'on' => 'click',
+					'selector' => 'input[type="submit"]',
+					'request' => 'event',
+					'vars' => array(
+						'eventCategory' => '${gaCategory}',
+						'eventAction' => '${gaAction}',
+						'eventLabel' => '${gaLabel}'
 					)
 				);
 				/* @formatter:on */

@@ -159,10 +159,14 @@ This is a major update, please read the [release notes](https://deconf.com/googl
 	* fix network admin menu capabilities, props by [Maxime Culea](https://github.com/MaximeCulea)
 * Enhancements:
 	* switch to a customized version of GAPI to avoid conflicts with other plugins
+	* automatically remove <em>amp/</em> from Google Analytics tracking page URL
+	* events tracking is now using <em>data-vars-ga-*</em> attributes instead of <em>data-ga-*</em>
 * New Features:
+	* sampleRate support for web analytics and AMP
 	* custom dimensions tracking support for AMP
 	* scrolling depth tracking support for AMP
-	* sampleRate support for web analytics and AMP	
+	* form submit tracking support for AMP
+	* downloads, affiliate links, hashmarks, outbound links, telephones, e-mails tracking support for AMP
 	
 = 5.0.1 =
 * Enhancements:
