@@ -161,6 +161,7 @@ This is a major update, please read the [release notes](https://deconf.com/googl
 	* switch to a customized version of GAPI to avoid conflicts with other plugins
 	* automatically remove <em>amp/</em> from Google Analytics tracking page URL
 	* events tracking is now using <em>data-vars-ga-*</em> attributes instead of <em>data-ga-*</em>
+	* increase default report expiration cookie from 7 days to 365 days
 * New Features:
 	* sampleRate support for web analytics and AMP
 	* custom dimensions tracking support for AMP

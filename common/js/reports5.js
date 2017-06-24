@@ -86,7 +86,7 @@ jQuery.fn.extend( {
 				} else {
 					name = "gadwp_ir_" + name;
 				}
-				dateItem.setTime( dateItem.getTime() + ( 24 * 60 * 60 * 1000 * 7 ) );
+				dateItem.setTime( dateItem.getTime() + ( 24 * 60 * 60 * 1000 * 365 ) );
 				expires = "expires=" + dateItem.toUTCString();
 				document.cookie = name + "=" + value + "; " + expires + "; path=/";
 			},
