@@ -392,7 +392,12 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics_AMP' ) ) {
 			$this->config = array();
 
 			// Set the Tracking ID
-			$this->config['vars'] = array( 'account' => $this->uaid, 'documentLocation' => '${canonicalUrl}' );
+			/* @formatter:off */
+			$this->config['vars'] = array(
+				'account' => $this->uaid,
+				'documentLocation' => '${canonicalUrl}',
+			);
+			/* @formatter:on */
 
 			// Set Custom Dimensions as extraUrlParams
 			$custom_dimensions = $this->bulid_custom_dimensions();
@@ -417,7 +422,7 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics_AMP' ) ) {
 				/* @formatter:off */
 				$this->config['triggers']['gadwpTrackPageview']['sampleSpec'] = array(
 					'sampleOn' => '${clientId}',
-					'threshold' => (int) $this->gadwp->config->options['ga_user_samplerate']
+					'threshold' => (int) $this->gadwp->config->options['ga_user_samplerate'],
 				);
 				/* @formatter:on */
 			}
@@ -428,14 +433,14 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics_AMP' ) ) {
 				$this->config['triggers']['gadwpScrollPings'] = array (
 					'on' => 'scroll',
 					'scrollSpec' => array(
-						'verticalBoundaries' => '&#91;25, 50, 75, 100&#93;'
+						'verticalBoundaries' => '&#91;25, 50, 75, 100&#93;',
 					),
 					'request' => 'event',
 					'vars' => array(
 						'eventCategory' => 'Scroll Depth',
 						'eventAction' => 'Percentage',
-						'eventLabel' => '${verticalScrollBoundary}%'
-					)
+						'eventLabel' => '${verticalScrollBoundary}%',
+					),
 				);
 				/* @formatter:on */
 			}
@@ -450,8 +455,8 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics_AMP' ) ) {
 					'vars' => array(
 						'eventCategory' => '${gaCategory}',
 						'eventAction' => '${gaAction}',
-						'eventLabel' => '${gaLabel}'
-					)
+						'eventLabel' => '${gaLabel}',
+					),
 				);
 				/* @formatter:on */
 			}
@@ -465,8 +470,8 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics_AMP' ) ) {
 					'vars' => array(
 						'eventCategory' => '${gaCategory}',
 						'eventAction' => '${gaAction}',
-						'eventLabel' => '${gaLabel}'
-					)
+						'eventLabel' => '${gaLabel}',
+					),
 				);
 				/* @formatter:on */
 			}
