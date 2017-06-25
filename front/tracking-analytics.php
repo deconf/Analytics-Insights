@@ -356,15 +356,21 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics_AMP' ) ) {
 		public function __construct() {
 			parent::__construct();
 
-			add_action( 'amp_post_template_head', array( $this, 'load_scripts' ) );
+			add_filter( 'amp_post_template_data', array( $this, 'load_scripts' ) );
 			add_action( 'amp_post_template_footer', array( $this, 'output' ) );
 		}
 
 		/**
 		 * Inserts the Analytics AMP script in the head section
 		 */
-		public function load_scripts() {
-			?><script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script><?php
+		public function load_scripts( $data ) {
+			if ( ! isset( $data['amp_component_scripts'] ) ) {
+				$data['amp_component_scripts'] = array();
+			}
+
+			$data['amp_component_scripts']['amp-analytics'] = 'https://cdn.ampproject.org/v0/amp-analytics-0.1.js';
+
+			return $data;
 		}
 
 		/**
@@ -422,7 +428,7 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics_AMP' ) ) {
 				$this->config['triggers']['gadwpScrollPings'] = array (
 					'on' => 'scroll',
 					'scrollSpec' => array(
-						'verticalBoundaries' => [25, 50, 75, 100]
+						'verticalBoundaries' => '&#91;25, 50, 75, 100&#93;'
 					),
 					'request' => 'event',
 					'vars' => array(
@@ -479,6 +485,8 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics_AMP' ) ) {
 			} else {
 				$json = json_encode( $this->config, JSON_PRETTY_PRINT );
 			}
+
+			$json = str_replace( array( '"&#91;', '&#93;"' ), array( '[', ']' ), $json ); //make verticalBoundaries a JavaScript array
 
 			$data = array( 'json' => $json );
 

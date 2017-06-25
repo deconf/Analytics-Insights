@@ -31,7 +31,7 @@ if ( ! class_exists( 'GADWP_Tracking_TagManager' ) ) {
 			}
 
 			if ( $this->gadwp->config->options['amp_tracking_tagmanager'] && $this->gadwp->config->options['amp_containerid'] ) {
-				add_action( 'amp_post_template_head', array( $this, 'amp_add_analytics_script' ) );
+				add_filter( 'amp_post_template_data', array( $this, 'amp_add_analytics_script' ) );
 				add_action( 'amp_post_template_footer', array( $this, 'amp_output' ) );
 			}
 		}
@@ -153,8 +153,14 @@ if ( ! class_exists( 'GADWP_Tracking_TagManager' ) ) {
 		/**
 		 * Inserts the Analytics AMP script in the head section
 		 */
-		public function amp_add_analytics_script() {
-			?><script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script><?php
+		public function amp_add_analytics_script( $data ) {
+			if ( ! isset( $data['amp_component_scripts'] ) ) {
+				$data['amp_component_scripts'] = array();
+			}
+
+			$data['amp_component_scripts']['amp-analytics'] = 'https://cdn.ampproject.org/v0/amp-analytics-0.1.js';
+
+			return $data;
 		}
 
 		/**
