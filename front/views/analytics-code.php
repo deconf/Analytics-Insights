@@ -1,4 +1,12 @@
-
+<?php
+/**
+ * Author: Alin Marcu
+ * Copyright 2017 Alin Marcu
+ * Author URI: https://deconf.com
+ * License: GPLv2 or later
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ */
+?>
 <!-- BEGIN GADWP v<?php echo GADWP_CURRENT_VERSION; ?> Universal Analytics - https://deconf.com/google-analytics-dashboard-wordpress/ -->
 <script>
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

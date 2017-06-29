@@ -1690,83 +1690,9 @@ final class GADWP_Settings {
 		global $wp_version;
 
 		$gadwp = GADWP();
-		?>
-				</div>
-													</div>
-												</div>
-												<div id="postbox-container-1" class="postbox-container">
-													<div class="meta-box-sortables">
-														<div class="postbox">
-															<h3>
-																<span><?php _e("Setup Tutorial & Demo",'google-analytics-dashboard-for-wp') ?></span>
-															</h3>
-															<div class="inside">
-																<a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=video&utm_campaign=gadwp" target="_blank"><img src="<?php echo plugins_url( 'images/google-analytics-dashboard.png' , __FILE__ );?>" width="100%" alt="" /></a>
-															</div>
-														</div>
-														<div class="postbox">
-															<h3>
-																<span><?php _e("Follow & Review",'google-analytics-dashboard-for-wp')?></span>
-															</h3>
-															<div class="inside">
-																<div class="gadash-desc">
-																	<div style="margin-left: -10px;">
-																		<div class="g-page" data-width="273" data-href="//plus.google.com/+Deconfcom" data-layout="landscape" data-showtagline="false" data-showcoverphoto="false" data-rel="publisher"></div>
-																	</div>
-																	<script type="text/javascript">
-																	  (function() {
-																		var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-																		po.src = 'https://apis.google.com/js/platform.js';
-																		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-																	  })();
-																	</script>
-																</div>
-																<br />
-																<div class="gadash-desc">
-																	<a href="https://twitter.com/deconfcom" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @deconfcom</a>
-																	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-																</div>
-																<br />
-																<div class="gadash-title">
-																	<a href="http://wordpress.org/support/view/plugin-reviews/google-analytics-dashboard-for-wp#plugin-info"><img src="<?php echo plugins_url( 'images/star.png' , __FILE__ ); ?>" /></a>
-																</div>
-																<div class="gadash-desc">
-																	<?php printf(__('Your feedback and review are both important, %s!', 'google-analytics-dashboard-for-wp'), sprintf('<a href="http://wordpress.org/support/view/plugin-reviews/google-analytics-dashboard-for-wp#plugin-info">%s</a>', __('rate this plugin', 'google-analytics-dashboard-for-wp')));?>
-																</div>
-															</div>
-														</div>
-														<div class="postbox">
-															<h3>
-																<span><?php _e("Further Reading",'google-analytics-dashboard-for-wp')?></span>
-															</h3>
-															<div class="inside">
-																<div class="gadash-title">
-																	<a href="https://deconf.com/clicky-web-analytics-review/?utm_source=gadwp_config&utm_medium=link&utm_content=clicky&utm_campaign=gadwp"><img src="<?php echo plugins_url( 'images/clicky.png' , __FILE__ ); ?>" /></a>
-																</div>
-																<div class="gadash-desc">
-																	<?php printf(__('%s service with users tracking at IP level.', 'google-analytics-dashboard-for-wp'), sprintf('<a href="https://deconf.com/clicky-web-analytics-review/?utm_source=gadwp_config&utm_medium=link&utm_content=clicky&utm_campaign=gadwp">%s</a>', __('Web Analytics', 'google-analytics-dashboard-for-wp')));?>
-																</div>
-																<br />
-																<div class="gadash-title">
-																	<a href="https://deconf.com/move-website-https-ssl/?utm_source=gadwp_config&utm_medium=link&utm_content=ssl&utm_campaign=gadwp"><img src="<?php echo plugins_url( 'images/ssl.png' , __FILE__ ); ?>" /></a>
-																</div>
-																<div class="gadash-desc">
-																	<?php printf(__('%s by moving your website to HTTPS/SSL.', 'google-analytics-dashboard-for-wp'), sprintf('<a href="https://deconf.com/move-website-https-ssl/?utm_source=gadwp_config&utm_medium=link&utm_content=ssl&utm_campaign=gadwp">%s</a>', __('Improve search rankings', 'google-analytics-dashboard-for-wp')));?>
-																</div>
-																<br />
-																<div class="gadash-title">
-																	<a href="https://deconf.com/wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=plugins&utm_campaign=gadwp"><img src="<?php echo plugins_url( 'images/wp.png' , __FILE__ ); ?>" /></a>
-																</div>
-																<div class="gadash-desc">
-																	<?php printf(__('Other %s written by the same author', 'google-analytics-dashboard-for-wp'), sprintf('<a href="https://deconf.com/wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=plugins&utm_campaign=gadwp">%s</a>', __('WordPress Plugins', 'google-analytics-dashboard-for-wp')));?>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-<?php
+
+		GADWP_Tools::load_view( 'admin/views/settings-sidebar.php' );
+
 		// Dismiss the admin update notice
 		if ( version_compare( $wp_version, '4.2', '<' ) && current_user_can( 'manage_options' ) ) {
 			delete_option( 'gadwp_got_updated' );

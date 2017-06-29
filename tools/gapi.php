@@ -148,36 +148,8 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 		 * Generates and retrieves the Access Code
 		 */
 		public function token_request() {
-			$authUrl = $this->client->createAuthUrl();
-			?>
-<form name="input" action="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>" method="post">
-	<table class="gadwp-settings-options">
-		<tr>
-			<td colspan="2" class="gadwp-settings-info">
-						<?php echo __( "Use this link to get your access code:", 'google-analytics-dashboard-for-wp' ) . ' <a href="' . $authUrl . '" id="gapi-access-code" target="_blank">' . __ ( "Get Access Code", 'google-analytics-dashboard-for-wp' ) . '</a>.'; ?>
-					</td>
-		</tr>
-		<tr>
-			<td class="gadwp-settings-title">
-				<label for="ga_dash_code" title="<?php _e("Use the red link to get your access code!",'google-analytics-dashboard-for-wp')?>"><?php echo _e( "Access Code:", 'google-analytics-dashboard-for-wp' ); ?></label>
-			</td>
-			<td>
-				<input type="text" id="ga_dash_code" name="ga_dash_code" value="" size="61" required="required" title="<?php _e("Use the red link to get your access code!",'google-analytics-dashboard-for-wp')?>">
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<hr>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<input type="submit" class="button button-secondary" name="ga_dash_authorize" value="<?php _e( "Save Access Code", 'google-analytics-dashboard-for-wp' ); ?>" />
-			</td>
-		</tr>
-	</table>
-</form>
-<?php
+			$data['authUrl'] = $this->client->createAuthUrl();
+			GADWP_Tools::load_view( 'admin/views/access-code.php', $data );
 		}
 
 		/**
@@ -314,7 +286,9 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			if ( $data->getRows() > 0 ) {
 				return $data;
 			} else {
-				return - 21;
+				$data->rows = array();
+				return $data;
+				// return - 21;
 			}
 		}
 
@@ -384,6 +358,9 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
+			if ( empty( $data->rows ) ) {
+				return - 21;
+			}
 			$gadwp_data = array( array( $dayorhour, $title ) );
 			if ( 'today' == $from || 'yesterday' == $from ) {
 				foreach ( $data->getRows() as $row ) {
@@ -436,7 +413,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			$serial = 'qr3_' . $this->get_serial( $projectId . $from . $filter );
 			$data = $this->handle_corereports( $projectId, $from, $to, $metrics, $options, $serial );
 			if ( is_numeric( $data ) ) {
-				if ( - 21 == $data ) {
+				if ( - 21 == $data or empty( $data->rows ) ) {
 					return array_fill( 0, 9, 0 );
 				} else {
 					return $data;
@@ -679,6 +656,9 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			$data = $this->handle_corereports( $projectId, $from, $to, $metrics, $options, $serial );
 			if ( is_numeric( $data ) ) {
 				return $data;
+			}
+			if ( empty( $data->rows ) ) {
+				return - 21;
 			}
 			$block = ( 'channelGrouping' == $query ) ? __( "Channels", 'google-analytics-dashboard-for-wp' ) : __( "Devices", 'google-analytics-dashboard-for-wp' );
 			$gadwp_data = array( array( '<div style="color:black; font-size:1.1em">' . $block . '</div><div style="color:darkblue; font-size:1.2em">' . (int) $data['totalsForAllResults'][$metrics] . '</div>', "" ) );

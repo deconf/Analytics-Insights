@@ -776,7 +776,7 @@ jQuery.fn.extend( {
 					"text-align" : "center"
 				} );
 				if ( response == -21 ) {
-					jQuery( target ).html( gadwpItemData.i18n[ 12 ] + ' (' + response + ')' );
+					jQuery( target ).html( gadwpItemData.i18n[ 12 ] );
 				} else {
 					jQuery( target ).html( gadwpItemData.i18n[ 13 ] + ' (' + response + ')' );
 				}
