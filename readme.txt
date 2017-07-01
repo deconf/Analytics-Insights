@@ -4,7 +4,7 @@ Donate link: https://deconf.com/donate/
 Tags: analytics,google analytics,google analytics dashboard,google analytics plugin,google analytics widget
 Requires at least: 3.5
 Tested up to: 4.8
-Stable tag: 5.0.1
+Stable tag: 5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,6 +45,7 @@ Installs the latest Google Analytics tracking code and allows full code customiz
 - Enhanced link attribution
 - Remarketing, demographics and interests tracking
 - Page Speed sampling rate control
+- User sampling rate control
 - Cross domain tracking
 - Exclude user roles from tracking
 - Accelerated Mobile Pages (AMP) support for Google Analytics
@@ -79,7 +80,25 @@ As an alternative to Google Analytics tracking code, you can use Google Tag Mana
 - Data Layer variables: authors, publication year, publication month, categories, tags, user type
 - Additional Data Layer variables for page scrolling depth
 - Exclude user roles from tracking
-- Accelerated Mobile Pages (AMP) support for Google Tag Manager 
+- Accelerated Mobile Pages (AMP) support for Google Tag Manager
+
+= Accelerated Mobile Pages (AMP) features =
+
+Out-of-the box features for AMP:
+
+- Google Tag Manager basic tracking
+- Google Analytics basic tracking 
+- Automatically removes <em>amp/</em> from Google Analytics tracking page URL
+- Scrolling depth tracking
+- Custom dimensions tracking
+- User sampling rate control
+ 
+Events tracking for AMP using annotated HTML elements (data-vars-ga-* attributes):
+
+- form submit tracking
+- file downloads tracking
+- affiliate links tracking
+- hashmarks, outbound links, telephones and e-mails tracking
 
 = Google Analytics Dashboard for WP on Multisite =
 
