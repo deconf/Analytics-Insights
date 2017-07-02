@@ -148,7 +148,7 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 		 * Styles & Scripts load
 		 */
 		private function load_scripts() {
-			if ( $this->gadwp->config->options['ga_event_tracking'] || $this->gadwp->config->options['ga_aff_tracking'] || $this->gadwp->config->options['ga_hash_tracking'] || $this->gadwp->config->options['ga_pagescrolldepth_tracking'] ) {
+			if ( $this->gadwp->config->options['ga_event_tracking'] || $this->gadwp->config->options['ga_aff_tracking'] || $this->gadwp->config->options['ga_hash_tracking'] || $this->gadwp->config->options['ga_pagescrolldepth_tracking'] || $this->gadwp->config->options['ga_formsubmit_tracking'] ) {
 
 				$root_domain = GADWP_Tools::get_root_domain();
 
@@ -443,6 +443,9 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics_AMP' ) ) {
 					),
 				);
 				/* @formatter:on */
+				if ( $this->gadwp->config->options['ga_event_bouncerate'] ) {
+					$this->config['triggers']['gadwpScrollPings']['extraUrlParams'] = array( 'ni' => (bool) $this->gadwp->config->options['ga_event_bouncerate'] );
+				}
 			}
 
 			// Set downloads, outbound links, affiliate links, hashmarks, email, telephone events
@@ -459,6 +462,9 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics_AMP' ) ) {
 					),
 				);
 				/* @formatter:on */
+				if ( $this->gadwp->config->options['ga_event_bouncerate'] ) {
+					$this->config['triggers']['gadwpEventTracking']['extraUrlParams'] = array( 'ni' => (bool) $this->gadwp->config->options['ga_event_bouncerate'] );
+				}
 			}
 			// Set form submit event
 			if ( $this->gadwp->config->options['ga_formsubmit_tracking'] ) {
@@ -474,6 +480,9 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics_AMP' ) ) {
 					),
 				);
 				/* @formatter:on */
+				if ( $this->gadwp->config->options['ga_event_bouncerate'] ) {
+					$this->config['triggers']['gadwpFormSubmit']['extraUrlParams'] = array( 'ni' => (bool) $this->gadwp->config->options['ga_event_bouncerate'] );
+				}
 			}
 
 			do_action( 'gadwp_analytics_amp_config', $this );
@@ -491,7 +500,7 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics_AMP' ) ) {
 				$json = json_encode( $this->config, JSON_PRETTY_PRINT );
 			}
 
-			$json = str_replace( array( '"&#91;', '&#93;"' ), array( '[', ']' ), $json ); //make verticalBoundaries a JavaScript array
+			$json = str_replace( array( '"&#91;', '&#93;"' ), array( '[', ']' ), $json ); // make verticalBoundaries a JavaScript array
 
 			$data = array( 'json' => $json );
 

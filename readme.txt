@@ -170,6 +170,10 @@ This is a major update, please read the [release notes](https://deconf.com/googl
 
 == Changelog ==
 
+= 5.1.0.1 =
+* New Features:
+	* non-interaction hit support for web analytics and AMP
+	
 = 5.1 =
 * Bug Fixes:
 	* if tracking is disabled it keeps it that way while upgrading from versions lower than 5.0
