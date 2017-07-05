@@ -244,9 +244,9 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 				} else {
 					GADWP_Tools::delete_cache( 'gapi_errors' );
 				}
-				GADWP_Tools::unset_cookie( 'default_metric' );
-				GADWP_Tools::unset_cookie( 'default_dimension' );
-				GADWP_Tools::unset_cookie( 'default_view' );
+				//GADWP_Tools::unset_cookie( 'default_metric' );
+				//GADWP_Tools::unset_cookie( 'default_dimension' );
+				//GADWP_Tools::unset_cookie( 'default_view' );
 			}
 
 			/* @formatter:off */

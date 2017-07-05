@@ -170,9 +170,13 @@ This is a major update, please read the [release notes](https://deconf.com/googl
 
 == Changelog ==
 
-= 5.1.0.1 =
+= 5.1.1 =
 * New Features:
-	* non-interaction hit support for web analytics and AMP
+	* adds non-interaction hit support for AMP
+* Enhancements:
+	* automatically annotates all AMP HTML elements with the appropriate data when DOM and libxml PHP extension are available
+	* renames the access code POST variable
+	* exclude scroll page depth events from bounce rate calculation
 	
 = 5.1 =
 * Bug Fixes:
