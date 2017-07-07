@@ -590,7 +590,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			$metrics = 'ga:' . $metric;
 			$options = "";
 			$title = __( "Countries", 'google-analytics-dashboard-for-wp' );
-			$serial = 'qr7_' . $this->get_serial( $projectId . $from . $filter );
+			$serial = 'qr7_' . $this->get_serial( $projectId . $from . $filter . $metric );
 			$dimensions = 'ga:country';
 			$local_filter = '';
 			if ( $this->gadwp->config->options['ga_target_geomap'] ) {

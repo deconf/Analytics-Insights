@@ -60,6 +60,7 @@ Google Analytics Dashboard for WP enables you to easily track events like:
 - Fragment identifiers
 - Telephone
 - Page Scrolling Depth
+- Custom event categories, actions and labels using annotated HTML elements
 
 With Google Analytics Dashboard for WP you can use custom dimensions to track:
 
@@ -84,21 +85,17 @@ As an alternative to Google Analytics tracking code, you can use Google Tag Mana
 
 = Accelerated Mobile Pages (AMP) features =
 
-Out-of-the box features for AMP:
-
 - Google Tag Manager basic tracking
 - Google Analytics basic tracking 
 - Automatically removes <em>amp/</em> from Google Analytics tracking page URL
 - Scrolling depth tracking
 - Custom dimensions tracking
 - User sampling rate control
- 
-Events tracking for AMP using annotated HTML elements (data-vars-ga-* attributes):
-
-- form submit tracking
-- file downloads tracking
-- affiliate links tracking
-- hashmarks, outbound links, telephones and e-mails tracking
+- Form submit tracking
+- File downloads tracking
+- Affiliate links tracking
+- Hashmarks, outbound links, telephones and e-mails tracking
+- Custom event categories, actions and labels using annotated HTML elements
 
 = Google Analytics Dashboard for WP on Multisite =
 
@@ -177,6 +174,8 @@ This is a major update, please read the [release notes](https://deconf.com/googl
 	* automatically annotates all AMP HTML elements with the appropriate data when DOM and libxml PHP extension are available
 	* renames the access code POST variable
 	* exclude scroll page depth events from bounce rate calculation
+* Bug Fixes:
+	* fixes the switch between metrics on Location report 	
 	
 = 5.1 =
 * Bug Fixes:
