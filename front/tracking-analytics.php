@@ -93,6 +93,17 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics_Base' ) ) {
 
 			return $custom_dimensions;
 		}
+
+		protected function is_event_tracking( $opt, $with_pagescrolldepth = true ) {
+			if ( $this->gadwp->config->options['ga_event_tracking'] || $this->gadwp->config->options['ga_aff_tracking'] || $this->gadwp->config->options['ga_hash_tracking'] || $this->gadwp->config->options['ga_formsubmit_tracking'] ) {
+				return true;
+			}
+
+			if ( $this->gadwp->config->options['ga_pagescrolldepth_tracking'] && $with_pagescrolldepth ) {
+				return true;
+			}
+			return false;
+		}
 	}
 }
 
@@ -148,7 +159,7 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 		 * Styles & Scripts load
 		 */
 		private function load_scripts() {
-			if ( $this->gadwp->config->options['ga_event_tracking'] || $this->gadwp->config->options['ga_aff_tracking'] || $this->gadwp->config->options['ga_hash_tracking'] || $this->gadwp->config->options['ga_pagescrolldepth_tracking'] || $this->gadwp->config->options['ga_formsubmit_tracking'] ) {
+			if ( $this->is_event_tracking( true ) ) {
 
 				$root_domain = GADWP_Tools::get_root_domain();
 
@@ -358,6 +369,113 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics_AMP' ) ) {
 
 			add_filter( 'amp_post_template_data', array( $this, 'load_scripts' ) );
 			add_action( 'amp_post_template_footer', array( $this, 'output' ) );
+			add_filter( 'the_content', array( $this, 'add_data_attributes' ) );
+		}
+
+		private function get_link_event_data( $link ) {
+			if ( empty( $link ) ) {
+				return false;
+			}
+			if ( $this->gadwp->config->options['ga_event_tracking'] ) {
+				// Add mailto data-vars
+				/*
+				 * developers:
+				 * on changes adjust the substr() length parameter
+				 */
+				if ( substr( $link, 0, 7 ) === "mailto:" ) {
+					return array( 'email', 'send', $link );
+				}
+
+				// Add telephone data-vars
+				/*
+				 * developers:
+				 * on changes adjust the substr() length parameter
+				 */
+				if ( substr( $link, 0, 4 ) === "tel:" ) {
+					return array( 'telephone', 'call', $link );
+				}
+
+				// Add download data-vars
+				if ( $this->gadwp->config->options['ga_event_downloads'] && preg_match( '/.*\.' . $this->gadwp->config->options['ga_event_downloads'] . '(\?.*)?$/i', $link, $matches ) ) {
+					return array( 'download', 'click', $link );
+				}
+			}
+			if ( $this->gadwp->config->options['ga_hash_tracking'] ) {
+				// Add hashmark data-vars
+				$root_domain = GADWP_Tools::get_root_domain();
+				if ( $root_domain && ( strpos( $link, $root_domain ) > - 1 || strpos( $link, '://' ) === false ) && strpos( $link, '#' ) > - 1 ) {
+					return array( 'hashmark', 'click', $link );
+				}
+			}
+			if ( $this->gadwp->config->options['ga_aff_tracking'] ) {
+				// Add affiliate data-vars
+				if ( strpos( $link, $this->gadwp->config->options['ga_event_affiliates'] ) > - 1 ) {
+					return array( 'affiliates', 'click', $link );
+				}
+			}
+			if ( $this->gadwp->config->options['ga_event_tracking'] ) {
+				// Add outbound data-vars
+				$root_domain = GADWP_Tools::get_root_domain();
+				if ( $root_domain && strpos( $link, $root_domain ) === false && strpos( $link, '://' ) > - 1 ) {
+					return array( 'outbound', 'click', $link );
+				}
+			}
+			return false;
+		}
+
+		public function add_data_attributes( $content ) {
+			if ( function_exists( 'is_amp_endpoint' ) && is_amp_endpoint() && $this->is_event_tracking( false ) ) {
+
+				$dom = GADWP_Tools::get_dom_from_content( $content );
+
+				if ( $dom ) {
+
+					$links = $dom->getElementsByTagName( 'a' );
+
+					foreach ( $links as $item ) {
+
+						$data_attributes = $this->get_link_event_data( $item->getAttribute( 'href' ) );
+
+						if ( $data_attributes ) {
+							if ( ! $item->hasAttribute( 'data-vars-ga-category' ) ) {
+								$item->setAttribute( 'data-vars-ga-category', $data_attributes[0] );
+							}
+							if ( ! $item->hasAttribute( 'data-vars-ga-action' ) ) {
+								$item->setAttribute( 'data-vars-ga-action', $data_attributes[1] );
+							}
+							if ( ! $item->hasAttribute( 'data-vars-ga-label' ) ) {
+								$item->setAttribute( 'data-vars-ga-label', $data_attributes[2] );
+							}
+						}
+					}
+
+					if ( $this->gadwp->config->options['ga_formsubmit_tracking'] ) {
+						$form_submits = $dom->getElementsByTagName( 'input' );
+						foreach ( $form_submits as $item ) {
+							if ( $item->getAttribute( 'type' ) == 'submit' ) {
+								if ( ! $item->hasAttribute( 'data-vars-ga-category' ) ) {
+									$item->setAttribute( 'data-vars-ga-category', 'form' );
+								}
+								if ( ! $item->hasAttribute( 'data-vars-ga-action' ) ) {
+									$item->setAttribute( 'data-vars-ga-action', 'submit' );
+								}
+								if ( ! $item->hasAttribute( 'data-vars-ga-label' ) ) {
+									if ( $item->getAttribute( 'value' ) ) {
+										$label = $item->getAttribute( 'value' );
+									}
+									if ( $item->getAttribute( 'name' ) ) {
+										$label = $item->getAttribute( 'name' );
+									}
+									$item->setAttribute( 'data-vars-ga-label', $label );
+								}
+							}
+						}
+					}
+					return GADWP_Tools::get_content_from_dom( $dom );
+				}
+			}
+
+			return $content;
 		}
 
 		/**
@@ -443,17 +561,15 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics_AMP' ) ) {
 					),
 				);
 				/* @formatter:on */
-				if ( $this->gadwp->config->options['ga_event_bouncerate'] ) {
-					$this->config['triggers']['gadwpScrollPings']['extraUrlParams'] = array( 'ni' => (bool) $this->gadwp->config->options['ga_event_bouncerate'] );
-				}
+				$this->config['triggers']['gadwpScrollPings']['extraUrlParams'] = array( 'ni' => true );
 			}
 
-			// Set downloads, outbound links, affiliate links, hashmarks, email, telephone events
-			if ( $this->gadwp->config->options['ga_event_tracking'] ) {
+			if ( $this->is_event_tracking( false ) ) {
+				// Set downloads, outbound links, affiliate links, hashmarks, e-mails, telephones, form submits events
 				/* @formatter:off */
 				$this->config['triggers']['gadwpEventTracking'] = array (
 					'on' => 'click',
-					'selector' => 'a',
+					'selector' => '[data-vars-ga-category][data-vars-ga-action][data-vars-ga-label]',
 					'request' => 'event',
 					'vars' => array(
 						'eventCategory' => '${gaCategory}',
@@ -466,25 +582,6 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics_AMP' ) ) {
 					$this->config['triggers']['gadwpEventTracking']['extraUrlParams'] = array( 'ni' => (bool) $this->gadwp->config->options['ga_event_bouncerate'] );
 				}
 			}
-			// Set form submit event
-			if ( $this->gadwp->config->options['ga_formsubmit_tracking'] ) {
-				/* @formatter:off */
-				$this->config['triggers']['gadwpFormSubmit'] = array (
-					'on' => 'click',
-					'selector' => 'input[type="submit"]',
-					'request' => 'event',
-					'vars' => array(
-						'eventCategory' => '${gaCategory}',
-						'eventAction' => '${gaAction}',
-						'eventLabel' => '${gaLabel}',
-					),
-				);
-				/* @formatter:on */
-				if ( $this->gadwp->config->options['ga_event_bouncerate'] ) {
-					$this->config['triggers']['gadwpFormSubmit']['extraUrlParams'] = array( 'ni' => (bool) $this->gadwp->config->options['ga_event_bouncerate'] );
-				}
-			}
-
 			do_action( 'gadwp_analytics_amp_config', $this );
 		}
 

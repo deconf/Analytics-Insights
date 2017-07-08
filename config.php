@@ -91,7 +91,7 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 								'tm_pagescrolldepth_tracking',
 								'ga_speed_samplerate',
 								'ga_user_samplerate',
-						);
+			);
 			foreach ( $numerics as $key ) {
 				if ( isset( $options[$key] ) ) {
 					$options[$key] = (int) $options[$key];
@@ -114,7 +114,7 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 							'ga_event_affiliates',
 							'ecommerce_mode',
 							'ga_dash_tracking_type',
-					);
+			);
 			foreach ( $texts as $key ) {
 				if ( isset( $options[$key] ) ) {
 					$options[$key] = trim (sanitize_text_field( $options[$key] ));
@@ -244,9 +244,9 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 				} else {
 					GADWP_Tools::delete_cache( 'gapi_errors' );
 				}
-				GADWP_Tools::unset_cookie( 'default_metric' );
-				GADWP_Tools::unset_cookie( 'default_dimension' );
-				GADWP_Tools::unset_cookie( 'default_view' );
+				// GADWP_Tools::unset_cookie( 'default_metric' );
+				// GADWP_Tools::unset_cookie( 'default_dimension' );
+				// GADWP_Tools::unset_cookie( 'default_view' );
 			}
 
 			/* @formatter:off */
@@ -282,7 +282,7 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 								'ga_dash_excludesa', //v5.0
 								'ga_pagescrolldepth_tracking', //v5.0
 								'tm_pagescrolldepth_tracking', //v5.0
-						);
+			);
 			foreach ( $zeros as $key ) {
 				if ( ! isset( $this->options[$key] ) ) {
 					$this->options[$key] = 0;

@@ -288,7 +288,6 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			} else {
 				$data->rows = array();
 				return $data;
-				// return - 21;
 			}
 		}
 
@@ -359,6 +358,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				return $data;
 			}
 			if ( empty( $data->rows ) ) {
+				// unable to render it as an Area Chart, returns a numeric value to be handled by reportsx.js
 				return - 21;
 			}
 			$gadwp_data = array( array( $dayorhour, $title ) );
@@ -427,7 +427,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			$gadwp_data[3] = isset( $gadwp_data[3] ) ? number_format_i18n( $gadwp_data[3], 2 ) . '%' : '0%';
 			$gadwp_data[4] = isset( $gadwp_data[4] ) ? number_format_i18n( $gadwp_data[4] ) : 0;
 			$gadwp_data[5] = isset( $gadwp_data[5] ) ? number_format_i18n( $gadwp_data[5], 2 ) : 0;
-			$gadwp_data[6] = isset( $gadwp_data[5] ) ? gmdate( "H:i:s", $gadwp_data[6] ) : '00:00:00';
+			$gadwp_data[6] = isset( $gadwp_data[6] ) ? gmdate( "H:i:s", $gadwp_data[6] ) : '00:00:00';
 			$gadwp_data[7] = isset( $gadwp_data[7] ) ? number_format_i18n( $gadwp_data[7], 2 ) : 0;
 			if ( $filter ) {
 				$gadwp_data[8] = isset( $gadwp_data[8] ) ? number_format_i18n( $gadwp_data[8], 2 ) . '%' : '0%';
@@ -439,7 +439,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 		}
 
 		/**
-		 * Analytics data for Org Charts & Table Charts (content pages)
+		 * Analytics data for Table Charts (content pages)
 		 *
 		 * @param
 		 *            $projectId
@@ -501,7 +501,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 		}
 
 		/**
-		 * Analytics data for Org Charts & Table Charts (referrers)
+		 * Analytics data for Table Charts (referrers)
 		 *
 		 * @param
 		 *            $projectId
@@ -535,7 +535,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 		}
 
 		/**
-		 * Analytics data for Org Charts & Table Charts (searches)
+		 * Analytics data for Table Charts (searches)
 		 *
 		 * @param
 		 *            $projectId
@@ -570,7 +570,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 		}
 
 		/**
-		 * Analytics data for Org Charts & Table Charts (location reports)
+		 * Analytics data for Table Charts (location reports)
 		 *
 		 * @param
 		 *            $projectId
@@ -586,7 +586,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			$metrics = 'ga:' . $metric;
 			$options = "";
 			$title = __( "Countries", 'google-analytics-dashboard-for-wp' );
-			$serial = 'qr7_' . $this->get_serial( $projectId . $from . $filter );
+			$serial = 'qr7_' . $this->get_serial( $projectId . $from . $filter . $metric );
 			$dimensions = 'ga:country';
 			$local_filter = '';
 			if ( $this->gadwp->config->options['ga_target_geomap'] ) {
@@ -654,6 +654,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				return $data;
 			}
 			if ( empty( $data->rows ) ) {
+				// unable to render as an Org Chart, returns a numeric value to be handled by reportsx.js
 				return - 21;
 			}
 			$block = ( 'channelGrouping' == $query ) ? __( "Channels", 'google-analytics-dashboard-for-wp' ) : __( "Devices", 'google-analytics-dashboard-for-wp' );

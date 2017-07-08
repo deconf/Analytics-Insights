@@ -79,7 +79,7 @@ jQuery( window ).on( 'load', function () {
 			jQuery( 'a[href^="http"]' ).filter( function () {
 				var reg = new RegExp( '.*\\.(' + gadwpUAEventsData.options[ 'event_downloads' ] + ')(\\?.*)?$' );
 				if ( !this.href.match( reg ) ) {
-					if ( this.href.indexOf( gadwpUAEventsData.options[ 'root_domain' ] ) == -1 )
+					if ( this.href.indexOf( gadwpUAEventsData.options[ 'root_domain' ] ) == -1 && this.href.indexOf( '://' ) > -1 )
 						return this.href;
 				}
 			} ).click( function ( e ) {
@@ -192,7 +192,7 @@ jQuery( window ).on( 'load', function () {
 			userTiming : false,
 			pixelDepth : false,
 			gtmOverride : true,
-			nonInteraction : gadwpUAEventsData.options[ 'event_bouncerate' ],
+			nonInteraction : true,
 		} );
 	}
 
