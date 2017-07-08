@@ -413,11 +413,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			$serial = 'qr3_' . $this->get_serial( $projectId . $from . $filter );
 			$data = $this->handle_corereports( $projectId, $from, $to, $metrics, $options, $serial );
 			if ( is_numeric( $data ) ) {
-				if ( - 21 == $data or empty( $data->rows ) ) {
-					return array_fill( 0, 9, 0 );
-				} else {
-					return $data;
-				}
+				return $data;
 			}
 			$gadwp_data = array();
 			foreach ( $data->getRows() as $row ) {
@@ -425,18 +421,18 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			}
 
 			// i18n support
-			$gadwp_data[0] = number_format_i18n( $gadwp_data[0] );
-			$gadwp_data[1] = number_format_i18n( $gadwp_data[1] );
-			$gadwp_data[2] = number_format_i18n( $gadwp_data[2] );
-			$gadwp_data[3] = number_format_i18n( $gadwp_data[3], 2 ) . '%';
-			$gadwp_data[4] = number_format_i18n( $gadwp_data[4] );
-			$gadwp_data[5] = number_format_i18n( $gadwp_data[5], 2 );
-			$gadwp_data[6] = gmdate( "H:i:s", $gadwp_data[6] );
-			$gadwp_data[7] = number_format_i18n( $gadwp_data[7], 2 );
+			$gadwp_data[0] = isset( $gadwp_data[0] ) ? number_format_i18n( $gadwp_data[0] ) : 0;
+			$gadwp_data[1] = isset( $gadwp_data[1] ) ? number_format_i18n( $gadwp_data[1] ) : 0;
+			$gadwp_data[2] = isset( $gadwp_data[2] ) ? number_format_i18n( $gadwp_data[2] ) : 0;
+			$gadwp_data[3] = isset( $gadwp_data[3] ) ? number_format_i18n( $gadwp_data[3], 2 ) . '%' : '0%';
+			$gadwp_data[4] = isset( $gadwp_data[4] ) ? number_format_i18n( $gadwp_data[4] ) : 0;
+			$gadwp_data[5] = isset( $gadwp_data[5] ) ? number_format_i18n( $gadwp_data[5], 2 ) : 0;
+			$gadwp_data[6] = isset( $gadwp_data[5] ) ? gmdate( "H:i:s", $gadwp_data[6] ) : '00:00:00';
+			$gadwp_data[7] = isset( $gadwp_data[7] ) ? number_format_i18n( $gadwp_data[7], 2 ) : 0;
 			if ( $filter ) {
-				$gadwp_data[8] = number_format_i18n( $gadwp_data[8], 2 ) . '%';
+				$gadwp_data[8] = isset( $gadwp_data[8] ) ? number_format_i18n( $gadwp_data[8], 2 ) . '%' : '0%';
 			} else {
-				$gadwp_data[8] = gmdate( "H:i:s", $gadwp_data[8] );
+				$gadwp_data[8] = isset( $gadwp_data[8] ) ? gmdate( "H:i:s", $gadwp_data[8] ) : '00:00:00';
 			}
 
 			return $gadwp_data;
