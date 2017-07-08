@@ -175,7 +175,8 @@ This is a major update, please read the [release notes](https://deconf.com/googl
 	* renames the access code POST variable
 	* exclude scroll page depth events from bounce rate calculation
 * Bug Fixes:
-	* fixes the switch between metrics on Location report 	
+	* fixes the switch between metrics on Location report
+	* fixes PHP notices on empty reports	
 	
 = 5.1 =
 * Bug Fixes:
