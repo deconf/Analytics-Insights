@@ -742,7 +742,7 @@ final class GADWP_Settings {
 												<div class="gadwp-settings-switchoo-switch"></div>
 											</label>
 										</div>
-										<div class="switch-desc"><?php echo " ".__("exclude events from bounce-rate calculation", 'google-analytics-dashboard-for-wp' );?></div>
+										<div class="switch-desc"><?php echo " ".__("exclude events from bounce-rate and time on page calculation", 'google-analytics-dashboard-for-wp' );?></div>
 									</td>
 								</tr>
 								<tr>
@@ -1081,10 +1081,10 @@ final class GADWP_Settings {
 			$gadwp->gapi_controller = new GADWP_GAPI_Controller();
 		}
 		echo '<script type="text/javascript">jQuery("#gapi-warning").hide()</script>';
-		if ( isset( $_POST['ga_dash_code'] ) ) {
-			if ( 1 == ! stripos( 'x' . $_POST['ga_dash_code'], 'UA-', 1 ) ) {
+		if ( isset( $_POST['gadwp_access_code'] ) ) {
+			if ( 1 == ! stripos( 'x' . $_POST['gadwp_access_code'], 'UA-', 1 ) ) {
 				try {
-					$gadwp->gapi_controller->client->authenticate( $_POST['ga_dash_code'] );
+					$gadwp->gapi_controller->client->authenticate( $_POST['gadwp_access_code'] );
 					$gadwp->config->options['ga_dash_token'] = $gadwp->gapi_controller->client->getAccessToken();
 					$gadwp->config->options['automatic_updates_minorversion'] = 1;
 					$gadwp->config->set_plugin_options();
@@ -1368,10 +1368,10 @@ final class GADWP_Settings {
 		}
 
 		echo '<script type="text/javascript">jQuery("#gapi-warning").hide()</script>';
-		if ( isset( $_POST['ga_dash_code'] ) ) {
-			if ( 1 == ! stripos( 'x' . $_POST['ga_dash_code'], 'UA-', 1 ) ) {
+		if ( isset( $_POST['gadwp_access_code'] ) ) {
+			if ( 1 == ! stripos( 'x' . $_POST['gadwp_access_code'], 'UA-', 1 ) ) {
 				try {
-					$gadwp->gapi_controller->client->authenticate( $_POST['ga_dash_code'] );
+					$gadwp->gapi_controller->client->authenticate( $_POST['gadwp_access_code'] );
 					$gadwp->config->options['ga_dash_token'] = $gadwp->gapi_controller->client->getAccessToken();
 					$gadwp->config->options['automatic_updates_minorversion'] = 1;
 					$gadwp->config->set_plugin_options( true );
