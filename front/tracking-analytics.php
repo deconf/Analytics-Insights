@@ -396,7 +396,7 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics_AMP' ) ) {
 				}
 
 				// Add download data-vars
-				if ( $this->gadwp->config->options['ga_event_downloads'] && preg_match( '/.*\.' . $this->gadwp->config->options['ga_event_downloads'] . '(\?.*)?$/i', $link, $matches ) ) {
+				if ( $this->gadwp->config->options['ga_event_downloads'] && preg_match( '/.*\.(' . $this->gadwp->config->options['ga_event_downloads'] . ')(\?.*)?$/i', $link, $matches ) ) {
 					return array( 'download', 'click', $link );
 				}
 			}
