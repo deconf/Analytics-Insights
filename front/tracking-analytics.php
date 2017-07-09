@@ -369,7 +369,7 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics_AMP' ) ) {
 
 			add_filter( 'amp_post_template_data', array( $this, 'load_scripts' ) );
 			add_action( 'amp_post_template_footer', array( $this, 'output' ) );
-			add_filter( 'the_content', array( $this, 'add_data_attributes' ) );
+			add_filter( 'the_content', array( $this, 'add_data_attributes' ), 999, 1 );
 		}
 
 		private function get_link_event_data( $link ) {
@@ -377,20 +377,12 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics_AMP' ) ) {
 				return false;
 			}
 			if ( $this->gadwp->config->options['ga_event_tracking'] ) {
-				// Add mailto data-vars
-				/*
-				 * developers:
-				 * on changes adjust the substr() length parameter
-				 */
+				// on changes adjust the substr() length parameter
 				if ( substr( $link, 0, 7 ) === "mailto:" ) {
 					return array( 'email', 'send', $link );
 				}
 
-				// Add telephone data-vars
-				/*
-				 * developers:
-				 * on changes adjust the substr() length parameter
-				 */
+				// on changes adjust the substr() length parameter
 				if ( substr( $link, 0, 4 ) === "tel:" ) {
 					return array( 'telephone', 'call', $link );
 				}
