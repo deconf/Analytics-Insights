@@ -91,6 +91,7 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 								'tm_pagescrolldepth_tracking',
 								'ga_speed_samplerate',
 								'ga_user_samplerate',
+								'ga_event_precision',
 			);
 			foreach ( $numerics as $key ) {
 				if ( isset( $options[$key] ) ) {
@@ -282,6 +283,7 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 								'ga_dash_excludesa', //v5.0
 								'ga_pagescrolldepth_tracking', //v5.0
 								'tm_pagescrolldepth_tracking', //v5.0
+								'ga_event_precision', //v5.1.1.1
 			);
 			foreach ( $zeros as $key ) {
 				if ( ! isset( $this->options[$key] ) ) {

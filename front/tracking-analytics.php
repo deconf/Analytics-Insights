@@ -180,6 +180,7 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 						'hash_tracking' =>  $this->gadwp->config->options ['ga_hash_tracking'],
 						'root_domain' => $root_domain,
 						'event_timeout' => apply_filters( 'gadwp_analyticsevents_timeout', 100 ),
+						'event_precision' => $this->gadwp->config->options['ga_event_precision'],
 						'event_formsubmit' =>  $this->gadwp->config->options ['ga_formsubmit_tracking'],
 						'ga_pagescrolldepth_tracking' => $this->gadwp->config->options['ga_pagescrolldepth_tracking'],
 					),

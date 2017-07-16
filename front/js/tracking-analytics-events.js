@@ -13,11 +13,12 @@ var gadwpRedirectCalled = false;
 var gadwpDefaultPrevented = false;
 
 function gadwpRedirect () {
+	alert('called');
 	if ( gadwpRedirectCalled ) {
 		return;
 	}
 	gadwpRedirectCalled = true;
-	if ( !gadwpDefaultPrevented ) {
+	if ( gadwpDefaultPrevented == false ) {
 		document.location.href = gadwpRedirectLink;
 	} else {
 		gadwpDefaultPrevented = false;
@@ -88,24 +89,36 @@ jQuery( window ).on( 'load', function () {
 				var category = this.getAttribute( 'data-vars-ga-category' ) || 'outbound';
 				var action = this.getAttribute( 'data-vars-ga-action' ) || 'click';
 				var label = this.getAttribute( 'data-vars-ga-label' ) || this.href;
-				if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
-					ga( 'send', 'event', category, action, label, {
-						'nonInteraction' : 1,
-						'hitCallback' : gadwpRedirect
-					} );
-				} else {
-					ga( 'send', 'event', category, action, label, {
-						'hitCallback' : gadwpRedirect
-					} );
-				}
-				if ( this.target != '_blank' ) {
+				if ( this.target != '_blank' && gadwpUAEventsData.options[ 'event_precision' ] ) {
 					if ( e.isDefaultPrevented() ) {
 						gadwpDefaultPrevented = true;
+						gadwpRedirectCalled = false;						
 					}
+				} else {
+					gadwpRedirectCalled = true;
+					gadwpDefaultPrevented = false;
+				}
+				if ( this.target != '_blank' && gadwpUAEventsData.options[ 'event_precision' ] ) {
+					if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
+						ga( 'send', 'event', category, action, label, {
+							'nonInteraction' : 1,
+							'hitCallback' : gadwpRedirect
+						} );
+					} else {
+						ga( 'send', 'event', category, action, label, {
+							'hitCallback' : gadwpRedirect
+						} );
+					}					
 					setTimeout( gadwpRedirect, gadwpUAEventsData.options[ 'event_timeout' ] );
 					return false;
 				} else {
-					gadwpRedirectCalled = true;
+					if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
+						ga( 'send', 'event', category, action, label, {
+							'nonInteraction' : 1
+						} );
+					} else {
+						ga( 'send', 'event', category, action, label );
+					}					
 				}
 			} );
 		}
@@ -125,24 +138,36 @@ jQuery( window ).on( 'load', function () {
 			var category = this.getAttribute( 'data-vars-ga-category' ) || 'affiliates';
 			var action = this.getAttribute( 'data-vars-ga-action' ) || 'click';
 			var label = this.getAttribute( 'data-vars-ga-label' ) || this.href;
-			if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
-				ga( 'send', 'event', category, action, label, {
-					'nonInteraction' : 1,
-					'hitCallback' : gadwpRedirect
-				} );
-			} else {
-				ga( 'send', 'event', category, action, label, {
-					'hitCallback' : gadwpRedirect
-				} );
-			}
-			if ( this.target != '_blank' ) {
+			if ( this.target != '_blank' && gadwpUAEventsData.options[ 'event_precision' ] ) {
 				if ( e.isDefaultPrevented() ) {
 					gadwpDefaultPrevented = true;
+					gadwpRedirectCalled = false;
 				}
+			} else {
+				gadwpRedirectCalled = true;
+				gadwpDefaultPrevented = false;
+			}			
+			if ( this.target != '_blank' && gadwpUAEventsData.options[ 'event_precision' ] ) {
+				if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
+					ga( 'send', 'event', category, action, label, {
+						'nonInteraction' : 1,
+						'hitCallback' : gadwpRedirect
+					} );
+				} else {
+					ga( 'send', 'event', category, action, label, {
+						'hitCallback' : gadwpRedirect
+					} );
+				}				
 				setTimeout( gadwpRedirect, gadwpUAEventsData.options[ 'event_timeout' ] );
 				return false;
 			} else {
-				gadwpRedirectCalled = true;
+				if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
+					ga( 'send', 'event', category, action, label, {
+						'nonInteraction' : 1
+					} );
+				} else {
+					ga( 'send', 'event', category, action, label );
+				}					
 			}
 		} );
 	}
