@@ -13,7 +13,6 @@ var gadwpRedirectCalled = false;
 var gadwpDefaultPrevented = false;
 
 function gadwpRedirect () {
-	alert('called');
 	if ( gadwpRedirectCalled ) {
 		return;
 	}
