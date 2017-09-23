@@ -74,6 +74,7 @@ class GADWP_Install {
 			$options['amp_containerid'] = '';
 			$options['amp_tracking_tagmanager'] = 0;
 			$options['amp_tracking_analytics'] = 0;
+			$options['amp_tracking_clientidapi'] = 0;
 			$options['trackingcode_infooter'] = 0;
 			$options['trackingevents_infooter'] = 0;
 			$options['ecommerce_mode'] = 'disabled';
@@ -143,6 +144,7 @@ class GADWP_Install {
 			$options['amp_containerid'] = '';
 			$options['amp_tracking_tagmanager'] = 0;
 			$options['amp_tracking_analytics'] = 0;
+			$options['amp_tracking_clientidapi'] = 0;
 			$options['trackingcode_infooter'] = 0;
 			$options['trackingevents_infooter'] = 0;
 			$options['ecommerce_mode'] = 'disabled';

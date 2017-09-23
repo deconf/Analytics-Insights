@@ -34,6 +34,7 @@ final class GADWP_Settings {
 				$options['ga_pagescrolldepth_tracking'] = 0;
 				$options['tm_pagescrolldepth_tracking'] = 0;
 				$options['amp_tracking_analytics'] = 0;
+				$options['amp_tracking_clientidapi'] = 0;
 				$options['amp_tracking_tagmanager'] = 0;
 				$options['optimize_pagehiding'] = 0;
 				$options['optimize_tracking'] = 0;
@@ -842,6 +843,18 @@ final class GADWP_Settings {
 											</label>
 										</div>
 										<div class="switch-desc"><?php echo " ".__("enable tracking for Accelerated Mobile Pages (AMP)", 'google-analytics-dashboard-for-wp' );?></div>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2" class="gadwp-settings-title">
+										<div class="button-primary gadwp-settings-switchoo">
+											<input type="checkbox" name="options[amp_tracking_clientidapi]" value="1" class="gadwp-settings-switchoo-checkbox" id="amp_tracking_clientidapi" <?php checked( $options['amp_tracking_clientidapi'], 1 ); ?>>
+											<label class="gadwp-settings-switchoo-label" for="amp_tracking_clientidapi">
+												<div class="gadwp-settings-switchoo-inner"></div>
+												<div class="gadwp-settings-switchoo-switch"></div>
+											</label>
+										</div>
+										<div class="switch-desc"><?php echo " ".__("enable Google AMP Client Id API", 'google-analytics-dashboard-for-wp' );?></div>
 									</td>
 								</tr>
 								<tr>
