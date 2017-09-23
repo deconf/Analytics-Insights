@@ -170,6 +170,7 @@ This is a major update, please read the [release notes](https://deconf.com/googl
 = 5.1.1.2 =
 * Compatibility:
 	* tested up to 4.8.2
+	* changes to align with h1 security program policy and requirement
 
 = 5.1.1.1 =
 * Enhancements:
