@@ -110,7 +110,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			}
 			if ( isset( $errors[1][0]['reason'] ) && ( 'userRateLimitExceeded' == $errors[1][0]['reason'] || 'quotaExceeded' == $errors[1][0]['reason'] ) ) {
 				if ( $this->gadwp->config->options['api_backoff'] <= 5 ) {
-					usleep( rand( 100000, 1500000 ) );
+					usleep( rand( 1000000, 4500000 ) );
 					$this->gadwp->config->options['api_backoff'] = $this->gadwp->config->options['api_backoff'] + 1;
 					$this->gadwp->config->set_plugin_options();
 					return false;
@@ -118,7 +118,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 					return true;
 				}
 			}
-			if ( 400 == $errors[0] || 401 == $errors[0] || 403 == $errors[0] ) {
+			if ( 500 == $errors[0] || 503 == $errors[0] || 400 == $errors[0] || 401 == $errors[0] || 403 == $errors[0] ) {
 				return true;
 			}
 			return false;
