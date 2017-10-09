@@ -276,6 +276,13 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 				$this->add( 'require', $fields );
 			}
 
+			if ( $this->gadwp->config->options['ga_force_ssl'] ) {
+				$fields = array();
+				$fields['option'] = 'forceSSL';
+				$fields['value'] = 'true';
+				$this->add( 'set', $fields );
+			}
+
 			$custom_dimensions = $this->bulid_custom_dimensions();
 			if ( ! empty( $custom_dimensions ) ) {
 				foreach ( $custom_dimensions as $index => $value ) {

@@ -281,10 +281,10 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $this->error_timeout );
 				return $e->getCode();
 			}
-			
+
 			$this->gadwp->config->options['api_backoff'] = 0;
-			$this->gadwp->config->set_plugin_options();			
-			
+			$this->gadwp->config->set_plugin_options();
+
 			if ( $data->getRows() > 0 ) {
 				return $data;
 			} else {
@@ -804,10 +804,10 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				$gadwp_data->rows[$i] = array_map( 'esc_html', $row );
 				$i++;
 			}
-			
+
 			$this->gadwp->config->options['api_backoff'] = 0;
-			$this->gadwp->config->set_plugin_options();			
-			
+			$this->gadwp->config->set_plugin_options();
+
 			return array( $gadwp_data );
 		}
 

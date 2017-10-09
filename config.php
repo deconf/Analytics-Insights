@@ -286,6 +286,7 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 								'ga_pagescrolldepth_tracking', //v5.0
 								'tm_pagescrolldepth_tracking', //v5.0
 								'ga_event_precision', //v5.1.1.1
+								'ga_force_ssl', //v5.1.2
 			);
 			foreach ( $zeros as $key ) {
 				if ( ! isset( $this->options[$key] ) ) {

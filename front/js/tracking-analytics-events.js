@@ -60,10 +60,10 @@ jQuery( window ).on( 'load', function () {
 
 		// Track telephone calls
 		jQuery( 'a[href^="tel"]' ).click( function ( e ) {
+			var category = this.getAttribute( 'data-vars-ga-category' ) || 'telephone';
+			var action = this.getAttribute( 'data-vars-ga-action' ) || 'call';
+			var label = this.getAttribute( 'data-vars-ga-label' ) || this.href;
 			if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
-				var category = this.getAttribute( 'data-vars-ga-category' ) || 'telephone';
-				var action = this.getAttribute( 'data-vars-ga-action' ) || 'call';
-				var label = this.getAttribute( 'data-vars-ga-label' ) || this.href;
 				ga( 'send', 'event', category, action, label, {
 					'nonInteraction' : 1
 				} );
