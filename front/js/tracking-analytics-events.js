@@ -29,8 +29,10 @@ jQuery( window ).on( 'load', function () {
 	if ( gadwpUAEventsData.options[ 'event_tracking' ] ) {
 		// Track Downloads
 		jQuery( 'a' ).filter( function () {
-			var reg = new RegExp( '.*\\.(' + gadwpUAEventsData.options[ 'event_downloads' ] + ')(\\?.*)?$' );
-			return this.href.match( reg );
+            if (typeof this.href === 'string') {
+                var reg = new RegExp( '.*\\.(' + gadwpUAEventsData.options[ 'event_downloads' ] + ')(\\?.*)?$' );
+                return this.href.match( reg );
+            }
 		} ).click( function ( e ) {
 			var category = this.getAttribute( 'data-vars-ga-category' ) || 'download';
 			var action = this.getAttribute( 'data-vars-ga-action' ) || 'click';
