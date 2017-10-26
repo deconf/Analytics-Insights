@@ -47,7 +47,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				}
 			}
 			$this->client = new Deconf_Client( $config );
-			$this->client->setScopes( array( 'https://www.googleapis.com/auth/analytics.readonly', 'https://www.googleapis.com/auth/analytics.edit' ) );
+			$this->client->setScopes( array( 'https://www.googleapis.com/auth/analytics.readonly' ) );
 			$this->client->setAccessType( 'offline' );
 			$this->client->setApplicationName( 'Google Analytics Dashboard' );
 			$this->client->setRedirectUri( 'urn:ietf:wg:oauth:2.0:oob' );
