@@ -169,7 +169,7 @@ This is a major update, please read the [release notes](https://deconf.com/googl
 
 = 5.1.2.1 =
 * Bug Fixes:
-	* fixes an GAPI access issue
+	* fixes multiple GAPI issues
 	
 = 5.1.2 =
 * Enhancements: 
