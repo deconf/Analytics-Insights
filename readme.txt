@@ -167,6 +167,10 @@ This is a major update, please read the [release notes](https://deconf.com/googl
 
 == Changelog ==
 
+= 5.2 =
+* Enhancements: 
+	* introduces a new auth method with endpoints
+	
 = 5.1.2.1 =
 * Bug Fixes:
 	* fixes multiple GAPI issues

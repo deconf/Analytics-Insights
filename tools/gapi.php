@@ -23,7 +23,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 
 		public $error_timeout;
 
-		private $managequota;
+		public $managequota;
 
 		private $gadwp;
 
@@ -58,8 +58,12 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				$this->client->setClientId( $this->gadwp->config->options['ga_dash_clientid'] );
 				$this->client->setClientSecret( $this->gadwp->config->options['ga_dash_clientsecret'] );
 			} else {
-				$this->client->setClientId( $this->access[0] );
-				$this->client->setClientSecret( $this->access[1] );
+				if ( $this->gadwp->config->options['with_endpoint'] ) {
+					$this->client->setClientId( '65556128781-pgfs40ihk5f4peufgknqlgba3q4p3hl9.apps.googleusercontent.com' );
+				} else {
+					$this->client->setClientId( $this->access[0] );
+					$this->client->setClientSecret( $this->access[1] );
+				}
 			}
 			$this->service = new Deconf_Service_Analytics( $this->client );
 			if ( $this->gadwp->config->options['ga_dash_token'] ) {
@@ -67,15 +71,18 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				if ( $token ) {
 					try {
 						$this->client->setAccessToken( $token );
-						$gadwp->config->options['ga_dash_token'] = $this->client->getAccessToken();
+						if ( $this->gadwp->config->options['with_endpoint'] && ! $this->gadwp->config->options['ga_dash_userapi'] ) {
+							$this->endpoint_refresh_token( $token );
+						}
+						$this->gadwp->config->options['ga_dash_token'] = $this->client->getAccessToken();
 					} catch ( Deconf_IO_Exception $e ) {
-						GADWP_Tools::set_cache( 'ga_dash_lasterror', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $this->error_timeout );
+						GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $this->error_timeout );
 					} catch ( Deconf_Service_Exception $e ) {
-						GADWP_Tools::set_cache( 'ga_dash_lasterror', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( "(" . $e->getCode() . ") " . $e->getMessage() ), $this->error_timeout );
+						GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( "(" . $e->getCode() . ") " . $e->getMessage() ), $this->error_timeout );
 						GADWP_Tools::set_cache( 'ga_dash_gapi_errors', array( $e->getCode(), (array) $e->getErrors() ), $this->error_timeout );
 						$this->reset_token();
 					} catch ( Exception $e ) {
-						GADWP_Tools::set_cache( 'ga_dash_lasterror', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $this->error_timeout );
+						GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $this->error_timeout );
 						$this->reset_token();
 					}
 					if ( is_multisite() && $this->gadwp->config->options['ga_dash_network'] ) {
@@ -92,6 +99,63 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			$midnight = $midnight + 8 * 3600; // UTC 8 AM
 			$this->error_timeout = $midnight - time();
 			return;
+		}
+
+		private function endpoint_refresh_token( $token ) {
+			if ( $this->client->isAccessTokenExpired() ) {
+				$oldtoken = json_encode( $token );
+				$site = get_site_url();
+				$response = wp_remote_get( 'https://gadwp.deconf.com/?accesstoken=' . $oldtoken . '&managequota=' . $this->managequota . '&url=' . $site, array( 'timeout' => 120, 'httpversion' => '1.1' ) );
+				if ( ! is_wp_error( $response ) ) {
+					$status = wp_remote_retrieve_response_code( $response );
+					if ( 200 == $status ) {
+						if ( $response['body'] ) {
+							$newtoken = json_decode( $response['body'] );
+							if ( $newtoken ) {
+								$this->client->setAccessToken( $newtoken );
+							} else {
+								GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . __( 'GADWP Endpoint Error', 'google-analytics-dashboard-for-wp ' ), $this->error_timeout );
+								GADWP_Tools::set_cache( 'endpoint_error', date( 'Y-m-d H:i:s' ) . ': ' . __( 'GADWP Endpoint - Unable to decode the token', 'google-analytics-dashboard-for-wp' ), $this->error_timeout );
+							}
+						} else {
+							GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . __( 'GADWP Endpoint Error', 'google-analytics-dashboard-for-wp ' ), $this->error_timeout );
+							GADWP_Tools::set_cache( 'endpoint_error', date( 'Y-m-d H:i:s' ) . ': ' . __( 'GADWP Endpoint - Empty response', 'google-analytics-dashboard-for-wp' ), $this->error_timeout );
+						}
+					} else {
+						if ( $response['body'] ) {
+							$message = ' ' . $status . "\n" . $response['body'];
+						} else {
+							$message = ' ' . $status;
+						}
+						GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . __( 'GADWP Endpoint Error', 'google-analytics-dashboard-for-wp ' ), $this->error_timeout );
+						GADWP_Tools::set_cache( 'endpoint_error', date( 'Y-m-d H:i:s' ) . ': ' . __( 'GADWP Endpoint - Response code', 'google-analytics-dashboard-for-wp ' ) . $message, $this->error_timeout );
+					}
+				} else {
+					GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . __( 'GADWP Endpoint Error', 'google-analytics-dashboard-for-wp ' ), $this->error_timeout );
+					GADWP_Tools::set_cache( 'endpoint_error', date( 'Y-m-d H:i:s' ) . ': ' . __( 'GADWP Endpoint - Unable to connect to endpoint', 'google-analytics-dashboard-for-wp' ), $this->error_timeout );
+				}
+			}
+		}
+
+		private function endpoint_revoke_token() {
+			$oldtoken = json_encode( $this->client->getAccessToken() );
+			$site = get_site_url();
+			$response = wp_remote_get( 'https://gadwp.deconf.com/?revoketoken=' . $oldtoken . '&managequota=' . $this->managequota . '&url=' . $site, array( 'timeout' => 120, 'httpversion' => '1.1' ) );
+			if ( ! is_wp_error( $response ) ) {
+				$status = wp_remote_retrieve_response_code( $response );
+				if ( 200 != $status ) {
+					if ( $response['body'] ) {
+						$message = ' ' . $status . "\n" . $response['body'];
+					} else {
+						$message = ' ' . $status;
+					}
+					GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . __( 'GADWP Endpoint Error', 'google-analytics-dashboard-for-wp ' ), $this->error_timeout );
+					GADWP_Tools::set_cache( 'endpoint_error', date( 'Y-m-d H:i:s' ) . ': ' . __( 'GADWP Endpoint - Response code', 'google-analytics-dashboard-for-wp ' ) . $message, $this->error_timeout );
+				}
+			} else {
+				GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . __( 'GADWP Endpoint Error', 'google-analytics-dashboard-for-wp ' ), $this->error_timeout );
+				GADWP_Tools::set_cache( 'endpoint_error', date( 'Y-m-d H:i:s' ) . ': ' . __( 'GADWP Endpoint - Unable to connect to endpoint', 'google-analytics-dashboard-for-wp' ), $this->error_timeout );
+			}
 		}
 
 		/**
@@ -219,7 +283,12 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				$this->gadwp->config->options['ga_dash_tableid_jail'] = "";
 				$this->gadwp->config->options['ga_dash_profile_list'] = array();
 				try {
-					$this->client->revokeToken();
+					if ( $this->gadwp->config->options['with_endpoint'] && ! $this->gadwp->config->options['ga_dash_userapi'] ) {
+						$this->endpoint_revoke_token();
+					} else {
+						$this->client->revokeToken();
+						$this->gadwp->config->options['with_endpoint'] = 1;
+					}
 				} catch ( Exception $e ) {
 					if ( is_multisite() && $this->gadwp->config->options['ga_dash_network'] ) {
 						$this->gadwp->config->set_plugin_options( true );
@@ -415,7 +484,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				$options['filters'] = 'ga:pagePath==' . $filter;
 				$metrics = 'ga:uniquePageviews,ga:users,ga:pageviews,ga:BounceRate,ga:organicSearches,ga:pageviewsPerSession,ga:avgTimeOnPage,ga:avgPageLoadTime,ga:exitRate';
 			} else {
-				$metrics = 'ga:sessionss,ga:users,ga:pageviews,ga:BounceRate,ga:organicSearches,ga:pageviewsPerSession,ga:avgTimeOnPage,ga:avgPageLoadTime,ga:avgSessionDuration';
+				$metrics = 'ga:sessions,ga:users,ga:pageviews,ga:BounceRate,ga:organicSearches,ga:pageviewsPerSession,ga:avgTimeOnPage,ga:avgPageLoadTime,ga:avgSessionDuration';
 			}
 			$serial = 'qr3_' . $this->get_serial( $projectId . $from . $filter );
 			$data = $this->handle_corereports( $projectId, $from, $to, $metrics, $options, $serial );

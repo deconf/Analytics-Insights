@@ -93,6 +93,7 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 								'ga_speed_samplerate',
 								'ga_user_samplerate',
 								'ga_event_precision',
+								'with_endpoint',
 			);
 			foreach ( $numerics as $key ) {
 				if ( isset( $options[$key] ) ) {
@@ -241,10 +242,12 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 					foreach ( GADWP_Tools::get_sites( array( 'number' => apply_filters( 'gadwp_sites_limit', 100 ) ) ) as $blog ) {
 						switch_to_blog( $blog['blog_id'] );
 						GADWP_Tools::delete_cache( 'gapi_errors' );
+						GADWP_Tools::delete_cache( 'endpoint_error' );
 						restore_current_blog();
 					}
 				} else {
 					GADWP_Tools::delete_cache( 'gapi_errors' );
+					GADWP_Tools::delete_cache( 'endpoint_error' );
 				}
 				// GADWP_Tools::unset_cookie( 'default_metric' );
 				// GADWP_Tools::unset_cookie( 'default_dimension' );
@@ -287,6 +290,7 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 								'tm_pagescrolldepth_tracking', //v5.0
 								'ga_event_precision', //v5.1.1.1
 								'ga_force_ssl', //v5.1.2
+								'with_endpoint', //v5.2
 			);
 			foreach ( $zeros as $key ) {
 				if ( ! isset( $this->options[$key] ) ) {

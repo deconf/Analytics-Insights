@@ -78,6 +78,40 @@ final class GADWP_Settings {
 		return $options;
 	}
 
+	private static function endpoint_get_token( $gadwp_access_code, $gadwp ){
+		$site = get_site_url();
+		$response = wp_remote_get( 'https://gadwp.deconf.com/?accesscode=' . $gadwp_access_code .'&managequota=' . $gadwp->gapi_controller->managequota . '&url=' . $site, array( 'timeout' => 120, 'httpversion' => '1.1' ) );
+		if ( ! is_wp_error( $response ) ) {
+			$status = wp_remote_retrieve_response_code( $response );
+			if ( 200 == $status ) {
+				if ( $response['body'] ) {
+					$newtoken = json_decode( $response['body'] ); // use the content
+					if ( $newtoken ) {
+						$gadwp->gapi_controller->client->setAccessToken( $newtoken );
+					} else {
+						GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . __( 'GADWP Endpoint Error', 'google-analytics-dashboard-for-wp ' ), $gadwp->gapi_controller->error_timeout );
+						GADWP_Tools::set_cache( 'endpoint_error', date( 'Y-m-d H:i:s' ) . ': ' . __( 'GADWP Endpoint - Unable to decode the token', 'google-analytics-dashboard-for-wp' ), $gadwp->gapi_controller->error_timeout );
+					}
+				} else {
+					GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . __( 'GADWP Endpoint Error', 'google-analytics-dashboard-for-wp ' ), $gadwp->gapi_controller->error_timeout );
+					GADWP_Tools::set_cache( 'endpoint_error', date( 'Y-m-d H:i:s' ) . ': ' . __( 'GADWP Endpoint - Empty response', 'google-analytics-dashboard-for-wp' ), $gadwp->gapi_controller->error_timeout );
+				}
+			} else {
+				if ( $response['body'] ) {
+					$message = ' ' . $status . "\n" . $response['body'];
+				} else {
+					$message =  ' ' . $status;
+				}
+				GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . __( 'GADWP Endpoint Error', 'google-analytics-dashboard-for-wp ' ), $gadwp->gapi_controller->error_timeout );
+				GADWP_Tools::set_cache( 'endpoint_error', date( 'Y-m-d H:i:s' ) . ': ' . __( 'GADWP Endpoint - Response code', 'google-analytics-dashboard-for-wp ' ) . $message, $gadwp->gapi_controller->error_timeout );
+			}
+		} else {
+			GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . __( 'GADWP Endpoint Error', 'google-analytics-dashboard-for-wp ' ), $gadwp->gapi_controller->error_timeout );
+			GADWP_Tools::set_cache( 'endpoint_error', date( 'Y-m-d H:i:s' ) . ': ' . __( 'GADWP Endpoint - Unable to connect to endpoint', 'google-analytics-dashboard-for-wp' ), $gadwp->gapi_controller->error_timeout );
+		}
+
+	}
+
 	private static function navigation_tabs( $tabs ) {
 		echo '<h2 class="nav-tab-wrapper">';
 		foreach ( $tabs as $tab => $name ) {
@@ -142,6 +176,12 @@ final class GADWP_Settings {
 										<tr>
 											<?php endif; ?>
 										<?php endforeach; ?>
+
+
+
+
+
+
 									</table>
 								</td>
 							</tr>
@@ -170,6 +210,12 @@ final class GADWP_Settings {
 						</table>
 						<input type="hidden" name="options[ga_dash_hidden]" value="Y">
 						<?php wp_nonce_field('gadash_form','gadash_security');?>
+
+
+
+
+
+
 </form>
 <?php
 		self::output_sidebar();
@@ -231,6 +277,12 @@ final class GADWP_Settings {
 										<tr>
 											<?php endif; ?>
 										<?php endforeach; ?>
+
+
+
+
+
+
 									</table>
 								</td>
 							</tr>
@@ -318,6 +370,12 @@ final class GADWP_Settings {
 						</table>
 						<input type="hidden" name="options[ga_dash_hidden]" value="Y">
 						<?php wp_nonce_field('gadash_form','gadash_security'); ?>
+
+
+
+
+
+
 </form>
 <?php
 		self::output_sidebar();
@@ -982,6 +1040,12 @@ final class GADWP_Settings {
 											<tr>
 											<?php endif; ?>
 										<?php endforeach; ?>
+
+
+
+
+
+
 										</table>
 									</td>
 								</tr>
@@ -1001,6 +1065,12 @@ final class GADWP_Settings {
 						</table>
 						<input type="hidden" name="options[ga_dash_hidden]" value="Y">
 						<?php wp_nonce_field('gadash_form','gadash_security'); ?>
+
+
+
+
+
+
 </form>
 <?php
 		self::output_sidebar();
@@ -1062,7 +1132,7 @@ final class GADWP_Settings {
 							</tr>
 							<tr>
 								<td>
-									<pre class="gadwp-settings-logdata"><?php _e("Error Details: ", 'google-analytics-dashboard-for-wp'); $error_details = print_r( GADWP_Tools::get_cache( 'gapi_errors' ), true ) ? "\n" . esc_html( print_r( GADWP_Tools::get_cache( 'last_error' ), true ) ) : __( "None", 'google-analytics-dashboard-for-wp' ); echo $error_details; ?></pre>
+									<pre class="gadwp-settings-logdata"><?php _e("Error Details: ", 'google-analytics-dashboard-for-wp'); echo "\n" . esc_html( print_r( GADWP_Tools::get_cache( 'gapi_errors' ), true ) ) . "\n" . esc_html( print_r( GADWP_Tools::get_cache( 'endpoint_error' ), true ) ) ?></pre>
 									<br />
 									<hr>
 								</td>
@@ -1123,14 +1193,19 @@ final class GADWP_Settings {
 		if ( isset( $_POST['gadwp_access_code'] ) ) {
 			if ( 1 == ! stripos( 'x' . $_POST['gadwp_access_code'], 'UA-', 1 ) ) {
 				try {
-					$gadwp->gapi_controller->client->authenticate( $_POST['gadwp_access_code'] );
+					$gadwp_access_code = $_POST['gadwp_access_code'];
+					if ( ! $gadwp->config->options['ga_dash_userapi'] ) {
+						self::endpoint_get_token( $gadwp_access_code, $gadwp );
+					}
 					$gadwp->config->options['ga_dash_token'] = $gadwp->gapi_controller->client->getAccessToken();
 					$gadwp->config->options['automatic_updates_minorversion'] = 1;
+					$gadwp->config->options['with_endpoint'] = 1;
 					$gadwp->config->set_plugin_options();
 					$options = self::update_options( 'general' );
 					$message = "<div class='updated' id='gadwp-autodismiss'><p>" . __( "Plugin authorization succeeded.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 					GADWP_Tools::delete_cache( 'gapi_errors' );
 					GADWP_Tools::delete_cache( 'last_error' );
+					GADWP_Tools::delete_cache( 'endpoint_error' );
 					if ( $gadwp->config->options['ga_dash_token'] && $gadwp->gapi_controller->client->getAccessToken() ) {
 						if ( ! empty( $gadwp->config->options['ga_dash_profile_list'] ) ) {
 							$profiles = $gadwp->config->options['ga_dash_profile_list'];
@@ -1185,6 +1260,7 @@ final class GADWP_Settings {
 			if ( isset( $_POST['gadash_security'] ) && wp_verify_nonce( $_POST['gadash_security'], 'gadash_form' ) ) {
 				GADWP_Tools::delete_cache( 'last_error' );
 				GADWP_Tools::delete_cache( 'gapi_errors' );
+				GADWP_Tools::delete_cache( 'endpoint_error' );
 				$message = "<div class='updated' id='gadwp-autodismiss'><p>" . __( "All errors reseted.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			} else {
 				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
@@ -1410,9 +1486,14 @@ final class GADWP_Settings {
 		if ( isset( $_POST['gadwp_access_code'] ) ) {
 			if ( 1 == ! stripos( 'x' . $_POST['gadwp_access_code'], 'UA-', 1 ) ) {
 				try {
-					$gadwp->gapi_controller->client->authenticate( $_POST['gadwp_access_code'] );
+
+					$gadwp_access_code = $_POST['gadwp_access_code'];
+					if ( ! $gadwp->config->options['ga_dash_userapi'] ) {
+						self::endpoint_get_token( $gadwp_access_code, $gadwp );
+					}
 					$gadwp->config->options['ga_dash_token'] = $gadwp->gapi_controller->client->getAccessToken();
 					$gadwp->config->options['automatic_updates_minorversion'] = 1;
+					$gadwp->config->options['with_endpoint'] = 1;
 					$gadwp->config->set_plugin_options( true );
 					$options = self::update_options( 'network' );
 					$message = "<div class='updated' id='gadwp-action'><p>" . __( "Plugin authorization succeeded.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
