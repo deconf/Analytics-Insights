@@ -31,7 +31,7 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 		public function dashboard_widget() {
 			$projectId = 0;
 			
-			if ( empty( $this->gadwp->config->options['ga_dash_token'] ) ) {
+			if ( empty( $this->gadwp->config->options['token'] ) ) {
 				echo '<p>' . __( "This plugin needs an authorization:", 'google-analytics-dashboard-for-wp' ) . '</p><form action="' . menu_page_url( 'gadash_settings', false ) . '" method="POST">' . get_submit_button( __( "Authorize Plugin", 'google-analytics-dashboard-for-wp' ), 'secondary' ) . '</form>';
 				return;
 			}

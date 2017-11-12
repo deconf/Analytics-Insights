@@ -149,7 +149,7 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 				$options['ga_cookieexpires'] = (int) $options['ga_cookieexpires'];
 			}
 
-			$token = json_decode( $options['ga_dash_token'] ); // v4.8.2
+			$token = json_decode( $options['token'] ); // v4.8.2
 			if ( isset( $token->token_type ) ) {
 				unset( $options['ga_dash_refresh_token'] );
 			}
@@ -164,8 +164,8 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 			$old_network_options = (array) json_decode( $get_network_options );
 			if ( is_multisite() ) {
 				if ( $network_settings ) { // Retrieve network options, clear blog options, store both to db
-					$network_options['ga_dash_token'] = $this->options['ga_dash_token'];
-					$options['ga_dash_token'] = '';
+					$network_options['token'] = $this->options['token'];
+					$options['token'] = '';
 					if ( is_network_admin() ) {
 						$network_options['ga_dash_profile_list'] = $this->options['ga_dash_profile_list'];
 						$options['ga_dash_profile_list'] = array();
@@ -184,8 +184,17 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 							unset( $options['ga_dash_tableid_network'] );
 						}
 					}
-					update_site_option( 'gadash_network_options', json_encode( $this->validate_data( array_merge( $old_network_options, $network_options ) ) ) );
+					$merged_options = array_merge( $old_network_options, $network_options ); //v5.2
+					if ( isset( $merged_options['ga_dash_token'] ) ) {
+						$merged_options['token'] = $merged_options['ga_dash_token'];
+						unset( $merged_options['ga_dash_token'] );
+					}
+					update_site_option( 'gadash_network_options', json_encode( $this->validate_data( $merged_options ) ) );
 				}
+			}
+			if ( isset( $options['ga_dash_token'] ) ) { //v5.2
+				$options['token'] = $options['ga_dash_token'];
+				unset( $options['ga_dash_token'] );
 			}
 			update_option( 'gadash_options', json_encode( $this->validate_data( $options ) ) );
 		}
@@ -221,35 +230,12 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 		private function maintain_compatibility() {
 			$flag = false;
 
-			if ( GADWP_CURRENT_VERSION != get_option( 'gadwp_version' ) ) {
-				$flag = true;
-				update_option( 'gadwp_version', GADWP_CURRENT_VERSION );
-				$rebuild_token = json_decode( $this->options['ga_dash_token'] ); // v4.8.2
-				if ( is_object( $rebuild_token ) && ! isset( $rebuild_token->token_type ) ) {
-					if ( isset( $this->options['ga_dash_refresh_token'] ) ) {
-						$rebuild_token->refresh_token = $this->options['ga_dash_refresh_token'];
-					}
-					$rebuild_token->token_type = "Bearer";
-					$this->options['ga_dash_token'] = json_encode( $rebuild_token );
-					unset( $this->options['ga_dash_refresh_token'] );
-					$this->set_plugin_options( true );
-				} else {
-					unset( $this->options['ga_dash_refresh_token'] );
+			if ( isset( $this->options['ga_dash_token'] ) ) { //v5.2
+				if ( ! isset( $this->options['token'] ) ) {
+					$this->options['token'] = $this->options['ga_dash_token'];
 				}
-				GADWP_Tools::clear_cache();
-				GADWP_Tools::delete_cache( 'last_error' );
-				if ( is_multisite() ) { // Cleanup errors and cookies on the entire network
-					foreach ( GADWP_Tools::get_sites( array( 'number' => apply_filters( 'gadwp_sites_limit', 100 ) ) ) as $blog ) {
-						switch_to_blog( $blog['blog_id'] );
-						GADWP_Tools::delete_cache( 'gapi_errors' );
-						restore_current_blog();
-					}
-				} else {
-					GADWP_Tools::delete_cache( 'gapi_errors' );
-				}
-				// GADWP_Tools::unset_cookie( 'default_metric' );
-				// GADWP_Tools::unset_cookie( 'default_dimension' );
-				// GADWP_Tools::unset_cookie( 'default_view' );
+				unset( $this->options['ga_dash_token'] );
+				$this->set_plugin_options( false );
 			}
 
 			/* @formatter:off */

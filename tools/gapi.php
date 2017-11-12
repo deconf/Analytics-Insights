@@ -63,15 +63,15 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				}
 			}
 			$this->service = new Deconf_Service_Analytics( $this->client );
-			if ( $this->gadwp->config->options['ga_dash_token'] ) {
-				$token = $this->gadwp->config->options['ga_dash_token'];
+			if ( $this->gadwp->config->options['token'] ) {
+				$token = $this->gadwp->config->options['token'];
 				if ( $token ) {
 					try {
 						$this->client->setAccessToken( $token );
 						if ( $this->gadwp->config->options['with_endpoint'] && ! $this->gadwp->config->options['ga_dash_userapi'] ) {
 							$this->endpoint_refresh_token( $token );
 						}
-						$this->gadwp->config->options['ga_dash_token'] = $this->client->getAccessToken();
+						$this->gadwp->config->options['token'] = $this->client->getAccessToken();
 					} catch ( GADWP_Exception $e ) {
 						GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( "(" . $e->getCode() . ") " . $e->getMessage() ), $this->get_timeouts( 'midnight' ) );
 						GADWP_Tools::set_cache( 'gapi_errors', array( $e->getCode() ), $this->get_timeouts() );
@@ -186,12 +186,12 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				return false;
 			}
 
-			if ( isset( $errors[1][0]['reason'] ) && ( 'badRequest' == $errors[1][0]['reason'] || 'accessNotConfigured' == $errors[1][0]['reason'] || 'invalidCredentials' == $errors[1][0]['reason'] || 'authError' == $errors[1][0]['reason'] || 'insufficientPermissions' == $errors[1][0]['reason'] || 'required' == $errors[1][0]['reason'] || 'keyExpired' == $errors[1][0]['reason'] ) ) {
+			if ( isset( $errors[1][0]['reason'] ) && ( 'invalidParameter' == $errors[1][0]['reason'] || 'badRequest' == $errors[1][0]['reason'] || 'invalidCredentials' == $errors[1][0]['reason'] || 'insufficientPermissions' == $errors[1][0]['reason'] || 'required' == $errors[1][0]['reason'] ) ) {
 				$this->reset_token( false );
 				return true;
 			}
 
-			if ( isset( $errors[1][0]['reason'] ) && ( 'userRateLimitExceeded' == $errors[1][0]['reason'] || 'quotaExceeded' == $errors[1][0]['reason'] ) ) {
+			if ( isset( $errors[1][0]['reason'] ) && ( 'userRateLimitExceeded' == $errors[1][0]['reason'] || 'rateLimitExceeded' == $errors[1][0]['reason'] || 'quotaExceeded' == $errors[1][0]['reason'] ) ) {
 				if ( $this->gadwp->config->options['api_backoff'] <= 5 ) {
 					usleep( rand( 1000000, 4500000 ) );
 					$this->gadwp->config->options['api_backoff'] = $this->gadwp->config->options['api_backoff'] + 1;
@@ -301,7 +301,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 		 *            $all
 		 */
 		public function reset_token( $all = true ) {
-			$this->gadwp->config->options['ga_dash_token'] = "";
+			$this->gadwp->config->options['token'] = "";
 			if ( $all ) {
 				$this->gadwp->config->options['ga_dash_tableid_jail'] = "";
 				$this->gadwp->config->options['ga_dash_profile_list'] = array();

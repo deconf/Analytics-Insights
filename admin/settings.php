@@ -98,7 +98,7 @@ final class GADWP_Settings {
 				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
-		if ( ! $gadwp->config->options['ga_dash_tableid_jail'] || ! $gadwp->config->options['ga_dash_token'] ) {
+		if ( ! $gadwp->config->options['ga_dash_tableid_jail'] || ! $gadwp->config->options['token'] ) {
 			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'google-analytics-dashboard-for-wp' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_errors_debugging', false ), __( 'Errors & Debug', 'google-analytics-dashboard-for-wp' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_settings', false ), __( 'authorize the plugin', 'google-analytics-dashboard-for-wp' ) ) ) );
 		}
 		?>
@@ -187,7 +187,7 @@ final class GADWP_Settings {
 				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
-		if ( ! $gadwp->config->options['ga_dash_tableid_jail'] || ! $gadwp->config->options['ga_dash_token'] ) {
+		if ( ! $gadwp->config->options['ga_dash_tableid_jail'] || ! $gadwp->config->options['token'] ) {
 			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'google-analytics-dashboard-for-wp' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_errors_debugging', false ), __( 'Errors & Debug', 'google-analytics-dashboard-for-wp' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_settings', false ), __( 'authorize the plugin', 'google-analytics-dashboard-for-wp' ) ) ) );
 		}
 		?>
@@ -1018,8 +1018,8 @@ final class GADWP_Settings {
 		$anonim = $gadwp->config->options;
 		$anonim['wp_version'] = $wp_version;
 		$anonim['gadwp_version'] = GADWP_CURRENT_VERSION;
-		if ( $anonim['ga_dash_token'] ) {
-			$anonim['ga_dash_token'] = 'HIDDEN';
+		if ( $anonim['token'] ) {
+			$anonim['token'] = 'HIDDEN';
 		}
 		if ( $anonim['ga_dash_clientid'] ) {
 			$anonim['ga_dash_clientid'] = 'HIDDEN';
@@ -1028,7 +1028,7 @@ final class GADWP_Settings {
 			$anonim['ga_dash_clientsecret'] = 'HIDDEN';
 		}
 		$options = self::update_options( 'frontend' );
-		if ( ! $gadwp->config->options['ga_dash_tableid_jail'] || ! $gadwp->config->options['ga_dash_token'] ) {
+		if ( ! $gadwp->config->options['ga_dash_tableid_jail'] || ! $gadwp->config->options['token'] ) {
 			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'google-analytics-dashboard-for-wp' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_errors_debugging', false ), __( 'Errors & Debug', 'google-analytics-dashboard-for-wp' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadash_settings', false ), __( 'authorize the plugin', 'google-analytics-dashboard-for-wp' ) ) ) );
 		}
 		?>
@@ -1127,7 +1127,7 @@ final class GADWP_Settings {
 					if ( ! $gadwp->config->options['ga_dash_userapi'] ) {
 						$gadwp->gapi_controller->endpoint_get_token( $gadwp_access_code );
 					}
-					$gadwp->config->options['ga_dash_token'] = $gadwp->gapi_controller->client->getAccessToken();
+					$gadwp->config->options['token'] = $gadwp->gapi_controller->client->getAccessToken();
 					$gadwp->config->options['automatic_updates_minorversion'] = 1;
 					$gadwp->config->options['with_endpoint'] = 1;
 					$gadwp->config->set_plugin_options();
@@ -1135,7 +1135,7 @@ final class GADWP_Settings {
 					$message = "<div class='updated' id='gadwp-autodismiss'><p>" . __( "Plugin authorization succeeded.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 					GADWP_Tools::delete_cache( 'gapi_errors' );
 					GADWP_Tools::delete_cache( 'last_error' );
-					if ( $gadwp->config->options['ga_dash_token'] && $gadwp->gapi_controller->client->getAccessToken() ) {
+					if ( $gadwp->config->options['token'] && $gadwp->gapi_controller->client->getAccessToken() ) {
 						if ( ! empty( $gadwp->config->options['ga_dash_profile_list'] ) ) {
 							$profiles = $gadwp->config->options['ga_dash_profile_list'];
 						} else {
@@ -1248,7 +1248,7 @@ final class GADWP_Settings {
 														<?php printf(__('You should watch the %1$s and read this %2$s before proceeding to authorization. This plugin requires a properly configured Google Analytics account!', 'google-analytics-dashboard-for-wp'), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=top_video&utm_campaign=gadwp', __("video", 'google-analytics-dashboard-for-wp')), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=top_tutorial&utm_campaign=gadwp', __("tutorial", 'google-analytics-dashboard-for-wp')));?>
 													</td>
 												</tr>
-												  <?php if (! $options['ga_dash_token'] || $options['ga_dash_userapi']) : ?>
+												  <?php if (! $options['token'] || $options['ga_dash_userapi']) : ?>
 												<tr>
 													<td colspan="2" class="gadwp-settings-info">
 														<input name="options[ga_dash_userapi]" type="checkbox" id="ga_dash_userapi" value="1" <?php checked( $options['ga_dash_userapi'], 1 ); ?> onchange="this.form.submit()" <?php echo ($options['ga_dash_network'])?'disabled="disabled"':''; ?> /><?php echo " ".__("developer mode (requires advanced API knowledge)", 'google-analytics-dashboard-for-wp' );?>
@@ -1275,7 +1275,7 @@ final class GADWP_Settings {
 													</td>
 												</tr>
 												  <?php endif; ?>
-												  <?php if ( $options['ga_dash_token'] ) : ?>
+												  <?php if ( $options['token'] ) : ?>
 												<tr>
 													<td colspan="2">
 														<input type="submit" name="Reset" class="button button-secondary" value="<?php _e( "Clear Authorization", 'google-analytics-dashboard-for-wp' ); ?>" <?php echo $options['ga_dash_network']?'disabled="disabled"':''; ?> />
@@ -1420,7 +1420,7 @@ final class GADWP_Settings {
 					if ( ! $gadwp->config->options['ga_dash_userapi'] ) {
 						$gadwp->gapi_controller->endpoint_get_token( $gadwp_access_code );
 					}
-					$gadwp->config->options['ga_dash_token'] = $gadwp->gapi_controller->client->getAccessToken();
+					$gadwp->config->options['token'] = $gadwp->gapi_controller->client->getAccessToken();
 					$gadwp->config->options['automatic_updates_minorversion'] = 1;
 					$gadwp->config->options['with_endpoint'] = 1;
 					$gadwp->config->set_plugin_options( true );
@@ -1437,7 +1437,7 @@ final class GADWP_Settings {
 						GADWP_Tools::delete_cache( 'last_error' );
 						GADWP_Tools::delete_cache( 'gapi_errors' );
 					}
-					if ( $gadwp->config->options['ga_dash_token'] && $gadwp->gapi_controller->client->getAccessToken() ) {
+					if ( $gadwp->config->options['token'] && $gadwp->gapi_controller->client->getAccessToken() ) {
 						if ( ! empty( $gadwp->config->options['ga_dash_profile_list'] ) ) {
 							$profiles = $gadwp->config->options['ga_dash_profile_list'];
 						} else {
@@ -1475,7 +1475,7 @@ final class GADWP_Settings {
 				$gadwp->config->options['ga_dash_profile_list'] = array();
 				$message = "<div class='updated' id='gadwp-autodismiss'><p>" . __( "Properties refreshed.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 				$options = self::update_options( 'network' );
-				if ( $gadwp->config->options['ga_dash_token'] && $gadwp->gapi_controller->client->getAccessToken() ) {
+				if ( $gadwp->config->options['token'] && $gadwp->gapi_controller->client->getAccessToken() ) {
 					if ( ! empty( $gadwp->config->options['ga_dash_profile_list'] ) ) {
 						$profiles = $gadwp->config->options['ga_dash_profile_list'];
 					} else {
@@ -1588,7 +1588,7 @@ final class GADWP_Settings {
 								<?php printf(__('You should watch the %1$s and read this %2$s before proceeding to authorization. This plugin requires a properly configured Google Analytics account!', 'google-analytics-dashboard-for-wp'), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=top_video&utm_campaign=gadwp', __("video", 'google-analytics-dashboard-for-wp')), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=top_tutorial&utm_campaign=gadwp', __("tutorial", 'google-analytics-dashboard-for-wp')));?>
 								</td>
 																	</tr>
-								<?php if ( ! $options['ga_dash_token'] || $options['ga_dash_userapi'] ) : ?>
+								<?php if ( ! $options['token'] || $options['ga_dash_userapi'] ) : ?>
 								<tr>
 																		<td colspan="2" class="gadwp-settings-info">
 																			<input name="options[ga_dash_userapi]" type="checkbox" id="ga_dash_userapi" value="1" <?php checked( $options['ga_dash_userapi'], 1 ); ?> onchange="this.form.submit()" /><?php echo " ".__("developer mode (requires advanced API knowledge)", 'google-analytics-dashboard-for-wp' );?>
@@ -1617,7 +1617,7 @@ final class GADWP_Settings {
 								</td>
 																	</tr>
 							<?php endif; ?>
-							<?php if ( $options['ga_dash_token'] ) : ?>
+							<?php if ( $options['token'] ) : ?>
 							<tr>
 																		<td colspan="2">
 																			<input type="submit" name="Reset" class="button button-secondary" value="<?php _e( "Clear Authorization", 'google-analytics-dashboard-for-wp' ); ?>" />

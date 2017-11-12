@@ -59,7 +59,7 @@ if ( ! class_exists( 'GADWP_Frontend_Ajax' ) ) {
 				wp_die( - 31 );
 			}
 
-			if ( $this->gadwp->config->options['ga_dash_token'] && $this->gadwp->config->options['ga_dash_tableid_jail'] ) {
+			if ( $this->gadwp->config->options['token'] && $this->gadwp->config->options['ga_dash_tableid_jail'] ) {
 				if ( null === $this->gadwp->gapi_controller ) {
 					$this->gadwp->gapi_controller = new GADWP_GAPI_Controller();
 				}
@@ -137,7 +137,7 @@ if ( ! class_exists( 'GADWP_Frontend_Ajax' ) ) {
 			if ( ob_get_length() ) {
 				ob_clean();
 			}
-			if ( $this->gadwp->config->options['ga_dash_token'] && $this->gadwp->config->options['ga_dash_tableid_jail'] ) {
+			if ( $this->gadwp->config->options['token'] && $this->gadwp->config->options['ga_dash_tableid_jail'] ) {
 				if ( null === $this->gadwp->gapi_controller ) {
 					$this->gadwp->gapi_controller = new GADWP_GAPI_Controller();
 				}
