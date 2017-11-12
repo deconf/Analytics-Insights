@@ -242,12 +242,10 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 					foreach ( GADWP_Tools::get_sites( array( 'number' => apply_filters( 'gadwp_sites_limit', 100 ) ) ) as $blog ) {
 						switch_to_blog( $blog['blog_id'] );
 						GADWP_Tools::delete_cache( 'gapi_errors' );
-						GADWP_Tools::delete_cache( 'endpoint_error' );
 						restore_current_blog();
 					}
 				} else {
 					GADWP_Tools::delete_cache( 'gapi_errors' );
-					GADWP_Tools::delete_cache( 'endpoint_error' );
 				}
 				// GADWP_Tools::unset_cookie( 'default_metric' );
 				// GADWP_Tools::unset_cookie( 'default_dimension' );

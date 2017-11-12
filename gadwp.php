@@ -14,9 +14,15 @@
 if ( ! defined( 'ABSPATH' ) )
 	exit();
 
-// Plugin Version
+	// Plugin Version
 if ( ! defined( 'GADWP_CURRENT_VERSION' ) ) {
 	define( 'GADWP_CURRENT_VERSION', '5.2-beta' );
+}
+
+if ( ! class_exists( 'GADWP_Exception' ) ) {
+
+	class GADWP_Exception extends Exception {
+	}
 }
 
 if ( ! class_exists( 'GADWP_Manager' ) ) {
