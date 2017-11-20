@@ -51,9 +51,9 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			$this->client->setRedirectUri( 'urn:ietf:wg:oauth:2.0:oob' );
 			$this->managequota = 'u' . get_current_user_id() . 's' . get_current_blog_id();
 			$this->access = array_map( array( $this, 'map' ), $this->access );
-			if ( $this->gadwp->config->options['ga_dash_userapi'] ) {
-				$this->client->setClientId( $this->gadwp->config->options['ga_dash_clientid'] );
-				$this->client->setClientSecret( $this->gadwp->config->options['ga_dash_clientsecret'] );
+			if ( $this->gadwp->config->options['user_api'] ) {
+				$this->client->setClientId( $this->gadwp->config->options['client_id'] );
+				$this->client->setClientSecret( $this->gadwp->config->options['client_secret'] );
 			} else {
 				if ( $this->gadwp->config->options['with_endpoint'] ) {
 					$this->client->setClientId( '65556128781-pgfs40ihk5f4peufgknqlgba3q4p3hl9.apps.googleusercontent.com' );
@@ -68,7 +68,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				if ( $token ) {
 					try {
 						$this->client->setAccessToken( $token );
-						if ( $this->gadwp->config->options['with_endpoint'] && ! $this->gadwp->config->options['ga_dash_userapi'] ) {
+						if ( $this->gadwp->config->options['with_endpoint'] && ! $this->gadwp->config->options['user_api'] ) {
 							$this->endpoint_refresh_token( $token );
 						}
 						$this->gadwp->config->options['token'] = $this->client->getAccessToken();
@@ -85,7 +85,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 						GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $this->get_timeouts( 'midnight' ) );
 						$this->reset_token();
 					}
-					if ( is_multisite() && $this->gadwp->config->options['ga_dash_network'] ) {
+					if ( is_multisite() && $this->gadwp->config->options['network_mode'] ) {
 						$this->gadwp->config->set_plugin_options( true );
 					} else {
 						$this->gadwp->config->set_plugin_options();
@@ -252,7 +252,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 		public function refresh_profiles() {
 			try {
 
-				$ga_dash_profile_list = array();
+				$ga_profiles_list = array();
 				$startindex = 1;
 				$totalresults = 65535; // use something big
 
@@ -270,27 +270,27 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 							$timetz = new DateTimeZone( $profile->getTimezone() );
 							$localtime = new DateTime( 'now', $timetz );
 							$timeshift = strtotime( $localtime->format( 'Y-m-d H:i:s' ) ) - time();
-							$ga_dash_profile_list[] = array( $profile->getName(), $profile->getId(), $profile->getwebPropertyId(), $profile->getwebsiteUrl(), $timeshift, $profile->getTimezone(), $profile->getDefaultPage() );
+							$ga_profiles_list[] = array( $profile->getName(), $profile->getId(), $profile->getwebPropertyId(), $profile->getwebsiteUrl(), $timeshift, $profile->getTimezone(), $profile->getDefaultPage() );
 							$startindex++;
 						}
 					}
 				}
 
-				if ( empty( $ga_dash_profile_list ) ) {
+				if ( empty( $ga_profiles_list ) ) {
 					GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': No properties were found in this account!', $this->get_timeouts( 'midnight' ) );
 				} else {
 					GADWP_Tools::delete_cache( 'last_error' );
 				}
-				return $ga_dash_profile_list;
+				return $ga_profiles_list;
 			} catch ( Deconf_IO_Exception $e ) {
 				GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $this->get_timeouts( 'midnight' ) );
-				return $ga_dash_profile_list;
+				return $ga_profiles_list;
 			} catch ( Deconf_Service_Exception $e ) {
 				GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( "(" . $e->getCode() . ") " . $e->getMessage() ), $this->get_timeouts( 'midnight' ) );
 				GADWP_Tools::set_cache( 'gapi_errors', array( $e->getCode(), (array) $e->getErrors() ), $this->get_timeouts( 'midnight' ) );
 			} catch ( Exception $e ) {
 				GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $this->get_timeouts( 'midnight' ) );
-				return $ga_dash_profile_list;
+				return $ga_profiles_list;
 			}
 		}
 
@@ -303,24 +303,24 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 		public function reset_token( $all = true ) {
 			$this->gadwp->config->options['token'] = "";
 			if ( $all ) {
-				$this->gadwp->config->options['ga_dash_tableid_jail'] = "";
-				$this->gadwp->config->options['ga_dash_profile_list'] = array();
+				$this->gadwp->config->options['tableid_jail'] = "";
+				$this->gadwp->config->options['ga_profiles_list'] = array();
 				try {
-					if ( $this->gadwp->config->options['with_endpoint'] && ! $this->gadwp->config->options['ga_dash_userapi'] ) {
+					if ( $this->gadwp->config->options['with_endpoint'] && ! $this->gadwp->config->options['user_api'] ) {
 						$this->endpoint_revoke_token();
 					} else {
 						$this->client->revokeToken();
 						$this->gadwp->config->options['with_endpoint'] = 1;
 					}
 				} catch ( Exception $e ) {
-					if ( is_multisite() && $this->gadwp->config->options['ga_dash_network'] ) {
+					if ( is_multisite() && $this->gadwp->config->options['network_mode'] ) {
 						$this->gadwp->config->set_plugin_options( true );
 					} else {
 						$this->gadwp->config->set_plugin_options();
 					}
 				}
 			}
-			if ( is_multisite() && $this->gadwp->config->options['ga_dash_network'] ) {
+			if ( is_multisite() && $this->gadwp->config->options['network_mode'] ) {
 				$this->gadwp->config->set_plugin_options( true );
 			} else {
 				$this->gadwp->config->set_plugin_options();

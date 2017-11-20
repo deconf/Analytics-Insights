@@ -20,7 +20,7 @@ if ( ! class_exists( 'GADWP_Common_Ajax' ) ) {
 		public function __construct() {
 			$this->gadwp = GADWP();
 			
-			if ( GADWP_Tools::check_roles( $this->gadwp->config->options['ga_dash_access_back'] ) || GADWP_Tools::check_roles( $this->gadwp->config->options['ga_dash_access_front'] ) ) {
+			if ( GADWP_Tools::check_roles( $this->gadwp->config->options['access_back'] ) || GADWP_Tools::check_roles( $this->gadwp->config->options['access_front'] ) ) {
 				add_action( 'wp_ajax_gadwp_set_error', array( $this, 'ajax_set_error' ) );
 			}
 		}

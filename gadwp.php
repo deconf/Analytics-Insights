@@ -180,7 +180,7 @@ if ( ! class_exists( 'GADWP_Manager' ) ) {
 		public function load() {
 			if ( is_admin() ) {
 				if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-					if ( GADWP_Tools::check_roles( self::$instance->config->options['ga_dash_access_back'] ) ) {
+					if ( GADWP_Tools::check_roles( self::$instance->config->options['access_back'] ) ) {
 						/*
 						 * Load Backend ajax actions
 						 */
@@ -199,7 +199,7 @@ if ( ! class_exists( 'GADWP_Manager' ) ) {
 					 */
 					include_once ( GADWP_DIR . 'common/ajax-actions.php' );
 					self::$instance->common_actions = new GADWP_Common_Ajax();
-				} else if ( GADWP_Tools::check_roles( self::$instance->config->options['ga_dash_access_back'] ) ) {
+				} else if ( GADWP_Tools::check_roles( self::$instance->config->options['access_back'] ) ) {
 					/*
 					 * Load Backend Setup
 					 */
@@ -223,7 +223,7 @@ if ( ! class_exists( 'GADWP_Manager' ) ) {
 					}
 				}
 			} else {
-				if ( GADWP_Tools::check_roles( self::$instance->config->options['ga_dash_access_front'] ) ) {
+				if ( GADWP_Tools::check_roles( self::$instance->config->options['access_front'] ) ) {
 					/*
 					 * Load Frontend Setup
 					 */
@@ -239,7 +239,7 @@ if ( ! class_exists( 'GADWP_Manager' ) ) {
 					}
 				}
 
-				if ( ! GADWP_Tools::check_roles( self::$instance->config->options['ga_track_exclude'], true ) && 'disabled' != self::$instance->config->options['ga_dash_tracking_type'] ) {
+				if ( ! GADWP_Tools::check_roles( self::$instance->config->options['track_exclude'], true ) && 'disabled' != self::$instance->config->options['tracking_type'] ) {
 					/*
 					 * Load tracking class
 					 */

@@ -38,7 +38,7 @@ if ( ! class_exists( 'GADWP_Frontend_Setup' ) ) {
 			/*
 			 * Item reports Styles & Scripts
 			 */
-			if ( GADWP_Tools::check_roles( $this->gadwp->config->options['ga_dash_access_front'] ) && $this->gadwp->config->options['frontend_item_reports'] ) {
+			if ( GADWP_Tools::check_roles( $this->gadwp->config->options['access_front'] ) && $this->gadwp->config->options['frontend_item_reports'] ) {
 
 				wp_enqueue_style( 'gadwp-nprogress', GADWP_URL . 'common/nprogress/nprogress.css', null, GADWP_CURRENT_VERSION );
 
@@ -117,7 +117,7 @@ if ( ! class_exists( 'GADWP_Frontend_Setup' ) ) {
 							__( "Exit Rate", 'google-analytics-dashboard-for-wp' ),
 							__( "Precision: ", 'google-analytics-dashboard-for-wp' ), //29
 					),
-					'colorVariations' => GADWP_Tools::variations( $this->gadwp->config->options['ga_dash_style'] ),
+					'colorVariations' => GADWP_Tools::variations( $this->gadwp->config->options['theme_color'] ),
 					'region' => $region,
 					'mapsApiKey' => $this->gadwp->config->options['maps_api_key'],
 					'language' => get_bloginfo( 'language' ),

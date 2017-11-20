@@ -245,5 +245,15 @@ if ( ! class_exists( 'GADWP_Tools' ) ) {
 			}
 			return $out;
 		}
+
+		public static function array_keys_rename( $options, $keys ){
+			foreach ( $keys as $key => $newkey) {
+				if ( isset( $options[$key] ) ) {
+					$options[$newkey] = $options[$key];
+					unset( $options[$key] );
+				}
+			}
+			return $options;
+		}
 	}
 }

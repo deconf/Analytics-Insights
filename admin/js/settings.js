@@ -10,12 +10,12 @@
  * Navigation Tabs
  */
 jQuery( document ).ready( function () {
-	if ( window.location.href.indexOf( "page=gadash_" ) != -1 ) {
+	if ( window.location.href.indexOf( "page=gadwp_" ) != -1 ) {
 		var ident = 'basic';
 
 		if ( window.location.hash ) {
 			ident = window.location.hash.split( '#' )[ 2 ].split( '-' )[ 1 ];
-		} else if ( window.location.href.indexOf( "page=gadash_errors_debugging" ) != -1 ) {
+		} else if ( window.location.href.indexOf( "page=gadwp_errors_debugging" ) != -1 ) {
 			ident = 'errors';
 		}
 
@@ -28,7 +28,7 @@ jQuery( document ).ready( function () {
 	}
 
 	jQuery( 'a[href^="#"]' ).click( function ( e ) {
-		if ( window.location.href.indexOf( "page=gadash_" ) != -1 ) {
+		if ( window.location.href.indexOf( "page=gadwp_" ) != -1 ) {
 			jQuery( ".nav-tab-wrapper a" ).each( function ( index ) {
 				jQuery( this ).removeClass( "nav-tab-active" );
 				jQuery( "#" + this.hash.split( '#' )[ 2 ] ).hide();

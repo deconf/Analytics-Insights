@@ -20,7 +20,7 @@ if ( ! class_exists( 'GADWP_Frontend_Ajax' ) ) {
 		public function __construct() {
 			$this->gadwp = GADWP();
 
-			if ( GADWP_Tools::check_roles( $this->gadwp->config->options['ga_dash_access_front'] ) && $this->gadwp->config->options['frontend_item_reports'] ) {
+			if ( GADWP_Tools::check_roles( $this->gadwp->config->options['access_front'] ) && $this->gadwp->config->options['frontend_item_reports'] ) {
 				// Item Reports action
 				add_action( 'wp_ajax_gadwp_frontend_item_reports', array( $this, 'ajax_item_reports' ) );
 			}
@@ -55,11 +55,11 @@ if ( ! class_exists( 'GADWP_Frontend_Ajax' ) ) {
 				ob_clean();
 			}
 
-			if ( ! GADWP_Tools::check_roles( $this->gadwp->config->options['ga_dash_access_front'] ) || 0 == $this->gadwp->config->options['frontend_item_reports'] ) {
+			if ( ! GADWP_Tools::check_roles( $this->gadwp->config->options['access_front'] ) || 0 == $this->gadwp->config->options['frontend_item_reports'] ) {
 				wp_die( - 31 );
 			}
 
-			if ( $this->gadwp->config->options['token'] && $this->gadwp->config->options['ga_dash_tableid_jail'] ) {
+			if ( $this->gadwp->config->options['token'] && $this->gadwp->config->options['tableid_jail'] ) {
 				if ( null === $this->gadwp->gapi_controller ) {
 					$this->gadwp->gapi_controller = new GADWP_GAPI_Controller();
 				}
@@ -67,13 +67,13 @@ if ( ! class_exists( 'GADWP_Frontend_Ajax' ) ) {
 				wp_die( - 24 );
 			}
 
-			if ( $this->gadwp->config->options['ga_dash_tableid_jail'] ) {
-				$projectId = $this->gadwp->config->options['ga_dash_tableid_jail'];
+			if ( $this->gadwp->config->options['tableid_jail'] ) {
+				$projectId = $this->gadwp->config->options['tableid_jail'];
 			} else {
 				wp_die( - 26 );
 			}
 
-			$profile_info = GADWP_Tools::get_selected_profile( $this->gadwp->config->options['ga_dash_profile_list'], $projectId );
+			$profile_info = GADWP_Tools::get_selected_profile( $this->gadwp->config->options['ga_profiles_list'], $projectId );
 
 			if ( isset( $profile_info[4] ) ) {
 				$this->gadwp->gapi_controller->timeshift = $profile_info[4];
@@ -137,15 +137,15 @@ if ( ! class_exists( 'GADWP_Frontend_Ajax' ) ) {
 			if ( ob_get_length() ) {
 				ob_clean();
 			}
-			if ( $this->gadwp->config->options['token'] && $this->gadwp->config->options['ga_dash_tableid_jail'] ) {
+			if ( $this->gadwp->config->options['token'] && $this->gadwp->config->options['tableid_jail'] ) {
 				if ( null === $this->gadwp->gapi_controller ) {
 					$this->gadwp->gapi_controller = new GADWP_GAPI_Controller();
 				}
 			} else {
 				wp_die( - 24 );
 			}
-			$projectId = $this->gadwp->config->options['ga_dash_tableid_jail'];
-			$profile_info = GADWP_Tools::get_selected_profile( $this->gadwp->config->options['ga_dash_profile_list'], $projectId );
+			$projectId = $this->gadwp->config->options['tableid_jail'];
+			$profile_info = GADWP_Tools::get_selected_profile( $this->gadwp->config->options['ga_profiles_list'], $projectId );
 			if ( isset( $profile_info[4] ) ) {
 				$this->gadwp->gapi_controller->timeshift = $profile_info[4];
 			} else {

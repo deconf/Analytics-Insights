@@ -29,7 +29,7 @@
 		</tr>
 		<tr>
 			<td colspan="2">
-				<input type="submit" class="button button-secondary" name="ga_dash_authorize" value="<?php _e( "Save Access Code", 'google-analytics-dashboard-for-wp' ); ?>" />
+				<input type="submit" class="button button-secondary" name="gadwp_authorize" value="<?php _e( "Save Access Code", 'google-analytics-dashboard-for-wp' ); ?>" />
 			</td>
 		</tr>
 	</table>

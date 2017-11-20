@@ -19,7 +19,7 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 
 		public function __construct() {
 			$this->gadwp = GADWP();
-			if ( GADWP_Tools::check_roles( $this->gadwp->config->options['ga_dash_access_back'] ) && ( 1 == $this->gadwp->config->options['dashboard_widget'] ) ) {
+			if ( GADWP_Tools::check_roles( $this->gadwp->config->options['access_back'] ) && ( 1 == $this->gadwp->config->options['dashboard_widget'] ) ) {
 				add_action( 'wp_dashboard_setup', array( $this, 'add_widget' ) );
 			}
 		}
@@ -32,22 +32,22 @@ if ( ! class_exists( 'GADWP_Backend_Widgets' ) ) {
 			$projectId = 0;
 			
 			if ( empty( $this->gadwp->config->options['token'] ) ) {
-				echo '<p>' . __( "This plugin needs an authorization:", 'google-analytics-dashboard-for-wp' ) . '</p><form action="' . menu_page_url( 'gadash_settings', false ) . '" method="POST">' . get_submit_button( __( "Authorize Plugin", 'google-analytics-dashboard-for-wp' ), 'secondary' ) . '</form>';
+				echo '<p>' . __( "This plugin needs an authorization:", 'google-analytics-dashboard-for-wp' ) . '</p><form action="' . menu_page_url( 'gadwp_settings', false ) . '" method="POST">' . get_submit_button( __( "Authorize Plugin", 'google-analytics-dashboard-for-wp' ), 'secondary' ) . '</form>';
 				return;
 			}
 			
 			if ( current_user_can( 'manage_options' ) ) {
-				if ( $this->gadwp->config->options['ga_dash_tableid_jail'] ) {
-					$projectId = $this->gadwp->config->options['ga_dash_tableid_jail'];
+				if ( $this->gadwp->config->options['tableid_jail'] ) {
+					$projectId = $this->gadwp->config->options['tableid_jail'];
 				} else {
-					echo '<p>' . __( "An admin should asign a default Google Analytics Profile.", 'google-analytics-dashboard-for-wp' ) . '</p><form action="' . menu_page_url( 'gadash_settings', false ) . '" method="POST">' . get_submit_button( __( "Select Domain", 'google-analytics-dashboard-for-wp' ), 'secondary' ) . '</form>';
+					echo '<p>' . __( "An admin should asign a default Google Analytics Profile.", 'google-analytics-dashboard-for-wp' ) . '</p><form action="' . menu_page_url( 'gadwp_settings', false ) . '" method="POST">' . get_submit_button( __( "Select Domain", 'google-analytics-dashboard-for-wp' ), 'secondary' ) . '</form>';
 					return;
 				}
 			} else {
-				if ( $this->gadwp->config->options['ga_dash_tableid_jail'] ) {
-					$projectId = $this->gadwp->config->options['ga_dash_tableid_jail'];
+				if ( $this->gadwp->config->options['tableid_jail'] ) {
+					$projectId = $this->gadwp->config->options['tableid_jail'];
 				} else {
-					echo '<p>' . __( "An admin should asign a default Google Analytics Profile.", 'google-analytics-dashboard-for-wp' ) . '</p><form action="' . menu_page_url( 'gadash_settings', false ) . '" method="POST">' . get_submit_button( __( "Select Domain", 'google-analytics-dashboard-for-wp' ), 'secondary' ) . '</form>';
+					echo '<p>' . __( "An admin should asign a default Google Analytics Profile.", 'google-analytics-dashboard-for-wp' ) . '</p><form action="' . menu_page_url( 'gadwp_settings', false ) . '" method="POST">' . get_submit_button( __( "Select Domain", 'google-analytics-dashboard-for-wp' ), 'secondary' ) . '</form>';
 					return;
 				}
 			}
