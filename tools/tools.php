@@ -60,14 +60,6 @@ if ( ! class_exists( 'GADWP_Tools' ) ) {
 			return str_replace( array( "https://", "http://", " " ), "", $domain );
 		}
 
-		public static function clear_transients() {
-			global $wpdb;
-			$sqlquery = $wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_gadash%%'" );
-			$sqlquery = $wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_timeout_gadash%%'" );
-			$sqlquery = $wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_ga_dash%%'" );
-			$sqlquery = $wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_timeout_ga_dash%%'" );
-		}
-
 		public static function colourVariator( $colour, $per ) {
 			$colour = substr( $colour, 1 );
 			$rgb = '';
@@ -135,30 +127,6 @@ if ( ! class_exists( 'GADWP_Tools' ) ) {
 
 		public static function get_cache( $name ) {
 			$option = get_option( 'gadwp_cache_' . $name );
-
-			if ( false === $option || ! isset( $option['value'] ) || ! isset( $option['expires'] ) ) {
-				return false;
-			}
-
-			if ( $option['expires'] < time() ) {
-				delete_option( 'gadwp_cache_' . $name );
-				return false;
-			} else {
-				return $option['value'];
-			}
-		}
-
-		public static function set_site_cache( $name, $value, $expiration = 0 ) {
-			$option = array( 'value' => $value, 'expires' => time() + (int) $expiration );
-			update_site_option( 'gadwp_cache_' . $name, $option );
-		}
-
-		public static function delete_site_cache( $name ) {
-			delete_site_option( 'gadwp_cache_' . $name );
-		}
-
-		public static function get_site_cache( $name ) {
-			$option = get_site_option( 'gadwp_cache_' . $name );
 
 			if ( false === $option || ! isset( $option['value'] ) || ! isset( $option['expires'] ) ) {
 				return false;
