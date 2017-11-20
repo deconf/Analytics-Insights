@@ -199,6 +199,14 @@ if ( ! class_exists( 'GADWP_Manager' ) ) {
 					 */
 					include_once ( GADWP_DIR . 'common/ajax-actions.php' );
 					self::$instance->common_actions = new GADWP_Common_Ajax();
+
+					if ( self::$instance->config->options['backend_item_reports'] ) {
+						/*
+						 * Load Backend Item Reports for Quick Edit
+						 */
+						include_once ( GADWP_DIR . 'admin/item-reports.php' );
+						self::$instance->backend_item_reports = new GADWP_Backend_Item_Reports();
+					}
 				} else if ( GADWP_Tools::check_roles( self::$instance->config->options['ga_dash_access_back'] ) ) {
 					/*
 					 * Load Backend Setup
