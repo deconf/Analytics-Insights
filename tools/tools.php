@@ -200,7 +200,7 @@ if ( ! class_exists( 'GADWP_Tools' ) ) {
 				}
 				return $dom;
 			} else {
-				self::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . __( 'DOM is disabled or libxml PHP extension is missing. Contact your hosting provider. Automatic tracking of events for AMP pages is not possible.', 'google-analytics-dashboard-for-wp' ), 24*60*60 );
+				self::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . __( 'DOM is disabled or libxml PHP extension is missing. Contact your hosting provider. Automatic tracking of events for AMP pages is not possible.', 'google-analytics-dashboard-for-wp' ), 24 * 60 * 60 );
 				return false;
 			}
 		}
@@ -214,14 +214,29 @@ if ( ! class_exists( 'GADWP_Tools' ) ) {
 			return $out;
 		}
 
-		public static function array_keys_rename( $options, $keys ){
-			foreach ( $keys as $key => $newkey) {
+		public static function array_keys_rename( $options, $keys ) {
+			foreach ( $keys as $key => $newkey ) {
 				if ( isset( $options[$key] ) ) {
 					$options[$newkey] = $options[$key];
 					unset( $options[$key] );
 				}
 			}
 			return $options;
+		}
+
+		public static function set_error( $e, $timeout ) {
+			if ( is_object( $e ) ) {
+				if ( method_exists( $e, 'getCode' ) && method_exists( $e, 'getMessage' ) ) {
+					self::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( "(" . $e->getCode() . ") " . $e->getMessage() ), $timeout );
+				} else {
+					GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $timeout );
+				}
+				if ( method_exists( $e, 'getCode' ) && method_exists( $e, 'getErrors' ) ) {
+					self::set_cache( 'gapi_errors', array( $e->getCode(), (array) $e->getErrors() ), $timeout );
+				}
+			} else {
+				self::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $timeout );
+			}
 		}
 	}
 }

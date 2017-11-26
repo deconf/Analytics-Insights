@@ -170,9 +170,12 @@ This is a major update, please read the [release notes](https://deconf.com/googl
 = 5.2 =
 * Enhancements:  
 	* improvements on exponential backoff system
-	* introduces a new auth method with endpoints
-	* options array updates
+	* introduces a new authentication method with endpoints
+	* multiple updates of plugin's options
 	* code cleanup
+	* improvements on error reporting system
+* Bug Fixes:	
+	* some thrown errors were not displayed on Errors & Debug screen
 	
 = 5.1.2.2 =
 * Bug Fixes:

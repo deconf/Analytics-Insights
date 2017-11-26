@@ -19,9 +19,9 @@ if ( ! defined( 'GADWP_CURRENT_VERSION' ) ) {
 	define( 'GADWP_CURRENT_VERSION', '5.2-beta' );
 }
 
-if ( ! class_exists( 'GADWP_Exception' ) ) {
+if ( ! class_exists( 'GADWP_Endpoint_Exception' ) ) {
 
-	class GADWP_Exception extends Exception {
+	class GADWP_Endpoint_Exception extends Exception {
 	}
 }
 

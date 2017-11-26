@@ -36,7 +36,12 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			if ( function_exists( 'curl_version' ) ) {
 				$curlversion = curl_version();
 				$curl_options = array();
-				if ( isset( $curlversion['version'] ) && ( version_compare( PHP_VERSION, '5.3.0' ) >= 0 ) && version_compare( $curlversion['version'], '7.10.8' ) >= 0 && defined( 'GADWP_IP_VERSION' ) && GADWP_IP_VERSION ) {
+				if ( isset( $curlversion['version'] ) ) {
+					$rightversion = ( version_compare( PHP_VERSION, '5.3.0' ) >= 0 ) && version_compare( $curlversion['version'], '7.10.8' ) >= 0;
+				} else {
+					$rightversion = false;
+				}
+				if ( $rightversion && defined( 'GADWP_IP_VERSION' ) && GADWP_IP_VERSION ) {
 					$curl_options[CURLOPT_IPRESOLVE] = GADWP_IP_VERSION; // Force CURL_IPRESOLVE_V4 or CURL_IPRESOLVE_V6
 				}
 				$curl_options = apply_filters( 'gadwp_curl_options', $curl_options );
@@ -72,17 +77,19 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 							$this->endpoint_refresh_token( $token );
 						}
 						$this->gadwp->config->options['token'] = $this->client->getAccessToken();
-					} catch ( GADWP_Exception $e ) {
-						GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( "(" . $e->getCode() . ") " . $e->getMessage() ), $this->get_timeouts( 'midnight' ) );
-						GADWP_Tools::set_cache( 'gapi_errors', array( $e->getCode() ), $this->get_timeouts() );
+					} catch ( GADWP_Endpoint_Exception $e ) {
+						$timeout = $this->get_timeouts();
+						GADWP_Tools::set_error( $e, $timeout );
 					} catch ( Deconf_IO_Exception $e ) {
-						GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $this->get_timeouts( 'midnight' ) );
+						$timeout = $this->get_timeouts( 'midnight' );
+						GADWP_Tools::set_error( $e, $timeout );
 					} catch ( Deconf_Service_Exception $e ) {
-						GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( "(" . $e->getCode() . ") " . $e->getMessage() ), $this->get_timeouts( 'midnight' ) );
-						GADWP_Tools::set_cache( 'gapi_errors', array( $e->getCode(), (array) $e->getErrors() ), $this->get_timeouts( 'midnight' ) );
+						$timeout = $this->get_timeouts( 'midnight' );
+						GADWP_Tools::set_error( $e, $timeout );
 						$this->reset_token();
 					} catch ( Exception $e ) {
-						GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $this->get_timeouts( 'midnight' ) );
+						$timeout = $this->get_timeouts( 'midnight' );
+						GADWP_Tools::set_error( $e, $timeout );
 						$this->reset_token();
 					}
 					if ( is_multisite() && $this->gadwp->config->options['network_mode'] ) {
@@ -105,10 +112,10 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 						if ( is_string( $newtoken ) && strlen( $newtoken ) > 5 ) {
 							$this->client->setAccessToken( $newtoken );
 						} else {
-							throw new GADWP_Exception( __( 'GADWP Endpoint - Invalid token', 'google-analytics-dashboard-for-wp' ), - 51 );
+							throw new GADWP_Endpoint_Exception( __( 'GADWP Endpoint - Invalid token', 'google-analytics-dashboard-for-wp' ), - 51 );
 						}
 					} else {
-						throw new GADWP_Exception( __( 'GADWP Endpoint - Empty response', 'google-analytics-dashboard-for-wp' ), - 52 );
+						throw new GADWP_Endpoint_Exception( __( 'GADWP Endpoint - Empty response', 'google-analytics-dashboard-for-wp' ), - 52 );
 					}
 				} else {
 					if ( $response['body'] ) {
@@ -116,10 +123,10 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 					} else {
 						$message = ' ' . $status;
 					}
-					throw new GADWP_Exception( sprintf( __( 'GADWP Endpoint - Response code: %s', 'google-analytics-dashboard-for-wp ' ), $message ), - 53 );
+					throw new GADWP_Endpoint_Exception( sprintf( __( 'GADWP Endpoint - Response code: %s', 'google-analytics-dashboard-for-wp ' ), $message ), - 53 );
 				}
 			} else {
-				throw new GADWP_Exception( __( 'GADWP Endpoint - Unable to connect to endpoint', 'google-analytics-dashboard-for-wp' ), - 54 );
+				throw new GADWP_Endpoint_Exception( __( 'GADWP Endpoint - Unable to connect to endpoint', 'google-analytics-dashboard-for-wp' ), - 54 );
 			}
 		}
 
@@ -136,10 +143,10 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 							if ( is_string( $newtoken ) && strlen( $newtoken ) > 5 ) {
 								$this->client->setAccessToken( $newtoken );
 							} else {
-								throw new GADWP_Exception( __( 'GADWP Endpoint - Unable to decode the token', 'google-analytics-dashboard-for-wp' ), - 51 );
+								throw new GADWP_Endpoint_Exception( __( 'GADWP Endpoint - Unable to decode the token', 'google-analytics-dashboard-for-wp' ), - 51 );
 							}
 						} else {
-							throw new GADWP_Exception( __( 'GADWP Endpoint - Empty response', 'google-analytics-dashboard-for-wp' ), - 52 );
+							throw new GADWP_Endpoint_Exception( __( 'GADWP Endpoint - Empty response', 'google-analytics-dashboard-for-wp' ), - 52 );
 						}
 					} else {
 						if ( $response['body'] ) {
@@ -147,10 +154,10 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 						} else {
 							$message = ' ' . $status;
 						}
-						throw new GADWP_Exception( sprintf( __( 'GADWP Endpoint - Response: %s', 'google-analytics-dashboard-for-wp ' ), $message ), - 53 );
+						throw new GADWP_Endpoint_Exception( sprintf( __( 'GADWP Endpoint - Response: %s', 'google-analytics-dashboard-for-wp ' ), $message ), - 53 );
 					}
 				} else {
-					throw new GADWP_Exception( __( 'GADWP Endpoint - Unable to connect to endpoint', 'google-analytics-dashboard-for-wp' ), - 54 );
+					throw new GADWP_Endpoint_Exception( __( 'GADWP Endpoint - Unable to connect to endpoint', 'google-analytics-dashboard-for-wp' ), - 54 );
 				}
 			}
 		}
@@ -277,20 +284,22 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				}
 
 				if ( empty( $ga_profiles_list ) ) {
-					GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': No properties were found in this account!', $this->get_timeouts( 'midnight' ) );
+					$timeout = $this->get_timeouts( 'midnight' );
+					GADWP_Tools::set_error( 'No properties were found in this account!', $timeout );
 				} else {
 					GADWP_Tools::delete_cache( 'last_error' );
 				}
 				return $ga_profiles_list;
 			} catch ( Deconf_IO_Exception $e ) {
-				GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $this->get_timeouts( 'midnight' ) );
+				$timeout = $this->get_timeouts( 'midnight' );
+				GADWP_Tools::set_error( $e, $timeout );
 				return $ga_profiles_list;
 			} catch ( Deconf_Service_Exception $e ) {
-				GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( "(" . $e->getCode() . ") " . $e->getMessage() ), $this->get_timeouts( 'midnight' ) );
-				GADWP_Tools::set_cache( 'gapi_errors', array( $e->getCode(), (array) $e->getErrors() ), $this->get_timeouts( 'midnight' ) );
+				$timeout = $this->get_timeouts( 'midnight' );
+				GADWP_Tools::set_error( $e, $timeout );
 			} catch ( Exception $e ) {
-				GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $this->get_timeouts( 'midnight' ) );
-				return $ga_profiles_list;
+				$timeout = $this->get_timeouts( 'midnight' );
+				GADWP_Tools::set_error( $e, $timeout );
 			}
 		}
 
@@ -371,11 +380,12 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 					$data = $transient;
 				}
 			} catch ( Deconf_Service_Exception $e ) {
-				GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( "(" . $e->getCode() . ") " . $e->getMessage() ), $this->get_timeouts( 'midnight' ) );
-				GADWP_Tools::set_cache( 'gapi_errors', array( $e->getCode(), (array) $e->getErrors() ), $this->get_timeouts( 'midnight' ) );
+				$timeout = $this->get_timeouts( 'midnight' );
+				GADWP_Tools::set_error( $e, $timeout );
 				return $e->getCode();
 			} catch ( Exception $e ) {
-				GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $this->get_timeouts( 'midnight' ) );
+				$timeout = $this->get_timeouts( 'midnight' );
+				GADWP_Tools::set_error( $e, $timeout );
 				return $e->getCode();
 			}
 
@@ -885,11 +895,12 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 					$data = $transient;
 				}
 			} catch ( Deconf_Service_Exception $e ) {
-				GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( "(" . $e->getCode() . ") " . $e->getMessage() ), $this->get_timeouts( 'midnight' ) );
-				GADWP_Tools::set_cache( 'gapi_errors', array( $e->getCode(), (array) $e->getErrors() ), $this->get_timeouts( 'midnight' ) );
+				$timeout = $this->get_timeouts( 'midnight' );
+				GADWP_Tools::set_error( $e, $timeout );
 				return $e->getCode();
 			} catch ( Exception $e ) {
-				GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $this->get_timeouts( 'midnight' ) );
+				$timeout = $this->get_timeouts( 'midnight' );
+				GADWP_Tools::set_error( $e, $timeout );
 				return $e->getCode();
 			}
 			if ( $data->getRows() < 1 ) {

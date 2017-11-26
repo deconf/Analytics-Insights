@@ -142,6 +142,10 @@ final class GADWP_Settings {
 										<tr>
 											<?php endif; ?>
 										<?php endforeach; ?>
+
+
+
+
 									</table>
 								</td>
 							</tr>
@@ -170,6 +174,10 @@ final class GADWP_Settings {
 						</table>
 						<input type="hidden" name="options[gadwp_hidden]" value="Y">
 						<?php wp_nonce_field('gadwp_form','gadwp_security');?>
+
+
+
+
 </form>
 <?php
 		self::output_sidebar();
@@ -231,6 +239,10 @@ final class GADWP_Settings {
 										<tr>
 											<?php endif; ?>
 										<?php endforeach; ?>
+
+
+
+
 									</table>
 								</td>
 							</tr>
@@ -318,6 +330,10 @@ final class GADWP_Settings {
 						</table>
 						<input type="hidden" name="options[gadwp_hidden]" value="Y">
 						<?php wp_nonce_field('gadwp_form','gadwp_security'); ?>
+
+
+
+
 </form>
 <?php
 		self::output_sidebar();
@@ -982,6 +998,10 @@ final class GADWP_Settings {
 											<tr>
 											<?php endif; ?>
 										<?php endforeach; ?>
+
+
+
+
 										</table>
 									</td>
 								</tr>
@@ -1001,6 +1021,10 @@ final class GADWP_Settings {
 						</table>
 						<input type="hidden" name="options[gadwp_hidden]" value="Y">
 						<?php wp_nonce_field('gadwp_form','gadwp_security'); ?>
+
+
+
+
 </form>
 <?php
 		self::output_sidebar();
@@ -1151,16 +1175,18 @@ final class GADWP_Settings {
 							$options = self::update_options( 'general' );
 						}
 					}
-				} catch ( GADWP_Exception $e ) {
-					GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( "(" . $e->getCode() . ") " . $e->getMessage() ), $gadwp->gapi_controller->get_timeouts( 'midnight' ) );
-					GADWP_Tools::set_cache( 'gapi_errors', array( $e->getCode() ), $gadwp->gapi_controller->get_timeouts() );
+				} catch ( GADWP_Endpoint_Exception $e ) {
+					$timeout = $this->get_timeouts();
+					GADWP_Tools::set_error( $e, $timeout );
 				} catch ( Deconf_IO_Exception $e ) {
-					GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $gadwp->gapi_controller->get_timeouts( 'midnight' ) );
+					$timeout = $this->get_timeouts( 'midnight' );
+					GADWP_Tools::set_error( $e, $timeout );
 				} catch ( Deconf_Service_Exception $e ) {
-					GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( "(" . $e->getCode() . ") " . $e->getMessage() ), $gadwp->gapi_controller->get_timeouts( 'midnight' ) );
-					GADWP_Tools::set_cache( 'gapi_errors', $e->getErrors(), $gadwp->gapi_controller->get_timeouts( 'midnight' ) );
+					$timeout = $this->get_timeouts( 'midnight' );
+					GADWP_Tools::set_error( $e, $timeout );
 				} catch ( Exception $e ) {
-					GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ) . "\nResponseHttpCode:" . $e->getCode(), $gadwp->gapi_controller->get_timeouts( 'midnight' ) );
+					$timeout = $this->get_timeouts( 'midnight' );
+					GADWP_Tools::set_error( $e, $timeout );
 					$gadwp->gapi_controller->reset_token( false );
 				}
 			} else {
@@ -1452,16 +1478,18 @@ final class GADWP_Settings {
 							$options = self::update_options( 'network' );
 						}
 					}
-				} catch ( GADWP_Exception $e ) {
-					GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( "(" . $e->getCode() . ") " . $e->getMessage() ), $gadwp->gapi_controller->get_timeouts( 'midnight' ) );
-					GADWP_Tools::set_cache( 'gapi_errors', array( $e->getCode() ), $gadwp->gapi_controller->get_timeouts() );
+				} catch ( GADWP_Endpoint_Exception $e ) {
+					$timeout = $this->get_timeouts();
+					GADWP_Tools::set_error( $e, $timeout );
 				} catch ( Deconf_IO_Exception $e ) {
-					GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $gadwp->gapi_controller->get_timeouts( 'midnight' ) );
+					$timeout = $this->get_timeouts( 'midnight' );
+					GADWP_Tools::set_error( $e, $timeout );
 				} catch ( Deconf_Service_Exception $e ) {
-					GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( "(" . $e->getCode() . ") " . $e->getMessage() ), $gadwp->gapi_controller->get_timeouts( 'midnight' ) );
-					GADWP_Tools::set_cache( 'gapi_errors', $e->getErrors(), $gadwp->gapi_controller->get_timeouts( 'midnight' ) );
+					$timeout = $this->get_timeouts( 'midnight' );
+					GADWP_Tools::set_error( $e, $timeout );
 				} catch ( Exception $e ) {
-					GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ) . "\nResponseHttpCode:" . $e->getCode(), $gadwp->gapi_controller->get_timeouts( 'midnight' ) );
+					$timeout = $this->get_timeouts( 'midnight' );
+					GADWP_Tools::set_error( $e, $timeout );
 					$gadwp->gapi_controller->reset_token( false );
 				}
 			} else {
@@ -1807,7 +1835,7 @@ final class GADWP_Settings {
 																	<a href="https://deconf.com/wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=plugins&utm_campaign=gadwp"><img src="<?php echo plugins_url( 'images/wp.png' , __FILE__ ); ?>" /></a>
 																</div>
 																<div class="gadwp-desc">
-																	<?php printf(__('Other %s written by the same author', 'google-analytics-dashboard-for-wp'), sprintf('<a href="https://deconf.com/wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=plugins&utm_campaign=gadwp">%s</a>', __('WordPress Plugins', 'google-analytics-dashboard-for-wp')));?>
+																	<?php printf(__('Premium %s', 'google-analytics-dashboard-for-wp'), sprintf('<a href="https://shareasale.com/r.cfm?b=386922&u=926589&m=28169&urllink=&afftrack=">%s</a>', __('WordPress Themes & Plugins', 'google-analytics-dashboard-for-wp')));?>
 																</div>
 															</div>
 														</div>
