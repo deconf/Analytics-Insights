@@ -1148,9 +1148,7 @@ final class GADWP_Settings {
 			if ( 1 == ! stripos( 'x' . $_POST['gadwp_access_code'], 'UA-', 1 ) ) {
 				try {
 					$gadwp_access_code = $_POST['gadwp_access_code'];
-					if ( ! $gadwp->config->options['user_api'] ) {
-						$gadwp->gapi_controller->endpoint_get_token( $gadwp_access_code );
-					}
+					$gadwp->gapi_controller->client->authenticate( $_POST['gadwp_access_code'] );
 					$gadwp->config->options['token'] = $gadwp->gapi_controller->client->getAccessToken();
 					$gadwp->config->options['automatic_updates_minorversion'] = 1;
 					$gadwp->config->options['with_endpoint'] = 1;
@@ -1175,17 +1173,14 @@ final class GADWP_Settings {
 							$options = self::update_options( 'general' );
 						}
 					}
-				} catch ( GADWP_Endpoint_Exception $e ) {
-					$timeout = $this->get_timeouts();
-					GADWP_Tools::set_error( $e, $timeout );
 				} catch ( Deconf_IO_Exception $e ) {
-					$timeout = $this->get_timeouts( 'midnight' );
+					$timeout = $gadwp->gapi_controller->get_timeouts( 'midnight' );
 					GADWP_Tools::set_error( $e, $timeout );
 				} catch ( Deconf_Service_Exception $e ) {
-					$timeout = $this->get_timeouts( 'midnight' );
+					$timeout = $gadwp->gapi_controller->get_timeouts( 'midnight' );
 					GADWP_Tools::set_error( $e, $timeout );
 				} catch ( Exception $e ) {
-					$timeout = $this->get_timeouts( 'midnight' );
+					$timeout = $gadwp->gapi_controller->get_timeouts( 'midnight' );
 					GADWP_Tools::set_error( $e, $timeout );
 					$gadwp->gapi_controller->reset_token( false );
 				}
@@ -1442,9 +1437,7 @@ final class GADWP_Settings {
 				try {
 
 					$gadwp_access_code = $_POST['gadwp_access_code'];
-					if ( ! $gadwp->config->options['user_api'] ) {
-						$gadwp->gapi_controller->endpoint_get_token( $gadwp_access_code );
-					}
+					$gadwp->gapi_controller->client->authenticate( $_POST['gadwp_access_code'] );
 					$gadwp->config->options['token'] = $gadwp->gapi_controller->client->getAccessToken();
 					$gadwp->config->options['automatic_updates_minorversion'] = 1;
 					$gadwp->config->options['with_endpoint'] = 1;
@@ -1478,17 +1471,14 @@ final class GADWP_Settings {
 							$options = self::update_options( 'network' );
 						}
 					}
-				} catch ( GADWP_Endpoint_Exception $e ) {
-					$timeout = $this->get_timeouts();
-					GADWP_Tools::set_error( $e, $timeout );
 				} catch ( Deconf_IO_Exception $e ) {
-					$timeout = $this->get_timeouts( 'midnight' );
+					$timeout = $gadwp->gapi_controller->get_timeouts( 'midnight' );
 					GADWP_Tools::set_error( $e, $timeout );
 				} catch ( Deconf_Service_Exception $e ) {
-					$timeout = $this->get_timeouts( 'midnight' );
+					$timeout = $gadwp->gapi_controller->get_timeouts( 'midnight' );
 					GADWP_Tools::set_error( $e, $timeout );
 				} catch ( Exception $e ) {
-					$timeout = $this->get_timeouts( 'midnight' );
+					$timeout = $gadwp->gapi_controller->get_timeouts( 'midnight' );
 					GADWP_Tools::set_error( $e, $timeout );
 					$gadwp->gapi_controller->reset_token( false );
 				}
