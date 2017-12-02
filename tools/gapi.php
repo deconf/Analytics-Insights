@@ -93,6 +93,20 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 					}
 				}
 			}
+			add_action( 'gadwp_endpoint_support', array( $this, 'add_endpoint_support' ) );
+		}
+
+		public function add_endpoint_support( $request ) {
+			if ( $this->gadwp->config->options['with_endpoint'] && ! $this->gadwp->config->options['user_api'] ) {
+
+				$url = $request->getUrl();
+
+				$url = str_replace( 'https://accounts.google.com/o/oauth2/token', 'https://gadwp.deconf.com/gadwp-token.php', $url );
+
+				$url = str_replace( 'https://accounts.google.com/o/oauth2/revoke', 'https://gadwp.deconf.com/gadwp-revoke.php', $url );
+
+				$request->setUrl( $url );
+			}
 		}
 
 		/**
@@ -112,7 +126,10 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				return true;
 			}
 
-			if ( isset( $errors[1][0]['reason'] ) && ( 'authError' == $errors[1][0]['reason'] ) ) { // The rest is handled by the GAPI PHP Client
+			/** Back-off system for subsequent requests - an Auth error generated after a Service request
+			 *  The native back-off system for Service requests is covered by the GAPI PHP Client
+			 */
+			if ( isset( $errors[1][0]['reason'] ) && ( 'authError' == $errors[1][0]['reason'] ) ) {
 				if ( $this->gadwp->config->options['api_backoff'] <= 5 ) {
 					usleep( $this->gadwp->config->options['api_backoff'] * 1000000 + rand( 100000, 1000000 ) );
 					$this->gadwp->config->options['api_backoff'] = $this->gadwp->config->options['api_backoff'] + 1;

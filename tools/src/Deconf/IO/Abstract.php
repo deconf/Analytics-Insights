@@ -122,20 +122,8 @@ abstract class Deconf_IO_Abstract
   public function makeRequest(Deconf_Http_Request $request)
   {
 
-  	// GADWP With Endpoint
-  	$gadwp = GADWP();
-
-  	if ( $gadwp->config->options['with_endpoint'] && ! $gadwp->config->options['user_api'] ) {
-
-	  	$url = $request->getUrl();
-
-	  	$url = str_replace( 'https://accounts.google.com/o/oauth2/token', 'https://gadwp.deconf.com/gadwp-token.php', $url );
-
-	  	$url = str_replace( 'https://accounts.google.com/o/oauth2/revoke', 'https://gadwp.deconf.com/gadwp-revoke.php', $url );
-
-	  	$request->setUrl( $url );
-
-  	}
+  	// Add support for GADWP Endpoint
+  	do_action('gadwp_endpoint_support', $request);
 
     // First, check to see if we have a valid cached version.
     $cached = $this->getCachedRequest($request);
