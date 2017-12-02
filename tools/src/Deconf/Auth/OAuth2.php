@@ -411,9 +411,9 @@ class Deconf_Auth_OAuth2 extends Deconf_Auth_Abstract
       return true;
     }
 
-    // If the token is set to expire in the next 30 seconds.
+    // If the token is set to expire in the next 60 seconds.
     $expired = ($this->token['created']
-        + ($this->token['expires_in'] - 30)) < time();
+        + ($this->token['expires_in'] - 60)) < time();
 
     return $expired;
   }
