@@ -103,7 +103,20 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 
 		public function endpoint_get_token( $gadwp_access_code ) {
 			$site = get_site_url();
-			$response = wp_remote_get( 'https://gadwp.deconf.com/?accesscode=' . $gadwp_access_code . '&managequota=' . $this->managequota . '&url=' . $site, array( 'timeout' => 120, 'httpversion' => '1.1' ) );
+
+			/* @formatter:off */
+			$postdata = array( 	'managequota' => $this->managequota,
+								'url' => $site,
+								'accesscode' => $gadwp_access_code,
+			);
+			$data = array( 	'timeout' => 120,
+							'httpversion' => '1.1',
+							'body' => $postdata,
+			);
+			/* @formatter:on */
+
+			$response = wp_remote_post( 'https://gadwp.deconf.com/gadwp.php', $data );
+
 			if ( ! is_wp_error( $response ) ) {
 				$status = wp_remote_retrieve_response_code( $response );
 				if ( 200 == $status ) {
@@ -134,7 +147,20 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			if ( $this->client->isAccessTokenExpired() ) {
 				$oldtoken = json_encode( $token );
 				$site = get_site_url();
-				$response = wp_remote_get( 'https://gadwp.deconf.com/?accesstoken=' . $oldtoken . '&managequota=' . $this->managequota . '&url=' . $site, array( 'timeout' => 120, 'httpversion' => '1.1' ) );
+
+				/* @formatter:off */
+				$postdata = array( 	'managequota' => $this->managequota,
+					'url' => $site,
+					'accesstoken' => $oldtoken,
+				);
+				$data = array( 	'timeout' => 120,
+					'httpversion' => '1.1',
+					'body' => $postdata,
+				);
+				/* @formatter:on */
+
+				$response = wp_remote_post( 'https://gadwp.deconf.com/gadwp.php', $data );
+
 				if ( ! is_wp_error( $response ) ) {
 					$status = wp_remote_retrieve_response_code( $response );
 					if ( 200 == $status ) {
@@ -165,7 +191,20 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 		private function endpoint_revoke_token() {
 			$oldtoken = json_encode( $this->client->getAccessToken() );
 			$site = get_site_url();
-			$response = wp_remote_get( 'https://gadwp.deconf.com/?revoketoken=' . $oldtoken . '&managequota=' . $this->managequota . '&url=' . $site, array( 'timeout' => 120, 'httpversion' => '1.1' ) );
+
+			/* @formatter:off */
+			$postdata = array( 	'managequota' => $this->managequota,
+				'url' => $site,
+				'revoketoken' => $oldtoken,
+			);
+			$data = array( 	'timeout' => 120,
+				'httpversion' => '1.1',
+				'body' => $postdata,
+			);
+			/* @formatter:on */
+
+			$response = wp_remote_post( 'https://gadwp.deconf.com/gadwp.php', $data );
+
 			if ( ! is_wp_error( $response ) ) {
 				$status = wp_remote_retrieve_response_code( $response );
 				if ( 200 != $status ) {
@@ -198,7 +237,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				return true;
 			}
 
-			if ( isset( $errors[1][0]['reason'] ) && ( 'userRateLimitExceeded' == $errors[1][0]['reason'] || 'rateLimitExceeded' == $errors[1][0]['reason'] || 'quotaExceeded' == $errors[1][0]['reason'] ) ) {
+			if ( isset( $errors[1][0]['reason'] ) && ( 'authError' == $errors[1][0]['reason'] || 'userRateLimitExceeded' == $errors[1][0]['reason'] || 'rateLimitExceeded' == $errors[1][0]['reason'] || 'quotaExceeded' == $errors[1][0]['reason'] ) ) {
 				if ( $this->gadwp->config->options['api_backoff'] <= 5 ) {
 					usleep( rand( 1000000, 4500000 ) );
 					$this->gadwp->config->options['api_backoff'] = $this->gadwp->config->options['api_backoff'] + 1;
