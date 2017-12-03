@@ -1143,7 +1143,7 @@ function GADWPReportLoad () {
 	if ( gadwpItemData.scope == 'admin-widgets' ) {
 		jQuery( '#gadwp-window-1' ).gadwpItemReport( 1 );
 	} else {
-		jQuery( gadwpItemData.getSelector( gadwpItemData.scope ) ).click( function () {
+		jQuery( '#the-list' ).on( 'click', gadwpItemData.getSelector( gadwpItemData.scope ),  function () {
 			if ( !jQuery( "#gadwp-window-" + gadwpItemData.getID( this ) ).length > 0 ) {
 				jQuery( "body" ).append( '<div id="gadwp-window-' + gadwpItemData.getID( this ) + '"></div>' );
 			}
