@@ -1151,7 +1151,7 @@ final class GADWP_Settings {
 					$gadwp->gapi_controller->client->authenticate( $_POST['gadwp_access_code'] );
 					$gadwp->config->options['token'] = $gadwp->gapi_controller->client->getAccessToken();
 					$gadwp->config->options['automatic_updates_minorversion'] = 1;
-					$gadwp->config->options['with_endpoint'] = 1;
+					$gadwp->config->options['with_endpoint'] = 0;
 					$gadwp->config->set_plugin_options();
 					$options = self::update_options( 'general' );
 					$message = "<div class='updated' id='gadwp-autodismiss'><p>" . __( "Plugin authorization succeeded.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
@@ -1440,7 +1440,7 @@ final class GADWP_Settings {
 					$gadwp->gapi_controller->client->authenticate( $_POST['gadwp_access_code'] );
 					$gadwp->config->options['token'] = $gadwp->gapi_controller->client->getAccessToken();
 					$gadwp->config->options['automatic_updates_minorversion'] = 1;
-					$gadwp->config->options['with_endpoint'] = 1;
+					$gadwp->config->options['with_endpoint'] = 0;
 					$gadwp->config->set_plugin_options( true );
 					$options = self::update_options( 'network' );
 					$message = "<div class='updated' id='gadwp-action'><p>" . __( "Plugin authorization succeeded.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";

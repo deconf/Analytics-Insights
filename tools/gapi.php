@@ -68,7 +68,10 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				}
 			}
 
-			add_action( 'gadwp_endpoint_support', array( $this, 'add_endpoint_support' ) );
+			/**
+			 * Endpoint support available but disabled at this point
+			 */
+			//add_action( 'gadwp_endpoint_support', array( $this, 'add_endpoint_support' ) );
 
 			$this->service = new Deconf_Service_Analytics( $this->client );
 			if ( $this->gadwp->config->options['token'] ) {
@@ -253,7 +256,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				$this->gadwp->config->options['ga_profiles_list'] = array();
 				try {
 					$this->client->revokeToken();
-					$this->gadwp->config->options['with_endpoint'] = 1;
+					$this->gadwp->config->options['with_endpoint'] = 0;
 				} catch ( Exception $e ) {
 					if ( is_multisite() && $this->gadwp->config->options['network_mode'] ) {
 						$this->gadwp->config->set_plugin_options( true );

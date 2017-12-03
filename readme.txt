@@ -176,7 +176,11 @@ This is a major update, please read the [release notes](https://deconf.com/googl
 	* improvements on error reporting system
 * Bug Fixes:	
 	* some thrown errors were not displayed on Errors & Debug screen
-	
+
+= 5.1.2.3 =
+* Bug Fixes:
+	* fixes an access token request loop
+
 = 5.1.2.2 =
 * Bug Fixes:
 	* fixes a GAPI parameter issue

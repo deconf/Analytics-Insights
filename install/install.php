@@ -83,7 +83,7 @@ class GADWP_Install {
 			$options['tm_pagescrolldepth_tracking'] = 0;
 			$options['ga_event_precision'] = 0;
 			$options['ga_force_ssl'] = 0;
-			$options['with_endpoint'] = 1;
+			$options['with_endpoint'] = 0;
 		} else {
 			$options = array();
 			$options['client_id'] = get_option( 'ga_dash_clientid' );
@@ -152,7 +152,7 @@ class GADWP_Install {
 			$options['ga_user_samplerate'] = 100;
 			$options['ga_event_precision'] = 0;
 			$options['ga_force_ssl'] = 0;
-			$options['with_endpoint'] = 1;
+			$options['with_endpoint'] = 0;
 
 			delete_option( 'ga_dash_clientid' );
 			delete_option( 'ga_dash_clientsecret' );
