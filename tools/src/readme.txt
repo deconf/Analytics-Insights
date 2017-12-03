@@ -22,4 +22,4 @@
 				 
  * Updated the IO -> cacerts.pem file to support Let's Encrypt certificates
  
- * Changed 'Google' provider to 'Deconf', to avoid conflicts on diferent versions of GAPI PHP Client 	
+ * Changed 'Google' provider to 'Deconf', to avoid conflicts on different versions of GAPI PHP Client 	
