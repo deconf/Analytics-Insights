@@ -67,12 +67,19 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 					$this->client->setClientSecret( $this->access[1] );
 				}
 			}
+
+			add_action( 'gadwp_endpoint_support', array( $this, 'add_endpoint_support' ) );
+
 			$this->service = new Deconf_Service_Analytics( $this->client );
 			if ( $this->gadwp->config->options['token'] ) {
 				$token = $this->gadwp->config->options['token'];
 				if ( $token ) {
 					try {
 						$this->client->setAccessToken( $token );
+						if ( $this->client->isAccessTokenExpired() ) {
+							$refreshtoken = $this->client->getRefreshToken();
+							$this->client->refreshToken( $refreshtoken );
+						}
 						$this->gadwp->config->options['token'] = $this->client->getAccessToken();
 					} catch ( Deconf_IO_Exception $e ) {
 						$timeout = $this->get_timeouts( 'midnight' );
@@ -93,7 +100,6 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 					}
 				}
 			}
-			add_action( 'gadwp_endpoint_support', array( $this, 'add_endpoint_support' ) );
 		}
 
 		public function add_endpoint_support( $request ) {
