@@ -24,7 +24,7 @@ if ( ! class_exists( 'GADWP_Frontend_Item_Reports' ) ) {
 		}
 
 		function custom_adminbar_node( $wp_admin_bar ) {
-			if ( GADWP_Tools::check_roles( $this->gadwp->config->options['ga_dash_access_front'] ) && $this->gadwp->config->options['frontend_item_reports'] ) {
+			if ( GADWP_Tools::check_roles( $this->gadwp->config->options['access_front'] ) && $this->gadwp->config->options['frontend_item_reports'] ) {
 				/* @formatter:off */
 				$args = array( 	'id' => 'gadwp-1',
 								'title' => '<span class="ab-icon"></span><span class="">' . __( "Analytics", 'google-analytics-dashboard-for-wp' ) . '</span>',

@@ -7,5 +7,5 @@
  */
 
 jQuery( document ).ready( function () {
-	jQuery( '.ga_dash_style' ).wpColorPicker();
+	jQuery( '.theme_color' ).wpColorPicker();
 } );

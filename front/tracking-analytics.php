@@ -22,7 +22,7 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics_Base' ) ) {
 		public function __construct() {
 			$this->gadwp = GADWP();
 
-			$profile = GADWP_Tools::get_selected_profile( $this->gadwp->config->options['ga_dash_profile_list'], $this->gadwp->config->options['ga_dash_tableid_jail'] );
+			$profile = GADWP_Tools::get_selected_profile( $this->gadwp->config->options['ga_profiles_list'], $this->gadwp->config->options['tableid_jail'] );
 
 			$this->uaid = esc_html( $profile[2] );
 		}
@@ -264,7 +264,7 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 				$this->add( 'linker:autoLink', $fields );
 			}
 
-			if ( $this->gadwp->config->options['ga_dash_remarketing'] ) {
+			if ( $this->gadwp->config->options['ga_remarketing'] ) {
 				$fields = array();
 				$fields['plugin'] = 'displayfeatures';
 				$this->add( 'require', $fields );
@@ -293,7 +293,7 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 				}
 			}
 
-			if ( $this->gadwp->config->options['ga_dash_anonim'] ) {
+			if ( $this->gadwp->config->options['ga_anonymize_ip'] ) {
 				$fields = array();
 				$fields['option'] = 'anonymizeIp';
 				$fields['value'] = 'true';

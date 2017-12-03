@@ -44,9 +44,9 @@ final class GADWP_Frontend_Widget extends WP_Widget {
 			echo $args['before_title'] . $widget_title . $args['after_title'];
 		}
 
-		if ( isset( $this->gadwp->config->options['ga_dash_style'] ) ) {
-			$css = "colors:['" . $this->gadwp->config->options['ga_dash_style'] . "','" . GADWP_Tools::colourVariator( $this->gadwp->config->options['ga_dash_style'], - 20 ) . "'],";
-			$color = $this->gadwp->config->options['ga_dash_style'];
+		if ( isset( $this->gadwp->config->options['theme_color'] ) ) {
+			$css = "colors:['" . $this->gadwp->config->options['theme_color'] . "','" . GADWP_Tools::colourVariator( $this->gadwp->config->options['theme_color'], - 20 ) . "'],";
+			$color = $this->gadwp->config->options['theme_color'];
 		} else {
 			$css = "";
 			$color = "#3366CC";

@@ -47,3 +47,4 @@ Hooks
 
   - gadwp_tagmanager_datalayer
   - gadwp_analytics_commands
+  - gadwp_endpoint_support

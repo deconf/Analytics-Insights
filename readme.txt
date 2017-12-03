@@ -4,7 +4,7 @@ Donate link: https://deconf.com/donate/
 Tags: analytics,google analytics,google analytics dashboard,google analytics plugin,google analytics widget
 Requires at least: 3.5
 Tested up to: 4.8.2
-Stable tag: 5.2
+Stable tag: 5.1.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -163,17 +163,24 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 
 == Upgrade Notice ==
 
-This is a major update, please read the [release notes](https://deconf.com/google-analytics-dashboard-for-wp-5-0-release-notes/) first.
+This is a major update, please read the [release notes](https://deconf.com/google-analytics-dashboard-for-wp-5-2-release-notes/) first.
 
 == Changelog ==
 
 = 5.2 =
 * Enhancements:  
 	* improvements on exponential backoff system
-	* introduces a new auth method with endpoints
-* Note:
-	* will require reauthorization for multisite installs
-	
+	* introduces a new authentication method with endpoints
+	* multiple updates of plugin's options
+	* code cleanup
+	* improvements on error reporting system
+* Bug Fixes:	
+	* some thrown errors were not displayed on Errors & Debug screen
+
+= 5.1.2.3 =
+* Bug Fixes:
+	* fixes an access token request loop
+
 = 5.1.2.2 =
 * Bug Fixes:
 	* fixes a GAPI parameter issue
