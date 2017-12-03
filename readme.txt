@@ -176,6 +176,7 @@ This is a major update, please read the [release notes](https://deconf.com/googl
 	* improvements on error reporting system
 * Bug Fixes:	
 	* some thrown errors were not displayed on Errors & Debug screen
+	* analytics icon disappears from post list after quick edit, , props by [karex](https://github.com/karex)
 
 = 5.1.2.3 =
 * Bug Fixes:
