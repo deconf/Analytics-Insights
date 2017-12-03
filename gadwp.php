@@ -201,7 +201,6 @@ if ( ! class_exists( 'GADWP_Manager' ) ) {
 						include_once ( GADWP_DIR . 'admin/item-reports.php' );
 						self::$instance->backend_item_reports = new GADWP_Backend_Item_Reports();
 					}
-
 				} else if ( GADWP_Tools::check_roles( self::$instance->config->options['access_back'] ) ) {
 
 					/*

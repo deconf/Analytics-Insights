@@ -79,8 +79,10 @@ jQuery( window ).on( 'load', function () {
 
 			// Track Outbound Links
 			jQuery( 'a[href^="http"]' ).filter( function () {
-				var reg = new RegExp( '.*\\.(' + gadwpUAEventsData.options[ 'event_downloads' ] + ')(\\?.*)?$' );
-				if ( !this.href.match( reg ) ) {
+	            if (typeof this.href === 'string') {
+	                var reg = new RegExp( '.*\\.(' + gadwpUAEventsData.options[ 'event_downloads' ] + ')(\\?.*)?$' );
+	            }				
+				if ( reg && !this.href.match( reg ) ) {
 					if ( this.href.indexOf( gadwpUAEventsData.options[ 'root_domain' ] ) == -1 && this.href.indexOf( '://' ) > -1 )
 						return this.href;
 				}
@@ -130,8 +132,10 @@ jQuery( window ).on( 'load', function () {
 		// Track Affiliates
 		jQuery( 'a' ).filter( function () {
 			if ( gadwpUAEventsData.options[ 'event_affiliates' ] != '' ) {
-				var reg = new RegExp( '(' + gadwpUAEventsData.options[ 'event_affiliates' ].replace( /\//g, '\/' ) + ')' );
-				return this.href.match( reg );
+				if (typeof this.href === 'string') {
+					var reg = new RegExp( '(' + gadwpUAEventsData.options[ 'event_affiliates' ].replace( /\//g, '\/' ) + ')' );
+					return this.href.match( reg );
+				}	
 			}
 		} ).click( function ( event ) {
 			gadwpRedirectCalled = false;
