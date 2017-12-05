@@ -1151,7 +1151,6 @@ final class GADWP_Settings {
 					$gadwp->gapi_controller->client->authenticate( $_POST['gadwp_access_code'] );
 					$gadwp->config->options['token'] = $gadwp->gapi_controller->client->getAccessToken();
 					$gadwp->config->options['automatic_updates_minorversion'] = 1;
-					$gadwp->config->options['with_endpoint'] = 0;
 					$gadwp->config->set_plugin_options();
 					$options = self::update_options( 'general' );
 					$message = "<div class='updated' id='gadwp-autodismiss'><p>" . __( "Plugin authorization succeeded.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
@@ -1182,7 +1181,7 @@ final class GADWP_Settings {
 				} catch ( Exception $e ) {
 					$timeout = $gadwp->gapi_controller->get_timeouts( 'midnight' );
 					GADWP_Tools::set_error( $e, $timeout );
-					$gadwp->gapi_controller->reset_token( false );
+					$gadwp->gapi_controller->reset_token( true );
 				}
 			} else {
 				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "The access code is <strong>NOT</strong> your <strong>Tracking ID</strong> (UA-XXXXX-X). Try again, and use the red link to get your access code", 'google-analytics-dashboard-for-wp' ) . ".</p></div>";
@@ -1210,6 +1209,7 @@ final class GADWP_Settings {
 			if ( isset( $_POST['gadwp_security'] ) && wp_verify_nonce( $_POST['gadwp_security'], 'gadwp_form' ) ) {
 				GADWP_Tools::delete_cache( 'last_error' );
 				GADWP_Tools::delete_cache( 'gapi_errors' );
+				delete_option( 'gadwp_got_updated' );
 				$message = "<div class='updated' id='gadwp-autodismiss'><p>" . __( "All errors reseted.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			} else {
 				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
@@ -1440,7 +1440,6 @@ final class GADWP_Settings {
 					$gadwp->gapi_controller->client->authenticate( $_POST['gadwp_access_code'] );
 					$gadwp->config->options['token'] = $gadwp->gapi_controller->client->getAccessToken();
 					$gadwp->config->options['automatic_updates_minorversion'] = 1;
-					$gadwp->config->options['with_endpoint'] = 0;
 					$gadwp->config->set_plugin_options( true );
 					$options = self::update_options( 'network' );
 					$message = "<div class='updated' id='gadwp-action'><p>" . __( "Plugin authorization succeeded.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
@@ -1480,7 +1479,7 @@ final class GADWP_Settings {
 				} catch ( Exception $e ) {
 					$timeout = $gadwp->gapi_controller->get_timeouts( 'midnight' );
 					GADWP_Tools::set_error( $e, $timeout );
-					$gadwp->gapi_controller->reset_token( false );
+					$gadwp->gapi_controller->reset_token( true );
 				}
 			} else {
 				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "The access code is <strong>NOT</strong> your <strong>Tracking ID</strong> (UA-XXXXX-X). Try again, and use the red link to get your access code", 'google-analytics-dashboard-for-wp' ) . ".</p></div>";

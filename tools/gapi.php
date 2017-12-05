@@ -60,12 +60,8 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				$this->client->setClientId( $this->gadwp->config->options['client_id'] );
 				$this->client->setClientSecret( $this->gadwp->config->options['client_secret'] );
 			} else {
-				if ( $this->gadwp->config->options['with_endpoint'] ) {
-					$this->client->setClientId( '65556128781-pgfs40ihk5f4peufgknqlgba3q4p3hl9.apps.googleusercontent.com' );
-				} else {
-					$this->client->setClientId( $this->access[0] );
-					$this->client->setClientSecret( $this->access[1] );
-				}
+				$this->client->setClientId( $this->access[0] );
+				$this->client->setClientSecret( $this->access[1] );
 			}
 
 			/**
@@ -131,7 +127,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			}
 
 			if ( isset( $errors[1][0]['reason'] ) && ( 'invalidParameter' == $errors[1][0]['reason'] || 'badRequest' == $errors[1][0]['reason'] || 'invalidCredentials' == $errors[1][0]['reason'] || 'insufficientPermissions' == $errors[1][0]['reason'] || 'required' == $errors[1][0]['reason'] ) ) {
-				$this->reset_token( false );
+				$this->reset_token();
 				return true;
 			}
 
