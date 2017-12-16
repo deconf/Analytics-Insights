@@ -179,6 +179,10 @@ This is a major update, please read the [release notes](https://deconf.com/googl
 	* analytics icon disappears from post list after quick edit, props by [karex](https://github.com/karex)
 	* fix for inline SVG links, props by [Andrew Minion](https://github.com/macbookandrew)
 
+= 5.1.2.4 =
+* Security:
+	* fixes a security vulnerability on a dashboard report, see [the release notes](https://deconf.com/google-analytics-dashboard-for-wp-5-1-2-4-security-release); credits [Oways](https://hackerone.com/0ways)
+	
 = 5.1.2.3 =
 * Bug Fixes:
 	* fixes an access token request loop

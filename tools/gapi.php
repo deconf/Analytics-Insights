@@ -252,7 +252,6 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				$this->gadwp->config->options['ga_profiles_list'] = array();
 				try {
 					$this->client->revokeToken();
-					$this->gadwp->config->options['with_endpoint'] = 0;
 				} catch ( Exception $e ) {
 					if ( is_multisite() && $this->gadwp->config->options['network_mode'] ) {
 						$this->gadwp->config->set_plugin_options( true );
@@ -841,7 +840,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			$i = 0;
 			$gadwp_data = $data;
 			foreach ( $data->getRows() as $row ) {
-				$gadwp_data->rows[$i] = array_map( 'esc_html', $row );
+				$gadwp_data->rows[$i] = array_map( 'wp_kses_data', $row );
 				$i++;
 			}
 
