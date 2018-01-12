@@ -44,6 +44,17 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				if ( $rightversion && defined( 'GADWP_IP_VERSION' ) && GADWP_IP_VERSION ) {
 					$curl_options[CURLOPT_IPRESOLVE] = GADWP_IP_VERSION; // Force CURL_IPRESOLVE_V4 or CURL_IPRESOLVE_V6
 				}
+
+				// add Proxy server settings to curl, if defined
+				if(defined('WP_PROXY_HOST') && defined('WP_PROXY_PORT')) {
+					$curl_options[CURLOPT_PROXY] = WP_PROXY_HOST;
+					$curl_options[CURLOPT_PROXYPORT] = WP_PROXY_PORT;
+				}
+				if(defined('WP_PROXY_USERNAME') && defined('WP_PROXY_PASSWORD')) {
+					$curl_options[CURLOPT_HTTPAUTH] = CURLAUTH_BASIC;
+					$curl_options[CURLOPT_PROXYUSERPWD] = WP_PROXY_USERNAME.':'.WP_PROXY_PASSWORD;
+				}
+
 				$curl_options = apply_filters( 'gadwp_curl_options', $curl_options );
 				if ( ! empty( $curl_options ) ) {
 					$config->setClassConfig( 'Deconf_IO_Curl', array( 'options' => $curl_options ) );
