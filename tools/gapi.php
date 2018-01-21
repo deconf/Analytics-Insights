@@ -52,7 +52,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			$this->client = new Deconf_Client( $config );
 			$this->client->setScopes( array( 'https://www.googleapis.com/auth/analytics.readonly' ) );
 			$this->client->setAccessType( 'offline' );
-			$this->client->setApplicationName( 'Google Analytics Dashboard' );
+			$this->client->setApplicationName( 'GADWP ' . GADWP_CURRENT_VERSION );
 			$this->client->setRedirectUri( 'urn:ietf:wg:oauth:2.0:oob' );
 			$this->managequota = 'u' . get_current_user_id() . 's' . get_current_blog_id();
 			$this->access = array_map( array( $this, 'map' ), $this->access );
@@ -65,9 +65,9 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			}
 
 			/**
-			 * Endpoint support available but disabled at this point
+			 * GADWP Endpoint support
 			 */
-			//add_action( 'gadwp_endpoint_support', array( $this, 'add_endpoint_support' ) );
+			add_action( 'gadwp_endpoint_support', array( $this, 'add_endpoint_support' ) );
 
 			$this->service = new Deconf_Service_Analytics( $this->client );
 			if ( $this->gadwp->config->options['token'] ) {
@@ -106,11 +106,15 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 
 				$url = $request->getUrl();
 
-				$url = str_replace( 'https://accounts.google.com/o/oauth2/token', 'https://gadwp.deconf.com/gadwp-token.php', $url );
+				$url = str_replace( 'https://accounts.google.com/o/oauth2/token', GADWP_ENDPOINT_URL . 'gadwp-token.php', $url );
 
-				$url = str_replace( 'https://accounts.google.com/o/oauth2/revoke', 'https://gadwp.deconf.com/gadwp-revoke.php', $url );
+				$url = str_replace( 'https://accounts.google.com/o/oauth2/revoke', GADWP_ENDPOINT_URL . 'gadwp-revoke.php', $url );
 
 				$request->setUrl( $url );
+
+				if ( ! $request->getUserAgent() ) {
+					$request->setUserAgent( $this->client->getApplicationName() );
+				}
 			}
 		}
 

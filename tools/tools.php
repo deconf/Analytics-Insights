@@ -200,7 +200,7 @@ if ( ! class_exists( 'GADWP_Tools' ) ) {
 				}
 				return $dom;
 			} else {
-				self::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . __( 'DOM is disabled or libxml PHP extension is missing. Contact your hosting provider. Automatic tracking of events for AMP pages is not possible.', 'google-analytics-dashboard-for-wp' ), 24 * 60 * 60 );
+				self::set_error( __( 'DOM is disabled or libxml PHP extension is missing. Contact your hosting provider. Automatic tracking of events for AMP pages is not possible.', 'google-analytics-dashboard-for-wp' ), 24 * 60 * 60 );
 				return false;
 			}
 		}
@@ -229,7 +229,7 @@ if ( ! class_exists( 'GADWP_Tools' ) ) {
 				if ( method_exists( $e, 'getCode' ) && method_exists( $e, 'getMessage' ) ) {
 					self::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( "(" . $e->getCode() . ") " . $e->getMessage() ), $timeout );
 				} else {
-					GADWP_Tools::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $timeout );
+					self::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $timeout );
 				}
 				if ( method_exists( $e, 'getCode' ) && method_exists( $e, 'getErrors' ) ) {
 					self::set_cache( 'gapi_errors', array( $e->getCode(), (array) $e->getErrors() ), $timeout );
@@ -237,6 +237,29 @@ if ( ! class_exists( 'GADWP_Tools' ) ) {
 			} else {
 				self::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $timeout );
 			}
+
+			// Count Errors
+			$midnight = strtotime( "tomorrow 00:00:00" ); // UTC midnight
+			$midnight = $midnight + 8 * 3600; // UTC 8 AM
+			$tomidnight = $midnight - time();
+			$errors_count = self::get_cache( 'errors_count' );
+			$errors_count = (int) $errors_count + 1;
+			self::set_cache( 'errors_count', $errors_count, $tomidnight );
+		}
+
+		public static function anonymize_options( $options ) {
+			global $wp_version;
+
+			$options['wp_version'] = $wp_version;
+			$options['gadwp_version'] = GADWP_CURRENT_VERSION;
+			if ( $options['token'] ) {
+				$options['token'] = 'HIDDEN';
+			}
+			if ( $options['client_secret'] ) {
+				$options['client_secret'] = 'HIDDEN';
+			}
+
+			return $options;
 		}
 	}
 }

@@ -14,10 +14,15 @@
 if ( ! defined( 'ABSPATH' ) )
 	exit();
 
-	// Plugin Version
+// Plugin Version
 if ( ! defined( 'GADWP_CURRENT_VERSION' ) ) {
 	define( 'GADWP_CURRENT_VERSION', '5.2-beta' );
 }
+
+if ( ! defined( 'GADWP_ENDPOINT_URL' ) ) {
+	define( 'GADWP_ENDPOINT_URL', 'https://gadwp.deconf.com/' );
+}
+
 
 if ( ! class_exists( 'GADWP_Manager' ) ) {
 

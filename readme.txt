@@ -172,6 +172,7 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 	* multiple updates of plugin's options
 	* code cleanup
 	* improvements on error reporting system
+	* option to report errors to developer
 * Bug Fixes:	
 	* some thrown errors were not displayed on Errors & Debug screen
 	* analytics icon disappears from post list after quick edit, props by [karex](https://github.com/karex)

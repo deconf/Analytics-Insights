@@ -146,6 +146,8 @@ final class GADWP_Settings {
 
 
 
+
+
 									</table>
 								</td>
 							</tr>
@@ -174,6 +176,8 @@ final class GADWP_Settings {
 						</table>
 						<input type="hidden" name="options[gadwp_hidden]" value="Y">
 						<?php wp_nonce_field('gadwp_form','gadwp_security');?>
+
+
 
 
 
@@ -239,6 +243,8 @@ final class GADWP_Settings {
 										<tr>
 											<?php endif; ?>
 										<?php endforeach; ?>
+
+
 
 
 
@@ -330,6 +336,8 @@ final class GADWP_Settings {
 						</table>
 						<input type="hidden" name="options[gadwp_hidden]" value="Y">
 						<?php wp_nonce_field('gadwp_form','gadwp_security'); ?>
+
+
 
 
 
@@ -1002,6 +1010,8 @@ final class GADWP_Settings {
 
 
 
+
+
 										</table>
 									</td>
 								</tr>
@@ -1025,13 +1035,14 @@ final class GADWP_Settings {
 
 
 
+
+
 </form>
 <?php
 		self::output_sidebar();
 	}
 
 	public static function errors_debugging() {
-		global $wp_version;
 
 		$gadwp = GADWP();
 
@@ -1039,18 +1050,8 @@ final class GADWP_Settings {
 			return;
 		}
 
-		$anonim = $gadwp->config->options;
-		$anonim['wp_version'] = $wp_version;
-		$anonim['gadwp_version'] = GADWP_CURRENT_VERSION;
-		if ( $anonim['token'] ) {
-			$anonim['token'] = 'HIDDEN';
-		}
-		if ( $anonim['client_id'] ) {
-			$anonim['client_id'] = 'HIDDEN';
-		}
-		if ( $anonim['client_secret'] ) {
-			$anonim['client_secret'] = 'HIDDEN';
-		}
+		$anonim = GADWP_Tools::anonymize_options( $gadwp->config->options );
+
 		$options = self::update_options( 'frontend' );
 		if ( ! $gadwp->config->options['tableid_jail'] || ! $gadwp->config->options['token'] ) {
 			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'google-analytics-dashboard-for-wp' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadwp_errors_debugging', false ), __( 'Errors & Debug', 'google-analytics-dashboard-for-wp' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadwp_settings', false ), __( 'authorize the plugin', 'google-analytics-dashboard-for-wp' ) ) ) );
@@ -1071,22 +1072,17 @@ final class GADWP_Settings {
 						<table class="gadwp-settings-options">
 							<tr>
 								<td>
-									<?php echo "<h2>" . __( "Last Error detected", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?>
+									<?php echo "<h2>" . __( "Error Details", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?>
 								</td>
 							</tr>
 							<tr>
 								<td>
-									<?php $errors = print_r( GADWP_Tools::get_cache( 'last_error' ), true ) ? esc_html( print_r( GADWP_Tools::get_cache( 'last_error' ), true ) ) : __( "None", 'google-analytics-dashboard-for-wp' ); ?>
+									<?php $errors_count = GADWP_Tools::get_cache( 'errors_count' ); ?>
+									<pre class="gadwp-settings-logdata"><?php echo __("Count: ", 'google-analytics-dashboard-for-wp') . (int)$errors_count;?></pre>
+									<?php $errors = print_r( GADWP_Tools::get_cache( 'last_error' ), true ) ? esc_html( print_r( GADWP_Tools::get_cache( 'last_error' ), true ) ) : ''; ?>
+									<?php $errors = str_replace( 'Deconf_', 'Google_', $errors); ?>
 									<pre class="gadwp-settings-logdata"><?php echo __("Last Error: ", 'google-analytics-dashboard-for-wp') . $errors;?></pre>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2">
-									<hr><?php echo "<h2>" . __( "Error Details", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
-							</tr>
-							<tr>
-								<td>
-									<pre class="gadwp-settings-logdata"><?php _e("Error Details: ", 'google-analytics-dashboard-for-wp'); echo "\n" . esc_html( print_r( GADWP_Tools::get_cache( 'gapi_errors' ), true ) ) ?></pre>
+									<pre class="gadwp-settings-logdata"><?php _e("GAPI Error: ", 'google-analytics-dashboard-for-wp'); echo "\n" . esc_html( print_r( GADWP_Tools::get_cache( 'gapi_errors' ), true ) ) ?></pre>
 									<br />
 									<hr>
 								</td>
@@ -1132,8 +1128,6 @@ final class GADWP_Settings {
 
 	public static function general_settings() {
 		$gadwp = GADWP();
-
-		global $wp_version;
 
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
@@ -1207,6 +1201,29 @@ final class GADWP_Settings {
 		}
 		if ( isset( $_POST['Reset_Err'] ) ) {
 			if ( isset( $_POST['gadwp_security'] ) && wp_verify_nonce( $_POST['gadwp_security'], 'gadwp_form' ) ) {
+
+				$anonim = GADWP_Tools::anonymize_options( $gadwp->config->options );
+
+				$sep = "\n---------------------------\n";
+				$error_report = GADWP_Tools::get_cache( 'last_error' );
+				$error_report .= $sep . print_r( GADWP_Tools::get_cache( 'gapi_errors' ), true );
+				$error_report .= $sep . GADWP_Tools::get_cache( 'errors_count' );
+				$error_report .= $sep . print_r( $anonim, true );
+
+				$url = GADWP_ENDPOINT_URL . 'gadwp-report.php';
+				/* @formatter:off */
+				$response = wp_remote_post( $url, array(
+						'method' => 'POST',
+						'timeout' => 45,
+						'redirection' => 5,
+						'httpversion' => '1.0',
+						'blocking' => true,
+						'headers' => array(),
+						'body' => array( 'error_report' => $error_report ),
+						'cookies' => array()
+					)
+				);
+				/* @formatter:on */
 				GADWP_Tools::delete_cache( 'last_error' );
 				GADWP_Tools::delete_cache( 'gapi_errors' );
 				delete_option( 'gadwp_got_updated' );
@@ -1300,7 +1317,7 @@ final class GADWP_Settings {
 													<td colspan="2">
 														<input type="submit" name="Reset" class="button button-secondary" value="<?php _e( "Clear Authorization", 'google-analytics-dashboard-for-wp' ); ?>" <?php echo $options['network_mode']?'disabled="disabled"':''; ?> />
 														<input type="submit" name="Clear" class="button button-secondary" value="<?php _e( "Clear Cache", 'google-analytics-dashboard-for-wp' ); ?>" />
-														<input type="submit" name="Reset_Err" class="button button-secondary" value="<?php _e( "Reset Errors", 'google-analytics-dashboard-for-wp' ); ?>" />
+														<input type="submit" name="Reset_Err" class="button button-secondary" value="<?php _e( "Report & Reset Errors", 'google-analytics-dashboard-for-wp' ); ?>" />
 													</td>
 												</tr>
 												<tr>
@@ -1416,7 +1433,6 @@ final class GADWP_Settings {
 	// Network Settings
 	public static function general_settings_network() {
 		$gadwp = GADWP();
-		global $wp_version;
 
 		if ( ! current_user_can( 'manage_network_options' ) ) {
 			return;
