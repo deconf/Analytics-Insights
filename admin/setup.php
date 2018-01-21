@@ -352,7 +352,7 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 		function admin_notice() {
 			$currentScreen = get_current_screen();
 
-			if ( ! current_user_can( 'manage_options' ) || 'dashboard' != $currentScreen->base ) {
+			if ( ! current_user_can( 'manage_options' ) || strpos( $currentScreen->base, '_gadwp_' ) === false ) {
 				return;
 			}
 
