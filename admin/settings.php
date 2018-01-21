@@ -142,12 +142,6 @@ final class GADWP_Settings {
 										<tr>
 											<?php endif; ?>
 										<?php endforeach; ?>
-
-
-
-
-
-
 									</table>
 								</td>
 							</tr>

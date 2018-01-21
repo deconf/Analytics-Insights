@@ -3,7 +3,7 @@ Contributors: deconf
 Donate link: https://deconf.com/donate/
 Tags: analytics,google analytics,google analytics dashboard,google analytics plugin,google analytics widget
 Requires at least: 3.5
-Tested up to: 4.9.1
+Tested up to: 4.9.2
 Stable tag: 5.1.2.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -173,6 +173,7 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 	* code cleanup
 	* improvements on error reporting system
 	* option to report errors to developer
+	* move the upgrade notice from the Dashboard to plugin's settings page
 * Bug Fixes:	
 	* some thrown errors were not displayed on Errors & Debug screen
 	* analytics icon disappears from post list after quick edit, props by [karex](https://github.com/karex)
