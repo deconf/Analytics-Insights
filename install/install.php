@@ -52,6 +52,7 @@ class GADWP_Install {
 			$options['ga_event_affiliates'] = '/out/';
 			$options['automatic_updates_minorversion'] = 1;
 			$options['backend_item_reports'] = 1;
+			$options['backend_realtime_report'] = 0;
 			$options['frontend_item_reports'] = 0;
 			$options['dashboard_widget'] = 1;
 			$options['api_backoff'] = 0;
@@ -120,6 +121,7 @@ class GADWP_Install {
 			$options['ga_aff_tracking'] = 0;
 			$options['automatic_updates_minorversion'] = 1;
 			$options['backend_item_reports'] = 1;
+			$options['backend_realtime_report'] = 0;
 			$options['dashboard_widget'] = 1;
 			$options['api_backoff'] = 0;
 			$options['ga_cookiedomain'] = '';

@@ -51,6 +51,7 @@ final class GADWP_Settings {
 				$options['switch_profile'] = 0;
 				$options['backend_item_reports'] = 0;
 				$options['dashboard_widget'] = 0;
+				$options['backend_realtime_report'] = 0;
 				if ( empty( $new_options['access_back'] ) ) {
 					$new_options['access_back'][] = 'administrator';
 				}
@@ -286,6 +287,20 @@ final class GADWP_Settings {
 								<td colspan="2">
 									<hr><?php echo "<h2>" . __( "Real-Time Settings", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
 							</tr>
+							<?php if ( $options['user_api'] ) : ?>
+							<tr>
+								<td colspan="2" class="gadwp-settings-title">
+									<div class="button-primary gadwp-settings-switchoo">
+										<input type="checkbox" name="options[backend_realtime_report]" value="1" class="gadwp-settings-switchoo-checkbox" id="backend_realtime_report" <?php checked( $options['backend_realtime_report'], 1 ); ?>>
+										<label class="gadwp-settings-switchoo-label" for="backend_realtime_report">
+											<div class="gadwp-settings-switchoo-inner"></div>
+											<div class="gadwp-settings-switchoo-switch"></div>
+										</label>
+									</div>
+									<div class="switch-desc"><?php _e ( "enable Real-Time report (requires access to Real-Time Reporting API)", 'google-analytics-dashboard-for-wp' );?></div>
+								</td>
+							</tr>
+							<?php endif; ?>
 							<tr>
 								<td colspan="2" class="gadwp-settings-title"> <?php _e("Maximum number of pages to display on real-time tab:", 'google-analytics-dashboard-for-wp'); ?>
 									<input type="number" name="options[ga_realtime_pages]" id="ga_realtime_pages" value="<?php echo (int)$options['ga_realtime_pages']; ?>" size="3">
@@ -1279,14 +1294,14 @@ final class GADWP_Settings {
 														<?php printf(__('You should watch the %1$s and read this %2$s before proceeding to authorization. This plugin requires a properly configured Google Analytics account!', 'google-analytics-dashboard-for-wp'), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=top_video&utm_campaign=gadwp', __("video", 'google-analytics-dashboard-for-wp')), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=top_tutorial&utm_campaign=gadwp', __("tutorial", 'google-analytics-dashboard-for-wp')));?>
 													</td>
 												</tr>
-												  <?php if (! $options['token'] || $options['user_api']) : ?>
+												  <?php if (! $options['token'] || ($options['user_api']  && ! $options['network_mode'])) : ?>
 												<tr>
 													<td colspan="2" class="gadwp-settings-info">
 														<input name="options[user_api]" type="checkbox" id="user_api" value="1" <?php checked( $options['user_api'], 1 ); ?> onchange="this.form.submit()" <?php echo ($options['network_mode'])?'disabled="disabled"':''; ?> /><?php echo " ".__("developer mode (requires advanced API knowledge)", 'google-analytics-dashboard-for-wp' );?>
 													</td>
 												</tr>
 												  <?php endif; ?>
-												  <?php if ($options['user_api']) : ?>
+												  <?php if ($options['user_api']  && ! $options['network_mode']) : ?>
 												<tr>
 													<td class="gadwp-settings-title">
 														<label for="options[client_id]"><?php _e("Client ID:", 'google-analytics-dashboard-for-wp'); ?></label>

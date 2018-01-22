@@ -95,6 +95,7 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 								'ga_user_samplerate',
 								'ga_event_precision',
 								'with_endpoint',
+								'backend_realtime_report',
 			);
 			foreach ( $numerics as $key ) {
 				if ( isset( $options[$key] ) ) {
@@ -219,7 +220,8 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 		private function maintain_compatibility() {
 			$flag = false;
 
-			if ( GADWP_CURRENT_VERSION != get_option( 'gadwp_version' ) ) {
+			$prevver = get_option( 'gadwp_version' );
+			if ( $prevver && GADWP_CURRENT_VERSION != $prevver ) {
 				$flag = true;
 				update_option( 'gadwp_version', GADWP_CURRENT_VERSION );
 				update_option( 'gadwp_got_updated', true );
@@ -273,6 +275,7 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 								'ga_event_precision', //v5.1.1.1
 								'ga_force_ssl', //v5.1.2
 								'with_endpoint', //v5.2
+								'backend_realtime_report', //v5.2
 			);
 			foreach ( $zeros as $key ) {
 				if ( ! isset( $this->options[$key] ) ) {

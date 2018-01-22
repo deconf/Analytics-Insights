@@ -149,20 +149,28 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 					wp_enqueue_script( 'gadwp-backend-dashboard-reports', GADWP_URL . 'common/js/reports5.js', array( 'jquery', 'googlecharts', 'gadwp-nprogress', 'jquery-ui-tooltip', 'jquery-ui-core', 'jquery-ui-position', 'jquery-ui-tooltip-html' ), GADWP_CURRENT_VERSION, true );
 
 					/* @formatter:off */
+
+					$datelist = array(
+						'realtime' => __( "Real-Time", 'google-analytics-dashboard-for-wp' ),
+						'today' => __( "Today", 'google-analytics-dashboard-for-wp' ),
+						'yesterday' => __( "Yesterday", 'google-analytics-dashboard-for-wp' ),
+						'7daysAgo' => sprintf( __( "Last %d Days", 'google-analytics-dashboard-for-wp' ), 7 ),
+						'14daysAgo' => sprintf( __( "Last %d Days", 'google-analytics-dashboard-for-wp' ), 14 ),
+						'30daysAgo' => sprintf( __( "Last %d Days", 'google-analytics-dashboard-for-wp' ), 30 ),
+						'90daysAgo' => sprintf( __( "Last %d Days", 'google-analytics-dashboard-for-wp' ), 90 ),
+						'365daysAgo' =>  sprintf( _n( "%s Year", "%s Years", 1, 'google-analytics-dashboard-for-wp' ), __('One', 'google-analytics-dashboard-for-wp') ),
+						'1095daysAgo' =>  sprintf( _n( "%s Year", "%s Years", 3, 'google-analytics-dashboard-for-wp' ), __('Three', 'google-analytics-dashboard-for-wp') ),
+					);
+
+
+					if ( $this->gadwp->config->options['user_api'] && ! $this->gadwp->config->options['backend_realtime_report'] ) {
+						array_shift( $datelist );
+					}
+
 					wp_localize_script( 'gadwp-backend-dashboard-reports', 'gadwpItemData', array(
 						'ajaxurl' => admin_url( 'admin-ajax.php' ),
 						'security' => wp_create_nonce( 'gadwp_backend_item_reports' ),
-						'dateList' => array(
-							'realtime' => __( "Real-Time", 'google-analytics-dashboard-for-wp' ),
-							'today' => __( "Today", 'google-analytics-dashboard-for-wp' ),
-							'yesterday' => __( "Yesterday", 'google-analytics-dashboard-for-wp' ),
-							'7daysAgo' => sprintf( __( "Last %d Days", 'google-analytics-dashboard-for-wp' ), 7 ),
-							'14daysAgo' => sprintf( __( "Last %d Days", 'google-analytics-dashboard-for-wp' ), 14 ),
-							'30daysAgo' => sprintf( __( "Last %d Days", 'google-analytics-dashboard-for-wp' ), 30 ),
-							'90daysAgo' => sprintf( __( "Last %d Days", 'google-analytics-dashboard-for-wp' ), 90 ),
-							'365daysAgo' =>  sprintf( _n( "%s Year", "%s Years", 1, 'google-analytics-dashboard-for-wp' ), __('One', 'google-analytics-dashboard-for-wp') ),
-							'1095daysAgo' =>  sprintf( _n( "%s Year", "%s Years", 3, 'google-analytics-dashboard-for-wp' ), __('Three', 'google-analytics-dashboard-for-wp') ),
-						),
+						'dateList' => $datelist,
 						'reportList' => array(
 							'sessions' => __( "Sessions", 'google-analytics-dashboard-for-wp' ),
 							'users' => __( "Users", 'google-analytics-dashboard-for-wp' ),
@@ -216,6 +224,7 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 						'viewList' => $views,
 						'scope' => 'admin-widgets',
 					)
+
 					);
 					/* @formatter:on */
 				}
@@ -357,10 +366,11 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 			}
 
 			if ( get_option( 'gadwp_got_updated' ) ) :
-			?>
-				<div id="gadwp-notice" class="notice is-dismissible">
-				    <p><?php echo sprintf( __('Google Analytics Dashboard for WP has been updated to version %s.', 'google-analytics-dashboard-for-wp' ), GADWP_CURRENT_VERSION).' '.sprintf( __('For details, check out %1$s and %2$s.', 'google-analytics-dashboard-for-wp' ), sprintf(' <a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_notice&utm_medium=link&utm_content=release_notice&utm_campaign=gadwp">%s</a> ', __('the release notes', 'google-analytics-dashboard-for-wp') ), sprintf(' <a href="%1$s">%2$s</a>', esc_url( get_admin_url( null, 'admin.php?page=gadwp_settings' ) ), __('the plugin&#39;s settings page', 'google-analytics-dashboard-for-wp') ) ); ?></p>
-				</div>
+				?>
+<div id="gadwp-notice" class="notice is-dismissible">
+	<p><?php echo sprintf( __('Google Analytics Dashboard for WP has been updated to version %s.', 'google-analytics-dashboard-for-wp' ), GADWP_CURRENT_VERSION).' '.sprintf( __('For details, check out %1$s and %2$s.', 'google-analytics-dashboard-for-wp' ), sprintf(' <a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_notice&utm_medium=link&utm_content=release_notice&utm_campaign=gadwp">%s</a> ', __('the release notes', 'google-analytics-dashboard-for-wp') ), sprintf(' <a href="%1$s">%2$s</a>', esc_url( get_admin_url( null, 'admin.php?page=gadwp_settings' ) ), __('the plugin&#39;s settings page', 'google-analytics-dashboard-for-wp') ) ); ?></p>
+</div>
+
 			<?php
 			endif;
 		}
