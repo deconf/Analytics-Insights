@@ -180,6 +180,7 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 	* some thrown errors were not displayed on Errors & Debug screen
 	* analytics icon disappears from post list after quick edit, props by [karex](https://github.com/karex)
 	* fix for inline SVG links, props by [Andrew Minion](https://github.com/macbookandrew)
+	* fixes a bug on affiliate events tracking
 
 = 5.1.2.5 =
 * Bug Fixes:

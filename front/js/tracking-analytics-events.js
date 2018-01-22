@@ -137,7 +137,7 @@ jQuery( window ).on( 'load', function () {
 					return this.href.match( reg );
 				}	
 			}
-		} ).click( function ( event ) {
+		} ).click( function ( e ) {
 			gadwpRedirectCalled = false;
 			gadwpRedirectLink = this.href;
 			var category = this.getAttribute( 'data-vars-ga-category' ) || 'affiliates';
