@@ -174,6 +174,7 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 	* improvements on error reporting system
 	* option to report errors to developer
 	* move the upgrade notice from the Dashboard to plugin's settings page
+	* enable PHP cURL proxy support using WordPress settings, props by [Joe Hobson](https://github.com/joehobson) 
 * Bug Fixes:	
 	* some thrown errors were not displayed on Errors & Debug screen
 	* analytics icon disappears from post list after quick edit, props by [karex](https://github.com/karex)

@@ -50,7 +50,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 					$curl_options[CURLOPT_PROXY] = WP_PROXY_HOST;
 					$curl_options[CURLOPT_PROXYPORT] = WP_PROXY_PORT;
 				}
-				
+
 				if ( defined( 'WP_PROXY_USERNAME' ) && defined( 'WP_PROXY_PASSWORD' ) ) {
 					$curl_options[CURLOPT_HTTPAUTH] = CURLAUTH_BASIC;
 					$curl_options[CURLOPT_PROXYUSERPWD] = WP_PROXY_USERNAME . ':' . WP_PROXY_PASSWORD;
