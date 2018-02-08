@@ -9,9 +9,14 @@
 "use strict";
 
 if ( gadwpItemData.mapsApiKey ) {
-	google.charts.load('current', {mapsApiKey: gadwpItemData.mapsApiKey, 'packages':['corechart', 'table', 'orgchart', 'geochart']});	
+	google.charts.load( 'current', {
+		mapsApiKey : gadwpItemData.mapsApiKey,
+		'packages' : [ 'corechart', 'table', 'orgchart', 'geochart' ]
+	} );
 } else {
-	google.charts.load('current', {'packages':['corechart', 'table', 'orgchart', 'geochart']});
+	google.charts.load( 'current', {
+		'packages' : [ 'corechart', 'table', 'orgchart', 'geochart' ]
+	} );
 }
 
 google.charts.setOnLoadCallback( GADWPReportLoad );
@@ -120,7 +125,7 @@ jQuery.fn.extend( {
 			addOptions : function ( id, list ) {
 				var defaultMetric, defaultDimension, defaultView, output = [];
 
-				if ( !tools.getCookie( 'default_metric' ) || !tools.getCookie( 'default_dimension' )  || !tools.getCookie( 'default_swmetric' ) ) {
+				if ( !tools.getCookie( 'default_metric' ) || !tools.getCookie( 'default_dimension' ) || !tools.getCookie( 'default_swmetric' ) ) {
 					defaultMetric = 'sessions';
 					defaultDimension = '30daysAgo';
 					if ( gadwpItemData.scope == 'front-item' || gadwpItemData.scope == 'admin-item' ) {
@@ -140,16 +145,16 @@ jQuery.fn.extend( {
 
 				if ( list == false ) {
 					if ( gadwpItemData.scope == 'front-item' || gadwpItemData.scope == 'admin-item' ) {
-						output = ''; // Remove Sessions metric selection on item reports						
+						output = ''; // Remove Sessions metric selection on item reports
 					} else {
 						output = '<span id="gadwp-swmetric-sessions" title="' + gadwpItemData.i18n[ 5 ] + '" class="dashicons dashicons-clock" style="font-size:22px;padding:4px;"></span>';
 					}
-					
+
 					output += '<span id="gadwp-swmetric-users" title="' + gadwpItemData.i18n[ 6 ] + '" class="dashicons dashicons-admin-users" style="font-size:22px;padding:4px;"></span>';
 					output += '<span id="gadwp-swmetric-pageviews" title="' + gadwpItemData.i18n[ 7 ] + '" class="dashicons dashicons-admin-page" style="font-size:22px;padding:4px;"></span>';
 
 					jQuery( id ).html( output );
-					
+
 					jQuery( '#gadwp-swmetric-' + swmetric ).css( "color", "#008ec2" );
 				} else {
 					jQuery.each( list, function ( key, value ) {
@@ -201,7 +206,7 @@ jQuery.fn.extend( {
 		}
 
 		reports = {
-			oldViewPort: 0,	
+			oldViewPort : 0,
 			orgChartTableChartData : '',
 			tableChartData : '',
 			orgChartPieChartsData : '',
@@ -371,8 +376,8 @@ jQuery.fn.extend( {
 					reports.throwDebug( response );
 				}
 				NProgress.done();
-			},			
-			
+			},
+
 			drawTableChart : function ( data ) {
 				var chartData, options, chart;
 
@@ -753,7 +758,7 @@ jQuery.fn.extend( {
 						"color" : "#000",
 						"text-align" : "center"
 					} );
-					jQuery( "#gadwp-reports" + slug ).html ( response );
+					jQuery( "#gadwp-reports" + slug ).html( response );
 					jQuery( "#gadwp-reports" + slug ).show();
 					jQuery( "#gadwp-status" + slug ).html( gadwpItemData.i18n[ 11 ] );
 					console.log( "\n********************* GADWP Log ********************* \n\n" + response );
@@ -936,8 +941,8 @@ jQuery.fn.extend( {
 						jQuery.post( gadwpItemData.ajaxurl, postData, function ( response ) {
 							reports.orgChartTableChart( response );
 						} );
-					} else if ( query == '404errors' ) {	
-						tpl = '<div id="gadwp-404tablechart' + slug + '">';	
+					} else if ( query == '404errors' ) {
+						tpl = '<div id="gadwp-404tablechart' + slug + '">';
 						tpl += '<div id="gadwp-tablechart' + slug + '"></div>';
 						tpl += '</div>';
 
@@ -946,7 +951,7 @@ jQuery.fn.extend( {
 						jQuery( '#gadwp-sel-metric' + slug ).show();
 
 						postData.query = query;
-						postData.metric = swmetric;						
+						postData.metric = swmetric;
 
 						jQuery.post( gadwpItemData.ajaxurl, postData, function ( response ) {
 							reports.tableChart( response );
@@ -968,7 +973,7 @@ jQuery.fn.extend( {
 						jQuery( '#gadwp-reports' + slug ).html( tpl );
 						jQuery( '#gadwp-reports' + slug ).hide();
 						jQuery( '#gadwp-sel-metric' + slug ).show();
-						
+
 						if ( query == 'trafficdetails' ) {
 							postData.query = 'channelGrouping,medium,visitorType,source,socialNetwork';
 							reports.i18n = gadwpItemData.i18n.slice( 0, 5 );
@@ -1049,7 +1054,7 @@ jQuery.fn.extend( {
 				}
 				if ( jQuery( '#gadwp-404tablechart' + slug ).length > 0 && jQuery.isArray( reports.tableChartData ) ) {
 					reports.tableChart( reports.tableChartData );
-				}				
+				}
 			},
 
 			init : function () {
@@ -1075,10 +1080,10 @@ jQuery.fn.extend( {
 				reports.render( jQuery( '#gadwp-sel-view' + slug ).val(), jQuery( '#gadwp-sel-period' + slug ).val(), jQuery( '#gadwp-sel-report' + slug ).val() );
 
 				jQuery( window ).resize( function () {
-					var diff = jQuery(window).width() - reports.oldViewPort; 
+					var diff = jQuery( window ).width() - reports.oldViewPort;
 					if ( ( diff < -5 ) || ( diff > 5 ) ) {
-						reports.oldViewPort = jQuery(window).width();
-						reports.refresh(); //refresh only on over 5px viewport width changes
+						reports.oldViewPort = jQuery( window ).width();
+						reports.refresh(); // refresh only on over 5px viewport width changes
 					}
 				} );
 			}
@@ -1104,19 +1109,19 @@ jQuery.fn.extend( {
 			jQuery( '#gadwp-reports' + slug ).html( '' );
 			reports.init();
 		} );
-		
+
 		jQuery( '[id^=gadwp-swmetric-]' ).click( function () {
 			swmetric = this.id.replace( 'gadwp-swmetric-', '' );
 			tools.setCookie( 'default_swmetric', swmetric );
 			jQuery( '#gadwp-swmetric-sessions' ).css( "color", "#444" );
 			jQuery( '#gadwp-swmetric-users' ).css( "color", "#444" );
 			jQuery( '#gadwp-swmetric-pageviews' ).css( "color", "#444" );
-			jQuery( '#' + this.id ).css( "color", "#008ec2" );			
-			
+			jQuery( '#' + this.id ).css( "color", "#008ec2" );
+
 			jQuery( '#gadwp-reports' + slug ).html( '' );
 			reports.init();
-		} );		
-		
+		} );
+
 		if ( gadwpItemData.scope == 'admin-widgets' ) {
 			return;
 		} else {
@@ -1143,7 +1148,8 @@ function GADWPReportLoad () {
 	if ( gadwpItemData.scope == 'admin-widgets' ) {
 		jQuery( '#gadwp-window-1' ).gadwpItemReport( 1 );
 	} else {
-		jQuery( '#the-list' ).on( 'click', gadwpItemData.getSelector( gadwpItemData.scope ),  function () {
+		console.log( 'Test' );
+		jQuery( gadwpItemData.getSelector( gadwpItemData.scope ) ).click( function () {
 			if ( !jQuery( "#gadwp-window-" + gadwpItemData.getID( this ) ).length > 0 ) {
 				jQuery( "body" ).append( '<div id="gadwp-window-' + gadwpItemData.getID( this ) + '"></div>' );
 			}
