@@ -165,7 +165,7 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 
 == Changelog ==
 
-= 5.2.0.1 =
+= 5.2.1 =
 * Enhancements:  
 	* avoid submitting empty error reports
 * Bug Fixes:	
