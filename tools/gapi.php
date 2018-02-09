@@ -45,7 +45,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 					$curl_options[CURLOPT_IPRESOLVE] = GADWP_IP_VERSION; // Force CURL_IPRESOLVE_V4 or CURL_IPRESOLVE_V6
 				}
 
-				//$curl_options[CURLOPT_SSL_VERIFYPEER] = false;
+				$curl_options[CURLOPT_SSL_VERIFYPEER] = false;
 
 				// add Proxy server settings to curl, if defined
 				if ( defined( 'WP_PROXY_HOST' ) && defined( 'WP_PROXY_PORT' ) ) {
