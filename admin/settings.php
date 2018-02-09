@@ -1211,27 +1211,31 @@ final class GADWP_Settings {
 		if ( isset( $_POST['Reset_Err'] ) ) {
 			if ( isset( $_POST['gadwp_security'] ) && wp_verify_nonce( $_POST['gadwp_security'], 'gadwp_form' ) ) {
 
-				$anonim = GADWP_Tools::anonymize_options( $gadwp->config->options );
+				if ( GADWP_Tools::get_cache( 'gapi_errors' ) || GADWP_Tools::get_cache( 'last_error' ) ) {
 
-				$sep = "\n---------------------------\n";
-				$error_report = GADWP_Tools::get_cache( 'last_error' );
-				$error_report .= $sep . print_r( GADWP_Tools::get_cache( 'gapi_errors' ), true );
-				$error_report .= $sep . GADWP_Tools::get_cache( 'errors_count' );
-				$error_report .= $sep . print_r( $anonim, true );
+					$anonim = GADWP_Tools::anonymize_options( $gadwp->config->options );
 
-				$url = GADWP_ENDPOINT_URL . 'gadwp-report.php';
-				/* @formatter:off */
-				$response = wp_remote_post( $url, array(
-						'method' => 'POST',
-						'timeout' => 45,
-						'redirection' => 5,
-						'httpversion' => '1.0',
-						'blocking' => true,
-						'headers' => array(),
-						'body' => array( 'error_report' => $error_report ),
-						'cookies' => array()
-					)
-				);
+					$sep = "\n---------------------------\n";
+					$error_report = GADWP_Tools::get_cache( 'last_error' );
+					$error_report .= $sep . print_r( GADWP_Tools::get_cache( 'gapi_errors' ), true );
+					$error_report .= $sep . GADWP_Tools::get_cache( 'errors_count' );
+					$error_report .= $sep . print_r( $anonim, true );
+
+					$url = GADWP_ENDPOINT_URL . 'gadwp-report.php';
+					/* @formatter:off */
+					$response = wp_remote_post( $url, array(
+							'method' => 'POST',
+							'timeout' => 45,
+							'redirection' => 5,
+							'httpversion' => '1.0',
+							'blocking' => true,
+							'headers' => array(),
+							'body' => array( 'error_report' => $error_report ),
+							'cookies' => array()
+						)
+					);
+				}
+
 				/* @formatter:on */
 				GADWP_Tools::delete_cache( 'last_error' );
 				GADWP_Tools::delete_cache( 'gapi_errors' );
