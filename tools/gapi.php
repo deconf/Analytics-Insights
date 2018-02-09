@@ -58,8 +58,9 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 
 				$curl_options = apply_filters( 'gadwp_curl_options', $curl_options );
 				if ( ! empty( $curl_options ) ) {
-					$config->setClassConfig( 'Deconf_IO_Curl', array( 'options' => $curl_options ) );
+					$config->setClassConfig( 'Deconf_IO_Curl', 'options', $curl_options );
 				}
+
 			}
 			$this->client = new Deconf_Client( $config );
 			$this->client->setScopes( array( 'https://www.googleapis.com/auth/analytics.readonly' ) );
