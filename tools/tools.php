@@ -226,11 +226,7 @@ if ( ! class_exists( 'GADWP_Tools' ) ) {
 
 		public static function set_error( $e, $timeout ) {
 			if ( is_object( $e ) ) {
-				if ( method_exists( $e, 'getCode' ) && method_exists( $e, 'getMessage' ) ) {
-					self::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( "(" . $e->getCode() . ") " . $e->getMessage() ), $timeout );
-				} else {
-					self::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $timeout );
-				}
+				self::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $timeout );
 				if ( method_exists( $e, 'getCode' ) && method_exists( $e, 'getErrors' ) ) {
 					self::set_cache( 'gapi_errors', array( $e->getCode(), (array) $e->getErrors() ), $timeout );
 				}

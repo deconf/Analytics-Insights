@@ -119,7 +119,7 @@ if ( ! class_exists( 'GADWP_Frontend_Setup' ) ) {
 					),
 					'colorVariations' => GADWP_Tools::variations( $this->gadwp->config->options['theme_color'] ),
 					'region' => $region,
-					'mapsApiKey' => $this->gadwp->config->options['maps_api_key'],
+					'mapsApiKey' => apply_filters( 'gadwp_maps_api_key', $this->gadwp->config->options['maps_api_key'] ),
 					'language' => get_bloginfo( 'language' ),
 					'filter' => $_SERVER["REQUEST_URI"],
 					'viewList' => false,

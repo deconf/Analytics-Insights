@@ -4,7 +4,7 @@ Donate link: https://deconf.com/donate/
 Tags: analytics,google analytics,google analytics dashboard,google analytics plugin,google analytics widget
 Requires at least: 3.5
 Tested up to: 4.9.4
-Stable tag: 5.2.1
+Stable tag: 5.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -164,6 +164,16 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 == Upgrade Notice ==
 
 == Changelog ==
+
+= 5.2.2 =
+* Enhancements:  
+	* more informative alerts and suggestions on the authorization screen
+	* disable autocomplete for the access code input field to avoid reuse of the same unique authorization code
+	* GADWP Endpoint improvements
+	* Error reporting improvements
+	* introducing the gadwp_maps_api_key filter
+* Bug Fixes:	
+	* use the theme color palette for the frontend widget 	 
 
 = 5.2.1 =
 * Enhancements:  

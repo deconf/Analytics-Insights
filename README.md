@@ -42,6 +42,8 @@ Hooks
   - gadwp_analyticsevents_timeout
   - gadwp_curl_options
   - gadwp_analytics_script_path
+  - gadwp_maps_api_key
+  - gadwp_curl_options
 
 * Actions
 

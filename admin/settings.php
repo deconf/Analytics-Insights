@@ -1078,7 +1078,7 @@ final class GADWP_Settings {
 						<?php $tabs = array( 'errors' => __( "Errors & Details", 'google-analytics-dashboard-for-wp' ), 'config' => __( "Plugin Settings", 'google-analytics-dashboard-for-wp' ) ); ?>
 						<?php self::navigation_tabs( $tabs ); ?>
 						<div id="gadwp-errors">
-						<table class="gadwp-settings-options">
+						<table class="gadwp-settings-logdata">
 							<tr>
 								<td>
 									<?php echo "<h2>" . __( "Error Details", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?>
@@ -1087,11 +1087,11 @@ final class GADWP_Settings {
 							<tr>
 								<td>
 									<?php $errors_count = GADWP_Tools::get_cache( 'errors_count' ); ?>
-									<pre class="gadwp-settings-logdata"><?php echo __("Count: ", 'google-analytics-dashboard-for-wp') . (int)$errors_count;?></pre>
+									<pre class="gadwp-settings-logdata"><?php echo '<span>' . __("Count: ", 'google-analytics-dashboard-for-wp') . '</span>' . (int)$errors_count;?></pre>
 									<?php $errors = print_r( GADWP_Tools::get_cache( 'last_error' ), true ) ? esc_html( print_r( GADWP_Tools::get_cache( 'last_error' ), true ) ) : ''; ?>
 									<?php $errors = str_replace( 'Deconf_', 'Google_', $errors); ?>
-									<pre class="gadwp-settings-logdata"><?php echo __("Last Error: ", 'google-analytics-dashboard-for-wp') . $errors;?></pre>
-									<pre class="gadwp-settings-logdata"><?php _e("GAPI Error: ", 'google-analytics-dashboard-for-wp'); echo "\n" . esc_html( print_r( GADWP_Tools::get_cache( 'gapi_errors' ), true ) ) ?></pre>
+									<pre class="gadwp-settings-logdata"><?php echo '<span>' . __("Last Error: ", 'google-analytics-dashboard-for-wp') . '</span>' . "\n" . $errors;?></pre>
+									<pre class="gadwp-settings-logdata"><?php echo '<span>' . __("GAPI Error: ", 'google-analytics-dashboard-for-wp') . '</span>'; echo "\n" . esc_html( print_r( GADWP_Tools::get_cache( 'gapi_errors' ), true ) ) ?></pre>
 									<br />
 									<hr>
 								</td>
@@ -1187,7 +1187,7 @@ final class GADWP_Settings {
 					$gadwp->gapi_controller->reset_token( true );
 				}
 			} else {
-				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "The access code is <strong>NOT</strong> your <strong>Tracking ID</strong> (UA-XXXXX-X). Try again, and use the red link to get your access code", 'google-analytics-dashboard-for-wp' ) . ".</p></div>";
+				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "The access code is <strong>not</strong> your <strong>Tracking ID</strong> (UA-XXXXX-X) <strong>nor</strong> your <strong>email address</strong>!", 'google-analytics-dashboard-for-wp' ) . ".</p></div>";
 			}
 		}
 		if ( isset( $_POST['Clear'] ) ) {
@@ -1278,7 +1278,7 @@ final class GADWP_Settings {
 											<?php GADWP_Tools::clear_cache(); ?>
 											<?php $gadwp->gapi_controller->token_request(); ?>
 											<div class="updated">
-											<p><?php _e( "Use the red link (see below) to generate and get your access code!", 'google-analytics-dashboard-for-wp' )?></p>
+											<p><?php _e( "Use the red link (see below) to generate and get your access code! You need to generate a new code each time you authorize!", 'google-analytics-dashboard-for-wp' )?></p>
 										</div>
 										<?php else : ?>
 										<?php if ( isset( $message ) ) :?>
@@ -1511,7 +1511,7 @@ final class GADWP_Settings {
 					$gadwp->gapi_controller->reset_token( true );
 				}
 			} else {
-				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "The access code is <strong>NOT</strong> your <strong>Tracking ID</strong> (UA-XXXXX-X). Try again, and use the red link to get your access code", 'google-analytics-dashboard-for-wp' ) . ".</p></div>";
+				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "The access code is <strong>not</strong> your <strong>Tracking ID</strong> (UA-XXXXX-X) <strong>nor</strong> your <strong>email address</strong>!", 'google-analytics-dashboard-for-wp' ) . ".</p></div>";
 			}
 		}
 		if ( isset( $_POST['Refresh'] ) ) {
@@ -1590,7 +1590,7 @@ final class GADWP_Settings {
 						<?php GADWP_Tools::clear_cache();?>
 						<?php $gadwp->gapi_controller->token_request();?>
 					<div class="updated">
-																<p><?php _e( "Use the red link (see below) to generate and get your access code!", 'google-analytics-dashboard-for-wp' );?></p>
+																<p><?php _e( "Use the red link (see below) to generate and get your access code! You need to generate a new code each time you authorize!", 'google-analytics-dashboard-for-wp' );?></p>
 															</div>
 					<?php else : ?>
 						<?php if ( isset( $message ) ) : ?>

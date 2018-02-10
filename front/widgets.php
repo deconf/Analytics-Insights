@@ -112,7 +112,8 @@ final class GADWP_Frontend_Widget extends WP_Widget {
 		var data = google.visualization.arrayToDataTable(response);
 		var options = {
 			legend: { position: "none" },
-			pointSize: "3, <?php echo $css; ?>",
+			pointSize: "3",
+			<?php echo $css; ?>
 			title: "<?php echo $title; ?>",
 			titlePosition: "in",
 			chartArea: { width: "95%", height: "75%" },

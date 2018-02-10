@@ -58,8 +58,23 @@ td.gadwp-settings-title label {
 }
 
 pre.gadwp-settings-logdata {
-	white-space: pre-wrap;
+    white-space: pre-wrap;       /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
+
+pre.gadwp-settings-logdata span{
+	color: #b30000;
+	font-weight: 800;
+}
+
+table.gadwp-settings-logdata {
+	table-layout:fixed;
+	width: 100%;
+}	
+
 
 td.gadwp-settings-roles {
 	padding-bottom: 15px;
