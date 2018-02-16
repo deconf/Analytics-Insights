@@ -96,6 +96,8 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 								'ga_event_precision',
 								'with_endpoint',
 								'backend_realtime_report',
+								'ga_optout',
+								'ga_dnt_optout',
 			);
 			foreach ( $numerics as $key ) {
 				if ( isset( $options[$key] ) ) {
@@ -276,6 +278,8 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 								'ga_force_ssl', //v5.1.2
 								'with_endpoint', //v5.2
 								'backend_realtime_report', //v5.2
+								'ga_optout', //v5.2.3
+								'ga_dnt_optout', //v5.2.3
 			);
 			foreach ( $zeros as $key ) {
 				if ( ! isset( $this->options[$key] ) ) {

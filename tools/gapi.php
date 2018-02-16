@@ -119,11 +119,18 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				$url = $request->getUrl();
 
 				if ( in_array( $url, array( 'https://accounts.google.com/o/oauth2/token', 'https://accounts.google.com/o/oauth2/revoke' ) ) ) {
-					$curl_options[CURLOPT_SSL_VERIFYPEER] = 0;
-					$this->client->setClassConfig( 'Deconf_IO_Curl', 'options', $curl_options );
+					if ( get_class( $this->client->getIo() ) != 'Deconf_IO_Stream' ) {
+						$curl_options[CURLOPT_SSL_VERIFYPEER] = 0;
+						$this->client->setClassConfig( 'Deconf_IO_Curl', 'options', $curl_options );
+					} else {
+						$options = array( "ssl" => array( "verify_peer" => false ) );
+						stream_context_set_default( $options );
+					}
 				} else {
-					$curl_options[CURLOPT_SSL_VERIFYPEER] = 1;
-					$this->client->setClassConfig( 'Deconf_IO_Curl', 'options', $curl_options );
+					if ( get_class( $this->client->getIo() ) != 'Deconf_IO_Stream' ) {
+						$curl_options[CURLOPT_SSL_VERIFYPEER] = 1;
+						$this->client->setClassConfig( 'Deconf_IO_Curl', 'options', $curl_options );
+					}
 				}
 
 				$url = str_replace( 'https://accounts.google.com/o/oauth2/token', GADWP_ENDPOINT_URL . 'gadwp-token.php', $url );

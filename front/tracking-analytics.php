@@ -364,7 +364,11 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 				}
 			}
 
-			$tracking_script_path = apply_filters( 'gadwp_analytics_script_path', 'https://www.google-analytics.com/analytics.js' );;
+			$tracking_script_path = apply_filters( 'gadwp_analytics_script_path', 'https://www.google-analytics.com/analytics.js' );
+
+			if ( $this->gadwp->config->options['ga_optout'] || $this->gadwp->config->options['ga_dnt_optout'] ) {
+				GADWP_Tools::load_view( 'front/views/analytics-optout-code.php', array( 'uaid' => $this->uaid, 'gaDntOptout' => $this->gadwp->config->options['ga_dnt_optout'], 'gaOptout' => $this->gadwp->config->options['ga_optout'] ) );
+			}
 
 			GADWP_Tools::load_view( 'front/views/analytics-code.php', array( 'trackingcode' => $trackingcode, 'tracking_script_path' => $tracking_script_path ) );
 		}

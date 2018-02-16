@@ -22,6 +22,8 @@ final class GADWP_Settings {
 			$new_options = $_POST['options'];
 			if ( 'tracking' == $who ) {
 				$options['ga_anonymize_ip'] = 0;
+				$options['ga_optout'] = 0;
+				$options['ga_dnt_optout'] = 0;
 				$options['ga_event_tracking'] = 0;
 				$options['ga_enhanced_links'] = 0;
 				$options['ga_event_precision'] = 0;
@@ -755,6 +757,30 @@ final class GADWP_Settings {
 											</label>
 										</div>
 										<div class="switch-desc"><?php echo " ".__("anonymize IPs while tracking", 'google-analytics-dashboard-for-wp' );?></div>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2" class="gadwp-settings-title">
+										<div class="button-primary gadwp-settings-switchoo">
+											<input type="checkbox" name="options[ga_optout]" value="1" class="gadwp-settings-switchoo-checkbox" id="ga_optout" <?php checked( $options['ga_optout'], 1 ); ?>>
+											<label class="gadwp-settings-switchoo-label" for="ga_optout">
+												<div class="gadwp-settings-switchoo-inner"></div>
+												<div class="gadwp-settings-switchoo-switch"></div>
+											</label>
+										</div>
+										<div class="switch-desc"><?php echo " ".__("enable support for user opt-out", 'google-analytics-dashboard-for-wp' );?></div>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2" class="gadwp-settings-title">
+										<div class="button-primary gadwp-settings-switchoo">
+											<input type="checkbox" name="options[ga_dnt_optout]" value="1" class="gadwp-settings-switchoo-checkbox" id="ga_dnt_optout" <?php checked( $options['ga_dnt_optout'], 1 ); ?>>
+											<label class="gadwp-settings-switchoo-label" for="ga_dnt_optout">
+												<div class="gadwp-settings-switchoo-inner"></div>
+												<div class="gadwp-settings-switchoo-switch"></div>
+											</label>
+										</div>
+										<div class="switch-desc"> <?php _e( 'exclude tracking for users sending Do Not Track header', 'google-analytics-dashboard-for-wp' ); ?></div>
 									</td>
 								</tr>
 								<tr>
