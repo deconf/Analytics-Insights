@@ -41,6 +41,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				} else {
 					$rightversion = false;
 				}
+
 				if ( $rightversion && defined( 'GADWP_IP_VERSION' ) && GADWP_IP_VERSION ) {
 					$curl_options[CURLOPT_IPRESOLVE] = GADWP_IP_VERSION; // Force CURL_IPRESOLVE_V4 or CURL_IPRESOLVE_V6
 				}
@@ -87,7 +88,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				if ( $token ) {
 					try {
 						$this->client->setAccessToken( $token );
-						if ( $this->client->isAccessTokenExpired() ) {
+						if ( ! $this->client->isAccessTokenExpired() ) {
 							$refreshtoken = $this->client->getRefreshToken();
 							$this->client->refreshToken( $refreshtoken );
 						}
@@ -120,6 +121,8 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 
 				if ( in_array( $url, array( 'https://accounts.google.com/o/oauth2/token', 'https://accounts.google.com/o/oauth2/revoke' ) ) ) {
 					if ( get_class( $this->client->getIo() ) != 'Deconf_IO_Stream' ) {
+						$curl_old_options = $this->client->getClassConfig( 'Deconf_IO_Curl' );
+						$curl_options = $curl_old_options['options'];
 						$curl_options[CURLOPT_SSL_VERIFYPEER] = 0;
 						$this->client->setClassConfig( 'Deconf_IO_Curl', 'options', $curl_options );
 					} else {
@@ -128,8 +131,16 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 					}
 				} else {
 					if ( get_class( $this->client->getIo() ) != 'Deconf_IO_Stream' ) {
-						$curl_options[CURLOPT_SSL_VERIFYPEER] = 1;
-						$this->client->setClassConfig( 'Deconf_IO_Curl', 'options', $curl_options );
+						$curl_old_options = $this->client->getClassConfig( 'Deconf_IO_Curl' );
+						$curl_options = $curl_old_options['options'];
+						if ( isset( $curl_options[CURLOPT_SSL_VERIFYPEER] ) ) {
+							unset( $curl_options[CURLOPT_SSL_VERIFYPEER] );
+							if ( empty( $curl_options ) ) {
+								$this->client->setClassConfig( 'Deconf_IO_Curl', 'options', '' );
+							} else {
+								$this->client->setClassConfig( 'Deconf_IO_Curl', 'options', $curl_options );
+							}
+						}
 					}
 				}
 
