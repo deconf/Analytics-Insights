@@ -96,7 +96,7 @@ if ( ! class_exists( 'GADWP_Tracking_TagManager' ) ) {
 			}
 
 			if ( $this->gadwp->config->options['tm_category_var'] && is_category() ) {
-				$this->add_var( 'gadwpCategory', esc_attr( single_tag_title() ) );
+				$this->add_var( 'gadwpCategory', esc_attr( single_tag_title( '', false ) ) );
 			}
 			if ( $this->gadwp->config->options['tm_category_var'] && is_single() ) {
 				global $post;
