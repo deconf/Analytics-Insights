@@ -1188,17 +1188,18 @@ final class GADWP_Settings {
 		}
 		echo '<script type="text/javascript">jQuery("#gapi-warning").hide()</script>';
 		if ( isset( $_POST['gadwp_access_code'] ) ) {
-			if ( 1 == ! stripos( 'x' . $_POST['gadwp_access_code'], 'UA-', 1 ) ) {
+			if ( 1 == ! stripos( 'x' . $_POST['gadwp_access_code'], 'UA-', 1 ) && $_POST['gadwp_access_code'] != get_option( 'gadwp_redeemed_code' ) ) {
 				try {
 					$gadwp_access_code = $_POST['gadwp_access_code'];
+					update_option( 'gadwp_redeemed_code', $gadwp_access_code );
+					GADWP_Tools::delete_cache( 'gapi_errors' );
+					GADWP_Tools::delete_cache( 'last_error' );
 					$gadwp->gapi_controller->client->authenticate( $_POST['gadwp_access_code'] );
 					$gadwp->config->options['token'] = $gadwp->gapi_controller->client->getAccessToken();
 					$gadwp->config->options['automatic_updates_minorversion'] = 1;
 					$gadwp->config->set_plugin_options();
 					$options = self::update_options( 'general' );
 					$message = "<div class='updated' id='gadwp-autodismiss'><p>" . __( "Plugin authorization succeeded.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
-					GADWP_Tools::delete_cache( 'gapi_errors' );
-					GADWP_Tools::delete_cache( 'last_error' );
 					if ( $gadwp->config->options['token'] && $gadwp->gapi_controller->client->getAccessToken() ) {
 						if ( ! empty( $gadwp->config->options['ga_profiles_list'] ) ) {
 							$profiles = $gadwp->config->options['ga_profiles_list'];
@@ -1227,7 +1228,11 @@ final class GADWP_Settings {
 					$gadwp->gapi_controller->reset_token( true );
 				}
 			} else {
-				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "The access code is <strong>not</strong> your <strong>Tracking ID</strong> (UA-XXXXX-X) <strong>nor</strong> your <strong>email address</strong>!", 'google-analytics-dashboard-for-wp' ) . ".</p></div>";
+				if ( 1 == stripos( 'x' . $_POST['gadwp_access_code'], 'UA-', 1 ) ) {
+					$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "The access code is <strong>not</strong> your <strong>Tracking ID</strong> (UA-XXXXX-X) <strong>nor</strong> your <strong>email address</strong>!", 'google-analytics-dashboard-for-wp' ) . ".</p></div>";
+				} else {
+					$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "You can only use the access code <strong>once</strong>, please generate a <strong>new access</strong> code following the instructions!", 'google-analytics-dashboard-for-wp' ) . ".</p></div>";
+				}
 			}
 		}
 		if ( isset( $_POST['Clear'] ) ) {
@@ -1503,10 +1508,10 @@ final class GADWP_Settings {
 
 		echo '<script type="text/javascript">jQuery("#gapi-warning").hide()</script>';
 		if ( isset( $_POST['gadwp_access_code'] ) ) {
-			if ( 1 == ! stripos( 'x' . $_POST['gadwp_access_code'], 'UA-', 1 ) ) {
+			if ( 1 == ! stripos( 'x' . $_POST['gadwp_access_code'], 'UA-', 1 ) && $_POST['gadwp_access_code'] != get_option( 'gadwp_redeemed_code' ) ) {
 				try {
-
 					$gadwp_access_code = $_POST['gadwp_access_code'];
+					update_option( 'gadwp_redeemed_code', $gadwp_access_code );
 					$gadwp->gapi_controller->client->authenticate( $_POST['gadwp_access_code'] );
 					$gadwp->config->options['token'] = $gadwp->gapi_controller->client->getAccessToken();
 					$gadwp->config->options['automatic_updates_minorversion'] = 1;
@@ -1552,7 +1557,11 @@ final class GADWP_Settings {
 					$gadwp->gapi_controller->reset_token( true );
 				}
 			} else {
-				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "The access code is <strong>not</strong> your <strong>Tracking ID</strong> (UA-XXXXX-X) <strong>nor</strong> your <strong>email address</strong>!", 'google-analytics-dashboard-for-wp' ) . ".</p></div>";
+				if ( 1 == stripos( 'x' . $_POST['gadwp_access_code'], 'UA-', 1 ) ) {
+					$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "The access code is <strong>not</strong> your <strong>Tracking ID</strong> (UA-XXXXX-X) <strong>nor</strong> your <strong>email address</strong>!", 'google-analytics-dashboard-for-wp' ) . ".</p></div>";
+				} else {
+					$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "You can only use the access code <strong>once</strong>, please generate a <strong>new access code</strong> using the red link", 'google-analytics-dashboard-for-wp' ) . "!</p></div>";
+				}
 			}
 		}
 		if ( isset( $_POST['Refresh'] ) ) {
@@ -1855,7 +1864,7 @@ final class GADWP_Settings {
 																</div>
 																<br />
 																<div class="gadwp-desc">
-																	<a href="https://twitter.com/deconfcom" class="twitter-follow-button" data-show-screen-name="false">Follow @deconfcom</a>
+																	<a href="https://twitter.com/deconfcom" class="twitter-follow-button" data-show-screen-name="false"></a>
 																	<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 																</div>
 															</div>
