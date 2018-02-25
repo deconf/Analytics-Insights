@@ -1336,7 +1336,7 @@ final class GADWP_Settings {
 												</tr>
 												<tr>
 													<td colspan="2" class="gadwp-settings-info">
-														<?php printf(__('You should watch the %1$s and read this %2$s before proceeding to authorization. This plugin requires a properly configured Google Analytics account!', 'google-analytics-dashboard-for-wp'), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=top_video&utm_campaign=gadwp', __("video", 'google-analytics-dashboard-for-wp')), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=top_tutorial&utm_campaign=gadwp', __("tutorial", 'google-analytics-dashboard-for-wp')));?>
+														<?php printf(__('You need to create a %1$s and watch this %2$s before proceeding to authorization.', 'google-analytics-dashboard-for-wp'), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/creating-a-google-analytics-account/?utm_source=gadwp_config&utm_medium=link&utm_content=top_tutorial&utm_campaign=gadwp', __("free analytics account", 'google-analytics-dashboard-for-wp')), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=top_video&utm_campaign=gadwp', __("video tutorial", 'google-analytics-dashboard-for-wp')));?>
 													</td>
 												</tr>
 												  <?php if (! $options['token'] || ($options['user_api']  && ! $options['network_mode'])) : ?>
@@ -1669,7 +1669,7 @@ final class GADWP_Settings {
 																	</tr>
 																	<tr>
 																		<td colspan="2" class="gadwp-settings-info">
-								<?php printf(__('You should watch the %1$s and read this %2$s before proceeding to authorization. This plugin requires a properly configured Google Analytics account!', 'google-analytics-dashboard-for-wp'), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=top_video&utm_campaign=gadwp', __("video", 'google-analytics-dashboard-for-wp')), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=top_tutorial&utm_campaign=gadwp', __("tutorial", 'google-analytics-dashboard-for-wp')));?>
+								<?php printf(__('You need to create a %1$s and watch this %2$s before proceeding to authorization.', 'google-analytics-dashboard-for-wp'), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/creating-a-google-analytics-account/?utm_source=gadwp_config&utm_medium=link&utm_content=top_tutorial&utm_campaign=gadwp', __("free analytics account", 'google-analytics-dashboard-for-wp')), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=top_video&utm_campaign=gadwp', __("video tutorial", 'google-analytics-dashboard-for-wp')));?>
 								</td>
 																	</tr>
 								<?php if ( ! $options['token'] || $options['user_api'] ) : ?>
@@ -1842,32 +1842,21 @@ final class GADWP_Settings {
 														</div>
 														<div class="postbox">
 															<h3>
-																<span><?php _e("Follow & Review",'google-analytics-dashboard-for-wp')?></span>
+																<span><?php _e("Stay Updated",'google-analytics-dashboard-for-wp')?></span>
 															</h3>
 															<div class="inside">
 																<div class="gadwp-desc">
-																	<div style="margin-left: -10px;">
-																		<div class="g-page" data-width="273" data-href="//plus.google.com/+Deconfcom" data-layout="landscape" data-showtagline="false" data-showcoverphoto="false" data-rel="publisher"></div>
-																	</div>
-																	<script type="text/javascript">
-																	  (function() {
-																		var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-																		po.src = 'https://apis.google.com/js/platform.js';
-																		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-																	  })();
-																	</script>
+																	<div class="g-ytsubscribe" data-channel="TheDeConf" data-layout="default" data-count="default"></div>
 																</div>
 																<br />
 																<div class="gadwp-desc">
-																	<a href="https://twitter.com/deconfcom" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @deconfcom</a>
-																	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+																	<div class="g-follow" data-annotation="bubble" data-height="24" data-href="//plus.google.com/u/0/114149166432576972465" data-rel="publisher"></div>
+																	<script src="https://apis.google.com/js/platform.js" async defer></script>
 																</div>
 																<br />
-																<div class="gadwp-title">
-																	<a href="http://wordpress.org/support/view/plugin-reviews/google-analytics-dashboard-for-wp#plugin-info"><img src="<?php echo plugins_url( 'images/star.png' , __FILE__ ); ?>" /></a>
-																</div>
 																<div class="gadwp-desc">
-																	<?php printf(__('Your feedback and review are both important, %s!', 'google-analytics-dashboard-for-wp'), sprintf('<a href="http://wordpress.org/support/view/plugin-reviews/google-analytics-dashboard-for-wp#plugin-info">%s</a>', __('rate this plugin', 'google-analytics-dashboard-for-wp')));?>
+																	<a href="https://twitter.com/deconfcom" class="twitter-follow-button" data-show-screen-name="false">Follow @deconfcom</a>
+																	<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 																</div>
 															</div>
 														</div>
@@ -1891,10 +1880,10 @@ final class GADWP_Settings {
 																</div>
 																<br />
 																<div class="gadwp-title">
-																	<a href="https://deconf.com/wordpress/?utm_source=gadwp_config&utm_medium=link&utm_content=plugins&utm_campaign=gadwp"><img src="<?php echo plugins_url( 'images/wp.png' , __FILE__ ); ?>" /></a>
+																	<a href="http://wordpress.org/support/view/plugin-reviews/google-analytics-dashboard-for-wp#plugin-info"><img src="<?php echo plugins_url( 'images/star.png' , __FILE__ ); ?>" /></a>
 																</div>
 																<div class="gadwp-desc">
-																	<?php printf(__('Premium %s', 'google-analytics-dashboard-for-wp'), sprintf('<a href="https://shareasale.com/r.cfm?b=386922&u=926589&m=28169&urllink=&afftrack=">%s</a>', __('WordPress Themes & Plugins', 'google-analytics-dashboard-for-wp')));?>
+																	<?php printf(__('Your feedback and review are both important, %s!', 'google-analytics-dashboard-for-wp'), sprintf('<a href="http://wordpress.org/support/view/plugin-reviews/google-analytics-dashboard-for-wp#plugin-info">%s</a>', __('rate this plugin', 'google-analytics-dashboard-for-wp')));?>
 																</div>
 															</div>
 														</div>

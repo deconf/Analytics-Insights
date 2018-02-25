@@ -16,7 +16,7 @@ if ( ! class_exists( 'GADWP_Tools' ) ) {
 	class GADWP_Tools {
 
 		public static function get_countrycodes() {
-			include_once 'iso3166.php';
+			include 'iso3166.php';
 			return $country_codes;
 		}
 
