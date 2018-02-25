@@ -1256,7 +1256,7 @@ final class GADWP_Settings {
 		if ( isset( $_POST['Reset_Err'] ) ) {
 			if ( isset( $_POST['gadwp_security'] ) && wp_verify_nonce( $_POST['gadwp_security'], 'gadwp_form' ) ) {
 
-				if ( !GADWP_Tools::get_cache( 'gapi_errors' ) || GADWP_Tools::get_cache( 'last_error' ) ) {
+				if ( GADWP_Tools::get_cache( 'gapi_errors' ) || GADWP_Tools::get_cache( 'last_error' ) ) {
 
 					$info = GADWP_Tools::system_info();
 					$info .= 'GADWP Version: ' . GADWP_CURRENT_VERSION;
