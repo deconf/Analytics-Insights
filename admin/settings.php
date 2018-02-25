@@ -1101,7 +1101,7 @@ final class GADWP_Settings {
 			<div class="settings-wrapper">
 				<div class="inside">
 						<?php if (isset($message)) echo $message; ?>
-						<?php $tabs = array( 'errors' => __( "Errors & Details", 'google-analytics-dashboard-for-wp' ), 'config' => __( "Plugin Settings", 'google-analytics-dashboard-for-wp' ) ); ?>
+						<?php $tabs = array( 'errors' => __( "Errors & Details", 'google-analytics-dashboard-for-wp' ), 'config' => __( "Plugin Settings", 'google-analytics-dashboard-for-wp' ), 'sysinfo' => __( "System", 'google-analytics-dashboard-for-wp' ) ); ?>
 						<?php self::navigation_tabs( $tabs ); ?>
 						<div id="gadwp-errors">
 						<table class="gadwp-settings-logdata">
@@ -1151,6 +1151,20 @@ final class GADWP_Settings {
 							<tr>
 								<td>
 									<pre class="gadwp-settings-logdata"><?php echo esc_html(print_r($anonim, true));?></pre>
+									<br />
+									<hr>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div id="gadwp-sysinfo">
+						<table class="gadwp-settings-options">
+							<tr>
+								<td><?php echo "<h2>" . __( "System Information", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
+							</tr>
+							<tr>
+								<td>
+									<pre class="gadwp-settings-logdata"><?php echo esc_html(GADWP_Tools::system_info());?></pre>
 									<br />
 									<hr>
 								</td>
@@ -1237,15 +1251,16 @@ final class GADWP_Settings {
 		if ( isset( $_POST['Reset_Err'] ) ) {
 			if ( isset( $_POST['gadwp_security'] ) && wp_verify_nonce( $_POST['gadwp_security'], 'gadwp_form' ) ) {
 
-				if ( GADWP_Tools::get_cache( 'gapi_errors' ) || GADWP_Tools::get_cache( 'last_error' ) ) {
+				if ( !GADWP_Tools::get_cache( 'gapi_errors' ) || GADWP_Tools::get_cache( 'last_error' ) ) {
 
-					$anonim = GADWP_Tools::anonymize_options( $gadwp->config->options );
+					$info = GADWP_Tools::system_info();
+					$info .= 'GADWP Version: ' . GADWP_CURRENT_VERSION;
 
 					$sep = "\n---------------------------\n";
 					$error_report = GADWP_Tools::get_cache( 'last_error' );
 					$error_report .= $sep . print_r( GADWP_Tools::get_cache( 'gapi_errors' ), true );
 					$error_report .= $sep . GADWP_Tools::get_cache( 'errors_count' );
-					$error_report .= $sep . print_r( $anonim, true );
+					$error_report .= $sep . $info;
 
 					$url = GADWP_ENDPOINT_URL . 'gadwp-report.php';
 					/* @formatter:off */

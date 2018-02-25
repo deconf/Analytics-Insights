@@ -169,6 +169,7 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 * Enhancements:
 	* add Google Analytics user opt-out support
 	* add option to exclude tracking for users sending the <em>Do Not Track</em> header
+	* add System tab to Errors & Debug screen
 * Bug Fixes:	
 	* remove a debugging message
 	* cURL options were overwritten during regular API calls	

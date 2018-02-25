@@ -126,8 +126,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 						$curl_options[CURLOPT_SSL_VERIFYPEER] = 0;
 						$this->client->setClassConfig( 'Deconf_IO_Curl', 'options', $curl_options );
 					} else {
-						$options = array( "ssl" => array( "verify_peer" => false ) );
-						stream_context_set_default( $options );
+						add_filter( 'gadwp_endpoint_stream_options', array( $this, 'add_endpoint_stream_ssl' ), 10 );
 					}
 				} else {
 					if ( get_class( $this->client->getIo() ) != 'Deconf_IO_Stream' ) {
@@ -154,6 +153,10 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 					$request->setUserAgent( $this->client->getApplicationName() );
 				}
 			}
+		}
+
+		public function add_endpoint_stream_ssl( $requestSslContext ) {
+			return array( "verify_peer" => false );
 		}
 
 		/**

@@ -87,6 +87,9 @@ class Deconf_IO_Stream extends Deconf_IO_Abstract
     $requestSslContext = array_key_exists('ssl', $default_options) ?
         $default_options['ssl'] : array();
 
+    // Add support for GADWP Endpoint
+    $requestSslContext = apply_filters('gadwp_endpoint_stream_options', $requestSslContext, $request);
+
     if (!$this->client->isAppEngine() && !array_key_exists("cafile", $requestSslContext)) {
       $requestSslContext["cafile"] = dirname(__FILE__) . '/cacerts.pem';
     }

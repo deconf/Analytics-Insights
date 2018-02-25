@@ -92,12 +92,12 @@ class Deconf_IO_Curl extends Deconf_IO_Abstract
     if ($request->canGzip()) {
       curl_setopt($curl, CURLOPT_ENCODING, 'gzip,deflate');
     }
-    
+
     $options = $this->client->getClassConfig('Deconf_IO_Curl', 'options');
     if (is_array($options)) {
       $this->setOptions($options);
     }
-    
+
     foreach ($this->options as $key => $var) {
       curl_setopt($curl, $key, $var);
     }

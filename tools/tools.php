@@ -257,5 +257,56 @@ if ( ! class_exists( 'GADWP_Tools' ) ) {
 
 			return $options;
 		}
+
+		public static function system_info() {
+			$info = '';
+
+			// Server Software
+			$server_soft = "-";
+			if ( isset( $_SERVER['SERVER_SOFTWARE'] ) ) {
+				$server_soft = $_SERVER['SERVER_SOFTWARE'];
+			}
+			$info .= 'Server Info: ' . $server_soft . "\n";
+
+			// PHP version
+			if ( defined( 'PHP_VERSION' ) ) {
+				$info .= 'PHP Version: ' . PHP_VERSION . "\n";
+			} else if ( defined( 'HHVM_VERSION' ) ) {
+				$info .= 'HHVM Version: ' . HHVM_VERSION . "\n";
+			} else {
+				$info .= 'Other Version: ' . '-' . "\n";
+			}
+
+			/*PHP extensions
+			if ( is_callable( 'get_loaded_extensions' ) ) {
+				$info .= 'Loaded Extensions: ' . implode(', ', get_loaded_extensions()) . "\n";
+			} else {
+				$info .= 'Loaded Extensions: ' . '-' . "\n";
+			}*/
+
+			// cURL Info
+			if ( function_exists( 'curl_version' ) && function_exists( 'curl_exec' ) ) {
+				$curl_version = curl_version();
+				if ( ! empty( $curl_version ) ) {
+					$curl_ver = $curl_version['version'] . " " . $curl_version['ssl_version'];
+				} else {
+					$curl_ver = '-';
+				}
+			} else {
+				$curl_ver = '-';
+			}
+			$info .= 'cURL Info: ' . $curl_ver . "\n";
+
+			// Gzip
+			if ( is_callable( 'gzopen' ) ) {
+				$gzip = true;
+			} else {
+				$gzip = false;
+			}
+			$gzip_status = ( $gzip ) ? 'Yes' : 'No';
+			$info .= 'Gzip: ' . $gzip_status . "\n";
+
+			return $info;
+		}
 	}
 }
