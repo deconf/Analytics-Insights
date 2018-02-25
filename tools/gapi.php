@@ -88,7 +88,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 				if ( $token ) {
 					try {
 						$this->client->setAccessToken( $token );
-						if ( ! $this->client->isAccessTokenExpired() ) {
+						if ( $this->client->isAccessTokenExpired() ) {
 							$refreshtoken = $this->client->getRefreshToken();
 							$this->client->refreshToken( $refreshtoken );
 						}
