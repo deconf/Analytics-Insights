@@ -205,7 +205,7 @@ jQuery( window ).on( 'load', function () {
 			var category = gadwpSubmitObject.getAttribute( 'data-vars-ga-category' ) || 'form';
 			var action = gadwpSubmitObject.getAttribute( 'data-vars-ga-action' ) || 'submit';
 			var label = gadwpSubmitObject.getAttribute( 'data-vars-ga-label' ) || gadwpSubmitObject.name || gadwpSubmitObject.value;
-			if ( gadwpUAEventsData.options[ 'event_formsubmit' ] ) {
+			if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
 				ga( 'send', 'event', category, action, label, {
 					'nonInteraction' : 1
 				} );
