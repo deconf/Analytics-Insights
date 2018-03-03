@@ -41,8 +41,8 @@ In addition, you can control who can view specific Google Analytics reports by s
 
 Installs the latest Google Analytics tracking code and allows full code customization:
 
-- Universal Google Analytics tracking code
-- IP address anonymization
+- Universal Google Analytics (analytics.js) tracking code
+- Global Site Tag (gtag.js) tracking code
 - Enhanced link attribution
 - Remarketing, demographics and interests tracking
 - Page Speed sampling rate control
@@ -51,6 +51,12 @@ Installs the latest Google Analytics tracking code and allows full code customiz
 - Exclude user roles from tracking
 - Accelerated Mobile Pages (AMP) support for Google Analytics
 - Ecommerce support for Google Analytics
+
+User privacy oriented features:
+
+- IP address anonymization
+- option to follow Do Not Track (DNT) sent by browsers
+- support for user tracking opt-out
 
 Google Analytics Dashboard for WP enables you to easily track events like:
  
