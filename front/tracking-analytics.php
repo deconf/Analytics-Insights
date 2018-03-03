@@ -183,6 +183,7 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 						'event_precision' => $this->gadwp->config->options['ga_event_precision'],
 						'event_formsubmit' =>  $this->gadwp->config->options ['ga_formsubmit_tracking'],
 						'ga_pagescrolldepth_tracking' => $this->gadwp->config->options['ga_pagescrolldepth_tracking'],
+						'ga_with_gtag' => false,
 					),
 				)
 				);
@@ -205,8 +206,8 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 		 * @param string $value
 		 * @return string
 		 */
-		private function filter( $value ) {
-			if ( 'true' == $value || 'false' == $value ) {
+		private function filter( $value, $is_dim = false ) {
+			if ( 'true' == $value || 'false' == $value || ( is_numeric( $value ) && ! $is_dim ) ) {
 				return $value;
 			}
 
@@ -287,8 +288,8 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 			if ( ! empty( $custom_dimensions ) ) {
 				foreach ( $custom_dimensions as $index => $value ) {
 					$fields = array();
-					$fields['dimension'] = 'dimension' . $index;
-					$fields['value'] = $value;
+					$fields['gadwp_dimension'] = 'dimension' . $index;
+					$fields['gadwp_dim_value'] = $value;
 					$this->add( 'set', $fields );
 				}
 			}
@@ -345,7 +346,11 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 
 				$fields = '';
 				foreach ( $set['fields'] as $fieldkey => $fieldvalue ) {
-					$fieldvalue = $this->filter( $fieldvalue );
+					if ( false === strpos( $fieldkey, 'gadwp_dim_value' ) ) {
+						$fieldvalue = $this->filter( $fieldvalue );
+					} else {
+						$fieldvalue = $this->filter( $fieldvalue, true );
+					}
 					$fields .= ", " . $fieldvalue;
 				}
 
@@ -370,10 +375,275 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 				GADWP_Tools::load_view( 'front/views/analytics-optout-code.php', array( 'uaid' => $this->uaid, 'gaDntOptout' => $this->gadwp->config->options['ga_dnt_optout'], 'gaOptout' => $this->gadwp->config->options['ga_optout'] ) );
 			}
 
-			GADWP_Tools::load_view( 'front/views/analytics-code.php', array( 'trackingcode' => $trackingcode, 'tracking_script_path' => $tracking_script_path ) );
+			GADWP_Tools::load_view( 'front/views/analytics-code.php', array( 'trackingcode' => $trackingcode, 'tracking_script_path' => $tracking_script_path, 'ga_with_gtag' => false ) );
 		}
 	}
 }
+
+// BEGIN GTAG
+
+if ( ! class_exists( 'GADWP_Tracking_GlobalSiteTag' ) ) {
+
+	class GADWP_Tracking_GlobalSiteTag extends GADWP_Tracking_Analytics_Base {
+
+		private $commands;
+
+		public function __construct() {
+			parent::__construct();
+
+			$this->load_scripts();
+
+			if ( $this->gadwp->config->options['optimize_tracking'] && $this->gadwp->config->options['optimize_pagehiding'] && $this->gadwp->config->options['optimize_containerid'] ) {
+				add_action( 'wp_head', array( $this, 'optimize_output' ), 99 );
+			}
+
+			if ( $this->gadwp->config->options['trackingcode_infooter'] ) {
+				add_action( 'wp_footer', array( $this, 'output' ), 99 );
+			} else {
+				add_action( 'wp_head', array( $this, 'output' ), 99 );
+			}
+		}
+
+		/**
+		 * Retrieves the commands
+		 */
+		public function get() {
+			return $this->commands;
+		}
+
+		/**
+		 * Stores the commands
+		 * @param array $commands
+		 */
+		public function set( $commands ) {
+			$this->commands = $commands;
+		}
+
+		/**
+		 * Formats the command before being added to the commands
+		 * @param string $command
+		 * @param array $fields
+		 * @param string $fieldsobject
+		 * @return array
+		 */
+		public function prepare( $command, $fields, $fieldsobject = null ) {
+			return array( 'command' => $command, 'fields' => $fields, 'fieldsobject' => $fieldsobject );
+		}
+
+		/**
+		 * Styles & Scripts load
+		 */
+		private function load_scripts() {
+			if ( $this->is_event_tracking( true ) ) {
+
+				$root_domain = GADWP_Tools::get_root_domain();
+
+				wp_enqueue_script( 'gadwp-tracking-analytics-events', GADWP_URL . 'front/js/tracking-analytics-events.js', array( 'jquery' ), GADWP_CURRENT_VERSION, $this->gadwp->config->options['trackingevents_infooter'] );
+
+				if ( $this->gadwp->config->options['ga_pagescrolldepth_tracking'] ) {
+					wp_enqueue_script( 'gadwp-pagescrolldepth-tracking', GADWP_URL . 'front/js/tracking-scrolldepth.js', array( 'jquery' ), GADWP_CURRENT_VERSION, $this->gadwp->config->options['trackingevents_infooter'] );
+				}
+
+				/* @formatter:off */
+				wp_localize_script( 'gadwp-tracking-analytics-events', 'gadwpUAEventsData', array(
+					'options' => array(
+						'event_tracking' => $this->gadwp->config->options['ga_event_tracking'],
+						'event_downloads' => esc_js($this->gadwp->config->options['ga_event_downloads']),
+						'event_bouncerate' => $this->gadwp->config->options['ga_event_bouncerate'],
+						'aff_tracking' => $this->gadwp->config->options['ga_aff_tracking'],
+						'event_affiliates' =>  esc_js($this->gadwp->config->options['ga_event_affiliates']),
+						'hash_tracking' =>  $this->gadwp->config->options ['ga_hash_tracking'],
+						'root_domain' => $root_domain,
+						'event_timeout' => apply_filters( 'gadwp_analyticsevents_timeout', 100 ),
+						'event_precision' => $this->gadwp->config->options['ga_event_precision'],
+						'event_formsubmit' =>  $this->gadwp->config->options ['ga_formsubmit_tracking'],
+						'ga_pagescrolldepth_tracking' => $this->gadwp->config->options['ga_pagescrolldepth_tracking'],
+						'ga_with_gtag' => true,
+					),
+				)
+				);
+				/* @formatter:on */
+			}
+		}
+
+		/**
+		 * Adds a formatted command to commands
+		 * @param string $command
+		 * @param array $fields
+		 * @param string $fieldsobject
+		 */
+		private function add( $command, $fields, $fieldsobject = null ) {
+			$this->commands[] = $this->prepare( $command, $fields, $fieldsobject );
+		}
+
+		/**
+		 * Sanitizes the output of commands in the tracking code
+		 * @param string $value
+		 * @return string
+		 */
+		private function filter( $value, $is_dim = false ) {
+			if ( 'true' == $value || 'false' == $value || ( is_numeric( $value ) && ! $is_dim ) ) {
+				return $value;
+			}
+
+			if ( substr( $value, 0, 1 ) == '{' && substr( $value, - 1 ) == '}' ) {
+				return $value;
+			}
+
+			return "'" . $value . "'";
+		}
+
+		/**
+		 * Builds the commands based on user's options
+		 */
+		private function build_commands() {
+			$fields = array();
+			$fieldsobject = array();
+			$fields['trackingId'] = $this->uaid;
+			$custom_dimensions = $this->bulid_custom_dimensions();
+			/*
+			 * if ( 1 != $this->gadwp->config->options['ga_speed_samplerate'] ) {
+			 * $fieldsobject['siteSpeedSampleRate'] = (int) $this->gadwp->config->options['ga_speed_samplerate'];
+			 * }
+			 */
+			if ( ! empty( $this->gadwp->config->options['ga_cookiedomain'] ) ) {
+				$fieldsobject['cookie_domain'] = $this->gadwp->config->options['ga_cookiedomain'];
+			}
+			if ( ! empty( $this->gadwp->config->options['ga_cookiename'] ) ) {
+				$fieldsobject['cookie_name'] = $this->gadwp->config->options['ga_cookiename'];
+			}
+			if ( ! empty( $this->gadwp->config->options['ga_cookieexpires'] ) ) {
+				$fieldsobject['cookie_expires'] = (int) $this->gadwp->config->options['ga_cookieexpires'];
+			}
+			/*
+			 * if ( $this->gadwp->config->options['amp_tracking_clientidapi'] ) {
+			 * $fieldsobject['useAmpClientId'] = 'true';
+			 * }
+			 */
+			if ( $this->gadwp->config->options['ga_crossdomain_tracking'] && '' != $this->gadwp->config->options['ga_crossdomain_list'] ) {
+				$domains = '';
+				$domains = explode( ',', $this->gadwp->config->options['ga_crossdomain_list'] );
+				$domains = array_map( 'trim', $domains );
+				$domains = strip_tags( implode( "','", $domains ) );
+				$domains = "['" . $domains . "']";
+				$fieldsobject['linker'] = "{ 'domains' : " . $domains . " }";
+			}
+			if ( ! $this->gadwp->config->options['ga_remarketing'] ) {
+				$fieldsobject['allow_display_features'] = 'false';
+			}
+			if ( $this->gadwp->config->options['ga_enhanced_links'] ) {
+				$fieldsobject['link_attribution'] = 'true';
+			}
+			if ( $this->gadwp->config->options['ga_anonymize_ip'] ) {
+				$fieldsobject['anonymize_ip'] = 'true';
+			}
+			if ( $this->gadwp->config->options['optimize_tracking'] && $this->gadwp->config->options['optimize_containerid'] ) {
+				$fieldsobject['optimize_id'] = esc_attr( $this->gadwp->config->options['optimize_containerid'] );
+			}
+			if ( 100 != $this->gadwp->config->options['ga_user_samplerate'] ) {
+				$fieldsobject['sample_rate'] = (int) $this->gadwp->config->options['ga_user_samplerate'];
+			}
+			if ( ! empty( $custom_dimensions ) ) {
+				$fieldsobject['custom_map'] = '{';
+				foreach ( $custom_dimensions as $index => $value ) {
+					$fieldsobject['custom_map'] .= "'dimension" . $index . "': '" . "gadwp_dim_" . $index . "', ";
+				}
+				$fieldsobject['custom_map'] = rtrim( $fieldsobject['custom_map'], ", " );
+				$fieldsobject['custom_map'] .= '}';
+			}
+			$this->add( 'config', $fields, $fieldsobject );
+
+			if ( ! empty( $custom_dimensions ) ) {
+				$fields = array();
+				$fieldsobject = array();
+				$fields['event_name'] = 'gadwp_dimensions';
+				foreach ( $custom_dimensions as $index => $value ) {
+					$fieldsobject['gadwp_dim_' . $index] = $value;
+				}
+				$this->add( 'event', $fields, $fieldsobject );
+			}
+
+			/*
+			 * if ( $this->gadwp->config->options['ga_force_ssl'] ) {
+			 * $fields = array();
+			 * $fields['option'] = 'forceSSL';
+			 * $fields['value'] = 'true';
+			 * $this->add( 'set', $fields );
+			 * }
+			 */
+
+			/*
+			 * if ( 'enhanced' == $this->gadwp->config->options['ecommerce_mode'] ) {
+			 * $fields = array();
+			 * $fields['plugin'] = 'ec';
+			 * $this->add( 'require', $fields );
+			 * } else if ( 'standard' == $this->gadwp->config->options['ecommerce_mode'] ) {
+			 * $fields = array();
+			 * $fields['plugin'] = 'ecommerce';
+			 * $this->add( 'require', $fields );
+			 * }
+			 */
+
+			do_action( 'gadwp_analytics_commands', $this );
+		}
+
+		/**
+		 * Outputs the Google Optimize tracking code
+		 */
+		public function optimize_output() {
+			GADWP_Tools::load_view( 'front/views/optimize-code.php', array( 'containerid' => $this->gadwp->config->options['optimize_containerid'] ) );
+		}
+
+		/**
+		 * Outputs the Google Analytics tracking code
+		 */
+		public function output() {
+			$this->commands = array();
+
+			$this->build_commands();
+
+			$trackingcode = '';
+
+			foreach ( $this->commands as $set ) {
+				$command = $set['command'];
+
+				$fields = '';
+				foreach ( $set['fields'] as $fieldkey => $fieldvalue ) {
+					$fieldvalue = $this->filter( $fieldvalue );
+					$fields .= ", " . $fieldvalue;
+				}
+
+				if ( $set['fieldsobject'] ) {
+					$fieldsobject = ", {\n\t";
+					foreach ( $set['fieldsobject'] as $fieldkey => $fieldvalue ) {
+						if ( false === strpos( $fieldkey, 'gadwp_' ) ) {
+							$fieldvalue = $this->filter( $fieldvalue );
+						} else {
+							$fieldvalue = $this->filter( $fieldvalue, true );
+						}
+						$fieldkey = $this->filter( $fieldkey );
+						$fieldsobject .= $fieldkey . ": " . $fieldvalue . ", \n\t";
+					}
+					$fieldsobject = rtrim( $fieldsobject, ", " );
+					$fieldsobject .= "}";
+					$trackingcode .= "  gtag('" . $command . "'" . $fields . $fieldsobject . ");\n";
+				} else {
+					$trackingcode .= "  gtag('" . $command . "'" . $fields . ");\n";
+				}
+			}
+
+			$tracking_script_path = apply_filters( 'gadwp_analytics_script_path', 'https://www.googletagmanager.com/gtag/js' );
+
+			if ( $this->gadwp->config->options['ga_optout'] || $this->gadwp->config->options['ga_dnt_optout'] ) {
+				GADWP_Tools::load_view( 'front/views/analytics-optout-code.php', array( 'uaid' => $this->uaid, 'gaDntOptout' => $this->gadwp->config->options['ga_dnt_optout'], 'gaOptout' => $this->gadwp->config->options['ga_optout'] ) );
+			}
+
+			GADWP_Tools::load_view( 'front/views/analytics-code.php', array( 'trackingcode' => $trackingcode, 'tracking_script_path' => $tracking_script_path, 'ga_with_gtag' => true, 'uaid' => $this->uaid ) );
+		}
+	}
+}
+
+// END GTAG
 
 if ( ! class_exists( 'GADWP_Tracking_Analytics_AMP' ) ) {
 

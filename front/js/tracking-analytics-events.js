@@ -24,6 +24,62 @@ function gadwpRedirect () {
 	}
 }
 
+function gadwp_send_event ( category, action, label, withCallBack ) {
+
+	if ( gadwpUAEventsData.options[ 'ga_with_gtag' ] ) {
+		if ( withCallBack ) {
+			if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
+				gtag( 'event', action, {
+					'event_category': category, 
+					'event_label': label,
+					'non_interaction' : 1,
+					'event_callback' : gadwpRedirect
+				} );
+			} else {
+				gtag( 'event', action, {
+					'event_category': category, 
+					'event_label': label,
+					'event_callback' : gadwpRedirect
+				} );
+			}
+		} else {
+			if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
+				gtag( 'event', action, {
+					'event_category': category, 
+					'event_label': label,
+					'non_interaction' : 1,
+				} );
+			} else {
+				gtag( 'event', action, {
+					'event_category': category, 
+					'event_label': label
+				} );
+			}
+		}
+	} else {
+		if ( withCallBack ) {
+			if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
+				ga( 'send', 'event', category, action, label, {
+					'nonInteraction' : 1,
+					'hitCallback' : gadwpRedirect
+				} );
+			} else {
+				ga( 'send', 'event', category, action, label, {
+					'hitCallback' : gadwpRedirect
+				} );
+			}
+		} else {
+			if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
+				ga( 'send', 'event', category, action, label, {
+					'nonInteraction' : 1
+				} );
+			} else {
+				ga( 'send', 'event', category, action, label );
+			}
+		}
+	}	
+}
+
 jQuery( window ).on( 'load', function () {
 
 	if ( gadwpUAEventsData.options[ 'event_tracking' ] ) {
@@ -37,13 +93,7 @@ jQuery( window ).on( 'load', function () {
 			var category = this.getAttribute( 'data-vars-ga-category' ) || 'download';
 			var action = this.getAttribute( 'data-vars-ga-action' ) || 'click';
 			var label = this.getAttribute( 'data-vars-ga-label' ) || this.href;
-			if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
-				ga( 'send', 'event', category, action, label, {
-					'nonInteraction' : 1
-				} );
-			} else {
-				ga( 'send', 'event', category, action, label );
-			}
+			gadwp_send_event ( category, action, label, false );
 		} );
 
 		// Track Mailto
@@ -51,13 +101,7 @@ jQuery( window ).on( 'load', function () {
 			var category = this.getAttribute( 'data-vars-ga-category' ) || 'email';
 			var action = this.getAttribute( 'data-vars-ga-action' ) || 'send';
 			var label = this.getAttribute( 'data-vars-ga-label' ) || this.href;
-			if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
-				ga( 'send', 'event', category, action, label, {
-					'nonInteraction' : 1
-				} );
-			} else {
-				ga( 'send', 'event', category, action, label );
-			}
+			gadwp_send_event ( category, action, label, false );
 		} );
 
 		// Track telephone calls
@@ -65,14 +109,7 @@ jQuery( window ).on( 'load', function () {
 			var category = this.getAttribute( 'data-vars-ga-category' ) || 'telephone';
 			var action = this.getAttribute( 'data-vars-ga-action' ) || 'call';
 			var label = this.getAttribute( 'data-vars-ga-label' ) || this.href;
-			if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
-				ga( 'send', 'event', category, action, label, {
-					'nonInteraction' : 1
-				} );
-			} else {
-				ga( 'send', 'event', category, action, label );
-			}
-
+			gadwp_send_event ( category, action, label, false );
 		} );
 
 		if ( gadwpUAEventsData.options[ 'root_domain' ] ) {
@@ -102,26 +139,11 @@ jQuery( window ).on( 'load', function () {
 					gadwpDefaultPrevented = false;
 				}
 				if ( this.target != '_blank' && gadwpUAEventsData.options[ 'event_precision' ] ) {
-					if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
-						ga( 'send', 'event', category, action, label, {
-							'nonInteraction' : 1,
-							'hitCallback' : gadwpRedirect
-						} );
-					} else {
-						ga( 'send', 'event', category, action, label, {
-							'hitCallback' : gadwpRedirect
-						} );
-					}					
+					gadwp_send_event( category, action, label, true );	
 					setTimeout( gadwpRedirect, gadwpUAEventsData.options[ 'event_timeout' ] );
 					return false;
 				} else {
-					if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
-						ga( 'send', 'event', category, action, label, {
-							'nonInteraction' : 1
-						} );
-					} else {
-						ga( 'send', 'event', category, action, label );
-					}					
+					gadwp_send_event( category, action, label, false );	
 				}
 			} );
 		}
@@ -153,26 +175,11 @@ jQuery( window ).on( 'load', function () {
 				gadwpDefaultPrevented = false;
 			}			
 			if ( this.target != '_blank' && gadwpUAEventsData.options[ 'event_precision' ] ) {
-				if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
-					ga( 'send', 'event', category, action, label, {
-						'nonInteraction' : 1,
-						'hitCallback' : gadwpRedirect
-					} );
-				} else {
-					ga( 'send', 'event', category, action, label, {
-						'hitCallback' : gadwpRedirect
-					} );
-				}				
+				gadwp_send_event( category, action, label, true );
 				setTimeout( gadwpRedirect, gadwpUAEventsData.options[ 'event_timeout' ] );
 				return false;
 			} else {
-				if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
-					ga( 'send', 'event', category, action, label, {
-						'nonInteraction' : 1
-					} );
-				} else {
-					ga( 'send', 'event', category, action, label );
-				}					
+				gadwp_send_event( category, action, label, false );
 			}
 		} );
 	}
@@ -187,13 +194,7 @@ jQuery( window ).on( 'load', function () {
 			var category = this.getAttribute( 'data-vars-ga-category' ) || 'hashmark';
 			var action = this.getAttribute( 'data-vars-ga-action' ) || 'click';
 			var label = this.getAttribute( 'data-vars-ga-label' ) || this.href;
-			if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
-				ga( 'send', 'event', category, action, label, {
-					'nonInteraction' : 1
-				} );
-			} else {
-				ga( 'send', 'event', category, action, label );
-			}
+			gadwp_send_event ( category, action, label, false );
 		} );
 	}
 
@@ -205,13 +206,7 @@ jQuery( window ).on( 'load', function () {
 			var category = gadwpSubmitObject.getAttribute( 'data-vars-ga-category' ) || 'form';
 			var action = gadwpSubmitObject.getAttribute( 'data-vars-ga-action' ) || 'submit';
 			var label = gadwpSubmitObject.getAttribute( 'data-vars-ga-label' ) || gadwpSubmitObject.name || gadwpSubmitObject.value;
-			if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
-				ga( 'send', 'event', category, action, label, {
-					'nonInteraction' : 1
-				} );
-			} else {
-				ga( 'send', 'event', category, action, label );
-			}
+			gadwp_send_event ( category, action, label, false );
 		} );
 	}
 

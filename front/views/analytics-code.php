@@ -7,6 +7,9 @@
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
 ?>
+
+<?php if ( 0 == $data['ga_with_gtag'] ):?>
+
 <!-- BEGIN GADWP v<?php echo GADWP_CURRENT_VERSION; ?> Universal Analytics - https://deconf.com/google-analytics-dashboard-wordpress/ -->
 <script>
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -16,3 +19,17 @@
 <?php echo $data['trackingcode']?>
 </script>
 <!-- END GADWP Universal Analytics -->
+
+<?php else:?>
+
+<!-- BEGIN GADWP v<?php echo GADWP_CURRENT_VERSION; ?> Global Site Tag - https://deconf.com/google-analytics-dashboard-wordpress/ -->
+<script async src="<?php echo $data['tracking_script_path']?>?id=<?php echo $data['uaid']?>"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+<?php echo $data['trackingcode']?>
+</script>
+<!-- END GADWP Global Site Tag -->
+
+<?php endif;?>

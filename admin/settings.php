@@ -43,6 +43,7 @@ final class GADWP_Settings {
 				$options['optimize_tracking'] = 0;
 				$options['trackingcode_infooter'] = 0;
 				$options['trackingevents_infooter'] = 0;
+				$options['ga_with_gtag'] = 0;
 				if ( isset( $_POST['options']['ga_tracking_code'] ) ) {
 					$new_options['ga_tracking_code'] = trim( $new_options['ga_tracking_code'], "\t" );
 				}
@@ -419,6 +420,18 @@ final class GADWP_Settings {
 									<td>
 										<?php $profile_info = GADWP_Tools::get_selected_profile($gadwp->config->options['ga_profiles_list'], $gadwp->config->options['tableid_jail']); ?>
 										<?php echo '<pre>' . __("View Name:", 'google-analytics-dashboard-for-wp') . "\t" . esc_html($profile_info[0]) . "<br />" . __("Tracking ID:", 'google-analytics-dashboard-for-wp') . "\t" . esc_html($profile_info[2]) . "<br />" . __("Default URL:", 'google-analytics-dashboard-for-wp') . "\t" . esc_html($profile_info[3]) . "<br />" . __("Time Zone:", 'google-analytics-dashboard-for-wp') . "\t" . esc_html($profile_info[5]) . '</pre>';?>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2" class="gadwp-settings-title">
+										<div class="button-primary gadwp-settings-switchoo">
+											<input type="checkbox" name="options[ga_with_gtag]" value="1" class="gadwp-settings-switchoo-checkbox" id="ga_with_gtag" <?php checked( $options['ga_with_gtag'], 1 ); ?>>
+											<label class="gadwp-settings-switchoo-label" for="ga_with_gtag">
+												<div class="gadwp-settings-switchoo-inner"></div>
+												<div class="gadwp-settings-switchoo-switch"></div>
+											</label>
+										</div>
+										<div class="switch-desc"><?php echo " ".__("use global site tag gtag.js (not recommended)", 'google-analytics-dashboard-for-wp' );?></div>
 									</td>
 								</tr>
 								<?php elseif ( 'tagmanager' == $options['tracking_type'] ) : ?>
@@ -834,7 +847,7 @@ final class GADWP_Settings {
 								<tr>
 									<td colspan="2" class="gadwp-settings-title">
 										<div class="button-primary gadwp-settings-switchoo">
-											<input type="checkbox" name="options[ga_force_ssl]" value="1" class="gadwp-settings-switchoo-checkbox" id="ga_force_ssl" <?php checked( $options['ga_force_ssl'], 1 ); ?>>
+											<input type="checkbox" name="options[ga_force_ssl]" value="1" class="gadwp-settings-switchoo-checkbox" id="ga_force_ssl" <?php checked( $options['ga_force_ssl'] || $options['ga_with_gtag'], 1 ); ?>  <?php disabled( $options['ga_with_gtag'], true );?>>
 											<label class="gadwp-settings-switchoo-label" for="ga_force_ssl">
 												<div class="gadwp-settings-switchoo-inner"></div>
 												<div class="gadwp-settings-switchoo-switch"></div>
@@ -920,7 +933,7 @@ final class GADWP_Settings {
 								<tr>
 									<td colspan="2" class="gadwp-settings-title">
 										<div class="button-primary gadwp-settings-switchoo">
-											<input type="checkbox" name="options[amp_tracking_clientidapi]" value="1" class="gadwp-settings-switchoo-checkbox" id="amp_tracking_clientidapi" <?php checked( $options['amp_tracking_clientidapi'], 1 ); ?>>
+											<input type="checkbox" name="options[amp_tracking_clientidapi]" value="1" class="gadwp-settings-switchoo-checkbox" id="amp_tracking_clientidapi" <?php checked( $options['amp_tracking_clientidapi'] && !$options['ga_with_gtag'], 1 ); ?> <?php disabled( $options['ga_with_gtag'], true );?>>
 											<label class="gadwp-settings-switchoo-label" for="amp_tracking_clientidapi">
 												<div class="gadwp-settings-switchoo-inner"></div>
 												<div class="gadwp-settings-switchoo-switch"></div>
@@ -938,10 +951,10 @@ final class GADWP_Settings {
 										</label>
 									</td>
 									<td>
-										<select id="ecommerce_mode" name="options[ecommerce_mode]">
+										<select id="ecommerce_mode" name="options[ecommerce_mode]" <?php disabled( $options['ga_with_gtag'], true );?>>
 											<option value="disabled" <?php selected( $options['ecommerce_mode'], 'disabled' ); ?>><?php _e("Disabled", 'google-analytics-dashboard-for-wp');?></option>
 											<option value="standard" <?php selected( $options['ecommerce_mode'], 'standard' ); ?>><?php _e("Ecommerce Plugin", 'google-analytics-dashboard-for-wp');?></option>
-											<option value="enhanced" <?php selected( $options['ecommerce_mode'], 'enhanced' ); ?>><?php _e("Enhanced Ecommerce Plugin", 'google-analytics-dashboard-for-wp');?></option>
+											<option value="enhanced" <?php selected( $options['ecommerce_mode'], 'enhanced' ); selected( $options['ga_with_gtag'], true );?>><?php _e("Enhanced Ecommerce Plugin", 'google-analytics-dashboard-for-wp');?></option>
 										</select>
 									</td>
 								</tr>

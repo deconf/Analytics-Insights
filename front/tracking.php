@@ -43,12 +43,16 @@ if ( ! class_exists( 'GADWP_Tracking' ) ) {
 
 				// Analytics
 				require_once 'tracking-analytics.php';
-				$this->analytics = new GADWP_Tracking_Analytics();
+
+				if ( 1 == $this->gadwp->config->options['ga_with_gtag'] ) {
+					$this->analytics = new GADWP_Tracking_GlobalSiteTag();
+				} else {
+					$this->analytics = new GADWP_Tracking_Analytics();
+				}
 
 				if ( $this->gadwp->config->options['amp_tracking_analytics'] ) {
 					$this->analytics_amp = new GADWP_Tracking_Analytics_AMP();
 				}
-
 			}
 
 			if ( 'tagmanager' == $this->gadwp->config->options['tracking_type'] && $this->gadwp->config->options['web_containerid'] ) {

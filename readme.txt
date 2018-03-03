@@ -5,6 +5,7 @@ Tags: analytics,google analytics,google analytics dashboard,google analytics plu
 Requires at least: 3.5
 Tested up to: 4.9.4
 Stable tag: 5.2.3.1
+Requires PHP: 5.2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -165,6 +166,12 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 
 == Changelog ==
 
+= 5.3 =
+* Enhancements:
+	* adds full support for Global Site Tag (gtag.js)
+* Bug Fixes:	
+	* form submit events were not following the non-interaction settings   
+	
 = 5.2.3.1 =
 * Bug Fixes:	
 	* fixing a small reporting issue 
