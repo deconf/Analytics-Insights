@@ -241,6 +241,12 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 				}
 			}
 
+			// Enable GADWP EndPoint for those updating from a version lower than 5.2, introduced in GADWP v5.3
+			if ( version_compare( $prevver, '5.2.0', '<' ) ) {
+				$this->options['with_endpoint'] = 2;
+				$flag = true;
+			}
+
 			/* @formatter:off */
 			$zeros = array( 	'ga_enhanced_links',
 								'network_mode',

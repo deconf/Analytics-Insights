@@ -86,7 +86,6 @@ As an alternative to Google Analytics tracking code, you can use Google Tag Mana
 
 - Google Tag Manager code
 - Data Layer variables: authors, publication year, publication month, categories, tags, user type
-- Additional Data Layer variables for page scrolling depth
 - Exclude user roles from tracking
 - Accelerated Mobile Pages (AMP) support for Google Tag Manager
 
@@ -176,7 +175,8 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 * Enhancements:
 	* adds full support for Global Site Tag (gtag.js)
 	* remove Scroll Depth functionality, since this is now available as a trigger on Google Tag Manager
-	* adds support for custom dimensions for AMP pages with Google Tag Manager tracking 
+	* adds custom dimensions support for AMP pages with Google Tag Manager tracking
+	* adds support for button submits
 * Bug Fixes:	
 	* form submit events were not following the non-interaction settings   
 	

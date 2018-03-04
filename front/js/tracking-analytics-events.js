@@ -201,7 +201,7 @@ jQuery( window ).on( 'load', function () {
 	if ( gadwpUAEventsData.options[ 'event_formsubmit' ] ) {
 
 		// Track Form Submit
-		jQuery( 'input[type="submit"]' ).click( function ( e ) {
+		jQuery( 'input[type="submit"], button[type="submit"]' ).click( function ( e ) {
 			var gadwpSubmitObject = this;
 			var category = gadwpSubmitObject.getAttribute( 'data-vars-ga-category' ) || 'form';
 			var action = gadwpSubmitObject.getAttribute( 'data-vars-ga-action' ) || 'submit';
