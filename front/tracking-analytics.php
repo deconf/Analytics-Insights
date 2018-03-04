@@ -27,7 +27,7 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics_Base' ) ) {
 			$this->uaid = esc_html( $profile[2] );
 		}
 
-		protected function bulid_custom_dimensions() {
+		protected function build_custom_dimensions() {
 			$custom_dimensions = array();
 
 			if ( $this->gadwp->config->options['ga_author_dimindex'] && ( is_single() || is_page() ) ) {
@@ -107,9 +107,9 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics_Base' ) ) {
 	}
 }
 
-if ( ! class_exists( 'GADWP_Tracking_Analytics_Web' ) ) {
+if ( ! class_exists( 'GADWP_Tracking_Analytics_Common' ) ) {
 
-	class GADWP_Tracking_Analytics_Web extends GADWP_Tracking_Analytics_Base {
+	class GADWP_Tracking_Analytics_Common extends GADWP_Tracking_Analytics_Base {
 
 		protected $commands;
 
@@ -223,7 +223,7 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics_Web' ) ) {
 
 if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 
-	class GADWP_Tracking_Analytics extends GADWP_Tracking_Analytics_Web {
+	class GADWP_Tracking_Analytics extends GADWP_Tracking_Analytics_Common {
 
 		public function __construct() {
 			parent::__construct();
@@ -301,7 +301,7 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 				$this->add( 'set', $fields );
 			}
 
-			$custom_dimensions = $this->bulid_custom_dimensions();
+			$custom_dimensions = $this->build_custom_dimensions();
 			if ( ! empty( $custom_dimensions ) ) {
 				foreach ( $custom_dimensions as $index => $value ) {
 					$fields = array();
@@ -393,7 +393,7 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics' ) ) {
 
 if ( ! class_exists( 'GADWP_Tracking_GlobalSiteTag' ) ) {
 
-	class GADWP_Tracking_GlobalSiteTag extends GADWP_Tracking_Analytics_Web {
+	class GADWP_Tracking_GlobalSiteTag extends GADWP_Tracking_Analytics_Common {
 
 		public function __construct() {
 			parent::__construct();
@@ -412,7 +412,7 @@ if ( ! class_exists( 'GADWP_Tracking_GlobalSiteTag' ) ) {
 			$fields = array();
 			$fieldsobject = array();
 			$fields['trackingId'] = $this->uaid;
-			$custom_dimensions = $this->bulid_custom_dimensions();
+			$custom_dimensions = $this->build_custom_dimensions();
 			/*
 			 * if ( 1 != $this->gadwp->config->options['ga_speed_samplerate'] ) {
 			 * $fieldsobject['siteSpeedSampleRate'] = (int) $this->gadwp->config->options['ga_speed_samplerate'];
@@ -682,7 +682,7 @@ if ( ! class_exists( 'GADWP_Tracking_Analytics_AMP' ) ) {
 			/* @formatter:on */
 
 			// Set Custom Dimensions as extraUrlParams
-			$custom_dimensions = $this->bulid_custom_dimensions();
+			$custom_dimensions = $this->build_custom_dimensions();
 
 			if ( ! empty( $custom_dimensions ) ) {
 				foreach ( $custom_dimensions as $index => $value ) {

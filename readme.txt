@@ -175,6 +175,8 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 = 5.3 =
 * Enhancements:
 	* adds full support for Global Site Tag (gtag.js)
+	* remove Scroll Depth functionality, since this is now available as a trigger on Google Tag Manager
+	* adds support for custom dimensions for AMP pages with Google Tag Manager tracking 
 * Bug Fixes:	
 	* form submit events were not following the non-interaction settings   
 	

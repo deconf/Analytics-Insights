@@ -22,8 +22,6 @@ if ( ! class_exists( 'GADWP_Tracking_TagManager' ) ) {
 		public function __construct() {
 			$this->gadwp = GADWP();
 
-			$this->load_scripts();
-
 			if ( $this->gadwp->config->options['trackingcode_infooter'] ) {
 				add_action( 'wp_footer', array( $this, 'output' ), 99 );
 			} else {
@@ -33,16 +31,6 @@ if ( ! class_exists( 'GADWP_Tracking_TagManager' ) ) {
 			if ( $this->gadwp->config->options['amp_tracking_tagmanager'] && $this->gadwp->config->options['amp_containerid'] ) {
 				add_filter( 'amp_post_template_data', array( $this, 'amp_add_analytics_script' ) );
 				add_action( 'amp_post_template_footer', array( $this, 'amp_output' ) );
-			}
-		}
-
-		/**
-		 * Styles & Scripts load
-		 */
-		private function load_scripts() {
-			if ( $this->gadwp->config->options['tm_pagescrolldepth_tracking'] ) {
-				wp_enqueue_script( 'gadwp-pagescrolldepth-tracking', GADWP_URL . 'front/js/tracking-scrolldepth.js', array( 'jquery' ), GADWP_CURRENT_VERSION, $this->gadwp->config->options['trackingcode_infooter'] );
-				wp_enqueue_script( 'gadwp-tracking-tagmanager-events', GADWP_URL . 'front/js/tracking-tagmanager-events.js', array( 'jquery', 'gadwp-pagescrolldepth-tracking' ), GADWP_CURRENT_VERSION, $this->gadwp->config->options['trackingcode_infooter'] );
 			}
 		}
 
@@ -73,7 +61,7 @@ if ( ! class_exists( 'GADWP_Tracking_TagManager' ) ) {
 		/**
 		 * Builds the datalayer based on user's options
 		 */
-		private function build_datalayer() {
+		private function build_custom_dimensions() {
 			global $post;
 
 			if ( $this->gadwp->config->options['tm_author_var'] && ( is_single() || is_page() ) ) {
@@ -134,7 +122,7 @@ if ( ! class_exists( 'GADWP_Tracking_TagManager' ) ) {
 		 * Outputs the Google Tag Manager tracking code
 		 */
 		public function output() {
-			$this->build_datalayer();
+			$this->build_custom_dimensions();
 
 			if ( is_array( $this->datalayer ) ) {
 				$vars = "{";
@@ -167,7 +155,23 @@ if ( ! class_exists( 'GADWP_Tracking_TagManager' ) ) {
 		 * Outputs the Tag Manager code for AMP
 		 */
 		public function amp_output() {
-			?><amp-analytics config="https://www.googletagmanager.com/amp.json?id=<?php echo $this->gadwp->config->options['amp_containerid']; ?>&gtm.url=SOURCE_URL" data-credentials="include"></amp-analytics><?php
+
+			$this->build_custom_dimensions();
+
+			$vars = array( 'vars' => $this->datalayer );
+
+			if ( version_compare( phpversion(), '5.4.0', '<' ) ) {
+				$json = json_encode( $vars );
+			} else {
+				$json = json_encode( $vars, JSON_PRETTY_PRINT );
+			}
+
+			$amp_containerid = $this->gadwp->config->options['amp_containerid'];
+
+			$json = str_replace( array( '"&#91;', '&#93;"' ), array( '[', ']' ), $json ); // make verticalBoundaries a JavaScript array
+
+			GADWP_Tools::load_view( 'front/views/tagmanager-amp-code.php', array ( 'json' => $json, 'containerid' => $amp_containerid ) );
+
 		}
 	}
 }
