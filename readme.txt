@@ -4,7 +4,7 @@ Donate link: https://deconf.com/donate/
 Tags: analytics,google analytics,google analytics dashboard,google analytics plugin,google analytics widget
 Requires at least: 3.5
 Tested up to: 4.9.4
-Stable tag: 5.2.3.1
+Stable tag: 5.3
 Requires PHP: 5.2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -171,7 +171,7 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 
 == Changelog ==
 
-= 5.3 =
+= 5.3 [release notes](https://deconf.com/adding-gtag-js-to-your-site/) =
 * Enhancements:
 	* adds full support for Global Site Tag (gtag.js)
 	* remove Scroll Depth functionality, since this is now available as a trigger on Google Tag Manager

@@ -239,12 +239,11 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 				} else {
 					GADWP_Tools::delete_cache( 'gapi_errors' );
 				}
-			}
 
-			// Enable GADWP EndPoint for those updating from a version lower than 5.2, introduced in GADWP v5.3
-			if ( version_compare( $prevver, '5.2.0', '<' ) ) {
-				$this->options['with_endpoint'] = 2;
-				$flag = true;
+				// Enable GADWP EndPoint for those updating from a version lower than 5.2, introduced in GADWP v5.3
+				if (version_compare( $prevver, '5.2', '<' ) ) {
+					$this->options['with_endpoint'] = 2;
+				}
 			}
 
 			/* @formatter:off */
