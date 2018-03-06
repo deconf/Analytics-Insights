@@ -1265,6 +1265,8 @@ final class GADWP_Settings {
 					$error_report .= $sep . GADWP_Tools::get_cache( 'errors_count' );
 					$error_report .= $sep . $info;
 
+					$error_report = urldecode( $error_report );
+
 					$url = GADWP_ENDPOINT_URL . 'gadwp-report.php';
 					/* @formatter:off */
 					$response = wp_remote_post( $url, array(

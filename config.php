@@ -246,6 +246,13 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 				}
 			}
 
+			if ( isset( $this->options['item_reports'] ) ) { // v4.8
+				$this->options['backend_item_reports'] = $this->options['item_reports'];
+			}
+			if ( isset( $this->options['ga_dash_frontend_stats'] ) ) { // v4.8
+				$this->options['frontend_item_reports'] = $this->options['ga_dash_frontend_stats'];
+			}
+
 			/* @formatter:off */
 			$zeros = array( 	'ga_enhanced_links',
 								'network_mode',
@@ -287,19 +294,13 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 								'ga_optout', //v5.2.3
 								'ga_dnt_optout', //v5.2.3
 								'ga_with_gtag', //v5.3
+								'frontend_item_reports',
 			);
 			foreach ( $zeros as $key ) {
 				if ( ! isset( $this->options[$key] ) ) {
 					$this->options[$key] = 0;
 					$flag = true;
 				}
-			}
-
-			if ( isset( $this->options['item_reports'] ) ) { // v4.8
-				$this->options['backend_item_reports'] = $this->options['item_reports'];
-			}
-			if ( isset( $this->options['ga_dash_frontend_stats'] ) ) { // v4.8
-				$this->options['frontend_item_reports'] = $this->options['ga_dash_frontend_stats'];
 			}
 
 			if ( isset($this->options['ga_dash_tracking']) && 0 == $this->options['ga_dash_tracking'] ) { // v5.0.1
