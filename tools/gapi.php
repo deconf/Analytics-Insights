@@ -290,7 +290,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 		 * @param
 		 *            $all
 		 */
-		public function reset_token( $all = true ) {
+		public function reset_token( $all = false ) {
 			$this->gadwp->config->options['token'] = "";
 			if ( $all ) {
 				$this->gadwp->config->options['tableid_jail'] = "";

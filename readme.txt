@@ -4,7 +4,7 @@ Donate link: https://deconf.com/donate/
 Tags: analytics,google analytics,google analytics dashboard,google analytics plugin,google analytics widget
 Requires at least: 3.5
 Tested up to: 4.9.4
-Stable tag: 5.3.1
+Stable tag: 5.3.1.1
 Requires PHP: 5.2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -172,6 +172,10 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 == Changelog ==
 
 [GADWP v5.3 release notes](https://deconf.com/adding-gtag-js-to-your-site/)
+
+= 5.3.1.1 =
+* Bug Fixes:	
+	* avoid tracking issues by not clearing the profiles list on automatic token resets
 
 = 5.3.1 =
 * Bug Fixes:	
