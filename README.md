@@ -42,6 +42,7 @@ Hooks
   - gadwp_analyticsevents_timeout
   - gadwp_curl_options
   - gadwp_analytics_script_path
+  - gadwp_gtag_script_path
   - gadwp_maps_api_key
   - gadwp_curl_options
 
@@ -49,4 +50,9 @@ Hooks
 
   - gadwp_tagmanager_datalayer
   - gadwp_analytics_commands
+  - gadwp_gtag_commands
   - gadwp_endpoint_support
+  
+* Shortcodes
+
+  - gadwp_user_optout
