@@ -36,6 +36,8 @@ final class GADWP_Settings {
 				$options['ga_force_ssl'] = 0;
 				$options['ga_pagescrolldepth_tracking'] = 0;
 				$options['tm_pagescrolldepth_tracking'] = 0;
+				$options['tm_optout'] = 0;
+				$options['tm_dnt_optout'] = 0;
 				$options['amp_tracking_analytics'] = 0;
 				$options['amp_tracking_clientidapi'] = 0;
 				$options['amp_tracking_tagmanager'] = 0;
@@ -388,7 +390,7 @@ final class GADWP_Settings {
 						<?php if ( 'universal' == $options['tracking_type'] ) :?>
 						<?php $tabs = array( 'basic' => __( "Basic Settings", 'google-analytics-dashboard-for-wp' ), 'events' => __( "Events Tracking", 'google-analytics-dashboard-for-wp' ), 'custom' => __( "Custom Definitions", 'google-analytics-dashboard-for-wp' ), 'exclude' => __( "Exclude Tracking", 'google-analytics-dashboard-for-wp' ), 'advanced' => __( "Advanced Settings", 'google-analytics-dashboard-for-wp' ), 'integration' => __( "Integration", 'google-analytics-dashboard-for-wp' ) );?>
 						<?php elseif ( 'tagmanager' == $options['tracking_type'] ) :?>
-						<?php $tabs = array( 'basic' => __( "Basic Settings", 'google-analytics-dashboard-for-wp' ), 'tmdatalayervars' => __( "DataLayer Variables", 'google-analytics-dashboard-for-wp' ), 'exclude' => __( "Exclude Tracking", 'google-analytics-dashboard-for-wp' ), 'tmintegration' => __( "Integration", 'google-analytics-dashboard-for-wp' ) );?>
+						<?php $tabs = array( 'basic' => __( "Basic Settings", 'google-analytics-dashboard-for-wp' ), 'tmdatalayervars' => __( "DataLayer Variables", 'google-analytics-dashboard-for-wp' ), 'exclude' => __( "Exclude Tracking", 'google-analytics-dashboard-for-wp' ), 'tmadvanced' =>  __( "Advanced Settings", 'google-analytics-dashboard-for-wp' ), 'tmintegration' => __( "Integration", 'google-analytics-dashboard-for-wp' ) );?>
 						<?php else :?>
 						<?php $tabs = array( 'basic' => __( "Basic Settings", 'google-analytics-dashboard-for-wp' ) );?>
 						<?php endif; ?>
@@ -981,6 +983,37 @@ final class GADWP_Settings {
 								</tr>
 							</table>
 						</div>
+						<div id="gadwp-tmadvanced">
+							<table class="gadwp-settings-options">
+								<tr>
+									<td colspan="2"><?php echo "<h2>" . __( "Advanced Tracking", 'google-analytics-dashboard-for-wp' ) . "</h2>"; ?></td>
+								</tr>
+								<tr>
+									<td colspan="2" class="gadwp-settings-title">
+										<div class="button-primary gadwp-settings-switchoo">
+											<input type="checkbox" name="options[tm_optout]" value="1" class="gadwp-settings-switchoo-checkbox" id="tm_optout" <?php checked( $options['tm_optout'], 1 ); ?>>
+											<label class="gadwp-settings-switchoo-label" for="tm_optout">
+												<div class="gadwp-settings-switchoo-inner"></div>
+												<div class="gadwp-settings-switchoo-switch"></div>
+											</label>
+										</div>
+										<div class="switch-desc"><?php echo " ".__("enable support for user opt-out", 'google-analytics-dashboard-for-wp' );?></div>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2" class="gadwp-settings-title">
+										<div class="button-primary gadwp-settings-switchoo">
+											<input type="checkbox" name="options[tm_dnt_optout]" value="1" class="gadwp-settings-switchoo-checkbox" id="tm_dnt_optout" <?php checked( $options['tm_dnt_optout'], 1 ); ?>>
+											<label class="gadwp-settings-switchoo-label" for="tm_dnt_optout">
+												<div class="gadwp-settings-switchoo-inner"></div>
+												<div class="gadwp-settings-switchoo-switch"></div>
+											</label>
+										</div>
+										<div class="switch-desc"> <?php _e( 'exclude tracking for users sending Do Not Track header', 'google-analytics-dashboard-for-wp' ); ?></div>
+									</td>
+								</tr>
+							</table>
+						</div>
 						<div id="gadwp-tmintegration">
 							<table class="gadwp-settings-options">
 								<tr>
@@ -1039,12 +1072,6 @@ final class GADWP_Settings {
 											<tr>
 											<?php endif; ?>
 										<?php endforeach; ?>
-
-
-
-
-
-
 										</table>
 									</td>
 								</tr>

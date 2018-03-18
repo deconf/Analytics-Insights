@@ -19,8 +19,14 @@ if ( ! class_exists( 'GADWP_Tracking_TagManager' ) ) {
 
 		private $datalayer;
 
+		private $uaid;
+
 		public function __construct() {
 			$this->gadwp = GADWP();
+
+			$profile = GADWP_Tools::get_selected_profile( $this->gadwp->config->options['ga_profiles_list'], $this->gadwp->config->options['tableid_jail'] );
+
+			$this->uaid = esc_html( $profile[2] );
 
 			if ( $this->gadwp->config->options['trackingcode_infooter'] ) {
 				add_action( 'wp_footer', array( $this, 'output' ), 99 );
@@ -135,6 +141,10 @@ if ( ! class_exists( 'GADWP_Tracking_TagManager' ) ) {
 				$vars = "{}";
 			}
 
+			if ( ( $this->gadwp->config->options['tm_optout'] || $this->gadwp->config->options['tm_dnt_optout'] ) && ! empty( $this->uaid ) ) {
+				GADWP_Tools::load_view( 'front/views/analytics-optout-code.php', array( 'uaid' => $this->uaid, 'gaDntOptout' => $this->gadwp->config->options['tm_dnt_optout'], 'gaOptout' => $this->gadwp->config->options['tm_optout'] ) );
+			}
+
 			GADWP_Tools::load_view( 'front/views/tagmanager-code.php', array( 'containerid' => $this->gadwp->config->options['web_containerid'], 'vars' => $vars ) );
 		}
 
@@ -155,7 +165,6 @@ if ( ! class_exists( 'GADWP_Tracking_TagManager' ) ) {
 		 * Outputs the Tag Manager code for AMP
 		 */
 		public function amp_output() {
-
 			$this->build_custom_dimensions();
 
 			$vars = array( 'vars' => $this->datalayer );
@@ -170,8 +179,7 @@ if ( ! class_exists( 'GADWP_Tracking_TagManager' ) ) {
 
 			$json = str_replace( array( '"&#91;', '&#93;"' ), array( '[', ']' ), $json ); // make verticalBoundaries a JavaScript array
 
-			GADWP_Tools::load_view( 'front/views/tagmanager-amp-code.php', array ( 'json' => $json, 'containerid' => $amp_containerid ) );
-
+			GADWP_Tools::load_view( 'front/views/tagmanager-amp-code.php', array( 'json' => $json, 'containerid' => $amp_containerid ) );
 		}
 	}
 }

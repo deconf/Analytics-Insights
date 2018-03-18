@@ -10,8 +10,8 @@
 <script>
 var gadwpDnt = false;
 var gadwpProperty = '<?php echo $data['uaid']?>';
-var gadwpDntFollow =  '<?php echo $data['gaDntOptout']?>';
-var gadwpOptout =  '<?php echo $data['gaOptout']?>';
+var gadwpDntFollow = <?php echo $data['gaDntOptout'] ? 'true' : 'false'?>;
+var gadwpOptout = <?php echo $data['gaOptout'] ? 'true' : 'false'?>;
 var disableStr = 'ga-disable-' + gadwpProperty;
 if(gadwpDntFollow && (window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
 	gadwpDnt = true;
