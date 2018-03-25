@@ -177,7 +177,7 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 * Bug Fixes:	
 	* fixes for user opt-out feature 
 * Enhancements: 
-	* use <em>gadwp_useroptout</em> shortcode to easily generate opt-out buttons and links
+	* use <em>gadwp_useroptout</em> shortcode to easily generate opt-out buttons and links, [more details](https://deconf.com/google-analytics-gdpr-and-user-data-privacy-compliance)
 	* adding <em>gadwp_gtag_commands</em> and <em>gadwp_gtag_script_path</em> hooks to allow further gtag (Global Site Tag) code customization
 	* adds opt-out and DNT support for Google Tag Manager	
 	
