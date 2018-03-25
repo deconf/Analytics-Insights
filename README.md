@@ -55,4 +55,4 @@ Hooks
   
 * Shortcodes
 
-  - gadwp_user_optout
+  - gadwp_useroptout
