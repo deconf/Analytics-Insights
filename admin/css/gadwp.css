@@ -7,7 +7,7 @@
  */
 
 /* Tab navigation */
-#gadwp-events, #gadwp-custom, #gadwp-advanced, #gadwp-exclude, #gadwp-config, #gadwp-tmdatalayervars, #gadwp-tmintegration, #gadwp-integration {
+#gadwp-events, #gadwp-custom, #gadwp-advanced, #gadwp-exclude, #gadwp-config, #gadwp-tmdatalayervars, #gadwp-tmintegration, #gadwp-integration, #gadwp-tmadvanced {
 	display: none;
 }
 
