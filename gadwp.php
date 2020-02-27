@@ -20,7 +20,7 @@ if ( ! defined( 'GADWP_CURRENT_VERSION' ) ) {
 }
 
 if ( ! defined( 'GADWP_ENDPOINT_URL' ) ) {
-	define( 'GADWP_ENDPOINT_URL', 'https://gadwp.deconf.com/' );
+	define( 'GADWP_ENDPOINT_URL', 'https://deconf.com/gadwp/' );
 }
 
 
