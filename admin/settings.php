@@ -18,8 +18,8 @@ final class GADWP_Settings {
 		$gadwp = GADWP();
 		$network_settings = false;
 		$options = $gadwp->config->options; // Get current options
-		if ( isset( $_POST['options']['gadwp_hidden'] ) && isset( $_POST['options'] ) && ( isset( $_POST['gadwp_security'] ) && wp_verify_nonce( $_POST['gadwp_security'], 'gadwp_form' ) ) && 'Reset' != $who ) {
-			$new_options = $_POST['options'];
+		if ( isset( $_REQUEST['options']['gadwp_hidden'] ) && isset( $_REQUEST['options'] ) && ( isset( $_REQUEST['gadwp_security'] ) && wp_verify_nonce( $_REQUEST['gadwp_security'], 'gadwp_form' ) ) && 'Reset' != $who ) {
+			$new_options = $_REQUEST['options'];
 			if ( 'tracking' == $who ) {
 				$options['ga_anonymize_ip'] = 0;
 				$options['ga_optout'] = 0;
@@ -46,7 +46,7 @@ final class GADWP_Settings {
 				$options['trackingcode_infooter'] = 0;
 				$options['trackingevents_infooter'] = 0;
 				$options['ga_with_gtag'] = 0;
-				if ( isset( $_POST['options']['ga_tracking_code'] ) ) {
+				if ( isset( $_REQUEST['options']['ga_tracking_code'] ) ) {
 					$new_options['ga_tracking_code'] = trim( $new_options['ga_tracking_code'], "\t" );
 				}
 				if ( empty( $new_options['track_exclude'] ) ) {
@@ -98,9 +98,9 @@ final class GADWP_Settings {
 			return;
 		}
 		$options = self::update_options( 'frontend' );
-		if ( isset( $_POST['options']['gadwp_hidden'] ) ) {
+		if ( isset( $_REQUEST['options']['gadwp_hidden'] ) ) {
 			$message = "<div class='updated' id='gadwp-autodismiss'><p>" . __( "Settings saved.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
-			if ( ! ( isset( $_POST['gadwp_security'] ) && wp_verify_nonce( $_POST['gadwp_security'], 'gadwp_form' ) ) ) {
+			if ( ! ( isset( $_REQUEST['gadwp_security'] ) && wp_verify_nonce( $_REQUEST['gadwp_security'], 'gadwp_form' ) ) ) {
 				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
@@ -193,9 +193,9 @@ final class GADWP_Settings {
 			return;
 		}
 		$options = self::update_options( 'backend' );
-		if ( isset( $_POST['options']['gadwp_hidden'] ) ) {
+		if ( isset( $_REQUEST['options']['gadwp_hidden'] ) ) {
 			$message = "<div class='updated' id='gadwp-autodismiss'><p>" . __( "Settings saved.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
-			if ( ! ( isset( $_POST['gadwp_security'] ) && wp_verify_nonce( $_POST['gadwp_security'], 'gadwp_form' ) ) ) {
+			if ( ! ( isset( $_REQUEST['gadwp_security'] ) && wp_verify_nonce( $_REQUEST['gadwp_security'], 'gadwp_form' ) ) ) {
 				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
@@ -368,9 +368,9 @@ final class GADWP_Settings {
 			return;
 		}
 		$options = self::update_options( 'tracking' );
-		if ( isset( $_POST['options']['gadwp_hidden'] ) ) {
+		if ( isset( $_REQUEST['options']['gadwp_hidden'] ) ) {
 			$message = "<div class='updated' id='gadwp-autodismiss'><p>" . __( "Settings saved.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
-			if ( ! ( isset( $_POST['gadwp_security'] ) && wp_verify_nonce( $_POST['gadwp_security'], 'gadwp_form' ) ) ) {
+			if ( ! ( isset( $_REQUEST['gadwp_security'] ) && wp_verify_nonce( $_REQUEST['gadwp_security'], 'gadwp_form' ) ) ) {
 				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
@@ -1212,14 +1212,14 @@ final class GADWP_Settings {
 			$gadwp->gapi_controller = new GADWP_GAPI_Controller();
 		}
 		echo '<script type="text/javascript">jQuery("#gapi-warning").hide()</script>';
-		if ( isset( $_POST['gadwp_access_code'] ) ) {
-			if ( 1 == ! stripos( 'x' . $_POST['gadwp_access_code'], 'UA-', 1 ) && $_POST['gadwp_access_code'] != get_option( 'gadwp_redeemed_code' ) ) {
+		if ( isset( $_REQUEST['gadwp_access_code'] ) ) {
+			if ( 1 == ! stripos( 'x' . $_REQUEST['gadwp_access_code'], 'UA-', 1 ) && $_REQUEST['gadwp_access_code'] != get_option( 'gadwp_redeemed_code' ) ) {
 				try {
-					$gadwp_access_code = $_POST['gadwp_access_code'];
+					$gadwp_access_code = $_REQUEST['gadwp_access_code'];
 					update_option( 'gadwp_redeemed_code', $gadwp_access_code );
 					GADWP_Tools::delete_cache( 'gapi_errors' );
 					GADWP_Tools::delete_cache( 'last_error' );
-					$gadwp->gapi_controller->client->authenticate( $_POST['gadwp_access_code'] );
+					$gadwp->gapi_controller->client->authenticate( $_REQUEST['gadwp_access_code'] );
 					$gadwp->config->options['token'] = $gadwp->gapi_controller->client->getAccessToken();
 					$gadwp->config->options['automatic_updates_minorversion'] = 1;
 					$gadwp->config->set_plugin_options();
@@ -1249,23 +1249,23 @@ final class GADWP_Settings {
 					$gadwp->gapi_controller->reset_token();
 				}
 			} else {
-				if ( 1 == stripos( 'x' . $_POST['gadwp_access_code'], 'UA-', 1 ) ) {
+				if ( 1 == stripos( 'x' . $_REQUEST['gadwp_access_code'], 'UA-', 1 ) ) {
 					$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "The access code is <strong>not</strong> your <strong>Tracking ID</strong> (UA-XXXXX-X) <strong>nor</strong> your <strong>email address</strong>!", 'google-analytics-dashboard-for-wp' ) . ".</p></div>";
 				} else {
 					$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "You can only use the access code <strong>once</strong>, please generate a <strong>new access</strong> code following the instructions!", 'google-analytics-dashboard-for-wp' ) . ".</p></div>";
 				}
 			}
 		}
-		if ( isset( $_POST['Clear'] ) ) {
-			if ( isset( $_POST['gadwp_security'] ) && wp_verify_nonce( $_POST['gadwp_security'], 'gadwp_form' ) ) {
+		if ( isset( $_REQUEST['Clear'] ) ) {
+			if ( isset( $_REQUEST['gadwp_security'] ) && wp_verify_nonce( $_REQUEST['gadwp_security'], 'gadwp_form' ) ) {
 				GADWP_Tools::clear_cache();
 				$message = "<div class='updated' id='gadwp-autodismiss'><p>" . __( "Cleared Cache.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			} else {
 				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
-		if ( isset( $_POST['Reset'] ) ) {
-			if ( isset( $_POST['gadwp_security'] ) && wp_verify_nonce( $_POST['gadwp_security'], 'gadwp_form' ) ) {
+		if ( isset( $_REQUEST['Reset'] ) ) {
+			if ( isset( $_REQUEST['gadwp_security'] ) && wp_verify_nonce( $_REQUEST['gadwp_security'], 'gadwp_form' ) ) {
 				$gadwp->gapi_controller->reset_token();
 				GADWP_Tools::clear_cache();
 				$message = "<div class='updated' id='gadwp-autodismiss'><p>" . __( "Token Reseted and Revoked.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
@@ -1274,8 +1274,8 @@ final class GADWP_Settings {
 				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
-		if ( isset( $_POST['Reset_Err'] ) ) {
-			if ( isset( $_POST['gadwp_security'] ) && wp_verify_nonce( $_POST['gadwp_security'], 'gadwp_form' ) ) {
+		if ( isset( $_REQUEST['Reset_Err'] ) ) {
+			if ( isset( $_REQUEST['gadwp_security'] ) && wp_verify_nonce( $_REQUEST['gadwp_security'], 'gadwp_form' ) ) {
 
 				if ( GADWP_Tools::get_cache( 'gapi_errors' ) || GADWP_Tools::get_cache( 'last_error' ) ) {
 
@@ -1314,14 +1314,14 @@ final class GADWP_Settings {
 				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
-		if ( isset( $_POST['options']['gadwp_hidden'] ) && ! isset( $_POST['Clear'] ) && ! isset( $_POST['Reset'] ) && ! isset( $_POST['Reset_Err'] ) ) {
+		if ( isset( $_REQUEST['options']['gadwp_hidden'] ) && ! isset( $_REQUEST['Clear'] ) && ! isset( $_REQUEST['Reset'] ) && ! isset( $_REQUEST['Reset_Err'] ) ) {
 			$message = "<div class='updated' id='gadwp-autodismiss'><p>" . __( "Settings saved.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
-			if ( ! ( isset( $_POST['gadwp_security'] ) && wp_verify_nonce( $_POST['gadwp_security'], 'gadwp_form' ) ) ) {
+			if ( ! ( isset( $_REQUEST['gadwp_security'] ) && wp_verify_nonce( $_REQUEST['gadwp_security'], 'gadwp_form' ) ) ) {
 				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
-		if ( isset( $_POST['Hide'] ) ) {
-			if ( isset( $_POST['gadwp_security'] ) && wp_verify_nonce( $_POST['gadwp_security'], 'gadwp_form' ) ) {
+		if ( isset( $_REQUEST['Hide'] ) ) {
+			if ( isset( $_REQUEST['gadwp_security'] ) && wp_verify_nonce( $_REQUEST['gadwp_security'], 'gadwp_form' ) ) {
 				$message = "<div class='updated' id='gadwp-action'><p>" . __( "All other domains/properties were removed.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 				$lock_profile = GADWP_Tools::get_selected_profile( $gadwp->config->options['ga_profiles_list'], $gadwp->config->options['tableid_jail'] );
 				$gadwp->config->options['ga_profiles_list'] = array( $lock_profile );
@@ -1343,17 +1343,14 @@ final class GADWP_Settings {
 										<?php if ( $gadwp->gapi_controller->gapi_errors_handler() || GADWP_Tools::get_cache( 'last_error' ) ) : ?>
 													<?php $message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'google-analytics-dashboard-for-wp' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadwp_errors_debugging', false ), __( 'Errors & Debug', 'google-analytics-dashboard-for-wp' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadwp_settings', false ), __( 'authorize the plugin', 'google-analytics-dashboard-for-wp' ) ) ) );?>
 										<?php endif;?>
-										<?php if ( isset( $_POST['Authorize'] ) ) : ?>
+										<?php if ( isset( $_REQUEST['Authorize'] ) ) : ?>
 											<?php GADWP_Tools::clear_cache(); ?>
 											<?php $gadwp->gapi_controller->token_request(); ?>
-											<div class="updated">
-											<p><?php _e( "Use the red link (see below) to generate and get your access code! You need to generate a new code each time you authorize!", 'google-analytics-dashboard-for-wp' )?></p>
-										</div>
 										<?php else : ?>
 										<?php if ( isset( $message ) ) :?>
 											<?php echo $message;?>
 										<?php endif; ?>
-										<form name="gadwp_form" method="post" action="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>">
+										<form name="gadwp_form" method="post" action="<?php echo esc_url( $_SERVER['REQUEST_URI'] ); ?>">
 											<input type="hidden" name="options[gadwp_hidden]" value="Y">
 											<?php wp_nonce_field('gadwp_form','gadwp_security'); ?>
 											<table class="gadwp-settings-options">
@@ -1530,12 +1527,12 @@ final class GADWP_Settings {
 		}
 
 		echo '<script type="text/javascript">jQuery("#gapi-warning").hide()</script>';
-		if ( isset( $_POST['gadwp_access_code'] ) ) {
-			if ( 1 == ! stripos( 'x' . $_POST['gadwp_access_code'], 'UA-', 1 ) && $_POST['gadwp_access_code'] != get_option( 'gadwp_redeemed_code' ) ) {
+		if ( isset( $_REQUEST['gadwp_access_code'] ) ) {
+			if ( 1 == ! stripos( 'x' . $_REQUEST['gadwp_access_code'], 'UA-', 1 ) && $_REQUEST['gadwp_access_code'] != get_option( 'gadwp_redeemed_code' ) ) {
 				try {
-					$gadwp_access_code = $_POST['gadwp_access_code'];
+					$gadwp_access_code = $_REQUEST['gadwp_access_code'];
 					update_option( 'gadwp_redeemed_code', $gadwp_access_code );
-					$gadwp->gapi_controller->client->authenticate( $_POST['gadwp_access_code'] );
+					$gadwp->gapi_controller->client->authenticate( $_REQUEST['gadwp_access_code'] );
 					$gadwp->config->options['token'] = $gadwp->gapi_controller->client->getAccessToken();
 					$gadwp->config->options['automatic_updates_minorversion'] = 1;
 					$gadwp->config->set_plugin_options( true );
@@ -1576,15 +1573,15 @@ final class GADWP_Settings {
 					$gadwp->gapi_controller->reset_token();
 				}
 			} else {
-				if ( 1 == stripos( 'x' . $_POST['gadwp_access_code'], 'UA-', 1 ) ) {
+				if ( 1 == stripos( 'x' . $_REQUEST['gadwp_access_code'], 'UA-', 1 ) ) {
 					$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "The access code is <strong>not</strong> your <strong>Tracking ID</strong> (UA-XXXXX-X) <strong>nor</strong> your <strong>email address</strong>!", 'google-analytics-dashboard-for-wp' ) . ".</p></div>";
 				} else {
 					$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "You can only use the access code <strong>once</strong>, please generate a <strong>new access code</strong> using the red link", 'google-analytics-dashboard-for-wp' ) . "!</p></div>";
 				}
 			}
 		}
-		if ( isset( $_POST['Refresh'] ) ) {
-			if ( isset( $_POST['gadwp_security'] ) && wp_verify_nonce( $_POST['gadwp_security'], 'gadwp_form' ) ) {
+		if ( isset( $_REQUEST['Refresh'] ) ) {
+			if ( isset( $_REQUEST['gadwp_security'] ) && wp_verify_nonce( $_REQUEST['gadwp_security'], 'gadwp_form' ) ) {
 				$gadwp->config->options['ga_profiles_list'] = array();
 				$message = "<div class='updated' id='gadwp-autodismiss'><p>" . __( "Properties refreshed.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 				$options = self::update_options( 'network' );
@@ -1608,16 +1605,16 @@ final class GADWP_Settings {
 				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
-		if ( isset( $_POST['Clear'] ) ) {
-			if ( isset( $_POST['gadwp_security'] ) && wp_verify_nonce( $_POST['gadwp_security'], 'gadwp_form' ) ) {
+		if ( isset( $_REQUEST['Clear'] ) ) {
+			if ( isset( $_REQUEST['gadwp_security'] ) && wp_verify_nonce( $_REQUEST['gadwp_security'], 'gadwp_form' ) ) {
 				GADWP_Tools::clear_cache();
 				$message = "<div class='updated' id='gadwp-autodismiss'><p>" . __( "Cleared Cache.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			} else {
 				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
-		if ( isset( $_POST['Reset'] ) ) {
-			if ( isset( $_POST['gadwp_security'] ) && wp_verify_nonce( $_POST['gadwp_security'], 'gadwp_form' ) ) {
+		if ( isset( $_REQUEST['Reset'] ) ) {
+			if ( isset( $_REQUEST['gadwp_security'] ) && wp_verify_nonce( $_REQUEST['gadwp_security'], 'gadwp_form' ) ) {
 				$gadwp->gapi_controller->reset_token();
 				GADWP_Tools::clear_cache();
 				$message = "<div class='updated' id='gadwp-autodismiss'><p>" . __( "Token Reseted and Revoked.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
@@ -1626,14 +1623,14 @@ final class GADWP_Settings {
 				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
-		if ( isset( $_POST['options']['gadwp_hidden'] ) && ! isset( $_POST['Clear'] ) && ! isset( $_POST['Reset'] ) && ! isset( $_POST['Refresh'] ) ) {
+		if ( isset( $_REQUEST['options']['gadwp_hidden'] ) && ! isset( $_REQUEST['Clear'] ) && ! isset( $_REQUEST['Reset'] ) && ! isset( $_REQUEST['Refresh'] ) ) {
 			$message = "<div class='updated' id='gadwp-autodismiss'><p>" . __( "Settings saved.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
-			if ( ! ( isset( $_POST['gadwp_security'] ) && wp_verify_nonce( $_POST['gadwp_security'], 'gadwp_form' ) ) ) {
+			if ( ! ( isset( $_REQUEST['gadwp_security'] ) && wp_verify_nonce( $_REQUEST['gadwp_security'], 'gadwp_form' ) ) ) {
 				$message = "<div class='error' id='gadwp-autodismiss'><p>" . __( "Cheating Huh?", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 			}
 		}
-		if ( isset( $_POST['Hide'] ) ) {
-			if ( isset( $_POST['gadwp_security'] ) && wp_verify_nonce( $_POST['gadwp_security'], 'gadwp_form' ) ) {
+		if ( isset( $_REQUEST['Hide'] ) ) {
+			if ( isset( $_REQUEST['gadwp_security'] ) && wp_verify_nonce( $_REQUEST['gadwp_security'], 'gadwp_form' ) ) {
 				$message = "<div class='updated' id='gadwp-autodismiss'><p>" . __( "All other domains/properties were removed.", 'google-analytics-dashboard-for-wp' ) . "</p></div>";
 				$lock_profile = GADWP_Tools::get_selected_profile( $gadwp->config->options['ga_profiles_list'], $gadwp->config->options['tableid_jail'] );
 				$gadwp->config->options['ga_profiles_list'] = array( $lock_profile );
@@ -1655,12 +1652,9 @@ final class GADWP_Settings {
 					<?php if ( $gadwp->gapi_controller->gapi_errors_handler() || GADWP_Tools::get_cache( 'last_error' ) ) : ?>
 						<?php $message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'google-analytics-dashboard-for-wp' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadwp_errors_debugging', false ), __( 'Errors & Debug', 'google-analytics-dashboard-for-wp' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'gadwp_settings', false ), __( 'authorize the plugin', 'google-analytics-dashboard-for-wp' ) ) ) );?>
 					<?php endif; ?>
-					<?php if ( isset( $_POST['Authorize'] ) ) : ?>
+					<?php if ( isset( $_REQUEST['Authorize'] ) ) : ?>
 						<?php GADWP_Tools::clear_cache();?>
 						<?php $gadwp->gapi_controller->token_request();?>
-					<div class="updated">
-																<p><?php _e( "Use the red link (see below) to generate and get your access code! You need to generate a new code each time you authorize!", 'google-analytics-dashboard-for-wp' );?></p>
-															</div>
 					<?php else : ?>
 						<?php if ( isset( $message ) ) : ?>
 							<?php echo $message; ?>

@@ -173,6 +173,10 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 
 [GADWP v5.3 release notes](https://deconf.com/adding-gtag-js-to-your-site/)
 
+= 5.3.3 =
+* Enhancements:
+	* automatically authorize users without copy/pasting the access codes
+	
 = 5.3.2 =
 * Bug Fixes:	
 	* fixes for user opt-out feature 

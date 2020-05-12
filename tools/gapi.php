@@ -25,7 +25,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 
 		private $gadwp;
 
-		private $access = array( '65556128672.apps.googleusercontent.com', 'Kc7888wgbc_JbeCmApbFjnYpwE' );
+		private $access = array( '220758964178-rhheb4146405g3fs6e4qjkk0rnf5q9q5.apps.googleusercontent.com', '' );
 
 		public function __construct() {
 			$this->gadwp = GADWP();
@@ -66,12 +66,24 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			$this->client->setScopes( array( 'https://www.googleapis.com/auth/analytics.readonly' ) );
 			$this->client->setAccessType( 'offline' );
 			$this->client->setApplicationName( 'GADWP ' . GADWP_CURRENT_VERSION );
-			$this->client->setRedirectUri( 'urn:ietf:wg:oauth:2.0:oob' );
+
+			$security = wp_create_nonce( 'gadwp_security' );
+
+			if ( is_multisite() && $this->gadwp->config->options['network_mode'] ) {
+				$state_uri = network_admin_url('admin.php?page=gadwp_settings') . '&gadwp_security=' . $security;
+			} else {
+				$state_uri = admin_url('admin.php?page=gadwp_settings') . '&gadwp_security=' . $security;
+			}
+
+			$this->client->setRedirectUri( 'https://deconf.com/gadwp/oauth2callback.php' );
+			$this->client->setState($state_uri);
+
+
 			$this->managequota = 'u' . get_current_user_id() . 's' . get_current_blog_id();
-			$this->access = array_map( array( $this, 'map' ), $this->access );
 			if ( $this->gadwp->config->options['user_api'] ) {
 				$this->client->setClientId( $this->gadwp->config->options['client_id'] );
 				$this->client->setClientSecret( $this->gadwp->config->options['client_secret'] );
+				$this->client->setRedirectUri('urn:ietf:wg:oauth:2.0:oob');
 			} else {
 				$this->client->setClientId( $this->access[0] );
 				$this->client->setClientSecret( $this->access[1] );
@@ -229,6 +241,7 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 		 */
 		public function token_request() {
 			$data['authUrl'] = $this->client->createAuthUrl();
+			$data['user_api'] = $this->gadwp->config->options['user_api'];
 			GADWP_Tools::load_view( 'admin/views/access-code.php', $data );
 		}
 
@@ -894,16 +907,6 @@ if ( ! class_exists( 'GADWP_GAPI_Controller' ) ) {
 			$this->gadwp->config->set_plugin_options();
 
 			return array( $gadwp_data );
-		}
-
-		private function map( $map ) {
-			$map = explode( '.', $map );
-			if ( isset( $map[1] ) ) {
-				$map[0] += ord( 'map' );
-				return implode( '.', $map );
-			} else {
-				return str_ireplace( 'map', chr( 112 ), $map[0] );
-			}
 		}
 
 		/**

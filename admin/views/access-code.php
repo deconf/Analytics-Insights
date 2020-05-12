@@ -11,9 +11,11 @@
 	<table class="gadwp-settings-options">
 		<tr>
 			<td colspan="2" class="gadwp-settings-info">
-						<?php echo __( "Use this link to get your <strong>one-time-use</strong> access code:", 'google-analytics-dashboard-for-wp' ) . ' <a href="' . $data['authUrl'] . '" id="gapi-access-code" target="_blank">' . __ ( "Get Access Code", 'google-analytics-dashboard-for-wp' ) . '</a>.'; ?>
+						<?php $target = $data['user_api'] ? '_blank' : '' ?>
+						<?php echo __( "Use this link to get your <strong>one-time-use</strong> access code:", 'google-analytics-dashboard-for-wp' ) . ' <a href="' . $data['authUrl'] . '" id="gapi-access-code" target="' . $target . '">' . __ ( "Get Access Code", 'google-analytics-dashboard-for-wp' ) . '</a>.'; ?>
 			</td>
 		</tr>
+		<?php if ( $data['user_api'] ) :?>
 		<tr>
 			<td class="gadwp-settings-title">
 				<label for="gadwp_access_code" title="<?php _e("Use the red link to get your access code! You need to generate a new one each time you authorize!",'google-analytics-dashboard-for-wp')?>"><?php echo _e( "Access Code:", 'google-analytics-dashboard-for-wp' ); ?></label>
@@ -32,5 +34,6 @@
 				<input type="submit" class="button button-secondary" name="gadwp_authorize" value="<?php _e( "Save Access Code", 'google-analytics-dashboard-for-wp' ); ?>" />
 			</td>
 		</tr>
+		<?php endif; ?>
 	</table>
 </form>
