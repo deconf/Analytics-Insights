@@ -1343,10 +1343,6 @@ final class AIWP_Settings {
 										<?php if ( $aiwp->gapi_controller->gapi_errors_handler() || AIWP_Tools::get_cache( 'last_error' ) ) : ?>
 													<?php $message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'analytics-insights' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_errors_debugging', false ), __( 'Errors & Debug', 'analytics-insights' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_settings', false ), __( 'authorize the plugin', 'analytics-insights' ) ) ) );?>
 										<?php endif;?>
-										<?php if ( isset( $_REQUEST['Authorize'] ) ) : ?>
-											<?php AIWP_Tools::clear_cache(); ?>
-											<?php $aiwp->gapi_controller->token_request(); ?>
-										<?php else : ?>
 										<?php if ( isset( $message ) ) :?>
 											<?php echo $message;?>
 										<?php endif; ?>
@@ -1487,7 +1483,8 @@ final class AIWP_Settings {
 												</tr>
 												<tr>
 													<td colspan="2">
-														<input type="submit" name="Authorize" class="button button-secondary" id="authorize" value="<?php _e( "Authorize Plugin", 'analytics-insights' ); ?>" <?php echo $options['network_mode']?'disabled="disabled"':''; ?> />
+													 <?php $auth = $aiwp->gapi_controller->client->createAuthUrl();?>
+														<input type="button" class="button button-secondary" onclick="location.href='<?php echo $auth; ?>'" <?php echo $options['network_mode']?'disabled="disabled"':''; ?> value="Authorize Plugin" />
 														<input type="submit" name="Clear" class="button button-secondary" value="<?php _e( "Clear Cache", 'analytics-insights' ); ?>" />
 													</td>
 												</tr>
@@ -1503,7 +1500,6 @@ final class AIWP_Settings {
 			<?php endif; ?>
 											</table>
 										</form>
-			<?php endif; ?>
 			<?php
 
 		self::output_sidebar();
@@ -1652,13 +1648,9 @@ final class AIWP_Settings {
 					<?php if ( $aiwp->gapi_controller->gapi_errors_handler() || AIWP_Tools::get_cache( 'last_error' ) ) : ?>
 						<?php $message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'analytics-insights' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_errors_debugging', false ), __( 'Errors & Debug', 'analytics-insights' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_settings', false ), __( 'authorize the plugin', 'analytics-insights' ) ) ) );?>
 					<?php endif; ?>
-					<?php if ( isset( $_REQUEST['Authorize'] ) ) : ?>
-						<?php AIWP_Tools::clear_cache();?>
-						<?php $aiwp->gapi_controller->token_request();?>
-					<?php else : ?>
-						<?php if ( isset( $message ) ) : ?>
+					<?php if ( isset( $message ) ) : ?>
 							<?php echo $message; ?>
-						<?php endif; ?>
+					<?php endif; ?>
 					<form name="aiwp_form" method="post" action="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>">
 																<input type="hidden" name="options[aiwp_hidden]" value="Y">
 						<?php wp_nonce_field('aiwp_form','aiwp_security'); ?>
@@ -1821,7 +1813,8 @@ final class AIWP_Settings {
 																	</tr>
 																	<tr>
 																		<td colspan="2">
-																			<input type="submit" name="Authorize" class="button button-secondary" id="authorize" value="<?php _e( "Authorize Plugin", 'analytics-insights' ); ?>" />
+																			<?php $auth = $aiwp->gapi_controller->client->createAuthUrl();?>
+																			<input type="button" class="button button-secondary" onclick="location.href='<?php echo $auth; ?>'" value="Authorize Plugin" />
 																			<input type="submit" name="Clear" class="button button-secondary" value="<?php _e( "Clear Cache", 'analytics-insights' ); ?>" />
 																		</td>
 																	</tr>
@@ -1838,7 +1831,6 @@ final class AIWP_Settings {
 			<?php endif;?>
 						</table>
 															</form>
-		<?php endif; ?>
 		<?php
 
 		self::output_sidebar();

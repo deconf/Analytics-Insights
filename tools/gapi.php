@@ -237,15 +237,6 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		}
 
 		/**
-		 * Generates and retrieves the Access Code
-		 */
-		public function token_request() {
-			$data['authUrl'] = $this->client->createAuthUrl();
-			$data['user_api'] = $this->aiwp->config->options['user_api'];
-			AIWP_Tools::load_view( 'admin/views/access-code.php', $data );
-		}
-
-		/**
 		 * Retrieves all Google Analytics Views with details
 		 *
 		 * @return array
