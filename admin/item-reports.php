@@ -11,16 +11,16 @@
 if ( ! defined( 'ABSPATH' ) )
 	exit();
 
-if ( ! class_exists( 'GADWP_Backend_Item_Reports' ) ) {
+if ( ! class_exists( 'AIWP_Backend_Item_Reports' ) ) {
 
-	final class GADWP_Backend_Item_Reports {
+	final class AIWP_Backend_Item_Reports {
 
-		private $gadwp;
+		private $aiwp;
 
 		public function __construct() {
-			$this->gadwp = GADWP();
+			$this->aiwp = AIWP();
 
-			if ( GADWP_Tools::check_roles( $this->gadwp->config->options['access_back'] ) && 1 == $this->gadwp->config->options['backend_item_reports'] ) {
+			if ( AIWP_Tools::check_roles( $this->aiwp->config->options['access_back'] ) && 1 == $this->aiwp->config->options['backend_item_reports'] ) {
 				// Add custom column in Posts List
 				add_filter( 'manage_posts_columns', array( $this, 'add_columns' ) );
 
@@ -38,19 +38,19 @@ if ( ! class_exists( 'GADWP_Backend_Item_Reports' ) ) {
 		public function add_icons( $column, $id ) {
 			global $wp_version;
 
-			if ( 'gadwp_stats' != $column ) {
+			if ( 'aiwp_stats' != $column ) {
 				return;
 			}
 
 			if ( version_compare( $wp_version, '3.8.0', '>=' ) ) {
-				echo '<a id="gadwp-' . $id . '" title="' . get_the_title( $id ) . '" href="#' . $id . '" class="gadwp-icon dashicons-before dashicons-chart-area">&nbsp;</a>';
+				echo '<a id="aiwp-' . $id . '" title="' . get_the_title( $id ) . '" href="#' . $id . '" class="aiwp-icon dashicons-before dashicons-chart-area">&nbsp;</a>';
 			} else {
-				echo '<a id="gadwp-' . $id . '" title="' . get_the_title( $id ) . '" href="#' . $id . '"><img class="gadwp-icon-oldwp" src="' . GADWP_URL . 'admin/images/gadwp-icon.png"</a>';
+				echo '<a id="aiwp-' . $id . '" title="' . get_the_title( $id ) . '" href="#' . $id . '"><img class="aiwp-icon-oldwp" src="' . AIWP_URL . 'admin/images/aiwp-icon.png"</a>';
 			}
 		}
 
 		public function add_columns( $columns ) {
-			return array_merge( $columns, array( 'gadwp_stats' => __( 'Analytics', 'google-analytics-dashboard-for-wp' ) ) );
+			return array_merge( $columns, array( 'aiwp_stats' => __( 'Analytics', 'analytics-insights' ) ) );
 		}
 	}
 }

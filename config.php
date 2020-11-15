@@ -11,9 +11,9 @@
 if ( ! defined( 'ABSPATH' ) )
 	exit();
 
-if ( ! class_exists( 'GADWP_Config' ) ) {
+if ( ! class_exists( 'AIWP_Config' ) ) {
 
-	final class GADWP_Config {
+	final class AIWP_Config {
 
 		public $options;
 
@@ -47,10 +47,10 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 			if ( ! isset( $item['new_version'] ) || ! isset( $item['plugin'] ) || ! $this->options['automatic_updates_minorversion'] ) {
 				return $update;
 			}
-			if ( isset( $item['slug'] ) && 'google-analytics-dashboard-for-wp' == $item['slug'] ) {
+			if ( isset( $item['slug'] ) && 'analytics-insights' == $item['slug'] ) {
 				// Only when a minor update is available
-				if ( $this->get_major_version( GADWP_CURRENT_VERSION ) == $this->get_major_version( $item['new_version'] ) ) {
-					return ( $this->get_major_version( GADWP_CURRENT_VERSION ) == $this->get_major_version( $item['new_version'] ) );
+				if ( $this->get_major_version( AIWP_CURRENT_VERSION ) == $this->get_major_version( $item['new_version'] ) ) {
+					return ( $this->get_major_version( AIWP_CURRENT_VERSION ) == $this->get_major_version( $item['new_version'] ) );
 				}
 			}
 			return $update;
@@ -162,7 +162,7 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 		public function set_plugin_options( $network_settings = false ) {
 			// Handle Network Mode
 			$options = $this->options;
-			$get_network_options = get_site_option( 'gadwp_network_options' );
+			$get_network_options = get_site_option( 'aiwp_network_options' );
 			$old_network_options = (array) json_decode( $get_network_options );
 
 			if ( is_multisite() ) {
@@ -188,10 +188,10 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 						}
 					}
 					$merged_options = array_merge( $old_network_options, $network_options );
-					update_site_option( 'gadwp_network_options', json_encode( $this->validate_data( $merged_options ) ) );
+					update_site_option( 'aiwp_network_options', json_encode( $this->validate_data( $merged_options ) ) );
 				}
 			}
-			update_option( 'gadwp_options', json_encode( $this->validate_data( $options ) ) );
+			update_option( 'aiwp_options', json_encode( $this->validate_data( $options ) ) );
 		}
 
 		private function get_plugin_options() {
@@ -200,19 +200,19 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 			 */
 			global $blog_id;
 
-			if ( ! get_option( 'gadwp_options' ) ) {
-				GADWP_Install::install();
+			if ( ! get_option( 'aiwp_options' ) ) {
+				AIWP_Install::install();
 			}
-			$this->options = (array) json_decode( get_option( 'gadwp_options' ) );
+			$this->options = (array) json_decode( get_option( 'aiwp_options' ) );
 			// Maintain Compatibility
 			$this->maintain_compatibility();
 			// Handle Network Mode
 			if ( is_multisite() ) {
-				$get_network_options = get_site_option( 'gadwp_network_options' );
+				$get_network_options = get_site_option( 'aiwp_network_options' );
 				$network_options = (array) json_decode( $get_network_options );
 				if ( isset( $network_options['network_mode'] ) && ( $network_options['network_mode'] ) ) {
 					if ( ! is_network_admin() && ! empty( $network_options['ga_profiles_list'] ) && isset( $network_options['network_tableid']->$blog_id ) ) {
-						$network_options['ga_profiles_list'] = array( 0 => GADWP_Tools::get_selected_profile( $network_options['ga_profiles_list'], $network_options['network_tableid']->$blog_id ) );
+						$network_options['ga_profiles_list'] = array( 0 => AIWP_Tools::get_selected_profile( $network_options['ga_profiles_list'], $network_options['network_tableid']->$blog_id ) );
 						$network_options['tableid_jail'] = $network_options['ga_profiles_list'][0][1];
 					}
 					$this->options = array_merge( $this->options, $network_options );
@@ -225,24 +225,24 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 		private function maintain_compatibility() {
 			$flag = false;
 
-			$prevver = get_option( 'gadwp_version' );
-			if ( $prevver && GADWP_CURRENT_VERSION != $prevver ) {
+			$prevver = get_option( 'aiwp_version' );
+			if ( $prevver && AIWP_CURRENT_VERSION != $prevver ) {
 				$flag = true;
-				update_option( 'gadwp_version', GADWP_CURRENT_VERSION );
-				update_option( 'gadwp_got_updated', true );
-				GADWP_Tools::clear_cache();
-				GADWP_Tools::delete_cache( 'last_error' );
+				update_option( 'aiwp_version', AIWP_CURRENT_VERSION );
+				update_option( 'aiwp_got_updated', true );
+				AIWP_Tools::clear_cache();
+				AIWP_Tools::delete_cache( 'last_error' );
 				if ( is_multisite() ) { // Cleanup errors and cookies on the entire network
-					foreach ( GADWP_Tools::get_sites( array( 'number' => apply_filters( 'gadwp_sites_limit', 100 ) ) ) as $blog ) {
+					foreach ( AIWP_Tools::get_sites( array( 'number' => apply_filters( 'aiwp_sites_limit', 100 ) ) ) as $blog ) {
 						switch_to_blog( $blog['blog_id'] );
-						GADWP_Tools::delete_cache( 'gapi_errors' );
+						AIWP_Tools::delete_cache( 'gapi_errors' );
 						restore_current_blog();
 					}
 				} else {
-					GADWP_Tools::delete_cache( 'gapi_errors' );
+					AIWP_Tools::delete_cache( 'gapi_errors' );
 				}
 
-				// Enable GADWP EndPoint for those updating from a version lower than 5.2, introduced in GADWP v5.3
+				// Enable AIWP EndPoint for those updating from a version lower than 5.2, introduced in AIWP v5.3
 				if (version_compare( $prevver, '5.2', '<' ) ) {
 					$this->options['with_endpoint'] = 2;
 				}
@@ -441,8 +441,8 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 				$options = get_site_option( 'gadash_network_options' );
 				if ( $options ) {
 					$options = (array) json_decode( $options );
-					$options = GADWP_Tools::array_keys_rename( $options, $batch );
-					update_site_option( 'gadwp_network_options', json_encode( $this->validate_data( $options ) ) );
+					$options = AIWP_Tools::array_keys_rename( $options, $batch );
+					update_site_option( 'aiwp_network_options', json_encode( $this->validate_data( $options ) ) );
 					delete_site_option( 'gadash_network_options' );
 				}
 			}
@@ -450,8 +450,8 @@ if ( ! class_exists( 'GADWP_Config' ) ) {
 			$options = get_option( 'gadash_options' );
 			if ( $options ) {
 				$options = (array) json_decode( $options );
-				$options = GADWP_Tools::array_keys_rename( $options, $batch );
-				update_option( 'gadwp_options', json_encode( $this->validate_data( $options ) ) );
+				$options = AIWP_Tools::array_keys_rename( $options, $batch );
+				update_option( 'aiwp_options', json_encode( $this->validate_data( $options ) ) );
 				delete_option( 'gadash_options' );
 			}
 		}

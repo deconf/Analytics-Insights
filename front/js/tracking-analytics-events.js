@@ -8,42 +8,42 @@
 
 "use strict";
 
-var gadwpRedirectLink;
-var gadwpRedirectCalled = false;
-var gadwpDefaultPrevented = false;
+var aiwpRedirectLink;
+var aiwpRedirectCalled = false;
+var aiwpDefaultPrevented = false;
 
-function gadwpRedirect () {
-	if ( gadwpRedirectCalled ) {
+function aiwpRedirect () {
+	if ( aiwpRedirectCalled ) {
 		return;
 	}
-	gadwpRedirectCalled = true;
-	if ( gadwpDefaultPrevented == false ) {
-		document.location.href = gadwpRedirectLink;
+	aiwpRedirectCalled = true;
+	if ( aiwpDefaultPrevented == false ) {
+		document.location.href = aiwpRedirectLink;
 	} else {
-		gadwpDefaultPrevented = false;
+		aiwpDefaultPrevented = false;
 	}
 }
 
-function gadwp_send_event ( category, action, label, withCallBack ) {
+function aiwp_send_event ( category, action, label, withCallBack ) {
 
-	if ( gadwpUAEventsData.options[ 'ga_with_gtag' ] ) {
+	if ( aiwpUAEventsData.options[ 'ga_with_gtag' ] ) {
 		if ( withCallBack ) {
-			if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
+			if ( aiwpUAEventsData.options[ 'event_bouncerate' ] ) {
 				gtag( 'event', action, {
 					'event_category': category, 
 					'event_label': label,
 					'non_interaction' : 1,
-					'event_callback' : gadwpRedirect
+					'event_callback' : aiwpRedirect
 				} );
 			} else {
 				gtag( 'event', action, {
 					'event_category': category, 
 					'event_label': label,
-					'event_callback' : gadwpRedirect
+					'event_callback' : aiwpRedirect
 				} );
 			}
 		} else {
-			if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
+			if ( aiwpUAEventsData.options[ 'event_bouncerate' ] ) {
 				gtag( 'event', action, {
 					'event_category': category, 
 					'event_label': label,
@@ -58,18 +58,18 @@ function gadwp_send_event ( category, action, label, withCallBack ) {
 		}
 	} else {
 		if ( withCallBack ) {
-			if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
+			if ( aiwpUAEventsData.options[ 'event_bouncerate' ] ) {
 				ga( 'send', 'event', category, action, label, {
 					'nonInteraction' : 1,
-					'hitCallback' : gadwpRedirect
+					'hitCallback' : aiwpRedirect
 				} );
 			} else {
 				ga( 'send', 'event', category, action, label, {
-					'hitCallback' : gadwpRedirect
+					'hitCallback' : aiwpRedirect
 				} );
 			}
 		} else {
-			if ( gadwpUAEventsData.options[ 'event_bouncerate' ] ) {
+			if ( aiwpUAEventsData.options[ 'event_bouncerate' ] ) {
 				ga( 'send', 'event', category, action, label, {
 					'nonInteraction' : 1
 				} );
@@ -82,18 +82,18 @@ function gadwp_send_event ( category, action, label, withCallBack ) {
 
 jQuery( window ).on( 'load', function () {
 
-	if ( gadwpUAEventsData.options[ 'event_tracking' ] ) {
+	if ( aiwpUAEventsData.options[ 'event_tracking' ] ) {
 		// Track Downloads
 		jQuery( 'a' ).filter( function () {
             if (typeof this.href === 'string') {
-                var reg = new RegExp( '.*\\.(' + gadwpUAEventsData.options[ 'event_downloads' ] + ')(\\?.*)?$' );
+                var reg = new RegExp( '.*\\.(' + aiwpUAEventsData.options[ 'event_downloads' ] + ')(\\?.*)?$' );
                 return this.href.match( reg );
             }
 		} ).click( function ( e ) {
 			var category = this.getAttribute( 'data-vars-ga-category' ) || 'download';
 			var action = this.getAttribute( 'data-vars-ga-action' ) || 'click';
 			var label = this.getAttribute( 'data-vars-ga-label' ) || this.href;
-			gadwp_send_event ( category, action, label, false );
+			aiwp_send_event ( category, action, label, false );
 		} );
 
 		// Track Mailto
@@ -101,7 +101,7 @@ jQuery( window ).on( 'load', function () {
 			var category = this.getAttribute( 'data-vars-ga-category' ) || 'email';
 			var action = this.getAttribute( 'data-vars-ga-action' ) || 'send';
 			var label = this.getAttribute( 'data-vars-ga-label' ) || this.href;
-			gadwp_send_event ( category, action, label, false );
+			aiwp_send_event ( category, action, label, false );
 		} );
 
 		// Track telephone calls
@@ -109,108 +109,108 @@ jQuery( window ).on( 'load', function () {
 			var category = this.getAttribute( 'data-vars-ga-category' ) || 'telephone';
 			var action = this.getAttribute( 'data-vars-ga-action' ) || 'call';
 			var label = this.getAttribute( 'data-vars-ga-label' ) || this.href;
-			gadwp_send_event ( category, action, label, false );
+			aiwp_send_event ( category, action, label, false );
 		} );
 
-		if ( gadwpUAEventsData.options[ 'root_domain' ] ) {
+		if ( aiwpUAEventsData.options[ 'root_domain' ] ) {
 
 			// Track Outbound Links
 			jQuery( 'a[href^="http"]' ).filter( function () {
 	            if (typeof this.href === 'string') {
-	                var reg = new RegExp( '.*\\.(' + gadwpUAEventsData.options[ 'event_downloads' ] + ')(\\?.*)?$' );
+	                var reg = new RegExp( '.*\\.(' + aiwpUAEventsData.options[ 'event_downloads' ] + ')(\\?.*)?$' );
 	            }				
 				if ( reg && !this.href.match( reg ) ) {
-					if ( this.href.indexOf( gadwpUAEventsData.options[ 'root_domain' ] ) == -1 && this.href.indexOf( '://' ) > -1 )
+					if ( this.href.indexOf( aiwpUAEventsData.options[ 'root_domain' ] ) == -1 && this.href.indexOf( '://' ) > -1 )
 						return this.href;
 				}
 			} ).click( function ( e ) {
-				gadwpRedirectCalled = false;
-				gadwpRedirectLink = this.href;
+				aiwpRedirectCalled = false;
+				aiwpRedirectLink = this.href;
 				var category = this.getAttribute( 'data-vars-ga-category' ) || 'outbound';
 				var action = this.getAttribute( 'data-vars-ga-action' ) || 'click';
 				var label = this.getAttribute( 'data-vars-ga-label' ) || this.href;
-				if ( this.target != '_blank' && gadwpUAEventsData.options[ 'event_precision' ] ) {
+				if ( this.target != '_blank' && aiwpUAEventsData.options[ 'event_precision' ] ) {
 					if ( e.isDefaultPrevented() ) {
-						gadwpDefaultPrevented = true;
-						gadwpRedirectCalled = false;						
+						aiwpDefaultPrevented = true;
+						aiwpRedirectCalled = false;						
 					}
 				} else {
-					gadwpRedirectCalled = true;
-					gadwpDefaultPrevented = false;
+					aiwpRedirectCalled = true;
+					aiwpDefaultPrevented = false;
 				}
-				if ( this.target != '_blank' && gadwpUAEventsData.options[ 'event_precision' ] ) {
-					gadwp_send_event( category, action, label, true );	
-					setTimeout( gadwpRedirect, gadwpUAEventsData.options[ 'event_timeout' ] );
+				if ( this.target != '_blank' && aiwpUAEventsData.options[ 'event_precision' ] ) {
+					aiwp_send_event( category, action, label, true );	
+					setTimeout( aiwpRedirect, aiwpUAEventsData.options[ 'event_timeout' ] );
 					return false;
 				} else {
-					gadwp_send_event( category, action, label, false );	
+					aiwp_send_event( category, action, label, false );	
 				}
 			} );
 		}
 	}
 
-	if ( gadwpUAEventsData.options[ 'event_affiliates' ] && gadwpUAEventsData.options[ 'aff_tracking' ] ) {
+	if ( aiwpUAEventsData.options[ 'event_affiliates' ] && aiwpUAEventsData.options[ 'aff_tracking' ] ) {
 
 		// Track Affiliates
 		jQuery( 'a' ).filter( function () {
-			if ( gadwpUAEventsData.options[ 'event_affiliates' ] != '' ) {
+			if ( aiwpUAEventsData.options[ 'event_affiliates' ] != '' ) {
 				if (typeof this.href === 'string') {
-					var reg = new RegExp( '(' + gadwpUAEventsData.options[ 'event_affiliates' ].replace( /\//g, '\/' ) + ')' );
+					var reg = new RegExp( '(' + aiwpUAEventsData.options[ 'event_affiliates' ].replace( /\//g, '\/' ) + ')' );
 					return this.href.match( reg );
 				}	
 			}
 		} ).click( function ( e ) {
-			gadwpRedirectCalled = false;
-			gadwpRedirectLink = this.href;
+			aiwpRedirectCalled = false;
+			aiwpRedirectLink = this.href;
 			var category = this.getAttribute( 'data-vars-ga-category' ) || 'affiliates';
 			var action = this.getAttribute( 'data-vars-ga-action' ) || 'click';
 			var label = this.getAttribute( 'data-vars-ga-label' ) || this.href;
-			if ( this.target != '_blank' && gadwpUAEventsData.options[ 'event_precision' ] ) {
+			if ( this.target != '_blank' && aiwpUAEventsData.options[ 'event_precision' ] ) {
 				if ( e.isDefaultPrevented() ) {
-					gadwpDefaultPrevented = true;
-					gadwpRedirectCalled = false;
+					aiwpDefaultPrevented = true;
+					aiwpRedirectCalled = false;
 				}
 			} else {
-				gadwpRedirectCalled = true;
-				gadwpDefaultPrevented = false;
+				aiwpRedirectCalled = true;
+				aiwpDefaultPrevented = false;
 			}			
-			if ( this.target != '_blank' && gadwpUAEventsData.options[ 'event_precision' ] ) {
-				gadwp_send_event( category, action, label, true );
-				setTimeout( gadwpRedirect, gadwpUAEventsData.options[ 'event_timeout' ] );
+			if ( this.target != '_blank' && aiwpUAEventsData.options[ 'event_precision' ] ) {
+				aiwp_send_event( category, action, label, true );
+				setTimeout( aiwpRedirect, aiwpUAEventsData.options[ 'event_timeout' ] );
 				return false;
 			} else {
-				gadwp_send_event( category, action, label, false );
+				aiwp_send_event( category, action, label, false );
 			}
 		} );
 	}
 
-	if ( gadwpUAEventsData.options[ 'root_domain' ] && gadwpUAEventsData.options[ 'hash_tracking' ] ) {
+	if ( aiwpUAEventsData.options[ 'root_domain' ] && aiwpUAEventsData.options[ 'hash_tracking' ] ) {
 
 		// Track Hashmarks
 		jQuery( 'a' ).filter( function () {
-			if ( this.href.indexOf( gadwpUAEventsData.options[ 'root_domain' ] ) != -1 || this.href.indexOf( '://' ) == -1 )
+			if ( this.href.indexOf( aiwpUAEventsData.options[ 'root_domain' ] ) != -1 || this.href.indexOf( '://' ) == -1 )
 				return this.hash;
 		} ).click( function ( e ) {
 			var category = this.getAttribute( 'data-vars-ga-category' ) || 'hashmark';
 			var action = this.getAttribute( 'data-vars-ga-action' ) || 'click';
 			var label = this.getAttribute( 'data-vars-ga-label' ) || this.href;
-			gadwp_send_event ( category, action, label, false );
+			aiwp_send_event ( category, action, label, false );
 		} );
 	}
 
-	if ( gadwpUAEventsData.options[ 'event_formsubmit' ] ) {
+	if ( aiwpUAEventsData.options[ 'event_formsubmit' ] ) {
 
 		// Track Form Submit
 		jQuery( 'input[type="submit"], button[type="submit"]' ).click( function ( e ) {
-			var gadwpSubmitObject = this;
-			var category = gadwpSubmitObject.getAttribute( 'data-vars-ga-category' ) || 'form';
-			var action = gadwpSubmitObject.getAttribute( 'data-vars-ga-action' ) || 'submit';
-			var label = gadwpSubmitObject.getAttribute( 'data-vars-ga-label' ) || gadwpSubmitObject.name || gadwpSubmitObject.value;
-			gadwp_send_event ( category, action, label, false );
+			var aiwpSubmitObject = this;
+			var category = aiwpSubmitObject.getAttribute( 'data-vars-ga-category' ) || 'form';
+			var action = aiwpSubmitObject.getAttribute( 'data-vars-ga-action' ) || 'submit';
+			var label = aiwpSubmitObject.getAttribute( 'data-vars-ga-label' ) || aiwpSubmitObject.name || aiwpSubmitObject.value;
+			aiwp_send_event ( category, action, label, false );
 		} );
 	}
 
-	if ( gadwpUAEventsData.options[ 'ga_pagescrolldepth_tracking' ] ) {
+	if ( aiwpUAEventsData.options[ 'ga_pagescrolldepth_tracking' ] ) {
 		// Track Page Scroll Depth
 		jQuery.scrollDepth( {
 			percentage : true,

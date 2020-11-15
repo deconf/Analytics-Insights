@@ -10,12 +10,12 @@
  * Navigation Tabs
  */
 jQuery( document ).ready( function () {
-	if ( window.location.href.indexOf( "page=gadwp_" ) != -1 ) {
+	if ( window.location.href.indexOf( "page=aiwp_" ) != -1 ) {
 		var ident = 'basic';
 
 		if ( window.location.hash ) {
 			ident = window.location.hash.split( '#' )[ 2 ].split( '-' )[ 1 ];
-		} else if ( window.location.href.indexOf( "page=gadwp_errors_debugging" ) != -1 ) {
+		} else if ( window.location.href.indexOf( "page=aiwp_errors_debugging" ) != -1 ) {
 			ident = 'errors';
 		}
 
@@ -24,11 +24,11 @@ jQuery( document ).ready( function () {
 			jQuery( "#" + this.hash.split( '#' )[ 2 ] ).hide();
 		} );
 		jQuery( "#tab-" + ident ).addClass( "nav-tab-active" );
-		jQuery( "#gadwp-" + ident ).show();
+		jQuery( "#aiwp-" + ident ).show();
 	}
 
 	jQuery( 'a[href^="#"]' ).click( function ( e ) {
-		if ( window.location.href.indexOf( "page=gadwp_" ) != -1 ) {
+		if ( window.location.href.indexOf( "page=aiwp_" ) != -1 ) {
 			jQuery( ".nav-tab-wrapper a" ).each( function ( index ) {
 				jQuery( this ).removeClass( "nav-tab-active" );
 				jQuery( "#" + this.hash.split( '#' )[ 2 ] ).hide();
@@ -38,5 +38,5 @@ jQuery( document ).ready( function () {
 		}
 	} );
 
-	//jQuery( '#gadwp-autodismiss' ).delay( 2000 ).fadeOut( 'slow' );
+	//jQuery( '#aiwp-autodismiss' ).delay( 2000 ).fadeOut( 'slow' );
 } );

@@ -11,24 +11,24 @@
 if ( ! defined( 'ABSPATH' ) )
 	exit();
 
-class GADWP_Uninstall {
+class AIWP_Uninstall {
 
 	public static function uninstall() {
 		global $wpdb;
 		if ( is_multisite() ) { // Cleanup Network install
-			foreach ( GADWP_Tools::get_sites( array( 'number' => apply_filters( 'gadwp_sites_limit', 100 ) ) ) as $blog ) {
+			foreach ( AIWP_Tools::get_sites( array( 'number' => apply_filters( 'aiwp_sites_limit', 100 ) ) ) as $blog ) {
 				switch_to_blog( $blog['blog_id'] );
-				$sqlquery = $wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'gadwp_cache_%%'" );
-				delete_option( 'gadwp_options' );
+				$sqlquery = $wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'aiwp_cache_%%'" );
+				delete_option( 'aiwp_options' );
 				restore_current_blog();
 			}
-			delete_site_option( 'gadwp_network_options' );
+			delete_site_option( 'aiwp_network_options' );
 		} else { // Cleanup Single install
-			$sqlquery = $wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'gadwp_cache_%%'" );
-			delete_option( 'gadwp_options' );
+			$sqlquery = $wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'aiwp_cache_%%'" );
+			delete_option( 'aiwp_options' );
 		}
-		GADWP_Tools::unset_cookie( 'default_metric' );
-		GADWP_Tools::unset_cookie( 'default_dimension' );
-		GADWP_Tools::unset_cookie( 'default_view' );
+		AIWP_Tools::unset_cookie( 'default_metric' );
+		AIWP_Tools::unset_cookie( 'default_dimension' );
+		AIWP_Tools::unset_cookie( 'default_view' );
 	}
 }

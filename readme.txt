@@ -1,9 +1,9 @@
-=== Google Analytics Dashboard for WP (GADWP) ===
+=== Analytics Insights (AIWP) ===
 Contributors: deconf
 Donate link: https://deconf.com/donate/
 Tags: analytics,google analytics,google analytics dashboard,google analytics plugin,google analytics widget,gtag
 Requires at least: 3.5
-Tested up to: 4.9.4
+Tested up to: 5.5
 Stable tag: 5.3.2
 Requires PHP: 5.2.4
 License: GPLv2 or later
@@ -58,7 +58,7 @@ User privacy oriented features:
 - option to follow Do Not Track (DNT) sent by browsers
 - support for user tracking opt-out
 
-Google Analytics Dashboard for WP enables you to easily track events like:
+Analytics Insights enables you to easily track events like:
  
 - Downloads
 - Emails 
@@ -69,7 +69,7 @@ Google Analytics Dashboard for WP enables you to easily track events like:
 - Page Scrolling Depth
 - Custom event categories, actions and labels using annotated HTML elements
 
-With Google Analytics Dashboard for WP you can use custom dimensions to track:
+With Analytics Insights you can use custom dimensions to track:
 
 - Authors
 - Publication year
@@ -103,7 +103,7 @@ As an alternative to Google Analytics tracking code, you can use Google Tag Mana
 - Hashmarks, outbound links, telephones and e-mails tracking
 - Custom event categories, actions and labels using annotated HTML elements
 
-= Google Analytics Dashboard for WP on Multisite =
+= Analytics Insights on Multisite =
 
 This plugin is fully compatible with multisite network installs, allowing three setup modes:
 
@@ -111,19 +111,19 @@ This plugin is fully compatible with multisite network installs, allowing three 
 - Mode 2: network activated using a single Google Analytics account
 - Mode 3: network deactivated using multiple Google Analytics accounts
 
-> <strong>Google Analytics Dashboard for WP on GitHub</strong><br>
-> You can submit feature requests or bugs on [Google Analytics Dashboard for WP](https://github.com/deconf/Google-Analytics-Dashboard-for-WP) repository.
+> <strong>Analytics Insights on GitHub</strong><br>
+> You can submit feature requests or bugs on [Analytics Insights](https://github.com/deconf/analytics-insights) repository.
 
 = Further reading =
 
-* Homepage of [Google Analytics Dashboard for WP](https://deconf.com/google-analytics-dashboard-wordpress/)
+* Homepage of [Analytics Insights](https://deconf.com/google-analytics-dashboard-wordpress/)
 * Other [WordPress Plugins](https://deconf.com/wordpress/) by same author
 * [Google Analytics | Partners](https://www.google.com/analytics/partners/company/5127525902581760/gadp/5629499534213120/app/5707702298738688/listing/5639274879778816) Gallery
 
 == Installation ==
 
-1. Upload the full google-analytics-dashboard-for-wp directory into your wp-content/plugins directory.
-2. In WordPress select Plugins from your sidebar menu and activate the Google Analytics Dashboard for WP plugin.
+1. Upload the full analytics-insights directory into your wp-content/plugins directory.
+2. In WordPress select Plugins from your sidebar menu and activate the Analytics Insights plugin.
 3. Open the plugin configuration page, which is located under Google Analytics menu.
 4. Authorize the plugin to connect to Google Analytics using the Authorize Plugin button.
 5. Go back to the plugin configuration page, which is located under Google Analytics menu to update/set your settings.
@@ -137,52 +137,54 @@ No, once the plugin is authorized and a default domain is selected the Google An
 
 = Some settings are missing in the video tutorial =
 
-We are constantly improving Google Analytics Dashboard for WP, sometimes the video tutorial may be a little outdated.
+We are constantly improving Analytics Insights, sometimes the video tutorial may be a little outdated.
 
 = How can I suggest a new feature, contribute or report a bug? =
 
-You can submit pull requests, feature requests and bug reports on [our GitHub repository](https://github.com/deconf/Google-Analytics-Dashboard-for-WP).
+You can submit pull requests, feature requests and bug reports on [our GitHub repository](https://github.com/deconf/analytics-insights).
 
 = Documentation, Tutorials and FAQ =
 
-For documentation, tutorials, FAQ and videos check out: [Google Analytics Dashboard for WP documentation](https://deconf.com/google-analytics-dashboard-wordpress/).
+For documentation, tutorials, FAQ and videos check out: [Analytics Insights documentation](https://deconf.com/google-analytics-dashboard-wordpress/).
 
 == Screenshots ==
 
-1. Google Analytics Dashboard for WP Blue Color
-2. Google Analytics Dashboard for WP Real-Time
-3. Google Analytics Dashboard for WP reports per Posts/Pages
-4. Google Analytics Dashboard for WP Geo Map
-5. Google Analytics Dashboard for WP Top Pages, Top Referrers and Top Searches
-6. Google Analytics Dashboard for WP Traffic Overview
-7. Google Analytics Dashboard for WP statistics per page on Frontend
-8. Google Analytics Dashboard for WP cities on region map
-9. Google Analytics Dashboard for WP Widget
+1. Blue Color
+2. Real-Time
+3. Analytics reports per Posts/Pages
+4. Geo Map
+5. Top Pages, Top Referrers and Top Searches
+6. Traffic Overview
+7. Statistics per page on Frontend
+8. Cities on region map
+9. Analytics Insights Widget
 
 == Localization ==
 
-You can translate Google Analytics Dashboard for WP on [translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/google-analytics-dashboard-for-wp).
+You can translate Analytics Insights on [translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/analytics-insights).
 
 == License ==
 
-Google Analytics Dashboard for WP it's released under the GPLv2, you can use it free of charge on your personal or commercial website.
+Analytics Insights it's released under the GPLv2, you can use it free of charge on your personal or commercial website.
 
 == Upgrade Notice ==
 
 == Changelog ==
 
-[GADWP v5.3 release notes](https://deconf.com/adding-gtag-js-to-your-site/)
+[AIWP v5.3 release notes](https://deconf.com/adding-gtag-js-to-your-site/)
 
 = 5.3.3 =
 * Enhancements:
 	* automatically authorize users without copy/pasting the access codes
+* Bug Fixes:	
+	* CSS fix for on/off buttons	
 	
 = 5.3.2 =
 * Bug Fixes:	
 	* fixes for user opt-out feature 
 * Enhancements: 
-	* use <em>gadwp_useroptout</em> shortcode to easily generate opt-out buttons and links, [more details](https://deconf.com/google-analytics-gdpr-and-user-data-privacy-compliance)
-	* adding <em>gadwp_gtag_commands</em> and <em>gadwp_gtag_script_path</em> hooks to allow further gtag (Global Site Tag) code customization
+	* use <em>aiwp_useroptout</em> shortcode to easily generate opt-out buttons and links, [more details](https://deconf.com/google-analytics-gdpr-and-user-data-privacy-compliance)
+	* adding <em>aiwp_gtag_commands</em> and <em>aiwp_gtag_script_path</em> hooks to allow further gtag (Global Site Tag) code customization
 	* adds opt-out and DNT support for Google Tag Manager	
 	
 = 5.3.1.1 =
@@ -220,9 +222,9 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 * Enhancements:  
 	* more informative alerts and suggestions on the authorization screen
 	* disable autocomplete for the access code input field to avoid reuse of the same unique authorization code
-	* GADWP Endpoint improvements
+	* AIWP Endpoint improvements
 	* Error reporting improvements
-	* introducing the gadwp_maps_api_key filter
+	* introducing the aiwp_maps_api_key filter
 * Bug Fixes:	
 	* use the theme color palette for the frontend widget 	 
 
@@ -249,4 +251,4 @@ Google Analytics Dashboard for WP it's released under the GPLv2, you can use it 
 	* fix for inline SVG links, props by [Andrew Minion](https://github.com/macbookandrew)
 	* fixes a bug on affiliate events tracking
 
-The full changelog is [available here](https://deconf.com/changelog-google-analytics-dashboard-for-wp/).
+The full changelog is [available here](https://deconf.com/changelog-analytics-insights/).

@@ -7,7 +7,7 @@
  */
 
 jQuery( window ).resize( function () {
-	if ( typeof gadwp_drawFrontWidgetChart == "function" && typeof gadwpFrontWidgetData !== 'undefined' && !jQuery.isNumeric( gadwpFrontWidgetData ) ) {
-		gadwp_drawFrontWidgetChart( gadwpFrontWidgetData );
+	if ( typeof aiwp_drawFrontWidgetChart == "function" && typeof aiwpFrontWidgetData !== 'undefined' && !jQuery.isNumeric( aiwpFrontWidgetData ) ) {
+		aiwp_drawFrontWidgetChart( aiwpFrontWidgetData );
 	}
 } );

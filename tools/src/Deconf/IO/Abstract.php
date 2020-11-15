@@ -122,8 +122,8 @@ abstract class Deconf_IO_Abstract
   public function makeRequest(Deconf_Http_Request $request)
   {
 
-  	// Add support for GADWP Endpoint
-  	do_action('gadwp_endpoint_support', $request);
+  	// Add support for AIWP Endpoint
+  	do_action('aiwp_endpoint_support', $request);
 
     // First, check to see if we have a valid cached version.
     $cached = $this->getCachedRequest($request);

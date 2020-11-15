@@ -11,14 +11,14 @@
 if ( ! defined( 'ABSPATH' ) )
 	exit();
 
-final class GADWP_Frontend_Widget extends WP_Widget {
+final class AIWP_Frontend_Widget extends WP_Widget {
 
-	private $gadwp;
+	private $aiwp;
 
 	public function __construct() {
-		$this->gadwp = GADWP();
+		$this->aiwp = AIWP();
 
-		parent::__construct( 'gadwp-frontwidget-report', __( 'Google Analytics Dashboard', 'google-analytics-dashboard-for-wp' ), array( 'description' => __( "Will display your google analytics stats in a widget", 'google-analytics-dashboard-for-wp' ) ) );
+		parent::__construct( 'aiwp-frontwidget-report', __( 'Google Analytics Dashboard', 'analytics-insights' ), array( 'description' => __( "Will display your google analytics stats in a widget", 'analytics-insights' ) ) );
 		// Frontend Styles
 		if ( is_active_widget( false, false, $this->id_base, true ) ) {
 			add_action( 'wp_enqueue_scripts', array( $this, 'load_styles_scripts' ) );
@@ -30,23 +30,23 @@ final class GADWP_Frontend_Widget extends WP_Widget {
 		$lang = explode( '-', $lang );
 		$lang = $lang[0];
 
-		wp_enqueue_style( 'gadwp-front-widget', GADWP_URL . 'front/css/widgets.css', null, GADWP_CURRENT_VERSION );
-		wp_enqueue_script( 'gadwp-front-widget', GADWP_URL . 'front/js/widgets.js', array( 'jquery' ), GADWP_CURRENT_VERSION );
+		wp_enqueue_style( 'aiwp-front-widget', AIWP_URL . 'front/css/widgets.css', null, AIWP_CURRENT_VERSION );
+		wp_enqueue_script( 'aiwp-front-widget', AIWP_URL . 'front/js/widgets.js', array( 'jquery' ), AIWP_CURRENT_VERSION );
 		wp_enqueue_script( 'googlecharts', 'https://www.gstatic.com/charts/loader.js', array(), null );
 	}
 
 	public function widget( $args, $instance ) {
 		$widget_title = apply_filters( 'widget_title', $instance['title'] );
-		$title = __( "Sessions", 'google-analytics-dashboard-for-wp' );
-		echo "\n<!-- BEGIN GADWP v" . GADWP_CURRENT_VERSION . " Widget - https://deconf.com/google-analytics-dashboard-wordpress/ -->\n";
+		$title = __( "Sessions", 'analytics-insights' );
+		echo "\n<!-- BEGIN AIWP v" . AIWP_CURRENT_VERSION . " Widget - https://deconf.com/google-analytics-dashboard-wordpress/ -->\n";
 		echo $args['before_widget'];
 		if ( ! empty( $widget_title ) ) {
 			echo $args['before_title'] . $widget_title . $args['after_title'];
 		}
 
-		if ( isset( $this->gadwp->config->options['theme_color'] ) ) {
-			$css = "colors:['" . $this->gadwp->config->options['theme_color'] . "','" . GADWP_Tools::colourVariator( $this->gadwp->config->options['theme_color'], - 20 ) . "'],";
-			$color = $this->gadwp->config->options['theme_color'];
+		if ( isset( $this->aiwp->config->options['theme_color'] ) ) {
+			$css = "colors:['" . $this->aiwp->config->options['theme_color'] . "','" . AIWP_Tools::colourVariator( $this->aiwp->config->options['theme_color'], - 20 ) . "'],";
+			$color = $this->aiwp->config->options['theme_color'];
 		} else {
 			$css = "";
 			$color = "#3366CC";
@@ -65,13 +65,13 @@ final class GADWP_Frontend_Widget extends WP_Widget {
 		$periodtext = "";
 		switch ( $instance['period'] ) {
 			case '7daysAgo' :
-				$periodtext = sprintf( __( 'Last %d Days', 'google-analytics-dashboard-for-wp' ), 7 );
+				$periodtext = sprintf( __( 'Last %d Days', 'analytics-insights' ), 7 );
 				break;
 			case '14daysAgo' :
-				$periodtext = sprintf( __( 'Last %d Days', 'google-analytics-dashboard-for-wp' ), 14 );
+				$periodtext = sprintf( __( 'Last %d Days', 'analytics-insights' ), 14 );
 				break;
 			case '30daysAgo' :
-				$periodtext = sprintf( __( 'Last %d Days', 'google-analytics-dashboard-for-wp' ), 30 );
+				$periodtext = sprintf( __( 'Last %d Days', 'analytics-insights' ), 30 );
 				break;
 			default :
 				$periodtext = "";
@@ -79,36 +79,36 @@ final class GADWP_Frontend_Widget extends WP_Widget {
 		}
 		switch ( $instance['display'] ) {
 			case '1' :
-				echo '<div id="gadwp-widget"><div id="gadwp-widgetchart"></div><div id="gadwp-widgettotals"></div></div>';
+				echo '<div id="aiwp-widget"><div id="aiwp-widgetchart"></div><div id="aiwp-widgettotals"></div></div>';
 				break;
 			case '2' :
-				echo '<div id="gadwp-widget"><div id="gadwp-widgetchart"></div></div>';
+				echo '<div id="aiwp-widget"><div id="aiwp-widgetchart"></div></div>';
 				break;
 			case '3' :
-				echo '<div id="gadwp-widget"><div id="gadwp-widgettotals"></div></div>';
+				echo '<div id="aiwp-widget"><div id="aiwp-widgettotals"></div></div>';
 				break;
 		}
 		?>
 <script type="text/javascript">
 	google.charts.load('current', {'packages':['corechart']});
-	google.charts.setOnLoadCallback( GADWPWidgetLoad );
-	function GADWPWidgetLoad (){
-		jQuery.post("<?php echo admin_url( 'admin-ajax.php' ); ?>", {action: "ajax_frontwidget_report", gadwp_number: "<?php echo $this->number; ?>", gadwp_optionname: "<?php  echo $this->option_name; ?>" }, function(response){
+	google.charts.setOnLoadCallback( AIWPWidgetLoad );
+	function AIWPWidgetLoad (){
+		jQuery.post("<?php echo admin_url( 'admin-ajax.php' ); ?>", {action: "ajax_frontwidget_report", aiwp_number: "<?php echo $this->number; ?>", aiwp_optionname: "<?php  echo $this->option_name; ?>" }, function(response){
 			if (!jQuery.isNumeric(response) && jQuery.isArray(response)){
-				if (jQuery("#gadwp-widgetchart")[0]){
-					gadwpFrontWidgetData = response[0];
-					gadwp_drawFrontWidgetChart(gadwpFrontWidgetData);
+				if (jQuery("#aiwp-widgetchart")[0]){
+					aiwpFrontWidgetData = response[0];
+					aiwp_drawFrontWidgetChart(aiwpFrontWidgetData);
 				}
-				if (jQuery("#gadwp-widgettotals")[0]){
-					gadwp_drawFrontWidgetTotals(response[1]);
+				if (jQuery("#aiwp-widgettotals")[0]){
+					aiwp_drawFrontWidgetTotals(response[1]);
 				}
 			}else{
-				jQuery("#gadwp-widgetchart").css({"background-color":"#F7F7F7","height":"auto","padding-top":"50px","padding-bottom":"50px","color":"#000","text-align":"center"});
-				jQuery("#gadwp-widgetchart").html("<?php __( "This report is unavailable", 'google-analytics-dashboard-for-wp' ); ?> ("+response+")");
+				jQuery("#aiwp-widgetchart").css({"background-color":"#F7F7F7","height":"auto","padding-top":"50px","padding-bottom":"50px","color":"#000","text-align":"center"});
+				jQuery("#aiwp-widgetchart").html("<?php __( "This report is unavailable", 'analytics-insights' ); ?> ("+response+")");
 			}
 		});
 	}
-	function gadwp_drawFrontWidgetChart(response) {
+	function aiwp_drawFrontWidgetChart(response) {
 		var data = google.visualization.arrayToDataTable(response);
 		var options = {
 			legend: { position: "none" },
@@ -120,21 +120,21 @@ final class GADWP_Frontend_Widget extends WP_Widget {
 			hAxis: { textPosition: "none"},
 			vAxis: { textPosition: "none", minValue: 0, gridlines: { color: "transparent" }, baselineColor: "transparent"}
 		}
-		var chart = new google.visualization.AreaChart(document.getElementById("gadwp-widgetchart"));
+		var chart = new google.visualization.AreaChart(document.getElementById("aiwp-widgetchart"));
 		<?php echo $formater; ?>
 		chart.draw(data, options);
 	}
-	function gadwp_drawFrontWidgetTotals(response) {
+	function aiwp_drawFrontWidgetTotals(response) {
 		if ( null == response ){
 			response = 0;
 		}
-		jQuery("#gadwp-widgettotals").html('<div class="gadwp-left"><?php _e( "Period:", 'google-analytics-dashboard-for-wp' ); ?></div> <div class="gadwp-right"><?php echo $periodtext; ?> </div><div class="gadwp-left"><?php _e( "Sessions:", 'google-analytics-dashboard-for-wp' ); ?></div> <div class="gadwp-right">'+response+'</div>');
+		jQuery("#aiwp-widgettotals").html('<div class="aiwp-left"><?php _e( "Period:", 'analytics-insights' ); ?></div> <div class="aiwp-right"><?php echo $periodtext; ?> </div><div class="aiwp-left"><?php _e( "Sessions:", 'analytics-insights' ); ?></div> <div class="aiwp-right">'+response+'</div>');
 	}
 </script>
 <?php
 		if ( 1 == $instance['give_credits'] ) :
 			?>
-<div style="text-align: right; width: 100%; font-size: 0.8em; clear: both; margin-right: 5px;"><?php _e( 'generated by', 'google-analytics-dashboard-for-wp' ); ?> <a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_report&utm_medium=link&utm_content=front_widget&utm_campaign=gadwp" rel="nofollow" style="text-decoration: none; font-size: 1em;">GADWP</a>&nbsp;
+<div style="text-align: right; width: 100%; font-size: 0.8em; clear: both; margin-right: 5px;"><?php _e( 'generated by', 'analytics-insights' ); ?> <a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=aiwp_report&utm_medium=link&utm_content=front_widget&utm_campaign=aiwp" rel="nofollow" style="text-decoration: none; font-size: 1em;">AIWP</a>&nbsp;
 </div>
 
 		<?php
@@ -145,11 +145,11 @@ final class GADWP_Frontend_Widget extends WP_Widget {
 		}
 		echo $widget_content;
 		echo $args['after_widget'];
-		echo "\n<!-- END GADWP Widget -->\n";
+		echo "\n<!-- END AIWP Widget -->\n";
 	}
 
 	public function form( $instance ) {
-		$widget_title = ( isset( $instance['title'] ) ? $instance['title'] : __( "Google Analytics Stats", 'google-analytics-dashboard-for-wp' ) );
+		$widget_title = ( isset( $instance['title'] ) ? $instance['title'] : __( "Google Analytics Stats", 'analytics-insights' ) );
 		$period = ( isset( $instance['period'] ) ? $instance['period'] : '7daysAgo' );
 		$display = ( isset( $instance['display'] ) ? $instance['display'] : 1 );
 		$give_credits = ( isset( $instance['give_credits'] ) ? $instance['give_credits'] : 1 );
@@ -157,27 +157,27 @@ final class GADWP_Frontend_Widget extends WP_Widget {
 		/* @formatter:off */
 ?>
 <p>
-    <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( "Title:",'google-analytics-dashboard-for-wp' ); ?></label> <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $widget_title ); ?>">
+    <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( "Title:",'analytics-insights' ); ?></label> <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $widget_title ); ?>">
 </p>
 <p>
-    <label for="<?php echo $this->get_field_id( 'display' ); ?>"><?php _e( "Display:",'google-analytics-dashboard-for-wp' ); ?></label> <select id="<?php echo $this->get_field_id('display'); ?>" class="widefat" name="<?php   echo $this->get_field_name( 'display' ); ?>">
-        <option value="1" <?php selected( $display, 1 ); ?>><?php _e('Chart & Totals', 'google-analytics-dashboard-for-wp');?></option>
-        <option value="2" <?php selected( $display, 2 ); ?>><?php _e('Chart', 'google-analytics-dashboard-for-wp');?></option>
-        <option value="3" <?php selected( $display, 3 ); ?>><?php _e('Totals', 'google-analytics-dashboard-for-wp');?></option>
+    <label for="<?php echo $this->get_field_id( 'display' ); ?>"><?php _e( "Display:",'analytics-insights' ); ?></label> <select id="<?php echo $this->get_field_id('display'); ?>" class="widefat" name="<?php   echo $this->get_field_name( 'display' ); ?>">
+        <option value="1" <?php selected( $display, 1 ); ?>><?php _e('Chart & Totals', 'analytics-insights');?></option>
+        <option value="2" <?php selected( $display, 2 ); ?>><?php _e('Chart', 'analytics-insights');?></option>
+        <option value="3" <?php selected( $display, 3 ); ?>><?php _e('Totals', 'analytics-insights');?></option>
     </select>
 </p>
 <p>
-    <label for="<?php echo $this->get_field_id( 'anonim' ); ?>"><?php _e( "Anonymize stats:",'google-analytics-dashboard-for-wp' ); ?></label> <input class="widefat" id="<?php echo $this->get_field_id( 'anonim' ); ?>" name="<?php echo $this->get_field_name( 'anonim' ); ?>" type="checkbox" <?php checked( $anonim, 1 ); ?> value="1">
+    <label for="<?php echo $this->get_field_id( 'anonim' ); ?>"><?php _e( "Anonymize stats:",'analytics-insights' ); ?></label> <input class="widefat" id="<?php echo $this->get_field_id( 'anonim' ); ?>" name="<?php echo $this->get_field_name( 'anonim' ); ?>" type="checkbox" <?php checked( $anonim, 1 ); ?> value="1">
 </p>
 <p>
-    <label for="<?php echo $this->get_field_id( 'period' ); ?>"><?php _e( "Stats for:",'google-analytics-dashboard-for-wp' ); ?></label> <select id="<?php echo $this->get_field_id('period'); ?>" class="widefat" name="<?php   echo $this->get_field_name( 'period' ); ?>">
-        <option value="7daysAgo" <?php selected( $period, '7daysAgo' ); ?>><?php printf( __('Last %d Days', 'google-analytics-dashboard-for-wp'), 7 );?></option>
-        <option value="14daysAgo" <?php selected( $period, '14daysAgo' ); ?>><?php printf( __('Last %d Days', 'google-analytics-dashboard-for-wp'), 14 );?></option>
-        <option value="30daysAgo" <?php selected( $period, '30daysAgo' ); ?>><?php printf( __('Last %d Days', 'google-analytics-dashboard-for-wp'), 30 );?></option>
+    <label for="<?php echo $this->get_field_id( 'period' ); ?>"><?php _e( "Stats for:",'analytics-insights' ); ?></label> <select id="<?php echo $this->get_field_id('period'); ?>" class="widefat" name="<?php   echo $this->get_field_name( 'period' ); ?>">
+        <option value="7daysAgo" <?php selected( $period, '7daysAgo' ); ?>><?php printf( __('Last %d Days', 'analytics-insights'), 7 );?></option>
+        <option value="14daysAgo" <?php selected( $period, '14daysAgo' ); ?>><?php printf( __('Last %d Days', 'analytics-insights'), 14 );?></option>
+        <option value="30daysAgo" <?php selected( $period, '30daysAgo' ); ?>><?php printf( __('Last %d Days', 'analytics-insights'), 30 );?></option>
     </select>
 </p>
 <p>
-    <label for="<?php echo $this->get_field_id( 'give_credits' ); ?>"><?php _e( "Give credits:",'google-analytics-dashboard-for-wp' ); ?></label> <input class="widefat" id="<?php echo $this->get_field_id( 'give_credits' ); ?>" name="<?php echo $this->get_field_name( 'give_credits' ); ?>" type="checkbox" <?php checked( $give_credits, 1 ); ?> value="1">
+    <label for="<?php echo $this->get_field_id( 'give_credits' ); ?>"><?php _e( "Give credits:",'analytics-insights' ); ?></label> <input class="widefat" id="<?php echo $this->get_field_id( 'give_credits' ); ?>" name="<?php echo $this->get_field_name( 'give_credits' ); ?>" type="checkbox" <?php checked( $give_credits, 1 ); ?> value="1">
 </p>
 <?php
 		/* @formatter:on */

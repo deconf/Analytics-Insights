@@ -11,30 +11,30 @@
 if ( ! defined( 'ABSPATH' ) )
 	exit();
 
-if ( ! class_exists( 'GADWP_Tracking_TagManager' ) ) {
+if ( ! class_exists( 'AIWP_Tracking_TagManager' ) ) {
 
-	class GADWP_Tracking_TagManager {
+	class AIWP_Tracking_TagManager {
 
-		private $gadwp;
+		private $aiwp;
 
 		private $datalayer;
 
 		private $uaid;
 
 		public function __construct() {
-			$this->gadwp = GADWP();
+			$this->aiwp = AIWP();
 
-			$profile = GADWP_Tools::get_selected_profile( $this->gadwp->config->options['ga_profiles_list'], $this->gadwp->config->options['tableid_jail'] );
+			$profile = AIWP_Tools::get_selected_profile( $this->aiwp->config->options['ga_profiles_list'], $this->aiwp->config->options['tableid_jail'] );
 
 			$this->uaid = esc_html( $profile[2] );
 
-			if ( $this->gadwp->config->options['trackingcode_infooter'] ) {
+			if ( $this->aiwp->config->options['trackingcode_infooter'] ) {
 				add_action( 'wp_footer', array( $this, 'output' ), 99 );
 			} else {
 				add_action( 'wp_head', array( $this, 'output' ), 99 );
 			}
 
-			if ( $this->gadwp->config->options['amp_tracking_tagmanager'] && $this->gadwp->config->options['amp_containerid'] ) {
+			if ( $this->aiwp->config->options['amp_tracking_tagmanager'] && $this->aiwp->config->options['amp_containerid'] ) {
 				add_filter( 'amp_post_template_data', array( $this, 'amp_add_analytics_script' ) );
 				add_action( 'amp_post_template_footer', array( $this, 'amp_output' ) );
 			}
@@ -70,38 +70,38 @@ if ( ! class_exists( 'GADWP_Tracking_TagManager' ) ) {
 		private function build_custom_dimensions() {
 			global $post;
 
-			if ( $this->gadwp->config->options['tm_author_var'] && ( is_single() || is_page() ) ) {
+			if ( $this->aiwp->config->options['tm_author_var'] && ( is_single() || is_page() ) ) {
 				global $post;
 				$author_id = $post->post_author;
 				$author_name = get_the_author_meta( 'display_name', $author_id );
-				$this->add_var( 'gadwpAuthor', esc_attr( $author_name ) );
+				$this->add_var( 'aiwpAuthor', esc_attr( $author_name ) );
 			}
 
-			if ( $this->gadwp->config->options['tm_pubyear_var'] && is_single() ) {
+			if ( $this->aiwp->config->options['tm_pubyear_var'] && is_single() ) {
 				global $post;
 				$date = get_the_date( 'Y', $post->ID );
-				$this->add_var( 'gadwpPublicationYear', (int) $date );
+				$this->add_var( 'aiwpPublicationYear', (int) $date );
 			}
 
-			if ( $this->gadwp->config->options['tm_pubyearmonth_var'] && is_single() ) {
+			if ( $this->aiwp->config->options['tm_pubyearmonth_var'] && is_single() ) {
 				global $post;
 				$date = get_the_date( 'Y-m', $post->ID );
-				$this->add_var( 'gadwpPublicationYearMonth', esc_attr( $date ) );
+				$this->add_var( 'aiwpPublicationYearMonth', esc_attr( $date ) );
 			}
 
-			if ( $this->gadwp->config->options['tm_category_var'] && is_category() ) {
-				$this->add_var( 'gadwpCategory', esc_attr( single_tag_title( '', false ) ) );
+			if ( $this->aiwp->config->options['tm_category_var'] && is_category() ) {
+				$this->add_var( 'aiwpCategory', esc_attr( single_tag_title( '', false ) ) );
 			}
-			if ( $this->gadwp->config->options['tm_category_var'] && is_single() ) {
+			if ( $this->aiwp->config->options['tm_category_var'] && is_single() ) {
 				global $post;
 				$categories = get_the_category( $post->ID );
 				foreach ( $categories as $category ) {
-					$this->add_var( 'gadwpCategory', esc_attr( $category->name ) );
+					$this->add_var( 'aiwpCategory', esc_attr( $category->name ) );
 					break;
 				}
 			}
 
-			if ( $this->gadwp->config->options['tm_tag_var'] && is_single() ) {
+			if ( $this->aiwp->config->options['tm_tag_var'] && is_single() ) {
 				global $post;
 				$post_tags_list = '';
 				$post_tags_array = get_the_tags( $post->ID );
@@ -112,16 +112,16 @@ if ( ! class_exists( 'GADWP_Tracking_TagManager' ) ) {
 				}
 				$post_tags_list = rtrim( $post_tags_list, ', ' );
 				if ( $post_tags_list ) {
-					$this->add_var( 'gadwpTag', esc_attr( $post_tags_list ) );
+					$this->add_var( 'aiwpTag', esc_attr( $post_tags_list ) );
 				}
 			}
 
-			if ( $this->gadwp->config->options['tm_user_var'] ) {
+			if ( $this->aiwp->config->options['tm_user_var'] ) {
 				$usertype = is_user_logged_in() ? 'registered' : 'guest';
-				$this->add_var( 'gadwpUser', $usertype );
+				$this->add_var( 'aiwpUser', $usertype );
 			}
 
-			do_action( 'gadwp_tagmanager_datalayer', $this );
+			do_action( 'aiwp_tagmanager_datalayer', $this );
 		}
 
 		/**
@@ -141,11 +141,11 @@ if ( ! class_exists( 'GADWP_Tracking_TagManager' ) ) {
 				$vars = "{}";
 			}
 
-			if ( ( $this->gadwp->config->options['tm_optout'] || $this->gadwp->config->options['tm_dnt_optout'] ) && ! empty( $this->uaid ) ) {
-				GADWP_Tools::load_view( 'front/views/analytics-optout-code.php', array( 'uaid' => $this->uaid, 'gaDntOptout' => $this->gadwp->config->options['tm_dnt_optout'], 'gaOptout' => $this->gadwp->config->options['tm_optout'] ) );
+			if ( ( $this->aiwp->config->options['tm_optout'] || $this->aiwp->config->options['tm_dnt_optout'] ) && ! empty( $this->uaid ) ) {
+				AIWP_Tools::load_view( 'front/views/analytics-optout-code.php', array( 'uaid' => $this->uaid, 'gaDntOptout' => $this->aiwp->config->options['tm_dnt_optout'], 'gaOptout' => $this->aiwp->config->options['tm_optout'] ) );
 			}
 
-			GADWP_Tools::load_view( 'front/views/tagmanager-code.php', array( 'containerid' => $this->gadwp->config->options['web_containerid'], 'vars' => $vars ) );
+			AIWP_Tools::load_view( 'front/views/tagmanager-code.php', array( 'containerid' => $this->aiwp->config->options['web_containerid'], 'vars' => $vars ) );
 		}
 
 		/**
@@ -175,11 +175,11 @@ if ( ! class_exists( 'GADWP_Tracking_TagManager' ) ) {
 				$json = json_encode( $vars, JSON_PRETTY_PRINT );
 			}
 
-			$amp_containerid = $this->gadwp->config->options['amp_containerid'];
+			$amp_containerid = $this->aiwp->config->options['amp_containerid'];
 
 			$json = str_replace( array( '"&#91;', '&#93;"' ), array( '[', ']' ), $json ); // make verticalBoundaries a JavaScript array
 
-			GADWP_Tools::load_view( 'front/views/tagmanager-amp-code.php', array( 'json' => $json, 'containerid' => $amp_containerid ) );
+			AIWP_Tools::load_view( 'front/views/tagmanager-amp-code.php', array( 'json' => $json, 'containerid' => $amp_containerid ) );
 		}
 	}
 }

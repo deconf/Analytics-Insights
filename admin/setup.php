@@ -11,14 +11,14 @@
 if ( ! defined( 'ABSPATH' ) )
 	exit();
 
-if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
+if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 
-	final class GADWP_Backend_Setup {
+	final class AIWP_Backend_Setup {
 
-		private $gadwp;
+		private $aiwp;
 
 		public function __construct() {
-			$this->gadwp = GADWP();
+			$this->aiwp = AIWP();
 
 			// Styles & Scripts
 			add_action( 'admin_enqueue_scripts', array( $this, 'load_styles_scripts' ) );
@@ -27,7 +27,7 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 			// Network Menu
 			add_action( 'network_admin_menu', array( $this, 'network_menu' ) );
 			// Settings link
-			add_filter( "plugin_action_links_" . plugin_basename( GADWP_DIR . 'gadwp.php' ), array( $this, 'settings_link' ) );
+			add_filter( "plugin_action_links_" . plugin_basename( AIWP_DIR . 'analytics-insights.php' ), array( $this, 'settings_link' ) );
 			// Updated admin notice
 			add_action( 'admin_notices', array( $this, 'admin_notice' ) );
 		}
@@ -38,13 +38,13 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 		public function site_menu() {
 			global $wp_version;
 			if ( current_user_can( 'manage_options' ) ) {
-				include ( GADWP_DIR . 'admin/settings.php' );
-				add_menu_page( __( "Google Analytics", 'google-analytics-dashboard-for-wp' ), __( "Google Analytics", 'google-analytics-dashboard-for-wp' ), 'manage_options', 'gadwp_settings', array( 'GADWP_Settings', 'general_settings' ), version_compare( $wp_version, '3.8.0', '>=' ) ? 'dashicons-chart-area' : GADWP_URL . 'admin/images/gadwp-icon.png' );
-				add_submenu_page( 'gadwp_settings', __( "General Settings", 'google-analytics-dashboard-for-wp' ), __( "General Settings", 'google-analytics-dashboard-for-wp' ), 'manage_options', 'gadwp_settings', array( 'GADWP_Settings', 'general_settings' ) );
-				add_submenu_page( 'gadwp_settings', __( "Backend Settings", 'google-analytics-dashboard-for-wp' ), __( "Backend Settings", 'google-analytics-dashboard-for-wp' ), 'manage_options', 'gadwp_backend_settings', array( 'GADWP_Settings', 'backend_settings' ) );
-				add_submenu_page( 'gadwp_settings', __( "Frontend Settings", 'google-analytics-dashboard-for-wp' ), __( "Frontend Settings", 'google-analytics-dashboard-for-wp' ), 'manage_options', 'gadwp_frontend_settings', array( 'GADWP_Settings', 'frontend_settings' ) );
-				add_submenu_page( 'gadwp_settings', __( "Tracking Code", 'google-analytics-dashboard-for-wp' ), __( "Tracking Code", 'google-analytics-dashboard-for-wp' ), 'manage_options', 'gadwp_tracking_settings', array( 'GADWP_Settings', 'tracking_settings' ) );
-				add_submenu_page( 'gadwp_settings', __( "Errors & Debug", 'google-analytics-dashboard-for-wp' ), __( "Errors & Debug", 'google-analytics-dashboard-for-wp' ), 'manage_options', 'gadwp_errors_debugging', array( 'GADWP_Settings', 'errors_debugging' ) );
+				include ( AIWP_DIR . 'admin/settings.php' );
+				add_menu_page( __( "Google Analytics", 'analytics-insights' ), __( "Google Analytics", 'analytics-insights' ), 'manage_options', 'aiwp_settings', array( 'AIWP_Settings', 'general_settings' ), version_compare( $wp_version, '3.8.0', '>=' ) ? 'dashicons-chart-area' : AIWP_URL . 'admin/images/aiwp-icon.png' );
+				add_submenu_page( 'aiwp_settings', __( "General Settings", 'analytics-insights' ), __( "General Settings", 'analytics-insights' ), 'manage_options', 'aiwp_settings', array( 'AIWP_Settings', 'general_settings' ) );
+				add_submenu_page( 'aiwp_settings', __( "Backend Settings", 'analytics-insights' ), __( "Backend Settings", 'analytics-insights' ), 'manage_options', 'aiwp_backend_settings', array( 'AIWP_Settings', 'backend_settings' ) );
+				add_submenu_page( 'aiwp_settings', __( "Frontend Settings", 'analytics-insights' ), __( "Frontend Settings", 'analytics-insights' ), 'manage_options', 'aiwp_frontend_settings', array( 'AIWP_Settings', 'frontend_settings' ) );
+				add_submenu_page( 'aiwp_settings', __( "Tracking Code", 'analytics-insights' ), __( "Tracking Code", 'analytics-insights' ), 'manage_options', 'aiwp_tracking_settings', array( 'AIWP_Settings', 'tracking_settings' ) );
+				add_submenu_page( 'aiwp_settings', __( "Errors & Debug", 'analytics-insights' ), __( "Errors & Debug", 'analytics-insights' ), 'manage_options', 'aiwp_errors_debugging', array( 'AIWP_Settings', 'errors_debugging' ) );
 			}
 		}
 
@@ -54,10 +54,10 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 		public function network_menu() {
 			global $wp_version;
 			if ( current_user_can( 'manage_network' ) ) {
-				include ( GADWP_DIR . 'admin/settings.php' );
-				add_menu_page( __( "Google Analytics", 'google-analytics-dashboard-for-wp' ), "Google Analytics", 'manage_network', 'gadwp_settings', array( 'GADWP_Settings', 'general_settings_network' ), version_compare( $wp_version, '3.8.0', '>=' ) ? 'dashicons-chart-area' : GADWP_URL . 'admin/images/gadwp-icon.png' );
-				add_submenu_page( 'gadwp_settings', __( "General Settings", 'google-analytics-dashboard-for-wp' ), __( "General Settings", 'google-analytics-dashboard-for-wp' ), 'manage_network', 'gadwp_settings', array( 'GADWP_Settings', 'general_settings_network' ) );
-				add_submenu_page( 'gadwp_settings', __( "Errors & Debug", 'google-analytics-dashboard-for-wp' ), __( "Errors & Debug", 'google-analytics-dashboard-for-wp' ), 'manage_network', 'gadwp_errors_debugging', array( 'GADWP_Settings', 'errors_debugging' ) );
+				include ( AIWP_DIR . 'admin/settings.php' );
+				add_menu_page( __( "Google Analytics", 'analytics-insights' ), "Google Analytics", 'manage_network', 'aiwp_settings', array( 'AIWP_Settings', 'general_settings_network' ), version_compare( $wp_version, '3.8.0', '>=' ) ? 'dashicons-chart-area' : AIWP_URL . 'admin/images/aiwp-icon.png' );
+				add_submenu_page( 'aiwp_settings', __( "General Settings", 'analytics-insights' ), __( "General Settings", 'analytics-insights' ), 'manage_network', 'aiwp_settings', array( 'AIWP_Settings', 'general_settings_network' ) );
+				add_submenu_page( 'aiwp_settings', __( "Errors & Debug", 'analytics-insights' ), __( "Errors & Debug", 'analytics-insights' ), 'manage_network', 'aiwp_errors_debugging', array( 'AIWP_Settings', 'errors_debugging' ) );
 			}
 		}
 
@@ -77,36 +77,36 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 			}
 
 			/*
-			 * GADWP main stylesheet
+			 * AIWP main stylesheet
 			 */
-			wp_enqueue_style( 'gadwp', GADWP_URL . 'admin/css/gadwp.css', null, GADWP_CURRENT_VERSION );
+			wp_enqueue_style( 'aiwp', AIWP_URL . 'admin/css/aiwp.css', null, AIWP_CURRENT_VERSION );
 
 			/*
-			 * GADWP UI
+			 * AIWP UI
 			 */
 
-			if ( GADWP_Tools::get_cache( 'gapi_errors' ) ) {
+			if ( AIWP_Tools::get_cache( 'gapi_errors' ) ) {
 				$ed_bubble = '!';
 			} else {
 				$ed_bubble = '';
 			}
 
-			wp_enqueue_script( 'gadwp-backend-ui', plugins_url( 'js/ui.js', __FILE__ ), array( 'jquery' ), GADWP_CURRENT_VERSION, true );
+			wp_enqueue_script( 'aiwp-backend-ui', plugins_url( 'js/ui.js', __FILE__ ), array( 'jquery' ), AIWP_CURRENT_VERSION, true );
 
 			/* @formatter:off */
-			wp_localize_script( 'gadwp-backend-ui', 'gadwp_ui_data', array(
+			wp_localize_script( 'aiwp-backend-ui', 'aiwp_ui_data', array(
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
-				'security' => wp_create_nonce( 'gadwp_dismiss_notices' ),
+				'security' => wp_create_nonce( 'aiwp_dismiss_notices' ),
 				'ed_bubble' => $ed_bubble,
 			)
 			);
 			/* @formatter:on */
 
-			if ( $this->gadwp->config->options['switch_profile'] && count( $this->gadwp->config->options['ga_profiles_list'] ) > 1 ) {
+			if ( $this->aiwp->config->options['switch_profile'] && count( $this->aiwp->config->options['ga_profiles_list'] ) > 1 ) {
 				$views = array();
-				foreach ( $this->gadwp->config->options['ga_profiles_list'] as $items ) {
+				foreach ( $this->aiwp->config->options['ga_profiles_list'] as $items ) {
 					if ( $items[3] ) {
-						$views[$items[1]] = esc_js( GADWP_Tools::strip_protocol( $items[3] ) ); // . ' &#8658; ' . $items[0] );
+						$views[$items[1]] = esc_js( AIWP_Tools::strip_protocol( $items[3] ) ); // . ' &#8658; ' . $items[0] );
 					}
 				}
 			} else {
@@ -119,12 +119,12 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 			$widgets_hooks = array( 'index.php' );
 
 			if ( in_array( $new_hook, $widgets_hooks ) ) {
-				if ( GADWP_Tools::check_roles( $this->gadwp->config->options['access_back'] ) && $this->gadwp->config->options['dashboard_widget'] ) {
+				if ( AIWP_Tools::check_roles( $this->aiwp->config->options['access_back'] ) && $this->aiwp->config->options['dashboard_widget'] ) {
 
-					if ( $this->gadwp->config->options['ga_target_geomap'] ) {
-						$country_codes = GADWP_Tools::get_countrycodes();
-						if ( isset( $country_codes[$this->gadwp->config->options['ga_target_geomap']] ) ) {
-							$region = $this->gadwp->config->options['ga_target_geomap'];
+					if ( $this->aiwp->config->options['ga_target_geomap'] ) {
+						$country_codes = AIWP_Tools::get_countrycodes();
+						if ( isset( $country_codes[$this->aiwp->config->options['ga_target_geomap']] ) ) {
+							$region = $this->aiwp->config->options['ga_target_geomap'];
 						} else {
 							$region = false;
 						}
@@ -132,94 +132,94 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 						$region = false;
 					}
 
-					wp_enqueue_style( 'gadwp-nprogress', GADWP_URL . 'common/nprogress/nprogress.css', null, GADWP_CURRENT_VERSION );
+					wp_enqueue_style( 'aiwp-nprogress', AIWP_URL . 'common/nprogress/nprogress.css', null, AIWP_CURRENT_VERSION );
 
-					wp_enqueue_style( 'gadwp-backend-item-reports', GADWP_URL . 'admin/css/admin-widgets.css', null, GADWP_CURRENT_VERSION );
+					wp_enqueue_style( 'aiwp-backend-item-reports', AIWP_URL . 'admin/css/admin-widgets.css', null, AIWP_CURRENT_VERSION );
 
-					wp_register_style( 'jquery-ui-tooltip-html', GADWP_URL . 'common/realtime/jquery.ui.tooltip.html.css' );
+					wp_register_style( 'jquery-ui-tooltip-html', AIWP_URL . 'common/realtime/jquery.ui.tooltip.html.css' );
 
 					wp_enqueue_style( 'jquery-ui-tooltip-html' );
 
-					wp_register_script( 'jquery-ui-tooltip-html', GADWP_URL . 'common/realtime/jquery.ui.tooltip.html.js' );
+					wp_register_script( 'jquery-ui-tooltip-html', AIWP_URL . 'common/realtime/jquery.ui.tooltip.html.js' );
 
 					wp_register_script( 'googlecharts', 'https://www.gstatic.com/charts/loader.js', array(), null );
 
-					wp_enqueue_script( 'gadwp-nprogress', GADWP_URL . 'common/nprogress/nprogress.js', array( 'jquery' ), GADWP_CURRENT_VERSION );
+					wp_enqueue_script( 'aiwp-nprogress', AIWP_URL . 'common/nprogress/nprogress.js', array( 'jquery' ), AIWP_CURRENT_VERSION );
 
-					wp_enqueue_script( 'gadwp-backend-dashboard-reports', GADWP_URL . 'common/js/reports5.js', array( 'jquery', 'googlecharts', 'gadwp-nprogress', 'jquery-ui-tooltip', 'jquery-ui-core', 'jquery-ui-position', 'jquery-ui-tooltip-html' ), GADWP_CURRENT_VERSION, true );
+					wp_enqueue_script( 'aiwp-backend-dashboard-reports', AIWP_URL . 'common/js/reports5.js', array( 'jquery', 'googlecharts', 'aiwp-nprogress', 'jquery-ui-tooltip', 'jquery-ui-core', 'jquery-ui-position', 'jquery-ui-tooltip-html' ), AIWP_CURRENT_VERSION, true );
 
 					/* @formatter:off */
 
 					$datelist = array(
-						'realtime' => __( "Real-Time", 'google-analytics-dashboard-for-wp' ),
-						'today' => __( "Today", 'google-analytics-dashboard-for-wp' ),
-						'yesterday' => __( "Yesterday", 'google-analytics-dashboard-for-wp' ),
-						'7daysAgo' => sprintf( __( "Last %d Days", 'google-analytics-dashboard-for-wp' ), 7 ),
-						'14daysAgo' => sprintf( __( "Last %d Days", 'google-analytics-dashboard-for-wp' ), 14 ),
-						'30daysAgo' => sprintf( __( "Last %d Days", 'google-analytics-dashboard-for-wp' ), 30 ),
-						'90daysAgo' => sprintf( __( "Last %d Days", 'google-analytics-dashboard-for-wp' ), 90 ),
-						'365daysAgo' =>  sprintf( _n( "%s Year", "%s Years", 1, 'google-analytics-dashboard-for-wp' ), __('One', 'google-analytics-dashboard-for-wp') ),
-						'1095daysAgo' =>  sprintf( _n( "%s Year", "%s Years", 3, 'google-analytics-dashboard-for-wp' ), __('Three', 'google-analytics-dashboard-for-wp') ),
+						'realtime' => __( "Real-Time", 'analytics-insights' ),
+						'today' => __( "Today", 'analytics-insights' ),
+						'yesterday' => __( "Yesterday", 'analytics-insights' ),
+						'7daysAgo' => sprintf( __( "Last %d Days", 'analytics-insights' ), 7 ),
+						'14daysAgo' => sprintf( __( "Last %d Days", 'analytics-insights' ), 14 ),
+						'30daysAgo' => sprintf( __( "Last %d Days", 'analytics-insights' ), 30 ),
+						'90daysAgo' => sprintf( __( "Last %d Days", 'analytics-insights' ), 90 ),
+						'365daysAgo' =>  sprintf( _n( "%s Year", "%s Years", 1, 'analytics-insights' ), __('One', 'analytics-insights') ),
+						'1095daysAgo' =>  sprintf( _n( "%s Year", "%s Years", 3, 'analytics-insights' ), __('Three', 'analytics-insights') ),
 					);
 
 
-					if ( $this->gadwp->config->options['user_api'] && ! $this->gadwp->config->options['backend_realtime_report'] ) {
+					if ( $this->aiwp->config->options['user_api'] && ! $this->aiwp->config->options['backend_realtime_report'] ) {
 						array_shift( $datelist );
 					}
 
-					wp_localize_script( 'gadwp-backend-dashboard-reports', 'gadwpItemData', array(
+					wp_localize_script( 'aiwp-backend-dashboard-reports', 'aiwpItemData', array(
 						'ajaxurl' => admin_url( 'admin-ajax.php' ),
-						'security' => wp_create_nonce( 'gadwp_backend_item_reports' ),
+						'security' => wp_create_nonce( 'aiwp_backend_item_reports' ),
 						'dateList' => $datelist,
 						'reportList' => array(
-							'sessions' => __( "Sessions", 'google-analytics-dashboard-for-wp' ),
-							'users' => __( "Users", 'google-analytics-dashboard-for-wp' ),
-							'organicSearches' => __( "Organic", 'google-analytics-dashboard-for-wp' ),
-							'pageviews' => __( "Page Views", 'google-analytics-dashboard-for-wp' ),
-							'visitBounceRate' => __( "Bounce Rate", 'google-analytics-dashboard-for-wp' ),
-							'locations' => __( "Location", 'google-analytics-dashboard-for-wp' ),
-							'contentpages' =>  __( "Pages", 'google-analytics-dashboard-for-wp' ),
-							'referrers' => __( "Referrers", 'google-analytics-dashboard-for-wp' ),
-							'searches' => __( "Searches", 'google-analytics-dashboard-for-wp' ),
-							'trafficdetails' => __( "Traffic", 'google-analytics-dashboard-for-wp' ),
-							'technologydetails' => __( "Technology", 'google-analytics-dashboard-for-wp' ),
-							'404errors' => __( "404 Errors", 'google-analytics-dashboard-for-wp' ),
+							'sessions' => __( "Sessions", 'analytics-insights' ),
+							'users' => __( "Users", 'analytics-insights' ),
+							'organicSearches' => __( "Organic", 'analytics-insights' ),
+							'pageviews' => __( "Page Views", 'analytics-insights' ),
+							'visitBounceRate' => __( "Bounce Rate", 'analytics-insights' ),
+							'locations' => __( "Location", 'analytics-insights' ),
+							'contentpages' =>  __( "Pages", 'analytics-insights' ),
+							'referrers' => __( "Referrers", 'analytics-insights' ),
+							'searches' => __( "Searches", 'analytics-insights' ),
+							'trafficdetails' => __( "Traffic", 'analytics-insights' ),
+							'technologydetails' => __( "Technology", 'analytics-insights' ),
+							'404errors' => __( "404 Errors", 'analytics-insights' ),
 						),
 						'i18n' => array(
-							__( "A JavaScript Error is blocking plugin resources!", 'google-analytics-dashboard-for-wp' ), //0
-							__( "Traffic Mediums", 'google-analytics-dashboard-for-wp' ),
-							__( "Visitor Type", 'google-analytics-dashboard-for-wp' ),
-							__( "Search Engines", 'google-analytics-dashboard-for-wp' ),
-							__( "Social Networks", 'google-analytics-dashboard-for-wp' ),
-							__( "Sessions", 'google-analytics-dashboard-for-wp' ),
-							__( "Users", 'google-analytics-dashboard-for-wp' ),
-							__( "Page Views", 'google-analytics-dashboard-for-wp' ),
-							__( "Bounce Rate", 'google-analytics-dashboard-for-wp' ),
-							__( "Organic Search", 'google-analytics-dashboard-for-wp' ),
-							__( "Pages/Session", 'google-analytics-dashboard-for-wp' ),
-							__( "Invalid response", 'google-analytics-dashboard-for-wp' ),
-							__( "No Data", 'google-analytics-dashboard-for-wp' ),
-							__( "This report is unavailable", 'google-analytics-dashboard-for-wp' ),
-							__( "report generated by", 'google-analytics-dashboard-for-wp' ), //14
-							__( "This plugin needs an authorization:", 'google-analytics-dashboard-for-wp' ) . ' <a href="' . menu_page_url( 'gadwp_settings', false ) . '">' . __( "authorize the plugin", 'google-analytics-dashboard-for-wp' ) . '</a>.',
-							__( "Browser", 'google-analytics-dashboard-for-wp' ), //16
-							__( "Operating System", 'google-analytics-dashboard-for-wp' ),
-							__( "Screen Resolution", 'google-analytics-dashboard-for-wp' ),
-							__( "Mobile Brand", 'google-analytics-dashboard-for-wp' ),
-							__( "REFERRALS", 'google-analytics-dashboard-for-wp' ), //20
-							__( "KEYWORDS", 'google-analytics-dashboard-for-wp' ),
-							__( "SOCIAL", 'google-analytics-dashboard-for-wp' ),
-							__( "CAMPAIGN", 'google-analytics-dashboard-for-wp' ),
-							__( "DIRECT", 'google-analytics-dashboard-for-wp' ),
-							__( "NEW", 'google-analytics-dashboard-for-wp' ), //25
-							__( "Time on Page", 'google-analytics-dashboard-for-wp' ),
-							__( "Page Load Time", 'google-analytics-dashboard-for-wp' ),
-							__( "Session Duration", 'google-analytics-dashboard-for-wp' ),
+							__( "A JavaScript Error is blocking plugin resources!", 'analytics-insights' ), //0
+							__( "Traffic Mediums", 'analytics-insights' ),
+							__( "Visitor Type", 'analytics-insights' ),
+							__( "Search Engines", 'analytics-insights' ),
+							__( "Social Networks", 'analytics-insights' ),
+							__( "Sessions", 'analytics-insights' ),
+							__( "Users", 'analytics-insights' ),
+							__( "Page Views", 'analytics-insights' ),
+							__( "Bounce Rate", 'analytics-insights' ),
+							__( "Organic Search", 'analytics-insights' ),
+							__( "Pages/Session", 'analytics-insights' ),
+							__( "Invalid response", 'analytics-insights' ),
+							__( "No Data", 'analytics-insights' ),
+							__( "This report is unavailable", 'analytics-insights' ),
+							__( "report generated by", 'analytics-insights' ), //14
+							__( "This plugin needs an authorization:", 'analytics-insights' ) . ' <a href="' . menu_page_url( 'aiwp_settings', false ) . '">' . __( "authorize the plugin", 'analytics-insights' ) . '</a>.',
+							__( "Browser", 'analytics-insights' ), //16
+							__( "Operating System", 'analytics-insights' ),
+							__( "Screen Resolution", 'analytics-insights' ),
+							__( "Mobile Brand", 'analytics-insights' ),
+							__( "REFERRALS", 'analytics-insights' ), //20
+							__( "KEYWORDS", 'analytics-insights' ),
+							__( "SOCIAL", 'analytics-insights' ),
+							__( "CAMPAIGN", 'analytics-insights' ),
+							__( "DIRECT", 'analytics-insights' ),
+							__( "NEW", 'analytics-insights' ), //25
+							__( "Time on Page", 'analytics-insights' ),
+							__( "Page Load Time", 'analytics-insights' ),
+							__( "Session Duration", 'analytics-insights' ),
 						),
-						'rtLimitPages' => $this->gadwp->config->options['ga_realtime_pages'],
-						'colorVariations' => GADWP_Tools::variations( $this->gadwp->config->options['theme_color'] ),
+						'rtLimitPages' => $this->aiwp->config->options['ga_realtime_pages'],
+						'colorVariations' => AIWP_Tools::variations( $this->aiwp->config->options['theme_color'] ),
 						'region' => $region,
-						'mapsApiKey' => apply_filters( 'gadwp_maps_api_key', $this->gadwp->config->options['maps_api_key'] ),
+						'mapsApiKey' => apply_filters( 'aiwp_maps_api_key', $this->aiwp->config->options['maps_api_key'] ),
 						'language' => get_bloginfo( 'language' ),
 						'viewList' => $views,
 						'scope' => 'admin-widgets',
@@ -235,12 +235,12 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 			 */
 			$contentstats_hooks = array( 'edit.php' );
 			if ( in_array( $hook, $contentstats_hooks ) ) {
-				if ( GADWP_Tools::check_roles( $this->gadwp->config->options['access_back'] ) && $this->gadwp->config->options['backend_item_reports'] ) {
+				if ( AIWP_Tools::check_roles( $this->aiwp->config->options['access_back'] ) && $this->aiwp->config->options['backend_item_reports'] ) {
 
-					if ( $this->gadwp->config->options['ga_target_geomap'] ) {
-						$country_codes = GADWP_Tools::get_countrycodes();
-						if ( isset( $country_codes[$this->gadwp->config->options['ga_target_geomap']] ) ) {
-							$region = $this->gadwp->config->options['ga_target_geomap'];
+					if ( $this->aiwp->config->options['ga_target_geomap'] ) {
+						$country_codes = AIWP_Tools::get_countrycodes();
+						if ( isset( $country_codes[$this->aiwp->config->options['ga_target_geomap']] ) ) {
+							$region = $this->aiwp->config->options['ga_target_geomap'];
 						} else {
 							$region = false;
 						}
@@ -248,78 +248,78 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 						$region = false;
 					}
 
-					wp_enqueue_style( 'gadwp-nprogress', GADWP_URL . 'common/nprogress/nprogress.css', null, GADWP_CURRENT_VERSION );
+					wp_enqueue_style( 'aiwp-nprogress', AIWP_URL . 'common/nprogress/nprogress.css', null, AIWP_CURRENT_VERSION );
 
-					wp_enqueue_style( 'gadwp-backend-item-reports', GADWP_URL . 'admin/css/item-reports.css', null, GADWP_CURRENT_VERSION );
+					wp_enqueue_style( 'aiwp-backend-item-reports', AIWP_URL . 'admin/css/item-reports.css', null, AIWP_CURRENT_VERSION );
 
 					wp_enqueue_style( "wp-jquery-ui-dialog" );
 
 					wp_register_script( 'googlecharts', 'https://www.gstatic.com/charts/loader.js', array(), null );
 
-					wp_enqueue_script( 'gadwp-nprogress', GADWP_URL . 'common/nprogress/nprogress.js', array( 'jquery' ), GADWP_CURRENT_VERSION );
+					wp_enqueue_script( 'aiwp-nprogress', AIWP_URL . 'common/nprogress/nprogress.js', array( 'jquery' ), AIWP_CURRENT_VERSION );
 
-					wp_enqueue_script( 'gadwp-backend-item-reports', GADWP_URL . 'common/js/reports5.js', array( 'gadwp-nprogress', 'googlecharts', 'jquery', 'jquery-ui-dialog' ), GADWP_CURRENT_VERSION, true );
+					wp_enqueue_script( 'aiwp-backend-item-reports', AIWP_URL . 'common/js/reports5.js', array( 'aiwp-nprogress', 'googlecharts', 'jquery', 'jquery-ui-dialog' ), AIWP_CURRENT_VERSION, true );
 
 					/* @formatter:off */
-					wp_localize_script( 'gadwp-backend-item-reports', 'gadwpItemData', array(
+					wp_localize_script( 'aiwp-backend-item-reports', 'aiwpItemData', array(
 						'ajaxurl' => admin_url( 'admin-ajax.php' ),
-						'security' => wp_create_nonce( 'gadwp_backend_item_reports' ),
+						'security' => wp_create_nonce( 'aiwp_backend_item_reports' ),
 						'dateList' => array(
-							'today' => __( "Today", 'google-analytics-dashboard-for-wp' ),
-							'yesterday' => __( "Yesterday", 'google-analytics-dashboard-for-wp' ),
-							'7daysAgo' => sprintf( __( "Last %d Days", 'google-analytics-dashboard-for-wp' ), 7 ),
-							'14daysAgo' => sprintf( __( "Last %d Days", 'google-analytics-dashboard-for-wp' ), 14 ),
-							'30daysAgo' => sprintf( __( "Last %d Days", 'google-analytics-dashboard-for-wp' ), 30 ),
-							'90daysAgo' => sprintf( __( "Last %d Days", 'google-analytics-dashboard-for-wp' ), 90 ),
-							'365daysAgo' =>  sprintf( _n( "%s Year", "%s Years", 1, 'google-analytics-dashboard-for-wp' ), __('One', 'google-analytics-dashboard-for-wp') ),
-							'1095daysAgo' =>  sprintf( _n( "%s Year", "%s Years", 3, 'google-analytics-dashboard-for-wp' ), __('Three', 'google-analytics-dashboard-for-wp') ),
+							'today' => __( "Today", 'analytics-insights' ),
+							'yesterday' => __( "Yesterday", 'analytics-insights' ),
+							'7daysAgo' => sprintf( __( "Last %d Days", 'analytics-insights' ), 7 ),
+							'14daysAgo' => sprintf( __( "Last %d Days", 'analytics-insights' ), 14 ),
+							'30daysAgo' => sprintf( __( "Last %d Days", 'analytics-insights' ), 30 ),
+							'90daysAgo' => sprintf( __( "Last %d Days", 'analytics-insights' ), 90 ),
+							'365daysAgo' =>  sprintf( _n( "%s Year", "%s Years", 1, 'analytics-insights' ), __('One', 'analytics-insights') ),
+							'1095daysAgo' =>  sprintf( _n( "%s Year", "%s Years", 3, 'analytics-insights' ), __('Three', 'analytics-insights') ),
 						),
 						'reportList' => array(
-							'uniquePageviews' => __( "Unique Views", 'google-analytics-dashboard-for-wp' ),
-							'users' => __( "Users", 'google-analytics-dashboard-for-wp' ),
-							'organicSearches' => __( "Organic", 'google-analytics-dashboard-for-wp' ),
-							'pageviews' => __( "Page Views", 'google-analytics-dashboard-for-wp' ),
-							'visitBounceRate' => __( "Bounce Rate", 'google-analytics-dashboard-for-wp' ),
-							'locations' => __( "Location", 'google-analytics-dashboard-for-wp' ),
-							'referrers' => __( "Referrers", 'google-analytics-dashboard-for-wp' ),
-							'searches' => __( "Searches", 'google-analytics-dashboard-for-wp' ),
-							'trafficdetails' => __( "Traffic", 'google-analytics-dashboard-for-wp' ),
-							'technologydetails' => __( "Technology", 'google-analytics-dashboard-for-wp' ),
+							'uniquePageviews' => __( "Unique Views", 'analytics-insights' ),
+							'users' => __( "Users", 'analytics-insights' ),
+							'organicSearches' => __( "Organic", 'analytics-insights' ),
+							'pageviews' => __( "Page Views", 'analytics-insights' ),
+							'visitBounceRate' => __( "Bounce Rate", 'analytics-insights' ),
+							'locations' => __( "Location", 'analytics-insights' ),
+							'referrers' => __( "Referrers", 'analytics-insights' ),
+							'searches' => __( "Searches", 'analytics-insights' ),
+							'trafficdetails' => __( "Traffic", 'analytics-insights' ),
+							'technologydetails' => __( "Technology", 'analytics-insights' ),
 						),
 						'i18n' => array(
-							__( "A JavaScript Error is blocking plugin resources!", 'google-analytics-dashboard-for-wp' ), //0
-							__( "Traffic Mediums", 'google-analytics-dashboard-for-wp' ),
-							__( "Visitor Type", 'google-analytics-dashboard-for-wp' ),
-							__( "Social Networks", 'google-analytics-dashboard-for-wp' ),
-							__( "Search Engines", 'google-analytics-dashboard-for-wp' ),
-							__( "Unique Views", 'google-analytics-dashboard-for-wp' ),
-							__( "Users", 'google-analytics-dashboard-for-wp' ),
-							__( "Page Views", 'google-analytics-dashboard-for-wp' ),
-							__( "Bounce Rate", 'google-analytics-dashboard-for-wp' ),
-							__( "Organic Search", 'google-analytics-dashboard-for-wp' ),
-							__( "Pages/Session", 'google-analytics-dashboard-for-wp' ),
-							__( "Invalid response", 'google-analytics-dashboard-for-wp' ),
-							__( "No Data", 'google-analytics-dashboard-for-wp' ),
-							__( "This report is unavailable", 'google-analytics-dashboard-for-wp' ),
-							__( "report generated by", 'google-analytics-dashboard-for-wp' ), //14
-							__( "This plugin needs an authorization:", 'google-analytics-dashboard-for-wp' ) . ' <a href="' . menu_page_url( 'gadwp_settings', false ) . '">' . __( "authorize the plugin", 'google-analytics-dashboard-for-wp' ) . '</a>.',
-							__( "Browser", 'google-analytics-dashboard-for-wp' ), //16
-							__( "Operating System", 'google-analytics-dashboard-for-wp' ),
-							__( "Screen Resolution", 'google-analytics-dashboard-for-wp' ),
-							__( "Mobile Brand", 'google-analytics-dashboard-for-wp' ), //19
-							__( "Future Use", 'google-analytics-dashboard-for-wp' ),
-							__( "Future Use", 'google-analytics-dashboard-for-wp' ),
-							__( "Future Use", 'google-analytics-dashboard-for-wp' ),
-							__( "Future Use", 'google-analytics-dashboard-for-wp' ),
-							__( "Future Use", 'google-analytics-dashboard-for-wp' ),
-							__( "Future Use", 'google-analytics-dashboard-for-wp' ), //25
-							__( "Time on Page", 'google-analytics-dashboard-for-wp' ),
-							__( "Page Load Time", 'google-analytics-dashboard-for-wp' ),
-							__( "Exit Rate", 'google-analytics-dashboard-for-wp' ),
+							__( "A JavaScript Error is blocking plugin resources!", 'analytics-insights' ), //0
+							__( "Traffic Mediums", 'analytics-insights' ),
+							__( "Visitor Type", 'analytics-insights' ),
+							__( "Social Networks", 'analytics-insights' ),
+							__( "Search Engines", 'analytics-insights' ),
+							__( "Unique Views", 'analytics-insights' ),
+							__( "Users", 'analytics-insights' ),
+							__( "Page Views", 'analytics-insights' ),
+							__( "Bounce Rate", 'analytics-insights' ),
+							__( "Organic Search", 'analytics-insights' ),
+							__( "Pages/Session", 'analytics-insights' ),
+							__( "Invalid response", 'analytics-insights' ),
+							__( "No Data", 'analytics-insights' ),
+							__( "This report is unavailable", 'analytics-insights' ),
+							__( "report generated by", 'analytics-insights' ), //14
+							__( "This plugin needs an authorization:", 'analytics-insights' ) . ' <a href="' . menu_page_url( 'aiwp_settings', false ) . '">' . __( "authorize the plugin", 'analytics-insights' ) . '</a>.',
+							__( "Browser", 'analytics-insights' ), //16
+							__( "Operating System", 'analytics-insights' ),
+							__( "Screen Resolution", 'analytics-insights' ),
+							__( "Mobile Brand", 'analytics-insights' ), //19
+							__( "Future Use", 'analytics-insights' ),
+							__( "Future Use", 'analytics-insights' ),
+							__( "Future Use", 'analytics-insights' ),
+							__( "Future Use", 'analytics-insights' ),
+							__( "Future Use", 'analytics-insights' ),
+							__( "Future Use", 'analytics-insights' ), //25
+							__( "Time on Page", 'analytics-insights' ),
+							__( "Page Load Time", 'analytics-insights' ),
+							__( "Exit Rate", 'analytics-insights' ),
 						),
-						'colorVariations' => GADWP_Tools::variations( $this->gadwp->config->options['theme_color'] ),
+						'colorVariations' => AIWP_Tools::variations( $this->aiwp->config->options['theme_color'] ),
 						'region' => $region,
-						'mapsApiKey' => apply_filters( 'gadwp_maps_api_key', $this->gadwp->config->options['maps_api_key'] ),
+						'mapsApiKey' => apply_filters( 'aiwp_maps_api_key', $this->aiwp->config->options['maps_api_key'] ),
 						'language' => get_bloginfo( 'language' ),
 						'viewList' => false,
 						'scope' => 'admin-item',
@@ -332,13 +332,13 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 			/*
 			 * Settings Styles & Scripts
 			 */
-			$settings_hooks = array( '_page_gadwp_settings', '_page_gadwp_backend_settings', '_page_gadwp_frontend_settings', '_page_gadwp_tracking_settings', '_page_gadwp_errors_debugging' );
+			$settings_hooks = array( '_page_aiwp_settings', '_page_aiwp_backend_settings', '_page_aiwp_frontend_settings', '_page_aiwp_tracking_settings', '_page_aiwp_errors_debugging' );
 
 			if ( in_array( $new_hook, $settings_hooks ) ) {
 				wp_enqueue_style( 'wp-color-picker' );
 				wp_enqueue_script( 'wp-color-picker' );
 				wp_enqueue_script( 'wp-color-picker-script-handle', plugins_url( 'js/wp-color-picker-script.js', __FILE__ ), array( 'wp-color-picker' ), false, true );
-				wp_enqueue_script( 'gadwp-settings', plugins_url( 'js/settings.js', __FILE__ ), array( 'jquery' ), GADWP_CURRENT_VERSION, true );
+				wp_enqueue_script( 'aiwp-settings', plugins_url( 'js/settings.js', __FILE__ ), array( 'jquery' ), AIWP_CURRENT_VERSION, true );
 			}
 		}
 
@@ -350,7 +350,7 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 		 * @return array
 		 */
 		public function settings_link( $links ) {
-			$settings_link = '<a href="' . esc_url( get_admin_url( null, 'admin.php?page=gadwp_settings' ) ) . '">' . __( "Settings", 'google-analytics-dashboard-for-wp' ) . '</a>';
+			$settings_link = '<a href="' . esc_url( get_admin_url( null, 'admin.php?page=aiwp_settings' ) ) . '">' . __( "Settings", 'analytics-insights' ) . '</a>';
 			array_unshift( $links, $settings_link );
 			return $links;
 		}
@@ -361,14 +361,14 @@ if ( ! class_exists( 'GADWP_Backend_Setup' ) ) {
 		function admin_notice() {
 			$currentScreen = get_current_screen();
 
-			if ( ! current_user_can( 'manage_options' ) || strpos( $currentScreen->base, '_gadwp_' ) === false ) {
+			if ( ! current_user_can( 'manage_options' ) || strpos( $currentScreen->base, '_aiwp_' ) === false ) {
 				return;
 			}
 
-			if ( get_option( 'gadwp_got_updated' ) ) :
+			if ( get_option( 'aiwp_got_updated' ) ) :
 				?>
-<div id="gadwp-notice" class="notice is-dismissible">
-	<p><?php echo sprintf( __('Google Analytics Dashboard for WP has been updated to version %s.', 'google-analytics-dashboard-for-wp' ), GADWP_CURRENT_VERSION).' '.sprintf( __('For details, check out %1$s.', 'google-analytics-dashboard-for-wp' ), sprintf(' <a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_notice&utm_medium=link&utm_content=release_notice&utm_campaign=gadwp">%s</a>', __('the plugin documentation', 'google-analytics-dashboard-for-wp') ) ); ?></p>
+<div id="aiwp-notice" class="notice is-dismissible">
+	<p><?php echo sprintf( __('Analytics Insights has been updated to version %s.', 'analytics-insights' ), AIWP_CURRENT_VERSION).' '.sprintf( __('For details, check out %1$s.', 'analytics-insights' ), sprintf(' <a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=aiwp_notice&utm_medium=link&utm_content=release_notice&utm_campaign=aiwp">%s</a>', __('the plugin documentation', 'analytics-insights') ) ); ?></p>
 </div>
 
 			<?php

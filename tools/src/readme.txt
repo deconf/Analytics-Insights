@@ -6,15 +6,15 @@
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
  
- * Custom GADWP EndPoint: 
+ * Custom AIWP EndPoint: 
 
  		- added an action hook to IO -> Abstract -> MakeRequest to enable custom endpoint support:
  
 			   public function makeRequest(Deconf_Http_Request $request)
 			   {
 			
-				  	// Add support for GADWP Endpoint
-				  	do_action('gadwp_endpoint_support', $request);
+				  	// Add support for AIWP Endpoint
+				  	do_action('aiwp_endpoint_support', $request);
 				  	
 				  	...
 				 

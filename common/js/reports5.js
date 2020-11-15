@@ -8,9 +8,9 @@
 
 "use strict";
 
-if ( gadwpItemData.mapsApiKey ) {
+if ( aiwpItemData.mapsApiKey ) {
 	google.charts.load( 'current', {
-		mapsApiKey : gadwpItemData.mapsApiKey,
+		mapsApiKey : aiwpItemData.mapsApiKey,
 		'packages' : [ 'corechart', 'table', 'orgchart', 'geochart' ]
 	} );
 } else {
@@ -19,11 +19,11 @@ if ( gadwpItemData.mapsApiKey ) {
 	} );
 }
 
-google.charts.setOnLoadCallback( GADWPReportLoad );
+google.charts.setOnLoadCallback( AIWPReportLoad );
 
 // Get the numeric ID
-gadwpItemData.getID = function ( item ) {
-	if ( gadwpItemData.scope == 'admin-item' ) {
+aiwpItemData.getID = function ( item ) {
+	if ( aiwpItemData.scope == 'admin-item' ) {
 		if ( typeof item.id == "undefined" ) {
 			return 0
 		}
@@ -45,15 +45,15 @@ gadwpItemData.getID = function ( item ) {
 }
 
 // Get the selector
-gadwpItemData.getSelector = function ( scope ) {
+aiwpItemData.getSelector = function ( scope ) {
 	if ( scope == 'admin-item' ) {
-		return 'a[id^="gadwp-"]';
+		return 'a[id^="aiwp-"]';
 	} else {
-		return 'li[id^="wp-admin-bar-gadwp"] a';
+		return 'li[id^="wp-admin-bar-aiwp"] a';
 	}
 }
 
-gadwpItemData.responsiveDialog = function () {
+aiwpItemData.responsiveDialog = function () {
 	var dialog, wWidth, visible;
 
 	visible = jQuery( ".ui-dialog:visible" );
@@ -79,17 +79,17 @@ gadwpItemData.responsiveDialog = function () {
 }
 
 jQuery.fn.extend( {
-	gadwpItemReport : function ( itemId ) {
+	aiwpItemReport : function ( itemId ) {
 		var postData, tools, template, reports, refresh, init, swmetric, slug = "-" + itemId;
 
 		tools = {
 			setCookie : function ( name, value ) {
 				var expires, dateItem = new Date();
 
-				if ( gadwpItemData.scope == 'admin-widgets' ) {
-					name = "gadwp_wg_" + name;
+				if ( aiwpItemData.scope == 'admin-widgets' ) {
+					name = "aiwp_wg_" + name;
 				} else {
-					name = "gadwp_ir_" + name;
+					name = "aiwp_ir_" + name;
 				}
 				dateItem.setTime( dateItem.getTime() + ( 24 * 60 * 60 * 1000 * 365 ) );
 				expires = "expires=" + dateItem.toUTCString();
@@ -98,10 +98,10 @@ jQuery.fn.extend( {
 			getCookie : function ( name ) {
 				var cookie, cookiesArray, div, i = 0;
 
-				if ( gadwpItemData.scope == 'admin-widgets' ) {
-					name = "gadwp_wg_" + name + "=";
+				if ( aiwpItemData.scope == 'admin-widgets' ) {
+					name = "aiwp_wg_" + name + "=";
 				} else {
-					name = "gadwp_ir_" + name + "=";
+					name = "aiwp_ir_" + name + "=";
 				}
 				cookiesArray = document.cookie.split( ';' );
 				for ( i = 0; i < cookiesArray.length; i++ ) {
@@ -128,7 +128,7 @@ jQuery.fn.extend( {
 				if ( !tools.getCookie( 'default_metric' ) || !tools.getCookie( 'default_dimension' ) || !tools.getCookie( 'default_swmetric' ) ) {
 					defaultMetric = 'sessions';
 					defaultDimension = '30daysAgo';
-					if ( gadwpItemData.scope == 'front-item' || gadwpItemData.scope == 'admin-item' ) {
+					if ( aiwpItemData.scope == 'front-item' || aiwpItemData.scope == 'admin-item' ) {
 						swmetric = 'pageviews';
 					} else {
 						swmetric = 'sessions';
@@ -144,18 +144,18 @@ jQuery.fn.extend( {
 				}
 
 				if ( list == false ) {
-					if ( gadwpItemData.scope == 'front-item' || gadwpItemData.scope == 'admin-item' ) {
+					if ( aiwpItemData.scope == 'front-item' || aiwpItemData.scope == 'admin-item' ) {
 						output = ''; // Remove Sessions metric selection on item reports
 					} else {
-						output = '<span id="gadwp-swmetric-sessions" title="' + gadwpItemData.i18n[ 5 ] + '" class="dashicons dashicons-clock" style="font-size:22px;padding:4px;"></span>';
+						output = '<span id="aiwp-swmetric-sessions" title="' + aiwpItemData.i18n[ 5 ] + '" class="dashicons dashicons-clock" style="font-size:22px;padding:4px;"></span>';
 					}
 
-					output += '<span id="gadwp-swmetric-users" title="' + gadwpItemData.i18n[ 6 ] + '" class="dashicons dashicons-admin-users" style="font-size:22px;padding:4px;"></span>';
-					output += '<span id="gadwp-swmetric-pageviews" title="' + gadwpItemData.i18n[ 7 ] + '" class="dashicons dashicons-admin-page" style="font-size:22px;padding:4px;"></span>';
+					output += '<span id="aiwp-swmetric-users" title="' + aiwpItemData.i18n[ 6 ] + '" class="dashicons dashicons-admin-users" style="font-size:22px;padding:4px;"></span>';
+					output += '<span id="aiwp-swmetric-pageviews" title="' + aiwpItemData.i18n[ 7 ] + '" class="dashicons dashicons-admin-page" style="font-size:22px;padding:4px;"></span>';
 
 					jQuery( id ).html( output );
 
-					jQuery( '#gadwp-swmetric-' + swmetric ).css( "color", "#008ec2" );
+					jQuery( '#aiwp-swmetric-' + swmetric ).css( "color", "#008ec2" );
 				} else {
 					jQuery.each( list, function ( key, value ) {
 						if ( key == defaultMetric || key == defaultDimension || key == defaultView ) {
@@ -171,37 +171,37 @@ jQuery.fn.extend( {
 			init : function () {
 				var tpl;
 
-				if ( !jQuery( '#gadwp-window' + slug ).length ) {
+				if ( !jQuery( '#aiwp-window' + slug ).length ) {
 					return;
 				}
 
-				if ( jQuery( '#gadwp-window' + slug ).html().length ) { // add main template once
+				if ( jQuery( '#aiwp-window' + slug ).html().length ) { // add main template once
 					return;
 				}
 
-				tpl = '<div id="gadwp-container' + slug + '">';
-				if ( gadwpItemData.viewList != false ) {
-					tpl += '<select id="gadwp-sel-view' + slug + '"></select>';
+				tpl = '<div id="aiwp-container' + slug + '">';
+				if ( aiwpItemData.viewList != false ) {
+					tpl += '<select id="aiwp-sel-view' + slug + '"></select>';
 				}
-				tpl += '<select id="gadwp-sel-period' + slug + '"></select> ';
-				tpl += '<select id="gadwp-sel-report' + slug + '"></select>';
-				tpl += '<div id="gadwp-sel-metric' + slug + '" style="float:right;display:none;">';
+				tpl += '<select id="aiwp-sel-period' + slug + '"></select> ';
+				tpl += '<select id="aiwp-sel-report' + slug + '"></select>';
+				tpl += '<div id="aiwp-sel-metric' + slug + '" style="float:right;display:none;">';
 				tpl += '</div>';
-				tpl += '<div id="gadwp-progressbar' + slug + '"></div>';
-				tpl += '<div id="gadwp-status' + slug + '"></div>';
-				tpl += '<div id="gadwp-reports' + slug + '"></div>';
+				tpl += '<div id="aiwp-progressbar' + slug + '"></div>';
+				tpl += '<div id="aiwp-status' + slug + '"></div>';
+				tpl += '<div id="aiwp-reports' + slug + '"></div>';
 				tpl += '<div style="text-align:right;width:100%;font-size:0.8em;clear:both;margin-right:5px;margin-top:10px;">';
-				tpl += gadwpItemData.i18n[ 14 ];
-				tpl += ' <a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=gadwp_report&utm_medium=link&utm_content=back_report&utm_campaign=gadwp" rel="nofollow" style="text-decoration:none;font-size:1em;">GADWP</a>&nbsp;';
+				tpl += aiwpItemData.i18n[ 14 ];
+				tpl += ' <a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=aiwp_report&utm_medium=link&utm_content=back_report&utm_campaign=aiwp" rel="nofollow" style="text-decoration:none;font-size:1em;">AIWP</a>&nbsp;';
 				tpl += '</div>';
 				tpl += '</div>',
 
-				jQuery( '#gadwp-window' + slug ).append( tpl );
+				jQuery( '#aiwp-window' + slug ).append( tpl );
 
-				template.addOptions( '#gadwp-sel-view' + slug, gadwpItemData.viewList );
-				template.addOptions( '#gadwp-sel-period' + slug, gadwpItemData.dateList );
-				template.addOptions( '#gadwp-sel-report' + slug, gadwpItemData.reportList );
-				template.addOptions( '#gadwp-sel-metric' + slug, false );
+				template.addOptions( '#aiwp-sel-view' + slug, aiwpItemData.viewList );
+				template.addOptions( '#aiwp-sel-period' + slug, aiwpItemData.dateList );
+				template.addOptions( '#aiwp-sel-report' + slug, aiwpItemData.reportList );
+				template.addOptions( '#aiwp-sel-metric' + slug, false );
 			}
 		}
 
@@ -218,21 +218,21 @@ jQuery.fn.extend( {
 
 			getTitle : function ( scope ) {
 				if ( scope == 'admin-item' ) {
-					return jQuery( '#gadwp' + slug ).attr( "title" );
+					return jQuery( '#aiwp' + slug ).attr( "title" );
 				} else {
 					return document.getElementsByTagName( "title" )[ 0 ].innerHTML;
 				}
 			},
 
 			alertMessage : function ( msg ) {
-				jQuery( "#gadwp-status" + slug ).css( {
+				jQuery( "#aiwp-status" + slug ).css( {
 					"margin-top" : "3px",
 					"padding-left" : "5px",
 					"height" : "auto",
 					"color" : "#000",
 					"border-left" : "5px solid red"
 				} );
-				jQuery( "#gadwp-status" + slug ).html( msg );
+				jQuery( "#aiwp-status" + slug ).html( msg );
 			},
 
 			areaChartBottomStats : function ( response ) {
@@ -240,7 +240,7 @@ jQuery.fn.extend( {
 				if ( jQuery.isArray( response ) ) {
 					if ( !jQuery.isNumeric( response[ 0 ] ) ) {
 						if ( jQuery.isArray( response[ 0 ] ) ) {
-							jQuery( '#gadwp-reports' + slug ).show();
+							jQuery( '#aiwp-reports' + slug ).show();
 							if ( postData.query == 'visitBounceRate,bottomstats' ) {
 								reports.drawAreaChart( response[ 0 ], true );
 							} else {
@@ -250,19 +250,19 @@ jQuery.fn.extend( {
 							reports.throwDebug( response[ 0 ] );
 						}
 					} else {
-						jQuery( '#gadwp-reports' + slug ).show();
-						reports.throwError( '#gadwp-areachart' + slug, response[ 0 ], "125px" );
+						jQuery( '#aiwp-reports' + slug ).show();
+						reports.throwError( '#aiwp-areachart' + slug, response[ 0 ], "125px" );
 					}
 					if ( !jQuery.isNumeric( response[ 1 ] ) ) {
 						if ( jQuery.isArray( response[ 1 ] ) ) {
-							jQuery( '#gadwp-reports' + slug ).show();
+							jQuery( '#aiwp-reports' + slug ).show();
 							reports.drawBottomStats( response[ 1 ] );
 						} else {
 							reports.throwDebug( response[ 1 ] );
 						}
 					} else {
-						jQuery( '#gadwp-reports' + slug ).show();
-						reports.throwError( '#gadwp-bottomstats' + slug, response[ 1 ], "40px" );
+						jQuery( '#aiwp-reports' + slug ).show();
+						reports.throwError( '#aiwp-bottomstats' + slug, response[ 1 ], "40px" );
 					}
 				} else {
 					reports.throwDebug( response );
@@ -277,27 +277,27 @@ jQuery.fn.extend( {
 				if ( jQuery.isArray( response ) ) {
 					if ( !jQuery.isNumeric( response[ 0 ] ) ) {
 						if ( jQuery.isArray( response[ 0 ] ) ) {
-							jQuery( '#gadwp-reports' + slug ).show();
+							jQuery( '#aiwp-reports' + slug ).show();
 							reports.drawOrgChart( response[ 0 ] );
 						} else {
 							reports.throwDebug( response[ 0 ] );
 						}
 					} else {
-						jQuery( '#gadwp-reports' + slug ).show();
-						reports.throwError( '#gadwp-orgchart' + slug, response[ 0 ], "125px" );
+						jQuery( '#aiwp-reports' + slug ).show();
+						reports.throwError( '#aiwp-orgchart' + slug, response[ 0 ], "125px" );
 					}
 
 					for ( i = 1; i < response.length; i++ ) {
 						if ( !jQuery.isNumeric( response[ i ] ) ) {
 							if ( jQuery.isArray( response[ i ] ) ) {
-								jQuery( '#gadwp-reports' + slug ).show();
+								jQuery( '#aiwp-reports' + slug ).show();
 								reports.drawPieChart( 'piechart-' + i, response[ i ], reports.i18n[ i ] );
 							} else {
 								reports.throwDebug( response[ i ] );
 							}
 						} else {
-							jQuery( '#gadwp-reports' + slug ).show();
-							reports.throwError( '#gadwp-piechart-' + i + slug, response[ i ], "80px" );
+							jQuery( '#aiwp-reports' + slug ).show();
+							reports.throwError( '#aiwp-piechart-' + i + slug, response[ i ], "80px" );
 						}
 					}
 				} else {
@@ -311,16 +311,16 @@ jQuery.fn.extend( {
 				if ( jQuery.isArray( response ) ) {
 					if ( !jQuery.isNumeric( response[ 0 ] ) ) {
 						if ( jQuery.isArray( response[ 0 ] ) ) {
-							jQuery( '#gadwp-reports' + slug ).show();
+							jQuery( '#aiwp-reports' + slug ).show();
 							reports.drawGeoChart( response[ 0 ] );
 							reports.drawTableChart( response[ 0 ] );
 						} else {
 							reports.throwDebug( response[ 0 ] );
 						}
 					} else {
-						jQuery( '#gadwp-reports' + slug ).show();
-						reports.throwError( '#gadwp-geochart' + slug, response[ 0 ], "125px" );
-						reports.throwError( '#gadwp-tablechart' + slug, response[ 0 ], "125px" );
+						jQuery( '#aiwp-reports' + slug ).show();
+						reports.throwError( '#aiwp-geochart' + slug, response[ 0 ], "125px" );
+						reports.throwError( '#aiwp-tablechart' + slug, response[ 0 ], "125px" );
 					}
 				} else {
 					reports.throwDebug( response );
@@ -333,14 +333,14 @@ jQuery.fn.extend( {
 				if ( jQuery.isArray( response ) ) {
 					if ( !jQuery.isNumeric( response[ 0 ] ) ) {
 						if ( jQuery.isArray( response[ 0 ] ) ) {
-							jQuery( '#gadwp-reports' + slug ).show();
+							jQuery( '#aiwp-reports' + slug ).show();
 							reports.drawOrgChart( response[ 0 ] );
 						} else {
 							reports.throwDebug( response[ 0 ] );
 						}
 					} else {
-						jQuery( '#gadwp-reports' + slug ).show();
-						reports.throwError( '#gadwp-orgchart' + slug, response[ 0 ], "125px" );
+						jQuery( '#aiwp-reports' + slug ).show();
+						reports.throwError( '#aiwp-orgchart' + slug, response[ 0 ], "125px" );
 					}
 
 					if ( !jQuery.isNumeric( response[ 1 ] ) ) {
@@ -350,7 +350,7 @@ jQuery.fn.extend( {
 							reports.throwDebug( response[ 1 ] );
 						}
 					} else {
-						reports.throwError( '#gadwp-tablechart' + slug, response[ 1 ], "125px" );
+						reports.throwError( '#aiwp-tablechart' + slug, response[ 1 ], "125px" );
 					}
 				} else {
 					reports.throwDebug( response );
@@ -363,14 +363,14 @@ jQuery.fn.extend( {
 				if ( jQuery.isArray( response ) ) {
 					if ( !jQuery.isNumeric( response[ 0 ] ) ) {
 						if ( jQuery.isArray( response[ 0 ] ) ) {
-							jQuery( '#gadwp-reports' + slug ).show();
+							jQuery( '#aiwp-reports' + slug ).show();
 							reports.drawTableChart( response[ 0 ] );
 						} else {
 							reports.throwDebug( response[ 0 ] );
 						}
 					} else {
-						jQuery( '#gadwp-reports' + slug ).show();
-						reports.throwError( '#gadwp-tablechart' + slug, response[ 0 ], "125px" );
+						jQuery( '#aiwp-reports' + slug ).show();
+						reports.throwError( '#aiwp-tablechart' + slug, response[ 0 ], "125px" );
 					}
 				} else {
 					reports.throwDebug( response );
@@ -388,7 +388,7 @@ jQuery.fn.extend( {
 					width : '100%',
 					allowHtml : true
 				};
-				chart = new google.visualization.Table( document.getElementById( 'gadwp-tablechart' + slug ) );
+				chart = new google.visualization.Table( document.getElementById( 'aiwp-tablechart' + slug ) );
 
 				chart.draw( chartData, options );
 			},
@@ -402,7 +402,7 @@ jQuery.fn.extend( {
 					allowHtml : true,
 					height : '100%'
 				};
-				chart = new google.visualization.OrgChart( document.getElementById( 'gadwp-orgchart' + slug ) );
+				chart = new google.visualization.OrgChart( document.getElementById( 'aiwp-orgchart' + slug ) );
 
 				chart.draw( chartData, options );
 			},
@@ -421,9 +421,9 @@ jQuery.fn.extend( {
 					},
 					title : title,
 					pieSliceText : 'value',
-					colors : gadwpItemData.colorVariations
+					colors : aiwpItemData.colorVariations
 				};
-				chart = new google.visualization.PieChart( document.getElementById( 'gadwp-' + id + slug ) );
+				chart = new google.visualization.PieChart( document.getElementById( 'aiwp-' + id + slug ) );
 
 				chart.draw( chartData, options );
 			},
@@ -437,14 +437,14 @@ jQuery.fn.extend( {
 						width : '99%',
 						height : '90%'
 					},
-					colors : [ gadwpItemData.colorVariations[ 5 ], gadwpItemData.colorVariations[ 4 ] ]
+					colors : [ aiwpItemData.colorVariations[ 5 ], aiwpItemData.colorVariations[ 4 ] ]
 				}
-				if ( gadwpItemData.region ) {
-					options.region = gadwpItemData.region;
+				if ( aiwpItemData.region ) {
+					options.region = aiwpItemData.region;
 					options.displayMode = 'markers';
 					options.datalessRegionColor = 'EFEFEF';
 				}
-				chart = new google.visualization.GeoChart( document.getElementById( 'gadwp-geochart' + slug ) );
+				chart = new google.visualization.GeoChart( document.getElementById( 'aiwp-geochart' + slug ) );
 
 				chart.draw( chartData, options );
 			},
@@ -468,7 +468,7 @@ jQuery.fn.extend( {
 						position : 'none'
 					},
 					pointSize : 3,
-					colors : [ gadwpItemData.colorVariations[ 0 ], gadwpItemData.colorVariations[ 4 ] ],
+					colors : [ aiwpItemData.colorVariations[ 0 ], aiwpItemData.colorVariations[ 4 ] ],
 					chartArea : {
 						width : '99%',
 						height : '90%'
@@ -481,7 +481,7 @@ jQuery.fn.extend( {
 						textPosition : 'none'
 					}
 				};
-				chart = new google.visualization.AreaChart( document.getElementById( 'gadwp-areachart' + slug ) );
+				chart = new google.visualization.AreaChart( document.getElementById( 'aiwp-areachart' + slug ) );
 
 				chart.draw( chartData, options );
 			},
@@ -518,7 +518,7 @@ jQuery.fn.extend( {
 
 				for ( i = 0; i < rtData.length; i++ ) {
 					count += parseInt( rtData[ i ].count );
-					table += "<tr><td class='gadwp-pgdetailsl'>" + rtData[ i ].value + "</td><td class='gadwp-pgdetailsr'>" + rtData[ i ].count + "</td></tr>";
+					table += "<tr><td class='aiwp-pgdetailsl'>" + rtData[ i ].value + "</td><td class='aiwp-pgdetailsr'>" + rtData[ i ].count + "</td></tr>";
 				}
 				;
 				if ( count ) {
@@ -542,19 +542,19 @@ jQuery.fn.extend( {
 
 							case "REFERRAL":
 								countrfr += parseInt( rtData[ i ][ 6 ] );
-								tablerfr += "<tr><td class='gadwp-pgdetailsl'>" + rtData[ i ][ 1 ] + "</td><td class='gadwp-pgdetailsr'>" + rtData[ i ][ 6 ] + "</td></tr>";
+								tablerfr += "<tr><td class='aiwp-pgdetailsl'>" + rtData[ i ][ 1 ] + "</td><td class='aiwp-pgdetailsr'>" + rtData[ i ][ 6 ] + "</td></tr>";
 								break;
 							case "ORGANIC":
 								countkwd += parseInt( rtData[ i ][ 6 ] );
-								tablekwd += "<tr><td class='gadwp-pgdetailsl'>" + rtData[ i ][ 2 ] + "</td><td class='gadwp-pgdetailsr'>" + rtData[ i ][ 6 ] + "</td></tr>";
+								tablekwd += "<tr><td class='aiwp-pgdetailsl'>" + rtData[ i ][ 2 ] + "</td><td class='aiwp-pgdetailsr'>" + rtData[ i ][ 6 ] + "</td></tr>";
 								break;
 							case "SOCIAL":
 								countscl += parseInt( rtData[ i ][ 6 ] );
-								tablescl += "<tr><td class='gadwp-pgdetailsl'>" + rtData[ i ][ 1 ] + "</td><td class='gadwp-pgdetailsr'>" + rtData[ i ][ 6 ] + "</td></tr>";
+								tablescl += "<tr><td class='aiwp-pgdetailsl'>" + rtData[ i ][ 1 ] + "</td><td class='aiwp-pgdetailsr'>" + rtData[ i ][ 6 ] + "</td></tr>";
 								break;
 							case "CUSTOM":
 								countcpg += parseInt( rtData[ i ][ 6 ] );
-								tablecpg += "<tr><td class='gadwp-pgdetailsl'>" + rtData[ i ][ 1 ] + "</td><td class='gadwp-pgdetailsr'>" + rtData[ i ][ 6 ] + "</td></tr>";
+								tablecpg += "<tr><td class='aiwp-pgdetailsl'>" + rtData[ i ][ 1 ] + "</td><td class='aiwp-pgdetailsr'>" + rtData[ i ][ 6 ] + "</td></tr>";
 								break;
 							case "DIRECT":
 								countdrt += parseInt( rtData[ i ][ 6 ] );
@@ -586,9 +586,9 @@ jQuery.fn.extend( {
 					postData.from = false;
 					postData.to = false;
 					postData.query = 'realtime';
-					jQuery.post( gadwpItemData.ajaxurl, postData, function ( response ) {
+					jQuery.post( aiwpItemData.ajaxurl, postData, function ( response ) {
 						if ( jQuery.isArray( response ) ) {
-							jQuery( '#gadwp-reports' + slug ).show();
+							jQuery( '#aiwp-reports' + slug ).show();
 							reports.realtime = response[ 0 ];
 							reports.drawRealtime( reports.realtime );
 						} else {
@@ -605,8 +605,8 @@ jQuery.fn.extend( {
 				var rtInfoRight, uPagePath, uReferrals, uKeywords, uSocial, uCustom, i = 0, pagepath = [], referrals = [], keywords = [], social = [], visittype = [], custom = [], uPagePathStats = [], pgStatsTable = "", uReferrals = [], uKeywords = [], uSocial = [], uCustom = [], uVisitType = [ "REFERRAL", "ORGANIC", "SOCIAL", "CUSTOM" ], uVisitorType = [ "DIRECT", "NEW" ];
 
 				jQuery( function () {
-					jQuery( '#gadwp-widget *' ).tooltip( {
-						tooltipClass : "gadwp"
+					jQuery( '#aiwp-widget *' ).tooltip( {
+						tooltipClass : "aiwp"
 					} );
 				} );
 
@@ -619,25 +619,25 @@ jQuery.fn.extend( {
 					rtData[ "rows" ] = [];
 				}
 
-				if ( rtData[ "totalsForAllResults" ][ "rt:activeUsers" ] !== document.getElementById( "gadwp-online" ).innerHTML ) {
-					jQuery( "#gadwp-online" ).fadeOut( "slow" );
-					jQuery( "#gadwp-online" ).fadeOut( 500 );
-					jQuery( "#gadwp-online" ).fadeOut( "slow", function () {
-						if ( ( parseInt( rtData[ "totalsForAllResults" ][ "rt:activeUsers" ] ) ) < ( parseInt( document.getElementById( "gadwp-online" ).innerHTML ) ) ) {
-							jQuery( "#gadwp-online" ).css( {
+				if ( rtData[ "totalsForAllResults" ][ "rt:activeUsers" ] !== document.getElementById( "aiwp-online" ).innerHTML ) {
+					jQuery( "#aiwp-online" ).fadeOut( "slow" );
+					jQuery( "#aiwp-online" ).fadeOut( 500 );
+					jQuery( "#aiwp-online" ).fadeOut( "slow", function () {
+						if ( ( parseInt( rtData[ "totalsForAllResults" ][ "rt:activeUsers" ] ) ) < ( parseInt( document.getElementById( "aiwp-online" ).innerHTML ) ) ) {
+							jQuery( "#aiwp-online" ).css( {
 								'background-color' : '#FFE8E8'
 							} );
 						} else {
-							jQuery( "#gadwp-online" ).css( {
+							jQuery( "#aiwp-online" ).css( {
 								'background-color' : '#E0FFEC'
 							} );
 						}
-						document.getElementById( "gadwp-online" ).innerHTML = rtData[ "totalsForAllResults" ][ "rt:activeUsers" ];
+						document.getElementById( "aiwp-online" ).innerHTML = rtData[ "totalsForAllResults" ][ "rt:activeUsers" ];
 					} );
-					jQuery( "#gadwp-online" ).fadeIn( "slow" );
-					jQuery( "#gadwp-online" ).fadeIn( 500 );
-					jQuery( "#gadwp-online" ).fadeIn( "slow", function () {
-						jQuery( "#gadwp-online" ).css( {
+					jQuery( "#aiwp-online" ).fadeIn( "slow" );
+					jQuery( "#aiwp-online" ).fadeIn( 500 );
+					jQuery( "#aiwp-online" ).fadeIn( "slow", function () {
+						jQuery( "#aiwp-online" ).css( {
 							'background-color' : '#FFFFFF'
 						} );
 					} );
@@ -677,11 +677,11 @@ jQuery.fn.extend( {
 
 				pgStatsTable = "";
 				for ( i = 0; i < uPagePathStats.length; i++ ) {
-					if ( i < gadwpItemData.rtLimitPages ) {
-						pgStatsTable += '<div class="gadwp-pline"><div class="gadwp-pleft"><a href="#" data-gadwp="' + reports.rtPageDetails( rtData, uPagePathStats[ i ].pagepath ) + '">' + uPagePathStats[ i ].pagepath.substring( 0, 70 ) + '</a></div><div class="gadwp-pright">' + uPagePathStats[ i ].count + '</div></div>';
+					if ( i < aiwpItemData.rtLimitPages ) {
+						pgStatsTable += '<div class="aiwp-pline"><div class="aiwp-pleft"><a href="#" data-aiwp="' + reports.rtPageDetails( rtData, uPagePathStats[ i ].pagepath ) + '">' + uPagePathStats[ i ].pagepath.substring( 0, 70 ) + '</a></div><div class="aiwp-pright">' + uPagePathStats[ i ].count + '</div></div>';
 					}
 				}
-				document.getElementById( "gadwp-pages" ).innerHTML = '<br /><div class="gadwp-pg">' + pgStatsTable + '</div>';
+				document.getElementById( "aiwp-pages" ).innerHTML = '<br /><div class="aiwp-pg">' + pgStatsTable + '</div>';
 
 				uReferrals = referrals.filter( reports.rtOnlyUniqueValues );
 				for ( i = 0; i < uReferrals.length; i++ ) {
@@ -727,19 +727,19 @@ jQuery.fn.extend( {
 					return b.count - a.count
 				} );
 
-				rtInfoRight = '<div class="gadwp-bigtext"><a href="#" data-gadwp="' + reports.rtGenerateTooltip( uReferrals ) + '"><div class="gadwp-bleft">' + reports.i18n[ 0 ] + '</a></div><div class="gadwp-bright">' + reports.rtCountSessions( rtData, uVisitType[ 0 ] ) + '</div></div>';
-				rtInfoRight += '<div class="gadwp-bigtext"><a href="#" data-gadwp="' + reports.rtGenerateTooltip( uKeywords ) + '"><div class="gadwp-bleft">' + reports.i18n[ 1 ] + '</a></div><div class="gadwp-bright">' + reports.rtCountSessions( rtData, uVisitType[ 1 ] ) + '</div></div>';
-				rtInfoRight += '<div class="gadwp-bigtext"><a href="#" data-gadwp="' + reports.rtGenerateTooltip( uSocial ) + '"><div class="gadwp-bleft">' + reports.i18n[ 2 ] + '</a></div><div class="gadwp-bright">' + reports.rtCountSessions( rtData, uVisitType[ 2 ] ) + '</div></div>';
-				rtInfoRight += '<div class="gadwp-bigtext"><a href="#" data-gadwp="' + reports.rtGenerateTooltip( uCustom ) + '"><div class="gadwp-bleft">' + reports.i18n[ 3 ] + '</a></div><div class="gadwp-bright">' + reports.rtCountSessions( rtData, uVisitType[ 3 ] ) + '</div></div>';
+				rtInfoRight = '<div class="aiwp-bigtext"><a href="#" data-aiwp="' + reports.rtGenerateTooltip( uReferrals ) + '"><div class="aiwp-bleft">' + reports.i18n[ 0 ] + '</a></div><div class="aiwp-bright">' + reports.rtCountSessions( rtData, uVisitType[ 0 ] ) + '</div></div>';
+				rtInfoRight += '<div class="aiwp-bigtext"><a href="#" data-aiwp="' + reports.rtGenerateTooltip( uKeywords ) + '"><div class="aiwp-bleft">' + reports.i18n[ 1 ] + '</a></div><div class="aiwp-bright">' + reports.rtCountSessions( rtData, uVisitType[ 1 ] ) + '</div></div>';
+				rtInfoRight += '<div class="aiwp-bigtext"><a href="#" data-aiwp="' + reports.rtGenerateTooltip( uSocial ) + '"><div class="aiwp-bleft">' + reports.i18n[ 2 ] + '</a></div><div class="aiwp-bright">' + reports.rtCountSessions( rtData, uVisitType[ 2 ] ) + '</div></div>';
+				rtInfoRight += '<div class="aiwp-bigtext"><a href="#" data-aiwp="' + reports.rtGenerateTooltip( uCustom ) + '"><div class="aiwp-bleft">' + reports.i18n[ 3 ] + '</a></div><div class="aiwp-bright">' + reports.rtCountSessions( rtData, uVisitType[ 3 ] ) + '</div></div>';
 
-				rtInfoRight += '<div class="gadwp-bigtext"><div class="gadwp-bleft">' + reports.i18n[ 4 ] + '</div><div class="gadwp-bright">' + reports.rtCountSessions( rtData, uVisitorType[ 0 ] ) + '</div></div>';
-				rtInfoRight += '<div class="gadwp-bigtext"><div class="gadwp-bleft">' + reports.i18n[ 5 ] + '</div><div class="gadwp-bright">' + reports.rtCountSessions( rtData, uVisitorType[ 1 ] ) + '</div></div>';
+				rtInfoRight += '<div class="aiwp-bigtext"><div class="aiwp-bleft">' + reports.i18n[ 4 ] + '</div><div class="aiwp-bright">' + reports.rtCountSessions( rtData, uVisitorType[ 0 ] ) + '</div></div>';
+				rtInfoRight += '<div class="aiwp-bigtext"><div class="aiwp-bleft">' + reports.i18n[ 5 ] + '</div><div class="aiwp-bright">' + reports.rtCountSessions( rtData, uVisitorType[ 1 ] ) + '</div></div>';
 
-				document.getElementById( "gadwp-tdo-right" ).innerHTML = rtInfoRight;
+				document.getElementById( "aiwp-tdo-right" ).innerHTML = rtInfoRight;
 			},
 
 			throwDebug : function ( response ) {
-				jQuery( "#gadwp-status" + slug ).css( {
+				jQuery( "#aiwp-status" + slug ).css( {
 					"margin-top" : "3px",
 					"padding-left" : "5px",
 					"height" : "auto",
@@ -747,9 +747,9 @@ jQuery.fn.extend( {
 					"border-left" : "5px solid red"
 				} );
 				if ( response == '-24' ) {
-					jQuery( "#gadwp-status" + slug ).html( gadwpItemData.i18n[ 15 ] );
+					jQuery( "#aiwp-status" + slug ).html( aiwpItemData.i18n[ 15 ] );
 				} else {
-					jQuery( "#gadwp-reports" + slug ).css( {
+					jQuery( "#aiwp-reports" + slug ).css( {
 						"background-color" : "#F7F7F7",
 						"height" : "auto",
 						"margin-top" : "10px",
@@ -758,16 +758,16 @@ jQuery.fn.extend( {
 						"color" : "#000",
 						"text-align" : "center"
 					} );
-					jQuery( "#gadwp-reports" + slug ).html( response );
-					jQuery( "#gadwp-reports" + slug ).show();
-					jQuery( "#gadwp-status" + slug ).html( gadwpItemData.i18n[ 11 ] );
-					console.log( "\n********************* GADWP Log ********************* \n\n" + response );
+					jQuery( "#aiwp-reports" + slug ).html( response );
+					jQuery( "#aiwp-reports" + slug ).show();
+					jQuery( "#aiwp-status" + slug ).html( aiwpItemData.i18n[ 11 ] );
+					console.log( "\n********************* AIWP Log ********************* \n\n" + response );
 					postData = {
-						action : 'gadwp_set_error',
+						action : 'aiwp_set_error',
 						response : response,
-						gadwp_security_set_error : gadwpItemData.security,
+						aiwp_security_set_error : aiwpItemData.security,
 					}
-					jQuery.post( gadwpItemData.ajaxurl, postData );
+					jQuery.post( aiwpItemData.ajaxurl, postData );
 				}
 			},
 
@@ -781,9 +781,9 @@ jQuery.fn.extend( {
 					"text-align" : "center"
 				} );
 				if ( response == -21 ) {
-					jQuery( target ).html( gadwpItemData.i18n[ 12 ] );
+					jQuery( target ).html( aiwpItemData.i18n[ 12 ] );
 				} else {
-					jQuery( target ).html( gadwpItemData.i18n[ 13 ] + ' (' + response + ')' );
+					jQuery( target ).html( aiwpItemData.i18n[ 13 ] + ' (' + response + ')' );
 				}
 			},
 
@@ -791,13 +791,13 @@ jQuery.fn.extend( {
 				var projectId, from, to, tpl, focusFlag;
 
 				if ( period == 'realtime' ) {
-					jQuery( '#gadwp-sel-report' + slug ).hide();
+					jQuery( '#aiwp-sel-report' + slug ).hide();
 				} else {
-					jQuery( '#gadwp-sel-report' + slug ).show();
+					jQuery( '#aiwp-sel-report' + slug ).show();
 					clearInterval( reports.rtRuns );
 				}
 
-				jQuery( '#gadwp-status' + slug ).html( '' );
+				jQuery( '#aiwp-status' + slug ).html( '' );
 				switch ( period ) {
 					case 'today':
 						from = 'today';
@@ -843,26 +843,26 @@ jQuery.fn.extend( {
 					projectId = false;
 				}
 
-				if ( gadwpItemData.scope == 'admin-item' ) {
+				if ( aiwpItemData.scope == 'admin-item' ) {
 					postData = {
-						action : 'gadwp_backend_item_reports',
-						gadwp_security_backend_item_reports : gadwpItemData.security,
+						action : 'aiwp_backend_item_reports',
+						aiwp_security_backend_item_reports : aiwpItemData.security,
 						from : from,
 						to : to,
 						filter : itemId
 					}
-				} else if ( gadwpItemData.scope == 'front-item' ) {
+				} else if ( aiwpItemData.scope == 'front-item' ) {
 					postData = {
-						action : 'gadwp_frontend_item_reports',
-						gadwp_security_frontend_item_reports : gadwpItemData.security,
+						action : 'aiwp_frontend_item_reports',
+						aiwp_security_frontend_item_reports : aiwpItemData.security,
 						from : from,
 						to : to,
-						filter : gadwpItemData.filter
+						filter : aiwpItemData.filter
 					}
 				} else {
 					postData = {
-						action : 'gadwp_backend_item_reports',
-						gadwp_security_backend_item_reports : gadwpItemData.security,
+						action : 'aiwp_backend_item_reports',
+						aiwp_security_backend_item_reports : aiwpItemData.security,
 						projectId : projectId,
 						from : from,
 						to : to
@@ -870,7 +870,7 @@ jQuery.fn.extend( {
 				}
 				if ( period == 'realtime' ) {
 
-					reports.i18n = gadwpItemData.i18n.slice( 20, 26 );
+					reports.i18n = aiwpItemData.i18n.slice( 20, 26 );
 
 					reports.render.focusFlag = 1;
 
@@ -880,44 +880,44 @@ jQuery.fn.extend( {
 						reports.render.focusFlag = 0;
 					} );
 
-					tpl = '<div id="gadwp-realtime' + slug + '">';
-					tpl += '<div class="gadwp-rt-box">';
-					tpl += '<div class="gadwp-tdo-left">';
-					tpl += '<div class="gadwp-online" id="gadwp-online">0</div>';
+					tpl = '<div id="aiwp-realtime' + slug + '">';
+					tpl += '<div class="aiwp-rt-box">';
+					tpl += '<div class="aiwp-tdo-left">';
+					tpl += '<div class="aiwp-online" id="aiwp-online">0</div>';
 					tpl += '</div>';
-					tpl += '<div class="gadwp-tdo-right" id="gadwp-tdo-right">';
-					tpl += '<div class="gadwp-bigtext">';
-					tpl += '<div class="gadwp-bleft">' + reports.i18n[ 0 ] + '</div>';
-					tpl += '<div class="gadwp-bright">0</div>';
+					tpl += '<div class="aiwp-tdo-right" id="aiwp-tdo-right">';
+					tpl += '<div class="aiwp-bigtext">';
+					tpl += '<div class="aiwp-bleft">' + reports.i18n[ 0 ] + '</div>';
+					tpl += '<div class="aiwp-bright">0</div>';
 					tpl += '</div>';
-					tpl += '<div class="gadwp-bigtext">';
-					tpl += '<div class="gadwp-bleft">' + reports.i18n[ 1 ] + '</div>';
-					tpl += '<div class="gadwp-bright">0</div>';
+					tpl += '<div class="aiwp-bigtext">';
+					tpl += '<div class="aiwp-bleft">' + reports.i18n[ 1 ] + '</div>';
+					tpl += '<div class="aiwp-bright">0</div>';
 					tpl += '</div>';
-					tpl += '<div class="gadwp-bigtext">';
-					tpl += '<div class="gadwp-bleft">' + reports.i18n[ 2 ] + '</div>';
-					tpl += '<div class="gadwp-bright">0</div>';
+					tpl += '<div class="aiwp-bigtext">';
+					tpl += '<div class="aiwp-bleft">' + reports.i18n[ 2 ] + '</div>';
+					tpl += '<div class="aiwp-bright">0</div>';
 					tpl += '</div>';
-					tpl += '<div class="gadwp-bigtext">';
-					tpl += '<div class="gadwp-bleft">' + reports.i18n[ 3 ] + '</div>';
-					tpl += '<div class="gadwp-bright">0</div>';
+					tpl += '<div class="aiwp-bigtext">';
+					tpl += '<div class="aiwp-bleft">' + reports.i18n[ 3 ] + '</div>';
+					tpl += '<div class="aiwp-bright">0</div>';
 					tpl += '</div>';
-					tpl += '<div class="gadwp-bigtext">';
-					tpl += '<div class="gadwp-bleft">' + reports.i18n[ 4 ] + '</div>';
-					tpl += '<div class="gadwp-bright">0</div>';
+					tpl += '<div class="aiwp-bigtext">';
+					tpl += '<div class="aiwp-bleft">' + reports.i18n[ 4 ] + '</div>';
+					tpl += '<div class="aiwp-bright">0</div>';
 					tpl += '</div>';
-					tpl += '<div class="gadwp-bigtext">';
-					tpl += '<div class="gadwp-bleft">' + reports.i18n[ 5 ] + '</div>';
-					tpl += '<div class="gadwp-bright">0</div>';
+					tpl += '<div class="aiwp-bigtext">';
+					tpl += '<div class="aiwp-bleft">' + reports.i18n[ 5 ] + '</div>';
+					tpl += '<div class="aiwp-bright">0</div>';
 					tpl += '</div>';
 					tpl += '</div>';
 					tpl += '</div>';
 					tpl += '<div>';
-					tpl += '<div id="gadwp-pages" class="gadwp-pages">&nbsp;</div>';
+					tpl += '<div id="aiwp-pages" class="aiwp-pages">&nbsp;</div>';
 					tpl += '</div>';
 					tpl += '</div>';
 
-					jQuery( '#gadwp-reports' + slug ).html( tpl );
+					jQuery( '#aiwp-reports' + slug ).html( tpl );
 
 					reports.rtRefresh( reports.render.focusFlag );
 
@@ -926,110 +926,110 @@ jQuery.fn.extend( {
 				} else {
 					if ( jQuery.inArray( query, [ 'referrers', 'contentpages', 'searches' ] ) > -1 ) {
 
-						tpl = '<div id="gadwp-orgcharttablechart' + slug + '">';
-						tpl += '<div id="gadwp-orgchart' + slug + '"></div>';
-						tpl += '<div id="gadwp-tablechart' + slug + '"></div>';
+						tpl = '<div id="aiwp-orgcharttablechart' + slug + '">';
+						tpl += '<div id="aiwp-orgchart' + slug + '"></div>';
+						tpl += '<div id="aiwp-tablechart' + slug + '"></div>';
 						tpl += '</div>';
 
-						jQuery( '#gadwp-reports' + slug ).html( tpl );
-						jQuery( '#gadwp-reports' + slug ).hide();
-						jQuery( '#gadwp-sel-metric' + slug ).show();
+						jQuery( '#aiwp-reports' + slug ).html( tpl );
+						jQuery( '#aiwp-reports' + slug ).hide();
+						jQuery( '#aiwp-sel-metric' + slug ).show();
 
 						postData.query = 'channelGrouping,' + query;
 						postData.metric = swmetric;
 
-						jQuery.post( gadwpItemData.ajaxurl, postData, function ( response ) {
+						jQuery.post( aiwpItemData.ajaxurl, postData, function ( response ) {
 							reports.orgChartTableChart( response );
 						} );
 					} else if ( query == '404errors' ) {
-						tpl = '<div id="gadwp-404tablechart' + slug + '">';
-						tpl += '<div id="gadwp-tablechart' + slug + '"></div>';
+						tpl = '<div id="aiwp-404tablechart' + slug + '">';
+						tpl += '<div id="aiwp-tablechart' + slug + '"></div>';
 						tpl += '</div>';
 
-						jQuery( '#gadwp-reports' + slug ).html( tpl );
-						jQuery( '#gadwp-reports' + slug ).hide();
-						jQuery( '#gadwp-sel-metric' + slug ).show();
+						jQuery( '#aiwp-reports' + slug ).html( tpl );
+						jQuery( '#aiwp-reports' + slug ).hide();
+						jQuery( '#aiwp-sel-metric' + slug ).show();
 
 						postData.query = query;
 						postData.metric = swmetric;
 
-						jQuery.post( gadwpItemData.ajaxurl, postData, function ( response ) {
+						jQuery.post( aiwpItemData.ajaxurl, postData, function ( response ) {
 							reports.tableChart( response );
 						} );
 					} else if ( query == 'trafficdetails' || query == 'technologydetails' ) {
 
-						tpl = '<div id="gadwp-orgchartpiecharts' + slug + '">';
-						tpl += '<div id="gadwp-orgchart' + slug + '"></div>';
-						tpl += '<div class="gadwp-floatwraper">';
-						tpl += '<div id="gadwp-piechart-1' + slug + '" class="halfsize floatleft"></div>';
-						tpl += '<div id="gadwp-piechart-2' + slug + '" class="halfsize floatright"></div>';
+						tpl = '<div id="aiwp-orgchartpiecharts' + slug + '">';
+						tpl += '<div id="aiwp-orgchart' + slug + '"></div>';
+						tpl += '<div class="aiwp-floatwraper">';
+						tpl += '<div id="aiwp-piechart-1' + slug + '" class="halfsize floatleft"></div>';
+						tpl += '<div id="aiwp-piechart-2' + slug + '" class="halfsize floatright"></div>';
 						tpl += '</div>';
-						tpl += '<div class="gadwp-floatwraper">';
-						tpl += '<div id="gadwp-piechart-3' + slug + '" class="halfsize floatleft"></div>';
-						tpl += '<div id="gadwp-piechart-4' + slug + '" class="halfsize floatright"></div>';
+						tpl += '<div class="aiwp-floatwraper">';
+						tpl += '<div id="aiwp-piechart-3' + slug + '" class="halfsize floatleft"></div>';
+						tpl += '<div id="aiwp-piechart-4' + slug + '" class="halfsize floatright"></div>';
 						tpl += '</div>';
 						tpl += '</div>';
 
-						jQuery( '#gadwp-reports' + slug ).html( tpl );
-						jQuery( '#gadwp-reports' + slug ).hide();
-						jQuery( '#gadwp-sel-metric' + slug ).show();
+						jQuery( '#aiwp-reports' + slug ).html( tpl );
+						jQuery( '#aiwp-reports' + slug ).hide();
+						jQuery( '#aiwp-sel-metric' + slug ).show();
 
 						if ( query == 'trafficdetails' ) {
 							postData.query = 'channelGrouping,medium,visitorType,source,socialNetwork';
-							reports.i18n = gadwpItemData.i18n.slice( 0, 5 );
+							reports.i18n = aiwpItemData.i18n.slice( 0, 5 );
 						} else {
-							reports.i18n = gadwpItemData.i18n.slice( 15, 20 );
+							reports.i18n = aiwpItemData.i18n.slice( 15, 20 );
 							postData.query = 'deviceCategory,browser,operatingSystem,screenResolution,mobileDeviceBranding';
 						}
 						postData.metric = swmetric;
 
-						jQuery.post( gadwpItemData.ajaxurl, postData, function ( response ) {
+						jQuery.post( aiwpItemData.ajaxurl, postData, function ( response ) {
 							reports.orgChartPieCharts( response )
 						} );
 
 					} else if ( query == 'locations' ) {
 
-						tpl = '<div id="gadwp-geocharttablechart' + slug + '">';
-						tpl += '<div id="gadwp-geochart' + slug + '"></div>';
-						tpl += '<div id="gadwp-tablechart' + slug + '"></div>';
+						tpl = '<div id="aiwp-geocharttablechart' + slug + '">';
+						tpl += '<div id="aiwp-geochart' + slug + '"></div>';
+						tpl += '<div id="aiwp-tablechart' + slug + '"></div>';
 						tpl += '</div>';
 
-						jQuery( '#gadwp-reports' + slug ).html( tpl );
-						jQuery( '#gadwp-reports' + slug ).hide();
-						jQuery( '#gadwp-sel-metric' + slug ).show();
+						jQuery( '#aiwp-reports' + slug ).html( tpl );
+						jQuery( '#aiwp-reports' + slug ).hide();
+						jQuery( '#aiwp-sel-metric' + slug ).show();
 
 						postData.query = query;
 						postData.metric = swmetric;
 
-						jQuery.post( gadwpItemData.ajaxurl, postData, function ( response ) {
+						jQuery.post( aiwpItemData.ajaxurl, postData, function ( response ) {
 							reports.geoChartTableChart( response );
 						} );
 
 					} else {
 
-						tpl = '<div id="gadwp-areachartbottomstats' + slug + '">';
-						tpl += '<div id="gadwp-areachart' + slug + '"></div>';
-						tpl += '<div id="gadwp-bottomstats' + slug + '">';
+						tpl = '<div id="aiwp-areachartbottomstats' + slug + '">';
+						tpl += '<div id="aiwp-areachart' + slug + '"></div>';
+						tpl += '<div id="aiwp-bottomstats' + slug + '">';
 						tpl += '<div class="inside">';
-						tpl += '<div class="small-box"><h3>' + gadwpItemData.i18n[ 5 ] + '</h3><p id="gdsessions' + slug + '">&nbsp;</p></div>';
-						tpl += '<div class="small-box"><h3>' + gadwpItemData.i18n[ 6 ] + '</h3><p id="gdusers' + slug + '">&nbsp;</p></div>';
-						tpl += '<div class="small-box"><h3>' + gadwpItemData.i18n[ 7 ] + '</h3><p id="gdpageviews' + slug + '">&nbsp;</p></div>';
-						tpl += '<div class="small-box"><h3>' + gadwpItemData.i18n[ 8 ] + '</h3><p id="gdbouncerate' + slug + '">&nbsp;</p></div>';
-						tpl += '<div class="small-box"><h3>' + gadwpItemData.i18n[ 9 ] + '</h3><p id="gdorganicsearch' + slug + '">&nbsp;</p></div>';
-						tpl += '<div class="small-box"><h3>' + gadwpItemData.i18n[ 10 ] + '</h3><p id="gdpagespervisit' + slug + '">&nbsp;</p></div>';
-						tpl += '<div class="small-box"><h3>' + gadwpItemData.i18n[ 26 ] + '</h3><p id="gdpagetime' + slug + '">&nbsp;</p></div>';
-						tpl += '<div class="small-box"><h3>' + gadwpItemData.i18n[ 27 ] + '</h3><p id="gdpageload' + slug + '">&nbsp;</p></div>';
-						tpl += '<div class="small-box"><h3>' + gadwpItemData.i18n[ 28 ] + '</h3><p id="gdsessionduration' + slug + '">&nbsp;</p></div>';
+						tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 5 ] + '</h3><p id="gdsessions' + slug + '">&nbsp;</p></div>';
+						tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 6 ] + '</h3><p id="gdusers' + slug + '">&nbsp;</p></div>';
+						tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 7 ] + '</h3><p id="gdpageviews' + slug + '">&nbsp;</p></div>';
+						tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 8 ] + '</h3><p id="gdbouncerate' + slug + '">&nbsp;</p></div>';
+						tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 9 ] + '</h3><p id="gdorganicsearch' + slug + '">&nbsp;</p></div>';
+						tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 10 ] + '</h3><p id="gdpagespervisit' + slug + '">&nbsp;</p></div>';
+						tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 26 ] + '</h3><p id="gdpagetime' + slug + '">&nbsp;</p></div>';
+						tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 27 ] + '</h3><p id="gdpageload' + slug + '">&nbsp;</p></div>';
+						tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 28 ] + '</h3><p id="gdsessionduration' + slug + '">&nbsp;</p></div>';
 						tpl += '</div>';
 						tpl += '</div>';
 						tpl += '</div>';
 
-						jQuery( '#gadwp-reports' + slug ).html( tpl );
-						jQuery( '#gadwp-reports' + slug ).hide();
+						jQuery( '#aiwp-reports' + slug ).html( tpl );
+						jQuery( '#aiwp-reports' + slug ).hide();
 
 						postData.query = query + ',bottomstats';
 
-						jQuery.post( gadwpItemData.ajaxurl, postData, function ( response ) {
+						jQuery.post( aiwpItemData.ajaxurl, postData, function ( response ) {
 							reports.areaChartBottomStats( response );
 						} );
 
@@ -1040,44 +1040,44 @@ jQuery.fn.extend( {
 			},
 
 			refresh : function () {
-				if ( jQuery( '#gadwp-areachartbottomstats' + slug ).length > 0 && jQuery.isArray( reports.areaChartBottomStatsData ) ) {
+				if ( jQuery( '#aiwp-areachartbottomstats' + slug ).length > 0 && jQuery.isArray( reports.areaChartBottomStatsData ) ) {
 					reports.areaChartBottomStats( reports.areaChartBottomStatsData );
 				}
-				if ( jQuery( '#gadwp-orgchartpiecharts' + slug ).length > 0 && jQuery.isArray( reports.orgChartPieChartsData ) ) {
+				if ( jQuery( '#aiwp-orgchartpiecharts' + slug ).length > 0 && jQuery.isArray( reports.orgChartPieChartsData ) ) {
 					reports.orgChartPieCharts( reports.orgChartPieChartsData );
 				}
-				if ( jQuery( '#gadwp-geocharttablechart' + slug ).length > 0 && jQuery.isArray( reports.geoChartTableChartData ) ) {
+				if ( jQuery( '#aiwp-geocharttablechart' + slug ).length > 0 && jQuery.isArray( reports.geoChartTableChartData ) ) {
 					reports.geoChartTableChart( reports.geoChartTableChartData );
 				}
-				if ( jQuery( '#gadwp-orgcharttablechart' + slug ).length > 0 && jQuery.isArray( reports.orgChartTableChartData ) ) {
+				if ( jQuery( '#aiwp-orgcharttablechart' + slug ).length > 0 && jQuery.isArray( reports.orgChartTableChartData ) ) {
 					reports.orgChartTableChart( reports.orgChartTableChartData );
 				}
-				if ( jQuery( '#gadwp-404tablechart' + slug ).length > 0 && jQuery.isArray( reports.tableChartData ) ) {
+				if ( jQuery( '#aiwp-404tablechart' + slug ).length > 0 && jQuery.isArray( reports.tableChartData ) ) {
 					reports.tableChart( reports.tableChartData );
 				}
 			},
 
 			init : function () {
 
-				if ( !jQuery( "#gadwp-reports" + slug ).length ) {
+				if ( !jQuery( "#aiwp-reports" + slug ).length ) {
 					return;
 				}
 
-				if ( jQuery( "#gadwp-reports" + slug ).html().length ) { // only when report is empty
+				if ( jQuery( "#aiwp-reports" + slug ).html().length ) { // only when report is empty
 					return;
 				}
 
 				try {
 					NProgress.configure( {
-						parent : "#gadwp-progressbar" + slug,
+						parent : "#aiwp-progressbar" + slug,
 						showSpinner : false
 					} );
 					NProgress.start();
 				} catch ( e ) {
-					reports.alertMessage( gadwpItemData.i18n[ 0 ] );
+					reports.alertMessage( aiwpItemData.i18n[ 0 ] );
 				}
 
-				reports.render( jQuery( '#gadwp-sel-view' + slug ).val(), jQuery( '#gadwp-sel-period' + slug ).val(), jQuery( '#gadwp-sel-report' + slug ).val() );
+				reports.render( jQuery( '#aiwp-sel-view' + slug ).val(), jQuery( '#aiwp-sel-period' + slug ).val(), jQuery( '#aiwp-sel-report' + slug ).val() );
 
 				jQuery( window ).resize( function () {
 					var diff = jQuery( window ).width() - reports.oldViewPort;
@@ -1093,36 +1093,36 @@ jQuery.fn.extend( {
 
 		reports.init();
 
-		jQuery( '#gadwp-sel-view' + slug ).change( function () {
-			jQuery( '#gadwp-reports' + slug ).html( '' );
+		jQuery( '#aiwp-sel-view' + slug ).change( function () {
+			jQuery( '#aiwp-reports' + slug ).html( '' );
 			reports.init();
 		} );
 
-		jQuery( '#gadwp-sel-period' + slug ).change( function () {
-			jQuery( '#gadwp-sel-metric' + slug ).hide();
-			jQuery( '#gadwp-reports' + slug ).html( '' );
+		jQuery( '#aiwp-sel-period' + slug ).change( function () {
+			jQuery( '#aiwp-sel-metric' + slug ).hide();
+			jQuery( '#aiwp-reports' + slug ).html( '' );
 			reports.init();
 		} );
 
-		jQuery( '#gadwp-sel-report' + slug ).change( function () {
-			jQuery( '#gadwp-sel-metric' + slug ).hide();
-			jQuery( '#gadwp-reports' + slug ).html( '' );
+		jQuery( '#aiwp-sel-report' + slug ).change( function () {
+			jQuery( '#aiwp-sel-metric' + slug ).hide();
+			jQuery( '#aiwp-reports' + slug ).html( '' );
 			reports.init();
 		} );
 
-		jQuery( '[id^=gadwp-swmetric-]' ).click( function () {
-			swmetric = this.id.replace( 'gadwp-swmetric-', '' );
+		jQuery( '[id^=aiwp-swmetric-]' ).click( function () {
+			swmetric = this.id.replace( 'aiwp-swmetric-', '' );
 			tools.setCookie( 'default_swmetric', swmetric );
-			jQuery( '#gadwp-swmetric-sessions' ).css( "color", "#444" );
-			jQuery( '#gadwp-swmetric-users' ).css( "color", "#444" );
-			jQuery( '#gadwp-swmetric-pageviews' ).css( "color", "#444" );
+			jQuery( '#aiwp-swmetric-sessions' ).css( "color", "#444" );
+			jQuery( '#aiwp-swmetric-users' ).css( "color", "#444" );
+			jQuery( '#aiwp-swmetric-pageviews' ).css( "color", "#444" );
 			jQuery( '#' + this.id ).css( "color", "#008ec2" );
 
-			jQuery( '#gadwp-reports' + slug ).html( '' );
+			jQuery( '#aiwp-reports' + slug ).html( '' );
 			reports.init();
 		} );
 
-		if ( gadwpItemData.scope == 'admin-widgets' ) {
+		if ( aiwpItemData.scope == 'admin-widgets' ) {
 			return;
 		} else {
 			return this.dialog( {
@@ -1131,9 +1131,9 @@ jQuery.fn.extend( {
 				height : 'auto',
 				modal : true,
 				fluid : true,
-				dialogClass : 'gadwp wp-dialog',
+				dialogClass : 'aiwp wp-dialog',
 				resizable : false,
-				title : reports.getTitle( gadwpItemData.scope ),
+				title : reports.getTitle( aiwpItemData.scope ),
 				position : {
 					my : "top",
 					at : "top+100",
@@ -1144,25 +1144,25 @@ jQuery.fn.extend( {
 	}
 } );
 
-function GADWPReportLoad () {
-	if ( gadwpItemData.scope == 'admin-widgets' ) {
-		jQuery( '#gadwp-window-1' ).gadwpItemReport( 1 );
+function AIWPReportLoad () {
+	if ( aiwpItemData.scope == 'admin-widgets' ) {
+		jQuery( '#aiwp-window-1' ).aiwpItemReport( 1 );
 	} else {
-		jQuery( gadwpItemData.getSelector( gadwpItemData.scope ) ).click( function () {
-			if ( !jQuery( "#gadwp-window-" + gadwpItemData.getID( this ) ).length > 0 ) {
-				jQuery( "body" ).append( '<div id="gadwp-window-' + gadwpItemData.getID( this ) + '"></div>' );
+		jQuery( aiwpItemData.getSelector( aiwpItemData.scope ) ).click( function () {
+			if ( !jQuery( "#aiwp-window-" + aiwpItemData.getID( this ) ).length > 0 ) {
+				jQuery( "body" ).append( '<div id="aiwp-window-' + aiwpItemData.getID( this ) + '"></div>' );
 			}
-			jQuery( '#gadwp-window-' + gadwpItemData.getID( this ) ).gadwpItemReport( gadwpItemData.getID( this ) );
+			jQuery( '#aiwp-window-' + aiwpItemData.getID( this ) ).aiwpItemReport( aiwpItemData.getID( this ) );
 		} );
 	}
 
 	// on window resize
 	jQuery( window ).resize( function () {
-		gadwpItemData.responsiveDialog();
+		aiwpItemData.responsiveDialog();
 	} );
 
 	// dialog width larger than viewport
 	jQuery( document ).on( "dialogopen", ".ui-dialog", function ( event, ui ) {
-		gadwpItemData.responsiveDialog();
+		aiwpItemData.responsiveDialog();
 	} );
 }

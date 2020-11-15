@@ -7,7 +7,7 @@
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
 ?>
-<!-- BEGIN GADWP v<?php echo GADWP_CURRENT_VERSION; ?> Tag Manager - https://deconf.com/google-analytics-dashboard-wordpress/ -->
+<!-- BEGIN AIWP v<?php echo AIWP_CURRENT_VERSION; ?> Tag Manager - https://deconf.com/google-analytics-dashboard-wordpress/ -->
 <script>
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push(<?php echo $data['vars']; ?>);
@@ -20,5 +20,5 @@
 	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 	})(window,document,'script','dataLayer','<?php echo $data['containerid']; ?>');
 </script>
-<!-- END GADWP Tag Manager -->
+<!-- END AIWP Tag Manager -->
 

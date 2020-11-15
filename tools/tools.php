@@ -11,9 +11,9 @@
 if ( ! defined( 'ABSPATH' ) )
 	exit();
 
-if ( ! class_exists( 'GADWP_Tools' ) ) {
+if ( ! class_exists( 'AIWP_Tools' ) ) {
 
-	class GADWP_Tools {
+	class AIWP_Tools {
 
 		public static function get_countrycodes() {
 			include 'iso3166.php';
@@ -110,30 +110,30 @@ if ( ! class_exists( 'GADWP_Tools' ) ) {
 		}
 
 		public static function unset_cookie( $name ) {
-			$name = 'gadwp_wg_' . $name;
+			$name = 'aiwp_wg_' . $name;
 			setcookie( $name, '', time() - 3600, '/' );
-			$name = 'gadwp_ir_' . $name;
+			$name = 'aiwp_ir_' . $name;
 			setcookie( $name, '', time() - 3600, '/' );
 		}
 
 		public static function set_cache( $name, $value, $expiration = 0 ) {
 			$option = array( 'value' => $value, 'expires' => time() + (int) $expiration );
-			update_option( 'gadwp_cache_' . $name, $option, 'no' );
+			update_option( 'aiwp_cache_' . $name, $option, 'no' );
 		}
 
 		public static function delete_cache( $name ) {
-			delete_option( 'gadwp_cache_' . $name );
+			delete_option( 'aiwp_cache_' . $name );
 		}
 
 		public static function get_cache( $name ) {
-			$option = get_option( 'gadwp_cache_' . $name );
+			$option = get_option( 'aiwp_cache_' . $name );
 
 			if ( false === $option || ! isset( $option['value'] ) || ! isset( $option['expires'] ) ) {
 				return false;
 			}
 
 			if ( $option['expires'] < time() ) {
-				delete_option( 'gadwp_cache_' . $name );
+				delete_option( 'aiwp_cache_' . $name );
 				return false;
 			} else {
 				return $option['value'];
@@ -142,7 +142,7 @@ if ( ! class_exists( 'GADWP_Tools' ) ) {
 
 		public static function clear_cache() {
 			global $wpdb;
-			$sqlquery = $wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'gadwp_cache_qr%%'" );
+			$sqlquery = $wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'aiwp_cache_qr%%'" );
 		}
 
 		public static function get_sites( $args ) { // Use wp_get_sites() if WP version is lower than 4.6.0
@@ -167,8 +167,8 @@ if ( ! class_exists( 'GADWP_Tools' ) ) {
 		 * @return boolean - If template file was found
 		 **/
 		public static function load_view( $path, $data = array() ) {
-			if ( file_exists( GADWP_DIR . $path ) ) {
-				require_once ( GADWP_DIR . $path );
+			if ( file_exists( AIWP_DIR . $path ) ) {
+				require_once ( AIWP_DIR . $path );
 				return true;
 			}
 			return false;
@@ -180,11 +180,11 @@ if ( ! class_exists( 'GADWP_Tools' ) ) {
 					$version = '';
 				} else {
 					/* translators: %s: version number */
-					$version = sprintf( __( 'This message was added in version %s.', 'google-analytics-dashboard-for-wp' ), $version );
+					$version = sprintf( __( 'This message was added in version %s.', 'analytics-insights' ), $version );
 				}
 
 				/* translators: Developer debugging message. 1: PHP function name, 2: Explanatory message, 3: Version information message */
-				trigger_error( sprintf( __( '%1$s was called <strong>incorrectly</strong>. %2$s %3$s', 'google-analytics-dashboard-for-wp' ), $function, $message, $version ) );
+				trigger_error( sprintf( __( '%1$s was called <strong>incorrectly</strong>. %2$s %3$s', 'analytics-insights' ), $function, $message, $version ) );
 			}
 		}
 
@@ -200,7 +200,7 @@ if ( ! class_exists( 'GADWP_Tools' ) ) {
 				}
 				return $dom;
 			} else {
-				self::set_error( __( 'DOM is disabled or libxml PHP extension is missing. Contact your hosting provider. Automatic tracking of events for AMP pages is not possible.', 'google-analytics-dashboard-for-wp' ), 24 * 60 * 60 );
+				self::set_error( __( 'DOM is disabled or libxml PHP extension is missing. Contact your hosting provider. Automatic tracking of events for AMP pages is not possible.', 'analytics-insights' ), 24 * 60 * 60 );
 				return false;
 			}
 		}
@@ -247,7 +247,7 @@ if ( ! class_exists( 'GADWP_Tools' ) ) {
 			global $wp_version;
 
 			$options['wp_version'] = $wp_version;
-			$options['gadwp_version'] = GADWP_CURRENT_VERSION;
+			$options['aiwp_version'] = AIWP_CURRENT_VERSION;
 			if ( $options['token'] ) {
 				$options['token'] = 'HIDDEN';
 			}

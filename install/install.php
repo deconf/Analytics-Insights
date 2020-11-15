@@ -11,7 +11,7 @@
 if ( ! defined( 'ABSPATH' ) )
 	exit();
 
-class GADWP_Install {
+class AIWP_Install {
 
 	public static function install() {
 		if ( ! get_option( 'ga_dash_token' ) ) {
@@ -189,6 +189,6 @@ class GADWP_Install {
 			delete_option( 'ga_dash_refresh_token' );
 			delete_option( 'ga_dash_profile_list' );
 		}
-		add_option( 'gadwp_options', json_encode( $options ) );
+		add_option( 'aiwp_options', json_encode( $options ) );
 	}
 }

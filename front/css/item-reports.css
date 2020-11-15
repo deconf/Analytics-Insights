@@ -7,47 +7,47 @@
  */
 
 /* Frontend Item Reports */
-.column-gadwp_stats {
+.column-aiwp_stats {
 	width: 70px;
 }
 
-.gadwp-icon {
+.aiwp-icon {
 	color: #555;
 }
 
-.gadwp-icon:hover {
+.aiwp-icon:hover {
 	color: #2ea2cc;
 }
 
-.gadwp-icon-oldwp {
+.aiwp-icon-oldwp {
 	padding-top: 5px;
 }
 
-[id^=gadwp-container-] {
+[id^=aiwp-container-] {
 	width: 480px;
 }
 
-[id^=gadwp-areachart-] {
+[id^=aiwp-areachart-] {
 	height: 280px;
 }
 
-[id^=gadwp-progressbar-] {
+[id^=aiwp-progressbar-] {
 	width: 100%;
 	height: 3px;
 	margin: 5px 0 0px 0;
 }
 
-[id^=gadwp-bottomstats-] {
+[id^=aiwp-bottomstats-] {
 	width: 100%;
 }
 
-[id^=gadwp-bottomstats-] .inside {
+[id^=aiwp-bottomstats-] .inside {
 	display: table;
 	margin: 0 auto;
 	padding: 0px;
 }
 
-[id^=gadwp-bottomstats-] .inside .small-box {
+[id^=aiwp-bottomstats-] .inside .small-box {
 	width: 31.2%;
 	float: left;
 	margin: 10px 5px 10px 5px;
@@ -58,7 +58,7 @@
 	box-shadow: 0px 0px 7px 0px #BBB;
 }
 
-[id^=gadwp-bottomstats-] .inside .small-box h3 {
+[id^=aiwp-bottomstats-] .inside .small-box h3 {
 	font-family: 'Open Sans', sans-serif;
 	font-size: 1em;
 	color: #777;
@@ -69,44 +69,44 @@
 	white-space: nowrap;
 }
 
-[id^=gadwp-bottomstats-] .inside .small-box p {
+[id^=aiwp-bottomstats-] .inside .small-box p {
 	font-size: 1.2em;
 	margin: 0px 0px 2px 0px;
 }
 
-.gadwp-floatwraper {
+.aiwp-floatwraper {
 	display: table;
 	width: 100%;
 	height: 100%;
 }
 
-[id^=gadwp-piechart-].halfsize {
+[id^=aiwp-piechart-].halfsize {
 	width: 47%;
 	margin: 10px 0 0 0;
 	height: 200px;
 	float: left;
 }
 
-[id^=gadwp-piechart-].floatleft {
+[id^=aiwp-piechart-].floatleft {
 	float: left;
 }
 
-[id^=gadwp-piechart-].floatright {
+[id^=aiwp-piechart-].floatright {
 	float: right;
 }
 
-[id^=gadwp-tablechart-], [id^=gadwp-tablechart-] {
+[id^=aiwp-tablechart-], [id^=aiwp-tablechart-] {
 	margin: 10px 0 0 0;
 }
 
-.ui-dialog.gadwp {
+.ui-dialog.aiwp {
 	font-family: 'Open Sans', sans-serif;
 	font-size: 13px;
 	-webkit-box-sizing: initial;
 	-moz-box-sizing: initial;
 }
 
-.ui-dialog.gadwp select {
+.ui-dialog.aiwp select {
 	font-family: 'Open Sans', sans-serif;
 	border: 1px solid #ddd;
 	font-size: 14px;
@@ -116,47 +116,47 @@
 	width: auto;
 }
 
-.ui-dialog.gadwp table {
+.ui-dialog.aiwp table {
 	margin: auto;
 	width: auto;
 }
 
-.gadwp .ui-dialog-titlebar {
+.aiwp .ui-dialog-titlebar {
 	font-size: 1.1em;
 	text-overflow: ellipsis;
 	overflow: hidden;
 }
 
 @media screen and (max-width: 500px) {
-	[id^=gadwp-container-] {
+	[id^=aiwp-container-] {
 		width: 410px;
 	}
-	[id^=gadwp-bottomstats-] .inside .small-box {
+	[id^=aiwp-bottomstats-] .inside .small-box {
 		width: 30.8%;
 	}
 }
 
 @media screen and (max-width: 410px) {
-	[id^=gadwp-container-] {
+	[id^=aiwp-container-] {
 		width: 260px;
 	}
-	[id^=gadwp-bottomstats-] .inside .small-box {
+	[id^=aiwp-bottomstats-] .inside .small-box {
 		width: 46%;
 	}
 }
 
 /* Toolbar Node (Analytics menu item) */
-#wpadminbar #wp-admin-bar-gadwp-1>.ab-item:before {
+#wpadminbar #wp-admin-bar-aiwp-1>.ab-item:before {
 	content: '\f239';
 	top: 2px;
 }
 
-.no-font-face #wpadminbar #wp-admin-bar-gadwp-1>.ab-item {
+.no-font-face #wpadminbar #wp-admin-bar-aiwp-1>.ab-item {
 	text-indent: 0;
 }
 
 @media screen and ( max-width: 782px ) {
-	#wpadminbar #wp-admin-bar-gadwp-1>.ab-item {
+	#wpadminbar #wp-admin-bar-aiwp-1>.ab-item {
 		text-indent: 100%;
 		white-space: nowrap;
 		overflow: hidden;
@@ -165,7 +165,7 @@
 		color: #999;
 		position: relative;
 	}
-	#wpadminbar #wp-admin-bar-gadwp-1>.ab-item:before {
+	#wpadminbar #wp-admin-bar-aiwp-1>.ab-item:before {
 		display: block;
 		text-indent: 0;
 		font: normal 32px/1 'dashicons';
@@ -176,10 +176,10 @@
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
 	}
-	#wpadminbar li#wp-admin-bar-gadwp-1 {
+	#wpadminbar li#wp-admin-bar-aiwp-1 {
 		display: block;
 	}
-	#wpadminbar #wp-admin-bar-gadwp-1 {
+	#wpadminbar #wp-admin-bar-aiwp-1 {
 		position: static;
 	}
 }
