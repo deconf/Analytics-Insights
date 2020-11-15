@@ -1390,9 +1390,9 @@ final class AIWP_Settings {
 												  <?php if ( $options['token'] ) : ?>
 												<tr>
 													<td colspan="2">
-														<input type="submit" name="Reset" class="button button-secondary" value="<?php _e( "Clear Authorization", 'analytics-insights' ); ?>" <?php echo $options['network_mode']?'disabled="disabled"':''; ?> />
-														<input type="submit" name="Clear" class="button button-secondary" value="<?php _e( "Clear Cache", 'analytics-insights' ); ?>" />
-														<input type="submit" name="Reset_Err" class="button button-secondary" value="<?php _e( "Report & Reset Errors", 'analytics-insights' ); ?>" />
+														<button type="submit" name="Reset" class="button button-secondary" <?php echo $options['network_mode']?'disabled="disabled"':''; ?>><?php _e( "Clear Authorization", 'analytics-insights' ); ?></button>
+														<button type="submit" name="Clear" class="button button-secondary"><?php _e( "Clear Cache", 'analytics-insights' ); ?></button>
+														<button type="submit" name="Reset_Err" class="button button-secondary"><?php _e( "Report & Reset Errors", 'analytics-insights' ); ?></button>
 													</td>
 												</tr>
 												<tr>
@@ -1484,8 +1484,8 @@ final class AIWP_Settings {
 												<tr>
 													<td colspan="2">
 													 <?php $auth = $aiwp->gapi_controller->client->createAuthUrl();?>
-														<input type="button" class="button button-secondary" onclick="location.href='<?php echo $auth; ?>'" <?php echo $options['network_mode']?'disabled="disabled"':''; ?> value="Authorize Plugin" />
-														<input type="submit" name="Clear" class="button button-secondary" value="<?php _e( "Clear Cache", 'analytics-insights' ); ?>" />
+														<button type="submit" class="button button-secondary" formaction="<?php echo $auth; ?>" <?php echo $options['network_mode']?'disabled="disabled"':''; ?>><?php _e( "Authorize Plugin", 'analytics-insights' ); ?></button>
+														<button type="submit" name="Clear" class="button button-secondary"><?php _e( "Clear Cache", 'analytics-insights' ); ?></button>
 													</td>
 												</tr>
 												<tr>
@@ -1718,9 +1718,9 @@ final class AIWP_Settings {
 							<?php if ( $options['token'] ) : ?>
 							<tr>
 																		<td colspan="2">
-																			<input type="submit" name="Reset" class="button button-secondary" value="<?php _e( "Clear Authorization", 'analytics-insights' ); ?>" />
-																			<input type="submit" name="Clear" class="button button-secondary" value="<?php _e( "Clear Cache", 'analytics-insights' ); ?>" />
-																			<input type="submit" name="Refresh" class="button button-secondary" value="<?php _e( "Refresh Properties", 'analytics-insights' ); ?>" />
+																			<button type="submit" name="Reset" class="button button-secondary"><?php _e( "Clear Authorization", 'analytics-insights' ); ?></button>
+																			<button type="submit" name="Clear" class="button button-secondary"><?php _e( "Clear Cache", 'analytics-insights' ); ?></button>
+																			<button type="submit" name="Refresh" class="button button-secondary"><?php _e( "Refresh Properties", 'analytics-insights' ); ?></button>
 																		</td>
 																	</tr>
 																	<tr>
@@ -1814,8 +1814,8 @@ final class AIWP_Settings {
 																	<tr>
 																		<td colspan="2">
 																			<?php $auth = $aiwp->gapi_controller->client->createAuthUrl();?>
-																			<input type="button" class="button button-secondary" onclick="location.href='<?php echo $auth; ?>'" value="Authorize Plugin" />
-																			<input type="submit" name="Clear" class="button button-secondary" value="<?php _e( "Clear Cache", 'analytics-insights' ); ?>" />
+																			<button type="submit" class="button button-secondary" formaction="<?php echo $auth; ?>"><?php _e( "Authorize Plugin", 'analytics-insights' ); ?></button>
+																			<button type="submit" name="Clear" class="button button-secondary"><?php _e( "Clear Cache", 'analytics-insights' ); ?></button>
 																		</td>
 																	</tr>
 							<?php endif; ?>
@@ -1861,11 +1861,6 @@ final class AIWP_Settings {
 															<div class="inside">
 																<div class="aiwp-desc">
 																	<div class="g-ytsubscribe" data-channel="TheDeConf" data-layout="default" data-count="default"></div>
-																</div>
-																<br />
-																<div class="aiwp-desc">
-																	<div class="g-follow" data-annotation="bubble" data-height="24" data-href="//plus.google.com/u/0/114149166432576972465" data-rel="publisher"></div>
-																	<script src="https://apis.google.com/js/platform.js" async defer></script>
 																</div>
 																<br />
 																<div class="aiwp-desc">
