@@ -1861,6 +1861,7 @@ final class AIWP_Settings {
 															<div class="inside">
 																<div class="aiwp-desc">
 																	<div class="g-ytsubscribe" data-channel="TheDeConf" data-layout="default" data-count="default"></div>
+																	<script src="https://apis.google.com/js/platform.js" async defer></script>
 																</div>
 																<br />
 																<div class="aiwp-desc">
