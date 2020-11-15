@@ -109,6 +109,7 @@ td.aiwp-settings-roles {
 	border: none;
 	padding: 0;
 	height: 22px;
+	min-height: auto;
 	-moz-box-shadow: none;
 	-webkit-box-shadow: none;
 	-o-box-shadow: none;
