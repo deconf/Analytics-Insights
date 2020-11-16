@@ -1382,6 +1382,9 @@ final class AIWP_Settings {
 													</td>
 													<td>
 														<input type="text" name="options[client_secret]" value="<?php echo esc_attr($options['client_secret']); ?>" size="40" required="required">
+															<?php if ( !$options['token'] ) : ?>
+																<input type="submit" name="Submit" class="button button-primary" value="<?php _e('Save Credentials', 'analytics-insights' ) ?>" />
+															<?php endif; ?>
 														<input type="hidden" name="options[aiwp_hidden]" value="Y">
 														<?php wp_nonce_field('aiwp_form','aiwp_security'); ?>
 													</td>
@@ -1696,8 +1699,7 @@ final class AIWP_Settings {
 							<?php if ( $options['user_api'] ) : ?>
 							<tr>
 																		<td class="aiwp-settings-title">
-																			<label for="options[client_id]"><?php _e("Client ID:", 'analytics-insights'); ?>
-									</label>
+																			<label for="options[client_id]"><?php _e("Client ID:", 'analytics-insights'); ?></label>
 																		</td>
 																		<td>
 																			<input type="text" name="options[client_id]" value="<?php echo esc_attr($options['client_id']); ?>" size="40" required="required">
@@ -1705,12 +1707,14 @@ final class AIWP_Settings {
 																	</tr>
 																	<tr>
 																		<td class="aiwp-settings-title">
-																			<label for="options[client_secret]"><?php _e("Client Secret:", 'analytics-insights'); ?>
-									</label>
+																			<label for="options[client_secret]"><?php _e("Client Secret:", 'analytics-insights'); ?></label>
 																		</td>
 																		<td>
 																			<input type="text" name="options[client_secret]" value="<?php echo esc_attr($options['client_secret']); ?>" size="40" required="required">
 																			<input type="hidden" name="options[aiwp_hidden]" value="Y">
+																			<?php if ( !$options['token'] ) : ?>
+																				<input type="submit" name="Submit" class="button button-primary" value="<?php _e('Save Credentials', 'analytics-insights' ) ?>" />
+																			<?php endif; ?>
 																			<?php wp_nonce_field('aiwp_form','aiwp_security'); ?>
 								</td>
 																	</tr>

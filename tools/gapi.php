@@ -64,6 +64,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			}
 			$this->client = new Deconf_Client( $config );
 			$this->client->setScopes( array( 'https://www.googleapis.com/auth/analytics.readonly' ) );
+			$this->client->setApprovalPrompt('force');
 			$this->client->setAccessType( 'offline' );
 			$this->client->setApplicationName( 'AIWP ' . AIWP_CURRENT_VERSION );
 
@@ -74,19 +75,17 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			} else {
 				$state_uri = admin_url('admin.php?page=aiwp_settings') . '&aiwp_security=' . $security;
 			}
-
-			$this->client->setRedirectUri( 'https://deconf.com/aiwp/oauth2callback.php' );
 			$this->client->setState($state_uri);
-
 
 			$this->managequota = 'u' . get_current_user_id() . 's' . get_current_blog_id();
 			if ( $this->aiwp->config->options['user_api'] ) {
 				$this->client->setClientId( $this->aiwp->config->options['client_id'] );
 				$this->client->setClientSecret( $this->aiwp->config->options['client_secret'] );
-				$this->client->setRedirectUri('urn:ietf:wg:oauth:2.0:oob');
+				$this->client->setRedirectUri(AIWP_URL . 'tools/oauth2callback.php');
 			} else {
 				$this->client->setClientId( $this->access[0] );
 				$this->client->setClientSecret( $this->access[1] );
+				$this->client->setRedirectUri( 'https://deconf.com/aiwp/oauth2callback.php' );
 			}
 
 			/**
