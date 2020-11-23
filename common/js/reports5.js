@@ -297,7 +297,26 @@ jQuery.fn.extend( {
 			},
 
 			orgChartPieCharts : function ( response ) {
+				
+				var tpl;
 				var i = 0;
+				
+				tpl = '<div id="aiwp-orgchartpiecharts' + slug + '">';
+				tpl += '<div id="aiwp-orgchart' + slug + '"></div>';
+				tpl += '<div class="aiwp-floatwraper">';
+				tpl += '<div id="aiwp-piechart-1' + slug + '" class="halfsize floatleft"></div>';
+				tpl += '<div id="aiwp-piechart-2' + slug + '" class="halfsize floatright"></div>';
+				tpl += '</div>';
+				tpl += '<div class="aiwp-floatwraper">';
+				tpl += '<div id="aiwp-piechart-3' + slug + '" class="halfsize floatleft"></div>';
+				tpl += '<div id="aiwp-piechart-4' + slug + '" class="halfsize floatright"></div>';
+				tpl += '</div>';
+				tpl += '</div>';
+
+				if ( !jQuery( '#aiwp-orgchartpiecharts' + slug ).length ) {
+					jQuery( '#aiwp-reports' + slug ).html( tpl );
+				}
+								
 				reports.orgChartPieChartsData = response;
 				if ( jQuery.isArray( response ) ) {
 					if ( !jQuery.isNumeric( response[ 0 ] ) ) {
@@ -332,6 +351,18 @@ jQuery.fn.extend( {
 			},
 
 			geoChartTableChart : function ( response ) {
+				
+				var tpl;
+				
+				tpl = '<div id="aiwp-geocharttablechart' + slug + '">';
+				tpl += '<div id="aiwp-geochart' + slug + '"></div>';
+				tpl += '<div id="aiwp-tablechart' + slug + '"></div>';
+				tpl += '</div>';
+			
+				if ( !jQuery( '#aiwp-geocharttablechart' + slug ).length ) {
+					jQuery( '#aiwp-reports' + slug ).html( tpl );
+				}			
+			
 				reports.geoChartTableChartData = response;
 				if ( jQuery.isArray( response ) ) {
 					if ( !jQuery.isNumeric( response[ 0 ] ) ) {
@@ -354,6 +385,18 @@ jQuery.fn.extend( {
 			},
 
 			orgChartTableChart : function ( response ) {
+				
+				var tpl;
+				
+				tpl = '<div id="aiwp-orgcharttablechart' + slug + '">';
+				tpl += '<div id="aiwp-orgchart' + slug + '"></div>';
+				tpl += '<div id="aiwp-tablechart' + slug + '"></div>';
+				tpl += '</div>';
+
+				if ( !jQuery( '#aiwp-orgcharttablechart' + slug ).length ) {
+					jQuery( '#aiwp-reports' + slug ).html( tpl );
+				}		
+			
 				reports.orgChartTableChartData = response
 				if ( jQuery.isArray( response ) ) {
 					if ( !jQuery.isNumeric( response[ 0 ] ) ) {
@@ -384,6 +427,17 @@ jQuery.fn.extend( {
 			},
 
 			tableChart : function ( response ) {
+
+				var tpl;
+			
+				tpl = '<div id="aiwp-404tablechart' + slug + '">';
+				tpl += '<div id="aiwp-tablechart' + slug + '"></div>';
+				tpl += '</div>';
+
+				if ( !jQuery( '#aiwp-404tablechart' + slug ).length ) {
+					jQuery( '#aiwp-reports' + slug ).html( tpl );
+				}			
+			
 				reports.tableChartData = response
 				if ( jQuery.isArray( response ) ) {
 					if ( !jQuery.isNumeric( response[ 0 ] ) ) {
@@ -951,15 +1005,6 @@ jQuery.fn.extend( {
 				} else {
 					if ( jQuery.inArray( query, [ 'referrers', 'contentpages', 'searches' ] ) > -1 ) {
 
-						tpl = '<div id="aiwp-orgcharttablechart' + slug + '">';
-						tpl += '<div id="aiwp-orgchart' + slug + '"></div>';
-						tpl += '<div id="aiwp-tablechart' + slug + '"></div>';
-						tpl += '</div>';
-
-						jQuery( '#aiwp-reports' + slug ).html( tpl );
-						jQuery( '#aiwp-reports' + slug ).hide();
-						jQuery( '#aiwp-sel-metric' + slug ).show();
-
 						postData.query = 'channelGrouping,' + query;
 						postData.metric = swmetric;
 
@@ -967,13 +1012,6 @@ jQuery.fn.extend( {
 							reports.orgChartTableChart( response );
 						} );
 					} else if ( query == '404errors' ) {
-						tpl = '<div id="aiwp-404tablechart' + slug + '">';
-						tpl += '<div id="aiwp-tablechart' + slug + '"></div>';
-						tpl += '</div>';
-
-						jQuery( '#aiwp-reports' + slug ).html( tpl );
-						jQuery( '#aiwp-reports' + slug ).hide();
-						jQuery( '#aiwp-sel-metric' + slug ).show();
 
 						postData.query = query;
 						postData.metric = swmetric;
@@ -982,22 +1020,6 @@ jQuery.fn.extend( {
 							reports.tableChart( response );
 						} );
 					} else if ( query == 'trafficdetails' || query == 'technologydetails' ) {
-
-						tpl = '<div id="aiwp-orgchartpiecharts' + slug + '">';
-						tpl += '<div id="aiwp-orgchart' + slug + '"></div>';
-						tpl += '<div class="aiwp-floatwraper">';
-						tpl += '<div id="aiwp-piechart-1' + slug + '" class="halfsize floatleft"></div>';
-						tpl += '<div id="aiwp-piechart-2' + slug + '" class="halfsize floatright"></div>';
-						tpl += '</div>';
-						tpl += '<div class="aiwp-floatwraper">';
-						tpl += '<div id="aiwp-piechart-3' + slug + '" class="halfsize floatleft"></div>';
-						tpl += '<div id="aiwp-piechart-4' + slug + '" class="halfsize floatright"></div>';
-						tpl += '</div>';
-						tpl += '</div>';
-
-						jQuery( '#aiwp-reports' + slug ).html( tpl );
-						jQuery( '#aiwp-reports' + slug ).hide();
-						jQuery( '#aiwp-sel-metric' + slug ).show();
 
 						if ( query == 'trafficdetails' ) {
 							postData.query = 'channelGrouping,medium,visitorType,source,socialNetwork';
@@ -1013,15 +1035,6 @@ jQuery.fn.extend( {
 						} );
 
 					} else if ( query == 'locations' ) {
-
-						tpl = '<div id="aiwp-geocharttablechart' + slug + '">';
-						tpl += '<div id="aiwp-geochart' + slug + '"></div>';
-						tpl += '<div id="aiwp-tablechart' + slug + '"></div>';
-						tpl += '</div>';
-
-						jQuery( '#aiwp-reports' + slug ).html( tpl );
-						jQuery( '#aiwp-reports' + slug ).hide();
-						jQuery( '#aiwp-sel-metric' + slug ).show();
 
 						postData.query = query;
 						postData.metric = swmetric;
