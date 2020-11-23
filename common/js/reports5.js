@@ -260,6 +260,8 @@ jQuery.fn.extend( {
 					jQuery( '#aiwp-reports' + slug ).html( tpl );
 				}
 				
+				jQuery( '#aiwp-sel-metric' + slug ).hide();				
+				
 				reports.areaChartBottomStatsData = response;
 				
 				if ( jQuery.isArray( response ) ) {
@@ -316,6 +318,8 @@ jQuery.fn.extend( {
 				if ( !jQuery( '#aiwp-orgchartpiecharts' + slug ).length ) {
 					jQuery( '#aiwp-reports' + slug ).html( tpl );
 				}
+				
+				jQuery( '#aiwp-sel-metric' + slug ).show();
 								
 				reports.orgChartPieChartsData = response;
 				if ( jQuery.isArray( response ) ) {
@@ -361,7 +365,9 @@ jQuery.fn.extend( {
 			
 				if ( !jQuery( '#aiwp-geocharttablechart' + slug ).length ) {
 					jQuery( '#aiwp-reports' + slug ).html( tpl );
-				}			
+				}		
+				
+				jQuery( '#aiwp-sel-metric' + slug ).show();	
 			
 				reports.geoChartTableChartData = response;
 				if ( jQuery.isArray( response ) ) {
@@ -395,7 +401,9 @@ jQuery.fn.extend( {
 
 				if ( !jQuery( '#aiwp-orgcharttablechart' + slug ).length ) {
 					jQuery( '#aiwp-reports' + slug ).html( tpl );
-				}		
+				}
+				
+				jQuery( '#aiwp-sel-metric' + slug ).show();		
 			
 				reports.orgChartTableChartData = response
 				if ( jQuery.isArray( response ) ) {
@@ -436,7 +444,9 @@ jQuery.fn.extend( {
 
 				if ( !jQuery( '#aiwp-404tablechart' + slug ).length ) {
 					jQuery( '#aiwp-reports' + slug ).html( tpl );
-				}			
+				}
+				
+				jQuery( '#aiwp-sel-metric' + slug ).show();			
 			
 				reports.tableChartData = response
 				if ( jQuery.isArray( response ) ) {

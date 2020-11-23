@@ -173,7 +173,7 @@ Analytics Insights it's released under the GPLv2, you can use it free of charge 
 
 [AIWP v5.3 release notes](https://deconf.com/adding-gtag-js-to-your-site/)
 
-= 5.3.3 =
+= 5.4 =
 * Enhancements:
 	* automatically authorize users without copy/pasting the access codes
 	* improvements on UX for reports switching (no more charts reloading)
