@@ -236,7 +236,32 @@ jQuery.fn.extend( {
 			},
 
 			areaChartBottomStats : function ( response ) {
+			
+				var tpl;
+			
+				tpl = '<div id="aiwp-areachartbottomstats' + slug + '">';
+				tpl += '<div id="aiwp-areachart' + slug + '"></div>';
+				tpl += '<div id="aiwp-bottomstats' + slug + '">';
+				tpl += '<div class="inside">';
+				tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 5 ] + '</h3><p id="gdsessions' + slug + '">&nbsp;</p></div>';
+				tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 6 ] + '</h3><p id="gdusers' + slug + '">&nbsp;</p></div>';
+				tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 7 ] + '</h3><p id="gdpageviews' + slug + '">&nbsp;</p></div>';
+				tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 8 ] + '</h3><p id="gdbouncerate' + slug + '">&nbsp;</p></div>';
+				tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 9 ] + '</h3><p id="gdorganicsearch' + slug + '">&nbsp;</p></div>';
+				tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 10 ] + '</h3><p id="gdpagespervisit' + slug + '">&nbsp;</p></div>';
+				tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 26 ] + '</h3><p id="gdpagetime' + slug + '">&nbsp;</p></div>';
+				tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 27 ] + '</h3><p id="gdpageload' + slug + '">&nbsp;</p></div>';
+				tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 28 ] + '</h3><p id="gdsessionduration' + slug + '">&nbsp;</p></div>';
+				tpl += '</div>';
+				tpl += '</div>';
+				tpl += '</div>';
+
+				if ( !jQuery( '#aiwp-areachartbottomstats' + slug ).length ) {
+					jQuery( '#aiwp-reports' + slug ).html( tpl );
+				}
+				
 				reports.areaChartBottomStatsData = response;
+				
 				if ( jQuery.isArray( response ) ) {
 					if ( !jQuery.isNumeric( response[ 0 ] ) ) {
 						if ( jQuery.isArray( response[ 0 ] ) ) {
@@ -1007,26 +1032,6 @@ jQuery.fn.extend( {
 
 					} else {
 
-						tpl = '<div id="aiwp-areachartbottomstats' + slug + '">';
-						tpl += '<div id="aiwp-areachart' + slug + '"></div>';
-						tpl += '<div id="aiwp-bottomstats' + slug + '">';
-						tpl += '<div class="inside">';
-						tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 5 ] + '</h3><p id="gdsessions' + slug + '">&nbsp;</p></div>';
-						tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 6 ] + '</h3><p id="gdusers' + slug + '">&nbsp;</p></div>';
-						tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 7 ] + '</h3><p id="gdpageviews' + slug + '">&nbsp;</p></div>';
-						tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 8 ] + '</h3><p id="gdbouncerate' + slug + '">&nbsp;</p></div>';
-						tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 9 ] + '</h3><p id="gdorganicsearch' + slug + '">&nbsp;</p></div>';
-						tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 10 ] + '</h3><p id="gdpagespervisit' + slug + '">&nbsp;</p></div>';
-						tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 26 ] + '</h3><p id="gdpagetime' + slug + '">&nbsp;</p></div>';
-						tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 27 ] + '</h3><p id="gdpageload' + slug + '">&nbsp;</p></div>';
-						tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 28 ] + '</h3><p id="gdsessionduration' + slug + '">&nbsp;</p></div>';
-						tpl += '</div>';
-						tpl += '</div>';
-						tpl += '</div>';
-
-						jQuery( '#aiwp-reports' + slug ).html( tpl );
-						jQuery( '#aiwp-reports' + slug ).hide();
-
 						postData.query = query + ',bottomstats';
 
 						jQuery.post( aiwpItemData.ajaxurl, postData, function ( response ) {
@@ -1059,14 +1064,6 @@ jQuery.fn.extend( {
 
 			init : function () {
 
-				if ( !jQuery( "#aiwp-reports" + slug ).length ) {
-					return;
-				}
-
-				if ( jQuery( "#aiwp-reports" + slug ).html().length ) { // only when report is empty
-					return;
-				}
-
 				try {
 					NProgress.configure( {
 						parent : "#aiwp-progressbar" + slug,
@@ -1094,19 +1091,19 @@ jQuery.fn.extend( {
 		reports.init();
 
 		jQuery( '#aiwp-sel-view' + slug ).change( function () {
-			jQuery( '#aiwp-reports' + slug ).html( '' );
+			//jQuery( '#aiwp-reports' + slug ).html( '' );
 			reports.init();
 		} );
 
 		jQuery( '#aiwp-sel-period' + slug ).change( function () {
 			jQuery( '#aiwp-sel-metric' + slug ).hide();
-			jQuery( '#aiwp-reports' + slug ).html( '' );
+			//jQuery( '#aiwp-reports' + slug ).html( '' );
 			reports.init();
 		} );
 
 		jQuery( '#aiwp-sel-report' + slug ).change( function () {
 			jQuery( '#aiwp-sel-metric' + slug ).hide();
-			jQuery( '#aiwp-reports' + slug ).html( '' );
+			//jQuery( '#aiwp-reports' + slug ).html( '' );
 			reports.init();
 		} );
 
@@ -1118,7 +1115,7 @@ jQuery.fn.extend( {
 			jQuery( '#aiwp-swmetric-pageviews' ).css( "color", "#444" );
 			jQuery( '#' + this.id ).css( "color", "#008ec2" );
 
-			jQuery( '#aiwp-reports' + slug ).html( '' );
+			//jQuery( '#aiwp-reports' + slug ).html( '' );
 			reports.init();
 		} );
 
