@@ -3,19 +3,19 @@ Analytics Insights
 
 Displays Google Analytics Reports and Real-Time Statistics in your WordPress Dashboard. Automatically inserts the tracking code in every page of your website.
 
-Google Analytics Dashboard for WordPress repository
+Analytics Insights for WordPress repository
 ---------------------------------------------------
 
-Google Analytics Dashboard displays detailed analytics data and statistics about the number of visits, number of visitors, bounce rates, organic searches, pages per visit directly on your WordPress Administration Dashboard.
+A Google Analytics Dashboard displays detailed analytics data and statistics about the number of visits, number of visitors, bounce rates, organic searches, pages per visit directly on your WordPress Administration Dashboard.
 
 The full documentation for this plugin is available here <a href="https://deconf.com/google-analytics-dashboard-wordpress/" title="Google Analytics Dashboard for WordPress">Analytics Insights</a>
 
 Bugs & Contributions
 --------------------
 
-If you find an issue you can <a href="https://github.com/deconf/analytics-insights/issues">report it here</a>. 
+If you find an issue you can <a href="https://github.com/deconf/Google-Analytics-Dashboard-for-WP/issues">report it here</a>. 
 
-If you have a suggestion, a tweak or an enhancement you can <a href="https://github.com/deconf/analytics-insights/labels/enhancement">post it here</a>.
+If you have a suggestion, a tweak or an enhancement you can <a href="https://github.com/deconf/Google-Analytics-Dashboard-for-WP/labels/enhancement">post it here</a>.
 
 You can also contribute by submitting a Pull Request with your fixes and / or features.
 
@@ -26,8 +26,7 @@ Support
 
 For support and other questions use these dedicated forums:
 
- * support on <a href="https://deconf.com/ask/" title="Google Analytics Dashboard for WordPress support">deconf.com forums</a>
- * support on <a href="https://wordpress.org/support/plugin/analytics-insights" title="Google Analytics Dashboard for WordPress support">wordpress.org forums</a>
+ * support on <a href="https://wordpress.org/support/plugin/analytics-insights" title="Analytics Insights for WordPress support">wordpress.org forums</a>
 
 You can also find Analytics Insights on <a href="http://wordpress.org/plugins/analytics-insights/">wordpress.org</a>
 
