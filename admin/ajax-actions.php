@@ -134,9 +134,6 @@ if ( ! class_exists( 'AIWP_Backend_Ajax' ) ) {
 			if ( ! current_user_can( 'manage_options' ) ) {
 				wp_die( - 31 );
 			}
-
-			delete_option( 'aiwp_got_updated' );
-
 			wp_die();
 		}
 	}

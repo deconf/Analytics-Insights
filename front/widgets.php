@@ -18,7 +18,7 @@ final class AIWP_Frontend_Widget extends WP_Widget {
 	public function __construct() {
 		$this->aiwp = AIWP();
 
-		parent::__construct( 'aiwp-frontwidget-report', __( 'Google Analytics Dashboard', 'analytics-insights' ), array( 'description' => __( "Will display your google analytics stats in a widget", 'analytics-insights' ) ) );
+		parent::__construct( 'aiwp-frontwidget-report', __( 'Analytics Insights', 'analytics-insights' ), array( 'description' => __( "Will display your google analytics stats in a widget", 'analytics-insights' ) ) );
 		// Frontend Styles
 		if ( is_active_widget( false, false, $this->id_base, true ) ) {
 			add_action( 'wp_enqueue_scripts', array( $this, 'load_styles_scripts' ) );

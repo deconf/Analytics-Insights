@@ -6,9 +6,9 @@ Displays Google Analytics Reports and Real-Time Statistics in your WordPress Das
 Analytics Insights for WordPress repository
 ---------------------------------------------------
 
-A Google Analytics Dashboard displays detailed analytics data and statistics about the number of visits, number of visitors, bounce rates, organic searches, pages per visit directly on your WordPress Administration Dashboard.
+A Google Analytics Dashboard that displays detailed analytics data and statistics about the number of visits, number of visitors, bounce rates, organic searches, pages per visit directly on your WordPress Administration Dashboard.
 
-The full documentation for this plugin is available here <a href="https://deconf.com/google-analytics-dashboard-wordpress/" title="Google Analytics Dashboard for WordPress">Analytics Insights</a>
+The full documentation for this plugin is available here <a href="https://deconf.com/google-analytics-dashboard-wordpress/" title="Analytics Insights for WordPress">Analytics Insights</a>
 
 Bugs & Contributions
 --------------------

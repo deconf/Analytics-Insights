@@ -67,14 +67,10 @@ final class AIWP_Settings {
 				}
 			} elseif ( 'general' == $who ) {
 				$options['user_api'] = 0;
-				if ( ! is_multisite() ) {
-					$options['automatic_updates_minorversion'] = 0;
-				}
 			} elseif ( 'network' == $who ) {
 				$options['user_api'] = 0;
 				$options['network_mode'] = 0;
 				$options['superadmin_tracking'] = 0;
-				$options['automatic_updates_minorversion'] = 0;
 				$network_settings = true;
 			}
 			$options = array_merge( $options, $new_options );
@@ -90,6 +86,23 @@ final class AIWP_Settings {
 			echo "<a class='nav-tab' id='tab-$tab' href='#top#aiwp-$tab'>$name</a>";
 		}
 		echo '</h2>';
+	}
+
+	private static function switch_button( $option_name, $option_value, $option_id, $checked, $option_text, $disabled = false, $onchange = false ) {
+		?>
+<tr>
+	<td colspan="2" class="aiwp-settings-title">
+		<div class="button-primary aiwp-settings-switchoo">
+			<input type="checkbox" name="<?php echo $option_name; ?>" value="<?php echo $option_value; ?>" class="aiwp-settings-switchoo-checkbox" id="<?php echo $option_id; ?>" <?php checked( $checked, 1 ); ?> <?php disabled( $disabled, true );?> <?php if ($onchange) {echo ' onchange="this.form.submit()"'; } ?>>
+			<label class="aiwp-settings-switchoo-label" for="<?php echo $option_id; ?>">
+				<div class="aiwp-settings-switchoo-inner"></div>
+				<div class="aiwp-settings-switchoo-switch"></div>
+			</label>
+		</div>
+		<div class="switch-desc"><?php echo " " . $option_text ;?></div>
+	</td>
+</tr>
+<?php
 	}
 
 	public static function frontend_settings() {
@@ -148,21 +161,22 @@ final class AIWP_Settings {
 										<tr>
 											<?php endif; ?>
 										<?php endforeach; ?>
+
+
+
+
+
+
+
+
+
+
+
+
 									</table>
 								</td>
 							</tr>
-							<tr>
-								<td colspan="2" class="aiwp-settings-title">
-									<div class="button-primary aiwp-settings-switchoo">
-										<input type="checkbox" name="options[frontend_item_reports]" value="1" class="aiwp-settings-switchoo-checkbox" id="frontend_item_reports" <?php checked( $options['frontend_item_reports'], 1 ); ?>>
-										<label class="aiwp-settings-switchoo-label" for="frontend_item_reports">
-											<div class="aiwp-settings-switchoo-inner"></div>
-											<div class="aiwp-settings-switchoo-switch"></div>
-										</label>
-									</div>
-									<div class="switch-desc"><?php echo " ".__("enable web page reports on frontend", 'analytics-insights' );?></div>
-								</td>
-							</tr>
+							<?php self::switch_button('options[frontend_item_reports]', 1, 'frontend_item_reports', $options['frontend_item_reports'], __("enable web page reports on frontend", 'analytics-insights') ); ?>
 							<tr>
 								<td colspan="2">
 									<hr>
@@ -176,6 +190,12 @@ final class AIWP_Settings {
 						</table>
 						<input type="hidden" name="options[aiwp_hidden]" value="Y">
 						<?php wp_nonce_field('aiwp_form','aiwp_security');?>
+
+
+
+
+
+
 
 
 
@@ -243,68 +263,18 @@ final class AIWP_Settings {
 										<tr>
 											<?php endif; ?>
 										<?php endforeach; ?>
-
-
-
-
-
-
 									</table>
 								</td>
 							</tr>
-							<tr>
-								<td colspan="2" class="aiwp-settings-title">
-									<div class="button-primary aiwp-settings-switchoo">
-										<input type="checkbox" name="options[switch_profile]" value="1" class="aiwp-settings-switchoo-checkbox" id="switch_profile" <?php checked( $options['switch_profile'], 1 ); ?>>
-										<label class="aiwp-settings-switchoo-label" for="switch_profile">
-											<div class="aiwp-settings-switchoo-inner"></div>
-											<div class="aiwp-settings-switchoo-switch"></div>
-										</label>
-									</div>
-									<div class="switch-desc"><?php _e ( "enable Switch View functionality", 'analytics-insights' );?></div>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2" class="aiwp-settings-title">
-									<div class="button-primary aiwp-settings-switchoo">
-										<input type="checkbox" name="options[backend_item_reports]" value="1" class="aiwp-settings-switchoo-checkbox" id="backend_item_reports" <?php checked( $options['backend_item_reports'], 1 ); ?>>
-										<label class="aiwp-settings-switchoo-label" for="backend_item_reports">
-											<div class="aiwp-settings-switchoo-inner"></div>
-											<div class="aiwp-settings-switchoo-switch"></div>
-										</label>
-									</div>
-									<div class="switch-desc"><?php _e ( "enable reports on Posts List and Pages List", 'analytics-insights' );?></div>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2" class="aiwp-settings-title">
-									<div class="button-primary aiwp-settings-switchoo">
-										<input type="checkbox" name="options[dashboard_widget]" value="1" class="aiwp-settings-switchoo-checkbox" id="dashboard_widget" <?php checked( $options['dashboard_widget'], 1 ); ?>>
-										<label class="aiwp-settings-switchoo-label" for="dashboard_widget">
-											<div class="aiwp-settings-switchoo-inner"></div>
-											<div class="aiwp-settings-switchoo-switch"></div>
-										</label>
-									</div>
-									<div class="switch-desc"><?php _e ( "enable the main Dashboard Widget", 'analytics-insights' );?></div>
-								</td>
-							</tr>
+							<?php self::switch_button('options[switch_profile]', 1, 'switch_profile', $options['switch_profile'], __( "enable Switch View functionality", 'analytics-insights') ); ?>
+							<?php self::switch_button('options[backend_item_reports]', 1, 'backend_item_reports', $options['backend_item_reports'], __( "enable reports on Posts List and Pages List", 'analytics-insights') ); ?>
+							<?php self::switch_button('options[dashboard_widget]', 1, 'dashboard_widget', $options['dashboard_widget'], __( "enable the main Dashboard Widget", 'analytics-insights') ); ?>
 							<tr>
 								<td colspan="2">
 									<hr><?php echo "<h2>" . __( "Real-Time Settings", 'analytics-insights' ) . "</h2>"; ?></td>
 							</tr>
 							<?php if ( $options['user_api'] ) : ?>
-							<tr>
-								<td colspan="2" class="aiwp-settings-title">
-									<div class="button-primary aiwp-settings-switchoo">
-										<input type="checkbox" name="options[backend_realtime_report]" value="1" class="aiwp-settings-switchoo-checkbox" id="backend_realtime_report" <?php checked( $options['backend_realtime_report'], 1 ); ?>>
-										<label class="aiwp-settings-switchoo-label" for="backend_realtime_report">
-											<div class="aiwp-settings-switchoo-inner"></div>
-											<div class="aiwp-settings-switchoo-switch"></div>
-										</label>
-									</div>
-									<div class="switch-desc"><?php _e ( "enable Real-Time report (requires access to Real-Time Reporting API)", 'analytics-insights' );?></div>
-								</td>
-							</tr>
+								<?php self::switch_button('options[backend_realtime_report]', 1, 'backend_realtime_report', $options['backend_realtime_report'], __( "enable Real-Time report (requires access to Real-Time Reporting API)", 'analytics-insights') ); ?>
 							<?php endif; ?>
 							<tr>
 								<td colspan="2" class="aiwp-settings-title"> <?php _e("Maximum number of pages to display on real-time tab:", 'analytics-insights'); ?>
@@ -350,12 +320,6 @@ final class AIWP_Settings {
 						</table>
 						<input type="hidden" name="options[aiwp_hidden]" value="Y">
 						<?php wp_nonce_field('aiwp_form','aiwp_security'); ?>
-
-
-
-
-
-
 </form>
 <?php
 		self::output_sidebar();
@@ -424,18 +388,7 @@ final class AIWP_Settings {
 										<?php echo '<pre>' . __("View Name:", 'analytics-insights') . "\t" . esc_html($profile_info[0]) . "<br />" . __("Tracking ID:", 'analytics-insights') . "\t" . esc_html($profile_info[2]) . "<br />" . __("Default URL:", 'analytics-insights') . "\t" . esc_html($profile_info[3]) . "<br />" . __("Time Zone:", 'analytics-insights') . "\t" . esc_html($profile_info[5]) . '</pre>';?>
 									</td>
 								</tr>
-								<tr>
-									<td colspan="2" class="aiwp-settings-title">
-										<div class="button-primary aiwp-settings-switchoo">
-											<input type="checkbox" name="options[ga_with_gtag]" value="1" class="aiwp-settings-switchoo-checkbox" id="ga_with_gtag" <?php checked( $options['ga_with_gtag'], 1 ); ?>>
-											<label class="aiwp-settings-switchoo-label" for="ga_with_gtag">
-												<div class="aiwp-settings-switchoo-inner"></div>
-												<div class="aiwp-settings-switchoo-switch"></div>
-											</label>
-										</div>
-										<div class="switch-desc"><?php echo " ".__("use global site tag gtag.js (not recommended)", 'analytics-insights' );?></div>
-									</td>
-								</tr>
+								<?php self::switch_button('options[ga_with_gtag]', 1, 'ga_with_gtag', $options['ga_with_gtag'], __( "use global site tag gtag.js (not recommended)", 'analytics-insights') ); ?>
 								<?php elseif ( 'tagmanager' == $options['tracking_type'] ) : ?>
 								<tr>
 									<td class="aiwp-settings-title">
@@ -466,66 +419,11 @@ final class AIWP_Settings {
 								<tr>
 									<td colspan="2"><?php echo "<h2>" . __( "Events Tracking", 'analytics-insights' ) . "</h2>"; ?></td>
 								</tr>
-								<tr>
-									<td colspan="2" class="aiwp-settings-title">
-										<div class="button-primary aiwp-settings-switchoo">
-											<input type="checkbox" name="options[ga_event_tracking]" value="1" class="aiwp-settings-switchoo-checkbox" id="ga_event_tracking" <?php checked( $options['ga_event_tracking'], 1 ); ?>>
-											<label class="aiwp-settings-switchoo-label" for="ga_event_tracking">
-												<div class="aiwp-settings-switchoo-inner"></div>
-												<div class="aiwp-settings-switchoo-switch"></div>
-											</label>
-										</div>
-										<div class="switch-desc"><?php echo " ".__("track downloads, mailto, telephone and outbound links", 'analytics-insights' ); ?></div>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="2" class="aiwp-settings-title">
-										<div class="button-primary aiwp-settings-switchoo">
-											<input type="checkbox" name="options[ga_aff_tracking]" value="1" class="aiwp-settings-switchoo-checkbox" id="ga_aff_tracking" <?php checked( $options['ga_aff_tracking'], 1 ); ?>>
-											<label class="aiwp-settings-switchoo-label" for="ga_aff_tracking">
-												<div class="aiwp-settings-switchoo-inner"></div>
-												<div class="aiwp-settings-switchoo-switch"></div>
-											</label>
-										</div>
-										<div class="switch-desc"><?php echo " ".__("track affiliate links", 'analytics-insights' ); ?></div>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="2" class="aiwp-settings-title">
-										<div class="button-primary aiwp-settings-switchoo">
-											<input type="checkbox" name="options[ga_hash_tracking]" value="1" class="aiwp-settings-switchoo-checkbox" id="ga_hash_tracking" <?php checked( $options['ga_hash_tracking'], 1 ); ?>>
-											<label class="aiwp-settings-switchoo-label" for="ga_hash_tracking">
-												<div class="aiwp-settings-switchoo-inner"></div>
-												<div class="aiwp-settings-switchoo-switch"></div>
-											</label>
-										</div>
-										<div class="switch-desc"><?php echo " ".__("track fragment identifiers, hashmarks (#) in URI links", 'analytics-insights' ); ?></div>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="2" class="aiwp-settings-title">
-										<div class="button-primary aiwp-settings-switchoo">
-											<input type="checkbox" name="options[ga_formsubmit_tracking]" value="1" class="aiwp-settings-switchoo-checkbox" id="ga_formsubmit_tracking" <?php checked( $options['ga_formsubmit_tracking'], 1 ); ?>>
-											<label class="aiwp-settings-switchoo-label" for="ga_formsubmit_tracking">
-												<div class="aiwp-settings-switchoo-inner"></div>
-												<div class="aiwp-settings-switchoo-switch"></div>
-											</label>
-										</div>
-										<div class="switch-desc"><?php echo " ".__("track form submit actions", 'analytics-insights' ); ?></div>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="2" class="aiwp-settings-title">
-										<div class="button-primary aiwp-settings-switchoo">
-											<input type="checkbox" name="options[ga_pagescrolldepth_tracking]" value="1" class="aiwp-settings-switchoo-checkbox" id="ga_pagescrolldepth_tracking" <?php checked( $options['ga_pagescrolldepth_tracking'], 1 ); ?>>
-											<label class="aiwp-settings-switchoo-label" for="ga_pagescrolldepth_tracking">
-												<div class="aiwp-settings-switchoo-inner"></div>
-												<div class="aiwp-settings-switchoo-switch"></div>
-											</label>
-										</div>
-										<div class="switch-desc"><?php echo " ".__("track page scrolling depth", 'analytics-insights' ); ?></div>
-									</td>
-								</tr>
+								<?php self::switch_button('options[ga_event_tracking]', 1, 'ga_event_tracking', $options['ga_event_tracking'], __( "track downloads, mailto, telephone and outbound links", 'analytics-insights') ); ?>
+								<?php self::switch_button('options[ga_aff_tracking]', 1, 'ga_aff_tracking', $options['ga_aff_tracking'], __( "track affiliate links", 'analytics-insights') ); ?>
+								<?php self::switch_button('options[ga_hash_tracking]', 1, 'ga_hash_tracking', $options['ga_hash_tracking'], __( "track fragment identifiers, hashmarks (#) in URI links", 'analytics-insights') ); ?>
+								<?php self::switch_button('options[ga_formsubmit_tracking]', 1, 'ga_formsubmit_tracking', $options['ga_formsubmit_tracking'], __( "track form submit actions", 'analytics-insights') ); ?>
+								<?php self::switch_button('options[ga_pagescrolldepth_tracking]', 1, 'ga_pagescrolldepth_tracking', $options['ga_pagescrolldepth_tracking'], __( "track page scrolling depth", 'analytics-insights') ); ?>
 								<tr>
 									<td class="aiwp-settings-title">
 										<label for="ga_event_downloads"><?php _e("Downloads Regex:", 'analytics-insights'); ?>
@@ -747,117 +645,19 @@ final class AIWP_Settings {
 										%
 									</td>
 								</tr>
-								<tr>
-									<td colspan="2" class="aiwp-settings-title">
-										<div class="button-primary aiwp-settings-switchoo">
-											<input type="checkbox" name="options[ga_anonymize_ip]" value="1" class="aiwp-settings-switchoo-checkbox" id="ga_anonymize_ip" <?php checked( $options['ga_anonymize_ip'], 1 ); ?>>
-											<label class="aiwp-settings-switchoo-label" for="ga_anonymize_ip">
-												<div class="aiwp-settings-switchoo-inner"></div>
-												<div class="aiwp-settings-switchoo-switch"></div>
-											</label>
-										</div>
-										<div class="switch-desc"><?php echo " ".__("anonymize IPs while tracking", 'analytics-insights' );?></div>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="2" class="aiwp-settings-title">
-										<div class="button-primary aiwp-settings-switchoo">
-											<input type="checkbox" name="options[ga_optout]" value="1" class="aiwp-settings-switchoo-checkbox" id="ga_optout" <?php checked( $options['ga_optout'], 1 ); ?>>
-											<label class="aiwp-settings-switchoo-label" for="ga_optout">
-												<div class="aiwp-settings-switchoo-inner"></div>
-												<div class="aiwp-settings-switchoo-switch"></div>
-											</label>
-										</div>
-										<div class="switch-desc"><?php echo " ".__("enable support for user opt-out", 'analytics-insights' );?></div>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="2" class="aiwp-settings-title">
-										<div class="button-primary aiwp-settings-switchoo">
-											<input type="checkbox" name="options[ga_dnt_optout]" value="1" class="aiwp-settings-switchoo-checkbox" id="ga_dnt_optout" <?php checked( $options['ga_dnt_optout'], 1 ); ?>>
-											<label class="aiwp-settings-switchoo-label" for="ga_dnt_optout">
-												<div class="aiwp-settings-switchoo-inner"></div>
-												<div class="aiwp-settings-switchoo-switch"></div>
-											</label>
-										</div>
-										<div class="switch-desc"> <?php _e( 'exclude tracking for users sending Do Not Track header', 'analytics-insights' ); ?></div>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="2" class="aiwp-settings-title">
-										<div class="button-primary aiwp-settings-switchoo">
-											<input type="checkbox" name="options[ga_remarketing]" value="1" class="aiwp-settings-switchoo-checkbox" id="ga_remarketing" <?php checked( $options['ga_remarketing'], 1 ); ?>>
-											<label class="aiwp-settings-switchoo-label" for="ga_remarketing">
-												<div class="aiwp-settings-switchoo-inner"></div>
-												<div class="aiwp-settings-switchoo-switch"></div>
-											</label>
-										</div>
-										<div class="switch-desc"><?php echo " ".__("enable remarketing, demographics and interests reports", 'analytics-insights' );?></div>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="2" class="aiwp-settings-title">
-										<div class="button-primary aiwp-settings-switchoo">
-											<input type="checkbox" name="options[ga_event_bouncerate]" value="1" class="aiwp-settings-switchoo-checkbox" id="ga_event_bouncerate" <?php checked( $options['ga_event_bouncerate'], 1 ); ?>>
-											<label class="aiwp-settings-switchoo-label" for="ga_event_bouncerate">
-												<div class="aiwp-settings-switchoo-inner"></div>
-												<div class="aiwp-settings-switchoo-switch"></div>
-											</label>
-										</div>
-										<div class="switch-desc"><?php echo " ".__("exclude events from bounce-rate and time on page calculation", 'analytics-insights' );?></div>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="2" class="aiwp-settings-title">
-										<div class="button-primary aiwp-settings-switchoo">
-											<input type="checkbox" name="options[ga_enhanced_links]" value="1" class="aiwp-settings-switchoo-checkbox" id="ga_enhanced_links" <?php checked( $options['ga_enhanced_links'], 1 ); ?>>
-											<label class="aiwp-settings-switchoo-label" for="ga_enhanced_links">
-												<div class="aiwp-settings-switchoo-inner"></div>
-												<div class="aiwp-settings-switchoo-switch"></div>
-											</label>
-										</div>
-										<div class="switch-desc"><?php echo " ".__("enable enhanced link attribution", 'analytics-insights' );?></div>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="2" class="aiwp-settings-title">
-										<div class="button-primary aiwp-settings-switchoo">
-											<input type="checkbox" name="options[ga_event_precision]" value="1" class="aiwp-settings-switchoo-checkbox" id="ga_event_precision" <?php checked( $options['ga_event_precision'], 1 ); ?>>
-											<label class="aiwp-settings-switchoo-label" for="ga_event_precision">
-												<div class="aiwp-settings-switchoo-inner"></div>
-												<div class="aiwp-settings-switchoo-switch"></div>
-											</label>
-										</div>
-										<div class="switch-desc"><?php echo " ".__("use hitCallback to increase event tracking accuracy", 'analytics-insights' );?></div>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="2" class="aiwp-settings-title">
-										<div class="button-primary aiwp-settings-switchoo">
-											<input type="checkbox" name="options[ga_force_ssl]" value="1" class="aiwp-settings-switchoo-checkbox" id="ga_force_ssl" <?php checked( $options['ga_force_ssl'] || $options['ga_with_gtag'], 1 ); ?>  <?php disabled( $options['ga_with_gtag'], true );?>>
-											<label class="aiwp-settings-switchoo-label" for="ga_force_ssl">
-												<div class="aiwp-settings-switchoo-inner"></div>
-												<div class="aiwp-settings-switchoo-switch"></div>
-											</label>
-										</div>
-										<div class="switch-desc"><?php echo " ".__("enable Force SSL", 'analytics-insights' );?></div>
-									</td>
-								</tr>
+								<?php self::switch_button('options[ga_anonymize_ip]', 1, 'ga_anonymize_ip', $options['ga_anonymize_ip'], __( "anonymize IPs while tracking", 'analytics-insights') ); ?>
+								<?php self::switch_button('options[ga_optout]', 1, 'ga_optout', $options['ga_optout'], __( "enable support for user opt-out", 'analytics-insights') ); ?>
+								<?php self::switch_button('options[ga_dnt_optout]', 1, 'ga_dnt_optout', $options['ga_dnt_optout'], __( "exclude tracking for users sending Do Not Track header", 'analytics-insights') ); ?>
+								<?php self::switch_button('options[ga_dnt_optout]', 1, 'ga_dnt_optout', $options['ga_dnt_optout'], __( "exclude tracking for users sending Do Not Track header", 'analytics-insights') ); ?>
+								<?php self::switch_button('options[ga_remarketing]', 1, 'ga_remarketing', $options['ga_remarketing'], __( "enable remarketing, demographics and interests reports", 'analytics-insights') ); ?>
+								<?php self::switch_button('options[ga_event_bouncerate]', 1, 'ga_event_bouncerate', $options['ga_event_bouncerate'], __( "exclude events from bounce-rate and time on page calculation", 'analytics-insights') ); ?>
+								<?php self::switch_button('options[ga_enhanced_links]', 1, 'ga_enhanced_links', $options['ga_enhanced_links'], __( "enable enhanced link attribution", 'analytics-insights') ); ?>
+								<?php self::switch_button('options[ga_event_precision]', 1, 'ga_event_precision', $options['ga_event_precision'], __( "use hitCallback to increase event tracking accuracy", 'analytics-insights') ); ?>
+								<?php self::switch_button('options[ga_force_ssl]', 1, 'ga_force_ssl', $options['ga_force_ssl'], __( "enable Force SSL", 'analytics-insights') ); ?>
 								<tr>
 									<td colspan="2"><?php echo "<h2>" . __( "Cross-domain Tracking", 'analytics-insights' ) . "</h2>"; ?></td>
 								</tr>
-								<tr>
-									<td colspan="2" class="aiwp-settings-title">
-										<div class="button-primary aiwp-settings-switchoo">
-											<input type="checkbox" name="options[ga_crossdomain_tracking]" value="1" class="aiwp-settings-switchoo-checkbox" id="ga_crossdomain_tracking" <?php checked( $options['ga_crossdomain_tracking'], 1 ); ?>>
-											<label class="aiwp-settings-switchoo-label" for="ga_crossdomain_tracking">
-												<div class="aiwp-settings-switchoo-inner"></div>
-												<div class="aiwp-settings-switchoo-switch"></div>
-											</label>
-										</div>
-										<div class="switch-desc"><?php echo " ".__("enable cross domain tracking", 'analytics-insights' ); ?></div>
-									</td>
-								</tr>
+								<?php self::switch_button('options[ga_crossdomain_tracking]', 1, 'ga_crossdomain_tracking', $options['ga_crossdomain_tracking'], __( "enable cross domain tracking", 'analytics-insights') ); ?>
 								<tr>
 									<td class="aiwp-settings-title">
 										<label for="ga_crossdomain_list"><?php _e("Cross Domains:", 'analytics-insights'); ?>
@@ -905,30 +705,8 @@ final class AIWP_Settings {
 								<tr>
 									<td colspan="2"><?php echo "<h2>" . __( "Accelerated Mobile Pages (AMP)", 'analytics-insights' ) . "</h2>"; ?></td>
 								</tr>
-								<tr>
-									<td colspan="2" class="aiwp-settings-title">
-										<div class="button-primary aiwp-settings-switchoo">
-											<input type="checkbox" name="options[amp_tracking_analytics]" value="1" class="aiwp-settings-switchoo-checkbox" id="amp_tracking_analytics" <?php checked( $options['amp_tracking_analytics'], 1 ); ?>>
-											<label class="aiwp-settings-switchoo-label" for="amp_tracking_analytics">
-												<div class="aiwp-settings-switchoo-inner"></div>
-												<div class="aiwp-settings-switchoo-switch"></div>
-											</label>
-										</div>
-										<div class="switch-desc"><?php echo " ".__("enable tracking for Accelerated Mobile Pages (AMP)", 'analytics-insights' );?></div>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="2" class="aiwp-settings-title">
-										<div class="button-primary aiwp-settings-switchoo">
-											<input type="checkbox" name="options[amp_tracking_clientidapi]" value="1" class="aiwp-settings-switchoo-checkbox" id="amp_tracking_clientidapi" <?php checked( $options['amp_tracking_clientidapi'] && !$options['ga_with_gtag'], 1 ); ?> <?php disabled( $options['ga_with_gtag'], true );?>>
-											<label class="aiwp-settings-switchoo-label" for="amp_tracking_clientidapi">
-												<div class="aiwp-settings-switchoo-inner"></div>
-												<div class="aiwp-settings-switchoo-switch"></div>
-											</label>
-										</div>
-										<div class="switch-desc"><?php echo " ".__("enable Google AMP Client Id API", 'analytics-insights' );?></div>
-									</td>
-								</tr>
+								<?php self::switch_button('options[amp_tracking_analytics]', 1, 'amp_tracking_analytics', $options['amp_tracking_analytics'], __( "enable tracking for Accelerated Mobile Pages (AMP)", 'analytics-insights') ); ?>
+								<?php self::switch_button('options[amp_tracking_clientidapi]', 1, 'amp_tracking_clientidapi', $options['amp_tracking_clientidapi'] && !$options['ga_with_gtag'], __( "enable Google AMP Client Id API", 'analytics-insights'), $options['ga_with_gtag'] ); ?>
 								<tr>
 									<td colspan="2"><?php echo "<h2>" . __( "Ecommerce", 'analytics-insights' ) . "</h2>"; ?></td>
 								</tr>
@@ -948,30 +726,8 @@ final class AIWP_Settings {
 								<tr>
 									<td colspan="2"><?php echo "<h2>" . __( "Optimize", 'analytics-insights' ) . "</h2>"; ?></td>
 								</tr>
-								<tr>
-									<td colspan="2" class="aiwp-settings-title">
-										<div class="button-primary aiwp-settings-switchoo">
-											<input type="checkbox" name="options[optimize_tracking]" value="1" class="aiwp-settings-switchoo-checkbox" id="optimize_tracking" <?php checked( $options['optimize_tracking'], 1 ); ?>>
-											<label class="aiwp-settings-switchoo-label" for="optimize_tracking">
-												<div class="aiwp-settings-switchoo-inner"></div>
-												<div class="aiwp-settings-switchoo-switch"></div>
-											</label>
-										</div>
-										<div class="switch-desc"><?php echo " ".__("enable Optimize tracking", 'analytics-insights' );?></div>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="2" class="aiwp-settings-title">
-										<div class="button-primary aiwp-settings-switchoo">
-											<input type="checkbox" name="options[optimize_pagehiding]" value="1" class="aiwp-settings-switchoo-checkbox" id="optimize_pagehiding" <?php checked( $options['optimize_pagehiding'], 1 ); ?>>
-											<label class="aiwp-settings-switchoo-label" for="optimize_pagehiding">
-												<div class="aiwp-settings-switchoo-inner"></div>
-												<div class="aiwp-settings-switchoo-switch"></div>
-											</label>
-										</div>
-										<div class="switch-desc"><?php echo " ".__("enable Page Hiding support", 'analytics-insights' );?></div>
-									</td>
-								</tr>
+								<?php self::switch_button('options[optimize_tracking]', 1, 'optimize_tracking', $options['optimize_tracking'], __( "enable Optimize tracking", 'analytics-insights') ); ?>
+								<?php self::switch_button('options[optimize_pagehiding]', 1, 'optimize_pagehiding', $options['optimize_pagehiding'], __( "enable Page Hiding support", 'analytics-insights') ); ?>
 								<tr>
 									<td class="aiwp-settings-title">
 										<label for="tracking_type"><?php _e("Container ID:", 'analytics-insights' ); ?>
@@ -988,30 +744,8 @@ final class AIWP_Settings {
 								<tr>
 									<td colspan="2"><?php echo "<h2>" . __( "Advanced Tracking", 'analytics-insights' ) . "</h2>"; ?></td>
 								</tr>
-								<tr>
-									<td colspan="2" class="aiwp-settings-title">
-										<div class="button-primary aiwp-settings-switchoo">
-											<input type="checkbox" name="options[tm_optout]" value="1" class="aiwp-settings-switchoo-checkbox" id="tm_optout" <?php checked( $options['tm_optout'], 1 ); ?>>
-											<label class="aiwp-settings-switchoo-label" for="tm_optout">
-												<div class="aiwp-settings-switchoo-inner"></div>
-												<div class="aiwp-settings-switchoo-switch"></div>
-											</label>
-										</div>
-										<div class="switch-desc"><?php echo " ".__("enable support for user opt-out", 'analytics-insights' );?></div>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="2" class="aiwp-settings-title">
-										<div class="button-primary aiwp-settings-switchoo">
-											<input type="checkbox" name="options[tm_dnt_optout]" value="1" class="aiwp-settings-switchoo-checkbox" id="tm_dnt_optout" <?php checked( $options['tm_dnt_optout'], 1 ); ?>>
-											<label class="aiwp-settings-switchoo-label" for="tm_dnt_optout">
-												<div class="aiwp-settings-switchoo-inner"></div>
-												<div class="aiwp-settings-switchoo-switch"></div>
-											</label>
-										</div>
-										<div class="switch-desc"> <?php _e( 'exclude tracking for users sending Do Not Track header', 'analytics-insights' ); ?></div>
-									</td>
-								</tr>
+								<?php self::switch_button('options[tm_optout]', 1, 'tm_optout', $options['tm_optout'], __( "enable support for user opt-out", 'analytics-insights') ); ?>
+								<?php self::switch_button('options[tm_dnt_optout]', 1, 'tm_dnt_optout', $options['tm_dnt_optout'], __( "exclude tracking for users sending Do Not Track header", 'analytics-insights') ); ?>
 							</table>
 						</div>
 						<div id="aiwp-tmintegration">
@@ -1019,18 +753,7 @@ final class AIWP_Settings {
 								<tr>
 									<td colspan="2"><?php echo "<h2>" . __( "Accelerated Mobile Pages (AMP)", 'analytics-insights' ) . "</h2>"; ?></td>
 								</tr>
-								<tr>
-									<td colspan="2" class="aiwp-settings-title">
-										<div class="button-primary aiwp-settings-switchoo">
-											<input type="checkbox" name="options[amp_tracking_tagmanager]" value="1" class="aiwp-settings-switchoo-checkbox" id="amp_tracking_tagmanager" <?php checked( $options['amp_tracking_tagmanager'], 1 ); ?>>
-											<label class="aiwp-settings-switchoo-label" for="amp_tracking_tagmanager">
-												<div class="aiwp-settings-switchoo-inner"></div>
-												<div class="aiwp-settings-switchoo-switch"></div>
-											</label>
-										</div>
-										<div class="switch-desc"><?php echo " ".__("enable tracking for Accelerated Mobile Pages (AMP)", 'analytics-insights' );?></div>
-									</td>
-								</tr>
+								<?php self::switch_button('options[amp_tracking_tagmanager]', 1, 'amp_tracking_tagmanager', $options['amp_tracking_tagmanager'], __( "enable tracking for Accelerated Mobile Pages (AMP)", 'analytics-insights') ); ?>
 								<tr>
 									<td class="aiwp-settings-title">
 										<label for="tracking_type"><?php _e("AMP Container ID:", 'analytics-insights' ); ?>
@@ -1072,6 +795,8 @@ final class AIWP_Settings {
 											<tr>
 											<?php endif; ?>
 										<?php endforeach; ?>
+
+
 										</table>
 									</td>
 								</tr>
@@ -1091,19 +816,12 @@ final class AIWP_Settings {
 						</table>
 						<input type="hidden" name="options[aiwp_hidden]" value="Y">
 						<?php wp_nonce_field('aiwp_form','aiwp_security'); ?>
-
-
-
-
-
-
 </form>
 <?php
 		self::output_sidebar();
 	}
 
 	public static function errors_debugging() {
-
 		$aiwp = AIWP();
 
 		if ( ! current_user_can( 'manage_options' ) ) {
@@ -1221,13 +939,12 @@ final class AIWP_Settings {
 					AIWP_Tools::delete_cache( 'last_error' );
 					$aiwp->gapi_controller->client->authenticate( $_REQUEST['aiwp_access_code'] );
 					$aiwp->config->options['token'] = $aiwp->gapi_controller->client->getAccessToken();
-					$aiwp->config->options['automatic_updates_minorversion'] = 1;
 					$aiwp->config->set_plugin_options();
 					$options = self::update_options( 'general' );
 					$message = "<div class='updated' id='aiwp-autodismiss'><p>" . __( "Plugin authorization succeeded.", 'analytics-insights' ) . "</p></div>";
 					if ( $aiwp->config->options['token'] && $aiwp->gapi_controller->client->getAccessToken() ) {
 						$profiles = $aiwp->gapi_controller->refresh_profiles();
-						if ( is_array ( $profiles ) && ! empty( $profiles ) ) {
+						if ( is_array( $profiles ) && ! empty( $profiles ) ) {
 							$aiwp->config->options['ga_profiles_list'] = $profiles;
 							if ( ! $aiwp->config->options['tableid_jail'] ) {
 								$profile = AIWP_Tools::guess_default_domain( $profiles );
@@ -1308,7 +1025,7 @@ final class AIWP_Settings {
 				/* @formatter:on */
 				AIWP_Tools::delete_cache( 'last_error' );
 				AIWP_Tools::delete_cache( 'gapi_errors' );
-				delete_option( 'aiwp_got_updated' );
+
 				$message = "<div class='updated' id='aiwp-autodismiss'><p>" . __( "All errors reseted.", 'analytics-insights' ) . "</p></div>";
 			} else {
 				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "Cheating Huh?", 'analytics-insights' ) . "</p></div>";
@@ -1451,28 +1168,6 @@ final class AIWP_Settings {
 														<hr>
 													</td>
 												</tr>
-												<?php if ( !is_multisite()) :?>
-												<tr>
-													<td colspan="2"><?php echo "<h2>" . __( "Automatic Updates", 'analytics-insights' ) . "</h2>"; ?></td>
-												</tr>
-												<tr>
-													<td colspan="2" class="aiwp-settings-title">
-														<div class="button-primary aiwp-settings-switchoo">
-															<input type="checkbox" name="options[automatic_updates_minorversion]" value="1" class="aiwp-settings-switchoo-checkbox" id="automatic_updates_minorversion" <?php checked( $options['automatic_updates_minorversion'], 1 ); ?>>
-															<label class="aiwp-settings-switchoo-label" for="automatic_updates_minorversion">
-																<div class="aiwp-settings-switchoo-inner"></div>
-																<div class="aiwp-settings-switchoo-switch"></div>
-															</label>
-														</div>
-														<div class="switch-desc"><?php echo " ".__( "automatic updates for minor versions (security and maintenance releases only)", 'analytics-insights' );?></div>
-													</td>
-												</tr>
-												<tr>
-													<td colspan="2">
-														<hr>
-													</td>
-												</tr>
-												<?php endif; ?>
 												<tr>
 													<td colspan="2" class="submit">
 														<input type="submit" name="Submit" class="button button-primary" value="<?php _e('Save Changes', 'analytics-insights' ) ?>" />
@@ -1533,7 +1228,6 @@ final class AIWP_Settings {
 					update_option( 'aiwp_redeemed_code', $aiwp_access_code );
 					$aiwp->gapi_controller->client->authenticate( $_REQUEST['aiwp_access_code'] );
 					$aiwp->config->options['token'] = $aiwp->gapi_controller->client->getAccessToken();
-					$aiwp->config->options['automatic_updates_minorversion'] = 1;
 					$aiwp->config->set_plugin_options( true );
 					$options = self::update_options( 'network' );
 					$message = "<div class='updated' id='aiwp-action'><p>" . __( "Plugin authorization succeeded.", 'analytics-insights' ) . "</p></div>";
@@ -1550,7 +1244,7 @@ final class AIWP_Settings {
 					}
 					if ( $aiwp->config->options['token'] && $aiwp->gapi_controller->client->getAccessToken() ) {
 						$profiles = $aiwp->gapi_controller->refresh_profiles();
-						if ( is_array ( $profiles ) && ! empty( $profiles ) ) {
+						if ( is_array( $profiles ) && ! empty( $profiles ) ) {
 							$aiwp->config->options['ga_profiles_list'] = $profiles;
 							if ( isset( $aiwp->config->options['tableid_jail'] ) && ! $aiwp->config->options['tableid_jail'] ) {
 								$profile = AIWP_Tools::guess_default_domain( $profiles );
@@ -1638,8 +1332,7 @@ final class AIWP_Settings {
 				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "Cheating Huh?", 'analytics-insights' ) . "</p></div>";
 			}
 		}
-		?>
-<div class="wrap">
+		?><div class="wrap">
 											<h2><?php _e( "Google Analytics Settings", 'analytics-insights' );?></h2>
 											<hr>
 										</div>
@@ -1660,21 +1353,10 @@ final class AIWP_Settings {
 						<table class="aiwp-settings-options">
 																	<tr>
 																		<td colspan="2">
-								<?php echo "<h2>" . __( "Network Setup", 'analytics-insights' ) . "</h2>"; ?>
+									<?php echo "<h2>" . __( "Network Setup", 'analytics-insights' ) . "</h2>"; ?>
 								</td>
 																	</tr>
-																	<tr>
-																		<td colspan="2" class="aiwp-settings-title">
-																			<div class="button-primary aiwp-settings-switchoo">
-																				<input type="checkbox" name="options[network_mode]" value="1" class="aiwp-settings-switchoo-checkbox" id="network_mode" <?php checked( $options['network_mode'], 1); ?> onchange="this.form.submit()">
-																				<label class="aiwp-settings-switchoo-label" for="network_mode">
-																					<div class="aiwp-settings-switchoo-inner"></div>
-																					<div class="aiwp-settings-switchoo-switch"></div>
-																				</label>
-																			</div>
-																			<div class="switch-desc"><?php echo " ".__("use a single Google Analytics account for the entire network", 'analytics-insights' );?></div>
-																		</td>
-																	</tr>
+							<?php self::switch_button('options[network_mode]', 1, 'network_mode', $options['network_mode'], __( "use a single Google Analytics account for the entire network", 'analytics-insights'), false, true ); ?>
 							<?php if ($options['network_mode']) : ?>
 							<tr>
 																		<td colspan="2">
@@ -1766,39 +1448,12 @@ final class AIWP_Settings {
 																		</td>
 																	</tr>
 							<?php endforeach; ?>
-							<tr>
-																		<td colspan="2">
-																			<h2><?php echo _e( "Automatic Updates", 'analytics-insights' );?></h2>
-																		</td>
-																	</tr>
-																	<tr>
-																		<td colspan="2" class="aiwp-settings-title">
-																			<div class="button-primary aiwp-settings-switchoo">
-																				<input type="checkbox" name="options[automatic_updates_minorversion]" value="1" class="aiwp-settings-switchoo-checkbox" id="automatic_updates_minorversion" <?php checked( $options['automatic_updates_minorversion'], 1 ); ?>>
-																				<label class="aiwp-settings-switchoo-label" for="automatic_updates_minorversion">
-																					<div class="aiwp-settings-switchoo-inner"></div>
-																					<div class="aiwp-settings-switchoo-switch"></div>
-																				</label>
-																			</div>
-																			<div class="switch-desc"><?php echo " ".__( "automatic updates for minor versions (security and maintenance releases only)", 'analytics-insights' );?></div>
-																		</td>
-																	</tr>
 																	<tr>
 																		<td colspan="2">
-																			<hr><?php echo "<h2>" . __( "Exclude Tracking", 'analytics-insights' ) . "</h2>"; ?></td>
-																	</tr>
-																	<tr>
-																		<td colspan="2" class="aiwp-settings-title">
-																			<div class="button-primary aiwp-settings-switchoo">
-																				<input type="checkbox" name="options[superadmin_tracking]" value="1" class="aiwp-settings-switchoo-checkbox" id="superadmin_tracking"<?php checked( $options['superadmin_tracking'], 1); ?>">
-																				<label class="aiwp-settings-switchoo-label" for="superadmin_tracking">
-																					<div class="aiwp-settings-switchoo-inner"></div>
-																					<div class="aiwp-settings-switchoo-switch"></div>
-																				</label>
-																			</div>
-																			<div class="switch-desc"><?php echo " ".__("exclude Super Admin tracking for the entire network", 'analytics-insights' );?></div>
+																			<hr><?php echo "<h2>" . __( "Exclude Tracking", 'analytics-insights' ) . "</h2>"; ?>
 																		</td>
 																	</tr>
+																	<?php self::switch_button('options[superadmin_tracking]', 1, 'superadmin_tracking', $options['superadmin_tracking'], __( "exclude Super Admin tracking for the entire network", 'analytics-insights'), false, false ); ?>
 																	<tr>
 																		<td colspan="2">
 																			<hr>
@@ -1906,9 +1561,5 @@ final class AIWP_Settings {
 											</div>
 										</div>
 <?php
-		// Dismiss the admin update notice
-		if ( version_compare( $wp_version, '4.2', '<' ) && current_user_can( 'manage_options' ) ) {
-			delete_option( 'aiwp_got_updated' );
-		}
 	}
 }

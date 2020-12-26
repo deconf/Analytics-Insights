@@ -22,43 +22,6 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 			$this->option_keys_rename(); // v5.2
 			                             // Get plugin options
 			$this->get_plugin_options();
-			// Automatic updates
-			add_filter( 'auto_update_plugin', array( $this, 'automatic_update' ), 10, 2 );
-			// Provide language packs for all available Network languages
-			if ( is_multisite() ) {
-				add_filter( 'plugins_update_check_locales', array( $this, 'translation_updates' ), 10, 1 );
-			}
-		}
-
-		public function get_major_version( $version ) {
-			$exploded_version = explode( '.', $version );
-			if ( isset( $exploded_version[2] ) ) {
-				return $exploded_version[0] . '.' . $exploded_version[1] . '.' . $exploded_version[2];
-			} else {
-				return $exploded_version[0] . '.' . $exploded_version[1] . '.0';
-			}
-		}
-
-		public function automatic_update( $update, $item ) {
-			$item = (array) $item;
-			if ( is_multisite() && ! is_main_site() ) {
-				return;
-			}
-			if ( ! isset( $item['new_version'] ) || ! isset( $item['plugin'] ) || ! $this->options['automatic_updates_minorversion'] ) {
-				return $update;
-			}
-			if ( isset( $item['slug'] ) && 'analytics-insights' == $item['slug'] ) {
-				// Only when a minor update is available
-				if ( $this->get_major_version( AIWP_CURRENT_VERSION ) == $this->get_major_version( $item['new_version'] ) ) {
-					return ( $this->get_major_version( AIWP_CURRENT_VERSION ) == $this->get_major_version( $item['new_version'] ) );
-				}
-			}
-			return $update;
-		}
-
-		public function translation_updates( $locales ) {
-			$languages = get_available_languages();
-			return array_values( $languages );
 		}
 
 		// Validates data before storing
@@ -180,7 +143,6 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 						$options['user_api'] = 0;
 						$network_options['network_mode'] = $this->options['network_mode'];
 						$network_options['superadmin_tracking'] = $this->options['superadmin_tracking'];
-						$network_options['automatic_updates_minorversion'] = $this->options['automatic_updates_minorversion'];
 						unset( $options['network_mode'] );
 						if ( isset( $this->options['network_tableid'] ) ) {
 							$network_options['network_tableid'] = $this->options['network_tableid'];
@@ -229,7 +191,6 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 			if ( $prevver && AIWP_CURRENT_VERSION != $prevver ) {
 				$flag = true;
 				update_option( 'aiwp_version', AIWP_CURRENT_VERSION );
-				update_option( 'aiwp_got_updated', true );
 				AIWP_Tools::clear_cache();
 				AIWP_Tools::delete_cache( 'last_error' );
 				if ( is_multisite() ) { // Cleanup errors and cookies on the entire network
@@ -351,7 +312,6 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 			}
 
 			$ones = array( 	'ga_speed_samplerate',
-							'automatic_updates_minorversion',
 							'backend_item_reports', // v4.8
 							'dashboard_widget', // v4.7
 			);

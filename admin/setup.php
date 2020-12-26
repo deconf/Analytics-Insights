@@ -28,8 +28,6 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 			add_action( 'network_admin_menu', array( $this, 'network_menu' ) );
 			// Settings link
 			add_filter( "plugin_action_links_" . plugin_basename( AIWP_DIR . 'analytics-insights.php' ), array( $this, 'settings_link' ) );
-			// Updated admin notice
-			add_action( 'admin_notices', array( $this, 'admin_notice' ) );
 		}
 
 		/**
@@ -353,26 +351,6 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 			$settings_link = '<a href="' . esc_url( get_admin_url( null, 'admin.php?page=aiwp_settings' ) ) . '">' . __( "Settings", 'analytics-insights' ) . '</a>';
 			array_unshift( $links, $settings_link );
 			return $links;
-		}
-
-		/**
-		 *  Add an admin notice after a manual or atuomatic update
-		 */
-		function admin_notice() {
-			$currentScreen = get_current_screen();
-
-			if ( ! current_user_can( 'manage_options' ) || strpos( $currentScreen->base, '_aiwp_' ) === false ) {
-				return;
-			}
-
-			if ( get_option( 'aiwp_got_updated' ) ) :
-				?>
-<div id="aiwp-notice" class="notice is-dismissible">
-	<p><?php echo sprintf( __('Analytics Insights has been updated to version %s.', 'analytics-insights' ), AIWP_CURRENT_VERSION).' '.sprintf( __('For details, check out %1$s.', 'analytics-insights' ), sprintf(' <a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=aiwp_notice&utm_medium=link&utm_content=release_notice&utm_campaign=aiwp">%s</a>', __('the plugin documentation', 'analytics-insights') ) ); ?></p>
-</div>
-
-			<?php
-			endif;
 		}
 	}
 }
