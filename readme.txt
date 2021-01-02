@@ -1,7 +1,7 @@
-=== Analytics Insights (AIWP) ===
+=== Analytics Insights ===
 Contributors: deconf
 Donate link: https://deconf.com/donate/
-Tags: analytics,google analytics,google analytics dashboard,google analytics plugin,google analytics widget,gtag
+Tags: analytics,google analytics,google analytics dashboard,google analytics plugin,google analytics widget,aiwp
 Requires at least: 3.5
 Tested up to: 5.5
 Stable tag: 5.3.2
