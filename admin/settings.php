@@ -6,6 +6,7 @@
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
+//@formatter:off
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
 	exit();
@@ -564,7 +565,6 @@ final class AIWP_Settings {
 		</tr>
 		<?php self::html_switch_button('options[ga_anonymize_ip]', 1, 'ga_anonymize_ip', $options['ga_anonymize_ip'], __( "anonymize IPs while tracking", 'analytics-insights') ); ?>
 		<?php self::html_switch_button('options[ga_optout]', 1, 'ga_optout', $options['ga_optout'], __( "enable support for user opt-out", 'analytics-insights') ); ?>
-		<?php self::html_switch_button('options[ga_dnt_optout]', 1, 'ga_dnt_optout', $options['ga_dnt_optout'], __( "exclude tracking for users sending Do Not Track header", 'analytics-insights') ); ?>
 		<?php self::html_switch_button('options[ga_dnt_optout]', 1, 'ga_dnt_optout', $options['ga_dnt_optout'], __( "exclude tracking for users sending Do Not Track header", 'analytics-insights') ); ?>
 		<?php self::html_switch_button('options[ga_remarketing]', 1, 'ga_remarketing', $options['ga_remarketing'], __( "enable remarketing, demographics and interests reports", 'analytics-insights') ); ?>
 		<?php self::html_switch_button('options[ga_event_bouncerate]', 1, 'ga_event_bouncerate', $options['ga_event_bouncerate'], __( "exclude events from bounce-rate and time on page calculation", 'analytics-insights') ); ?>

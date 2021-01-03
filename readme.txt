@@ -118,7 +118,6 @@ This plugin is fully compatible with multisite network installs, allowing three 
 
 * Homepage of [Analytics Insights](https://deconf.com/google-analytics-dashboard-wordpress/)
 * Other [WordPress Plugins](https://deconf.com/wordpress/) by same author
-* [Google Analytics | Partners](https://www.google.com/analytics/partners/company/5127525902581760/gadp/5629499534213120/app/5707702298738688/listing/5639274879778816) Gallery
 
 == Installation ==
 
@@ -179,6 +178,8 @@ Analytics Insights it's released under the GPLv2, you can use it free of charge 
 	* improvements on UX for reports switching (no more charts reloading)
 	* removed automatic updates
 	* settings page optimization
+	* refactoring code on settings page
+	* removed a duplicate option in Tracking Code 
 * Bug Fixes:	
 	* CSS fix for on/off buttons	
 	
