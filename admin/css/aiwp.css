@@ -11,6 +11,14 @@
 	display: none;
 }
 
+#aiwp-autodismiss{
+	position: fixed;
+	top: 35px;
+	left: 50%;
+    transform: translate(-50%, 0);
+	z-index: 2;
+}
+
 /* Options pages */
 table.aiwp-settings-options {
 	padding-left: 10px;

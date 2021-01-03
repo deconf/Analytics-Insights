@@ -213,6 +213,8 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 							__( "Time on Page", 'analytics-insights' ),
 							__( "Page Load Time", 'analytics-insights' ),
 							__( "Session Duration", 'analytics-insights' ),
+							__( "", 'analytics-insights' ),
+							__( "Search ...", 'analytics-insights' ), //30
 						),
 						'rtLimitPages' => $this->aiwp->config->options['ga_realtime_pages'],
 						'colorVariations' => AIWP_Tools::variations( $this->aiwp->config->options['theme_color'] ),
@@ -314,6 +316,8 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 							__( "Time on Page", 'analytics-insights' ),
 							__( "Page Load Time", 'analytics-insights' ),
 							__( "Exit Rate", 'analytics-insights' ),
+							__( "", 'analytics-insights' ),
+							__( "Search ...", 'analytics-insights' ), //30
 						),
 						'colorVariations' => AIWP_Tools::variations( $this->aiwp->config->options['theme_color'] ),
 						'region' => $region,

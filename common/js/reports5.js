@@ -11,11 +11,11 @@
 if ( aiwpItemData.mapsApiKey ) {
 	google.charts.load( 'current', {
 		mapsApiKey : aiwpItemData.mapsApiKey,
-		'packages' : [ 'corechart', 'table', 'orgchart', 'geochart' ]
+		'packages' : [ 'corechart', 'table', 'orgchart', 'geochart', 'controls' ]
 	} );
 } else {
 	google.charts.load( 'current', {
-		'packages' : [ 'corechart', 'table', 'orgchart', 'geochart' ]
+		'packages' : [ 'corechart', 'table', 'orgchart', 'geochart', 'controls' ]
 	} );
 }
 
@@ -360,7 +360,10 @@ jQuery.fn.extend( {
 				
 				tpl = '<div id="aiwp-geocharttablechart' + slug + '">';
 				tpl += '<div id="aiwp-geochart' + slug + '"></div>';
+				tpl += '<div id="aiwp-dashboard' + slug + '">';
+				tpl += '<div id="aiwp-control' + slug + '"></div>';
 				tpl += '<div id="aiwp-tablechart' + slug + '"></div>';
+				tpl += '</div>';
 				tpl += '</div>';
 			
 				if ( !jQuery( '#aiwp-geocharttablechart' + slug ).length ) {
@@ -396,7 +399,10 @@ jQuery.fn.extend( {
 				
 				tpl = '<div id="aiwp-orgcharttablechart' + slug + '">';
 				tpl += '<div id="aiwp-orgchart' + slug + '"></div>';
+				tpl += '<div id="aiwp-dashboard' + slug + '">';
+				tpl += '<div id="aiwp-control' + slug + '"></div>';
 				tpl += '<div id="aiwp-tablechart' + slug + '"></div>';
+				tpl += '</div>';
 				tpl += '</div>';
 
 				if ( !jQuery( '#aiwp-orgcharttablechart' + slug ).length ) {
@@ -468,18 +474,49 @@ jQuery.fn.extend( {
 			},
 
 			drawTableChart : function ( data ) {
-				var chartData, options, chart;
+				var chartData, options, chart, dashboard, control, wrapper;
 
 				chartData = google.visualization.arrayToDataTable( data );
 				options = {
 					page : 'enable',
 					pageSize : 10,
 					width : '100%',
-					allowHtml : true
+					allowHtml : true,
+					sortColumn : 1,
+					sortAscending : false					
 				};
-				chart = new google.visualization.Table( document.getElementById( 'aiwp-tablechart' + slug ) );
+				
+				dashboard = new google.visualization.Dashboard(document.getElementById( 'aiwp-dashboard' + slug ));
+				
+			    control = new google.visualization.ControlWrapper({
+			        controlType: 'StringFilter',
+			        containerId: 'aiwp-control' + slug,
+			        options: {
+			            filterColumnIndex: 0, 
+			            matchType : 'any',
+			            ui : { label : '', cssClass : 'aiwp-dashboard-control' },
+			        }
+			    });
+			    
+			    google.visualization.events.addListener(control, 'ready', function () {
+			        jQuery('.aiwp-dashboard-control input').prop('placeholder', aiwpItemData.i18n[ 30 ]);
+			    });
+				
+			    wrapper = new google.visualization.ChartWrapper({
+			    	  'chartType' : 'Table',
+			    	  'containerId' : 'aiwp-tablechart' + slug,
+			    	  'options' : options,
+		    	});
+			    
+			    dashboard.bind(control, wrapper);
+			    
+			    dashboard.draw( chartData );
+			    
+			    // outputs selection
+			    google.visualization.events.addListener(wrapper, 'select', function() {
+			    	console.log(wrapper.getDataTable().getValue(wrapper.getChart().getSelection()[0].row, 0));
+			    });				
 
-				chart.draw( chartData, options );
 			},
 
 			drawOrgChart : function ( data ) {

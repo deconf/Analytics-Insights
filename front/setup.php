@@ -116,6 +116,7 @@ if ( ! class_exists( 'AIWP_Frontend_Setup' ) ) {
 							__( "Page Load Time", 'analytics-insights' ),
 							__( "Exit Rate", 'analytics-insights' ),
 							__( "Precision: ", 'analytics-insights' ), //29
+						 __( "Search ...", 'analytics-insights' ),
 					),
 					'colorVariations' => AIWP_Tools::variations( $this->aiwp->config->options['theme_color'] ),
 					'region' => $region,
