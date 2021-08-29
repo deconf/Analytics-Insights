@@ -174,6 +174,7 @@ Analytics Insights it's released under the GPLv2, you can use it free of charge 
 
 = 5.4 =
 * Enhancements:
+	* capability to filter and search within displayed tables
 	* automatically authorize users without copy/pasting the access codes
 	* improvements on UX for reports switching (no more charts reloading)
 	* removed automatic updates

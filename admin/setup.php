@@ -37,7 +37,7 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 			global $wp_version;
 			if ( current_user_can( 'manage_options' ) ) {
 				include ( AIWP_DIR . 'admin/settings.php' );
-				add_menu_page( __( "Google Analytics", 'analytics-insights' ), __( "Google Analytics", 'analytics-insights' ), 'manage_options', 'aiwp_settings', array( 'AIWP_Settings', 'general_settings' ), version_compare( $wp_version, '3.8.0', '>=' ) ? 'dashicons-chart-area' : AIWP_URL . 'admin/images/aiwp-icon.png' );
+				add_menu_page( __( "Analytics Insights", 'analytics-insights' ), __( "Analytics Insights", 'analytics-insights' ), 'manage_options', 'aiwp_settings', array( 'AIWP_Settings', 'general_settings' ), version_compare( $wp_version, '3.8.0', '>=' ) ? 'dashicons-chart-area' : AIWP_URL . 'admin/images/aiwp-icon.png' );
 				add_submenu_page( 'aiwp_settings', __( "General Settings", 'analytics-insights' ), __( "General Settings", 'analytics-insights' ), 'manage_options', 'aiwp_settings', array( 'AIWP_Settings', 'general_settings' ) );
 				add_submenu_page( 'aiwp_settings', __( "Backend Settings", 'analytics-insights' ), __( "Backend Settings", 'analytics-insights' ), 'manage_options', 'aiwp_backend_settings', array( 'AIWP_Settings', 'backend_settings' ) );
 				add_submenu_page( 'aiwp_settings', __( "Frontend Settings", 'analytics-insights' ), __( "Frontend Settings", 'analytics-insights' ), 'manage_options', 'aiwp_frontend_settings', array( 'AIWP_Settings', 'frontend_settings' ) );
@@ -53,7 +53,7 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 			global $wp_version;
 			if ( current_user_can( 'manage_network' ) ) {
 				include ( AIWP_DIR . 'admin/settings.php' );
-				add_menu_page( __( "Google Analytics", 'analytics-insights' ), "Google Analytics", 'manage_network', 'aiwp_settings', array( 'AIWP_Settings', 'general_settings_network' ), version_compare( $wp_version, '3.8.0', '>=' ) ? 'dashicons-chart-area' : AIWP_URL . 'admin/images/aiwp-icon.png' );
+				add_menu_page( __( "Analytics Insights", 'analytics-insights' ), "Analytics Insights", 'manage_network', 'aiwp_settings', array( 'AIWP_Settings', 'general_settings_network' ), version_compare( $wp_version, '3.8.0', '>=' ) ? 'dashicons-chart-area' : AIWP_URL . 'admin/images/aiwp-icon.png' );
 				add_submenu_page( 'aiwp_settings', __( "General Settings", 'analytics-insights' ), __( "General Settings", 'analytics-insights' ), 'manage_network', 'aiwp_settings', array( 'AIWP_Settings', 'general_settings_network' ) );
 				add_submenu_page( 'aiwp_settings', __( "Errors & Debug", 'analytics-insights' ), __( "Errors & Debug", 'analytics-insights' ), 'manage_network', 'aiwp_errors_debugging', array( 'AIWP_Settings', 'errors_debugging' ) );
 			}
