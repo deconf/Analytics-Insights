@@ -116,7 +116,7 @@ This plugin is fully compatible with multisite network installs, allowing three 
 
 = Further reading =
 
-* Homepage of [Analytics Insights](https://deconf.com/google-analytics-dashboard-wordpress/)
+* Homepage of [Analytics Insights](https://deconf.com/analytics-insights/)
 * Other [WordPress Plugins](https://deconf.com/wordpress/) by same author
 
 == Installation ==
@@ -144,7 +144,7 @@ You can submit pull requests, feature requests and bug reports on [our GitHub re
 
 = Documentation, Tutorials and FAQ =
 
-For documentation, tutorials, FAQ and videos check out: [Analytics Insights documentation](https://deconf.com/google-analytics-dashboard-wordpress/).
+For documentation, tutorials, FAQ and videos check out: [Analytics Insights documentation](https://deconf.com/analytics-insights/).
 
 == Screenshots ==
 

@@ -9,7 +9,7 @@
 ?>
 
 <?php if ( 0 == $data['ga_with_gtag'] ):?>
-<!-- BEGIN AIWP v<?php echo AIWP_CURRENT_VERSION; ?> Universal Analytics - https://deconf.com/google-analytics-dashboard-wordpress/ -->
+<!-- BEGIN AIWP v<?php echo AIWP_CURRENT_VERSION; ?> Universal Analytics - https://deconf.com/analytics-insights/ -->
 <script>
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -19,7 +19,7 @@
 </script>
 <!-- END AIWP Universal Analytics -->
 <?php else:?>
-<!-- BEGIN AIWP v<?php echo AIWP_CURRENT_VERSION; ?> Global Site Tag - https://deconf.com/google-analytics-dashboard-wordpress/ -->
+<!-- BEGIN AIWP v<?php echo AIWP_CURRENT_VERSION; ?> Global Site Tag - https://deconf.com/analytics-insights/ -->
 <script async src="<?php echo $data['tracking_script_path']?>?id=<?php echo $data['uaid']?>"></script>
 <script>
   window.dataLayer = window.dataLayer || [];

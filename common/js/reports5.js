@@ -192,7 +192,7 @@ jQuery.fn.extend( {
 				tpl += '<div id="aiwp-reports' + slug + '"></div>';
 				tpl += '<div style="text-align:right;width:100%;font-size:0.8em;clear:both;margin-right:5px;margin-top:10px;">';
 				tpl += aiwpItemData.i18n[ 14 ];
-				tpl += ' <a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=aiwp_report&utm_medium=link&utm_content=back_report&utm_campaign=aiwp" rel="nofollow" style="text-decoration:none;font-size:1em;">AIWP</a>&nbsp;';
+				tpl += ' <a href="https://deconf.com/analytics-insights/?utm_source=aiwp_report&utm_medium=link&utm_content=back_report&utm_campaign=aiwp" rel="nofollow" style="text-decoration:none;font-size:1em;">AIWP</a>&nbsp;';
 				tpl += '</div>';
 				tpl += '</div>',
 
