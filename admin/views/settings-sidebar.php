@@ -12,7 +12,7 @@ $aiwp = AIWP();
 				<span><?php _e("Setup Tutorial & Demo",'analytics-insights') ?></span>
 			</h3>
 			<div class="inside">
-				<a href="https://deconf.com/google-analytics-dashboard-wordpress/?utm_source=aiwp_config&utm_medium=link&utm_content=video&utm_campaign=aiwp" target="_blank"><img src="<?php echo plugins_url( '../images/google-analytics-dashboard.png' , __FILE__ );?>" width="100%" alt="" /></a>
+				<a href="https://deconf.com/analytics-insights/?utm_source=aiwp_config&utm_medium=link&utm_content=tutorial&utm_campaign=aiwp" target="_blank"><img src="<?php echo plugins_url( '../images/analytics-insights.png' , __FILE__ );?>" width="100%" alt="" /></a>
 			</div>
 		</div>
 		<div class="postbox">

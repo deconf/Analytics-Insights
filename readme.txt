@@ -170,9 +170,9 @@ Analytics Insights it's released under the GPLv2, you can use it free of charge 
 
 == Changelog ==
 
-[AIWP v5.3 release notes](https://deconf.com/adding-gtag-js-to-your-site/)
+[AIWP v5.4 release notes](https://deconf.com/analytics-insights/)
 
-= 5.4 =
+= 5.4 (2021.08.30) =
 * Enhancements:
 	* capability to filter and search within displayed tables
 	* automatically authorize users without copy/pasting the access codes
