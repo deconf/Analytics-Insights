@@ -20,7 +20,7 @@ final class AIWP_Settings {
 		$network_settings = false;
 		$options = $aiwp->config->options; // Get current options
 		if ( isset( $_REQUEST['options']['aiwp_hidden'] ) && isset( $_REQUEST['options'] ) && ( isset( $_REQUEST['aiwp_security'] ) && wp_verify_nonce( $_REQUEST['aiwp_security'], 'aiwp_form' ) ) && 'Reset' != $who ) {
-			$new_options = $_REQUEST['options'];
+			$new_options = $aiwp->config->validate_data( $_REQUEST['options'] );
 			if ( 'tracking' == $who ) {
 				$options['ga_anonymize_ip'] = 0;
 				$options['ga_optout'] = 0;
@@ -91,10 +91,10 @@ final class AIWP_Settings {
 
 	private static function html_form_begin( $text, $action, $message ) {
 ?>
-<form name="aiwp_form" method="post" action="<?php echo $action; ?>">
+<form name="aiwp_form" method="post" action="<?php echo esc_url( $action ); ?>">
 	<div class="wrap">
-			<?php echo "<h2>" . $text . "</h2>"; ?>
-	  <?php if (isset($message)) echo $message; ?>
+			<?php echo "<h2>" . esc_html( $text ) . "</h2>"; ?>
+	  <?php if (isset($message)) echo wp_kses( $message, array( 'div' => array( 'class' => array(), 'id' => array() ), 'p' => array())); ?>
 	  <hr>
 	</div>
 	<div id="poststuff" class="aiwp">
@@ -118,13 +118,13 @@ final class AIWP_Settings {
 <tr>
 	<td colspan="2" class="aiwp-settings-title">
 		<div class="button-primary aiwp-settings-switchoo">
-			<input type="checkbox" name="<?php echo $option_name; ?>" value="<?php echo $option_value; ?>" class="aiwp-settings-switchoo-checkbox" id="<?php echo $option_id; ?>" <?php checked( $checked, 1 ); ?> <?php disabled( $disabled, true );?> <?php if ($onchange) {echo ' onchange="this.form.submit()"'; } ?>>
-			<label class="aiwp-settings-switchoo-label" for="<?php echo $option_id; ?>">
+			<input type="checkbox" name="<?php echo esc_attr( $option_name ); ?>" value="<?php echo esc_attr( $option_value ); ?>" class="aiwp-settings-switchoo-checkbox" id="<?php echo esc_attr( $option_id ); ?>" <?php checked( $checked, 1 ); ?> <?php disabled( $disabled, true );?> <?php if ($onchange) {echo ' onchange="this.form.submit()"'; } ?>>
+			<label class="aiwp-settings-switchoo-label" for="<?php echo esc_attr( $option_id ); ?>">
 				<div class="aiwp-settings-switchoo-inner"></div>
 				<div class="aiwp-settings-switchoo-switch"></div>
 			</label>
 		</div>
-		<div class="switch-desc"><?php echo " " . $option_text ;?></div>
+		<div class="switch-desc"><?php echo " " . esc_html( $option_text );?></div>
 	</td>
 </tr>
 <?php
@@ -792,11 +792,11 @@ final class AIWP_Settings {
 		if ( isset( $_REQUEST['aiwp_access_code'] ) ) {
 			if ( 1 == ! stripos( 'x' . $_REQUEST['aiwp_access_code'], 'UA-', 1 ) && $_REQUEST['aiwp_access_code'] != get_option( 'aiwp_redeemed_code' ) ) {
 				try {
-					$aiwp_access_code = $_REQUEST['aiwp_access_code'];
+					$aiwp_access_code = sanitize_text_field( $_REQUEST['aiwp_access_code'] );
 					update_option( 'aiwp_redeemed_code', $aiwp_access_code );
 					AIWP_Tools::delete_cache( 'gapi_errors' );
 					AIWP_Tools::delete_cache( 'last_error' );
-					$aiwp->gapi_controller->client->authenticate( $_REQUEST['aiwp_access_code'] );
+					$aiwp->gapi_controller->client->authenticate( $aiwp_access_code );
 					$aiwp->config->options['token'] = $aiwp->gapi_controller->client->getAccessToken();
 					$aiwp->config->set_plugin_options();
 					$options = self::update_options( 'general' );
@@ -1034,9 +1034,9 @@ final class AIWP_Settings {
 		if ( isset( $_REQUEST['aiwp_access_code'] ) ) {
 			if ( 1 == ! stripos( 'x' . $_REQUEST['aiwp_access_code'], 'UA-', 1 ) && $_REQUEST['aiwp_access_code'] != get_option( 'aiwp_redeemed_code' ) ) {
 				try {
-					$aiwp_access_code = $_REQUEST['aiwp_access_code'];
+					$aiwp_access_code = sanitize_text_field( $_REQUEST['aiwp_access_code'] );
 					update_option( 'aiwp_redeemed_code', $aiwp_access_code );
-					$aiwp->gapi_controller->client->authenticate( $_REQUEST['aiwp_access_code'] );
+					$aiwp->gapi_controller->client->authenticate( $aiwp_access_code );
 					$aiwp->config->options['token'] = $aiwp->gapi_controller->client->getAccessToken();
 					$aiwp->config->set_plugin_options( true );
 					$options = self::update_options( 'network' );

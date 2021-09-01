@@ -40,17 +40,17 @@ if ( ! class_exists( 'AIWP_Frontend_Ajax' ) ) {
 				wp_die( - 30 );
 			}
 
-			$from = $_POST['from'];
-			$to = $_POST['to'];
-			$query = $_POST['query'];
-			$uri = $_POST['filter'];
+			$from = sanitize_text_field( $_POST['from'] );
+			$to = sanitize_text_field( $_POST['to'] );
+			$query = sanitize_text_field( $_POST['query'] );
+			$uri = sanitize_text_field( $_POST['filter'] );
 			if ( isset( $_POST['metric'] ) ) {
-				$metric = $_POST['metric'];
+				$metric = sanitize_text_field( $_POST['metric'] );
 			} else {
 				$metric = 'pageviews';
 			}
 
-			$query = $_POST['query'];
+			$query = sanitize_text_field( $_POST['query'] );
 			if ( ob_get_length() ) {
 				ob_clean();
 			}

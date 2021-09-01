@@ -40,20 +40,20 @@ if ( ! class_exists( 'AIWP_Backend_Ajax' ) ) {
 				wp_die( - 30 );
 			}
 			if ( isset( $_POST['projectId'] ) && $this->aiwp->config->options['switch_profile'] && 'false' !== $_POST['projectId'] ) {
-				$projectId = $_POST['projectId'];
+				$projectId = sanitize_text_field( $_POST['projectId'] );
 			} else {
 				$projectId = false;
 			}
-			$from = $_POST['from'];
-			$to = $_POST['to'];
-			$query = $_POST['query'];
+			$from = sanitize_text_field( $_POST['from'] );
+			$to = sanitize_text_field( $_POST['to'] );
+			$query = sanitize_text_field( $_POST['query'] );
 			if ( isset( $_POST['filter'] ) ) {
-				$filter_id = $_POST['filter'];
+				$filter_id = sanitize_text_field( $_POST['filter'] );
 			} else {
 				$filter_id = false;
 			}
 			if ( isset( $_POST['metric'] ) ) {
-				$metric = $_POST['metric'];
+				$metric = sanitize_text_field( $_POST['metric'] );
 			} else {
 				$metric = 'sessions';
 			}

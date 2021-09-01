@@ -25,7 +25,7 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 		}
 
 		// Validates data before storing
-		private function validate_data( $options ) {
+		public function validate_data( $options ) {
 			/* @formatter:off */
 			$numerics = array( 	'ga_realtime_pages',
 								'ga_enhanced_links',

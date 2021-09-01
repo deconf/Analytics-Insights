@@ -277,28 +277,6 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 				$info .= 'Other Version: ' . '-' . "\n";
 			}
 
-			/*
-			 * PHP extensions
-			 * if ( is_callable( 'get_loaded_extensions' ) ) {
-			 * $info .= 'Loaded Extensions: ' . implode(', ', get_loaded_extensions()) . "\n";
-			 * } else {
-			 * $info .= 'Loaded Extensions: ' . '-' . "\n";
-			 * }
-			 */
-
-			// cURL Info
-			if ( function_exists( 'curl_version' ) && function_exists( 'curl_exec' ) ) {
-				$curl_version = curl_version();
-				if ( ! empty( $curl_version ) ) {
-					$curl_ver = $curl_version['version'] . " " . $curl_version['ssl_version'];
-				} else {
-					$curl_ver = '-';
-				}
-			} else {
-				$curl_ver = '-';
-			}
-			$info .= 'cURL Info: ' . $curl_ver . "\n";
-
 			// Gzip
 			if ( is_callable( 'gzopen' ) ) {
 				$gzip = true;
