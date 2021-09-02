@@ -115,8 +115,8 @@ if ( ! class_exists( 'AIWP_Frontend_Ajax' ) ) {
 			if ( ! isset( $_POST['aiwp_number'] ) || ! isset( $_POST['aiwp_optionname'] ) || ! is_active_widget( false, false, 'aiwp-frontwidget-report' ) ) {
 				wp_die( - 30 );
 			}
-			$widget_index = $_POST['aiwp_number'];
-			$option_name = $_POST['aiwp_optionname'];
+			$widget_index = sanitize_text_field( $_POST['aiwp_number'] );
+			$option_name = sanitize_text_field( $_POST['aiwp_optionname'] );
 			$options = get_option( $option_name );
 			if ( isset( $options[$widget_index] ) ) {
 				$instance = $options[$widget_index];

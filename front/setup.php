@@ -122,7 +122,7 @@ if ( ! class_exists( 'AIWP_Frontend_Setup' ) ) {
 					'region' => $region,
 					'mapsApiKey' => apply_filters( 'aiwp_maps_api_key', $this->aiwp->config->options['maps_api_key'] ),
 					'language' => get_bloginfo( 'language' ),
-					'filter' => $_SERVER["REQUEST_URI"],
+					'filter' => esc_url( $_SERVER["REQUEST_URI"] ),
 					'viewList' => false,
 					'scope' => 'front-item',
 				 )

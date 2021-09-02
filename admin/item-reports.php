@@ -43,9 +43,9 @@ if ( ! class_exists( 'AIWP_Backend_Item_Reports' ) ) {
 			}
 
 			if ( version_compare( $wp_version, '3.8.0', '>=' ) ) {
-				echo '<a id="aiwp-' . $id . '" title="' . get_the_title( $id ) . '" href="#' . $id . '" class="aiwp-icon dashicons-before dashicons-chart-area">&nbsp;</a>';
+				echo '<a id="aiwp-' . esc_attr( $id ) . '" title="' . get_the_title( $id ) . '" href="#' . esc_attr( $id ) . '" class="aiwp-icon dashicons-before dashicons-chart-area">&nbsp;</a>';
 			} else {
-				echo '<a id="aiwp-' . $id . '" title="' . get_the_title( $id ) . '" href="#' . $id . '"><img class="aiwp-icon-oldwp" src="' . AIWP_URL . 'admin/images/aiwp-icon.png"</a>';
+				echo '<a id="aiwp-' . esc_attr( $id ) . '" title="' . get_the_title( $id ) . '" href="#' . esc_attr( $id ) . '"><img class="aiwp-icon-oldwp" src="' . AIWP_URL . 'admin/images/aiwp-icon.png"</a>';
 			}
 		}
 

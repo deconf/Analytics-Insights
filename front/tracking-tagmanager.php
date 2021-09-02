@@ -107,7 +107,7 @@ if ( ! class_exists( 'AIWP_Tracking_TagManager' ) ) {
 				$post_tags_array = get_the_tags( $post->ID );
 				if ( $post_tags_array ) {
 					foreach ( $post_tags_array as $tag ) {
-						$post_tags_list .= $tag->name . ', ';
+						$post_tags_list .= esc_attr( $tag->name ) . ', ';
 					}
 				}
 				$post_tags_list = rtrim( $post_tags_list, ', ' );

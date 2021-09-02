@@ -264,7 +264,7 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 			// Server Software
 			$server_soft = "-";
 			if ( isset( $_SERVER['SERVER_SOFTWARE'] ) ) {
-				$server_soft = $_SERVER['SERVER_SOFTWARE'];
+				$server_soft = sanitize_text_field( $_SERVER['SERVER_SOFTWARE'] );
 			}
 			$info .= 'Server Info: ' . $server_soft . "\n";
 

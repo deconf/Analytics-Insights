@@ -9,7 +9,7 @@
 ?>
 <script>
 var aiwpDnt = false;
-var aiwpProperty = '<?php echo $data['uaid']?>';
+var aiwpProperty = '<?php echo esc_js ( $data['uaid'] )?>';
 var aiwpDntFollow = <?php echo $data['gaDntOptout'] ? 'true' : 'false'?>;
 var aiwpOptout = <?php echo $data['gaOptout'] ? 'true' : 'false'?>;
 var disableStr = 'ga-disable-' + aiwpProperty;

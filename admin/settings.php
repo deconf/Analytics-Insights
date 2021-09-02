@@ -173,7 +173,7 @@ final class AIWP_Settings {
 				<?php if ( 'subscriber' != $role ) : ?>
 				<?php $i++; ?>
 					<td>
- 					<label><input type="checkbox" name="options[access_front][]" value="<?php echo $role; ?>" <?php if ( in_array($role,$options['access_front']) || 'administrator' == $role ) echo 'checked="checked"'; if ( 'administrator' == $role ) echo 'disabled="disabled"';?> /><?php echo $name; ?></label>
+ 					<label><input type="checkbox" name="options[access_front][]" value="<?php echo esc_attr( $role ); ?>" <?php if ( in_array($role,$options['access_front']) || 'administrator' == $role ) echo 'checked="checked"'; if ( 'administrator' == $role ) echo 'disabled="disabled"';?> /><?php echo $name; ?></label>
 					</td>
 					<?php endif; ?>
 					<?php if ( 0 == $i % 4 ) : ?>
@@ -231,7 +231,7 @@ final class AIWP_Settings {
 				<?php if ( 'subscriber' != $role ) : ?>
 				<?php $i++; ?>
 					<td>
-						<label><input type="checkbox" name="options[access_back][]" value="<?php echo $role; ?>" <?php if ( in_array($role,$options['access_back']) || 'administrator' == $role ) echo 'checked="checked"'; if ( 'administrator' == $role ) echo 'disabled="disabled"';?> /> <?php echo $name; ?></label>
+						<label><input type="checkbox" name="options[access_back][]" value="<?php echo esc_attr( $role ); ?>" <?php if ( in_array($role,$options['access_back']) || 'administrator' == $role ) echo 'checked="checked"'; if ( 'administrator' == $role ) echo 'disabled="disabled"';?> /> <?php echo $name; ?></label>
 					</td>
 					<?php endif; ?>
 					<?php if ( 0 == $i % 4 ) : ?>
@@ -680,7 +680,7 @@ final class AIWP_Settings {
     				<?php $i++; ?>
 						<td>
 							<label>
-								<input type="checkbox" name="options[track_exclude][]" value="<?php echo $role; ?>" <?php if (in_array($role,$options['track_exclude'])) echo 'checked="checked"'; ?> /> <?php echo $name; ?></label>
+								<input type="checkbox" name="options[track_exclude][]" value="<?php echo esc_attr( $role ); ?>" <?php if (in_array($role,$options['track_exclude'])) echo 'checked="checked"'; ?> /> <?php echo $name; ?></label>
 						</td>
 						<?php endif; ?>
 						<?php if ( 0 == $i % 4 ) : ?>
@@ -1207,7 +1207,7 @@ final class AIWP_Settings {
 			<label for="network_tableid"><?php echo '<strong>'.$blog['domain'].$blog['path'].'</strong>: ';?></label>
 		</td>
 		<td>
-			<select id="network_tableid" <?php disabled(!empty($options['ga_profiles_list']),false);?> name="options[network_tableid][<?php echo $blog['blog_id'];?>]">
+			<select id="network_tableid" <?php disabled(!empty($options['ga_profiles_list']),false);?> name="options[network_tableid][<?php echo esc_attr( $blog['blog_id'] );?>]">
 	 		<?php if ( ! empty( $options['ga_profiles_list'] ) ) : ?>
 				<?php foreach ( $options['ga_profiles_list'] as $items ) : ?>
 				<?php if ( $items[3] ) : ?>

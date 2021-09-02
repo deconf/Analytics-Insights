@@ -20,7 +20,7 @@
 <!-- END AIWP Universal Analytics -->
 <?php else:?>
 <!-- BEGIN AIWP v<?php echo AIWP_CURRENT_VERSION; ?> Global Site Tag - https://deconf.com/analytics-insights/ -->
-<script async src="<?php echo $data['tracking_script_path']?>?id=<?php echo $data['uaid']?>"></script>
+<script async src="<?php echo $data['tracking_script_path']?>?id=<?php echo esc_js( $data['uaid'] )?>"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
