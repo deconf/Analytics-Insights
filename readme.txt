@@ -4,7 +4,7 @@ Donate link: https://deconf.com/donate/
 Tags: analytics,google analytics,google analytics dashboard,google analytics plugin,google analytics widget,aiwp
 Requires at least: 3.5
 Tested up to: 5.8
-Stable tag: 5.4.2
+Stable tag: 5.4.3
 Requires PHP: 5.2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -172,7 +172,7 @@ Analytics Insights it's released under the GPLv2, you can use it free of charge 
 
 [AIWP v5.4 release notes](https://deconf.com/analytics-insights/)
 
-= 5.4.2 (2021.09.02) =
+= 5.4.3 (2021.09.02) =
 * Security Fixes:
 	* sanitizing, escapping, and validating additional data
 

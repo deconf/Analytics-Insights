@@ -173,7 +173,7 @@ final class AIWP_Settings {
 				<?php if ( 'subscriber' != $role ) : ?>
 				<?php $i++; ?>
 					<td>
- 					<label><input type="checkbox" name="options[access_front][]" value="<?php echo esc_attr( $role ); ?>" <?php if ( in_array($role,$options['access_front']) || 'administrator' == $role ) echo 'checked="checked"'; if ( 'administrator' == $role ) echo 'disabled="disabled"';?> /><?php echo $name; ?></label>
+ 					<label><input type="checkbox" name="options[access_front][]" value="<?php echo esc_attr( $role ); ?>" <?php if ( in_array($role,$options['access_front']) || 'administrator' == $role ) echo 'checked="checked"'; if ( 'administrator' == $role ) echo 'disabled="disabled"';?> /><?php echo esc_attr( $name ); ?></label>
 					</td>
 					<?php endif; ?>
 					<?php if ( 0 == $i % 4 ) : ?>
@@ -231,7 +231,7 @@ final class AIWP_Settings {
 				<?php if ( 'subscriber' != $role ) : ?>
 				<?php $i++; ?>
 					<td>
-						<label><input type="checkbox" name="options[access_back][]" value="<?php echo esc_attr( $role ); ?>" <?php if ( in_array($role,$options['access_back']) || 'administrator' == $role ) echo 'checked="checked"'; if ( 'administrator' == $role ) echo 'disabled="disabled"';?> /> <?php echo $name; ?></label>
+						<label><input type="checkbox" name="options[access_back][]" value="<?php echo esc_attr( $role ); ?>" <?php if ( in_array($role,$options['access_back']) || 'administrator' == $role ) echo 'checked="checked"'; if ( 'administrator' == $role ) echo 'disabled="disabled"';?> /> <?php echo esc_attr( $name ); ?></label>
 					</td>
 					<?php endif; ?>
 					<?php if ( 0 == $i % 4 ) : ?>
@@ -406,7 +406,7 @@ final class AIWP_Settings {
 			<td>
 				<select id="ga_author_dimindex" name="options[ga_author_dimindex]">
 										<?php for ($i=0;$i<21;$i++) : ?>
-											<option value="<?php echo $i;?>" <?php selected( $options['ga_author_dimindex'], $i ); ?>><?php echo 0 == $i ?'Disabled':'dimension '.$i; ?></option>
+											<option value="<?php echo (int) $i;?>" <?php selected( $options['ga_author_dimindex'], $i ); ?>><?php echo 0 == $i ?'Disabled':'dimension '.(int) $i; ?></option>
 										<?php endfor; ?>
 			 </select>
 			</td>
@@ -418,7 +418,7 @@ final class AIWP_Settings {
 			<td>
 				<select id="ga_pubyear_dimindex" name="options[ga_pubyear_dimindex]">
 										<?php for ($i=0;$i<21;$i++) : ?>
-											<option value="<?php echo $i;?>" <?php selected( $options['ga_pubyear_dimindex'], $i ); ?>><?php echo 0 == $i ?'Disabled':'dimension '.$i; ?></option>
+											<option value="<?php echo (int) $i;?>" <?php selected( $options['ga_pubyear_dimindex'], $i ); ?>><?php echo 0 == $i ?'Disabled':'dimension '.(int) $i; ?></option>
 										<?php endfor; ?>
 				</select>
 			</td>
@@ -430,7 +430,7 @@ final class AIWP_Settings {
 			<td>
 				<select id="ga_pubyearmonth_dimindex" name="options[ga_pubyearmonth_dimindex]">
 										<?php for ($i=0;$i<21;$i++) : ?>
-											<option value="<?php echo $i;?>" <?php selected( $options['ga_pubyearmonth_dimindex'], $i ); ?>><?php echo 0 == $i ?'Disabled':'dimension '.$i; ?></option>
+											<option value="<?php echo (int) $i;?>" <?php selected( $options['ga_pubyearmonth_dimindex'], $i ); ?>><?php echo 0 == $i ?'Disabled':'dimension '.(int) $i; ?></option>
 										<?php endfor; ?>
 				</select>
 			</td>
@@ -442,7 +442,7 @@ final class AIWP_Settings {
 			<td>
 				<select id="ga_category_dimindex" name="options[ga_category_dimindex]">
 										<?php for ($i=0;$i<21;$i++) : ?>
-											<option value="<?php echo $i;?>" <?php selected( $options['ga_category_dimindex'], $i ); ?>><?php echo 0 == $i ? 'Disabled':'dimension '.$i; ?></option>
+											<option value="<?php echo (int) $i;?>" <?php selected( $options['ga_category_dimindex'], $i ); ?>><?php echo 0 == $i ? 'Disabled':'dimension '.(int) $i; ?></option>
 										<?php endfor; ?>
 				</select>
 			</td>
@@ -454,7 +454,7 @@ final class AIWP_Settings {
 			<td>
 				<select id="ga_user_dimindex" name="options[ga_user_dimindex]">
 										<?php for ($i=0;$i<21;$i++) : ?>
-											<option value="<?php echo $i;?>" <?php selected( $options['ga_user_dimindex'], $i ); ?>><?php echo 0 == $i ? 'Disabled':'dimension '.$i; ?></option>
+											<option value="<?php echo (int) $i;?>" <?php selected( $options['ga_user_dimindex'], $i ); ?>><?php echo 0 == $i ? 'Disabled':'dimension '.(int) $i; ?></option>
 										<?php endfor; ?>
 				</select>
 			</td>
@@ -466,7 +466,7 @@ final class AIWP_Settings {
 			<td>
 				<select id="ga_tag_dimindex" name="options[ga_tag_dimindex]">
 										<?php for ($i=0;$i<21;$i++) : ?>
-										<option value="<?php echo $i;?>" <?php selected( $options['ga_tag_dimindex'], $i ); ?>><?php echo 0 == $i ? 'Disabled':'dimension '.$i; ?></option>
+										<option value="<?php echo (int) $i;?>" <?php selected( $options['ga_tag_dimindex'], $i ); ?>><?php echo 0 == $i ? 'Disabled':'dimension '.(int) $i; ?></option>
 										<?php endfor; ?>
 				</select>
 			</td>
@@ -680,7 +680,7 @@ final class AIWP_Settings {
     				<?php $i++; ?>
 						<td>
 							<label>
-								<input type="checkbox" name="options[track_exclude][]" value="<?php echo esc_attr( $role ); ?>" <?php if (in_array($role,$options['track_exclude'])) echo 'checked="checked"'; ?> /> <?php echo $name; ?></label>
+								<input type="checkbox" name="options[track_exclude][]" value="<?php echo esc_attr( $role ); ?>" <?php if (in_array($role,$options['track_exclude'])) echo 'checked="checked"'; ?> /> <?php echo esc_attr( $name ); ?></label>
 						</td>
 						<?php endif; ?>
 						<?php if ( 0 == $i % 4 ) : ?>
@@ -730,7 +730,7 @@ final class AIWP_Settings {
 				<pre class="aiwp-settings-logdata"><?php echo '<span>' . __("Count: ", 'analytics-insights') . '</span>' . (int)$errors_count;?></pre>
 				<?php $errors = print_r( AIWP_Tools::get_cache( 'last_error' ), true ) ? esc_html( print_r( AIWP_Tools::get_cache( 'last_error' ), true ) ) : ''; ?>
 				<?php $errors = str_replace( 'Deconf_', 'Google_', $errors); ?>
-				<pre class="aiwp-settings-logdata"><?php echo '<span>' . __("Last Error: ", 'analytics-insights') . '</span>' . "\n" . $errors;?></pre>
+				<pre class="aiwp-settings-logdata"><?php echo '<span>' . __("Last Error: ", 'analytics-insights') . '</span>' . "\n" . esc_html( $errors );?></pre>
 				<pre class="aiwp-settings-logdata"><?php echo '<span>' . __("GAPI Error: ", 'analytics-insights') . '</span>'; echo "\n" . esc_html( print_r( AIWP_Tools::get_cache( 'gapi_errors' ), true ) ) ?></pre><br />
 				<hr>
 			</td>
@@ -740,9 +740,9 @@ final class AIWP_Settings {
 			<td>
 				<?php $sampling = AIWP_TOOLS::get_cache( 'sampleddata' ); ?>
 				<?php if ( $sampling ) :?>
-					<?php printf( __( "Last Detected on %s.", 'analytics-insights' ), '<strong>'. $sampling['date'] . '</strong>' );?><br />
-					<?php printf( __( "The report was based on %s of sessions.", 'analytics-insights' ), '<strong>'. $sampling['percent'] . '</strong>' );?><br />
-					<?php printf( __( "Sessions ratio: %s.", 'analytics-insights' ), '<strong>'. $sampling['sessions'] . '</strong>' ); ?>
+					<?php printf( __( "Last Detected on %s.", 'analytics-insights' ), '<strong>'. esc_html( $sampling['date'] ) . '</strong>' );?><br />
+					<?php printf( __( "The report was based on %s of sessions.", 'analytics-insights' ), '<strong>'. esc_html( $sampling['percent'] ) . '</strong>' );?><br />
+					<?php printf( __( "Sessions ratio: %s.", 'analytics-insights' ), '<strong>'. esc_html( $sampling['sessions'] ) . '</strong>' ); ?>
 				<?php else :?>
 					<?php _e( "None", 'analytics-insights' ); ?>
 			 <?php endif;?>
@@ -1000,7 +1000,7 @@ final class AIWP_Settings {
 	<tr>
 		<td colspan="2">
 	  <?php $auth = $aiwp->gapi_controller->client->createAuthUrl();?>
-			<button type="submit" class="button button-secondary" formaction="<?php echo $auth; ?>" <?php echo $options['network_mode']?'disabled="disabled"':''; ?>><?php _e( "Authorize Plugin", 'analytics-insights' ); ?></button>
+			<button type="submit" class="button button-secondary" formaction="<?php echo esc_raw_url( $auth ); ?>" <?php echo $options['network_mode']?'disabled="disabled"':''; ?>><?php _e( "Authorize Plugin", 'analytics-insights' ); ?></button>
 			<button type="submit" name="Clear" class="button button-secondary"><?php _e( "Clear Cache", 'analytics-insights' ); ?></button>
 		</td>
 	</tr>
@@ -1240,7 +1240,7 @@ final class AIWP_Settings {
 	<tr>
 		<td colspan="2">
 	  <?php $auth = $aiwp->gapi_controller->client->createAuthUrl();?>
-			<button type="submit" class="button button-secondary" formaction="<?php echo $auth; ?>"><?php _e( "Authorize Plugin", 'analytics-insights' ); ?></button>
+			<button type="submit" class="button button-secondary" formaction="<?php echo esc_raw_url( $auth ); ?>"><?php _e( "Authorize Plugin", 'analytics-insights' ); ?></button>
 			<button type="submit" name="Clear" class="button button-secondary"><?php _e( "Clear Cache", 'analytics-insights' ); ?></button>
 		</td>
 	</tr>
