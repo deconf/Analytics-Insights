@@ -710,8 +710,8 @@ msgid "the plugin&#39;s settings page"
 msgstr ""
 
 #: .././admin/widgets.php:27 .././front/widgets.php:21
-msgid "Google Analytics Dashboard"
-msgstr "Bezoekersstatistieken"
+msgid "Analytics Insights"
+msgstr "Analytics Insights"
 
 #: .././admin/widgets.php:66
 msgid "Something went wrong while retrieving profiles list."

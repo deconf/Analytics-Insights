@@ -712,8 +712,8 @@ msgid "the plugin&#39;s settings page"
 msgstr ""
 
 #: .././admin/widgets.php:27 .././front/widgets.php:21
-msgid "Google Analytics Dashboard"
-msgstr "Google Analytics Dashboard"
+msgid "Analytics Insights"
+msgstr "Analytics Insights"
 
 #: .././admin/widgets.php:66
 msgid "Something went wrong while retrieving profiles list."
@@ -1016,8 +1016,8 @@ msgstr "Typ"
 #~ msgid "written by the same author"
 #~ msgstr "vom selben Autor"
 
-#~ msgid "Google Analytics Dashboard Settings"
-#~ msgstr "Google Analytics Dashboard Einstellungen"
+#~ msgid "Google Analytics Settings"
+#~ msgstr "Google Analytics Einstellungen"
 
 #~ msgid "A new frontend widget is available! To enable it, go to"
 #~ msgstr ""
@@ -1026,8 +1026,8 @@ msgstr "Typ"
 #~ msgid "Appearance -> Widgets"
 #~ msgstr "Design -> Widgets"
 
-#~ msgid "and look for Google Analytics Dashboard."
-#~ msgstr "und suche nach Google Analytics Dashboard."
+#~ msgid "and look for Analytics Insights."
+#~ msgstr "und suche nach Analytics Insights."
 
 #~ msgid "Something went wrong, you need to"
 #~ msgstr "Ein Fehler ist aufgetreten. Du musst"

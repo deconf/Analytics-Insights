@@ -698,8 +698,8 @@ msgid "the plugin&#39;s settings page"
 msgstr ""
 
 #: .././admin/widgets.php:27 .././front/widgets.php:21
-msgid "Google Analytics Dashboard"
-msgstr "Pulpit Google Analytics"
+msgid "Analytics Insights"
+msgstr "Analytics Insights"
 
 #: .././admin/widgets.php:66
 msgid "Something went wrong while retrieving profiles list."
@@ -974,8 +974,8 @@ msgstr "Typ"
 #~ msgid "written by the same author"
 #~ msgstr "napisane przez tego samego autora"
 
-#~ msgid "Google Analytics Dashboard Settings"
-#~ msgstr "Ustawienia Pulpitu Google Analytics"
+#~ msgid "Google Analytics Settings"
+#~ msgstr "Ustawienia Google Analytics"
 
 #~ msgid "A new frontend widget is available! To enable it, go to"
 #~ msgstr "Nowy widget frontendu jest dostępny! Aby go włączyć, przejðź do"

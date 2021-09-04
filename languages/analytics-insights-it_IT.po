@@ -685,7 +685,7 @@ msgstr "Impostazioni"
 #: .././admin/setup.php:239
 #, php-format
 msgid "Analytics Insights has been updated to version %s."
-msgstr "Google Analytics Dashboard for Wp è stato aggiornato alla versione %s."
+msgstr "Analytics Insights è stato aggiornato alla versione %s."
 
 #: .././admin/setup.php:239
 #, php-format
@@ -701,8 +701,8 @@ msgid "the plugin&#39;s settings page"
 msgstr "La pagina delle impostazioni del plugin"
 
 #: .././admin/widgets.php:27 .././front/widgets.php:21
-msgid "Google Analytics Dashboard"
-msgstr "Bacheca di Google Analytics"
+msgid "Analytics Insights"
+msgstr "Analytics Insights"
 
 #: .././admin/widgets.php:66
 msgid "Something went wrong while retrieving profiles list."
@@ -1055,8 +1055,8 @@ msgstr "Tipo"
 #~ msgid "Appearance -> Widgets"
 #~ msgstr "Aspetto -> Widgets"
 
-#~ msgid "and look for Google Analytics Dashboard."
-#~ msgstr "e cerca Bacheca di Google Analytics."
+#~ msgid "and look for Analytics Insights."
+#~ msgstr "e cerca Analytics Insights."
 
 #~ msgid "Something went wrong, you need to"
 #~ msgstr "Qualcosa &egrave; andato male, devi"

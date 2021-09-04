@@ -712,8 +712,8 @@ msgid "the plugin&#39;s settings page"
 msgstr ""
 
 #: .././admin/widgets.php:27 .././front/widgets.php:21
-msgid "Google Analytics Dashboard"
-msgstr "Google Analytics vezérlőpult"
+msgid "Analytics Insights"
+msgstr "Analytics Insights"
 
 #: .././admin/widgets.php:66
 msgid "Something went wrong while retrieving profiles list."
@@ -971,7 +971,7 @@ msgstr "Típus"
 #~ msgid "Google Analytics account"
 #~ msgstr "Google Analytics fiókját"
 
-#~ msgid "Google Analytics Dashboard Settings"
+#~ msgid "Google Analytics Settings"
 #~ msgstr "Google Analytics vezérlőpult beállítások"
 
 #~ msgid "(find out more"
@@ -1042,8 +1042,8 @@ msgstr "Típus"
 #~ msgid "Appearance -> Widgets"
 #~ msgstr "Megjelenés -> Widgetek"
 
-#~ msgid "and look for Google Analytics Dashboard."
-#~ msgstr "menühöz és keresse a Google Analytics vezérlőpultot."
+#~ msgid "and look for Analytics Insights."
+#~ msgstr "menühöz és keresse a Analytics Insights."
 
 #~ msgid "Debugging Data"
 #~ msgstr "Hibakeresés adatok"

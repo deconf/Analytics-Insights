@@ -709,8 +709,8 @@ msgid "the plugin&#39;s settings page"
 msgstr ""
 
 #: .././admin/widgets.php:27 .././front/widgets.php:21
-msgid "Google Analytics Dashboard"
-msgstr "Painel do Google Analytics"
+msgid "Analytics Insights"
+msgstr "Analytics Insights"
 
 #: .././admin/widgets.php:66
 msgid "Something went wrong while retrieving profiles list."
@@ -1095,8 +1095,8 @@ msgstr "Tipo"
 #~ msgid "service with users tracking at IP level."
 #~ msgstr "serviço com os usuários de rastreamento a nível de IP."
 
-#~ msgid "Google Analytics Dashboard Settings"
-#~ msgstr "Configurações de Painel do Google Analytics"
+#~ msgid "Google Analytics Settings"
+#~ msgstr "Configurações do Google Analytics"
 
 #~ msgid "A new frontend widget is available! To enable it, go to"
 #~ msgstr "Um novo Widget da Frente está disponível! Para ativá-lo, vá para o"
@@ -1104,8 +1104,8 @@ msgstr "Tipo"
 #~ msgid "Appearance -> Widgets"
 #~ msgstr "Aparência -> Widgets"
 
-#~ msgid "and look for Google Analytics Dashboard."
-#~ msgstr "e procura por Painel do Google Analytics."
+#~ msgid "and look for Analytics Insights."
+#~ msgstr "e procura por Analytics Insights."
 
 #~ msgid "Something went wrong, you need to"
 #~ msgstr "Algo deu errado, você precisa"

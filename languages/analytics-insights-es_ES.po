@@ -711,8 +711,8 @@ msgid "the plugin&#39;s settings page"
 msgstr "página de configuración del plugin"
 
 #: .././admin/widgets.php:27 .././front/widgets.php:21
-msgid "Google Analytics Dashboard"
-msgstr "Escritorio de Google Analytics"
+msgid "Analytics Insights"
+msgstr "Analytics Insights"
 
 #: .././admin/widgets.php:66
 msgid "Something went wrong while retrieving profiles list."
@@ -948,11 +948,11 @@ msgstr "Tipo"
 #~ msgid "You should watch the"
 #~ msgstr "Deberías ver este"
 
-#~ msgid "Google Analytics Dashboard Settings"
-#~ msgstr "Configuración del escritorio de Google Analytics"
+#~ msgid "Google Analytics Settings"
+#~ msgstr "Configuración del Google Analytics"
 
-#~ msgid "and look for Google Analytics Dashboard."
-#~ msgstr "y busca escritorio de Google Analytics."
+#~ msgid "and look for Analytics Insights."
+#~ msgstr "y busca Analytics Insights."
 
 #, fuzzy
 #~ msgid "Google Analytics account"
@@ -1107,14 +1107,14 @@ msgstr "Tipo"
 #~ "(el resto de la configuración se mostrará después de completar el proceso "
 #~ "de autorización)"
 
-#~ msgid "Google Analytics Dashboard Official Page"
-#~ msgstr "Página oficial de Google Analytics Dashboard"
+#~ msgid "Analytics Insights Official Page"
+#~ msgstr "Página oficial de Analytics Insights"
 
-#~ msgid "Google Analytics Dashboard Wordpress Support"
-#~ msgstr "Soporte de Wordpress de Google Analytics Dashboard"
+#~ msgid "Analytics Insights Wordpress Support"
+#~ msgstr "Soporte de Wordpress de Analytics Insights"
 
-#~ msgid "Google Analytics Dashboard on Deconf Forum"
-#~ msgstr "Google Analytics Dashboard en el foro de Deconf"
+#~ msgid "Analytics Insights on Deconf Forum"
+#~ msgstr "Analytics Insights en el foro de Deconf"
 
 #~ msgid "Useful Plugins"
 #~ msgstr "Plugins de interés"
