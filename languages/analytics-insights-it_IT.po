@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Google Analytics Dashboard for WP 4.8.1.2\n"
+"Project-Id-Version: Analytics Insights 4.8.1.2\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/google-analytics-"
 "dashboard-for-wp\n"
 "POT-Creation-Date: 2015-08-04 16:53+0300\n"
@@ -35,7 +35,7 @@ msgstr "Impostazioni salvate."
 #: .././admin/settings.php:1030 .././admin/settings.php:1055
 #: .././admin/settings.php:1065 .././admin/settings.php:1071
 #: .././admin/settings.php:1082
-msgid "Cheating Huh?"
+msgid "You do not have sufficient permissions to access this page."
 msgstr "Tentativo di frode?"
 
 #: .././admin/settings.php:95 .././admin/settings.php:190
@@ -684,7 +684,7 @@ msgstr "Impostazioni"
 
 #: .././admin/setup.php:239
 #, php-format
-msgid "Google Analytics Dashboard for WP has been updated to version %s."
+msgid "Analytics Insights has been updated to version %s."
 msgstr "Google Analytics Dashboard for Wp è stato aggiornato alla versione %s."
 
 #: .././admin/setup.php:239

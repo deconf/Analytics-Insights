@@ -39,7 +39,7 @@ msgstr "設定を保存しました。"
 #: .././admin/settings.php:1030 .././admin/settings.php:1055
 #: .././admin/settings.php:1065 .././admin/settings.php:1071
 #: .././admin/settings.php:1082
-msgid "Cheating Huh?"
+msgid "You do not have sufficient permissions to access this page."
 msgstr "修正しますか？"
 
 #: .././admin/settings.php:95 .././admin/settings.php:190
@@ -691,7 +691,7 @@ msgstr "設定"
 
 #: .././admin/setup.php:239
 #, php-format
-msgid "Google Analytics Dashboard for WP has been updated to version %s."
+msgid "Analytics Insights has been updated to version %s."
 msgstr ""
 
 #: .././admin/setup.php:239
@@ -1000,8 +1000,8 @@ msgstr "タイプ"
 #~ msgid "find out more"
 #~ msgstr "もっと詳しく"
 
-#~ msgid "Google Analytics Dashboard for WP"
-#~ msgstr "Google Analytics Dashboard for WP"
+#~ msgid "Analytics Insights"
+#~ msgstr "Analytics Insights"
 
 #~ msgid "https://deconf.com"
 #~ msgstr "https://deconf.com"

@@ -45,11 +45,11 @@ final class AIWP_Frontend_Widget extends WP_Widget {
 		}
 
 		if ( isset( $this->aiwp->config->options['theme_color'] ) ) {
-			$css = "colors:['" . esc_attr( $this->aiwp->config->options['theme_color'] ) . "','" . AIWP_Tools::colourVariator( $this->aiwp->config->options['theme_color'], - 20 ) . "'],";
-			$color = $this->aiwp->config->options['theme_color'];
+			$css = "colors:['" . esc_attr( $this->aiwp->config->options['theme_color'] ) . "','" . esc_attr( AIWP_Tools::colourVariator( $this->aiwp->config->options['theme_color'], - 20 ) ) . "'],\n";
+			//$color = $this->aiwp->config->options['theme_color'];
 		} else {
 			$css = "";
-			$color = "#3366CC";
+			//$color = "#3366CC";
 		}
 		ob_start();
 		if ( $instance['anonim'] ) {

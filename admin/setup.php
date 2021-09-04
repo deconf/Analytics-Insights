@@ -122,7 +122,7 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 					if ( $this->aiwp->config->options['ga_target_geomap'] ) {
 						$country_codes = AIWP_Tools::get_countrycodes();
 						if ( isset( $country_codes[$this->aiwp->config->options['ga_target_geomap']] ) ) {
-							$region = $this->aiwp->config->options['ga_target_geomap'];
+							$region = esc_js( $this->aiwp->config->options['ga_target_geomap'] );
 						} else {
 							$region = false;
 						}
@@ -217,9 +217,9 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 							__( "Search ...", 'analytics-insights' ), //30
 						),
 						'rtLimitPages' => $this->aiwp->config->options['ga_realtime_pages'],
-						'colorVariations' => AIWP_Tools::variations( $this->aiwp->config->options['theme_color'] ),
+						'colorVariations' => AIWP_Tools::variations( esc_js( $this->aiwp->config->options['theme_color'] ) ),
 						'region' => $region,
-						'mapsApiKey' => apply_filters( 'aiwp_maps_api_key', $this->aiwp->config->options['maps_api_key'] ),
+						'mapsApiKey' => apply_filters( 'aiwp_maps_api_key', esc_js( $this->aiwp->config->options['maps_api_key'] ) ),
 						'language' => get_bloginfo( 'language' ),
 						'viewList' => $views,
 						'scope' => 'admin-widgets',
@@ -321,7 +321,7 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 						),
 						'colorVariations' => AIWP_Tools::variations( $this->aiwp->config->options['theme_color'] ),
 						'region' => $region,
-						'mapsApiKey' => apply_filters( 'aiwp_maps_api_key', $this->aiwp->config->options['maps_api_key'] ),
+						'mapsApiKey' => apply_filters( 'aiwp_maps_api_key', esc_js( $this->aiwp->config->options['maps_api_key'] ) ),
 						'language' => get_bloginfo( 'language' ),
 						'viewList' => false,
 						'scope' => 'admin-item',

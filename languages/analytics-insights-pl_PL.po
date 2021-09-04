@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Google Analytics Dashboard for WP\n"
+"Project-Id-Version: Analytics Insights\n"
 "POT-Creation-Date: 2015-08-04 16:53+0300\n"
 "PO-Revision-Date: 2015-08-04 16:53+0300\n"
 "Last-Translator: Alin Marcu <admin@deconf.com>\n"
@@ -37,7 +37,7 @@ msgstr ""
 #: .././admin/settings.php:1030 .././admin/settings.php:1055
 #: .././admin/settings.php:1065 .././admin/settings.php:1071
 #: .././admin/settings.php:1082
-msgid "Cheating Huh?"
+msgid "You do not have sufficient permissions to access this page."
 msgstr "Oszukujemy, co?"
 
 #: .././admin/settings.php:95 .././admin/settings.php:190
@@ -681,7 +681,7 @@ msgstr "Ustawienia"
 
 #: .././admin/setup.php:239
 #, php-format
-msgid "Google Analytics Dashboard for WP has been updated to version %s."
+msgid "Analytics Insights has been updated to version %s."
 msgstr ""
 
 #: .././admin/setup.php:239

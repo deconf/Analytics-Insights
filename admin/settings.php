@@ -84,7 +84,7 @@ final class AIWP_Settings {
 	private static function navigation_tabs( $tabs ) {
 		echo '<h2 class="nav-tab-wrapper">';
 		foreach ( $tabs as $tab => $name ) {
-			echo "<a class='nav-tab' id='tab-$tab' href='#top#aiwp-$tab'>$name</a>";
+			echo "<a class='nav-tab' id='tab-$tab' href='#top#aiwp-$tab'>esc_html( $name )</a>";
 		}
 		echo '</h2>';
 	}
@@ -134,7 +134,7 @@ final class AIWP_Settings {
 		?>
 <tr>
 	<td <?php if ( $withspan ) echo 'colspan="2"'; ?>>
-			<?php if ( $withhr ) echo "<hr>";	if ( $title ) echo "<h2>" . $title . "</h2>";?>
+			<?php if ( $withhr ) echo "<hr>";	if ( $title ) echo "<h2>" . esc_html( $title ) . "</h2>";?>
 	</td>
 </tr>
 <?php
@@ -150,7 +150,7 @@ final class AIWP_Settings {
 		if ( isset( $_REQUEST['options']['aiwp_hidden'] ) ) {
 			$message = "<div class='updated' id='aiwp-autodismiss'><p>" . __( "Settings saved.", 'analytics-insights' ) . "</p></div>";
 			if ( ! ( isset( $_REQUEST['aiwp_security'] ) && wp_verify_nonce( $_REQUEST['aiwp_security'], 'aiwp_form' ) ) ) {
-				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "Cheating Huh?", 'analytics-insights' ) . "</p></div>";
+				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You do not have sufficient permissions to access this page.", 'analytics-insights' ) . "</p></div>";
 			}
 		}
 		if ( ! $aiwp->config->options['tableid_jail'] || ! $aiwp->config->options['token'] ) {
@@ -206,7 +206,7 @@ final class AIWP_Settings {
 		if ( isset( $_REQUEST['options']['aiwp_hidden'] ) ) {
 			$message = "<div class='updated' id='aiwp-autodismiss'><p>" . __( "Settings saved.", 'analytics-insights' ) . "</p></div>";
 			if ( ! ( isset( $_REQUEST['aiwp_security'] ) && wp_verify_nonce( $_REQUEST['aiwp_security'], 'aiwp_form' ) ) ) {
-				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "Cheating Huh?", 'analytics-insights' ) . "</p></div>";
+				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You do not have sufficient permissions to access this page.", 'analytics-insights' ) . "</p></div>";
 			}
 		}
 		if ( ! $aiwp->config->options['tableid_jail'] || ! $aiwp->config->options['token'] ) {
@@ -296,7 +296,7 @@ final class AIWP_Settings {
 		if ( isset( $_REQUEST['options']['aiwp_hidden'] ) ) {
 			$message = "<div class='updated' id='aiwp-autodismiss'><p>" . __( "Settings saved.", 'analytics-insights' ) . "</p></div>";
 			if ( ! ( isset( $_REQUEST['aiwp_security'] ) && wp_verify_nonce( $_REQUEST['aiwp_security'], 'aiwp_form' ) ) ) {
-				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "Cheating Huh?", 'analytics-insights' ) . "</p></div>";
+				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You do not have sufficient permissions to access this page.", 'analytics-insights' ) . "</p></div>";
 			}
 		}
 		if ( ! $aiwp->config->options['tableid_jail'] ) {
@@ -837,7 +837,7 @@ final class AIWP_Settings {
 				AIWP_Tools::clear_cache();
 				$message = "<div class='updated' id='aiwp-autodismiss'><p>" . __( "Cleared Cache.", 'analytics-insights' ) . "</p></div>";
 			} else {
-				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "Cheating Huh?", 'analytics-insights' ) . "</p></div>";
+				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You do not have sufficient permissions to access this page.", 'analytics-insights' ) . "</p></div>";
 			}
 		}
 		if ( isset( $_REQUEST['Reset'] ) ) {
@@ -847,7 +847,7 @@ final class AIWP_Settings {
 				$message = "<div class='updated' id='aiwp-autodismiss'><p>" . __( "Token Reseted and Revoked.", 'analytics-insights' ) . "</p></div>";
 				$options = self::update_options( 'Reset' );
 			} else {
-				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "Cheating Huh?", 'analytics-insights' ) . "</p></div>";
+				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You do not have sufficient permissions to access this page.", 'analytics-insights' ) . "</p></div>";
 			}
 		}
 		if ( isset( $_REQUEST['Reset_Err'] ) ) {
@@ -880,13 +880,13 @@ final class AIWP_Settings {
 				AIWP_Tools::delete_cache( 'gapi_errors' );
 				$message = "<div class='updated' id='aiwp-autodismiss'><p>" . __( "All errors reseted.", 'analytics-insights' ) . "</p></div>";
 			} else {
-				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "Cheating Huh?", 'analytics-insights' ) . "</p></div>";
+				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You do not have sufficient permissions to access this page.", 'analytics-insights' ) . "</p></div>";
 			}
 		}
 		if ( isset( $_REQUEST['options']['aiwp_hidden'] ) && ! isset( $_REQUEST['Clear'] ) && ! isset( $_REQUEST['Reset'] ) && ! isset( $_REQUEST['Reset_Err'] ) ) {
 			$message = "<div class='updated' id='aiwp-autodismiss'><p>" . __( "Settings saved.", 'analytics-insights' ) . "</p></div>";
 			if ( ! ( isset( $_REQUEST['aiwp_security'] ) && wp_verify_nonce( $_REQUEST['aiwp_security'], 'aiwp_form' ) ) ) {
-				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "Cheating Huh?", 'analytics-insights' ) . "</p></div>";
+				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You do not have sufficient permissions to access this page.", 'analytics-insights' ) . "</p></div>";
 			}
 		}
 		if ( isset( $_REQUEST['Hide'] ) ) {
@@ -896,14 +896,14 @@ final class AIWP_Settings {
 				$aiwp->config->options['ga_profiles_list'] = array( $lock_profile );
 				$options = self::update_options( 'general' );
 			} else {
-				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "Cheating Huh?", 'analytics-insights' ) . "</p></div>";
+				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You do not have sufficient permissions to access this page.", 'analytics-insights' ) . "</p></div>";
 			}
 		}
 		if ( $aiwp->gapi_controller->gapi_errors_handler() || AIWP_Tools::get_cache( 'last_error' ) ) {
 			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'analytics-insights' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_errors_debugging', false ), __( 'Errors & Debug', 'analytics-insights' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_settings', false ), __( 'authorize the plugin', 'analytics-insights' ) ) ) );
 		}
  	?>
-<?php self::html_form_begin(__( "Google Analytics Settings", 'analytics-insights' ), esc_url($_SERVER['REQUEST_URI']), $message)?>
+<?php self::html_form_begin(__( "Google Analytics Settings", 'analytics-insights' ), esc_url( $_SERVER['REQUEST_URI'] ), $message)?>
 <table class="aiwp-settings-options">
 	<?php self::html_section_delimiter(__( "Plugin Authorization", 'analytics-insights' ), false); ?>
 	<tr>
@@ -1000,7 +1000,7 @@ final class AIWP_Settings {
 	<tr>
 		<td colspan="2">
 	  <?php $auth = $aiwp->gapi_controller->client->createAuthUrl();?>
-			<button type="submit" class="button button-secondary" formaction="<?php echo esc_raw_url( $auth ); ?>" <?php echo $options['network_mode']?'disabled="disabled"':''; ?>><?php _e( "Authorize Plugin", 'analytics-insights' ); ?></button>
+			<button type="submit" class="button button-secondary" formaction="<?php echo esc_url_raw( $auth ); ?>" <?php echo $options['network_mode']?'disabled="disabled"':''; ?>><?php _e( "Authorize Plugin", 'analytics-insights' ); ?></button>
 			<button type="submit" name="Clear" class="button button-secondary"><?php _e( "Clear Cache", 'analytics-insights' ); ?></button>
 		</td>
 	</tr>
@@ -1105,7 +1105,7 @@ final class AIWP_Settings {
 					}
 				}
 			} else {
-				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "Cheating Huh?", 'analytics-insights' ) . "</p></div>";
+				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You do not have sufficient permissions to access this page.", 'analytics-insights' ) . "</p></div>";
 			}
 		}
 		if ( isset( $_REQUEST['Clear'] ) ) {
@@ -1113,7 +1113,7 @@ final class AIWP_Settings {
 				AIWP_Tools::clear_cache();
 				$message = "<div class='updated' id='aiwp-autodismiss'><p>" . __( "Cleared Cache.", 'analytics-insights' ) . "</p></div>";
 			} else {
-				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "Cheating Huh?", 'analytics-insights' ) . "</p></div>";
+				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You do not have sufficient permissions to access this page.", 'analytics-insights' ) . "</p></div>";
 			}
 		}
 		if ( isset( $_REQUEST['Reset'] ) ) {
@@ -1123,13 +1123,13 @@ final class AIWP_Settings {
 				$message = "<div class='updated' id='aiwp-autodismiss'><p>" . __( "Token Reseted and Revoked.", 'analytics-insights' ) . "</p></div>";
 				$options = self::update_options( 'Reset' );
 			} else {
-				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "Cheating Huh?", 'analytics-insights' ) . "</p></div>";
+				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You do not have sufficient permissions to access this page.", 'analytics-insights' ) . "</p></div>";
 			}
 		}
 		if ( isset( $_REQUEST['options']['aiwp_hidden'] ) && ! isset( $_REQUEST['Clear'] ) && ! isset( $_REQUEST['Reset'] ) && ! isset( $_REQUEST['Refresh'] ) ) {
 			$message = "<div class='updated' id='aiwp-autodismiss'><p>" . __( "Settings saved.", 'analytics-insights' ) . "</p></div>";
 			if ( ! ( isset( $_REQUEST['aiwp_security'] ) && wp_verify_nonce( $_REQUEST['aiwp_security'], 'aiwp_form' ) ) ) {
-				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "Cheating Huh?", 'analytics-insights' ) . "</p></div>";
+				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You do not have sufficient permissions to access this page.", 'analytics-insights' ) . "</p></div>";
 			}
 		}
 		if ( isset( $_REQUEST['Hide'] ) ) {
@@ -1139,7 +1139,7 @@ final class AIWP_Settings {
 				$aiwp->config->options['ga_profiles_list'] = array( $lock_profile );
 				$options = self::update_options( 'network' );
 			} else {
-				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "Cheating Huh?", 'analytics-insights' ) . "</p></div>";
+				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You do not have sufficient permissions to access this page.", 'analytics-insights' ) . "</p></div>";
 			}
 		}
 		if ( $aiwp->gapi_controller->gapi_errors_handler() || AIWP_Tools::get_cache( 'last_error' ) ) {
@@ -1240,7 +1240,7 @@ final class AIWP_Settings {
 	<tr>
 		<td colspan="2">
 	  <?php $auth = $aiwp->gapi_controller->client->createAuthUrl();?>
-			<button type="submit" class="button button-secondary" formaction="<?php echo esc_raw_url( $auth ); ?>"><?php _e( "Authorize Plugin", 'analytics-insights' ); ?></button>
+			<button type="submit" class="button button-secondary" formaction="<?php echo esc_url_raw( $auth ); ?>"><?php _e( "Authorize Plugin", 'analytics-insights' ); ?></button>
 			<button type="submit" name="Clear" class="button button-secondary"><?php _e( "Clear Cache", 'analytics-insights' ); ?></button>
 		</td>
 	</tr>

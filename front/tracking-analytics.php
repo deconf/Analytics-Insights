@@ -365,7 +365,7 @@ if ( ! class_exists( 'AIWP_Tracking_GlobalSiteTag' ) ) {
 		private function build_commands() {
 			$fields = array();
 			$fieldsobject = array();
-			$fields['trackingId'] = $this->uaid;
+			$fields['trackingId'] = esc_js( $this->uaid );
 			$custom_dimensions = $this->build_custom_dimensions();
 			/*
 			 * if ( 1 != $this->aiwp->config->options['ga_speed_samplerate'] ) {
