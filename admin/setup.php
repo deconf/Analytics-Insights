@@ -104,7 +104,7 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 				$views = array();
 				foreach ( $this->aiwp->config->options['ga_profiles_list'] as $items ) {
 					if ( $items[3] ) {
-						$views[$items[1]] = esc_js( AIWP_Tools::strip_protocol( $items[3] ) ); // . ' &#8658; ' . $items[0] );
+						$views[$items[1]] = esc_js( AIWP_Tools::strip_protocol( $items[3] ) );
 					}
 				}
 			} else {

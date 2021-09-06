@@ -14,18 +14,18 @@
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','<?php echo $data['tracking_script_path']?>','ga');
-<?php echo $data['trackingcode']?>
+})(window,document,'script','<?php echo esc_url( $data['tracking_script_path'] )?>','ga');
+<?php echo wp_kses( $data['trackingcode'], array() )?>
 </script>
 <!-- END AIWP Universal Analytics -->
 <?php else:?>
 <!-- BEGIN AIWP v<?php echo AIWP_CURRENT_VERSION; ?> Global Site Tag - https://deconf.com/analytics-insights/ -->
-<script async src="<?php echo $data['tracking_script_path']?>?id=<?php echo esc_js( $data['uaid'] )?>"></script>
+<script async src="<?php echo esc_url( $data['tracking_script_path'] )?>?id=<?php echo esc_js( $data['uaid'] )?>"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-<?php echo $data['trackingcode']?>
+<?php echo wp_kses( $data['trackingcode'], array() )?>
 
   if (window.performance) {
     var timeSincePageLoad = Math.round(performance.now());

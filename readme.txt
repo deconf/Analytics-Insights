@@ -174,7 +174,7 @@ Analytics Insights it's released under the GPLv2, you can use it free of charge 
 
 = 5.4.4 (2021.09.04) =
 * Security Fixes:
-	* sanitizing, escapping, and validating additional data
+	* sanitizing, escaping, and validating additional data
 * Enhancements:
 	* new translations for multiple languages
 	* replacing <strong>Cheating huh?<strong> with a more helpful feedback	
@@ -186,7 +186,7 @@ Analytics Insights it's released under the GPLv2, you can use it free of charge 
 	* improvements on UX for reports switching (no more charts reloading)
 	* removed automatic updates
 	* settings page optimization
-	* refactoring code on settings page
+	* refactoring code on the settings page
 	* removed a duplicate option in Tracking Code 
 * Bug Fixes:	
 	* CSS fix for on/off buttons	

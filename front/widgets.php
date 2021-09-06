@@ -113,7 +113,7 @@ final class AIWP_Frontend_Widget extends WP_Widget {
 		var options = {
 			legend: { position: "none" },
 			pointSize: "3",
-			<?php echo $css; ?>
+			<?php echo esc_html( $css ); ?>
 			title: "<?php echo esc_js( $title ); ?>",
 			titlePosition: "in",
 			chartArea: { width: "95%", height: "75%" },

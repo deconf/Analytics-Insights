@@ -10,7 +10,7 @@
 <!-- BEGIN AIWP v<?php echo AIWP_CURRENT_VERSION; ?> Tag Manager - https://deconf.com/analytics-insights/ -->
 <script>
   window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push(<?php echo $data['vars']; ?>);
+  window.dataLayer.push(<?php echo wp_kses( $data['vars'], array() ); ?>);
 </script>
 
 <script>

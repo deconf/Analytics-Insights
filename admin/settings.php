@@ -84,7 +84,7 @@ final class AIWP_Settings {
 	private static function navigation_tabs( $tabs ) {
 		echo '<h2 class="nav-tab-wrapper">';
 		foreach ( $tabs as $tab => $name ) {
-			echo "<a class='nav-tab' id='tab-$tab' href='#top#aiwp-$tab'>". esc_html( $name ) ."</a>";
+			echo "<a class='nav-tab' id='tab-".esc_attr( $tab )."' href='#top#aiwp-".esc_attr( $tab )."'>". esc_html( $name ) ."</a>";
 		}
 		echo '</h2>';
 	}

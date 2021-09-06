@@ -9,6 +9,6 @@
 ?>
 <amp-analytics config="https://www.googletagmanager.com/amp.json?id=<?php echo esc_js( $data['containerid'] ); ?>&gtm.url=SOURCE_URL" data-credentials="include">
 	<script type="application/json">
-<?php echo $data['json']; ?>
+<?php echo wp_kses( $data['json'], array() ); ?>
 	</script>
 </amp-analytics>

@@ -9,6 +9,6 @@
 ?>
 <amp-analytics type="googleanalytics" id="aiwp-googleanalytics">
 	<script type="application/json">
-<?php echo $data['json']; ?>
+<?php echo wp_kses( $data['json'], array() ); ?>
 	</script>
 </amp-analytics>
