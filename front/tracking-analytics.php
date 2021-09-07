@@ -20,7 +20,7 @@ if ( ! class_exists( 'AIWP_Tracking_Analytics_Base' ) ) {
 		public function __construct() {
 			$this->aiwp = AIWP();
 			$profile = AIWP_Tools::get_selected_profile( $this->aiwp->config->options['ga_profiles_list'], $this->aiwp->config->options['tableid_jail'] );
-			$this->uaid = esc_html( $profile[2] );
+			$this->uaid = sanitize_text_field( $profile[2] );
 		}
 
 		protected function build_custom_dimensions() {
@@ -30,7 +30,7 @@ if ( ! class_exists( 'AIWP_Tracking_Analytics_Base' ) ) {
 				$author_id = $post->post_author;
 				$author_name = get_the_author_meta( 'display_name', $author_id );
 				$index = (int) $this->aiwp->config->options['ga_author_dimindex'];
-				$custom_dimensions[$index] = esc_attr( $author_name );
+				$custom_dimensions[$index] = sanitize_text_field( $author_name );
 			}
 			if ( $this->aiwp->config->options['ga_pubyear_dimindex'] && is_single() ) {
 				global $post;
@@ -42,19 +42,19 @@ if ( ! class_exists( 'AIWP_Tracking_Analytics_Base' ) ) {
 				global $post;
 				$date = get_the_date( 'Y-m', $post->ID );
 				$index = (int) $this->aiwp->config->options['ga_pubyearmonth_dimindex'];
-				$custom_dimensions[$index] = esc_attr( $date );
+				$custom_dimensions[$index] = sanitize_text_field( $date );
 			}
 			if ( $this->aiwp->config->options['ga_category_dimindex'] && is_category() ) {
 				$fields = array();
 				$index = (int) $this->aiwp->config->options['ga_category_dimindex'];
-				$custom_dimensions[$index] = esc_attr( single_tag_title( '', false ) );
+				$custom_dimensions[$index] = sanitize_text_field( single_tag_title( '', false ) );
 			}
 			if ( $this->aiwp->config->options['ga_category_dimindex'] && is_single() ) {
 				global $post;
 				$categories = get_the_category( $post->ID );
 				foreach ( $categories as $category ) {
 					$index = (int) $this->aiwp->config->options['ga_category_dimindex'];
-					$custom_dimensions[$index] = esc_attr( $category->name );
+					$custom_dimensions[$index] = sanitize_text_field( $category->name );
 					break;
 				}
 			}
@@ -65,13 +65,13 @@ if ( ! class_exists( 'AIWP_Tracking_Analytics_Base' ) ) {
 				$post_tags_array = get_the_tags( $post->ID );
 				if ( $post_tags_array ) {
 					foreach ( $post_tags_array as $tag ) {
-						$post_tags_list .= esc_attr( $tag->name ) . ', ';
+						$post_tags_list .= sanitize_text_field( $tag->name ) . ', ';
 					}
 				}
 				$post_tags_list = rtrim( $post_tags_list, ', ' );
 				if ( $post_tags_list ) {
 					$index = (int) $this->aiwp->config->options['ga_tag_dimindex'];
-					$custom_dimensions[$index] = esc_attr( $post_tags_list );
+					$custom_dimensions[$index] = sanitize_text_field( $post_tags_list );
 				}
 			}
 			if ( $this->aiwp->config->options['ga_user_dimindex'] ) {
@@ -121,12 +121,12 @@ if ( ! class_exists( 'AIWP_Tracking_Analytics_Common' ) ) {
 				wp_localize_script( 'aiwp-tracking-analytics-events', 'aiwpUAEventsData', array(
 					'options' => array(
 						'event_tracking' => $this->aiwp->config->options['ga_event_tracking'],
-						'event_downloads' => esc_js($this->aiwp->config->options['ga_event_downloads']),
+						'event_downloads' => sanitize_text_field($this->aiwp->config->options['ga_event_downloads']),
 						'event_bouncerate' => $this->aiwp->config->options['ga_event_bouncerate'],
 						'aff_tracking' => $this->aiwp->config->options['ga_aff_tracking'],
-						'event_affiliates' =>  esc_js($this->aiwp->config->options['ga_event_affiliates']),
+						'event_affiliates' =>  sanitize_text_field($this->aiwp->config->options['ga_event_affiliates']),
 						'hash_tracking' =>  $this->aiwp->config->options ['ga_hash_tracking'],
-						'root_domain' => esc_js( $root_domain ),
+						'root_domain' => sanitize_text_field( $root_domain ),
 						'event_timeout' => apply_filters( 'aiwp_analyticsevents_timeout', 100 ),
 						'event_precision' => $this->aiwp->config->options['ga_event_precision'],
 						'event_formsubmit' =>  $this->aiwp->config->options ['ga_formsubmit_tracking'],
@@ -233,7 +233,7 @@ if ( ! class_exists( 'AIWP_Tracking_Analytics' ) ) {
 				$fields['cookieDomain'] = 'auto';
 			}
 			if ( ! empty( $this->aiwp->config->options['ga_cookiename'] ) ) {
-				$fieldsobject['cookieName'] = esc_js( $this->aiwp->config->options['ga_cookiename'] );
+				$fieldsobject['cookieName'] = sanitize_text_field( $this->aiwp->config->options['ga_cookiename'] );
 			}
 			if ( ! empty( $this->aiwp->config->options['ga_cookieexpires'] ) ) {
 				$fieldsobject['cookieExpires'] = (int) $this->aiwp->config->options['ga_cookieexpires'];
@@ -248,7 +248,7 @@ if ( ! class_exists( 'AIWP_Tracking_Analytics' ) ) {
 				$this->add( 'require', $fields );
 				$fields = array();
 				$domains = '';
-				$domains = explode( ',', esc_js( $this->aiwp->config->options['ga_crossdomain_list'] ) );
+				$domains = explode( ',', sanitize_text_field( $this->aiwp->config->options['ga_crossdomain_list'] ) );
 				$domains = array_map( 'trim', $domains );
 				$domains = strip_tags( implode( "','", $domains ) );
 				$domains = "['" . $domains . "']";
@@ -297,7 +297,7 @@ if ( ! class_exists( 'AIWP_Tracking_Analytics' ) ) {
 			}
 			if ( $this->aiwp->config->options['optimize_tracking'] && $this->aiwp->config->options['optimize_containerid'] ) {
 				$fields = array();
-				$fields['plugin'] = esc_attr( $this->aiwp->config->options['optimize_containerid'] );
+				$fields['plugin'] = sanitize_text_field( $this->aiwp->config->options['optimize_containerid'] );
 				$this->add( 'require', $fields );
 			}
 			$fields = array();
@@ -365,7 +365,7 @@ if ( ! class_exists( 'AIWP_Tracking_GlobalSiteTag' ) ) {
 		private function build_commands() {
 			$fields = array();
 			$fieldsobject = array();
-			$fields['trackingId'] = esc_js( $this->uaid );
+			$fields['trackingId'] = sanitize_text_field( $this->uaid );
 			$custom_dimensions = $this->build_custom_dimensions();
 			/*
 			 * if ( 1 != $this->aiwp->config->options['ga_speed_samplerate'] ) {
@@ -373,17 +373,17 @@ if ( ! class_exists( 'AIWP_Tracking_GlobalSiteTag' ) ) {
 			 * }
 			 */
 			if ( ! empty( $this->aiwp->config->options['ga_cookiedomain'] ) ) {
-				$fieldsobject['cookie_domain'] = esc_js( $this->aiwp->config->options['ga_cookiedomain'] );
+				$fieldsobject['cookie_domain'] = sanitize_text_field( $this->aiwp->config->options['ga_cookiedomain'] );
 			}
 			if ( ! empty( $this->aiwp->config->options['ga_cookiename'] ) ) {
-				$fieldsobject['cookie_name'] = esc_js( $this->aiwp->config->options['ga_cookiename'] );
+				$fieldsobject['cookie_name'] = sanitize_text_field( $this->aiwp->config->options['ga_cookiename'] );
 			}
 			if ( ! empty( $this->aiwp->config->options['ga_cookieexpires'] ) ) {
 				$fieldsobject['cookie_expires'] = (int) $this->aiwp->config->options['ga_cookieexpires'];
 			}
 			if ( $this->aiwp->config->options['ga_crossdomain_tracking'] && '' != $this->aiwp->config->options['ga_crossdomain_list'] ) {
 				$domains = '';
-				$domains = explode( ',', esc_js ($this->aiwp->config->options['ga_crossdomain_list'] ) );
+				$domains = explode( ',', sanitize_text_field( $this->aiwp->config->options['ga_crossdomain_list'] ) );
 				$domains = array_map( 'trim', $domains );
 				$domains = strip_tags( implode( "','", $domains ) );
 				$domains = "['" . $domains . "']";
@@ -399,7 +399,7 @@ if ( ! class_exists( 'AIWP_Tracking_GlobalSiteTag' ) ) {
 				$fieldsobject['anonymize_ip'] = 'true';
 			}
 			if ( $this->aiwp->config->options['optimize_tracking'] && $this->aiwp->config->options['optimize_containerid'] ) {
-				$fieldsobject['optimize_id'] = esc_attr( $this->aiwp->config->options['optimize_containerid'] );
+				$fieldsobject['optimize_id'] = sanitize_text_field( $this->aiwp->config->options['optimize_containerid'] );
 			}
 			if ( 100 != $this->aiwp->config->options['ga_user_samplerate'] ) {
 				$fieldsobject['sample_rate'] = (int) $this->aiwp->config->options['ga_user_samplerate'];
@@ -600,7 +600,7 @@ if ( ! class_exists( 'AIWP_Tracking_Analytics_AMP' ) ) {
 			// Set the Tracking ID
 			/* @formatter:off */
 			$this->config['vars'] = array(
-				'account' => esc_js ( $this->uaid ),
+				'account' => sanitize_text_field ( $this->uaid ),
 				'documentLocation' => '${canonicalUrl}',
 			);
 			/* @formatter:on */

@@ -157,7 +157,7 @@ final class AIWP_Settings {
 			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'analytics-insights' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_errors_debugging', false ), __( 'Errors & Debug', 'analytics-insights' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_settings', false ), __( 'authorize the plugin', 'analytics-insights' ) ) ) );
 		}
 		?>
-<?php self::html_form_begin(__( "Google Analytics Frontend Settings", 'analytics-insights' ), esc_url($_SERVER['REQUEST_URI']), $message)?>
+<?php self::html_form_begin(__( "Google Analytics Frontend Settings", 'analytics-insights' ), $_SERVER['REQUEST_URI'], $message)?>
 <table class="aiwp-settings-options">
 	<?php self::html_section_delimiter(__( "Permissions", 'analytics-insights' ), false); ?>
 	<tr>
@@ -213,7 +213,7 @@ final class AIWP_Settings {
 			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'analytics-insights' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_errors_debugging', false ), __( 'Errors & Debug', 'analytics-insights' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_settings', false ), __( 'authorize the plugin', 'analytics-insights' ) ) ) );
 		}
 		?>
-<?php self::html_form_begin(__( "Google Analytics Backend Settings", 'analytics-insights' ), esc_url($_SERVER['REQUEST_URI']), $message)?>
+<?php self::html_form_begin(__( "Google Analytics Backend Settings", 'analytics-insights' ), $_SERVER['REQUEST_URI'], $message)?>
 <table class="aiwp-settings-options">
 	<?php self::html_section_delimiter(__( "Permissions", 'analytics-insights' ), false); ?>
 	<tr>
@@ -718,7 +718,7 @@ final class AIWP_Settings {
 			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'analytics-insights' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_errors_debugging', false ), __( 'Errors & Debug', 'analytics-insights' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_settings', false ), __( 'authorize the plugin', 'analytics-insights' ) ) ) );
 		}
 		?>
-<?php self::html_form_begin(__( "Google Analytics Errors & Debugging", 'analytics-insights' ), esc_url($_SERVER['REQUEST_URI']), $message)?>
+<?php self::html_form_begin(__( "Google Analytics Errors & Debugging", 'analytics-insights' ), $_SERVER['REQUEST_URI'], $message)?>
 <?php $tabs = array( 'errors' => __( "Errors & Details", 'analytics-insights' ), 'config' => __( "Plugin Settings", 'analytics-insights' ), 'sysinfo' => __( "System", 'analytics-insights' ) ); ?>
 <?php self::navigation_tabs( $tabs ); ?>
 <div id="aiwp-errors">
@@ -870,7 +870,7 @@ final class AIWP_Settings {
 							'httpversion' => '1.0',
 							'blocking' => true,
 							'headers' => array(),
-							'body' => array( 'error_report' => $error_report ),
+							'body' => array( 'error_report' => esc_html( $error_report ) ),
 							'cookies' => array()
 						)
 					);
@@ -903,7 +903,7 @@ final class AIWP_Settings {
 			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'analytics-insights' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_errors_debugging', false ), __( 'Errors & Debug', 'analytics-insights' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_settings', false ), __( 'authorize the plugin', 'analytics-insights' ) ) ) );
 		}
  	?>
-<?php self::html_form_begin(__( "Google Analytics Settings", 'analytics-insights' ), esc_url( $_SERVER['REQUEST_URI'] ), $message)?>
+<?php self::html_form_begin(__( "Google Analytics Settings", 'analytics-insights' ), $_SERVER['REQUEST_URI'], $message)?>
 <table class="aiwp-settings-options">
 	<?php self::html_section_delimiter(__( "Plugin Authorization", 'analytics-insights' ), false); ?>
 	<tr>
@@ -1146,7 +1146,7 @@ final class AIWP_Settings {
 			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'analytics-insights' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_errors_debugging', false ), __( 'Errors & Debug', 'analytics-insights' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_settings', false ), __( 'authorize the plugin', 'analytics-insights' ) ) ) );
 		}
 		?>
-<?php self::html_form_begin(__( "Google Analytics Settings", 'analytics-insights' ), esc_url($_SERVER['REQUEST_URI']), $message)?>
+<?php self::html_form_begin(__( "Google Analytics Settings", 'analytics-insights' ), $_SERVER['REQUEST_URI'], $message)?>
 <table class="aiwp-settings-options">
  <?php self::html_section_delimiter(__( "Network Setup", 'analytics-insights' ), false); ?>
 	<?php self::html_switch_button('options[network_mode]', 1, 'network_mode', $options['network_mode'], __( "use a single Google Analytics account for the entire network", 'analytics-insights'), false, true ); ?>
@@ -1204,7 +1204,7 @@ final class AIWP_Settings {
 	<?php foreach ( AIWP_Tools::get_sites( array( 'number' => apply_filters( 'aiwp_sites_limit', 100 ) ) ) as $blog ) : ?>
 	<tr>
 		<td class="aiwp-settings-title-s">
-			<label for="network_tableid"><?php echo '<strong>'.$blog['domain'].$blog['path'].'</strong>: ';?></label>
+			<label for="network_tableid"><?php echo '<strong>'. esc_html( $blog['domain'] ) . esc_url( $blog['path'] ) .'</strong>: ';?></label>
 		</td>
 		<td>
 			<select id="network_tableid" <?php disabled(!empty($options['ga_profiles_list']),false);?> name="options[network_tableid][<?php echo esc_attr( $blog['blog_id'] );?>]">

@@ -118,9 +118,9 @@ if ( ! class_exists( 'AIWP_Frontend_Setup' ) ) {
 							__( "Precision: ", 'analytics-insights' ), //29
 						 __( "Search ...", 'analytics-insights' ),
 					),
-					'colorVariations' => AIWP_Tools::variations( $this->aiwp->config->options['theme_color'] ),
+					'colorVariations' => AIWP_Tools::variations( sanitize_text_field($this->aiwp->config->options['theme_color'] ) ),
 					'region' => $region,
-					'mapsApiKey' => apply_filters( 'aiwp_maps_api_key', $this->aiwp->config->options['maps_api_key'] ),
+					'mapsApiKey' => apply_filters( 'aiwp_maps_api_key', sanitize_text_field( $this->aiwp->config->options['maps_api_key'] ) ),
 					'language' => get_bloginfo( 'language' ),
 					'filter' => esc_url( $_SERVER["REQUEST_URI"] ),
 					'viewList' => false,
