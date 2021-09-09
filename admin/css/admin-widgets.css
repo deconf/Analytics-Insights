@@ -205,8 +205,8 @@
 }
 
 .aiwp-dashboard-control input::placeholder {
-    /* modern browser */
-    color: #999;
+	/* modern browser */
+	color: #999;
 }
 
 @media screen and (max-width: 410px) {

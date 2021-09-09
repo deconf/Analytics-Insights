@@ -6,11 +6,9 @@
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
-
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) )
 	exit();
-
 if ( ! class_exists( 'AIWP_Frontend_Item_Reports' ) ) {
 
 	final class AIWP_Frontend_Item_Reports {
@@ -19,7 +17,6 @@ if ( ! class_exists( 'AIWP_Frontend_Item_Reports' ) ) {
 
 		public function __construct() {
 			$this->aiwp = AIWP();
-			
 			add_action( 'admin_bar_menu', array( $this, 'custom_adminbar_node' ), 999 );
 		}
 

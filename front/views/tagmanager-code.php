@@ -12,7 +12,6 @@
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push(<?php echo wp_kses( $data['vars'], array() ); ?>);
 </script>
-
 <script>
 (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -21,4 +20,3 @@
 	})(window,document,'script','dataLayer','<?php echo esc_js( $data['containerid'] ); ?>');
 </script>
 <!-- END AIWP Tag Manager -->
-

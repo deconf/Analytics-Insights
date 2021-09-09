@@ -6,11 +6,9 @@
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
-
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) )
 	exit();
-
 if ( ! class_exists( 'AIWP_Backend_Ajax' ) ) {
 
 	final class AIWP_Backend_Ajax {
@@ -19,7 +17,6 @@ if ( ! class_exists( 'AIWP_Backend_Ajax' ) ) {
 
 		public function __construct() {
 			$this->aiwp = AIWP();
-
 			if ( AIWP_Tools::check_roles( $this->aiwp->config->options['access_back'] ) && ( ( 1 == $this->aiwp->config->options['backend_item_reports'] ) || ( 1 == $this->aiwp->config->options['dashboard_widget'] ) ) ) {
 				// Items action
 				add_action( 'wp_ajax_aiwp_backend_item_reports', array( $this, 'ajax_item_reports' ) );
@@ -33,7 +30,7 @@ if ( ! class_exists( 'AIWP_Backend_Ajax' ) ) {
 		/**
 		 * Ajax handler for Item Reports
 		 *
-		 * @return json|int
+		 * @return mixed|int
 		 */
 		public function ajax_item_reports() {
 			if ( ! isset( $_POST['aiwp_security_backend_item_reports'] ) || ! wp_verify_nonce( $_POST['aiwp_security_backend_item_reports'], 'aiwp_backend_item_reports' ) ) {
@@ -57,15 +54,12 @@ if ( ! class_exists( 'AIWP_Backend_Ajax' ) ) {
 			} else {
 				$metric = 'sessions';
 			}
-
 			if ( $filter_id && $metric == 'sessions' ) { // Sessions metric is not available for item reports
 				$metric = 'pageviews';
 			}
-
 			if ( ob_get_length() ) {
 				ob_clean();
 			}
-
 			if ( ! ( AIWP_Tools::check_roles( $this->aiwp->config->options['access_back'] ) && ( ( 1 == $this->aiwp->config->options['backend_item_reports'] ) || ( 1 == $this->aiwp->config->options['dashboard_widget'] ) ) ) ) {
 				wp_die( - 31 );
 			}
@@ -85,39 +79,29 @@ if ( ! class_exists( 'AIWP_Backend_Ajax' ) ) {
 			} else {
 				$this->aiwp->gapi_controller->timeshift = (int) current_time( 'timestamp' ) - time();
 			}
-
 			if ( $filter_id ) {
 				$uri_parts = explode( '/', get_permalink( $filter_id ), 4 );
-
 				if ( isset( $uri_parts[3] ) ) {
 					$uri = '/' . $uri_parts[3];
 				} else {
 					wp_die( - 25 );
 				}
-
 				// allow URL correction before sending an API request
 				$filter = apply_filters( 'aiwp_backenditem_uri', $uri, $filter_id );
-
 				$lastchar = substr( $filter, - 1 );
-
 				if ( isset( $profile_info[6] ) && $profile_info[6] && '/' == $lastchar ) {
 					$filter = $filter . $profile_info[6];
 				}
-
 				// Encode URL
 				$filter = rawurlencode( rawurldecode( $filter ) );
 			} else {
 				$filter = false;
 			}
-
 			$queries = explode( ',', $query );
-
 			$results = array();
-
 			foreach ( $queries as $value ) {
 				$results[] = $this->aiwp->gapi_controller->get( $projectId, $value, $from, $to, $filter, $metric );
 			}
-
 			wp_send_json( $results );
 		}
 
@@ -130,7 +114,6 @@ if ( ! class_exists( 'AIWP_Backend_Ajax' ) ) {
 			if ( ! isset( $_POST['aiwp_security_dismiss_notices'] ) || ! wp_verify_nonce( $_POST['aiwp_security_dismiss_notices'], 'aiwp_dismiss_notices' ) ) {
 				wp_die( - 30 );
 			}
-
 			if ( ! current_user_can( 'manage_options' ) ) {
 				wp_die( - 31 );
 			}

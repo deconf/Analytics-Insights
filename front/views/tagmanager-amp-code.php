@@ -7,8 +7,6 @@
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
 ?>
-<amp-analytics config="https://www.googletagmanager.com/amp.json?id=<?php echo esc_js( $data['containerid'] ); ?>&gtm.url=SOURCE_URL" data-credentials="include">
-	<script type="application/json">
+<amp-analytics config="https://www.googletagmanager.com/amp.json?id=<?php echo esc_js( $data['containerid'] ); ?>&gtm.url=SOURCE_URL" data-credentials="include"> <script type="application/json">
 <?php echo wp_kses( $data['json'], array() ); ?>
-	</script>
-</amp-analytics>
+	</script> </amp-analytics>

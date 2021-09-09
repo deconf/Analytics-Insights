@@ -109,7 +109,7 @@ final class AIWP_Settings {
 
 	private static function html_form_end() {
 		?>
-		</form>
+	</form>
 <?php
 	}
 
@@ -173,7 +173,8 @@ final class AIWP_Settings {
 				<?php if ( 'subscriber' != $role ) : ?>
 				<?php $i++; ?>
 					<td>
- 					<label><input type="checkbox" name="options[access_front][]" value="<?php echo esc_attr( $role ); ?>" <?php if ( in_array($role,$options['access_front']) || 'administrator' == $role ) echo 'checked="checked"'; if ( 'administrator' == $role ) echo 'disabled="disabled"';?> /><?php echo esc_attr( $name ); ?></label>
+						<label>
+							<input type="checkbox" name="options[access_front][]" value="<?php echo esc_attr( $role ); ?>" <?php if ( in_array($role,$options['access_front']) || 'administrator' == $role ) echo 'checked="checked"'; if ( 'administrator' == $role ) echo 'disabled="disabled"';?> /><?php echo esc_attr( $name ); ?></label>
 					</td>
 					<?php endif; ?>
 					<?php if ( 0 == $i % 4 ) : ?>
@@ -231,7 +232,8 @@ final class AIWP_Settings {
 				<?php if ( 'subscriber' != $role ) : ?>
 				<?php $i++; ?>
 					<td>
-						<label><input type="checkbox" name="options[access_back][]" value="<?php echo esc_attr( $role ); ?>" <?php if ( in_array($role,$options['access_back']) || 'administrator' == $role ) echo 'checked="checked"'; if ( 'administrator' == $role ) echo 'disabled="disabled"';?> /> <?php echo esc_attr( $name ); ?></label>
+						<label>
+							<input type="checkbox" name="options[access_back][]" value="<?php echo esc_attr( $role ); ?>" <?php if ( in_array($role,$options['access_back']) || 'administrator' == $role ) echo 'checked="checked"'; if ( 'administrator' == $role ) echo 'disabled="disabled"';?> /> <?php echo esc_attr( $name ); ?></label>
 					</td>
 					<?php endif; ?>
 					<?php if ( 0 == $i % 4 ) : ?>
@@ -250,7 +252,7 @@ final class AIWP_Settings {
  <?php self::html_switch_button('options[backend_realtime_report]', 1, 'backend_realtime_report', $options['backend_realtime_report'], __( "enable Real-Time report (requires access to Real-Time Reporting API)", 'analytics-insights') ); ?>
  <?php endif; ?>
  <tr>
- 	<td colspan="2" class="aiwp-settings-title"> <?php _e("Maximum number of pages to display on real-time tab:", 'analytics-insights'); ?>
+		<td colspan="2" class="aiwp-settings-title"> <?php _e("Maximum number of pages to display on real-time tab:", 'analytics-insights'); ?>
 									<input type="number" name="options[ga_realtime_pages]" id="ga_realtime_pages" value="<?php echo (int)$options['ga_realtime_pages']; ?>" size="3">
 		</td>
 	</tr>
@@ -552,7 +554,8 @@ final class AIWP_Settings {
 				<label for="ga_speed_samplerate"><?php _e("Speed Sample Rate:", 'analytics-insights'); ?></label>
 			</td>
 			<td>
-				<input type="number" id="ga_speed_samplerate" name="options[ga_speed_samplerate]" value="<?php echo (int)($options['ga_speed_samplerate']); ?>" max="100" min="1">%
+				<input type="number" id="ga_speed_samplerate" name="options[ga_speed_samplerate]" value="<?php echo (int)($options['ga_speed_samplerate']); ?>" max="100" min="1">
+				%
 			</td>
 		</tr>
 		<tr>
@@ -560,7 +563,8 @@ final class AIWP_Settings {
 				<label for="ga_user_samplerate"><?php _e("User Sample Rate:", 'analytics-insights'); ?></label>
 			</td>
 			<td>
-				<input type="number" id="ga_user_samplerate" name="options[ga_user_samplerate]" value="<?php echo (int)($options['ga_user_samplerate']); ?>" max="100" min="1">%
+				<input type="number" id="ga_user_samplerate" name="options[ga_user_samplerate]" value="<?php echo (int)($options['ga_user_samplerate']); ?>" max="100" min="1">
+				%
 			</td>
 		</tr>
 		<?php self::html_switch_button('options[ga_anonymize_ip]', 1, 'ga_anonymize_ip', $options['ga_anonymize_ip'], __( "anonymize IPs while tracking", 'analytics-insights') ); ?>
@@ -731,7 +735,8 @@ final class AIWP_Settings {
 				<?php $errors = print_r( AIWP_Tools::get_cache( 'last_error' ), true ) ? esc_html( print_r( AIWP_Tools::get_cache( 'last_error' ), true ) ) : ''; ?>
 				<?php $errors = str_replace( 'Deconf_', 'Google_', $errors); ?>
 				<pre class="aiwp-settings-logdata"><?php echo '<span>' . __("Last Error: ", 'analytics-insights') . '</span>' . "\n" . esc_html( $errors );?></pre>
-				<pre class="aiwp-settings-logdata"><?php echo '<span>' . __("GAPI Error: ", 'analytics-insights') . '</span>'; echo "\n" . esc_html( print_r( AIWP_Tools::get_cache( 'gapi_errors' ), true ) ) ?></pre><br />
+				<pre class="aiwp-settings-logdata"><?php echo '<span>' . __("GAPI Error: ", 'analytics-insights') . '</span>'; echo "\n" . esc_html( print_r( AIWP_Tools::get_cache( 'gapi_errors' ), true ) ) ?></pre>
+				<br />
 				<hr>
 			</td>
 		</tr>
@@ -755,7 +760,8 @@ final class AIWP_Settings {
 		<?php self::html_section_delimiter(__( "Plugin Configuration", 'analytics-insights' ), false, false); ?>
 		<tr>
 			<td>
-				<pre class="aiwp-settings-logdata"><?php echo esc_html(print_r($anonim, true));?></pre><br />
+				<pre class="aiwp-settings-logdata"><?php echo esc_html( print_r( $anonim, true ) );?></pre>
+				<br />
 				<hr>
 			</td>
 		</tr>
@@ -766,7 +772,8 @@ final class AIWP_Settings {
 		<?php self::html_section_delimiter(__( "System Information", 'analytics-insights' ), false, false); ?>
 		<tr>
 			<td>
-				<pre class="aiwp-settings-logdata"><?php echo esc_html(AIWP_Tools::system_info());?></pre><br />
+				<pre class="aiwp-settings-logdata"><?php echo esc_html( AIWP_Tools::system_info() );?></pre>
+				<br />
 				<hr>
 			</td>
 		</tr>
@@ -899,10 +906,10 @@ final class AIWP_Settings {
 				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You do not have sufficient permissions to access this page.", 'analytics-insights' ) . "</p></div>";
 			}
 		}
-		if ( $aiwp->gapi_controller->gapi_errors_handler() || AIWP_Tools::get_cache( 'last_error' ) ) {
+		if ( ( $aiwp->gapi_controller->gapi_errors_handler() || AIWP_Tools::get_cache( 'last_error' ) ) && strpos(AIWP_Tools::get_cache( 'last_error' ), '-27') === false )  {
 			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'analytics-insights' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_errors_debugging', false ), __( 'Errors & Debug', 'analytics-insights' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_settings', false ), __( 'authorize the plugin', 'analytics-insights' ) ) ) );
 		}
- 	?>
+		?>
 <?php self::html_form_begin(__( "Google Analytics Settings", 'analytics-insights' ), $_SERVER['REQUEST_URI'], $message)?>
 <table class="aiwp-settings-options">
 	<?php self::html_section_delimiter(__( "Plugin Authorization", 'analytics-insights' ), false); ?>
@@ -924,7 +931,7 @@ final class AIWP_Settings {
 			<label for="options[client_id]"><?php _e("Client ID:", 'analytics-insights'); ?></label>
 		</td>
 		<td>
-			<input type="text" name="options[client_id]" value="<?php echo esc_attr($options['client_id']); ?>" size="40" required="required">
+			<input type="text" name="options[client_id]" value="<?php echo esc_attr( $options['client_id'] ); ?>" size="40" required="required">
 		</td>
 	</tr>
 	<tr>
@@ -932,7 +939,7 @@ final class AIWP_Settings {
 			<label for="options[client_secret]"><?php _e("Client Secret:", 'analytics-insights'); ?></label>
 		</td>
 		<td>
-			<input type="text" name="options[client_secret]" value="<?php echo esc_attr($options['client_secret']); ?>" size="40" required="required">
+			<input type="text" name="options[client_secret]" value="<?php echo esc_attr( $options['client_secret'] ); ?>" size="40" required="required">
 	 	<?php if ( !$options['token'] ) : ?>
 			<input type="submit" name="Submit" class="button button-primary" value="<?php _e('Save Credentials', 'analytics-insights' ) ?>" />
 			<?php endif; ?>
@@ -986,7 +993,7 @@ final class AIWP_Settings {
 			<label for="theme_color"><?php _e("Theme Color:", 'analytics-insights' ); ?></label>
 		</td>
 		<td>
-			<input type="text" id="theme_color" class="theme_color" name="options[theme_color]" value="<?php echo esc_attr($options['theme_color']); ?>" size="10">
+			<input type="text" id="theme_color" class="theme_color" name="options[theme_color]" value="<?php echo esc_attr( $options['theme_color'] ); ?>" size="10">
 		</td>
 	</tr>
 	<?php self::html_section_delimiter(); ?>
@@ -1142,7 +1149,7 @@ final class AIWP_Settings {
 				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You do not have sufficient permissions to access this page.", 'analytics-insights' ) . "</p></div>";
 			}
 		}
-		if ( $aiwp->gapi_controller->gapi_errors_handler() || AIWP_Tools::get_cache( 'last_error' ) ) {
+		if ( ( $aiwp->gapi_controller->gapi_errors_handler() || AIWP_Tools::get_cache( 'last_error' ) ) && strpos(AIWP_Tools::get_cache( 'last_error' ), '-27') === false )  {
 			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'analytics-insights' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_errors_debugging', false ), __( 'Errors & Debug', 'analytics-insights' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_settings', false ), __( 'authorize the plugin', 'analytics-insights' ) ) ) );
 		}
 		?>
@@ -1171,7 +1178,7 @@ final class AIWP_Settings {
 			<label for="options[client_id]"><?php _e("Client ID:", 'analytics-insights'); ?></label>
 		</td>
 		<td>
-			<input type="text" name="options[client_id]" value="<?php echo esc_attr($options['client_id']); ?>" size="40" required="required">
+			<input type="text" name="options[client_id]" value="<?php echo esc_attr( $options['client_id'] ); ?>" size="40" required="required">
 		</td>
 	</tr>
 	<tr>
@@ -1179,7 +1186,7 @@ final class AIWP_Settings {
 			<label for="options[client_secret]"><?php _e("Client Secret:", 'analytics-insights'); ?></label>
 		</td>
 		<td>
-			<input type="text" name="options[client_secret]" value="<?php echo esc_attr($options['client_secret']); ?>" size="40" required="required">
+			<input type="text" name="options[client_secret]" value="<?php echo esc_attr( $options['client_secret'] ); ?>" size="40" required="required">
 			<input type="hidden" name="options[aiwp_hidden]" value="Y">
 			<?php if ( !$options['token'] ) : ?>
 			<input type="submit" name="Submit" class="button button-primary" value="<?php _e('Save Credentials', 'analytics-insights' ) ?>" />

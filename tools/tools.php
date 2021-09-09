@@ -6,11 +6,9 @@
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
-
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) )
 	exit();
-
 if ( ! class_exists( 'AIWP_Tools' ) ) {
 
 	class AIWP_Tools {
@@ -127,11 +125,9 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 
 		public static function get_cache( $name ) {
 			$option = get_option( 'aiwp_cache_' . $name );
-
 			if ( false === $option || ! isset( $option['value'] ) || ! isset( $option['expires'] ) ) {
 				return false;
 			}
-
 			if ( $option['expires'] < time() ) {
 				delete_option( 'aiwp_cache_' . $name );
 				return false;
@@ -182,7 +178,6 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 					/* translators: %s: version number */
 					$version = sprintf( __( 'This message was added in version %s.', 'analytics-insights' ), $version );
 				}
-
 				/* translators: Developer debugging message. 1: PHP function name, 2: Explanatory message, 3: Version information message */
 				trigger_error( sprintf( __( '%1$s was called <strong>incorrectly</strong>. %2$s %3$s', 'analytics-insights' ), $function, $message, $version ) );
 			}
@@ -233,7 +228,6 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 			} else {
 				self::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $timeout );
 			}
-
 			// Count Errors until midnight
 			$midnight = strtotime( "tomorrow 00:00:00" ); // UTC midnight
 			$midnight = $midnight + 8 * 3600; // UTC 8 AM
@@ -245,7 +239,6 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 
 		public static function anonymize_options( $options ) {
 			global $wp_version;
-
 			$options['wp_version'] = $wp_version;
 			$options['aiwp_version'] = AIWP_CURRENT_VERSION;
 			if ( $options['token'] ) {
@@ -254,20 +247,17 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 			if ( $options['client_secret'] ) {
 				$options['client_secret'] = 'HIDDEN';
 			}
-
 			return $options;
 		}
 
 		public static function system_info() {
 			$info = '';
-
 			// Server Software
 			$server_soft = "-";
 			if ( isset( $_SERVER['SERVER_SOFTWARE'] ) ) {
 				$server_soft = $_SERVER['SERVER_SOFTWARE'];
 			}
 			$info .= 'Server Info: ' . sanitize_text_field( $server_soft ) . "\n";
-
 			// PHP version
 			if ( defined( 'PHP_VERSION' ) ) {
 				$info .= 'PHP Version: ' . PHP_VERSION . "\n";
@@ -276,7 +266,6 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 			} else {
 				$info .= 'Other Version: ' . '-' . "\n";
 			}
-
 			// Gzip
 			if ( is_callable( 'gzopen' ) ) {
 				$gzip = true;
@@ -285,7 +274,6 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 			}
 			$gzip_status = ( $gzip ) ? 'Yes' : 'No';
 			$info .= 'Gzip: ' . $gzip_status . "\n";
-
 			return $info;
 		}
 	}

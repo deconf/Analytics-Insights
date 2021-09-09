@@ -172,12 +172,14 @@ Analytics Insights it's released under the GPLv2, you can use it free of charge 
 
 [AIWP v5.4 release notes](https://deconf.com/analytics-insights/)
 
-= 5.4.1 (2021.09.07) =
+= 5.4.1 (2021.09.09) =
 * Security Fixes:
 	* sanitizing, escaping, and validating additional data
 * Enhancements:
 	* new translations for multiple languages
 	* replacing <strong>Cheating huh?<strong> with a more helpful feedback	
+* Bug Fixes:
+	* fixes multisite/network mode random token resets 
 
 = 5.4 (2021.08.30) =
 * Enhancements:

@@ -6,11 +6,9 @@
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
-
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) )
 	exit();
-
 if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 
 	final class AIWP_Backend_Setup {
@@ -19,7 +17,6 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 
 		public function __construct() {
 			$this->aiwp = AIWP();
-
 			// Styles & Scripts
 			add_action( 'admin_enqueue_scripts', array( $this, 'load_styles_scripts' ) );
 			// Site Menu
@@ -67,30 +64,24 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 		 */
 		public function load_styles_scripts( $hook ) {
 			$new_hook = explode( '_page_', $hook );
-
 			if ( isset( $new_hook[1] ) ) {
 				$new_hook = '_page_' . $new_hook[1];
 			} else {
 				$new_hook = $hook;
 			}
-
 			/*
 			 * AIWP main stylesheet
 			 */
 			wp_enqueue_style( 'aiwp', AIWP_URL . 'admin/css/aiwp.css', null, AIWP_CURRENT_VERSION );
-
 			/*
 			 * AIWP UI
 			 */
-
 			if ( AIWP_Tools::get_cache( 'gapi_errors' ) ) {
 				$ed_bubble = '!';
 			} else {
 				$ed_bubble = '';
 			}
-
 			wp_enqueue_script( 'aiwp-backend-ui', plugins_url( 'js/ui.js', __FILE__ ), array( 'jquery' ), AIWP_CURRENT_VERSION, true );
-
 			/* @formatter:off */
 			wp_localize_script( 'aiwp-backend-ui', 'aiwp_ui_data', array(
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
@@ -99,7 +90,6 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 			)
 			);
 			/* @formatter:on */
-
 			if ( $this->aiwp->config->options['switch_profile'] && count( $this->aiwp->config->options['ga_profiles_list'] ) > 1 ) {
 				$views = array();
 				foreach ( $this->aiwp->config->options['ga_profiles_list'] as $items ) {
@@ -110,15 +100,12 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 			} else {
 				$views = false;
 			}
-
 			/*
 			 * Main Dashboard Widgets Styles & Scripts
 			 */
 			$widgets_hooks = array( 'index.php' );
-
 			if ( in_array( $new_hook, $widgets_hooks ) ) {
 				if ( AIWP_Tools::check_roles( $this->aiwp->config->options['access_back'] ) && $this->aiwp->config->options['dashboard_widget'] ) {
-
 					if ( $this->aiwp->config->options['ga_target_geomap'] ) {
 						$country_codes = AIWP_Tools::get_countrycodes();
 						if ( isset( $country_codes[$this->aiwp->config->options['ga_target_geomap']] ) ) {
@@ -129,23 +116,14 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 					} else {
 						$region = false;
 					}
-
 					wp_enqueue_style( 'aiwp-nprogress', AIWP_URL . 'common/nprogress/nprogress.css', null, AIWP_CURRENT_VERSION );
-
 					wp_enqueue_style( 'aiwp-backend-item-reports', AIWP_URL . 'admin/css/admin-widgets.css', null, AIWP_CURRENT_VERSION );
-
 					wp_register_style( 'jquery-ui-tooltip-html', AIWP_URL . 'common/realtime/jquery.ui.tooltip.html.css' );
-
 					wp_enqueue_style( 'jquery-ui-tooltip-html' );
-
 					wp_register_script( 'jquery-ui-tooltip-html', AIWP_URL . 'common/realtime/jquery.ui.tooltip.html.js' );
-
 					wp_register_script( 'googlecharts', 'https://www.gstatic.com/charts/loader.js', array(), null );
-
 					wp_enqueue_script( 'aiwp-nprogress', AIWP_URL . 'common/nprogress/nprogress.js', array( 'jquery' ), AIWP_CURRENT_VERSION );
-
 					wp_enqueue_script( 'aiwp-backend-dashboard-reports', AIWP_URL . 'common/js/reports5.js', array( 'jquery', 'googlecharts', 'aiwp-nprogress', 'jquery-ui-tooltip', 'jquery-ui-core', 'jquery-ui-position', 'jquery-ui-tooltip-html' ), AIWP_CURRENT_VERSION, true );
-
 					/* @formatter:off */
 
 					$datelist = array(
@@ -229,14 +207,12 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 					/* @formatter:on */
 				}
 			}
-
 			/*
 			 * Posts/Pages List Styles & Scripts
 			 */
 			$contentstats_hooks = array( 'edit.php' );
 			if ( in_array( $hook, $contentstats_hooks ) ) {
 				if ( AIWP_Tools::check_roles( $this->aiwp->config->options['access_back'] ) && $this->aiwp->config->options['backend_item_reports'] ) {
-
 					if ( $this->aiwp->config->options['ga_target_geomap'] ) {
 						$country_codes = AIWP_Tools::get_countrycodes();
 						if ( isset( $country_codes[$this->aiwp->config->options['ga_target_geomap']] ) ) {
@@ -247,19 +223,12 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 					} else {
 						$region = false;
 					}
-
 					wp_enqueue_style( 'aiwp-nprogress', AIWP_URL . 'common/nprogress/nprogress.css', null, AIWP_CURRENT_VERSION );
-
 					wp_enqueue_style( 'aiwp-backend-item-reports', AIWP_URL . 'admin/css/item-reports.css', null, AIWP_CURRENT_VERSION );
-
 					wp_enqueue_style( "wp-jquery-ui-dialog" );
-
 					wp_register_script( 'googlecharts', 'https://www.gstatic.com/charts/loader.js', array(), null );
-
 					wp_enqueue_script( 'aiwp-nprogress', AIWP_URL . 'common/nprogress/nprogress.js', array( 'jquery' ), AIWP_CURRENT_VERSION );
-
 					wp_enqueue_script( 'aiwp-backend-item-reports', AIWP_URL . 'common/js/reports5.js', array( 'aiwp-nprogress', 'googlecharts', 'jquery', 'jquery-ui-dialog' ), AIWP_CURRENT_VERSION, true );
-
 					/* @formatter:off */
 					wp_localize_script( 'aiwp-backend-item-reports', 'aiwpItemData', array(
 						'ajaxurl' => admin_url( 'admin-ajax.php' ),
@@ -330,12 +299,10 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 					/* @formatter:on */
 				}
 			}
-
 			/*
 			 * Settings Styles & Scripts
 			 */
 			$settings_hooks = array( '_page_aiwp_settings', '_page_aiwp_backend_settings', '_page_aiwp_frontend_settings', '_page_aiwp_tracking_settings', '_page_aiwp_errors_debugging' );
-
 			if ( in_array( $new_hook, $settings_hooks ) ) {
 				wp_enqueue_style( 'wp-color-picker' );
 				wp_enqueue_script( 'wp-color-picker' );

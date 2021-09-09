@@ -6,11 +6,9 @@
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
-
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) )
 	exit();
-
 if ( ! class_exists( 'AIWP_Config' ) ) {
 
 	final class AIWP_Config {
@@ -94,31 +92,24 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 				}
 			}
 			/* @formatter:on */
-
 			if ( isset( $options['ga_event_downloads'] ) && empty( $options['ga_event_downloads'] ) ) {
 				$options['ga_event_downloads'] = 'zip|mp3*|mpe*g|pdf|docx*|pptx*|xlsx*|rar*';
 			}
-
 			if ( isset( $options['pagetitle_404'] ) && empty( $options['pagetitle_404'] ) ) {
 				$options['pagetitle_404'] = 'Page Not Found';
 			}
-
 			if ( isset( $options['ga_event_affiliates'] ) && empty( $options['ga_event_affiliates'] ) ) {
 				$options['ga_event_affiliates'] = '/out/';
 			}
-
 			if ( isset( $options['ga_speed_samplerate'] ) && ( $options['ga_speed_samplerate'] < 1 || $options['ga_speed_samplerate'] > 100 ) ) {
 				$options['ga_speed_samplerate'] = 1;
 			}
-
 			if ( isset( $options['ga_user_samplerate'] ) && ( $options['ga_user_samplerate'] < 1 || $options['ga_user_samplerate'] > 100 ) ) {
 				$options['ga_user_samplerate'] = 100;
 			}
-
 			if ( isset( $options['ga_cookieexpires'] ) && $options['ga_cookieexpires'] ) { // v4.9
 				$options['ga_cookieexpires'] = (int) $options['ga_cookieexpires'];
 			}
-
 			return $options;
 		}
 
@@ -127,7 +118,6 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 			$options = $this->options;
 			$get_network_options = get_site_option( 'aiwp_network_options' );
 			$old_network_options = (array) json_decode( $get_network_options );
-
 			if ( is_multisite() ) {
 				if ( $network_settings ) { // Retrieve network options, clear blog options, store both to db
 					$network_options['token'] = $this->options['token'];
@@ -161,7 +151,6 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 			 * Get plugin options
 			 */
 			global $blog_id;
-
 			if ( ! get_option( 'aiwp_options' ) ) {
 				AIWP_Install::install();
 			}
@@ -186,7 +175,6 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 
 		private function maintain_compatibility() {
 			$flag = false;
-
 			$prevver = get_option( 'aiwp_version' );
 			if ( $prevver && AIWP_CURRENT_VERSION != $prevver ) {
 				$flag = true;
@@ -202,20 +190,17 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 				} else {
 					AIWP_Tools::delete_cache( 'gapi_errors' );
 				}
-
 				// Enable AIWP EndPoint for those updating from a version lower than 5.2, introduced in AIWP v5.3
-				if (version_compare( $prevver, '5.2', '<' ) ) {
+				if ( version_compare( $prevver, '5.2', '<' ) ) {
 					$this->options['with_endpoint'] = 2;
 				}
 			}
-
 			if ( isset( $this->options['item_reports'] ) ) { // v4.8
 				$this->options['backend_item_reports'] = $this->options['item_reports'];
 			}
 			if ( isset( $this->options['ga_dash_frontend_stats'] ) ) { // v4.8
 				$this->options['frontend_item_reports'] = $this->options['ga_dash_frontend_stats'];
 			}
-
 			/* @formatter:off */
 			$zeros = array( 	'ga_enhanced_links',
 								'network_mode',
@@ -340,43 +325,35 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 				$this->options['access_back'][] = 'administrator';
 			}
 			/* @formatter:on */
-
 			if ( ! isset( $this->options['ga_event_affiliates'] ) ) {
 				$this->options['ga_event_affiliates'] = '/out/';
 				$flag = true;
 			}
-
 			if ( ! isset( $this->options['ga_user_samplerate'] ) ) {
 				$this->options['ga_user_samplerate'] = 100;
 			}
-
 			if ( ! isset( $this->options['ga_event_downloads'] ) ) {
 				$this->options['ga_event_downloads'] = 'zip|mp3*|mpe*g|pdf|docx*|pptx*|xlsx*|rar*';
 				$flag = true;
 			}
-
 			if ( ! isset( $this->options['pagetitle_404'] ) ) { // v4.9.4
 				$this->options['pagetitle_404'] = 'Page Not Found';
 				$flag = true;
 			}
-
 			if ( ! isset( $this->options['ecommerce_mode'] ) ) { // v5.0
 				$this->options['ecommerce_mode'] = 'disabled';
 				$flag = true;
 			}
-
 			if ( isset( $this->options['ga_dash_tracking'] ) && 'classic' == $this->options['ga_dash_tracking'] ) { // v5.0
 				$this->options['tracking_type'] = 'universal';
 				$flag = true;
 			}
-
 			if ( $flag ) {
 				$this->set_plugin_options( false );
 			}
 		}
 
 		private function option_keys_rename() {
-
 			/* @formatter:off */
 			$batch = array( 	'ga_dash_token' => 'token',
 								'ga_dash_clientid' => 'client_id',
@@ -396,7 +373,6 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 								'ga_dash_style' => 'theme_color',
 			);
 			/* @formatter:on */
-
 			if ( is_multisite() ) {
 				$options = get_site_option( 'gadash_network_options' );
 				if ( $options ) {
@@ -406,7 +382,6 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 					delete_site_option( 'gadash_network_options' );
 				}
 			}
-
 			$options = get_option( 'gadash_options' );
 			if ( $options ) {
 				$options = (array) json_decode( $options );

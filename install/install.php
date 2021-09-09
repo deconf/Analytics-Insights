@@ -6,7 +6,6 @@
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
-
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) )
 	exit();
@@ -163,7 +162,6 @@ class AIWP_Install {
 			$options['tm_optout'] = 0;
 			$options['tm_dnt_optout'] = 0;
 			$options['ga_with_gtag'] = 0;
-
 			delete_option( 'ga_dash_clientid' );
 			delete_option( 'ga_dash_clientsecret' );
 			delete_option( 'ga_dash_access' );
@@ -173,7 +171,6 @@ class AIWP_Install {
 			delete_option( 'ga_dash_frontend' );
 			delete_option( 'ga_dash_style' );
 			delete_option( 'ga_dash_jailadmins' );
-
 			delete_option( 'ga_dash_tracking' );
 			delete_option( 'ga_dash_tracking_type' );
 			delete_option( 'ga_dash_anonim' );

@@ -6,11 +6,9 @@
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
-
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) )
 	exit();
-
 if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
 	final class AIWP_GAPI_Controller {
@@ -29,7 +27,6 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
 		public function __construct() {
 			$this->aiwp = AIWP();
-
 			include_once ( AIWP_DIR . 'tools/src/Deconf/autoload.php' );
 			$config = new Deconf_Config();
 			$config->setCacheClass( 'Deconf_Cache_Null' );
@@ -41,22 +38,18 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				} else {
 					$rightversion = false;
 				}
-
 				if ( $rightversion && defined( 'AIWP_IP_VERSION' ) && AIWP_IP_VERSION ) {
 					$curl_options[CURLOPT_IPRESOLVE] = AIWP_IP_VERSION; // Force CURL_IPRESOLVE_V4 or CURL_IPRESOLVE_V6
 				}
-
 				// add Proxy server settings to curl, if defined
 				if ( defined( 'WP_PROXY_HOST' ) && defined( 'WP_PROXY_PORT' ) ) {
 					$curl_options[CURLOPT_PROXY] = WP_PROXY_HOST;
 					$curl_options[CURLOPT_PROXYPORT] = WP_PROXY_PORT;
 				}
-
 				if ( defined( 'WP_PROXY_USERNAME' ) && defined( 'WP_PROXY_PASSWORD' ) ) {
 					$curl_options[CURLOPT_HTTPAUTH] = CURLAUTH_BASIC;
 					$curl_options[CURLOPT_PROXYUSERPWD] = WP_PROXY_USERNAME . ':' . WP_PROXY_PASSWORD;
 				}
-
 				$curl_options = apply_filters( 'aiwp_curl_options', $curl_options );
 				if ( ! empty( $curl_options ) ) {
 					$config->setClassConfig( 'Deconf_IO_Curl', 'options', $curl_options );
@@ -64,35 +57,30 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			}
 			$this->client = new Deconf_Client( $config );
 			$this->client->setScopes( array( 'https://www.googleapis.com/auth/analytics.readonly' ) );
-			$this->client->setApprovalPrompt('force');
+			$this->client->setApprovalPrompt( 'force' );
 			$this->client->setAccessType( 'offline' );
 			$this->client->setApplicationName( 'AIWP ' . AIWP_CURRENT_VERSION );
-
 			$security = wp_create_nonce( 'aiwp_security' );
-
 			if ( is_multisite() && $this->aiwp->config->options['network_mode'] ) {
-				$state_uri = network_admin_url('admin.php?page=aiwp_settings') . '&aiwp_security=' . $security;
+				$state_uri = network_admin_url( 'admin.php?page=aiwp_settings' ) . '&aiwp_security=' . $security;
 			} else {
-				$state_uri = admin_url('admin.php?page=aiwp_settings') . '&aiwp_security=' . $security;
+				$state_uri = admin_url( 'admin.php?page=aiwp_settings' ) . '&aiwp_security=' . $security;
 			}
-			$this->client->setState($state_uri);
-
+			$this->client->setState( $state_uri );
 			$this->managequota = 'u' . get_current_user_id() . 's' . get_current_blog_id();
 			if ( $this->aiwp->config->options['user_api'] ) {
 				$this->client->setClientId( $this->aiwp->config->options['client_id'] );
 				$this->client->setClientSecret( $this->aiwp->config->options['client_secret'] );
-				$this->client->setRedirectUri(AIWP_URL . 'tools/oauth2callback.php');
+				$this->client->setRedirectUri( AIWP_URL . 'tools/oauth2callback.php' );
 			} else {
 				$this->client->setClientId( $this->access[0] );
 				$this->client->setClientSecret( $this->access[1] );
 				$this->client->setRedirectUri( 'https://deconf.com/aiwp/oauth2callback.php' );
 			}
-
 			/**
 			 * AIWP Endpoint support
 			 */
 			add_action( 'aiwp_endpoint_support', array( $this, 'add_endpoint_support' ) );
-
 			$this->service = new Deconf_Service_Analytics( $this->client );
 			if ( $this->aiwp->config->options['token'] ) {
 				$token = $this->aiwp->config->options['token'];
@@ -127,9 +115,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
 		public function add_endpoint_support( $request ) {
 			if ( $this->aiwp->config->options['with_endpoint'] && ! $this->aiwp->config->options['user_api'] ) {
-
 				$url = $request->getUrl();
-
 				if ( in_array( $url, array( 'https://accounts.google.com/o/oauth2/token', 'https://accounts.google.com/o/oauth2/revoke' ) ) ) {
 					if ( get_class( $this->client->getIo() ) != 'Deconf_IO_Stream' ) {
 						$curl_old_options = $this->client->getClassConfig( 'Deconf_IO_Curl' );
@@ -153,13 +139,9 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 						}
 					}
 				}
-
 				$url = str_replace( 'https://accounts.google.com/o/oauth2/token', AIWP_ENDPOINT_URL . 'aiwp-token.php', $url );
-
 				$url = str_replace( 'https://accounts.google.com/o/oauth2/revoke', AIWP_ENDPOINT_URL . 'aiwp-revoke.php', $url );
-
 				$request->setUrl( $url );
-
 				if ( ! $request->getUserAgent() ) {
 					$request->setUserAgent( $this->client->getApplicationName() );
 				}
@@ -177,16 +159,13 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 */
 		public function gapi_errors_handler() {
 			$errors = AIWP_Tools::get_cache( 'gapi_errors' );
-
 			if ( false === $errors || ! isset( $errors[0] ) ) { // invalid error
 				return false;
 			}
-
 			if ( isset( $errors[1][0]['reason'] ) && ( 'invalidParameter' == $errors[1][0]['reason'] || 'badRequest' == $errors[1][0]['reason'] || 'invalidCredentials' == $errors[1][0]['reason'] || 'insufficientPermissions' == $errors[1][0]['reason'] || 'required' == $errors[1][0]['reason'] ) ) {
 				$this->reset_token();
 				return true;
 			}
-
 			/** Back-off system for subsequent requests - an Auth error generated after a Service request
 			 *  The native back-off system for Service requests is covered by the GAPI PHP Client
 			 */
@@ -200,11 +179,9 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					return true;
 				}
 			}
-
 			if ( 500 == $errors[0] || 503 == $errors[0] || 400 == $errors[0] || 401 == $errors[0] || 403 == $errors[0] || $errors[0] < - 50 ) {
 				return true;
 			}
-
 			return false;
 		}
 
@@ -242,21 +219,14 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 */
 		public function refresh_profiles() {
 			try {
-
 				$ga_profiles_list = array();
 				$startindex = 1;
 				$totalresults = 65535; // use something big
-
 				while ( $startindex < $totalresults ) {
-
 					$profiles = $this->service->management_profiles->listManagementProfiles( '~all', '~all', array( 'start-index' => $startindex ) );
-
 					$items = $profiles->getItems();
-
 					$totalresults = $profiles->getTotalResults();
-
 					if ( $totalresults > 0 ) {
-
 						foreach ( $items as $profile ) {
 							$timetz = new DateTimeZone( $profile->getTimezone() );
 							$localtime = new DateTime( 'now', $timetz );
@@ -266,7 +236,6 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 						}
 					}
 				}
-
 				if ( empty( $ga_profiles_list ) ) {
 					$timeout = $this->get_timeouts( 'midnight' );
 					AIWP_Tools::set_error( 'No properties were found in this account!', $timeout );
@@ -367,10 +336,8 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				AIWP_Tools::set_error( $e, $timeout );
 				return $e->getCode();
 			}
-
 			$this->aiwp->config->options['api_backoff'] = 0;
 			$this->aiwp->config->set_plugin_options();
-
 			if ( $data->getRows() > 0 ) {
 				return $data;
 			} else {
@@ -473,7 +440,6 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					$aiwp_data[] = array( date_i18n( __( 'l, F j, Y', 'analytics-insights' ), strtotime( $row[0] ) ), round( $row[2], 2 ) );
 				}
 			}
-
 			return $aiwp_data;
 		}
 
@@ -507,7 +473,6 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			foreach ( $data->getRows() as $row ) {
 				$aiwp_data = array_map( 'floatval', $row );
 			}
-
 			// i18n support
 			$aiwp_data[0] = isset( $aiwp_data[0] ) ? number_format_i18n( $aiwp_data[0] ) : 0;
 			$aiwp_data[1] = isset( $aiwp_data[1] ) ? number_format_i18n( $aiwp_data[1] ) : 0;
@@ -522,7 +487,6 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			} else {
 				$aiwp_data[8] = isset( $aiwp_data[8] ) ? gmdate( "H:i:s", $aiwp_data[8] ) : '00:00:00';
 			}
-
 			return $aiwp_data;
 		}
 
@@ -649,7 +613,6 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
-
 			$aiwp_data = array( array( __( "Searches", 'analytics-insights' ), __( ucfirst( $metric ), 'analytics-insights' ) ) );
 			foreach ( $data->getRows() as $row ) {
 				$aiwp_data[] = array( esc_html( $row[0] ), (int) $row[1] );
@@ -679,7 +642,6 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			$local_filter = '';
 			if ( $this->aiwp->config->options['ga_target_geomap'] ) {
 				$dimensions = 'ga:city, ga:region';
-
 				$country_codes = AIWP_Tools::get_countrycodes();
 				if ( isset( $country_codes[$this->aiwp->config->options['ga_target_geomap']] ) ) {
 					$local_filter = 'ga:country==' . ( $country_codes[$this->aiwp->config->options['ga_target_geomap']] );
@@ -702,7 +664,6 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
-
 			$aiwp_data = array( array( $title, __( ucfirst( $metric ), 'analytics-insights' ) ) );
 			foreach ( $data->getRows() as $row ) {
 				if ( isset( $row[2] ) ) {
@@ -772,7 +733,6 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		private function get_piechart_data( $projectId, $from, $to, $query, $filter = '', $metric ) {
 			$metrics = 'ga:' . $metric;
 			$dimensions = 'ga:' . $query;
-
 			if ( 'source' == $query ) {
 				$options = array( 'dimensions' => $dimensions, 'sort' => '-' . $metrics, 'quotaUser' => $this->managequota . 'p' . $projectId );
 				if ( $filter ) {
@@ -810,7 +770,6 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			if ( $others > 0 ) {
 				$aiwp_data[] = array( __( 'Other', 'analytics-insights' ), $others );
 			}
-
 			return $aiwp_data;
 		}
 
@@ -892,10 +851,8 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				$aiwp_data->rows[$i] = array_map( 'esc_html', $strip );
 				$i++;
 			}
-
 			$this->aiwp->config->options['api_backoff'] = 0;
 			$this->aiwp->config->set_plugin_options();
-
 			return array( $aiwp_data );
 		}
 

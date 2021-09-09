@@ -151,7 +151,7 @@
 }
 
 .aiwp-dashboard-control {
-	padding-bottom: 10px;	
+	padding-bottom: 10px;
 }
 
 .aiwp-dashboard-control input {
@@ -161,8 +161,8 @@
 }
 
 .aiwp-dashboard-control input::placeholder {
-    /* modern browser */
-    color: #999;
+	/* modern browser */
+	color: #999;
 }
 
 @media screen and (max-width: 500px) {

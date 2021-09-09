@@ -7,8 +7,6 @@
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
 ?>
-<amp-analytics type="googleanalytics" id="aiwp-googleanalytics">
-	<script type="application/json">
+<amp-analytics type="googleanalytics" id="aiwp-googleanalytics"> <script type="application/json">
 <?php echo wp_kses( $data['json'], array() ); ?>
-	</script>
-</amp-analytics>
+	</script> </amp-analytics>

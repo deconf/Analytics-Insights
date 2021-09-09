@@ -6,11 +6,9 @@
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
-
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) )
 	exit();
-
 if ( ! class_exists( 'AIWP_Common_Ajax' ) ) {
 
 	final class AIWP_Common_Ajax {
@@ -19,7 +17,6 @@ if ( ! class_exists( 'AIWP_Common_Ajax' ) ) {
 
 		public function __construct() {
 			$this->aiwp = AIWP();
-
 			if ( AIWP_Tools::check_roles( $this->aiwp->config->options['access_back'] ) || AIWP_Tools::check_roles( $this->aiwp->config->options['access_front'] ) ) {
 				add_action( 'wp_ajax_aiwp_set_error', array( $this, 'ajax_set_error' ) );
 			}

@@ -6,11 +6,9 @@
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
-
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) )
 	exit();
-
 if ( ! class_exists( 'AIWP_Backend_Widgets' ) ) {
 
 	class AIWP_Backend_Widgets {
@@ -30,12 +28,10 @@ if ( ! class_exists( 'AIWP_Backend_Widgets' ) ) {
 
 		public function dashboard_widget() {
 			$projectId = 0;
-
 			if ( empty( $this->aiwp->config->options['token'] ) ) {
 				echo '<p>' . __( "This plugin needs an authorization:", 'analytics-insights' ) . '</p><form action="' . menu_page_url( 'aiwp_settings', false ) . '" method="POST">' . get_submit_button( __( "Authorize Plugin", 'analytics-insights' ), 'secondary' ) . '</form>';
 				return;
 			}
-
 			if ( current_user_can( 'manage_options' ) ) {
 				if ( $this->aiwp->config->options['tableid_jail'] ) {
 					$projectId = $this->aiwp->config->options['tableid_jail'];
@@ -51,12 +47,10 @@ if ( ! class_exists( 'AIWP_Backend_Widgets' ) ) {
 					return;
 				}
 			}
-
 			if ( ! ( $projectId ) ) {
 				echo '<p>' . __( "Something went wrong while retrieving property data. You need to create and properly configure a Google Analytics account:", 'analytics-insights' ) . '</p> <form action="https://deconf.com/how-to-set-up-google-analytics-on-your-website/" method="POST">' . get_submit_button( __( "Find out more!", 'analytics-insights' ), 'secondary' ) . '</form>';
 				return;
 			}
-
 			?>
 <div id="aiwp-window-1"></div>
 <?php

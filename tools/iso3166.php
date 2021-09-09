@@ -6,12 +6,10 @@
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
-
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) )
 	exit();
-
-	/* @formatter:off */
+/* @formatter:off */
 $country_codes = array(
 	'AD' => 'Andorra',
 	'AE' => 'United Arab Emirates',
@@ -54,7 +52,7 @@ $country_codes = array(
 	'CF' => 'Central African Republic',
 	'CG' => 'Congo',
 	'CH' => 'Switzerland',
-	'CI' => 'Côte d?Ivoire',
+	'CI' => 'Cï¿½te d?Ivoire',
 	'CK' => 'Cook Islands',
 	'CL' => 'Chile',
 	'CM' => 'Cameroon',
