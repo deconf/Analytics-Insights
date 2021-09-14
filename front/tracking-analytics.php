@@ -217,7 +217,7 @@ if ( ! class_exists( 'AIWP_Tracking_Analytics' ) ) {
 		private function build_commands() {
 			$fields = array();
 			$fieldsobject = array();
-			$fields['trackingId'] = esc_url( $this->uaid );
+			$fields['trackingId'] = sanitize_text_field( $this->uaid );
 			if ( 1 != $this->aiwp->config->options['ga_speed_samplerate'] ) {
 				$fieldsobject['siteSpeedSampleRate'] = (int) $this->aiwp->config->options['ga_speed_samplerate'];
 			}
@@ -228,7 +228,7 @@ if ( ! class_exists( 'AIWP_Tracking_Analytics' ) ) {
 				$fieldsobject['allowLinker'] = 'true';
 			}
 			if ( ! empty( $this->aiwp->config->options['ga_cookiedomain'] ) ) {
-				$fieldsobject['cookieDomain'] = esc_url( $this->aiwp->config->options['ga_cookiedomain'] );
+				$fieldsobject['cookieDomain'] = sanitize_text_field( $this->aiwp->config->options['ga_cookiedomain'] );
 			} else {
 				$fields['cookieDomain'] = 'auto';
 			}

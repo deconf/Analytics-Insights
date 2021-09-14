@@ -22,7 +22,7 @@ if ( ! class_exists( 'AIWP_Tracking_TagManager' ) ) {
 		public function __construct() {
 			$this->aiwp = AIWP();
 			$profile = AIWP_Tools::get_selected_profile( $this->aiwp->config->options['ga_profiles_list'], $this->aiwp->config->options['tableid_jail'] );
-			$this->uaid = esc_html( $profile[2] );
+			$this->uaid = sanitize_text_field( $profile[2] );
 			if ( $this->aiwp->config->options['trackingcode_infooter'] ) {
 				add_action( 'wp_footer', array( $this, 'output' ), 99 );
 			} else {
