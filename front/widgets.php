@@ -117,7 +117,7 @@ final class AIWP_Frontend_Widget extends WP_Widget {
 			vAxis: { textPosition: "none", minValue: 0, gridlines: { color: "transparent" }, baselineColor: "transparent"}
 		}
 		var chart = new google.visualization.AreaChart(document.getElementById("aiwp-widgetchart"));
-		<?php echo esc_js( $formater ); ?>
+		<?php echo wp_kses( $formater, array() ); ?>
 		chart.draw(data, options);
 	}
 	function aiwp_drawFrontWidgetTotals(response) {

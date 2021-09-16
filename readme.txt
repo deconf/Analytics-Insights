@@ -1,10 +1,10 @@
 === Analytics Insights - Google Analytics, AMP Analytics, Stats ===
 Contributors: deconf
 Donate link: https://deconf.com/donate/
-Tags: google analytics, stats
+Tags: analytics, google analytics, google analytics dashboard
 Requires at least: 3.5
 Tested up to: 5.8
-Stable tag: 5.4.2
+Stable tag: 5.4.3
 Requires PHP: 5.2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -12,71 +12,26 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Connects Google Analytics with your WordPress site. Displays stats and gives insights to help you understand your users and site content on a whole new level!
 
 == Description ==
-Analytics Insights is a plugin for Google Analytics that enables site tracking using the latest Google Analytics tracking code. It allows you to view key Google Analytics stats in your WordPress Dashboard.
+
+Analytics Insights is a WordPress plugin that enables site tracking using the latest Google Analytics tracking code. It allows you to view key Google Analytics stats in your WordPress Dashboard.
+
+= Google Analytics Reports, Stats and Insights =
+
+Analytics Insights displays the reports you need on your dashboard and on the site's frontend. Audience, acquisition, behavior, and real-time stats are all presented as charts within a dedicated dashboard widget.  
 
 In addition to a set of general Google Analytics stats, insights like in-depth Page reports and in-depth Post reports are available.
 
-The Google Analytics tracking code is fully customizable through options and hooks, allowing advanced data collection like custom dimensions and events.    
-
-= Google Analytics Real-Time Stats =
-
-Google Analytics reports, in real-time, in your dashboard screen:
-
-- Real-time number of visitors 
-- Real-time acquisition channels
-- Real-time traffic sources details 
-
-= Google Analytics Reports and Insights =
-
-The Google Analytics insights and reports you need on your dashboard and on the site's frontend:  
-
-- Sessions, organic searches, page views, bounce rate analytics stats
-- Locations, pages, referrers, keywords, 404 errors analytics stats
-- Traffic channels, social networks, traffic mediums, search engines analytics stats
-- Device categories, browsers, operating systems, screen resolutions, mobile brands analytics stats
-
 = Google Analytics Tracking =
 
-Installs the latest Google Analytics tracking code and allows full code customization:
+The Google Analytics tracking code is fully customizable through options and hooks, allowing advanced data collection like custom dimensions and events.
 
-- Universal Google Analytics (analytics.js) tracking code
-- Global Site Tag (gtag.js) tracking code
-- Accelerated Mobile Pages (AMP) support for Google Analytics
-- Cross domain tracking
-- Ecommerce support for Google Analytics
-- User privacy oriented features and much more
+The plugin installs the latest Google Analytics tracking code. No matter the tracking method you choose, they are all available and customizable: Universal Google Analytics (analytics.js) tracking code, Global Site Tag (gtag.js) tracking code, and Accelerated Mobile Pages (AMP) tracking.
 
-With Analytics Insights you can easily track events like downloads, page scrolling depth, outbound links, emails. In addition, you can track custom event categories, actions, and labels using annotated HTML elements.
-
-Custom dimensions tracking of authors, publication date, categories, tags is also possible with Analytics Insights.
-
-= Google Tag Manager Tracking =
-
-As an alternative to Google Analytics tracking code, you can use Google Tag Manager for tracking:
-
-- Google Tag Manager code
-- Data Layer variables: authors, publication date, categories, tags, user type
-- Accelerated Mobile Pages (AMP) support for Google Tag Manager
-
-= Accelerated Mobile Pages (AMP) features =
-
-- Google Tag Manager basic tracking
-- Google Analytics basic tracking 
-- Automatically removes <em>amp/</em> from Google Analytics tracking page URL
-- Events tracking, custom dimensions tracking, annotated HTML elements tracking
+Advanced features like events tracking and custom dimensions tracking can be enabled with a switch of a button, without the need of any programming skills.  
 
 = Analytics Insights on Multisite =
 
-This plugin is fully compatible with multisite network installs, allowing three setup modes:
-
-- Mode 1: network activated using multiple Google Analytics accounts
-- Mode 2: network activated using a single Google Analytics account
-- Mode 3: network deactivated using multiple Google Analytics accounts
-
-= Further reading =
-
-* Homepage of [Analytics Insights](https://deconf.com/analytics-insights-for-wordpress/)
-* Other [WordPress Plugins](https://deconf.com/wordpress/) by same author
+This plugin is fully compatible with multisite network installs. Allows using multiple Google Analytics accounts or using a single Google Analytics account for the entire network.
 
 == Installation ==
 
@@ -126,6 +81,12 @@ Analytics Insights it's released under the GPLv2, you can use it free of charge 
 == Changelog ==
 
 [AIWP v5.4 release notes](https://deconf.com/analytics-insights-for-wordpress/)
+
+= 5.4.3 (2021.09.16) =
+* Bug Fixes:
+	* fixes javascript error when rendering anonymized charts on frontend analytics widget
+* Enhancements:
+	* readme.txt and assets update
 
 = 5.4.2 (2021.09.10) =
 * Bug Fixes:
