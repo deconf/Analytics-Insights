@@ -367,11 +367,7 @@ if ( ! class_exists( 'AIWP_Tracking_GlobalSiteTag' ) ) {
 			$fieldsobject = array();
 			$fields['trackingId'] = sanitize_text_field( $this->uaid );
 			$custom_dimensions = $this->build_custom_dimensions();
-			/*
-			 * if ( 1 != $this->aiwp->config->options['ga_speed_samplerate'] ) {
-			 * $fieldsobject['siteSpeedSampleRate'] = (int) $this->aiwp->config->options['ga_speed_samplerate'];
-			 * }
-			 */
+
 			if ( ! empty( $this->aiwp->config->options['ga_cookiedomain'] ) ) {
 				$fieldsobject['cookie_domain'] = sanitize_text_field( $this->aiwp->config->options['ga_cookiedomain'] );
 			}

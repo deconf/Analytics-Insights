@@ -1,7 +1,7 @@
 === Analytics Insights - Google Analytics, AMP Analytics, Stats ===
 Contributors: deconf
 Donate link: https://deconf.com/donate/
-Tags: analytics, google analytics, google analytics dashboard
+Tags: google analytics, google analytics dashboard, google analytics widget, WordPress analytics
 Requires at least: 3.5
 Tested up to: 5.8
 Stable tag: 5.4.3
@@ -108,7 +108,7 @@ Analytics Insights it's released under the GPLv2, you can use it free of charge 
 	* improvements on UX for reports and stats switching (no more charts reloading)
 	* removed automatic updates
 	* settings page optimization
-	* refactoring code on the settings page
+	* refactoring code on the GADWP settings page
 	* removed a duplicate option in Tracking Code 
 * Bug Fixes:	
 	* CSS fix for on/off buttons on Analytics Insights settings
