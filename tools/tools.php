@@ -162,7 +162,7 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 		 * @param array $data - data to pass along to the template
 		 * @return boolean - If template file was found
 		 **/
-		public static function load_view( $path, $data = array() ) {
+		public static function load_view( $path, $data = array(), $globalsitetag = 0 ) {
 			if ( file_exists( AIWP_DIR . $path ) ) {
 				require_once ( AIWP_DIR . $path );
 				return true;

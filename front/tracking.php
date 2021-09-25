@@ -46,22 +46,40 @@ if ( ! class_exists( 'AIWP_Tracking' ) ) {
 			if ( AIWP_Tools::check_roles( $this->aiwp->config->options['track_exclude'], true ) || ( $this->aiwp->config->options['superadmin_tracking'] && current_user_can( 'manage_network' ) ) ) {
 				return;
 			}
-			if ( 'universal' == $this->aiwp->config->options['tracking_type'] && $this->aiwp->config->options['tableid_jail'] ) {
-				// Analytics
+			if ( 'globalsitetag' == $this->aiwp->config->options['tracking_type'] && $this->aiwp->config->options['tableid_jail'] ) {
+				// Global Site Tag (gtag.js)
 				require_once 'tracking-analytics.php';
-				if ( 1 == $this->aiwp->config->options['ga_with_gtag'] ) {
+				//if ( function_exists( 'is_amp_endpoint' ) && is_amp_endpoint() ) {
+					if ( $this->aiwp->config->options['amp_tracking_analytics'] ) {
+						$this->analytics_amp = new AIWP_Tracking_GlobalSiteTag_AMP();
+					}
+				//} else {
 					$this->analytics = new AIWP_Tracking_GlobalSiteTag();
-				} else {
-					$this->analytics = new AIWP_Tracking_Analytics();
-				}
-				if ( $this->aiwp->config->options['amp_tracking_analytics'] ) {
-					$this->analytics_amp = new AIWP_Tracking_Analytics_AMP();
-				}
+				//}
 			}
+
+			if ( 'universal' == $this->aiwp->config->options['tracking_type'] && $this->aiwp->config->options['tableid_jail'] ) {
+				// Universal Analytics (analytics.js)
+				require_once 'tracking-analytics.php';
+				//if ( function_exists( 'is_amp_endpoint' ) && is_amp_endpoint() ) {
+					if ( $this->aiwp->config->options['amp_tracking_analytics'] ) {
+						$this->analytics_amp = new AIWP_Tracking_Analytics_AMP();
+					}
+				//} else {
+					$this->analytics = new AIWP_Tracking_Analytics();
+				//}
+			}
+
 			if ( 'tagmanager' == $this->aiwp->config->options['tracking_type'] && $this->aiwp->config->options['web_containerid'] ) {
 				// Tag Manager
 				require_once 'tracking-tagmanager.php';
-				$this->tagmanager = new AIWP_Tracking_TagManager();
+				//if ( function_exists( 'is_amp_endpoint' ) && is_amp_endpoint() ) {
+					if ( $this->aiwp->config->options['amp_tracking_tagmanager'] && $this->aiwp->config->options['amp_containerid'] ) {
+						$this->tagmanager_amp = new AIWP_Tracking_TagManager_AMP();
+					}
+				//} else {
+					$this->tagmanager = new AIWP_Tracking_TagManager();
+				//}
 			}
 			add_shortcode( 'aiwp_useroptout', array( $this, 'aiwp_user_optout' ) );
 		}

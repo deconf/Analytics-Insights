@@ -9,29 +9,20 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) )
 	exit();
-if ( ! class_exists( 'AIWP_Tracking_TagManager' ) ) {
+if ( ! class_exists( 'AIWP_Tracking_TagManager_Base' ) ) {
 
-	class AIWP_Tracking_TagManager {
+	class AIWP_Tracking_TagManager_Base {
 
-		private $aiwp;
+		protected $aiwp;
 
-		private $datalayer;
+		protected $datalayer;
 
-		private $uaid;
+		protected $uaid;
 
 		public function __construct() {
 			$this->aiwp = AIWP();
 			$profile = AIWP_Tools::get_selected_profile( $this->aiwp->config->options['ga_profiles_list'], $this->aiwp->config->options['tableid_jail'] );
 			$this->uaid = sanitize_text_field( $profile[2] );
-			if ( $this->aiwp->config->options['trackingcode_infooter'] ) {
-				add_action( 'wp_footer', array( $this, 'output' ), 99 );
-			} else {
-				add_action( 'wp_head', array( $this, 'output' ), 99 );
-			}
-			if ( $this->aiwp->config->options['amp_tracking_tagmanager'] && $this->aiwp->config->options['amp_containerid'] ) {
-				add_filter( 'amp_post_template_data', array( $this, 'amp_add_analytics_script' ) );
-				add_action( 'amp_post_template_footer', array( $this, 'amp_output' ) );
-			}
 		}
 
 		/**
@@ -61,7 +52,7 @@ if ( ! class_exists( 'AIWP_Tracking_TagManager' ) ) {
 		/**
 		 * Builds the datalayer based on user's options
 		 */
-		private function build_custom_dimensions() {
+		public function build_custom_dimensions() {
 			global $post;
 			if ( $this->aiwp->config->options['tm_author_var'] && ( is_single() || is_page() ) ) {
 				global $post;
@@ -110,11 +101,33 @@ if ( ! class_exists( 'AIWP_Tracking_TagManager' ) ) {
 			}
 			do_action( 'aiwp_tagmanager_datalayer', $this );
 		}
+	}
+}
+
+if ( ! class_exists( 'AIWP_Tracking_TagManager' ) ) {
+
+	class AIWP_Tracking_TagManager extends AIWP_Tracking_TagManager_Base{
+
+		public function __construct() {
+			parent::__construct();
+			$this->load_scripts();
+		}
+
+		private function load_scripts(){
+			if ( $this->aiwp->config->options['trackingcode_infooter'] ) {
+				add_action( 'wp_footer', array( $this, 'output' ), 99 );
+			} else {
+				add_action( 'wp_head', array( $this, 'output' ), 99 );
+			}
+		}
 
 		/**
 		 * Outputs the Google Tag Manager tracking code
 		 */
 		public function output() {
+			if ( function_exists( 'is_amp_endpoint' ) && is_amp_endpoint() ) {
+				return;
+			}
 			$this->build_custom_dimensions();
 			if ( is_array( $this->datalayer ) ) {
 				$vars = "{";
@@ -130,6 +143,22 @@ if ( ! class_exists( 'AIWP_Tracking_TagManager' ) ) {
 				AIWP_Tools::load_view( 'front/views/analytics-optout-code.php', array( 'uaid' => $this->uaid, 'gaDntOptout' => $this->aiwp->config->options['tm_dnt_optout'], 'gaOptout' => $this->aiwp->config->options['tm_optout'] ) );
 			}
 			AIWP_Tools::load_view( 'front/views/tagmanager-code.php', array( 'containerid' => $this->aiwp->config->options['web_containerid'], 'vars' => $vars ) );
+		}
+	}
+}
+
+if ( ! class_exists( 'AIWP_Tracking_TagManager_AMP' ) ) {
+
+	class AIWP_Tracking_TagManager_AMP extends AIWP_Tracking_TagManager_Base{
+
+		public function __construct() {
+			parent::__construct();
+			$this->load_scripts();
+		}
+
+		private function load_scripts(){
+				add_filter( 'amp_post_template_data', array( $this, 'amp_add_analytics_script' ) );
+				add_action( 'amp_post_template_footer', array( $this, 'amp_output' ) );
 		}
 
 		/**

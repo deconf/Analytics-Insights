@@ -8,7 +8,7 @@
  */
 ?>
 
-<?php if ( 0 == $data['ga_with_gtag'] ):?>
+<?php if ( 0 == $globalsitetag ):?>
 <!-- BEGIN AIWP v<?php echo AIWP_CURRENT_VERSION; ?> Universal Analytics - https://deconf.com/analytics-insights/ -->
 <script>
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

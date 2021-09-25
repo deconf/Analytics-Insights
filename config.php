@@ -61,7 +61,6 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 								'ga_dnt_optout',
 								'tm_optout',
 								'tm_dnt_optout',
-								'ga_with_gtag',
 			);
 			foreach ( $numerics as $key ) {
 				if ( isset( $options[$key] ) ) {
@@ -241,7 +240,6 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 								'backend_realtime_report', //v5.2
 								'ga_optout', //v5.2.3
 								'ga_dnt_optout', //v5.2.3
-								'ga_with_gtag', //v5.3
 								'frontend_item_reports',
 								'tm_optout', //v5.3.1.2
 								'tm_dnt_optout', //v5.3.1.2
@@ -255,6 +253,11 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 
 			if ( isset($this->options['ga_dash_tracking']) && 0 == $this->options['ga_dash_tracking'] ) { // v5.0.1
 				$this->options['tracking_type'] = 'disabled';
+				$flag = true;
+			}
+
+			if ( isset($this->options['ga_with_gtag']) && 1 == $this->options['ga_with_gtag'] ) { // v5.4.4
+				$this->options['tracking_type'] = 'globalsitetag';
 				$flag = true;
 			}
 
@@ -272,6 +275,7 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 								'ga_dash_cachetime', // v5.2
 								'ga_dash_default_ua', // v5.2
 								'ga_dash_hidden', // v5.2
+								'ga_with_gtag', // v5.4.4
 			);
 			foreach ( $unsets as $key ) {
 				if ( isset( $this->options[$key] ) ) {

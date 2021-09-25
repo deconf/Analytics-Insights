@@ -46,7 +46,6 @@ final class AIWP_Settings {
 				$options['optimize_tracking'] = 0;
 				$options['trackingcode_infooter'] = 0;
 				$options['trackingevents_infooter'] = 0;
-				$options['ga_with_gtag'] = 0;
 				if ( isset( $_REQUEST['options']['ga_tracking_code'] ) ) {
 					$new_options['ga_tracking_code'] = trim( $new_options['ga_tracking_code'], "\t" );
 				}
@@ -114,6 +113,9 @@ final class AIWP_Settings {
 	}
 
 	private static function html_switch_button( $option_name, $option_value, $option_id, $checked, $option_text, $disabled = false, $onchange = false ) {
+		if ( $disabled ){
+			return;
+		}
 		?>
 <tr>
 	<td colspan="2" class="aiwp-settings-title">
@@ -130,7 +132,7 @@ final class AIWP_Settings {
 <?php
 	}
 
-	private static function html_section_delimiter( $title = false, $withhr = true, $withspan = true ) {
+	private static function html_section_delimiter( $title = false, $withhr = true, $withspan = true, $disabled = false ) {
 		?>
 <tr>
 	<td <?php if ( $withspan ) echo 'colspan="2"'; ?>>
@@ -304,7 +306,7 @@ final class AIWP_Settings {
 		if ( ! $aiwp->config->options['tableid_jail'] ) {
 			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'analytics-insights' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_errors_debugging', false ), __( 'Errors & Debug', 'analytics-insights' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_settings', false ), __( 'authorize the plugin', 'analytics-insights' ) ) ) );
 		}
-		if ( 'universal' == $options['tracking_type'] ) {
+		if ( 'universal' == $options['tracking_type'] || 'globalsitetag' == $options['tracking_type'] ) {
 			$tabs = array( 'basic' => __( "Basic Settings", 'analytics-insights' ), 'events' => __( "Events Tracking", 'analytics-insights' ), 'custom' => __( "Custom Definitions", 'analytics-insights' ), 'exclude' => __( "Exclude Tracking", 'analytics-insights' ), 'advanced' => __( "Advanced Settings", 'analytics-insights' ), 'integration' => __( "Integration", 'analytics-insights' ) );
 		} else if ( 'tagmanager' == $options['tracking_type'] ) {
 			$tabs = array( 'basic' => __( "Basic Settings", 'analytics-insights' ), 'tmdatalayervars' => __( "DataLayer Variables", 'analytics-insights' ), 'exclude' => __( "Exclude Tracking", 'analytics-insights' ), 'tmadvanced' => __( "Advanced Settings", 'analytics-insights' ), 'tmintegration' => __( "Integration", 'analytics-insights' ) );
@@ -323,13 +325,14 @@ final class AIWP_Settings {
 			</td>
 			<td>
 				<select id="tracking_type" name="options[tracking_type]" onchange="this.form.submit()">
-					<option value="universal" <?php selected( $options['tracking_type'], 'universal' ); ?>><?php _e("Analytics", 'analytics-insights');?></option>
+					<option value="universal" <?php selected( $options['tracking_type'], 'universal' ); ?>><?php _e("Universal Analytics", 'analytics-insights');?></option>
+					<option value="globalsitetag" <?php selected( $options['tracking_type'], 'globalsitetag' ); ?>><?php _e("Global Site Tag", 'analytics-insights');?></option>
 					<option value="tagmanager" <?php selected( $options['tracking_type'], 'tagmanager' ); ?>><?php _e("Tag Manager", 'analytics-insights');?></option>
 					<option value="disabled" <?php selected( $options['tracking_type'], 'disabled' ); ?>><?php _e("Disabled", 'analytics-insights');?></option>
 				</select>
 			</td>
 		</tr>
-	 <?php if ( 'universal' == $options['tracking_type'] ) : ?>
+	 <?php if ( 'universal' == $options['tracking_type'] || 'globalsitetag' == $options['tracking_type'] ) : ?>
 		<tr>
 			<td class="aiwp-settings-title"></td>
 			<td>
@@ -337,7 +340,6 @@ final class AIWP_Settings {
 		 	<?php echo '<pre>' . __("View Name:", 'analytics-insights') . "\t" . esc_html($profile_info[0]) . "<br />" . __("Tracking ID:", 'analytics-insights') . "\t" . esc_html($profile_info[2]) . "<br />" . __("Default URL:", 'analytics-insights') . "\t" . esc_html($profile_info[3]) . "<br />" . __("Time Zone:", 'analytics-insights') . "\t" . esc_html($profile_info[5]) . '</pre>';?>
 		</td>
 		</tr>
-			<?php self::html_switch_button('options[ga_with_gtag]', 1, 'ga_with_gtag', $options['ga_with_gtag'], __( "use global site tag gtag.js (not recommended)", 'analytics-insights') ); ?>
 			<?php elseif ( 'tagmanager' == $options['tracking_type'] ) : ?>
 		<tr>
 			<td class="aiwp-settings-title">
@@ -617,20 +619,22 @@ final class AIWP_Settings {
 	<table class="aiwp-settings-options">
 		<?php self::html_section_delimiter(__( "Accelerated Mobile Pages (AMP)", 'analytics-insights' ), false); ?>
 		<?php self::html_switch_button('options[amp_tracking_analytics]', 1, 'amp_tracking_analytics', $options['amp_tracking_analytics'], __( "enable tracking for Accelerated Mobile Pages (AMP)", 'analytics-insights') ); ?>
-		<?php self::html_switch_button('options[amp_tracking_clientidapi]', 1, 'amp_tracking_clientidapi', $options['amp_tracking_clientidapi'] && !$options['ga_with_gtag'], __( "enable Google AMP Client Id API", 'analytics-insights'), $options['ga_with_gtag'] ); ?>
+		<?php self::html_switch_button('options[amp_tracking_clientidapi]', 1, 'amp_tracking_clientidapi', $options['amp_tracking_clientidapi'] && ( 'globalsitetag' !== $options['tracking_type'] ), __( "enable Google AMP Client Id API", 'analytics-insights'), 'globalsitetag' === $options['tracking_type'] ); ?>
+		<?php if ( 'globalsitetag' !== $options['tracking_type'] ) : ?>
 		<?php self::html_section_delimiter(__( "Ecommerce", 'analytics-insights' ), false); ?>
 		<tr>
 			<td class="aiwp-settings-title">
 				<label for="tracking_type"><?php _e("Ecommerce Tracking:", 'analytics-insights' ); ?></label>
 			</td>
 			<td>
-				<select id="ecommerce_mode" name="options[ecommerce_mode]" <?php disabled( $options['ga_with_gtag'], true );?>>
+				<select id="ecommerce_mode" name="options[ecommerce_mode]" <?php disabled( 'globalsitetag' === $options['tracking_type'], true );?>>
 					<option value="disabled" <?php selected( $options['ecommerce_mode'], 'disabled' ); ?>><?php _e("Disabled", 'analytics-insights');?></option>
 					<option value="standard" <?php selected( $options['ecommerce_mode'], 'standard' ); ?>><?php _e("Ecommerce Plugin", 'analytics-insights');?></option>
-					<option value="enhanced" <?php selected( $options['ecommerce_mode'], 'enhanced' ); selected( $options['ga_with_gtag'], true );?>><?php _e("Enhanced Ecommerce Plugin", 'analytics-insights');?></option>
+					<option value="enhanced" <?php selected( $options['ecommerce_mode'], 'enhanced' ); selected( 'globalsitetag' === $options['tracking_type'], true );?>><?php _e("Enhanced Ecommerce Plugin", 'analytics-insights');?></option>
 				</select>
 			</td>
 		</tr>
+		<?php endif; ?>
 		<?php self::html_section_delimiter(__( "Optimize", 'analytics-insights' ), false); ?>
 		<?php self::html_switch_button('options[optimize_tracking]', 1, 'optimize_tracking', $options['optimize_tracking'], __( "enable Optimize tracking", 'analytics-insights') ); ?>
 		<?php self::html_switch_button('options[optimize_pagehiding]', 1, 'optimize_pagehiding', $options['optimize_pagehiding'], __( "enable Page Hiding support", 'analytics-insights') ); ?>

@@ -1,10 +1,10 @@
 === Analytics Insights - Google Analytics, AMP Analytics, Stats ===
 Contributors: deconf
 Donate link: https://deconf.com/donate/
-Tags: google analytics, google analytics dashboard, google analytics widget, WordPress analytics
+Tags: google analytics dashboard, google analytics widget, WordPress analytics, google analytics plugin
 Requires at least: 3.5
 Tested up to: 5.8
-Stable tag: 5.4.3
+Stable tag: 5.4.4
 Requires PHP: 5.2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -48,10 +48,6 @@ This plugin is fully compatible with multisite network installs. Allows using mu
 
 No, once the plugin is authorized and a default domain is selected the Google Analytics tracking code is automatically inserted in all webpages.
 
-= Some settings are missing in the video tutorial =
-
-We are constantly improving Analytics Insights, sometimes the video tutorial may be a little outdated.
-
 = How can I suggest a new feature, contribute or report a bug? =
 
 You can submit pull requests, feature requests, and bug reports on [our GitHub repository](https://github.com/deconf/analytics-insights).
@@ -81,6 +77,12 @@ Analytics Insights it's released under the GPLv2, you can use it free of charge 
 == Changelog ==
 
 [AIWP v5.4 release notes](https://deconf.com/analytics-insights-for-wordpress/)
+
+= 5.4.4 (2021.09.24) =
+* Enhancements:
+	* add AMP Analytics support for gtag.js (Global Site Tag)
+	* add events support to Global Site Tag tracking on AMP pages; including scroll depth and HTML attributes triggers
+	* add custom dimensions support to Global Site Tag tracking on AMP pages 
 
 = 5.4.3 (2021.09.16) =
 * Bug Fixes:

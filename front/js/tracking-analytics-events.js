@@ -26,7 +26,7 @@ function aiwpRedirect () {
 
 function aiwp_send_event ( category, action, label, withCallBack ) {
 
-	if ( aiwpUAEventsData.options[ 'ga_with_gtag' ] ) {
+	if ( aiwpUAEventsData.options[ 'global_site_tag' ] ) {
 		if ( withCallBack ) {
 			if ( aiwpUAEventsData.options[ 'event_bouncerate' ] ) {
 				gtag( 'event', action, {

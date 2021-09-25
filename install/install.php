@@ -87,7 +87,6 @@ class AIWP_Install {
 			$options['ga_dnt_optout'] = 0;
 			$options['tm_optout'] = 0;
 			$options['tm_dnt_optout'] = 0;
-			$options['ga_with_gtag'] = 0;
 		} else {
 			$options = array();
 			$options['client_id'] = get_option( 'ga_dash_clientid' );
@@ -161,7 +160,6 @@ class AIWP_Install {
 			$options['ga_dnt_optout'] = 0;
 			$options['tm_optout'] = 0;
 			$options['tm_dnt_optout'] = 0;
-			$options['ga_with_gtag'] = 0;
 			delete_option( 'ga_dash_clientid' );
 			delete_option( 'ga_dash_clientsecret' );
 			delete_option( 'ga_dash_access' );
