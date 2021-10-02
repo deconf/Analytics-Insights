@@ -9,14 +9,18 @@
 /* Real-Time content */
 .aiwp-pline {
 	width: 100%;
-	margin: 0 0;
-	padding: 5px 0 5px 0;
-	background: #fff;
-	-moz-box-shadow: 0px 0px 3px 0px #BBB;
-	-webkit-box-shadow: 0px 0px 3px 0px #BBB;
-	box-shadow: 0px 0px 3px 0px #BBB;
-	display: table;
-	overflow: hidden;
+    margin: 7px 0;
+    padding: 7px 0 7px 0;
+    background: #fff;
+    -moz-box-shadow: 0px 0px 3px 0px #BBB;
+    -webkit-box-shadow: 0px 0px 3px 0px #bbb;
+    box-shadow: 0px 0px 3px 0px #bbb;
+    display: table;
+    overflow: hidden;
+    -moz-border-radius: 0px 7px;
+    -webkit-border-radius: 0px 7px;
+    border-radius: 0px 7px;
+    border: 1px #7CAEFF solid;
 }
 
 .aiwp-pleft {
@@ -25,6 +29,10 @@
 	padding-left: 5px;
 }
 
+.aiwp-pleft a{
+	text-decoration:none;
+}	
+
 .aiwp-pright {
 	width: 5%;
 	float: right;
@@ -32,7 +40,7 @@
 }
 
 [id^=aiwp-realtime-] {
-	margin: 10px 0 0 0;
+	margin: 0 0;
 	width: 100%;
 }
 
@@ -41,41 +49,44 @@
 	margin: 0 0;
 	background: #fff;
 	text-align: center;
-	-moz-box-shadow: 0px 0px 5px 0px #BBB;
-	-webkit-box-shadow: 0px 0px 5px 0px #BBB;
-	box-shadow: 0px 0px 5px 0px #BBB;
 	display: table;
 }
 
 .aiwp-tdo-left {
 	width: 60%;
-	padding: 33px 0;
+	padding: 26px 0;
 	float: left;
 	text-align: center;
+	color: #f77149;
 }
 
 .aiwp-tdo-right {
 	width: 35%;
 	margin: 0px 10px 0px 0;
 	text-align: left;
-	font-weight: bold;
+	font-weight: normal;
 	vertical-align: middle;
 	float: right;
 	display: table;
 }
 
 .aiwp-online {
-	font-size: 100px;
+	font-size: 120px;
 	font-weight: normal;
 	line-height: 1em;
+	padding: 20px;
 	margin: 0 auto;
 	width: 80%;
+	-moz-border-radius: 100px 100px;
+	-webkit-border-radius: 100px 100px;
+	border-radius: 100px 100px;		
+	display: table;
 }
 
 .aiwp-bigtext {
 	font-size: 14px;
 	width: 100%;
-	margin: 0 0;
+	margin: 6px 0;
 	padding: 5px 5px 5px 5px;
 	background: #fff;
 	-moz-box-shadow: 0px 0px 3px 0px #BBB;
@@ -83,11 +94,19 @@
 	box-shadow: 0px 0px 3px 0px #BBB;
 	display: table;
 	overflow: hidden;
+	-moz-border-radius: 0px 7px;
+	-webkit-border-radius: 0px 7px;
+	border-radius: 0px 7px;	
+	border: 1px #7CAEFF solid;
 }
 
 .aiwp-bleft {
 	float: left;
 	width: 80%;
+}
+
+.aiwp-bleft a {
+	text-decoration: none;
 }
 
 .aiwp-bright {

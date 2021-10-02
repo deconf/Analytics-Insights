@@ -80,6 +80,8 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 	* use only minified scripts and follow SCRIPT_DEBUG flag while debugging
 	* fix invalid links
 	* geochart overlapping the metrics icons on mobile devices
+* Enhancements:
+	* UX updates for the analytics real-time report
 
 = 5.4.4 (2021.09.24) =
 * Enhancements:
