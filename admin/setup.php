@@ -72,7 +72,7 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 			/*
 			 * AIWP main stylesheet
 			 */
-			wp_enqueue_style( 'aiwp', AIWP_URL . 'admin/css/aiwp.css', null, AIWP_CURRENT_VERSION );
+			wp_enqueue_style( 'aiwp', AIWP_URL . 'admin/css/aiwp' . AIWP_Tools::script_debug_suffix() . '.css', null, AIWP_CURRENT_VERSION );
 			/*
 			 * AIWP UI
 			 */
@@ -81,7 +81,7 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 			} else {
 				$ed_bubble = '';
 			}
-			wp_enqueue_script( 'aiwp-backend-ui', plugins_url( 'js/ui.js', __FILE__ ), array( 'jquery' ), AIWP_CURRENT_VERSION, true );
+			wp_enqueue_script( 'aiwp-backend-ui', plugins_url( 'js/ui' . AIWP_Tools::script_debug_suffix() . '.js', __FILE__ ), array( 'jquery' ), AIWP_CURRENT_VERSION, true );
 			/* @formatter:off */
 			wp_localize_script( 'aiwp-backend-ui', 'aiwp_ui_data', array(
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
@@ -116,14 +116,14 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 					} else {
 						$region = false;
 					}
-					wp_enqueue_style( 'aiwp-nprogress', AIWP_URL . 'common/nprogress/nprogress.css', null, AIWP_CURRENT_VERSION );
-					wp_enqueue_style( 'aiwp-backend-item-reports', AIWP_URL . 'admin/css/admin-widgets.css', null, AIWP_CURRENT_VERSION );
-					wp_register_style( 'jquery-ui-tooltip-html', AIWP_URL . 'common/realtime/jquery.ui.tooltip.html.css' );
+					wp_enqueue_style( 'aiwp-nprogress', AIWP_URL . 'common/nprogress/nprogress' . AIWP_Tools::script_debug_suffix() . '.css', null, AIWP_CURRENT_VERSION );
+					wp_enqueue_style( 'aiwp-backend-item-reports', AIWP_URL . 'admin/css/admin-widgets' . AIWP_Tools::script_debug_suffix() . '.css', null, AIWP_CURRENT_VERSION );
+					wp_register_style( 'jquery-ui-tooltip-html', AIWP_URL . 'common/realtime/jquery.ui.tooltip.html' . AIWP_Tools::script_debug_suffix() . '.css' );
 					wp_enqueue_style( 'jquery-ui-tooltip-html' );
-					wp_register_script( 'jquery-ui-tooltip-html', AIWP_URL . 'common/realtime/jquery.ui.tooltip.html.js' );
+					wp_register_script( 'jquery-ui-tooltip-html', AIWP_URL . 'common/realtime/jquery.ui.tooltip.html' . AIWP_Tools::script_debug_suffix() . '.js' );
 					wp_register_script( 'googlecharts', 'https://www.gstatic.com/charts/loader.js', array(), null );
-					wp_enqueue_script( 'aiwp-nprogress', AIWP_URL . 'common/nprogress/nprogress.js', array( 'jquery' ), AIWP_CURRENT_VERSION );
-					wp_enqueue_script( 'aiwp-backend-dashboard-reports', AIWP_URL . 'common/js/reports5.js', array( 'jquery', 'googlecharts', 'aiwp-nprogress', 'jquery-ui-tooltip', 'jquery-ui-core', 'jquery-ui-position', 'jquery-ui-tooltip-html' ), AIWP_CURRENT_VERSION, true );
+					wp_enqueue_script( 'aiwp-nprogress', AIWP_URL . 'common/nprogress/nprogress' . AIWP_Tools::script_debug_suffix() . '.js', array( 'jquery' ), AIWP_CURRENT_VERSION );
+					wp_enqueue_script( 'aiwp-backend-dashboard-reports', AIWP_URL . 'common/js/reports5' . AIWP_Tools::script_debug_suffix() . '.js', array( 'jquery', 'googlecharts', 'aiwp-nprogress', 'jquery-ui-tooltip', 'jquery-ui-core', 'jquery-ui-position', 'jquery-ui-tooltip-html' ), AIWP_CURRENT_VERSION, true );
 					/* @formatter:off */
 
 					$datelist = array(
@@ -223,12 +223,12 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 					} else {
 						$region = false;
 					}
-					wp_enqueue_style( 'aiwp-nprogress', AIWP_URL . 'common/nprogress/nprogress.css', null, AIWP_CURRENT_VERSION );
-					wp_enqueue_style( 'aiwp-backend-item-reports', AIWP_URL . 'admin/css/item-reports.css', null, AIWP_CURRENT_VERSION );
+					wp_enqueue_style( 'aiwp-nprogress', AIWP_URL . 'common/nprogress/nprogress' . AIWP_Tools::script_debug_suffix() . '.css', null, AIWP_CURRENT_VERSION );
+					wp_enqueue_style( 'aiwp-backend-item-reports', AIWP_URL . 'admin/css/item-reports' . AIWP_Tools::script_debug_suffix() . '.css', null, AIWP_CURRENT_VERSION );
 					wp_enqueue_style( "wp-jquery-ui-dialog" );
 					wp_register_script( 'googlecharts', 'https://www.gstatic.com/charts/loader.js', array(), null );
-					wp_enqueue_script( 'aiwp-nprogress', AIWP_URL . 'common/nprogress/nprogress.js', array( 'jquery' ), AIWP_CURRENT_VERSION );
-					wp_enqueue_script( 'aiwp-backend-item-reports', AIWP_URL . 'common/js/reports5.js', array( 'aiwp-nprogress', 'googlecharts', 'jquery', 'jquery-ui-dialog' ), AIWP_CURRENT_VERSION, true );
+					wp_enqueue_script( 'aiwp-nprogress', AIWP_URL . 'common/nprogress/nprogress' . AIWP_Tools::script_debug_suffix() . '.js', array( 'jquery' ), AIWP_CURRENT_VERSION );
+					wp_enqueue_script( 'aiwp-backend-item-reports', AIWP_URL . 'common/js/reports5' . AIWP_Tools::script_debug_suffix() . '.js', array( 'aiwp-nprogress', 'googlecharts', 'jquery', 'jquery-ui-dialog' ), AIWP_CURRENT_VERSION, true );
 					/* @formatter:off */
 					wp_localize_script( 'aiwp-backend-item-reports', 'aiwpItemData', array(
 						'ajaxurl' => admin_url( 'admin-ajax.php' ),
@@ -306,8 +306,8 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 			if ( in_array( $new_hook, $settings_hooks ) ) {
 				wp_enqueue_style( 'wp-color-picker' );
 				wp_enqueue_script( 'wp-color-picker' );
-				wp_enqueue_script( 'wp-color-picker-script-handle', plugins_url( 'js/wp-color-picker-script.js', __FILE__ ), array( 'wp-color-picker' ), false, true );
-				wp_enqueue_script( 'aiwp-settings', plugins_url( 'js/settings.js', __FILE__ ), array( 'jquery' ), AIWP_CURRENT_VERSION, true );
+				wp_enqueue_script( 'wp-color-picker-script-handle', plugins_url( 'js/wp-color-picker-script' . AIWP_Tools::script_debug_suffix() . '.js', __FILE__ ), array( 'wp-color-picker' ), false, true );
+				wp_enqueue_script( 'aiwp-settings', plugins_url( 'js/settings' . AIWP_Tools::script_debug_suffix() . '.js', __FILE__ ), array( 'jquery' ), AIWP_CURRENT_VERSION, true );
 			}
 		}
 

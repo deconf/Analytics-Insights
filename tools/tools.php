@@ -276,5 +276,19 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 			$info .= 'Gzip: ' . $gzip_status . "\n";
 			return $info;
 		}
+
+		/**
+		 * Follows the SCRIPT_DEBUG settings
+		 * @param string $script
+		 * @return string
+		 */
+		public static function script_debug_suffix() {
+			if ( defined( 'SCRIPT_DEBUG' ) and SCRIPT_DEBUG ) {
+				return '';
+			} else {
+				return '.min';
+			}
+		}
+
 	}
 }

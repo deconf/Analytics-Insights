@@ -9,7 +9,7 @@
 ?>
 
 <?php if ( 0 == $globalsitetag ):?>
-<!-- BEGIN AIWP v<?php echo AIWP_CURRENT_VERSION; ?> Universal Analytics - https://deconf.com/analytics-insights/ -->
+<!-- BEGIN AIWP v<?php echo AIWP_CURRENT_VERSION; ?> Universal Analytics - https://deconf.com/analytics-insights-for-wordpress/ -->
 <script>
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -19,7 +19,7 @@
 </script>
 <!-- END AIWP Universal Analytics -->
 <?php else:?>
-<!-- BEGIN AIWP v<?php echo AIWP_CURRENT_VERSION; ?> Global Site Tag - https://deconf.com/analytics-insights/ -->
+<!-- BEGIN AIWP v<?php echo AIWP_CURRENT_VERSION; ?> Global Site Tag - https://deconf.com/analytics-insights-for-wordpress/ -->
 <script async src="<?php echo esc_url( $data['tracking_script_path'] )?>?id=<?php echo esc_js( $data['uaid'] )?>"></script>
 <script>
   window.dataLayer = window.dataLayer || [];

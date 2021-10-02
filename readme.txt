@@ -68,15 +68,17 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 8. Cities on the region map
 9. Analytics Insights Widget
 
-== License ==
-
-Analytics Insights it's released under the GPLv2, you can use it free of charge on your personal or commercial website.
-
 == Upgrade Notice ==
 
 == Changelog ==
 
 [AIWP v5.4 release notes](https://deconf.com/analytics-insights-for-wordpress/)
+
+= 5.4.5 (2021.09.28) =
+* Bug Fixes:
+	* Maps API key missing quotes
+	* use only minified scripts and follow SCRIPT_DEBUG flag while debugging
+	* fix invalid links
 
 = 5.4.4 (2021.09.24) =
 * Enhancements:
@@ -113,7 +115,7 @@ Analytics Insights it's released under the GPLv2, you can use it free of charge 
 	* refactoring code on the GADWP settings page
 	* removed a duplicate option in Tracking Code 
 * Bug Fixes:	
-	* CSS fix for on/off buttons on Analytics Insights settings
+	* CSS fix for on/off buttons on GADWP settings page
 	
 = 5.3.2 =
 * Bug Fixes:	
