@@ -1,10 +1,10 @@
 === Analytics Insights - Google Analytics, AMP Analytics, Stats ===
 Contributors: deconf
 Donate link: https://deconf.com/donate/
-Tags: google analytics dashboard, google analytics widget, WordPress analytics, google analytics plugin
+Tags: google analytics dashboard, google analytics widget, WordPress analytics, google analytics plugin, global site tag
 Requires at least: 3.5
 Tested up to: 5.8
-Stable tag: 5.4.4
+Stable tag: 5.4.5
 Requires PHP: 5.2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -79,6 +79,7 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 	* Maps API key missing quotes
 	* use only minified scripts and follow SCRIPT_DEBUG flag while debugging
 	* fix invalid links
+	* geochart overlapping the metrics icons on mobile devices
 
 = 5.4.4 (2021.09.24) =
 * Enhancements:

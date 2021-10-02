@@ -578,6 +578,8 @@ jQuery.fn.extend( {
 			drawAreaChart : function ( data, format ) {
 				var chartData, options, chart, formatter;
 
+				jQuery( '#aiwp-sel-metric' + slug ).hide();	
+				
 				chartData = google.visualization.arrayToDataTable( data );
 
 				if ( format ) {
@@ -1151,19 +1153,14 @@ jQuery.fn.extend( {
 		reports.init();
 
 		jQuery( '#aiwp-sel-view' + slug ).change( function () {
-			//jQuery( '#aiwp-reports' + slug ).html( '' );
 			reports.init();
 		} );
 
 		jQuery( '#aiwp-sel-period' + slug ).change( function () {
-			jQuery( '#aiwp-sel-metric' + slug ).hide();
-			//jQuery( '#aiwp-reports' + slug ).html( '' );
 			reports.init();
 		} );
 
 		jQuery( '#aiwp-sel-report' + slug ).change( function () {
-			jQuery( '#aiwp-sel-metric' + slug ).hide();
-			//jQuery( '#aiwp-reports' + slug ).html( '' );
 			reports.init();
 		} );
 

@@ -117,6 +117,11 @@
 	height: 100%;
 }
 
+[id^=aiwp-geochart-], [id^=aiwp-orgchart-] {
+	display:inline-block;
+	width: 100%;
+}
+
 [id^=aiwp-piechart-].halfsize {
 	width: 47%;
 	margin: 10px 0 0 0;

@@ -17,6 +17,27 @@ $aiwp = AIWP();
 		</div>
 		<div class="postbox">
 			<h3>
+				<span><?php _e("WordPress Plugins",'analytics-insights')?></span>
+			</h3>
+			<div class="inside">
+				<div class="aiwp-title">
+					<a href="https://deconf.com/clicky-web-analytics-review/?utm_source=aiwp_config&utm_medium=link&utm_content=clicky&utm_campaign=aiwp"><img src="<?php echo plugins_url( '../images/clicky.png' , __FILE__ ); ?>" /></a>
+				</div>
+				<div class="aiwp-desc">
+					<?php printf(__('%s - A web analytics service with users tracking at IP level.', 'analytics-insights'), sprintf('<a href="https://deconf.com/clicky-web-analytics-review/?utm_source=aiwp_config&utm_medium=link&utm_content=clicky&utm_campaign=aiwp">%s</a>', __('Clicky Analytics', 'analytics-insights')));?>
+				</div>
+				<br />
+				<div class="aiwp-title">
+					<a href="https://wordpress.org/plugins/search-engine-insights/"><img src="<?php echo plugins_url( '../images/seiwp.png' , __FILE__ ); ?>" /></a>
+				</div>
+				<div class="aiwp-desc">
+						<?php printf(__('%s - Add your website to Google Search Console!', 'analytics-insights'), sprintf('<a href="https://wordpress.org/plugins/search-engine-insights/">%s</a>', __('Search Engine Insights', 'analytics-insights')));?>
+				</div>
+			</div>
+		</div>
+	</div>
+		<div class="postbox">
+			<h3>
 				<span><?php _e("Stay Updated",'analytics-insights')?></span>
 			</h3>
 			<div class="inside">
@@ -31,34 +52,6 @@ $aiwp = AIWP();
 				</div>
 			</div>
 		</div>
-		<div class="postbox">
-			<h3>
-				<span><?php _e("Further Reading",'analytics-insights')?></span>
-			</h3>
-			<div class="inside">
-				<div class="aiwp-title">
-					<a href="https://deconf.com/clicky-web-analytics-review/?utm_source=aiwp_config&utm_medium=link&utm_content=clicky&utm_campaign=aiwp"><img src="<?php echo plugins_url( '../images/clicky.png' , __FILE__ ); ?>" /></a>
-				</div>
-				<div class="aiwp-desc">
-					<?php printf(__('%s service with users tracking at IP level.', 'analytics-insights'), sprintf('<a href="https://deconf.com/clicky-web-analytics-review/?utm_source=aiwp_config&utm_medium=link&utm_content=clicky&utm_campaign=aiwp">%s</a>', __('Web Analytics', 'analytics-insights')));?>
-				</div>
-				<br />
-				<div class="aiwp-title">
-					<a href="https://deconf.com/move-website-https-ssl/?utm_source=aiwp_config&utm_medium=link&utm_content=ssl&utm_campaign=aiwp"><img src="<?php echo plugins_url( '../images/ssl.png' , __FILE__ ); ?>" /></a>
-				</div>
-				<div class="aiwp-desc">
-					<?php printf(__('%s by moving your website to HTTPS/SSL.', 'analytics-insights'), sprintf('<a href="https://deconf.com/move-website-https-ssl/?utm_source=aiwp_config&utm_medium=link&utm_content=ssl&utm_campaign=aiwp">%s</a>', __('Improve search rankings', 'analytics-insights')));?>
-				</div>
-				<br />
-				<div class="aiwp-title">
-					<a href="http://wordpress.org/support/view/plugin-reviews/analytics-insights#plugin-info"><img src="<?php echo plugins_url( '../images/star.png' , __FILE__ ); ?>" /></a>
-				</div>
-				<div class="aiwp-desc">
-					<?php printf(__('Your feedback and review are both important, %s!', 'analytics-insights'), sprintf('<a href="http://wordpress.org/support/view/plugin-reviews/analytics-insights#plugin-info">%s</a>', __('rate this plugin', 'analytics-insights')));?>
-				</div>
-			</div>
-		</div>
-	</div>
 </div>
 </div>
 </div>
