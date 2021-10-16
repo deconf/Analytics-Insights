@@ -1090,7 +1090,7 @@ final class AIWP_Settings {
 				if ( 1 == stripos( 'x' . $_REQUEST['aiwp_access_code'], 'UA-', 1 ) ) {
 					$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "The access code is <strong>not</strong> your <strong>Tracking ID</strong> (UA-XXXXX-X) <strong>nor</strong> your <strong>email address</strong>!", 'analytics-insights' ) . ".</p></div>";
 				} else {
-					$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You can only use the access code <strong>once</strong>, please generate a <strong>new access code</strong> using the red link", 'analytics-insights' ) . "!</p></div>";
+					$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You can only use the access code once.", 'analytics-insights' ) . "!</p></div>";
 				}
 			}
 		}

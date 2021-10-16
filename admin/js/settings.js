@@ -39,4 +39,5 @@ jQuery( document ).ready( function () {
 	} );
 
 	jQuery( '#aiwp-autodismiss' ).delay( 2000 ).fadeOut( 'slow' );
+	
 } );

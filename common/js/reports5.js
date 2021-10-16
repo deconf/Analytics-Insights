@@ -711,6 +711,7 @@ jQuery.fn.extend( {
 
 			rtRefresh : function () {
 				if ( reports.render.focusFlag ) {
+					//console.log('aiwpRtBeat');
 					postData.from = false;
 					postData.to = false;
 					postData.query = 'realtime';
@@ -731,7 +732,7 @@ jQuery.fn.extend( {
 
 			drawRealtime : function ( rtData ) {
 				var rtInfoRight, uPagePath, uReferrals, uKeywords, uSocial, uCustom, i = 0, pagepath = [], referrals = [], keywords = [], social = [], visittype = [], custom = [], uPagePathStats = [], pgStatsTable = "", uReferrals = [], uKeywords = [], uSocial = [], uCustom = [], uVisitType = [ "REFERRAL", "ORGANIC", "SOCIAL", "CUSTOM" ], uVisitorType = [ "DIRECT", "NEW" ];
-
+				
 				jQuery( function () {
 					jQuery( '#aiwp-widget *' ).tooltip( {
 						tooltipClass : "aiwp"
@@ -1001,6 +1002,8 @@ jQuery.fn.extend( {
 					reports.i18n = aiwpItemData.i18n.slice( 20, 26 );
 
 					reports.render.focusFlag = 1;
+					
+					jQuery( '#aiwp-sel-metric' + slug ).hide();
 
 					jQuery( window ).bind( "focus", function ( event ) {
 						reports.render.focusFlag = 1;
@@ -1049,7 +1052,7 @@ jQuery.fn.extend( {
 
 					reports.rtRefresh( reports.render.focusFlag );
 
-					reports.rtRuns = setInterval( reports.rtRefresh, 55000 );
+					reports.rtRuns = setInterval( reports.rtRefresh, 65000 );
 
 				} else {
 					if ( jQuery.inArray( query, [ 'referrers', 'contentpages', 'searches' ] ) > -1 ) {

@@ -132,10 +132,10 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 						$options['user_api'] = 0;
 						$network_options['network_mode'] = $this->options['network_mode'];
 						$network_options['superadmin_tracking'] = $this->options['superadmin_tracking'];
-						unset( $options['network_mode'] );
+						//unset( $options['network_mode'] );
 						if ( isset( $this->options['network_tableid'] ) ) {
 							$network_options['network_tableid'] = $this->options['network_tableid'];
-							unset( $options['network_tableid'] );
+							//unset( $options['network_tableid'] );
 						}
 					}
 					$merged_options = array_merge( $old_network_options, $network_options );

@@ -7,7 +7,7 @@
  */
 
 /* Tab navigation */
-#aiwp-events, #aiwp-custom, #aiwp-advanced, #aiwp-exclude, #aiwp-config, #aiwp-tmdatalayervars, #aiwp-tmintegration, #aiwp-integration, #aiwp-tmadvanced {
+#aiwp-events, #aiwp-custom, #aiwp-advanced, #aiwp-exclude, #aiwp-config, #aiwp-errors, #aiwp-sysinfo, #aiwp-tmdatalayervars, #aiwp-tmintegration, #aiwp-integration, #aiwp-tmadvanced {
 	display: none;
 }
 

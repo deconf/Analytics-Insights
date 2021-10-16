@@ -75,7 +75,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			} else {
 				$this->client->setClientId( $this->access[0] );
 				$this->client->setClientSecret( $this->access[1] );
-				$this->client->setRedirectUri( 'https://deconf.com/aiwp/oauth2callback.php' );
+				$this->client->setRedirectUri( AIWP_ENDPOINT_URL . 'oauth2callback.php' );
 			}
 			/**
 			 * AIWP Endpoint support
