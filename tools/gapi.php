@@ -503,7 +503,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 *            $filter
 		 * @return array|int
 		 */
-		private function get_contentpages( $projectId, $from, $to, $filter = '', $metric ) {
+		private function get_contentpages( $projectId, $from, $to , $metric, $filter = '' ) {
 			$metrics = 'ga:' . $metric;
 			$dimensions = 'ga:pageTitle';
 			$options = array( 'dimensions' => $dimensions, 'sort' => '-' . $metrics, 'quotaUser' => $this->managequota . 'p' . $projectId );
@@ -533,7 +533,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 *            $to
 		 * @return array|int
 		 */
-		private function get_404errors( $projectId, $from, $to, $filter = "Page Not Found", $metric ) {
+		private function get_404errors( $projectId, $from, $to, $metric, $filter = "Page Not Found" ) {
 			$metrics = 'ga:' . $metric;
 			$dimensions = 'ga:pagePath,ga:fullReferrer';
 			$options = array( 'dimensions' => $dimensions, 'sort' => '-' . $metrics, 'quotaUser' => $this->managequota . 'p' . $projectId );
@@ -565,7 +565,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 *            $filter
 		 * @return array|int
 		 */
-		private function get_referrers( $projectId, $from, $to, $filter = '', $metric ) {
+		private function get_referrers( $projectId, $from, $to, $metric, $filter = '' ) {
 			$metrics = 'ga:' . $metric;
 			$dimensions = 'ga:source';
 			$options = array( 'dimensions' => $dimensions, 'sort' => '-' . $metrics, 'quotaUser' => $this->managequota . 'p' . $projectId );
@@ -599,7 +599,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 *            $filter
 		 * @return array|int
 		 */
-		private function get_searches( $projectId, $from, $to, $filter = '', $metric ) {
+		private function get_searches( $projectId, $from, $to, $metric, $filter = '' ) {
 			$metrics = 'ga:' . $metric;
 			$dimensions = 'ga:keyword';
 			$options = array( 'dimensions' => $dimensions, 'sort' => '-' . $metrics, 'quotaUser' => $this->managequota . 'p' . $projectId );
@@ -633,7 +633,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 *            $filter
 		 * @return array|int
 		 */
-		private function get_locations( $projectId, $from, $to, $filter = '', $metric ) {
+		private function get_locations( $projectId, $from, $to, $metric, $filter = '' ) {
 			$metrics = 'ga:' . $metric;
 			$options = "";
 			$title = __( "Countries", 'analytics-insights' );
@@ -690,7 +690,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 *            $filter
 		 * @return array|int
 		 */
-		private function get_orgchart_data( $projectId, $from, $to, $query, $filter = '', $metric ) {
+		private function get_orgchart_data( $projectId, $from, $to, $query, $metric, $filter = '' ) {
 			$metrics = 'ga:' . $metric;
 			$dimensions = 'ga:' . $query;
 			$options = array( 'dimensions' => $dimensions, 'sort' => '-' . $metrics, 'quotaUser' => $this->managequota . 'p' . $projectId );
@@ -730,7 +730,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 *            $filter
 		 * @return array|int
 		 */
-		private function get_piechart_data( $projectId, $from, $to, $query, $filter = '', $metric ) {
+		private function get_piechart_data( $projectId, $from, $to, $query, $metric, $filter = '' ) {
 			$metrics = 'ga:' . $metric;
 			$dimensions = 'ga:' . $query;
 			if ( 'source' == $query ) {
@@ -881,29 +881,29 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				return $this->get_bottomstats( $projectId, $from, $to, $filter );
 			}
 			if ( 'locations' == $query ) {
-				return $this->get_locations( $projectId, $from, $to, $filter, $metric );
+				return $this->get_locations( $projectId, $from, $to, $metric, $filter );
 			}
 			if ( 'referrers' == $query ) {
-				return $this->get_referrers( $projectId, $from, $to, $filter, $metric );
+				return $this->get_referrers( $projectId, $from, $to, $metric, $filter );
 			}
 			if ( 'contentpages' == $query ) {
-				return $this->get_contentpages( $projectId, $from, $to, $filter, $metric );
+				return $this->get_contentpages( $projectId, $from, $to, $metric, $filter );
 			}
 			if ( '404errors' == $query ) {
 				$filter = $this->aiwp->config->options['pagetitle_404'];
-				return $this->get_404errors( $projectId, $from, $to, $filter, $metric );
+				return $this->get_404errors( $projectId, $from, $to, $metric, $filter );
 			}
 			if ( 'searches' == $query ) {
-				return $this->get_searches( $projectId, $from, $to, $filter, $metric );
+				return $this->get_searches( $projectId, $from, $to, $metric, $filter );
 			}
 			if ( 'realtime' == $query ) {
 				return $this->get_realtime( $projectId );
 			}
 			if ( 'channelGrouping' == $query || 'deviceCategory' == $query ) {
-				return $this->get_orgchart_data( $projectId, $from, $to, $query, $filter, $metric );
+				return $this->get_orgchart_data( $projectId, $from, $to, $query, $metric, $filter );
 			}
 			if ( in_array( $query, array( 'medium', 'visitorType', 'socialNetwork', 'source', 'browser', 'operatingSystem', 'screenResolution', 'mobileDeviceBranding' ) ) ) {
-				return $this->get_piechart_data( $projectId, $from, $to, $query, $filter, $metric );
+				return $this->get_piechart_data( $projectId, $from, $to, $query, $metric, $filter );
 			}
 			wp_die( - 27 );
 		}

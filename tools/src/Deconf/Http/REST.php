@@ -115,7 +115,7 @@ class Deconf_Http_REST
       if ($response->getExpectedRaw()) {
         return $body;
       }
-      
+
       $decoded = json_decode($body, true);
       if ($decoded === null || $decoded === "") {
         $error = "Invalid json in service response: $body";
@@ -170,7 +170,7 @@ class Deconf_Http_REST
     }
 
     if (count($queryVars)) {
-      $requestUrl .= '?' . implode($queryVars, '&');
+    	$requestUrl .= '?' . implode('&', $queryVars);
     }
 
     return $requestUrl;

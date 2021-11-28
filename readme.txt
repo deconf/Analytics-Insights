@@ -4,7 +4,7 @@ Donate link: https://deconf.com/donate/
 Tags: google analytics dashboard, google analytics widget, WordPress analytics, google analytics plugin, global site tag
 Requires at least: 3.5
 Tested up to: 5.8
-Stable tag: 5.4.6
+Stable tag: 5.4.7
 Requires PHP: 5.2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -73,12 +73,13 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 == Changelog ==
 
 [AIWP v5.4 release notes](https://deconf.com/analytics-insights-for-wordpress/)
-
-= 5.4.7 (2021.10.14) =
+	
+= 5.4.7 (2021.11.28) =
 * Bug Fixes:
 	* multiple bugfixes for network mode setup
 	* admin page css fixes
-	
+	* fixing multiple notices and errors for PHP 8 
+		
 = 5.4.6 (2021.10.14) =
 * Bug Fixes:
 	* Maps API key missing quotes
