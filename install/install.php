@@ -20,6 +20,7 @@ class AIWP_Install {
 			$options['access_front'][] = 'administrator';
 			$options['access_back'][] = 'administrator';
 			$options['tableid_jail'] = '';
+			$options['webstream_jail'] = '';
 			$options['theme_color'] = '#1e73be';
 			$options['switch_profile'] = 0;
 			$options['tracking_type'] = 'universal';
@@ -32,6 +33,7 @@ class AIWP_Install {
 			$options['ga_realtime_pages'] = 10;
 			$options['token'] = '';
 			$options['ga_profiles_list'] = array();
+			$options['ga4_webstreams_list'] = array();
 			$options['ga_tracking_code'] = '';
 			$options['ga_enhanced_links'] = 0;
 			$options['ga_remarketing'] = 0;

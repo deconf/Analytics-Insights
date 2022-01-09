@@ -807,9 +807,17 @@ final class AIWP_Settings {
 					update_option( 'aiwp_redeemed_code', $aiwp_access_code );
 					AIWP_Tools::delete_cache( 'gapi_errors' );
 					AIWP_Tools::delete_cache( 'last_error' );
-					$aiwp->gapi_controller->client->authenticate( $aiwp_access_code );
+
+					$token = $aiwp->gapi_controller->authenticate( $aiwp_access_code );
+
+					$array_token = (array)$token;
+
+					$aiwp->gapi_controller->client->setAccessToken( $array_token );
+
 					$aiwp->config->options['token'] = $aiwp->gapi_controller->client->getAccessToken();
+
 					$aiwp->config->set_plugin_options();
+
 					$options = self::update_options( 'general' );
 					$message = "<div class='updated' id='aiwp-autodismiss'><p>" . __( "Plugin authorization succeeded.", 'analytics-insights' ) . "</p></div>";
 					if ( $aiwp->config->options['token'] && $aiwp->gapi_controller->client->getAccessToken() ) {
@@ -823,13 +831,22 @@ final class AIWP_Settings {
 							$aiwp->config->set_plugin_options();
 							$options = self::update_options( 'general' );
 						}
+
+						$webstreams = $aiwp->gapi_controller->refresh_webstreams_ga4();
+						if ( is_array( $webstreams ) && ! empty( $webstreams ) ) {
+								$aiwp->config->options['ga4_webstreams_list'] = $webstreams;
+								if ( ! $aiwp->config->options['webstream_jail'] ) {
+									//$profile = AIWP_Tools::guess_default_domain( $profiles );
+									//$aiwp->config->options['tableid_jail'] = $profile;
+								}
+								$aiwp->config->set_plugin_options();
+								$options = self::update_options( 'general' );
+						}
 					}
-				} catch ( Deconf_IO_Exception $e ) {
+				} catch ( Google_Service_Exception $e ) {
 					$timeout = $aiwp->gapi_controller->get_timeouts( 'midnight' );
 					AIWP_Tools::set_error( $e, $timeout );
-				} catch ( Deconf_Service_Exception $e ) {
-					$timeout = $aiwp->gapi_controller->get_timeouts( 'midnight' );
-					AIWP_Tools::set_error( $e, $timeout );
+					$aiwp->gapi_controller->reset_token();
 				} catch ( Exception $e ) {
 					$timeout = $aiwp->gapi_controller->get_timeouts( 'midnight' );
 					AIWP_Tools::set_error( $e, $timeout );
@@ -1047,9 +1064,17 @@ final class AIWP_Settings {
 				try {
 					$aiwp_access_code = sanitize_text_field( $_REQUEST['aiwp_access_code'] );
 					update_option( 'aiwp_redeemed_code', $aiwp_access_code );
-					$aiwp->gapi_controller->client->authenticate( $aiwp_access_code );
+
+					$token = $aiwp->gapi_controller->authenticate( $aiwp_access_code );
+
+					$array_token = (array)$token;
+
+					$aiwp->gapi_controller->client->setAccessToken( $array_token );
+
 					$aiwp->config->options['token'] = $aiwp->gapi_controller->client->getAccessToken();
+
 					$aiwp->config->set_plugin_options( true );
+
 					$options = self::update_options( 'network' );
 					$message = "<div class='updated' id='aiwp-action'><p>" . __( "Plugin authorization succeeded.", 'analytics-insights' ) . "</p></div>";
 					if ( is_multisite() ) { // Cleanup errors on the entire network
@@ -1074,13 +1099,22 @@ final class AIWP_Settings {
 							$aiwp->config->set_plugin_options( true );
 							$options = self::update_options( 'network' );
 						}
+
+						$webstreams = $aiwp->gapi_controller->refresh_webstreams_ga4();
+						if ( is_array( $webstreams ) && ! empty( $webstreams ) ) {
+							$aiwp->config->options['ga4_webstreams_list'] = $webstreams;
+							if ( isset( $aiwp->config->options['webstream_jail'] ) && ! $aiwp->config->options['webstream_jail'] ) {
+								//$profile = AIWP_Tools::guess_default_domain( $profiles );
+								//$aiwp->config->options['tableid_jail'] = $profile;
+							}
+							$aiwp->config->set_plugin_options( true );
+							$options = self::update_options( 'network' );
+						}
 					}
-				} catch ( Deconf_IO_Exception $e ) {
+				} catch ( Google_Service_Exception $e ) {
 					$timeout = $aiwp->gapi_controller->get_timeouts( 'midnight' );
 					AIWP_Tools::set_error( $e, $timeout );
-				} catch ( Deconf_Service_Exception $e ) {
-					$timeout = $aiwp->gapi_controller->get_timeouts( 'midnight' );
-					AIWP_Tools::set_error( $e, $timeout );
+					$aiwp->gapi_controller->reset_token();
 				} catch ( Exception $e ) {
 					$timeout = $aiwp->gapi_controller->get_timeouts( 'midnight' );
 					AIWP_Tools::set_error( $e, $timeout );
@@ -1114,6 +1148,22 @@ final class AIWP_Settings {
 						$aiwp->config->set_plugin_options( true );
 						$options = self::update_options( 'network' );
 					}
+
+					if ( ! empty( $aiwp->config->options['ga4_webstreams_list'] ) ) {
+						$webstreams = $aiwp->config->options['ga4_webstreams_list'];
+					} else {
+						$webstreams = $aiwp->gapi_controller->refresh_webstreams_ga4();
+					}
+					if ( $webstreams ) {
+						$aiwp->config->options['ga4_webstreams_list'] = $webstreams;
+						if ( isset( $aiwp->config->options['webstream_jail'] ) && ! $aiwp->config->options['webstream_jail'] ) {
+							//$profile = AIWP_Tools::guess_default_domain( $profiles );
+							//$aiwp->config->options['tableid_jail'] = $profile;
+						}
+						$aiwp->config->set_plugin_options( true );
+						$options = self::update_options( 'network' );
+					}
+
 				}
 			} else {
 				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You do not have sufficient permissions to access this page.", 'analytics-insights' ) . "</p></div>";

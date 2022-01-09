@@ -1,0 +1,3 @@
+#### Library Install Production ####
+
+composer install --no-dev --optimize-autoloader

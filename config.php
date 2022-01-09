@@ -292,6 +292,7 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 								'web_containerid', // v5.0
 								'amp_containerid', // v5.0
 								'optimize_containerid', // v5.0
+								'webstream_jail', // v5.5
 			);
 			foreach ( $empties as $key ) {
 				if ( ! isset( $this->options[$key] ) ) {
@@ -315,6 +316,7 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 								'access_back',
 								'ga_profiles_list',
 								'track_exclude',
+								'ga4_webstreams_list',	// v5.5
 			);
 			foreach ( $arrays as $key ) {
 				if ( ! is_array( $this->options[$key] ) ) {

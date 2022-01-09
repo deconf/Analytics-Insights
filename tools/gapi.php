@@ -9,6 +9,9 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) )
 	exit();
+
+use Google\Service\Exception as GoogleServiceException;
+
 if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
 	final class AIWP_GAPI_Controller {
@@ -17,48 +20,36 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
 		public $service;
 
+		public $service_ga4;
+
 		public $timeshift;
 
 		public $managequota;
 
 		private $aiwp;
 
-		private $access = array( '220758964178-rhheb4146405g3fs6e4qjkk0rnf5q9q5.apps.googleusercontent.com', '' );
+		private $access = array( '220758964178-rhheb4146405g3fs6e4qjkk0rnf5q9q5.apps.googleusercontent.com', 'secret' );
 
 		public function __construct() {
 			$this->aiwp = AIWP();
-			include_once ( AIWP_DIR . 'tools/src/Deconf/autoload.php' );
-			$config = new Deconf_Config();
-			$config->setCacheClass( 'Deconf_Cache_Null' );
-			if ( function_exists( 'curl_version' ) ) {
-				$curlversion = curl_version();
-				$curl_options = array();
-				if ( isset( $curlversion['version'] ) ) {
-					$rightversion = ( version_compare( PHP_VERSION, '5.3.0' ) >= 0 ) && version_compare( $curlversion['version'], '7.10.8' ) >= 0;
-				} else {
-					$rightversion = false;
-				}
-				if ( $rightversion && defined( 'AIWP_IP_VERSION' ) && AIWP_IP_VERSION ) {
-					$curl_options[CURLOPT_IPRESOLVE] = AIWP_IP_VERSION; // Force CURL_IPRESOLVE_V4 or CURL_IPRESOLVE_V6
-				}
-				// add Proxy server settings to curl, if defined
-				if ( defined( 'WP_PROXY_HOST' ) && defined( 'WP_PROXY_PORT' ) ) {
-					$curl_options[CURLOPT_PROXY] = WP_PROXY_HOST;
-					$curl_options[CURLOPT_PROXYPORT] = WP_PROXY_PORT;
-				}
+			include_once ( AIWP_DIR . 'tools/vendor/autoload.php' );
+			$this->client = new Google\Client();
+
+			// add Proxy server settings to Guzzle, if defined
+
+			if ( defined( 'WP_PROXY_HOST' ) && defined( 'WP_PROXY_PORT' ) ) {
+				$httpoptions = array();
+				$httpoptions [ 'proxy' ] = "'" . WP_PROXY_HOST . ":". WP_PROXY_PORT ."'";
 				if ( defined( 'WP_PROXY_USERNAME' ) && defined( 'WP_PROXY_PASSWORD' ) ) {
-					$curl_options[CURLOPT_HTTPAUTH] = CURLAUTH_BASIC;
-					$curl_options[CURLOPT_PROXYUSERPWD] = WP_PROXY_USERNAME . ':' . WP_PROXY_PASSWORD;
+					$httpoptions [ 'auth' ] = array( WP_PROXY_USERNAME, WP_PROXY_PASSWORD );
 				}
-				$curl_options = apply_filters( 'aiwp_curl_options', $curl_options );
-				if ( ! empty( $curl_options ) ) {
-					$config->setClassConfig( 'Deconf_IO_Curl', 'options', $curl_options );
-				}
+				$httpClient = new GuzzleHttp\Client( $httpoptions );
+				$this->client->setHttpClient( $httpClient );
 			}
-			$this->client = new Deconf_Client( $config );
+
 			$this->client->setScopes( array( 'https://www.googleapis.com/auth/analytics.readonly' ) );
-			$this->client->setApprovalPrompt( 'force' );
 			$this->client->setAccessType( 'offline' );
+			$this->client->setApprovalPrompt( 'force' );
 			$this->client->setApplicationName( 'AIWP ' . AIWP_CURRENT_VERSION );
 			$security = wp_create_nonce( 'aiwp_security' );
 			if ( is_multisite() && $this->aiwp->config->options['network_mode'] ) {
@@ -77,33 +68,29 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				$this->client->setClientSecret( $this->access[1] );
 				$this->client->setRedirectUri( AIWP_ENDPOINT_URL . 'oauth2callback.php' );
 			}
+
 			/**
 			 * AIWP Endpoint support
 			 */
-			add_action( 'aiwp_endpoint_support', array( $this, 'add_endpoint_support' ) );
-			$this->service = new Deconf_Service_Analytics( $this->client );
 			if ( $this->aiwp->config->options['token'] ) {
 				$token = $this->aiwp->config->options['token'];
 				if ( $token ) {
 					try {
-						$this->client->setAccessToken( $token );
-						if ( $this->client->isAccessTokenExpired() ) {
-							$refreshtoken = $this->client->getRefreshToken();
-							$this->client->refreshToken( $refreshtoken );
+						$array_token = (array)$token;
+						$this->client->setAccessToken( $array_token );
+						if ( $this->isAccessTokenExpired() ) {
+							$this->fetch_new_token( $token );
 						}
-						$this->aiwp->config->options['token'] = $this->client->getAccessToken();
-					} catch ( Deconf_IO_Exception $e ) {
+					} catch ( GoogleServiceException $e ) {
 						$timeout = $this->get_timeouts( 'midnight' );
-						AIWP_Tools::set_error( $e, $timeout );
-					} catch ( Deconf_Service_Exception $e ) {
-						$timeout = $this->get_timeouts( 'midnight' );
-						AIWP_Tools::set_error( $e, $timeout );
+						aiwp_Tools::set_error( $e, $timeout );
 						$this->reset_token();
 					} catch ( Exception $e ) {
 						$timeout = $this->get_timeouts( 'midnight' );
-						AIWP_Tools::set_error( $e, $timeout );
+						aiwp_Tools::set_error( $e, $timeout );
 						$this->reset_token();
 					}
+
 					if ( is_multisite() && $this->aiwp->config->options['network_mode'] ) {
 						$this->aiwp->config->set_plugin_options( true );
 					} else {
@@ -111,45 +98,184 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					}
 				}
 			}
+
+			$this->service = new Google\Service\Analytics( $this->client );
+			$this->service_ga4 = new Google\Service\GoogleAnalyticsAdmin( $this->client );
+
 		}
 
-		public function add_endpoint_support( $request ) {
+		/**
+		 * Returns if the access_token is expired.
+		 * @return bool Returns True if the access_token is expired.
+		 */
+		public function isAccessTokenExpired() {
+			$token = (array)$this->aiwp->config->options['token'];
+			if ( ! $token ) {
+				return true;
+			}
+			$created = 0;
+			if ( isset( $token['created'] ) ) {
+				$created = $token['created'];
+			}
+			// If the token is set to expire in the next 90 seconds.
+			return ( $created + ( $token['expires_in'] - 90 ) ) < time();
+		}
+
+		public function fetch_new_token( $oldtoken ) {
 			if ( $this->aiwp->config->options['with_endpoint'] && ! $this->aiwp->config->options['user_api'] ) {
-				$url = $request->getUrl();
-				if ( in_array( $url, array( 'https://accounts.google.com/o/oauth2/token', 'https://accounts.google.com/o/oauth2/revoke' ) ) ) {
-					if ( get_class( $this->client->getIo() ) != 'Deconf_IO_Stream' ) {
-						$curl_old_options = $this->client->getClassConfig( 'Deconf_IO_Curl' );
-						$curl_options = $curl_old_options['options'];
-						$curl_options[CURLOPT_SSL_VERIFYPEER] = 0;
-						$this->client->setClassConfig( 'Deconf_IO_Curl', 'options', $curl_options );
-					} else {
-						add_filter( 'aiwp_endpoint_stream_options', array( $this, 'add_endpoint_stream_ssl' ), 10 );
-					}
+
+				$endpoint = AIWP_ENDPOINT_URL . 'aiwp-token.php';
+
+				$token = json_encode( $oldtoken );
+
+				$response = wp_remote_post( $endpoint, array(
+					'method' => 'POST',
+					'timeout' => 45,
+					'redirection' => 5,
+					'httpversion' => '1.0',
+					'blocking' => true,
+					'headers' => array(),
+					'body' => array(
+						'token' => $token,
+						'client_id' => $this->client->getClientId(),
+						'version' => AIWP_CURRENT_VERSION
+					),
+					'cookies' => array()
+				)
+					);
+
+				if ( is_wp_error( $response ) ) { //AIWP Endpoint Error
+					$e = __("Endpoint Error:", 'analytics-insights') . $response->get_error_message();
+					$timeout = $this->get_timeouts( 'midnight' );
+					AIWP_Tools::set_error( $e, $timeout );
 				} else {
-					if ( get_class( $this->client->getIo() ) != 'Deconf_IO_Stream' ) {
-						$curl_old_options = $this->client->getClassConfig( 'Deconf_IO_Curl' );
-						$curl_options = $curl_old_options['options'];
-						if ( isset( $curl_options[CURLOPT_SSL_VERIFYPEER] ) ) {
-							unset( $curl_options[CURLOPT_SSL_VERIFYPEER] );
-							if ( empty( $curl_options ) ) {
-								$this->client->setClassConfig( 'Deconf_IO_Curl', 'options', '' );
-							} else {
-								$this->client->setClassConfig( 'Deconf_IO_Curl', 'options', $curl_options );
-							}
-						}
+					$token = json_decode( $response['body'] );
+					$array_token = (array)$token;
+					if ( isset( $array_token['access_token'] ) ){
+						$this->client->setAccessToken( $array_token );
+						$this->aiwp->config->options['token'] = $this->client->getAccessToken();
+					} else{ //Google Endpoint Error
+						$timeout = $this->get_timeouts( 'midnight' );
+						AIWP_Tools::set_error( $token, $timeout );
 					}
 				}
-				$url = str_replace( 'https://accounts.google.com/o/oauth2/token', AIWP_ENDPOINT_URL . 'aiwp-token.php', $url );
-				$url = str_replace( 'https://accounts.google.com/o/oauth2/revoke', AIWP_ENDPOINT_URL . 'aiwp-revoke.php', $url );
-				$request->setUrl( $url );
-				if ( ! $request->getUserAgent() ) {
-					$request->setUserAgent( $this->client->getApplicationName() );
+			} else {
+				try {
+					$this->client->refreshToken( $this->client->getRefreshToken() );
+					$this->aiwp->config->options['token'] = $this->client->getAccessToken();
+				} catch ( GoogleServiceException $e ) {
+					$timeout = $this->get_timeouts( 'midnight' );
+					AIWP_Tools::set_error( $e, $timeout );
+				} catch ( Exception $e ) {
+					$timeout = $this->get_timeouts( 'midnight' );
+					AIWP_Tools::set_error( $e, $timeout );
 				}
 			}
 		}
 
-		public function add_endpoint_stream_ssl( $requestSslContext ) {
-			return array( "verify_peer" => false );
+		public function authenticate( $access_code ) {
+			if ( $this->aiwp->config->options['with_endpoint'] && ! $this->aiwp->config->options['user_api'] ) {
+
+				$endpoint = AIWP_ENDPOINT_URL . 'aiwp-token.php';
+
+				$response = wp_remote_post( $endpoint, array(
+					'method' => 'POST',
+					'timeout' => 45,
+					'redirection' => 5,
+					'httpversion' => '1.0',
+					'blocking' => true,
+					'headers' => array(),
+					'body' => array(
+						'access_code' => $access_code,
+						'client_id' => $this->client->getClientId(),
+						'version' => AIWP_CURRENT_VERSION
+					),
+					'cookies' => array()
+				)
+					);
+
+				if ( is_wp_error( $response ) ) { //AIWP Endpoint Error
+					$e = __("Endpoint Error:", 'analytics-insights') . $response->get_error_message();
+					$timeout = $this->get_timeouts( 'midnight' );
+					AIWP_Tools::set_error( $e, $timeout );
+				} else {
+					$token = json_decode( $response['body'] );
+					$array_token = (array)$token;
+					if ( isset( $array_token['access_token'] ) ){
+						return $token;
+					} else { //Google Endpoint Error
+						$timeout = $this->get_timeouts( 'midnight' );
+						AIWP_Tools::set_error( $token, $timeout );
+					}
+				}
+			} else {
+				try {
+					$this->client->fetchAccessTokenWithAuthCode( $access_code );
+					return $this->client->getAccessToken();
+				} catch ( GoogleServiceException $e ) {
+					$timeout = $this->get_timeouts( 'midnight' );
+					AIWP_Tools::set_error( $e, $timeout );
+				} catch ( Exception $e ) {
+					$timeout = $this->get_timeouts( 'midnight' );
+					AIWP_Tools::set_error( $e, $timeout );
+				}
+			}
+		}
+
+		/**
+		 * Handles the token reset process
+		 *
+		 * @param
+		 *            $all
+		 */
+		public function reset_token( $all = false ) {
+
+			$token = $this->client->getAccessToken();
+
+			if ( $all && $token ) {
+
+				if ( $this->aiwp->config->options['with_endpoint'] && ! $this->aiwp->config->options['user_api'] ) {
+
+					$endpoint = AIWP_ENDPOINT_URL . 'aiwp-revoke.php';
+
+					$response = wp_remote_post( $endpoint, array(
+						'method' => 'POST',
+						'timeout' => 45,
+						'redirection' => 5,
+						'httpversion' => '1.0',
+						'blocking' => true,
+						'headers' => array(),
+						'body' => array(
+							'client_id' => $this->client->getClientId(),
+							'token' => json_encode( $this->client->getAccessToken() ),
+							'version' => AIWP_CURRENT_VERSION
+						),
+						'cookies' => array()
+					)
+						);
+					if ( is_wp_error( $response ) ) { // AIWP Endpoint Error
+						$e = __( "Endpoint Error:", 'analytics-insights' ) . $response->get_error_message();
+						$timeout = $this->get_timeouts( 'midnight' );
+						AIWP_Tools::set_error( $e, $timeout );
+					}
+				} else {
+					$this->client->revokeToken();
+				}
+			}
+
+			if ( $all ){
+				$this->aiwp->config->options['site_jail'] = "";
+				$this->aiwp->config->options['sites_list'] = array();
+			}
+
+			$this->aiwp->config->options['token'] = "";
+			$this->aiwp->config->options['sites_list_locked'] = 0;
+
+			if ( is_multisite() && $this->aiwp->config->options['network_mode'] ) {
+				$this->aiwp->config->set_plugin_options( true );
+			} else {
+				$this->aiwp->config->set_plugin_options();
+			}
 		}
 
 		/**
@@ -166,6 +292,11 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				$this->reset_token();
 				return true;
 			}
+			if ( 400 == $errors[0] || 401 == $errors[0] || 403 == $errors[0] ) {
+				$this->reset_token();
+				return true;
+			}
+
 			/** Back-off system for subsequent requests - an Auth error generated after a Service request
 			 *  The native back-off system for Service requests is covered by the GAPI PHP Client
 			 */
@@ -179,7 +310,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					return true;
 				}
 			}
-			if ( 500 == $errors[0] || 503 == $errors[0] || 400 == $errors[0] || 401 == $errors[0] || 403 == $errors[0] || $errors[0] < - 50 ) {
+			if ( 500 == $errors[0] || 503 == $errors[0] || $errors[0] < - 50 ) {
 				return true;
 			}
 			return false;
@@ -213,11 +344,12 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		}
 
 		/**
-		 * Retrieves all Google Analytics Views with details
+		 * Retrieves all Universal Analytics Views with details
 		 *
 		 * @return array
 		 */
-		public function refresh_profiles() {
+		 public function refresh_profiles() {
+
 			try {
 				$ga_profiles_list = array();
 				$startindex = 1;
@@ -243,11 +375,44 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					AIWP_Tools::delete_cache( 'last_error' );
 				}
 				return $ga_profiles_list;
-			} catch ( Deconf_IO_Exception $e ) {
+			} catch ( GoogleServiceException $e ) {
 				$timeout = $this->get_timeouts( 'midnight' );
 				AIWP_Tools::set_error( $e, $timeout );
-				return $ga_profiles_list;
-			} catch ( Deconf_Service_Exception $e ) {
+			} catch ( Exception $e ) {
+				$timeout = $this->get_timeouts( 'midnight' );
+				AIWP_Tools::set_error( $e, $timeout );
+			}
+
+		}
+
+		/**
+		 * Retrieves all Google Analytics 4 Properties with details
+		 *
+		 * @return array
+		 */
+		public function refresh_webstreams_ga4() {
+			try {
+				$ga4_webstreams_list = array();
+
+				 $accounts = $this->service_ga4->accountSummaries->listAccountSummaries()->getAccountSummaries();
+
+				 if ( !empty( $accounts ) ) {
+				 	foreach ( $accounts as $account ) {
+				 		$properties = $account->getPropertySummaries();
+				 		if ( !empty( $properties ) ) {
+				 			foreach ( $properties as $property ) {
+				 				$webstreams = $this->service_ga4->properties_webDataStreams->listPropertiesWebDataStreams( $property->getProperty())->getWebDataStreams();
+				 				if ( !empty( $webstreams ) ) {
+				 					foreach ( $webstreams as $webstream ) {
+				 						$ga4_webstreams_list[] = array( $webstream->getDisplayName(), $webstream->getName(), $webstream->getDefaultUri(), $webstream->getMeasurementId() );
+				 					}
+				 				}
+				 			}
+				 		}
+				 	}
+				 }
+				return $ga4_webstreams_list;
+			} catch ( GoogleServiceException $e ) {
 				$timeout = $this->get_timeouts( 'midnight' );
 				AIWP_Tools::set_error( $e, $timeout );
 			} catch ( Exception $e ) {
@@ -256,33 +421,6 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			}
 		}
 
-		/**
-		 * Handles the token reset process
-		 *
-		 * @param
-		 *            $all
-		 */
-		public function reset_token( $all = false ) {
-			$this->aiwp->config->options['token'] = "";
-			if ( $all ) {
-				$this->aiwp->config->options['tableid_jail'] = "";
-				$this->aiwp->config->options['ga_profiles_list'] = array();
-				try {
-					$this->client->revokeToken();
-				} catch ( Exception $e ) {
-					if ( is_multisite() && $this->aiwp->config->options['network_mode'] ) {
-						$this->aiwp->config->set_plugin_options( true );
-					} else {
-						$this->aiwp->config->set_plugin_options();
-					}
-				}
-			}
-			if ( is_multisite() && $this->aiwp->config->options['network_mode'] ) {
-				$this->aiwp->config->set_plugin_options( true );
-			} else {
-				$this->aiwp->config->set_plugin_options();
-			}
-		}
 
 		/**
 		 * Get and cache Core Reports
@@ -327,7 +465,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				} else {
 					$data = $transient;
 				}
-			} catch ( Deconf_Service_Exception $e ) {
+			} catch ( GoogleServiceException $e ) {
 				$timeout = $this->get_timeouts( 'midnight' );
 				AIWP_Tools::set_error( $e, $timeout );
 				return $e->getCode();
@@ -832,7 +970,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				} else {
 					$data = $transient;
 				}
-			} catch ( Deconf_Service_Exception $e ) {
+			} catch ( GoogleServiceException $e ) {
 				$timeout = $this->get_timeouts( 'midnight' );
 				AIWP_Tools::set_error( $e, $timeout );
 				return $e->getCode();
