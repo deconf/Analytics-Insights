@@ -17,10 +17,18 @@ if ( ! class_exists( 'AIWP_Tracking_Analytics_Base' ) ) {
 
 		protected $uaid;
 
+		protected $mid;
+
 		public function __construct() {
 			$this->aiwp = AIWP();
 			$profile = AIWP_Tools::get_selected_profile( $this->aiwp->config->options['ga_profiles_list'], $this->aiwp->config->options['tableid_jail'] );
 			$this->uaid = sanitize_text_field( $profile[2] );
+			if ( 'dualtracking' == $this->aiwp->config->options['tracking_type'] && $this->aiwp->config->options['webstream_jail'] ) {
+				$webstream = AIWP_Tools::get_selected_profile( $this->aiwp->config->options['ga4_webstreams_list'], $this->aiwp->config->options['webstream_jail'] );
+				$this->mid = sanitize_text_field( $webstream[3] );
+			} else {
+				$this->mid = '';
+			}
 		}
 
 		protected function build_custom_dimensions() {
@@ -131,7 +139,7 @@ if ( ! class_exists( 'AIWP_Tracking_Analytics_Common' ) ) {
 						'event_precision' => $this->aiwp->config->options['ga_event_precision'],
 						'event_formsubmit' =>  $this->aiwp->config->options ['ga_formsubmit_tracking'],
 						'ga_pagescrolldepth_tracking' => $this->aiwp->config->options['ga_pagescrolldepth_tracking'],
-						'global_site_tag' => $this->aiwp->config->options ['tracking_type'],
+						'global_site_tag' => 'globalsitetag' == $this->aiwp->config->options ['tracking_type'] || 'dualtracking' == $this->aiwp->config->options ['tracking_type'],
 					),
 				)
 				);
@@ -345,7 +353,8 @@ if ( ! class_exists( 'AIWP_Tracking_Analytics' ) ) {
 			if ( $this->aiwp->config->options['ga_optout'] || $this->aiwp->config->options['ga_dnt_optout'] ) {
 				AIWP_Tools::load_view( 'front/views/analytics-optout-code.php', array( 'uaid' => $this->uaid, 'gaDntOptout' => $this->aiwp->config->options['ga_dnt_optout'], 'gaOptout' => $this->aiwp->config->options['ga_optout'] ) );
 			}
-			AIWP_Tools::load_view( 'front/views/analytics-code.php', array( 'trackingcode' => $trackingcode, 'tracking_script_path' => $tracking_script_path, 'uaid' => $this->uaid ), 'globalsitetag' == $this->aiwp->config->options['tracking_type'] );
+			$flag = 'globalsitetag' == $this->aiwp->config->options['tracking_type'] || 'dualtracking' == $this->aiwp->config->options['tracking_type'];
+			AIWP_Tools::load_view( 'front/views/analytics-code.php', array( 'trackingcode' => $trackingcode, 'tracking_script_path' => $tracking_script_path, 'uaid' => $this->uaid ), $flag );
 		}
 	}
 }
@@ -411,7 +420,9 @@ if ( ! class_exists( 'AIWP_Tracking_GlobalSiteTag' ) ) {
 				$fieldsobject['custom_map'] = rtrim( $fieldsobject['custom_map'], ", \n\t\t" );
 				$fieldsobject['custom_map'] .= "\n\t}";
 			}
+
 			$this->add( 'config', $fields, $fieldsobject );
+
 			if ( ! empty( $custom_dimensions ) ) {
 				$fields = array();
 				$fieldsobject = array();
@@ -421,6 +432,11 @@ if ( ! class_exists( 'AIWP_Tracking_GlobalSiteTag' ) ) {
 				}
 				$this->add( 'event', $fields, $fieldsobject );
 			}
+
+			if ( $this->mid ) {
+				$this->add( 'config', array($this->mid) );
+			}
+
 			do_action( 'aiwp_gtag_commands', $this );
 		}
 
@@ -463,7 +479,8 @@ if ( ! class_exists( 'AIWP_Tracking_GlobalSiteTag' ) ) {
 			if ( $this->aiwp->config->options['ga_optout'] || $this->aiwp->config->options['ga_dnt_optout'] ) {
 				AIWP_Tools::load_view( 'front/views/analytics-optout-code.php', array( 'uaid' => $this->uaid, 'gaDntOptout' => $this->aiwp->config->options['ga_dnt_optout'], 'gaOptout' => $this->aiwp->config->options['ga_optout'] ) );
 			}
-			AIWP_Tools::load_view( 'front/views/analytics-code.php', array( 'trackingcode' => $trackingcode, 'tracking_script_path' => $tracking_script_path, 'uaid' => $this->uaid ), 'globalsitetag' == $this->aiwp->config->options['tracking_type'] );
+			$flag = 'globalsitetag' == $this->aiwp->config->options['tracking_type'] || 'dualtracking' == $this->aiwp->config->options['tracking_type'];
+			AIWP_Tools::load_view( 'front/views/analytics-code.php', array( 'trackingcode' => $trackingcode, 'tracking_script_path' => $tracking_script_path, 'uaid' => $this->uaid ), $flag );
 		}
 	}
 }
@@ -685,7 +702,8 @@ if ( ! class_exists( 'AIWP_Tracking_Analytics_AMP' ) ) {
 			}
 			$json = str_replace( array( '"&#91;', '&#93;"' ), array( '[', ']' ), $json ); // make verticalBoundaries a JavaScript array
 			$data = array( 'json' => $json );
-			AIWP_Tools::load_view( 'front/views/analytics-amp-code.php', $data, 'globalsitetag' == $this->aiwp->config->options['tracking_type'] );
+			$flag = 'globalsitetag' == $this->aiwp->config->options['tracking_type'] || 'dualtracking' == $this->aiwp->config->options['tracking_type'];
+			AIWP_Tools::load_view( 'front/views/analytics-amp-code.php', $data, $flag );
 		}
 	}
 }
@@ -915,7 +933,8 @@ class AIWP_Tracking_GlobalSiteTag_AMP extends AIWP_Tracking_Analytics_Base {
 		}
 		$json = str_replace( array( '"&#91;', '&#93;"' ), array( '[', ']' ), $json ); // make verticalBoundaries a JavaScript array
 		$data = array( 'json' => $json );
-		AIWP_Tools::load_view( 'front/views/analytics-amp-code.php', $data, 'globalsitetag' == $this->aiwp->config->options['tracking_type'] );
+		$flag = 'globalsitetag' == $this->aiwp->config->options['tracking_type'] || 'dualtracking' == $this->aiwp->config->options['tracking_type'];
+		AIWP_Tools::load_view( 'front/views/analytics-amp-code.php', $data, $flag );
 	}
 }
 }

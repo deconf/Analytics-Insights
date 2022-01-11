@@ -18,12 +18,12 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 			return $country_codes;
 		}
 
-		public static function guess_default_domain( $profiles ) {
+		public static function guess_default_domain( $profiles, $index = 3 ) {
 			$domain = get_option( 'siteurl' );
 			$domain = str_ireplace( array( 'http://', 'https://' ), '', $domain );
 			if ( ! empty( $profiles ) ) {
 				foreach ( $profiles as $items ) {
-					if ( strpos( $items[3], $domain ) ) {
+					if ( strpos( $items[$index], $domain ) ) {
 						return $items[1];
 					}
 				}

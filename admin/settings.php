@@ -306,7 +306,7 @@ final class AIWP_Settings {
 		if ( ! $aiwp->config->options['tableid_jail'] ) {
 			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'analytics-insights' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_errors_debugging', false ), __( 'Errors & Debug', 'analytics-insights' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_settings', false ), __( 'authorize the plugin', 'analytics-insights' ) ) ) );
 		}
-		if ( 'universal' == $options['tracking_type'] || 'globalsitetag' == $options['tracking_type'] ) {
+		if ( 'universal' == $options['tracking_type'] || 'globalsitetag' == $options['tracking_type'] || 'dualtracking' == $options['tracking_type'] ) {
 			$tabs = array( 'basic' => __( "Basic Settings", 'analytics-insights' ), 'events' => __( "Events Tracking", 'analytics-insights' ), 'custom' => __( "Custom Definitions", 'analytics-insights' ), 'exclude' => __( "Exclude Tracking", 'analytics-insights' ), 'advanced' => __( "Advanced Settings", 'analytics-insights' ), 'integration' => __( "Integration", 'analytics-insights' ) );
 		} else if ( 'tagmanager' == $options['tracking_type'] ) {
 			$tabs = array( 'basic' => __( "Basic Settings", 'analytics-insights' ), 'tmdatalayervars' => __( "DataLayer Variables", 'analytics-insights' ), 'exclude' => __( "Exclude Tracking", 'analytics-insights' ), 'tmadvanced' => __( "Advanced Settings", 'analytics-insights' ), 'tmintegration' => __( "Integration", 'analytics-insights' ) );
@@ -327,18 +327,25 @@ final class AIWP_Settings {
 				<select id="tracking_type" name="options[tracking_type]" onchange="this.form.submit()">
 					<option value="universal" <?php selected( $options['tracking_type'], 'universal' ); ?>><?php _e("Universal Analytics", 'analytics-insights');?></option>
 					<option value="globalsitetag" <?php selected( $options['tracking_type'], 'globalsitetag' ); ?>><?php _e("Global Site Tag", 'analytics-insights');?></option>
+					<?php if ( $aiwp->config->options['webstream_jail'] ) : ?>
+					<option value="dualtracking" <?php selected( $options['tracking_type'], 'dualtracking' ); ?>><?php _e("Dual Tracking", 'analytics-insights');?></option>
+					<?php endif; ?>
 					<option value="tagmanager" <?php selected( $options['tracking_type'], 'tagmanager' ); ?>><?php _e("Tag Manager", 'analytics-insights');?></option>
 					<option value="disabled" <?php selected( $options['tracking_type'], 'disabled' ); ?>><?php _e("Disabled", 'analytics-insights');?></option>
 				</select>
 			</td>
 		</tr>
-	 <?php if ( 'universal' == $options['tracking_type'] || 'globalsitetag' == $options['tracking_type'] ) : ?>
+	 <?php if ( 'universal' == $options['tracking_type'] || 'globalsitetag' == $options['tracking_type'] || 'dualtracking' == $options['tracking_type'] ) : ?>
 		<tr>
 			<td class="aiwp-settings-title"></td>
 			<td>
-	 		<?php $profile_info = AIWP_Tools::get_selected_profile($aiwp->config->options['ga_profiles_list'], $aiwp->config->options['tableid_jail']); ?>
-		 	<?php echo '<pre>' . __("View Name:", 'analytics-insights') . "\t" . esc_html($profile_info[0]) . "<br />" . __("Tracking ID:", 'analytics-insights') . "\t" . esc_html($profile_info[2]) . "<br />" . __("Default URL:", 'analytics-insights') . "\t" . esc_html($profile_info[3]) . "<br />" . __("Time Zone:", 'analytics-insights') . "\t" . esc_html($profile_info[5]) . '</pre>';?>
-		</td>
+	 		<?php $profile_info = AIWP_Tools::get_selected_profile( $aiwp->config->options['ga_profiles_list'], $aiwp->config->options['tableid_jail'] ); ?>
+		 	<pre><?php echo "<b>" . __("Google Analytics:", 'analytics-insights') . "</b><br />" . __("View Name:", 'analytics-insights') . "\t" . esc_html($profile_info[0]) . "<br />" . __("Tracking ID:", 'analytics-insights') . "\t" . esc_html($profile_info[2]) . "<br />" . __("Default URL:", 'analytics-insights') . "\t" . esc_html($profile_info[3]) . "<br />" . __("Time Zone:", 'analytics-insights') . "\t" . esc_html($profile_info[5]);?></pre>
+	 <?php if ( 'dualtracking' == $options['tracking_type'] && $aiwp->config->options['webstream_jail'] ) : ?>
+				<?php $webstream_info = AIWP_Tools::get_selected_profile( $aiwp->config->options['ga4_webstreams_list'], $aiwp->config->options['webstream_jail'] ); ?>
+				<pre><?php echo "<b>" . __("Google Analytics 4:", 'analytics-insights') . "</b><br />" . __( "Stream Name:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[0] ) . "<br />" . __( "Measurement ID:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[3] ) . "<br />" . __( "Stream URL:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[2] );?></pre>
+		<?php endif; ?>
+			</td>
 		</tr>
 			<?php elseif ( 'tagmanager' == $options['tracking_type'] ) : ?>
 		<tr>
@@ -821,6 +828,7 @@ final class AIWP_Settings {
 					$options = self::update_options( 'general' );
 					$message = "<div class='updated' id='aiwp-autodismiss'><p>" . __( "Plugin authorization succeeded.", 'analytics-insights' ) . "</p></div>";
 					if ( $aiwp->config->options['token'] && $aiwp->gapi_controller->client->getAccessToken() ) {
+
 						$profiles = $aiwp->gapi_controller->refresh_profiles();
 						if ( is_array( $profiles ) && ! empty( $profiles ) ) {
 							$aiwp->config->options['ga_profiles_list'] = $profiles;
@@ -836,12 +844,13 @@ final class AIWP_Settings {
 						if ( is_array( $webstreams ) && ! empty( $webstreams ) ) {
 								$aiwp->config->options['ga4_webstreams_list'] = $webstreams;
 								if ( ! $aiwp->config->options['webstream_jail'] ) {
-									//$profile = AIWP_Tools::guess_default_domain( $profiles );
-									//$aiwp->config->options['tableid_jail'] = $profile;
+									$property = AIWP_Tools::guess_default_domain( $webstreams );
+									$aiwp->config->options['webstream_jail'] = $property;
 								}
 								$aiwp->config->set_plugin_options();
 								$options = self::update_options( 'general' );
 						}
+
 					}
 				} catch ( Google_Service_Exception $e ) {
 					$timeout = $aiwp->gapi_controller->get_timeouts( 'midnight' );
@@ -922,6 +931,12 @@ final class AIWP_Settings {
 				$message = "<div class='updated' id='aiwp-action'><p>" . __( "All other domains/properties were removed.", 'analytics-insights' ) . "</p></div>";
 				$lock_profile = AIWP_Tools::get_selected_profile( $aiwp->config->options['ga_profiles_list'], $aiwp->config->options['tableid_jail'] );
 				$aiwp->config->options['ga_profiles_list'] = array( $lock_profile );
+				$lock_property = AIWP_Tools::get_selected_profile( $aiwp->config->options['ga4_webstreams_list'], $aiwp->config->options['webstream_jail'] );
+				if ( empty ($lock_property) ){
+					$aiwp->config->options['ga4_webstreams_list'] = '';
+				} else {
+					$aiwp->config->options['ga4_webstreams_list'] = array( $lock_property );
+				}
 				$options = self::update_options( 'general' );
 			} else {
 				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You do not have sufficient permissions to access this page.", 'analytics-insights' ) . "</p></div>";
@@ -979,7 +994,7 @@ final class AIWP_Settings {
 	<?php self::html_section_delimiter(__( "General Settings", 'analytics-insights' ), false); ?>
 	<tr>
 		<td class="aiwp-settings-title">
-			<label for="tableid_jail"><?php _e("Select View:", 'analytics-insights' ); ?></label>
+			<label for="tableid_jail"><?php _e("Unversal Analytics:", 'analytics-insights' ); ?></label>
 		</td>
 		<td>
 			<select id="tableid_jail" <?php disabled(empty($options['ga_profiles_list']) || 1 == count($options['ga_profiles_list']), true); ?> name="options[tableid_jail]">
@@ -995,9 +1010,6 @@ final class AIWP_Settings {
 				<option value=""><?php _e( "Property not found", 'analytics-insights' ); ?></option>
 			<?php endif; ?>
 			</select>
-			<?php if ( count( $options['ga_profiles_list'] ) > 1 ) : ?>
-			&nbsp;<input type="submit" name="Hide" class="button button-secondary" value="<?php _e( "Lock Selection", 'analytics-insights' ); ?>" />
-			<?php endif; ?>
 		</td>
 	</tr>
 	<?php if ( $options['tableid_jail'] ) :	?>
@@ -1006,6 +1018,36 @@ final class AIWP_Settings {
 		<td>
 			<?php $profile_info = AIWP_Tools::get_selected_profile( $aiwp->config->options['ga_profiles_list'], $aiwp->config->options['tableid_jail'] ); ?>
 			<pre><?php echo __( "View Name:", 'analytics-insights' ) . "\t" . esc_html( $profile_info[0] ) . "<br />" . __( "Tracking ID:", 'analytics-insights' ) . "\t" . esc_html( $profile_info[2] ) . "<br />" . __( "Default URL:", 'analytics-insights' ) . "\t" . esc_html( $profile_info[3] ) . "<br />" . __( "Time Zone:", 'analytics-insights' ) . "\t" . esc_html( $profile_info[5] );?></pre>
+		</td>
+	</tr>
+	<?php endif; ?>
+		<tr>
+		<td class="aiwp-settings-title">
+			<label for="webstream_jail"><?php _e("Google Analaytics 4:", 'analytics-insights' ); ?></label>
+		</td>
+		<td>
+			<select id="webstream_jail" <?php disabled(empty($options['ga4_webstreams_list']) || 1 == count($options['ga4_webstreams_list']), true); ?> name="options[webstream_jail]">
+			<?php if ( ! empty( $options['ga4_webstreams_list'] ) ) : ?>
+			<option value="" <?php selected( '', $options['webstream_jail'] ); ?>><?php _e( "Disabled", 'analytics-insights' ); ?></option>
+			<?php foreach ( $options['ga4_webstreams_list'] as $items ) : ?>
+			<?php if ( $items[2] ) : ?>
+				<option value="<?php echo esc_attr( $items[1] ); ?>" <?php selected( $items[1], $options['webstream_jail'] ); ?> title="<?php _e( "Stream Name:", 'analytics-insights' ); ?> <?php echo esc_attr( $items[0] ); ?>">
+	  		<?php echo esc_html( AIWP_Tools::strip_protocol( $items[2] ) )?> &#8658; <?php echo esc_attr( $items[0] ); ?>
+				</option>
+			<?php endif; ?>
+			<?php endforeach; ?>
+			<?php else : ?>
+				<option value=""><?php _e( "Disabled", 'analytics-insights' ); ?></option>
+			<?php endif; ?>
+			</select>
+		</td>
+	</tr>
+	<?php if ( $options['webstream_jail'] ) :	?>
+	<tr>
+		<td class="aiwp-settings-title"></td>
+		<td>
+			<?php $webstream_info = AIWP_Tools::get_selected_profile( $aiwp->config->options['ga4_webstreams_list'], $aiwp->config->options['webstream_jail'] ); ?>
+			<pre><?php echo __( "Stream Name:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[0] ) . "<br />" . __( "Measurement ID:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[3] ) . "<br />" . __( "Stream URL:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[2] );?></pre>
 		</td>
 	</tr>
 	<?php endif; ?>
@@ -1021,6 +1063,9 @@ final class AIWP_Settings {
 	<tr>
 		<td colspan="2" class="submit">
 			<input type="submit" name="Submit" class="button button-primary" value="<?php _e('Save Changes', 'analytics-insights' ) ?>" />
+			<?php if ( (is_array( $options['ga_profiles_list'] ) && count( $options['ga_profiles_list'] ) ) > 1 || ( is_array( $options['ga4_webstreams_list'] ) && count( $options['ga4_webstreams_list'] ) > 1 ) ): ?>
+				<input type="submit" name="Hide" class="button button-secondary"" value="<?php _e( "Lock Selection", 'analytics-insights' ); ?>" />
+			<?php endif; ?>
 		</td>
 	</tr>
 	<?php else : ?>
@@ -1089,6 +1134,7 @@ final class AIWP_Settings {
 						AIWP_Tools::delete_cache( 'gapi_errors' );
 					}
 					if ( $aiwp->config->options['token'] && $aiwp->gapi_controller->client->getAccessToken() ) {
+
 						$profiles = $aiwp->gapi_controller->refresh_profiles();
 						if ( is_array( $profiles ) && ! empty( $profiles ) ) {
 							$aiwp->config->options['ga_profiles_list'] = $profiles;
@@ -1104,12 +1150,13 @@ final class AIWP_Settings {
 						if ( is_array( $webstreams ) && ! empty( $webstreams ) ) {
 							$aiwp->config->options['ga4_webstreams_list'] = $webstreams;
 							if ( isset( $aiwp->config->options['webstream_jail'] ) && ! $aiwp->config->options['webstream_jail'] ) {
-								//$profile = AIWP_Tools::guess_default_domain( $profiles );
-								//$aiwp->config->options['tableid_jail'] = $profile;
+								$property = AIWP_Tools::guess_default_domain( $webstreams, 2 );
+								$aiwp->config->options['webstream_jail'] = $property;
 							}
 							$aiwp->config->set_plugin_options( true );
 							$options = self::update_options( 'network' );
 						}
+
 					}
 				} catch ( Google_Service_Exception $e ) {
 					$timeout = $aiwp->gapi_controller->get_timeouts( 'midnight' );
@@ -1157,8 +1204,8 @@ final class AIWP_Settings {
 					if ( $webstreams ) {
 						$aiwp->config->options['ga4_webstreams_list'] = $webstreams;
 						if ( isset( $aiwp->config->options['webstream_jail'] ) && ! $aiwp->config->options['webstream_jail'] ) {
-							//$profile = AIWP_Tools::guess_default_domain( $profiles );
-							//$aiwp->config->options['tableid_jail'] = $profile;
+							$property = AIWP_Tools::guess_default_domain( $webstreams, 2 );
+							$aiwp->config->options['webstream_jail'] = $property;
 						}
 						$aiwp->config->set_plugin_options( true );
 						$options = self::update_options( 'network' );

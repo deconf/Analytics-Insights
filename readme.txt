@@ -74,18 +74,20 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 
 [AIWP v5.4 release notes](https://deconf.com/analytics-insights-for-wordpress/)
 
-= 5.5 (2022.01.09)
-* Important Note:
-	* Upgrading to 1.5 may require plugin re-authorization 
-	
+= 5.5 (2022.01.11)
 * Enhancements:
  	* Google Analytics library update to v2
 	* Google Analytics API Endpoint update to v1
-	* minimum requirements changed to PHP 5.6.0 or higher
-	* add Google Analytics 4 webstreams list capabilities
+	* automatically get Google Analytics 4 webstreams list
+	* add Google Analytics 4 tracking feature
+	* dual tracking is now available; use both GA4 and UA tracking at the same time
+
+* Requirements:
+	* minimum requirements changed to PHP 5.6.0 or higher	 
 
 * Bug Fixes:
 	* multiple bugfixes for network mode setup
+	* fix events tracking in Universal Analytics
 		
 
 = 5.4.7 (2021.11.28) =
