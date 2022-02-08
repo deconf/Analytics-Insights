@@ -1063,7 +1063,7 @@ final class AIWP_Settings {
 	<tr>
 		<td colspan="2" class="submit">
 			<input type="submit" name="Submit" class="button button-primary" value="<?php _e('Save Changes', 'analytics-insights' ) ?>" />
-			<?php if ( (is_array( $options['ga_profiles_list'] ) && count( $options['ga_profiles_list'] ) ) > 1 || ( is_array( $options['ga4_webstreams_list'] ) && count( $options['ga4_webstreams_list'] ) > 1 ) ): ?>
+			<?php if ( (is_array( $options['ga_profiles_list'] ) && count( $options['ga_profiles_list'] ) > 1 ) || ( is_array( $options['ga4_webstreams_list'] ) && count( $options['ga4_webstreams_list'] ) > 1 ) ): ?>
 				<input type="submit" name="Hide" class="button button-secondary"" value="<?php _e( "Lock Selection", 'analytics-insights' ); ?>" />
 			<?php endif; ?>
 		</td>
