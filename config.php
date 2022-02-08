@@ -124,6 +124,8 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 					if ( is_network_admin() ) {
 						$network_options['ga_profiles_list'] = $this->options['ga_profiles_list'];
 						$options['ga_profiles_list'] = array();
+						$network_options['ga4_webstreams_list'] = $this->options['ga4_webstreams_list'];
+						$options['ga4_webstreams_list'] = array();
 						$network_options['client_id'] = $this->options['client_id'];
 						$options['client_id'] = '';
 						$network_options['client_secret'] = $this->options['client_secret'];
@@ -135,7 +137,9 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 						//unset( $options['network_mode'] );
 						if ( isset( $this->options['network_tableid'] ) ) {
 							$network_options['network_tableid'] = $this->options['network_tableid'];
-							//unset( $options['network_tableid'] );
+						}
+						if ( isset( $this->options['network_webstream'] ) ) {
+							$network_options['network_webstream'] = $this->options['network_webstream'];
 						}
 					}
 					$merged_options = array_merge( $old_network_options, $network_options );
@@ -164,6 +168,10 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 					if ( ! is_network_admin() && ! empty( $network_options['ga_profiles_list'] ) && isset( $network_options['network_tableid']->$blog_id ) ) {
 						$network_options['ga_profiles_list'] = array( 0 => AIWP_Tools::get_selected_profile( $network_options['ga_profiles_list'], $network_options['network_tableid']->$blog_id ) );
 						$network_options['tableid_jail'] = $network_options['ga_profiles_list'][0][1];
+					}
+					if ( ! is_network_admin() && ! empty( $network_options['ga4_webstreams_list'] ) && isset( $network_options['network_webstream']->$blog_id ) ) {
+						$network_options['ga4_webstreams_list'] = array( 0 => AIWP_Tools::get_selected_profile( $network_options['ga4_webstreams_list'], $network_options['network_webstream']->$blog_id ) );
+						$network_options['webstream_jail'] = $network_options['ga4_webstreams_list'][0][1];
 					}
 					$this->options = array_merge( $this->options, $network_options );
 				} else {
@@ -276,6 +284,7 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 								'ga_dash_default_ua', // v5.2
 								'ga_dash_hidden', // v5.2
 								'ga_with_gtag', // v5.4.4
+								'ga_webstreams_list',
 			);
 			foreach ( $unsets as $key ) {
 				if ( isset( $this->options[$key] ) ) {
@@ -293,6 +302,7 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 								'amp_containerid', // v5.0
 								'optimize_containerid', // v5.0
 								'webstream_jail', // v5.5
+								'ga_target_geomap', // v5.5
 			);
 			foreach ( $empties as $key ) {
 				if ( ! isset( $this->options[$key] ) ) {
@@ -352,6 +362,14 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 			}
 			if ( isset( $this->options['ga_dash_tracking'] ) && 'classic' == $this->options['ga_dash_tracking'] ) { // v5.0
 				$this->options['tracking_type'] = 'universal';
+				$flag = true;
+			}
+			if ( ! isset( $this->options['ga_realtime_pages'] ) ) { // v5.4
+				$this->options['ga_realtime_pages'] = 10;
+				$flag = true;
+			}
+			if ( ! isset( $this->options['theme_color'] ) ) { // v5.5
+				$this->options['theme_color'] = '#1e73be';
 				$flag = true;
 			}
 			if ( $flag ) {

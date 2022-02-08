@@ -829,7 +829,7 @@ final class AIWP_Settings {
 					$message = "<div class='updated' id='aiwp-autodismiss'><p>" . __( "Plugin authorization succeeded.", 'analytics-insights' ) . "</p></div>";
 					if ( $aiwp->config->options['token'] && $aiwp->gapi_controller->client->getAccessToken() ) {
 
-						$profiles = $aiwp->gapi_controller->refresh_profiles();
+						$profiles = $aiwp->gapi_controller->ua_refresh_profiles();
 						if ( is_array( $profiles ) && ! empty( $profiles ) ) {
 							$aiwp->config->options['ga_profiles_list'] = $profiles;
 							if ( ! $aiwp->config->options['tableid_jail'] ) {
@@ -840,7 +840,7 @@ final class AIWP_Settings {
 							$options = self::update_options( 'general' );
 						}
 
-						$webstreams = $aiwp->gapi_controller->refresh_webstreams_ga4();
+						$webstreams = $aiwp->gapi_controller->ga4_refresh_profiles();
 						if ( is_array( $webstreams ) && ! empty( $webstreams ) ) {
 								$aiwp->config->options['ga4_webstreams_list'] = $webstreams;
 								if ( ! $aiwp->config->options['webstream_jail'] ) {
@@ -1135,7 +1135,7 @@ final class AIWP_Settings {
 					}
 					if ( $aiwp->config->options['token'] && $aiwp->gapi_controller->client->getAccessToken() ) {
 
-						$profiles = $aiwp->gapi_controller->refresh_profiles();
+						$profiles = $aiwp->gapi_controller->ua_refresh_profiles();
 						if ( is_array( $profiles ) && ! empty( $profiles ) ) {
 							$aiwp->config->options['ga_profiles_list'] = $profiles;
 							if ( isset( $aiwp->config->options['tableid_jail'] ) && ! $aiwp->config->options['tableid_jail'] ) {
@@ -1146,7 +1146,7 @@ final class AIWP_Settings {
 							$options = self::update_options( 'network' );
 						}
 
-						$webstreams = $aiwp->gapi_controller->refresh_webstreams_ga4();
+						$webstreams = $aiwp->gapi_controller->ga4_refresh_profiles();
 						if ( is_array( $webstreams ) && ! empty( $webstreams ) ) {
 							$aiwp->config->options['ga4_webstreams_list'] = $webstreams;
 							if ( isset( $aiwp->config->options['webstream_jail'] ) && ! $aiwp->config->options['webstream_jail'] ) {
@@ -1178,13 +1178,14 @@ final class AIWP_Settings {
 		if ( isset( $_REQUEST['Refresh'] ) ) {
 			if ( isset( $_REQUEST['aiwp_security'] ) && wp_verify_nonce( $_REQUEST['aiwp_security'], 'aiwp_form' ) ) {
 				$aiwp->config->options['ga_profiles_list'] = array();
+				$aiwp->config->options['ga4_webstreams_list'] = array();
 				$message = "<div class='updated' id='aiwp-autodismiss'><p>" . __( "Properties refreshed.", 'analytics-insights' ) . "</p></div>";
 				$options = self::update_options( 'network' );
 				if ( $aiwp->config->options['token'] && $aiwp->gapi_controller->client->getAccessToken() ) {
 					if ( ! empty( $aiwp->config->options['ga_profiles_list'] ) ) {
 						$profiles = $aiwp->config->options['ga_profiles_list'];
 					} else {
-						$profiles = $aiwp->gapi_controller->refresh_profiles();
+						$profiles = $aiwp->gapi_controller->ua_refresh_profiles();
 					}
 					if ( $profiles ) {
 						$aiwp->config->options['ga_profiles_list'] = $profiles;
@@ -1199,7 +1200,7 @@ final class AIWP_Settings {
 					if ( ! empty( $aiwp->config->options['ga4_webstreams_list'] ) ) {
 						$webstreams = $aiwp->config->options['ga4_webstreams_list'];
 					} else {
-						$webstreams = $aiwp->gapi_controller->refresh_webstreams_ga4();
+						$webstreams = $aiwp->gapi_controller->ga4_refresh_profiles();
 					}
 					if ( $webstreams ) {
 						$aiwp->config->options['ga4_webstreams_list'] = $webstreams;
@@ -1245,6 +1246,12 @@ final class AIWP_Settings {
 				$message = "<div class='updated' id='aiwp-autodismiss'><p>" . __( "All other domains/properties were removed.", 'analytics-insights' ) . "</p></div>";
 				$lock_profile = AIWP_Tools::get_selected_profile( $aiwp->config->options['ga_profiles_list'], $aiwp->config->options['tableid_jail'] );
 				$aiwp->config->options['ga_profiles_list'] = array( $lock_profile );
+				$lock_property = AIWP_Tools::get_selected_profile( $aiwp->config->options['ga4_webstreams_list'], $aiwp->config->options['webstream_jail'] );
+				if ( empty ($lock_property) ){
+					$aiwp->config->options['ga4_webstreams_list'] = array();
+				} else {
+					$aiwp->config->options['ga4_webstreams_list'] = array( $lock_property );
+				}
 				$options = self::update_options( 'network' );
 			} else {
 				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You do not have sufficient permissions to access this page.", 'analytics-insights' ) . "</p></div>";
@@ -1309,6 +1316,9 @@ final class AIWP_Settings {
 	<?php if ( isset( $options['network_tableid'] ) ) : ?>
 	<?php $options['network_tableid'] = json_decode( json_encode( $options['network_tableid'] ), false ); ?>
 	<?php endif; ?>
+	<?php if ( isset( $options['network_webstream'] ) ) : ?>
+	<?php $options['network_webstream'] = json_decode( json_encode( $options['network_webstream'] ), false ); ?>
+	<?php endif; ?>
 	<?php foreach ( AIWP_Tools::get_sites( array( 'number' => apply_filters( 'aiwp_sites_limit', 100 ) ) ) as $blog ) : ?>
 	<tr>
 		<td class="aiwp-settings-title-s">
@@ -1333,7 +1343,24 @@ final class AIWP_Settings {
 			</select>
 			<br />
 		</td>
-	</tr>
+		<td>
+			<select id="network_webstreams" <?php disabled(empty($options['ga4_webstreams_list']) || 1 == count($options['ga4_webstreams_list']), true); ?> name="options[network_webstream][<?php echo esc_attr( $blog['blog_id'] );?>]">
+			<?php if ( ! empty( $options['ga4_webstreams_list'] ) ) : ?>
+			<?php $temp_id = $blog['blog_id']; ?>
+			<option value="" <?php selected( '', $options['network_webstream']->$temp_id ); ?>><?php _e( "Disabled", 'analytics-insights' ); ?></option>
+			<?php foreach ( $options['ga4_webstreams_list'] as $items ) : ?>
+			<?php if ( $items[2] ) : ?>
+				<option value="<?php echo esc_attr( $items[1] ); ?>" <?php selected( $items[1], isset( $options['network_webstream']->$temp_id ) ? $options['network_webstream']->$temp_id : '');?> title="<?php _e( "Stream Name:", 'analytics-insights' ); ?> <?php echo esc_attr( $items[0] ); ?>">
+	  		<?php echo esc_html( AIWP_Tools::strip_protocol( $items[2] ) )?> &#8658; <?php echo esc_attr( $items[0] ); ?>
+				</option>
+			<?php endif; ?>
+			<?php endforeach; ?>
+			<?php else : ?>
+				<option value=""><?php _e( "Disabled", 'analytics-insights' ); ?></option>
+			<?php endif; ?>
+			</select>
+		</td>
+ </tr>
 	<?php endforeach; ?>
 	<?php self::html_section_delimiter(); ?>
 	<?php self::html_switch_button('options[superadmin_tracking]', 1, 'superadmin_tracking', $options['superadmin_tracking'], __( "exclude Super Admin tracking for the entire network", 'analytics-insights'), false, false ); ?>

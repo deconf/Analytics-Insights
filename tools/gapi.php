@@ -348,7 +348,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 *
 		 * @return array
 		 */
-		 public function refresh_profiles() {
+		 public function ua_refresh_profiles() {
 
 			try {
 				$ga_profiles_list = array();
@@ -390,7 +390,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 *
 		 * @return array
 		 */
-		public function refresh_webstreams_ga4() {
+		public function ga4_refresh_profiles() {
 			try {
 				$ga4_webstreams_list = array();
 

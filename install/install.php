@@ -176,10 +176,6 @@ class AIWP_Install {
 			delete_option( 'ga_dash_anonim' );
 			delete_option( 'ga_dash_userapi' );
 			delete_option( 'ga_event_tracking' );
-			delete_option( 'ga_event_downloads' );
-			delete_option( 'track_exclude' );
-			delete_option( 'ga_target_geomap' );
-			delete_option( 'ga_realtime_pages' );
 			delete_option( 'ga_dash_token' );
 			delete_option( 'ga_dash_refresh_token' );
 			delete_option( 'ga_dash_profile_list' );

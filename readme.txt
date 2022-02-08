@@ -1,7 +1,7 @@
 === Analytics Insights - Google Analytics, AMP Analytics, Stats ===
 Contributors: deconf
 Donate link: https://deconf.com/donate/
-Tags: google analytics dashboard, google analytics widget, WordPress analytics, google analytics plugin, global site tag
+Tags: analytics,google analytics,google analytics code,google analytics dashboard,google analytics plugin,google analytics tracking code,google analytics widget,wordpress analytics
 Requires at least: 3.5
 Tested up to: 5.9
 Stable tag: 5.5
@@ -15,6 +15,8 @@ Connects Google Analytics with your WordPress site. Displays stats and gives ins
 
 Analytics Insights is a WordPress plugin that enables site tracking using the latest Google Analytics tracking code. It allows you to view key Google Analytics stats in your WordPress Dashboard.
 
+Dual Tracking, using Google Analytics 4 (GA4) and Universal Analytics (UA) at the same time, is now available.
+
 = Google Analytics Reports, Stats and Insights =
 
 Analytics Insights displays the reports you need on your dashboard and on the site's frontend. Audience, acquisition, behavior, and real-time stats are all presented as charts within a dedicated dashboard widget.  
@@ -25,10 +27,12 @@ In addition to a set of general Google Analytics stats, insights like in-depth P
 
 The Google Analytics tracking code is fully customizable through options and hooks, allowing advanced data collection like custom dimensions and events.
 
-The plugin installs the latest Google Analytics tracking code. No matter the tracking method you choose, they are all available and customizable: Universal Google Analytics (analytics.js) tracking code, Global Site Tag (gtag.js) tracking code, and Accelerated Mobile Pages (AMP) tracking.
+The plugin installs the latest Google Analytics tracking code. No matter the tracking method you choose, they are all available and customizable: Google Analytics 4 (GA4), Universal Google Analytics (analytics.js) tracking code, Global Site Tag (gtag.js) tracking code, and Accelerated Mobile Pages (AMP) tracking.
 
 Advanced features like events tracking and custom dimensions tracking can be enabled with a switch of a button, without the need of any programming skills.  
 
+If you need Universal Analytics (UA) and Google Analytics 4 (GA4) to both collect data at the same time, for the same website, simply enable the Dual Tracking feature.  
+ 
 = Analytics Insights on Multisite =
 
 This plugin is fully compatible with multisite network installs. Allows using multiple Google Analytics accounts or using a single Google Analytics account for the entire network.
@@ -74,13 +78,13 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 
 [AIWP v5.4 release notes](https://deconf.com/analytics-insights-for-wordpress/)
 
-= 5.5 (2022.01.11)
+= 5.5 (2022.02.08)
 * Enhancements:
  	* Google Analytics library update to v2
 	* Google Analytics API Endpoint update to v1
 	* automatically get Google Analytics 4 webstreams list
 	* add Google Analytics 4 tracking feature
-	* dual tracking is now available; use both GA4 and UA tracking at the same time
+	* dual tracking is now available; use both GA4 tracking and UA tracking at the same time
 
 * Requirements:
 	* minimum requirements changed to PHP 5.6.0 or higher	 
@@ -146,8 +150,8 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 * Bug Fixes:	
 	* fixes for user opt-out feature 
 * Enhancements: 
-	* use <em>aiwp_useroptout</em> shortcode to easily generate opt-out buttons and links, [more details](https://deconf.com/google-analytics-gdpr-and-user-data-privacy-compliance)
-	* adding <em>aiwp_gtag_commands</em> and <em>aiwp_gtag_script_path</em> hooks to allow further gtag (Global Site Tag) code customization
+	* use <em>gadwp_useroptout</em> shortcode to easily generate opt-out buttons and links, [more details](https://deconf.com/google-analytics-gdpr-and-user-data-privacy-compliance)
+	* adding <em>gadwp_gtag_commands</em> and <em>gadwp_gtag_script_path</em> hooks to allow further gtag (Global Site Tag) code customization
 	* adds opt-out and DNT support for Google Tag Manager	
 	
 = 5.3.1.1 =
@@ -185,9 +189,9 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 * Enhancements:  
 	* more informative alerts and suggestions on the authorization screen
 	* disable autocomplete for the access code input field to avoid reuse of the same unique Google Analytics authorization code
-	* AIWP Endpoint improvements
+	* GADWP Endpoint improvements
 	* Error reporting improvements
-	* introducing the aiwp_maps_api_key filter
+	* introducing the gadwp_maps_api_key filter
 * Bug Fixes:	
 	* use the theme color palette for the frontend stats widget 	 
 
