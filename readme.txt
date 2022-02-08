@@ -15,7 +15,7 @@ Connects Google Analytics with your WordPress site. Displays stats and gives ins
 
 Analytics Insights is a WordPress plugin that enables site tracking using the latest Google Analytics tracking code. It allows you to view key Google Analytics stats in your WordPress Dashboard.
 
-Dual Tracking, using Google Analytics 4 (GA4) and Universal Analytics (UA) at the same time, is now available.
+With newly introduced Dual Tracking feature, you can collect data with both Google Analytics 4 (GA4) and Universal Analytics (UA) at the same time.
 
 = Google Analytics Reports, Stats and Insights =
 
@@ -82,9 +82,9 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 * Enhancements:
  	* Google Analytics library update to v2
 	* Google Analytics API Endpoint update to v1
-	* automatically get Google Analytics 4 webstreams list
-	* add Google Analytics 4 tracking feature
-	* dual tracking is now available; use both GA4 tracking and UA tracking at the same time
+	* automatically get Google Analytics 4 (GA4) webstreams list
+	* add Google Analytics 4 (GA4) tracking feature
+	* dual tracking is now available; use both Google Analytics 4 (GA4) tracking and Universal analytics (UA) tracking at the same time
 
 * Requirements:
 	* minimum requirements changed to PHP 5.6.0 or higher	 

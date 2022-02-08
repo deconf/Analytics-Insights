@@ -1150,7 +1150,7 @@ final class AIWP_Settings {
 						if ( is_array( $webstreams ) && ! empty( $webstreams ) ) {
 							$aiwp->config->options['ga4_webstreams_list'] = $webstreams;
 							if ( isset( $aiwp->config->options['webstream_jail'] ) && ! $aiwp->config->options['webstream_jail'] ) {
-								$property = AIWP_Tools::guess_default_domain( $webstreams, 2 );
+								$property = AIWP_Tools::guess_default_domain( $webstreams );
 								$aiwp->config->options['webstream_jail'] = $property;
 							}
 							$aiwp->config->set_plugin_options( true );
@@ -1205,7 +1205,7 @@ final class AIWP_Settings {
 					if ( $webstreams ) {
 						$aiwp->config->options['ga4_webstreams_list'] = $webstreams;
 						if ( isset( $aiwp->config->options['webstream_jail'] ) && ! $aiwp->config->options['webstream_jail'] ) {
-							$property = AIWP_Tools::guess_default_domain( $webstreams, 2 );
+							$property = AIWP_Tools::guess_default_domain( $webstreams );
 							$aiwp->config->options['webstream_jail'] = $property;
 						}
 						$aiwp->config->set_plugin_options( true );
@@ -1347,7 +1347,7 @@ final class AIWP_Settings {
 			<select id="network_webstreams" <?php disabled(empty($options['ga4_webstreams_list']) || 1 == count($options['ga4_webstreams_list']), true); ?> name="options[network_webstream][<?php echo esc_attr( $blog['blog_id'] );?>]">
 			<?php if ( ! empty( $options['ga4_webstreams_list'] ) ) : ?>
 			<?php $temp_id = $blog['blog_id']; ?>
-			<option value="" <?php selected( '', $options['network_webstream']->$temp_id ); ?>><?php _e( "Disabled", 'analytics-insights' ); ?></option>
+			<option value="" <?php selected( '', isset( $options['network_webstream']->$temp_id ) ? $options['network_webstream']->$temp_id : ''); ?>><?php _e( "Disabled", 'analytics-insights' ); ?></option>
 			<?php foreach ( $options['ga4_webstreams_list'] as $items ) : ?>
 			<?php if ( $items[2] ) : ?>
 				<option value="<?php echo esc_attr( $items[1] ); ?>" <?php selected( $items[1], isset( $options['network_webstream']->$temp_id ) ? $options['network_webstream']->$temp_id : '');?> title="<?php _e( "Stream Name:", 'analytics-insights' ); ?> <?php echo esc_attr( $items[0] ); ?>">
