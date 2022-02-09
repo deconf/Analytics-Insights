@@ -844,7 +844,7 @@ final class AIWP_Settings {
 						if ( is_array( $webstreams ) && ! empty( $webstreams ) ) {
 								$aiwp->config->options['ga4_webstreams_list'] = $webstreams;
 								if ( ! $aiwp->config->options['webstream_jail'] ) {
-									$property = AIWP_Tools::guess_default_domain( $webstreams );
+									$property = AIWP_Tools::guess_default_domain( $webstreams, 2 );
 									$aiwp->config->options['webstream_jail'] = $property;
 								}
 								$aiwp->config->set_plugin_options();
@@ -1150,7 +1150,7 @@ final class AIWP_Settings {
 						if ( is_array( $webstreams ) && ! empty( $webstreams ) ) {
 							$aiwp->config->options['ga4_webstreams_list'] = $webstreams;
 							if ( isset( $aiwp->config->options['webstream_jail'] ) && ! $aiwp->config->options['webstream_jail'] ) {
-								$property = AIWP_Tools::guess_default_domain( $webstreams );
+								$property = AIWP_Tools::guess_default_domain( $webstreams, 2 );
 								$aiwp->config->options['webstream_jail'] = $property;
 							}
 							$aiwp->config->set_plugin_options( true );
@@ -1205,7 +1205,7 @@ final class AIWP_Settings {
 					if ( $webstreams ) {
 						$aiwp->config->options['ga4_webstreams_list'] = $webstreams;
 						if ( isset( $aiwp->config->options['webstream_jail'] ) && ! $aiwp->config->options['webstream_jail'] ) {
-							$property = AIWP_Tools::guess_default_domain( $webstreams );
+							$property = AIWP_Tools::guess_default_domain( $webstreams, 2 );
 							$aiwp->config->options['webstream_jail'] = $property;
 						}
 						$aiwp->config->set_plugin_options( true );

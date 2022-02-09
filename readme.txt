@@ -4,7 +4,7 @@ Donate link: https://deconf.com/donate/
 Tags: analytics,google analytics,google analytics code,google analytics dashboard,google analytics plugin,google analytics tracking code,google analytics widget,wordpress analytics
 Requires at least: 3.5
 Tested up to: 5.9
-Stable tag: 5.5.2
+Stable tag: 5.5.3
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -78,15 +78,21 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 
 [AIWP v5.4 release notes](https://deconf.com/analytics-insights-for-wordpress/)
 
-= 5.5.2 (2022.02.08)
+= 5.5.3 (2022.02.09) =
+* Enhancements:
+	* improvements on detecting default GA4 webstream after install
+* Bug Fixes:
+	* 404 error reports are empty 
+	
+= 5.5.2 (2022.02.08) =
 * Bug Fixes:
 	* Lock Selection button missing when there are no GA4 properties defined
 
-= 5.5.1 (2022.02.08)
+= 5.5.1 (2022.02.08) =
 * Bug Fixes:
 	* properly encode the access token
 	
-= 5.5.0 (2022.02.07)
+= 5.5.0 (2022.02.07) =
 * Enhancements:
  	* Google Analytics library update to v2
 	* Google Analytics API Endpoint update to v1

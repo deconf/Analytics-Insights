@@ -445,6 +445,8 @@ jQuery.fn.extend( {
 				var tpl;
 			
 				tpl = '<div id="aiwp-404tablechart' + slug + '">';
+				tpl += '<div id="aiwp-dashboard' + slug + '">';
+				tpl += '<div id="aiwp-control' + slug + '"></div>';
 				tpl += '<div id="aiwp-tablechart' + slug + '"></div>';
 				tpl += '</div>';
 
@@ -485,7 +487,7 @@ jQuery.fn.extend( {
 					sortColumn : 1,
 					sortAscending : false					
 				};
-				
+
 				dashboard = new google.visualization.Dashboard(document.getElementById( 'aiwp-dashboard' + slug ));
 				
 			    control = new google.visualization.ControlWrapper({
@@ -711,7 +713,6 @@ jQuery.fn.extend( {
 
 			rtRefresh : function () {
 				if ( reports.render.focusFlag ) {
-					//console.log('aiwpRtBeat');
 					postData.from = false;
 					postData.to = false;
 					postData.query = 'realtime';
