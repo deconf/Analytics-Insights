@@ -78,7 +78,7 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 
 [AIWP v5.4 release notes](https://deconf.com/analytics-insights-for-wordpress/)
 
-= 5.5.3 (2022.02.09) =
+= 5.5.3 (2022.02.14) =
 * Enhancements:
 	* improvements on detecting default GA4 webstream after install
 * Bug Fixes:
