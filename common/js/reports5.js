@@ -444,7 +444,7 @@ jQuery.fn.extend( {
 
 				var tpl;
 			
-				tpl = '<div id="aiwp-404tablechart' + slug + '">';
+				tpl = '<div id="aiwp-404tablechart' + slug + '"><br>';
 				tpl += '<div id="aiwp-dashboard' + slug + '">';
 				tpl += '<div id="aiwp-control' + slug + '"></div>';
 				tpl += '<div id="aiwp-tablechart' + slug + '"></div>';
