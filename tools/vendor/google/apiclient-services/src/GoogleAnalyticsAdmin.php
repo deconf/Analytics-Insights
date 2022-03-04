@@ -1381,7 +1381,7 @@ class GoogleAnalyticsAdmin extends \Google\Service
         [
           'methods' => [
             'create' => [
-              'path' => 'v1alpha/{+parent}/webDataStreams',
+              'path' => 'v1alpha/{+parent}/dataStreams',
               'httpMethod' => 'POST',
               'parameters' => [
                 'parent' => [
@@ -1421,7 +1421,7 @@ class GoogleAnalyticsAdmin extends \Google\Service
                 ],
               ],
             ],'list' => [
-              'path' => 'v1alpha/{+parent}/webDataStreams',
+              'path' => 'v1alpha/{+parent}/dataStreams',
               'httpMethod' => 'GET',
               'parameters' => [
                 'parent' => [
