@@ -401,11 +401,16 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				 		$properties = $account->getPropertySummaries();
 				 		if ( !empty( $properties ) ) {
 				 			foreach ( $properties as $property ) {
-				 				$webstreams = $this->service_ga4->properties_webDataStreams->listPropertiesWebDataStreams( $property->getProperty())->getWebDataStreams();
-				 				if ( !empty( $webstreams ) ) {
-				 					foreach ( $webstreams as $webstream ) {
-				 						$ga4_webstreams_list[] = array( $webstream->getDisplayName(), $webstream->getName(), $webstream->getDefaultUri(), $webstream->getMeasurementId() );
+				 				$datastreams = $this->service_ga4->properties_dataStreams->listPropertiesDataStreams( $property->getProperty() )->getDataStreams();
+
+				 				if ( !empty( $datastreams ) ) {
+				 					foreach ( $datastreams as $datastream ) {
+				 						$webstream = $datastream->getWebStreamData();
+					 						if ('WEB_DATA_STREAM' == $datastream->type){
+						 						$ga4_webstreams_list[] = array( $datastream->getDisplayName(), $datastream->getName(), $webstream->getDefaultUri(), $webstream->getMeasurementId() );
+					 						}
 				 					}
+
 				 				}
 				 			}
 				 		}

@@ -1042,7 +1042,7 @@ final class AIWP_Settings {
 			</select>
 		</td>
 	</tr>
-	<?php if ( $options['webstream_jail'] ) :	?>
+	<?php if ( $options['webstream_jail'] && !empty($aiwp->config->options['ga4_webstreams_list']) ) :	?>
 	<tr>
 		<td class="aiwp-settings-title"></td>
 		<td>
