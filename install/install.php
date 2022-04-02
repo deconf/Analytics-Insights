@@ -23,7 +23,8 @@ class AIWP_Install {
 			$options['webstream_jail'] = '';
 			$options['theme_color'] = '#1e73be';
 			$options['switch_profile'] = 0;
-			$options['tracking_type'] = 'universal';
+			$options['tracking_type'] = 'globalsitetag';
+			$options['reporting_type'] = 0;
 			$options['ga_anonymize_ip'] = 0;
 			$options['user_api'] = 0;
 			$options['ga_event_tracking'] = 0;
@@ -89,6 +90,7 @@ class AIWP_Install {
 			$options['ga_dnt_optout'] = 0;
 			$options['tm_optout'] = 0;
 			$options['tm_dnt_optout'] = 0;
+			$options['reporting_type'] = 0;
 		} else {
 			$options = array();
 			$options['client_id'] = get_option( 'ga_dash_clientid' );
@@ -162,6 +164,7 @@ class AIWP_Install {
 			$options['ga_dnt_optout'] = 0;
 			$options['tm_optout'] = 0;
 			$options['tm_dnt_optout'] = 0;
+			$options['reporting_type'] = 0;
 			delete_option( 'ga_dash_clientid' );
 			delete_option( 'ga_dash_clientsecret' );
 			delete_option( 'ga_dash_access' );

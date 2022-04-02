@@ -20,7 +20,11 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
 		public $service;
 
-		public $service_ga4;
+		public $service_ga3_reporting;
+
+		public $service_ga4_admin;
+
+		public $service_ga4_data;
 
 		public $timeshift;
 
@@ -98,10 +102,6 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					}
 				}
 			}
-
-			$this->service = new Google\Service\Analytics( $this->client );
-			$this->service_ga4 = new Google\Service\GoogleAnalyticsAdmin( $this->client );
-
 		}
 
 		/**
@@ -284,6 +284,10 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 * @return boolean
 		 */
 		public function gapi_errors_handler() {
+
+			// @todo: comment-out the return false in production
+			//return false;
+
 			$errors = AIWP_Tools::get_cache( 'gapi_errors' );
 			if ( false === $errors || ! isset( $errors[0] ) ) { // invalid error
 				return false;
@@ -354,10 +358,14 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				$ga_profiles_list = array();
 				$startindex = 1;
 				$totalresults = 65535; // use something big
+
 				while ( $startindex < $totalresults ) {
+
+					$this->service = new Google\Service\Analytics( $this->client );
 					$profiles = $this->service->management_profiles->listManagementProfiles( '~all', '~all', array( 'start-index' => $startindex ) );
 					$items = $profiles->getItems();
 					$totalresults = $profiles->getTotalResults();
+
 					if ( $totalresults > 0 ) {
 						foreach ( $items as $profile ) {
 							$timetz = new DateTimeZone( $profile->getTimezone() );
@@ -368,13 +376,16 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 						}
 					}
 				}
+
 				if ( empty( $ga_profiles_list ) ) {
 					$timeout = $this->get_timeouts( 'midnight' );
 					AIWP_Tools::set_error( 'No properties were found in this account!', $timeout );
 				} else {
 					AIWP_Tools::delete_cache( 'last_error' );
 				}
+
 				return $ga_profiles_list;
+
 			} catch ( GoogleServiceException $e ) {
 				$timeout = $this->get_timeouts( 'midnight' );
 				AIWP_Tools::set_error( $e, $timeout );
@@ -394,14 +405,15 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			try {
 				$ga4_webstreams_list = array();
 
-				 $accounts = $this->service_ga4->accountSummaries->listAccountSummaries()->getAccountSummaries();
+				$this->service_ga4_admin = new Google\Service\GoogleAnalyticsAdmin( $this->client );
+				$accounts = $this->service_ga4_admin->accountSummaries->listAccountSummaries()->getAccountSummaries();
 
 				 if ( !empty( $accounts ) ) {
 				 	foreach ( $accounts as $account ) {
 				 		$properties = $account->getPropertySummaries();
 				 		if ( !empty( $properties ) ) {
 				 			foreach ( $properties as $property ) {
-				 				$datastreams = $this->service_ga4->properties_dataStreams->listPropertiesDataStreams( $property->getProperty() )->getDataStreams();
+				 				$datastreams = $this->service_ga4_admin->properties_dataStreams->listPropertiesDataStreams( $property->getProperty() )->getDataStreams();
 
 				 				if ( !empty( $datastreams ) ) {
 				 					foreach ( $datastreams as $datastream ) {
@@ -416,7 +428,9 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				 		}
 				 	}
 				 }
+
 				return $ga4_webstreams_list;
+
 			} catch ( GoogleServiceException $e ) {
 				$timeout = $this->get_timeouts( 'midnight' );
 				AIWP_Tools::set_error( $e, $timeout );
@@ -442,9 +456,9 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 *            $options
 		 * @param
 		 *            $serial
-		 * @return int|Deconf_Service_Analytics_GaData
+		 * @return int|Google\Service\AnalyticsReporting\DateRangeValues
 		 */
-		private function handle_corereports( $projectId, $from, $to, $metrics, $options, $serial ) {
+		private function handle_corereports( $projectId, $from, $to, $metrics, $dimensions, $sortby, $filters, $serial ) {
 			try {
 				if ( 'today' == $from ) {
 					$interval = 'hourly';
@@ -456,8 +470,101 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					if ( $this->gapi_errors_handler() ) {
 						return - 23;
 					}
-					$options['samplingLevel'] = 'HIGHER_PRECISION';
-					$data = $this->service->data_ga->get( 'ga:' . $projectId, $from, $to, $metrics, $options );
+
+					if ( $this->aiwp->config->options['reporting_type'] ){
+
+						//$projectIdArr = explode( '/dataStreams/',$projectId );
+						//$projectId = $projectIdArr[0];
+
+						$this->service_ga4_data = new Google\Service\AnalyticsData( $this->client );
+
+					} else {
+
+						// Create the DateRange object.
+						$dateRange = new Google\Service\AnalyticsReporting\DateRange();
+						$dateRange->setStartDate( $from );
+						$dateRange->setEndDate( $to );
+
+						// Create the Metrics object.
+						if ( is_array( $metrics ) ){
+							foreach ( $metrics as $value ){
+								$metricobj = new Google\Service\AnalyticsReporting\Metric();
+								$metricobj->setExpression( $value );
+								$metric[] = $metricobj;
+							}
+						} else {
+							$metricobj = new Google\Service\AnalyticsReporting\Metric();
+							$metricobj->setExpression( $metrics );
+							$metric[] = $metricobj;
+						}
+
+						// Create the ReportRequest object.
+						$request = new Google\Service\AnalyticsReporting\ReportRequest();
+						$request->setViewId( $projectId );
+						$request->setDateRanges( $dateRange );
+						$request->setMetrics( $metric );
+						$request->includeEmptyRows = true;
+
+						// Create the Dimensions object.
+						if ( $dimensions ){
+
+							if ( is_array( $dimensions ) ){
+								foreach ( $dimensions as $value ){
+									$dimensionobj = new Google\Service\AnalyticsReporting\Dimension();
+									$dimensionobj->setName( $value );
+									$dimension[] = $dimensionobj;
+								}
+							} else {
+								$dimensionobj = new Google\Service\AnalyticsReporting\Dimension();
+								$dimensionobj->setName( $dimensions );
+								$dimension[] = $dimensionobj;
+							}
+
+							$request->setDimensions( $dimension );
+						}
+
+						// Create the Filters
+						if ( $filters ) {
+
+							foreach ( $filters as $value ){
+								$dimensionFilterobj = new Google\Service\AnalyticsReporting\DimensionFilter();
+								$dimensionFilterobj->setDimensionName( $value[0] );
+								$dimensionFilterobj->setOperator( $value[1] );
+								$dimensionFilterobj->setExpressions( array( $value[2] ) );
+								$dimensionFilterobj->setNot( $value[3] );
+								$dimensionFilter[] = $dimensionFilterobj;
+							}
+
+							// Create the DimensionFilterClauses
+							$dimensionFilterClause = new Google\Service\AnalyticsReporting\DimensionFilterClause();
+							$dimensionFilterClause->setOperator( 'AND' );
+							$dimensionFilterClause->setFilters( $dimensionFilter );
+
+							$request->setDimensionFilterClauses( array( $dimensionFilterClause ) );
+
+						}
+
+						// Create the Ordering.
+						if ( $sortby ){
+							$ordering = new Google\Service\AnalyticsReporting\OrderBy();
+							$ordering->setOrderType("VALUE");
+							$ordering->setFieldName( $metrics );
+							$request->setOrderBys( $ordering );
+						}
+
+						$body = new Google\Service\AnalyticsReporting\GetReportsRequest();
+						$body->setReportRequests( array( $request) );
+
+						$this->service_ga3_reporting = new Google\Service\AnalyticsReporting( $this->client );
+
+						$response = $this->service_ga3_reporting->reports->batchGet( $body );
+
+						$reports = $response->getReports();
+
+						$data = $reports[0]->getData();
+
+					}
+
 					if ( method_exists( $data, 'getContainsSampledData' ) && $data->getContainsSampledData() ) {
 						$sampling['date'] = date( 'Y-m-d H:i:s' );
 						$sampling['percent'] = number_format( ( $data->getSampleSize() / $data->getSampleSpace() ) * 100, 2 ) . '%';
@@ -516,6 +623,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 * @return array|int
 		 */
 		private function get_areachart_data( $projectId, $from, $to, $query, $filter = '' ) {
+
 			switch ( $query ) {
 				case 'users' :
 					$title = __( "Users", 'analytics-insights' );
@@ -535,34 +643,49 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				default :
 					$title = __( "Sessions", 'analytics-insights' );
 			}
+
 			$metrics = 'ga:' . $query;
+
 			if ( 'today' == $from || 'yesterday' == $from ) {
 				$dimensions = 'ga:hour';
 				$dayorhour = __( "Hour", 'analytics-insights' );
 			} else if ( '365daysAgo' == $from || '1095daysAgo' == $from ) {
-				$dimensions = 'ga:yearMonth, ga:month';
+				$dimensions = array(
+					'ga:yearMonth',
+					'ga:month'
+				);
 				$dayorhour = __( "Date", 'analytics-insights' );
 			} else {
-				$dimensions = 'ga:date,ga:dayOfWeekName';
+				$dimensions = array(
+					'ga:date',
+ 				'ga:dayOfWeekName'
+				);
 				$dayorhour = __( "Date", 'analytics-insights' );
 			}
-			$options = array( 'dimensions' => $dimensions, 'quotaUser' => $this->managequota . 'p' . $projectId );
+
+			$filters = false;
+
 			if ( $filter ) {
-				$options['filters'] = 'ga:pagePath==' . $filter;
+				$filters[] = array( 'ga:pagePath', 'EXACT', $filter, false );
 			}
+
 			$serial = 'qr2_' . $this->get_serial( $projectId . $from . $metrics . $filter );
-			$data = $this->handle_corereports( $projectId, $from, $to, $metrics, $options, $serial );
+
+			$data = $this->handle_corereports( $projectId, $from, $to, $metrics, $dimensions, false, $filters, $serial );
+
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
+
 			if ( empty( $data->rows ) ) {
 				// unable to render it as an Area Chart, returns a numeric value to be handled by reportsx.js
 				return - 21;
 			}
+
 			$aiwp_data = array( array( $dayorhour, $title ) );
 			if ( 'today' == $from || 'yesterday' == $from ) {
 				foreach ( $data->getRows() as $row ) {
-					$aiwp_data[] = array( (int) $row[0] . ':00', round( $row[1], 2 ) );
+					$aiwp_data[] = array( (int) $row->getDimensions()[0] . ':00', round( $row->getMetrics()[0]->getValues()[0], 2 ) );
 				}
 			} else if ( '365daysAgo' == $from || '1095daysAgo' == $from ) {
 				foreach ( $data->getRows() as $row ) {
@@ -571,7 +694,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					 * Example: 'F, Y' will become 'November, 2015'
 					 * For details see: http://php.net/manual/en/function.date.php#refsect1-function.date-parameters
 					 */
-					$aiwp_data[] = array( date_i18n( __( 'F, Y', 'analytics-insights' ), strtotime( $row[0] . '01' ) ), round( $row[2], 2 ) );
+					$aiwp_data[] = array( date_i18n( __( 'F, Y', 'analytics-insights' ), strtotime( $row->getDimensions()[0] . '01' ) ), round( $row->getMetrics()[0]->getValues()[0], 2 ) );
 				}
 			} else {
 				foreach ( $data->getRows() as $row ) {
@@ -580,10 +703,12 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					 * Example: 'l, F j, Y' will become 'Thusday, November 17, 2015'
 					 * For details see: http://php.net/manual/en/function.date.php#refsect1-function.date-parameters
 					 */
-					$aiwp_data[] = array( date_i18n( __( 'l, F j, Y', 'analytics-insights' ), strtotime( $row[0] ) ), round( $row[2], 2 ) );
+					$aiwp_data[] = array( date_i18n( __( 'l, F j, Y', 'analytics-insights' ), strtotime( $row->getDimensions()[0] ) ), round( $row->getMetrics()[0]->getValues()[0], 2 ) );
 				}
 			}
+
 			return $aiwp_data;
+
 		}
 
 		/**
@@ -600,22 +725,55 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 * @return array|int
 		 */
 		private function get_bottomstats( $projectId, $from, $to, $filter = '' ) {
-			$options = array( 'dimensions' => null, 'quotaUser' => $this->managequota . 'p' . $projectId );
+
+			$filters = false;
+
 			if ( $filter ) {
-				$options['filters'] = 'ga:pagePath==' . $filter;
-				$metrics = 'ga:uniquePageviews,ga:users,ga:pageviews,ga:BounceRate,ga:organicSearches,ga:pageviewsPerSession,ga:avgTimeOnPage,ga:avgPageLoadTime,ga:exitRate';
+				$filters[] = array( 'ga:pagePath', 'EXACT', $filter, false );
+				$metrics = array (
+					'ga:uniquePageviews',
+					'ga:users',
+					'ga:pageviews',
+					'ga:BounceRate',
+					'ga:organicSearches',
+					'ga:pageviewsPerSession',
+					'ga:avgTimeOnPage',
+					'ga:avgPageLoadTime',
+					'ga:exitRate'
+				);
 			} else {
-				$metrics = 'ga:sessions,ga:users,ga:pageviews,ga:BounceRate,ga:organicSearches,ga:pageviewsPerSession,ga:avgTimeOnPage,ga:avgPageLoadTime,ga:avgSessionDuration';
+				$metrics = array (
+					'ga:sessions',
+					'ga:users',
+					'ga:pageviews',
+					'ga:BounceRate',
+					'ga:organicSearches',
+					'ga:pageviewsPerSession',
+					'ga:avgTimeOnPage',
+					'ga:avgPageLoadTime',
+					'ga:avgSessionDuration'
+				);
 			}
+
+			$sortby = false;
+
 			$serial = 'qr3_' . $this->get_serial( $projectId . $from . $filter );
-			$data = $this->handle_corereports( $projectId, $from, $to, $metrics, $options, $serial );
+			$data = $this->handle_corereports( $projectId, $from, $to, $metrics, false, $sortby, $filters, $serial );
+
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
-			$aiwp_data = array();
-			foreach ( $data->getRows() as $row ) {
-				$aiwp_data = array_map( 'floatval', $row );
+
+			if ( is_numeric( $data ) ) {
+				return $data;
 			}
+
+			$aiwp_data = array();
+
+			if ( isset( $data->getRows()[0] ) ) {
+				$aiwp_data=$data->getRows()[0]->getMetrics()[0]->getValues();
+			}
+
 			// i18n support
 			$aiwp_data[0] = isset( $aiwp_data[0] ) ? number_format_i18n( $aiwp_data[0] ) : 0;
 			$aiwp_data[1] = isset( $aiwp_data[1] ) ? number_format_i18n( $aiwp_data[1] ) : 0;
@@ -625,12 +783,15 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			$aiwp_data[5] = isset( $aiwp_data[5] ) ? number_format_i18n( $aiwp_data[5], 2 ) : 0;
 			$aiwp_data[6] = isset( $aiwp_data[6] ) ? gmdate( "H:i:s", $aiwp_data[6] ) : '00:00:00';
 			$aiwp_data[7] = isset( $aiwp_data[7] ) ? number_format_i18n( $aiwp_data[7], 2 ) : 0;
+
 			if ( $filter ) {
 				$aiwp_data[8] = isset( $aiwp_data[8] ) ? number_format_i18n( $aiwp_data[8], 2 ) . '%' : '0%';
 			} else {
 				$aiwp_data[8] = isset( $aiwp_data[8] ) ? gmdate( "H:i:s", $aiwp_data[8] ) : '00:00:00';
 			}
+
 			return $aiwp_data;
+
 		}
 
 		/**
@@ -647,22 +808,34 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 * @return array|int
 		 */
 		private function get_contentpages( $projectId, $from, $to , $metric, $filter = '' ) {
+
 			$metrics = 'ga:' . $metric;
+
 			$dimensions = 'ga:pageTitle';
-			$options = array( 'dimensions' => $dimensions, 'sort' => '-' . $metrics, 'quotaUser' => $this->managequota . 'p' . $projectId );
+
+			$sortby = '-' . $metrics;
+
+			$filters = false;
 			if ( $filter ) {
-				$options['filters'] = 'ga:pagePath==' . $filter;
+				$filters[] = array( 'ga:pagePath', 'EXACT', $filter, false );
 			}
+
 			$serial = 'qr4_' . $this->get_serial( $projectId . $from . $filter . $metric );
-			$data = $this->handle_corereports( $projectId, $from, $to, $metrics, $options, $serial );
+
+			$data =  $this->handle_corereports( $projectId, $from, $to, $metrics, $dimensions, $sortby, $filters, $serial );
+
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
+
 			$aiwp_data = array( array( __( "Pages", 'analytics-insights' ), __( ucfirst( $metric ), 'analytics-insights' ) ) );
+
 			foreach ( $data->getRows() as $row ) {
-				$aiwp_data[] = array( esc_html( $row[0] ), (int) $row[1] );
+				$aiwp_data[] = array( esc_html( $row->getDimensions()[0] ), (int) $row->getMetrics()[0]->getValues()[0] );
 			}
+
 			return $aiwp_data;
+
 		}
 
 		/**
@@ -677,22 +850,35 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 * @return array|int
 		 */
 		private function get_404errors( $projectId, $from, $to, $metric, $filter = "Page Not Found" ) {
+
 			$metrics = 'ga:' . $metric;
-			$dimensions = 'ga:pagePath,ga:fullReferrer';
-			$options = array( 'dimensions' => $dimensions, 'sort' => '-' . $metrics, 'quotaUser' => $this->managequota . 'p' . $projectId );
-			$options['filters'] = 'ga:pageTitle=@' . $filter;
+
+			$dimensions = array (
+				'ga:pagePath',
+				'ga:fullReferrer'
+			);
+
+			$sortby = '-' . $metrics;
+
+			$filters[] = array( 'ga:pageTitle', 'PARTIAL', $filter, false );
+
 			$serial = 'qr4_' . $this->get_serial( $projectId . $from . $filter . $metric );
-			$data = $this->handle_corereports( $projectId, $from, $to, $metrics, $options, $serial );
+
+			$data =  $this->handle_corereports( $projectId, $from, $to, $metrics, $dimensions, $sortby, $filters, $serial );
+
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
+
 			$aiwp_data = array( array( __( "404 Errors", 'analytics-insights' ), __( ucfirst( $metric ), 'analytics-insights' ) ) );
 			foreach ( $data->getRows() as $row ) {
-				$path = esc_html( $row[0] );
-				$source = esc_html( $row[1] );
-				$aiwp_data[] = array( "<strong>" . __( "URI:", 'analytics-insights' ) . "</strong> " . $path . "<br><strong>" . __( "Source:", 'analytics-insights' ) . "</strong> " . $source, (int) $row[2] );
+				$path = esc_html( $row->getDimensions()[0] );
+				$source = esc_html( $row->getDimensions()[1] );
+				$aiwp_data[] = array( "<strong>" . __( "URI:", 'analytics-insights' ) . "</strong> " . $path . "<br><strong>" . __( "Source:", 'analytics-insights' ) . "</strong> " . $source, (int) $row->getMetrics()[0]->getValues()[0] );
 			}
+
 			return $aiwp_data;
+
 		}
 
 		/**
@@ -709,24 +895,37 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 * @return array|int
 		 */
 		private function get_referrers( $projectId, $from, $to, $metric, $filter = '' ) {
+
 			$metrics = 'ga:' . $metric;
+
 			$dimensions = 'ga:source';
-			$options = array( 'dimensions' => $dimensions, 'sort' => '-' . $metrics, 'quotaUser' => $this->managequota . 'p' . $projectId );
+
+			$sortby = '-' . $metrics;
+
+			$filters = false;
 			if ( $filter ) {
-				$options['filters'] = 'ga:medium==referral;ga:pagePath==' . $filter;
+				$filters[] = array( 'ga:pagePath', 'EXACT', $filter, false );
+				$filters[] = array( 'ga:medium', 'EXACT', 'referral', false );
 			} else {
-				$options['filters'] = 'ga:medium==referral';
+				$filters[] = array( 'ga:medium', 'EXACT', 'referral', false );
 			}
+
 			$serial = 'qr5_' . $this->get_serial( $projectId . $from . $filter . $metric );
-			$data = $this->handle_corereports( $projectId, $from, $to, $metrics, $options, $serial );
+
+			$data =  $this->handle_corereports( $projectId, $from, $to, $metrics, $dimensions, $sortby, $filters, $serial );
+
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
+
 			$aiwp_data = array( array( __( "Referrers", 'analytics-insights' ), __( ucfirst( $metric ), 'analytics-insights' ) ) );
+
 			foreach ( $data->getRows() as $row ) {
-				$aiwp_data[] = array( esc_html( $row[0] ), (int) $row[1] );
+				$aiwp_data[] = array( esc_html( $row->getDimensions()[0] ), (int) $row->getMetrics()[0]->getValues()[0] );
 			}
+
 			return $aiwp_data;
+
 		}
 
 		/**
@@ -743,24 +942,36 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 * @return array|int
 		 */
 		private function get_searches( $projectId, $from, $to, $metric, $filter = '' ) {
+
 			$metrics = 'ga:' . $metric;
+
 			$dimensions = 'ga:keyword';
-			$options = array( 'dimensions' => $dimensions, 'sort' => '-' . $metrics, 'quotaUser' => $this->managequota . 'p' . $projectId );
+
+			$sortby = '-' . $metrics;
+
+			$filters = false;
 			if ( $filter ) {
-				$options['filters'] = 'ga:keyword!=(not set);ga:pagePath==' . $filter;
+				$filters[] = array( 'ga:pagePath', 'EXACT', $filter, false );
+				$filters[] = array( 'ga:keyword', 'EXACT', '(not set)', true );
 			} else {
-				$options['filters'] = 'ga:keyword!=(not set)';
+				$filters[] = array( 'ga:keyword', 'EXACT', '(not set)', true );
 			}
+
 			$serial = 'qr6_' . $this->get_serial( $projectId . $from . $filter . $metric );
-			$data = $this->handle_corereports( $projectId, $from, $to, $metrics, $options, $serial );
+
+			$data =  $this->handle_corereports( $projectId, $from, $to, $metrics, $dimensions, $sortby, $filters, $serial );
+
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
+
 			$aiwp_data = array( array( __( "Searches", 'analytics-insights' ), __( ucfirst( $metric ), 'analytics-insights' ) ) );
 			foreach ( $data->getRows() as $row ) {
-				$aiwp_data[] = array( esc_html( $row[0] ), (int) $row[1] );
+				$aiwp_data[] = array( esc_html( $row->getDimensions()[0] ), (int) $row->getMetrics()[0]->getValues()[0] );
 			}
+
 			return $aiwp_data;
+
 		}
 
 		/**
@@ -777,45 +988,64 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 * @return array|int
 		 */
 		private function get_locations( $projectId, $from, $to, $metric, $filter = '' ) {
+
 			$metrics = 'ga:' . $metric;
-			$options = "";
+
 			$title = __( "Countries", 'analytics-insights' );
+
 			$serial = 'qr7_' . $this->get_serial( $projectId . $from . $filter . $metric );
+
 			$dimensions = 'ga:country';
+
 			$local_filter = '';
+
 			if ( $this->aiwp->config->options['ga_target_geomap'] ) {
-				$dimensions = 'ga:city, ga:region';
+				$dimensions = array (
+					'ga:city',
+					'ga:region'
+				);
+
 				$country_codes = AIWP_Tools::get_countrycodes();
 				if ( isset( $country_codes[$this->aiwp->config->options['ga_target_geomap']] ) ) {
-					$local_filter = 'ga:country==' . ( $country_codes[$this->aiwp->config->options['ga_target_geomap']] );
+					$local_filter = array( 'ga:country', 'EXACT', ( $country_codes[$this->aiwp->config->options['ga_target_geomap']] ), false );
 					$title = __( "Cities from", 'analytics-insights' ) . ' ' . __( $country_codes[$this->aiwp->config->options['ga_target_geomap']] );
 					$serial = 'qr7_' . $this->get_serial( $projectId . $from . $this->aiwp->config->options['ga_target_geomap'] . $filter . $metric );
 				}
 			}
-			$options = array( 'dimensions' => $dimensions, 'sort' => '-' . $metrics, 'quotaUser' => $this->managequota . 'p' . $projectId );
+
+			$sortby = '-' . $metrics;
+
+			$filters = false;
 			if ( $filter ) {
-				$options['filters'] = 'ga:pagePath==' . $filter;
+				$filters[] = array( 'ga:pagePath', 'EXACT', $filter , false);
 				if ( $local_filter ) {
-					$options['filters'] .= ';' . $local_filter;
+					$filters[] = array ( 'ga:pagePath', 'EXACT', $filter, false );
+					$filters[1] = $local_filter;
 				}
 			} else {
 				if ( $local_filter ) {
-					$options['filters'] = $local_filter;
+					$filters[] = $local_filter;
 				}
 			}
-			$data = $this->handle_corereports( $projectId, $from, $to, $metrics, $options, $serial );
+
+			$data =  $this->handle_corereports( $projectId, $from, $to, $metrics, $dimensions, $sortby, $filters, $serial );
+
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
+
 			$aiwp_data = array( array( $title, __( ucfirst( $metric ), 'analytics-insights' ) ) );
+
 			foreach ( $data->getRows() as $row ) {
-				if ( isset( $row[2] ) ) {
-					$aiwp_data[] = array( esc_html( $row[0] ) . ', ' . esc_html( $row[1] ), (int) $row[2] );
+				if ( isset( $row->getDimensions()[1] ) ) {
+					$aiwp_data[] = array( esc_html( $row->getDimensions()[0] ) . ', ' . esc_html( $row->getDimensions()[1] ), (int) $row->getMetrics()[0]->getValues()[0] );
 				} else {
-					$aiwp_data[] = array( esc_html( $row[0] ), (int) $row[1] );
+					$aiwp_data[] = array( esc_html( $row->getDimensions()[0] ), (int) $row->getMetrics()[0]->getValues()[0] );
 				}
 			}
+
 			return $aiwp_data;
+
 		}
 
 		/**
@@ -834,28 +1064,41 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 * @return array|int
 		 */
 		private function get_orgchart_data( $projectId, $from, $to, $query, $metric, $filter = '' ) {
+
 			$metrics = 'ga:' . $metric;
+
 			$dimensions = 'ga:' . $query;
-			$options = array( 'dimensions' => $dimensions, 'sort' => '-' . $metrics, 'quotaUser' => $this->managequota . 'p' . $projectId );
+
+			$sortby = '-' . $metrics;
+
+
+			$filters = false;
 			if ( $filter ) {
-				$options['filters'] = 'ga:pagePath==' . $filter;
+				$filters[] = array( 'ga:pagePath', 'EXACT', $filter, false );
 			}
+
 			$serial = 'qr8_' . $this->get_serial( $projectId . $from . $query . $filter . $metric );
-			$data = $this->handle_corereports( $projectId, $from, $to, $metrics, $options, $serial );
+
+			$data =  $this->handle_corereports( $projectId, $from, $to, $metrics, $dimensions, $sortby, $filters, $serial );
+
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
-			if ( empty( $data->rows ) ) {
+
+			if ( empty( $data->getRows() ) ) {
 				// unable to render as an Org Chart, returns a numeric value to be handled by reportsx.js
 				return - 21;
 			}
+
 			$block = ( 'channelGrouping' == $query ) ? __( "Channels", 'analytics-insights' ) : __( "Devices", 'analytics-insights' );
-			$aiwp_data = array( array( '<div style="color:black; font-size:1.1em">' . $block . '</div><div style="color:darkblue; font-size:1.2em">' . (int) $data['totalsForAllResults'][$metrics] . '</div>', "" ) );
+			$aiwp_data = array( array( '<div style="color:black; font-size:1.1em">' . $block . '</div><div style="color:darkblue; font-size:1.2em">' . (int) $data->getTotals()[0]->getValues()[0] . '</div>', "" ) );
 			foreach ( $data->getRows() as $row ) {
-				$shrink = explode( " ", $row[0] );
-				$aiwp_data[] = array( '<div style="color:black; font-size:1.1em">' . esc_html( $shrink[0] ) . '</div><div style="color:darkblue; font-size:1.2em">' . (int) $row[1] . '</div>', '<div style="color:black; font-size:1.1em">' . $block . '</div><div style="color:darkblue; font-size:1.2em">' . (int) $data['totalsForAllResults'][$metrics] . '</div>' );
+				$shrink = explode( " ", $row->getDimensions()[0] );
+				$aiwp_data[] = array( '<div style="color:black; font-size:1.1em">' . esc_html( $shrink[0] ) . '</div><div style="color:darkblue; font-size:1.2em">' . (int) $row->getMetrics()[0]->getValues()[0] . '</div>', '<div style="color:black; font-size:1.1em">' . $block . '</div><div style="color:darkblue; font-size:1.2em">' . (int) $data->getTotals()[0]->getValues()[0] . '</div>' );
 			}
+
 			return $aiwp_data;
+
 		}
 
 		/**
@@ -874,46 +1117,55 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 * @return array|int
 		 */
 		private function get_piechart_data( $projectId, $from, $to, $query, $metric, $filter = '' ) {
+
 			$metrics = 'ga:' . $metric;
 			$dimensions = 'ga:' . $query;
+			$sortby =  false;
+
 			if ( 'source' == $query ) {
-				$options = array( 'dimensions' => $dimensions, 'sort' => '-' . $metrics, 'quotaUser' => $this->managequota . 'p' . $projectId );
+				$sortby = '-' . $metrics;
 				if ( $filter ) {
-					$options['filters'] = 'ga:medium==organic;ga:keyword!=(not set);ga:pagePath==' . $filter;
+					$filters[] = array( 'ga:pagePath', 'EXACT', $filter, false );
+					$filters[] = array( 'ga:medium', 'EXACT', 'organic', false );
+					$filters[] = array( 'ga:keyword', 'EXACT', '(not set)', true );
 				} else {
-					$options['filters'] = 'ga:medium==organic;ga:keyword!=(not set)';
+					$filters[] = array( 'ga:medium', 'EXACT', 'organic', false );
+					$filters[] = array( 'ga:keyword', 'EXACT', '(not set)', true );
 				}
 			} else {
-				$options = array( 'dimensions' => $dimensions, 'sort' => '-' . $metrics, 'quotaUser' => $this->managequota . 'p' . $projectId );
+				$sortby = '-' . $metrics;
 				if ( $filter ) {
-					$options['filters'] = 'ga:' . $query . '!=(not set);ga:pagePath==' . $filter;
+					$filters[] = array( 'ga:pagePath', 'EXACT', $filter, false );
+					$filters[] = array( 'ga:' . $query, 'EXACT', '(not set)', true );
 				} else {
-					$options['filters'] = 'ga:' . $query . '!=(not set)';
+					$filters[] = array( 'ga:' . $query, 'EXACT', '(not set)', true );
 				}
 			}
+
 			$serial = 'qr10_' . $this->get_serial( $projectId . $from . $query . $filter . $metric );
-			$data = $this->handle_corereports( $projectId, $from, $to, $metrics, $options, $serial );
+
+			$data =  $this->handle_corereports( $projectId, $from, $to, $metrics, $dimensions, $sortby, $filters, $serial );
+
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
+
 			$aiwp_data = array( array( __( "Type", 'analytics-insights' ), __( ucfirst( $metric ), 'analytics-insights' ) ) );
-			$i = 0;
+
 			$included = 0;
 			foreach ( $data->getRows() as $row ) {
-				if ( $i < 20 ) {
-					$aiwp_data[] = array( str_replace( "(none)", "direct", esc_html( $row[0] ) ), (int) $row[1] );
-					$included += $row[1];
-					$i++;
-				} else {
-					break;
-				}
+					$aiwp_data[] = array( str_replace( "(none)", "direct", esc_html( $row->getDimensions()[0] ) ), (int) $row->getMetrics()[0]->getValues()[0] );
+					$included += $row->getMetrics()[0]->getValues()[0];
 			}
-			$totals = $data->getTotalsForAllResults();
-			$others = $totals[$metrics] - $included;
+
+			$totals = $data->getTotals()[0]->getValues()[0];
+			$others = $totals - $included;
 			if ( $others > 0 ) {
 				$aiwp_data[] = array( __( 'Other', 'analytics-insights' ), $others );
 			}
+
 			return $aiwp_data;
+
 		}
 
 		/**
@@ -928,29 +1180,40 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 * @return array|int
 		 */
 		public function frontend_widget_stats( $projectId, $from, $anonim ) {
-			$content = '';
+
 			$to = 'yesterday';
 			$metrics = 'ga:sessions';
-			$dimensions = 'ga:date,ga:dayOfWeekName';
-			$options = array( 'dimensions' => $dimensions, 'quotaUser' => $this->managequota . 'p' . $projectId );
+			$dimensions = array (
+				'ga:date',
+				'ga:dayOfWeekName'
+			);
+
 			$serial = 'qr2_' . $this->get_serial( $projectId . $from . $metrics );
-			$data = $this->handle_corereports( $projectId, $from, $to, $metrics, $options, $serial );
+
+
+			$data =  $this->handle_corereports( $projectId, $from, $to, $metrics, $dimensions, false, false, $serial );
+
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
+
 			$aiwp_data = array( array( __( "Date", 'analytics-insights' ), __( "Sessions", 'analytics-insights' ) ) );
+
 			if ( $anonim ) {
 				$max_array = array();
-				foreach ( $data->getRows() as $item ) {
-					$max_array[] = $item[2];
+				foreach ( $data->getRows() as $row ) {
+					$max_array[] = $row->getMetrics()[0]->getValues()[0];
 				}
 				$max = max( $max_array ) ? max( $max_array ) : 1;
 			}
+
 			foreach ( $data->getRows() as $row ) {
-				$aiwp_data[] = array( date_i18n( __( 'l, F j, Y', 'analytics-insights' ), strtotime( $row[0] ) ), ( $anonim ? round( $row[2] * 100 / $max, 2 ) : (int) $row[2] ) );
+				$aiwp_data[] = array( date_i18n( __( 'l, F j, Y', 'analytics-insights' ), strtotime( $row->getDimensions()[0] .',' . $row->getDimensions()[1] ) ), ( $anonim ? round( $row->getMetrics()[0]->getValues()[0] * 100 / $max, 2 ) : (int) $row->getMetrics()[0]->getValues()[0] ) );
 			}
-			$totals = $data->getTotalsForAllResults();
-			return array( $aiwp_data, $anonim ? 0 : number_format_i18n( $totals['ga:sessions'] ) );
+			$totals = $data->getTotals()[0]->getValues()[0];
+
+			return array( $aiwp_data, $anonim ? 0 : number_format_i18n( $totals ) );
+
 		}
 
 		/**
@@ -963,17 +1226,25 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		private function get_realtime( $projectId ) {
 			$metrics = 'rt:activeUsers';
 			$dimensions = 'rt:pagePath,rt:source,rt:keyword,rt:trafficType,rt:visitorType,rt:pageTitle';
+
 			try {
 				$serial = 'qr_realtimecache_' . $this->get_serial( $projectId );
 				$transient = AIWP_Tools::get_cache( $serial );
 				if ( false === $transient ) {
+
 					if ( $this->gapi_errors_handler() ) {
 						return - 23;
 					}
+
+					$this->service = new Google\Service\Analytics( $this->client );
 					$data = $this->service->data_realtime->get( 'ga:' . $projectId, $metrics, array( 'dimensions' => $dimensions, 'quotaUser' => $this->managequota . 'p' . $projectId ) );
+
 					AIWP_Tools::set_cache( $serial, $data, 55 );
+
 				} else {
+
 					$data = $transient;
+
 				}
 			} catch ( GoogleServiceException $e ) {
 				$timeout = $this->get_timeouts( 'midnight' );
@@ -984,9 +1255,11 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				AIWP_Tools::set_error( $e, $timeout );
 				return $e->getCode();
 			}
+
 			if ( $data->getRows() < 1 ) {
 				return - 21;
 			}
+
 			$i = 0;
 			$aiwp_data = $data;
 			foreach ( $data->getRows() as $row ) {
@@ -994,9 +1267,12 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				$aiwp_data->rows[$i] = array_map( 'esc_html', $strip );
 				$i++;
 			}
+
 			$this->aiwp->config->options['api_backoff'] = 0;
 			$this->aiwp->config->set_plugin_options();
+
 			return array( $aiwp_data );
+
 		}
 
 		/**
@@ -1011,12 +1287,14 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 * 		$to
 		 * @param
 		 * 		$filter
-		 * @return number|Deconf_Service_Analytics_GaData
+		 * @return number|Google\Service\Analytics\GaData
 		 */
 		public function get( $projectId, $query, $from = false, $to = false, $filter = '', $metric = 'sessions' ) {
-			if ( empty( $projectId ) || ! is_numeric( $projectId ) ) {
+
+			if ( empty( $projectId ) ) {
 				wp_die( - 26 );
 			}
+
 			if ( in_array( $query, array( 'sessions', 'users', 'organicSearches', 'visitBounceRate', 'pageviews', 'uniquePageviews' ) ) ) {
 				return $this->get_areachart_data( $projectId, $from, $to, $query, $filter );
 			}
@@ -1048,7 +1326,9 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			if ( in_array( $query, array( 'medium', 'visitorType', 'socialNetwork', 'source', 'browser', 'operatingSystem', 'screenResolution', 'mobileDeviceBranding' ) ) ) {
 				return $this->get_piechart_data( $projectId, $from, $to, $query, $metric, $filter );
 			}
+
 			wp_die( - 27 );
+
 		}
 	}
 }

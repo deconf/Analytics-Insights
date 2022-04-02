@@ -51,15 +51,21 @@ if ( ! class_exists( 'AIWP_Frontend_Ajax' ) ) {
 			if ( ! AIWP_Tools::check_roles( $this->aiwp->config->options['access_front'] ) || 0 == $this->aiwp->config->options['frontend_item_reports'] ) {
 				wp_die( - 31 );
 			}
-			if ( $this->aiwp->config->options['token'] && $this->aiwp->config->options['tableid_jail'] ) {
+			$reporting_ready = $this->aiwp->config->options['tableid_jail'] || ($this->aiwp->config->options['reporting_type'] && $this->aiwp->config->options['webstream_jail'] );
+			if ( $this->aiwp->config->options['token'] && $reporting_ready ) {
 				if ( null === $this->aiwp->gapi_controller ) {
 					$this->aiwp->gapi_controller = new AIWP_GAPI_Controller();
 				}
 			} else {
 				wp_die( - 24 );
 			}
-			if ( $this->aiwp->config->options['tableid_jail'] ) {
-				$projectId = $this->aiwp->config->options['tableid_jail'];
+			$reporting_ready = $this->aiwp->config->options['tableid_jail'] || ( $this->aiwp->config->options['reporting_type'] && $this->aiwp->config->options['webstream_jail'] );
+			if ( $reporting_ready ) {
+				if ($this->aiwp->config->options['reporting_type']){
+					$projectId = $this->aiwp->config->options['webstream_jail'];
+				} else {
+					$projectId = $this->aiwp->config->options['tableid_jail'];
+				}
 			} else {
 				wp_die( - 26 );
 			}
@@ -77,7 +83,7 @@ if ( ! class_exists( 'AIWP_Frontend_Ajax' ) ) {
 				$filter = $filter . $profile_info[6];
 			}
 			// Encode URL
-			$filter = rawurlencode( rawurldecode( $filter ) );
+			//$filter = rawurlencode( rawurldecode( $filter ) );
 			$queries = explode( ',', $query );
 			$results = array();
 			foreach ( $queries as $value ) {
@@ -117,14 +123,19 @@ if ( ! class_exists( 'AIWP_Frontend_Ajax' ) ) {
 			if ( ob_get_length() ) {
 				ob_clean();
 			}
-			if ( $this->aiwp->config->options['token'] && $this->aiwp->config->options['tableid_jail'] ) {
+			$reporting_ready = $this->aiwp->config->options['tableid_jail'] || ( $this->aiwp->config->options['reporting_type'] && $this->aiwp->config->options['webstream_jail'] );
+			if ( $reporting_ready ) {
 				if ( null === $this->aiwp->gapi_controller ) {
 					$this->aiwp->gapi_controller = new AIWP_GAPI_Controller();
 				}
 			} else {
 				wp_die( - 24 );
 			}
-			$projectId = $this->aiwp->config->options['tableid_jail'];
+			if ($this->aiwp->config->options['reporting_type']){
+				$projectId = $this->aiwp->config->options['webstream_jail'];
+			} else {
+				$projectId = $this->aiwp->config->options['tableid_jail'];
+			}
 			$profile_info = AIWP_Tools::get_selected_profile( $this->aiwp->config->options['ga_profiles_list'], $projectId );
 			if ( isset( $profile_info[4] ) ) {
 				$this->aiwp->gapi_controller->timeshift = $profile_info[4];

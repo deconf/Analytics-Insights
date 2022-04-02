@@ -46,7 +46,7 @@ if ( ! class_exists( 'AIWP_Tracking' ) ) {
 			if ( AIWP_Tools::check_roles( $this->aiwp->config->options['track_exclude'], true ) || ( $this->aiwp->config->options['superadmin_tracking'] && current_user_can( 'manage_network' ) ) ) {
 				return;
 			}
-			if ( ( 'globalsitetag' == $this->aiwp->config->options['tracking_type'] || 'dualtracking' == $this->aiwp->config->options['tracking_type'] ) && $this->aiwp->config->options['tableid_jail'] ) {
+			if ( ( 'ga4tracking' == $this->aiwp->config->options['tracking_type'] || 'globalsitetag' == $this->aiwp->config->options['tracking_type'] || 'dualtracking' == $this->aiwp->config->options['tracking_type'] ) && $this->aiwp->config->options['tableid_jail'] ) {
 				// Global Site Tag (gtag.js)
 				require_once 'tracking-analytics.php';
 					if ( $this->aiwp->config->options['amp_tracking_analytics'] ) {

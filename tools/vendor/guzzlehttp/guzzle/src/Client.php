@@ -428,7 +428,6 @@ class Client implements ClientInterface
                         . base64_encode("$value[0]:$value[1]");
                     break;
                 case 'digest':
-                    // @todo: Do not rely on curl
                     $options['curl'][CURLOPT_HTTPAUTH] = CURLAUTH_DIGEST;
                     $options['curl'][CURLOPT_USERPWD] = "$value[0]:$value[1]";
                     break;

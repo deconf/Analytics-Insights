@@ -61,6 +61,7 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 								'ga_dnt_optout',
 								'tm_optout',
 								'tm_dnt_optout',
+								'reporting_type',
 			);
 			foreach ( $numerics as $key ) {
 				if ( isset( $options[$key] ) ) {
@@ -251,6 +252,7 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 								'frontend_item_reports',
 								'tm_optout', //v5.3.1.2
 								'tm_dnt_optout', //v5.3.1.2
+								'reporting_type', //v5.6
 			);
 			foreach ( $zeros as $key ) {
 				if ( ! isset( $this->options[$key] ) ) {
@@ -372,6 +374,15 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 				$this->options['theme_color'] = '#1e73be';
 				$flag = true;
 			}
+			if ( ! isset( $this->options['reporting_type'] ) ) { // v5.5.6
+				$this->options['reporting_type'] = 0;
+				$flag = true;
+			}
+
+			// @todo: switch between Data API and Reporting v4 API, do not use in production!
+			//$this->options['reporting_type'] = 0;
+			//$flag = true;
+
 			if ( $flag ) {
 				$this->set_plugin_options( false );
 			}

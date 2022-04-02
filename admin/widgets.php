@@ -33,15 +33,25 @@ if ( ! class_exists( 'AIWP_Backend_Widgets' ) ) {
 				return;
 			}
 			if ( current_user_can( 'manage_options' ) ) {
-				if ( $this->aiwp->config->options['tableid_jail'] ) {
-					$projectId = $this->aiwp->config->options['tableid_jail'];
+				$reporting_ready = $this->aiwp->config->options['tableid_jail'] || ( $this->aiwp->config->options['reporting_type'] && $this->aiwp->config->options['webstream_jail'] );
+				if ( $reporting_ready ) {
+					if ($this->aiwp->config->options['reporting_type']){
+						$projectId = $this->aiwp->config->options['webstream_jail'];
+					} else {
+						$projectId = $this->aiwp->config->options['tableid_jail'];
+					}
 				} else {
 					echo '<p>' . __( "An admin should asign a default Google Analytics Profile.", 'analytics-insights' ) . '</p><form action="' . menu_page_url( 'aiwp_settings', false ) . '" method="POST">' . get_submit_button( __( "Select Domain", 'analytics-insights' ), 'secondary' ) . '</form>';
 					return;
 				}
 			} else {
-				if ( $this->aiwp->config->options['tableid_jail'] ) {
-					$projectId = $this->aiwp->config->options['tableid_jail'];
+				$reporting_ready = $this->aiwp->config->options['tableid_jail'] || ( $this->aiwp->config->options['reporting_type'] && $this->aiwp->config->options['webstream_jail'] );
+				if ( $reporting_ready ) {
+					if ($this->aiwp->config->options['reporting_type']){
+						$projectId = $this->aiwp->config->options['webstream_jail'];
+					} else {
+						$projectId = $this->aiwp->config->options['tableid_jail'];
+					}
 				} else {
 					echo '<p>' . __( "An admin should asign a default Google Analytics Profile.", 'analytics-insights' ) . '</p><form action="' . menu_page_url( 'aiwp_settings', false ) . '" method="POST">' . get_submit_button( __( "Select Domain", 'analytics-insights' ), 'secondary' ) . '</form>';
 					return;

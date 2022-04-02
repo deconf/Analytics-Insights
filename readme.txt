@@ -1,10 +1,10 @@
-=== Analytics Insights - Google Analytics, AMP Analytics, Stats ===
+=== Analytics Insights for Google Analytics (AIWP) ===
 Contributors: deconf
 Donate link: https://deconf.com/donate/
 Tags: analytics,google analytics,google analytics code,google analytics dashboard,google analytics plugin,google analytics tracking code,google analytics widget,wordpress analytics
 Requires at least: 3.5
 Tested up to: 5.9
-Stable tag: 5.5.5
+Stable tag: 5.6
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -52,6 +52,10 @@ This plugin is fully compatible with multisite network installs. Allows using mu
 
 No, once the plugin is authorized and a default domain is selected the Google Analytics tracking code is automatically inserted in all webpages.
 
+= Is Google Analytics 4 tracking supported? =
+
+Yes, you can use Google Analytics 4 properties and/or Universal Analytics properties for tracking, both are supported. 
+
 = How can I suggest a new feature, contribute or report a bug? =
 
 You can submit pull requests, feature requests, and bug reports on [our GitHub repository](https://github.com/deconf/analytics-insights).
@@ -78,6 +82,20 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 
 [AIWP v5.4 release notes](https://deconf.com/analytics-insights-for-wordpress/)
 
+= 5.6 (2022.02.14) =
+* Enhancements:
+	* switching all reports to Google Analytics Reporting v4 API for an easier migration to Google Analytics Data API
+	* preparing support for Google Analytics 4 reports
+	* Global Site Tag is now the default tracking method on new installations
+* Bug Fixes:
+	* fix frontend per page Google Analytics reports  
+	
+= 5.5.6 (2022.03.31) =
+* Bug Fixes:
+	* Google Analytics 4 events tracking fix
+* Security:
+	* Google Analytics library update
+	
 = 5.5.5 (2022.03.05) =
 * Bug Fixes:
 	* update and multiple fixes for Google Analytics Admin service 

@@ -17,12 +17,12 @@ if ( ! class_exists( 'AIWP_Tracking_TagManager_Base' ) ) {
 
 		protected $datalayer;
 
-		protected $uaid;
+		protected $gaid;
 
 		public function __construct() {
 			$this->aiwp = AIWP();
 			$profile = AIWP_Tools::get_selected_profile( $this->aiwp->config->options['ga_profiles_list'], $this->aiwp->config->options['tableid_jail'] );
-			$this->uaid = sanitize_text_field( $profile[2] );
+			$this->gaid = sanitize_text_field( $profile[2] );
 		}
 
 		/**
@@ -139,8 +139,8 @@ if ( ! class_exists( 'AIWP_Tracking_TagManager' ) ) {
 			} else {
 				$vars = "{}";
 			}
-			if ( ( $this->aiwp->config->options['tm_optout'] || $this->aiwp->config->options['tm_dnt_optout'] ) && ! empty( $this->uaid ) ) {
-				AIWP_Tools::load_view( 'front/views/analytics-optout-code.php', array( 'uaid' => $this->uaid, 'gaDntOptout' => $this->aiwp->config->options['tm_dnt_optout'], 'gaOptout' => $this->aiwp->config->options['tm_optout'] ) );
+			if ( ( $this->aiwp->config->options['tm_optout'] || $this->aiwp->config->options['tm_dnt_optout'] ) && ! empty( $this->gaid ) ) {
+				AIWP_Tools::load_view( 'front/views/analytics-optout-code.php', array( 'gaid' => $this->gaid, 'gaDntOptout' => $this->aiwp->config->options['tm_dnt_optout'], 'gaOptout' => $this->aiwp->config->options['tm_optout'] ) );
 			}
 			AIWP_Tools::load_view( 'front/views/tagmanager-code.php', array( 'containerid' => $this->aiwp->config->options['web_containerid'], 'vars' => $vars ) );
 		}

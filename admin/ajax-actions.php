@@ -63,7 +63,8 @@ if ( ! class_exists( 'AIWP_Backend_Ajax' ) ) {
 			if ( ! ( AIWP_Tools::check_roles( $this->aiwp->config->options['access_back'] ) && ( ( 1 == $this->aiwp->config->options['backend_item_reports'] ) || ( 1 == $this->aiwp->config->options['dashboard_widget'] ) ) ) ) {
 				wp_die( - 31 );
 			}
-			if ( $this->aiwp->config->options['token'] && $this->aiwp->config->options['tableid_jail'] && $from && $to ) {
+			$reporting_ready = $this->aiwp->config->options['tableid_jail'] || ( $this->aiwp->config->options['reporting_type'] && $this->aiwp->config->options['webstream_jail'] );
+			if ( $this->aiwp->config->options['token'] && $reporting_ready && $from && $to ) {
 				if ( null === $this->aiwp->gapi_controller ) {
 					$this->aiwp->gapi_controller = new AIWP_GAPI_Controller();
 				}
@@ -71,7 +72,11 @@ if ( ! class_exists( 'AIWP_Backend_Ajax' ) ) {
 				wp_die( - 24 );
 			}
 			if ( false == $projectId ) {
-				$projectId = $this->aiwp->config->options['tableid_jail'];
+				if ( $this->aiwp->config->options['reporting_type'] ){
+					$projectId = $this->aiwp->config->options['webstream_jail'];
+				} else {
+					$projectId = $this->aiwp->config->options['tableid_jail'];
+				}
 			}
 			$profile_info = AIWP_Tools::get_selected_profile( $this->aiwp->config->options['ga_profiles_list'], $projectId );
 			if ( isset( $profile_info[4] ) ) {
@@ -93,7 +98,7 @@ if ( ! class_exists( 'AIWP_Backend_Ajax' ) ) {
 					$filter = $filter . $profile_info[6];
 				}
 				// Encode URL
-				$filter = rawurlencode( rawurldecode( $filter ) );
+				//$filter = rawurlencode( rawurldecode( $filter ) );
 			} else {
 				$filter = false;
 			}
