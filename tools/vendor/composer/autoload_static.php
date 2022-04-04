@@ -4,17 +4,17 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit0f198ae42135ab8a4725399d5890cbbb
+class ComposerStaticInit6346523eb4a11805514f3cda9f45ea39
 {
     public static $files = array (
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
-        'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
         '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
+        'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
         'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
-        '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
+        '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         '1f87db08236948d07391152dccb70f04' => __DIR__ . '/..' . '/google/apiclient-services/autoload.php',
         'a8d3953fd9959404dd22d3dfcd0a79f0' => __DIR__ . '/..' . '/google/apiclient/src/aliases.php',
     );
@@ -165,9 +165,6 @@ class ComposerStaticInit0f198ae42135ab8a4725399d5890cbbb
         'Google\\Auth\\ProjectIdProviderInterface' => __DIR__ . '/..' . '/google/auth/src/ProjectIdProviderInterface.php',
         'Google\\Auth\\ServiceAccountSignerTrait' => __DIR__ . '/..' . '/google/auth/src/ServiceAccountSignerTrait.php',
         'Google\\Auth\\SignBlobInterface' => __DIR__ . '/..' . '/google/auth/src/SignBlobInterface.php',
-        'Google\\Auth\\Subscriber\\AuthTokenSubscriber' => __DIR__ . '/..' . '/google/auth/src/Subscriber/AuthTokenSubscriber.php',
-        'Google\\Auth\\Subscriber\\ScopedAccessTokenSubscriber' => __DIR__ . '/..' . '/google/auth/src/Subscriber/ScopedAccessTokenSubscriber.php',
-        'Google\\Auth\\Subscriber\\SimpleSubscriber' => __DIR__ . '/..' . '/google/auth/src/Subscriber/SimpleSubscriber.php',
         'Google\\Auth\\UpdateMetadataInterface' => __DIR__ . '/..' . '/google/auth/src/UpdateMetadataInterface.php',
         'Google\\Client' => __DIR__ . '/..' . '/google/apiclient/src/Client.php',
         'Google\\Collection' => __DIR__ . '/..' . '/google/apiclient/src/Collection.php',
@@ -505,6 +502,7 @@ class ComposerStaticInit0f198ae42135ab8a4725399d5890cbbb
         'Google\\Service\\GoogleAnalyticsAdmin\\Resource\\PropertiesCustomDimensions' => __DIR__ . '/..' . '/google/apiclient-services/src/GoogleAnalyticsAdmin/Resource/PropertiesCustomDimensions.php',
         'Google\\Service\\GoogleAnalyticsAdmin\\Resource\\PropertiesCustomMetrics' => __DIR__ . '/..' . '/google/apiclient-services/src/GoogleAnalyticsAdmin/Resource/PropertiesCustomMetrics.php',
         'Google\\Service\\GoogleAnalyticsAdmin\\Resource\\PropertiesDataStreams' => __DIR__ . '/..' . '/google/apiclient-services/src/GoogleAnalyticsAdmin/Resource/PropertiesDataStreams.php',
+        'Google\\Service\\GoogleAnalyticsAdmin\\Resource\\PropertiesDataStreamsMeasurementProtocolSecrets' => __DIR__ . '/..' . '/google/apiclient-services/src/GoogleAnalyticsAdmin/Resource/PropertiesDataStreamsMeasurementProtocolSecrets.php',
         'Google\\Service\\GoogleAnalyticsAdmin\\Resource\\PropertiesDisplayVideo360AdvertiserLinkProposals' => __DIR__ . '/..' . '/google/apiclient-services/src/GoogleAnalyticsAdmin/Resource/PropertiesDisplayVideo360AdvertiserLinkProposals.php',
         'Google\\Service\\GoogleAnalyticsAdmin\\Resource\\PropertiesDisplayVideo360AdvertiserLinks' => __DIR__ . '/..' . '/google/apiclient-services/src/GoogleAnalyticsAdmin/Resource/PropertiesDisplayVideo360AdvertiserLinks.php',
         'Google\\Service\\GoogleAnalyticsAdmin\\Resource\\PropertiesFirebaseLinks' => __DIR__ . '/..' . '/google/apiclient-services/src/GoogleAnalyticsAdmin/Resource/PropertiesFirebaseLinks.php',
@@ -516,18 +514,31 @@ class ComposerStaticInit0f198ae42135ab8a4725399d5890cbbb
         'Google\\Service\\GoogleAnalyticsAdmin\\Resource\\PropertiesWebDataStreamsMeasurementProtocolSecrets' => __DIR__ . '/..' . '/google/apiclient-services/src/GoogleAnalyticsAdmin/Resource/PropertiesWebDataStreamsMeasurementProtocolSecrets.php',
         'Google\\Service\\Resource' => __DIR__ . '/..' . '/google/apiclient/src/Service/Resource.php',
         'Google\\Service\\SearchConsole' => __DIR__ . '/..' . '/google/apiclient-services/src/SearchConsole.php',
+        'Google\\Service\\SearchConsole\\AmpInspectionResult' => __DIR__ . '/..' . '/google/apiclient-services/src/SearchConsole/AmpInspectionResult.php',
+        'Google\\Service\\SearchConsole\\AmpIssue' => __DIR__ . '/..' . '/google/apiclient-services/src/SearchConsole/AmpIssue.php',
         'Google\\Service\\SearchConsole\\ApiDataRow' => __DIR__ . '/..' . '/google/apiclient-services/src/SearchConsole/ApiDataRow.php',
         'Google\\Service\\SearchConsole\\ApiDimensionFilter' => __DIR__ . '/..' . '/google/apiclient-services/src/SearchConsole/ApiDimensionFilter.php',
         'Google\\Service\\SearchConsole\\ApiDimensionFilterGroup' => __DIR__ . '/..' . '/google/apiclient-services/src/SearchConsole/ApiDimensionFilterGroup.php',
         'Google\\Service\\SearchConsole\\BlockedResource' => __DIR__ . '/..' . '/google/apiclient-services/src/SearchConsole/BlockedResource.php',
+        'Google\\Service\\SearchConsole\\DetectedItems' => __DIR__ . '/..' . '/google/apiclient-services/src/SearchConsole/DetectedItems.php',
         'Google\\Service\\SearchConsole\\Image' => __DIR__ . '/..' . '/google/apiclient-services/src/SearchConsole/Image.php',
+        'Google\\Service\\SearchConsole\\IndexStatusInspectionResult' => __DIR__ . '/..' . '/google/apiclient-services/src/SearchConsole/IndexStatusInspectionResult.php',
+        'Google\\Service\\SearchConsole\\InspectUrlIndexRequest' => __DIR__ . '/..' . '/google/apiclient-services/src/SearchConsole/InspectUrlIndexRequest.php',
+        'Google\\Service\\SearchConsole\\InspectUrlIndexResponse' => __DIR__ . '/..' . '/google/apiclient-services/src/SearchConsole/InspectUrlIndexResponse.php',
+        'Google\\Service\\SearchConsole\\Item' => __DIR__ . '/..' . '/google/apiclient-services/src/SearchConsole/Item.php',
         'Google\\Service\\SearchConsole\\MobileFriendlyIssue' => __DIR__ . '/..' . '/google/apiclient-services/src/SearchConsole/MobileFriendlyIssue.php',
+        'Google\\Service\\SearchConsole\\MobileUsabilityInspectionResult' => __DIR__ . '/..' . '/google/apiclient-services/src/SearchConsole/MobileUsabilityInspectionResult.php',
+        'Google\\Service\\SearchConsole\\MobileUsabilityIssue' => __DIR__ . '/..' . '/google/apiclient-services/src/SearchConsole/MobileUsabilityIssue.php',
         'Google\\Service\\SearchConsole\\ResourceIssue' => __DIR__ . '/..' . '/google/apiclient-services/src/SearchConsole/ResourceIssue.php',
         'Google\\Service\\SearchConsole\\Resource\\Searchanalytics' => __DIR__ . '/..' . '/google/apiclient-services/src/SearchConsole/Resource/Searchanalytics.php',
         'Google\\Service\\SearchConsole\\Resource\\Sitemaps' => __DIR__ . '/..' . '/google/apiclient-services/src/SearchConsole/Resource/Sitemaps.php',
         'Google\\Service\\SearchConsole\\Resource\\Sites' => __DIR__ . '/..' . '/google/apiclient-services/src/SearchConsole/Resource/Sites.php',
+        'Google\\Service\\SearchConsole\\Resource\\UrlInspection' => __DIR__ . '/..' . '/google/apiclient-services/src/SearchConsole/Resource/UrlInspection.php',
+        'Google\\Service\\SearchConsole\\Resource\\UrlInspectionIndex' => __DIR__ . '/..' . '/google/apiclient-services/src/SearchConsole/Resource/UrlInspectionIndex.php',
         'Google\\Service\\SearchConsole\\Resource\\UrlTestingTools' => __DIR__ . '/..' . '/google/apiclient-services/src/SearchConsole/Resource/UrlTestingTools.php',
         'Google\\Service\\SearchConsole\\Resource\\UrlTestingToolsMobileFriendlyTest' => __DIR__ . '/..' . '/google/apiclient-services/src/SearchConsole/Resource/UrlTestingToolsMobileFriendlyTest.php',
+        'Google\\Service\\SearchConsole\\RichResultsInspectionResult' => __DIR__ . '/..' . '/google/apiclient-services/src/SearchConsole/RichResultsInspectionResult.php',
+        'Google\\Service\\SearchConsole\\RichResultsIssue' => __DIR__ . '/..' . '/google/apiclient-services/src/SearchConsole/RichResultsIssue.php',
         'Google\\Service\\SearchConsole\\RunMobileFriendlyTestRequest' => __DIR__ . '/..' . '/google/apiclient-services/src/SearchConsole/RunMobileFriendlyTestRequest.php',
         'Google\\Service\\SearchConsole\\RunMobileFriendlyTestResponse' => __DIR__ . '/..' . '/google/apiclient-services/src/SearchConsole/RunMobileFriendlyTestResponse.php',
         'Google\\Service\\SearchConsole\\SearchAnalyticsQueryRequest' => __DIR__ . '/..' . '/google/apiclient-services/src/SearchConsole/SearchAnalyticsQueryRequest.php',
@@ -535,6 +546,7 @@ class ComposerStaticInit0f198ae42135ab8a4725399d5890cbbb
         'Google\\Service\\SearchConsole\\SitemapsListResponse' => __DIR__ . '/..' . '/google/apiclient-services/src/SearchConsole/SitemapsListResponse.php',
         'Google\\Service\\SearchConsole\\SitesListResponse' => __DIR__ . '/..' . '/google/apiclient-services/src/SearchConsole/SitesListResponse.php',
         'Google\\Service\\SearchConsole\\TestStatus' => __DIR__ . '/..' . '/google/apiclient-services/src/SearchConsole/TestStatus.php',
+        'Google\\Service\\SearchConsole\\UrlInspectionResult' => __DIR__ . '/..' . '/google/apiclient-services/src/SearchConsole/UrlInspectionResult.php',
         'Google\\Service\\SearchConsole\\WmxSite' => __DIR__ . '/..' . '/google/apiclient-services/src/SearchConsole/WmxSite.php',
         'Google\\Service\\SearchConsole\\WmxSitemap' => __DIR__ . '/..' . '/google/apiclient-services/src/SearchConsole/WmxSitemap.php',
         'Google\\Service\\SearchConsole\\WmxSitemapContent' => __DIR__ . '/..' . '/google/apiclient-services/src/SearchConsole/WmxSitemapContent.php',
@@ -807,9 +819,9 @@ class ComposerStaticInit0f198ae42135ab8a4725399d5890cbbb
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit0f198ae42135ab8a4725399d5890cbbb::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit0f198ae42135ab8a4725399d5890cbbb::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit0f198ae42135ab8a4725399d5890cbbb::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit6346523eb4a11805514f3cda9f45ea39::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit6346523eb4a11805514f3cda9f45ea39::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit6346523eb4a11805514f3cda9f45ea39::$classMap;
 
         }, null, ClassLoader::class);
     }
