@@ -380,8 +380,8 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 			}
 
 			// @todo: switch between Data API and Reporting v4 API, do not use in production!
-			//$this->options['reporting_type'] = 0;
-			//$flag = true;
+			$this->options['reporting_type'] = 0;
+			$flag = true;
 
 			if ( $flag ) {
 				$this->set_plugin_options( false );

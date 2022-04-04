@@ -302,5 +302,33 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 			}
 		}
 
+		/**
+		 * Dimensions and metric mapping from GA3 to GA4
+		 * @param string $value
+		 * @return string
+		 */
+		public static function ga3_ga4_mapping( $value ) {
+			$value = str_replace('ga:', '', $value);
+			$list = [
+				'users' => 'totalUsers',
+				'sessionDuration' => 'userEngagementDuration',
+				'fullReferrer' => 'pageReferrer',
+				'source' => 'sessionSource',
+				'medium' => 'sessionMedium',
+				'dataSource' => 'platform',
+				'pagePath' => 'pagePathPlusQueryString',
+				'pageviews' => 'screenPageViews',
+				'pageviewsPerSession' => 'screenPageViewsPerSession',
+				'timeOnPage' => 'userEngagementDuration',
+				'channelGrouping' => 'sessionDefaultChannelGrouping',
+				'dayOfWeekName' => 'dayOfWeek',
+			];
+
+			if ( isset( $list[ $value ] ) ){
+				return $list[ $value ];
+			} else {
+				return $value;
+			}
+		}
 	}
 }

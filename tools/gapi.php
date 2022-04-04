@@ -355,13 +355,15 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 public function ua_refresh_profiles() {
 
 			try {
+
 				$ga_profiles_list = array();
 				$startindex = 1;
 				$totalresults = 65535; // use something big
 
+				$this->service = new Google\Service\Analytics( $this->client );
+
 				while ( $startindex < $totalresults ) {
 
-					$this->service = new Google\Service\Analytics( $this->client );
 					$profiles = $this->service->management_profiles->listManagementProfiles( '~all', '~all', array( 'start-index' => $startindex ) );
 					$items = $profiles->getItems();
 					$totalresults = $profiles->getTotalResults();
@@ -442,7 +444,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
 
 		/**
-		 * Get and cache Core Reports
+		 * Get and cache Google Analytics 3 Core Reports
 		 *
 		 * @param
 		 *            $projecId
@@ -471,113 +473,123 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 						return - 23;
 					}
 
-					if ( $this->aiwp->config->options['reporting_type'] ){
+					$this->service_ga3_reporting = new Google\Service\AnalyticsReporting( $this->client );
 
-						//$projectIdArr = explode( '/dataStreams/',$projectId );
-						//$projectId = $projectIdArr[0];
+					// Create the DateRange object.
+					$dateRange = new Google\Service\AnalyticsReporting\DateRange();
+					$dateRange->setStartDate( $from );
+					$dateRange->setEndDate( $to );
 
-						$this->service_ga4_data = new Google\Service\AnalyticsData( $this->client );
-
-					} else {
-
-						// Create the DateRange object.
-						$dateRange = new Google\Service\AnalyticsReporting\DateRange();
-						$dateRange->setStartDate( $from );
-						$dateRange->setEndDate( $to );
-
-						// Create the Metrics object.
-						if ( is_array( $metrics ) ){
-							foreach ( $metrics as $value ){
-								$metricobj = new Google\Service\AnalyticsReporting\Metric();
-								$metricobj->setExpression( $value );
-								$metric[] = $metricobj;
-							}
-						} else {
+					// Create the Metrics object.
+					if ( is_array( $metrics ) ){
+						foreach ( $metrics as $value ){
 							$metricobj = new Google\Service\AnalyticsReporting\Metric();
-							$metricobj->setExpression( $metrics );
+							$metricobj->setExpression( $value );
 							$metric[] = $metricobj;
 						}
+					} else {
+						$metricobj = new Google\Service\AnalyticsReporting\Metric();
+						$metricobj->setExpression( $metrics );
+						$metric[] = $metricobj;
+					}
 
-						// Create the ReportRequest object.
-						$request = new Google\Service\AnalyticsReporting\ReportRequest();
-						$request->setViewId( $projectId );
-						$request->setDateRanges( $dateRange );
-						$request->setMetrics( $metric );
-						$request->includeEmptyRows = true;
+					// Create the ReportRequest object.
+					$request = new Google\Service\AnalyticsReporting\ReportRequest();
+					$request->setViewId( $projectId );
+					$request->setDateRanges( $dateRange );
+					$request->setMetrics( $metric );
+					$request->setIncludeEmptyRows( true );
 
-						// Create the Dimensions object.
-						if ( $dimensions ){
+					// Create the Dimensions object.
+					if ( $dimensions ){
 
-							if ( is_array( $dimensions ) ){
-								foreach ( $dimensions as $value ){
-									$dimensionobj = new Google\Service\AnalyticsReporting\Dimension();
-									$dimensionobj->setName( $value );
-									$dimension[] = $dimensionobj;
-								}
-							} else {
+						if ( is_array( $dimensions ) ){
+							foreach ( $dimensions as $value ){
 								$dimensionobj = new Google\Service\AnalyticsReporting\Dimension();
-								$dimensionobj->setName( $dimensions );
+								$dimensionobj->setName( $value );
 								$dimension[] = $dimensionobj;
 							}
-
-							$request->setDimensions( $dimension );
+						} else {
+							$dimensionobj = new Google\Service\AnalyticsReporting\Dimension();
+							$dimensionobj->setName( $dimensions );
+							$dimension[] = $dimensionobj;
 						}
 
-						// Create the Filters
-						if ( $filters ) {
+						$request->setDimensions( $dimension );
+					}
 
-							foreach ( $filters as $value ){
-								$dimensionFilterobj = new Google\Service\AnalyticsReporting\DimensionFilter();
-								$dimensionFilterobj->setDimensionName( $value[0] );
-								$dimensionFilterobj->setOperator( $value[1] );
-								$dimensionFilterobj->setExpressions( array( $value[2] ) );
-								$dimensionFilterobj->setNot( $value[3] );
-								$dimensionFilter[] = $dimensionFilterobj;
+					// Create the Filters
+					if ( $filters ) {
+
+						foreach ( $filters as $value ){
+							$dimensionFilterobj = new Google\Service\AnalyticsReporting\DimensionFilter();
+							$dimensionFilterobj->setDimensionName( $value[0] );
+							$dimensionFilterobj->setOperator( $value[1] );
+							$dimensionFilterobj->setExpressions( array( $value[2] ) );
+							$dimensionFilterobj->setNot( $value[3] );
+							$dimensionFilter[] = $dimensionFilterobj;
+						}
+
+						// Create the DimensionFilterClauses
+						$dimensionFilterClause = new Google\Service\AnalyticsReporting\DimensionFilterClause();
+						$dimensionFilterClause->setOperator( 'AND' );
+						$dimensionFilterClause->setFilters( $dimensionFilter );
+
+						$request->setDimensionFilterClauses( array( $dimensionFilterClause ) );
+
+					}
+
+					// Create the Ordering.
+					if ( $sortby ){
+						$ordering = new Google\Service\AnalyticsReporting\OrderBy();
+						$ordering->setOrderType( 'VALUE' );
+						$ordering->setSortOrder( 'DESCENDING' );
+						$ordering->setFieldName( $metrics );
+						$request->setOrderBys( $ordering );
+					}
+
+					$body = new Google\Service\AnalyticsReporting\GetReportsRequest();
+					$body->setReportRequests( array( $request) );
+
+					$response = $this->service_ga3_reporting->reports->batchGet( $body );
+
+					$reports = $response->getReports();
+
+					$dataraw = $reports[0]->getData();
+
+					$data['values'] = array();
+					$data['totals'] = '';
+
+					foreach ( $dataraw->getRows() as $row ) {
+
+						$values = array();
+
+						if ( isset( $row->getDimensions()[0] ) ){
+							foreach ( $row->getDimensions() as $value){
+								$values[] = $value;
 							}
-
-							// Create the DimensionFilterClauses
-							$dimensionFilterClause = new Google\Service\AnalyticsReporting\DimensionFilterClause();
-							$dimensionFilterClause->setOperator( 'AND' );
-							$dimensionFilterClause->setFilters( $dimensionFilter );
-
-							$request->setDimensionFilterClauses( array( $dimensionFilterClause ) );
-
 						}
 
-						// Create the Ordering.
-						if ( $sortby ){
-							$ordering = new Google\Service\AnalyticsReporting\OrderBy();
-							$ordering->setOrderType("VALUE");
-							$ordering->setFieldName( $metrics );
-							$request->setOrderBys( $ordering );
+						if ( isset( $row->getMetrics()[0] ) ){
+							foreach ( $row->getMetrics()[0]->getValues() as $value){
+								$values[] = $value;
+							}
 						}
 
-						$body = new Google\Service\AnalyticsReporting\GetReportsRequest();
-						$body->setReportRequests( array( $request) );
-
-						$this->service_ga3_reporting = new Google\Service\AnalyticsReporting( $this->client );
-
-						$response = $this->service_ga3_reporting->reports->batchGet( $body );
-
-						$reports = $response->getReports();
-
-						$data = $reports[0]->getData();
+						$data['values'][] = $values;
 
 					}
 
-					if ( method_exists( $data, 'getContainsSampledData' ) && $data->getContainsSampledData() ) {
-						$sampling['date'] = date( 'Y-m-d H:i:s' );
-						$sampling['percent'] = number_format( ( $data->getSampleSize() / $data->getSampleSpace() ) * 100, 2 ) . '%';
-						$sampling['sessions'] = $data->getSampleSize() . ' / ' . $data->getSampleSpace();
-						AIWP_Tools::set_cache( 'sampleddata', $sampling, 30 * 24 * 3600 );
-						AIWP_Tools::set_cache( $serial, $data, $this->get_timeouts( 'hourly' ) ); // refresh every hour if data is sampled
-					} else {
-						AIWP_Tools::set_cache( $serial, $data, $this->get_timeouts( $interval ) );
+					if ( isset( $dataraw->getTotals()[0]->getValues()[0] ) ){
+						$data['totals'] = $dataraw->getTotals()[0]->getValues()[0];
 					}
+
+					AIWP_Tools::set_cache( $serial, $data, $this->get_timeouts( $interval ) );
+
 				} else {
 					$data = $transient;
 				}
-			} catch ( GoogleServiceException $e ) {
+			} catch ( Google\Service\Exception $e ) {
 				$timeout = $this->get_timeouts( 'midnight' );
 				AIWP_Tools::set_error( $e, $timeout );
 				return $e->getCode();
@@ -588,12 +600,187 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			}
 			$this->aiwp->config->options['api_backoff'] = 0;
 			$this->aiwp->config->set_plugin_options();
-			if ( $data->getRows() > 0 ) {
-				return $data;
-			} else {
-				$data->rows = array();
-				return $data;
+
+			return $data;
+
+		}
+
+		/**
+		 * Get and cache Google Analtyics 4 Reports
+		 *
+		 * @param
+		 *            $projecId
+		 * @param
+		 *            $from
+		 * @param
+		 *            $to
+		 * @param
+		 *            $metrics
+		 * @param
+		 *            $options
+		 * @param
+		 *            $serial
+		 * @return int|Google\Service\AnalyticsReporting\DateRangeValues
+		 */
+		private function handle_corereports_ga4( $projectId, $from, $to, $metrics, $dimensions, $sortby, $filters, $serial ) {
+			try {
+				if ( 'today' == $from ) {
+					$interval = 'hourly';
+				} else {
+					$interval = 'daily';
+				}
+				$transient = AIWP_Tools::get_cache( $serial );
+				if ( false === $transient ) {
+					if ( $this->gapi_errors_handler() ) {
+						return - 23;
+					}
+
+					$projectIdArr = explode( '/dataStreams/',$projectId );
+					$projectId = $projectIdArr[0];
+
+					$this->service_ga4_data = new Google\Service\AnalyticsData( $this->client );
+
+					// Create the DateRange object.
+					$dateRange = new Google\Service\AnalyticsData\DateRange();
+					$dateRange->setStartDate( $from );
+					$dateRange->setEndDate( $to );
+
+					// Create the Metrics object.
+					if ( is_array( $metrics ) ){
+						foreach ( $metrics as $value ){
+							$value = AIWP_Tools::ga3_ga4_mapping( $value );
+							$metricobj = new Google\Service\AnalyticsData\Metric();
+							$metricobj->setName( $value );
+							$metric[] = $metricobj;
+						}
+					} else {
+						$metrics = AIWP_Tools::ga3_ga4_mapping( $metrics );
+						$metricobj = new Google\Service\AnalyticsData\Metric();
+						$metricobj->setName( $metrics );
+						$metric[] = $metricobj;
+					}
+
+					// Create the ReportRequest object.
+					$request = new Google\Service\AnalyticsData\RunReportRequest();
+					$request->setProperty( $projectId );
+					$request->setDateRanges( $dateRange );
+					$request->setMetrics( $metric );
+					$request->setKeepEmptyRows( true );
+
+					// Create the Dimensions object.
+					if ( $dimensions ){
+
+						if ( is_array( $dimensions ) ){
+							foreach ( $dimensions as $value ){
+								$value = AIWP_Tools::ga3_ga4_mapping( $value );
+								$dimensionobj = new Google\Service\AnalyticsData\Dimension();
+								$dimensionobj->setName( $value );
+								$dimension[] = $dimensionobj;
+							}
+						} else {
+							$dimensions = AIWP_Tools::ga3_ga4_mapping( $dimensions );
+							$dimensionobj = new Google\Service\AnalyticsData\Dimension();
+							$dimensionobj->setName( $dimensions );
+							$dimension[] = $dimensionobj;
+						}
+
+						$request->setDimensions( $dimension );
+					}
+
+					// Create the Filters
+					if ( $filters ) {
+
+						foreach ( $filters as $value ){
+							$dimensionFilter = new Google\Service\AnalyticsData\Filter();
+							$value[0] = AIWP_Tools::ga3_ga4_mapping( $value[0] );
+							$dimensionFilter->setFieldName( $value[0] );
+							$dimensionFilter->setStringFilter( $value[2] );
+							$dimensionFilterExpressionobj = new Google\Service\AnalyticsData\FilterExpression();
+							$dimensionFilterExpressionobj->setFilter($dimensionFilter);
+							if ( $value[3] ){
+								$dimensionFilterExpression[] = $dimensionFilterExpressionobj->setNotExpression($dimensionFilterExpressionobj);
+							}
+						}
+
+						$dimensionFilterExpressionList = new Google\Service\AnalyticsData\FilterExpressionList();
+						$dimensionFilterExpressionList->setExpressions($dimensionFilterExpression);
+
+						$request->setDimensionFilter($dimensionFilterExpressionList);
+
+					}
+
+					// Create the Ordering.
+					if ( $sortby ){
+						$ordering = new Google\Service\AnalyticsData\OrderBy();
+						$metrics = AIWP_Tools::ga3_ga4_mapping( $metrics );
+						$ordering->setMetric( $metrics );
+						$ordering->setDesc( true );
+						$request->setOrderBys( $ordering );
+					} else {
+						if ( isset( $dimension[0] ) ){
+							$dimensionOrderBy = new Google\Service\AnalyticsData\DimensionOrderBy();
+							$dimensionOrderBy->setDimensionName($dimension[0]->getName());
+							$dimensionOrderBy->setOrderType( 'NUMERIC' );
+							$ordering = new Google\Service\AnalyticsData\OrderBy();
+							$ordering->setDimension( $dimensionOrderBy );
+							$ordering->setDesc( false );
+							$request->setOrderBys( $ordering );
+						}
+					}
+
+					$response = $this->service_ga4_data->properties->runReport($projectId, $request);
+
+					$dataraw = $response;
+
+					$data['values'] = array();
+					$data['totals'] = '';
+
+					foreach ( $dataraw->getRows() as $row ) {
+
+						$values = array();
+
+						if ( isset( $row->getDimensionValues()[0] ) ){
+							foreach ( $row->getDimensionValues() as $item ){
+								$values[] = $item->getValue();
+							}
+						}
+
+						if ( isset( $row->getMetricValues()[0] ) ){
+							foreach ( $row->getMetricValues() as $item){
+								$values[] = $item->getValue();
+							}
+						}
+
+						$data['values'][] = $values;
+
+					}
+
+					//@todo: Fix these totals
+					$data['totals'] = 0;
+
+					//if ( isset( $dataraw->getTotals()[0]->getValues()[0] ) ){
+					//	$data['totals'] = $dataraw->getTotals()[0]->getValues()[0];
+					//}
+
+					AIWP_Tools::set_cache( $serial, $data, $this->get_timeouts( $interval ) );
+
+				} else {
+					$data = $transient;
+				}
+			} catch ( Google\Service\Exception $e ) {
+				$timeout = $this->get_timeouts( 'midnight' );
+				AIWP_Tools::set_error( $e, $timeout );
+				return $e->getCode();
+			} catch ( Exception $e ) {
+				$timeout = $this->get_timeouts( 'midnight' );
+				AIWP_Tools::set_error( $e, $timeout );
+				return $e->getCode();
 			}
+			$this->aiwp->config->options['api_backoff'] = 0;
+			$this->aiwp->config->set_plugin_options();
+
+			return $data;
+
 		}
 
 		/**
@@ -677,33 +864,33 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				return $data;
 			}
 
-			if ( empty( $data->rows ) ) {
+			if ( empty( $data['values'] ) ) {
 				// unable to render it as an Area Chart, returns a numeric value to be handled by reportsx.js
 				return - 21;
 			}
 
 			$aiwp_data = array( array( $dayorhour, $title ) );
 			if ( 'today' == $from || 'yesterday' == $from ) {
-				foreach ( $data->getRows() as $row ) {
-					$aiwp_data[] = array( (int) $row->getDimensions()[0] . ':00', round( $row->getMetrics()[0]->getValues()[0], 2 ) );
+				foreach ( $data['values'] as $row ) {
+					$aiwp_data[] = array( (int) $row[0] . ':00', round( $row[1], 2 ) );
 				}
 			} else if ( '365daysAgo' == $from || '1095daysAgo' == $from ) {
-				foreach ( $data->getRows() as $row ) {
+				foreach ( $data['values'] as $row) {
 					/*
 					 * translators:
 					 * Example: 'F, Y' will become 'November, 2015'
 					 * For details see: http://php.net/manual/en/function.date.php#refsect1-function.date-parameters
 					 */
-					$aiwp_data[] = array( date_i18n( __( 'F, Y', 'analytics-insights' ), strtotime( $row->getDimensions()[0] . '01' ) ), round( $row->getMetrics()[0]->getValues()[0], 2 ) );
+					$aiwp_data[] = array( date_i18n( __( 'F, Y', 'analytics-insights' ), strtotime( $row[0] . '01' ) ), round( $row[2], 2 ) );
 				}
 			} else {
-				foreach ( $data->getRows() as $row ) {
+				foreach ( $data['values'] as $row ) {
 					/*
 					 * translators:
 					 * Example: 'l, F j, Y' will become 'Thusday, November 17, 2015'
 					 * For details see: http://php.net/manual/en/function.date.php#refsect1-function.date-parameters
 					 */
-					$aiwp_data[] = array( date_i18n( __( 'l, F j, Y', 'analytics-insights' ), strtotime( $row->getDimensions()[0] ) ), round( $row->getMetrics()[0]->getValues()[0], 2 ) );
+					$aiwp_data[] = array( date_i18n( __( 'l, F j, Y', 'analytics-insights' ), strtotime( $row[0] ) ), round( $row[2], 2 ) );
 				}
 			}
 
@@ -712,7 +899,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		}
 
 		/**
-		 * Analytics data for Bottom Stats (bottom stats on main report)
+		 * Google Analytics 3 data for Bottom Stats (bottom stats on main report)
 		 *
 		 * @param
 		 *            $projectId
@@ -764,15 +951,84 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				return $data;
 			}
 
+			$aiwp_data = array();
+
+			$aiwp_data = $data['values'][0];
+
+			// i18n support
+			$aiwp_data[0] = isset( $aiwp_data[0] ) ? number_format_i18n( $aiwp_data[0] ) : 0;
+			$aiwp_data[1] = isset( $aiwp_data[1] ) ? number_format_i18n( $aiwp_data[1] ) : 0;
+			$aiwp_data[2] = isset( $aiwp_data[2] ) ? number_format_i18n( $aiwp_data[2] ) : 0;
+			$aiwp_data[3] = isset( $aiwp_data[3] ) ? number_format_i18n( $aiwp_data[3], 2 ) . '%' : '0%';
+			$aiwp_data[4] = isset( $aiwp_data[4] ) ? number_format_i18n( $aiwp_data[4] ) : 0;
+			$aiwp_data[5] = isset( $aiwp_data[5] ) ? number_format_i18n( $aiwp_data[5], 2 ) : 0;
+			$aiwp_data[6] = isset( $aiwp_data[6] ) ? gmdate( "H:i:s", $aiwp_data[6] ) : '00:00:00';
+			$aiwp_data[7] = isset( $aiwp_data[7] ) ? number_format_i18n( $aiwp_data[7], 2 ) : 0;
+
+			if ( $filter ) {
+				$aiwp_data[8] = isset( $aiwp_data[8] ) ? number_format_i18n( $aiwp_data[8], 2 ) . '%' : '0%';
+			} else {
+				$aiwp_data[8] = isset( $aiwp_data[8] ) ? gmdate( "H:i:s", $aiwp_data[8] ) : '00:00:00';
+			}
+
+			return $aiwp_data;
+
+		}
+
+		/**
+		 * Analytics data for Bottom Stats (bottom stats on main report)
+		 *
+		 * @param
+		 *            $projectId
+		 * @param
+		 *            $from
+		 * @param
+		 *            $to
+		 * @param
+		 *            $filter
+		 * @return array|int
+		 */
+		private function get_bottomstats_ga4( $projectId, $from, $to, $filter = '' ) {
+
+			$filters = false;
+
+			if ( $filter ) {
+				$filters[] = array( 'ga:pagePath', 'EXACT', $filter, false );
+				$metrics = array (
+					'ga:sessions',
+					'ga:users',
+					'ga:pageviews',
+					'ga:BounceRate',
+					'averageSessionDuration',
+					'ga:pageviewsPerSession',
+					'userEngagementDuration',
+					'engagementRate',
+				);
+			} else {
+				$metrics = array (
+					'ga:sessions',
+					'ga:users',
+					'ga:pageviews',
+					'ga:BounceRate',
+					'averageSessionDuration',
+					'ga:pageviewsPerSession',
+					'userEngagementDuration',
+					'engagementRate',
+				);
+			}
+
+			$sortby = false;
+
+			$serial = 'qr3_' . $this->get_serial( $projectId . $from . $filter );
+			$data = $this->handle_corereports( $projectId, $from, $to, $metrics, false, $sortby, $filters, $serial );
+
 			if ( is_numeric( $data ) ) {
 				return $data;
 			}
 
 			$aiwp_data = array();
 
-			if ( isset( $data->getRows()[0] ) ) {
-				$aiwp_data=$data->getRows()[0]->getMetrics()[0]->getValues();
-			}
+			$aiwp_data = $data['values'][0];
 
 			// i18n support
 			$aiwp_data[0] = isset( $aiwp_data[0] ) ? number_format_i18n( $aiwp_data[0] ) : 0;
@@ -830,8 +1086,8 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
 			$aiwp_data = array( array( __( "Pages", 'analytics-insights' ), __( ucfirst( $metric ), 'analytics-insights' ) ) );
 
-			foreach ( $data->getRows() as $row ) {
-				$aiwp_data[] = array( esc_html( $row->getDimensions()[0] ), (int) $row->getMetrics()[0]->getValues()[0] );
+			foreach ( $data['values'] as $row ) {
+				$aiwp_data[] = array( esc_html( $row[0] ), (int) $row[1] );
 			}
 
 			return $aiwp_data;
@@ -871,10 +1127,10 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			}
 
 			$aiwp_data = array( array( __( "404 Errors", 'analytics-insights' ), __( ucfirst( $metric ), 'analytics-insights' ) ) );
-			foreach ( $data->getRows() as $row ) {
-				$path = esc_html( $row->getDimensions()[0] );
-				$source = esc_html( $row->getDimensions()[1] );
-				$aiwp_data[] = array( "<strong>" . __( "URI:", 'analytics-insights' ) . "</strong> " . $path . "<br><strong>" . __( "Source:", 'analytics-insights' ) . "</strong> " . $source, (int) $row->getMetrics()[0]->getValues()[0] );
+			foreach ( $data['values'] as $row ) {
+				$path = esc_html( $row[0] );
+				$source = esc_html( $row[1] );
+				$aiwp_data[] = array( "<strong>" . __( "URI:", 'analytics-insights' ) . "</strong> " . $path . "<br><strong>" . __( "Source:", 'analytics-insights' ) . "</strong> " . $source, (int) $row[2] );
 			}
 
 			return $aiwp_data;
@@ -920,8 +1176,8 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
 			$aiwp_data = array( array( __( "Referrers", 'analytics-insights' ), __( ucfirst( $metric ), 'analytics-insights' ) ) );
 
-			foreach ( $data->getRows() as $row ) {
-				$aiwp_data[] = array( esc_html( $row->getDimensions()[0] ), (int) $row->getMetrics()[0]->getValues()[0] );
+			foreach ( $data['values'] as $row ) {
+				$aiwp_data[] = array( esc_html( $row[0] ), (int) $row[1] );
 			}
 
 			return $aiwp_data;
@@ -966,8 +1222,8 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			}
 
 			$aiwp_data = array( array( __( "Searches", 'analytics-insights' ), __( ucfirst( $metric ), 'analytics-insights' ) ) );
-			foreach ( $data->getRows() as $row ) {
-				$aiwp_data[] = array( esc_html( $row->getDimensions()[0] ), (int) $row->getMetrics()[0]->getValues()[0] );
+			foreach ( $data['values'] as $row ) {
+				$aiwp_data[] = array( esc_html( $row[0] ), (int) $row[1] );
 			}
 
 			return $aiwp_data;
@@ -1036,11 +1292,11 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
 			$aiwp_data = array( array( $title, __( ucfirst( $metric ), 'analytics-insights' ) ) );
 
-			foreach ( $data->getRows() as $row ) {
-				if ( isset( $row->getDimensions()[1] ) ) {
-					$aiwp_data[] = array( esc_html( $row->getDimensions()[0] ) . ', ' . esc_html( $row->getDimensions()[1] ), (int) $row->getMetrics()[0]->getValues()[0] );
+			foreach ( $data['values'] as $row ) {
+				if ( isset( $row[2] ) ) {
+					$aiwp_data[] = array( esc_html( $row[0] ) . ', ' . esc_html( $row[1] ), (int) $row[2] );
 				} else {
-					$aiwp_data[] = array( esc_html( $row->getDimensions()[0] ), (int) $row->getMetrics()[0]->getValues()[0] );
+					$aiwp_data[] = array( esc_html( $row[0] ), (int) $row[1] );
 				}
 			}
 
@@ -1085,16 +1341,16 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				return $data;
 			}
 
-			if ( empty( $data->getRows() ) ) {
+			if ( empty( $data['values'] ) ) {
 				// unable to render as an Org Chart, returns a numeric value to be handled by reportsx.js
 				return - 21;
 			}
 
 			$block = ( 'channelGrouping' == $query ) ? __( "Channels", 'analytics-insights' ) : __( "Devices", 'analytics-insights' );
-			$aiwp_data = array( array( '<div style="color:black; font-size:1.1em">' . $block . '</div><div style="color:darkblue; font-size:1.2em">' . (int) $data->getTotals()[0]->getValues()[0] . '</div>', "" ) );
-			foreach ( $data->getRows() as $row ) {
-				$shrink = explode( " ", $row->getDimensions()[0] );
-				$aiwp_data[] = array( '<div style="color:black; font-size:1.1em">' . esc_html( $shrink[0] ) . '</div><div style="color:darkblue; font-size:1.2em">' . (int) $row->getMetrics()[0]->getValues()[0] . '</div>', '<div style="color:black; font-size:1.1em">' . $block . '</div><div style="color:darkblue; font-size:1.2em">' . (int) $data->getTotals()[0]->getValues()[0] . '</div>' );
+			$aiwp_data = array( array( '<div style="color:black; font-size:1.1em">' . $block . '</div><div style="color:darkblue; font-size:1.2em">' . (int) $data['totals'] . '</div>', "" ) );
+			foreach ( $data['values'] as $row ) {
+				$shrink = explode( " ", $row[0] );
+				$aiwp_data[] = array( '<div style="color:black; font-size:1.1em">' . esc_html( $shrink[0] ) . '</div><div style="color:darkblue; font-size:1.2em">' . (int) $row[1] . '</div>', '<div style="color:black; font-size:1.1em">' . $block . '</div><div style="color:darkblue; font-size:1.2em">' . (int) $data['totals'] . '</div>' );
 			}
 
 			return $aiwp_data;
@@ -1153,12 +1409,12 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			$aiwp_data = array( array( __( "Type", 'analytics-insights' ), __( ucfirst( $metric ), 'analytics-insights' ) ) );
 
 			$included = 0;
-			foreach ( $data->getRows() as $row ) {
-					$aiwp_data[] = array( str_replace( "(none)", "direct", esc_html( $row->getDimensions()[0] ) ), (int) $row->getMetrics()[0]->getValues()[0] );
-					$included += $row->getMetrics()[0]->getValues()[0];
+			foreach ( $data['values'] as $row ) {
+					$aiwp_data[] = array( str_replace( "(none)", "direct", esc_html( $row[0] ) ), (int) $row[1] );
+					$included += $row[1];
 			}
 
-			$totals = $data->getTotals()[0]->getValues()[0];
+			$totals = $data['totals'];
 			$others = $totals - $included;
 			if ( $others > 0 ) {
 				$aiwp_data[] = array( __( 'Other', 'analytics-insights' ), $others );
@@ -1201,16 +1457,16 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
 			if ( $anonim ) {
 				$max_array = array();
-				foreach ( $data->getRows() as $row ) {
-					$max_array[] = $row->getMetrics()[0]->getValues()[0];
+				foreach ( $data['values'] as $row ) {
+					$max_array[] = $row[2];
 				}
 				$max = max( $max_array ) ? max( $max_array ) : 1;
 			}
 
-			foreach ( $data->getRows() as $row ) {
-				$aiwp_data[] = array( date_i18n( __( 'l, F j, Y', 'analytics-insights' ), strtotime( $row->getDimensions()[0] .',' . $row->getDimensions()[1] ) ), ( $anonim ? round( $row->getMetrics()[0]->getValues()[0] * 100 / $max, 2 ) : (int) $row->getMetrics()[0]->getValues()[0] ) );
+			foreach ( $data['values'] as $row ) {
+				$aiwp_data[] = array( date_i18n( __( 'l, F j, Y', 'analytics-insights' ), strtotime( $row[0] .',' . $row[1] ) ), ( $anonim ? round( $row[2] * 100 / $max, 2 ) : (int) $row[2] ) );
 			}
-			$totals = $data->getTotals()[0]->getValues()[0];
+			$totals = $data['totals'];
 
 			return array( $aiwp_data, $anonim ? 0 : number_format_i18n( $totals ) );
 
@@ -1237,6 +1493,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					}
 
 					$this->service = new Google\Service\Analytics( $this->client );
+
 					$data = $this->service->data_realtime->get( 'ga:' . $projectId, $metrics, array( 'dimensions' => $dimensions, 'quotaUser' => $this->managequota . 'p' . $projectId ) );
 
 					AIWP_Tools::set_cache( $serial, $data, 55 );

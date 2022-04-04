@@ -330,13 +330,17 @@ final class AIWP_Settings {
 				<select id="tracking_type" name="options[tracking_type]" onchange="this.form.submit()">
 					<?php if ( $aiwp->config->options['tableid_jail'] ) : ?>
 					 <option value="globalsitetag" <?php selected( $options['tracking_type'], 'globalsitetag' ); ?>><?php _e("Google Analytics 3", 'analytics-insights');?></option>
-					 <option value="universal" <?php selected( $options['tracking_type'], 'universal' ); ?>><?php _e("Universal Analytics", 'analytics-insights');?></option>
 					<?php endif; ?>
 					<?php if ( $aiwp->config->options['webstream_jail'] ) : ?>
 					 <option value="ga4tracking" <?php selected( $options['tracking_type'], 'ga4tracking' ); ?>><?php _e("Google Analytics 4", 'analytics-insights');?></option>
+					<?php endif; ?>
+					<?php if ( $aiwp->config->options['webstream_jail'] && $aiwp->config->options['tableid_jail'] ) : ?>
 					 <option value="dualtracking" <?php selected( $options['tracking_type'], 'dualtracking' ); ?>><?php _e("Dual Tracking", 'analytics-insights');?></option>
 					<?php endif; ?>
 					<option value="tagmanager" <?php selected( $options['tracking_type'], 'tagmanager' ); ?>><?php _e("Tag Manager", 'analytics-insights');?></option>
+					<?php if ( $aiwp->config->options['tableid_jail'] ) : ?>
+					 <option value="universal" <?php selected( $options['tracking_type'], 'universal' ); ?>><?php _e("Universal Analytics", 'analytics-insights');?></option>
+					<?php endif; ?>
 					<option value="disabled" <?php selected( $options['tracking_type'], 'disabled' ); ?>><?php _e("Disabled", 'analytics-insights');?></option>
 				</select>
 			</td>
