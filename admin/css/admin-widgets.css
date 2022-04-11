@@ -60,6 +60,14 @@
 	color: #f77149;
 }
 
+.aiwp-tdo-left-ga4 {
+	width: 56%;
+	padding: 16px 0;
+	float: left;
+	text-align: center;
+	color: #f77149;
+}
+
 .aiwp-tdo-right {
 	width: 35%;
 	margin: 0px 10px 0px 0;
@@ -70,7 +78,30 @@
 	display: table;
 }
 
+.aiwp-tdo-right-ga4 {
+	width: 40%;
+	margin: 30px 10px 0px 0;
+	text-align: left;
+	font-weight: normal;
+	vertical-align: middle;
+	float: right;
+	display: table;
+}
+
 .aiwp-online {
+	font-size: 120px;
+	font-weight: normal;
+	line-height: 1em;
+	padding: 20px;
+	margin: 0 auto;
+	width: 80%;
+	-moz-border-radius: 100px 100px;
+	-webkit-border-radius: 100px 100px;
+	border-radius: 100px 100px;		
+	display: table;
+}
+
+.aiwp-online-ga4 {
 	font-size: 120px;
 	font-weight: normal;
 	line-height: 1em;
@@ -100,9 +131,36 @@
 	border: 1px #7CAEFF solid;
 }
 
+.aiwp-bigtext-ga4 {
+	font-size: 18px;
+	height: 30px;
+	width: 100%;
+	margin: 6px 0;
+	padding: 5px 5px 5px 5px;
+	background: #fff;
+	display: table;
+	overflow: hidden;
+	-moz-border-radius: 0px 7px;
+	-webkit-border-radius: 0px 7px;
+	border-radius: 0px 7px;	
+	border: none;
+}
+
 .aiwp-bleft {
 	float: left;
 	width: 80%;
+}
+
+.aiwp-rt-title {
+	float: center;
+	width: 56%;
+	padding-top: 5px;
+}
+
+[id^=aiwp-realtime-] .dashicons, .dashicons-before:before{
+	font-size: 24px;
+	height: 24px;
+	width: 24px;
 }
 
 .aiwp-bleft a {

@@ -63,8 +63,8 @@ if ( ! class_exists( 'AIWP_Backend_Ajax' ) ) {
 			if ( ! ( AIWP_Tools::check_roles( $this->aiwp->config->options['access_back'] ) && ( ( 1 == $this->aiwp->config->options['backend_item_reports'] ) || ( 1 == $this->aiwp->config->options['dashboard_widget'] ) ) ) ) {
 				wp_die( - 31 );
 			}
-			$reporting_ready = $this->aiwp->config->options['tableid_jail'] || ( $this->aiwp->config->options['reporting_type'] && $this->aiwp->config->options['webstream_jail'] );
-			if ( $this->aiwp->config->options['token'] && $reporting_ready && $from && $to ) {
+
+			if ( $this->aiwp->config->options['token'] && $this->aiwp->config->reporting_ready && $from && $to ) {
 				if ( null === $this->aiwp->gapi_controller ) {
 					$this->aiwp->gapi_controller = new AIWP_GAPI_Controller();
 				}

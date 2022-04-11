@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Analytics Insights
+ * Plugin Name: Analytics Insights for Google Analytics (AIWP)
  * Plugin URI: https://deconf.com/analytics-insights-for-wordpress/
  * Description: Displays Google Analytics Reports and Real-Time Statistics in your Dashboard. Automatically inserts the tracking code in every page of your website.
  * Author: Alin Marcu

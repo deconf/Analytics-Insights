@@ -322,6 +322,11 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 				'timeOnPage' => 'userEngagementDuration',
 				'channelGrouping' => 'sessionDefaultChannelGrouping',
 				'dayOfWeekName' => 'dayOfWeek',
+				'visitBounceRate' => 'bounceRate',
+				'organicSearches' => 'engagedSessions',
+				'socialNetwork' => 'language',
+				'visitorType' => 'newVsReturning',
+				'uniquePageviews' => 'sessions',
 			];
 
 			if ( isset( $list[ $value ] ) ){

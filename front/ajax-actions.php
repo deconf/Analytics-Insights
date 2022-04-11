@@ -51,16 +51,14 @@ if ( ! class_exists( 'AIWP_Frontend_Ajax' ) ) {
 			if ( ! AIWP_Tools::check_roles( $this->aiwp->config->options['access_front'] ) || 0 == $this->aiwp->config->options['frontend_item_reports'] ) {
 				wp_die( - 31 );
 			}
-			$reporting_ready = $this->aiwp->config->options['tableid_jail'] || ($this->aiwp->config->options['reporting_type'] && $this->aiwp->config->options['webstream_jail'] );
-			if ( $this->aiwp->config->options['token'] && $reporting_ready ) {
+			if ( $this->aiwp->config->options['token'] && $this->aiwp->config->reporting_ready ) {
 				if ( null === $this->aiwp->gapi_controller ) {
 					$this->aiwp->gapi_controller = new AIWP_GAPI_Controller();
 				}
 			} else {
 				wp_die( - 24 );
 			}
-			$reporting_ready = $this->aiwp->config->options['tableid_jail'] || ( $this->aiwp->config->options['reporting_type'] && $this->aiwp->config->options['webstream_jail'] );
-			if ( $reporting_ready ) {
+			if ( $this->aiwp->config->reporting_ready ) {
 				if ($this->aiwp->config->options['reporting_type']){
 					$projectId = $this->aiwp->config->options['webstream_jail'];
 				} else {
@@ -123,8 +121,7 @@ if ( ! class_exists( 'AIWP_Frontend_Ajax' ) ) {
 			if ( ob_get_length() ) {
 				ob_clean();
 			}
-			$reporting_ready = $this->aiwp->config->options['tableid_jail'] || ( $this->aiwp->config->options['reporting_type'] && $this->aiwp->config->options['webstream_jail'] );
-			if ( $reporting_ready ) {
+			if ( $this->aiwp->config->reporting_ready ) {
 				if ( null === $this->aiwp->gapi_controller ) {
 					$this->aiwp->gapi_controller = new AIWP_GAPI_Controller();
 				}
@@ -142,7 +139,11 @@ if ( ! class_exists( 'AIWP_Frontend_Ajax' ) ) {
 			} else {
 				$this->aiwp->gapi_controller->timeshift = (int) current_time( 'timestamp' ) - time();
 			}
-			wp_send_json( $this->aiwp->gapi_controller->frontend_widget_stats( $projectId, $period, (int) $instance['anonim'] ) );
+			if ( $this->aiwp->config->options['reporting_type'] ) {
+				wp_send_json( $this->aiwp->gapi_controller->frontend_widget_stats_ga4( $projectId, $period, (int) $instance['anonim'] ) );
+			} else {
+				wp_send_json( $this->aiwp->gapi_controller->frontend_widget_stats( $projectId, $period, (int) $instance['anonim'] ) );
+			}
 		}
 	}
 }

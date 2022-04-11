@@ -155,8 +155,8 @@ final class AIWP_Settings {
 				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You do not have sufficient permissions to access this page.", 'analytics-insights' ) . "</p></div>";
 			}
 		}
-		$reporting_ready = $aiwp->config->options['tableid_jail'] || ($aiwp->config->options['reporting_type'] && $aiwp->config->options['webstream_jail'] );
-		if ( ! $reporting_ready || ! $aiwp->config->options['token'] ) {
+
+		if ( ! $aiwp->config->reporting_ready || ! $aiwp->config->options['token'] ) {
 			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'analytics-insights' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_errors_debugging', false ), __( 'Errors & Debug', 'analytics-insights' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_settings', false ), __( 'authorize the plugin', 'analytics-insights' ) ) ) );
 		}
 		?>
@@ -213,8 +213,7 @@ final class AIWP_Settings {
 				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You do not have sufficient permissions to access this page.", 'analytics-insights' ) . "</p></div>";
 			}
 		}
-		$reporting_ready = $aiwp->config->options['tableid_jail'] || ($aiwp->config->options['reporting_type'] && $aiwp->config->options['webstream_jail'] );
-		if ( ! $reporting_ready || ! $aiwp->config->options['token'] ) {
+		if ( ! $aiwp->config->reporting_ready || ! $aiwp->config->options['token'] ) {
 			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'analytics-insights' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_errors_debugging', false ), __( 'Errors & Debug', 'analytics-insights' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_settings', false ), __( 'authorize the plugin', 'analytics-insights' ) ) ) );
 		}
 		?>
@@ -305,8 +304,7 @@ final class AIWP_Settings {
 				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You do not have sufficient permissions to access this page.", 'analytics-insights' ) . "</p></div>";
 			}
 		}
-		$reporting_ready = $aiwp->config->options['tableid_jail'] || ($aiwp->config->options['reporting_type'] && $aiwp->config->options['webstream_jail'] );
-		if ( ! $reporting_ready ) {
+		if ( ! $aiwp->config->reporting_ready ) {
 			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'analytics-insights' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_errors_debugging', false ), __( 'Errors & Debug', 'analytics-insights' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_settings', false ), __( 'authorize the plugin', 'analytics-insights' ) ) ) );
 		}
 		if ( 'universal' == $options['tracking_type'] || 'globalsitetag' == $options['tracking_type'] || 'dualtracking' == $options['tracking_type'] || 'ga4tracking' == $options['tracking_type'] ) {
@@ -748,8 +746,7 @@ final class AIWP_Settings {
 		}
 		$anonim = AIWP_Tools::anonymize_options( $aiwp->config->options );
 		$options = self::update_options( 'frontend' );
-		$reporting_ready = $aiwp->config->options['tableid_jail'] || ($aiwp->config->options['reporting_type'] && $aiwp->config->options['webstream_jail'] );
-		if ( ! $reporting_ready || ! $aiwp->config->options['token'] ) {
+		if ( ! $aiwp->config->reporting_ready || ! $aiwp->config->options['token'] ) {
 			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'analytics-insights' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_errors_debugging', false ), __( 'Errors & Debug', 'analytics-insights' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_settings', false ), __( 'authorize the plugin', 'analytics-insights' ) ) ) );
 		}
 		?>
@@ -849,7 +846,7 @@ final class AIWP_Settings {
 					$message = "<div class='updated' id='aiwp-autodismiss'><p>" . __( "Plugin authorization succeeded.", 'analytics-insights' ) . "</p></div>";
 					if ( $aiwp->config->options['token'] && $aiwp->gapi_controller->client->getAccessToken() ) {
 
-						$profiles = $aiwp->gapi_controller->ua_refresh_profiles();
+						$profiles = $aiwp->gapi_controller->refresh_profiles_ua();
 						if ( is_array( $profiles ) && ! empty( $profiles ) ) {
 							$aiwp->config->options['ga_profiles_list'] = $profiles;
 							if ( ! $aiwp->config->options['tableid_jail'] ) {
@@ -860,7 +857,7 @@ final class AIWP_Settings {
 							$options = self::update_options( 'general' );
 						}
 
-						$webstreams = $aiwp->gapi_controller->ga4_refresh_profiles();
+						$webstreams = $aiwp->gapi_controller->refresh_profiles_ga4();
 						if ( is_array( $webstreams ) && ! empty( $webstreams ) ) {
 								$aiwp->config->options['ga4_webstreams_list'] = $webstreams;
 								if ( ! $aiwp->config->options['webstream_jail'] ) {
@@ -1155,7 +1152,7 @@ final class AIWP_Settings {
 					}
 					if ( $aiwp->config->options['token'] && $aiwp->gapi_controller->client->getAccessToken() ) {
 
-						$profiles = $aiwp->gapi_controller->ua_refresh_profiles();
+						$profiles = $aiwp->gapi_controller->refresh_profiles_ua();
 						if ( is_array( $profiles ) && ! empty( $profiles ) ) {
 							$aiwp->config->options['ga_profiles_list'] = $profiles;
 							if ( isset( $aiwp->config->options['tableid_jail'] ) && ! $aiwp->config->options['tableid_jail'] ) {
@@ -1166,7 +1163,7 @@ final class AIWP_Settings {
 							$options = self::update_options( 'network' );
 						}
 
-						$webstreams = $aiwp->gapi_controller->ga4_refresh_profiles();
+						$webstreams = $aiwp->gapi_controller->refresh_profiles_ga4();
 						if ( is_array( $webstreams ) && ! empty( $webstreams ) ) {
 							$aiwp->config->options['ga4_webstreams_list'] = $webstreams;
 							if ( isset( $aiwp->config->options['webstream_jail'] ) && ! $aiwp->config->options['webstream_jail'] ) {
@@ -1205,7 +1202,7 @@ final class AIWP_Settings {
 					if ( ! empty( $aiwp->config->options['ga_profiles_list'] ) ) {
 						$profiles = $aiwp->config->options['ga_profiles_list'];
 					} else {
-						$profiles = $aiwp->gapi_controller->ua_refresh_profiles();
+						$profiles = $aiwp->gapi_controller->refresh_profiles_ua();
 					}
 					if ( $profiles ) {
 						$aiwp->config->options['ga_profiles_list'] = $profiles;
@@ -1220,7 +1217,7 @@ final class AIWP_Settings {
 					if ( ! empty( $aiwp->config->options['ga4_webstreams_list'] ) ) {
 						$webstreams = $aiwp->config->options['ga4_webstreams_list'];
 					} else {
-						$webstreams = $aiwp->gapi_controller->ga4_refresh_profiles();
+						$webstreams = $aiwp->gapi_controller->refresh_profiles_ga4();
 					}
 					if ( $webstreams ) {
 						$aiwp->config->options['ga4_webstreams_list'] = $webstreams;

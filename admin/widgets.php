@@ -33,8 +33,7 @@ if ( ! class_exists( 'AIWP_Backend_Widgets' ) ) {
 				return;
 			}
 			if ( current_user_can( 'manage_options' ) ) {
-				$reporting_ready = $this->aiwp->config->options['tableid_jail'] || ( $this->aiwp->config->options['reporting_type'] && $this->aiwp->config->options['webstream_jail'] );
-				if ( $reporting_ready ) {
+				if ( $this->aiwp->config->reporting_ready ) {
 					if ($this->aiwp->config->options['reporting_type']){
 						$projectId = $this->aiwp->config->options['webstream_jail'];
 					} else {
@@ -45,8 +44,7 @@ if ( ! class_exists( 'AIWP_Backend_Widgets' ) ) {
 					return;
 				}
 			} else {
-				$reporting_ready = $this->aiwp->config->options['tableid_jail'] || ( $this->aiwp->config->options['reporting_type'] && $this->aiwp->config->options['webstream_jail'] );
-				if ( $reporting_ready ) {
+				if ( $this->aiwp->config->reporting_ready ) {
 					if ($this->aiwp->config->options['reporting_type']){
 						$projectId = $this->aiwp->config->options['webstream_jail'];
 					} else {

@@ -632,12 +632,12 @@ jQuery.fn.extend( {
 				return self.indexOf( value ) === index;
 			},
 
-			rtCountSessions : function ( rtData, searchValue ) {
+			rtCountSessions : function ( rtData, searchValue, index ) {
 				var count = 0, i = 0;
 
 				for ( i = 0; i < rtData[ "rows" ].length; i++ ) {
 					if ( jQuery.inArray( searchValue, rtData[ "rows" ][ i ] ) > -1 ) {
-						count += parseInt( rtData[ "rows" ][ i ][ 6 ] );
+						count += parseInt( rtData[ "rows" ][ i ][ index ] );
 					}
 				}
 				return count;
@@ -720,7 +720,11 @@ jQuery.fn.extend( {
 						if ( jQuery.isArray( response ) ) {
 							jQuery( '#aiwp-reports' + slug ).show();
 							reports.realtime = response[ 0 ];
-							reports.drawRealtime( reports.realtime );
+							if ( aiwpItemData.reportingType ){
+								reports.drawRealtimeGA4( reports.realtime );
+							} else {
+								reports.drawRealtime( reports.realtime );
+							}
 						} else {
 							reports.throwDebug( response );
 						}
@@ -732,6 +736,7 @@ jQuery.fn.extend( {
 			},
 
 			drawRealtime : function ( rtData ) {
+	
 				var rtInfoRight, uPagePath, uReferrals, uKeywords, uSocial, uCustom, i = 0, pagepath = [], referrals = [], keywords = [], social = [], visittype = [], custom = [], uPagePathStats = [], pgStatsTable = "", uReferrals = [], uKeywords = [], uSocial = [], uCustom = [], uVisitType = [ "REFERRAL", "ORGANIC", "SOCIAL", "CUSTOM" ], uVisitorType = [ "DIRECT", "NEW" ];
 				
 				jQuery( function () {
@@ -798,7 +803,7 @@ jQuery.fn.extend( {
 				for ( i = 0; i < uPagePath.length; i++ ) {
 					uPagePathStats[ i ] = {
 						"pagepath" : uPagePath[ i ],
-						"count" : reports.rtCountSessions( rtData, uPagePath[ i ] )
+						"count" : reports.rtCountSessions( rtData, uPagePath[ i ], 6 )
 					}
 				}
 				uPagePathStats.sort( function ( a, b ) {
@@ -817,7 +822,7 @@ jQuery.fn.extend( {
 				for ( i = 0; i < uReferrals.length; i++ ) {
 					uReferrals[ i ] = {
 						"value" : uReferrals[ i ],
-						"count" : reports.rtCountSessions( rtData, uReferrals[ i ] )
+						"count" : reports.rtCountSessions( rtData, uReferrals[ i ], 6 )
 					};
 				}
 				uReferrals.sort( function ( a, b ) {
@@ -828,7 +833,7 @@ jQuery.fn.extend( {
 				for ( i = 0; i < uKeywords.length; i++ ) {
 					uKeywords[ i ] = {
 						"value" : uKeywords[ i ],
-						"count" : reports.rtCountSessions( rtData, uKeywords[ i ] )
+						"count" : reports.rtCountSessions( rtData, uKeywords[ i ], 6 )
 					};
 				}
 				uKeywords.sort( function ( a, b ) {
@@ -839,7 +844,7 @@ jQuery.fn.extend( {
 				for ( i = 0; i < uSocial.length; i++ ) {
 					uSocial[ i ] = {
 						"value" : uSocial[ i ],
-						"count" : reports.rtCountSessions( rtData, uSocial[ i ] )
+						"count" : reports.rtCountSessions( rtData, uSocial[ i ], 6 )
 					};
 				}
 				uSocial.sort( function ( a, b ) {
@@ -850,23 +855,108 @@ jQuery.fn.extend( {
 				for ( i = 0; i < uCustom.length; i++ ) {
 					uCustom[ i ] = {
 						"value" : uCustom[ i ],
-						"count" : reports.rtCountSessions( rtData, uCustom[ i ] )
+						"count" : reports.rtCountSessions( rtData, uCustom[ i ], 6 )
 					};
 				}
 				uCustom.sort( function ( a, b ) {
 					return b.count - a.count
 				} );
 
-				rtInfoRight = '<div class="aiwp-bigtext"><a href="#" data-aiwp="' + reports.rtGenerateTooltip( uReferrals ) + '"><div class="aiwp-bleft">' + reports.i18n[ 0 ] + '</a></div><div class="aiwp-bright">' + reports.rtCountSessions( rtData, uVisitType[ 0 ] ) + '</div></div>';
-				rtInfoRight += '<div class="aiwp-bigtext"><a href="#" data-aiwp="' + reports.rtGenerateTooltip( uKeywords ) + '"><div class="aiwp-bleft">' + reports.i18n[ 1 ] + '</a></div><div class="aiwp-bright">' + reports.rtCountSessions( rtData, uVisitType[ 1 ] ) + '</div></div>';
-				rtInfoRight += '<div class="aiwp-bigtext"><a href="#" data-aiwp="' + reports.rtGenerateTooltip( uSocial ) + '"><div class="aiwp-bleft">' + reports.i18n[ 2 ] + '</a></div><div class="aiwp-bright">' + reports.rtCountSessions( rtData, uVisitType[ 2 ] ) + '</div></div>';
-				rtInfoRight += '<div class="aiwp-bigtext"><a href="#" data-aiwp="' + reports.rtGenerateTooltip( uCustom ) + '"><div class="aiwp-bleft">' + reports.i18n[ 3 ] + '</a></div><div class="aiwp-bright">' + reports.rtCountSessions( rtData, uVisitType[ 3 ] ) + '</div></div>';
+				rtInfoRight = '<div class="aiwp-bigtext"><a href="#" data-aiwp="' + reports.rtGenerateTooltip( uReferrals ) + '"><div class="aiwp-bleft">' + reports.i18n[ 0 ] + '</a></div><div class="aiwp-bright">' + reports.rtCountSessions( rtData, uVisitType[ 0 ], 6 ) + '</div></div>';
+				rtInfoRight += '<div class="aiwp-bigtext"><a href="#" data-aiwp="' + reports.rtGenerateTooltip( uKeywords ) + '"><div class="aiwp-bleft">' + reports.i18n[ 1 ] + '</a></div><div class="aiwp-bright">' + reports.rtCountSessions( rtData, uVisitType[ 1 ], 6 ) + '</div></div>';
+				rtInfoRight += '<div class="aiwp-bigtext"><a href="#" data-aiwp="' + reports.rtGenerateTooltip( uSocial ) + '"><div class="aiwp-bleft">' + reports.i18n[ 2 ] + '</a></div><div class="aiwp-bright">' + reports.rtCountSessions( rtData, uVisitType[ 2 ], 6 ) + '</div></div>';
+				rtInfoRight += '<div class="aiwp-bigtext"><a href="#" data-aiwp="' + reports.rtGenerateTooltip( uCustom ) + '"><div class="aiwp-bleft">' + reports.i18n[ 3 ] + '</a></div><div class="aiwp-bright">' + reports.rtCountSessions( rtData, uVisitType[ 3 ], 6 ) + '</div></div>';
 
-				rtInfoRight += '<div class="aiwp-bigtext"><div class="aiwp-bleft">' + reports.i18n[ 4 ] + '</div><div class="aiwp-bright">' + reports.rtCountSessions( rtData, uVisitorType[ 0 ] ) + '</div></div>';
-				rtInfoRight += '<div class="aiwp-bigtext"><div class="aiwp-bleft">' + reports.i18n[ 5 ] + '</div><div class="aiwp-bright">' + reports.rtCountSessions( rtData, uVisitorType[ 1 ] ) + '</div></div>';
+				rtInfoRight += '<div class="aiwp-bigtext"><div class="aiwp-bleft">' + reports.i18n[ 4 ] + '</div><div class="aiwp-bright">' + reports.rtCountSessions( rtData, uVisitorType[ 0 ], 6 ) + '</div></div>';
+				rtInfoRight += '<div class="aiwp-bigtext"><div class="aiwp-bleft">' + reports.i18n[ 5 ] + '</div><div class="aiwp-bright">' + reports.rtCountSessions( rtData, uVisitorType[ 1 ], 6 ) + '</div></div>';
 
 				document.getElementById( "aiwp-tdo-right" ).innerHTML = rtInfoRight;
 			},
+			
+			drawRealtimeGA4 : function ( rtData ) {
+				
+				var rtInfoRight, pgStatsTable, i, uScreenName, desktopCount = 0, mobileCount = 0, tabletCount = 0, screenName = [], uScreenNameStats = [];
+				
+				jQuery( function () {
+					jQuery( '#aiwp-widget *' ).tooltip( {
+						tooltipClass : "aiwp"
+					} );
+				} );
+
+				if ( jQuery.isNumeric( rtData ) || typeof rtData === "undefined" ) {
+					rtData = [];
+					rtData[ "totals" ] = "0";
+					rtData[ "rows" ] = [];
+				}
+
+				if ( rtData[ "totals" ] !== document.getElementById( "aiwp-online-ga4" ).innerHTML ) {
+					jQuery( "#aiwp-online-ga4" ).fadeOut( "slow" );
+					jQuery( "#aiwp-online-ga4" ).fadeOut( 500 );
+					jQuery( "#aiwp-online-ga4" ).fadeOut( "slow", function () {
+						if ( ( parseInt( rtData[ "totals" ] ) ) < ( parseInt( document.getElementById( "aiwp-online-ga4" ).innerHTML ) ) ) {
+							jQuery( "#aiwp-online-ga4" ).css( {
+								'background-color' : '#FFE8E8'
+							} );
+						} else {
+							jQuery( "#aiwp-online-ga4" ).css( {
+								'background-color' : '#E0FFEC'
+							} );
+						}
+						document.getElementById( "aiwp-online-ga4" ).innerHTML = rtData[ "totals" ];
+					} );
+					jQuery( "#aiwp-online-ga4" ).fadeIn( "slow" );
+					jQuery( "#aiwp-online-ga4" ).fadeIn( 500 );
+					jQuery( "#aiwp-online-ga4" ).fadeIn( "slow", function () {
+						jQuery( "#aiwp-online-ga4" ).css( {
+							'background-color' : '#FFFFFF'
+						} );
+					} );
+				}
+
+				if ( rtData[ "totals" ] == 0 ) {
+					rtData[ "rows" ] = [];
+				}
+
+				for ( i = 0; i < rtData[ "rows" ].length; i++ ) {
+				
+					screenName.push( rtData[ "rows" ][ i ][ 1 ] );
+					
+					if ( rtData[ "rows" ][ i ][ 0 ] == "desktop" ) {
+						desktopCount = desktopCount + parseInt( rtData[ "rows" ][ i ][ 2 ] );
+					}
+					if ( rtData[ "rows" ][ i ][ 0 ] == "mobile" ) {
+						mobileCount = mobileCount + parseInt( rtData[ "rows" ][ i ][ 2 ] );
+					}
+					if ( rtData[ "rows" ][ i ][ 0 ] == "tablet" ) {
+						tabletCount = tabletCount + parseInt( rtData[ "rows" ][ i ][ 2 ] );
+					}
+				}
+
+				uScreenName = screenName.filter( reports.rtOnlyUniqueValues );
+				for ( i = 0; i < uScreenName.length; i++ ) {
+					uScreenNameStats[ i ] = {
+						"screenName" : uScreenName[ i ],
+						"count" : reports.rtCountSessions( rtData, uScreenName[ i ], 2 )
+					}
+				}
+				uScreenNameStats.sort( function ( a, b ) {
+					return b.count - a.count
+				} );
+
+				pgStatsTable = "";
+				for ( i = 0; i < uScreenNameStats.length; i++ ) {
+					if ( i < aiwpItemData.rtLimitPages ) {
+						pgStatsTable += '<div class="aiwp-pline"><div class="aiwp-pleft">' + uScreenNameStats[ i ].screenName.substring( 0, 70 ) + '</div><div class="aiwp-pright">' + uScreenNameStats[ i ].count + '</div></div>';
+					}
+				}
+				document.getElementById( "aiwp-pages" ).innerHTML = '<br /><div class="aiwp-pg">' + pgStatsTable + '</div>';
+				
+				rtInfoRight = '<div class="aiwp-bigtext-ga4"><div class="aiwp-bleft"><span class="dashicons dashicons-desktop"></span> ' + reports.i18n[ 12 ] + '</div><div class="aiwp-bright">' + desktopCount + '</div></div>';
+				rtInfoRight += '<div class="aiwp-bigtext-ga4"><div class="aiwp-bleft"><span class="dashicons dashicons-smartphone"></span> ' + reports.i18n[ 13 ] + '</div><div class="aiwp-bright">' + mobileCount + '</div></div>';
+				rtInfoRight += '<div class="aiwp-bigtext-ga4"><div class="aiwp-bleft"><span class="dashicons dashicons-tablet"></span> ' + reports.i18n[ 14 ] + '</div><div class="aiwp-bright">' + tabletCount + '</div></div>';
+
+				document.getElementById( "aiwp-tdo-right-ga4" ).innerHTML = rtInfoRight;
+			},			
 
 			throwDebug : function ( response ) {
 				jQuery( "#aiwp-status" + slug ).css( {
@@ -1000,7 +1090,7 @@ jQuery.fn.extend( {
 				}
 				if ( period == 'realtime' ) {
 
-					reports.i18n = aiwpItemData.i18n.slice( 20, 26 );
+					reports.i18n = aiwpItemData.i18n.slice( 20, 36 );
 
 					reports.render.focusFlag = 1;
 					
@@ -1011,44 +1101,76 @@ jQuery.fn.extend( {
 					} ).bind( "blur", function ( event ) {
 						reports.render.focusFlag = 0;
 					} );
+					
+					if ( aiwpItemData.reportingType ) {
 
-					tpl = '<div id="aiwp-realtime' + slug + '">';
-					tpl += '<div class="aiwp-rt-box">';
-					tpl += '<div class="aiwp-tdo-left">';
-					tpl += '<div class="aiwp-online" id="aiwp-online">0</div>';
-					tpl += '</div>';
-					tpl += '<div class="aiwp-tdo-right" id="aiwp-tdo-right">';
-					tpl += '<div class="aiwp-bigtext">';
-					tpl += '<div class="aiwp-bleft">' + reports.i18n[ 0 ] + '</div>';
-					tpl += '<div class="aiwp-bright">0</div>';
-					tpl += '</div>';
-					tpl += '<div class="aiwp-bigtext">';
-					tpl += '<div class="aiwp-bleft">' + reports.i18n[ 1 ] + '</div>';
-					tpl += '<div class="aiwp-bright">0</div>';
-					tpl += '</div>';
-					tpl += '<div class="aiwp-bigtext">';
-					tpl += '<div class="aiwp-bleft">' + reports.i18n[ 2 ] + '</div>';
-					tpl += '<div class="aiwp-bright">0</div>';
-					tpl += '</div>';
-					tpl += '<div class="aiwp-bigtext">';
-					tpl += '<div class="aiwp-bleft">' + reports.i18n[ 3 ] + '</div>';
-					tpl += '<div class="aiwp-bright">0</div>';
-					tpl += '</div>';
-					tpl += '<div class="aiwp-bigtext">';
-					tpl += '<div class="aiwp-bleft">' + reports.i18n[ 4 ] + '</div>';
-					tpl += '<div class="aiwp-bright">0</div>';
-					tpl += '</div>';
-					tpl += '<div class="aiwp-bigtext">';
-					tpl += '<div class="aiwp-bleft">' + reports.i18n[ 5 ] + '</div>';
-					tpl += '<div class="aiwp-bright">0</div>';
-					tpl += '</div>';
-					tpl += '</div>';
-					tpl += '</div>';
-					tpl += '<div>';
-					tpl += '<div id="aiwp-pages" class="aiwp-pages">&nbsp;</div>';
-					tpl += '</div>';
-					tpl += '</div>';
+						tpl = '<div id="aiwp-realtime' + slug + '">';
+						tpl += '<div class="aiwp-rt-box">';
+						tpl += '<div class="aiwp-rt-title">' + reports.i18n[ 15 ] + '</div>';
+						tpl += '<div class="aiwp-tdo-left-ga4">';
+						tpl += '<div class="aiwp-online-ga4" id="aiwp-online-ga4">0</div>';
+						tpl += '</div>';
+						tpl += '<div class="aiwp-tdo-right-ga4" id="aiwp-tdo-right-ga4">';
+						tpl += '<div class="aiwp-bigtext-ga4">';
+						tpl += '<div class="aiwp-bleft"><span class="dashicons dashicons-desktop"></span> ' + reports.i18n[ 12 ] + '</div>';
+						tpl += '<div class="aiwp-bright">0</div>';
+						tpl += '</div>';
+						tpl += '<div class="aiwp-bigtext-ga4">';
+						tpl += '<div class="aiwp-bleft"><span class="dashicons dashicons-smartphone"></span> ' + reports.i18n[ 13 ] + '</div>';
+						tpl += '<div class="aiwp-bright">0</div>';
+						tpl += '</div>';
+						tpl += '<div class="aiwp-bigtext-ga4">';
+						tpl += '<div class="aiwp-bleft"><span class="dashicons dashicons-tablet"></span> ' + reports.i18n[ 14 ] + '</div>';
+						tpl += '<div class="aiwp-bright">0</div>';
+						tpl += '</div>';
+						tpl += '</div>';
+						tpl += '</div>';
+						tpl += '<div>';
+						tpl += '<div id="aiwp-pages" class="aiwp-pages">&nbsp;</div>';
+						tpl += '</div>';
+						tpl += '</div>';					
+					
+					} else {
 
+						tpl = '<div id="aiwp-realtime' + slug + '">';
+						tpl += '<div class="aiwp-rt-box">';
+						tpl += '<div class="aiwp-tdo-left">';
+						tpl += '<div class="aiwp-online" id="aiwp-online">0</div>';
+						tpl += '</div>';
+						tpl += '<div class="aiwp-tdo-right" id="aiwp-tdo-right">';
+						tpl += '<div class="aiwp-bigtext">';
+						tpl += '<div class="aiwp-bleft">' + reports.i18n[ 0 ] + '</div>';
+						tpl += '<div class="aiwp-bright">0</div>';
+						tpl += '</div>';
+						tpl += '<div class="aiwp-bigtext">';
+						tpl += '<div class="aiwp-bleft">' + reports.i18n[ 1 ] + '</div>';
+						tpl += '<div class="aiwp-bright">0</div>';
+						tpl += '</div>';
+						tpl += '<div class="aiwp-bigtext">';
+						tpl += '<div class="aiwp-bleft">' + reports.i18n[ 2 ] + '</div>';
+						tpl += '<div class="aiwp-bright">0</div>';
+						tpl += '</div>';
+						tpl += '<div class="aiwp-bigtext">';
+						tpl += '<div class="aiwp-bleft">' + reports.i18n[ 3 ] + '</div>';
+						tpl += '<div class="aiwp-bright">0</div>';
+						tpl += '</div>';
+						tpl += '<div class="aiwp-bigtext">';
+						tpl += '<div class="aiwp-bleft">' + reports.i18n[ 4 ] + '</div>';
+						tpl += '<div class="aiwp-bright">0</div>';
+						tpl += '</div>';
+						tpl += '<div class="aiwp-bigtext">';
+						tpl += '<div class="aiwp-bleft">' + reports.i18n[ 5 ] + '</div>';
+						tpl += '<div class="aiwp-bright">0</div>';
+						tpl += '</div>';
+						tpl += '</div>';
+						tpl += '</div>';
+						tpl += '<div>';
+						tpl += '<div id="aiwp-pages" class="aiwp-pages">&nbsp;</div>';
+						tpl += '</div>';
+						tpl += '</div>';
+
+					}
+						
 					jQuery( '#aiwp-reports' + slug ).html( tpl );
 
 					reports.rtRefresh( reports.render.focusFlag );

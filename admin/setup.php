@@ -147,10 +147,11 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 						'ajaxurl' => admin_url( 'admin-ajax.php' ),
 						'security' => wp_create_nonce( 'aiwp_backend_item_reports' ),
 						'dateList' => $datelist,
+						'reportingType' => $this->aiwp->config->options['reporting_type'],
 						'reportList' => array(
 							'sessions' => __( "Sessions", 'analytics-insights' ),
 							'users' => __( "Users", 'analytics-insights' ),
-							'organicSearches' => __( "Organic", 'analytics-insights' ),
+							'organicSearches' => $this->aiwp->config->options['reporting_type'] ? __( "Engagement", 'analytics-insights' ) : __( "Organic", 'analytics-insights' ),
 							'pageviews' => __( "Page Views", 'analytics-insights' ),
 							'visitBounceRate' => __( "Bounce Rate", 'analytics-insights' ),
 							'locations' => __( "Location", 'analytics-insights' ),
@@ -166,12 +167,12 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 							__( "Traffic Mediums", 'analytics-insights' ),
 							__( "Visitor Type", 'analytics-insights' ),
 							__( "Search Engines", 'analytics-insights' ),
-							__( "Social Networks", 'analytics-insights' ),
+							$this->aiwp->config->options['reporting_type'] ? __( "Language", 'analytics-insights' ) : __( "Social Networks", 'analytics-insights' ),
 							__( "Sessions", 'analytics-insights' ),
 							__( "Users", 'analytics-insights' ),
 							__( "Page Views", 'analytics-insights' ),
 							__( "Bounce Rate", 'analytics-insights' ),
-							__( "Organic Search", 'analytics-insights' ),
+							$this->aiwp->config->options['reporting_type'] ? __( "Session Duration", 'analytics-insights' ) : __( "Organic Searches", 'analytics-insights' ),
 							__( "Pages/Session", 'analytics-insights' ),
 							__( "Invalid response", 'analytics-insights' ),
 							__( "No Data", 'analytics-insights' ),
@@ -188,11 +189,16 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 							__( "CAMPAIGN", 'analytics-insights' ),
 							__( "DIRECT", 'analytics-insights' ),
 							__( "NEW", 'analytics-insights' ), //25
-							__( "Time on Page", 'analytics-insights' ),
-							__( "Page Load Time", 'analytics-insights' ),
+							$this->aiwp->config->options['reporting_type'] ? __( "Engaged Sessions", 'analytics-insights' ) : __( "Time on Page", 'analytics-insights' ),
+							$this->aiwp->config->options['reporting_type'] ? __( "Engagement Rate", 'analytics-insights' ) : __( "Page Load Time", 'analytics-insights' ),
+							$this->aiwp->config->options['reporting_type'] ? __( "Total Engagement", 'analytics-insights' ) : __( "Session Duration", 'analytics-insights' ),
 							__( "Session Duration", 'analytics-insights' ),
 							__( "", 'analytics-insights' ),
-							__( "Search ...", 'analytics-insights' ), //30
+							__( "Search ...", 'analytics-insights' ), //31
+							__( "DESKTOP", 'analytics-insights' ), //32
+							__( "MOBILE", 'analytics-insights' ), //33
+							__( "TABLET", 'analytics-insights' ), //34
+							__( "USERS IN LAST 30 MINUTES", 'analytics-insights' ), //35
 						),
 						'rtLimitPages' => $this->aiwp->config->options['ga_realtime_pages'],
 						'colorVariations' => AIWP_Tools::variations( sanitize_text_field( $this->aiwp->config->options['theme_color'] ) ),
@@ -244,9 +250,9 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 							'1095daysAgo' =>  sprintf( _n( "%s Year", "%s Years", 3, 'analytics-insights' ), __('Three', 'analytics-insights') ),
 						),
 						'reportList' => array(
-							'uniquePageviews' => __( "Unique Views", 'analytics-insights' ),
+							'uniquePageviews' => $this->aiwp->config->options['reporting_type'] ? __( "Sessions", 'analytics-insights' ) : __( "Unique Views", 'analytics-insights' ),
 							'users' => __( "Users", 'analytics-insights' ),
-							'organicSearches' => __( "Organic", 'analytics-insights' ),
+							'organicSearches' => $this->aiwp->config->options['reporting_type'] ? __( "Engagement", 'analytics-insights' ) : __( "Organic", 'analytics-insights' ),
 							'pageviews' => __( "Page Views", 'analytics-insights' ),
 							'visitBounceRate' => __( "Bounce Rate", 'analytics-insights' ),
 							'locations' => __( "Location", 'analytics-insights' ),
@@ -259,9 +265,9 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 							__( "A JavaScript Error is blocking plugin resources!", 'analytics-insights' ), //0
 							__( "Traffic Mediums", 'analytics-insights' ),
 							__( "Visitor Type", 'analytics-insights' ),
-							__( "Social Networks", 'analytics-insights' ),
+							$this->aiwp->config->options['reporting_type'] ? __( "Language", 'analytics-insights' ) : __( "Social Networks", 'analytics-insights' ),
 							__( "Search Engines", 'analytics-insights' ),
-							__( "Unique Views", 'analytics-insights' ),
+							$this->aiwp->config->options['reporting_type'] ? __( "Sessions", 'analytics-insights' ) : __( "Unique Views", 'analytics-insights' ),
 							__( "Users", 'analytics-insights' ),
 							__( "Page Views", 'analytics-insights' ),
 							__( "Bounce Rate", 'analytics-insights' ),
@@ -282,8 +288,8 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 							__( "Future Use", 'analytics-insights' ),
 							__( "Future Use", 'analytics-insights' ),
 							__( "Future Use", 'analytics-insights' ), //25
-							__( "Time on Page", 'analytics-insights' ),
-							__( "Page Load Time", 'analytics-insights' ),
+							$this->aiwp->config->options['reporting_type'] ? __( "Engaged Sessions", 'analytics-insights' ) : __( "Time on Page", 'analytics-insights' ),
+							$this->aiwp->config->options['reporting_type'] ? __( "Engagement Rate", 'analytics-insights' ) : __( "Page Load Time", 'analytics-insights' ),
 							__( "Exit Rate", 'analytics-insights' ),
 							__( "", 'analytics-insights' ),
 							__( "Search ...", 'analytics-insights' ), //30
