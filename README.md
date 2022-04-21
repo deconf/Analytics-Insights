@@ -1,7 +1,7 @@
 Analytics Insights
 =================================
 
-Displays Google Analytics Reports and Real-Time Statistics in your WordPress Dashboard. Automatically inserts the tracking code in every page of your website.
+Displays Google Analytics 4 Reports and Real-Time Statistics in your WordPress Dashboard. Automatically inserts the tracking code in every page of your website.
 
 Analytics Insights for WordPress repository
 ---------------------------------------------------
