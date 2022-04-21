@@ -62,7 +62,7 @@
 
 .aiwp-tdo-left-ga4 {
 	width: 56%;
-	padding: 16px 0;
+	padding: 0px 0;
 	float: left;
 	text-align: center;
 	color: #f77149;
@@ -80,7 +80,7 @@
 
 .aiwp-tdo-right-ga4 {
 	width: 40%;
-	margin: 30px 10px 0px 0;
+	margin: 14px 10px 0px 0;
 	text-align: left;
 	font-weight: normal;
 	vertical-align: middle;
@@ -151,6 +151,12 @@
 	width: 80%;
 }
 
+.aiwp-bleft-ga4 {
+	float: left;
+	width: 80%;
+	color: #0a4b78;
+}
+
 .aiwp-rt-title {
 	float: center;
 	width: 56%;
@@ -170,6 +176,12 @@
 .aiwp-bright {
 	float: right;
 	width: 20%;
+}
+
+.aiwp-bright-ga4 {
+	float: right;
+	width: 20%;
+	color:#f77149;
 }
 
 .aiwp-pgdetailsr {

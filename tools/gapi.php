@@ -266,6 +266,11 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			if ( $all ){
 				$this->aiwp->config->options['site_jail'] = "";
 				$this->aiwp->config->options['sites_list'] = array();
+				$this->aiwp->config->options['ga_profiles_list'] = array();
+				$this->aiwp->config->options['ga4_webstreams_list'] = array();
+				$this->aiwp->config->options['webstream_jail'] = '';
+				$this->aiwp->config->options['tableid_jail'] = '';
+				$this->aiwp->config->options['reporting_type'] = 0;
 			}
 
 			$this->aiwp->config->options['token'] = "";
@@ -286,7 +291,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		public function gapi_errors_handler() {
 
 			// @todo: comment-out the return false in production
-			return false;
+			//return false;
 
 			$errors = AIWP_Tools::get_cache( 'gapi_errors' );
 			if ( false === $errors || ! isset( $errors[0] ) ) { // invalid error
@@ -381,7 +386,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
 				if ( empty( $ga_profiles_list ) ) {
 					$timeout = $this->get_timeouts( 'midnight' );
-					AIWP_Tools::set_error( 'No properties were found in this account!', $timeout );
+					//AIWP_Tools::set_error( 'No properties were found in this account!', $timeout );
 				} else {
 					AIWP_Tools::delete_cache( 'last_error' );
 				}
@@ -2220,13 +2225,13 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
 				if ( isset( $row->getDimensionValues()[0] ) ){
 					foreach ( $row->getDimensionValues() as $item ){
-						$values[] = $item->getValue();
+						$values[] = esc_html( $item->getValue() );
 					}
 				}
 
 				if ( isset( $row->getMetricValues()[0] ) ){
 					foreach ( $row->getMetricValues() as $item){
-						$values[] = $item->getValue();
+						$values[] = esc_html( $item->getValue() );
 					}
 				}
 
@@ -2237,7 +2242,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			$aiwp_data['totals'] = 0;
 
 			if ( method_exists( $data, 'getTotals') && isset( $data->getTotals()[0]->getMetricValues()[0] ) ){
-				$aiwp_data['totals'] = $data->getTotals()[0]->getMetricValues()[0]->getValue();
+				$aiwp_data['totals'] = (int)$data->getTotals()[0]->getMetricValues()[0]->getValue();
 			}
 
 			return $aiwp_data;
@@ -2260,7 +2265,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 */
 		public function get( $projectId, $query, $from = false, $to = false, $filter = '', $metric = 'sessions' ) {
 
-			if ( empty( $projectId ) ) {
+			if ( empty( $projectId ) || '' == $projectId || 'Disabled' == $projectId ) {
 				wp_die( - 26 );
 			}
 

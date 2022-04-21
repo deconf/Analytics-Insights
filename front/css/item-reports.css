@@ -24,7 +24,7 @@
 }
 
 [id^=aiwp-container-] {
-	width: 480px;
+	width: 400px;
 }
 
 [id^=aiwp-areachart-] {
@@ -39,6 +39,7 @@
 
 [id^=aiwp-bottomstats-] {
 	width: 100%;
+	margin-top:5px;
 }
 
 [id^=aiwp-bottomstats-] .inside {
@@ -48,29 +49,32 @@
 }
 
 [id^=aiwp-bottomstats-] .inside .small-box {
-	width: 31.2%;
-	float: left;
-	margin: 10px 5px 10px 5px;
-	background: #fff;
-	text-align: center;
-	-moz-box-shadow: 0px 0px 7px 0px #BBB;
-	-webkit-box-shadow: 0px 0px 7px 0px #BBB;
-	box-shadow: 0px 0px 7px 0px #BBB;
+    width: 30%;
+    float: left;
+    margin: 0 5px 10px 5px;
+    background: #fff;
+    text-align: center;
+    -moz-box-shadow: 0px 0px 7px 0px #BBB;
+    -webkit-box-shadow: 0px 0px 7px 0px #BBB;
+    box-shadow: 0px 0px 7px 0px #BBB;	
 }
 
 [id^=aiwp-bottomstats-] .inside .small-box h3 {
-	font-family: 'Open Sans', sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 	font-size: 1em;
+	font-weight: 400;
 	color: #777;
 	padding: 0px 5px 0px 5px;
 	margin: 0px 0px 0px 0px;
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
+	line-height: 1.4;
 }
 
 [id^=aiwp-bottomstats-] .inside .small-box p {
 	font-size: 1.2em;
+	line-height: 1.5;
 	margin: 0px 0px 2px 0px;
 }
 
@@ -107,20 +111,108 @@
 }
 
 .ui-dialog.aiwp {
-	font-family: 'Open Sans', sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 	font-size: 13px;
 	-webkit-box-sizing: initial;
 	-moz-box-sizing: initial;
 }
 
 .ui-dialog.aiwp select {
-	font-family: 'Open Sans', sans-serif;
-	border: 1px solid #ddd;
-	font-size: 14px;
-	background: #fff;
-	padding: 2px;
-	color: #333;
-	width: auto;
+    --wp-admin--admin-bar--height: 32px;
+    -webkit-font-smoothing: subpixel-antialiased;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-weight: inherit;
+    margin: 0 1px;
+    border: 1px solid #8c8f94;
+    font-size: 14px;
+    line-height: 2;
+    color: #2c3338;
+    border-color: #8c8f94;
+    box-shadow: none;
+    border-radius: 3px;
+    padding: 0 24px 0 8px;
+    min-height: 30px;
+    -webkit-appearance: none;
+    background: #fff url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M5%206l5%205%205-5%202%201-7%207-7-7%202-1z%22%20fill%3D%22%23555%22%2F%3E%3C%2Fsvg%3E') no-repeat right 5px top 55%;
+    background-size: 16px 16px;
+    cursor: pointer;
+    vertical-align: middle;
+    max-width: 100%;
+}
+
+.ui-dialog.aiwp select:hover {
+	color: #2271b1;
+}
+
+.ui-dialog.aiwp select:focus {
+	border-color: #2271b1;
+	outline-offset: 0px;
+	outline: 0px;
+	color: #0a4b78;
+	box-shadow: 0 0 0 1px #2271b1;
+}
+
+.ui-dialog.aiwp select:active {
+	border-color: #8c8f94;
+	box-shadow: none;
+}
+
+.ui-dialog.aiwp select.disabled,
+.ui-dialog.aiwp select:disabled {
+	color: #a7aaad;
+	border-color: #dcdcde;
+	background-color: #f6f7f7;
+	/* The SVG is arrow-down-alt2 from Dashicons. */
+	background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M5%206l5%205%205-5%202%201-7%207-7-7%202-1z%22%20fill%3D%22%23a0a5aa%22%2F%3E%3C%2Fsvg%3E');
+	box-shadow: none;
+	text-shadow: 0 1px 0 #fff;
+	cursor: default;
+	transform: none;
+}
+
+/* Reset Firefox inner outline that appears on :focus. */
+/* This ruleset overrides the color change on :focus thus needs to be after select:focus. */
+.ui-dialog.aiwp select:-moz-focusring {
+	color: transparent;
+	text-shadow: 0 0 0 #0a4b78;
+}
+
+/* Remove background focus style from IE11 while keeping focus style available on option elements. */
+.ui-dialog.aiwp select::-ms-value {
+	background: transparent;
+	color: #50575e;
+}
+
+.ui-dialog.aiwp select:hover::-ms-value {
+	color: #2271b1;
+}
+
+.ui-dialog.aiwp select:focus::-ms-value {
+	color: #0a4b78;
+}
+
+.ui-dialog.aiwp select.disabled::-ms-value,
+.ui-dialog.aiwp select:disabled::-ms-value {
+	color: #a7aaad;
+}
+
+/* Hide the native down arrow for select element on IE. */
+.ui-dialog.aiwp select::-ms-expand {
+	display: none;
+}
+
+.ui-dialog.aiwp select option {
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 2;
+    cursor: pointer;
+    color: #2c3338;
+}
+
+.ui-dialog.aiwp button{
+	color: #646970;
+	background-color: inherit !important;
 }
 
 .ui-dialog.aiwp table {

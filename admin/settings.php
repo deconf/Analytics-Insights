@@ -66,6 +66,7 @@ final class AIWP_Settings {
 					$new_options['access_front'][] = 'administrator';
 				}
 			} elseif ( 'general' == $who ) {
+				$options['reporting_type'] = 0;
 				$options['user_api'] = 0;
 			} elseif ( 'network' == $who ) {
 				$options['user_api'] = 0;
@@ -896,7 +897,7 @@ final class AIWP_Settings {
 		}
 		if ( isset( $_REQUEST['Reset'] ) ) {
 			if ( isset( $_REQUEST['aiwp_security'] ) && wp_verify_nonce( $_REQUEST['aiwp_security'], 'aiwp_form' ) ) {
-				$aiwp->gapi_controller->reset_token();
+				$aiwp->gapi_controller->reset_token( true );
 				AIWP_Tools::clear_cache();
 				$message = "<div class='updated' id='aiwp-autodismiss'><p>" . __( "Token Reseted and Revoked.", 'analytics-insights' ) . "</p></div>";
 				$options = self::update_options( 'Reset' );
@@ -1014,8 +1015,9 @@ final class AIWP_Settings {
 			<label for="tableid_jail"><?php _e("Unversal Analytics:", 'analytics-insights' ); ?></label>
 		</td>
 		<td>
-			<select id="tableid_jail" <?php disabled(empty($options['ga_profiles_list']) || 1 == count($options['ga_profiles_list']), true); ?> name="options[tableid_jail]">
+			<select id="tableid_jail" <?php disabled( empty($options['ga_profiles_list']) || 1 == count($options['ga_profiles_list']), true ); ?> name="options[tableid_jail]">
 			<?php if ( ! empty( $options['ga_profiles_list'] ) ) : ?>
+			<option value="" <?php selected( '', $options['tableid_jail'] ); ?>><?php _e( "Disabled", 'analytics-insights' ); ?></option>
 			<?php foreach ( $options['ga_profiles_list'] as $items ) : ?>
 			<?php if ( $items[3] ) : ?>
 				<option value="<?php echo esc_attr( $items[1] ); ?>" <?php selected( $items[1], $options['tableid_jail'] ); ?> title="<?php _e( "View Name:", 'analytics-insights' ); ?> <?php echo esc_attr( $items[0] ); ?>">
@@ -1024,12 +1026,12 @@ final class AIWP_Settings {
 			<?php endif; ?>
 			<?php endforeach; ?>
 			<?php else : ?>
-				<option value=""><?php _e( "Property not found", 'analytics-insights' ); ?></option>
+				<option value=""><?php _e( "Disabled", 'analytics-insights' ); ?></option>
 			<?php endif; ?>
 			</select>
 		</td>
 	</tr>
-	<?php if ( $options['tableid_jail'] ) :	?>
+	<?php if ( $options['tableid_jail'] && !empty( $aiwp->config->options['ga_profiles_list'] ) ) :	?>
 	<tr>
 		<td class="aiwp-settings-title"></td>
 		<td>
@@ -1043,7 +1045,7 @@ final class AIWP_Settings {
 			<label for="webstream_jail"><?php _e("Google Analaytics 4:", 'analytics-insights' ); ?></label>
 		</td>
 		<td>
-			<select id="webstream_jail" <?php disabled(empty($options['ga4_webstreams_list']) || 1 == count($options['ga4_webstreams_list']), true); ?> name="options[webstream_jail]">
+			<select id="webstream_jail" <?php disabled( empty($options['ga4_webstreams_list'] ) || 1 == count($options['ga4_webstreams_list']), true); ?> name="options[webstream_jail]">
 			<?php if ( ! empty( $options['ga4_webstreams_list'] ) ) : ?>
 			<option value="" <?php selected( '', $options['webstream_jail'] ); ?>><?php _e( "Disabled", 'analytics-insights' ); ?></option>
 			<?php foreach ( $options['ga4_webstreams_list'] as $items ) : ?>
@@ -1059,7 +1061,7 @@ final class AIWP_Settings {
 			</select>
 		</td>
 	</tr>
-	<?php if ( $options['webstream_jail'] && !empty($aiwp->config->options['ga4_webstreams_list']) ) :	?>
+	<?php if ( $options['webstream_jail'] && !empty( $aiwp->config->options['ga4_webstreams_list'] ) ) :	?>
 	<tr>
 		<td class="aiwp-settings-title"></td>
 		<td>
@@ -1068,6 +1070,11 @@ final class AIWP_Settings {
 		</td>
 	</tr>
 	<?php endif; ?>
+	<tr><td>&nbsp;</td></tr>
+	<?php if ( $options['tableid_jail'] && $options['webstream_jail'] ) : ?>
+	<?php self::html_switch_button('options[reporting_type]', 1, 'reporting_type', $options['reporting_type'], __( "use Google Analytics 4 data to generate reports and stats", 'analytics-insights') ); ?>
+	<?php endif; ?>
+	<tr><td>&nbsp;</td></tr>
 	<tr>
 		<td class="aiwp-settings-title">
 			<label for="theme_color"><?php _e("Theme Color:", 'analytics-insights' ); ?></label>
@@ -1076,7 +1083,7 @@ final class AIWP_Settings {
 			<input type="text" id="theme_color" class="theme_color" name="options[theme_color]" value="<?php echo esc_attr( $options['theme_color'] ); ?>" size="10">
 		</td>
 	</tr>
-	<?php self::html_section_delimiter(); ?>
+	<tr><td>&nbsp;</td></tr>
 	<tr>
 		<td colspan="2" class="submit">
 			<input type="submit" name="Submit" class="button button-primary" value="<?php _e('Save Changes', 'analytics-insights' ) ?>" />
@@ -1244,7 +1251,7 @@ final class AIWP_Settings {
 		}
 		if ( isset( $_REQUEST['Reset'] ) ) {
 			if ( isset( $_REQUEST['aiwp_security'] ) && wp_verify_nonce( $_REQUEST['aiwp_security'], 'aiwp_form' ) ) {
-				$aiwp->gapi_controller->reset_token();
+				$aiwp->gapi_controller->reset_token( true );
 				AIWP_Tools::clear_cache();
 				$message = "<div class='updated' id='aiwp-autodismiss'><p>" . __( "Token Reseted and Revoked.", 'analytics-insights' ) . "</p></div>";
 				$options = self::update_options( 'Reset' );
@@ -1344,6 +1351,7 @@ final class AIWP_Settings {
 		<td>
 			<select id="network_tableid" <?php disabled(!empty($options['ga_profiles_list']),false);?> name="options[network_tableid][<?php echo esc_attr( $blog['blog_id'] );?>]">
 	 		<?php if ( ! empty( $options['ga_profiles_list'] ) ) : ?>
+	 		<option value="" <?php selected( '', $options['tableid_jail'] ); ?>><?php _e( "Disabled", 'analytics-insights' ); ?></option>
 				<?php foreach ( $options['ga_profiles_list'] as $items ) : ?>
 				<?php if ( $items[3] ) : ?>
 				<?php $temp_id = $blog['blog_id']; ?>
@@ -1354,7 +1362,7 @@ final class AIWP_Settings {
 				<?php endforeach; ?>
 				<?php else : ?>
 				<option value="">
-					<?php _e( "Property not found", 'analytics-insights' );?>
+					<?php _e( "Disabled", 'analytics-insights' );?>
 				</option>
 				<?php endif; ?>
 			</select>

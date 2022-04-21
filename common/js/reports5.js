@@ -720,7 +720,7 @@ jQuery.fn.extend( {
 						if ( jQuery.isArray( response ) ) {
 							jQuery( '#aiwp-reports' + slug ).show();
 							reports.realtime = response[ 0 ];
-							if ( aiwpItemData.reportingType ){
+							if ( aiwpItemData.reportingType == '1' ){
 								reports.drawRealtimeGA4( reports.realtime );
 							} else {
 								reports.drawRealtime( reports.realtime );
@@ -889,7 +889,7 @@ jQuery.fn.extend( {
 					rtData[ "rows" ] = [];
 				}
 
-				if ( rtData[ "totals" ] !== document.getElementById( "aiwp-online-ga4" ).innerHTML ) {
+				if ( parseInt( rtData[ "totals" ] ) !== parseInt( document.getElementById( "aiwp-online-ga4" ).innerHTML ) ) {
 					jQuery( "#aiwp-online-ga4" ).fadeOut( "slow" );
 					jQuery( "#aiwp-online-ga4" ).fadeOut( 500 );
 					jQuery( "#aiwp-online-ga4" ).fadeOut( "slow", function () {
@@ -951,9 +951,9 @@ jQuery.fn.extend( {
 				}
 				document.getElementById( "aiwp-pages" ).innerHTML = '<br /><div class="aiwp-pg">' + pgStatsTable + '</div>';
 				
-				rtInfoRight = '<div class="aiwp-bigtext-ga4"><div class="aiwp-bleft"><span class="dashicons dashicons-desktop"></span> ' + reports.i18n[ 12 ] + '</div><div class="aiwp-bright">' + desktopCount + '</div></div>';
-				rtInfoRight += '<div class="aiwp-bigtext-ga4"><div class="aiwp-bleft"><span class="dashicons dashicons-smartphone"></span> ' + reports.i18n[ 13 ] + '</div><div class="aiwp-bright">' + mobileCount + '</div></div>';
-				rtInfoRight += '<div class="aiwp-bigtext-ga4"><div class="aiwp-bleft"><span class="dashicons dashicons-tablet"></span> ' + reports.i18n[ 14 ] + '</div><div class="aiwp-bright">' + tabletCount + '</div></div>';
+				rtInfoRight = '<div class="aiwp-bigtext-ga4"><div class="aiwp-bleft-ga4"><span class="dashicons dashicons-desktop"></span> ' + reports.i18n[ 12 ] + '</div><div class="aiwp-bright-ga4">' + desktopCount + '</div></div>';
+				rtInfoRight += '<div class="aiwp-bigtext-ga4"><div class="aiwp-bleft-ga4"><span class="dashicons dashicons-smartphone"></span> ' + reports.i18n[ 13 ] + '</div><div class="aiwp-bright-ga4">' + mobileCount + '</div></div>';
+				rtInfoRight += '<div class="aiwp-bigtext-ga4"><div class="aiwp-bleft-ga4"><span class="dashicons dashicons-tablet"></span> ' + reports.i18n[ 14 ] + '</div><div class="aiwp-bright-ga4">' + tabletCount + '</div></div>';
 
 				document.getElementById( "aiwp-tdo-right-ga4" ).innerHTML = rtInfoRight;
 			},			
@@ -1102,7 +1102,7 @@ jQuery.fn.extend( {
 						reports.render.focusFlag = 0;
 					} );
 					
-					if ( aiwpItemData.reportingType ) {
+					if ( aiwpItemData.reportingType == '1' ) {
 
 						tpl = '<div id="aiwp-realtime' + slug + '">';
 						tpl += '<div class="aiwp-rt-box">';
@@ -1112,16 +1112,16 @@ jQuery.fn.extend( {
 						tpl += '</div>';
 						tpl += '<div class="aiwp-tdo-right-ga4" id="aiwp-tdo-right-ga4">';
 						tpl += '<div class="aiwp-bigtext-ga4">';
-						tpl += '<div class="aiwp-bleft"><span class="dashicons dashicons-desktop"></span> ' + reports.i18n[ 12 ] + '</div>';
-						tpl += '<div class="aiwp-bright">0</div>';
+						tpl += '<div class="aiwp-bleft-ga4"><span class="dashicons dashicons-desktop"></span> ' + reports.i18n[ 12 ] + '</div>';
+						tpl += '<div class="aiwp-bright-ga4">0</div>';
 						tpl += '</div>';
 						tpl += '<div class="aiwp-bigtext-ga4">';
-						tpl += '<div class="aiwp-bleft"><span class="dashicons dashicons-smartphone"></span> ' + reports.i18n[ 13 ] + '</div>';
-						tpl += '<div class="aiwp-bright">0</div>';
+						tpl += '<div class="aiwp-bleft-ga4"><span class="dashicons dashicons-smartphone"></span> ' + reports.i18n[ 13 ] + '</div>';
+						tpl += '<div class="aiwp-bright-ga4">0</div>';
 						tpl += '</div>';
 						tpl += '<div class="aiwp-bigtext-ga4">';
-						tpl += '<div class="aiwp-bleft"><span class="dashicons dashicons-tablet"></span> ' + reports.i18n[ 14 ] + '</div>';
-						tpl += '<div class="aiwp-bright">0</div>';
+						tpl += '<div class="aiwp-bleft-ga4"><span class="dashicons dashicons-tablet"></span> ' + reports.i18n[ 14 ] + '</div>';
+						tpl += '<div class="aiwp-bright-ga4">0</div>';
 						tpl += '</div>';
 						tpl += '</div>';
 						tpl += '</div>';
@@ -1175,7 +1175,7 @@ jQuery.fn.extend( {
 
 					reports.rtRefresh( reports.render.focusFlag );
 
-					reports.rtRuns = setInterval( reports.rtRefresh, 65000 );
+					reports.rtRuns = setInterval( reports.rtRefresh, 5000 );
 
 				} else {
 					if ( jQuery.inArray( query, [ 'referrers', 'contentpages', 'searches' ] ) > -1 ) {

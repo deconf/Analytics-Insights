@@ -23,9 +23,7 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 
 			$this->get_plugin_options(); // Get plugin options
 
-			$this->reporting_ready = $this->options['tableid_jail'];
-
-			//$this->options['tableid_jail'] || ( $this->options['reporting_type'] && $this->options['webstream_jail'] );
+			$this->reporting_ready = $this->options['tableid_jail'] || $this->options['webstream_jail'];
 
 		}
 
@@ -386,9 +384,15 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 				$flag = true;
 			}
 
-			// @todo: switch between Data API and Reporting v4 API, do not use in production!
-			$this->options['reporting_type'] = 1;
-			$flag = true;
+			if ( $this->options['tableid_jail'] && !$this->options['webstream_jail'] ){
+				$this->options['reporting_type'] = 0;
+				$flag = true;
+			}
+
+			if ( !$this->options['tableid_jail'] && $this->options['webstream_jail'] ){
+				$this->options['reporting_type'] = 1;
+				$flag = true;
+			}
 
 			if ( $flag ) {
 				$this->set_plugin_options( false );

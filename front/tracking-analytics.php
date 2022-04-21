@@ -291,7 +291,7 @@ if ( ! class_exists( 'AIWP_Tracking_Analytics' ) ) {
 				foreach ( $custom_dimensions as $index => $value ) {
 					$fields = array();
 					$fields['aiwp_dimension'] = 'dimension' . $index;
-					$fields['aiwp_dim_value'] = $value;
+					$fields['aiwp_dim_value'] = esc_js( $value );
 					$this->add( 'set', $fields );
 				}
 			}
@@ -439,7 +439,7 @@ if ( ! class_exists( 'AIWP_Tracking_GlobalSiteTag' ) ) {
 				$fieldsobject = array();
 				$fields['event_name'] = 'aiwp_dimensions';
 				foreach ( $custom_dimensions as $index => $value ) {
-					$fieldsobject['aiwp_dim_' . $index] = $value;
+					$fieldsobject['aiwp_dim_' . $index] = esc_js( $value );
 				}
 				$this->add( 'event', $fields, $fieldsobject );
 			}
@@ -635,7 +635,7 @@ if ( ! class_exists( 'AIWP_Tracking_Analytics_AMP' ) ) {
 			if ( ! empty( $custom_dimensions ) ) {
 				foreach ( $custom_dimensions as $index => $value ) {
 					$dimension = 'cd' . $index;
-					$this->config['extraUrlParams'][$dimension] = $value;
+					$this->config['extraUrlParams'][$dimension] = esc_js( $value );
 				}
 			}
 			// Set Triggers
@@ -870,7 +870,7 @@ class AIWP_Tracking_GlobalSiteTag_AMP extends AIWP_Tracking_Analytics_Base {
 			foreach ( $custom_dimensions as $index => $value ) {
 				$dimension = 'dimension' . $index;
 				$this->config['vars']['config'][sanitize_text_field ( $this->gaid )]['custom_map'][$dimension] = 'aiwp_dim_'.$index;
-				$this->config['triggers']['dimension_event']['vars']['aiwp_dim_'.$index] = $value;
+				$this->config['triggers']['dimension_event']['vars']['aiwp_dim_'.$index] = esc_js( $value );
 			}
 		}
 		/* @formatter:on */

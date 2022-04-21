@@ -1,25 +1,25 @@
-=== Analytics Insights for Google Analytics (AIWP) ===
+=== Analytics Insights for Google Analytics 4 (AIWP) ===
 Contributors: deconf
 Donate link: https://deconf.com/donate/
-Tags: analytics,google analytics,google analytics code,google analytics dashboard,google analytics plugin,google analytics tracking code,google analytics widget,wordpress analytics
+Tags: analytics,google analytics,google analytics 4,google analytics dashboard, GA4, google analytics plugin,google analytics tracking code,google analytics widget,wordpress analytics
 Requires at least: 3.5
 Tested up to: 5.9
-Stable tag: 5.6
+Stable tag: 5.6.1
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Connects Google Analytics with your WordPress site. Displays stats and gives insights to help you understand your users and site content on a whole new level!
+Connects Google Analytics 4 with your WordPress site. Displays stats and gives insights to help you understand your users and site content on a whole new level!
 
 == Description ==
 
 Analytics Insights is a WordPress plugin that enables site tracking using the latest Google Analytics tracking code. It allows you to view key Google Analytics stats in your WordPress Dashboard.
 
-With newly introduced Dual Tracking feature, you can collect data with both Google Analytics 4 (GA4) and Universal Analytics (UA) at the same time.
+With the newly introduced Dual Tracking feature, you can collect data with both Google Analytics 4 (GA4) and Universal Analytics (UA) at the same time.
 
 = Google Analytics Reports, Stats and Insights =
 
-Analytics Insights displays the reports you need on your dashboard and on the site's frontend. Audience, acquisition, behavior, and real-time stats are all presented as charts within a dedicated dashboard widget.  
+Analytics Insights displays the reports you need on your dashboard and on the site's frontend. Audience, acquisition, behavior, engagement and real-time stats are all presented as charts within a dedicated dashboard widget.  
 
 In addition to a set of general Google Analytics stats, insights like in-depth Page reports and in-depth Post reports are available.
 
@@ -31,7 +31,7 @@ The plugin installs the latest Google Analytics tracking code. No matter the tra
 
 Advanced features like events tracking and custom dimensions tracking can be enabled with a switch of a button, without the need of any programming skills.  
 
-If you need Universal Analytics (UA) and Google Analytics 4 (GA4) to both collect data at the same time, for the same website, simply enable the Dual Tracking feature.  
+If you need Universal Analytics (UA) and Google Analytics 4 (GA4) to both collect data at the same time, for the same website, simply enable the Dual Tracking feature. Google Analytics 4 tracking is also available without needing a Google Analytics 3 property. 
  
 = Analytics Insights on Multisite =
 
@@ -41,7 +41,7 @@ This plugin is fully compatible with multisite network installs. Allows using mu
 
 1. Upload the full analytics-insights directory into your wp-content/plugins directory.
 2. In WordPress select Plugins from your sidebar menu and activate the Analytics Insights plugin.
-3. Open the plugin configuration page, which is located under Analytics Insights menu.
+3. Open the plugin configuration page, which is located under the Analytics Insights menu.
 4. Authorize the plugin to connect to Google Analytics using the Authorize Plugin button.
 5. Go back to the plugin configuration page, which is located under Analytics Insights menu to update/set your settings.
 6. Go to Analytics Insights -> Tracking Code to configure/enable/disable tracking.
@@ -52,9 +52,17 @@ This plugin is fully compatible with multisite network installs. Allows using mu
 
 No, once the plugin is authorized and a default domain is selected the Google Analytics tracking code is automatically inserted in all webpages.
 
+= Why the numbers on Google Analytics 4 don't match those from Universal Analytics =
+
+To put it simple, different technologies and approaches lead to different results.
+
 = Is Google Analytics 4 tracking supported? =
 
 Yes, you can use Google Analytics 4 properties and/or Universal Analytics properties for tracking, both are supported. 
+
+= Can I only use a Google Analytics 4 property =
+
+Yes, you don't need to create or have an Universal Analytics property. A Google Analytics 4 property is enough for the plugin to be fully functional. 
 
 = How can I suggest a new feature, contribute or report a bug? =
 
@@ -67,28 +75,40 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 == Screenshots ==
 
 1. Blue Color
-2. Real-Time Analytics
-3. Analytics reports per Posts/Pages
-4. Geo Map
-5. Top Pages, Top Referrers, and Top Searches
-6. Traffic Overview
-7. Statistics per page on Frontend
-8. Cities on the region map
-9. Analytics Insights Widget
+2. Real-Time Google Analytics 3
+3. Real-Time Google Analytics 4 
+4. Analytics reports per Posts/Pages
+5. Geo Map
+6. Top Pages, Top Referrers, and Top Searches
+7. Traffic Overview
+8. Statistics per page on Frontend
+9. Cities on the region map
+10. Analytics Insights Widget
 
 == Upgrade Notice ==
 
 == Changelog ==
 
-[AIWP v5.4 release notes](https://deconf.com/analytics-insights-for-wordpress/)
-
-= 5.6 (2022.02.14) =
-* Enhancements:
-	* switching all reports to Google Analytics Reporting v4 API for an easier migration to Google Analytics Data API
-	* preparing support for Google Analytics 4 reports
-	* Global Site Tag is now the default tracking method on new installations
+= 5.6.1 (2022.04.21) =
 * Bug Fixes:
-	* fix frontend per page Google Analytics reports  
+	* escape single quotes on Google Analytics custom dimensions to prevent JavaScript Errors
+	
+= 5.6 (2022.04.14) - [release notes](https://deconf.com/analytics-insights-for-google-analytics-4/) =
+* Enhancements:
+	* switching all reports to Google Analytics Reporting v4 for an easier migration to Google Analytics Data API
+	* Google Analytics 4 reports are now available
+	* Global Site Tag is now the default tracking method on new installations
+	* Tracking only with a Google Analytics 4 property is now possible
+	* Google Analytics Data API update
+	* Google Analytics Reporting API update
+	* Google Analytics 4 real-time reports are now available
+	* Google Analytics 4 frontend reports UX improvements
+	* Google Analytics 3 frontend reports UX improvements
+* Bug Fixes:
+	* fix frontend per page Google Analytics reports
+	* redesign the Real-Time Report for Google Analytics 4  
+	* multiple CSS fixes
+	* Frontend Reports URI fix
 	
 = 5.5.6 (2022.03.31) =
 * Bug Fixes:
@@ -102,7 +122,7 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 	
 = 5.5.4 (2022.03.04) =
 * Bug Fixes:
-	* 404 error during Google Analytics 4 webdatastreams list request
+	* 404 error during Google Analytics 4 web datastreams list request
 	
 = 5.5.3 (2022.02.14) =
 * Enhancements:
@@ -174,7 +194,7 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 * Bug Fixes:
 	* fixes multisite/network mode random token resets 
 
-= 5.4 (2021.08.30) =
+= 5.4 (2021.08.30) - [release notes](https://deconf.com/analytics-insights-for-wordpress/) =
 * Enhancements:
 	* capability to filter and search within displayed tables
 	* automatically authorize users with Google Analytics, without copy/pasting the access codes
