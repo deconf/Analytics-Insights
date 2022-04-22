@@ -94,7 +94,7 @@ final class AIWP_Settings {
 <form name="aiwp_form" method="post" action="<?php echo esc_url( $action ); ?>">
 	<div class="wrap">
 			<?php echo "<h2>" . esc_html( $text ) . "</h2>"; ?>
-	  <?php if (isset($message)) echo wp_kses( $message, array( 'div' => array( 'class' => array(), 'id' => array() ), 'p' => array())); ?>
+	  <?php if (isset($message)) echo wp_kses( $message, array( 'div' => array( 'class' => array(), 'id' => array() ), 'p' => array(), 'a' => array( 'href' => array() ) ) ); ?>
 	  <hr>
 	</div>
 	<div id="poststuff" class="aiwp">
@@ -156,9 +156,10 @@ final class AIWP_Settings {
 				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You do not have sufficient permissions to access this page.", 'analytics-insights' ) . "</p></div>";
 			}
 		}
-
-		if ( ! $aiwp->config->reporting_ready || ! $aiwp->config->options['token'] ) {
+		if ( ! $aiwp->config->options['token'] ) {
 			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'analytics-insights' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_errors_debugging', false ), __( 'Errors & Debug', 'analytics-insights' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_settings', false ), __( 'authorize the plugin', 'analytics-insights' ) ) ) );
+		} else if ( ! $aiwp->config->reporting_ready ){
+			$message = sprintf( '<div class="error"><p>%s</p></div>', __("No Google Analytics properties were found in this Google account. Re-authorize with the right account!", 'analytics-insights') );
 		}
 		?>
 <?php self::html_form_begin(__( "Google Analytics Frontend Settings", 'analytics-insights' ), $_SERVER['REQUEST_URI'], $message)?>
@@ -214,8 +215,10 @@ final class AIWP_Settings {
 				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You do not have sufficient permissions to access this page.", 'analytics-insights' ) . "</p></div>";
 			}
 		}
-		if ( ! $aiwp->config->reporting_ready || ! $aiwp->config->options['token'] ) {
+		if ( ! $aiwp->config->options['token'] ) {
 			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'analytics-insights' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_errors_debugging', false ), __( 'Errors & Debug', 'analytics-insights' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_settings', false ), __( 'authorize the plugin', 'analytics-insights' ) ) ) );
+		} else if ( ! $aiwp->config->reporting_ready ){
+			$message = sprintf( '<div class="error"><p>%s</p></div>', __("No Google Analytics properties were found in this Google account. Re-authorize with the right account!", 'analytics-insights') );
 		}
 		?>
 <?php self::html_form_begin(__( "Google Analytics Backend Settings", 'analytics-insights' ), $_SERVER['REQUEST_URI'], $message)?>
@@ -306,7 +309,7 @@ final class AIWP_Settings {
 			}
 		}
 		if ( ! $aiwp->config->reporting_ready ) {
-			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'analytics-insights' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_errors_debugging', false ), __( 'Errors & Debug', 'analytics-insights' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_settings', false ), __( 'authorize the plugin', 'analytics-insights' ) ) ) );
+			$message = sprintf( '<div class="error"><p>%s</p></div>', __("No Google Analytics properties were found in this Google account. Re-authorize with the right account!", 'analytics-insights') );
 		}
 		if ( 'universal' == $options['tracking_type'] || 'globalsitetag' == $options['tracking_type'] || 'dualtracking' == $options['tracking_type'] || 'ga4tracking' == $options['tracking_type'] ) {
 			$tabs = array( 'basic' => __( "Basic Settings", 'analytics-insights' ), 'events' => __( "Events Tracking", 'analytics-insights' ), 'custom' => __( "Custom Definitions", 'analytics-insights' ), 'exclude' => __( "Exclude Tracking", 'analytics-insights' ), 'advanced' => __( "Advanced Settings", 'analytics-insights' ), 'integration' => __( "Integration", 'analytics-insights' ) );
@@ -747,8 +750,10 @@ final class AIWP_Settings {
 		}
 		$anonim = AIWP_Tools::anonymize_options( $aiwp->config->options );
 		$options = self::update_options( 'frontend' );
-		if ( ! $aiwp->config->reporting_ready || ! $aiwp->config->options['token'] ) {
+		if ( ! $aiwp->config->options['token'] ) {
 			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'analytics-insights' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_errors_debugging', false ), __( 'Errors & Debug', 'analytics-insights' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_settings', false ), __( 'authorize the plugin', 'analytics-insights' ) ) ) );
+		} else if ( ! $aiwp->config->reporting_ready ){
+			$message = sprintf( '<div class="error"><p>%s</p></div>', __("No Google Analytics properties were found in this Google account. Re-authorize with the right account!", 'analytics-insights') );
 		}
 		?>
 <?php self::html_form_begin(__( "Google Analytics Errors & Debugging", 'analytics-insights' ), $_SERVER['REQUEST_URI'], $message)?>
@@ -960,8 +965,10 @@ final class AIWP_Settings {
 				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You do not have sufficient permissions to access this page.", 'analytics-insights' ) . "</p></div>";
 			}
 		}
-		if ( ( $aiwp->gapi_controller->gapi_errors_handler() || AIWP_Tools::get_cache( 'last_error' ) ) && strpos(AIWP_Tools::get_cache( 'last_error' ), '-27') === false )  {
+		if ( ! $aiwp->config->options['token'] ) {
 			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'analytics-insights' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_errors_debugging', false ), __( 'Errors & Debug', 'analytics-insights' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_settings', false ), __( 'authorize the plugin', 'analytics-insights' ) ) ) );
+		} else if ( ! $aiwp->config->reporting_ready ){
+			$message = sprintf( '<div class="error"><p>%s</p></div>', __("No Google Analytics properties were found in this Google account. Re-authorize with the right account!", 'analytics-insights') );
 		}
 		?>
 <?php self::html_form_begin(__( "Google Analytics Settings", 'analytics-insights' ), $_SERVER['REQUEST_URI'], $message)?>
@@ -1281,15 +1288,17 @@ final class AIWP_Settings {
 				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You do not have sufficient permissions to access this page.", 'analytics-insights' ) . "</p></div>";
 			}
 		}
-		if ( ( $aiwp->gapi_controller->gapi_errors_handler() || AIWP_Tools::get_cache( 'last_error' ) ) && strpos(AIWP_Tools::get_cache( 'last_error' ), '-27') === false )  {
+		if ( ! $aiwp->config->options['token'] ) {
 			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'analytics-insights' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_errors_debugging', false ), __( 'Errors & Debug', 'analytics-insights' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_settings', false ), __( 'authorize the plugin', 'analytics-insights' ) ) ) );
+		} else if ( ! $aiwp->config->reporting_ready ){
+			$message = sprintf( '<div class="error"><p>%s</p></div>', __("No Google Analytics properties were found in this Google account. Re-authorize with the right account!", 'analytics-insights') );
 		}
 		?>
 <?php self::html_form_begin(__( "Google Analytics Settings", 'analytics-insights' ), $_SERVER['REQUEST_URI'], $message)?>
 <table class="aiwp-settings-options">
  <?php self::html_section_delimiter(__( "Network Setup", 'analytics-insights' ), false); ?>
 	<?php self::html_switch_button('options[network_mode]', 1, 'network_mode', $options['network_mode'], __( "use a single Google Analytics account for the entire network", 'analytics-insights'), false, true ); ?>
-	<?php if ($options['network_mode']) : ?>
+	<?php if ( $options['network_mode'] ) : ?>
 	<?php self::html_section_delimiter(); ?>
 	<?php self::html_section_delimiter(__( "Plugin Authorization", 'analytics-insights' ), false); ?>
 	<tr>

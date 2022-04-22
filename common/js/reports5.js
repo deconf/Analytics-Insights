@@ -197,6 +197,16 @@ jQuery.fn.extend( {
 				tpl += '</div>',
 
 				jQuery( '#aiwp-window' + slug ).append( tpl );
+				
+				jQuery( "#aiwp-reports" + slug ).css( {
+						"background-color" : "#FFFFFF",
+						"height" : "auto",
+						"margin-top" : "0",
+						"padding-top" : "0",
+						"padding-bottom" : "0",
+						"color" : "#3c434a",
+						"text-align" : "inherit"
+				} );				
 
 				template.addOptions( '#aiwp-sel-view' + slug, aiwpItemData.viewList );
 				template.addOptions( '#aiwp-sel-period' + slug, aiwpItemData.dateList );
@@ -259,6 +269,10 @@ jQuery.fn.extend( {
 				if ( !jQuery( '#aiwp-areachartbottomstats' + slug ).length ) {
 					jQuery( '#aiwp-reports' + slug ).html( tpl );
 				}
+
+				jQuery( '#aiwp-areachart' + slug ).removeAttr("style");
+				
+				jQuery( '#aiwp-bottomstats' + slug ).removeAttr("style");
 				
 				jQuery( '#aiwp-sel-metric' + slug ).hide();				
 				
@@ -314,6 +328,11 @@ jQuery.fn.extend( {
 				tpl += '<div id="aiwp-piechart-4' + slug + '" class="halfsize floatright"></div>';
 				tpl += '</div>';
 				tpl += '</div>';
+				
+				jQuery( '#aiwp-piechart-1' + slug ).removeAttr("style");
+				jQuery( '#aiwp-piechart-2' + slug ).removeAttr("style");
+				jQuery( '#aiwp-piechart-3' + slug ).removeAttr("style");
+				jQuery( '#aiwp-piechart-4' + slug ).removeAttr("style");
 
 				if ( !jQuery( '#aiwp-orgchartpiecharts' + slug ).length ) {
 					jQuery( '#aiwp-reports' + slug ).html( tpl );
@@ -368,8 +387,12 @@ jQuery.fn.extend( {
 			
 				if ( !jQuery( '#aiwp-geocharttablechart' + slug ).length ) {
 					jQuery( '#aiwp-reports' + slug ).html( tpl );
-				}		
+				}
 				
+				jQuery( '#aiwp-geochart' + slug ).removeAttr("style");
+				
+				jQuery( '#aiwp-tablechart' + slug ).removeAttr("style");
+								
 				jQuery( '#aiwp-sel-metric' + slug ).show();	
 			
 				reports.geoChartTableChartData = response;
@@ -408,6 +431,10 @@ jQuery.fn.extend( {
 				if ( !jQuery( '#aiwp-orgcharttablechart' + slug ).length ) {
 					jQuery( '#aiwp-reports' + slug ).html( tpl );
 				}
+				
+				jQuery( '#aiwp-orgchart' + slug ).removeAttr("style");
+				
+				jQuery( '#aiwp-tablechart' + slug ).removeAttr("style");
 				
 				jQuery( '#aiwp-sel-metric' + slug ).show();		
 			
@@ -453,6 +480,10 @@ jQuery.fn.extend( {
 				if ( !jQuery( '#aiwp-404tablechart' + slug ).length ) {
 					jQuery( '#aiwp-reports' + slug ).html( tpl );
 				}
+				
+				jQuery( '#aiwp-404tablechart' + slug ).removeAttr("style");
+				
+				jQuery( '#aiwp-tablechart' + slug ).removeAttr("style");
 				
 				jQuery( '#aiwp-sel-metric' + slug ).show();			
 			
@@ -956,7 +987,7 @@ jQuery.fn.extend( {
 				rtInfoRight += '<div class="aiwp-bigtext-ga4"><div class="aiwp-bleft-ga4"><span class="dashicons dashicons-tablet"></span> ' + reports.i18n[ 14 ] + '</div><div class="aiwp-bright-ga4">' + tabletCount + '</div></div>';
 
 				document.getElementById( "aiwp-tdo-right-ga4" ).innerHTML = rtInfoRight;
-			},			
+			},
 
 			throwDebug : function ( response ) {
 				jQuery( "#aiwp-status" + slug ).css( {

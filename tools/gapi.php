@@ -290,19 +290,26 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 */
 		public function gapi_errors_handler() {
 
-			// @todo: comment-out the return false in production
-			//return false;
-
 			$errors = AIWP_Tools::get_cache( 'gapi_errors' );
-			if ( false === $errors || ! isset( $errors[0] ) ) { // invalid error
+
+			//Proceed as normal if we don't know the error
+			if ( false === $errors || ! isset( $errors[0] ) ) {
 				return false;
 			}
+
+			//Reset the token since these are unrecoverable errors and need user intervention
 			if ( isset( $errors[1][0]['reason'] ) && ( 'invalidParameter' == $errors[1][0]['reason'] || 'badRequest' == $errors[1][0]['reason'] || 'invalidCredentials' == $errors[1][0]['reason'] || 'insufficientPermissions' == $errors[1][0]['reason'] || 'required' == $errors[1][0]['reason'] ) ) {
 				$this->reset_token();
 				return true;
 			}
-			if ( 400 == $errors[0] || 401 == $errors[0] || 403 == $errors[0] ) {
+
+			if ( 400 == $errors[0] || 401 == $errors[0] ) {
 				$this->reset_token();
+				return true;
+			}
+
+			//Backoff processing until the error timeouts, usually at midnight
+			if ( isset( $errors[1][0]['reason'] ) && ( 'dailyLimitExceeded' == $errors[1][0]['reason'] || 'userRateLimitExceeded' == $errors[1][0]['reason'] || 'rateLimitExceeded' == $errors[1][0]['reason'] || 'quotaExceeded' == $errors[1][0]['reason'] ) ) {
 				return true;
 			}
 
@@ -319,10 +326,13 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					return true;
 				}
 			}
+
 			if ( 500 == $errors[0] || 503 == $errors[0] || $errors[0] < - 50 ) {
 				return true;
 			}
+
 			return false;
+
 		}
 
 		/**
@@ -386,7 +396,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
 				if ( empty( $ga_profiles_list ) ) {
 					$timeout = $this->get_timeouts( 'midnight' );
-					//AIWP_Tools::set_error( 'No properties were found in this account!', $timeout );
+					//AIWP_Tools::set_error( 'No Google Analytics properties were found in this Google account. Re-authorize with the right account.!', $timeout );
 				} else {
 					AIWP_Tools::delete_cache( 'last_error' );
 				}

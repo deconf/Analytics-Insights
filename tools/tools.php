@@ -223,6 +223,10 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 			if ( is_object( $e ) ) {
 				self::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $timeout );
 				if ( method_exists( $e, 'getCode' ) && method_exists( $e, 'getErrors' ) ) {
+					$error_code = $e->getCode();
+					if ( 500 == $error_code || 503 == $error_code ) {
+						$timeout = 60;
+					}
 					self::set_cache( 'gapi_errors', array( $e->getCode(), (array) $e->getErrors() ), $timeout );
 				}
 			} else {

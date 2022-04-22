@@ -92,7 +92,11 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 = 5.6.1 (2022.04.21) =
 * Bug Fixes:
 	* escape single quotes on Google Analytics custom dimensions to prevent JavaScript Errors
-	
+* Enhancements:
+	* more accurate errors and error description
+	* reset CSS style applied during error display on Google Analytics reports widget
+	* handling improvements on Google Analytics APIs errors 
+	  	
 = 5.6 (2022.04.14) - [release notes](https://deconf.com/analytics-insights-for-google-analytics-4/) =
 * Enhancements:
 	* switching all reports to Google Analytics Reporting v4 for an easier migration to Google Analytics Data API
