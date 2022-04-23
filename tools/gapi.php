@@ -102,6 +102,15 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					}
 				}
 			}
+
+			$this->service = new Google\Service\Analytics( $this->client );
+
+			$this->service_ga4_admin = new Google\Service\GoogleAnalyticsAdmin( $this->client );
+
+			$this->service_ga3_reporting = new Google\Service\AnalyticsReporting( $this->client );
+
+			$this->service_ga4_data = new Google\Service\AnalyticsData( $this->client );
+
 		}
 
 		/**
@@ -117,12 +126,12 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			if ( isset( $token['created'] ) ) {
 				$created = $token['created'];
 			}
-			// If the token is set to expire in the next 90 seconds.
+			//If the token is set to expire in the next 90 seconds.
 			return ( $created + ( $token['expires_in'] - 90 ) ) < time();
 		}
 
 		public function fetch_new_token( $oldtoken ) {
-			if ( $this->aiwp->config->options['with_endpoint'] && ! $this->aiwp->config->options['user_api'] ) {
+			if ( ! $this->aiwp->config->options['user_api'] ) {
 
 				$endpoint = AIWP_ENDPOINT_URL . 'aiwp-token.php';
 
@@ -152,6 +161,11 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					$token = json_decode( $response['body'] );
 					$array_token = (array)$token;
 					if ( isset( $array_token['access_token'] ) ){
+
+						//Sync time with the EndPoint Server
+						$array_token['expires_in'] = $array_token['expires_in'] + ( time() - $array_token['created'] );
+						$array_token['created'] = time();
+
 						$this->client->setAccessToken( $array_token );
 						$this->aiwp->config->options['token'] = $this->client->getAccessToken();
 					} else{ //Google Endpoint Error
@@ -174,7 +188,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		}
 
 		public function authenticate( $access_code ) {
-			if ( $this->aiwp->config->options['with_endpoint'] && ! $this->aiwp->config->options['user_api'] ) {
+			if ( ! $this->aiwp->config->options['user_api'] ) {
 
 				$endpoint = AIWP_ENDPOINT_URL . 'aiwp-token.php';
 
@@ -234,7 +248,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
 			if ( $all && $token ) {
 
-				if ( $this->aiwp->config->options['with_endpoint'] && ! $this->aiwp->config->options['user_api'] ) {
+				if ( ! $this->aiwp->config->options['user_api'] ) {
 
 					$endpoint = AIWP_ENDPOINT_URL . 'aiwp-revoke.php';
 
@@ -375,8 +389,6 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				$startindex = 1;
 				$totalresults = 65535; // use something big
 
-				$this->service = new Google\Service\Analytics( $this->client );
-
 				while ( $startindex < $totalresults ) {
 
 					$profiles = $this->service->management_profiles->listManagementProfiles( '~all', '~all', array( 'start-index' => $startindex ) );
@@ -422,7 +434,6 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			try {
 				$ga4_webstreams_list = array();
 
-				$this->service_ga4_admin = new Google\Service\GoogleAnalyticsAdmin( $this->client );
 				$accounts = $this->service_ga4_admin->accountSummaries->listAccountSummaries()->getAccountSummaries();
 
 				 if ( !empty( $accounts ) ) {
@@ -497,8 +508,6 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					if ( $this->gapi_errors_handler() ) {
 						return - 23;
 					}
-
-					$this->service_ga3_reporting = new Google\Service\AnalyticsReporting( $this->client );
 
 					// Create the DateRange object.
 					$dateRange = new Google\Service\AnalyticsReporting\DateRange();
@@ -1256,8 +1265,6 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 						return - 23;
 					}
 
-					$this->service = new Google\Service\Analytics( $this->client );
-
 					$data = $this->service->data_realtime->get( 'ga:' . $projectId, $metrics, array( 'dimensions' => $dimensions, 'quotaUser' => $this->managequota . 'p' . $projectId ) );
 
 					AIWP_Tools::set_cache( $serial, $data, 55 );
@@ -1328,8 +1335,6 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
 					$projectIdArr = explode( '/dataStreams/',$projectId );
 					$projectId = $projectIdArr[0];
-
-					$this->service_ga4_data = new Google\Service\AnalyticsData( $this->client );
 
 					// Create the DateRange object.
 					$dateRange = new Google\Service\AnalyticsData\DateRange();
@@ -2168,8 +2173,6 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					if ( $this->gapi_errors_handler() ) {
 						return - 23;
 					}
-
-					$this->service_ga4_data = new Google\Service\AnalyticsData( $this->client );
 
 					$request = new Google\Service\AnalyticsData\RunRealtimeReportRequest();
 

@@ -85,7 +85,6 @@ class AIWP_Install {
 			$options['tm_pagescrolldepth_tracking'] = 0;
 			$options['ga_event_precision'] = 0;
 			$options['ga_force_ssl'] = 0;
-			$options['with_endpoint'] = 1;
 			$options['ga_optout'] = 0;
 			$options['ga_dnt_optout'] = 0;
 			$options['tm_optout'] = 0;
@@ -159,7 +158,6 @@ class AIWP_Install {
 			$options['ga_user_samplerate'] = 100;
 			$options['ga_event_precision'] = 0;
 			$options['ga_force_ssl'] = 0;
-			$options['with_endpoint'] = 1;
 			$options['ga_optout'] = 0;
 			$options['ga_dnt_optout'] = 0;
 			$options['tm_optout'] = 0;

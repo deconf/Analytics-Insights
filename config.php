@@ -60,7 +60,6 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 								'ga_speed_samplerate',
 								'ga_user_samplerate',
 								'ga_event_precision',
-								'with_endpoint',
 								'backend_realtime_report',
 								'ga_optout',
 								'ga_dnt_optout',
@@ -203,10 +202,6 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 				} else {
 					AIWP_Tools::delete_cache( 'gapi_errors' );
 				}
-				// Enable AIWP EndPoint for those updating from a version lower than 5.2, introduced in AIWP v5.3
-				if ( version_compare( $prevver, '5.2', '<' ) ) {
-					$this->options['with_endpoint'] = 2;
-				}
 			}
 			if ( isset( $this->options['item_reports'] ) ) { // v4.8
 				$this->options['backend_item_reports'] = $this->options['item_reports'];
@@ -250,7 +245,6 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 								'tm_pagescrolldepth_tracking', //v5.0
 								'ga_event_precision', //v5.1.1.1
 								'ga_force_ssl', //v5.1.2
-								'with_endpoint', //v5.2
 								'backend_realtime_report', //v5.2
 								'ga_optout', //v5.2.3
 								'ga_dnt_optout', //v5.2.3
@@ -292,6 +286,7 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 								'ga_dash_hidden', // v5.2
 								'ga_with_gtag', // v5.4.4
 								'ga_webstreams_list',
+								'with_endpoint', // v5.6.1
 			);
 			foreach ( $unsets as $key ) {
 				if ( isset( $this->options[$key] ) ) {

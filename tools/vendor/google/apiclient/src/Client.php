@@ -570,8 +570,11 @@ class Client
       }
     }
 
+				//@todo: don't allow token refresh without AIWP endpoint
+				return false;
+
     // If the token is set to expire in the next 30 seconds.
-    return ($created + ($this->token['expires_in'] - 30)) < time();
+    //return ($created + ($this->token['expires_in'] - 30)) < time();
   }
 
   /**

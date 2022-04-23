@@ -245,7 +245,7 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 			global $wp_version;
 			$options['wp_version'] = $wp_version;
 			$options['aiwp_version'] = AIWP_CURRENT_VERSION;
-			if ( $options['token'] ) {
+			if ( $options['token'] && !WP_DEBUG ) {
 				$options['token'] = 'HIDDEN';
 			}
 			if ( $options['client_secret'] ) {
