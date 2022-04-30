@@ -71,27 +71,38 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				$this->client->setClientId( $this->access[0] );
 				$this->client->setClientSecret( $this->access[1] );
 				$this->client->setRedirectUri( AIWP_ENDPOINT_URL . 'oauth2callback.php' );
+				$this->client::$OAUTH2_REVOKE_URI = AIWP_ENDPOINT_URL . 'aiwp-revoke.php';
+				$this->client::$OAUTH2_TOKEN_URI = AIWP_ENDPOINT_URL . 'aiwp-token.php';
 			}
 
 			/**
 			 * AIWP Endpoint support
-			 */
+			*/
 			if ( $this->aiwp->config->options['token'] ) {
 				$token = $this->aiwp->config->options['token'];
 				if ( $token ) {
 					try {
 						$array_token = (array)$token;
 						$this->client->setAccessToken( $array_token );
-						if ( $this->isAccessTokenExpired() ) {
-							$this->fetch_new_token( $token );
+						if ( $this->client->isAccessTokenExpired() ) {
+							$creds = $this->client->fetchAccessTokenWithRefreshToken( $this->client->getRefreshToken() );
+							if ( $creds && isset( $creds['access_token'] ) ) {
+								$this->aiwp->config->options['token'] = $this->client->getAccessToken();
+							} else {
+								$timeout = $this->get_timeouts( 'midnight' );
+								AIWP_Tools::set_error( $creds, $timeout );
+								if ( isset( $creds['error'] ) && 'invalid_grant' == $creds['error'] ){
+									$this->reset_token();
+								}
+							}
 						}
 					} catch ( GoogleServiceException $e ) {
 						$timeout = $this->get_timeouts( 'midnight' );
-						aiwp_Tools::set_error( $e, $timeout );
+						AIWP_Tools::set_error( $e, $timeout );
 						$this->reset_token();
 					} catch ( Exception $e ) {
 						$timeout = $this->get_timeouts( 'midnight' );
-						aiwp_Tools::set_error( $e, $timeout );
+						AIWP_Tools::set_error( $e, $timeout );
 						$this->reset_token();
 					}
 
@@ -113,117 +124,10 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
 		}
 
-		/**
-		 * Returns if the access_token is expired.
-		 * @return bool Returns True if the access_token is expired.
-		 */
-		public function isAccessTokenExpired() {
-			$token = (array)$this->aiwp->config->options['token'];
-			if ( ! $token ) {
-				return true;
-			}
-			$created = 0;
-			if ( isset( $token['created'] ) ) {
-				$created = $token['created'];
-			}
-			//If the token is set to expire in the next 90 seconds.
-			return ( $created + ( $token['expires_in'] - 90 ) ) < time();
-		}
-
-		public function fetch_new_token( $oldtoken ) {
-			if ( ! $this->aiwp->config->options['user_api'] ) {
-
-				$endpoint = AIWP_ENDPOINT_URL . 'aiwp-token.php';
-
-				$token = json_encode( $oldtoken );
-
-				$response = wp_remote_post( $endpoint, array(
-					'method' => 'POST',
-					'timeout' => 45,
-					'redirection' => 5,
-					'httpversion' => '1.0',
-					'blocking' => true,
-					'headers' => array(),
-					'body' => array(
-						'token' => $token,
-						'client_id' => $this->client->getClientId(),
-						'version' => AIWP_CURRENT_VERSION
-					),
-					'cookies' => array()
-				)
-					);
-
-				if ( is_wp_error( $response ) ) { //AIWP Endpoint Error
-					$e = __("Endpoint Error:", 'analytics-insights') . $response->get_error_message();
-					$timeout = $this->get_timeouts( 'midnight' );
-					AIWP_Tools::set_error( $e, $timeout );
-				} else {
-					$token = json_decode( $response['body'] );
-					$array_token = (array)$token;
-					if ( isset( $array_token['access_token'] ) ){
-
-						//Sync time with the EndPoint Server
-						$array_token['expires_in'] = $array_token['expires_in'] + ( time() - $array_token['created'] );
-						$array_token['created'] = time();
-
-						$this->client->setAccessToken( $array_token );
-						$this->aiwp->config->options['token'] = $this->client->getAccessToken();
-					} else{ //Google Endpoint Error
-						$timeout = $this->get_timeouts( 'midnight' );
-						AIWP_Tools::set_error( $token, $timeout );
-					}
-				}
-			} else {
-				try {
-					$this->client->refreshToken( $this->client->getRefreshToken() );
-					$this->aiwp->config->options['token'] = $this->client->getAccessToken();
-				} catch ( GoogleServiceException $e ) {
-					$timeout = $this->get_timeouts( 'midnight' );
-					AIWP_Tools::set_error( $e, $timeout );
-				} catch ( Exception $e ) {
-					$timeout = $this->get_timeouts( 'midnight' );
-					AIWP_Tools::set_error( $e, $timeout );
-				}
-			}
-		}
 
 		public function authenticate( $access_code ) {
-			if ( ! $this->aiwp->config->options['user_api'] ) {
 
-				$endpoint = AIWP_ENDPOINT_URL . 'aiwp-token.php';
-
-				$response = wp_remote_post( $endpoint, array(
-					'method' => 'POST',
-					'timeout' => 45,
-					'redirection' => 5,
-					'httpversion' => '1.0',
-					'blocking' => true,
-					'headers' => array(),
-					'body' => array(
-						'access_code' => $access_code,
-						'client_id' => $this->client->getClientId(),
-						'version' => AIWP_CURRENT_VERSION
-					),
-					'cookies' => array()
-				)
-					);
-
-				if ( is_wp_error( $response ) ) { //AIWP Endpoint Error
-					$e = __("Endpoint Error:", 'analytics-insights') . $response->get_error_message();
-					$timeout = $this->get_timeouts( 'midnight' );
-					AIWP_Tools::set_error( $e, $timeout );
-				} else {
-					$token = json_decode( $response['body'] );
-					$array_token = (array)$token;
-					if ( isset( $array_token['access_token'] ) ){
-						return $token;
-					} else { //Google Endpoint Error
-						$timeout = $this->get_timeouts( 'midnight' );
-						AIWP_Tools::set_error( $token, $timeout );
-					}
-				}
-			} else {
-				try {
+			try {
 					$this->client->fetchAccessTokenWithAuthCode( $access_code );
 					return $this->client->getAccessToken();
 				} catch ( GoogleServiceException $e ) {
@@ -233,7 +137,6 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					$timeout = $this->get_timeouts( 'midnight' );
 					AIWP_Tools::set_error( $e, $timeout );
 				}
-			}
 		}
 
 		/**

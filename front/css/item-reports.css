@@ -115,6 +115,7 @@
 	font-size: 13px;
 	-webkit-box-sizing: initial;
 	-moz-box-sizing: initial;
+	width: min-content !important;
 }
 
 .ui-dialog.aiwp select {

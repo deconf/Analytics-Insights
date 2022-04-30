@@ -118,6 +118,10 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 		}
 
 		public function set_plugin_options( $network_settings = false ) {
+
+			// Update reporting ready state
+			$this->reporting_ready = $this->options['tableid_jail'] || $this->options['webstream_jail'];
+
 			// Handle Network Mode
 			$options = $this->options;
 			$get_network_options = get_site_option( 'aiwp_network_options' );

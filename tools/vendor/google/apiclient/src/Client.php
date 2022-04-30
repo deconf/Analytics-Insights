@@ -51,8 +51,8 @@ class Client
 {
   const LIBVER = "2.12.1";
   const USER_AGENT_SUFFIX = "google-api-php-client/";
-  const OAUTH2_REVOKE_URI = 'https://oauth2.googleapis.com/revoke';
-  const OAUTH2_TOKEN_URI = 'https://oauth2.googleapis.com/token';
+  static public $OAUTH2_REVOKE_URI = 'https://oauth2.googleapis.com/revoke';
+  static public $OAUTH2_TOKEN_URI = 'https://oauth2.googleapis.com/token';
   const OAUTH2_AUTH_URL = 'https://accounts.google.com/o/oauth2/auth';
   const API_BASE_PATH = 'https://www.googleapis.com';
 
@@ -571,10 +571,10 @@ class Client
     }
 
 				//@todo: don't allow token refresh without AIWP endpoint
-				return false;
+				//return true;
 
     // If the token is set to expire in the next 30 seconds.
-    //return ($created + ($this->token['expires_in'] - 30)) < time();
+    return ($created + ($this->token['expires_in'] - 30)) < time();
   }
 
   /**
@@ -1069,7 +1069,7 @@ class Client
           'clientId'          => $this->getClientId(),
           'clientSecret'      => $this->getClientSecret(),
           'authorizationUri'   => self::OAUTH2_AUTH_URL,
-          'tokenCredentialUri' => self::OAUTH2_TOKEN_URI,
+          'tokenCredentialUri' => self::$OAUTH2_TOKEN_URI,
           'redirectUri'       => $this->getRedirectUri(),
           'issuer'            => $this->config['client_id'],
           'signingKey'        => $this->config['signing_key'],

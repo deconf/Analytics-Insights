@@ -1013,12 +1013,14 @@ jQuery.fn.extend( {
 					jQuery( "#aiwp-reports" + slug ).show();
 					jQuery( "#aiwp-status" + slug ).html( aiwpItemData.i18n[ 11 ] );
 					console.log( "\n********************* AIWP Log ********************* \n\n" + response );
-					postData = {
-						action : 'aiwp_set_error',
-						response : response,
-						aiwp_security_set_error : aiwpItemData.security,
+					if ( response ) {
+						postData = {
+							action : 'aiwp_set_error',
+							response : response,
+							aiwp_security_set_error : aiwpItemData.security,
+						}
+						jQuery.post( aiwpItemData.ajaxurl, postData );
 					}
-					jQuery.post( aiwpItemData.ajaxurl, postData );
 				}
 			},
 
