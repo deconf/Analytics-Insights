@@ -258,6 +258,14 @@
 	color: #999;
 }
 
+[id^=aiwp-tablechart-] .google-visualization-table-page-numbers {
+	line-height: 1.2em !important;
+}
+
+[id^=aiwp-tablechart-] a:link, [id^=aiwp-tablechart-] a:visited, [id^=aiwp-tablechart-] a:hover {
+	color: black;
+}
+
 @media screen and (max-width: 500px) {
 	[id^=aiwp-container-] {
 		width: 410px;

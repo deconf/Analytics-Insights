@@ -149,35 +149,8 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
 			$token = $this->client->getAccessToken();
 
-			if ( $all && $token ) {
-
-				if ( ! $this->aiwp->config->options['user_api'] ) {
-
-					$endpoint = AIWP_ENDPOINT_URL . 'aiwp-revoke.php';
-
-					$response = wp_remote_post( $endpoint, array(
-						'method' => 'POST',
-						'timeout' => 45,
-						'redirection' => 5,
-						'httpversion' => '1.0',
-						'blocking' => true,
-						'headers' => array(),
-						'body' => array(
-							'client_id' => $this->client->getClientId(),
-							'token' => json_encode( $this->client->getAccessToken() ),
-							'version' => AIWP_CURRENT_VERSION
-						),
-						'cookies' => array()
-					)
-						);
-					if ( is_wp_error( $response ) ) { // AIWP Endpoint Error
-						$e = __( "Endpoint Error:", 'analytics-insights' ) . $response->get_error_message();
-						$timeout = $this->get_timeouts( 'midnight' );
-						AIWP_Tools::set_error( $e, $timeout );
-					}
-				} else {
-					$this->client->revokeToken();
-				}
+			if ( $token ) {
+					$this->client->revokeToken( $token );
 			}
 
 			if ( $all ){

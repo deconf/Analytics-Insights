@@ -4,7 +4,7 @@ Donate link: https://deconf.com/donate/
 Tags: analytics,google analytics,google analytics 4,google analytics dashboard, GA4, google analytics plugin,google analytics tracking code,google analytics widget,wordpress analytics
 Requires at least: 3.5
 Tested up to: 5.9
-Stable tag: 5.6.4
+Stable tag: 5.6.5
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -89,11 +89,16 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 
 == Changelog ==
 
-= 5.6.5 (2022.04.30) =
+= 5.6.6 (2022.05.03) =
+* Enhancements:
+	* simplify the Google Analytics API token revoke method
+	
+= 5.6.5 (2022.05.03) =
 * Enhancements:
 	* replace text with dashicons on Posts List to save column space
 * Bug Fixes:
 	* small CSS fixes
+	* Google Analytics 4 tracking code missing when Universal Analytics is missing or is disabled
 
 = 5.6.4 (2022.04.26) =
 * Enhancements:
@@ -114,7 +119,8 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 	* reset CSS style applied during error display on Google Analytics reports widget
 	* handling improvements on Google Analytics APIs errors 
 	  	
-= 5.6 (2022.04.14) - [release notes](https://deconf.com/analytics-insights-for-google-analytics-4/) =
+= 5.6 (2022.04.14) =
+* [Release notes](https://deconf.com/analytics-insights-for-google-analytics-4/)
 * Enhancements:
 	* switching all reports to Google Analytics Reporting v4 for an easier migration to Google Analytics Data API
 	* Google Analytics 4 reports are now available
@@ -215,7 +221,8 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 * Bug Fixes:
 	* fixes multisite/network mode random token resets 
 
-= 5.4 (2021.08.30) - [release notes](https://deconf.com/analytics-insights-for-wordpress/) =
+= 5.4 (2021.08.30) =
+* [Release notes](https://deconf.com/analytics-insights-for-wordpress/)
 * Enhancements:
 	* capability to filter and search within displayed tables
 	* automatically authorize users with Google Analytics, without copy/pasting the access codes
