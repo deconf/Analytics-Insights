@@ -340,5 +340,18 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 				return $value;
 			}
 		}
+
+		public static function secondstohms( $value ){
+
+			$hours = floor( $value / 3600 );
+			$hours = $hours < 10 ? '0' . $hours : (string) $hours;
+			$minutes = floor( ( $value / 60 ) % 60 );
+			$minutes = $minutes < 10 ? '0' . $minutes : (string) $minutes;
+			$seconds = $value % 60;
+			$seconds = $seconds < 10 ? '0' . $seconds : (string) $seconds;
+
+			return $hours . ':' . $minutes . ':' . $seconds;
+
+		}
 	}
 }

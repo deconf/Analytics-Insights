@@ -28,7 +28,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
 		public $timeshift;
 
-		public $managequota;
+		public $quotauser;
 
 		private $aiwp;
 
@@ -62,7 +62,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				$state_uri = admin_url( 'admin.php?page=aiwp_settings' ) . '&aiwp_security=' . $security;
 			}
 			$this->client->setState( $state_uri );
-			$this->managequota = 'u' . get_current_user_id() . 's' . get_current_blog_id();
+			$this->quotauser = 'u' . get_current_user_id() . 's' . get_current_blog_id();
 			if ( $this->aiwp->config->options['user_api'] ) {
 				$this->client->setClientId( $this->aiwp->config->options['client_id'] );
 				$this->client->setClientSecret( $this->aiwp->config->options['client_secret'] );
@@ -310,7 +310,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			try {
 				$ga4_webstreams_list = array();
 
-				$accounts = $this->service_ga4_admin->accountSummaries->listAccountSummaries()->getAccountSummaries();
+				$accounts = $this->service_ga4_admin->accountSummaries->listAccountSummaries( array( "pageSize" => 200 ) )->getAccountSummaries();
 
 				 if ( !empty( $accounts ) ) {
 				 	foreach ( $accounts as $account ) {
@@ -384,6 +384,8 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					if ( $this->gapi_errors_handler() ) {
 						return - 23;
 					}
+
+					$quotauser = $this->get_serial( $this->quotauser . $projectId );
 
 					// Create the DateRange object.
 					$dateRange = new Google\Service\AnalyticsReporting\DateRange();
@@ -461,7 +463,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					$body = new Google\Service\AnalyticsReporting\GetReportsRequest();
 					$body->setReportRequests( array( $request) );
 
-					$response = $this->service_ga3_reporting->reports->batchGet( $body );
+					$response = $this->service_ga3_reporting->reports->batchGet( $body, array( 'quotaUser' => $quotauser ) );
 
 					$reports = $response->getReports();
 
@@ -1141,7 +1143,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 						return - 23;
 					}
 
-					$data = $this->service->data_realtime->get( 'ga:' . $projectId, $metrics, array( 'dimensions' => $dimensions, 'quotaUser' => $this->managequota . 'p' . $projectId ) );
+					$data = $this->service->data_realtime->get( 'ga:' . $projectId, $metrics, array( 'dimensions' => $dimensions, 'quotaUser' => $this->quotauser . 'p' . $projectId ) );
 
 					AIWP_Tools::set_cache( $serial, $data, 55 );
 
@@ -1211,6 +1213,8 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
 					$projectIdArr = explode( '/dataStreams/',$projectId );
 					$projectId = $projectIdArr[0];
+
+					$quotauser = $this->get_serial( $this->quotauser . $projectId );
 
 					// Create the DateRange object.
 					$dateRange = new Google\Service\AnalyticsData\DateRange();
@@ -1322,7 +1326,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 						}
 					}
 
-					$response = $this->service_ga4_data->properties->runReport ( $projectId, $request );
+					$response = $this->service_ga4_data->properties->runReport ( $projectId, $request, array( 'quotaUser' => $quotauser ) );
 
 					$dataraw = $response;
 
@@ -1591,11 +1595,11 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			$aiwp_data[1] = isset( $aiwp_data[1] ) ? number_format_i18n( $aiwp_data[1] ) : 0;
 			$aiwp_data[2] = isset( $aiwp_data[2] ) ? number_format_i18n( $aiwp_data[2] ) : 0;
 			$aiwp_data[3] = isset( $aiwp_data[3] ) ? number_format_i18n( $aiwp_data[3] * 100, 2 ) . '%' : '0%';
-			$aiwp_data[4] = isset( $aiwp_data[4] ) ? gmdate( "H:i:s", $aiwp_data[4] ) : '00:00:00';
+			$aiwp_data[4] = isset( $aiwp_data[4] ) ? AIWP_Tools::secondstohms( $aiwp_data[4] ) : '00:00:00';
 			$aiwp_data[5] = isset( $aiwp_data[5] ) ? number_format_i18n( $aiwp_data[5], 2 ) : 0;
 			$aiwp_data[6] = isset( $aiwp_data[6] ) ? number_format_i18n( $aiwp_data[6] ) : 0;
 			$aiwp_data[7] = isset( $aiwp_data[7] ) ? number_format_i18n( $aiwp_data[7] * 100, 2 ) . '%' : '0%';
-			$aiwp_data[8] = isset( $aiwp_data[8] ) ? gmdate( "H:i:s", $aiwp_data[8] ) : '00:00:00';
+			$aiwp_data[8] = isset( $aiwp_data[8] ) ? AIWP_Tools::secondstohms( $aiwp_data[8] ) : '00:00:00';
 
 			return $aiwp_data;
 
@@ -2041,6 +2045,8 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			$projectIdArr = explode( '/dataStreams/',$projectId );
 			$projectId = $projectIdArr[0];
 
+			$quotauser = $this->get_serial( $this->quotauser . $projectId );
+
 			try {
 				$serial = 'qr_realtimecache_' . $this->get_serial( $projectId );
 				$transient = AIWP_Tools::get_cache( $serial );
@@ -2083,7 +2089,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
 					}
 
-					$data = $this->service_ga4_data->properties->runRealtimeReport( $projectId, $request );
+					$data = $this->service_ga4_data->properties->runRealtimeReport( $projectId, $request, array( 'quotaUser' => $quotauser ) );
 
 					AIWP_Tools::set_cache( $serial, $data, 55 );
 

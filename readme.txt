@@ -3,8 +3,8 @@ Contributors: deconf
 Donate link: https://deconf.com/donate/
 Tags: analytics,google analytics,google analytics 4,google analytics dashboard, GA4, google analytics plugin,google analytics tracking code,google analytics widget,wordpress analytics
 Requires at least: 3.5
-Tested up to: 5.9
-Stable tag: 5.6.5
+Tested up to: 6.0
+Stable tag: 5.6.6
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -89,9 +89,13 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 
 == Changelog ==
 
-= 5.6.6 (2022.05.03) =
+= 5.6.6 (2022.05.29) =
 * Enhancements:
 	* simplify the Google Analytics API token revoke method
+	* increase the maximum number of Google Analytics 4 accounts to 200
+	* make all Google Analytics API calls using quotaUser.  
+* Bug Fixes:	
+	* fixes Google Analytics 4 total engagement time on bottom stats board 
 	
 = 5.6.5 (2022.05.03) =
 * Enhancements:
