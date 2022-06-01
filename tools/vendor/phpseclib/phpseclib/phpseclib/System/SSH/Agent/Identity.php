@@ -12,7 +12,7 @@
  * @link      http://phpseclib.sourceforge.net
  * @internal  See http://api.libssh.org/rfc/PROTOCOL.agent
  *
- * Modified by __root__ on 31-May-2022 using Strauss.
+ * Modified by __root__ on 01-June-2022 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
