@@ -13,11 +13,14 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Google\Auth;
+namespace Deconf\AIWP\Google\Auth;
 
-use Google\Auth\Credentials\GCECredentials;
+use Deconf\AIWP\Google\Auth\Credentials\GCECredentials;
 use Psr\Cache\CacheItemPoolInterface;
 
 /**
@@ -26,8 +29,8 @@ use Psr\Cache\CacheItemPoolInterface;
  * cache object to `ApplicationDefaultCredentials::getCredentials`.
  *
  * ```
- * $sysvCache = new Google\Auth\SysvCacheItemPool();
- * $creds = Google\Auth\ApplicationDefaultCredentials::getCredentials(
+ * $sysvCache = new Deconf\AIWP\Google\Auth\SysvCacheItemPool();
+ * $creds = Deconf\AIWP\Google\Auth\ApplicationDefaultCredentials::getCredentials(
  *     $scope,
  *     null,
  *     null,
@@ -42,17 +45,7 @@ class GCECache
     use CacheTrait;
 
     /**
-     * @var array
-     */
-    private $cacheConfig;
-
-    /**
-     * @var CacheItemPoolInterface
-     */
-    private $cache;
-
-    /**
-     * @param array $cacheConfig Configuration for the cache
+     * @param array<mixed> $cacheConfig Configuration for the cache
      * @param CacheItemPoolInterface $cache
      */
     public function __construct(

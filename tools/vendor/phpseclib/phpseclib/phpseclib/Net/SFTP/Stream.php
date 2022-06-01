@@ -13,12 +13,15 @@
  * @copyright 2013 Jim Wigginton
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace phpseclib\Net\SFTP;
+namespace Deconf\AIWP\phpseclib\Net\SFTP;
 
-use phpseclib\Crypt\RSA;
-use phpseclib\Net\SFTP;
+use Deconf\AIWP\phpseclib\Crypt\RSA;
+use Deconf\AIWP\phpseclib\Net\SFTP;
 
 /**
  * SFTP Stream Wrapper
@@ -645,7 +648,7 @@ class Stream
     /**
      * Flushes the output
      *
-     * See <http://php.net/fflush>. Always returns true because \phpseclib\Net\SFTP doesn't cache stuff before writing
+     * See <http://php.net/fflush>. Always returns true because \Deconf\AIWP\phpseclib\Net\SFTP doesn't cache stuff before writing
      *
      * @return bool
      * @access public

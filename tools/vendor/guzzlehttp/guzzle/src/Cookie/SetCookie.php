@@ -1,5 +1,11 @@
 <?php
-namespace GuzzleHttp\Cookie;
+/**
+ * @license MIT
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
+ */
+namespace Deconf\AIWP\GuzzleHttp\Cookie;
 
 /**
  * Set-Cookie object
@@ -333,12 +339,19 @@ class SetCookie
      */
     public function matchesDomain($domain)
     {
+        $cookieDomain = $this->getDomain();
+        if (null === $cookieDomain) {
+            return true;
+        }
+
         // Remove the leading '.' as per spec in RFC 6265.
         // http://tools.ietf.org/html/rfc6265#section-5.2.3
-        $cookieDomain = ltrim($this->getDomain(), '.');
+        $cookieDomain = ltrim(strtolower($cookieDomain), '.');
+
+        $domain = strtolower($domain);
 
         // Domain not set or exact match.
-        if (!$cookieDomain || !strcasecmp($domain, $cookieDomain)) {
+        if ('' === $cookieDomain || $domain === $cookieDomain) {
             return true;
         }
 

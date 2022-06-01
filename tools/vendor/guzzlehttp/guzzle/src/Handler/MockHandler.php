@@ -1,11 +1,17 @@
 <?php
-namespace GuzzleHttp\Handler;
+/**
+ * @license MIT
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
+ */
+namespace Deconf\AIWP\GuzzleHttp\Handler;
 
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Promise\PromiseInterface;
-use GuzzleHttp\Promise\RejectedPromise;
-use GuzzleHttp\TransferStats;
+use Deconf\AIWP\GuzzleHttp\Exception\RequestException;
+use Deconf\AIWP\GuzzleHttp\HandlerStack;
+use Deconf\AIWP\GuzzleHttp\Promise\PromiseInterface;
+use Deconf\AIWP\GuzzleHttp\Promise\RejectedPromise;
+use Deconf\AIWP\GuzzleHttp\TransferStats;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -120,7 +126,7 @@ class MockHandler implements \Countable
                 if ($this->onRejected) {
                     call_user_func($this->onRejected, $reason);
                 }
-                return \GuzzleHttp\Promise\rejection_for($reason);
+                return \Deconf\AIWP\GuzzleHttp\Promise\rejection_for($reason);
             }
         );
     }
@@ -140,7 +146,7 @@ class MockHandler implements \Countable
                 $this->queue[] = $value;
             } else {
                 throw new \InvalidArgumentException('Expected a response or '
-                    . 'exception. Found ' . \GuzzleHttp\describe_type($value));
+                    . 'exception. Found ' . \Deconf\AIWP\GuzzleHttp\describe_type($value));
             }
         }
     }

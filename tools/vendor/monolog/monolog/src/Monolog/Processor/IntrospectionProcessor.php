@@ -7,11 +7,14 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Monolog\Processor;
+namespace Deconf\AIWP\Monolog\Processor;
 
-use Monolog\Logger;
+use Deconf\AIWP\Monolog\Logger;
 
 /**
  * Injects line/file:class/function where the log message came from
@@ -40,7 +43,7 @@ class IntrospectionProcessor implements ProcessorInterface
     public function __construct($level = Logger::DEBUG, array $skipClassesPartials = array(), $skipStackFramesCount = 0)
     {
         $this->level = Logger::toMonologLevel($level);
-        $this->skipClassesPartials = array_merge(array('Monolog\\'), $skipClassesPartials);
+        $this->skipClassesPartials = array_merge(array('Deconf\\AIWP\\Monolog\\'), $skipClassesPartials);
         $this->skipStackFramesCount = $skipStackFramesCount;
     }
 

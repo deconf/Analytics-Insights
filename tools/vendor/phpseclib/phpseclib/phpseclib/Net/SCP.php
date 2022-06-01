@@ -12,11 +12,11 @@
  * <?php
  *    include 'vendor/autoload.php';
  *
- *    $ssh = new \phpseclib\Net\SSH2('www.domain.tld');
+ *    $ssh = new \Deconf\AIWP\phpseclib\Net\SSH2('www.domain.tld');
  *    if (!$ssh->login('username', 'password')) {
  *        exit('bad login');
  *    }
- *    $scp = new \phpseclib\Net\SCP($ssh);
+ *    $scp = new \Deconf\AIWP\phpseclib\Net\SCP($ssh);
  *
  *    $scp->put('abcd', str_repeat('x', 1024*1024));
  * ?>
@@ -28,9 +28,12 @@
  * @copyright 2010 Jim Wigginton
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace phpseclib\Net;
+namespace Deconf\AIWP\phpseclib\Net;
 
 /**
  * Pure-PHP implementations of SCP.
@@ -43,7 +46,7 @@ class SCP
 {
     /**#@+
      * @access public
-     * @see \phpseclib\Net\SCP::put()
+     * @see \Deconf\AIWP\phpseclib\Net\SCP::put()
      */
     /**
      * Reads data from a local file.
@@ -57,8 +60,8 @@ class SCP
 
     /**#@+
      * @access private
-     * @see \phpseclib\Net\SCP::_send()
-     * @see \phpseclib\Net\SCP::_receive()
+     * @see \Deconf\AIWP\phpseclib\Net\SCP::_send()
+     * @see \Deconf\AIWP\phpseclib\Net\SCP::_receive()
     */
     /**
      * SSH1 is being used.
@@ -99,8 +102,8 @@ class SCP
      *
      * Connects to an SSH server
      *
-     * @param \phpseclib\Net\SSH1|\phpseclib\Net\SSH2 $ssh
-     * @return \phpseclib\Net\SCP
+     * @param \Deconf\AIWP\phpseclib\Net\SSH1|\Deconf\AIWP\phpseclib\Net\SSH2 $ssh
+     * @return \Deconf\AIWP\phpseclib\Net\SCP
      * @access public
      */
     function __construct($ssh)
@@ -120,7 +123,7 @@ class SCP
     /**
      * Uploads a file to the SCP server.
      *
-     * By default, \phpseclib\Net\SCP::put() does not read from the local filesystem.  $data is dumped directly into $remote_file.
+     * By default, \Deconf\AIWP\phpseclib\Net\SCP::put() does not read from the local filesystem.  $data is dumped directly into $remote_file.
      * So, for example, if you set $data to 'filename.ext' and then do \phpseclib\Net\SCP::get(), you will get a file, twelve bytes
      * long, containing 'filename.ext' as its contents.
      *

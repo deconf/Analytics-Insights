@@ -7,11 +7,14 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Monolog\Formatter;
+namespace Deconf\AIWP\Monolog\Formatter;
 
-use Monolog\Logger;
+use Deconf\AIWP\Monolog\Logger;
 
 /**
  * Formats a log message according to the ChromePHP array format

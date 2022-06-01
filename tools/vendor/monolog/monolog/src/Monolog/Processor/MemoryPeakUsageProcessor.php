@@ -7,14 +7,17 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Monolog\Processor;
+namespace Deconf\AIWP\Monolog\Processor;
 
 /**
  * Injects memory_get_peak_usage in all records
  *
- * @see Monolog\Processor\MemoryProcessor::__construct() for options
+ * @see Deconf\AIWP\Monolog\Processor\MemoryProcessor::__construct() for options
  * @author Rob Jensen
  */
 class MemoryPeakUsageProcessor extends MemoryProcessor

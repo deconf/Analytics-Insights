@@ -16,7 +16,7 @@
  * <?php
  *    include 'vendor/autoload.php';
  *
- *    $rc2 = new \phpseclib\Crypt\RC2();
+ *    $rc2 = new \Deconf\AIWP\phpseclib\Crypt\RC2();
  *
  *    $rc2->setKey('abcdefgh');
  *
@@ -31,9 +31,12 @@
  * @author   Patrick Monnerat <pm@datasphere.ch>
  * @license  http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link     http://phpseclib.sourceforge.net
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace phpseclib\Crypt;
+namespace Deconf\AIWP\phpseclib\Crypt;
 
 /**
  * Pure-PHP implementation of RC2.
@@ -46,7 +49,7 @@ class RC2 extends Base
     /**
      * Block Length of the cipher
      *
-     * @see \phpseclib\Crypt\Base::block_size
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::block_size
      * @var int
      * @access private
      */
@@ -55,7 +58,7 @@ class RC2 extends Base
     /**
      * The Key
      *
-     * @see \phpseclib\Crypt\Base::key
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::key
      * @see self::setKey()
      * @var string
      * @access private
@@ -65,7 +68,7 @@ class RC2 extends Base
     /**
      * The Original (unpadded) Key
      *
-     * @see \phpseclib\Crypt\Base::key
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::key
      * @see self::setKey()
      * @see self::encrypt()
      * @see self::decrypt()
@@ -77,7 +80,7 @@ class RC2 extends Base
     /**
      * Don't truncate / null pad key
      *
-     * @see \phpseclib\Crypt\Base::_clearBuffers()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::_clearBuffers()
      * @var bool
      * @access private
      */
@@ -86,7 +89,7 @@ class RC2 extends Base
     /**
      * Key Length (in bytes)
      *
-     * @see \phpseclib\Crypt\RC2::setKeyLength()
+     * @see \Deconf\AIWP\phpseclib\Crypt\RC2::setKeyLength()
      * @var int
      * @access private
      */
@@ -95,7 +98,7 @@ class RC2 extends Base
     /**
      * The mcrypt specific name of the cipher
      *
-     * @see \phpseclib\Crypt\Base::cipher_name_mcrypt
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::cipher_name_mcrypt
      * @var string
      * @access private
      */
@@ -104,7 +107,7 @@ class RC2 extends Base
     /**
      * Optimizing value while CFB-encrypting
      *
-     * @see \phpseclib\Crypt\Base::cfb_init_len
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::cfb_init_len
      * @var int
      * @access private
      */
@@ -264,7 +267,7 @@ class RC2 extends Base
      *
      * This is mainly just a wrapper to set things up for \phpseclib\Crypt\Base::isValidEngine()
      *
-     * @see \phpseclib\Crypt\Base::__construct()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::__construct()
      * @param int $engine
      * @access public
      * @return bool
@@ -329,7 +332,7 @@ class RC2 extends Base
      * If the key is not explicitly set, it'll be assumed to be a single
      * null byte.
      *
-     * @see \phpseclib\Crypt\Base::setKey()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::setKey()
      * @access public
      * @param string $key
      * @param int $t1 optional Effective key length in bits.
@@ -426,8 +429,8 @@ class RC2 extends Base
     /**
      * Encrypts a block
      *
-     * @see \phpseclib\Crypt\Base::_encryptBlock()
-     * @see \phpseclib\Crypt\Base::encrypt()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::_encryptBlock()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::encrypt()
      * @access private
      * @param string $in
      * @return string
@@ -471,8 +474,8 @@ class RC2 extends Base
     /**
      * Decrypts a block
      *
-     * @see \phpseclib\Crypt\Base::_decryptBlock()
-     * @see \phpseclib\Crypt\Base::decrypt()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::_decryptBlock()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::decrypt()
      * @access private
      * @param string $in
      * @return string
@@ -516,7 +519,7 @@ class RC2 extends Base
     /**
      * Setup the \phpseclib\Crypt\Base::ENGINE_MCRYPT $engine
      *
-     * @see \phpseclib\Crypt\Base::_setupMcrypt()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::_setupMcrypt()
      * @access private
      */
     function _setupMcrypt()
@@ -531,7 +534,7 @@ class RC2 extends Base
     /**
      * Creates the key schedule
      *
-     * @see \phpseclib\Crypt\Base::_setupKey()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::_setupKey()
      * @access private
      */
     function _setupKey()
@@ -552,7 +555,7 @@ class RC2 extends Base
     /**
      * Setup the performance-optimized function for de/encrypt()
      *
-     * @see \phpseclib\Crypt\Base::_setupInlineCrypt()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::_setupInlineCrypt()
      * @access private
      */
     function _setupInlineCrypt()

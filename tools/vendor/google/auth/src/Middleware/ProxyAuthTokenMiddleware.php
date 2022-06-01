@@ -13,12 +13,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Google\Auth\Middleware;
+namespace Deconf\AIWP\Google\Auth\Middleware;
 
-use Google\Auth\FetchAuthTokenInterface;
-use Google\Auth\GetQuotaProjectInterface;
+use Deconf\AIWP\Google\Auth\FetchAuthTokenInterface;
+use Deconf\AIWP\Google\Auth\GetQuotaProjectInterface;
 use Psr\Http\Message\RequestInterface;
 
 /**
@@ -35,7 +38,7 @@ use Psr\Http\Message\RequestInterface;
 class ProxyAuthTokenMiddleware
 {
     /**
-     * @var callback
+     * @var callable
      */
     private $httpHandler;
 
@@ -45,7 +48,7 @@ class ProxyAuthTokenMiddleware
     private $fetcher;
 
     /**
-     * @var callable
+     * @var ?callable
      */
     private $tokenCallback;
 
@@ -69,10 +72,10 @@ class ProxyAuthTokenMiddleware
     /**
      * Updates the request with an Authorization header when auth is 'google_auth'.
      *
-     *   use Google\Auth\Middleware\ProxyAuthTokenMiddleware;
-     *   use Google\Auth\OAuth2;
-     *   use GuzzleHttp\Client;
-     *   use GuzzleHttp\HandlerStack;
+     *   use Deconf\AIWP\Google\Auth\Middleware\ProxyAuthTokenMiddleware;
+     *   use Deconf\AIWP\Google\Auth\OAuth2;
+     *   use Deconf\AIWP\GuzzleHttp\Client;
+     *   use Deconf\AIWP\GuzzleHttp\HandlerStack;
      *
      *   $config = [..<oauth config param>.];
      *   $oauth2 = new OAuth2($config)
@@ -115,7 +118,7 @@ class ProxyAuthTokenMiddleware
     /**
      * Call fetcher to fetch the token.
      *
-     * @return string
+     * @return string|null
      */
     private function fetchToken()
     {
@@ -137,12 +140,19 @@ class ProxyAuthTokenMiddleware
         if (array_key_exists('id_token', $auth_tokens)) {
             return $auth_tokens['id_token'];
         }
+
+        return null;
     }
 
+    /**
+     * @return string|null;
+     */
     private function getQuotaProject()
     {
         if ($this->fetcher instanceof GetQuotaProjectInterface) {
             return $this->fetcher->getQuotaProject();
         }
+
+        return null;
     }
 }

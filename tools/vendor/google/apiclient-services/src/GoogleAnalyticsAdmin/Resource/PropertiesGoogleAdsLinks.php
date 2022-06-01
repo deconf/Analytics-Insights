@@ -13,23 +13,26 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Google\Service\GoogleAnalyticsAdmin\Resource;
+namespace Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\Resource;
 
-use Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaGoogleAdsLink;
-use Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaListGoogleAdsLinksResponse;
-use Google\Service\GoogleAnalyticsAdmin\GoogleProtobufEmpty;
+use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaGoogleAdsLink;
+use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaListGoogleAdsLinksResponse;
+use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleProtobufEmpty;
 
 /**
  * The "googleAdsLinks" collection of methods.
  * Typical usage is:
  *  <code>
- *   $analyticsadminService = new Google\Service\GoogleAnalyticsAdmin(...);
+ *   $analyticsadminService = new Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin(...);
  *   $googleAdsLinks = $analyticsadminService->googleAdsLinks;
  *  </code>
  */
-class PropertiesGoogleAdsLinks extends \Google\Service\Resource
+class PropertiesGoogleAdsLinks extends \Deconf\AIWP\Google\Service\Resource
 {
   /**
    * Creates a GoogleAdsLink. (googleAdsLinks.create)

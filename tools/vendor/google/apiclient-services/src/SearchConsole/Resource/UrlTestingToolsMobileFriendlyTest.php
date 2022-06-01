@@ -13,22 +13,25 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Google\Service\SearchConsole\Resource;
+namespace Deconf\AIWP\Google\Service\SearchConsole\Resource;
 
-use Google\Service\SearchConsole\RunMobileFriendlyTestRequest;
-use Google\Service\SearchConsole\RunMobileFriendlyTestResponse;
+use Deconf\AIWP\Google\Service\SearchConsole\RunMobileFriendlyTestRequest;
+use Deconf\AIWP\Google\Service\SearchConsole\RunMobileFriendlyTestResponse;
 
 /**
  * The "mobileFriendlyTest" collection of methods.
  * Typical usage is:
  *  <code>
- *   $searchconsoleService = new Google\Service\SearchConsole(...);
+ *   $searchconsoleService = new Deconf\AIWP\Google\Service\SearchConsole(...);
  *   $mobileFriendlyTest = $searchconsoleService->mobileFriendlyTest;
  *  </code>
  */
-class UrlTestingToolsMobileFriendlyTest extends \Google\Service\Resource
+class UrlTestingToolsMobileFriendlyTest extends \Deconf\AIWP\Google\Service\Resource
 {
   /**
    * Runs Mobile-Friendly Test for a given URL. (mobileFriendlyTest.run)

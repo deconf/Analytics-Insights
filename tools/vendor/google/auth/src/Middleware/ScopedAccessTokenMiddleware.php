@@ -13,11 +13,14 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Google\Auth\Middleware;
+namespace Deconf\AIWP\Google\Auth\Middleware;
 
-use Google\Auth\CacheTrait;
+use Deconf\AIWP\Google\Auth\CacheTrait;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Http\Message\RequestInterface;
 
@@ -40,22 +43,12 @@ class ScopedAccessTokenMiddleware
     const DEFAULT_CACHE_LIFETIME = 1500;
 
     /**
-     * @var CacheItemPoolInterface
-     */
-    private $cache;
-
-    /**
-     * @var array configuration
-     */
-    private $cacheConfig;
-
-    /**
      * @var callable
      */
     private $tokenFunc;
 
     /**
-     * @var array|string
+     * @var array<string>|string
      */
     private $scopes;
 
@@ -63,8 +56,8 @@ class ScopedAccessTokenMiddleware
      * Creates a new ScopedAccessTokenMiddleware.
      *
      * @param callable $tokenFunc a token generator function
-     * @param array|string $scopes the token authentication scopes
-     * @param array $cacheConfig configuration for the cache when it's present
+     * @param array<string>|string $scopes the token authentication scopes
+     * @param array<mixed> $cacheConfig configuration for the cache when it's present
      * @param CacheItemPoolInterface $cache an implementation of CacheItemPoolInterface
      */
     public function __construct(
@@ -97,15 +90,15 @@ class ScopedAccessTokenMiddleware
      *   AppIdentityService.
      *
      *   use google\appengine\api\app_identity\AppIdentityService;
-     *   use Google\Auth\Middleware\ScopedAccessTokenMiddleware;
-     *   use GuzzleHttp\Client;
-     *   use GuzzleHttp\HandlerStack;
+     *   use Deconf\AIWP\Google\Auth\Middleware\ScopedAccessTokenMiddleware;
+     *   use Deconf\AIWP\GuzzleHttp\Client;
+     *   use Deconf\AIWP\GuzzleHttp\HandlerStack;
      *
      *   $scope = 'https://www.googleapis.com/auth/taskqueue'
      *   $middleware = new ScopedAccessTokenMiddleware(
      *       'AppIdentityService::getAccessToken',
      *       $scope,
-     *       [ 'prefix' => 'Google\Auth\ScopedAccessToken::' ],
+     *       [ 'prefix' => 'Deconf\AIWP\Google\Auth\ScopedAccessToken::' ],
      *       $cache = new Memcache()
      *   );
      *   $stack = HandlerStack::create();

@@ -10,9 +10,12 @@
  * @copyright 2012 Jim Wigginton
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace phpseclib\File\ASN1;
+namespace Deconf\AIWP\phpseclib\File\ASN1;
 
 /**
  * ASN.1 Element
@@ -37,7 +40,7 @@ class Element
      * Constructor
      *
      * @param string $encoded
-     * @return \phpseclib\File\ASN1\Element
+     * @return \Deconf\AIWP\phpseclib\File\ASN1\Element
      * @access public
      */
     function __construct($encoded)

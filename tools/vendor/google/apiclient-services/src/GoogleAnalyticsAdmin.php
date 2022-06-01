@@ -13,11 +13,14 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Google\Service;
+namespace Deconf\AIWP\Google\Service;
 
-use Google\Client;
+use Deconf\AIWP\Google\Client;
 
 /**
  * Service definition for GoogleAnalyticsAdmin (v1alpha).
@@ -32,7 +35,7 @@ use Google\Client;
  *
  * @author Google, Inc.
  */
-class GoogleAnalyticsAdmin extends \Google\Service
+class GoogleAnalyticsAdmin extends \Deconf\AIWP\Google\Service
 {
   /** Edit Google Analytics management entities. */
   const ANALYTICS_EDIT =

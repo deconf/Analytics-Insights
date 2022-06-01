@@ -13,23 +13,26 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Google\Service\GoogleAnalyticsAdmin\Resource;
+namespace Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\Resource;
 
-use Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaDisplayVideo360AdvertiserLink;
-use Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaListDisplayVideo360AdvertiserLinksResponse;
-use Google\Service\GoogleAnalyticsAdmin\GoogleProtobufEmpty;
+use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaDisplayVideo360AdvertiserLink;
+use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaListDisplayVideo360AdvertiserLinksResponse;
+use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleProtobufEmpty;
 
 /**
  * The "displayVideo360AdvertiserLinks" collection of methods.
  * Typical usage is:
  *  <code>
- *   $analyticsadminService = new Google\Service\GoogleAnalyticsAdmin(...);
+ *   $analyticsadminService = new Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin(...);
  *   $displayVideo360AdvertiserLinks = $analyticsadminService->displayVideo360AdvertiserLinks;
  *  </code>
  */
-class PropertiesDisplayVideo360AdvertiserLinks extends \Google\Service\Resource
+class PropertiesDisplayVideo360AdvertiserLinks extends \Deconf\AIWP\Google\Service\Resource
 {
   /**
    * Creates a DisplayVideo360AdvertiserLink. This can only be utilized by users

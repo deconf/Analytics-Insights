@@ -13,24 +13,27 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Google\Service\GoogleAnalyticsAdmin\Resource;
+namespace Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\Resource;
 
-use Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaArchiveCustomMetricRequest;
-use Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaCustomMetric;
-use Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaListCustomMetricsResponse;
-use Google\Service\GoogleAnalyticsAdmin\GoogleProtobufEmpty;
+use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaArchiveCustomMetricRequest;
+use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaCustomMetric;
+use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaListCustomMetricsResponse;
+use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleProtobufEmpty;
 
 /**
  * The "customMetrics" collection of methods.
  * Typical usage is:
  *  <code>
- *   $analyticsadminService = new Google\Service\GoogleAnalyticsAdmin(...);
+ *   $analyticsadminService = new Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin(...);
  *   $customMetrics = $analyticsadminService->customMetrics;
  *  </code>
  */
-class PropertiesCustomMetrics extends \Google\Service\Resource
+class PropertiesCustomMetrics extends \Deconf\AIWP\Google\Service\Resource
 {
   /**
    * Archives a CustomMetric on a property. (customMetrics.archive)

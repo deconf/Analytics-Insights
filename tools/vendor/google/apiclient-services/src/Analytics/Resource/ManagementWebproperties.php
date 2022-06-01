@@ -13,22 +13,25 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Google\Service\Analytics\Resource;
+namespace Deconf\AIWP\Google\Service\Analytics\Resource;
 
-use Google\Service\Analytics\Webproperties;
-use Google\Service\Analytics\Webproperty;
+use Deconf\AIWP\Google\Service\Analytics\Webproperties;
+use Deconf\AIWP\Google\Service\Analytics\Webproperty;
 
 /**
  * The "webproperties" collection of methods.
  * Typical usage is:
  *  <code>
- *   $analyticsService = new Google\Service\Analytics(...);
+ *   $analyticsService = new Deconf\AIWP\Google\Service\Analytics(...);
  *   $webproperties = $analyticsService->webproperties;
  *  </code>
  */
-class ManagementWebproperties extends \Google\Service\Resource
+class ManagementWebproperties extends \Deconf\AIWP\Google\Service\Resource
 {
   /**
    * Gets a web property to which the user has access. (webproperties.get)

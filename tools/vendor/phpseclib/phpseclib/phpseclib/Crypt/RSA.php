@@ -10,7 +10,7 @@
  * <?php
  *    include 'vendor/autoload.php';
  *
- *    $rsa = new \phpseclib\Crypt\RSA();
+ *    $rsa = new \Deconf\AIWP\phpseclib\Crypt\RSA();
  *    extract($rsa->createKey());
  *
  *    $plaintext = 'terrafrost';
@@ -28,7 +28,7 @@
  * <?php
  *    include 'vendor/autoload.php';
  *
- *    $rsa = new \phpseclib\Crypt\RSA();
+ *    $rsa = new \Deconf\AIWP\phpseclib\Crypt\RSA();
  *    extract($rsa->createKey());
  *
  *    $plaintext = 'terrafrost';
@@ -47,11 +47,14 @@
  * @copyright 2009 Jim Wigginton
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace phpseclib\Crypt;
+namespace Deconf\AIWP\phpseclib\Crypt;
 
-use phpseclib\Math\BigInteger;
+use Deconf\AIWP\phpseclib\Math\BigInteger;
 
 /**
  * Pure-PHP PKCS#1 compliant implementation of RSA.
@@ -119,7 +122,7 @@ class RSA
 
     /**#@+
      * @access private
-     * @see \phpseclib\Crypt\RSA::createKey()
+     * @see \Deconf\AIWP\phpseclib\Crypt\RSA::createKey()
     */
     /**
      * ASN1 Integer
@@ -145,7 +148,7 @@ class RSA
 
     /**#@+
      * @access private
-     * @see \phpseclib\Crypt\RSA::__construct()
+     * @see \Deconf\AIWP\phpseclib\Crypt\RSA::__construct()
     */
     /**
      * To use the pure-PHP implementation
@@ -161,8 +164,8 @@ class RSA
 
     /**#@+
      * @access public
-     * @see \phpseclib\Crypt\RSA::createKey()
-     * @see \phpseclib\Crypt\RSA::setPrivateKeyFormat()
+     * @see \Deconf\AIWP\phpseclib\Crypt\RSA::createKey()
+     * @see \Deconf\AIWP\phpseclib\Crypt\RSA::setPrivateKeyFormat()
     */
     /**
      * PKCS#1 formatted private key
@@ -190,8 +193,8 @@ class RSA
 
     /**#@+
      * @access public
-     * @see \phpseclib\Crypt\RSA::createKey()
-     * @see \phpseclib\Crypt\RSA::setPublicKeyFormat()
+     * @see \Deconf\AIWP\phpseclib\Crypt\RSA::createKey()
+     * @see \Deconf\AIWP\phpseclib\Crypt\RSA::setPublicKeyFormat()
     */
     /**
      * Raw public key
@@ -249,7 +252,7 @@ class RSA
     /**
      * Precomputed Zero
      *
-     * @var \phpseclib\Math\BigInteger
+     * @var \Deconf\AIWP\phpseclib\Math\BigInteger
      * @access private
      */
     var $zero;
@@ -257,7 +260,7 @@ class RSA
     /**
      * Precomputed One
      *
-     * @var \phpseclib\Math\BigInteger
+     * @var \Deconf\AIWP\phpseclib\Math\BigInteger
      * @access private
      */
     var $one;
@@ -281,7 +284,7 @@ class RSA
     /**
      * Modulus (ie. n)
      *
-     * @var \phpseclib\Math\BigInteger
+     * @var \Deconf\AIWP\phpseclib\Math\BigInteger
      * @access private
      */
     var $modulus;
@@ -289,7 +292,7 @@ class RSA
     /**
      * Modulus length
      *
-     * @var \phpseclib\Math\BigInteger
+     * @var \Deconf\AIWP\phpseclib\Math\BigInteger
      * @access private
      */
     var $k;
@@ -297,7 +300,7 @@ class RSA
     /**
      * Exponent (ie. e or d)
      *
-     * @var \phpseclib\Math\BigInteger
+     * @var \Deconf\AIWP\phpseclib\Math\BigInteger
      * @access private
      */
     var $exponent;
@@ -337,7 +340,7 @@ class RSA
     /**
      * Hash function
      *
-     * @var \phpseclib\Crypt\Hash
+     * @var \Deconf\AIWP\phpseclib\Crypt\Hash
      * @access private
      */
     var $hash;
@@ -361,7 +364,7 @@ class RSA
     /**
      * Hash function for the Mask Generation Function
      *
-     * @var \phpseclib\Crypt\Hash
+     * @var \Deconf\AIWP\phpseclib\Crypt\Hash
      * @access private
      */
     var $mgfHash;
@@ -455,7 +458,7 @@ class RSA
      * \phpseclib\Crypt\RSA doesn't do it is because OpenSSL doesn't fail gracefully.  openssl_pkey_new(), in particular, requires
      * openssl.cnf be present somewhere and, unfortunately, the only real way to find out is too late.
      *
-     * @return \phpseclib\Crypt\RSA
+     * @return \Deconf\AIWP\phpseclib\Crypt\RSA
      * @access public
      */
     function __construct()
@@ -1405,11 +1408,18 @@ class RSA
                 unset($xml);
 
                 return isset($this->components['modulus']) && isset($this->components['publicExponent']) ? $this->components : false;
-            // from PuTTY's SSHPUBK.C
+            // see PuTTY's SSHPUBK.C and https://tartarus.org/~simon/putty-snapshots/htmldoc/AppendixC.html
             case self::PRIVATE_FORMAT_PUTTY:
                 $components = array();
                 $key = preg_split('#\r\n|\r|\n#', $key);
-                $type = trim(preg_replace('#PuTTY-User-Key-File-2: (.+)#', '$1', $key[0]));
+                if ($this->_string_shift($key[0], strlen('PuTTY-User-Key-File-')) != 'PuTTY-User-Key-File-') {
+                    return false;
+                }
+                $version = (int) $this->_string_shift($key[0], 3); // should be either "2: " or "3: 0" prior to int casting
+                if ($version != 2 && $version != 3) {
+                    return false;
+                }
+                $type = rtrim($key[0]);
                 if ($type != 'ssh-rsa') {
                     return false;
                 }
@@ -1424,23 +1434,55 @@ class RSA
                 extract(unpack('Nlength', $this->_string_shift($public, 4)));
                 $components['modulus'] = new BigInteger($this->_string_shift($public, $length), -256);
 
-                $privateLength = trim(preg_replace('#Private-Lines: (\d+)#', '$1', $key[$publicLength + 4]));
-                $private = base64_decode(implode('', array_map('trim', array_slice($key, $publicLength + 5, $privateLength))));
-
+                $offset = $publicLength + 4;
                 switch ($encryption) {
                     case 'aes256-cbc':
-                        $symkey = '';
-                        $sequence = 0;
-                        while (strlen($symkey) < 32) {
-                            $temp = pack('Na*', $sequence++, $this->password);
-                            $symkey.= pack('H*', sha1($temp));
-                        }
-                        $symkey = substr($symkey, 0, 32);
                         $crypto = new AES();
+                        switch ($version) {
+                            case 3:
+                                if (!function_exists('sodium_crypto_pwhash')) {
+                                    return false;
+                                }
+                                $flavour = trim(preg_replace('#Key-Derivation: (.*)#', '$1', $key[$offset++]));
+                                switch ($flavour) {
+                                    case 'Argon2i':
+                                        $flavour = SODIUM_CRYPTO_PWHASH_ALG_ARGON2I13;
+                                        break;
+                                    case 'Argon2id':
+                                        $flavour = SODIUM_CRYPTO_PWHASH_ALG_ARGON2ID13;
+                                        break;
+                                    default:
+                                        return false;
+                                }
+                                $memory = trim(preg_replace('#Argon2-Memory: (\d+)#', '$1', $key[$offset++]));
+                                $passes = trim(preg_replace('#Argon2-Passes: (\d+)#', '$1', $key[$offset++]));
+                                $parallelism = trim(preg_replace('#Argon2-Parallelism: (\d+)#', '$1', $key[$offset++]));
+                                $salt = pack('H*', trim(preg_replace('#Argon2-Salt: ([0-9a-f]+)#', '$1', $key[$offset++])));
+
+                                $length = 80; // keylen + ivlen + mac_keylen
+                                $temp = sodium_crypto_pwhash($length, $this->password, $salt, $passes, $memory << 10, $flavour);
+
+                                $symkey = substr($temp, 0, 32);
+                                $symiv = substr($temp, 32, 16);
+                                break;
+                            case 2:
+                                $symkey = '';
+                                $sequence = 0;
+                                while (strlen($symkey) < 32) {
+                                    $temp = pack('Na*', $sequence++, $this->password);
+                                    $symkey.= pack('H*', sha1($temp));
+                                }
+                                $symkey = substr($symkey, 0, 32);
+                                $symiv = str_repeat("\0", 16);
+                        }
                 }
+
+                $privateLength = trim(preg_replace('#Private-Lines: (\d+)#', '$1', $key[$offset++]));
+                $private = base64_decode(implode('', array_map('trim', array_slice($key, $offset, $privateLength))));
 
                 if ($encryption != 'none') {
                     $crypto->setKey($symkey);
+                    $crypto->setIV($symiv);
                     $crypto->disablePadding();
                     $private = $crypto->decrypt($private);
                     if ($private === false) {
@@ -2198,7 +2240,7 @@ class RSA
      * See {@link http://tools.ietf.org/html/rfc3447#section-4.1 RFC3447#section-4.1}.
      *
      * @access private
-     * @param \phpseclib\Math\BigInteger $x
+     * @param \Deconf\AIWP\phpseclib\Math\BigInteger $x
      * @param int $xLen
      * @return string
      */
@@ -2219,7 +2261,7 @@ class RSA
      *
      * @access private
      * @param int|string|resource $x
-     * @return \phpseclib\Math\BigInteger
+     * @return \Deconf\AIWP\phpseclib\Math\BigInteger
      */
     function _os2ip($x)
     {
@@ -2232,8 +2274,8 @@ class RSA
      * See {@link http://tools.ietf.org/html/rfc3447#section-5.1.1 RFC3447#section-5.1.2}.
      *
      * @access private
-     * @param \phpseclib\Math\BigInteger $x
-     * @return \phpseclib\Math\BigInteger
+     * @param \Deconf\AIWP\phpseclib\Math\BigInteger $x
+     * @return \Deconf\AIWP\phpseclib\Math\BigInteger
      */
     function _exponentiate($x)
     {
@@ -2316,10 +2358,10 @@ class RSA
      * Returns $x->modPow($this->exponents[$i], $this->primes[$i])
      *
      * @access private
-     * @param \phpseclib\Math\BigInteger $x
-     * @param \phpseclib\Math\BigInteger $r
+     * @param \Deconf\AIWP\phpseclib\Math\BigInteger $x
+     * @param \Deconf\AIWP\phpseclib\Math\BigInteger $r
      * @param int $i
-     * @return \phpseclib\Math\BigInteger
+     * @return \Deconf\AIWP\phpseclib\Math\BigInteger
      */
     function _blind($x, $r, $i)
     {
@@ -2372,8 +2414,8 @@ class RSA
      * See {@link http://tools.ietf.org/html/rfc3447#section-5.1.1 RFC3447#section-5.1.1}.
      *
      * @access private
-     * @param \phpseclib\Math\BigInteger $m
-     * @return \phpseclib\Math\BigInteger
+     * @param \Deconf\AIWP\phpseclib\Math\BigInteger $m
+     * @return \Deconf\AIWP\phpseclib\Math\BigInteger
      */
     function _rsaep($m)
     {
@@ -2390,8 +2432,8 @@ class RSA
      * See {@link http://tools.ietf.org/html/rfc3447#section-5.1.2 RFC3447#section-5.1.2}.
      *
      * @access private
-     * @param \phpseclib\Math\BigInteger $c
-     * @return \phpseclib\Math\BigInteger
+     * @param \Deconf\AIWP\phpseclib\Math\BigInteger $c
+     * @return \Deconf\AIWP\phpseclib\Math\BigInteger
      */
     function _rsadp($c)
     {
@@ -2408,8 +2450,8 @@ class RSA
      * See {@link http://tools.ietf.org/html/rfc3447#section-5.2.1 RFC3447#section-5.2.1}.
      *
      * @access private
-     * @param \phpseclib\Math\BigInteger $m
-     * @return \phpseclib\Math\BigInteger
+     * @param \Deconf\AIWP\phpseclib\Math\BigInteger $m
+     * @return \Deconf\AIWP\phpseclib\Math\BigInteger
      */
     function _rsasp1($m)
     {
@@ -2426,8 +2468,8 @@ class RSA
      * See {@link http://tools.ietf.org/html/rfc3447#section-5.2.2 RFC3447#section-5.2.2}.
      *
      * @access private
-     * @param \phpseclib\Math\BigInteger $s
-     * @return \phpseclib\Math\BigInteger
+     * @param \Deconf\AIWP\phpseclib\Math\BigInteger $s
+     * @return \Deconf\AIWP\phpseclib\Math\BigInteger
      */
     function _rsavp1($s)
     {

@@ -37,7 +37,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		public function __construct() {
 			$this->aiwp = AIWP();
 			include_once ( AIWP_DIR . 'tools/vendor/autoload.php' );
-			$this->client = new Google\Client();
+			$this->client = new Deconf\AIWP\Google\Client();
 
 			// add Proxy server settings to Guzzle, if defined
 
@@ -47,7 +47,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				if ( defined( 'WP_PROXY_USERNAME' ) && defined( 'WP_PROXY_PASSWORD' ) ) {
 					$httpoptions [ 'auth' ] = array( WP_PROXY_USERNAME, WP_PROXY_PASSWORD );
 				}
-				$httpClient = new GuzzleHttp\Client( $httpoptions );
+				$httpClient = new Deconf\AIWP\GuzzleHttp\Client( $httpoptions );
 				$this->client->setHttpClient( $httpClient );
 			}
 
@@ -114,13 +114,13 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				}
 			}
 
-			$this->service = new Google\Service\Analytics( $this->client );
+			$this->service = new Deconf\AIWP\Google\Service\Analytics( $this->client );
 
-			$this->service_ga4_admin = new Google\Service\GoogleAnalyticsAdmin( $this->client );
+			$this->service_ga4_admin = new Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin( $this->client );
 
-			$this->service_ga3_reporting = new Google\Service\AnalyticsReporting( $this->client );
+			$this->service_ga3_reporting = new Deconf\AIWP\Google\Service\AnalyticsReporting( $this->client );
 
-			$this->service_ga4_data = new Google\Service\AnalyticsData( $this->client );
+			$this->service_ga4_data = new Deconf\AIWP\Google\Service\AnalyticsData( $this->client );
 
 		}
 
@@ -388,25 +388,25 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					$quotauser = $this->get_serial( $this->quotauser . $projectId );
 
 					// Create the DateRange object.
-					$dateRange = new Google\Service\AnalyticsReporting\DateRange();
+					$dateRange = new Deconf\AIWP\Google\Service\AnalyticsReporting\DateRange();
 					$dateRange->setStartDate( $from );
 					$dateRange->setEndDate( $to );
 
 					// Create the Metrics object.
 					if ( is_array( $metrics ) ){
 						foreach ( $metrics as $value ){
-							$metricobj = new Google\Service\AnalyticsReporting\Metric();
+							$metricobj = new Deconf\AIWP\Google\Service\AnalyticsReporting\Metric();
 							$metricobj->setExpression( $value );
 							$metric[] = $metricobj;
 						}
 					} else {
-						$metricobj = new Google\Service\AnalyticsReporting\Metric();
+						$metricobj = new Deconf\AIWP\Google\Service\AnalyticsReporting\Metric();
 						$metricobj->setExpression( $metrics );
 						$metric[] = $metricobj;
 					}
 
 					// Create the ReportRequest object.
-					$request = new Google\Service\AnalyticsReporting\ReportRequest();
+					$request = new Deconf\AIWP\Google\Service\AnalyticsReporting\ReportRequest();
 					$request->setViewId( $projectId );
 					$request->setDateRanges( $dateRange );
 					$request->setMetrics( $metric );
@@ -417,12 +417,12 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
 						if ( is_array( $dimensions ) ){
 							foreach ( $dimensions as $value ){
-								$dimensionobj = new Google\Service\AnalyticsReporting\Dimension();
+								$dimensionobj = new Deconf\AIWP\Google\Service\AnalyticsReporting\Dimension();
 								$dimensionobj->setName( $value );
 								$dimension[] = $dimensionobj;
 							}
 						} else {
-							$dimensionobj = new Google\Service\AnalyticsReporting\Dimension();
+							$dimensionobj = new Deconf\AIWP\Google\Service\AnalyticsReporting\Dimension();
 							$dimensionobj->setName( $dimensions );
 							$dimension[] = $dimensionobj;
 						}
@@ -434,7 +434,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					if ( $filters ) {
 
 						foreach ( $filters as $value ){
-							$dimensionFilterobj = new Google\Service\AnalyticsReporting\DimensionFilter();
+							$dimensionFilterobj = new Deconf\AIWP\Google\Service\AnalyticsReporting\DimensionFilter();
 							$dimensionFilterobj->setDimensionName( $value[0] );
 							$dimensionFilterobj->setOperator( $value[1] );
 							$dimensionFilterobj->setExpressions( array( $value[2] ) );
@@ -443,7 +443,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 						}
 
 						// Create the DimensionFilterClauses
-						$dimensionFilterClause = new Google\Service\AnalyticsReporting\DimensionFilterClause();
+						$dimensionFilterClause = new Deconf\AIWP\Google\Service\AnalyticsReporting\DimensionFilterClause();
 						$dimensionFilterClause->setOperator( 'AND' );
 						$dimensionFilterClause->setFilters( $dimensionFilter );
 
@@ -453,14 +453,14 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
 					// Create the Ordering.
 					if ( $sortby ){
-						$ordering = new Google\Service\AnalyticsReporting\OrderBy();
+						$ordering = new Deconf\AIWP\Google\Service\AnalyticsReporting\OrderBy();
 						$ordering->setOrderType( 'VALUE' );
 						$ordering->setSortOrder( 'DESCENDING' );
 						$ordering->setFieldName( $metrics );
 						$request->setOrderBys( $ordering );
 					}
 
-					$body = new Google\Service\AnalyticsReporting\GetReportsRequest();
+					$body = new Deconf\AIWP\Google\Service\AnalyticsReporting\GetReportsRequest();
 					$body->setReportRequests( array( $request) );
 
 					$response = $this->service_ga3_reporting->reports->batchGet( $body, array( 'quotaUser' => $quotauser ) );
@@ -1217,7 +1217,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					$quotauser = $this->get_serial( $this->quotauser . $projectId );
 
 					// Create the DateRange object.
-					$dateRange = new Google\Service\AnalyticsData\DateRange();
+					$dateRange = new Deconf\AIWP\Google\Service\AnalyticsData\DateRange();
 					$dateRange->setStartDate( $from );
 					$dateRange->setEndDate( $to );
 
@@ -1225,19 +1225,19 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					if ( is_array( $metrics ) ){
 						foreach ( $metrics as $value ){
 							$value = AIWP_Tools::ga3_ga4_mapping( $value );
-							$metricobj = new Google\Service\AnalyticsData\Metric();
+							$metricobj = new Deconf\AIWP\Google\Service\AnalyticsData\Metric();
 							$metricobj->setName( $value );
 							$metric[] = $metricobj;
 						}
 					} else {
 						$metrics = AIWP_Tools::ga3_ga4_mapping( $metrics );
-						$metricobj = new Google\Service\AnalyticsData\Metric();
+						$metricobj = new Deconf\AIWP\Google\Service\AnalyticsData\Metric();
 						$metricobj->setName( $metrics );
 						$metric[] = $metricobj;
 					}
 
 					// Create the ReportRequest object.
-					$request = new Google\Service\AnalyticsData\RunReportRequest();
+					$request = new Deconf\AIWP\Google\Service\AnalyticsData\RunReportRequest();
 					$request->setProperty( $projectId );
 					$request->setDateRanges( $dateRange );
 					$request->setMetrics( $metric );
@@ -1250,13 +1250,13 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 						if ( is_array( $dimensions ) ){
 							foreach ( $dimensions as $value ){
 								$value = AIWP_Tools::ga3_ga4_mapping( $value );
-								$dimensionobj = new Google\Service\AnalyticsData\Dimension();
+								$dimensionobj = new Deconf\AIWP\Google\Service\AnalyticsData\Dimension();
 								$dimensionobj->setName( $value );
 								$dimension[] = $dimensionobj;
 							}
 						} else {
 							$dimensions = AIWP_Tools::ga3_ga4_mapping( $dimensions );
-							$dimensionobj = new Google\Service\AnalyticsData\Dimension();
+							$dimensionobj = new Deconf\AIWP\Google\Service\AnalyticsData\Dimension();
 							$dimensionobj->setName( $dimensions );
 							$dimension[] = $dimensionobj;
 						}
@@ -1270,15 +1270,15 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 						$dimensionFilterExpression = array();
 
 						foreach ( $filters as $value ){
-							$dimensionFilter = new Google\Service\AnalyticsData\Filter();
-							$stringFilter = new Google\Service\AnalyticsData\StringFilter();
+							$dimensionFilter = new Deconf\AIWP\Google\Service\AnalyticsData\Filter();
+							$stringFilter = new Deconf\AIWP\Google\Service\AnalyticsData\StringFilter();
 							$value[0] = AIWP_Tools::ga3_ga4_mapping( $value[0] );
 							$dimensionFilter->setFieldName( $value[0] );
 							$stringFilter->setValue( $value[2] );
 							$dimensionFilter->setStringFilter( $stringFilter );
 
-							$dimensionFilterExpressionobj = new Google\Service\AnalyticsData\FilterExpression();
-							$notexpr = new Google\Service\AnalyticsData\FilterExpression();
+							$dimensionFilterExpressionobj = new Deconf\AIWP\Google\Service\AnalyticsData\FilterExpression();
+							$notexpr = new Deconf\AIWP\Google\Service\AnalyticsData\FilterExpression();
 
 							if ( $value[3] ){
 								$dimensionFilterExpressionobj->setFilter( $dimensionFilter );
@@ -1291,10 +1291,10 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
 						}
 
-						$dimensionFilterExpressionList = new Google\Service\AnalyticsData\FilterExpressionList();
+						$dimensionFilterExpressionList = new Deconf\AIWP\Google\Service\AnalyticsData\FilterExpressionList();
 						$dimensionFilterExpressionList->setExpressions( $dimensionFilterExpression );
 
-						$dimensionFilterExpressionobj = new Google\Service\AnalyticsData\FilterExpression();
+						$dimensionFilterExpressionobj = new Deconf\AIWP\Google\Service\AnalyticsData\FilterExpression();
 						if ( count( $dimensionFilterExpression ) > 1 ){
 							$dimensionFilterExpressionobj->setAndGroup( $dimensionFilterExpressionList );
 						} else{
@@ -1307,19 +1307,19 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
 					// Create the Ordering.
 					if ( $sortby ){
-						$ordering = new Google\Service\AnalyticsData\OrderBy();
+						$ordering = new Deconf\AIWP\Google\Service\AnalyticsData\OrderBy();
 						$metrics = AIWP_Tools::ga3_ga4_mapping( $metrics );
-						$metricOrderBy = new Google\Service\AnalyticsData\MetricOrderBy();
+						$metricOrderBy = new Deconf\AIWP\Google\Service\AnalyticsData\MetricOrderBy();
 						$metricOrderBy->setMetricName( $metrics );
 						$ordering->setMetric( $metricOrderBy );
 						$ordering->setDesc( true );
 						$request->setOrderBys( $ordering );
 					} else {
 						if ( isset( $dimension[0] ) ){
-							$dimensionOrderBy = new Google\Service\AnalyticsData\DimensionOrderBy();
+							$dimensionOrderBy = new Deconf\AIWP\Google\Service\AnalyticsData\DimensionOrderBy();
 							$dimensionOrderBy->setDimensionName($dimension[0]->getName());
 							$dimensionOrderBy->setOrderType( 'NUMERIC' );
-							$ordering = new Google\Service\AnalyticsData\OrderBy();
+							$ordering = new Deconf\AIWP\Google\Service\AnalyticsData\OrderBy();
 							$ordering->setDimension( $dimensionOrderBy );
 							$ordering->setDesc( false );
 							$request->setOrderBys( $ordering );
@@ -2056,11 +2056,11 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 						return - 23;
 					}
 
-					$request = new Google\Service\AnalyticsData\RunRealtimeReportRequest();
+					$request = new Deconf\AIWP\Google\Service\AnalyticsData\RunRealtimeReportRequest();
 
 					// Create the Metrics object.
 					$metrics = AIWP_Tools::ga3_ga4_mapping( $metrics );
-					$metricobj = new Google\Service\AnalyticsData\Metric();
+					$metricobj = new Deconf\AIWP\Google\Service\AnalyticsData\Metric();
 					$metricobj->setName( $metrics );
 					$metric[] = $metricobj;
 
@@ -2074,13 +2074,13 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 						if ( is_array( $dimensions ) ){
 							foreach ( $dimensions as $value ){
 								$value = AIWP_Tools::ga3_ga4_mapping( $value );
-								$dimensionobj = new Google\Service\AnalyticsData\Dimension();
+								$dimensionobj = new Deconf\AIWP\Google\Service\AnalyticsData\Dimension();
 								$dimensionobj->setName( $value );
 								$dimension[] = $dimensionobj;
 							}
 						} else {
 							$dimensions = AIWP_Tools::ga3_ga4_mapping( $dimensions );
-							$dimensionobj = new Google\Service\AnalyticsData\Dimension();
+							$dimensionobj = new Deconf\AIWP\Google\Service\AnalyticsData\Dimension();
 							$dimensionobj->setName( $dimensions );
 							$dimension[] = $dimensionobj;
 						}

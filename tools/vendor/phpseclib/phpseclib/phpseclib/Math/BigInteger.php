@@ -20,7 +20,7 @@
  * base is being used should more than compensate.
  *
  * Numbers are stored in {@link http://en.wikipedia.org/wiki/Endianness little endian} format.  ie.
- * (new \phpseclib\Math\BigInteger(pow(2, 26)))->value = array(0, 1)
+ * (new \Deconf\AIWP\phpseclib\Math\BigInteger(pow(2, 26)))->value = array(0, 1)
  *
  * Useful resources are as follows:
  *
@@ -31,8 +31,8 @@
  * Here's an example of how to use this library:
  * <code>
  * <?php
- *    $a = new \phpseclib\Math\BigInteger(2);
- *    $b = new \phpseclib\Math\BigInteger(3);
+ *    $a = new \Deconf\AIWP\phpseclib\Math\BigInteger(2);
+ *    $b = new \Deconf\AIWP\phpseclib\Math\BigInteger(3);
  *
  *    $c = $a->add($b);
  *
@@ -45,11 +45,14 @@
  * @author    Jim Wigginton <terrafrost@php.net>
  * @copyright 2006 Jim Wigginton
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace phpseclib\Math;
+namespace Deconf\AIWP\phpseclib\Math;
 
-use phpseclib\Crypt\Random;
+use Deconf\AIWP\phpseclib\Crypt\Random;
 
 /**
  * Pure-PHP arbitrary precision integer arithmetic library. Supports base-2, base-10, base-16, and base-256
@@ -237,7 +240,7 @@ class BigInteger
      * Here's an example:
      * <code>
      * <?php
-     *    $a = new \phpseclib\Math\BigInteger('0x32', 16); // 50 in base-16
+     *    $a = new \Deconf\AIWP\phpseclib\Math\BigInteger('0x32', 16); // 50 in base-16
      *
      *    echo $a->toString(); // outputs 50
      * ?>
@@ -245,7 +248,7 @@ class BigInteger
      *
      * @param int|string|resource $x base-10 number or base-$base number if $base set.
      * @param int $base
-     * @return \phpseclib\Math\BigInteger
+     * @return \Deconf\AIWP\phpseclib\Math\BigInteger
      * @access public
      */
     function __construct($x = 0, $base = 10)
@@ -519,7 +522,7 @@ class BigInteger
      * Here's an example:
      * <code>
      * <?php
-     *    $a = new \phpseclib\Math\BigInteger('65');
+     *    $a = new \Deconf\AIWP\phpseclib\Math\BigInteger('65');
      *
      *    echo $a->toBytes(); // outputs chr(65)
      * ?>
@@ -618,7 +621,7 @@ class BigInteger
      * Here's an example:
      * <code>
      * <?php
-     *    $a = new \phpseclib\Math\BigInteger('65');
+     *    $a = new \Deconf\AIWP\phpseclib\Math\BigInteger('65');
      *
      *    echo $a->toHex(); // outputs '41'
      * ?>
@@ -643,7 +646,7 @@ class BigInteger
      * Here's an example:
      * <code>
      * <?php
-     *    $a = new \phpseclib\Math\BigInteger('65');
+     *    $a = new \Deconf\AIWP\phpseclib\Math\BigInteger('65');
      *
      *    echo $a->toBits(); // outputs '1000001'
      * ?>
@@ -679,7 +682,7 @@ class BigInteger
      * Here's an example:
      * <code>
      * <?php
-     *    $a = new \phpseclib\Math\BigInteger('50');
+     *    $a = new \Deconf\AIWP\phpseclib\Math\BigInteger('50');
      *
      *    echo $a->toString(); // outputs 50
      * ?>
@@ -739,7 +742,7 @@ class BigInteger
      *
      * @access public
      * @see self::__clone()
-     * @return \phpseclib\Math\BigInteger
+     * @return \Deconf\AIWP\phpseclib\Math\BigInteger
      */
     function copy()
     {
@@ -775,7 +778,7 @@ class BigInteger
      *
      * @access public
      * @see self::copy()
-     * @return \phpseclib\Math\BigInteger
+     * @return \Deconf\AIWP\phpseclib\Math\BigInteger
      */
     function __clone()
     {
@@ -858,8 +861,8 @@ class BigInteger
      * Here's an example:
      * <code>
      * <?php
-     *    $a = new \phpseclib\Math\BigInteger('10');
-     *    $b = new \phpseclib\Math\BigInteger('20');
+     *    $a = new \Deconf\AIWP\phpseclib\Math\BigInteger('10');
+     *    $b = new \Deconf\AIWP\phpseclib\Math\BigInteger('20');
      *
      *    $c = $a->add($b);
      *
@@ -867,8 +870,8 @@ class BigInteger
      * ?>
      * </code>
      *
-     * @param \phpseclib\Math\BigInteger $y
-     * @return \phpseclib\Math\BigInteger
+     * @param \Deconf\AIWP\phpseclib\Math\BigInteger $y
+     * @return \Deconf\AIWP\phpseclib\Math\BigInteger
      * @access public
      * @internal Performs base-2**52 addition
      */
@@ -987,8 +990,8 @@ class BigInteger
      * Here's an example:
      * <code>
      * <?php
-     *    $a = new \phpseclib\Math\BigInteger('10');
-     *    $b = new \phpseclib\Math\BigInteger('20');
+     *    $a = new \Deconf\AIWP\phpseclib\Math\BigInteger('10');
+     *    $b = new \Deconf\AIWP\phpseclib\Math\BigInteger('20');
      *
      *    $c = $a->subtract($b);
      *
@@ -996,8 +999,8 @@ class BigInteger
      * ?>
      * </code>
      *
-     * @param \phpseclib\Math\BigInteger $y
-     * @return \phpseclib\Math\BigInteger
+     * @param \Deconf\AIWP\phpseclib\Math\BigInteger $y
+     * @return \Deconf\AIWP\phpseclib\Math\BigInteger
      * @access public
      * @internal Performs base-2**52 subtraction
      */
@@ -1121,8 +1124,8 @@ class BigInteger
      * Here's an example:
      * <code>
      * <?php
-     *    $a = new \phpseclib\Math\BigInteger('10');
-     *    $b = new \phpseclib\Math\BigInteger('20');
+     *    $a = new \Deconf\AIWP\phpseclib\Math\BigInteger('10');
+     *    $b = new \Deconf\AIWP\phpseclib\Math\BigInteger('20');
      *
      *    $c = $a->multiply($b);
      *
@@ -1130,8 +1133,8 @@ class BigInteger
      * ?>
      * </code>
      *
-     * @param \phpseclib\Math\BigInteger $x
-     * @return \phpseclib\Math\BigInteger
+     * @param \Deconf\AIWP\phpseclib\Math\BigInteger $x
+     * @return \Deconf\AIWP\phpseclib\Math\BigInteger
      * @access public
      */
     function multiply($x)
@@ -1403,8 +1406,8 @@ class BigInteger
      * Here's an example:
      * <code>
      * <?php
-     *    $a = new \phpseclib\Math\BigInteger('10');
-     *    $b = new \phpseclib\Math\BigInteger('20');
+     *    $a = new \Deconf\AIWP\phpseclib\Math\BigInteger('10');
+     *    $b = new \Deconf\AIWP\phpseclib\Math\BigInteger('20');
      *
      *    list($quotient, $remainder) = $a->divide($b);
      *
@@ -1414,7 +1417,7 @@ class BigInteger
      * ?>
      * </code>
      *
-     * @param \phpseclib\Math\BigInteger $y
+     * @param \Deconf\AIWP\phpseclib\Math\BigInteger $y
      * @return array
      * @access public
      * @internal This function is based off of {@link http://www.cacr.math.uwaterloo.ca/hac/about/chap14.pdf#page=9 HAC 14.20}.
@@ -1622,9 +1625,9 @@ class BigInteger
      * Here's an example:
      * <code>
      * <?php
-     *    $a = new \phpseclib\Math\BigInteger('10');
-     *    $b = new \phpseclib\Math\BigInteger('20');
-     *    $c = new \phpseclib\Math\BigInteger('30');
+     *    $a = new \Deconf\AIWP\phpseclib\Math\BigInteger('10');
+     *    $b = new \Deconf\AIWP\phpseclib\Math\BigInteger('20');
+     *    $c = new \Deconf\AIWP\phpseclib\Math\BigInteger('30');
      *
      *    $c = $a->modPow($b, $c);
      *
@@ -1632,9 +1635,9 @@ class BigInteger
      * ?>
      * </code>
      *
-     * @param \phpseclib\Math\BigInteger $e
-     * @param \phpseclib\Math\BigInteger $n
-     * @return \phpseclib\Math\BigInteger
+     * @param \Deconf\AIWP\phpseclib\Math\BigInteger $e
+     * @param \Deconf\AIWP\phpseclib\Math\BigInteger $n
+     * @return \Deconf\AIWP\phpseclib\Math\BigInteger
      * @access public
      * @internal The most naive approach to modular exponentiation has very unreasonable requirements, and
      *    and although the approach involving repeated squaring does vastly better, it, too, is impractical
@@ -1802,9 +1805,9 @@ class BigInteger
      *
      * Alias for modPow().
      *
-     * @param \phpseclib\Math\BigInteger $e
-     * @param \phpseclib\Math\BigInteger $n
-     * @return \phpseclib\Math\BigInteger
+     * @param \Deconf\AIWP\phpseclib\Math\BigInteger $e
+     * @param \Deconf\AIWP\phpseclib\Math\BigInteger $n
+     * @return \Deconf\AIWP\phpseclib\Math\BigInteger
      * @access public
      */
     function powMod($e, $n)
@@ -1820,10 +1823,10 @@ class BigInteger
      * however, this function performs a modular reduction after every multiplication and squaring operation.
      * As such, this function has the same preconditions that the reductions being used do.
      *
-     * @param \phpseclib\Math\BigInteger $e
-     * @param \phpseclib\Math\BigInteger $n
+     * @param \Deconf\AIWP\phpseclib\Math\BigInteger $e
+     * @param \Deconf\AIWP\phpseclib\Math\BigInteger $n
      * @param int $mode
-     * @return \phpseclib\Math\BigInteger
+     * @return \Deconf\AIWP\phpseclib\Math\BigInteger
      * @access private
      */
     function _slidingWindow($e, $n, $mode)
@@ -1994,8 +1997,8 @@ class BigInteger
      *
      * @see self::_slidingWindow()
      * @access private
-     * @param \phpseclib\Math\BigInteger $n
-     * @return \phpseclib\Math\BigInteger
+     * @param \Deconf\AIWP\phpseclib\Math\BigInteger $n
+     * @return \Deconf\AIWP\phpseclib\Math\BigInteger
      */
     function _mod2($n)
     {
@@ -2433,8 +2436,8 @@ class BigInteger
      * Here's an example:
      * <code>
      * <?php
-     *    $a = new \phpseclib\Math\BigInteger(30);
-     *    $b = new \phpseclib\Math\BigInteger(17);
+     *    $a = new \Deconf\AIWP\phpseclib\Math\BigInteger(30);
+     *    $b = new \Deconf\AIWP\phpseclib\Math\BigInteger(17);
      *
      *    $c = $a->modInverse($b);
      *    echo $c->toString(); // outputs 4
@@ -2447,8 +2450,8 @@ class BigInteger
      * ?>
      * </code>
      *
-     * @param \phpseclib\Math\BigInteger $n
-     * @return \phpseclib\Math\BigInteger|false
+     * @param \Deconf\AIWP\phpseclib\Math\BigInteger $n
+     * @return \Deconf\AIWP\phpseclib\Math\BigInteger|false
      * @access public
      * @internal See {@link http://www.cacr.math.uwaterloo.ca/hac/about/chap14.pdf#page=21 HAC 14.64} for more information.
      */
@@ -2499,8 +2502,8 @@ class BigInteger
      * Here's an example:
      * <code>
      * <?php
-     *    $a = new \phpseclib\Math\BigInteger(693);
-     *    $b = new \phpseclib\Math\BigInteger(609);
+     *    $a = new \Deconf\AIWP\phpseclib\Math\BigInteger(693);
+     *    $b = new \Deconf\AIWP\phpseclib\Math\BigInteger(609);
      *
      *    extract($a->extendedGCD($b));
      *
@@ -2509,8 +2512,8 @@ class BigInteger
      * ?>
      * </code>
      *
-     * @param \phpseclib\Math\BigInteger $n
-     * @return \phpseclib\Math\BigInteger
+     * @param \Deconf\AIWP\phpseclib\Math\BigInteger $n
+     * @return \Deconf\AIWP\phpseclib\Math\BigInteger
      * @access public
      * @internal Calculates the GCD using the binary xGCD algorithim described in
      *    {@link http://www.cacr.math.uwaterloo.ca/hac/about/chap14.pdf#page=19 HAC 14.61}.  As the text above 14.61 notes,
@@ -2632,8 +2635,8 @@ class BigInteger
      * Here's an example:
      * <code>
      * <?php
-     *    $a = new \phpseclib\Math\BigInteger(693);
-     *    $b = new \phpseclib\Math\BigInteger(609);
+     *    $a = new \Deconf\AIWP\phpseclib\Math\BigInteger(693);
+     *    $b = new \Deconf\AIWP\phpseclib\Math\BigInteger(609);
      *
      *    $gcd = a->extendedGCD($b);
      *
@@ -2641,8 +2644,8 @@ class BigInteger
      * ?>
      * </code>
      *
-     * @param \phpseclib\Math\BigInteger $n
-     * @return \phpseclib\Math\BigInteger
+     * @param \Deconf\AIWP\phpseclib\Math\BigInteger $n
+     * @return \Deconf\AIWP\phpseclib\Math\BigInteger
      * @access public
      */
     function gcd($n)
@@ -2654,7 +2657,7 @@ class BigInteger
     /**
      * Absolute value.
      *
-     * @return \phpseclib\Math\BigInteger
+     * @return \Deconf\AIWP\phpseclib\Math\BigInteger
      * @access public
      */
     function abs()
@@ -2687,7 +2690,7 @@ class BigInteger
      *
      * Note how the same comparison operator is used.  If you want to test for equality, use $x->equals($y).
      *
-     * @param \phpseclib\Math\BigInteger $y
+     * @param \Deconf\AIWP\phpseclib\Math\BigInteger $y
      * @return int that is < 0 if $this is less than $y; > 0 if $this is greater than $y, and 0 if they are equal.
      * @access public
      * @see self::equals()
@@ -2753,7 +2756,7 @@ class BigInteger
      *
      * If you need to see if one number is greater than or less than another number, use BigInteger::compare()
      *
-     * @param \phpseclib\Math\BigInteger $x
+     * @param \Deconf\AIWP\phpseclib\Math\BigInteger $x
      * @return bool
      * @access public
      * @see self::compare()
@@ -2793,10 +2796,10 @@ class BigInteger
     /**
      * Logical And
      *
-     * @param \phpseclib\Math\BigInteger $x
+     * @param \Deconf\AIWP\phpseclib\Math\BigInteger $x
      * @access public
      * @internal Implemented per a request by Lluis Pamies i Juarez <lluis _a_ pamies.cat>
-     * @return \phpseclib\Math\BigInteger
+     * @return \Deconf\AIWP\phpseclib\Math\BigInteger
      */
     function bitwise_and($x)
     {
@@ -2834,10 +2837,10 @@ class BigInteger
     /**
      * Logical Or
      *
-     * @param \phpseclib\Math\BigInteger $x
+     * @param \Deconf\AIWP\phpseclib\Math\BigInteger $x
      * @access public
      * @internal Implemented per a request by Lluis Pamies i Juarez <lluis _a_ pamies.cat>
-     * @return \phpseclib\Math\BigInteger
+     * @return \Deconf\AIWP\phpseclib\Math\BigInteger
      */
     function bitwise_or($x)
     {
@@ -2874,10 +2877,10 @@ class BigInteger
     /**
      * Logical Exclusive-Or
      *
-     * @param \phpseclib\Math\BigInteger $x
+     * @param \Deconf\AIWP\phpseclib\Math\BigInteger $x
      * @access public
      * @internal Implemented per a request by Lluis Pamies i Juarez <lluis _a_ pamies.cat>
-     * @return \phpseclib\Math\BigInteger
+     * @return \Deconf\AIWP\phpseclib\Math\BigInteger
      */
     function bitwise_xor($x)
     {
@@ -2916,7 +2919,7 @@ class BigInteger
      *
      * @access public
      * @internal Implemented per a request by Lluis Pamies i Juarez <lluis _a_ pamies.cat>
-     * @return \phpseclib\Math\BigInteger
+     * @return \Deconf\AIWP\phpseclib\Math\BigInteger
      */
     function bitwise_not()
     {
@@ -2956,7 +2959,7 @@ class BigInteger
      * Shifts BigInteger's by $shift bits, effectively dividing by 2**$shift.
      *
      * @param int $shift
-     * @return \phpseclib\Math\BigInteger
+     * @return \Deconf\AIWP\phpseclib\Math\BigInteger
      * @access public
      * @internal The only version that yields any speed increases is the internal version.
      */
@@ -2994,7 +2997,7 @@ class BigInteger
      * Shifts BigInteger's by $shift bits, effectively multiplying by 2**$shift.
      *
      * @param int $shift
-     * @return \phpseclib\Math\BigInteger
+     * @return \Deconf\AIWP\phpseclib\Math\BigInteger
      * @access public
      * @internal The only version that yields any speed increases is the internal version.
      */
@@ -3032,7 +3035,7 @@ class BigInteger
      * Instead of the top x bits being dropped they're appended to the shifted bit string.
      *
      * @param int $shift
-     * @return \phpseclib\Math\BigInteger
+     * @return \Deconf\AIWP\phpseclib\Math\BigInteger
      * @access public
      */
     function bitwise_leftRotate($shift)
@@ -3077,7 +3080,7 @@ class BigInteger
      * Instead of the bottom x bits being dropped they're prepended to the shifted bit string.
      *
      * @param int $shift
-     * @return \phpseclib\Math\BigInteger
+     * @return \Deconf\AIWP\phpseclib\Math\BigInteger
      * @access public
      */
     function bitwise_rightRotate($shift)
@@ -3091,12 +3094,12 @@ class BigInteger
      * Byte length is equal to $length. Uses \phpseclib\Crypt\Random if it's loaded and mt_rand if it's not.
      *
      * @param int $size
-     * @return \phpseclib\Math\BigInteger
+     * @return \Deconf\AIWP\phpseclib\Math\BigInteger
      * @access private
      */
     function _random_number_helper($size)
     {
-        if (class_exists('\phpseclib\Crypt\Random')) {
+        if (class_exists('\Deconf\AIWP\phpseclib\Crypt\Random')) {
             $random = Random::string($size);
         } else {
             $random = '';
@@ -3124,9 +3127,9 @@ class BigInteger
      * $min->random($max)
      * $max->random($min)
      *
-     * @param \phpseclib\Math\BigInteger $arg1
-     * @param \phpseclib\Math\BigInteger $arg2
-     * @return \phpseclib\Math\BigInteger
+     * @param \Deconf\AIWP\phpseclib\Math\BigInteger $arg1
+     * @param \Deconf\AIWP\phpseclib\Math\BigInteger $arg2
+     * @return \Deconf\AIWP\phpseclib\Math\BigInteger
      * @access public
      * @internal The API for creating random numbers used to be $a->random($min, $max), where $a was a BigInteger object.
      *           That method is still supported for BC purposes.
@@ -3205,8 +3208,8 @@ class BigInteger
      * If there's not a prime within the given range, false will be returned.
      * If more than $timeout seconds have elapsed, give up and return false.
      *
-     * @param \phpseclib\Math\BigInteger $arg1
-     * @param \phpseclib\Math\BigInteger $arg2
+     * @param \Deconf\AIWP\phpseclib\Math\BigInteger $arg1
+     * @param \Deconf\AIWP\phpseclib\Math\BigInteger $arg2
      * @param int $timeout
      * @return Math_BigInteger|false
      * @access public
@@ -3335,7 +3338,7 @@ class BigInteger
      * $t parameter is distributability.  BigInteger::randomPrime() can be distributed across multiple pageloads
      * on a website instead of just one.
      *
-     * @param \phpseclib\Math\BigInteger $t
+     * @param \Deconf\AIWP\phpseclib\Math\BigInteger $t
      * @return bool
      * @access public
      * @internal Uses the
@@ -3557,8 +3560,8 @@ class BigInteger
      *
      * Removes leading zeros and truncates (if necessary) to maintain the appropriate precision
      *
-     * @param \phpseclib\Math\BigInteger $result
-     * @return \phpseclib\Math\BigInteger
+     * @param \Deconf\AIWP\phpseclib\Math\BigInteger $result
+     * @return \Deconf\AIWP\phpseclib\Math\BigInteger
      * @see self::_trim()
      * @access private
      */
@@ -3616,7 +3619,7 @@ class BigInteger
      * Removes leading zeros
      *
      * @param array $value
-     * @return \phpseclib\Math\BigInteger
+     * @return \Deconf\AIWP\phpseclib\Math\BigInteger
      * @access private
      */
     function _trim($value)

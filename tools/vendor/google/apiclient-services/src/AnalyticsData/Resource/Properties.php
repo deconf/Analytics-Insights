@@ -13,33 +13,36 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Google\Service\AnalyticsData\Resource;
+namespace Deconf\AIWP\Google\Service\AnalyticsData\Resource;
 
-use Google\Service\AnalyticsData\BatchRunPivotReportsRequest;
-use Google\Service\AnalyticsData\BatchRunPivotReportsResponse;
-use Google\Service\AnalyticsData\BatchRunReportsRequest;
-use Google\Service\AnalyticsData\BatchRunReportsResponse;
-use Google\Service\AnalyticsData\CheckCompatibilityRequest;
-use Google\Service\AnalyticsData\CheckCompatibilityResponse;
-use Google\Service\AnalyticsData\Metadata;
-use Google\Service\AnalyticsData\RunPivotReportRequest;
-use Google\Service\AnalyticsData\RunPivotReportResponse;
-use Google\Service\AnalyticsData\RunRealtimeReportRequest;
-use Google\Service\AnalyticsData\RunRealtimeReportResponse;
-use Google\Service\AnalyticsData\RunReportRequest;
-use Google\Service\AnalyticsData\RunReportResponse;
+use Deconf\AIWP\Google\Service\AnalyticsData\BatchRunPivotReportsRequest;
+use Deconf\AIWP\Google\Service\AnalyticsData\BatchRunPivotReportsResponse;
+use Deconf\AIWP\Google\Service\AnalyticsData\BatchRunReportsRequest;
+use Deconf\AIWP\Google\Service\AnalyticsData\BatchRunReportsResponse;
+use Deconf\AIWP\Google\Service\AnalyticsData\CheckCompatibilityRequest;
+use Deconf\AIWP\Google\Service\AnalyticsData\CheckCompatibilityResponse;
+use Deconf\AIWP\Google\Service\AnalyticsData\Metadata;
+use Deconf\AIWP\Google\Service\AnalyticsData\RunPivotReportRequest;
+use Deconf\AIWP\Google\Service\AnalyticsData\RunPivotReportResponse;
+use Deconf\AIWP\Google\Service\AnalyticsData\RunRealtimeReportRequest;
+use Deconf\AIWP\Google\Service\AnalyticsData\RunRealtimeReportResponse;
+use Deconf\AIWP\Google\Service\AnalyticsData\RunReportRequest;
+use Deconf\AIWP\Google\Service\AnalyticsData\RunReportResponse;
 
 /**
  * The "properties" collection of methods.
  * Typical usage is:
  *  <code>
- *   $analyticsdataService = new Google\Service\AnalyticsData(...);
+ *   $analyticsdataService = new Deconf\AIWP\Google\Service\AnalyticsData(...);
  *   $properties = $analyticsdataService->properties;
  *  </code>
  */
-class Properties extends \Google\Service\Resource
+class Properties extends \Deconf\AIWP\Google\Service\Resource
 {
   /**
    * Returns multiple pivot reports in a batch. All reports must be for the same
@@ -163,9 +166,14 @@ class Properties extends \Google\Service\Resource
     return $this->call('runPivotReport', [$params], RunPivotReportResponse::class);
   }
   /**
-   * The Google Analytics Realtime API returns a customized report of realtime
-   * event data for your property. These reports show events and usage from the
-   * last 30 minutes. (properties.runRealtimeReport)
+   * Returns a customized report of realtime event data for your property. Events
+   * appear in realtime reports seconds after they have been sent to the Google
+   * Analytics. Realtime reports show events and usage data for the periods of
+   * time ranging from the present moment to 30 minutes ago (up to 60 minutes for
+   * Google Analytics 360 properties). For a guide to constructing realtime
+   * requests & understanding responses, see [Creating a Realtime
+   * Report](https://developers.google.com/analytics/devguides/reporting/data/v1
+   * /realtime-basics). (properties.runRealtimeReport)
    *
    * @param string $property A Google Analytics GA4 property identifier whose
    * events are tracked. Specified in the URL path and not the body. To learn
@@ -189,7 +197,9 @@ class Properties extends \Google\Service\Resource
    * the requested dimensions and metrics. Metrics are individual measurements of
    * user activity on your property, such as active users or event count.
    * Dimensions break down metrics across some common criteria, such as country or
-   * event name. (properties.runReport)
+   * event name. For a guide to constructing requests & understanding responses,
+   * see [Creating a Report](https://developers.google.com/analytics/devguides/rep
+   * orting/data/v1/basics). (properties.runReport)
    *
    * @param string $property A Google Analytics GA4 property identifier whose
    * events are tracked. Specified in the URL path and not the body. To learn

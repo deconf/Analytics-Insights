@@ -13,9 +13,12 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Google\Auth;
+namespace Deconf\AIWP\Google\Auth;
 
 /**
  * Describes a Credentials object which supports updating request metadata
@@ -28,10 +31,10 @@ interface UpdateMetadataInterface
     /**
      * Updates metadata with the authorization token.
      *
-     * @param array $metadata metadata hashmap
+     * @param array<mixed> $metadata metadata hashmap
      * @param string $authUri optional auth uri
      * @param callable $httpHandler callback which delivers psr7 request
-     * @return array updated metadata hashmap
+     * @return array<mixed> updated metadata hashmap
      */
     public function updateMetadata(
         $metadata,

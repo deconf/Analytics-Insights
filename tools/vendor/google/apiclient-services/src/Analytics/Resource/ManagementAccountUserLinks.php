@@ -13,22 +13,25 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Google\Service\Analytics\Resource;
+namespace Deconf\AIWP\Google\Service\Analytics\Resource;
 
-use Google\Service\Analytics\EntityUserLink;
-use Google\Service\Analytics\EntityUserLinks;
+use Deconf\AIWP\Google\Service\Analytics\EntityUserLink;
+use Deconf\AIWP\Google\Service\Analytics\EntityUserLinks;
 
 /**
  * The "accountUserLinks" collection of methods.
  * Typical usage is:
  *  <code>
- *   $analyticsService = new Google\Service\Analytics(...);
+ *   $analyticsService = new Deconf\AIWP\Google\Service\Analytics(...);
  *   $accountUserLinks = $analyticsService->accountUserLinks;
  *  </code>
  */
-class ManagementAccountUserLinks extends \Google\Service\Resource
+class ManagementAccountUserLinks extends \Deconf\AIWP\Google\Service\Resource
 {
   /**
    * Removes a user from the given account. (accountUserLinks.delete)

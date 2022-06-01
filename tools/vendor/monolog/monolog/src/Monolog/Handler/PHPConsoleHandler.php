@@ -7,14 +7,17 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Monolog\Handler;
+namespace Deconf\AIWP\Monolog\Handler;
 
 use Exception;
-use Monolog\Formatter\LineFormatter;
-use Monolog\Logger;
-use Monolog\Utils;
+use Deconf\AIWP\Monolog\Formatter\LineFormatter;
+use Deconf\AIWP\Monolog\Logger;
+use Deconf\AIWP\Monolog\Utils;
 use PhpConsole\Connector;
 use PhpConsole\Handler;
 use PhpConsole\Helper;
@@ -30,7 +33,7 @@ use PhpConsole\Helper;
  * 3. Install PHP Console library https://github.com/barbushin/php-console#installation
  * 4. Example (result will looks like http://i.hizliresim.com/vg3Pz4.png)
  *
- *      $logger = new \Monolog\Logger('all', array(new \Monolog\Handler\PHPConsoleHandler()));
+ *      $logger = new \Deconf\AIWP\Monolog\Logger('all', array(new \Deconf\AIWP\Monolog\Handler\PHPConsoleHandler()));
  *      \Monolog\ErrorHandler::register($logger);
  *      echo $undefinedVar;
  *      $logger->addDebug('SELECT * FROM users', array('db', 'time' => 0.012));
@@ -42,7 +45,7 @@ class PHPConsoleHandler extends AbstractProcessingHandler
 {
     private $options = array(
         'enabled' => true, // bool Is PHP Console server enabled
-        'classesPartialsTraceIgnore' => array('Monolog\\'), // array Hide calls of classes started with...
+        'classesPartialsTraceIgnore' => array('Deconf\\AIWP\\Monolog\\'), // array Hide calls of classes started with...
         'debugTagsKeysInContext' => array(0, 'tag'), // bool Is PHP Console server enabled
         'useOwnErrorsHandler' => false, // bool Enable errors handling
         'useOwnExceptionsHandler' => false, // bool Enable exceptions handling

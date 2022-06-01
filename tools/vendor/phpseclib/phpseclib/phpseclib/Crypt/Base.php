@@ -32,9 +32,12 @@
  * @copyright 2007 Jim Wigginton
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace phpseclib\Crypt;
+namespace Deconf\AIWP\phpseclib\Crypt;
 
 /**
  * Base Class for all \phpseclib\Crypt\* cipher classes
@@ -47,8 +50,8 @@ abstract class Base
 {
     /**#@+
      * @access public
-     * @see \phpseclib\Crypt\Base::encrypt()
-     * @see \phpseclib\Crypt\Base::decrypt()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::encrypt()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::decrypt()
      */
     /**
      * Encrypt / decrypt using the Counter mode.
@@ -99,7 +102,7 @@ abstract class Base
     /**
      * Whirlpool available flag
      *
-     * @see \phpseclib\Crypt\Base::_hashInlineCryptFunction()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::_hashInlineCryptFunction()
      * @var bool
      * @access private
      */
@@ -107,7 +110,7 @@ abstract class Base
 
     /**#@+
      * @access private
-     * @see \phpseclib\Crypt\Base::__construct()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::__construct()
      */
     /**
      * Base value for the internal implementation $engine switch
@@ -156,7 +159,7 @@ abstract class Base
      * @var string
      * @access private
      */
-    var $iv;
+    var $iv = '';
 
     /**
      * A "sliding" Initialization Vector
@@ -234,8 +237,8 @@ abstract class Base
     /**
      * Does the enmcrypt resource need to be (re)initialized?
      *
-     * @see \phpseclib\Crypt\Twofish::setKey()
-     * @see \phpseclib\Crypt\Twofish::setIV()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Twofish::setKey()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Twofish::setIV()
      * @var bool
      * @access private
      */
@@ -244,8 +247,8 @@ abstract class Base
     /**
      * Does the demcrypt resource need to be (re)initialized?
      *
-     * @see \phpseclib\Crypt\Twofish::setKey()
-     * @see \phpseclib\Crypt\Twofish::setIV()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Twofish::setKey()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Twofish::setIV()
      * @var bool
      * @access private
      */
@@ -779,6 +782,7 @@ abstract class Base
                     }
                     return $ciphertext;
                 case self::MODE_OFB8:
+                    // OpenSSL has built in support for cfb8 but not ofb8
                     $ciphertext = '';
                     $len = strlen($plaintext);
                     $iv = $this->encryptIV;
@@ -795,8 +799,6 @@ abstract class Base
                     break;
                 case self::MODE_OFB:
                     return $this->_openssl_ofb_process($plaintext, $this->encryptIV, $this->enbuffer);
-                case self::MODE_OFB8:
-                    // OpenSSL has built in support for cfb8 but not ofb8
             }
         }
 
@@ -918,8 +920,8 @@ abstract class Base
                         $block = substr($plaintext, $i, $block_size);
                         if (strlen($block) > strlen($buffer['ciphertext'])) {
                             $buffer['ciphertext'].= $this->_encryptBlock($xor);
+                            $this->_increment_str($xor);
                         }
-                        $this->_increment_str($xor);
                         $key = $this->_string_shift($buffer['ciphertext'], $block_size);
                         $ciphertext.= $block ^ $key;
                     }
@@ -2079,6 +2081,13 @@ abstract class Base
      */
     function _increment_str(&$var)
     {
+        if (function_exists('sodium_increment')) {
+            $var = strrev($var);
+            sodium_increment($var);
+            $var = strrev($var);
+            return;
+        }
+
         for ($i = 4; $i <= strlen($var); $i+= 4) {
             $temp = substr($var, -$i, 4);
             switch ($temp) {

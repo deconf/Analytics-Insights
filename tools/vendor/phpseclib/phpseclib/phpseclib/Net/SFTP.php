@@ -14,7 +14,7 @@
  * <?php
  *    include 'vendor/autoload.php';
  *
- *    $sftp = new \phpseclib\Net\SFTP('www.domain.tld');
+ *    $sftp = new \Deconf\AIWP\phpseclib\Net\SFTP('www.domain.tld');
  *    if (!$sftp->login('username', 'password')) {
  *        exit('Login Failed');
  *    }
@@ -31,9 +31,12 @@
  * @copyright 2009 Jim Wigginton
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace phpseclib\Net;
+namespace Deconf\AIWP\phpseclib\Net;
 
 /**
  * Pure-PHP implementations of SFTP.
@@ -49,15 +52,15 @@ class SFTP extends SSH2
      *
      * \phpseclib\Net\SSH2::exec() uses 0 and \phpseclib\Net\SSH2::read() / \phpseclib\Net\SSH2::write() use 1.
      *
-     * @see \phpseclib\Net\SSH2::_send_channel_packet()
-     * @see \phpseclib\Net\SSH2::_get_channel_packet()
+     * @see \Deconf\AIWP\phpseclib\Net\SSH2::_send_channel_packet()
+     * @see \Deconf\AIWP\phpseclib\Net\SSH2::_get_channel_packet()
      * @access private
      */
     const CHANNEL = 0x100;
 
     /**#@+
      * @access public
-     * @see \phpseclib\Net\SFTP::put()
+     * @see \Deconf\AIWP\phpseclib\Net\SFTP::put()
     */
     /**
      * Reads data from a local file.
@@ -326,7 +329,7 @@ class SFTP extends SSH2
      * @param string $host
      * @param int $port
      * @param int $timeout
-     * @return \phpseclib\Net\SFTP
+     * @return \Deconf\AIWP\phpseclib\Net\SFTP
      * @access public
      */
     function __construct($host, $port = 22, $timeout = 10)
@@ -2159,7 +2162,7 @@ class SFTP extends SSH2
     /**
      * Uploads a file to the SFTP server.
      *
-     * By default, \phpseclib\Net\SFTP::put() does not read from the local filesystem.  $data is dumped directly into $remote_file.
+     * By default, \Deconf\AIWP\phpseclib\Net\SFTP::put() does not read from the local filesystem.  $data is dumped directly into $remote_file.
      * So, for example, if you set $data to 'filename.ext' and then do \phpseclib\Net\SFTP::get(), you will get a file, twelve bytes
      * long, containing 'filename.ext' as its contents.
      *

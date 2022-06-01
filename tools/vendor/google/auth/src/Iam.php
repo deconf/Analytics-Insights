@@ -13,14 +13,17 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Google\Auth;
+namespace Deconf\AIWP\Google\Auth;
 
-use Google\Auth\HttpHandler\HttpClientCache;
-use Google\Auth\HttpHandler\HttpHandlerFactory;
-use GuzzleHttp\Psr7;
-use GuzzleHttp\Psr7\Utils;
+use Deconf\AIWP\Google\Auth\HttpHandler\HttpClientCache;
+use Deconf\AIWP\Google\Auth\HttpHandler\HttpHandlerFactory;
+use Deconf\AIWP\GuzzleHttp\Psr7;
+use Deconf\AIWP\GuzzleHttp\Psr7\Utils;
 
 /**
  * Tools for using the IAM API.
@@ -57,7 +60,7 @@ class Iam
      * @param string $email The service account email.
      * @param string $accessToken An access token from the service account.
      * @param string $stringToSign The string to be signed.
-     * @param array $delegates [optional] A list of service account emails to
+     * @param array<string> $delegates [optional] A list of service account emails to
      *        add to the delegate chain. If omitted, the value of `$email` will
      *        be used.
      * @return string The signed string, base64-encoded.

@@ -11,11 +11,14 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  * @internal  See http://api.libssh.org/rfc/PROTOCOL.agent
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace phpseclib\System\SSH\Agent;
+namespace Deconf\AIWP\phpseclib\System\SSH\Agent;
 
-use phpseclib\System\SSH\Agent;
+use Deconf\AIWP\phpseclib\System\SSH\Agent;
 
 /**
  * Pure-PHP ssh-agent client identity object
@@ -46,7 +49,7 @@ class Identity
     /**
      * Key Object
      *
-     * @var \phpseclib\Crypt\RSA
+     * @var \Deconf\AIWP\phpseclib\Crypt\RSA
      * @access private
      * @see self::getPublicKey()
      */
@@ -84,7 +87,7 @@ class Identity
      * Default Constructor.
      *
      * @param resource $fsock
-     * @return \phpseclib\System\SSH\Agent\Identity
+     * @return \Deconf\AIWP\phpseclib\System\SSH\Agent\Identity
      * @access private
      */
     function __construct($fsock)
@@ -97,7 +100,7 @@ class Identity
      *
      * Called by \phpseclib\System\SSH\Agent::requestIdentities()
      *
-     * @param \phpseclib\Crypt\RSA $key
+     * @param \Deconf\AIWP\phpseclib\Crypt\RSA $key
      * @access private
      */
     function setPublicKey($key)

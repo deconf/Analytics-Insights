@@ -10,7 +10,7 @@
  * <?php
  *    include 'vendor/autoload.php';
  *
- *    echo bin2hex(\phpseclib\Crypt\Random::string(8));
+ *    echo bin2hex(\Deconf\AIWP\phpseclib\Crypt\Random::string(8));
  * ?>
  * </code>
  *
@@ -20,9 +20,12 @@
  * @copyright 2007 Jim Wigginton
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace phpseclib\Crypt;
+namespace Deconf\AIWP\phpseclib\Crypt;
 
 /**
  * Pure-PHP Random Number Generator
@@ -192,22 +195,22 @@ class Random
             //
             // http://en.wikipedia.org/wiki/Cryptographically_secure_pseudorandom_number_generator#Designs_based_on_cryptographic_primitives
             switch (true) {
-                case class_exists('\phpseclib\Crypt\AES'):
+                case class_exists('\Deconf\AIWP\phpseclib\Crypt\AES'):
                     $crypto = new AES(Base::MODE_CTR);
                     break;
-                case class_exists('\phpseclib\Crypt\Twofish'):
+                case class_exists('\Deconf\AIWP\phpseclib\Crypt\Twofish'):
                     $crypto = new Twofish(Base::MODE_CTR);
                     break;
-                case class_exists('\phpseclib\Crypt\Blowfish'):
+                case class_exists('\Deconf\AIWP\phpseclib\Crypt\Blowfish'):
                     $crypto = new Blowfish(Base::MODE_CTR);
                     break;
-                case class_exists('\phpseclib\Crypt\TripleDES'):
+                case class_exists('\Deconf\AIWP\phpseclib\Crypt\TripleDES'):
                     $crypto = new TripleDES(Base::MODE_CTR);
                     break;
-                case class_exists('\phpseclib\Crypt\DES'):
+                case class_exists('\Deconf\AIWP\phpseclib\Crypt\DES'):
                     $crypto = new DES(Base::MODE_CTR);
                     break;
-                case class_exists('\phpseclib\Crypt\RC4'):
+                case class_exists('\Deconf\AIWP\phpseclib\Crypt\RC4'):
                     $crypto = new RC4();
                     break;
                 default:

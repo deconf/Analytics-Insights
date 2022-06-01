@@ -13,22 +13,25 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Google\Service\SearchConsole\Resource;
+namespace Deconf\AIWP\Google\Service\SearchConsole\Resource;
 
-use Google\Service\SearchConsole\SitemapsListResponse;
-use Google\Service\SearchConsole\WmxSitemap;
+use Deconf\AIWP\Google\Service\SearchConsole\SitemapsListResponse;
+use Deconf\AIWP\Google\Service\SearchConsole\WmxSitemap;
 
 /**
  * The "sitemaps" collection of methods.
  * Typical usage is:
  *  <code>
- *   $searchconsoleService = new Google\Service\SearchConsole(...);
+ *   $searchconsoleService = new Deconf\AIWP\Google\Service\SearchConsole(...);
  *   $sitemaps = $searchconsoleService->sitemaps;
  *  </code>
  */
-class Sitemaps extends \Google\Service\Resource
+class Sitemaps extends \Deconf\AIWP\Google\Service\Resource
 {
   /**
    * Deletes a sitemap from the Sitemaps report. Does not stop Google from

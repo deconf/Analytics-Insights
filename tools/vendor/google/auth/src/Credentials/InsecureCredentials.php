@@ -13,11 +13,14 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Google\Auth\Credentials;
+namespace Deconf\AIWP\Google\Auth\Credentials;
 
-use Google\Auth\FetchAuthTokenInterface;
+use Deconf\AIWP\Google\Auth\FetchAuthTokenInterface;
 
 /**
  * Provides a set of credentials that will always return an empty access token.
@@ -27,7 +30,7 @@ use Google\Auth\FetchAuthTokenInterface;
 class InsecureCredentials implements FetchAuthTokenInterface
 {
     /**
-     * @var array
+     * @var array{access_token:string}
      */
     private $token = [
         'access_token' => ''
@@ -37,9 +40,7 @@ class InsecureCredentials implements FetchAuthTokenInterface
      * Fetches the auth token. In this case it returns an empty string.
      *
      * @param callable $httpHandler
-     * @return array A set of auth related metadata, containing the following
-     * keys:
-     *   - access_token (string)
+     * @return array{access_token:string} A set of auth related metadata
      */
     public function fetchAuthToken(callable $httpHandler = null)
     {
@@ -61,7 +62,7 @@ class InsecureCredentials implements FetchAuthTokenInterface
      * Fetches the last received token. In this case, it returns the same empty string
      * auth token.
      *
-     * @return array
+     * @return array{access_token:string}
      */
     public function getLastReceivedToken()
     {

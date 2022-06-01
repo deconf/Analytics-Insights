@@ -13,11 +13,18 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Google\Auth\Cache;
+namespace Deconf\AIWP\Google\Auth\Cache;
 
+use DateTime;
+use DateTimeInterface;
+use DateTimeZone;
 use Psr\Cache\CacheItemInterface;
+use TypeError;
 
 /**
  * A cache item.
@@ -35,7 +42,7 @@ final class Item implements CacheItemInterface
     private $value;
 
     /**
-     * @var \DateTime|null
+     * @var DateTimeInterface|null
      */
     private $expiration;
 
@@ -106,18 +113,13 @@ final class Item implements CacheItemInterface
             return $this;
         }
 
-        $implementationMessage = interface_exists('DateTimeInterface')
-            ? 'implement interface DateTimeInterface'
-            : 'be an instance of DateTime';
-
         $error = sprintf(
-            'Argument 1 passed to %s::expiresAt() must %s, %s given',
+            'Argument 1 passed to %s::expiresAt() must implement interface DateTimeInterface, %s given',
             get_class($this),
-            $implementationMessage,
             gettype($expiration)
         );
 
-        $this->handleError($error);
+        throw new TypeError($error);
     }
 
     /**
@@ -136,25 +138,10 @@ final class Item implements CacheItemInterface
                        'instance of DateInterval or of the type integer, %s given';
             $error = sprintf($message, get_class($this), gettype($time));
 
-            $this->handleError($error);
+            throw new TypeError($error);
         }
 
         return $this;
-    }
-
-    /**
-     * Handles an error.
-     *
-     * @param string $error
-     * @throws \TypeError
-     */
-    private function handleError($error)
-    {
-        if (class_exists('TypeError')) {
-            throw new \TypeError($error);
-        }
-
-        trigger_error($error, E_USER_ERROR);
     }
 
     /**
@@ -169,15 +156,18 @@ final class Item implements CacheItemInterface
             return true;
         }
 
-        if ($expiration instanceof \DateTimeInterface) {
+        if ($expiration instanceof DateTimeInterface) {
             return true;
         }
 
         return false;
     }
 
+    /**
+     * @return DateTime
+     */
     protected function currentTime()
     {
-        return new \DateTime('now', new \DateTimeZone('UTC'));
+        return new DateTime('now', new DateTimeZone('UTC'));
     }
 }

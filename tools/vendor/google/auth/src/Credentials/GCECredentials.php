@@ -13,22 +13,25 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Google\Auth\Credentials;
+namespace Deconf\AIWP\Google\Auth\Credentials;
 
-use Google\Auth\CredentialsLoader;
-use Google\Auth\GetQuotaProjectInterface;
-use Google\Auth\HttpHandler\HttpClientCache;
-use Google\Auth\HttpHandler\HttpHandlerFactory;
-use Google\Auth\Iam;
-use Google\Auth\ProjectIdProviderInterface;
-use Google\Auth\SignBlobInterface;
-use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Exception\ConnectException;
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Exception\ServerException;
-use GuzzleHttp\Psr7\Request;
+use Deconf\AIWP\Google\Auth\CredentialsLoader;
+use Deconf\AIWP\Google\Auth\GetQuotaProjectInterface;
+use Deconf\AIWP\Google\Auth\HttpHandler\HttpClientCache;
+use Deconf\AIWP\Google\Auth\HttpHandler\HttpHandlerFactory;
+use Deconf\AIWP\Google\Auth\Iam;
+use Deconf\AIWP\Google\Auth\ProjectIdProviderInterface;
+use Deconf\AIWP\Google\Auth\SignBlobInterface;
+use Deconf\AIWP\GuzzleHttp\Exception\ClientException;
+use Deconf\AIWP\GuzzleHttp\Exception\ConnectException;
+use Deconf\AIWP\GuzzleHttp\Exception\RequestException;
+use Deconf\AIWP\GuzzleHttp\Exception\ServerException;
+use Deconf\AIWP\GuzzleHttp\Psr7\Request;
 use InvalidArgumentException;
 
 /**
@@ -37,10 +40,10 @@ use InvalidArgumentException;
  * It can be used to authorize requests using the AuthTokenMiddleware, but will
  * only succeed if being run on GCE:
  *
- *   use Google\Auth\Credentials\GCECredentials;
- *   use Google\Auth\Middleware\AuthTokenMiddleware;
- *   use GuzzleHttp\Client;
- *   use GuzzleHttp\HandlerStack;
+ *   use Deconf\AIWP\Google\Auth\Credentials\GCECredentials;
+ *   use Deconf\AIWP\Google\Auth\Middleware\AuthTokenMiddleware;
+ *   use Deconf\AIWP\GuzzleHttp\Client;
+ *   use Deconf\AIWP\GuzzleHttp\HandlerStack;
  *
  *   $gce = new GCECredentials();
  *   $middleware = new AuthTokenMiddleware($gce);
@@ -126,6 +129,8 @@ class GCECredentials extends CredentialsLoader implements
 
     /**
      * Result of fetchAuthToken.
+     *
+     * @var array<mixed>
      */
     protected $lastReceivedToken;
 
@@ -166,7 +171,7 @@ class GCECredentials extends CredentialsLoader implements
 
     /**
      * @param Iam $iam [optional] An IAM instance.
-     * @param string|array $scope [optional] the scope of the access request,
+     * @param string|string[] $scope [optional] the scope of the access request,
      *        expressed either as an array or as a space-delimited string.
      * @param string $targetAudience [optional] The audience for the ID token.
      * @param string $quotaProject [optional] Specifies a project to bill for access
@@ -297,7 +302,7 @@ class GCECredentials extends CredentialsLoader implements
      */
     public static function onAppEngineFlexible()
     {
-        return substr(getenv('GAE_INSTANCE'), 0, 4) === 'aef-';
+        return substr((string) getenv('GAE_INSTANCE'), 0, 4) === 'aef-';
     }
 
     /**
@@ -328,12 +333,12 @@ class GCECredentials extends CredentialsLoader implements
                     new Request(
                         'GET',
                         $checkUri,
-                        [self::FLAVOR_HEADER => 'Google']
+                        [self::FLAVOR_HEADER => 'Deconf\AIWP\Google']
                     ),
                     ['timeout' => self::COMPUTE_PING_CONNECTION_TIMEOUT_S]
                 );
 
-                return $resp->getHeaderLine(self::FLAVOR_HEADER) == 'Google';
+                return $resp->getHeaderLine(self::FLAVOR_HEADER) == 'Deconf\AIWP\Google';
             } catch (ClientException $e) {
             } catch (ServerException $e) {
             } catch (RequestException $e) {
@@ -351,15 +356,14 @@ class GCECredentials extends CredentialsLoader implements
      *
      * @param callable $httpHandler callback which delivers psr7 request
      *
-     * @return array A set of auth related metadata, based on the token type.
+     * @return array<mixed> {
+     *     A set of auth related metadata, based on the token type.
      *
-     * Access tokens have the following keys:
-     *   - access_token (string)
-     *   - expires_in (int)
-     *   - token_type (string)
-     * ID tokens have the following keys:
-     *   - id_token (string)
-     *
+     *     @type string $access_token for access tokens
+     *     @type int    $expires_in   for access tokens
+     *     @type string $token_type   for access tokens
+     *     @type string $id_token     for ID tokens
+     * }
      * @throws \Exception
      */
     public function fetchAuthToken(callable $httpHandler = null)
@@ -402,7 +406,7 @@ class GCECredentials extends CredentialsLoader implements
     }
 
     /**
-     * @return array|null
+     * @return array{access_token:string,expires_at:int}|null
      */
     public function getLastReceivedToken()
     {
@@ -528,7 +532,7 @@ class GCECredentials extends CredentialsLoader implements
             new Request(
                 'GET',
                 $uri,
-                [self::FLAVOR_HEADER => 'Google']
+                [self::FLAVOR_HEADER => 'Deconf\AIWP\Google']
             )
         );
 

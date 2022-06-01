@@ -1,6 +1,12 @@
 <?php
+/**
+ * @license MIT
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
+ */
 
-namespace GuzzleHttp\Psr7;
+namespace Deconf\AIWP\GuzzleHttp\Psr7;
 
 use InvalidArgumentException;
 use Psr\Http\Message\RequestInterface;

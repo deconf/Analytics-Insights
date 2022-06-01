@@ -7,12 +7,15 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Monolog\Formatter;
+namespace Deconf\AIWP\Monolog\Formatter;
 
 use Exception;
-use Monolog\Utils;
+use Deconf\AIWP\Monolog\Utils;
 
 /**
  * Normalizes incoming records to remove objects/resources so it's easier to dump to various targets
@@ -35,7 +38,7 @@ class NormalizerFormatter implements FormatterInterface
         $this->dateFormat = $dateFormat ?: static::SIMPLE_DATE;
         $this->maxDepth = $maxDepth;
         if (!function_exists('json_encode')) {
-            throw new \RuntimeException('PHP\'s json extension is required to use Monolog\'s NormalizerFormatter');
+            throw new \RuntimeException('PHP\'s json extension is required to use Deconf\AIWP\Monolog\'s NormalizerFormatter');
         }
     }
 

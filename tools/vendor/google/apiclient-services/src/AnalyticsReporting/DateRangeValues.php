@@ -13,11 +13,14 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Google\Service\AnalyticsReporting;
+namespace Deconf\AIWP\Google\Service\AnalyticsReporting;
 
-class DateRangeValues extends \Google\Collection
+class DateRangeValues extends \Deconf\AIWP\Google\Collection
 {
   protected $collection_key = 'values';
   protected $pivotValueRegionsType = PivotValueRegion::class;

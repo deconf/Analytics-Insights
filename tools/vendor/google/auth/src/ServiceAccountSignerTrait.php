@@ -13,11 +13,14 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Google\Auth;
+namespace Deconf\AIWP\Google\Auth;
 
-use phpseclib\Crypt\RSA;
+use Deconf\AIWP\phpseclib\Crypt\RSA;
 
 /**
  * Sign a string using a Service Account private key.
@@ -37,7 +40,7 @@ trait ServiceAccountSignerTrait
         $privateKey = $this->auth->getSigningKey();
 
         $signedString = '';
-        if (class_exists('\\phpseclib\\Crypt\\RSA') && !$forceOpenssl) {
+        if (class_exists('\\Deconf\\AIWP\\phpseclib\\Crypt\\RSA') && !$forceOpenssl) {
             $rsa = new RSA();
             $rsa->loadKey($privateKey);
             $rsa->setSignatureMode(RSA::SIGNATURE_PKCS1);

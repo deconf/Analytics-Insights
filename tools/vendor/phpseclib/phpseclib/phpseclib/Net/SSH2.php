@@ -10,7 +10,7 @@
  * <?php
  *    include 'vendor/autoload.php';
  *
- *    $ssh = new \phpseclib\Net\SSH2('www.domain.tld');
+ *    $ssh = new \Deconf\AIWP\phpseclib\Net\SSH2('www.domain.tld');
  *    if (!$ssh->login('username', 'password')) {
  *        exit('Login Failed');
  *    }
@@ -24,11 +24,11 @@
  * <?php
  *    include 'vendor/autoload.php';
  *
- *    $key = new \phpseclib\Crypt\RSA();
+ *    $key = new \Deconf\AIWP\phpseclib\Crypt\RSA();
  *    //$key->setPassword('whatever');
  *    $key->loadKey(file_get_contents('privatekey'));
  *
- *    $ssh = new \phpseclib\Net\SSH2('www.domain.tld');
+ *    $ssh = new \Deconf\AIWP\phpseclib\Net\SSH2('www.domain.tld');
  *    if (!$ssh->login('username', $key)) {
  *        exit('Login Failed');
  *    }
@@ -45,21 +45,24 @@
  * @copyright 2007 Jim Wigginton
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace phpseclib\Net;
+namespace Deconf\AIWP\phpseclib\Net;
 
-use phpseclib\Crypt\Base;
-use phpseclib\Crypt\Blowfish;
-use phpseclib\Crypt\Hash;
-use phpseclib\Crypt\Random;
-use phpseclib\Crypt\RC4;
-use phpseclib\Crypt\Rijndael;
-use phpseclib\Crypt\RSA;
-use phpseclib\Crypt\TripleDES;
-use phpseclib\Crypt\Twofish;
-use phpseclib\Math\BigInteger; // Used to do Diffie-Hellman key exchange and DSA/RSA signature verification.
-use phpseclib\System\SSH\Agent;
+use Deconf\AIWP\phpseclib\Crypt\Base;
+use Deconf\AIWP\phpseclib\Crypt\Blowfish;
+use Deconf\AIWP\phpseclib\Crypt\Hash;
+use Deconf\AIWP\phpseclib\Crypt\Random;
+use Deconf\AIWP\phpseclib\Crypt\RC4;
+use Deconf\AIWP\phpseclib\Crypt\Rijndael;
+use Deconf\AIWP\phpseclib\Crypt\RSA;
+use Deconf\AIWP\phpseclib\Crypt\TripleDES;
+use Deconf\AIWP\phpseclib\Crypt\Twofish;
+use Deconf\AIWP\phpseclib\Math\BigInteger; // Used to do Diffie-Hellman key exchange and DSA/RSA signature verification.
+use Deconf\AIWP\phpseclib\System\SSH\Agent;
 
 /**
  * Pure-PHP implementation of SSHv2.
@@ -92,7 +95,7 @@ class SSH2
     /**#@+
      * Execution Bitmap Masks
      *
-     * @see \phpseclib\Net\SSH2::bitmap
+     * @see \Deconf\AIWP\phpseclib\Net\SSH2::bitmap
      * @access private
      */
     const MASK_CONSTRUCTOR   = 0x00000001;
@@ -115,8 +118,8 @@ class SSH2
      *     open request, and 'sender channel' is the channel number allocated by
      *     the other side.
      *
-     * @see \phpseclib\Net\SSH2::_send_channel_packet()
-     * @see \phpseclib\Net\SSH2::_get_channel_packet()
+     * @see \Deconf\AIWP\phpseclib\Net\SSH2::_send_channel_packet()
+     * @see \Deconf\AIWP\phpseclib\Net\SSH2::_get_channel_packet()
      * @access private
     */
     const CHANNEL_EXEC          = 1; // PuTTy uses 0x100
@@ -128,7 +131,7 @@ class SSH2
 
     /**#@+
      * @access public
-     * @see \phpseclib\Net\SSH2::getLog()
+     * @see \Deconf\AIWP\phpseclib\Net\SSH2::getLog()
     */
     /**
      * Returns the message numbers
@@ -154,7 +157,7 @@ class SSH2
 
     /**#@+
      * @access public
-     * @see \phpseclib\Net\SSH2::read()
+     * @see \Deconf\AIWP\phpseclib\Net\SSH2::read()
     */
     /**
      * Returns when a string matching $expect exactly is found
@@ -1063,7 +1066,7 @@ class SSH2
      * @param int $port
      * @param int $timeout
      * @see self::login()
-     * @return \phpseclib\Net\SSH2
+     * @return \Deconf\AIWP\phpseclib\Net\SSH2
      * @access public
      */
     function __construct($host, $port = 22, $timeout = 10)
@@ -2682,7 +2685,7 @@ class SSH2
      * Login with an ssh-agent provided key
      *
      * @param string $username
-     * @param \phpseclib\System\SSH\Agent $agent
+     * @param \Deconf\AIWP\phpseclib\System\SSH\Agent $agent
      * @return bool
      * @access private
      */
@@ -2703,7 +2706,7 @@ class SSH2
      * Login with an RSA private key
      *
      * @param string $username
-     * @param \phpseclib\Crypt\RSA $privatekey
+     * @param \Deconf\AIWP\phpseclib\Crypt\RSA $privatekey
      * @return bool
      * @access private
      * @internal It might be worthwhile, at some point, to protect against {@link http://tools.ietf.org/html/rfc4251#section-9.3.9 traffic analysis}

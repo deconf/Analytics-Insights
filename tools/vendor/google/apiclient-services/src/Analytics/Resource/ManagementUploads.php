@@ -13,23 +13,26 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Google\Service\Analytics\Resource;
+namespace Deconf\AIWP\Google\Service\Analytics\Resource;
 
-use Google\Service\Analytics\AnalyticsDataimportDeleteUploadDataRequest;
-use Google\Service\Analytics\Upload;
-use Google\Service\Analytics\Uploads;
+use Deconf\AIWP\Google\Service\Analytics\AnalyticsDataimportDeleteUploadDataRequest;
+use Deconf\AIWP\Google\Service\Analytics\Upload;
+use Deconf\AIWP\Google\Service\Analytics\Uploads;
 
 /**
  * The "uploads" collection of methods.
  * Typical usage is:
  *  <code>
- *   $analyticsService = new Google\Service\Analytics(...);
+ *   $analyticsService = new Deconf\AIWP\Google\Service\Analytics(...);
  *   $uploads = $analyticsService->uploads;
  *  </code>
  */
-class ManagementUploads extends \Google\Service\Resource
+class ManagementUploads extends \Deconf\AIWP\Google\Service\Resource
 {
   /**
    * Delete data associated with a previous upload. (uploads.deleteUploadData)

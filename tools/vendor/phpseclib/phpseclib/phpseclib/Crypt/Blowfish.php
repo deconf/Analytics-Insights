@@ -16,7 +16,7 @@
  * <?php
  *    include 'vendor/autoload.php';
  *
- *    $blowfish = new \phpseclib\Crypt\Blowfish();
+ *    $blowfish = new \Deconf\AIWP\phpseclib\Crypt\Blowfish();
  *
  *    $blowfish->setKey('12345678901234567890123456789012');
  *
@@ -33,9 +33,12 @@
  * @copyright 2007 Jim Wigginton
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace phpseclib\Crypt;
+namespace Deconf\AIWP\phpseclib\Crypt;
 
 /**
  * Pure-PHP implementation of Blowfish.
@@ -50,7 +53,7 @@ class Blowfish extends Base
     /**
      * Block Length of the cipher
      *
-     * @see \phpseclib\Crypt\Base::block_size
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::block_size
      * @var int
      * @access private
      */
@@ -59,7 +62,7 @@ class Blowfish extends Base
     /**
      * The mcrypt specific name of the cipher
      *
-     * @see \phpseclib\Crypt\Base::cipher_name_mcrypt
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::cipher_name_mcrypt
      * @var string
      * @access private
      */
@@ -68,7 +71,7 @@ class Blowfish extends Base
     /**
      * Optimizing value while CFB-encrypting
      *
-     * @see \phpseclib\Crypt\Base::cfb_init_len
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::cfb_init_len
      * @var int
      * @access private
      */
@@ -273,7 +276,7 @@ class Blowfish extends Base
     /**
      * The Key Length (in bytes)
      *
-     * @see \phpseclib\Crypt\Base::setKeyLength()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::setKeyLength()
      * @var int
      * @access private
      * @internal The max value is 256 / 8 = 32, the min value is 128 / 8 = 16.  Exists in conjunction with $Nk
@@ -309,7 +312,7 @@ class Blowfish extends Base
      *
      * This is mainly just a wrapper to set things up for \phpseclib\Crypt\Base::isValidEngine()
      *
-     * @see \phpseclib\Crypt\Base::isValidEngine()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::isValidEngine()
      * @param int $engine
      * @access public
      * @return bool
@@ -333,7 +336,7 @@ class Blowfish extends Base
     /**
      * Setup the key (expansion)
      *
-     * @see \phpseclib\Crypt\Base::_setupKey()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::_setupKey()
      * @access private
      */
     function _setupKey()
@@ -456,7 +459,7 @@ class Blowfish extends Base
     /**
      * Setup the performance-optimized function for de/encrypt()
      *
-     * @see \phpseclib\Crypt\Base::_setupInlineCrypt()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::_setupInlineCrypt()
      * @access private
      */
     function _setupInlineCrypt()

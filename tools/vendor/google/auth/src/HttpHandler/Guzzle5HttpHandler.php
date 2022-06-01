@@ -13,18 +13,24 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
-namespace Google\Auth\HttpHandler;
+namespace Deconf\AIWP\Google\Auth\HttpHandler;
 
 use Exception;
-use GuzzleHttp\ClientInterface;
-use GuzzleHttp\Message\ResponseInterface as Guzzle5ResponseInterface;
-use GuzzleHttp\Promise\Promise;
-use GuzzleHttp\Promise\RejectedPromise;
-use GuzzleHttp\Psr7\Response;
+use Deconf\AIWP\GuzzleHttp\ClientInterface;
+use Deconf\AIWP\GuzzleHttp\Message\ResponseInterface as Guzzle5ResponseInterface;
+use Deconf\AIWP\GuzzleHttp\Promise\Promise;
+use Deconf\AIWP\GuzzleHttp\Promise\RejectedPromise;
+use Deconf\AIWP\GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
+/**
+ * @deprecated
+ */
 class Guzzle5HttpHandler
 {
     /**
@@ -65,7 +71,7 @@ class Guzzle5HttpHandler
      */
     public function async(RequestInterface $request, array $options = [])
     {
-        if (!class_exists('GuzzleHttp\Promise\Promise')) {
+        if (!class_exists('Deconf\AIWP\GuzzleHttp\Promise\Promise')) {
             throw new Exception('Install guzzlehttp/promises to use async with Guzzle 5');
         }
 

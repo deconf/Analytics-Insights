@@ -7,14 +7,17 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Symfony\Polyfill\Intl\Idn;
+namespace Deconf\AIWP\Symfony\Polyfill\Intl\Idn;
 
 use Exception;
 use Normalizer;
-use Symfony\Polyfill\Intl\Idn\Resources\unidata\DisallowedRanges;
-use Symfony\Polyfill\Intl\Idn\Resources\unidata\Regex;
+use Deconf\AIWP\Symfony\Polyfill\Intl\Idn\Resources\unidata\DisallowedRanges;
+use Deconf\AIWP\Symfony\Polyfill\Intl\Idn\Resources\unidata\Regex;
 
 /**
  * @see https://www.unicode.org/reports/tr46/

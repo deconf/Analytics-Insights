@@ -12,7 +12,7 @@
  * <?php
  *    include 'vendor/autoload.php';
  *
- *    $des = new \phpseclib\Crypt\TripleDES();
+ *    $des = new \Deconf\AIWP\phpseclib\Crypt\TripleDES();
  *
  *    $des->setKey('abcdefghijklmnopqrstuvwx');
  *
@@ -32,9 +32,12 @@
  * @copyright 2007 Jim Wigginton
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace phpseclib\Crypt;
+namespace Deconf\AIWP\phpseclib\Crypt;
 
 /**
  * Pure-PHP implementation of Triple DES.
@@ -62,7 +65,7 @@ class TripleDES extends DES
     /**
      * Key Length (in bytes)
      *
-     * @see \phpseclib\Crypt\TripleDES::setKeyLength()
+     * @see \Deconf\AIWP\phpseclib\Crypt\TripleDES::setKeyLength()
      * @var int
      * @access private
      */
@@ -71,8 +74,8 @@ class TripleDES extends DES
     /**
      * The default salt used by setPassword()
      *
-     * @see \phpseclib\Crypt\Base::password_default_salt
-     * @see \phpseclib\Crypt\Base::setPassword()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::password_default_salt
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::setPassword()
      * @var string
      * @access private
      */
@@ -81,8 +84,8 @@ class TripleDES extends DES
     /**
      * The mcrypt specific name of the cipher
      *
-     * @see \phpseclib\Crypt\DES::cipher_name_mcrypt
-     * @see \phpseclib\Crypt\Base::cipher_name_mcrypt
+     * @see \Deconf\AIWP\phpseclib\Crypt\DES::cipher_name_mcrypt
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::cipher_name_mcrypt
      * @var string
      * @access private
      */
@@ -91,7 +94,7 @@ class TripleDES extends DES
     /**
      * Optimizing value while CFB-encrypting
      *
-     * @see \phpseclib\Crypt\Base::cfb_init_len
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::cfb_init_len
      * @var int
      * @access private
      */
@@ -101,7 +104,7 @@ class TripleDES extends DES
      * max possible size of $key
      *
      * @see self::setKey()
-     * @see \phpseclib\Crypt\DES::setKey()
+     * @see \Deconf\AIWP\phpseclib\Crypt\DES::setKey()
      * @var string
      * @access private
      */
@@ -144,10 +147,10 @@ class TripleDES extends DES
      *
      * - \phpseclib\Crypt\TripleDES::MODE_3CBC
      *
-     * If not explicitly set, \phpseclib\Crypt\Base::MODE_CBC will be used.
+     * If not explicitly set, \Deconf\AIWP\phpseclib\Crypt\Base::MODE_CBC will be used.
      *
-     * @see \phpseclib\Crypt\DES::__construct()
-     * @see \phpseclib\Crypt\Base::__construct()
+     * @see \Deconf\AIWP\phpseclib\Crypt\DES::__construct()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::__construct()
      * @param int $mode
      * @access public
      */
@@ -183,7 +186,7 @@ class TripleDES extends DES
      *
      * This is mainly just a wrapper to set things up for \phpseclib\Crypt\Base::isValidEngine()
      *
-     * @see \phpseclib\Crypt\Base::__construct()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::__construct()
      * @param int $engine
      * @access public
      * @return bool
@@ -205,7 +208,7 @@ class TripleDES extends DES
      * SetIV is not required when \phpseclib\Crypt\Base::MODE_ECB is being used.  If not explicitly set, it'll be assumed
      * to be all zero's.
      *
-     * @see \phpseclib\Crypt\Base::setIV()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::setIV()
      * @access public
      * @param string $iv
      */
@@ -224,7 +227,7 @@ class TripleDES extends DES
      *
      * Valid key lengths are 64, 128 and 192
      *
-     * @see \phpseclib\Crypt\Base:setKeyLength()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base:setKeyLength()
      * @access public
      * @param int $length
      */
@@ -256,8 +259,8 @@ class TripleDES extends DES
      * If the key is not explicitly set, it'll be assumed to be all null bytes.
      *
      * @access public
-     * @see \phpseclib\Crypt\DES::setKey()
-     * @see \phpseclib\Crypt\Base::setKey()
+     * @see \Deconf\AIWP\phpseclib\Crypt\DES::setKey()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::setKey()
      * @param string $key
      */
     function setKey($key)
@@ -287,7 +290,7 @@ class TripleDES extends DES
     /**
      * Encrypts a message.
      *
-     * @see \phpseclib\Crypt\Base::encrypt()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::encrypt()
      * @access public
      * @param string $plaintext
      * @return string $cipertext
@@ -314,7 +317,7 @@ class TripleDES extends DES
     /**
      * Decrypts a message.
      *
-     * @see \phpseclib\Crypt\Base::decrypt()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::decrypt()
      * @access public
      * @param string $ciphertext
      * @return string $plaintext
@@ -370,7 +373,7 @@ class TripleDES extends DES
      * continuous buffers not be used.  They do offer better security and are, in fact, sometimes required (SSH uses them),
      * however, they are also less intuitive and more likely to cause you problems.
      *
-     * @see \phpseclib\Crypt\Base::enableContinuousBuffer()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::enableContinuousBuffer()
      * @see self::disableContinuousBuffer()
      * @access public
      */
@@ -389,7 +392,7 @@ class TripleDES extends DES
      *
      * The default behavior.
      *
-     * @see \phpseclib\Crypt\Base::disableContinuousBuffer()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::disableContinuousBuffer()
      * @see self::enableContinuousBuffer()
      * @access public
      */
@@ -406,8 +409,8 @@ class TripleDES extends DES
     /**
      * Creates the key schedule
      *
-     * @see \phpseclib\Crypt\DES::_setupKey()
-     * @see \phpseclib\Crypt\Base::_setupKey()
+     * @see \Deconf\AIWP\phpseclib\Crypt\DES::_setupKey()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::_setupKey()
      * @access private
      */
     function _setupKey()
@@ -441,8 +444,8 @@ class TripleDES extends DES
     /**
      * Sets the internal crypt engine
      *
-     * @see \phpseclib\Crypt\Base::__construct()
-     * @see \phpseclib\Crypt\Base::setPreferredEngine()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::__construct()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::setPreferredEngine()
      * @param int $engine
      * @access public
      * @return int

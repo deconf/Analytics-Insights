@@ -13,59 +13,63 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Google;
+namespace Deconf\AIWP\Google;
 
-use Google\Http\Batch;
+use Deconf\AIWP\Google\Http\Batch;
 use TypeError;
 
 class Service
 {
-  public $batchPath;
-  public $rootUrl;
-  public $version;
-  public $servicePath;
-  public $availableScopes;
-  public $resource;
-  private $client;
+    public $batchPath;
+    public $rootUrl;
+    public $version;
+    public $servicePath;
+    public $serviceName;
+    public $availableScopes;
+    public $resource;
+    private $client;
 
-  public function __construct($clientOrConfig = [])
-  {
-    if ($clientOrConfig instanceof Client) {
-      $this->client = $clientOrConfig;
-    } elseif (is_array($clientOrConfig)) {
-      $this->client = new Client($clientOrConfig ?: []);
-    } else {
-      $errorMessage = 'constructor must be array or instance of Google\Client';
-      if (class_exists('TypeError')) {
-        throw new TypeError($errorMessage);
-      }
-      trigger_error($errorMessage, E_USER_ERROR);
+    public function __construct($clientOrConfig = [])
+    {
+        if ($clientOrConfig instanceof Client) {
+            $this->client = $clientOrConfig;
+        } elseif (is_array($clientOrConfig)) {
+            $this->client = new Client($clientOrConfig ?: []);
+        } else {
+            $errorMessage = 'constructor must be array or instance of Google\Client';
+            if (class_exists('TypeError')) {
+                throw new TypeError($errorMessage);
+            }
+            trigger_error($errorMessage, E_USER_ERROR);
+        }
     }
-  }
 
-  /**
+    /**
    * Return the associated Google\Client class.
-   * @return \Google\Client
+   * @return \Deconf\AIWP\Google\Client
    */
-  public function getClient()
-  {
-    return $this->client;
-  }
+    public function getClient()
+    {
+        return $this->client;
+    }
 
-  /**
+    /**
    * Create a new HTTP Batch handler for this service
    *
    * @return Batch
    */
-  public function createBatch()
-  {
-    return new Batch(
-        $this->client,
-        false,
-        $this->rootUrl,
-        $this->batchPath
-    );
-  }
+    public function createBatch()
+    {
+        return new Batch(
+            $this->client,
+            false,
+            $this->rootUrl,
+            $this->batchPath
+        );
+    }
 }

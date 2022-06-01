@@ -10,7 +10,7 @@
  * <?php
  *    include 'vendor/autoload.php';
  *
- *    $ssh = new \phpseclib\Net\SSH1('www.domain.tld');
+ *    $ssh = new \Deconf\AIWP\phpseclib\Net\SSH1('www.domain.tld');
  *    if (!$ssh->login('username', 'password')) {
  *        exit('Login Failed');
  *    }
@@ -24,7 +24,7 @@
  * <?php
  *    include 'vendor/autoload.php';
  *
- *    $ssh = new \phpseclib\Net\SSH1('www.domain.tld');
+ *    $ssh = new \Deconf\AIWP\phpseclib\Net\SSH1('www.domain.tld');
  *    if (!$ssh->login('username', 'password')) {
  *        exit('Login Failed');
  *    }
@@ -44,14 +44,17 @@
  * @copyright 2007 Jim Wigginton
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace phpseclib\Net;
+namespace Deconf\AIWP\phpseclib\Net;
 
-use phpseclib\Crypt\DES;
-use phpseclib\Crypt\Random;
-use phpseclib\Crypt\TripleDES;
-use phpseclib\Math\BigInteger;
+use Deconf\AIWP\phpseclib\Crypt\DES;
+use Deconf\AIWP\phpseclib\Crypt\Random;
+use Deconf\AIWP\phpseclib\Crypt\TripleDES;
+use Deconf\AIWP\phpseclib\Math\BigInteger;
 
 /**
  * Pure-PHP implementation of SSHv1.
@@ -65,7 +68,7 @@ class SSH1
     /**#@+
      * Encryption Methods
      *
-     * @see \phpseclib\Net\SSH1::getSupportedCiphers()
+     * @see \Deconf\AIWP\phpseclib\Net\SSH1::getSupportedCiphers()
      * @access public
      */
     /**
@@ -125,7 +128,7 @@ class SSH1
     /**#@+
      * Authentication Methods
      *
-     * @see \phpseclib\Net\SSH1::getSupportedAuthentications()
+     * @see \Deconf\AIWP\phpseclib\Net\SSH1::getSupportedAuthentications()
      * @access public
     */
     /**
@@ -160,7 +163,7 @@ class SSH1
     /**
      * The Response Type
      *
-     * @see \phpseclib\Net\SSH1::_get_binary_packet()
+     * @see \Deconf\AIWP\phpseclib\Net\SSH1::_get_binary_packet()
      * @access private
      */
     const RESPONSE_TYPE = 1;
@@ -168,7 +171,7 @@ class SSH1
     /**
      * The Response Data
      *
-     * @see \phpseclib\Net\SSH1::_get_binary_packet()
+     * @see \Deconf\AIWP\phpseclib\Net\SSH1::_get_binary_packet()
      * @access private
      */
     const RESPONSE_DATA = 2;
@@ -176,7 +179,7 @@ class SSH1
     /**#@+
      * Execution Bitmap Masks
      *
-     * @see \phpseclib\Net\SSH1::bitmap
+     * @see \Deconf\AIWP\phpseclib\Net\SSH1::bitmap
      * @access private
     */
     const MASK_CONSTRUCTOR = 0x00000001;
@@ -187,7 +190,7 @@ class SSH1
 
     /**#@+
      * @access public
-     * @see \phpseclib\Net\SSH1::getLog()
+     * @see \Deconf\AIWP\phpseclib\Net\SSH1::getLog()
     */
     /**
      * Returns the message numbers
@@ -209,7 +212,7 @@ class SSH1
 
     /**#@+
      * @access public
-     * @see \phpseclib\Net\SSH1::read()
+     * @see \Deconf\AIWP\phpseclib\Net\SSH1::read()
     */
     /**
      * Returns when a string matching $expect exactly is found
@@ -501,7 +504,7 @@ class SSH1
      * @param int $port
      * @param int $timeout
      * @param int $cipher
-     * @return \phpseclib\Net\SSH1
+     * @return \Deconf\AIWP\phpseclib\Net\SSH1
      * @access public
      */
     function __construct($host, $port = 22, $timeout = 10, $cipher = self::CIPHER_3DES)
@@ -679,7 +682,7 @@ class SSH1
 
         switch ($cipher) {
             //case self::CIPHER_NONE:
-            //    $this->crypto = new \phpseclib\Crypt\Null();
+            //    $this->crypto = new \Deconf\AIWP\phpseclib\Crypt\Null();
             //    break;
             case self::CIPHER_DES:
                 $this->crypto = new DES();
@@ -805,7 +808,7 @@ class SSH1
      * {@link http://www.faqs.org/docs/bashman/bashref_65.html http://www.faqs.org/docs/bashman/bashref_65.html}
      * {@link http://www.faqs.org/docs/bashman/bashref_62.html http://www.faqs.org/docs/bashman/bashref_62.html}
      *
-     * To execute further commands, a new \phpseclib\Net\SSH1 object will need to be created.
+     * To execute further commands, a new \Deconf\AIWP\phpseclib\Net\SSH1 object will need to be created.
      *
      * Returns false on failure and the output, otherwise.
      *
@@ -851,7 +854,7 @@ class SSH1
 
         fclose($this->fsock);
 
-        // reset the execution bitmap - a new \phpseclib\Net\SSH1 object needs to be created.
+        // reset the execution bitmap - a new \Deconf\AIWP\phpseclib\Net\SSH1 object needs to be created.
         $this->bitmap = 0;
 
         return $output;

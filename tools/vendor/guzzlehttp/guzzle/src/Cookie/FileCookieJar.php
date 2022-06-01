@@ -1,5 +1,11 @@
 <?php
-namespace GuzzleHttp\Cookie;
+/**
+ * @license MIT
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
+ */
+namespace Deconf\AIWP\GuzzleHttp\Cookie;
 
 /**
  * Persists non-session cookies using a JSON formatted file
@@ -56,7 +62,7 @@ class FileCookieJar extends CookieJar
             }
         }
 
-        $jsonStr = \GuzzleHttp\json_encode($json);
+        $jsonStr = \Deconf\AIWP\GuzzleHttp\json_encode($json);
         if (false === file_put_contents($filename, $jsonStr, LOCK_EX)) {
             throw new \RuntimeException("Unable to save file {$filename}");
         }
@@ -79,7 +85,7 @@ class FileCookieJar extends CookieJar
             return;
         }
 
-        $data = \GuzzleHttp\json_decode($json, true);
+        $data = \Deconf\AIWP\GuzzleHttp\json_decode($json, true);
         if (is_array($data)) {
             foreach (json_decode($json, true) as $cookie) {
                 $this->setCookie(new SetCookie($cookie));

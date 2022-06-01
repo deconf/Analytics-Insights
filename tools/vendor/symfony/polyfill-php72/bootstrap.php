@@ -7,9 +7,12 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-use Symfony\Polyfill\Php72 as p;
+use Deconf\AIWP\Symfony\Polyfill\Php72 as p;
 
 if (\PHP_VERSION_ID >= 70200) {
     return;

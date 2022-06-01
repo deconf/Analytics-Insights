@@ -7,13 +7,16 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Monolog\Handler;
+namespace Deconf\AIWP\Monolog\Handler;
 
-use Monolog\Formatter\ChromePHPFormatter;
-use Monolog\Logger;
-use Monolog\Utils;
+use Deconf\AIWP\Monolog\Formatter\ChromePHPFormatter;
+use Deconf\AIWP\Monolog\Logger;
+use Deconf\AIWP\Monolog\Utils;
 
 /**
  * Handler sending logs to the ChromePHP extension (http://www.chromephp.com/)
@@ -66,7 +69,7 @@ class ChromePHPHandler extends AbstractProcessingHandler
     {
         parent::__construct($level, $bubble);
         if (!function_exists('json_encode')) {
-            throw new \RuntimeException('PHP\'s json extension is required to use Monolog\'s ChromePHPHandler');
+            throw new \RuntimeException('PHP\'s json extension is required to use Deconf\AIWP\Monolog\'s ChromePHPHandler');
         }
     }
 

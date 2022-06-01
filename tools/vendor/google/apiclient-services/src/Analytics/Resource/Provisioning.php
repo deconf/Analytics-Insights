@@ -13,23 +13,26 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Google\Service\Analytics\Resource;
+namespace Deconf\AIWP\Google\Service\Analytics\Resource;
 
-use Google\Service\Analytics\AccountTicket;
-use Google\Service\Analytics\AccountTreeRequest;
-use Google\Service\Analytics\AccountTreeResponse;
+use Deconf\AIWP\Google\Service\Analytics\AccountTicket;
+use Deconf\AIWP\Google\Service\Analytics\AccountTreeRequest;
+use Deconf\AIWP\Google\Service\Analytics\AccountTreeResponse;
 
 /**
  * The "provisioning" collection of methods.
  * Typical usage is:
  *  <code>
- *   $analyticsService = new Google\Service\Analytics(...);
+ *   $analyticsService = new Deconf\AIWP\Google\Service\Analytics(...);
  *   $provisioning = $analyticsService->provisioning;
  *  </code>
  */
-class Provisioning extends \Google\Service\Resource
+class Provisioning extends \Deconf\AIWP\Google\Service\Resource
 {
   /**
    * Creates an account ticket. (provisioning.createAccountTicket)

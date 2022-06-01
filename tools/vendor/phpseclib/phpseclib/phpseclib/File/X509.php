@@ -22,15 +22,18 @@
  * @copyright 2012 Jim Wigginton
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace phpseclib\File;
+namespace Deconf\AIWP\phpseclib\File;
 
-use phpseclib\Crypt\Hash;
-use phpseclib\Crypt\Random;
-use phpseclib\Crypt\RSA;
-use phpseclib\File\ASN1\Element;
-use phpseclib\Math\BigInteger;
+use Deconf\AIWP\phpseclib\Crypt\Hash;
+use Deconf\AIWP\phpseclib\Crypt\Random;
+use Deconf\AIWP\phpseclib\Crypt\RSA;
+use Deconf\AIWP\phpseclib\File\ASN1\Element;
+use Deconf\AIWP\phpseclib\Math\BigInteger;
 use DateTime;
 use DateTimeZone;
 
@@ -54,7 +57,7 @@ class X509
 
     /**#@+
      * @access public
-     * @see \phpseclib\File\X509::getDN()
+     * @see \Deconf\AIWP\phpseclib\File\X509::getDN()
     */
     /**
      * Return internal array representation
@@ -84,9 +87,9 @@ class X509
 
     /**#@+
      * @access public
-     * @see \phpseclib\File\X509::saveX509()
-     * @see \phpseclib\File\X509::saveCSR()
-     * @see \phpseclib\File\X509::saveCRL()
+     * @see \Deconf\AIWP\phpseclib\File\X509::saveX509()
+     * @see \Deconf\AIWP\phpseclib\File\X509::saveCSR()
+     * @see \Deconf\AIWP\phpseclib\File\X509::saveCRL()
     */
     /**
      * Save as PEM
@@ -324,7 +327,7 @@ class X509
     /**
      * Default Constructor.
      *
-     * @return \phpseclib\File\X509
+     * @return \Deconf\AIWP\phpseclib\File\X509
      * @access public
      */
     function __construct()
@@ -1581,7 +1584,7 @@ class X509
         $filters['directoryName']['rdnSequence']['value'] = $type_utf8_string;
 
         /* in the case of policyQualifiers/qualifier, the type has to be \phpseclib\File\ASN1::TYPE_IA5_STRING.
-           \phpseclib\File\ASN1::TYPE_PRINTABLE_STRING will cause OpenSSL's X.509 parser to spit out random
+           \Deconf\AIWP\phpseclib\File\ASN1::TYPE_PRINTABLE_STRING will cause OpenSSL's X.509 parser to spit out random
            characters.
          */
         $filters['policyQualifiers']['qualifier']
@@ -3605,8 +3608,8 @@ class X509
      * $subject can be either an existing X.509 cert (if you want to resign it),
      * a CSR or something with the DN and public key explicitly set.
      *
-     * @param \phpseclib\File\X509 $issuer
-     * @param \phpseclib\File\X509 $subject
+     * @param \Deconf\AIWP\phpseclib\File\X509 $issuer
+     * @param \Deconf\AIWP\phpseclib\File\X509 $subject
      * @param string $signatureAlgorithm optional
      * @access public
      * @return mixed
@@ -3723,7 +3726,7 @@ class X509
         $altName = array();
 
         if (isset($subject->domains) && count($subject->domains)) {
-            $altName = array_map(array('\phpseclib\File\X509', '_dnsName'), $subject->domains);
+            $altName = array_map(array('\Deconf\AIWP\phpseclib\File\X509', '_dnsName'), $subject->domains);
         }
 
         if (isset($subject->ipAddresses) && count($subject->ipAddresses)) {
@@ -3914,8 +3917,8 @@ class X509
      *
      * $issuer's private key needs to be loaded.
      *
-     * @param \phpseclib\File\X509 $issuer
-     * @param \phpseclib\File\X509 $crl
+     * @param \Deconf\AIWP\phpseclib\File\X509 $issuer
+     * @param \Deconf\AIWP\phpseclib\File\X509 $crl
      * @param string $signatureAlgorithm optional
      * @access public
      * @return mixed
@@ -4045,7 +4048,7 @@ class X509
     /**
      * X.509 certificate signing helper function.
      *
-     * @param \phpseclib\File\X509 $key
+     * @param \Deconf\AIWP\phpseclib\File\X509 $key
      * @param string $signatureAlgorithm
      * @access public
      * @return mixed

@@ -1,9 +1,15 @@
 <?php
-namespace GuzzleHttp\Handler;
+/**
+ * @license MIT
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
+ */
+namespace Deconf\AIWP\GuzzleHttp\Handler;
 
-use GuzzleHttp\Promise as P;
-use GuzzleHttp\Promise\Promise;
-use GuzzleHttp\Utils;
+use Deconf\AIWP\GuzzleHttp\Promise as P;
+use Deconf\AIWP\GuzzleHttp\Promise\Promise;
+use Deconf\AIWP\GuzzleHttp\Utils;
 use Psr\Http\Message\RequestInterface;
 
 /**

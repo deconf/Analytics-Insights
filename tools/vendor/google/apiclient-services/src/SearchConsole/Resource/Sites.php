@@ -13,22 +13,25 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Google\Service\SearchConsole\Resource;
+namespace Deconf\AIWP\Google\Service\SearchConsole\Resource;
 
-use Google\Service\SearchConsole\SitesListResponse;
-use Google\Service\SearchConsole\WmxSite;
+use Deconf\AIWP\Google\Service\SearchConsole\SitesListResponse;
+use Deconf\AIWP\Google\Service\SearchConsole\WmxSite;
 
 /**
  * The "sites" collection of methods.
  * Typical usage is:
  *  <code>
- *   $searchconsoleService = new Google\Service\SearchConsole(...);
+ *   $searchconsoleService = new Deconf\AIWP\Google\Service\SearchConsole(...);
  *   $sites = $searchconsoleService->sites;
  *  </code>
  */
-class Sites extends \Google\Service\Resource
+class Sites extends \Deconf\AIWP\Google\Service\Resource
 {
   /**
    * Adds a site to the set of the user's sites in Search Console. (sites.add)

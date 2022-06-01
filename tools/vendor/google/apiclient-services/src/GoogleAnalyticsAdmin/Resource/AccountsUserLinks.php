@@ -13,31 +13,34 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Google\Service\GoogleAnalyticsAdmin\Resource;
+namespace Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\Resource;
 
-use Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaAuditUserLinksRequest;
-use Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaAuditUserLinksResponse;
-use Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaBatchCreateUserLinksRequest;
-use Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaBatchCreateUserLinksResponse;
-use Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaBatchDeleteUserLinksRequest;
-use Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaBatchGetUserLinksResponse;
-use Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaBatchUpdateUserLinksRequest;
-use Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaBatchUpdateUserLinksResponse;
-use Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaListUserLinksResponse;
-use Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaUserLink;
-use Google\Service\GoogleAnalyticsAdmin\GoogleProtobufEmpty;
+use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaAuditUserLinksRequest;
+use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaAuditUserLinksResponse;
+use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaBatchCreateUserLinksRequest;
+use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaBatchCreateUserLinksResponse;
+use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaBatchDeleteUserLinksRequest;
+use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaBatchGetUserLinksResponse;
+use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaBatchUpdateUserLinksRequest;
+use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaBatchUpdateUserLinksResponse;
+use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaListUserLinksResponse;
+use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaUserLink;
+use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleProtobufEmpty;
 
 /**
  * The "userLinks" collection of methods.
  * Typical usage is:
  *  <code>
- *   $analyticsadminService = new Google\Service\GoogleAnalyticsAdmin(...);
+ *   $analyticsadminService = new Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin(...);
  *   $userLinks = $analyticsadminService->userLinks;
  *  </code>
  */
-class AccountsUserLinks extends \Google\Service\Resource
+class AccountsUserLinks extends \Deconf\AIWP\Google\Service\Resource
 {
   /**
    * Lists all user links on an account or property, including implicit ones that

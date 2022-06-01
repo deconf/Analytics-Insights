@@ -1,10 +1,16 @@
 <?php
-namespace GuzzleHttp;
+/**
+ * @license MIT
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
+ */
+namespace Deconf\AIWP\GuzzleHttp;
 
-use GuzzleHttp\Handler\CurlHandler;
-use GuzzleHttp\Handler\CurlMultiHandler;
-use GuzzleHttp\Handler\Proxy;
-use GuzzleHttp\Handler\StreamHandler;
+use Deconf\AIWP\GuzzleHttp\Handler\CurlHandler;
+use Deconf\AIWP\GuzzleHttp\Handler\CurlMultiHandler;
+use Deconf\AIWP\GuzzleHttp\Handler\Proxy;
+use Deconf\AIWP\GuzzleHttp\Handler\StreamHandler;
 
 /**
  * Expands a URI template

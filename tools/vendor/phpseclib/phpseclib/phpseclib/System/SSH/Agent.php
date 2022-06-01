@@ -10,9 +10,9 @@
  * <?php
  *    include 'vendor/autoload.php';
  *
- *    $agent = new \phpseclib\System\SSH\Agent();
+ *    $agent = new \Deconf\AIWP\phpseclib\System\SSH\Agent();
  *
- *    $ssh = new \phpseclib\Net\SSH2('www.domain.tld');
+ *    $ssh = new \Deconf\AIWP\phpseclib\Net\SSH2('www.domain.tld');
  *    if (!$ssh->login('username', $agent)) {
  *        exit('Login Failed');
  *    }
@@ -29,12 +29,15 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  * @internal  See http://api.libssh.org/rfc/PROTOCOL.agent
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace phpseclib\System\SSH;
+namespace Deconf\AIWP\phpseclib\System\SSH;
 
-use phpseclib\Crypt\RSA;
-use phpseclib\System\SSH\Agent\Identity;
+use Deconf\AIWP\phpseclib\Crypt\RSA;
+use Deconf\AIWP\phpseclib\System\SSH\Agent\Identity;
 
 /**
  * Pure-PHP ssh-agent client identity factory
@@ -114,7 +117,7 @@ class Agent
     /**
      * Default Constructor
      *
-     * @return \phpseclib\System\SSH\Agent
+     * @return \Deconf\AIWP\phpseclib\System\SSH\Agent
      * @access public
      */
     function __construct($address = null)
@@ -234,11 +237,10 @@ class Agent
      * Signal that agent forwarding should
      * be requested when a channel is opened
      *
-     * @param Net_SSH2 $ssh
      * @return bool
      * @access public
      */
-    function startSSHForwarding($ssh)
+    function startSSHForwarding()
     {
         if ($this->forward_status == self::FORWARD_NONE) {
             $this->forward_status = self::FORWARD_REQUEST;

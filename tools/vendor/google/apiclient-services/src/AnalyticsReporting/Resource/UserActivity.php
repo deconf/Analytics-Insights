@@ -13,22 +13,25 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Google\Service\AnalyticsReporting\Resource;
+namespace Deconf\AIWP\Google\Service\AnalyticsReporting\Resource;
 
-use Google\Service\AnalyticsReporting\SearchUserActivityRequest;
-use Google\Service\AnalyticsReporting\SearchUserActivityResponse;
+use Deconf\AIWP\Google\Service\AnalyticsReporting\SearchUserActivityRequest;
+use Deconf\AIWP\Google\Service\AnalyticsReporting\SearchUserActivityResponse;
 
 /**
  * The "userActivity" collection of methods.
  * Typical usage is:
  *  <code>
- *   $analyticsreportingService = new Google\Service\AnalyticsReporting(...);
+ *   $analyticsreportingService = new Deconf\AIWP\Google\Service\AnalyticsReporting(...);
  *   $userActivity = $analyticsreportingService->userActivity;
  *  </code>
  */
-class UserActivity extends \Google\Service\Resource
+class UserActivity extends \Deconf\AIWP\Google\Service\Resource
 {
   /**
    * Returns User Activity data. (userActivity.search)

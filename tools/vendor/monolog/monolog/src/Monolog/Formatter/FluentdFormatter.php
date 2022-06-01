@@ -7,11 +7,14 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Monolog\Formatter;
+namespace Deconf\AIWP\Monolog\Formatter;
 
-use Monolog\Utils;
+use Deconf\AIWP\Monolog\Utils;
 
 /**
  * Class FluentdFormatter
@@ -27,9 +30,9 @@ use Monolog\Utils;
  *
  * Monolog setup:
  *
- * $logger = new Monolog\Logger('fluent.tag');
- * $fluentHandler = new Monolog\Handler\SocketHandler('unix:///var/run/td-agent/td-agent.sock');
- * $fluentHandler->setFormatter(new Monolog\Formatter\FluentdFormatter());
+ * $logger = new Deconf\AIWP\Monolog\Logger('fluent.tag');
+ * $fluentHandler = new Deconf\AIWP\Monolog\Handler\SocketHandler('unix:///var/run/td-agent/td-agent.sock');
+ * $fluentHandler->setFormatter(new Deconf\AIWP\Monolog\Formatter\FluentdFormatter());
  * $logger->pushHandler($fluentHandler);
  *
  * @author Andrius Putna <fordnox@gmail.com>
@@ -44,7 +47,7 @@ class FluentdFormatter implements FormatterInterface
     public function __construct($levelTag = false)
     {
         if (!function_exists('json_encode')) {
-            throw new \RuntimeException('PHP\'s json extension is required to use Monolog\'s FluentdUnixFormatter');
+            throw new \RuntimeException('PHP\'s json extension is required to use Deconf\AIWP\Monolog\'s FluentdUnixFormatter');
         }
 
         $this->levelTag = (bool) $levelTag;

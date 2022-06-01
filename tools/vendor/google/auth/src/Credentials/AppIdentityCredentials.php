@@ -13,9 +13,12 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Google\Auth\Credentials;
+namespace Deconf\AIWP\Google\Auth\Credentials;
 
 /*
  * The AppIdentityService class is automatically defined on App Engine,
@@ -23,11 +26,13 @@ namespace Google\Auth\Credentials;
  * PHP fatal error in the App Engine environment.
  */
 use google\appengine\api\app_identity\AppIdentityService;
-use Google\Auth\CredentialsLoader;
-use Google\Auth\ProjectIdProviderInterface;
-use Google\Auth\SignBlobInterface;
+use Deconf\AIWP\Google\Auth\CredentialsLoader;
+use Deconf\AIWP\Google\Auth\ProjectIdProviderInterface;
+use Deconf\AIWP\Google\Auth\SignBlobInterface;
 
 /**
+ * @deprecated
+ *
  * AppIdentityCredentials supports authorization on Google App Engine.
  *
  * It can be used to authorize requests using the AuthTokenMiddleware or
@@ -35,10 +40,10 @@ use Google\Auth\SignBlobInterface;
  *
  * Example:
  * ```
- * use Google\Auth\Credentials\AppIdentityCredentials;
- * use Google\Auth\Middleware\AuthTokenMiddleware;
- * use GuzzleHttp\Client;
- * use GuzzleHttp\HandlerStack;
+ * use Deconf\AIWP\Google\Auth\Credentials\AppIdentityCredentials;
+ * use Deconf\AIWP\Google\Auth\Middleware\AuthTokenMiddleware;
+ * use Deconf\AIWP\GuzzleHttp\Client;
+ * use Deconf\AIWP\GuzzleHttp\HandlerStack;
  *
  * $gae = new AppIdentityCredentials('https://www.googleapis.com/auth/books');
  * $middleware = new AuthTokenMiddleware($gae);
@@ -61,14 +66,14 @@ class AppIdentityCredentials extends CredentialsLoader implements
     /**
      * Result of fetchAuthToken.
      *
-     * @var array
+     * @var array<mixed>
      */
     protected $lastReceivedToken;
 
     /**
      * Array of OAuth2 scopes to be requested.
      *
-     * @var array
+     * @var string[]
      */
     private $scope;
 
@@ -78,11 +83,11 @@ class AppIdentityCredentials extends CredentialsLoader implements
     private $clientName;
 
     /**
-     * @param array $scope One or more scopes.
+     * @param string|string[] $scope One or more scopes.
      */
-    public function __construct($scope = array())
+    public function __construct($scope = [])
     {
-        $this->scope = $scope;
+        $this->scope = is_array($scope) ? $scope : explode(' ', (string) $scope);
     }
 
     /**
@@ -115,10 +120,12 @@ class AppIdentityCredentials extends CredentialsLoader implements
      * the GuzzleHttp\ClientInterface instance passed in will not be used.
      *
      * @param callable $httpHandler callback which delivers psr7 request
-     * @return array A set of auth related metadata, containing the following
-     *     keys:
-     *         - access_token (string)
-     *         - expiration_time (string)
+     * @return array<mixed> {
+     *     A set of auth related metadata, containing the following
+     *
+     *     @type string $access_token
+     *     @type string $expiration_time
+     * }
      */
     public function fetchAuthToken(callable $httpHandler = null)
     {
@@ -128,10 +135,8 @@ class AppIdentityCredentials extends CredentialsLoader implements
             return [];
         }
 
-        // AppIdentityService expects an array when multiple scopes are supplied
-        $scope = is_array($this->scope) ? $this->scope : explode(' ', $this->scope);
-
-        $token = AppIdentityService::getAccessToken($scope);
+        /** @phpstan-ignore-next-line */
+        $token = AppIdentityService::getAccessToken($this->scope);
         $this->lastReceivedToken = $token;
 
         return $token;
@@ -150,6 +155,7 @@ class AppIdentityCredentials extends CredentialsLoader implements
     {
         $this->checkAppEngineContext();
 
+        /** @phpstan-ignore-next-line */
         return base64_encode(AppIdentityService::signForApp($stringToSign)['signature']);
     }
 
@@ -161,7 +167,7 @@ class AppIdentityCredentials extends CredentialsLoader implements
      * @param callable $httpHandler Not used by this type.
      * @return string|null
      */
-    public function getProjectId(callable $httpHander = null)
+    public function getProjectId(callable $httpHandler = null)
     {
         try {
             $this->checkAppEngineContext();
@@ -169,6 +175,7 @@ class AppIdentityCredentials extends CredentialsLoader implements
             return null;
         }
 
+        /** @phpstan-ignore-next-line */
         return AppIdentityService::getApplicationId();
     }
 
@@ -186,6 +193,7 @@ class AppIdentityCredentials extends CredentialsLoader implements
         $this->checkAppEngineContext();
 
         if (!$this->clientName) {
+            /** @phpstan-ignore-next-line */
             $this->clientName = AppIdentityService::getServiceAccountName();
         }
 
@@ -193,7 +201,7 @@ class AppIdentityCredentials extends CredentialsLoader implements
     }
 
     /**
-     * @return array|null
+     * @return array{access_token:string,expires_at:int}|null
      */
     public function getLastReceivedToken()
     {
@@ -218,6 +226,9 @@ class AppIdentityCredentials extends CredentialsLoader implements
         return '';
     }
 
+    /**
+     * @return void
+     */
     private function checkAppEngineContext()
     {
         if (!self::onAppEngine() || !class_exists('google\appengine\api\app_identity\AppIdentityService')) {

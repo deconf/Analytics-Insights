@@ -13,11 +13,14 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Google\Task;
+namespace Deconf\AIWP\Google\Task;
 
-use Google\Exception as GoogleException;
+use Deconf\AIWP\Google\Exception as GoogleException;
 
 class Exception extends GoogleException
 {

@@ -13,22 +13,25 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Google\Service\Analytics\Resource;
+namespace Deconf\AIWP\Google\Service\Analytics\Resource;
 
-use Google\Service\Analytics\EntityAdWordsLink;
-use Google\Service\Analytics\EntityAdWordsLinks;
+use Deconf\AIWP\Google\Service\Analytics\EntityAdWordsLink;
+use Deconf\AIWP\Google\Service\Analytics\EntityAdWordsLinks;
 
 /**
  * The "webPropertyAdWordsLinks" collection of methods.
  * Typical usage is:
  *  <code>
- *   $analyticsService = new Google\Service\Analytics(...);
+ *   $analyticsService = new Deconf\AIWP\Google\Service\Analytics(...);
  *   $webPropertyAdWordsLinks = $analyticsService->webPropertyAdWordsLinks;
  *  </code>
  */
-class ManagementWebPropertyAdWordsLinks extends \Google\Service\Resource
+class ManagementWebPropertyAdWordsLinks extends \Deconf\AIWP\Google\Service\Resource
 {
   /**
    * Deletes a web property-Google Ads link. (webPropertyAdWordsLinks.delete)

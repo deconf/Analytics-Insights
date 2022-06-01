@@ -13,11 +13,14 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Google\Auth\HttpHandler;
+namespace Deconf\AIWP\Google\Auth\HttpHandler;
 
-use GuzzleHttp\ClientInterface;
+use Deconf\AIWP\GuzzleHttp\ClientInterface;
 
 /**
  * Stores an HTTP Client in order to prevent multiple instantiations.

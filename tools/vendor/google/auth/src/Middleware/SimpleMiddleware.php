@@ -13,15 +13,18 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Google\Auth\Middleware;
+namespace Deconf\AIWP\Google\Auth\Middleware;
 
-use GuzzleHttp\Psr7\Query;
+use Deconf\AIWP\GuzzleHttp\Psr7\Query;
 use Psr\Http\Message\RequestInterface;
 
 /**
- * SimpleMiddleware is a Guzzle Middleware that implements Google's Simple API
+ * SimpleMiddleware is a Guzzle Middleware that implements Deconf\AIWP\Google's Simple API
  * access.
  *
  * Requests are accessed using the Simple API access developer key.
@@ -29,7 +32,7 @@ use Psr\Http\Message\RequestInterface;
 class SimpleMiddleware
 {
     /**
-     * @var array
+     * @var array<mixed>
      */
     private $config;
 
@@ -39,7 +42,7 @@ class SimpleMiddleware
      * The configuration array expects one option
      * - key: required, otherwise InvalidArgumentException is thrown
      *
-     * @param array $config Configuration array
+     * @param array<mixed> $config Configuration array
      */
     public function __construct(array $config)
     {
@@ -53,9 +56,9 @@ class SimpleMiddleware
     /**
      * Updates the request query with the developer key if auth is set to simple.
      *
-     *   use Google\Auth\Middleware\SimpleMiddleware;
-     *   use GuzzleHttp\Client;
-     *   use GuzzleHttp\HandlerStack;
+     *   use Deconf\AIWP\Google\Auth\Middleware\SimpleMiddleware;
+     *   use Deconf\AIWP\GuzzleHttp\Client;
+     *   use Deconf\AIWP\GuzzleHttp\HandlerStack;
      *
      *   $my_key = 'is not the same as yours';
      *   $middleware = new SimpleMiddleware(['key' => $my_key]);

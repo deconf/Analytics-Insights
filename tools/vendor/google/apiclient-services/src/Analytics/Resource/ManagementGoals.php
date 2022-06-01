@@ -13,22 +13,25 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Google\Service\Analytics\Resource;
+namespace Deconf\AIWP\Google\Service\Analytics\Resource;
 
-use Google\Service\Analytics\Goal;
-use Google\Service\Analytics\Goals;
+use Deconf\AIWP\Google\Service\Analytics\Goal;
+use Deconf\AIWP\Google\Service\Analytics\Goals;
 
 /**
  * The "goals" collection of methods.
  * Typical usage is:
  *  <code>
- *   $analyticsService = new Google\Service\Analytics(...);
+ *   $analyticsService = new Deconf\AIWP\Google\Service\Analytics(...);
  *   $goals = $analyticsService->goals;
  *  </code>
  */
-class ManagementGoals extends \Google\Service\Resource
+class ManagementGoals extends \Deconf\AIWP\Google\Service\Resource
 {
   /**
    * Gets a goal to which the user has access. (goals.get)

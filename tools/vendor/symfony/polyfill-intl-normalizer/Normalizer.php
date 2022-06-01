@@ -7,9 +7,12 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Symfony\Polyfill\Intl\Normalizer;
+namespace Deconf\AIWP\Symfony\Polyfill\Intl\Normalizer;
 
 /**
  * Normalizer is a PHP fallback implementation of the Normalizer class provided by the intl extension.
@@ -23,14 +26,14 @@ namespace Symfony\Polyfill\Intl\Normalizer;
  */
 class Normalizer
 {
-    public const FORM_D = \Normalizer::FORM_D;
-    public const FORM_KD = \Normalizer::FORM_KD;
-    public const FORM_C = \Normalizer::FORM_C;
-    public const FORM_KC = \Normalizer::FORM_KC;
-    public const NFD = \Normalizer::NFD;
-    public const NFKD = \Normalizer::NFKD;
-    public const NFC = \Normalizer::NFC;
-    public const NFKC = \Normalizer::NFKC;
+    public const FORM_D = \Deconf_AIWP_Normalizer::FORM_D;
+    public const FORM_KD = \Deconf_AIWP_Normalizer::FORM_KD;
+    public const FORM_C = \Deconf_AIWP_Normalizer::FORM_C;
+    public const FORM_KC = \Deconf_AIWP_Normalizer::FORM_KC;
+    public const NFD = \Deconf_AIWP_Normalizer::NFD;
+    public const NFKD = \Deconf_AIWP_Normalizer::NFKD;
+    public const NFC = \Deconf_AIWP_Normalizer::NFC;
+    public const NFKC = \Deconf_AIWP_Normalizer::NFKC;
 
     private static $C;
     private static $D;
@@ -66,7 +69,7 @@ class Normalizer
             case self::NFKC: $C = true; $K = true; break;
             case self::NFKD: $C = false; $K = true; break;
             default:
-                if (\defined('Normalizer::NONE') && \Normalizer::NONE == $form) {
+                if (\defined('Normalizer::NONE') && \Deconf_AIWP_Normalizer::NONE == $form) {
                     return $s;
                 }
 

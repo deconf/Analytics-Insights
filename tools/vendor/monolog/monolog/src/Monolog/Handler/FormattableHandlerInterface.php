@@ -1,4 +1,10 @@
-<?php declare(strict_types=1);
+<?php
+/**
+ * @license MIT
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
+ */ declare(strict_types=1);
 
 /*
  * This file is part of the Monolog package.
@@ -9,9 +15,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Monolog\Handler;
+namespace Deconf\AIWP\Monolog\Handler;
 
-use Monolog\Formatter\FormatterInterface;
+use Deconf\AIWP\Monolog\Formatter\FormatterInterface;
 
 /**
  * Interface to describe loggers that have a formatter

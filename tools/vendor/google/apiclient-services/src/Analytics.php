@@ -13,11 +13,14 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Google\Service;
+namespace Deconf\AIWP\Google\Service;
 
-use Google\Client;
+use Deconf\AIWP\Google\Client;
 
 /**
  * Service definition for Analytics (v3).
@@ -32,7 +35,7 @@ use Google\Client;
  *
  * @author Google, Inc.
  */
-class Analytics extends \Google\Service
+class Analytics extends \Deconf\AIWP\Google\Service
 {
   /** View and manage your Google Analytics data. */
   const ANALYTICS =

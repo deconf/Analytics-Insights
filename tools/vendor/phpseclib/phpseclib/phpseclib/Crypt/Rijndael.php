@@ -30,7 +30,7 @@
  * <?php
  *    include 'vendor/autoload.php';
  *
- *    $rijndael = new \phpseclib\Crypt\Rijndael();
+ *    $rijndael = new \Deconf\AIWP\phpseclib\Crypt\Rijndael();
  *
  *    $rijndael->setKey('abcdefghijklmnop');
  *
@@ -50,9 +50,12 @@
  * @copyright 2008 Jim Wigginton
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace phpseclib\Crypt;
+namespace Deconf\AIWP\phpseclib\Crypt;
 
 /**
  * Pure-PHP implementation of Rijndael.
@@ -71,8 +74,8 @@ class Rijndael extends Base
      * or not for the current $block_size/$key_length.
      * In case of, $cipher_name_mcrypt will be set dynamically at run time accordingly.
      *
-     * @see \phpseclib\Crypt\Base::cipher_name_mcrypt
-     * @see \phpseclib\Crypt\Base::engine
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::cipher_name_mcrypt
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::engine
      * @see self::isValidEngine()
      * @var string
      * @access private
@@ -82,8 +85,8 @@ class Rijndael extends Base
     /**
      * The default salt used by setPassword()
      *
-     * @see \phpseclib\Crypt\Base::password_default_salt
-     * @see \phpseclib\Crypt\Base::setPassword()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::password_default_salt
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::setPassword()
      * @var string
      * @access private
      */
@@ -238,7 +241,7 @@ class Rijndael extends Base
      *
      * This is mainly just a wrapper to set things up for \phpseclib\Crypt\Base::isValidEngine()
      *
-     * @see \phpseclib\Crypt\Base::__construct()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::__construct()
      * @param int $engine
      * @access public
      * @return bool
@@ -458,7 +461,7 @@ class Rijndael extends Base
     /**
      * Setup the key (expansion)
      *
-     * @see \phpseclib\Crypt\Base::_setupKey()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::_setupKey()
      * @access private
      */
     function _setupKey()
@@ -763,7 +766,7 @@ class Rijndael extends Base
     /**
      * Setup the performance-optimized function for de/encrypt()
      *
-     * @see \phpseclib\Crypt\Base::_setupInlineCrypt()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Base::_setupInlineCrypt()
      * @access private
      */
     function _setupInlineCrypt()

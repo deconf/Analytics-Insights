@@ -7,14 +7,17 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Monolog\Handler\Slack;
+namespace Deconf\AIWP\Monolog\Handler\Slack;
 
-use Monolog\Logger;
-use Monolog\Utils;
-use Monolog\Formatter\NormalizerFormatter;
-use Monolog\Formatter\FormatterInterface;
+use Deconf\AIWP\Monolog\Logger;
+use Deconf\AIWP\Monolog\Utils;
+use Deconf\AIWP\Monolog\Formatter\NormalizerFormatter;
+use Deconf\AIWP\Monolog\Formatter\FormatterInterface;
 
 /**
  * Slack record utility helping to log to Slack webhooks or API.

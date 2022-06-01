@@ -20,7 +20,7 @@
  * <?php
  *    include 'vendor/autoload.php';
  *
- *    $hash = new \phpseclib\Crypt\Hash('sha1');
+ *    $hash = new \Deconf\AIWP\phpseclib\Crypt\Hash('sha1');
  *
  *    $hash->setKey('abcdefg');
  *
@@ -34,11 +34,14 @@
  * @copyright 2007 Jim Wigginton
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace phpseclib\Crypt;
+namespace Deconf\AIWP\phpseclib\Crypt;
 
-use phpseclib\Math\BigInteger;
+use Deconf\AIWP\phpseclib\Math\BigInteger;
 
 /**
  * Pure-PHP implementations of keyed-hash message authentication codes (HMACs) and various cryptographic hashing functions.
@@ -51,7 +54,7 @@ class Hash
 {
     /**#@+
      * @access private
-     * @see \phpseclib\Crypt\Hash::__construct()
+     * @see \Deconf\AIWP\phpseclib\Crypt\Hash::__construct()
      */
     /**
      * Toggles the internal implementation
@@ -152,7 +155,7 @@ class Hash
      * Default Constructor.
      *
      * @param string $hash
-     * @return \phpseclib\Crypt\Hash
+     * @return \Deconf\AIWP\phpseclib\Crypt\Hash
      * @access public
      */
     function __construct($hash = 'sha1')
@@ -789,7 +792,7 @@ class Hash
         }
 
         // Produce the final hash value (big-endian)
-        // (\phpseclib\Crypt\Hash::hash() trims the output for hashes but not for HMACs.  as such, we trim the output here)
+        // (\Deconf\AIWP\phpseclib\Crypt\Hash::hash() trims the output for hashes but not for HMACs.  as such, we trim the output here)
         $temp = $hash[0]->toBytes() . $hash[1]->toBytes() . $hash[2]->toBytes() . $hash[3]->toBytes() .
                 $hash[4]->toBytes() . $hash[5]->toBytes();
         if ($this->l != 48) {

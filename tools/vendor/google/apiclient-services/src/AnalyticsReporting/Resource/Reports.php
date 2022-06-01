@@ -13,22 +13,25 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
+ *
+ * Modified by __root__ on 31-May-2022 using Strauss.
+ * @see https://github.com/BrianHenryIE/strauss
  */
 
-namespace Google\Service\AnalyticsReporting\Resource;
+namespace Deconf\AIWP\Google\Service\AnalyticsReporting\Resource;
 
-use Google\Service\AnalyticsReporting\GetReportsRequest;
-use Google\Service\AnalyticsReporting\GetReportsResponse;
+use Deconf\AIWP\Google\Service\AnalyticsReporting\GetReportsRequest;
+use Deconf\AIWP\Google\Service\AnalyticsReporting\GetReportsResponse;
 
 /**
  * The "reports" collection of methods.
  * Typical usage is:
  *  <code>
- *   $analyticsreportingService = new Google\Service\AnalyticsReporting(...);
+ *   $analyticsreportingService = new Deconf\AIWP\Google\Service\AnalyticsReporting(...);
  *   $reports = $analyticsreportingService->reports;
  *  </code>
  */
-class Reports extends \Google\Service\Resource
+class Reports extends \Deconf\AIWP\Google\Service\Resource
 {
   /**
    * Returns the Analytics data. (reports.batchGet)
