@@ -14,7 +14,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  *
- * Modified by __root__ on 01-June-2022 using Strauss.
+ * Modified by __root__ on 17-June-2022 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
@@ -356,6 +356,16 @@ class GoogleAnalyticsAdmin extends \Deconf\AIWP\Google\Service
                   'required' => true,
                 ],
               ],
+            ],'getAttributionSettings' => [
+              'path' => 'v1alpha/{+name}',
+              'httpMethod' => 'GET',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
             ],'getDataRetentionSettings' => [
               'path' => 'v1alpha/{+name}',
               'httpMethod' => 'GET',
@@ -398,6 +408,20 @@ class GoogleAnalyticsAdmin extends \Deconf\AIWP\Google\Service
                 ],
               ],
             ],'patch' => [
+              'path' => 'v1alpha/{+name}',
+              'httpMethod' => 'PATCH',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+                'updateMask' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
+              ],
+            ],'updateAttributionSettings' => [
               'path' => 'v1alpha/{+name}',
               'httpMethod' => 'PATCH',
               'parameters' => [

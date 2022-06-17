@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Modified by __root__ on 01-June-2022 using Strauss.
+ * Modified by __root__ on 17-June-2022 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 namespace Deconf\AIWP\Google\Auth\HttpHandler;
@@ -28,9 +28,6 @@ use Deconf\AIWP\GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-/**
- * @deprecated
- */
 class Guzzle5HttpHandler
 {
     /**

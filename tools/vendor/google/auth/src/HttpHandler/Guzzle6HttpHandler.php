@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Modified by __root__ on 01-June-2022 using Strauss.
+ * Modified by __root__ on 17-June-2022 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 namespace Deconf\AIWP\Google\Auth\HttpHandler;
@@ -42,7 +42,7 @@ class Guzzle6HttpHandler
      * Accepts a PSR-7 request and an array of options and returns a PSR-7 response.
      *
      * @param RequestInterface $request
-     * @param array<mixed> $options
+     * @param array $options
      * @return ResponseInterface
      */
     public function __invoke(RequestInterface $request, array $options = [])
@@ -54,7 +54,7 @@ class Guzzle6HttpHandler
      * Accepts a PSR-7 request and an array of options and returns a PromiseInterface
      *
      * @param RequestInterface $request
-     * @param array<mixed> $options
+     * @param array $options
      *
      * @return \Deconf\AIWP\GuzzleHttp\Promise\PromiseInterface
      */

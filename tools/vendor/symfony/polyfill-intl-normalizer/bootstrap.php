@@ -8,19 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * Modified by __root__ on 01-June-2022 using Strauss.
+ * Modified by __root__ on 17-June-2022 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
 use Deconf\AIWP\Symfony\Polyfill\Intl\Normalizer as p;
 
-if (\PHP_VERSION_ID >= 80000) {
-    return require __DIR__.'/bootstrap80.php';
-}
-
 if (!function_exists('normalizer_is_normalized')) {
-    function normalizer_is_normalized($string, $form = p\Normalizer::FORM_C) { return p\Normalizer::isNormalized($string, $form); }
+    function normalizer_is_normalized($input, $form = p\Normalizer::NFC) { return p\Normalizer::isNormalized($input, $form); }
 }
 if (!function_exists('normalizer_normalize')) {
-    function normalizer_normalize($string, $form = p\Normalizer::FORM_C) { return p\Normalizer::normalize($string, $form); }
+    function normalizer_normalize($input, $form = p\Normalizer::NFC) { return p\Normalizer::normalize($input, $form); }
 }

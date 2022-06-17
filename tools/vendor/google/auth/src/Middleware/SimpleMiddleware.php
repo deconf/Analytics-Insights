@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Modified by __root__ on 01-June-2022 using Strauss.
+ * Modified by __root__ on 17-June-2022 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
@@ -32,7 +32,7 @@ use Psr\Http\Message\RequestInterface;
 class SimpleMiddleware
 {
     /**
-     * @var array<mixed>
+     * @var array
      */
     private $config;
 
@@ -42,7 +42,7 @@ class SimpleMiddleware
      * The configuration array expects one option
      * - key: required, otherwise InvalidArgumentException is thrown
      *
-     * @param array<mixed> $config Configuration array
+     * @param array $config Configuration array
      */
     public function __construct(array $config)
     {

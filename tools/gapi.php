@@ -71,8 +71,8 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				$this->client->setClientId( $this->access[0] );
 				$this->client->setClientSecret( $this->access[1] );
 				$this->client->setRedirectUri( AIWP_ENDPOINT_URL . 'oauth2callback.php' );
-				$this->client::$OAUTH2_REVOKE_URI = AIWP_ENDPOINT_URL . 'aiwp-revoke.php';
-				$this->client::$OAUTH2_TOKEN_URI = AIWP_ENDPOINT_URL . 'aiwp-token.php';
+				$this->client->OAUTH2_REVOKE_URI = AIWP_ENDPOINT_URL . 'aiwp-revoke.php';
+				$this->client->OAUTH2_TOKEN_URI = AIWP_ENDPOINT_URL . 'aiwp-token.php';
 			}
 
 			/**

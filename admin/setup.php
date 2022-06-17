@@ -90,15 +90,28 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 			)
 			);
 			/* @formatter:on */
-			if ( $this->aiwp->config->options['switch_profile'] && count( $this->aiwp->config->options['ga_profiles_list'] ) > 1 ) {
-				$views = array();
-				foreach ( $this->aiwp->config->options['ga_profiles_list'] as $items ) {
-					if ( $items[3] ) {
-						$views[$items[1]] = sanitize_text_field( AIWP_Tools::strip_protocol( $items[3] ) );
+			if ( $this->aiwp->config->options['reporting_type'] ){
+				if ( $this->aiwp->config->options['switch_profile'] && count( $this->aiwp->config->options['ga4_webstreams_list'] ) > 1 ) {
+					$views = array();
+					foreach ( $this->aiwp->config->options['ga4_webstreams_list'] as $items ) {
+						if ( $items[2] ) {
+							$views[$items[1]] = sanitize_text_field( AIWP_Tools::strip_protocol( $items[2] ) );
+						}
 					}
+				} else {
+					$views = false;
 				}
 			} else {
-				$views = false;
+				if ( $this->aiwp->config->options['switch_profile'] && count( $this->aiwp->config->options['ga_profiles_list'] ) > 1 ) {
+					$views = array();
+					foreach ( $this->aiwp->config->options['ga_profiles_list'] as $items ) {
+						if ( $items[3] ) {
+							$views[$items[1]] = sanitize_text_field( AIWP_Tools::strip_protocol( $items[3] ) );
+						}
+					}
+				} else {
+					$views = false;
+				}
 			}
 			/*
 			 * Main Dashboard Widgets Styles & Scripts

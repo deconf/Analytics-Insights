@@ -14,48 +14,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Modified by __root__ on 01-June-2022 using Strauss.
+ * Modified by __root__ on 17-June-2022 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
 namespace Deconf\AIWP\Google\Auth;
 
-use Psr\Cache\CacheItemPoolInterface;
-
 trait CacheTrait
 {
-    /**
-     * @var int
-     */
     private $maxKeyLength = 64;
-
-    /**
-     * @var array<mixed>
-     */
-    private $cacheConfig;
-
-    /**
-     * @var ?CacheItemPoolInterface
-     */
-    private $cache;
 
     /**
      * Gets the cached value if it is present in the cache when that is
      * available.
-     *
-     * @param mixed $k
-     *
-     * @return mixed
      */
     private function getCachedValue($k)
     {
         if (is_null($this->cache)) {
-            return null;
+            return;
         }
 
         $key = $this->getFullCacheKey($k);
         if (is_null($key)) {
-            return null;
+            return;
         }
 
         $cacheItem = $this->cache->getItem($key);
@@ -66,20 +47,16 @@ trait CacheTrait
 
     /**
      * Saves the value in the cache when that is available.
-     *
-     * @param mixed $k
-     * @param mixed $v
-     * @return mixed
      */
     private function setCachedValue($k, $v)
     {
         if (is_null($this->cache)) {
-            return null;
+            return;
         }
 
         $key = $this->getFullCacheKey($k);
         if (is_null($key)) {
-            return null;
+            return;
         }
 
         $cacheItem = $this->cache->getItem($key);
@@ -88,14 +65,10 @@ trait CacheTrait
         return $this->cache->save($cacheItem);
     }
 
-    /**
-     * @param null|string $key
-     * @return null|string
-     */
     private function getFullCacheKey($key)
     {
         if (is_null($key)) {
-            return null;
+            return;
         }
 
         $key = $this->cacheConfig['prefix'] . $key;

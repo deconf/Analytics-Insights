@@ -14,7 +14,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  *
- * Modified by __root__ on 01-June-2022 using Strauss.
+ * Modified by __root__ on 17-June-2022 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
@@ -22,6 +22,7 @@ namespace Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\Resource;
 
 use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaAcknowledgeUserDataCollectionRequest;
 use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaAcknowledgeUserDataCollectionResponse;
+use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaAttributionSettings;
 use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaDataRetentionSettings;
 use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaGoogleSignalsSettings;
 use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaListPropertiesResponse;
@@ -102,6 +103,21 @@ class Properties extends \Deconf\AIWP\Google\Service\Resource
     $params = ['name' => $name];
     $params = array_merge($params, $optParams);
     return $this->call('get', [$params], GoogleAnalyticsAdminV1alphaProperty::class);
+  }
+  /**
+   * Lookup for a AttributionSettings singleton.
+   * (properties.getAttributionSettings)
+   *
+   * @param string $name Required. The name of the attribution settings to
+   * retrieve. Format: properties/{property}/attributionSettings
+   * @param array $optParams Optional parameters.
+   * @return GoogleAnalyticsAdminV1alphaAttributionSettings
+   */
+  public function getAttributionSettings($name, $optParams = [])
+  {
+    $params = ['name' => $name];
+    $params = array_merge($params, $optParams);
+    return $this->call('getAttributionSettings', [$params], GoogleAnalyticsAdminV1alphaAttributionSettings::class);
   }
   /**
    * Returns the singleton data retention settings for this property.
@@ -192,6 +208,28 @@ class Properties extends \Deconf\AIWP\Google\Service\Resource
     $params = ['name' => $name, 'postBody' => $postBody];
     $params = array_merge($params, $optParams);
     return $this->call('patch', [$params], GoogleAnalyticsAdminV1alphaProperty::class);
+  }
+  /**
+   * Updates attribution settings on a property.
+   * (properties.updateAttributionSettings)
+   *
+   * @param string $name Output only. Resource name of this attribution settings
+   * resource. Format: properties/{property_id}/attributionSettings Example:
+   * "properties/1000/attributionSettings"
+   * @param GoogleAnalyticsAdminV1alphaAttributionSettings $postBody
+   * @param array $optParams Optional parameters.
+   *
+   * @opt_param string updateMask Required. The list of fields to be updated.
+   * Field names must be in snake case (e.g., "field_to_update"). Omitted fields
+   * will not be updated. To replace the entire entity, use one path with the
+   * string "*" to match all fields.
+   * @return GoogleAnalyticsAdminV1alphaAttributionSettings
+   */
+  public function updateAttributionSettings($name, GoogleAnalyticsAdminV1alphaAttributionSettings $postBody, $optParams = [])
+  {
+    $params = ['name' => $name, 'postBody' => $postBody];
+    $params = array_merge($params, $optParams);
+    return $this->call('updateAttributionSettings', [$params], GoogleAnalyticsAdminV1alphaAttributionSettings::class);
   }
   /**
    * Updates the singleton data retention settings for this property.

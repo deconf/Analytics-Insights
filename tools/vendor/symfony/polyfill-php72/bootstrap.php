@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * Modified by __root__ on 01-June-2022 using Strauss.
+ * Modified by __root__ on 17-June-2022 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
 use Deconf\AIWP\Symfony\Polyfill\Php72 as p;
 
-if (\PHP_VERSION_ID >= 70200) {
+if (PHP_VERSION_ID >= 70200) {
     return;
 }
 
@@ -34,7 +34,7 @@ if (!defined('PHP_OS_FAMILY')) {
     define('PHP_OS_FAMILY', p\Php72::php_os_family());
 }
 
-if ('\\' === \DIRECTORY_SEPARATOR && !function_exists('sapi_windows_vt100_support')) {
+if ('\\' === DIRECTORY_SEPARATOR && !function_exists('sapi_windows_vt100_support')) {
     function sapi_windows_vt100_support($stream, $enable = null) { return p\Php72::sapi_windows_vt100_support($stream, $enable); }
 }
 if (!function_exists('stream_isatty')) {

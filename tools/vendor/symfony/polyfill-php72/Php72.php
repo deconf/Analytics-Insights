@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * Modified by __root__ on 01-June-2022 using Strauss.
+ * Modified by __root__ on 17-June-2022 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
@@ -76,7 +76,7 @@ final class Php72
             return 'Windows';
         }
 
-        $map = [
+        $map = array(
             'Darwin' => 'Darwin',
             'DragonFly' => 'BSD',
             'FreeBSD' => 'BSD',
@@ -84,9 +84,9 @@ final class Php72
             'OpenBSD' => 'BSD',
             'Linux' => 'Linux',
             'SunOS' => 'Solaris',
-        ];
+        );
 
-        return isset($map[\PHP_OS]) ? $map[\PHP_OS] : 'Unknown';
+        return isset($map[PHP_OS]) ? $map[PHP_OS] : 'Unknown';
     }
 
     public static function spl_object_id($object)
@@ -105,7 +105,7 @@ final class Php72
     public static function sapi_windows_vt100_support($stream, $enable = null)
     {
         if (!\is_resource($stream)) {
-            trigger_error('sapi_windows_vt100_support() expects parameter 1 to be resource, '.\gettype($stream).' given', \E_USER_WARNING);
+            trigger_error('sapi_windows_vt100_support() expects parameter 1 to be resource, '.\gettype($stream).' given', E_USER_WARNING);
 
             return false;
         }
@@ -113,7 +113,7 @@ final class Php72
         $meta = stream_get_meta_data($stream);
 
         if ('STDIO' !== $meta['stream_type']) {
-            trigger_error('sapi_windows_vt100_support() was not able to analyze the specified stream', \E_USER_WARNING);
+            trigger_error('sapi_windows_vt100_support() was not able to analyze the specified stream', E_USER_WARNING);
 
             return false;
         }
@@ -137,7 +137,7 @@ final class Php72
     public static function stream_isatty($stream)
     {
         if (!\is_resource($stream)) {
-            trigger_error('stream_isatty() expects parameter 1 to be resource, '.\gettype($stream).' given', \E_USER_WARNING);
+            trigger_error('stream_isatty() expects parameter 1 to be resource, '.\gettype($stream).' given', E_USER_WARNING);
 
             return false;
         }
@@ -153,12 +153,12 @@ final class Php72
 
     private static function initHashMask()
     {
-        $obj = (object) [];
+        $obj = (object) array();
         self::$hashMask = -1;
 
         // check if we are nested in an output buffering handler to prevent a fatal error with ob_start() below
-        $obFuncs = ['ob_clean', 'ob_end_clean', 'ob_flush', 'ob_end_flush', 'ob_get_contents', 'ob_get_flush'];
-        foreach (debug_backtrace(\PHP_VERSION_ID >= 50400 ? \DEBUG_BACKTRACE_IGNORE_ARGS : false) as $frame) {
+        $obFuncs = array('ob_clean', 'ob_end_clean', 'ob_flush', 'ob_end_flush', 'ob_get_contents', 'ob_get_flush');
+        foreach (debug_backtrace(\PHP_VERSION_ID >= 50400 ? DEBUG_BACKTRACE_IGNORE_ARGS : false) as $frame) {
             if (isset($frame['function'][0]) && !isset($frame['class']) && 'o' === $frame['function'][0] && \in_array($frame['function'], $obFuncs)) {
                 $frame['line'] = 0;
                 break;
@@ -185,7 +185,7 @@ final class Php72
             $s = \chr(0xF0 | $code >> 18).\chr(0x80 | $code >> 12 & 0x3F).\chr(0x80 | $code >> 6 & 0x3F).\chr(0x80 | $code & 0x3F);
         }
 
-        if ('UTF-8' !== $encoding = $encoding ?? mb_internal_encoding()) {
+        if ('UTF-8' !== $encoding) {
             $s = mb_convert_encoding($s, $encoding, 'UTF-8');
         }
 

@@ -14,17 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Modified by __root__ on 01-June-2022 using Strauss.
+ * Modified by __root__ on 17-June-2022 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
 namespace Deconf\AIWP\Google\Auth\Cache;
 
-use DateTime;
-use DateTimeInterface;
-use DateTimeZone;
 use Psr\Cache\CacheItemInterface;
-use TypeError;
 
 /**
  * A cache item.
@@ -42,7 +38,7 @@ final class Item implements CacheItemInterface
     private $value;
 
     /**
-     * @var DateTimeInterface|null
+     * @var \DateTime|null
      */
     private $expiration;
 
@@ -113,13 +109,18 @@ final class Item implements CacheItemInterface
             return $this;
         }
 
+        $implementationMessage = interface_exists('DateTimeInterface')
+            ? 'implement interface DateTimeInterface'
+            : 'be an instance of DateTime';
+
         $error = sprintf(
-            'Argument 1 passed to %s::expiresAt() must implement interface DateTimeInterface, %s given',
+            'Argument 1 passed to %s::expiresAt() must %s, %s given',
             get_class($this),
+            $implementationMessage,
             gettype($expiration)
         );
 
-        throw new TypeError($error);
+        $this->handleError($error);
     }
 
     /**
@@ -138,10 +139,25 @@ final class Item implements CacheItemInterface
                        'instance of DateInterval or of the type integer, %s given';
             $error = sprintf($message, get_class($this), gettype($time));
 
-            throw new TypeError($error);
+            $this->handleError($error);
         }
 
         return $this;
+    }
+
+    /**
+     * Handles an error.
+     *
+     * @param string $error
+     * @throws \Deconf_AIWP_TypeError
+     */
+    private function handleError($error)
+    {
+        if (class_exists('TypeError')) {
+            throw new \TypeError($error);
+        }
+
+        trigger_error($error, E_USER_ERROR);
     }
 
     /**
@@ -156,18 +172,15 @@ final class Item implements CacheItemInterface
             return true;
         }
 
-        if ($expiration instanceof DateTimeInterface) {
+        if ($expiration instanceof \DateTimeInterface) {
             return true;
         }
 
         return false;
     }
 
-    /**
-     * @return DateTime
-     */
     protected function currentTime()
     {
-        return new DateTime('now', new DateTimeZone('UTC'));
+        return new \DateTime('now', new \DateTimeZone('UTC'));
     }
 }

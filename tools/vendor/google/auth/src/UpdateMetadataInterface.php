@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Modified by __root__ on 01-June-2022 using Strauss.
+ * Modified by __root__ on 17-June-2022 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
@@ -31,10 +31,10 @@ interface UpdateMetadataInterface
     /**
      * Updates metadata with the authorization token.
      *
-     * @param array<mixed> $metadata metadata hashmap
+     * @param array $metadata metadata hashmap
      * @param string $authUri optional auth uri
      * @param callable $httpHandler callback which delivers psr7 request
-     * @return array<mixed> updated metadata hashmap
+     * @return array updated metadata hashmap
      */
     public function updateMetadata(
         $metadata,

@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Modified by __root__ on 01-June-2022 using Strauss.
+ * Modified by __root__ on 17-June-2022 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
@@ -39,8 +39,8 @@ class IAMCredentials
     private $token;
 
     /**
-     * @param string $selector the IAM selector
-     * @param string $token the IAM token
+     * @param $selector string the IAM selector
+     * @param $token string the IAM token
      */
     public function __construct($selector, $token)
     {
@@ -62,7 +62,7 @@ class IAMCredentials
     /**
      * export a callback function which updates runtime metadata.
      *
-     * @return callable updateMetadata function
+     * @return array updateMetadata function
      */
     public function getUpdateMetadataFunc()
     {
@@ -72,13 +72,13 @@ class IAMCredentials
     /**
      * Updates metadata with the appropriate header metadata.
      *
-     * @param array<mixed> $metadata metadata hashmap
+     * @param array $metadata metadata hashmap
      * @param string $unusedAuthUri optional auth uri
      * @param callable $httpHandler callback which delivers psr7 request
      *        Note: this param is unused here, only included here for
      *        consistency with other credentials class
      *
-     * @return array<mixed> updated metadata hashmap
+     * @return array updated metadata hashmap
      */
     public function updateMetadata(
         $metadata,

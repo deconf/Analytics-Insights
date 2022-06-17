@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Modified by __root__ on 01-June-2022 using Strauss.
+ * Modified by __root__ on 17-June-2022 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
@@ -41,28 +41,29 @@ final class MemoryCacheItemPool implements CacheItemPoolInterface
     /**
      * {@inheritdoc}
      *
-     * @return CacheItemInterface The corresponding Cache Item.
+     * @return CacheItemInterface
+     *   The corresponding Cache Item.
      */
-    public function getItem($key): CacheItemInterface
+    public function getItem($key)
     {
-        return current($this->getItems([$key]));  // @phpstan-ignore-line
+        return current($this->getItems([$key]));
     }
 
     /**
      * {@inheritdoc}
      *
-     * @return iterable<CacheItemInterface>
+     * @return array
      *   A traversable collection of Cache Items keyed by the cache keys of
      *   each item. A Cache item will be returned for each key, even if that
      *   key is not found. However, if no keys are specified then an empty
      *   traversable MUST be returned instead.
      */
-    public function getItems(array $keys = []): iterable
+    public function getItems(array $keys = [])
     {
         $items = [];
-        $itemClass = \PHP_VERSION_ID >= 80000 ? TypedItem::class : Item::class;
+
         foreach ($keys as $key) {
-            $items[$key] = $this->hasItem($key) ? clone $this->items[$key] : new $itemClass($key);
+            $items[$key] = $this->hasItem($key) ? clone $this->items[$key] : new Item($key);
         }
 
         return $items;
@@ -74,7 +75,7 @@ final class MemoryCacheItemPool implements CacheItemPoolInterface
      * @return bool
      *   True if item exists in the cache, false otherwise.
      */
-    public function hasItem($key): bool
+    public function hasItem($key)
     {
         $this->isValidKey($key);
 
@@ -87,7 +88,7 @@ final class MemoryCacheItemPool implements CacheItemPoolInterface
      * @return bool
      *   True if the pool was successfully cleared. False if there was an error.
      */
-    public function clear(): bool
+    public function clear()
     {
         $this->items = [];
         $this->deferredItems = [];
@@ -101,7 +102,7 @@ final class MemoryCacheItemPool implements CacheItemPoolInterface
      * @return bool
      *   True if the item was successfully removed. False if there was an error.
      */
-    public function deleteItem($key): bool
+    public function deleteItem($key)
     {
         return $this->deleteItems([$key]);
     }
@@ -112,7 +113,7 @@ final class MemoryCacheItemPool implements CacheItemPoolInterface
      * @return bool
      *   True if the items were successfully removed. False if there was an error.
      */
-    public function deleteItems(array $keys): bool
+    public function deleteItems(array $keys)
     {
         array_walk($keys, [$this, 'isValidKey']);
 
@@ -129,7 +130,7 @@ final class MemoryCacheItemPool implements CacheItemPoolInterface
      * @return bool
      *   True if the item was successfully persisted. False if there was an error.
      */
-    public function save(CacheItemInterface $item): bool
+    public function save(CacheItemInterface $item)
     {
         $this->items[$item->getKey()] = $item;
 
@@ -142,7 +143,7 @@ final class MemoryCacheItemPool implements CacheItemPoolInterface
      * @return bool
      *   False if the item could not be queued or if a commit was attempted and failed. True otherwise.
      */
-    public function saveDeferred(CacheItemInterface $item): bool
+    public function saveDeferred(CacheItemInterface $item)
     {
         $this->deferredItems[$item->getKey()] = $item;
 
@@ -155,7 +156,7 @@ final class MemoryCacheItemPool implements CacheItemPoolInterface
      * @return bool
      *   True if all not-yet-saved items were successfully saved or there were none. False otherwise.
      */
-    public function commit(): bool
+    public function commit()
     {
         foreach ($this->deferredItems as $item) {
             $this->save($item);

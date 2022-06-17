@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * Modified by __root__ on 01-June-2022 using Strauss.
+ * Modified by __root__ on 17-June-2022 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
@@ -53,7 +53,11 @@ class MandrillHandler extends MailHandler
     {
         $message = clone $this->message;
         $message->setBody($content);
-        $message->setDate(time());
+        if (version_compare(\Swift::VERSION, '6.0.0', '>=')) {
+            $message->setDate(new \DateTimeImmutable());
+        } else {
+            $message->setDate(time());
+        }
 
         $ch = curl_init();
 

@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Modified by __root__ on 01-June-2022 using Strauss.
+ * Modified by __root__ on 17-June-2022 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
@@ -60,7 +60,7 @@ class Iam
      * @param string $email The service account email.
      * @param string $accessToken An access token from the service account.
      * @param string $stringToSign The string to be signed.
-     * @param array<string> $delegates [optional] A list of service account emails to
+     * @param array $delegates [optional] A list of service account emails to
      *        add to the delegate chain. If omitted, the value of `$email` will
      *        be used.
      * @return string The signed string, base64-encoded.

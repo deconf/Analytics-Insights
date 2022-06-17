@@ -7,6 +7,8 @@ require_once __DIR__ . '/google/apiclient/src/aliases.php';
 require_once __DIR__ . '/guzzlehttp/guzzle/src/functions_include.php';
 require_once __DIR__ . '/symfony/polyfill-intl-idn/bootstrap.php';
 require_once __DIR__ . '/symfony/polyfill-intl-normalizer/bootstrap.php';
+require_once __DIR__ . '/symfony/polyfill-php70/bootstrap.php';
+require_once __DIR__ . '/paragonie/random_compat/lib/random.php';
 require_once __DIR__ . '/symfony/polyfill-php72/bootstrap.php';
 require_once __DIR__ . '/guzzlehttp/promises/src/functions_include.php';
 require_once __DIR__ . '/guzzlehttp/psr7/src/functions_include.php';

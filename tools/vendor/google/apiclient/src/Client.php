@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Modified by __root__ on 01-June-2022 using Strauss.
+ * Modified by __root__ on 17-June-2022 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
@@ -54,10 +54,10 @@ use UnexpectedValueException;
  */
 class Client
 {
-    const LIBVER = "2.12.1";
+    const LIBVER = "2.12.6";
     const USER_AGENT_SUFFIX = "google-api-php-client/";
-    static public $OAUTH2_REVOKE_URI = 'https://oauth2.googleapis.com/revoke';
-    static public $OAUTH2_TOKEN_URI = 'https://oauth2.googleapis.com/token';
+    public $OAUTH2_REVOKE_URI = 'https://oauth2.googleapis.com/revoke';
+    public $OAUTH2_TOKEN_URI = 'https://oauth2.googleapis.com/token';
     const OAUTH2_AUTH_URL = 'https://accounts.google.com/o/oauth2/auth';
     const API_BASE_PATH = 'https://www.googleapis.com';
 
@@ -879,7 +879,7 @@ class Client
      *
      * @template T
      * @param RequestInterface $request
-     * @param class-string<T> $expectedClass
+     * @param class-string<T>|false|null $expectedClass
      * @throws \Deconf\AIWP\Google\Exception
      * @return mixed|T|ResponseInterface
      */
@@ -1070,7 +1070,7 @@ class Client
             'clientId'          => $this->getClientId(),
             'clientSecret'      => $this->getClientSecret(),
             'authorizationUri'   => self::OAUTH2_AUTH_URL,
-            'tokenCredentialUri' => self::$OAUTH2_TOKEN_URI,
+            'tokenCredentialUri' => $this->OAUTH2_TOKEN_URI,
             'redirectUri'       => $this->getRedirectUri(),
             'issuer'            => $this->config['client_id'],
             'signingKey'        => $this->config['signing_key'],
