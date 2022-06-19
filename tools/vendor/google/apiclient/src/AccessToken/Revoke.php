@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Modified by __root__ on 17-June-2022 using Strauss.
+ * Modified by __root__ on 18-June-2022 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
@@ -65,10 +65,9 @@ class Revoke
         }
 
         $body = Psr7\Utils::streamFor(http_build_query(['token' => $token]));
-        $client = new Client();
         $request = new Request(
             'POST',
-            $client->OAUTH2_REVOKE_URI,
+            AIWP_OAUTH2_REVOKE_URI,
             [
                 'Cache-Control' => 'no-store',
                 'Content-Type'  => 'application/x-www-form-urlencoded',

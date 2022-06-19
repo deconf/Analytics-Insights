@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Modified by __root__ on 17-June-2022 using Strauss.
+ * Modified by __root__ on 18-June-2022 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
@@ -56,8 +56,8 @@ class Client
 {
     const LIBVER = "2.12.6";
     const USER_AGENT_SUFFIX = "google-api-php-client/";
-    public $OAUTH2_REVOKE_URI = 'https://oauth2.googleapis.com/revoke';
-    public $OAUTH2_TOKEN_URI = 'https://oauth2.googleapis.com/token';
+    const OAUTH2_REVOKE_URI = 'https://oauth2.googleapis.com/revoke';
+    const OAUTH2_TOKEN_URI = 'https://oauth2.googleapis.com/token';
     const OAUTH2_AUTH_URL = 'https://accounts.google.com/o/oauth2/auth';
     const API_BASE_PATH = 'https://www.googleapis.com';
 
@@ -1070,7 +1070,7 @@ class Client
             'clientId'          => $this->getClientId(),
             'clientSecret'      => $this->getClientSecret(),
             'authorizationUri'   => self::OAUTH2_AUTH_URL,
-            'tokenCredentialUri' => $this->OAUTH2_TOKEN_URI,
+            'tokenCredentialUri' => AIWP_OAUTH2_TOKEN_URI,
             'redirectUri'       => $this->getRedirectUri(),
             'issuer'            => $this->config['client_id'],
             'signingKey'        => $this->config['signing_key'],

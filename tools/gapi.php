@@ -67,12 +67,14 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				$this->client->setClientId( $this->aiwp->config->options['client_id'] );
 				$this->client->setClientSecret( $this->aiwp->config->options['client_secret'] );
 				$this->client->setRedirectUri( AIWP_URL . 'tools/oauth2callback.php' );
+				define( 'AIWP_OAUTH2_REVOKE_URI', 'https://oauth2.googleapis.com/revoke' );
+				define( 'AIWP_OAUTH2_TOKEN_URI', 'https://oauth2.googleapis.com/token' );
 			} else {
 				$this->client->setClientId( $this->access[0] );
 				$this->client->setClientSecret( $this->access[1] );
 				$this->client->setRedirectUri( AIWP_ENDPOINT_URL . 'oauth2callback.php' );
-				$this->client->OAUTH2_REVOKE_URI = AIWP_ENDPOINT_URL . 'aiwp-revoke.php';
-				$this->client->OAUTH2_TOKEN_URI = AIWP_ENDPOINT_URL . 'aiwp-token.php';
+				define( 'AIWP_OAUTH2_REVOKE_URI', AIWP_ENDPOINT_URL . 'aiwp-revoke.php' );
+				define( 'AIWP_OAUTH2_TOKEN_URI', AIWP_ENDPOINT_URL . 'aiwp-token.php' );
 			}
 
 			/**

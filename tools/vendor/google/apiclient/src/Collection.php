@@ -2,7 +2,7 @@
 /**
  * @license Apache-2.0
  *
- * Modified by __root__ on 17-June-2022 using Strauss.
+ * Modified by __root__ on 18-June-2022 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
