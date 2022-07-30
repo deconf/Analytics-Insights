@@ -265,11 +265,11 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
 				$ga_profiles_list = array();
 				$startindex = 1;
+				$maxresults = 1000;
 				$totalresults = 65535; // use something big
 
-				while ( $startindex < $totalresults ) {
-
-					$profiles = $this->service->management_profiles->listManagementProfiles( '~all', '~all', array( 'start-index' => $startindex ) );
+				while ( $startindex <= $totalresults ) {
+					$profiles = $this->service->management_profiles->listManagementProfiles( '~all', '~all', array( 'start-index' => $startindex, 'max-results' => $maxresults ) );
 					$items = $profiles->getItems();
 					$totalresults = $profiles->getTotalResults();
 
@@ -310,30 +310,44 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 */
 		public function refresh_profiles_ga4() {
 			try {
+
 				$ga4_webstreams_list = array();
+				$pagesize = 200;
+				$firstcall = true;
+				$pagetoken = 'start'; //populate with something evaluating as true
 
-				$accounts = $this->service_ga4_admin->accountSummaries->listAccountSummaries( array( "pageSize" => 200 ) )->getAccountSummaries();
+				while ( $pagetoken || $firstcall ){
 
-				 if ( !empty( $accounts ) ) {
-				 	foreach ( $accounts as $account ) {
-				 		$properties = $account->getPropertySummaries();
-				 		if ( !empty( $properties ) ) {
-				 			foreach ( $properties as $property ) {
-				 				$datastreams = $this->service_ga4_admin->properties_dataStreams->listPropertiesDataStreams( $property->getProperty() )->getDataStreams();
+					if ( $firstcall ) {
+						$listaccounts = $this->service_ga4_admin->accountSummaries->listAccountSummaries( array( 'pageSize' => $pagesize ) );
+						$firstcall = false;
+					} else {
+						$listaccounts = $this->service_ga4_admin->accountSummaries->listAccountSummaries( array( 'pageSize' => $pagesize, 'pageToken' => $pagetoken ) );
+					}
 
-				 				if ( !empty( $datastreams ) ) {
-				 					foreach ( $datastreams as $datastream ) {
-				 						$webstream = $datastream->getWebStreamData();
-					 						if ('WEB_DATA_STREAM' == $datastream->type){
-						 						$ga4_webstreams_list[] = array( $datastream->getDisplayName(), $datastream->getName(), $webstream->getDefaultUri(), $webstream->getMeasurementId() );
-					 						}
-				 					}
+					$accounts = $listaccounts->getAccountSummaries();
+					$pagetoken = $listaccounts->getNextPageToken();
 
-				 				}
-				 			}
-				 		}
-				 	}
-				 }
+					if ( ! empty( $accounts ) ) {
+						foreach ( $accounts as $account ) {
+							$properties = $account->getPropertySummaries();
+							if ( ! empty( $properties ) ) {
+								foreach ( $properties as $property ) {
+									$datastreams = $this->service_ga4_admin->properties_dataStreams->listPropertiesDataStreams( $property->getProperty() )->getDataStreams();
+									if ( ! empty( $datastreams ) ) {
+										foreach ( $datastreams as $datastream ) {
+											$webstream = $datastream->getWebStreamData();
+											if ( 'WEB_DATA_STREAM' == $datastream->type ) {
+												$ga4_webstreams_list[] = array( $datastream->getDisplayName(), $datastream->getName(), $webstream->getDefaultUri(), $webstream->getMeasurementId() );
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+
+				}
 
 				return $ga4_webstreams_list;
 
