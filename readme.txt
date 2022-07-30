@@ -89,6 +89,11 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 
 == Changelog ==
 
+= 5.7.5 (2022.07.31) =
+* Bug Fixes:
+	* some namespace fixes
+	* code optimization on Google Analytics 4 properties retrieval
+
 = 5.7.4 (2022.07.30) =
 * Bug Fixes:
 	* fixes on Universal Analytics and Google Analytics 4 properties list, when the number of properties exceeds 200

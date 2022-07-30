@@ -10,7 +10,7 @@
 if ( ! defined( 'ABSPATH' ) )
 	exit();
 
-use Google\Service\Exception as GoogleServiceException;
+use Deconf\AIWP\Google\Service\Exception as GoogleServiceException;
 
 if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
@@ -313,20 +313,19 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
 				$ga4_webstreams_list = array();
 				$pagesize = 200;
-				$firstcall = true;
+				$options = array( 'pageSize' => $pagesize );
 				$pagetoken = 'start'; //populate with something evaluating as true
 
-				while ( $pagetoken || $firstcall ){
+				while ( $pagetoken ){
 
-					if ( $firstcall ) {
-						$listaccounts = $this->service_ga4_admin->accountSummaries->listAccountSummaries( array( 'pageSize' => $pagesize ) );
-						$firstcall = false;
-					} else {
-						$listaccounts = $this->service_ga4_admin->accountSummaries->listAccountSummaries( array( 'pageSize' => $pagesize, 'pageToken' => $pagetoken ) );
-					}
+					$listaccounts = $this->service_ga4_admin->accountSummaries->listAccountSummaries( $options );
 
 					$accounts = $listaccounts->getAccountSummaries();
 					$pagetoken = $listaccounts->getNextPageToken();
+
+					if ( $pagetoken ){
+						$options = array( 'pageSize' => $pagesize, 'pageToken' => $pagetoken );
+					}
 
 					if ( ! empty( $accounts ) ) {
 						foreach ( $accounts as $account ) {
@@ -386,7 +385,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 *            $options
 		 * @param
 		 *            $serial
-		 * @return int|Google\Service\AnalyticsReporting\DateRangeValues
+		 * @return int|Deconf\AIWP\Google\Service\AnalyticsReporting\DateRangeValues
 		 */
 		private function handle_corereports( $projectId, $from, $to, $metrics, $dimensions, $sortby, $filters, $serial ) {
 			try {
@@ -516,7 +515,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				} else {
 					$data = $transient;
 				}
-			} catch ( Google\Service\Exception $e ) {
+			} catch ( GoogleServiceException $e ) {
 				$timeout = $this->get_timeouts( 'midnight' );
 				AIWP_Tools::set_error( $e, $timeout );
 				return $e->getCode();
@@ -1212,7 +1211,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 *            $options
 		 * @param
 		 *            $serial
-		 * @return int|Google\Service\AnalyticsReporting\DateRangeValues
+		 * @return int|Deconf\AIWP\Google\Service\AnalyticsReporting\DateRangeValues
 		 */
 		private function handle_corereports_ga4( $projectId, $from, $to, $metrics, $dimensions, $sortby, $filters, $serial ) {
 			try {
@@ -1379,7 +1378,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				} else {
 					$data = $transient;
 				}
-			} catch ( Google\Service\Exception $e ) {
+			} catch ( GoogleServiceException $e ) {
 				$timeout = $this->get_timeouts( 'midnight' );
 				AIWP_Tools::set_error( $e, $timeout );
 				return $e->getCode();
@@ -2172,7 +2171,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 * 		$to
 		 * @param
 		 * 		$filter
-		 * @return number|Google\Service\Analytics\GaData
+		 * @return number|Deconf\AIWP\Google\Service\Analytics\GaData
 		 */
 		public function get( $projectId, $query, $from = false, $to = false, $filter = '', $metric = 'sessions' ) {
 
