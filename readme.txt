@@ -7,7 +7,7 @@ Tested up to: 6.0
 Stable tag: 5.7.4
 Requires PHP: 5.6
 License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Connects Google Analytics 4 with your WordPress site. Displays stats and gives insights to help you understand your users and site content on a whole new level!
 

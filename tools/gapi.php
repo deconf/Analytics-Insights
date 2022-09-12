@@ -4,7 +4,7 @@
  * Author URI: https://deconf.com
  * Copyright 2013 Alin Marcu
  * License: GPLv2 or later
- * License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  */
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) )
@@ -617,7 +617,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					/*
 					 * translators:
 					 * Example: 'F, Y' will become 'November, 2015'
-					 * For details see: http://php.net/manual/en/function.date.php#refsect1-function.date-parameters
+					 * For details see: https://php.net/manual/en/function.date.php#refsect1-function.date-parameters
 					 */
 					$aiwp_data[] = array( date_i18n( __( 'F, Y', 'analytics-insights' ), strtotime( $row[0] . '01' ) ), round( $row[2], 2 ) );
 				}
@@ -626,7 +626,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					/*
 					 * translators:
 					 * Example: 'l, F j, Y' will become 'Thusday, November 17, 2015'
-					 * For details see: http://php.net/manual/en/function.date.php#refsect1-function.date-parameters
+					 * For details see: https://php.net/manual/en/function.date.php#refsect1-function.date-parameters
 					 */
 					$aiwp_data[] = array( date_i18n( __( 'l, F j, Y', 'analytics-insights' ), strtotime( $row[0] ) ), round( $row[2], 2 ) );
 				}
@@ -1510,7 +1510,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					/*
 					 * translators:
 					 * Example: 'F, Y' will become 'November, 2015'
-					 * For details see: http://php.net/manual/en/function.date.php#refsect1-function.date-parameters
+					 * For details see: https://php.net/manual/en/function.date.php#refsect1-function.date-parameters
 					 */
 					$aiwp_data[] = array( date_i18n( __( 'F, Y', 'analytics-insights' ), strtotime( $key . '01' ) ), $value );
 				}
@@ -1538,7 +1538,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					/*
 					 * translators:
 					 * Example: 'l, F j, Y' will become 'Thusday, November 17, 2015'
-					 * For details see: http://php.net/manual/en/function.date.php#refsect1-function.date-parameters
+					 * For details see: https://php.net/manual/en/function.date.php#refsect1-function.date-parameters
 					 */
 					$aiwp_data[] = array( date_i18n( __( 'l, F j, Y', 'analytics-insights' ), strtotime( $key ) ), $value );
 				}
