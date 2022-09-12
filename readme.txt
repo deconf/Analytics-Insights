@@ -89,6 +89,10 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 
 == Changelog ==
 
+= 5.7.6 (2022.09.12) =
+* Bug Fixes:
+	* "Search ..." placeholder missing for admin reports
+
 = 5.7.5 (2022.07.31) =
 * Bug Fixes:
 	* some namespace fixes

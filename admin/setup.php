@@ -305,7 +305,8 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 							$this->aiwp->config->options['reporting_type'] ? __( "Engagement Rate", 'analytics-insights' ) : __( "Page Load Time", 'analytics-insights' ),
 							__( "Exit Rate", 'analytics-insights' ),
 							__( "", 'analytics-insights' ),
-							__( "Search ...", 'analytics-insights' ), //30
+							__( "", 'analytics-insights' ),
+							__( "Search ...", 'analytics-insights' ), //31
 						),
 						'colorVariations' => AIWP_Tools::variations( $this->aiwp->config->options['theme_color'] ),
 						'region' => $region,

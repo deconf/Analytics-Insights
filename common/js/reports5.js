@@ -532,7 +532,7 @@ jQuery.fn.extend( {
 			    });
 			    
 			    google.visualization.events.addListener(control, 'ready', function () {
-			        jQuery('.aiwp-dashboard-control input').prop('placeholder', aiwpItemData.i18n[ 30 ]);
+			        jQuery('.aiwp-dashboard-control input').prop('placeholder', aiwpItemData.i18n[ 31 ]);
 			    });
 				
 			    wrapper = new google.visualization.ChartWrapper({
