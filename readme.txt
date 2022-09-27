@@ -4,7 +4,7 @@ Donate link: https://deconf.com/donate/
 Tags: analytics,google analytics,google analytics 4,google analytics dashboard, GA4, google analytics plugin,google analytics tracking code,google analytics widget,wordpress analytics
 Requires at least: 3.5
 Tested up to: 6.0
-Stable tag: 5.7.4
+Stable tag: 5.7.7
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -89,9 +89,14 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 
 == Changelog ==
 
-= 5.7.6 (2022.09.12) =
+= 5.7.7 (2022.09.27) =
+* Bug Fixes:
+	* permanent fix for precision loses warning in PHP 8.1
+	
+= 5.7.6 (2022.09.20) =
 * Bug Fixes:
 	* "Search ..." placeholder missing for admin reports
+	* solves precision loses warning for PHP 8.1 
 
 = 5.7.5 (2022.07.31) =
 * Bug Fixes:

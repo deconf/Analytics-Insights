@@ -64,17 +64,16 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 			$per = $per / 100 * 255;
 			if ( $per < 0 ) {
 				// Darker
-				$per = abs( $per );
 				for ( $x = 0; $x < 3; $x++ ) {
 					$c = hexdec( substr( $colour, ( 2 * $x ), 2 ) ) - $per;
-					$c = ( $c < 0 ) ? 0 : dechex( $c );
+					$c = ( $c < 0 ) ? 0 : dechex( (int)$c );
 					$rgb .= ( strlen( $c ) < 2 ) ? '0' . $c : $c;
 				}
 			} else {
 				// Lighter
 				for ( $x = 0; $x < 3; $x++ ) {
 					$c = hexdec( substr( $colour, ( 2 * $x ), 2 ) ) + $per;
-					$c = ( $c > 255 ) ? 'ff' : dechex( $c );
+					$c = ( $c > 255 ) ? 'ff' : dechex( (int)$c );
 					$rgb .= ( strlen( $c ) < 2 ) ? '0' . $c : $c;
 				}
 			}
