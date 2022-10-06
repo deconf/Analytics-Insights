@@ -226,6 +226,8 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 						$timeout = 60;
 					}
 					self::set_cache( 'gapi_errors', array( $e->getCode(), (array) $e->getErrors() ), $timeout );
+				} else {
+					self::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( print_r( $e, true ) ), $timeout );
 				}
 			} else if ( is_array( $e ) ) {
 				self::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( print_r( $e, true ) ), $timeout );
