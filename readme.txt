@@ -3,8 +3,8 @@ Contributors: deconf
 Donate link: https://deconf.com/donate/
 Tags: analytics,google analytics,google analytics 4,google analytics dashboard, GA4, google analytics plugin,google analytics tracking code,google analytics widget,wordpress analytics
 Requires at least: 3.5
-Tested up to: 6.0
-Stable tag: 5.7.7
+Tested up to: 6.1
+Stable tag: 5.7.8
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -89,6 +89,10 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 
 == Changelog ==
 
+= 5.7.8 (2022.10.06) =
+* Bug Fixes:
+	* improvements on error reporting; for both Google Analytics EndPoint and Deconf Endpoint 
+	
 = 5.7.7 (2022.09.27) =
 * Bug Fixes:
 	* permanent fix for precision loses warning in PHP 8.1
