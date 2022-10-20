@@ -332,7 +332,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 							$properties = $account->getPropertySummaries();
 							if ( ! empty( $properties ) ) {
 								foreach ( $properties as $property ) {
-									$categorystreams = $this->service_ga4_admin->properties_dataStreams->listPropertiesDataStreams( $property->getProperty() )->getDataStreams();
+									$datastreams = $this->service_ga4_admin->properties_dataStreams->listPropertiesDataStreams( $property->getProperty() )->getDataStreams();
 									if ( ! empty( $datastreams ) ) {
 										foreach ( $datastreams as $datastream ) {
 											$webstream = $datastream->getWebStreamData();
