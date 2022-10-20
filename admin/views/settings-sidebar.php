@@ -24,7 +24,7 @@ $aiwp = AIWP();
 					<a href="https://deconf.com/clicky-web-analytics-review/?utm_source=aiwp_config&utm_medium=link&utm_content=clicky&utm_campaign=aiwp"><img src="<?php echo plugins_url( '../images/clicky.png' , __FILE__ ); ?>" /></a>
 				</div>
 				<div class="aiwp-desc">
-					<?php printf(__('%s - A web analytics service with users tracking at IP level.', 'analytics-insights'), sprintf('<a href="https://deconf.com/clicky-web-analytics-review/?utm_source=aiwp_config&utm_medium=link&utm_content=clicky&utm_campaign=aiwp">%s</a>', __('Clicky Analytics', 'analytics-insights')));?>
+					<?php printf(__('%s - A cookieless web analytics service for website tracking.', 'analytics-insights'), sprintf('<a href="https://deconf.com/clicky-web-analytics-review/?utm_source=aiwp_config&utm_medium=link&utm_content=clicky&utm_campaign=aiwp">%s</a>', __('Clicky Analytics', 'analytics-insights')));?>
 				</div>
 				<br />
 				<div class="aiwp-title">

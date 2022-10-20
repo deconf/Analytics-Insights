@@ -46,13 +46,35 @@ if ( ! class_exists( 'AIWP_Tracking' ) ) {
 			if ( AIWP_Tools::check_roles( $this->aiwp->config->options['track_exclude'], true ) || ( $this->aiwp->config->options['superadmin_tracking'] && current_user_can( 'manage_network' ) ) ) {
 				return;
 			}
+
 			if ( ( 'ga4tracking' == $this->aiwp->config->options['tracking_type'] || 'globalsitetag' == $this->aiwp->config->options['tracking_type'] || 'dualtracking' == $this->aiwp->config->options['tracking_type'] ) && ( $this->aiwp->config->options['tableid_jail'] || $this->aiwp->config->options['webstream_jail'] ) ) {
-				// Global Site Tag (gtag.js)
+
 				require_once 'tracking-analytics.php';
+
+				if ( 'globalsitetag' == $this->aiwp->config->options['tracking_type'] && $this->aiwp->config->options['tableid_jail'] ) {
+					// Global Site Tag (gtag.js)
 					if ( $this->aiwp->config->options['amp_tracking_analytics'] ) {
 						$this->analytics_amp = new AIWP_Tracking_GlobalSiteTag_AMP();
 					}
-					$this->analytics = new AIWP_Tracking_GlobalSiteTag();
+				}
+
+				if ( 'ga4tracking' == $this->aiwp->config->options['tracking_type'] && $this->aiwp->config->options['webstream_jail'] ) {
+					// Global Site Tag (gtag.js)
+						if ( $this->aiwp->config->options['amp_tracking_analytics'] ) {
+							$this->analytics_amp = new AIWP_Tracking_GA4_AMP();
+						}
+				}
+
+				if ( 'dualtracking' == $this->aiwp->config->options['tracking_type'] && $this->aiwp->config->options['tableid_jail'] && $this->aiwp->config->options['webstream_jail'] ) {
+					// Global Site Tag (gtag.js)
+					if ( $this->aiwp->config->options['amp_tracking_analytics'] ) {
+						$this->analytics_amp = new AIWP_Tracking_GlobalSiteTag_AMP();
+						$this->analytics_amp = new AIWP_Tracking_GA4_AMP();
+					}
+				}
+
+				$this->analytics = new AIWP_Tracking_GlobalSiteTag();
+
 			}
 
 			if ( 'universal' == $this->aiwp->config->options['tracking_type'] && $this->aiwp->config->options['tableid_jail'] ) {
@@ -61,7 +83,9 @@ if ( ! class_exists( 'AIWP_Tracking' ) ) {
 					if ( $this->aiwp->config->options['amp_tracking_analytics'] ) {
 						$this->analytics_amp = new AIWP_Tracking_Analytics_AMP();
 					}
+
 					$this->analytics = new AIWP_Tracking_Analytics();
+
 			}
 
 			if ( 'tagmanager' == $this->aiwp->config->options['tracking_type'] && $this->aiwp->config->options['web_containerid'] ) {
@@ -70,9 +94,13 @@ if ( ! class_exists( 'AIWP_Tracking' ) ) {
 					if ( $this->aiwp->config->options['amp_tracking_tagmanager'] && $this->aiwp->config->options['amp_containerid'] ) {
 						$this->tagmanager_amp = new AIWP_Tracking_TagManager_AMP();
 					}
+
 					$this->tagmanager = new AIWP_Tracking_TagManager();
+
 			}
+
 			add_shortcode( 'aiwp_useroptout', array( $this, 'aiwp_user_optout' ) );
+
 		}
 	}
 }

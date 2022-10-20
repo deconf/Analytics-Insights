@@ -918,6 +918,7 @@ jQuery.fn.extend( {
 					rtData = [];
 					rtData[ "totals" ] = "0";
 					rtData[ "rows" ] = [];
+					rtData[ "category" ] = [];
 				}
 
 				if ( parseInt( rtData[ "totals" ] ) !== parseInt( document.getElementById( "aiwp-online-ga4" ).innerHTML ) ) {
@@ -947,27 +948,30 @@ jQuery.fn.extend( {
 				if ( rtData[ "totals" ] == 0 ) {
 					rtData[ "rows" ] = [];
 				}
-
-				for ( i = 0; i < rtData[ "rows" ].length; i++ ) {
 				
-					screenName.push( rtData[ "rows" ][ i ][ 1 ] );
+				desktopCount = 0;
+				mobileCount = 0;
+				tabletCount = 0;
+
+				for ( i = 0; i < rtData[ "category" ].length; i++ ) {
+				
+					screenName.push( rtData[ "category" ][ i ][ 0 ] );
 					
-					if ( rtData[ "rows" ][ i ][ 0 ] == "desktop" ) {
-						desktopCount = desktopCount + parseInt( rtData[ "rows" ][ i ][ 2 ] );
+					if ( rtData[ "category" ][ i ][ 0 ] == "desktop" ) {
+						desktopCount = desktopCount + parseInt( rtData[ "category" ][ i ][ 1 ] );
 					}
-					if ( rtData[ "rows" ][ i ][ 0 ] == "mobile" ) {
-						mobileCount = mobileCount + parseInt( rtData[ "rows" ][ i ][ 2 ] );
+					if ( rtData[ "category" ][ i ][ 0 ] == "mobile" ) {
+						mobileCount = mobileCount + parseInt( rtData[ "category" ][ i ][ 1 ] );
 					}
-					if ( rtData[ "rows" ][ i ][ 0 ] == "tablet" ) {
-						tabletCount = tabletCount + parseInt( rtData[ "rows" ][ i ][ 2 ] );
+					if ( rtData[ "category" ][ i ][ 0 ] == "tablet" ) {
+						tabletCount = tabletCount + parseInt( rtData[ "category" ][ i ][ 1 ] );
 					}
 				}
 
-				uScreenName = screenName.filter( reports.rtOnlyUniqueValues );
-				for ( i = 0; i < uScreenName.length; i++ ) {
+				for ( i = 0; i < rtData[ "rows" ].length; i++ ) {
 					uScreenNameStats[ i ] = {
-						"screenName" : uScreenName[ i ],
-						"count" : reports.rtCountSessions( rtData, uScreenName[ i ], 2 )
+						"screenName" : rtData[ "rows" ][ i ][ 0 ],
+						"count" : rtData[ "rows" ][ i ][ 1 ]
 					}
 				}
 				uScreenNameStats.sort( function ( a, b ) {

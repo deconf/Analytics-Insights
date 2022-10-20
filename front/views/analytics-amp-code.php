@@ -11,8 +11,14 @@
 <amp-analytics type="googleanalytics" id="aiwp-googleanalytics"> <script type="application/json">
 <?php echo wp_kses( $data['json'], array() ); ?>
 </script> </amp-analytics>
-<?php else:?>
+<?php endif;?>
+<?php if ( 1 == $globalsitetag ):?>
 <amp-analytics type="gtag" data-credentials="include"> <script type="application/json">
+<?php echo wp_kses( $data['json'], array() ); ?>
+</script> </amp-analytics>
+<?php endif;?>
+<?php if ( 2 == $globalsitetag ):?>
+<amp-analytics type="googleanalytics" config="https://amp.analytics-debugger.com/ga4.json" data-credentials="include"> <script type="application/json">
 <?php echo wp_kses( $data['json'], array() ); ?>
 </script> </amp-analytics>
 <?php endif;?>

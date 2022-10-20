@@ -164,7 +164,7 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 		 **/
 		public static function load_view( $path, $data = array(), $globalsitetag = 0 ) {
 			if ( file_exists( AIWP_DIR . $path ) ) {
-				require_once ( AIWP_DIR . $path );
+				require ( AIWP_DIR . $path );
 				return true;
 			}
 			return false;

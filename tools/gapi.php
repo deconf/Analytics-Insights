@@ -332,7 +332,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 							$properties = $account->getPropertySummaries();
 							if ( ! empty( $properties ) ) {
 								foreach ( $properties as $property ) {
-									$datastreams = $this->service_ga4_admin->properties_dataStreams->listPropertiesDataStreams( $property->getProperty() )->getDataStreams();
+									$categorystreams = $this->service_ga4_admin->properties_dataStreams->listPropertiesDataStreams( $property->getProperty() )->getDataStreams();
 									if ( ! empty( $datastreams ) ) {
 										foreach ( $datastreams as $datastream ) {
 											$webstream = $datastream->getWebStreamData();
@@ -2055,7 +2055,8 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 */
 		private function get_realtime_ga4( $projectId ) {
 			$metrics = 'activeUsers';
-			$dimensions = array('deviceCategory', 'unifiedScreenName');
+			$dimensions = array('unifiedScreenName');
+			$dimensions1 = array('deviceCategory');
 
 			$projectIdArr = explode( '/dataStreams/',$projectId );
 			$projectId = $projectIdArr[0];
@@ -2072,6 +2073,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					}
 
 					$request = new Deconf\AIWP\Google\Service\AnalyticsData\RunRealtimeReportRequest();
+					$request1 = new Deconf\AIWP\Google\Service\AnalyticsData\RunRealtimeReportRequest();
 
 					// Create the Metrics object.
 					$metrics = AIWP_Tools::ga3_ga4_mapping( $metrics );
@@ -2082,6 +2084,10 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					// Create the ReportRequest object.
 					$request->setMetrics( $metric );
 					$request->setMetricAggregations( 'TOTAL' );
+
+					// Create the ReportRequest object.
+					$request1->setMetrics( $metric );
+					$request1->setMetricAggregations( 'TOTAL' );
 
 					// Create the Dimensions object.
 					if ( $dimensions ){
@@ -2104,13 +2110,37 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
 					}
 
-					$data = $this->service_ga4_data->properties->runRealtimeReport( $projectId, $request, array( 'quotaUser' => $quotauser ) );
+					// Create the Dimensions object.
+					if ( $dimensions1 ){
 
-					AIWP_Tools::set_cache( $serial, $data, 55 );
+						if ( is_array( $dimensions1 ) ){
+							foreach ( $dimensions1 as $value ){
+								$value = AIWP_Tools::ga3_ga4_mapping( $value );
+								$dimensionobj = new Deconf\AIWP\Google\Service\AnalyticsData\Dimension();
+								$dimensionobj->setName( $value );
+								$dimension1[] = $dimensionobj;
+							}
+						} else {
+							$dimensions1 = AIWP_Tools::ga3_ga4_mapping( $dimensions );
+							$dimensionobj = new Deconf\AIWP\Google\Service\AnalyticsData\Dimension();
+							$dimensionobj->setName( $dimensions );
+							$dimension1[] = $dimensionobj;
+						}
+
+						$request->setDimensions( $dimension );
+						$request1->setDimensions( $dimension1 );
+
+					}
+
+					$data = $this->service_ga4_data->properties->runRealtimeReport( $projectId, $request, array( 'quotaUser' => $quotauser ) );
+					$category = $this->service_ga4_data->properties->runRealtimeReport( $projectId, $request1, array( 'quotaUser' => $quotauser ) );
+
+					AIWP_Tools::set_cache( $serial, array( $data, $category), 55 );
 
 				} else {
 
-					$data = $transient;
+					$data = $transient[0];
+					$category = $transient[1];
 
 				}
 			} catch ( GoogleServiceException $e ) {
@@ -2149,10 +2179,33 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
 			}
 
+			$aiwp_data['category'] = array();
+
+			foreach ( $category->getRows() as $row ) {
+
+				$values = array();
+
+				if ( isset( $row->getDimensionValues()[0] ) ){
+					foreach ( $row->getDimensionValues() as $item ){
+						$values[] = esc_html( $item->getValue() );
+					}
+				}
+
+				if ( isset( $row->getMetricValues()[0] ) ){
+					foreach ( $row->getMetricValues() as $item){
+						$values[] = esc_html( $item->getValue() );
+					}
+				}
+
+				$aiwp_data['category'][] = $values;
+
+			}
+
+
 			$aiwp_data['totals'] = 0;
 
-			if ( method_exists( $data, 'getTotals') && isset( $data->getTotals()[0]->getMetricValues()[0] ) ){
-				$aiwp_data['totals'] = (int)$data->getTotals()[0]->getMetricValues()[0]->getValue();
+			if ( method_exists( $category, 'getTotals') && isset( $category->getTotals()[0]->getMetricValues()[0] ) ){
+				$aiwp_data['totals'] = (int)$category->getTotals()[0]->getMetricValues()[0]->getValue();
 			}
 
 			return $aiwp_data;

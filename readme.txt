@@ -4,7 +4,7 @@ Donate link: https://deconf.com/donate/
 Tags: analytics,google analytics,google analytics 4,google analytics dashboard, GA4, google analytics plugin,google analytics tracking code,google analytics widget,wordpress analytics
 Requires at least: 3.5
 Tested up to: 6.1
-Stable tag: 5.7.8
+Stable tag: 5.8
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -27,7 +27,7 @@ In addition to a set of general Google Analytics stats, insights like in-depth P
 
 The Google Analytics tracking code is fully customizable through options and hooks, allowing advanced data collection like custom dimensions and events.
 
-The plugin installs the latest Google Analytics tracking code. No matter the tracking method you choose, they are all available and customizable: Google Analytics 4 (GA4), Universal Google Analytics (analytics.js) tracking code, Global Site Tag (gtag.js) tracking code, and Accelerated Mobile Pages (AMP) tracking.
+The plugin installs the latest Google Analytics tracking code. No matter the tracking method you choose, they are all available and customizable: Google Analytics 4 (GA4), Universal Google Analytics (analytics.js) tracking code, Global Site Tag (gtag.js) tracking code, and Accelerated Mobile Pages (AMP) tracking. Accelerated Mobile Pages (AMP) tracking with Google Analytics 4 is also available. 
 
 Advanced features like events tracking and custom dimensions tracking can be enabled with a switch of a button, without the need of any programming skills.  
 
@@ -89,6 +89,14 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 
 == Changelog ==
 
+= 5.8 (2022.10.18) =
+* [Release notes](https://deconf.com/google-analytics-4-support-for-wordpress-amp-pages/)
+* Bug Fixes:
+	* Fixes multiple validation errors for AMP pages
+	* Google Analytics 4 (GA4) realtime reporting fixes
+* Enhancements:
+	* introducing Google Analytics 4 AMP tracking support (Experimental); you can now use Google Analytics 4 tracking on AMP pages
+	
 = 5.7.8 (2022.10.06) =
 * Bug Fixes:
 	* improvements on error reporting; for both Google Analytics EndPoint and Deconf Endpoint 
