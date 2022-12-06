@@ -323,7 +323,7 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 				'source' => 'sessionSource',
 				'medium' => 'sessionMedium',
 				'dataSource' => 'platform',
-				'pagePath' => 'pagePathPlusQueryString',
+				//'pagePath' => 'pagePathPlusQueryString',
 				'pageviews' => 'screenPageViews',
 				'pageviewsPerSession' => 'screenPageViewsPerSession',
 				'timeOnPage' => 'userEngagementDuration',
