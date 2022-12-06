@@ -25,8 +25,12 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-<?php echo wp_kses( $data['trackingcode'], array() )?>
-
+<?php
+// Use these actions to insert gtag() commands before/after the main gtag('config') for the tracker
+do_action('aiwp_output_globalsitetag_trackingcode_before');
+echo wp_kses( $data['trackingcode'], array() );
+do_action('aiwp_output_globalsitetag_trackingcode_after');
+?>
   if (window.performance) {
     var timeSincePageLoad = Math.round(performance.now());
     gtag('event', 'timing_complete', {
