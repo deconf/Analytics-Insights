@@ -26,9 +26,9 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 <?php
-do_action('aiwp_output_gtag_before');
+do_action('aiwp_gtag_output_before');
 echo wp_kses( $data['trackingcode'], array() );
-do_action('aiwp_output_gtag_after');
+do_action('aiwp_gtag_output_after');
 ?>
   if (window.performance) {
     var timeSincePageLoad = Math.round(performance.now());

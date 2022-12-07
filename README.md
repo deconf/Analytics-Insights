@@ -50,8 +50,8 @@ Hooks
   - aiwp_tagmanager_datalayer
   - aiwp_analytics_commands
   - aiwp_gtag_commands
-  - aiwp_output_gtag_before
-  - aiwp_output_gtag_after  
+  - aiwp_gtag_output_before
+  - aiwp_gtag_output_after  
   - aiwp_endpoint_support
   
 * Shortcodes
