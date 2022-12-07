@@ -28,6 +28,9 @@ if ( ! class_exists( 'AIWP_Frontend_Setup' ) ) {
 		 *            $hook
 		 */
 		public function load_styles_scripts() {
+			if ( AIWP_Tools::is_amp() ){
+				return;
+			}
 			$lang = get_bloginfo( 'language' );
 			$lang = explode( '-', $lang );
 			$lang = $lang[0];

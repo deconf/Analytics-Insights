@@ -325,7 +325,7 @@ if ( ! class_exists( 'AIWP_Tracking_Analytics' ) ) {
 		 */
 		public function output() {
 
-			if ( function_exists( 'is_amp_endpoint' ) && is_amp_endpoint() ) {
+			if ( AIWP_Tools::is_amp() ) {
 				return;
 			} else {
 				parent::load_scripts();
@@ -455,7 +455,7 @@ if ( ! class_exists( 'AIWP_Tracking_GlobalSiteTag' ) ) {
 		 */
 		public function output() {
 
-			if ( function_exists( 'is_amp_endpoint' ) && is_amp_endpoint() ) {
+			if ( AIWP_Tools::is_amp() ) {
 				return;
 			} else {
 				parent::load_scripts();
@@ -507,6 +507,11 @@ if ( ! class_exists( 'AIWP_Tracking_Analytics_AMP' ) ) {
 		public function __construct() {
 			parent::__construct();
 			add_filter( 'amp_post_template_data', array( $this, 'load_scripts' ) );
+			// For all AMP modes, AMP plugin version >=1.3.
+			//add_action( 'amp_print_analytics', array( $this, 'output' ) );
+			// For AMP Standard and Transitional, AMP plugin version <1.3.
+			add_action( 'wp_footer', array( $this, 'output' ) );
+			// For AMP Reader, AMP plugin version <1.3.
 			add_action( 'amp_post_template_footer', array( $this, 'output' ) );
 			add_filter( 'the_content', array( $this, 'add_data_attributes' ), 999, 1 );
 			if ( $this->aiwp->config->options['amp_tracking_clientidapi'] ) {
@@ -556,7 +561,7 @@ if ( ! class_exists( 'AIWP_Tracking_Analytics_AMP' ) ) {
 		}
 
 		public function add_data_attributes( $content ) {
-			if ( function_exists( 'is_amp_endpoint' ) && is_amp_endpoint() && $this->is_event_tracking( false ) ) {
+			if ( AIWP_Tools::is_amp() && $this->is_event_tracking( false ) ) {
 				$dom = AIWP_Tools::get_dom_from_content( $content );
 				if ( $dom ) {
 					$links = $dom->getElementsByTagName( 'a' );
@@ -738,6 +743,11 @@ class AIWP_Tracking_GlobalSiteTag_AMP extends AIWP_Tracking_Analytics_Base {
 	public function __construct() {
 		parent::__construct();
 		add_filter( 'amp_post_template_data', array( $this, 'load_scripts' ) );
+		// For all AMP modes, AMP plugin version >=1.3.
+		//add_action( 'amp_print_analytics', array( $this, 'output' ) );
+		// For AMP Standard and Transitional, AMP plugin version <1.3.
+		add_action( 'wp_footer', array( $this, 'output' ) );
+		// For AMP Reader, AMP plugin version <1.3.
 		add_action( 'amp_post_template_footer', array( $this, 'output' ) );
 		add_filter( 'the_content', array( $this, 'add_data_attributes' ), 999, 1 );
 		if ( $this->aiwp->config->options['amp_tracking_clientidapi'] ) {
@@ -787,7 +797,7 @@ class AIWP_Tracking_GlobalSiteTag_AMP extends AIWP_Tracking_Analytics_Base {
 	}
 
 	public function add_data_attributes( $content ) {
-		if ( function_exists( 'is_amp_endpoint' ) && is_amp_endpoint() && $this->is_event_tracking( false ) ) {
+		if ( AIWP_Tools::is_amp() && $this->is_event_tracking( false ) ) {
 			$dom = AIWP_Tools::get_dom_from_content( $content );
 			if ( $dom ) {
 				$links = $dom->getElementsByTagName( 'a' );
@@ -968,6 +978,11 @@ if ( ! class_exists( 'AIWP_Tracking_GA4_AMP' ) ) {
 		public function __construct() {
 			parent::__construct();
 			add_filter( 'amp_post_template_data', array( $this, 'load_scripts' ) );
+			// For all AMP modes, AMP plugin version >=1.3.
+			//add_action( 'amp_print_analytics', array( $this, 'output' ) );
+			// For AMP Standard and Transitional, AMP plugin version <1.3.
+			add_action( 'wp_footer', array( $this, 'output' ) );
+			// For AMP Reader, AMP plugin version <1.3.
 			add_action( 'amp_post_template_footer', array( $this, 'output' ) );
 			add_filter( 'the_content', array( $this, 'add_data_attributes' ), 999, 1 );
 			if ( $this->aiwp->config->options['amp_tracking_clientidapi'] ) {
@@ -1017,7 +1032,7 @@ if ( ! class_exists( 'AIWP_Tracking_GA4_AMP' ) ) {
 		}
 
 		public function add_data_attributes( $content ) {
-			if ( function_exists( 'is_amp_endpoint' ) && is_amp_endpoint() && $this->is_event_tracking( false ) ) {
+			if ( AIWP_Tools::is_amp() && $this->is_event_tracking( false ) ) {
 				$dom = AIWP_Tools::get_dom_from_content( $content );
 				if ( $dom ) {
 					$links = $dom->getElementsByTagName( 'a' );

@@ -24,6 +24,9 @@ final class AIWP_Frontend_Widget extends WP_Widget {
 	}
 
 	public function load_styles_scripts() {
+		if ( AIWP_Tools::is_amp() ){
+			return;
+		}
 		$lang = get_bloginfo( 'language' );
 		$lang = explode( '-', $lang );
 		$lang = $lang[0];
@@ -33,6 +36,9 @@ final class AIWP_Frontend_Widget extends WP_Widget {
 	}
 
 	public function widget( $args, $instance ) {
+		if ( AIWP_Tools::is_amp() ){
+			return;
+		}
 		$widget_title = apply_filters( 'widget_title', $instance['title'] );
 		$title = __( "Sessions", 'analytics-insights' );
 		echo "\n<!-- BEGIN AIWP v" . AIWP_CURRENT_VERSION . " Widget - https://deconf.com/analytics-insights-for-wordpress/ -->\n";

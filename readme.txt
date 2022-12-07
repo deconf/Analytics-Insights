@@ -91,7 +91,8 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 
 = 5.8.3 (2022.12.07) =
 * Enhancements:
-	* introducing two additional hooks (aiwp_gtag_output_before and aiwp_gtag_output_after) for Global Site Tag tracking code  
+	* introducing two additional hooks (aiwp_gtag_output_before and aiwp_gtag_output_after) for Global Site Tag tracking code
+	* add full Google Analytics 4 support to AMP Standard, AMP Transitional, and AMP Reader pages  
 
 = 5.8.2 (2022.12.06) =
 * Bug Fixes:

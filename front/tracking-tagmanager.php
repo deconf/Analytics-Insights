@@ -125,7 +125,7 @@ if ( ! class_exists( 'AIWP_Tracking_TagManager' ) ) {
 		 * Outputs the Google Tag Manager tracking code
 		 */
 		public function output() {
-			if ( function_exists( 'is_amp_endpoint' ) && is_amp_endpoint() ) {
+			if ( AIWP_Tools::is_amp() ) {
 				return;
 			}
 			$this->build_custom_dimensions();
@@ -158,6 +158,11 @@ if ( ! class_exists( 'AIWP_Tracking_TagManager_AMP' ) ) {
 
 		private function load_scripts(){
 				add_filter( 'amp_post_template_data', array( $this, 'amp_add_analytics_script' ) );
+				// For all AMP modes, AMP plugin version >=1.3.
+				//add_action( 'amp_print_analytics', array( $this, 'amp_output' ) );
+				// For AMP Standard and Transitional, AMP plugin version <1.3.
+				add_action( 'wp_footer', array( $this, 'amp_output' ) );
+				// For AMP Reader, AMP plugin version <1.3.
 				add_action( 'amp_post_template_footer', array( $this, 'amp_output' ) );
 		}
 

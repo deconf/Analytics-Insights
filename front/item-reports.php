@@ -1,8 +1,8 @@
 <?php
 /**
- * Author: Alin Marcu 
+ * Author: Alin Marcu
  * Author URI: https://deconf.com
- * Copyright 2013 Alin Marcu 
+ * Copyright 2013 Alin Marcu
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -21,6 +21,9 @@ if ( ! class_exists( 'AIWP_Frontend_Item_Reports' ) ) {
 		}
 
 		function custom_adminbar_node( $wp_admin_bar ) {
+			if ( AIWP_Tools::is_amp() ){
+				return;
+			}
 			if ( AIWP_Tools::check_roles( $this->aiwp->config->options['access_front'] ) && $this->aiwp->config->options['frontend_item_reports'] ) {
 				/* @formatter:off */
 				$args = array( 	'id' => 'aiwp-1',
