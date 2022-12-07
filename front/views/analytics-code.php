@@ -26,10 +26,9 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 <?php
-// Use these actions to insert gtag() commands before/after the main gtag('config') for the tracker
-do_action('aiwp_output_globalsitetag_trackingcode_before');
+do_action('aiwp_output_gtag_before');
 echo wp_kses( $data['trackingcode'], array() );
-do_action('aiwp_output_globalsitetag_trackingcode_after');
+do_action('aiwp_output_gtag_after');
 ?>
   if (window.performance) {
     var timeSincePageLoad = Math.round(performance.now());

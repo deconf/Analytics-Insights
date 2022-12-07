@@ -4,7 +4,7 @@ Donate link: https://deconf.com/donate/
 Tags: analytics,google analytics,google analytics 4,google analytics dashboard, GA4, google analytics plugin,google analytics tracking code,google analytics widget,wordpress analytics
 Requires at least: 3.5
 Tested up to: 6.1
-Stable tag: 5.8.2
+Stable tag: 5.8.3
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -88,6 +88,10 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 == Upgrade Notice ==
 
 == Changelog ==
+
+= 5.8.3 (2022.12.07) =
+* Enhancements:
+	* introducing two additional hooks (aiwp_output_gtag_before and aiwp_output_gtag_after) for Global Site Tag tracking code  
 
 = 5.8.2 (2022.12.06) =
 * Bug Fixes:
