@@ -465,6 +465,10 @@ if ( ! class_exists( 'AIWP_Tracking_GlobalSiteTag' ) ) {
 			$this->build_commands();
 			$trackingcode = '';
 			foreach ( $this->commands as $set ) {
+				
+				// Use this filter to insert properties into $set['fieldsobject']
+				$set = apply_filters('aiwp_gtag_command', $set, $this);
+				
 				$command = $set['command'];
 				$fields = '';
 				foreach ( $set['fields'] as $fieldkey => $fieldvalue ) {
