@@ -39,17 +39,36 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			include_once ( AIWP_DIR . 'tools/vendor/autoload.php' );
 			$this->client = new Deconf\AIWP\Google\Client();
 
-			// add Proxy server settings to Guzzle, if defined
+			// add cURL server settings to Guzzle
+
+			$httpoptions = array();
+
+			$origin = AIWP_Tools::strip_protocol( get_site_url() );
+
+			$httpoptions [ 'headers' ] = array( 'referer' => AIWP_CURRENT_VERSION, 'User-Agent' => $origin );
 
 			if ( defined( 'WP_PROXY_HOST' ) && defined( 'WP_PROXY_PORT' ) ) {
-				$httpoptions = array();
-				$httpoptions [ 'proxy' ] = "'" . WP_PROXY_HOST . ":". WP_PROXY_PORT ."'";
+				$httpoptions [ 'proxy' ] = WP_PROXY_HOST . ":". WP_PROXY_PORT;
 				if ( defined( 'WP_PROXY_USERNAME' ) && defined( 'WP_PROXY_PASSWORD' ) ) {
 					$httpoptions [ 'auth' ] = array( WP_PROXY_USERNAME, WP_PROXY_PASSWORD );
 				}
-				$httpClient = new Deconf\AIWP\GuzzleHttp\Client( $httpoptions );
-				$this->client->setHttpClient( $httpClient );
 			}
+
+			if ( defined( 'AIWP_FORCE_IP_RESOLVE' ) ){
+
+				if ( 'v4' == AIWP_FORCE_IP_RESOLVE ) {
+					$httpoptions [ 'force_ip_resolve' ] = 'v4';
+				}
+
+				if ( 'v6' == AIWP_FORCE_IP_RESOLVE ) {
+					$httpoptions [ 'force_ip_resolve' ] = 'v6';
+				}
+
+			}
+
+			$httpClient = new Deconf\AIWP\GuzzleHttp\Client( $httpoptions );
+
+			$this->client->setHttpClient( $httpClient );
 
 			$this->client->setScopes( array( 'https://www.googleapis.com/auth/analytics.readonly' ) );
 			$this->client->setAccessType( 'offline' );
