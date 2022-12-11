@@ -29,7 +29,7 @@ if ( ! class_exists( 'AIWP_Common_Ajax' ) ) {
 		 */
 		public function ajax_set_error() {
 			if ( ! isset( $_POST['aiwp_security_set_error'] ) || ! ( wp_verify_nonce( $_POST['aiwp_security_set_error'], 'aiwp_backend_item_reports' ) || wp_verify_nonce( $_POST['aiwp_security_set_error'], 'aiwp_frontend_item_reports' ) ) ) {
-				wp_die( - 40 );
+				wp_die( 640 );
 			}
 			$timeout = 24 * 60 * 60;
 			AIWP_Tools::set_error( $_POST['response'], $timeout );

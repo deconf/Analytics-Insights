@@ -761,15 +761,19 @@ final class AIWP_Settings {
 <?php self::navigation_tabs( $tabs ); ?>
 <div id="aiwp-errors">
 	<table class="aiwp-settings-logdata">
-		<?php self::html_section_delimiter(__( "Error Details", 'analytics-insights' ), false, false); ?>
+		<?php self::html_section_delimiter(__( "Detected Errors", 'analytics-insights' ), false, false); ?>
 		<tr>
 			<td>
 				<?php $errors_count = AIWP_Tools::get_cache( 'errors_count' ); ?>
 				<pre class="aiwp-settings-logdata"><?php echo '<span>' . __("Count: ", 'analytics-insights') . '</span>' . (int)$errors_count;?></pre>
-				<?php $errors = print_r( AIWP_Tools::get_cache( 'last_error' ), true ) ? esc_html( print_r( AIWP_Tools::get_cache( 'last_error' ), true ) ) : ''; ?>
-				<?php $errors = str_replace( 'Deconf_', 'Google_', $errors); ?>
-				<pre class="aiwp-settings-logdata"><?php echo '<span>' . __("Last Error: ", 'analytics-insights') . '</span>' . "\n" . esc_html( $errors );?></pre>
-				<pre class="aiwp-settings-logdata"><?php echo '<span>' . __("GAPI Error: ", 'analytics-insights') . '</span>'; echo "\n" . esc_html( print_r( AIWP_Tools::get_cache( 'gapi_errors' ), true ) ) ?></pre>
+				<?php $error = AIWP_Tools::get_cache( 'gapi_errors' ) ?>
+				<?php $error_code = isset( $error[0] ) ? $error[0] : 'None' ?>
+				<?php $error_reason = ( isset( $error[1] ) && !empty($error[1]) ) ? print_r( $error[1], true) : 'None' ?>
+				<?php $error_details = isset( $error[2] ) ? print_r( $error[2], true) : 'None' ?>
+				<pre class="aiwp-settings-logdata"><?php echo '<span>' . __("Error Code: ", 'analytics-insights') . '</span>' . esc_html( $error_code );?></pre>
+				<pre class="aiwp-settings-logdata"><?php echo '<span>' . __("Error Reason: ", 'analytics-insights') . '</span>' . "\n" . esc_html( $error_reason );?></pre>
+				<?php $error_details = str_replace( 'Deconf_', 'Google_', $error_details); ?>
+				<pre class="aiwp-settings-logdata"><?php echo '<span>' . __("Error Details: ", 'analytics-insights') . '</span>' . "\n" . esc_html( $error_details );?></pre>
 				<br />
 				<hr>
 			</td>
@@ -836,7 +840,6 @@ final class AIWP_Settings {
 					$aiwp_access_code = sanitize_text_field( $_REQUEST['aiwp_access_code'] );
 					update_option( 'aiwp_redeemed_code', $aiwp_access_code );
 					AIWP_Tools::delete_cache( 'gapi_errors' );
-					AIWP_Tools::delete_cache( 'last_error' );
 
 					$token = $aiwp->gapi_controller->authenticate( $aiwp_access_code );
 
@@ -876,11 +879,11 @@ final class AIWP_Settings {
 
 					}
 				} catch ( Google_Service_Exception $e ) {
-					$timeout = $aiwp->gapi_controller->get_timeouts( 'midnight' );
+					$timeout = $aiwp->gapi_controller->get_timeouts();
 					AIWP_Tools::set_error( $e, $timeout );
 					$aiwp->gapi_controller->reset_token();
 				} catch ( Exception $e ) {
-					$timeout = $aiwp->gapi_controller->get_timeouts( 'midnight' );
+					$timeout = $aiwp->gapi_controller->get_timeouts();
 					AIWP_Tools::set_error( $e, $timeout );
 					$aiwp->gapi_controller->reset_token();
 				}
@@ -912,12 +915,11 @@ final class AIWP_Settings {
 		}
 		if ( isset( $_REQUEST['Reset_Err'] ) ) {
 			if ( isset( $_REQUEST['aiwp_security'] ) && wp_verify_nonce( $_REQUEST['aiwp_security'], 'aiwp_form' ) ) {
-				if ( AIWP_Tools::get_cache( 'gapi_errors' ) || AIWP_Tools::get_cache( 'last_error' ) ) {
+				if ( AIWP_Tools::get_cache( 'gapi_errors' ) ) {
 					$info = AIWP_Tools::system_info();
 					$info .= 'AIWP Version: ' . AIWP_CURRENT_VERSION;
 					$sep = "\n---------------------------\n";
-					$error_report = AIWP_Tools::get_cache( 'last_error' );
-					$error_report .= $sep . print_r( AIWP_Tools::get_cache( 'gapi_errors' ), true );
+					$error_report = $sep . print_r( AIWP_Tools::get_cache( 'gapi_errors' ), true );
 					$error_report .= $sep . AIWP_Tools::get_cache( 'errors_count' );
 					$error_report .= $sep . $info;
 					$error_report = urldecode( $error_report );
@@ -936,7 +938,6 @@ final class AIWP_Settings {
 					);
 				}
 				/* @formatter:on */
-				AIWP_Tools::delete_cache( 'last_error' );
 				AIWP_Tools::delete_cache( 'gapi_errors' );
 				$message = "<div class='updated' id='aiwp-autodismiss'><p>" . __( "All errors reseted.", 'analytics-insights' ) . "</p></div>";
 			} else {
@@ -1156,12 +1157,10 @@ final class AIWP_Settings {
 					if ( is_multisite() ) { // Cleanup errors on the entire network
 						foreach ( AIWP_Tools::get_sites( array( 'number' => apply_filters( 'aiwp_sites_limit', 100 ) ) ) as $blog ) {
 							switch_to_blog( $blog['blog_id'] );
-							AIWP_Tools::delete_cache( 'last_error' );
 							AIWP_Tools::delete_cache( 'gapi_errors' );
 							restore_current_blog();
 						}
 					} else {
-						AIWP_Tools::delete_cache( 'last_error' );
 						AIWP_Tools::delete_cache( 'gapi_errors' );
 					}
 					if ( $aiwp->config->options['token'] && $aiwp->gapi_controller->client->getAccessToken() ) {
@@ -1190,11 +1189,11 @@ final class AIWP_Settings {
 
 					}
 				} catch ( Google_Service_Exception $e ) {
-					$timeout = $aiwp->gapi_controller->get_timeouts( 'midnight' );
+					$timeout = $aiwp->gapi_controller->get_timeouts();
 					AIWP_Tools::set_error( $e, $timeout );
 					$aiwp->gapi_controller->reset_token();
 				} catch ( Exception $e ) {
-					$timeout = $aiwp->gapi_controller->get_timeouts( 'midnight' );
+					$timeout = $aiwp->gapi_controller->get_timeouts();
 					AIWP_Tools::set_error( $e, $timeout );
 					$aiwp->gapi_controller->reset_token();
 				}

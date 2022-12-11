@@ -196,7 +196,6 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 				$flag = true;
 				update_option( 'aiwp_version', AIWP_CURRENT_VERSION );
 				AIWP_Tools::clear_cache();
-				AIWP_Tools::delete_cache( 'last_error' );
 				if ( is_multisite() ) { // Cleanup errors and cookies on the entire network
 					foreach ( AIWP_Tools::get_sites( array( 'number' => apply_filters( 'aiwp_sites_limit', 100 ) ) ) as $blog ) {
 						switch_to_blog( $blog['blog_id'] );
@@ -207,6 +206,9 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 					AIWP_Tools::delete_cache( 'gapi_errors' );
 				}
 			}
+
+			AIWP_Tools::delete_cache( 'last_error' ); //removed since 5.8.4
+
 			if ( isset( $this->options['item_reports'] ) ) { // v4.8
 				$this->options['backend_item_reports'] = $this->options['item_reports'];
 			}

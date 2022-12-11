@@ -226,14 +226,14 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 					if ( 500 == $error_code || 503 == $error_code ) {
 						$timeout = 60;
 					}
-					self::set_cache( 'gapi_errors', array( $e->getCode(), (array) $e->getErrors() ), $timeout );
+					self::set_cache( 'gapi_errors', array( $e->getCode(), (array) $e->getErrors(), esc_html( print_r( $e, true ) ) ), $timeout );
 				} else {
-					self::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( print_r( $e, true ) ), $timeout );
+					self::set_cache( 'gapi_errors', array( 600, array(), esc_html( print_r( $e, true ) ) ), $timeout );
 				}
 			} else if ( is_array( $e ) ) {
-				self::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( print_r( $e, true ) ), $timeout );
+				self::set_cache( 'gapi_errors', array( 600, array(), esc_html( print_r( $e, true ) ) ), $timeout );
 			} else {
-				self::set_cache( 'last_error', date( 'Y-m-d H:i:s' ) . ': ' . esc_html( $e ), $timeout );
+				self::set_cache( 'gapi_errors', array( 600, array(), esc_html( print_r( $e, true ) ) ), $timeout );
 			}
 			// Count Errors until midnight
 			$midnight = strtotime( "tomorrow 00:00:00" ); // UTC midnight

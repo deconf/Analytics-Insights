@@ -33,7 +33,7 @@ if ( ! class_exists( 'AIWP_Frontend_Ajax' ) ) {
 		 */
 		public function ajax_item_reports() {
 			if ( ! isset( $_POST['aiwp_security_frontend_item_reports'] ) || ! wp_verify_nonce( $_POST['aiwp_security_frontend_item_reports'], 'aiwp_frontend_item_reports' ) ) {
-				wp_die( - 30 );
+				wp_die( 630 );
 			}
 			$from = sanitize_text_field( $_POST['from'] );
 			$to = sanitize_text_field( $_POST['to'] );
@@ -49,14 +49,14 @@ if ( ! class_exists( 'AIWP_Frontend_Ajax' ) ) {
 				ob_clean();
 			}
 			if ( ! AIWP_Tools::check_roles( $this->aiwp->config->options['access_front'] ) || 0 == $this->aiwp->config->options['frontend_item_reports'] ) {
-				wp_die( - 31 );
+				wp_die( 631 );
 			}
 			if ( $this->aiwp->config->options['token'] && $this->aiwp->config->reporting_ready ) {
 				if ( null === $this->aiwp->gapi_controller ) {
 					$this->aiwp->gapi_controller = new AIWP_GAPI_Controller();
 				}
 			} else {
-				wp_die( - 24 );
+				wp_die( 624 );
 			}
 			if ( $this->aiwp->config->reporting_ready ) {
 				if ($this->aiwp->config->options['reporting_type']){
@@ -65,7 +65,7 @@ if ( ! class_exists( 'AIWP_Frontend_Ajax' ) ) {
 					$projectId = $this->aiwp->config->options['tableid_jail'];
 				}
 			} else {
-				wp_die( - 26 );
+				wp_die( 626 );
 			}
 			$profile_info = AIWP_Tools::get_selected_profile( $this->aiwp->config->options['ga_profiles_list'], $projectId );
 			if ( isset( $profile_info[4] ) ) {
@@ -97,7 +97,7 @@ if ( ! class_exists( 'AIWP_Frontend_Ajax' ) ) {
 		 */
 		public function ajax_frontend_widget() {
 			if ( ! isset( $_POST['aiwp_number'] ) || ! isset( $_POST['aiwp_optionname'] ) || ! is_active_widget( false, false, 'aiwp-frontwidget-report' ) ) {
-				wp_die( - 30 );
+				wp_die( 630 );
 			}
 			$widget_index = sanitize_text_field( $_POST['aiwp_number'] );
 			$option_name = sanitize_text_field( $_POST['aiwp_optionname'] );
@@ -105,7 +105,7 @@ if ( ! class_exists( 'AIWP_Frontend_Ajax' ) ) {
 			if ( isset( $options[$widget_index] ) ) {
 				$instance = $options[$widget_index];
 			} else {
-				wp_die( - 32 );
+				wp_die( 632 );
 			}
 			switch ( $instance['period'] ) { // make sure we have a valid request
 				case '7daysAgo' :
@@ -126,7 +126,7 @@ if ( ! class_exists( 'AIWP_Frontend_Ajax' ) ) {
 					$this->aiwp->gapi_controller = new AIWP_GAPI_Controller();
 				}
 			} else {
-				wp_die( - 24 );
+				wp_die( 624 );
 			}
 			if ($this->aiwp->config->options['reporting_type']){
 				$projectId = $this->aiwp->config->options['webstream_jail'];

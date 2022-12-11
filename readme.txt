@@ -92,6 +92,7 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 = 5.8.4 (2022.12.10) =
 * Enhancements:
 	* option to force IPv4 or IPv6 using AIWP_FORCE_IP_RESOLVE
+	* error handling improvements
 
 = 5.8.3 (2022.12.07) =
 * Enhancements:

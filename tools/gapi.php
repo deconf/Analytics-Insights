@@ -118,11 +118,11 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 							}
 						}
 					} catch ( GoogleServiceException $e ) {
-						$timeout = $this->get_timeouts( 'midnight' );
+						$timeout = $this->get_timeouts();
 						AIWP_Tools::set_error( $e, $timeout );
 						$this->reset_token();
 					} catch ( Exception $e ) {
-						$timeout = $this->get_timeouts( 'midnight' );
+						$timeout = $this->get_timeouts();
 						AIWP_Tools::set_error( $e, $timeout );
 						$this->reset_token();
 					}
@@ -152,10 +152,10 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					$this->client->fetchAccessTokenWithAuthCode( $access_code );
 					return $this->client->getAccessToken();
 				} catch ( GoogleServiceException $e ) {
-					$timeout = $this->get_timeouts( 'midnight' );
+					$timeout = $this->get_timeouts();
 					AIWP_Tools::set_error( $e, $timeout );
 				} catch ( Exception $e ) {
-					$timeout = $this->get_timeouts( 'midnight' );
+					$timeout = $this->get_timeouts();
 					AIWP_Tools::set_error( $e, $timeout );
 				}
 		}
@@ -169,10 +169,6 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		public function reset_token( $all = false ) {
 
 			$token = $this->client->getAccessToken();
-
-			if ( $token ) {
-					$this->client->revokeToken( $token );
-			}
 
 			if ( $all ){
 				$this->aiwp->config->options['site_jail'] = "";
@@ -192,7 +188,19 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			} else {
 				$this->aiwp->config->set_plugin_options();
 			}
+
+			if ( $token ) {
+				try {
+					$this->client->revokeToken( $token );
+				} catch ( GoogleServiceException $e ) {
+					return;
+				} catch ( Exception $e ) {
+					return;
+				}
+			}
+
 		}
+
 
 		/**
 		 * Handles errors returned by GAPI Library
@@ -211,17 +219,17 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			//Reset the token since these are unrecoverable errors and need user intervention
 			if ( isset( $errors[1][0]['reason'] ) && ( 'invalidParameter' == $errors[1][0]['reason'] || 'badRequest' == $errors[1][0]['reason'] || 'invalidCredentials' == $errors[1][0]['reason'] || 'insufficientPermissions' == $errors[1][0]['reason'] || 'required' == $errors[1][0]['reason'] ) ) {
 				$this->reset_token();
-				return true;
+				return $errors[0];
 			}
 
 			if ( 400 == $errors[0] || 401 == $errors[0] ) {
-				$this->reset_token();
-				return true;
+				//$this->reset_token();
+				return $errors[0];
 			}
 
 			//Backoff processing until the error timeouts, usually at midnight
 			if ( isset( $errors[1][0]['reason'] ) && ( 'dailyLimitExceeded' == $errors[1][0]['reason'] || 'userRateLimitExceeded' == $errors[1][0]['reason'] || 'rateLimitExceeded' == $errors[1][0]['reason'] || 'quotaExceeded' == $errors[1][0]['reason'] ) ) {
-				return true;
+				return $errors[0];
 			}
 
 			/** Back-off system for subsequent requests - an Auth error generated after a Service request
@@ -234,12 +242,12 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					$this->aiwp->config->set_plugin_options();
 					return false;
 				} else {
-					return true;
+					return $errors[0];
 				}
 			}
 
 			if ( 500 == $errors[0] || 503 == $errors[0] || $errors[0] < - 50 ) {
-				return true;
+				return $errors[0];
 			}
 
 			return false;
@@ -268,7 +276,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				$newhour = mktime( $nexthour[0], 0, 0, $nexthour[1], $nexthour[2], $nexthour[3] );
 				return $newhour - $local_time;
 			} else {
-				$newtime = strtotime( ' +5 minutes', $local_time );
+				$newtime = strtotime( ' +10 minutes', $local_time );
 				return $newtime - $local_time;
 			}
 		}
@@ -303,20 +311,13 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					}
 				}
 
-				if ( empty( $ga_profiles_list ) ) {
-					$timeout = $this->get_timeouts( 'midnight' );
-					//AIWP_Tools::set_error( 'No Google Analytics properties were found in this Google account. Re-authorize with the right account.!', $timeout );
-				} else {
-					AIWP_Tools::delete_cache( 'last_error' );
-				}
-
 				return $ga_profiles_list;
 
 			} catch ( GoogleServiceException $e ) {
-				$timeout = $this->get_timeouts( 'midnight' );
+				$timeout = $this->get_timeouts();
 				AIWP_Tools::set_error( $e, $timeout );
 			} catch ( Exception $e ) {
-				$timeout = $this->get_timeouts( 'midnight' );
+				$timeout = $this->get_timeouts();
 				AIWP_Tools::set_error( $e, $timeout );
 			}
 
@@ -370,10 +371,10 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				return $ga4_webstreams_list;
 
 			} catch ( GoogleServiceException $e ) {
-				$timeout = $this->get_timeouts( 'midnight' );
+				$timeout = $this->get_timeouts();
 				AIWP_Tools::set_error( $e, $timeout );
 			} catch ( Exception $e ) {
-				$timeout = $this->get_timeouts( 'midnight' );
+				$timeout = $this->get_timeouts();
 				AIWP_Tools::set_error( $e, $timeout );
 			}
 		}
@@ -416,7 +417,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				$transient = AIWP_Tools::get_cache( $serial );
 				if ( false === $transient ) {
 					if ( $this->gapi_errors_handler() ) {
-						return - 23;
+						return $this->gapi_errors_handler();
 					}
 
 					$quotauser = $this->get_serial( $this->quotauser . $projectId );
@@ -535,11 +536,11 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					$data = $transient;
 				}
 			} catch ( GoogleServiceException $e ) {
-				$timeout = $this->get_timeouts( 'midnight' );
+				$timeout = $this->get_timeouts();
 				AIWP_Tools::set_error( $e, $timeout );
 				return $e->getCode();
 			} catch ( Exception $e ) {
-				$timeout = $this->get_timeouts( 'midnight' );
+				$timeout = $this->get_timeouts();
 				AIWP_Tools::set_error( $e, $timeout );
 				return $e->getCode();
 			}
@@ -1174,7 +1175,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				if ( false === $transient ) {
 
 					if ( $this->gapi_errors_handler() ) {
-						return - 23;
+						return $this->gapi_errors_handler();
 					}
 
 					$data = $this->service->data_realtime->get( 'ga:' . $projectId, $metrics, array( 'dimensions' => $dimensions, 'quotaUser' => $this->quotauser . 'p' . $projectId ) );
@@ -1187,11 +1188,11 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
 				}
 			} catch ( GoogleServiceException $e ) {
-				$timeout = $this->get_timeouts( 'midnight' );
+				$timeout = $this->get_timeouts();
 				AIWP_Tools::set_error( $e, $timeout );
 				return $e->getCode();
 			} catch ( Exception $e ) {
-				$timeout = $this->get_timeouts( 'midnight' );
+				$timeout = $this->get_timeouts();
 				AIWP_Tools::set_error( $e, $timeout );
 				return $e->getCode();
 			}
@@ -1242,7 +1243,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				$transient = AIWP_Tools::get_cache( $serial );
 				if ( false === $transient ) {
 					if ( $this->gapi_errors_handler() ) {
-						return - 23;
+						return $this->gapi_errors_handler();
 					}
 
 					$projectIdArr = explode( '/dataStreams/',$projectId );
@@ -1398,11 +1399,11 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					$data = $transient;
 				}
 			} catch ( GoogleServiceException $e ) {
-				$timeout = $this->get_timeouts( 'midnight' );
+				$timeout = $this->get_timeouts();
 				AIWP_Tools::set_error( $e, $timeout );
 				return $e->getCode();
 			} catch ( Exception $e ) {
-				$timeout = $this->get_timeouts( 'midnight' );
+				$timeout = $this->get_timeouts();
 				AIWP_Tools::set_error( $e, $timeout );
 				return $e->getCode();
 			}
@@ -2088,7 +2089,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				if ( false === $transient ) {
 
 					if ( $this->gapi_errors_handler() ) {
-						return - 23;
+						return $this->gapi_errors_handler();
 					}
 
 					$request = new Deconf\AIWP\Google\Service\AnalyticsData\RunRealtimeReportRequest();
@@ -2163,11 +2164,11 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
 				}
 			} catch ( GoogleServiceException $e ) {
-				$timeout = $this->get_timeouts( 'midnight' );
+				$timeout = $this->get_timeouts();
 				AIWP_Tools::set_error( $e, $timeout );
 				return $e->getCode();
 			} catch ( Exception $e ) {
-				$timeout = $this->get_timeouts( 'midnight' );
+				$timeout = $this->get_timeouts();
 				AIWP_Tools::set_error( $e, $timeout );
 				return $e->getCode();
 			}
@@ -2248,7 +2249,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		public function get( $projectId, $query, $from = false, $to = false, $filter = '', $metric = 'sessions' ) {
 
 			if ( empty( $projectId ) || '' == $projectId || 'Disabled' == $projectId ) {
-				wp_die( - 26 );
+				wp_die( 626 );
 			}
 
 			if ( in_array( $query, array( 'sessions', 'users', 'organicSearches', 'visitBounceRate', 'pageviews', 'uniquePageviews' ) ) ) {
@@ -2323,7 +2324,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				}
 			}
 
-			wp_die( - 27 );
+			wp_die( 627 );
 
 		}
 	}
