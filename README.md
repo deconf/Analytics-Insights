@@ -47,8 +47,7 @@ Hooks
   - aiwp_analytics_commands
   - aiwp_gtag_commands
   - aiwp_gtag_output_before
-  - aiwp_gtag_output_after  
-  - aiwp_endpoint_support
+  - aiwp_gtag_output_after
   
 * Shortcodes
 
