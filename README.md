@@ -39,11 +39,7 @@ Hooks
   - aiwp_backenditem_uri
   - aiwp_frontenditem_uri
   - aiwp_analyticsevents_timeout
-  - aiwp_curl_options
-  - aiwp_analytics_script_path
-  - aiwp_gtag_script_path
   - aiwp_maps_api_key
-  - aiwp_curl_options
 
 * Actions
 
@@ -51,8 +47,7 @@ Hooks
   - aiwp_analytics_commands
   - aiwp_gtag_commands
   - aiwp_gtag_output_before
-  - aiwp_gtag_output_after  
-  - aiwp_endpoint_support
+  - aiwp_gtag_output_after
   
 * Shortcodes
 
