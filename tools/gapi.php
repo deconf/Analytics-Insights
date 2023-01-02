@@ -624,7 +624,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
 			if ( empty( $data['values'] ) ) {
 				// unable to render it as an Area Chart, returns a numeric value to be handled by reportsx.js
-				return - 21;
+				return 621;
 			}
 
 			$aiwp_data = array( array( $dayorhour, $title ) );
@@ -1028,7 +1028,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
 			if ( empty( $data['values'] ) ) {
 				// unable to render as an Org Chart, returns a numeric value to be handled by reportsx.js
-				return - 21;
+				return 621;
 			}
 
 			$block = ( 'channelGrouping' == $query ) ? __( "Channels", 'analytics-insights' ) : __( "Devices", 'analytics-insights' );
@@ -1198,7 +1198,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			}
 
 			if ( $data->getRows() < 1 ) {
-				return - 21;
+				return 621;
 			}
 
 			$i = 0;
@@ -1489,7 +1489,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
 			if ( empty( $data['values'] ) ) {
 				// unable to render it as an Area Chart, returns a numeric value to be handled by reportsx.js
-				return - 21;
+				return 621;
 			}
 
 			$aiwp_data = array( array( $dayorhour, $title ) );
@@ -1797,7 +1797,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
 			if ( empty( $data['values'] ) ) {
 				// unable to render as an Org Chart, returns a numeric value to be handled by reportsx.js
-				return - 21;
+				return 621;
 			}
 
 			$block = ( 'channelGrouping' == $query ) ? __( "Channels", 'analytics-insights' ) : __( "Devices", 'analytics-insights' );
@@ -2174,7 +2174,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			}
 
 			if ( $data->getRows() < 1 ) {
-				return - 21;
+				return 621;
 			}
 
 			$aiwp_data['rows'] = array();
