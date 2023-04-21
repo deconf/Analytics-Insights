@@ -1171,8 +1171,8 @@ final class AIWP_Settings {
 						if ( is_array( $profiles ) && ! empty( $profiles ) ) {
 							$aiwp->config->options['ga_profiles_list'] = $profiles;
 							if ( isset( $aiwp->config->options['tableid_jail'] ) && ! $aiwp->config->options['tableid_jail'] ) {
-								$profile = AIWP_Tools::guess_default_domain( $profiles );
-								$aiwp->config->options['tableid_jail'] = $profile;
+								//$profile = AIWP_Tools::guess_default_domain( $profiles );
+								//$aiwp->config->options['tableid_jail'] = $profile;
 							}
 							$aiwp->config->set_plugin_options( true );
 							$options = self::update_options( 'network' );
@@ -1182,8 +1182,8 @@ final class AIWP_Settings {
 						if ( is_array( $webstreams ) && ! empty( $webstreams ) ) {
 							$aiwp->config->options['ga4_webstreams_list'] = $webstreams;
 							if ( isset( $aiwp->config->options['webstream_jail'] ) && ! $aiwp->config->options['webstream_jail'] ) {
-								$property = AIWP_Tools::guess_default_domain( $webstreams, 2 );
-								$aiwp->config->options['webstream_jail'] = $property;
+								//$property = AIWP_Tools::guess_default_domain( $webstreams, 2 );
+								//$aiwp->config->options['webstream_jail'] = $property;
 							}
 							$aiwp->config->set_plugin_options( true );
 							$options = self::update_options( 'network' );
@@ -1222,8 +1222,8 @@ final class AIWP_Settings {
 					if ( $profiles ) {
 						$aiwp->config->options['ga_profiles_list'] = $profiles;
 						if ( isset( $aiwp->config->options['tableid_jail'] ) && ! $aiwp->config->options['tableid_jail'] ) {
-							$profile = AIWP_Tools::guess_default_domain( $profiles );
-							$aiwp->config->options['tableid_jail'] = $profile;
+							//$profile = AIWP_Tools::guess_default_domain( $profiles );
+							//$aiwp->config->options['tableid_jail'] = $profile;
 						}
 						$aiwp->config->set_plugin_options( true );
 						$options = self::update_options( 'network' );
@@ -1237,8 +1237,8 @@ final class AIWP_Settings {
 					if ( $webstreams ) {
 						$aiwp->config->options['ga4_webstreams_list'] = $webstreams;
 						if ( isset( $aiwp->config->options['webstream_jail'] ) && ! $aiwp->config->options['webstream_jail'] ) {
-							$property = AIWP_Tools::guess_default_domain( $webstreams, 2 );
-							$aiwp->config->options['webstream_jail'] = $property;
+							//$property = AIWP_Tools::guess_default_domain( $webstreams, 2 );
+							//$aiwp->config->options['webstream_jail'] = $property;
 						}
 						$aiwp->config->set_plugin_options( true );
 						$options = self::update_options( 'network' );

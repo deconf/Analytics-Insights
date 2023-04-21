@@ -36,7 +36,7 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 		public static function get_selected_profile( $profiles, $profile ) {
 			if ( ! empty( $profiles ) ) {
 				foreach ( $profiles as $item ) {
-					if ( $item[1] == $profile ) {
+					if ( isset( $item[1] ) && $item[1] == $profile ) {
 						return $item;
 					}
 				}

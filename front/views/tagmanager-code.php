@@ -7,6 +7,7 @@
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  */
 ?>
+
 <!-- BEGIN AIWP v<?php echo AIWP_CURRENT_VERSION; ?> Tag Manager - https://deconf.com/analytics-insights-for-wordpress/ -->
 <script>
   window.dataLayer = window.dataLayer || [];

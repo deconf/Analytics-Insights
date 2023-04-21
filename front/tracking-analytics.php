@@ -23,13 +23,21 @@ if ( ! class_exists( 'AIWP_Tracking_Analytics_Base' ) ) {
 			$this->aiwp = AIWP();
 			if ( $this->aiwp->config->options['tableid_jail'] ){
 				$profile = AIWP_Tools::get_selected_profile( $this->aiwp->config->options['ga_profiles_list'], $this->aiwp->config->options['tableid_jail'] );
-				$this->gaid = sanitize_text_field( $profile[2] );
+				if ( isset( $profile[2] ) ){
+					$this->gaid = sanitize_text_field( $profile[2] );
+				} else {
+					$this->gaid = '';
+				}
 			} else {
 				$this->gaid = '';
 			}
 			if ( $this->aiwp->config->options['webstream_jail'] ) {
 				$webstream = AIWP_Tools::get_selected_profile( $this->aiwp->config->options['ga4_webstreams_list'], $this->aiwp->config->options['webstream_jail'] );
-				$this->mid = sanitize_text_field( $webstream[3] );
+				if ( isset( $webstream[3] ) ){
+					$this->mid = sanitize_text_field( $webstream[3] );
+				} else {
+					$this->mid = '';
+				}
 			} else {
 				$this->mid = '';
 			}
