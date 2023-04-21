@@ -176,11 +176,15 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 				if ( isset( $network_options['network_mode'] ) && ( $network_options['network_mode'] ) ) {
 					if ( ! is_network_admin() && ! empty( $network_options['ga_profiles_list'] ) && isset( $network_options['network_tableid']->$blog_id ) ) {
 						$network_options['ga_profiles_list'] = array( 0 => AIWP_Tools::get_selected_profile( $network_options['ga_profiles_list'], $network_options['network_tableid']->$blog_id ) );
-						$network_options['tableid_jail'] = $network_options['ga_profiles_list'][0][1];
+						if ( isset( $network_options['ga_profiles_list'][0][1] ) ){
+							$network_options['tableid_jail'] = $network_options['ga_profiles_list'][0][1];
+						}
 					}
 					if ( ! is_network_admin() && ! empty( $network_options['ga4_webstreams_list'] ) && isset( $network_options['network_webstream']->$blog_id ) ) {
 						$network_options['ga4_webstreams_list'] = array( 0 => AIWP_Tools::get_selected_profile( $network_options['ga4_webstreams_list'], $network_options['network_webstream']->$blog_id ) );
-						$network_options['webstream_jail'] = $network_options['ga4_webstreams_list'][0][1];
+						if ( isset( $network_options['ga4_webstreams_list'][0][1] ) ){
+							$network_options['webstream_jail'] = $network_options['ga4_webstreams_list'][0][1];
+						}
 					}
 					$this->options = array_merge( $this->options, $network_options );
 				} else {
