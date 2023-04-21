@@ -124,7 +124,6 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					} catch ( Exception $e ) {
 						$timeout = $this->get_timeouts();
 						AIWP_Tools::set_error( $e, $timeout );
-						$this->reset_token();
 					}
 
 					if ( is_multisite() && $this->aiwp->config->options['network_mode'] ) {
@@ -217,13 +216,12 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			}
 
 			//Reset the token since these are unrecoverable errors and need user intervention
-			if ( isset( $errors[1][0]['reason'] ) && ( 'invalidParameter' == $errors[1][0]['reason'] || 'badRequest' == $errors[1][0]['reason'] || 'invalidCredentials' == $errors[1][0]['reason'] || 'insufficientPermissions' == $errors[1][0]['reason'] || 'required' == $errors[1][0]['reason'] ) ) {
+			if ( isset( $errors[1][0]['reason'] ) && ( 'authError' == $errors[1][0]['reason'] || 'invalidParameter' == $errors[1][0]['reason'] || 'badRequest' == $errors[1][0]['reason'] || 'invalidCredentials' == $errors[1][0]['reason'] || 'insufficientPermissions' == $errors[1][0]['reason'] || 'required' == $errors[1][0]['reason'] ) ) {
 				$this->reset_token();
 				return $errors[0];
 			}
 
 			if ( 400 == $errors[0] || 401 == $errors[0] ) {
-				//$this->reset_token();
 				return $errors[0];
 			}
 

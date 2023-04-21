@@ -12,6 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit();
 }
 
+use Deconf\AIWP\Google\Service\Exception as GoogleServiceException;
+
 final class AIWP_Settings {
 
 	private static function update_options( $who ) {
@@ -878,7 +880,7 @@ final class AIWP_Settings {
 						}
 
 					}
-				} catch ( Google_Service_Exception $e ) {
+				} catch ( GoogleServiceException $e ) {
 					$timeout = $aiwp->gapi_controller->get_timeouts();
 					AIWP_Tools::set_error( $e, $timeout );
 					$aiwp->gapi_controller->reset_token();
@@ -1188,7 +1190,7 @@ final class AIWP_Settings {
 						}
 
 					}
-				} catch ( Google_Service_Exception $e ) {
+				} catch ( GoogleServiceException $e ) {
 					$timeout = $aiwp->gapi_controller->get_timeouts();
 					AIWP_Tools::set_error( $e, $timeout );
 					$aiwp->gapi_controller->reset_token();
