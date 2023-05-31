@@ -2,7 +2,7 @@
 /**
  * @license MIT
  *
- * Modified by __root__ on 18-June-2022 using Strauss.
+ * Modified by __root__ on 31-May-2023 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 namespace Deconf\AIWP\GuzzleHttp;
@@ -10,7 +10,7 @@ namespace Deconf\AIWP\GuzzleHttp;
 use Deconf\AIWP\GuzzleHttp\Promise\EachPromise;
 use Deconf\AIWP\GuzzleHttp\Promise\PromiseInterface;
 use Deconf\AIWP\GuzzleHttp\Promise\PromisorInterface;
-use Psr\Http\Message\RequestInterface;
+use Deconf\AIWP\Psr\Http\Message\RequestInterface;
 
 /**
  * Sends an iterator of requests concurrently using a capped pool size.

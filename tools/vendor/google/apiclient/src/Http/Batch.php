@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Modified by __root__ on 18-June-2022 using Strauss.
+ * Modified by __root__ on 31-May-2023 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
@@ -25,8 +25,8 @@ use Deconf\AIWP\Google\Service\Exception as GoogleServiceException;
 use Deconf\AIWP\GuzzleHttp\Psr7;
 use Deconf\AIWP\GuzzleHttp\Psr7\Request;
 use Deconf\AIWP\GuzzleHttp\Psr7\Response;
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
+use Deconf\AIWP\Psr\Http\Message\RequestInterface;
+use Deconf\AIWP\Psr\Http\Message\ResponseInterface;
 
 /**
  * Class to handle batched requests to the Google API service.

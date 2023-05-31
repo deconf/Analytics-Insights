@@ -14,7 +14,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  *
- * Modified by __root__ on 18-June-2022 using Strauss.
+ * Modified by __root__ on 31-May-2023 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
@@ -100,9 +100,7 @@ class Properties extends \Deconf\AIWP\Google\Service\Resource
    * events are tracked. To learn more, see [where to find your Property
    * ID](https://developers.google.com/analytics/devguides/reporting/data/v1
    * /property-id). `property` should be the same value as in your `runReport`
-   * request. Example: properties/1234 Set the Property ID to 0 for compatibility
-   * checking on dimensions and metrics common to all properties. In this special
-   * mode, this method will not return custom dimensions and metrics.
+   * request. Example: properties/1234
    * @param CheckCompatibilityRequest $postBody
    * @param array $optParams Optional parameters.
    * @return CheckCompatibilityResponse

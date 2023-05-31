@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Modified by __root__ on 18-June-2022 using Strauss.
+ * Modified by __root__ on 31-May-2023 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
@@ -31,6 +31,7 @@ use stdClass;
  * http://tools.ietf.org/html/draft-zyp-json-schema-03#section-5
  *
  */
+#[\AllowDynamicProperties]
 class Model implements \ArrayAccess
 {
     /**
@@ -296,7 +297,7 @@ class Model implements \ArrayAccess
         $keyType = $key . "Type";
 
         // ensure keyType is a valid class
-        if (property_exists($this, $keyType) && class_exists($this->$keyType)) {
+        if (property_exists($this, $keyType) && $this->$keyType !== null && class_exists($this->$keyType)) {
             return $this->$keyType;
         }
     }

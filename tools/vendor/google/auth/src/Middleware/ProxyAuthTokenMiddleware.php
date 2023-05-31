@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Modified by __root__ on 18-June-2022 using Strauss.
+ * Modified by __root__ on 31-May-2023 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
@@ -22,7 +22,7 @@ namespace Deconf\AIWP\Google\Auth\Middleware;
 
 use Deconf\AIWP\Google\Auth\FetchAuthTokenInterface;
 use Deconf\AIWP\Google\Auth\GetQuotaProjectInterface;
-use Psr\Http\Message\RequestInterface;
+use Deconf\AIWP\Psr\Http\Message\RequestInterface;
 
 /**
  * ProxyAuthTokenMiddleware is a Guzzle Middleware that adds an Authorization header

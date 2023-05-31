@@ -14,7 +14,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  *
- * Modified by __root__ on 18-June-2022 using Strauss.
+ * Modified by __root__ on 31-May-2023 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
@@ -28,7 +28,7 @@ use Deconf\AIWP\Google\Service\Analytics\Filters;
  * Typical usage is:
  *  <code>
  *   $analyticsService = new Deconf\AIWP\Google\Service\Analytics(...);
- *   $filters = $analyticsService->filters;
+ *   $filters = $analyticsService->management_filters;
  *  </code>
  */
 class ManagementFilters extends \Deconf\AIWP\Google\Service\Resource

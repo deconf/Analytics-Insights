@@ -2,13 +2,13 @@
 /**
  * @license MIT
  *
- * Modified by __root__ on 18-June-2022 using Strauss.
+ * Modified by __root__ on 31-May-2023 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
 namespace Deconf\AIWP\GuzzleHttp\Psr7;
 
-use Psr\Http\Message\StreamInterface;
+use Deconf\AIWP\Psr\Http\Message\StreamInterface;
 
 /**
  * Provides a read only stream that pumps data from a PHP callable.

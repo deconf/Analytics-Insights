@@ -14,7 +14,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  *
- * Modified by __root__ on 18-June-2022 using Strauss.
+ * Modified by __root__ on 31-May-2023 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
@@ -28,7 +28,7 @@ use Deconf\AIWP\Google\Service\SearchConsole\InspectUrlIndexResponse;
  * Typical usage is:
  *  <code>
  *   $searchconsoleService = new Deconf\AIWP\Google\Service\SearchConsole(...);
- *   $index = $searchconsoleService->index;
+ *   $index = $searchconsoleService->urlInspection_index;
  *  </code>
  */
 class UrlInspectionIndex extends \Deconf\AIWP\Google\Service\Resource

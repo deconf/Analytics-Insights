@@ -14,14 +14,14 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  *
- * Modified by __root__ on 18-June-2022 using Strauss.
+ * Modified by __root__ on 31-May-2023 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
 namespace Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\Resource;
 
-use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaConversionEvent;
-use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaListConversionEventsResponse;
+use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1betaConversionEvent;
+use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1betaListConversionEventsResponse;
 use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleProtobufEmpty;
 
 /**
@@ -29,7 +29,7 @@ use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleProtobufEmpty;
  * Typical usage is:
  *  <code>
  *   $analyticsadminService = new Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin(...);
- *   $conversionEvents = $analyticsadminService->conversionEvents;
+ *   $conversionEvents = $analyticsadminService->properties_conversionEvents;
  *  </code>
  */
 class PropertiesConversionEvents extends \Deconf\AIWP\Google\Service\Resource
@@ -40,15 +40,15 @@ class PropertiesConversionEvents extends \Deconf\AIWP\Google\Service\Resource
    *
    * @param string $parent Required. The resource name of the parent property
    * where this conversion event will be created. Format: properties/123
-   * @param GoogleAnalyticsAdminV1alphaConversionEvent $postBody
+   * @param GoogleAnalyticsAdminV1betaConversionEvent $postBody
    * @param array $optParams Optional parameters.
-   * @return GoogleAnalyticsAdminV1alphaConversionEvent
+   * @return GoogleAnalyticsAdminV1betaConversionEvent
    */
-  public function create($parent, GoogleAnalyticsAdminV1alphaConversionEvent $postBody, $optParams = [])
+  public function create($parent, GoogleAnalyticsAdminV1betaConversionEvent $postBody, $optParams = [])
   {
     $params = ['parent' => $parent, 'postBody' => $postBody];
     $params = array_merge($params, $optParams);
-    return $this->call('create', [$params], GoogleAnalyticsAdminV1alphaConversionEvent::class);
+    return $this->call('create', [$params], GoogleAnalyticsAdminV1betaConversionEvent::class);
   }
   /**
    * Deletes a conversion event in a property. (conversionEvents.delete)
@@ -72,13 +72,13 @@ class PropertiesConversionEvents extends \Deconf\AIWP\Google\Service\Resource
    * retrieve. Format: properties/{property}/conversionEvents/{conversion_event}
    * Example: "properties/123/conversionEvents/456"
    * @param array $optParams Optional parameters.
-   * @return GoogleAnalyticsAdminV1alphaConversionEvent
+   * @return GoogleAnalyticsAdminV1betaConversionEvent
    */
   public function get($name, $optParams = [])
   {
     $params = ['name' => $name];
     $params = array_merge($params, $optParams);
-    return $this->call('get', [$params], GoogleAnalyticsAdminV1alphaConversionEvent::class);
+    return $this->call('get', [$params], GoogleAnalyticsAdminV1betaConversionEvent::class);
   }
   /**
    * Returns a list of conversion events in the specified parent property. Returns
@@ -96,13 +96,13 @@ class PropertiesConversionEvents extends \Deconf\AIWP\Google\Service\Resource
    * `ListConversionEvents` call. Provide this to retrieve the subsequent page.
    * When paginating, all other parameters provided to `ListConversionEvents` must
    * match the call that provided the page token.
-   * @return GoogleAnalyticsAdminV1alphaListConversionEventsResponse
+   * @return GoogleAnalyticsAdminV1betaListConversionEventsResponse
    */
   public function listPropertiesConversionEvents($parent, $optParams = [])
   {
     $params = ['parent' => $parent];
     $params = array_merge($params, $optParams);
-    return $this->call('list', [$params], GoogleAnalyticsAdminV1alphaListConversionEventsResponse::class);
+    return $this->call('list', [$params], GoogleAnalyticsAdminV1betaListConversionEventsResponse::class);
   }
 }
 

@@ -2,7 +2,7 @@
 /**
  * @license Apache-2.0
  *
- * Modified by __root__ on 18-June-2022 using Strauss.
+ * Modified by __root__ on 31-May-2023 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
@@ -14,24 +14,24 @@ if (class_exists('Deconf_AIWP_Google_Client', false)) {
 
 $classMap = [
     'Deconf\AIWP\Google\\Client' => 'Deconf_AIWP_Google_Client',
-    'Deconf\\AIWP\\Google\\Service' => 'Deconf_AIWP_Google_Service',
-    'Deconf\\AIWP\\Google\\AccessToken\\Revoke' => 'Deconf_AIWP_Google_AccessToken_Revoke',
-    'Deconf\\AIWP\\Google\\AccessToken\\Verify' => 'Deconf_AIWP_Google_AccessToken_Verify',
+    'Deconf\AIWP\Google\\Service' => 'Deconf_AIWP_Google_Service',
+    'Deconf\AIWP\Google\\AccessToken\\Revoke' => 'Deconf_AIWP_Google_AccessToken_Revoke',
+    'Deconf\AIWP\Google\\AccessToken\\Verify' => 'Deconf_AIWP_Google_AccessToken_Verify',
     'Deconf\AIWP\Google\\Model' => 'Deconf_AIWP_Google_Model',
-    'Deconf\\AIWP\\Google\\Utils\\UriTemplate' => 'Deconf_AIWP_Google_Utils_UriTemplate',
-    'Deconf\\AIWP\\Google\\AuthHandler\\Guzzle6AuthHandler' => 'Deconf_AIWP_Google_AuthHandler_Guzzle6AuthHandler',
-    'Deconf\\AIWP\\Google\\AuthHandler\\Guzzle7AuthHandler' => 'Deconf_AIWP_Google_AuthHandler_Guzzle7AuthHandler',
-    'Deconf\\AIWP\\Google\\AuthHandler\\Guzzle5AuthHandler' => 'Deconf_AIWP_Google_AuthHandler_Guzzle5AuthHandler',
-    'Deconf\\AIWP\\Google\\AuthHandler\\AuthHandlerFactory' => 'Deconf_AIWP_Google_AuthHandler_AuthHandlerFactory',
-    'Deconf\\AIWP\\Google\\Http\\Batch' => 'Deconf_AIWP_Google_Http_Batch',
-    'Deconf\\AIWP\\Google\\Http\\MediaFileUpload' => 'Deconf_AIWP_Google_Http_MediaFileUpload',
-    'Deconf\\AIWP\\Google\\Http\\REST' => 'Deconf_AIWP_Google_Http_REST',
-    'Deconf\\AIWP\\Google\\Task\\Retryable' => 'Deconf_AIWP_Google_Task_Retryable',
-    'Deconf\\AIWP\\Google\\Task\\Exception' => 'Deconf_AIWP_Google_Task_Exception',
-    'Deconf\\AIWP\\Google\\Task\\Runner' => 'Deconf_AIWP_Google_Task_Runner',
+    'Deconf\AIWP\Google\\Utils\\UriTemplate' => 'Deconf_AIWP_Google_Utils_UriTemplate',
+    'Deconf\AIWP\Google\\AuthHandler\\Guzzle6AuthHandler' => 'Deconf_AIWP_Google_AuthHandler_Guzzle6AuthHandler',
+    'Deconf\AIWP\Google\\AuthHandler\\Guzzle7AuthHandler' => 'Deconf_AIWP_Google_AuthHandler_Guzzle7AuthHandler',
+    'Deconf\AIWP\Google\\AuthHandler\\Guzzle5AuthHandler' => 'Deconf_AIWP_Google_AuthHandler_Guzzle5AuthHandler',
+    'Deconf\AIWP\Google\\AuthHandler\\AuthHandlerFactory' => 'Deconf_AIWP_Google_AuthHandler_AuthHandlerFactory',
+    'Deconf\AIWP\Google\\Http\\Batch' => 'Deconf_AIWP_Google_Http_Batch',
+    'Deconf\AIWP\Google\\Http\\MediaFileUpload' => 'Deconf_AIWP_Google_Http_MediaFileUpload',
+    'Deconf\AIWP\Google\\Http\\REST' => 'Deconf_AIWP_Google_Http_REST',
+    'Deconf\AIWP\Google\\Task\\Retryable' => 'Deconf_AIWP_Google_Task_Retryable',
+    'Deconf\AIWP\Google\\Task\\Exception' => 'Deconf_AIWP_Google_Task_Exception',
+    'Deconf\AIWP\Google\\Task\\Runner' => 'Deconf_AIWP_Google_Task_Runner',
     'Deconf\AIWP\Google\\Collection' => 'Deconf_AIWP_Google_Collection',
-    'Deconf\\AIWP\\Google\\Service\\Exception' => 'Deconf_AIWP_Google_Service_Exception',
-    'Deconf\\AIWP\\Google\\Service\\Resource' => 'Deconf_AIWP_Google_Service_Resource',
+    'Deconf\AIWP\Google\\Service\\Exception' => 'Deconf_AIWP_Google_Service_Exception',
+    'Deconf\AIWP\Google\\Service\\Resource' => 'Deconf_AIWP_Google_Service_Resource',
     'Deconf\AIWP\Google\\Exception' => 'Deconf_AIWP_Google_Exception',
 ];
 

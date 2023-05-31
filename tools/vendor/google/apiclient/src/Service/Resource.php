@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Modified by __root__ on 18-June-2022 using Strauss.
+ * Modified by __root__ on 31-May-2023 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
@@ -206,7 +206,7 @@ class Resource
         $request = new Request(
             $method['httpMethod'],
             $url,
-            ['content-type' => 'application/json'],
+            $postBody ? ['content-type' => 'application/json'] : [],
             $postBody ? json_encode($postBody) : ''
         );
 

@@ -2,7 +2,7 @@
 /**
  * @license MIT
  *
- * Modified by __root__ on 18-June-2022 using Strauss.
+ * Modified by __root__ on 31-May-2023 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 namespace Deconf\AIWP\GuzzleHttp\Handler;
@@ -12,8 +12,8 @@ use Deconf\AIWP\GuzzleHttp\HandlerStack;
 use Deconf\AIWP\GuzzleHttp\Promise\PromiseInterface;
 use Deconf\AIWP\GuzzleHttp\Promise\RejectedPromise;
 use Deconf\AIWP\GuzzleHttp\TransferStats;
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
+use Deconf\AIWP\Psr\Http\Message\RequestInterface;
+use Deconf\AIWP\Psr\Http\Message\ResponseInterface;
 
 /**
  * Handler that returns responses or throw exceptions from a queue.
@@ -97,8 +97,8 @@ class MockHandler implements \Countable
         }
 
         $response = $response instanceof \Exception
-            ? \GuzzleHttp\Promise\rejection_for($response)
-            : \GuzzleHttp\Promise\promise_for($response);
+            ? \Deconf\AIWP\GuzzleHttp\Promise\rejection_for($response)
+            : \Deconf\AIWP\GuzzleHttp\Promise\promise_for($response);
 
         return $response->then(
             function ($value) use ($request, $options) {

@@ -29,7 +29,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  *
- * Modified by __root__ on 18-June-2022 using Strauss.
+ * Modified by __root__ on 31-May-2023 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
@@ -250,6 +250,13 @@ class SCP
         $content = '';
         while ($size < $info['size']) {
             $data = $this->_receive();
+
+            // Terminate the loop in case the server repeatedly sends an empty response
+            if ($data === false) {
+                user_error('No data received from server', E_USER_NOTICE);
+                return false;
+            }
+
             // SCP usually seems to split stuff out into 16k chunks
             $size+= strlen($data);
 

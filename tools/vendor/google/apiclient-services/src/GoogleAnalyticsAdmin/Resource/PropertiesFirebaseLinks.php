@@ -14,14 +14,14 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  *
- * Modified by __root__ on 18-June-2022 using Strauss.
+ * Modified by __root__ on 31-May-2023 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
 namespace Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\Resource;
 
-use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaFirebaseLink;
-use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaListFirebaseLinksResponse;
+use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1betaFirebaseLink;
+use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1betaListFirebaseLinksResponse;
 use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleProtobufEmpty;
 
 /**
@@ -29,7 +29,7 @@ use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleProtobufEmpty;
  * Typical usage is:
  *  <code>
  *   $analyticsadminService = new Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin(...);
- *   $firebaseLinks = $analyticsadminService->firebaseLinks;
+ *   $firebaseLinks = $analyticsadminService->properties_firebaseLinks;
  *  </code>
  */
 class PropertiesFirebaseLinks extends \Deconf\AIWP\Google\Service\Resource
@@ -40,15 +40,15 @@ class PropertiesFirebaseLinks extends \Deconf\AIWP\Google\Service\Resource
    *
    * @param string $parent Required. Format: properties/{property_id} Example:
    * properties/1234
-   * @param GoogleAnalyticsAdminV1alphaFirebaseLink $postBody
+   * @param GoogleAnalyticsAdminV1betaFirebaseLink $postBody
    * @param array $optParams Optional parameters.
-   * @return GoogleAnalyticsAdminV1alphaFirebaseLink
+   * @return GoogleAnalyticsAdminV1betaFirebaseLink
    */
-  public function create($parent, GoogleAnalyticsAdminV1alphaFirebaseLink $postBody, $optParams = [])
+  public function create($parent, GoogleAnalyticsAdminV1betaFirebaseLink $postBody, $optParams = [])
   {
     $params = ['parent' => $parent, 'postBody' => $postBody];
     $params = array_merge($params, $optParams);
-    return $this->call('create', [$params], GoogleAnalyticsAdminV1alphaFirebaseLink::class);
+    return $this->call('create', [$params], GoogleAnalyticsAdminV1betaFirebaseLink::class);
   }
   /**
    * Deletes a FirebaseLink on a property (firebaseLinks.delete)
@@ -79,15 +79,15 @@ class PropertiesFirebaseLinks extends \Deconf\AIWP\Google\Service\Resource
    * 200; (higher values will be coerced to the maximum)
    * @opt_param string pageToken A page token, received from a previous
    * `ListFirebaseLinks` call. Provide this to retrieve the subsequent page. When
-   * paginating, all other parameters provided to `ListProperties` must match the
-   * call that provided the page token.
-   * @return GoogleAnalyticsAdminV1alphaListFirebaseLinksResponse
+   * paginating, all other parameters provided to `ListFirebaseLinks` must match
+   * the call that provided the page token.
+   * @return GoogleAnalyticsAdminV1betaListFirebaseLinksResponse
    */
   public function listPropertiesFirebaseLinks($parent, $optParams = [])
   {
     $params = ['parent' => $parent];
     $params = array_merge($params, $optParams);
-    return $this->call('list', [$params], GoogleAnalyticsAdminV1alphaListFirebaseLinksResponse::class);
+    return $this->call('list', [$params], GoogleAnalyticsAdminV1betaListFirebaseLinksResponse::class);
   }
 }
 

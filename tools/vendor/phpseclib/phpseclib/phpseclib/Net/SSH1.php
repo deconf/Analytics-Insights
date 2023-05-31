@@ -45,7 +45,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  *
- * Modified by __root__ on 18-June-2022 using Strauss.
+ * Modified by __root__ on 31-May-2023 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
@@ -208,6 +208,10 @@ class SSH1
      * Dumps the content real-time to a file
      */
     const LOG_REALTIME_FILE = 4;
+    /**
+     * Make sure that the log never gets larger than this
+     */
+    const LOG_MAX_SIZE = 1048576; // 1024 * 1024
     /**#@-*/
 
     /**#@+
@@ -363,7 +367,7 @@ class SSH1
      * @var array
      * @access private
      */
-    var $protocol_flag_log = array();
+    var $protocol_flags_log = array();
 
     /**
      * Message Log
@@ -409,6 +413,18 @@ class SSH1
      * @access private
      */
     var $interactiveBuffer = '';
+
+    /**
+     * Current log size
+     *
+     * Should never exceed self::LOG_MAX_SIZE
+     *
+     * @see self::_send_binary_packet()
+     * @see self::_get_binary_packet()
+     * @var int
+     * @access private
+     */
+    var $log_size;
 
     /**
      * Timeout
@@ -1421,7 +1437,7 @@ class SSH1
 
         switch (NET_SSH1_LOGGING) {
             case self::LOG_SIMPLE:
-                return $this->message_number_log;
+                return $this->protocol_flags_log;
                 break;
             case self::LOG_COMPLEX:
                 return $this->_format_log($this->message_log, $this->protocol_flags_log);

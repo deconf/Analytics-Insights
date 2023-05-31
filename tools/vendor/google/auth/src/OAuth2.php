@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Modified by __root__ on 18-June-2022 using Strauss.
+ * Modified by __root__ on 31-May-2023 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
@@ -27,9 +27,9 @@ use Deconf\AIWP\GuzzleHttp\Psr7\Query;
 use Deconf\AIWP\GuzzleHttp\Psr7\Request;
 use Deconf\AIWP\GuzzleHttp\Psr7\Utils;
 use InvalidArgumentException;
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\UriInterface;
+use Deconf\AIWP\Psr\Http\Message\RequestInterface;
+use Deconf\AIWP\Psr\Http\Message\ResponseInterface;
+use Deconf\AIWP\Psr\Http\Message\UriInterface;
 
 /**
  * OAuth2 supports authentication by OAuth2 2-legged flows.

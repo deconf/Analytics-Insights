@@ -2,7 +2,7 @@
 /**
  * @license Apache-2.0
  *
- * Modified by __root__ on 18-June-2022 using Strauss.
+ * Modified by __root__ on 31-May-2023 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
@@ -16,7 +16,7 @@ use Deconf\AIWP\Google\Auth\Middleware\ScopedAccessTokenMiddleware;
 use Deconf\AIWP\Google\Auth\Middleware\SimpleMiddleware;
 use Deconf\AIWP\GuzzleHttp\Client;
 use Deconf\AIWP\GuzzleHttp\ClientInterface;
-use Psr\Cache\CacheItemPoolInterface;
+use Deconf\AIWP\Psr\Cache\CacheItemPoolInterface;
 
 /**
  * This supports Guzzle 6
@@ -111,11 +111,6 @@ class Guzzle6AuthHandler
 
     private function createAuthHttp(ClientInterface $http)
     {
-        return new Client([
-            'base_uri' => $http->getConfig('base_uri'),
-            'http_errors' => true,
-            'verify' => $http->getConfig('verify'),
-            'proxy' => $http->getConfig('proxy'),
-        ]);
+        return new Client(['http_errors' => true] + $http->getConfig());
     }
 }

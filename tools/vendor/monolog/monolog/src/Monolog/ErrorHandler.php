@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * Modified by __root__ on 18-June-2022 using Strauss.
+ * Modified by __root__ on 31-May-2023 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
 namespace Deconf\AIWP\Monolog;
 
-use Psr\Log\LoggerInterface;
-use Psr\Log\LogLevel;
+use Deconf\AIWP\Psr\Log\LoggerInterface;
+use Deconf\AIWP\Psr\Log\LogLevel;
 use Deconf\AIWP\Monolog\Handler\AbstractHandler;
 
 /**
@@ -63,7 +63,7 @@ class ErrorHandler
     public static function register(LoggerInterface $logger, $errorLevelMap = array(), $exceptionLevel = null, $fatalLevel = null)
     {
         //Forces the autoloader to run for LogLevel. Fixes an autoload issue at compile-time on PHP5.3. See https://github.com/Seldaek/monolog/pull/929
-        class_exists('\\Psr\\Log\\LogLevel', true);
+        class_exists('\\Deconf\\AIWP\\Psr\\Log\\LogLevel', true);
 
         /** @phpstan-ignore-next-line */
         $handler = new static($logger);

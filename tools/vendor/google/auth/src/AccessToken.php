@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Modified by __root__ on 18-June-2022 using Strauss.
+ * Modified by __root__ on 31-May-2023 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
@@ -33,7 +33,7 @@ use Deconf\AIWP\GuzzleHttp\Psr7\Utils;
 use InvalidArgumentException;
 use Deconf\AIWP\phpseclib\Crypt\RSA;
 use Deconf\AIWP\phpseclib\Math\BigInteger;
-use Psr\Cache\CacheItemPoolInterface;
+use Deconf\AIWP\Psr\Cache\CacheItemPoolInterface;
 use RuntimeException;
 use SimpleJWT\InvalidTokenException;
 use SimpleJWT\JWT as SimpleJWT;

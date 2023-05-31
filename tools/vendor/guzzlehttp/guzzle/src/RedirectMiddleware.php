@@ -2,7 +2,7 @@
 /**
  * @license MIT
  *
- * Modified by __root__ on 18-June-2022 using Strauss.
+ * Modified by __root__ on 31-May-2023 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 namespace Deconf\AIWP\GuzzleHttp;
@@ -11,9 +11,9 @@ use Deconf\AIWP\GuzzleHttp\Exception\BadResponseException;
 use Deconf\AIWP\GuzzleHttp\Exception\TooManyRedirectsException;
 use Deconf\AIWP\GuzzleHttp\Promise\PromiseInterface;
 use Deconf\AIWP\GuzzleHttp\Psr7;
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\UriInterface;
+use Deconf\AIWP\Psr\Http\Message\RequestInterface;
+use Deconf\AIWP\Psr\Http\Message\ResponseInterface;
+use Deconf\AIWP\Psr\Http\Message\UriInterface;
 
 /**
  * Request redirect middleware.
@@ -99,6 +99,14 @@ class RedirectMiddleware
 
         $this->guardMax($request, $options);
         $nextRequest = $this->modifyRequest($request, $options, $response);
+
+        // If authorization is handled by curl, unset it if URI is cross-origin.
+        if (Psr7\UriComparator::isCrossOrigin($request->getUri(), $nextRequest->getUri()) && defined('\CURLOPT_HTTPAUTH')) {
+            unset(
+                $options['curl'][\CURLOPT_HTTPAUTH],
+                $options['curl'][\CURLOPT_USERPWD]
+            );
+        }
 
         if (isset($options['allow_redirects']['on_redirect'])) {
             call_user_func(
@@ -216,38 +224,13 @@ class RedirectMiddleware
             $modify['remove_headers'][] = 'Referer';
         }
 
-        // Remove Authorization and Cookie headers if required.
-        if (self::shouldStripSensitiveHeaders($request->getUri(), $modify['uri'])) {
+        // Remove Authorization and Cookie headers if URI is cross-origin.
+        if (Psr7\UriComparator::isCrossOrigin($request->getUri(), $modify['uri'])) {
             $modify['remove_headers'][] = 'Authorization';
             $modify['remove_headers'][] = 'Cookie';
         }
 
         return Psr7\modify_request($request, $modify);
-    }
-
-    /**
-     * Determine if we should strip sensitive headers from the request.
-     *
-     * We return true if either of the following conditions are true:
-     *
-     * 1. the host is different;
-     * 2. the scheme has changed, and now is non-https.
-     *
-     * @return bool
-     */
-    private static function shouldStripSensitiveHeaders(
-        UriInterface $originalUri,
-        UriInterface $modifiedUri
-    ) {
-        if (strcasecmp($originalUri->getHost(), $modifiedUri->getHost()) !== 0) {
-            return true;
-        }
-
-        if ($originalUri->getScheme() !== $modifiedUri->getScheme() && 'https' !== $modifiedUri->getScheme()) {
-            return true;
-        }
-
-        return false;
     }
 
     /**

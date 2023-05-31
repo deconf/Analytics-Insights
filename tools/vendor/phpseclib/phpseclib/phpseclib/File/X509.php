@@ -23,7 +23,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  *
- * Modified by __root__ on 18-June-2022 using Strauss.
+ * Modified by __root__ on 31-May-2023 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
@@ -148,6 +148,7 @@ class X509
     var $AuthorityKeyIdentifier;
     var $CertificatePolicies;
     var $AuthorityInfoAccessSyntax;
+    var $SubjectInfoAccessSyntax;
     var $SubjectAltName;
     var $SubjectDirectoryAttributes;
     var $PrivateKeyUsagePeriod;
@@ -2166,7 +2167,11 @@ class X509
                 if (!$fsock) {
                     return false;
                 }
-                fputs($fsock, "GET $parts[path] HTTP/1.0\r\n");
+                $path = $parts['path'];
+                if (isset($parts['query'])) {
+                    $path.= '?' . $parts['query'];
+                }
+                fputs($fsock, "GET $path HTTP/1.0\r\n");
                 fputs($fsock, "Host: $parts[host]\r\n\r\n");
                 $line = fgets($fsock, 1024);
                 if (strlen($line) < 3) {
@@ -4728,7 +4733,7 @@ class X509
                     return $this->computeKeyIdentifier($key->currentCert, $method);
                 }
                 return false;
-            default: // Should be a key object (i.e.: \phpseclib\Crypt\RSA).
+            default: // Should be a key object (i.e.: \Deconf\AIWP\phpseclib\Crypt\RSA).
                 $key = $key->getPublicKey(RSA::PUBLIC_FORMAT_PKCS1);
                 break;
         }

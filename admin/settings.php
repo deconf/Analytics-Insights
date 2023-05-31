@@ -1292,7 +1292,7 @@ final class AIWP_Settings {
 		if ( ! $aiwp->config->options['token'] ) {
 			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'analytics-insights' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_errors_debugging', false ), __( 'Errors & Debug', 'analytics-insights' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_settings', false ), __( 'authorize the plugin', 'analytics-insights' ) ) ) );
 		} else if ( ! $aiwp->config->reporting_ready ){
-			$message = sprintf( '<div class="error"><p>%s</p></div>', __("No Google Analytics properties were found in this Google account. Re-authorize with the right account!", 'analytics-insights') );
+			//$message = sprintf( '<div class="error"><p>%s</p></div>', __("No Google Analytics properties were found in this Google account. Re-authorize with the right account!", 'analytics-insights') );
 		}
 		?>
 <?php self::html_form_begin(__( "Google Analytics Settings", 'analytics-insights' ), $_SERVER['REQUEST_URI'], $message)?>

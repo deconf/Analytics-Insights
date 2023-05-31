@@ -14,7 +14,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  *
- * Modified by __root__ on 18-June-2022 using Strauss.
+ * Modified by __root__ on 31-May-2023 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
@@ -32,6 +32,8 @@ class PropertyQuota extends \Deconf\AIWP\Google\Model
   protected $tokensPerDayDataType = '';
   protected $tokensPerHourType = QuotaStatus::class;
   protected $tokensPerHourDataType = '';
+  protected $tokensPerProjectPerHourType = QuotaStatus::class;
+  protected $tokensPerProjectPerHourDataType = '';
 
   /**
    * @param QuotaStatus
@@ -102,6 +104,20 @@ class PropertyQuota extends \Deconf\AIWP\Google\Model
   public function getTokensPerHour()
   {
     return $this->tokensPerHour;
+  }
+  /**
+   * @param QuotaStatus
+   */
+  public function setTokensPerProjectPerHour(QuotaStatus $tokensPerProjectPerHour)
+  {
+    $this->tokensPerProjectPerHour = $tokensPerProjectPerHour;
+  }
+  /**
+   * @return QuotaStatus
+   */
+  public function getTokensPerProjectPerHour()
+  {
+    return $this->tokensPerProjectPerHour;
   }
 }
 

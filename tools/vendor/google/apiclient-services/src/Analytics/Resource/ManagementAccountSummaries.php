@@ -14,7 +14,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  *
- * Modified by __root__ on 18-June-2022 using Strauss.
+ * Modified by __root__ on 31-May-2023 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
@@ -27,7 +27,7 @@ use Deconf\AIWP\Google\Service\Analytics\AccountSummaries;
  * Typical usage is:
  *  <code>
  *   $analyticsService = new Deconf\AIWP\Google\Service\Analytics(...);
- *   $accountSummaries = $analyticsService->accountSummaries;
+ *   $accountSummaries = $analyticsService->management_accountSummaries;
  *  </code>
  */
 class ManagementAccountSummaries extends \Deconf\AIWP\Google\Service\Resource

@@ -14,7 +14,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  *
- * Modified by __root__ on 18-June-2022 using Strauss.
+ * Modified by __root__ on 31-May-2023 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
@@ -40,6 +40,8 @@ class GoogleAnalyticsAdminV1alphaChangeHistoryChangeChangeHistoryResource extend
   protected $displayVideo360AdvertiserLinkDataType = '';
   protected $displayVideo360AdvertiserLinkProposalType = GoogleAnalyticsAdminV1alphaDisplayVideo360AdvertiserLinkProposal::class;
   protected $displayVideo360AdvertiserLinkProposalDataType = '';
+  protected $expandedDataSetType = GoogleAnalyticsAdminV1alphaExpandedDataSet::class;
+  protected $expandedDataSetDataType = '';
   protected $firebaseLinkType = GoogleAnalyticsAdminV1alphaFirebaseLink::class;
   protected $firebaseLinkDataType = '';
   protected $googleAdsLinkType = GoogleAnalyticsAdminV1alphaGoogleAdsLink::class;
@@ -50,6 +52,8 @@ class GoogleAnalyticsAdminV1alphaChangeHistoryChangeChangeHistoryResource extend
   protected $measurementProtocolSecretDataType = '';
   protected $propertyType = GoogleAnalyticsAdminV1alphaProperty::class;
   protected $propertyDataType = '';
+  protected $searchAds360LinkType = GoogleAnalyticsAdminV1alphaSearchAds360Link::class;
+  protected $searchAds360LinkDataType = '';
 
   /**
    * @param GoogleAnalyticsAdminV1alphaAccount
@@ -178,6 +182,20 @@ class GoogleAnalyticsAdminV1alphaChangeHistoryChangeChangeHistoryResource extend
     return $this->displayVideo360AdvertiserLinkProposal;
   }
   /**
+   * @param GoogleAnalyticsAdminV1alphaExpandedDataSet
+   */
+  public function setExpandedDataSet(GoogleAnalyticsAdminV1alphaExpandedDataSet $expandedDataSet)
+  {
+    $this->expandedDataSet = $expandedDataSet;
+  }
+  /**
+   * @return GoogleAnalyticsAdminV1alphaExpandedDataSet
+   */
+  public function getExpandedDataSet()
+  {
+    return $this->expandedDataSet;
+  }
+  /**
    * @param GoogleAnalyticsAdminV1alphaFirebaseLink
    */
   public function setFirebaseLink(GoogleAnalyticsAdminV1alphaFirebaseLink $firebaseLink)
@@ -246,6 +264,20 @@ class GoogleAnalyticsAdminV1alphaChangeHistoryChangeChangeHistoryResource extend
   public function getProperty()
   {
     return $this->property;
+  }
+  /**
+   * @param GoogleAnalyticsAdminV1alphaSearchAds360Link
+   */
+  public function setSearchAds360Link(GoogleAnalyticsAdminV1alphaSearchAds360Link $searchAds360Link)
+  {
+    $this->searchAds360Link = $searchAds360Link;
+  }
+  /**
+   * @return GoogleAnalyticsAdminV1alphaSearchAds360Link
+   */
+  public function getSearchAds360Link()
+  {
+    return $this->searchAds360Link;
   }
 }
 

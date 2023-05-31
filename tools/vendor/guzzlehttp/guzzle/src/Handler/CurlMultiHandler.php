@@ -2,7 +2,7 @@
 /**
  * @license MIT
  *
- * Modified by __root__ on 18-June-2022 using Strauss.
+ * Modified by __root__ on 31-May-2023 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 namespace Deconf\AIWP\GuzzleHttp\Handler;
@@ -10,7 +10,7 @@ namespace Deconf\AIWP\GuzzleHttp\Handler;
 use Deconf\AIWP\GuzzleHttp\Promise as P;
 use Deconf\AIWP\GuzzleHttp\Promise\Promise;
 use Deconf\AIWP\GuzzleHttp\Utils;
-use Psr\Http\Message\RequestInterface;
+use Deconf\AIWP\Psr\Http\Message\RequestInterface;
 
 /**
  * Returns an asynchronous response using curl_multi_* functions.

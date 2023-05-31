@@ -2,13 +2,13 @@
 /**
  * @license MIT
  *
- * Modified by __root__ on 18-June-2022 using Strauss.
+ * Modified by __root__ on 31-May-2023 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 namespace Deconf\AIWP\GuzzleHttp;
 
 use Deconf\AIWP\GuzzleHttp\Exception\InvalidArgumentException;
-use Psr\Http\Message\UriInterface;
+use Deconf\AIWP\Psr\Http\Message\UriInterface;
 use Deconf\AIWP\Symfony\Polyfill\Intl\Idn\Idn;
 
 final class Utils

@@ -2,7 +2,7 @@
 /**
  * @license MIT
  *
- * Modified by __root__ on 18-June-2022 using Strauss.
+ * Modified by __root__ on 31-May-2023 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 namespace Deconf\AIWP\GuzzleHttp\Handler;
@@ -13,7 +13,7 @@ use Deconf\AIWP\GuzzleHttp\Promise\FulfilledPromise;
 use Deconf\AIWP\GuzzleHttp\Psr7;
 use Deconf\AIWP\GuzzleHttp\Psr7\LazyOpenStream;
 use Deconf\AIWP\GuzzleHttp\TransferStats;
-use Psr\Http\Message\RequestInterface;
+use Deconf\AIWP\Psr\Http\Message\RequestInterface;
 
 /**
  * Creates curl resources from a request

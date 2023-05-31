@@ -34,7 +34,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  *
- * Modified by __root__ on 18-June-2022 using Strauss.
+ * Modified by __root__ on 31-May-2023 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
@@ -370,6 +370,42 @@ class Twofish extends Base
      * @access private
      */
     var $key_length = 16;
+
+    /**
+     * Default Constructor.
+     *
+     * Determines whether or not the mcrypt extension should be used.
+     *
+     * $mode could be:
+     *
+     * - CRYPT_MODE_ECB
+     *
+     * - CRYPT_MODE_CBC
+     *
+     * - CRYPT_MODE_CTR
+     *
+     * - CRYPT_MODE_CFB
+     *
+     * - CRYPT_MODE_OFB
+     *
+     * (or the alias constants of the chosen cipher, for example for AES: CRYPT_AES_MODE_ECB or CRYPT_AES_MODE_CBC ...)
+     *
+     * If not explicitly set, CRYPT_MODE_CBC will be used.
+     *
+     * @param int $mode
+     * @access public
+     */
+    function __construct($mode = self::MODE_CBC)
+    {
+        parent::__construct($mode);
+
+        $this->m0 = array_map('intval', $this->m0);
+        $this->m1 = array_map('intval', $this->m1);
+        $this->m2 = array_map('intval', $this->m2);
+        $this->m3 = array_map('intval', $this->m3);
+        $this->q0 = array_map('intval', $this->q0);
+        $this->q1 = array_map('intval', $this->q1);
+    }
 
     /**
      * Sets the key length.

@@ -48,7 +48,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.html  MIT License
  * @link      http://phpseclib.sourceforge.net
  *
- * Modified by __root__ on 18-June-2022 using Strauss.
+ * Modified by __root__ on 31-May-2023 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
@@ -1391,6 +1391,10 @@ class RSA
             // http://en.wikipedia.org/wiki/XML_Signature
             case self::PRIVATE_FORMAT_XML:
             case self::PUBLIC_FORMAT_XML:
+                if (!extension_loaded('xml')) {
+                    return false;
+                }
+
                 $this->components = array();
 
                 $xml = xml_parser_create('UTF-8');
@@ -1525,13 +1529,43 @@ class RSA
                 if ($magic !== "openssh-key-v1\0") {
                     return false;
                 }
-                $options = $this->_string_shift($decoded, 24);
-                // \0\0\0\4none = ciphername
-                // \0\0\0\4none = kdfname
-                // \0\0\0\0 = kdfoptions
-                // \0\0\0\1 = numkeys
-                if ($options != "\0\0\0\4none\0\0\0\4none\0\0\0\0\0\0\0\1") {
+                extract(unpack('Nlength', $this->_string_shift($decoded, 4)));
+                if (strlen($decoded) < $length) {
                     return false;
+                }
+                $ciphername = $this->_string_shift($decoded, $length);
+                extract(unpack('Nlength', $this->_string_shift($decoded, 4)));
+                if (strlen($decoded) < $length) {
+                    return false;
+                }
+                $kdfname = $this->_string_shift($decoded, $length);
+                extract(unpack('Nlength', $this->_string_shift($decoded, 4)));
+                if (strlen($decoded) < $length) {
+                    return false;
+                }
+                $kdfoptions = $this->_string_shift($decoded, $length);
+                extract(unpack('Nnumkeys', $this->_string_shift($decoded, 4)));
+                if ($numkeys != 1 || ($ciphername != 'none' && $kdfname != 'bcrypt')) {
+                    return false;
+                }
+                switch ($ciphername) {
+                    case 'none':
+                        break;
+                    case 'aes256-ctr':
+                        extract(unpack('Nlength', $this->_string_shift($kdfoptions, 4)));
+                        if (strlen($kdfoptions) < $length) {
+                            return false;
+                        }
+                        $salt = $this->_string_shift($kdfoptions, $length);
+                        extract(unpack('Nrounds', $this->_string_shift($kdfoptions, 4)));
+                        $crypto = new AES(AES::MODE_CTR);
+                        $crypto->disablePadding();
+                        if (!$crypto->setPassword($this->password, 'bcrypt', $salt, $rounds, 32)) {
+                            return false;
+                        }
+                        break;
+                    default:
+                        return false;
                 }
                 extract(unpack('Nlength', $this->_string_shift($decoded, 4)));
                 if (strlen($decoded) < $length) {
@@ -1542,10 +1576,14 @@ class RSA
                 if (strlen($decoded) < $length) {
                     return false;
                 }
-                $paddedKey = $this->_string_shift($decoded, $length);
 
                 if ($this->_string_shift($publicKey, 11) !== "\0\0\0\7ssh-rsa") {
                     return false;
+                }
+
+                $paddedKey = $this->_string_shift($decoded, $length);
+                if (isset($crypto)) {
+                    $paddedKey = $crypto->decrypt($paddedKey);
                 }
 
                 $checkint1 = $this->_string_shift($paddedKey, 4);

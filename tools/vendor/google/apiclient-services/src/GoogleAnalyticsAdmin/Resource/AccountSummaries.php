@@ -14,13 +14,13 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  *
- * Modified by __root__ on 18-June-2022 using Strauss.
+ * Modified by __root__ on 31-May-2023 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
 namespace Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\Resource;
 
-use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1alphaListAccountSummariesResponse;
+use Deconf\AIWP\Google\Service\GoogleAnalyticsAdmin\GoogleAnalyticsAdminV1betaListAccountSummariesResponse;
 
 /**
  * The "accountSummaries" collection of methods.
@@ -46,13 +46,13 @@ class AccountSummaries extends \Deconf\AIWP\Google\Service\Resource
    * `ListAccountSummaries` call. Provide this to retrieve the subsequent page.
    * When paginating, all other parameters provided to `ListAccountSummaries` must
    * match the call that provided the page token.
-   * @return GoogleAnalyticsAdminV1alphaListAccountSummariesResponse
+   * @return GoogleAnalyticsAdminV1betaListAccountSummariesResponse
    */
   public function listAccountSummaries($optParams = [])
   {
     $params = [];
     $params = array_merge($params, $optParams);
-    return $this->call('list', [$params], GoogleAnalyticsAdminV1alphaListAccountSummariesResponse::class);
+    return $this->call('list', [$params], GoogleAnalyticsAdminV1betaListAccountSummariesResponse::class);
   }
 }
 
