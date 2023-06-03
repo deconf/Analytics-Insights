@@ -253,15 +253,15 @@ jQuery.fn.extend( {
 				tpl += '<div id="aiwp-areachart' + slug + '"></div>';
 				tpl += '<div id="aiwp-bottomstats' + slug + '">';
 				tpl += '<div class="inside">';
-				tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 5 ] + '</h3><p id="gdsessions' + slug + '">&nbsp;</p></div>';
-				tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 6 ] + '</h3><p id="gdusers' + slug + '">&nbsp;</p></div>';
-				tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 7 ] + '</h3><p id="gdpageviews' + slug + '">&nbsp;</p></div>';
-				tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 8 ] + '</h3><p id="gdbouncerate' + slug + '">&nbsp;</p></div>';
-				tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 9 ] + '</h3><p id="gdorganicsearch' + slug + '">&nbsp;</p></div>';
-				tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 10 ] + '</h3><p id="gdpagespervisit' + slug + '">&nbsp;</p></div>';
-				tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 26 ] + '</h3><p id="gdpagetime' + slug + '">&nbsp;</p></div>';
-				tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 27 ] + '</h3><p id="gdpageload' + slug + '">&nbsp;</p></div>';
-				tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 28 ] + '</h3><p id="gdsessionduration' + slug + '">&nbsp;</p></div>';
+				tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 5 ] + '</h3><p id="aiwpsessions' + slug + '">&nbsp;</p></div>';
+				tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 6 ] + '</h3><p id="aiwpusers' + slug + '">&nbsp;</p></div>';
+				tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 7 ] + '</h3><p id="aiwppageviews' + slug + '">&nbsp;</p></div>';
+				tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 8 ] + '</h3><p id="aiwpbouncerate' + slug + '">&nbsp;</p></div>';
+				tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 9 ] + '</h3><p id="aiwporganicsearch' + slug + '">&nbsp;</p></div>';
+				tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 10 ] + '</h3><p id="aiwppagespervisit' + slug + '">&nbsp;</p></div>';
+				tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 26 ] + '</h3><p id="aiwppagetime' + slug + '">&nbsp;</p></div>';
+				tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 27 ] + '</h3><p id="aiwppageload' + slug + '">&nbsp;</p></div>';
+				tpl += '<div class="small-box"><h3>' + aiwpItemData.i18n[ 28 ] + '</h3><p id="aiwpsessionduration' + slug + '">&nbsp;</p></div>';
 				tpl += '</div>';
 				tpl += '</div>';
 				tpl += '</div>';
@@ -648,15 +648,15 @@ jQuery.fn.extend( {
 			},
 
 			drawBottomStats : function ( data ) {
-				jQuery( "#gdsessions" + slug ).html( data[ 0 ] );
-				jQuery( "#gdusers" + slug ).html( data[ 1 ] );
-				jQuery( "#gdpageviews" + slug ).html( data[ 2 ] );
-				jQuery( "#gdbouncerate" + slug ).html( data[ 3 ] );
-				jQuery( "#gdorganicsearch" + slug ).html( data[ 4 ] );
-				jQuery( "#gdpagespervisit" + slug ).html( data[ 5 ] );
-				jQuery( "#gdpagetime" + slug ).html( data[ 6 ] );
-				jQuery( "#gdpageload" + slug ).html( data[ 7 ] );
-				jQuery( "#gdsessionduration" + slug ).html( data[ 8 ] );
+				jQuery( "#aiwpsessions" + slug ).html( data[ 0 ] );
+				jQuery( "#aiwpusers" + slug ).html( data[ 1 ] );
+				jQuery( "#aiwppageviews" + slug ).html( data[ 2 ] );
+				jQuery( "#aiwpbouncerate" + slug ).html( data[ 3 ] );
+				jQuery( "#aiwporganicsearch" + slug ).html( data[ 4 ] );
+				jQuery( "#aiwppagespervisit" + slug ).html( data[ 5 ] );
+				jQuery( "#aiwppagetime" + slug ).html( data[ 6 ] );
+				jQuery( "#aiwppageload" + slug ).html( data[ 7 ] );
+				jQuery( "#aiwpsessionduration" + slug ).html( data[ 8 ] );
 			},
 
 			rtOnlyUniqueValues : function ( value, index, self ) {
@@ -1365,12 +1365,21 @@ function AIWPReportLoad () {
 	if ( aiwpItemData.scope == 'admin-widgets' ) {
 		jQuery( '#aiwp-window-1' ).aiwpItemReport( 1 );
 	} else {
+		if ( aiwpItemData.scope == 'front-item' ) {
 		jQuery( aiwpItemData.getSelector( aiwpItemData.scope ) ).click( function () {
-			if ( !jQuery( "#aiwp-window-" + aiwpItemData.getID( this ) ).length > 0 ) {
-				jQuery( "body" ).append( '<div id="aiwp-window-' + aiwpItemData.getID( this ) + '"></div>' );
+			if ( !jQuery( "#aiwp-window-1" ).length > 0 ) {
+				jQuery( "body" ).append( '<div id="aiwp-window-1"></div>' );
 			}
-			jQuery( '#aiwp-window-' + aiwpItemData.getID( this ) ).aiwpItemReport( aiwpItemData.getID( this ) );
+			jQuery( '#aiwp-window-1' ).aiwpItemReport( 1 );
 		} );
+		} else {	
+			jQuery( aiwpItemData.getSelector( aiwpItemData.scope ) ).click( function () {
+				if ( !jQuery( "#aiwp-window-" + aiwpItemData.getID( this ) ).length > 0 ) {
+					jQuery( "body" ).append( '<div id="aiwp-window-' + aiwpItemData.getID( this ) + '"></div>' );
+				}
+				jQuery( '#aiwp-window-' + aiwpItemData.getID( this ) ).aiwpItemReport( aiwpItemData.getID( this ) );
+			} );
+	}
 	}
 
 	// on window resize

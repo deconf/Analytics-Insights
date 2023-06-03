@@ -89,6 +89,10 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 
 == Changelog ==
 
+= 5.8.9 (2023.06.03) =
+* Bug Fixes:
+	* Multiple JS fixes on Google Analytics item reports 
+
 = 5.8.8 (2023.05.31) =
 * Bug Fixes:
 	* Prefix PSR classes and namespace to avoid conflicts

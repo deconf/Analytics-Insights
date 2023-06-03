@@ -1022,7 +1022,7 @@ final class AIWP_Settings {
 	<?php self::html_section_delimiter(__( "General Settings", 'analytics-insights' ), false); ?>
 	<tr>
 		<td class="aiwp-settings-title">
-			<label for="tableid_jail"><?php _e("Unversal Analytics:", 'analytics-insights' ); ?></label>
+			<label for="tableid_jail"><?php _e("Universal Analytics:", 'analytics-insights' ); ?></label>
 		</td>
 		<td>
 			<select id="tableid_jail" <?php disabled( empty($options['ga_profiles_list']) || 1 == count($options['ga_profiles_list']), true ); ?> name="options[tableid_jail]">

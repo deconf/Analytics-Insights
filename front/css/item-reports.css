@@ -268,7 +268,7 @@
 
 @media screen and (max-width: 500px) {
 	[id^=aiwp-container-] {
-		width: 410px;
+		width: 400px;
 	}
 	[id^=aiwp-bottomstats-] .inside .small-box {
 		width: 30.8%;
