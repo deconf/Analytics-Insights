@@ -219,29 +219,33 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 			return $options;
 		}
 
-		public static function set_error( $e, $timeout ) {
-			if ( is_object( $e ) ) {
-				if ( method_exists( $e, 'getCode' ) && method_exists( $e, 'getErrors' ) ) {
-					$error_code = $e->getCode();
-					if ( 500 == $error_code || 503 == $error_code ) {
-						$timeout = 60;
+		public static function set_error( $e, $timeout, $ajax = false ) {
+			if ( $ajax ){
+				self::set_cache( 'aiwp_ajax_errors', esc_html( print_r( $e, true ) ), $timeout );
+			}else{
+				if ( is_object( $e ) ) {
+					if ( method_exists( $e, 'getCode' ) && method_exists( $e, 'getErrors' ) ) {
+						$error_code = $e->getCode();
+						if ( 500 == $error_code || 503 == $error_code ) {
+							$timeout = 60;
+						}
+						self::set_cache( 'aiwp_api_errors', array( $e->getCode(), (array) $e->getErrors(), esc_html( print_r( $e, true ) ) ), $timeout );
+					} else {
+						self::set_cache( 'aiwp_api_errors', array( 600, array(), esc_html( print_r( $e, true ) ) ), $timeout );
 					}
-					self::set_cache( 'gapi_errors', array( $e->getCode(), (array) $e->getErrors(), esc_html( print_r( $e, true ) ) ), $timeout );
+				} else if ( is_array( $e ) ) {
+					self::set_cache( 'aiwp_api_errors', array( 601, array(), esc_html( print_r( $e, true ) ) ), $timeout );
 				} else {
-					self::set_cache( 'gapi_errors', array( 600, array(), esc_html( print_r( $e, true ) ) ), $timeout );
+					self::set_cache( 'aiwp_api_errors', array( 602, array(), esc_html( print_r( $e, true ) ) ), $timeout );
 				}
-			} else if ( is_array( $e ) ) {
-				self::set_cache( 'gapi_errors', array( 600, array(), esc_html( print_r( $e, true ) ) ), $timeout );
-			} else {
-				self::set_cache( 'gapi_errors', array( 600, array(), esc_html( print_r( $e, true ) ) ), $timeout );
+				// Count Errors until midnight
+				$midnight = strtotime( "tomorrow 00:00:00" ); // UTC midnight
+				$midnight = $midnight + 8 * 3600; // UTC 8 AM
+				$tomidnight = $midnight - time();
+				$errors_count = self::get_cache( 'errors_count' );
+				$errors_count = (int) $errors_count + 1;
+				self::set_cache( 'errors_count', $errors_count, $tomidnight );
 			}
-			// Count Errors until midnight
-			$midnight = strtotime( "tomorrow 00:00:00" ); // UTC midnight
-			$midnight = $midnight + 8 * 3600; // UTC 8 AM
-			$tomidnight = $midnight - time();
-			$errors_count = self::get_cache( 'errors_count' );
-			$errors_count = (int) $errors_count + 1;
-			self::set_cache( 'errors_count', $errors_count, $tomidnight );
 		}
 
 		public static function anonymize_options( $options ) {

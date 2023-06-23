@@ -14,19 +14,14 @@ class AIWP_Uninstall {
 
 	public static function uninstall() {
 		global $wpdb;
-
 		$aiwp = AIWP();
-
 		if ( null === $aiwp->gapi_controller ) {
 			$aiwp->gapi_controller = new AIWP_GAPI_Controller();
 		}
-
 		try {
 			$aiwp->gapi_controller->reset_token( true );
 		} catch ( Exception $e ) {
-
 		}
-
 		if ( is_multisite() ) { // Cleanup Network install
 			foreach ( AIWP_Tools::get_sites( array( 'number' => apply_filters( 'aiwp_sites_limit', 100 ) ) ) as $blog ) {
 				switch_to_blog( $blog['blog_id'] );
@@ -42,5 +37,6 @@ class AIWP_Uninstall {
 		AIWP_Tools::unset_cookie( 'default_metric' );
 		AIWP_Tools::unset_cookie( 'default_dimension' );
 		AIWP_Tools::unset_cookie( 'default_view' );
+		AIWP_Tools::unset_cookie( 'default_swmetric' );
 	}
 }

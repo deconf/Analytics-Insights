@@ -203,11 +203,11 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 				if ( is_multisite() ) { // Cleanup errors and cookies on the entire network
 					foreach ( AIWP_Tools::get_sites( array( 'number' => apply_filters( 'aiwp_sites_limit', 100 ) ) ) as $blog ) {
 						switch_to_blog( $blog['blog_id'] );
-						AIWP_Tools::delete_cache( 'gapi_errors' );
+						AIWP_Tools::delete_cache( 'aiwp_api_errors' );
 						restore_current_blog();
 					}
 				} else {
-					AIWP_Tools::delete_cache( 'gapi_errors' );
+					AIWP_Tools::delete_cache( 'aiwp_api_errors' );
 				}
 			}
 
@@ -285,8 +285,6 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 								'ga_dash_tableid', // v4.9
 								'ga_dash_frontend_keywords', // v4.8
 								'ga_dash_apikey', // v4.9.1.3
-								'ga_dash_default_metric', // v4.8.1
-								'ga_dash_default_dimension', // v4.8.1
 								'ga_dash_adsense', // v5.0
 								'ga_dash_frontend_stats', // v4.8
 								'item_reports', // v4.8

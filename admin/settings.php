@@ -768,14 +768,17 @@ final class AIWP_Settings {
 			<td>
 				<?php $errors_count = AIWP_Tools::get_cache( 'errors_count' ); ?>
 				<pre class="aiwp-settings-logdata"><?php echo '<span>' . __("Count: ", 'analytics-insights') . '</span>' . (int)$errors_count;?></pre>
-				<?php $error = AIWP_Tools::get_cache( 'gapi_errors' ) ?>
+				<?php $error = AIWP_Tools::get_cache( 'aiwp_api_errors' ) ?>
+				<?php $ajax_error = AIWP_Tools::get_cache( 'aiwp_ajax_errors' ) ?>
 				<?php $error_code = isset( $error[0] ) ? $error[0] : 'None' ?>
 				<?php $error_reason = ( isset( $error[1] ) && !empty($error[1]) ) ? print_r( $error[1], true) : 'None' ?>
+				<?php $error_ajax = $ajax_error ? print_r( $ajax_error , true) : 'None' ?>
 				<?php $error_details = isset( $error[2] ) ? print_r( $error[2], true) : 'None' ?>
-				<pre class="aiwp-settings-logdata"><?php echo '<span>' . __("Error Code: ", 'analytics-insights') . '</span>' . esc_html( $error_code );?></pre>
-				<pre class="aiwp-settings-logdata"><?php echo '<span>' . __("Error Reason: ", 'analytics-insights') . '</span>' . "\n" . esc_html( $error_reason );?></pre>
+				<pre class="aiwp-settings-logdata"><?php echo '<span>' . __("Ajax Error Code: ", 'analytics-insights') . '</span>' . esc_html( $error_ajax );?></pre>
+				<pre class="aiwp-settings-logdata"><?php echo '<span>' . __("API Error Code: ", 'analytics-insights') . '</span>' . esc_html( $error_code );?></pre>
+				<pre class="aiwp-settings-logdata"><?php echo '<span>' . __("API Error Reason: ", 'analytics-insights') . '</span>' . "\n" . esc_html( $error_reason );?></pre>
 				<?php $error_details = str_replace( 'Deconf_', 'Google_', $error_details); ?>
-				<pre class="aiwp-settings-logdata"><?php echo '<span>' . __("Error Details: ", 'analytics-insights') . '</span>' . "\n" . esc_html( $error_details );?></pre>
+				<pre class="aiwp-settings-logdata"><?php echo '<span>' . __("API Error Details: ", 'analytics-insights') . '</span>' . "\n" . esc_html( $error_details );?></pre>
 				<br />
 				<hr>
 			</td>
@@ -841,7 +844,7 @@ final class AIWP_Settings {
 				try {
 					$aiwp_access_code = sanitize_text_field( $_REQUEST['aiwp_access_code'] );
 					update_option( 'aiwp_redeemed_code', $aiwp_access_code );
-					AIWP_Tools::delete_cache( 'gapi_errors' );
+					AIWP_Tools::delete_cache( 'aiwp_api_errors' );
 
 					$token = $aiwp->gapi_controller->authenticate( $aiwp_access_code );
 
@@ -917,11 +920,11 @@ final class AIWP_Settings {
 		}
 		if ( isset( $_REQUEST['Reset_Err'] ) ) {
 			if ( isset( $_REQUEST['aiwp_security'] ) && wp_verify_nonce( $_REQUEST['aiwp_security'], 'aiwp_form' ) ) {
-				if ( AIWP_Tools::get_cache( 'gapi_errors' ) ) {
+				if ( AIWP_Tools::get_cache( 'aiwp_api_errors' ) ) {
 					$info = AIWP_Tools::system_info();
 					$info .= 'AIWP Version: ' . AIWP_CURRENT_VERSION;
 					$sep = "\n---------------------------\n";
-					$error_report = $sep . print_r( AIWP_Tools::get_cache( 'gapi_errors' ), true );
+					$error_report = $sep . print_r( AIWP_Tools::get_cache( 'aiwp_api_errors' ), true );
 					$error_report .= $sep . AIWP_Tools::get_cache( 'errors_count' );
 					$error_report .= $sep . $info;
 					$error_report = urldecode( $error_report );
@@ -940,7 +943,7 @@ final class AIWP_Settings {
 					);
 				}
 				/* @formatter:on */
-				AIWP_Tools::delete_cache( 'gapi_errors' );
+				AIWP_Tools::delete_cache( 'aiwp_api_errors' );
 				$message = "<div class='updated' id='aiwp-autodismiss'><p>" . __( "All errors reseted.", 'analytics-insights' ) . "</p></div>";
 			} else {
 				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You do not have sufficient permissions to access this page.", 'analytics-insights' ) . "</p></div>";
@@ -1159,11 +1162,11 @@ final class AIWP_Settings {
 					if ( is_multisite() ) { // Cleanup errors on the entire network
 						foreach ( AIWP_Tools::get_sites( array( 'number' => apply_filters( 'aiwp_sites_limit', 100 ) ) ) as $blog ) {
 							switch_to_blog( $blog['blog_id'] );
-							AIWP_Tools::delete_cache( 'gapi_errors' );
+							AIWP_Tools::delete_cache( 'aiwp_api_errors' );
 							restore_current_blog();
 						}
 					} else {
-						AIWP_Tools::delete_cache( 'gapi_errors' );
+						AIWP_Tools::delete_cache( 'aiwp_api_errors' );
 					}
 					if ( $aiwp->config->options['token'] && $aiwp->gapi_controller->client->getAccessToken() ) {
 

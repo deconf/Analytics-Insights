@@ -4,7 +4,7 @@ Donate link: https://deconf.com/donate/
 Tags: analytics,google analytics,google analytics 4,google analytics dashboard, GA4, google analytics plugin,google analytics tracking code,google analytics widget,wordpress analytics
 Requires at least: 3.5
 Tested up to: 6.2
-Stable tag: 5.8.8
+Stable tag: 5.8.9
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -89,9 +89,11 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 
 == Changelog ==
 
-= 5.8.9 (2023.06.03) =
+= 5.8.9 (2023.06.23) =
 * Bug Fixes:
 	* Multiple JS fixes on Google Analytics item reports 
+* Enhancements:
+	* Improvements on error reporting system	
 
 = 5.8.8 (2023.05.31) =
 * Bug Fixes:

@@ -32,7 +32,7 @@ if ( ! class_exists( 'AIWP_Common_Ajax' ) ) {
 				wp_die( 640 );
 			}
 			$timeout = 24 * 60 * 60;
-			AIWP_Tools::set_error( $_POST['response'], $timeout );
+			AIWP_Tools::set_error( $_POST['response'], $timeout, true );
 			wp_die();
 		}
 	}

@@ -206,9 +206,9 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 *
 		 * @return boolean
 		 */
-		public function gapi_errors_handler() {
+		public function aiwp_api_errors_handler() {
 
-			$errors = AIWP_Tools::get_cache( 'gapi_errors' );
+			$errors = AIWP_Tools::get_cache( 'aiwp_api_errors' );
 
 			//Proceed as normal if we don't know the error
 			if ( false === $errors || ! isset( $errors[0] ) ) {
@@ -414,8 +414,8 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				}
 				$transient = AIWP_Tools::get_cache( $serial );
 				if ( false === $transient ) {
-					if ( $this->gapi_errors_handler() ) {
-						return $this->gapi_errors_handler();
+					if ( $this->aiwp_api_errors_handler() ) {
+						return $this->aiwp_api_errors_handler();
 					}
 
 					$quotauser = $this->get_serial( $this->quotauser . $projectId );
@@ -1172,8 +1172,8 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				$transient = AIWP_Tools::get_cache( $serial );
 				if ( false === $transient ) {
 
-					if ( $this->gapi_errors_handler() ) {
-						return $this->gapi_errors_handler();
+					if ( $this->aiwp_api_errors_handler() ) {
+						return $this->aiwp_api_errors_handler();
 					}
 
 					$data = $this->service->data_realtime->get( 'ga:' . $projectId, $metrics, array( 'dimensions' => $dimensions, 'quotaUser' => $this->quotauser . 'p' . $projectId ) );
@@ -1240,8 +1240,8 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				}
 				$transient = AIWP_Tools::get_cache( $serial );
 				if ( false === $transient ) {
-					if ( $this->gapi_errors_handler() ) {
-						return $this->gapi_errors_handler();
+					if ( $this->aiwp_api_errors_handler() ) {
+						return $this->aiwp_api_errors_handler();
 					}
 
 					$projectIdArr = explode( '/dataStreams/',$projectId );
@@ -2086,8 +2086,8 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				$transient = AIWP_Tools::get_cache( $serial );
 				if ( false === $transient ) {
 
-					if ( $this->gapi_errors_handler() ) {
-						return $this->gapi_errors_handler();
+					if ( $this->aiwp_api_errors_handler() ) {
+						return $this->aiwp_api_errors_handler();
 					}
 
 					$request = new Deconf\AIWP\Google\Service\AnalyticsData\RunRealtimeReportRequest();
