@@ -114,8 +114,12 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 			setcookie( $name, '', time() - 3600, '/' );
 		}
 
-		public static function set_cache( $name, $value, $expiration = 0 ) {
-			$option = array( 'value' => $value, 'expires' => time() + (int) $expiration );
+		public static function set_cache( $name, $value, $expiration = 1 ) {
+			if ( 0 == $expiration ){
+				$option = array( 'value' => $value, 'expires' => 0 );
+			}else{
+				$option = array( 'value' => $value, 'expires' => time() + (int) $expiration );
+			}
 			update_option( 'aiwp_cache_' . $name, $option, 'no' );
 		}
 
@@ -127,6 +131,9 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 			$option = get_option( 'aiwp_cache_' . $name );
 			if ( false === $option || ! isset( $option['value'] ) || ! isset( $option['expires'] ) ) {
 				return false;
+			}
+			if ( 0 == $option['expires'] ) {
+				return $option['value'];
 			}
 			if ( $option['expires'] < time() ) {
 				delete_option( 'aiwp_cache_' . $name );

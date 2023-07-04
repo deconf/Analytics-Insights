@@ -110,7 +110,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 							if ( $creds && isset( $creds['access_token'] ) ) {
 								$this->aiwp->config->options['token'] = $this->client->getAccessToken();
 							} else {
-								$timeout = $this->get_timeouts( 'midnight' );
+								$timeout = $this->get_timeouts();
 								AIWP_Tools::set_error( $creds, $timeout );
 								if ( isset( $creds['error'] ) && 'invalid_grant' == $creds['error'] ){
 									$this->reset_token();
@@ -274,8 +274,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				$newhour = mktime( $nexthour[0], 0, 0, $nexthour[1], $nexthour[2], $nexthour[3] );
 				return $newhour - $local_time;
 			} else {
-				$newtime = strtotime( ' +10 minutes', $local_time );
-				return $newtime - $local_time;
+				return 0;
 			}
 		}
 
@@ -1244,7 +1243,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 						return $this->aiwp_api_errors_handler();
 					}
 
-					$projectIdArr = explode( '/dataStreams/',$projectId );
+					$projectIdArr = explode( '/dataStreams/', $projectId );
 					$projectId = $projectIdArr[0];
 
 					$quotauser = $this->get_serial( $this->quotauser . $projectId );
