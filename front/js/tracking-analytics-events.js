@@ -26,6 +26,8 @@ function aiwpRedirect () {
 
 function aiwp_send_event ( category, action, label, withCallBack ) {
 
+	console.log( "This is the: " + aiwpUAEventsData.options[ 'global_site_tag' ]);
+
 	if ( aiwpUAEventsData.options[ 'global_site_tag' ] ) {
 		if ( withCallBack ) {
 			if ( aiwpUAEventsData.options[ 'event_bouncerate' ] ) {
@@ -54,27 +56,6 @@ function aiwp_send_event ( category, action, label, withCallBack ) {
 					'event_category': category, 
 					'event_label': label
 				} );
-			}
-		}
-	} else {
-		if ( withCallBack ) {
-			if ( aiwpUAEventsData.options[ 'event_bouncerate' ] ) {
-				ga( 'send', 'event', category, action, label, {
-					'nonInteraction' : 1,
-					'hitCallback' : aiwpRedirect
-				} );
-			} else {
-				ga( 'send', 'event', category, action, label, {
-					'hitCallback' : aiwpRedirect
-				} );
-			}
-		} else {
-			if ( aiwpUAEventsData.options[ 'event_bouncerate' ] ) {
-				ga( 'send', 'event', category, action, label, {
-					'nonInteraction' : 1
-				} );
-			} else {
-				ga( 'send', 'event', category, action, label );
 			}
 		}
 	}	

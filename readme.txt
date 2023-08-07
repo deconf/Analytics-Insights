@@ -4,7 +4,7 @@ Donate link: https://deconf.com/donate/
 Tags: analytics,google analytics,google analytics 4,google analytics dashboard, GA4, google analytics plugin,google analytics tracking code,google analytics widget,wordpress analytics
 Requires at least: 3.5
 Tested up to: 6.3
-Stable tag: 5.8.11
+Stable tag: 5.9
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -36,6 +36,11 @@ If you need Universal Analytics (UA) and Google Analytics 4 (GA4) to both collec
 = Analytics Insights on Multisite =
 
 This plugin is fully compatible with multisite network installs. Allows using multiple Google Analytics accounts or using a single Google Analytics account for the entire network.
+
+= Further reading =
+
+* [Clicky Analytics](https://wordpress.org/plugins/clicky-analytics/) - An easy to use and cookie-free analytics service for website tracking.
+* [Search Engine Insights](https://wordpress.org/plugins/search-engine-insights/) - The perfect tool for viewing Google Search Console stats in your WordPress dashboard.
 
 == Installation ==
 
@@ -89,6 +94,13 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 
 == Changelog ==
 
+= 5.9 (2023.08.07) =
+* Enhancements:
+	* switch the default tracking and reporting type to Google Analytics 4
+	* remove Universal Analytics (analytics.js) tracking options and code
+	* remove Google Analytics 3 tracking options and code
+	* multiple fixes for Google Analytics 4 events tracking
+		
 = 5.8.11 (2023.07.17) =
 * Bug Fixes:
 	* fixes the authorization endpoint which was causing issues with refresh toknes

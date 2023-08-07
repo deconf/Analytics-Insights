@@ -223,7 +223,6 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 			$zeros = array( 	'ga_enhanced_links',
 								'network_mode',
 								'ga_enhanced_excludesa',
-								'ga_remarketing',
 								'ga_event_bouncerate',
 								'ga_author_dimindex',
 								'ga_tag_dimindex',
@@ -275,8 +274,8 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 				$flag = true;
 			}
 
-			if ( isset($this->options['ga_with_gtag']) && 1 == $this->options['ga_with_gtag'] ) { // v5.4.4
-				$this->options['tracking_type'] = 'globalsitetag';
+			if ( 'ga4tracking' != $this->options['tracking_type'] && 'tagmanager' != $this->options['tracking_type'] ) { // v5.8.11
+				$this->options['tracking_type'] = 'ga4tracking';
 				$flag = true;
 			}
 
@@ -295,6 +294,7 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 								'ga_with_gtag', // v5.4.4
 								'ga_webstreams_list',
 								'with_endpoint', // v5.6.1
+								'ga_remarketing', // v5.8.11
 			);
 			foreach ( $unsets as $key ) {
 				if ( isset( $this->options[$key] ) ) {
@@ -370,10 +370,6 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 				$this->options['ecommerce_mode'] = 'disabled';
 				$flag = true;
 			}
-			if ( isset( $this->options['ga_dash_tracking'] ) && 'classic' == $this->options['ga_dash_tracking'] ) { // v5.0
-				$this->options['tracking_type'] = 'universal';
-				$flag = true;
-			}
 			if ( ! isset( $this->options['ga_realtime_pages'] ) ) { // v5.4
 				$this->options['ga_realtime_pages'] = 10;
 				$flag = true;
@@ -416,7 +412,6 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 								'ga_dash_tableid_network' => 'network_tableid',
 								'ga_dash_anonim' => 'ga_anonymize_ip',
 								'ga_dash_profile_list' => 'ga_profiles_list',
-								'ga_dash_remarketing' => 'ga_remarketing',
 								'ga_dash_excludesa' => 'superadmin_tracking',
 								'ga_track_exclude' => 'track_exclude',
 								'ga_dash_style' => 'theme_color',

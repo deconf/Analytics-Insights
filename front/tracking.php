@@ -47,16 +47,9 @@ if ( ! class_exists( 'AIWP_Tracking' ) ) {
 				return;
 			}
 
-			if ( ( 'ga4tracking' == $this->aiwp->config->options['tracking_type'] || 'globalsitetag' == $this->aiwp->config->options['tracking_type'] || 'dualtracking' == $this->aiwp->config->options['tracking_type'] ) && ( $this->aiwp->config->options['tableid_jail'] || $this->aiwp->config->options['webstream_jail'] ) ) {
+			if ( ( 'ga4tracking' == $this->aiwp->config->options['tracking_type'] ) && ( $this->aiwp->config->options['tableid_jail'] || $this->aiwp->config->options['webstream_jail'] ) ) {
 
 				require_once 'tracking-analytics.php';
-
-				if ( 'globalsitetag' == $this->aiwp->config->options['tracking_type'] && $this->aiwp->config->options['tableid_jail'] ) {
-					// Global Site Tag (gtag.js)
-					if ( $this->aiwp->config->options['amp_tracking_analytics'] ) {
-						$this->analytics_amp = new AIWP_Tracking_GlobalSiteTag_AMP();
-					}
-				}
 
 				if ( 'ga4tracking' == $this->aiwp->config->options['tracking_type'] && $this->aiwp->config->options['webstream_jail'] ) {
 					// Global Site Tag (gtag.js)
@@ -65,26 +58,7 @@ if ( ! class_exists( 'AIWP_Tracking' ) ) {
 						}
 				}
 
-				if ( 'dualtracking' == $this->aiwp->config->options['tracking_type'] && $this->aiwp->config->options['tableid_jail'] && $this->aiwp->config->options['webstream_jail'] ) {
-					// Global Site Tag (gtag.js)
-					if ( $this->aiwp->config->options['amp_tracking_analytics'] ) {
-						$this->analytics_amp = new AIWP_Tracking_GlobalSiteTag_AMP();
-						$this->analytics_amp = new AIWP_Tracking_GA4_AMP();
-					}
-				}
-
 				$this->analytics = new AIWP_Tracking_GlobalSiteTag();
-
-			}
-
-			if ( 'universal' == $this->aiwp->config->options['tracking_type'] && $this->aiwp->config->options['tableid_jail'] ) {
-				// Universal Analytics (analytics.js)
-				require_once 'tracking-analytics.php';
-					if ( $this->aiwp->config->options['amp_tracking_analytics'] ) {
-						$this->analytics_amp = new AIWP_Tracking_Analytics_AMP();
-					}
-
-					$this->analytics = new AIWP_Tracking_Analytics();
 
 			}
 

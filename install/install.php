@@ -23,8 +23,7 @@ class AIWP_Install {
 			$options['webstream_jail'] = '';
 			$options['theme_color'] = '#1e73be';
 			$options['switch_profile'] = 0;
-			$options['tracking_type'] = 'globalsitetag';
-			$options['reporting_type'] = 0;
+			$options['tracking_type'] = 'ga4tracking';
 			$options['ga_anonymize_ip'] = 0;
 			$options['user_api'] = 0;
 			$options['ga_event_tracking'] = 0;
@@ -37,7 +36,6 @@ class AIWP_Install {
 			$options['ga4_webstreams_list'] = array();
 			$options['ga_tracking_code'] = '';
 			$options['ga_enhanced_links'] = 0;
-			$options['ga_remarketing'] = 0;
 			$options['network_mode'] = 0;
 			$options['ga_speed_samplerate'] = 1;
 			$options['ga_user_samplerate'] = 100;
@@ -89,7 +87,7 @@ class AIWP_Install {
 			$options['ga_dnt_optout'] = 0;
 			$options['tm_optout'] = 0;
 			$options['tm_dnt_optout'] = 0;
-			$options['reporting_type'] = 0;
+			$options['reporting_type'] = 1;
 		} else {
 			$options = array();
 			$options['client_id'] = get_option( 'ga_dash_clientid' );
@@ -111,7 +109,6 @@ class AIWP_Install {
 			$options['token'] = get_option( 'ga_dash_token' );
 			$options['ga_profiles_list'] = get_option( 'ga_dash_profile_list' );
 			$options['ga_enhanced_links'] = 0;
-			$options['ga_remarketing'] = 0;
 			$options['network_mode'] = 0;
 			$options['ga_event_bouncerate'] = 0;
 			$options['ga_crossdomain_tracking'] = 0;
