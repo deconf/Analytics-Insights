@@ -1442,7 +1442,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					$factor = 100;
 					break;
 				case 'organicSearches' :
-					$title = __( "Engaged Sessions", 'analytics-insights' );
+					$title = __( "Organic Search", 'analytics-insights' );
 					break;
 				case 'uniquePageviews' :
 					$title = __( "Unique Page Views", 'analytics-insights' );
@@ -1592,7 +1592,6 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					'averageSessionDuration',
 					'ga:pageviewsPerSession',
 					'engagedSessions',
-					'engagementRate',
 					'userEngagementDuration',
 				);
 			} else {
@@ -1604,14 +1603,13 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					'averageSessionDuration',
 					'ga:pageviewsPerSession',
 					'engagedSessions',
-					'engagementRate',
 					'userEngagementDuration',
 				);
 			}
 
 			$sortby = false;
 
-			$serial = 'qr3_' . $this->get_serial( $projectId . $from . $filter );
+			$serial = 'qr30_' . $this->get_serial( $projectId . $from . $filter );
 			$data = $this->handle_corereports_ga4( $projectId, $from, $to, $metrics, false, $sortby, $filters, $serial );
 
 			if ( is_numeric( $data ) ) {
@@ -1629,9 +1627,35 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			$aiwp_data[3] = isset( $aiwp_data[3] ) ? number_format_i18n( $aiwp_data[3] * 100, 2 ) . '%' : '0%';
 			$aiwp_data[4] = isset( $aiwp_data[4] ) ? AIWP_Tools::secondstohms( $aiwp_data[4] ) : '00:00:00';
 			$aiwp_data[5] = isset( $aiwp_data[5] ) ? number_format_i18n( $aiwp_data[5], 2 ) : 0;
-			$aiwp_data[6] = isset( $aiwp_data[6] ) ? number_format_i18n( $aiwp_data[6] ) : 0;
-			$aiwp_data[7] = isset( $aiwp_data[7] ) ? number_format_i18n( $aiwp_data[7] * 100, 2 ) . '%' : '0%';
-			$aiwp_data[8] = isset( $aiwp_data[8] ) ? AIWP_Tools::secondstohms( $aiwp_data[8] ) : '00:00:00';
+			$aiwp_data[6] = isset( $aiwp_data[6] ) ? number_format_i18n( $aiwp_data[6] ) : 0;;
+			$aiwp_data[7] = isset( $aiwp_data[7] ) ? AIWP_Tools::secondstohms( $aiwp_data[7] ) : '00:00:00';
+
+
+			// Get Organic Searches
+			$metrics = 'ga:sessions';
+
+			$dimensions = 'ga:' . 'channelGrouping';
+
+			$sortby = '-' . $metrics;
+
+			$filters = false;
+			if ( $filter ) {
+				$filters[] = array( 'ga:pagePath', 'EXACT', $filter, false );
+			}
+
+			$serial = 'qr9_' . $this->get_serial( $projectId . $from . 'channelGrouping' . $filter . 'ga:sessions' );
+
+			$data =  $this->handle_corereports_ga4( $projectId, $from, $to, $metrics, $dimensions, $sortby, $filters, $serial );
+
+				$organic = 0;
+
+			foreach ( $data['values'] as $row ) {
+				if ( 'Organic Search' == $row[0] ){
+					$organic = number_format_i18n( $row[1] );
+				}
+			}
+
+			array_splice( $aiwp_data, 6, 0, $organic );
 
 			return $aiwp_data;
 

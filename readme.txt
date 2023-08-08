@@ -4,7 +4,7 @@ Donate link: https://deconf.com/donate/
 Tags: analytics,google analytics,google analytics 4,google analytics dashboard, GA4, google analytics plugin,google analytics tracking code,google analytics widget,wordpress analytics
 Requires at least: 3.5
 Tested up to: 6.3
-Stable tag: 5.9
+Stable tag: 5.9.1
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -79,20 +79,25 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 
 == Screenshots ==
 
-1. Blue Color
-2. Real-Time Google Analytics 3
-3. Real-Time Google Analytics 4 
-4. Analytics reports per Posts/Pages
-5. Geo Map
-6. Top Pages, Top Referrers, and Top Searches
-7. Traffic Overview
-8. Statistics per page on Frontend
-9. Cities on the region map
-10. Analytics Insights Widget
+1. Google Analytics 4 reports
+2. Real-Time Google Analytics 4 
+3. Analytics reports per Posts/Pages
+4. Google Analytics 4 Geo Map
+5. Google Analytics 4 Top Pages, Top Referrers, and Top Searches
+6. Google Analytics 4 Traffic Overview
+7. Google Analytics 4 Statistics per page on Frontend
+8. Google Analytics 4 Cities on the region map
+9. Analytics Insights Widget
 
 == Upgrade Notice ==
 
 == Changelog ==
+
+= 5.9.1 (2023.08.08) =
+* Bug Fixes:
+	* fix for Disable option on Google Analytics tracking code
+* Enhancements:
+	* replaced Engagement Rate with Organic Search on bottom stats report	
 
 = 5.9 (2023.08.07) =
 * Enhancements:

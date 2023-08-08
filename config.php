@@ -274,7 +274,7 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 				$flag = true;
 			}
 
-			if ( 'ga4tracking' != $this->options['tracking_type'] && 'tagmanager' != $this->options['tracking_type'] ) { // v5.8.11
+			if ( 'ga4tracking' != $this->options['tracking_type'] && 'tagmanager' != $this->options['tracking_type'] && 'disabled' != $this->options['tracking_type'] ) { // v5.8.11
 				$this->options['tracking_type'] = 'ga4tracking';
 				$flag = true;
 			}

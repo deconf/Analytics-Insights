@@ -202,8 +202,8 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 							__( "CAMPAIGN", 'analytics-insights' ),
 							__( "DIRECT", 'analytics-insights' ),
 							__( "NEW", 'analytics-insights' ), //25
-							$this->aiwp->config->options['reporting_type'] ? __( "Engaged Sessions", 'analytics-insights' ) : __( "Time on Page", 'analytics-insights' ),
-							$this->aiwp->config->options['reporting_type'] ? __( "Engagement Rate", 'analytics-insights' ) : __( "Page Load Time", 'analytics-insights' ),
+							$this->aiwp->config->options['reporting_type'] ? __( "Organic Search", 'analytics-insights' ) : __( "Time on Page", 'analytics-insights' ),
+							$this->aiwp->config->options['reporting_type'] ? __( "Engaged Sessions", 'analytics-insights' ) : __( "Page Load Time", 'analytics-insights' ),
 							$this->aiwp->config->options['reporting_type'] ? __( "Total Engagement", 'analytics-insights' ) : __( "Session Duration", 'analytics-insights' ),
 							__( "Session Duration", 'analytics-insights' ),
 							__( "", 'analytics-insights' ),
@@ -301,8 +301,8 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 							__( "Future Use", 'analytics-insights' ),
 							__( "Future Use", 'analytics-insights' ),
 							__( "Future Use", 'analytics-insights' ), //25
-							$this->aiwp->config->options['reporting_type'] ? __( "Engaged Sessions", 'analytics-insights' ) : __( "Time on Page", 'analytics-insights' ),
-							$this->aiwp->config->options['reporting_type'] ? __( "Engagement Rate", 'analytics-insights' ) : __( "Page Load Time", 'analytics-insights' ),
+							$this->aiwp->config->options['reporting_type'] ? __( "Organic Search", 'analytics-insights' ) : __( "Time on Page", 'analytics-insights' ),
+							$this->aiwp->config->options['reporting_type'] ? __( "Engaged Sessions", 'analytics-insights' ) : __( "Page Load Time", 'analytics-insights' ),
 							__( "Exit Rate", 'analytics-insights' ),
 							__( "", 'analytics-insights' ),
 							__( "", 'analytics-insights' ),
