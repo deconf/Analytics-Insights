@@ -1442,7 +1442,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					$factor = 100;
 					break;
 				case 'organicSearches' :
-					$title = __( "Organic Search", 'analytics-insights' );
+					$title = __( "Engagement", 'analytics-insights' );
 					break;
 				case 'uniquePageviews' :
 					$title = __( "Unique Page Views", 'analytics-insights' );

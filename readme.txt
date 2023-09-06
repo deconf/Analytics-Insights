@@ -1,10 +1,10 @@
 === Analytics Insights for Google Analytics 4 (AIWP) ===
 Contributors: deconf
 Donate link: https://deconf.com/donate/
-Tags: analytics,google analytics,google analytics 4,google analytics dashboard, GA4, google analytics plugin,google analytics tracking code,google analytics widget,wordpress analytics
+Tags: analytics,google analytics,google analytics 4,google analytics dashboard, GA4, google analytics plugin,google analytics tracking code,google analytics widget,wordpress analytics, gainwp
 Requires at least: 3.5
 Tested up to: 6.3
-Stable tag: 5.9.1
+Stable tag: 5.9.2
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -13,9 +13,7 @@ Connects Google Analytics 4 with your WordPress site. Displays stats and gives i
 
 == Description ==
 
-Analytics Insights is a WordPress plugin that enables site tracking using the latest Google Analytics tracking code. It allows you to view key Google Analytics stats in your WordPress Dashboard.
-
-With the newly introduced Dual Tracking feature, you can collect data with both Google Analytics 4 (GA4) and Universal Analytics (UA) at the same time.
+Analytics Insights is a WordPress plugin that enables site tracking using the latest Google Analytics 4 tracking code. It allows you to view key Google Analytics stats in your WordPress Dashboard.
 
 = Google Analytics Reports, Stats and Insights =
 
@@ -27,11 +25,11 @@ In addition to a set of general Google Analytics stats, insights like in-depth P
 
 The Google Analytics tracking code is fully customizable through options and hooks, allowing advanced data collection like custom dimensions and events.
 
-The plugin installs the latest Google Analytics tracking code. No matter the tracking method you choose, they are all available and customizable: Google Analytics 4 (GA4), Universal Google Analytics (analytics.js) tracking code, Global Site Tag (gtag.js) tracking code, and Accelerated Mobile Pages (AMP) tracking. Accelerated Mobile Pages (AMP) tracking with Google Analytics 4 is also available. 
+The plugin installs the latest Google Analytics 4 tracking code. No matter the tracking method you choose, they are all available and customizable: Google Analytics 4 (GA4), Global Site Tag (gtag.js) tracking code, and Accelerated Mobile Pages (AMP) tracking. Accelerated Mobile Pages (AMP) tracking for Google Analytics 4 is also available. 
 
 Advanced features like events tracking and custom dimensions tracking can be enabled with a switch of a button, without the need of any programming skills.  
 
-If you need Universal Analytics (UA) and Google Analytics 4 (GA4) to both collect data at the same time, for the same website, simply enable the Dual Tracking feature. Google Analytics 4 tracking is also available without needing a Google Analytics 3 property. 
+Old Google Analytics 3 reports are still available. Whenever you need to have a look at your old reports, you can switch back to Google Analytics 3 reports using the option available on <em>Analytics Insights > General Settings</em> screen. 
  
 = Analytics Insights on Multisite =
 
@@ -59,7 +57,7 @@ No, once the plugin is authorized and a default domain is selected the Google An
 
 = Why the numbers on Google Analytics 4 don't match those from Universal Analytics =
 
-To put it simple, different technologies and approaches lead to different results.
+To put it simply, different technologies and approaches lead to different results.
 
 = Is Google Analytics 4 tracking supported? =
 
@@ -93,6 +91,11 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 
 == Changelog ==
 
+= 5.9.2 (2023.09.06) =
+* Bug Fixes:
+	* text fix on Engagement report
+	* add details about the Google Analytics 4 WebStream used for tracking on Tracking Code screen
+	
 = 5.9.1 (2023.08.08) =
 * Bug Fixes:
 	* fix for Disable option on Google Analytics tracking code
@@ -108,7 +111,7 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 		
 = 5.8.11 (2023.07.17) =
 * Bug Fixes:
-	* fixes the authorization endpoint which was causing issues with refresh toknes
+	* fixes the authorization endpoint which was causing issues with refresh tokens
 	
 = 5.8.10 (2023.07.04) =
 * Enhancements:

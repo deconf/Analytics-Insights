@@ -252,7 +252,7 @@ final class AIWP_Settings {
 			</table>
 		</td>
 	</tr>
- <?php self::html_switch_button('options[switch_profile]', 1, 'switch_profile', $options['switch_profile'], __( "enable Switch View functionality", 'analytics-insights') ); ?>
+ <?php self::html_switch_button('options[switch_profile]', 1, 'switch_profile', $options['switch_profile'], __( "enable Switch Property functionality", 'analytics-insights') ); ?>
  <?php self::html_switch_button('options[backend_item_reports]', 1, 'backend_item_reports', $options['backend_item_reports'], __( "enable reports on Posts List and Pages List", 'analytics-insights') ); ?>
  <?php self::html_switch_button('options[dashboard_widget]', 1, 'dashboard_widget', $options['dashboard_widget'], __( "enable the main Dashboard Widget", 'analytics-insights') ); ?>
  <?php self::html_section_delimiter(__( "Real-Time Settings", 'analytics-insights' )); ?>
@@ -343,10 +343,9 @@ final class AIWP_Settings {
 		<tr>
 			<td class="aiwp-settings-title"></td>
 			<td>
-			<?php if ( 'ga4tracking' !== $options['tracking_type'] && $aiwp->config->options['tableid_jail'] ) : ?>
-	 		<?php $profile_info = AIWP_Tools::get_selected_profile( $aiwp->config->options['ga_profiles_list'], $aiwp->config->options['tableid_jail'] ); ?>
-		 	<pre><?php echo "<b>" . __("Google Analytics:", 'analytics-insights') . "</b><br />" . __("View Name:", 'analytics-insights') . "\t" . esc_html($profile_info[0]) . "<br />" . __("Tracking ID:", 'analytics-insights') . "\t" . esc_html($profile_info[2]) . "<br />" . __("Default URL:", 'analytics-insights') . "\t" . esc_html($profile_info[3]) . "<br />" . __("Time Zone:", 'analytics-insights') . "\t" . esc_html($profile_info[5]);?></pre>
-		<?php endif; ?>
+			<?php if ( 'ga4tracking' == $options['tracking_type'] && $aiwp->config->options['webstream_jail'] ) : ?>
+				<?php $webstream_info = AIWP_Tools::get_selected_profile( $aiwp->config->options['ga4_webstreams_list'], $aiwp->config->options['webstream_jail'] ); ?>
+				<pre><?php echo __( "Stream Name:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[0] ) . "<br />" . __( "Measurement ID:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[3] ) . "<br />" . __( "Stream URL:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[2] );?></pre>		<?php endif; ?>
 			</td>
 		</tr>
 			<?php elseif ( 'tagmanager' == $options['tracking_type'] ) : ?>
