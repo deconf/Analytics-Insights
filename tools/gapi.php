@@ -1147,7 +1147,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			}
 
 			foreach ( $data['values'] as $row ) {
-				$aiwp_data[] = array( date_i18n( __( 'l, F j, Y', 'analytics-insights' ), strtotime( $row[0] .',' . $row[1] ) ), ( $anonim ? round( $row[2] * 100 / $max, 2 ) : (int) $row[2] ) );
+				$aiwp_data[] = array( date_i18n( __( 'l, F j, Y', 'analytics-insights' ), strtotime( $row[0] ) ), ( $anonim ? round( $row[2] * 100 / $max, 2 ) : (int) $row[2] ) );
 			}
 			$totals = $data['totals'];
 
@@ -2079,7 +2079,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			}
 
 			foreach ( $data['values'] as $row ) {
-				$aiwp_data[] = array( date_i18n( __( 'l, F j, Y', 'analytics-insights' ), strtotime( $row[0] .',' . $row[1] ) ), ( $anonim ? round( $row[2] * 100 / $max, 2 ) : (int) $row[2] ) );
+				$aiwp_data[] = array( date_i18n( __( 'l, F j, Y', 'analytics-insights' ), strtotime( $row[0] ) ), ( $anonim ? round( $row[2] * 100 / $max, 2 ) : (int) $row[2] ) );
 			}
 			$totals = $data['totals'];
 

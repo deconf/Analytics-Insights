@@ -4,7 +4,7 @@ Donate link: https://deconf.com/donate/
 Tags: analytics,google analytics,google analytics 4,google analytics dashboard, GA4, google analytics plugin,google analytics tracking code,google analytics widget,wordpress analytics, gainwp
 Requires at least: 3.5
 Tested up to: 6.3
-Stable tag: 5.9.2
+Stable tag: 5.9.3
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -90,6 +90,10 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 == Upgrade Notice ==
 
 == Changelog ==
+
+= 5.9.3 (2023.09.12) =
+* Bug Fixes:
+	* frontend widget displays wrong the same date on analytics chart
 
 = 5.9.2 (2023.09.06) =
 * Bug Fixes:
