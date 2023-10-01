@@ -1040,7 +1040,7 @@ jQuery.fn.extend( {
 				if ( response == -21 ) {
 					jQuery( target ).html( aiwpItemData.i18n[ 12 ] );
 				} else {
-					jQuery( target ).html( aiwpItemData.i18n[ 13 ] + ' (' + response + ')' );
+					jQuery( target ).html( '<p><span style="font-size:4em;color:#778899;margin-left:-20px;" class="dashicons dashicons-clock"></span></p><br><p style="font-size:1.1em;color:#778899;">' + aiwpItemData.i18n[ 13 ] + '</p>' );
 				}
 			},
 

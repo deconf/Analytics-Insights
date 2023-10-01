@@ -1496,7 +1496,9 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					$fill_data[$i] = 0;
 				}
 				foreach ( $data['values'] as $row ) {
-					$fill_data[(int) $row[0]] = round( $row[1], 2 ) * $factor;
+					if ( array_key_exists((int) $row[0], $fill_data) ){
+						$fill_data[(int) $row[0]] = round( $row[1], 2 ) * $factor;
+					}
 				}
 				foreach ( $fill_data as $key => $value ) {
 					$aiwp_data[] = array( $key . ':00', $value );
@@ -1504,7 +1506,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
 			} else if ( '365daysAgo' == $from || '1095daysAgo' == $from ) {
 
-				$yesterday = date("Y-m-d", strtotime("-1 day"));
+				$yesterday = date("Y-m-d", strtotime("now"));
 				$offset = str_replace('daysAgo', '', $from);
 				$xdaysago =  date("Y-m-d", strtotime("-" . $offset . " day"));
 
@@ -1520,7 +1522,9 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 
 				foreach ( $data['values'] as $row ) {
 					$key = $row[0] . $row[1];
-					$fill_data[$key] = round( $row[2], 2 ) * $factor;
+					if ( array_key_exists($key, $fill_data) ){
+						$fill_data[$key] = round( $row[2], 2 ) * $factor;
+					}
 				}
 
 				foreach ( $fill_data as $key => $value ) {
@@ -1533,7 +1537,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				}
 			} else {
 
-				$yesterday = date("Y-m-d", strtotime("-1 day"));
+				$yesterday = date("Y-m-d", strtotime("now"));
 				$offset = str_replace('daysAgo', '', $from);
 				$xdaysago =  date("Y-m-d", strtotime("-" . $offset . " day"));
 
@@ -1548,7 +1552,9 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				}
 
 				foreach ( $data['values'] as $row ) {
-					$fill_data[$row[0]] = round( $row[2], 2 ) * $factor;
+					if ( array_key_exists($row[0], $fill_data) ){
+						$fill_data[$row[0]] = round( $row[2], 2 ) * $factor;
+					}
 				}
 
 				foreach ( $fill_data as $key => $value ) {
