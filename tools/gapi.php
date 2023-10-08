@@ -1217,7 +1217,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 * Google Analtyics 4 Reports Get and cache
 		 *
 		 * @param
-		 *            $projecId
+		 *            $projectId
 		 * @param
 		 *            $from
 		 * @param
@@ -1228,9 +1228,11 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 *            $options
 		 * @param
 		 *            $serial
+		 * @param
+		 *            $limit
 		 * @return int|Deconf\AIWP\Google\Service\AnalyticsReporting\DateRangeValues
 		 */
-		private function handle_corereports_ga4( $projectId, $from, $to, $metrics, $dimensions, $sortby, $filters, $serial ) {
+		public function handle_corereports_ga4( $projectId, $from, $to, $metrics, $dimensions, $sortby, $filters, $serial, $limit = 0 ) {
 			try {
 				if ( 'today' == $from ) {
 					$interval = 'hourly';
@@ -1358,6 +1360,10 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 						}
 					}
 
+					if ($limit) {
+						$request->setLimit($limit);
+					}
+					
 					$response = $this->service_ga4_data->properties->runReport ( $projectId, $request, array( 'quotaUser' => $quotauser ) );
 
 					$dataraw = $response;
