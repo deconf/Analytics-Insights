@@ -4,7 +4,7 @@ Donate link: https://deconf.com/donate/
 Tags: analytics,google analytics,google analytics 4,google analytics dashboard, GA4, google analytics plugin,google analytics tracking code,google analytics widget,wordpress analytics
 Requires at least: 3.5
 Tested up to: 6.3
-Stable tag: 5.9.4
+Stable tag: 5.9.5
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -91,6 +91,10 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 
 == Changelog ==
 
+= 5.9.5 (2023.10.29) =
+* Bug Fixes:
+	* when there is a single Google Analytics 4 property, Disabled is displayed on drop-down property list instead of the actual property
+	
 = 5.9.4 (2023.10.01) =
 * Bug Fixes:
 	* last day on the Analytics area chart is wrong
@@ -221,6 +225,7 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 * Bug Fixes:
 	* small CSS fixes
 	* Google Analytics 4 tracking code missing when Universal Analytics is missing or is disabled
+	* fixes a Google charts conflict with Site Kit by Google 
 
 = 5.6.4 (2022.04.26) =
 * Enhancements:
@@ -237,6 +242,7 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 * Bug Fixes:
 	* escape single quotes on Google Analytics custom dimensions to prevent JavaScript Errors
 	* fixes a small bug for GAinWP migration
+	* fixes a conflict with Site Kit by Google
 * Enhancements:
 	* more accurate errors and error description
 	* reset CSS style applied during error display on Google Analytics reports widget

@@ -978,7 +978,7 @@ final class AIWP_Settings {
 			<label for="webstream_jail"><?php _e("Google Analaytics 4:", 'analytics-insights' ); ?></label>
 		</td>
 		<td>
-			<select id="webstream_jail" <?php disabled( empty($options['ga4_webstreams_list'] ) || 1 == count($options['ga4_webstreams_list']), true); ?> name="options[webstream_jail]">
+			<select id="webstream_jail" <?php disabled( empty($options['ga4_webstreams_list'] ), true); ?> name="options[webstream_jail]">
 			<?php if ( ! empty( $options['ga4_webstreams_list'] ) ) : ?>
 			<option value="" <?php selected( '', $options['webstream_jail'] ); ?>><?php _e( "Disabled", 'analytics-insights' ); ?></option>
 			<?php foreach ( $options['ga4_webstreams_list'] as $items ) : ?>
@@ -1008,7 +1008,7 @@ final class AIWP_Settings {
 			<label for="tableid_jail"><?php _e("Universal Analytics:", 'analytics-insights' ); ?></label>
 		</td>
 		<td>
-			<select id="tableid_jail" <?php disabled( empty($options['ga_profiles_list']) || 1 == count($options['ga_profiles_list']), true ); ?> name="options[tableid_jail]">
+			<select id="tableid_jail" <?php disabled( empty($options['ga_profiles_list']), true ); ?> name="options[tableid_jail]">
 			<?php if ( ! empty( $options['ga_profiles_list'] ) ) : ?>
 			<option value="" <?php selected( '', $options['tableid_jail'] ); ?>><?php _e( "Disabled", 'analytics-insights' ); ?></option>
 			<?php foreach ( $options['ga_profiles_list'] as $items ) : ?>

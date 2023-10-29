@@ -159,7 +159,7 @@ class AIWP_Install {
 			$options['ga_dnt_optout'] = 0;
 			$options['tm_optout'] = 0;
 			$options['tm_dnt_optout'] = 0;
-			$options['reporting_type'] = 0;
+			$options['reporting_type'] = 1;
 			delete_option( 'ga_dash_clientid' );
 			delete_option( 'ga_dash_clientsecret' );
 			delete_option( 'ga_dash_access' );

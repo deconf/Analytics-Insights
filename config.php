@@ -379,7 +379,7 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 				$flag = true;
 			}
 			if ( ! isset( $this->options['reporting_type'] ) ) { // v5.5.6
-				$this->options['reporting_type'] = 0;
+				$this->options['reporting_type'] = 1;
 				$flag = true;
 			}
 
