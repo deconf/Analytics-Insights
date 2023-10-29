@@ -1,7 +1,7 @@
 === Analytics Insights for Google Analytics 4 (AIWP) ===
 Contributors: deconf
 Donate link: https://deconf.com/donate/
-Tags: analytics,google analytics,google analytics 4,google analytics dashboard, GA4, google analytics plugin,google analytics tracking code,google analytics widget,wordpress analytics, gainwp
+Tags: analytics,google analytics,google analytics 4,google analytics dashboard, GA4, google analytics plugin,google analytics tracking code,google analytics widget,wordpress analytics
 Requires at least: 3.5
 Tested up to: 6.3
 Stable tag: 5.9.4
@@ -94,7 +94,7 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 = 5.9.4 (2023.10.01) =
 * Bug Fixes:
 	* last day on the Analytics area chart is wrong
-	
+
 = 5.9.3 (2023.09.12) =
 * Bug Fixes:
 	* frontend widget displays wrong the same date on analytics chart
@@ -236,6 +236,7 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 = 5.6.2 (2022.04.22) =
 * Bug Fixes:
 	* escape single quotes on Google Analytics custom dimensions to prevent JavaScript Errors
+	* fixes a small bug for GAinWP migration
 * Enhancements:
 	* more accurate errors and error description
 	* reset CSS style applied during error display on Google Analytics reports widget
@@ -253,6 +254,7 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 	* Google Analytics 4 real-time reports are now available
 	* Google Analytics 4 frontend reports UX improvements
 	* Google Analytics 3 frontend reports UX improvements
+	* easy migrate from GADWP and GAinWP plugins
 * Bug Fixes:
 	* fix frontend per page Google Analytics reports
 	* redesign the Real-Time Report for Google Analytics 4  
@@ -303,13 +305,13 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 	* fix events tracking in Universal Analytics
 		
 
-= 5.4.7 (2021.11.28) =
+= 5.4.7 =
 * Bug Fixes:
 	* multiple bugfixes for network mode setup
 	* admin page css fixes
 	* fixing multiple notices and errors for PHP 8 
 		
-= 5.4.6 (2021.10.14) =
+= 5.4.6 =
 * Bug Fixes:
 	* Maps API key missing quotes
 	* use only minified scripts and follow SCRIPT_DEBUG flag while debugging
@@ -318,23 +320,23 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 * Enhancements:
 	* UX updates for the analytics real-time report
 
-= 5.4.4 (2021.09.24) =
+= 5.4.4 =
 * Enhancements:
 	* add AMP Analytics support for gtag.js (Global Site Tag)
 	* add events support to Global Site Tag tracking on AMP pages; including scroll depth and HTML attributes triggers
 	* add custom dimensions support to Global Site Tag tracking on AMP pages 
 
-= 5.4.3 (2021.09.16) =
+= 5.4.3 =
 * Bug Fixes:
 	* fixes javascript error when rendering anonymized charts on frontend analytics widget
 * Enhancements:
 	* readme.txt and assets update
 
-= 5.4.2 (2021.09.10) =
+= 5.4.2 =
 * Bug Fixes:
 	* fixes uaid issue for universal analytics
 
-= 5.4.1 (2021.09.09) =
+= 5.4.1 =
 * Security Fixes:
 	* sanitizing, escaping, and validating additional data
 * Enhancements:
@@ -343,7 +345,7 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 * Bug Fixes:
 	* fixes multisite/network mode random token resets 
 
-= 5.4 (2021.08.30) =
+= 5.4 =
 * [Release notes](https://deconf.com/analytics-insights-for-wordpress/)
 * Enhancements:
 	* capability to filter and search within displayed tables
