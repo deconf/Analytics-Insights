@@ -91,7 +91,7 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 
 == Changelog ==
 
-= 6.0 (2023.08.08) =
+= 6.0 (2023.11.19) =
 * Bug Fixes:
 	* fix a bug preventing all Google Analytics properties and datastreams to be retrived
 * Enhancements:
