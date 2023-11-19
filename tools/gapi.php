@@ -137,7 +137,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		public function refresh_token() {
 			$token = (array) $this->aiwp->config->options['token'];
 			$refresh_token = $token['refresh_token'];
-			$challenge = ( isset( $token['challenge'] ) && $token['challenge'] ) ? $token['challenge'] : '';
+			$challenge = ( isset( $token['challenge'] ) && '' != $token['challenge'] ) ? $token['challenge'] : '';
 			if ( ! $token || ! isset( $token['expires_in'] ) || ( $token['created'] + ( $token['expires_in'] - 30 ) ) < time() ) {
 				// @formatter:off
 				$post_data = array(
@@ -179,7 +179,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 							if ( ! isset( $newtoken['refresh_token'] ) ) {
 								$newtoken['refresh_token'] = $refresh_token;
 							}
-							if ( ! isset( $newtoken['challenge'] ) && $newtoken['challenge'] ) {
+							if ( ! isset( $newtoken['challenge'] ) && '' != $challenge ) {
 								$newtoken['challenge'] = $challenge;
 							}
 							$this->aiwp->config->options['token'] = $newtoken;
