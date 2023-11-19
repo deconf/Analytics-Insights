@@ -47,7 +47,7 @@ if ( ! class_exists( 'AIWP_Tracking' ) ) {
 				return;
 			}
 
-			if ( ( 'ga4tracking' == $this->aiwp->config->options['tracking_type'] ) && ( $this->aiwp->config->options['tableid_jail'] || $this->aiwp->config->options['webstream_jail'] ) ) {
+			if ( ( 'ga4tracking' == $this->aiwp->config->options['tracking_type'] ) && $this->aiwp->config->options['webstream_jail'] ) {
 
 				require_once 'tracking-analytics.php';
 

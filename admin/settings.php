@@ -67,7 +67,6 @@ final class AIWP_Settings {
 					$new_options['access_front'][] = 'administrator';
 				}
 			} elseif ( 'general' == $who ) {
-				$options['reporting_type'] = 0;
 				$options['user_api'] = 0;
 			} elseif ( 'network' == $who ) {
 				$options['user_api'] = 0;
@@ -110,7 +109,9 @@ final class AIWP_Settings {
 
 	private static function html_form_end() {
 		?>
-	</form>
+
+
+</form>
 <?php
 	}
 
@@ -157,11 +158,6 @@ final class AIWP_Settings {
 				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You do not have sufficient permissions to access this page.", 'analytics-insights' ) . "</p></div>";
 			}
 		}
-		if ( ! $aiwp->config->options['token'] ) {
-			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'analytics-insights' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_errors_debugging', false ), __( 'Errors & Debug', 'analytics-insights' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_settings', false ), __( 'authorize the plugin', 'analytics-insights' ) ) ) );
-		} else if ( ! $aiwp->config->reporting_ready ){
-			$message = sprintf( '<div class="error"><p>%s</p></div>', __("No Google Analytics properties were found in this Google account. Re-authorize with the right account!", 'analytics-insights') );
-		}
 		?>
 <?php self::html_form_begin(__( "Google Analytics Frontend Settings", 'analytics-insights' ), $_SERVER['REQUEST_URI'], $message)?>
 <table class="aiwp-settings-options">
@@ -188,6 +184,8 @@ final class AIWP_Settings {
 				<tr>
 				<?php endif; ?>
 				<?php endforeach; ?>
+
+
 			</table>
 		</td>
 	</tr>
@@ -215,11 +213,6 @@ final class AIWP_Settings {
 			if ( ! ( isset( $_REQUEST['aiwp_security'] ) && wp_verify_nonce( $_REQUEST['aiwp_security'], 'aiwp_form' ) ) ) {
 				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You do not have sufficient permissions to access this page.", 'analytics-insights' ) . "</p></div>";
 			}
-		}
-		if ( ! $aiwp->config->options['token'] ) {
-			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'analytics-insights' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_errors_debugging', false ), __( 'Errors & Debug', 'analytics-insights' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_settings', false ), __( 'authorize the plugin', 'analytics-insights' ) ) ) );
-		} else if ( ! $aiwp->config->reporting_ready ){
-			$message = sprintf( '<div class="error"><p>%s</p></div>', __("No Google Analytics properties were found in this Google account. Re-authorize with the right account!", 'analytics-insights') );
 		}
 		?>
 <?php self::html_form_begin(__( "Google Analytics Backend Settings", 'analytics-insights' ), $_SERVER['REQUEST_URI'], $message)?>
@@ -249,6 +242,8 @@ final class AIWP_Settings {
 				<tr>
 				<?php endif; ?>
 				<?php endforeach; ?>
+
+
 			</table>
 		</td>
 	</tr>
@@ -309,9 +304,6 @@ final class AIWP_Settings {
 				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You do not have sufficient permissions to access this page.", 'analytics-insights' ) . "</p></div>";
 			}
 		}
-		if ( ! $aiwp->config->reporting_ready ) {
-			$message = sprintf( '<div class="error"><p>%s</p></div>', __("No Google Analytics properties were found in this Google account. Re-authorize with the right account!", 'analytics-insights') );
-		}
 		if ( 'ga4tracking' == $options['tracking_type'] ) {
 			$tabs = array( 'basic' => __( "Basic Settings", 'analytics-insights' ), 'events' => __( "Events Tracking", 'analytics-insights' ), 'custom' => __( "Custom Definitions", 'analytics-insights' ), 'exclude' => __( "Exclude Tracking", 'analytics-insights' ), 'advanced' => __( "Advanced Settings", 'analytics-insights' ), 'integration' => __( "Integration", 'analytics-insights' ) );
 		} else if ( 'tagmanager' == $options['tracking_type'] ) {
@@ -345,7 +337,8 @@ final class AIWP_Settings {
 			<td>
 			<?php if ( 'ga4tracking' == $options['tracking_type'] && $aiwp->config->options['webstream_jail'] ) : ?>
 				<?php $webstream_info = AIWP_Tools::get_selected_profile( $aiwp->config->options['ga4_webstreams_list'], $aiwp->config->options['webstream_jail'] ); ?>
-				<pre><?php echo __( "Stream Name:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[0] ) . "<br />" . __( "Measurement ID:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[3] ) . "<br />" . __( "Stream URL:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[2] );?></pre>		<?php endif; ?>
+				<pre><?php echo __( "Stream Name:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[0] ) . "<br />" . __( "Stream ID:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[1] ) . "<br />" . __( "Stream URL:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[2] ) . "<br />" . __( "Measurement ID:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[3] ) . "<br />" . __( "Time Zone:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[5] );?></pre>
+				<?php endif; ?>
 			</td>
 		</tr>
 			<?php elseif ( 'tagmanager' == $options['tracking_type'] ) : ?>
@@ -676,6 +669,8 @@ final class AIWP_Settings {
 					<tr>
 							<?php endif; ?>
 					<?php endforeach; ?>
+
+
 				</table>
 			</td>
 		</tr>
@@ -702,11 +697,6 @@ final class AIWP_Settings {
 		}
 		$anonim = AIWP_Tools::anonymize_options( $aiwp->config->options );
 		$options = self::update_options( 'frontend' );
-		if ( ! $aiwp->config->options['token'] ) {
-			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'analytics-insights' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_errors_debugging', false ), __( 'Errors & Debug', 'analytics-insights' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_settings', false ), __( 'authorize the plugin', 'analytics-insights' ) ) ) );
-		} else if ( ! $aiwp->config->reporting_ready ){
-			$message = sprintf( '<div class="error"><p>%s</p></div>', __("No Google Analytics properties were found in this Google account. Re-authorize with the right account!", 'analytics-insights') );
-		}
 		?>
 <?php self::html_form_begin(__( "Google Analytics Errors & Debugging", 'analytics-insights' ), $_SERVER['REQUEST_URI'], $message)?>
 <?php $tabs = array( 'errors' => __( "Errors & Details", 'analytics-insights' ), 'config' => __( "Plugin Settings", 'analytics-insights' ), 'sysinfo' => __( "System", 'analytics-insights' ) ); ?>
@@ -790,36 +780,23 @@ final class AIWP_Settings {
 		}
 		echo '<script type="text/javascript">jQuery("#gapi-warning").hide()</script>';
 		if ( isset( $_REQUEST['aiwp_access_code'] ) ) {
-			if ( 1 == ! stripos( 'x' . $_REQUEST['aiwp_access_code'], 'UA-', 1 ) && $_REQUEST['aiwp_access_code'] != get_option( 'aiwp_redeemed_code' ) ) {
-				try {
+
+			if ( $_REQUEST['aiwp_access_code'] != get_option( 'aiwp_redeemed_code' ) ) {
+
 					$aiwp_access_code = sanitize_text_field( $_REQUEST['aiwp_access_code'] );
 					update_option( 'aiwp_redeemed_code', $aiwp_access_code );
 					AIWP_Tools::delete_cache( 'aiwp_api_errors' );
+					AIWP_Tools::delete_cache( 'aiwp_ajax_errors' );
 
 					$token = $aiwp->gapi_controller->authenticate( $aiwp_access_code );
 
-					$array_token = (array)$token;
-
-					$aiwp->gapi_controller->client->setAccessToken( $array_token );
-
-					$aiwp->config->options['token'] = $aiwp->gapi_controller->client->getAccessToken();
+					$aiwp->config->options['token'] = $token;
 
 					$aiwp->config->set_plugin_options();
 
 					$options = self::update_options( 'general' );
 					$message = "<div class='updated' id='aiwp-autodismiss'><p>" . __( "Plugin authorization succeeded.", 'analytics-insights' ) . "</p></div>";
-					if ( $aiwp->config->options['token'] && $aiwp->gapi_controller->client->getAccessToken() ) {
-
-						$profiles = $aiwp->gapi_controller->refresh_profiles_ua();
-						if ( is_array( $profiles ) && ! empty( $profiles ) ) {
-							$aiwp->config->options['ga_profiles_list'] = $profiles;
-							if ( ! $aiwp->config->options['tableid_jail'] ) {
-								$profile = AIWP_Tools::guess_default_domain( $profiles );
-								$aiwp->config->options['tableid_jail'] = $profile;
-							}
-							$aiwp->config->set_plugin_options();
-							$options = self::update_options( 'general' );
-						}
+					if ( $aiwp->config->options['token'] ) {
 
 						$webstreams = $aiwp->gapi_controller->refresh_profiles_ga4();
 						if ( is_array( $webstreams ) && ! empty( $webstreams ) ) {
@@ -833,21 +810,9 @@ final class AIWP_Settings {
 						}
 
 					}
-				} catch ( GoogleServiceException $e ) {
-					$timeout = $aiwp->gapi_controller->get_timeouts();
-					AIWP_Tools::set_error( $e, $timeout );
-					$aiwp->gapi_controller->reset_token();
-				} catch ( Exception $e ) {
-					$timeout = $aiwp->gapi_controller->get_timeouts();
-					AIWP_Tools::set_error( $e, $timeout );
-					$aiwp->gapi_controller->reset_token();
-				}
+
 			} else {
-				if ( 1 == stripos( 'x' . $_REQUEST['aiwp_access_code'], 'UA-', 1 ) ) {
-					$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "The access code is <strong>not</strong> your <strong>Tracking ID</strong> (UA-XXXXX-X) <strong>nor</strong> your <strong>email address</strong>!", 'analytics-insights' ) . ".</p></div>";
-				} else {
 					$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You can only use the access code <strong>once</strong>, please generate a <strong>new access</strong> code following the instructions!", 'analytics-insights' ) . ".</p></div>";
-				}
 			}
 		}
 		if ( isset( $_REQUEST['Clear'] ) ) {
@@ -870,30 +835,8 @@ final class AIWP_Settings {
 		}
 		if ( isset( $_REQUEST['Reset_Err'] ) ) {
 			if ( isset( $_REQUEST['aiwp_security'] ) && wp_verify_nonce( $_REQUEST['aiwp_security'], 'aiwp_form' ) ) {
-				if ( AIWP_Tools::get_cache( 'aiwp_api_errors' ) ) {
-					$info = AIWP_Tools::system_info();
-					$info .= 'AIWP Version: ' . AIWP_CURRENT_VERSION;
-					$sep = "\n---------------------------\n";
-					$error_report = $sep . print_r( AIWP_Tools::get_cache( 'aiwp_api_errors' ), true );
-					$error_report .= $sep . AIWP_Tools::get_cache( 'errors_count' );
-					$error_report .= $sep . $info;
-					$error_report = urldecode( $error_report );
-					$url = AIWP_ENDPOINT_URL . 'aiwp-report.php';
-					/* @formatter:off */
-					$response = wp_remote_post( $url, array(
-							'method' => 'POST',
-							'timeout' => 45,
-							'redirection' => 5,
-							'httpversion' => '1.0',
-							'blocking' => true,
-							'headers' => array(),
-							'body' => array( 'error_report' => esc_html( $error_report ) ),
-							'cookies' => array()
-						)
-					);
-				}
-				/* @formatter:on */
 				AIWP_Tools::delete_cache( 'aiwp_api_errors' );
+				AIWP_Tools::delete_cache( 'aiwp_ajax_errors' );
 				$message = "<div class='updated' id='aiwp-autodismiss'><p>" . __( "All errors reseted.", 'analytics-insights' ) . "</p></div>";
 			} else {
 				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You do not have sufficient permissions to access this page.", 'analytics-insights' ) . "</p></div>";
@@ -908,10 +851,8 @@ final class AIWP_Settings {
 		if ( isset( $_REQUEST['Hide'] ) ) {
 			if ( isset( $_REQUEST['aiwp_security'] ) && wp_verify_nonce( $_REQUEST['aiwp_security'], 'aiwp_form' ) ) {
 				$message = "<div class='updated' id='aiwp-action'><p>" . __( "All other domains/properties were removed.", 'analytics-insights' ) . "</p></div>";
-				$lock_profile = AIWP_Tools::get_selected_profile( $aiwp->config->options['ga_profiles_list'], $aiwp->config->options['tableid_jail'] );
-				$aiwp->config->options['ga_profiles_list'] = array( $lock_profile );
 				$lock_property = AIWP_Tools::get_selected_profile( $aiwp->config->options['ga4_webstreams_list'], $aiwp->config->options['webstream_jail'] );
-				if ( empty ($lock_property) ){
+				if ( empty( $lock_property ) ) {
 					$aiwp->config->options['ga4_webstreams_list'] = '';
 				} else {
 					$aiwp->config->options['ga4_webstreams_list'] = array( $lock_property );
@@ -920,11 +861,6 @@ final class AIWP_Settings {
 			} else {
 				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You do not have sufficient permissions to access this page.", 'analytics-insights' ) . "</p></div>";
 			}
-		}
-		if ( ! $aiwp->config->options['token'] ) {
-			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'analytics-insights' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_errors_debugging', false ), __( 'Errors & Debug', 'analytics-insights' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_settings', false ), __( 'authorize the plugin', 'analytics-insights' ) ) ) );
-		} else if ( ! $aiwp->config->reporting_ready ){
-			$message = sprintf( '<div class="error"><p>%s</p></div>', __("No Google Analytics properties were found in this Google account. Re-authorize with the right account!", 'analytics-insights') );
 		}
 		?>
 <?php self::html_form_begin(__( "Google Analytics Settings", 'analytics-insights' ), $_SERVER['REQUEST_URI'], $message)?>
@@ -968,7 +904,7 @@ final class AIWP_Settings {
 		<td colspan="2">
 			<button type="submit" name="Reset" class="button button-secondary" <?php echo $options['network_mode']?'disabled="disabled"':''; ?>><?php _e( "Clear Authorization", 'analytics-insights' ); ?></button>
 			<button type="submit" name="Clear" class="button button-secondary"><?php _e( "Clear Cache", 'analytics-insights' ); ?></button>
-			<button type="submit" name="Reset_Err" class="button button-secondary"><?php _e( "Report & Reset Errors", 'analytics-insights' ); ?></button>
+			<button type="submit" name="Reset_Err" class="button button-secondary"><?php _e( "Reset Errors", 'analytics-insights' ); ?></button>
 		</td>
 	</tr>
 	<?php self::html_section_delimiter(); ?>
@@ -978,9 +914,8 @@ final class AIWP_Settings {
 			<label for="webstream_jail"><?php _e("Google Analaytics 4:", 'analytics-insights' ); ?></label>
 		</td>
 		<td>
-			<select id="webstream_jail" <?php disabled( empty($options['ga4_webstreams_list'] ), true); ?> name="options[webstream_jail]">
+			<select id="webstream_jail" <?php disabled(empty($options['ga4_webstreams_list']) || 1 == count($options['ga4_webstreams_list']), true); ?> name="options[webstream_jail]">
 			<?php if ( ! empty( $options['ga4_webstreams_list'] ) ) : ?>
-			<option value="" <?php selected( '', $options['webstream_jail'] ); ?>><?php _e( "Disabled", 'analytics-insights' ); ?></option>
 			<?php foreach ( $options['ga4_webstreams_list'] as $items ) : ?>
 			<?php if ( $items[2] ) : ?>
 				<option value="<?php echo esc_attr( $items[1] ); ?>" <?php selected( $items[1], $options['webstream_jail'] ); ?> title="<?php _e( "Stream Name:", 'analytics-insights' ); ?> <?php echo esc_attr( $items[0] ); ?>">
@@ -988,8 +923,6 @@ final class AIWP_Settings {
 				</option>
 			<?php endif; ?>
 			<?php endforeach; ?>
-			<?php else : ?>
-				<option value=""><?php _e( "Disabled", 'analytics-insights' ); ?></option>
 			<?php endif; ?>
 			</select>
 		</td>
@@ -999,45 +932,13 @@ final class AIWP_Settings {
 		<td class="aiwp-settings-title"></td>
 		<td>
 			<?php $webstream_info = AIWP_Tools::get_selected_profile( $aiwp->config->options['ga4_webstreams_list'], $aiwp->config->options['webstream_jail'] ); ?>
-			<pre><?php echo __( "Stream Name:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[0] ) . "<br />" . __( "Measurement ID:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[3] ) . "<br />" . __( "Stream URL:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[2] );?></pre>
+							<pre><?php echo __( "Stream Name:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[0] ) . "<br />" . __( "Stream ID:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[1] ) . "<br />" . __( "Stream URL:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[2] ) . "<br />" . __( "Measurement ID:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[3] ) . "<br />" . __( "Time Zone:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[5] );?></pre>
 		</td>
 	</tr>
 	<?php endif; ?>
 	<tr>
-		<td class="aiwp-settings-title">
-			<label for="tableid_jail"><?php _e("Universal Analytics:", 'analytics-insights' ); ?></label>
-		</td>
-		<td>
-			<select id="tableid_jail" <?php disabled( empty($options['ga_profiles_list']), true ); ?> name="options[tableid_jail]">
-			<?php if ( ! empty( $options['ga_profiles_list'] ) ) : ?>
-			<option value="" <?php selected( '', $options['tableid_jail'] ); ?>><?php _e( "Disabled", 'analytics-insights' ); ?></option>
-			<?php foreach ( $options['ga_profiles_list'] as $items ) : ?>
-			<?php if ( $items[3] ) : ?>
-				<option value="<?php echo esc_attr( $items[1] ); ?>" <?php selected( $items[1], $options['tableid_jail'] ); ?> title="<?php _e( "View Name:", 'analytics-insights' ); ?> <?php echo esc_attr( $items[0] ); ?>">
-	  		<?php echo esc_html( AIWP_Tools::strip_protocol( $items[3] ) )?> &#8658; <?php echo esc_attr( $items[0] ); ?>
-				</option>
-			<?php endif; ?>
-			<?php endforeach; ?>
-			<?php else : ?>
-				<option value=""><?php _e( "Disabled", 'analytics-insights' ); ?></option>
-			<?php endif; ?>
-			</select>
-		</td>
+		<td>&nbsp;</td>
 	</tr>
-	<?php if ( $options['tableid_jail'] && !empty( $aiwp->config->options['ga_profiles_list'] ) ) :	?>
-	<tr>
-		<td class="aiwp-settings-title"></td>
-		<td>
-			<?php $profile_info = AIWP_Tools::get_selected_profile( $aiwp->config->options['ga_profiles_list'], $aiwp->config->options['tableid_jail'] ); ?>
-			<pre><?php echo __( "View Name:", 'analytics-insights' ) . "\t" . esc_html( $profile_info[0] ) . "<br />" . __( "Tracking ID:", 'analytics-insights' ) . "\t" . esc_html( $profile_info[2] ) . "<br />" . __( "Default URL:", 'analytics-insights' ) . "\t" . esc_html( $profile_info[3] ) . "<br />" . __( "Time Zone:", 'analytics-insights' ) . "\t" . esc_html( $profile_info[5] );?></pre>
-		</td>
-	</tr>
-	<?php endif; ?>
-	<tr><td>&nbsp;</td></tr>
-	<?php if ( $options['tableid_jail'] && $options['webstream_jail'] ) : ?>
-	<?php self::html_switch_button('options[reporting_type]', 1, 'reporting_type', $options['reporting_type'], __( "use Google Analytics 4 data to generate reports and stats", 'analytics-insights') ); ?>
-	<?php endif; ?>
-	<tr><td>&nbsp;</td></tr>
 	<tr>
 		<td class="aiwp-settings-title">
 			<label for="theme_color"><?php _e("Theme Color:", 'analytics-insights' ); ?></label>
@@ -1046,12 +947,14 @@ final class AIWP_Settings {
 			<input type="text" id="theme_color" class="theme_color" name="options[theme_color]" value="<?php echo esc_attr( $options['theme_color'] ); ?>" size="10">
 		</td>
 	</tr>
-	<tr><td>&nbsp;</td></tr>
+	<tr>
+		<td>&nbsp;</td>
+	</tr>
 	<tr>
 		<td colspan="2" class="submit">
 			<input type="submit" name="Submit" class="button button-primary" value="<?php _e('Save Changes', 'analytics-insights' ) ?>" />
-			<?php if ( (is_array( $options['ga_profiles_list'] ) && count( $options['ga_profiles_list'] ) > 1 ) || ( is_array( $options['ga4_webstreams_list'] ) && count( $options['ga4_webstreams_list'] ) > 1 ) ): ?>
-				<input type="submit" name="Hide" class="button button-secondary"" value="<?php _e( "Lock Selection", 'analytics-insights' ); ?>" />
+			<?php if ( ( is_array( $options['ga4_webstreams_list'] ) && count( $options['ga4_webstreams_list'] ) > 1 ) ): ?>
+				<input type="submit" name="Hide" class="button button-secondary" " value="<?php _e( "Lock Selection", 'analytics-insights' ); ?>" />
 			<?php endif; ?>
 		</td>
 	</tr>
@@ -1059,7 +962,7 @@ final class AIWP_Settings {
 	<?php self::html_section_delimiter(); ?>
 	<tr>
 		<td colspan="2">
-	  <?php $auth = $aiwp->gapi_controller->client->createAuthUrl();?>
+	  <?php $auth = $aiwp->gapi_controller->createAuthUrl();?>
 			<button type="submit" class="button button-secondary" formaction="<?php echo esc_url_raw( $auth ); ?>" <?php echo $options['network_mode']?'disabled="disabled"':''; ?>><?php _e( "Authorize Plugin", 'analytics-insights' ); ?></button>
 			<button type="submit" name="Clear" class="button button-secondary"><?php _e( "Clear Cache", 'analytics-insights' ); ?></button>
 		</td>
@@ -1093,65 +996,38 @@ final class AIWP_Settings {
 		echo '<script type="text/javascript">jQuery("#gapi-warning").hide()</script>';
 		if ( isset( $_REQUEST['aiwp_access_code'] ) ) {
 			if ( 1 == ! stripos( 'x' . $_REQUEST['aiwp_access_code'], 'UA-', 1 ) && $_REQUEST['aiwp_access_code'] != get_option( 'aiwp_redeemed_code' ) ) {
-				try {
+
 					$aiwp_access_code = sanitize_text_field( $_REQUEST['aiwp_access_code'] );
 					update_option( 'aiwp_redeemed_code', $aiwp_access_code );
-
 					$token = $aiwp->gapi_controller->authenticate( $aiwp_access_code );
-
-					$array_token = (array)$token;
-
-					$aiwp->gapi_controller->client->setAccessToken( $array_token );
-
-					$aiwp->config->options['token'] = $aiwp->gapi_controller->client->getAccessToken();
-
+					$aiwp->config->options['token'] = $token;
 					$aiwp->config->set_plugin_options( true );
-
 					$options = self::update_options( 'network' );
 					$message = "<div class='updated' id='aiwp-action'><p>" . __( "Plugin authorization succeeded.", 'analytics-insights' ) . "</p></div>";
 					if ( is_multisite() ) { // Cleanup errors on the entire network
 						foreach ( AIWP_Tools::get_sites( array( 'number' => apply_filters( 'aiwp_sites_limit', 100 ) ) ) as $blog ) {
 							switch_to_blog( $blog['blog_id'] );
 							AIWP_Tools::delete_cache( 'aiwp_api_errors' );
+							AIWP_Tools::delete_cache( 'aiwp_ajax_errors' );
 							restore_current_blog();
 						}
 					} else {
 						AIWP_Tools::delete_cache( 'aiwp_api_errors' );
+						AIWP_Tools::delete_cache( 'aiwp_ajax_errors' );
 					}
-					if ( $aiwp->config->options['token'] && $aiwp->gapi_controller->client->getAccessToken() ) {
-
-						$profiles = $aiwp->gapi_controller->refresh_profiles_ua();
-						if ( is_array( $profiles ) && ! empty( $profiles ) ) {
-							$aiwp->config->options['ga_profiles_list'] = $profiles;
-							if ( isset( $aiwp->config->options['tableid_jail'] ) && ! $aiwp->config->options['tableid_jail'] ) {
-								//$profile = AIWP_Tools::guess_default_domain( $profiles );
-								//$aiwp->config->options['tableid_jail'] = $profile;
-							}
-							$aiwp->config->set_plugin_options( true );
-							$options = self::update_options( 'network' );
-						}
-
+					if ( $aiwp->config->options['token'] ) {
 						$webstreams = $aiwp->gapi_controller->refresh_profiles_ga4();
 						if ( is_array( $webstreams ) && ! empty( $webstreams ) ) {
 							$aiwp->config->options['ga4_webstreams_list'] = $webstreams;
 							if ( isset( $aiwp->config->options['webstream_jail'] ) && ! $aiwp->config->options['webstream_jail'] ) {
-								//$property = AIWP_Tools::guess_default_domain( $webstreams, 2 );
-								//$aiwp->config->options['webstream_jail'] = $property;
+								// $property = AIWP_Tools::guess_default_domain( $webstreams, 2 );
+								// $aiwp->config->options['webstream_jail'] = $property;
 							}
 							$aiwp->config->set_plugin_options( true );
 							$options = self::update_options( 'network' );
 						}
-
 					}
-				} catch ( GoogleServiceException $e ) {
-					$timeout = $aiwp->gapi_controller->get_timeouts();
-					AIWP_Tools::set_error( $e, $timeout );
-					$aiwp->gapi_controller->reset_token();
-				} catch ( Exception $e ) {
-					$timeout = $aiwp->gapi_controller->get_timeouts();
-					AIWP_Tools::set_error( $e, $timeout );
-					$aiwp->gapi_controller->reset_token();
-				}
+
 			} else {
 				if ( 1 == stripos( 'x' . $_REQUEST['aiwp_access_code'], 'UA-', 1 ) ) {
 					$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "The access code is <strong>not</strong> your <strong>Tracking ID</strong> (UA-XXXXX-X) <strong>nor</strong> your <strong>email address</strong>!", 'analytics-insights' ) . ".</p></div>";
@@ -1162,26 +1038,10 @@ final class AIWP_Settings {
 		}
 		if ( isset( $_REQUEST['Refresh'] ) ) {
 			if ( isset( $_REQUEST['aiwp_security'] ) && wp_verify_nonce( $_REQUEST['aiwp_security'], 'aiwp_form' ) ) {
-				$aiwp->config->options['ga_profiles_list'] = array();
 				$aiwp->config->options['ga4_webstreams_list'] = array();
 				$message = "<div class='updated' id='aiwp-autodismiss'><p>" . __( "Properties refreshed.", 'analytics-insights' ) . "</p></div>";
 				$options = self::update_options( 'network' );
-				if ( $aiwp->config->options['token'] && $aiwp->gapi_controller->client->getAccessToken() ) {
-					if ( ! empty( $aiwp->config->options['ga_profiles_list'] ) ) {
-						$profiles = $aiwp->config->options['ga_profiles_list'];
-					} else {
-						$profiles = $aiwp->gapi_controller->refresh_profiles_ua();
-					}
-					if ( $profiles ) {
-						$aiwp->config->options['ga_profiles_list'] = $profiles;
-						if ( isset( $aiwp->config->options['tableid_jail'] ) && ! $aiwp->config->options['tableid_jail'] ) {
-							//$profile = AIWP_Tools::guess_default_domain( $profiles );
-							//$aiwp->config->options['tableid_jail'] = $profile;
-						}
-						$aiwp->config->set_plugin_options( true );
-						$options = self::update_options( 'network' );
-					}
-
+				if ( $aiwp->config->options['token'] && $aiwp->gapi_controller->refresh_token() ) {
 					if ( ! empty( $aiwp->config->options['ga4_webstreams_list'] ) ) {
 						$webstreams = $aiwp->config->options['ga4_webstreams_list'];
 					} else {
@@ -1190,13 +1050,12 @@ final class AIWP_Settings {
 					if ( $webstreams ) {
 						$aiwp->config->options['ga4_webstreams_list'] = $webstreams;
 						if ( isset( $aiwp->config->options['webstream_jail'] ) && ! $aiwp->config->options['webstream_jail'] ) {
-							//$property = AIWP_Tools::guess_default_domain( $webstreams, 2 );
-							//$aiwp->config->options['webstream_jail'] = $property;
+							// $property = AIWP_Tools::guess_default_domain( $webstreams, 2 );
+							// $aiwp->config->options['webstream_jail'] = $property;
 						}
 						$aiwp->config->set_plugin_options( true );
 						$options = self::update_options( 'network' );
 					}
-
 				}
 			} else {
 				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You do not have sufficient permissions to access this page.", 'analytics-insights' ) . "</p></div>";
@@ -1229,10 +1088,8 @@ final class AIWP_Settings {
 		if ( isset( $_REQUEST['Hide'] ) ) {
 			if ( isset( $_REQUEST['aiwp_security'] ) && wp_verify_nonce( $_REQUEST['aiwp_security'], 'aiwp_form' ) ) {
 				$message = "<div class='updated' id='aiwp-autodismiss'><p>" . __( "All other domains/properties were removed.", 'analytics-insights' ) . "</p></div>";
-				$lock_profile = AIWP_Tools::get_selected_profile( $aiwp->config->options['ga_profiles_list'], $aiwp->config->options['tableid_jail'] );
-				$aiwp->config->options['ga_profiles_list'] = array( $lock_profile );
 				$lock_property = AIWP_Tools::get_selected_profile( $aiwp->config->options['ga4_webstreams_list'], $aiwp->config->options['webstream_jail'] );
-				if ( empty ($lock_property) ){
+				if ( empty( $lock_property ) ) {
 					$aiwp->config->options['ga4_webstreams_list'] = array();
 				} else {
 					$aiwp->config->options['ga4_webstreams_list'] = array( $lock_property );
@@ -1241,11 +1098,6 @@ final class AIWP_Settings {
 			} else {
 				$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You do not have sufficient permissions to access this page.", 'analytics-insights' ) . "</p></div>";
 			}
-		}
-		if ( ! $aiwp->config->options['token'] ) {
-			$message = sprintf( '<div class="error"><p>%s</p></div>', sprintf( __( 'Something went wrong, check %1$s or %2$s.', 'analytics-insights' ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_errors_debugging', false ), __( 'Errors & Debug', 'analytics-insights' ) ), sprintf( '<a href="%1$s">%2$s</a>', menu_page_url( 'aiwp_settings', false ), __( 'authorize the plugin', 'analytics-insights' ) ) ) );
-		} else if ( ! $aiwp->config->reporting_ready ){
-			//$message = sprintf( '<div class="error"><p>%s</p></div>', __("No Google Analytics properties were found in this Google account. Re-authorize with the right account!", 'analytics-insights') );
 		}
 		?>
 <?php self::html_form_begin(__( "Google Analytics Settings", 'analytics-insights' ), $_SERVER['REQUEST_URI'], $message)?>
@@ -1300,42 +1152,18 @@ final class AIWP_Settings {
 	</tr>
 	<?php self::html_section_delimiter() ?>
 	<?php self::html_section_delimiter(__( "Properties/Views Settings", 'analytics-insights' ), false) ?>
-	<?php if ( isset( $options['network_tableid'] ) ) : ?>
-	<?php $options['network_tableid'] = json_decode( json_encode( $options['network_tableid'] ), false ); ?>
-	<?php endif; ?>
 	<?php if ( isset( $options['network_webstream'] ) ) : ?>
 	<?php $options['network_webstream'] = json_decode( json_encode( $options['network_webstream'] ), false ); ?>
 	<?php endif; ?>
 	<?php foreach ( AIWP_Tools::get_sites( array( 'number' => apply_filters( 'aiwp_sites_limit', 100 ) ) ) as $blog ) : ?>
 	<tr>
 		<td class="aiwp-settings-title-s">
-			<label for="network_tableid"><?php echo '<strong>'. esc_html( $blog['domain'] ) . esc_url( $blog['path'] ) .'</strong>: ';?></label>
-		</td>
-		<td>
-			<select id="network_tableid" <?php disabled(!empty($options['ga_profiles_list']),false);?> name="options[network_tableid][<?php echo esc_attr( $blog['blog_id'] );?>]">
-	 		<?php if ( ! empty( $options['ga_profiles_list'] ) ) : ?>
-	 		<option value="" <?php selected( '', $options['tableid_jail'] ); ?>><?php _e( "Disabled", 'analytics-insights' ); ?></option>
-				<?php foreach ( $options['ga_profiles_list'] as $items ) : ?>
-				<?php if ( $items[3] ) : ?>
-				<?php $temp_id = $blog['blog_id']; ?>
-				<option value="<?php echo esc_attr( $items[1] );?>" <?php selected( $items[1], isset( $options['network_tableid']->$temp_id ) ? $options['network_tableid']->$temp_id : '');?> title="<?php echo __( "View Name:", 'analytics-insights' ) . ' ' . esc_attr( $items[0] );?>">
-		 	 <?php echo esc_html( AIWP_Tools::strip_protocol( $items[3] ) );?> &#8658; <?php echo esc_attr( $items[0] );?>
-				</option>
-				<?php endif; ?>
-				<?php endforeach; ?>
-				<?php else : ?>
-				<option value="">
-					<?php _e( "Disabled", 'analytics-insights' );?>
-				</option>
-				<?php endif; ?>
-			</select>
-			<br />
+			<label for="network_webstream"><?php echo '<strong>'. esc_html( $blog['domain'] ) . esc_url( $blog['path'] ) .'</strong>: ';?></label>
 		</td>
 		<td>
 			<select id="network_webstreams" <?php disabled(empty($options['ga4_webstreams_list']) || 1 == count($options['ga4_webstreams_list']), true); ?> name="options[network_webstream][<?php echo esc_attr( $blog['blog_id'] );?>]">
 			<?php if ( ! empty( $options['ga4_webstreams_list'] ) ) : ?>
 			<?php $temp_id = $blog['blog_id']; ?>
-			<option value="" <?php selected( '', isset( $options['network_webstream']->$temp_id ) ? $options['network_webstream']->$temp_id : ''); ?>><?php _e( "Disabled", 'analytics-insights' ); ?></option>
 			<?php foreach ( $options['ga4_webstreams_list'] as $items ) : ?>
 			<?php if ( $items[2] ) : ?>
 				<option value="<?php echo esc_attr( $items[1] ); ?>" <?php selected( $items[1], isset( $options['network_webstream']->$temp_id ) ? $options['network_webstream']->$temp_id : '');?> title="<?php _e( "Stream Name:", 'analytics-insights' ); ?> <?php echo esc_attr( $items[0] ); ?>">
@@ -1343,12 +1171,10 @@ final class AIWP_Settings {
 				</option>
 			<?php endif; ?>
 			<?php endforeach; ?>
-			<?php else : ?>
-				<option value=""><?php _e( "Disabled", 'analytics-insights' ); ?></option>
 			<?php endif; ?>
 			</select>
 		</td>
- </tr>
+	</tr>
 	<?php endforeach; ?>
 	<?php self::html_section_delimiter(); ?>
 	<?php self::html_switch_button('options[superadmin_tracking]', 1, 'superadmin_tracking', $options['superadmin_tracking'], __( "exclude Super Admin tracking for the entire network", 'analytics-insights'), false, false ); ?>
@@ -1362,7 +1188,7 @@ final class AIWP_Settings {
 	<?php self::html_section_delimiter(); ?>
 	<tr>
 		<td colspan="2">
-	  <?php $auth = $aiwp->gapi_controller->client->createAuthUrl();?>
+	  <?php $auth = $aiwp->gapi_controller->createAuthUrl();?>
 			<button type="submit" class="button button-secondary" formaction="<?php echo esc_url_raw( $auth ); ?>"><?php _e( "Authorize Plugin", 'analytics-insights' ); ?></button>
 			<button type="submit" name="Clear" class="button button-secondary"><?php _e( "Clear Cache", 'analytics-insights' ); ?></button>
 		</td>

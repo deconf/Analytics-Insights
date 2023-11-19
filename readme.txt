@@ -3,8 +3,8 @@ Contributors: deconf
 Donate link: https://deconf.com/donate/
 Tags: analytics,google analytics,google analytics 4,google analytics dashboard, GA4, google analytics plugin,google analytics tracking code,google analytics widget,wordpress analytics
 Requires at least: 3.5
-Tested up to: 6.3
-Stable tag: 5.9.5
+Tested up to: 6.4
+Stable tag: 6.0
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -90,6 +90,15 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 == Upgrade Notice ==
 
 == Changelog ==
+
+= 6.0 (2023.08.08) =
+* Bug Fixes:
+	* fix a bug preventing all Google Analytics properties and datastreams to be retrived
+* Enhancements:
+	* refactoring code and switching to wp_remote_* instead of using Google Analytics 4 PHP library
+	* removing all Google Analytics 3 reports, since most of them are obsolete after three months
+* Upgrade Note:
+	* we're switching to the new, v2, Google OAuth2 flow, so re-authorizing may be required
 
 = 5.9.5 (2023.10.29) =
 * Bug Fixes:

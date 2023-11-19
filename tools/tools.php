@@ -67,14 +67,14 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 				$per = abs( $per );
 				for ( $x = 0; $x < 3; $x++ ) {
 					$c = hexdec( substr( $colour, ( 2 * $x ), 2 ) ) - $per;
-					$c = ( $c < 0 ) ? 0 : dechex( (int)$c );
+					$c = ( $c < 0 ) ? 0 : dechex( (int) $c );
 					$rgb .= ( strlen( $c ) < 2 ) ? '0' . $c : $c;
 				}
 			} else {
 				// Lighter
 				for ( $x = 0; $x < 3; $x++ ) {
 					$c = hexdec( substr( $colour, ( 2 * $x ), 2 ) ) + $per;
-					$c = ( $c > 255 ) ? 'ff' : dechex( (int)$c );
+					$c = ( $c > 255 ) ? 'ff' : dechex( (int) $c );
 					$rgb .= ( strlen( $c ) < 2 ) ? '0' . $c : $c;
 				}
 			}
@@ -115,9 +115,9 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 		}
 
 		public static function set_cache( $name, $value, $expiration = 1 ) {
-			if ( 0 == $expiration ){
+			if ( 0 == $expiration ) {
 				$option = array( 'value' => $value, 'expires' => 0 );
-			}else{
+			} else {
 				$option = array( 'value' => $value, 'expires' => time() + (int) $expiration );
 			}
 			update_option( 'aiwp_cache_' . $name, $option, 'no' );
@@ -227,16 +227,16 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 		}
 
 		public static function set_error( $e, $timeout, $ajax = false ) {
-			if ( $ajax ){
+			if ( $ajax ) {
 				self::set_cache( 'aiwp_ajax_errors', esc_html( print_r( $e, true ) ), $timeout );
-			}else{
+			} else {
 				if ( is_object( $e ) ) {
-					if ( method_exists( $e, 'getCode' ) && method_exists( $e, 'getErrors' ) ) {
-						$error_code = $e->getCode();
+					if ( method_exists( $e, 'get_error_code' ) && method_exists( $e, 'get_error_message' ) ) {
+						$error_code = $e->get_error_code();
 						if ( 500 == $error_code || 503 == $error_code ) {
 							$timeout = 60;
 						}
-						self::set_cache( 'aiwp_api_errors', array( $e->getCode(), (array) $e->getErrors(), esc_html( print_r( $e, true ) ) ), $timeout );
+						self::set_cache( 'aiwp_api_errors', array( $e->get_error_code(), $e->get_error_message(), $e->get_error_data() ), $timeout );
 					} else {
 						self::set_cache( 'aiwp_api_errors', array( 600, array(), esc_html( print_r( $e, true ) ) ), $timeout );
 					}
@@ -259,8 +259,11 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 			global $wp_version;
 			$options['wp_version'] = $wp_version;
 			$options['aiwp_version'] = AIWP_CURRENT_VERSION;
-			if ( $options['token'] && !WP_DEBUG ) {
+			if ( $options['token'] && ( ! WP_DEBUG || ( is_multisite() && ! current_user_can( 'manage_network_options' ) ) ) ) {
 				$options['token'] = 'HIDDEN';
+			} else {
+				$options['token'] = (array)$options['token'];
+				unset($options['token']['challenge']);
 			}
 			if ( $options['client_secret'] ) {
 				$options['client_secret'] = 'HIDDEN';
@@ -326,45 +329,25 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 		 * @return string
 		 */
 		public static function ga3_ga4_mapping( $value ) {
-			$value = str_replace('ga:', '', $value);
-			$list = [
-				'users' => 'totalUsers',
-				'sessionDuration' => 'userEngagementDuration',
-				'fullReferrer' => 'pageReferrer',
-				'source' => 'sessionSource',
-				'medium' => 'sessionMedium',
-				'dataSource' => 'platform',
-				//'pagePath' => 'pagePathPlusQueryString',
-				'pageviews' => 'screenPageViews',
-				'pageviewsPerSession' => 'screenPageViewsPerSession',
-				'timeOnPage' => 'userEngagementDuration',
-				'channelGrouping' => 'sessionDefaultChannelGrouping',
-				'dayOfWeekName' => 'dayOfWeek',
-				'visitBounceRate' => 'bounceRate',
-				'organicSearches' => 'engagedSessions',
-				'socialNetwork' => 'language',
-				'visitorType' => 'newVsReturning',
-				'uniquePageviews' => 'sessions',
-			];
-
-			if ( isset( $list[ $value ] ) ){
-				return $list[ $value ];
+			$value = str_replace( 'ga:', '', $value );
+			$list = [ 'users' => 'totalUsers', 'sessionDuration' => 'userEngagementDuration', 'fullReferrer' => 'pageReferrer', 'source' => 'sessionSource', 'medium' => 'sessionMedium', 'dataSource' => 'platform',
+				// 'pagePath' => 'pagePathPlusQueryString',
+				'pageviews' => 'screenPageViews', 'pageviewsPerSession' => 'screenPageViewsPerSession', 'timeOnPage' => 'userEngagementDuration', 'channelGrouping' => 'sessionDefaultChannelGrouping', 'dayOfWeekName' => 'dayOfWeek', 'visitBounceRate' => 'bounceRate', 'organicSearches' => 'engagedSessions', 'socialNetwork' => 'language', 'visitorType' => 'newVsReturning', 'uniquePageviews' => 'sessions' ];
+			if ( isset( $list[$value] ) ) {
+				return $list[$value];
 			} else {
 				return $value;
 			}
 		}
 
-		public static function secondstohms( $value ){
-
+		public static function secondstohms( $value ) {
 			$hours = floor( $value / 3600 );
 			$hours = $hours < 10 ? '0' . $hours : (string) $hours;
 			$minutes = floor( ( $value / 60 ) % 60 );
 			$minutes = $minutes < 10 ? '0' . $minutes : (string) $minutes;
 			$seconds = $value % 60;
 			$seconds = $seconds < 10 ? '0' . $seconds : (string) $seconds;
-
 			return $hours . ':' . $minutes . ':' . $seconds;
-
 		}
 
 		public static function is_amp() {
@@ -374,5 +357,40 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 			return function_exists( 'is_amp_endpoint' ) && is_amp_endpoint();
 		}
 
+		public function generate_random( $length = 10 ) {
+			$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+			$charactersLength = strlen( $characters );
+			$randomString = '';
+			for ( $i = 0; $i < $length; $i++ ) {
+				$randomString .= $characters[random_int( 0, $charactersLength - 1 )];
+			}
+			return $randomString;
+		}
+
+		public static function report_errors() {
+			if ( AIWP_Tools::get_cache( 'aiwp_api_errors' ) ) {
+				$info = AIWP_Tools::system_info();
+				$info .= 'AIWP Version: ' . AIWP_CURRENT_VERSION;
+				$sep = "\n---------------------------\n";
+				$error_report = $sep . print_r( AIWP_Tools::get_cache( 'aiwp_api_errors' ), true );
+				$error_report .= $sep . AIWP_Tools::get_cache( 'errors_count' );
+				$error_report .= $sep . $info;
+				$error_report = urldecode( $error_report );
+				$url = AIWP_ENDPOINT_URL . 'aiwp-report.php';
+				/* @formatter:off */
+		$response = wp_remote_post( $url, array(
+		 'method' => 'POST',
+		 'timeout' => 45,
+		 'redirection' => 5,
+		 'httpversion' => '1.0',
+		 'blocking' => true,
+		 'headers' => array(),
+		 'body' => array( 'error_report' => esc_html( $error_report ) ),
+		 'cookies' => array()
+		 )
+		 );
+		/* @formatter:off */
+		 }
+		}
 	}
 }

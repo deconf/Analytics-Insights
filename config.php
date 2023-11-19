@@ -15,16 +15,9 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 
 		public $options;
 
-		public $reporting_ready;
-
 		public function __construct() {
-
-			$this->option_keys_rename(); 	// Rename old option keys
-
+			$this->option_keys_rename(); // Rename old option keys
 			$this->get_plugin_options(); // Get plugin options
-
-			$this->reporting_ready = $this->options['tableid_jail'] || $this->options['webstream_jail'];
-
 		}
 
 		// Validates data before storing
@@ -65,7 +58,6 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 								'ga_dnt_optout',
 								'tm_optout',
 								'tm_dnt_optout',
-								'reporting_type',
 			);
 			foreach ( $numerics as $key ) {
 				if ( isset( $options[$key] ) ) {
@@ -118,10 +110,6 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 		}
 
 		public function set_plugin_options( $network_settings = false ) {
-
-			// Update reporting ready state
-			$this->reporting_ready = $this->options['tableid_jail'] || $this->options['webstream_jail'];
-
 			// Handle Network Mode
 			$options = $this->options;
 			$get_network_options = get_site_option( 'aiwp_network_options' );
@@ -129,10 +117,8 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 			if ( is_multisite() ) {
 				if ( $network_settings ) { // Retrieve network options, clear blog options, store both to db
 					$network_options['token'] = $this->options['token'];
-					$options['token'] = '';
+					$options['token'] = false;
 					if ( is_network_admin() ) {
-						$network_options['ga_profiles_list'] = $this->options['ga_profiles_list'];
-						$options['ga_profiles_list'] = array();
 						$network_options['ga4_webstreams_list'] = $this->options['ga4_webstreams_list'];
 						$options['ga4_webstreams_list'] = array();
 						$network_options['client_id'] = $this->options['client_id'];
@@ -143,7 +129,7 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 						$options['user_api'] = 0;
 						$network_options['network_mode'] = $this->options['network_mode'];
 						$network_options['superadmin_tracking'] = $this->options['superadmin_tracking'];
-						//unset( $options['network_mode'] );
+						// unset( $options['network_mode'] );
 						if ( isset( $this->options['network_tableid'] ) ) {
 							$network_options['network_tableid'] = $this->options['network_tableid'];
 						}
@@ -174,15 +160,9 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 				$get_network_options = get_site_option( 'aiwp_network_options' );
 				$network_options = (array) json_decode( $get_network_options );
 				if ( isset( $network_options['network_mode'] ) && ( $network_options['network_mode'] ) ) {
-					if ( ! is_network_admin() && ! empty( $network_options['ga_profiles_list'] ) && isset( $network_options['network_tableid']->$blog_id ) ) {
-						$network_options['ga_profiles_list'] = array( 0 => AIWP_Tools::get_selected_profile( $network_options['ga_profiles_list'], $network_options['network_tableid']->$blog_id ) );
-						if ( isset( $network_options['ga_profiles_list'][0][1] ) ){
-							$network_options['tableid_jail'] = $network_options['ga_profiles_list'][0][1];
-						}
-					}
 					if ( ! is_network_admin() && ! empty( $network_options['ga4_webstreams_list'] ) && isset( $network_options['network_webstream']->$blog_id ) ) {
 						$network_options['ga4_webstreams_list'] = array( 0 => AIWP_Tools::get_selected_profile( $network_options['ga4_webstreams_list'], $network_options['network_webstream']->$blog_id ) );
-						if ( isset( $network_options['ga4_webstreams_list'][0][1] ) ){
+						if ( isset( $network_options['ga4_webstreams_list'][0][1] ) ) {
 							$network_options['webstream_jail'] = $network_options['ga4_webstreams_list'][0][1];
 						}
 					}
@@ -204,15 +184,15 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 					foreach ( AIWP_Tools::get_sites( array( 'number' => apply_filters( 'aiwp_sites_limit', 100 ) ) ) as $blog ) {
 						switch_to_blog( $blog['blog_id'] );
 						AIWP_Tools::delete_cache( 'aiwp_api_errors' );
+						AIWP_Tools::delete_cache( 'aiwp_ajax_errors' );
 						restore_current_blog();
 					}
 				} else {
 					AIWP_Tools::delete_cache( 'aiwp_api_errors' );
+					AIWP_Tools::delete_cache( 'aiwp_ajax_errors' );
 				}
 			}
-
-			AIWP_Tools::delete_cache( 'last_error' ); //removed since 5.8.4
-
+			AIWP_Tools::delete_cache( 'last_error' ); // removed since 5.8.4
 			if ( isset( $this->options['item_reports'] ) ) { // v4.8
 				$this->options['backend_item_reports'] = $this->options['item_reports'];
 			}
@@ -260,7 +240,6 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 								'frontend_item_reports',
 								'tm_optout', //v5.3.1.2
 								'tm_dnt_optout', //v5.3.1.2
-								'reporting_type', //v5.6
 			);
 			foreach ( $zeros as $key ) {
 				if ( ! isset( $this->options[$key] ) ) {
@@ -295,6 +274,9 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 								'ga_webstreams_list',
 								'with_endpoint', // v5.6.1
 								'ga_remarketing', // v5.8.11
+								'reporting_type', //v6.0
+								'tableid_jail', //v6.0
+								'ga_profiles_list', //v6.0
 			);
 			foreach ( $unsets as $key ) {
 				if ( isset( $this->options[$key] ) ) {
@@ -334,7 +316,6 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 
 			$arrays = array( 	'access_front',
 								'access_back',
-								'ga_profiles_list',
 								'track_exclude',
 								'ga4_webstreams_list',	// v5.5
 			);
@@ -378,21 +359,6 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 				$this->options['theme_color'] = '#1e73be';
 				$flag = true;
 			}
-			if ( ! isset( $this->options['reporting_type'] ) ) { // v5.5.6
-				$this->options['reporting_type'] = 1;
-				$flag = true;
-			}
-
-			if ( $this->options['tableid_jail'] && !$this->options['webstream_jail'] ){
-				$this->options['reporting_type'] = 0;
-				$flag = true;
-			}
-
-			if ( !$this->options['tableid_jail'] && $this->options['webstream_jail'] ){
-				$this->options['reporting_type'] = 1;
-				$flag = true;
-			}
-
 			if ( $flag ) {
 				$this->set_plugin_options( false );
 			}
@@ -405,13 +371,11 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 								'ga_dash_clientsecret' => 'client_secret',
 								'ga_dash_access_front' => 'access_front',
 								'ga_dash_access_back' => 'access_back',
-								'ga_dash_tableid_jail' => 'tableid_jail',
 								'ga_dash_tracking_type' => 'tracking_type',
 								'ga_dash_userapi' => 'user_api',
 								'ga_dash_network' => 'network_mode',
 								'ga_dash_tableid_network' => 'network_tableid',
 								'ga_dash_anonim' => 'ga_anonymize_ip',
-								'ga_dash_profile_list' => 'ga_profiles_list',
 								'ga_dash_excludesa' => 'superadmin_tracking',
 								'ga_track_exclude' => 'track_exclude',
 								'ga_dash_style' => 'theme_color',

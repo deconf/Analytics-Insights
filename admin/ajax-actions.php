@@ -64,7 +64,7 @@ if ( ! class_exists( 'AIWP_Backend_Ajax' ) ) {
 				wp_die( 631 );
 			}
 
-			if ( $this->aiwp->config->options['token'] && $this->aiwp->config->reporting_ready && $from && $to ) {
+			if ( $this->aiwp->config->options['token'] && $this->aiwp->config->options['webstream_jail'] && $from && $to ) {
 				if ( null === $this->aiwp->gapi_controller ) {
 					$this->aiwp->gapi_controller = new AIWP_GAPI_Controller();
 				}
@@ -72,13 +72,9 @@ if ( ! class_exists( 'AIWP_Backend_Ajax' ) ) {
 				wp_die( 624 );
 			}
 			if ( false == $projectId ) {
-				if ( $this->aiwp->config->options['reporting_type'] ){
 					$projectId = $this->aiwp->config->options['webstream_jail'];
-				} else {
-					$projectId = $this->aiwp->config->options['tableid_jail'];
-				}
 			}
-			$profile_info = AIWP_Tools::get_selected_profile( $this->aiwp->config->options['ga_profiles_list'], $projectId );
+			$profile_info = AIWP_Tools::get_selected_profile( $this->aiwp->config->options['ga4_webstreams_list'], $projectId );
 			if ( isset( $profile_info[4] ) ) {
 				$this->aiwp->gapi_controller->timeshift = $profile_info[4];
 			} else {

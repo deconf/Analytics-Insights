@@ -21,12 +21,6 @@ if ( ! class_exists( 'AIWP_Tracking_TagManager_Base' ) ) {
 
 		public function __construct() {
 			$this->aiwp = AIWP();
-			$profile = AIWP_Tools::get_selected_profile( $this->aiwp->config->options['ga_profiles_list'], $this->aiwp->config->options['tableid_jail'] );
-			if ( isset( $profile[2] ) ){
-				$this->gaid = sanitize_text_field( $profile[2] );
-			} else {
-				$this->gaid = '';
-			}
 		}
 
 		/**
