@@ -209,22 +209,19 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 * @param
 		 *            $all
 		 */
-		public function reset_token( $all = false ) {
+		public function reset_token( $all = false, $valid_token = true ) {
 			$token = (array) $this->aiwp->config->options['token'];
 			if ( $all ) {
-				$this->aiwp->config->options['site_jail'] = '';
-				$this->aiwp->config->options['sites_list'] = array();
 				$this->aiwp->config->options['ga4_webstreams_list'] = array();
 				$this->aiwp->config->options['webstream_jail'] = '';
 			}
 			$this->aiwp->config->options['token'] = false;
-			$this->aiwp->config->options['sites_list_locked'] = 0;
 			if ( is_multisite() && $this->aiwp->config->options['network_mode'] ) {
 				$this->aiwp->config->set_plugin_options( true );
 			} else {
 				$this->aiwp->config->set_plugin_options();
 			}
-			if ( isset( $token['refresh_token'] ) ) {
+			if ( isset( $token['refresh_token'] ) && $valid_token ) {
 				// @formatter:off
 				$post_data = array(
 					'client_id' => $this->client_id,
@@ -251,13 +248,13 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			// Reset the token since these are unrecoverable errors and need user intervention
 			// We can also add 'INVALID_ARGUMENT'
 			if ( isset( $errors[2][0] ) && ( 'INVALID_ARGUMENTS' == $errors[2][0] || 'UNAUTHENTICATED' == $errors[2][0] || 'PERMISSION_DENIED' == $errors[2][0] ) ) {
-				$this->reset_token();
+				$this->reset_token( false, false );
 				return $errors[0];
 			}
 			// Reset the token since these are unrecoverable errors and need user intervention
 			// We can also add 'invalid_grant'
 			if ( isset( $errors[0] ) && ( 'invalid_grant' == $errors[0] || 'invalid_token' == $errors[0] ) ) {
-				$this->reset_token();
+				$this->reset_token( false, false );
 				return $errors[0];
 			}
 			if ( 401 == $errors[0] || 403 == $errors[0] ) {
@@ -1333,10 +1330,10 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					$aiwp_data['category'][] = $values;
 				}
 			}
+
+			// Leveraging total counts to JavaScript
 			$aiwp_data['totals'] = 0;
-			if ( isset( $category['totals'][0]['metricValues'][0]['value'] ) ) {
-				$aiwp_data['totals'] = $data['totals'][0]['metricValues'][0]['value'];
-			}
+
 			return $aiwp_data;
 		}
 

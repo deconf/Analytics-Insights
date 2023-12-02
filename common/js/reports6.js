@@ -779,6 +779,27 @@ jQuery.fn.extend( {
 					rtData[ "rows" ] = [];
 					rtData[ "category" ] = [];
 				}
+				
+				desktopCount = 0;
+				mobileCount = 0;
+				tabletCount = 0;
+
+				for ( i = 0; i < rtData[ "category" ].length; i++ ) {
+				
+					screenName.push( rtData[ "category" ][ i ][ 0 ] );
+					
+					if ( rtData[ "category" ][ i ][ 0 ] == "desktop" ) {
+						desktopCount = desktopCount + parseInt( rtData[ "category" ][ i ][ 1 ] );
+					}
+					if ( rtData[ "category" ][ i ][ 0 ] == "mobile" ) {
+						mobileCount = mobileCount + parseInt( rtData[ "category" ][ i ][ 1 ] );
+					}
+					if ( rtData[ "category" ][ i ][ 0 ] == "tablet" ) {
+						tabletCount = tabletCount + parseInt( rtData[ "category" ][ i ][ 1 ] );
+					}
+				}
+				
+				rtData[ "totals" ] = desktopCount + mobileCount	+ tabletCount;			
 
 				if ( parseInt( rtData[ "totals" ] ) !== parseInt( document.getElementById( "aiwp-online-ga4" ).innerHTML ) ) {
 					jQuery( "#aiwp-online-ga4" ).fadeOut( "slow" );
@@ -806,25 +827,6 @@ jQuery.fn.extend( {
 
 				if ( rtData[ "totals" ] == 0 ) {
 					rtData[ "rows" ] = [];
-				}
-				
-				desktopCount = 0;
-				mobileCount = 0;
-				tabletCount = 0;
-
-				for ( i = 0; i < rtData[ "category" ].length; i++ ) {
-				
-					screenName.push( rtData[ "category" ][ i ][ 0 ] );
-					
-					if ( rtData[ "category" ][ i ][ 0 ] == "desktop" ) {
-						desktopCount = desktopCount + parseInt( rtData[ "category" ][ i ][ 1 ] );
-					}
-					if ( rtData[ "category" ][ i ][ 0 ] == "mobile" ) {
-						mobileCount = mobileCount + parseInt( rtData[ "category" ][ i ][ 1 ] );
-					}
-					if ( rtData[ "category" ][ i ][ 0 ] == "tablet" ) {
-						tabletCount = tabletCount + parseInt( rtData[ "category" ][ i ][ 1 ] );
-					}
 				}
 
 				for ( i = 0; i < rtData[ "rows" ].length; i++ ) {

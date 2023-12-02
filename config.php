@@ -277,6 +277,9 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 								'reporting_type', //v6.0
 								'tableid_jail', //v6.0
 								'ga_profiles_list', //v6.0
+								'sites_list_locked', //v6.0.3
+								'site_jail', //v6.0.3
+								'sites_list', //v6.0.3
 			);
 			foreach ( $unsets as $key ) {
 				if ( isset( $this->options[$key] ) ) {

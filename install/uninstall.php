@@ -19,7 +19,7 @@ class AIWP_Uninstall {
 			$aiwp->gapi_controller = new AIWP_GAPI_Controller();
 		}
 		try {
-			$aiwp->gapi_controller->reset_token( true );
+			$aiwp->gapi_controller->reset_token( true, true );
 		} catch ( Exception $e ) {
 		}
 		if ( is_multisite() ) { // Cleanup Network install

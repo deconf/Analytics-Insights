@@ -337,6 +337,7 @@ final class AIWP_Settings {
 			<td>
 			<?php if ( 'ga4tracking' == $options['tracking_type'] && $aiwp->config->options['webstream_jail'] ) : ?>
 				<?php $webstream_info = AIWP_Tools::get_selected_profile( $aiwp->config->options['ga4_webstreams_list'], $aiwp->config->options['webstream_jail'] ); ?>
+				<?php $webstream_info[5] = isset( $webstream_info[5] ) ? $webstream_info[5] : '' ?>
 				<pre><?php echo __( "Stream Name:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[0] ) . "<br />" . __( "Stream ID:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[1] ) . "<br />" . __( "Stream URL:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[2] ) . "<br />" . __( "Measurement ID:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[3] ) . "<br />" . __( "Time Zone:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[5] );?></pre>
 				<?php endif; ?>
 			</td>
@@ -825,7 +826,7 @@ final class AIWP_Settings {
 		}
 		if ( isset( $_REQUEST['Reset'] ) ) {
 			if ( isset( $_REQUEST['aiwp_security'] ) && wp_verify_nonce( $_REQUEST['aiwp_security'], 'aiwp_form' ) ) {
-				$aiwp->gapi_controller->reset_token( true );
+				$aiwp->gapi_controller->reset_token( true, true );
 				AIWP_Tools::clear_cache();
 				$message = "<div class='updated' id='aiwp-autodismiss'><p>" . __( "Token Reseted and Revoked.", 'analytics-insights' ) . "</p></div>";
 				$options = self::update_options( 'Reset' );
@@ -932,7 +933,8 @@ final class AIWP_Settings {
 		<td class="aiwp-settings-title"></td>
 		<td>
 			<?php $webstream_info = AIWP_Tools::get_selected_profile( $aiwp->config->options['ga4_webstreams_list'], $aiwp->config->options['webstream_jail'] ); ?>
-							<pre><?php echo __( "Stream Name:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[0] ) . "<br />" . __( "Stream ID:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[1] ) . "<br />" . __( "Stream URL:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[2] ) . "<br />" . __( "Measurement ID:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[3] ) . "<br />" . __( "Time Zone:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[5] );?></pre>
+			<?php $webstream_info[5] = isset( $webstream_info[5] ) ? $webstream_info[5] : '' ?>
+			<pre><?php echo __( "Stream Name:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[0] ) . "<br />" . __( "Stream ID:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[1] ) . "<br />" . __( "Stream URL:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[2] ) . "<br />" . __( "Measurement ID:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[3] ) . "<br />" . __( "Time Zone:", 'analytics-insights' ) . "\t" . esc_html( $webstream_info[5] );?></pre>
 		</td>
 	</tr>
 	<?php endif; ?>
@@ -1071,7 +1073,7 @@ final class AIWP_Settings {
 		}
 		if ( isset( $_REQUEST['Reset'] ) ) {
 			if ( isset( $_REQUEST['aiwp_security'] ) && wp_verify_nonce( $_REQUEST['aiwp_security'], 'aiwp_form' ) ) {
-				$aiwp->gapi_controller->reset_token( true );
+				$aiwp->gapi_controller->reset_token( true, true );
 				AIWP_Tools::clear_cache();
 				$message = "<div class='updated' id='aiwp-autodismiss'><p>" . __( "Token Reseted and Revoked.", 'analytics-insights' ) . "</p></div>";
 				$options = self::update_options( 'Reset' );

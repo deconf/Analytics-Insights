@@ -49,7 +49,7 @@ if ( ! class_exists( 'AIWP_Frontend_Setup' ) ) {
 				wp_enqueue_style( "wp-jquery-ui-dialog" );
 				wp_register_script( 'googlecharts', 'https://www.gstatic.com/charts/loader.js', array(), null );
 				wp_enqueue_script( 'aiwp-nprogress', AIWP_URL . 'common/nprogress/nprogress' . AIWP_Tools::script_debug_suffix() . '.js', array( 'jquery' ), AIWP_CURRENT_VERSION );
-				wp_enqueue_script( 'aiwp-frontend-item-reports', AIWP_URL . 'common/js/reports5' . AIWP_Tools::script_debug_suffix() . '.js', array( 'aiwp-nprogress', 'googlecharts', 'jquery', 'jquery-ui-dialog' ), AIWP_CURRENT_VERSION, true );
+				wp_enqueue_script( 'aiwp-frontend-item-reports', AIWP_URL . 'common/js/reports6' . AIWP_Tools::script_debug_suffix() . '.js', array( 'aiwp-nprogress', 'googlecharts', 'jquery', 'jquery-ui-dialog' ), AIWP_CURRENT_VERSION, true );
 				/* @formatter:off */
 				wp_localize_script( 'aiwp-frontend-item-reports', 'aiwpItemData', array(
 					'ajaxurl' => admin_url( 'admin-ajax.php' ),
