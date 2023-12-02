@@ -210,7 +210,6 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 *            $all
 		 */
 		public function reset_token( $all = false, $valid_token = true ) {
-			$token = (array) $this->aiwp->config->options['token'];
 			if ( $all ) {
 				$this->aiwp->config->options['ga4_webstreams_list'] = array();
 				$this->aiwp->config->options['webstream_jail'] = '';
@@ -221,12 +220,21 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			} else {
 				$this->aiwp->config->set_plugin_options();
 			}
+		}
+
+		/**
+		 * Handles the token revoke process
+		 *
+		 * @param
+		 *            $all
+		 */
+		public function revoke_token( $all = false, $valid_token = true ) {
+			// See notes don't use unless mandatory
+			$token = (array) $this->aiwp->config->options['token'];
 			if ( isset( $token['refresh_token'] ) && $valid_token ) {
 				// @formatter:off
 				$post_data = array(
-					'client_id' => $this->client_id,
-					'client_secret' => $this->client_secret,
-					'refresh_token' => $token['refresh_token'],
+					'token' => $token['refresh_token'],
 				);
 				// @formatter:on
 				$request_args = array( 'body' => $post_data, 'headers' => array( 'Referer' => AIWP_CURRENT_VERSION ) );
