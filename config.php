@@ -183,13 +183,13 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 				if ( is_multisite() ) { // Cleanup errors and cookies on the entire network
 					foreach ( AIWP_Tools::get_sites( array( 'number' => apply_filters( 'aiwp_sites_limit', 100 ) ) ) as $blog ) {
 						switch_to_blog( $blog['blog_id'] );
-						AIWP_Tools::delete_cache( 'aiwp_api_errors' );
-						AIWP_Tools::delete_cache( 'aiwp_ajax_errors' );
+						AIWP_Tools::delete_cache( 'api_errors' );
+						AIWP_Tools::delete_cache( 'ajax_errors' );
 						restore_current_blog();
 					}
 				} else {
-					AIWP_Tools::delete_cache( 'aiwp_api_errors' );
-					AIWP_Tools::delete_cache( 'aiwp_ajax_errors' );
+					AIWP_Tools::delete_cache( 'api_errors' );
+					AIWP_Tools::delete_cache( 'ajax_errors' );
 				}
 			}
 			AIWP_Tools::delete_cache( 'last_error' ); // removed since 5.8.4

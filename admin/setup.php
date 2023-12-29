@@ -76,7 +76,7 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 			/*
 			 * AIWP UI
 			 */
-			if ( AIWP_Tools::get_cache( 'aiwp_api_errors' ) ) {
+			if ( AIWP_Tools::get_cache( 'api_errors' ) ) {
 				$ed_bubble = '!';
 			} else {
 				$ed_bubble = '';

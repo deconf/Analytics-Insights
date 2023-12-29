@@ -4,7 +4,7 @@ Donate link: https://deconf.com/donate/
 Tags: analytics,google analytics,google analytics 4,google analytics dashboard, GA4, google analytics plugin,google analytics tracking code,google analytics widget,wordpress analytics
 Requires at least: 3.5
 Tested up to: 6.4.1
-Stable tag: 6.0.4
+Stable tag: 6.1
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -91,6 +91,12 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 
 == Changelog ==
 
+= 6.1 (2023.12.20) =
+* Enhancements:
+	* catch additional Google Analytics API errors
+* Bug Fixes:
+	* fixes Google Analytics API errors cache prefix 
+	
 = 6.0.4 (2023.12.02) =
 * Bug Fixes:
 	* fixes a bug which was causing all tokens corresponding to a Gooogle Analytics account to be invalidated when clearing authorization on a website

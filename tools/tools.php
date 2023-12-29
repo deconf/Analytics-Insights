@@ -228,7 +228,7 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 
 		public static function set_error( $e, $timeout, $ajax = false ) {
 			if ( $ajax ) {
-				self::set_cache( 'aiwp_ajax_errors', esc_html( print_r( $e, true ) ), $timeout );
+				self::set_cache( 'ajax_errors', esc_html( print_r( $e, true ) ), $timeout );
 			} else {
 				if ( is_object( $e ) ) {
 					if ( method_exists( $e, 'get_error_code' ) && method_exists( $e, 'get_error_message' ) ) {
@@ -236,14 +236,14 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 						if ( 500 == $error_code || 503 == $error_code ) {
 							$timeout = 60;
 						}
-						self::set_cache( 'aiwp_api_errors', array( $e->get_error_code(), $e->get_error_message(), $e->get_error_data() ), $timeout );
+						self::set_cache( 'api_errors', array( $e->get_error_code(), $e->get_error_message(), $e->get_error_data() ), $timeout );
 					} else {
-						self::set_cache( 'aiwp_api_errors', array( 600, array(), esc_html( print_r( $e, true ) ) ), $timeout );
+						self::set_cache( 'api_errors', array( 600, array(), esc_html( print_r( $e, true ) ) ), $timeout );
 					}
 				} else if ( is_array( $e ) ) {
-					self::set_cache( 'aiwp_api_errors', array( 601, array(), esc_html( print_r( $e, true ) ) ), $timeout );
+					self::set_cache( 'api_errors', array( 601, array(), esc_html( print_r( $e, true ) ) ), $timeout );
 				} else {
-					self::set_cache( 'aiwp_api_errors', array( 602, array(), esc_html( print_r( $e, true ) ) ), $timeout );
+					self::set_cache( 'api_errors', array( 602, array(), esc_html( print_r( $e, true ) ) ), $timeout );
 				}
 				// Count Errors until midnight
 				$midnight = strtotime( "tomorrow 00:00:00" ); // UTC midnight
@@ -368,11 +368,11 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 		}
 
 		public static function report_errors() {
-			if ( AIWP_Tools::get_cache( 'aiwp_api_errors' ) ) {
+			if ( AIWP_Tools::get_cache( 'api_errors' ) ) {
 				$info = AIWP_Tools::system_info();
 				$info .= 'AIWP Version: ' . AIWP_CURRENT_VERSION;
 				$sep = "\n---------------------------\n";
-				$error_report = $sep . print_r( AIWP_Tools::get_cache( 'aiwp_api_errors' ), true );
+				$error_report = $sep . print_r( AIWP_Tools::get_cache( 'api_errors' ), true );
 				$error_report .= $sep . AIWP_Tools::get_cache( 'errors_count' );
 				$error_report .= $sep . $info;
 				$error_report = urldecode( $error_report );

@@ -115,10 +115,12 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			if ( isset( $token['error'] ) ) {
 				$timeout = $this->get_timeouts();
 				$error = new WP_Error();
-				if ( isset( $token['error']['code'] ) && isset( $token['error']['code'] ) && isset( $token['error']['status'] ) ) {
+				if ( isset( $token['error']['code'] ) && isset( $token['error']['status'] ) ) {
 					$error->add( $token['error']['code'], $token['error']['message'], array( $token['error']['status'], 'trying to exchange access code for token' ) );
 				} else if ( isset( $token['error'] ) && isset( $token['error_description'] ) ) {
 					$error->add( $token['error'], $token['error_description'], 'trying to exchange access code for token' );
+				} else if ( isset( $token['error']['code'] ) && isset( $token['error']['message'] ) ) {
+					$error->add( $token['error']['code'], $token['error']['message'], 'trying to verify site' );
 				}
 				AIWP_Tools::set_error( $error, $timeout );
 				return false;
@@ -164,10 +166,12 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 						if ( isset( $newtoken['error'] ) ) {
 							$timeout = $this->get_timeouts();
 							$error = new WP_Error();
-							if ( isset( $newtoken['error']['code'] ) && isset( $newtoken['error']['code'] ) && isset( $newtoken['error']['status'] ) ) {
+							if ( isset( $newtoken['error']['code'] )  && isset( $newtoken['error']['status'] ) ) {
 								$error->add( $newtoken['error']['code'], $newtoken['error']['message'], array( $newtoken['error']['status'], 'trying to refresh token' ) );
 							} else if ( isset( $newtoken['error'] ) && isset( $newtoken['error_description'] ) ) {
 								$error->add( $newtoken['error'], $newtoken['error_description'], 'trying to refresh token' );
+							} else if ( isset( $newtoken['error']['code'] ) && isset( $newtoken['error']['message'] ) ) {
+								$error->add( $newtoken['error']['code'], $newtoken['error']['message'], 'trying to verify site' );
 							}
 							AIWP_Tools::set_error( $error, $timeout );
 							return false;
@@ -248,7 +252,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 * @return boolean
 		 */
 		public function api_errors_handler() {
-			$errors = AIWP_Tools::get_cache( 'aiwp_api_errors' );
+			$errors = AIWP_Tools::get_cache( 'api_errors' );
 			// Proceed as normal if we don't know the error
 			if ( false === $errors || ! isset( $errors[0] ) ) {
 				return false;
@@ -350,10 +354,12 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					if ( isset( $accountsData['error'] ) ) {
 						$timeout = $this->get_timeouts();
 						$error = new WP_Error();
-						if ( isset( $accountsData['error']['code'] ) && isset( $accountsData['error']['code'] ) && isset( $accountsData['error']['status'] ) ) {
+						if ( isset( $accountsData['error']['code'] ) && isset( $accountsData['error']['status'] ) ) {
 							$error->add( $accountsData['error']['code'], $accountsData['error']['message'], array( $accountsData['error']['status'], 'trying to refresh token' ) );
 						} else if ( isset( $accountsData['error'] ) && isset( $accountsData['error_description'] ) ) {
 							$error->add( $accountsData['error'], $accountsData['error_description'], 'trying to refresh token' );
+						} else if ( isset( $accountsData['error']['code'] ) && isset( $accountsData['error']['message'] ) ) {
+							$error->add( $accountsData['error']['code'], $accountsData['error']['message'], 'trying to verify site' );
 						}
 						AIWP_Tools::set_error( $error, $timeout );
 						return $error->get_error_code();
@@ -377,10 +383,12 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 									if ( isset( $propertiesData['error'] ) ) {
 										$timeout = $this->get_timeouts();
 										$error = new WP_Error();
-										if ( isset( $propertiesData['error']['code'] ) && isset( $propertiesData['error']['code'] ) && isset( $propertiesData['error']['status'] ) ) {
+										if ( isset( $propertiesData['error']['code'] ) && isset( $propertiesData['error']['status'] ) ) {
 											$error->add( $propertiesData['error']['code'], $propertiesData['error']['message'], array( $propertiesData['error']['status'], 'trying to refresh token' ) );
 										} else if ( isset( $propertiesData['error'] ) && isset( $propertiesData['error_description'] ) ) {
 											$error->add( $propertiesData['error'], $propertiesData['error_description'], 'trying to refresh token' );
+										} else if ( isset( $propertiesData['error']['code'] ) && isset( $propertiesData['error']['message'] ) ) {
+											$error->add( $propertiesData['error']['code'], $propertiesData['error']['message'], 'trying to verify site' );
 										}
 										AIWP_Tools::set_error( $error, $timeout );
 										return $error->get_error_code();
@@ -404,10 +412,12 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 													if ( isset( $datastreamsData['error'] ) ) {
 														$timeout = $this->get_timeouts();
 														$error = new WP_Error();
-														if ( isset( $datastreamsData['error']['code'] ) && isset( $datastreamsData['error']['code'] ) && isset( $datastreamsData['error']['status'] ) ) {
+														if ( isset( $datastreamsData['error']['code'] ) && isset( $datastreamsData['error']['status'] ) ) {
 															$error->add( $datastreamsData['error']['code'], $datastreamsData['error']['message'], array( $datastreamsData['error']['status'], 'trying to refresh token' ) );
 														} else if ( isset( $datastreamsData['error'] ) && isset( $datastreamsData['error_description'] ) ) {
 															$error->add( $datastreamsData['error'], $datastreamsData['error_description'], 'trying to refresh token' );
+														} else if ( isset( $datastreamsData['error']['code'] ) && isset( $datastreamsData['error']['message'] ) ) {
+															$error->add( $datastreamsData['error']['code'], $datastreamsData['error']['message'], 'trying to verify site' );
 														}
 														AIWP_Tools::set_error( $error, $timeout );
 														return $error->get_error_code();
@@ -587,10 +597,12 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					if ( isset( $response_data['error'] ) ) {
 						$timeout = $this->get_timeouts();
 						$error = new WP_Error();
-						if ( isset( $response_data['error']['code'] ) && isset( $response_data['error']['code'] ) && isset( $response_data['error']['status'] ) ) {
+						if ( isset( $response_data['error']['code'] ) && isset( $response_data['error']['status'] ) ) {
 							$error->add( $response_data['error']['code'], $response_data['error']['message'], array( $response_data['error']['status'], 'trying to refresh token' ) );
 						} else if ( isset( $response_data['error'] ) && isset( $response_data['error_description'] ) ) {
 							$error->add( $response_data['error'], $response_data['error_description'], 'trying to refresh token' );
+						} else if ( isset( $response_data['error']['code'] ) && isset( $response_data['error']['message'] ) ) {
+							$error->add( $response_data['error']['code'], $response_data['error']['message'], 'trying to verify site' );
 						}
 						AIWP_Tools::set_error( $error, $timeout );
 						return $error->get_error_code();
@@ -1248,10 +1260,12 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					if ( isset( $response_data['error'] ) ) {
 						$timeout = $this->get_timeouts();
 						$error = new WP_Error();
-						if ( isset( $response_data['error']['code'] ) && isset( $response_data['error']['code'] ) && isset( $response_data['error']['status'] ) ) {
+						if ( isset( $response_data['error']['code'] ) && isset( $response_data['error']['status'] ) ) {
 							$error->add( $response_data['error']['code'], $response_data['error']['message'], array( $response_data['error']['status'], 'trying to refresh token' ) );
 						} else if ( isset( $response_data['error'] ) && isset( $response_data['error_description'] ) ) {
 							$error->add( $response_data['error'], $response_data['error_description'], 'trying to refresh token' );
+						} else if ( isset( $response_data['error']['code'] ) && isset( $response_data['error']['message'] ) ) {
+							$error->add( $response_data['error']['code'], $response_data['error']['message'], 'trying to verify site' );
 						}
 						AIWP_Tools::set_error( $error, $timeout );
 						return $error->get_error_code();
@@ -1286,10 +1300,12 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 					if ( isset( $response_data['error'] ) ) {
 						$timeout = $this->get_timeouts();
 						$error = new WP_Error();
-						if ( isset( $response_data['error']['code'] ) && isset( $response_data['error']['code'] ) && isset( $response_data['error']['status'] ) ) {
+						if ( isset( $response_data['error']['code'] ) && isset( $response_data['error']['status'] ) ) {
 							$error->add( $response_data['error']['code'], $response_data['error']['message'], array( $response_data['error']['status'], 'trying to refresh token' ) );
 						} else if ( isset( $response_data['error'] ) && isset( $response_data['error_description'] ) ) {
 							$error->add( $response_data['error'], $response_data['error_description'], 'trying to refresh token' );
+						} else if ( isset( $response_data['error']['code'] ) && isset( $response_data['error']['message'] ) ) {
+							$error->add( $response_data['error']['code'], $response_data['error']['message'], 'trying to verify site' );
 						}
 						AIWP_Tools::set_error( $error, $timeout );
 						return $error->get_error_code();
