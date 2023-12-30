@@ -21,7 +21,7 @@ $aiwp = AIWP();
 			</h3>
 			<div class="inside">
 				<div class="aiwp-title">
-					<a href="https://deconf.com/clicky-web-analytics-review/?utm_source=aiwp_config&utm_medium=link&utm_content=clicky&utm_campaign=aiwp"><img src="<?php echo plugins_url( '../images/clicky.png' , __FILE__ ); ?>" /></a>
+					<a href="https://wordpress.org/plugins/clicky-analytics/"><img src="<?php echo plugins_url( '../images/clicky.png' , __FILE__ ); ?>" /></a>
 				</div>
 				<div class="aiwp-desc">
 					<?php printf(__('%s - A cookieless web analytics service for website tracking.', 'analytics-insights'), sprintf('<a href="https://deconf.com/clicky-web-analytics-review/?utm_source=aiwp_config&utm_medium=link&utm_content=clicky&utm_campaign=aiwp">%s</a>', __('Clicky Analytics', 'analytics-insights')));?>
