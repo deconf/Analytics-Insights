@@ -41,3 +41,9 @@ jQuery( document ).ready( function () {
 	jQuery( '#aiwp-autodismiss' ).delay( 2000 ).fadeOut( 'slow' );
 	
 } );
+
+jQuery(document).ready(function() {
+  jQuery("#webstream_jail").select2();
+  jQuery("#ga_target_geomap").select2();
+  jQuery(".network_webstreams").select2();
+});

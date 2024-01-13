@@ -64,6 +64,11 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 				$this->token_uri = AIWP_ENDPOINT_URL . 'aiwp-token.php';
 				$this->revoke_uri = AIWP_ENDPOINT_URL . 'aiwp-revoke.php';
 			}
+
+			if ( $this->aiwp->config->options['token'] ) {
+				$this->refresh_token();
+			}
+
 		}
 
 		/**
@@ -325,9 +330,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 * @return array
 		 */
 		public function refresh_profiles_ga4() {
-			if ( $this->aiwp->config->options['token'] ) {
-				$this->refresh_token();
-			}
+
 			$token = (array) $this->aiwp->config->options['token'];
 			$access_token = $token['access_token'];
 			$pageSize = 100;
@@ -477,9 +480,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 * @return 			int
 		 */
 		private function handle_corereports_ga4( $projectId, $from, $to, $metrics, $dimensions, $sortby, $filters, $serial ) {
-			if ( $this->aiwp->config->options['token'] ) {
-				$this->refresh_token();
-			}
+
 			if ( 'today' == $from ) {
 				$interval = 'hourly';
 			} else {
@@ -862,10 +863,9 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 			$local_filter = '';
 			if ( $this->aiwp->config->options['ga_target_geomap'] ) {
 				$dimensions = array( 'ga:city', 'ga:region' );
-				$country_codes = AIWP_Tools::get_countrycodes();
-				if ( isset( $country_codes[$this->aiwp->config->options['ga_target_geomap']] ) ) {
-					$local_filter = array( 'ga:country', 'EXACT', ( $country_codes[$this->aiwp->config->options['ga_target_geomap']] ), false );
-					$title = __( "Cities from", 'analytics-insights' ) . ' ' . __( $country_codes[$this->aiwp->config->options['ga_target_geomap']] );
+				if ( $this->aiwp->config->options['ga_target_geomap'] ) {
+					$local_filter = array( 'ga:country', 'EXACT', ( $this->aiwp->config->options['ga_target_geomap'] ), false );
+					$title = __( "Cities from", 'analytics-insights' ) . ' ' . __( $this->aiwp->config->options['ga_target_geomap'] );
 					$serial = 'qr7_' . $this->get_serial( $projectId . $from . $this->aiwp->config->options['ga_target_geomap'] . $filter . $metric );
 				}
 			}
@@ -1197,9 +1197,7 @@ if ( ! class_exists( 'AIWP_GAPI_Controller' ) ) {
 		 * @return array|int
 		 */
 		private function get_realtime_ga4( $projectId ) {
-			if ( $this->aiwp->config->options['token'] ) {
-				$this->refresh_token();
-			}
+
 			$metrics = 'activeUsers';
 			$dimensions = array( 'unifiedScreenName' );
 			$dimensions1 = array( 'deviceCategory' );

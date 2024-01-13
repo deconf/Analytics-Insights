@@ -91,6 +91,13 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 
 == Changelog ==
 
+= 6.2 (2024.01.10) =
+* Enhancements:
+	* refresh Google Analytics API token only once per session
+	* update the ISO 3166 country list for Google Analytics map charts
+	* add a search option to Google Analytics Streams drop-down list
+	* add a search option to countries list under location settings	
+
 = 6.1 (2023.12.20) =
 * Enhancements:
 	* catch additional Google Analytics API errors

@@ -259,16 +259,30 @@ final class AIWP_Settings {
 									<input type="number" name="options[ga_realtime_pages]" id="ga_realtime_pages" value="<?php echo (int)$options['ga_realtime_pages']; ?>" size="3">
 		</td>
 	</tr>
-							<?php self::html_section_delimiter(__( "Location Settings", 'analytics-insights' )); ?>
+			<?php self::html_section_delimiter(__( "Location Settings", 'analytics-insights' )); ?>
 	<tr>
-		<td colspan="2" class="aiwp-settings-title">
-			<?php echo __("Target Geo Map to country:", 'analytics-insights'); ?>
-			<input type="text" style="text-align: center;" name="options[ga_target_geomap]" value="<?php echo esc_attr($options['ga_target_geomap']); ?>" size="3">
+		<td class="aiwp-settings-title">
+			<label for="ga_target_geomap"><?php _e("Target Map Country:", 'analytics-insights' ); ?></label>
+		</td>
+		<td>
+			<select id="ga_target_geomap" name="options[ga_target_geomap]">
+			<?php $country_codes = AIWP_Tools::get_countrycodes(); ?>
+			<?php foreach ( $country_codes as $key => $value ) : ?>
+			<?php if ( $value ) : ?>
+				<option value="<?php echo esc_attr( $value ); ?>" <?php selected( $value, $options['ga_target_geomap'] ); ?> >
+	  		<?php echo esc_html( $value ) ?>
+				</option>
+			<?php endif; ?>
+			<?php endforeach; ?>
+			</select>
 		</td>
 	</tr>
+	</tr>
+			<?php self::html_section_delimiter(__( "Google Maps Settings", 'analytics-insights' )); ?>
+	<tr>
 	<tr>
 		<td colspan="2" class="aiwp-settings-title">
-				<?php echo __("Maps API Key:", 'analytics-insights'); ?>
+				<?php echo __("API Key:", 'analytics-insights'); ?>
 				<input type="text" style="text-align: center;" name="options[maps_api_key]" value="<?php echo esc_attr($options['maps_api_key']); ?>" size="50">
 		</td>
 	</tr>
@@ -1043,7 +1057,7 @@ final class AIWP_Settings {
 				$aiwp->config->options['ga4_webstreams_list'] = array();
 				$message = "<div class='updated' id='aiwp-autodismiss'><p>" . __( "Properties refreshed.", 'analytics-insights' ) . "</p></div>";
 				$options = self::update_options( 'network' );
-				if ( $aiwp->config->options['token'] && $aiwp->gapi_controller->refresh_token() ) {
+				if ( $aiwp->config->options['token'] ) {
 					if ( ! empty( $aiwp->config->options['ga4_webstreams_list'] ) ) {
 						$webstreams = $aiwp->config->options['ga4_webstreams_list'];
 					} else {
@@ -1163,7 +1177,7 @@ final class AIWP_Settings {
 			<label for="network_webstream"><?php echo '<strong>'. esc_html( $blog['domain'] ) . esc_url( $blog['path'] ) .'</strong>: ';?></label>
 		</td>
 		<td>
-			<select id="network_webstreams" <?php disabled(empty($options['ga4_webstreams_list']) || 1 == count($options['ga4_webstreams_list']), true); ?> name="options[network_webstream][<?php echo esc_attr( $blog['blog_id'] );?>]">
+			<select id="network_webstreams-<?php echo $blog['blog_id'] ?>" class="network_webstreams" <?php disabled(empty($options['ga4_webstreams_list']) || 1 == count($options['ga4_webstreams_list']), true); ?> name="options[network_webstream][<?php echo esc_attr( $blog['blog_id'] );?>]">
 			<?php if ( ! empty( $options['ga4_webstreams_list'] ) ) : ?>
 			<?php $temp_id = $blog['blog_id']; ?>
 			<?php foreach ( $options['ga4_webstreams_list'] as $items ) : ?>

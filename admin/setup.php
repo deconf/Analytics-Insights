@@ -108,8 +108,9 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 				if ( AIWP_Tools::check_roles( $this->aiwp->config->options['access_back'] ) && $this->aiwp->config->options['dashboard_widget'] ) {
 					if ( $this->aiwp->config->options['ga_target_geomap'] ) {
 						$country_codes = AIWP_Tools::get_countrycodes();
+						$country_codes = array_flip($country_codes);
 						if ( isset( $country_codes[$this->aiwp->config->options['ga_target_geomap']] ) ) {
-							$region = sanitize_text_field( $this->aiwp->config->options['ga_target_geomap'] );
+							$region = sanitize_text_field( $country_codes[$this->aiwp->config->options['ga_target_geomap']] );
 						} else {
 							$region = false;
 						}
@@ -220,8 +221,9 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 				if ( AIWP_Tools::check_roles( $this->aiwp->config->options['access_back'] ) && $this->aiwp->config->options['backend_item_reports'] ) {
 					if ( $this->aiwp->config->options['ga_target_geomap'] ) {
 						$country_codes = AIWP_Tools::get_countrycodes();
+						$country_codes = array_flip($country_codes);
 						if ( isset( $country_codes[$this->aiwp->config->options['ga_target_geomap']] ) ) {
-							$region = $this->aiwp->config->options['ga_target_geomap'];
+							$region = sanitize_text_field($country_codes[$this->aiwp->config->options['ga_target_geomap']]);
 						} else {
 							$region = false;
 						}
@@ -311,6 +313,8 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 			$settings_hooks = array( '_page_aiwp_settings', '_page_aiwp_backend_settings', '_page_aiwp_frontend_settings', '_page_aiwp_tracking_settings', '_page_aiwp_errors_debugging' );
 			if ( in_array( $new_hook, $settings_hooks ) ) {
 				wp_enqueue_style( 'wp-color-picker' );
+				wp_enqueue_style( 'aiwp-select2-css', AIWP_URL . 'common/select2/css/select2' . AIWP_Tools::script_debug_suffix() . '.css' );
+				wp_enqueue_script( 'aiwp-select2-js', AIWP_URL . 'common/select2/js/select2' . AIWP_Tools::script_debug_suffix() . '.js', array( 'jquery' ), AIWP_CURRENT_VERSION );
 				wp_enqueue_script( 'wp-color-picker' );
 				wp_enqueue_script( 'wp-color-picker-script-handle', plugins_url( 'js/wp-color-picker-script' . AIWP_Tools::script_debug_suffix() . '.js', __FILE__ ), array( 'wp-color-picker' ), false, true );
 				wp_enqueue_script( 'aiwp-settings', plugins_url( 'js/settings' . AIWP_Tools::script_debug_suffix() . '.js', __FILE__ ), array( 'jquery' ), AIWP_CURRENT_VERSION, true );
