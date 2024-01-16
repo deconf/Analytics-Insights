@@ -11,6 +11,7 @@ if ( ! defined( 'ABSPATH' ) )
 	exit();
 /* @formatter:off */
 	$country_codes = array(
+		'None' => 'None',
 		'AF' => 'Afghanistan',
 		'AL' => 'Albania',
 		'DZ' => 'Algeria',

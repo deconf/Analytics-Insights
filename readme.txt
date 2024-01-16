@@ -4,7 +4,7 @@ Donate link: https://deconf.com/donate/
 Tags: analytics,google analytics,google analytics 4,google analytics dashboard, GA4, google analytics plugin,google analytics tracking code,google analytics widget,wordpress analytics
 Requires at least: 3.5
 Tested up to: 6.4.1
-Stable tag: 6.1
+Stable tag: 6.3
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -90,6 +90,12 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 == Upgrade Notice ==
 
 == Changelog ==
+
+= 6.3 (2024.01.16) =
+* Bug Fixes:
+	* fixed a bug causing the plugin to lose authentication when saving settings
+* Security:
+	* Level: medium; multiple conditions must be met and valid only for websites which are using their own Google API Projects; credits [WPScan Team](https://wpscan.com/)
 
 = 6.2 (2024.01.10) =
 * Enhancements:

@@ -109,7 +109,7 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 					if ( $this->aiwp->config->options['ga_target_geomap'] ) {
 						$country_codes = AIWP_Tools::get_countrycodes();
 						$country_codes = array_flip($country_codes);
-						if ( isset( $country_codes[$this->aiwp->config->options['ga_target_geomap']] ) ) {
+						if ( 'None' !== $this->aiwp->config->options['ga_target_geomap'] && isset( $country_codes[$this->aiwp->config->options['ga_target_geomap']] ) ) {
 							$region = sanitize_text_field( $country_codes[$this->aiwp->config->options['ga_target_geomap']] );
 						} else {
 							$region = false;
@@ -222,7 +222,7 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 					if ( $this->aiwp->config->options['ga_target_geomap'] ) {
 						$country_codes = AIWP_Tools::get_countrycodes();
 						$country_codes = array_flip($country_codes);
-						if ( isset( $country_codes[$this->aiwp->config->options['ga_target_geomap']] ) ) {
+						if ( 'None' !== $this->aiwp->config->options['ga_target_geomap'] && isset( $country_codes[$this->aiwp->config->options['ga_target_geomap']] ) ) {
 							$region = sanitize_text_field($country_codes[$this->aiwp->config->options['ga_target_geomap']]);
 						} else {
 							$region = false;

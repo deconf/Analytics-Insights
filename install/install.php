@@ -28,7 +28,7 @@ class AIWP_Install {
 			$options['ga_event_tracking'] = 0;
 			$options['ga_event_downloads'] = 'zip|mp3*|mpe*g|pdf|docx*|pptx*|xlsx*|rar*';
 			$options['track_exclude'] = array();
-			$options['ga_target_geomap'] = '';
+			$options['ga_target_geomap'] = 'None';
 			$options['ga_realtime_pages'] = 10;
 			$options['token'] = false;
 			$options['ga4_webstreams_list'] = array();

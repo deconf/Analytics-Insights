@@ -362,7 +362,13 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 				$this->options['theme_color'] = '#1e73be';
 				$flag = true;
 			}
-			if ( '' != $this->options['ga_target_geomap'] ) {
+
+			if ( '' == $this->options['ga_target_geomap'] ) {
+				$this->options['ga_target_geomap'] = 'None';
+				$flag = true;
+			}
+
+			if ( 'None' !== $this->options['ga_target_geomap'] ) {
 				$country_codes = AIWP_Tools::get_countrycodes();
 				if ( isset( $country_codes[$this->options['ga_target_geomap']] ) ) {
 					$this->options['ga_target_geomap'] = $country_codes[$this->options['ga_target_geomap']];

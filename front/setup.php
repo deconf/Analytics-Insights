@@ -42,7 +42,7 @@ if ( ! class_exists( 'AIWP_Frontend_Setup' ) ) {
 				wp_enqueue_style( 'aiwp-frontend-item-reports', AIWP_URL . 'front/css/item-reports' . AIWP_Tools::script_debug_suffix() . '.css', null, AIWP_CURRENT_VERSION );
 				$country_codes = AIWP_Tools::get_countrycodes();
 				$country_codes = array_flip($country_codes);
-				if ( $this->aiwp->config->options['ga_target_geomap'] && isset( $country_codes[$this->aiwp->config->options['ga_target_geomap']] ) ) {
+				if ( 'None' !== $this->aiwp->config->options['ga_target_geomap'] && isset( $country_codes[$this->aiwp->config->options['ga_target_geomap']] ) ) {
 					$region = sanitize_text_field($country_codes[$this->aiwp->config->options['ga_target_geomap']]);
 				} else {
 					$region = false;

@@ -90,7 +90,7 @@ final class AIWP_Settings {
 	}
 
 	private static function html_form_begin( $text, $action, $message ) {
-?>
+		?>
 <form name="aiwp_form" method="post" action="<?php echo esc_url( $action ); ?>">
 	<div class="wrap">
 			<?php echo "<h2>" . esc_html( $text ) . "</h2>"; ?>
@@ -794,42 +794,46 @@ final class AIWP_Settings {
 			$aiwp->gapi_controller = new AIWP_GAPI_Controller();
 		}
 		echo '<script type="text/javascript">jQuery("#gapi-warning").hide()</script>';
-		if ( isset( $_REQUEST['aiwp_access_code'] ) ) {
 
-			if ( $_REQUEST['aiwp_access_code'] != get_option( 'aiwp_redeemed_code' ) ) {
+		if ( isset( $_REQUEST['aiwp_access_code'] ) || isset( $_REQUEST['code'] ) ){
 
-					$aiwp_access_code = sanitize_text_field( $_REQUEST['aiwp_access_code'] );
-					update_option( 'aiwp_redeemed_code', $aiwp_access_code );
-					AIWP_Tools::delete_cache( 'api_errors' );
-					AIWP_Tools::delete_cache( 'ajax_errors' );
+			if ( isset( $_REQUEST['state'] ) && wp_verify_nonce( $_REQUEST['state'], 'aiwp_state' ) ) {
 
-					$token = $aiwp->gapi_controller->authenticate( $aiwp_access_code );
-
-					$aiwp->config->options['token'] = $token;
-
-					$aiwp->config->set_plugin_options();
-
-					$options = self::update_options( 'general' );
-					$message = "<div class='updated' id='aiwp-autodismiss'><p>" . __( "Plugin authorization succeeded.", 'analytics-insights' ) . "</p></div>";
-					if ( $aiwp->config->options['token'] ) {
-
-						$webstreams = $aiwp->gapi_controller->refresh_profiles_ga4();
-						if ( is_array( $webstreams ) && ! empty( $webstreams ) ) {
-								$aiwp->config->options['ga4_webstreams_list'] = $webstreams;
-								if ( ! $aiwp->config->options['webstream_jail'] ) {
-									$property = AIWP_Tools::guess_default_domain( $webstreams, 2 );
-									$aiwp->config->options['webstream_jail'] = $property;
-								}
-								$aiwp->config->set_plugin_options();
-								$options = self::update_options( 'general' );
-						}
-
-					}
-
+			if ( isset( $_REQUEST['code'] ) ){
+				$aiwp_access_code = sanitize_text_field( $_REQUEST['code'] );
 			} else {
-					$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You can only use the access code <strong>once</strong>, please generate a <strong>new access</strong> code following the instructions!", 'analytics-insights' ) . ".</p></div>";
+				$aiwp_access_code = sanitize_text_field( $_REQUEST['aiwp_access_code'] );
+			}
+
+			AIWP_Tools::delete_cache( 'api_errors' );
+			AIWP_Tools::delete_cache( 'ajax_errors' );
+
+			$token = $aiwp->gapi_controller->authenticate( $aiwp_access_code );
+
+			$aiwp->config->options['token'] = $token;
+
+			$aiwp->config->set_plugin_options();
+
+			$options = self::update_options( 'general' );
+			$message = "<div class='updated' id='aiwp-autodismiss'><p>" . __( "Plugin authorization succeeded.", 'analytics-insights' ) . "</p></div>";
+			if ( $aiwp->config->options['token'] ) {
+
+				$webstreams = $aiwp->gapi_controller->refresh_profiles_ga4();
+				if ( is_array( $webstreams ) && ! empty( $webstreams ) ) {
+						$aiwp->config->options['ga4_webstreams_list'] = $webstreams;
+						if ( ! $aiwp->config->options['webstream_jail'] ) {
+							$property = AIWP_Tools::guess_default_domain( $webstreams, 2 );
+							$aiwp->config->options['webstream_jail'] = $property;
+						}
+						$aiwp->config->set_plugin_options();
+						$options = self::update_options( 'general' );
+				}
+
+			}
+
 			}
 		}
+
 		if ( isset( $_REQUEST['Clear'] ) ) {
 			if ( isset( $_REQUEST['aiwp_security'] ) && wp_verify_nonce( $_REQUEST['aiwp_security'], 'aiwp_form' ) ) {
 				AIWP_Tools::clear_cache();
@@ -878,7 +882,7 @@ final class AIWP_Settings {
 			}
 		}
 		?>
-<?php self::html_form_begin(__( "Google Analytics Settings", 'analytics-insights' ), $_SERVER['REQUEST_URI'], $message)?>
+<?php self::html_form_begin(__( "Google Analytics Settings", 'analytics-insights' ), admin_url( 'admin.php?page=aiwp_settings' ), $message)?>
 <table class="aiwp-settings-options">
 	<?php self::html_section_delimiter(__( "Plugin Authorization", 'analytics-insights' ), false); ?>
 	<tr>
@@ -1010,11 +1014,18 @@ final class AIWP_Settings {
 			$aiwp->gapi_controller = new AIWP_GAPI_Controller();
 		}
 		echo '<script type="text/javascript">jQuery("#gapi-warning").hide()</script>';
-		if ( isset( $_REQUEST['aiwp_access_code'] ) ) {
-			if ( 1 == ! stripos( 'x' . $_REQUEST['aiwp_access_code'], 'UA-', 1 ) && $_REQUEST['aiwp_access_code'] != get_option( 'aiwp_redeemed_code' ) ) {
+		if ( isset( $_REQUEST['aiwp_access_code'] ) || isset( $_REQUEST['code'] ) ){
+
+			if ( isset( $_REQUEST['state'] ) && wp_verify_nonce( $_REQUEST['state'], 'aiwp_state' ) ) {
+
+				if ( isset( $_REQUEST['code'] ) ){
+					$aiwp_access_code = sanitize_text_field( $_REQUEST['code'] );
+				} else {
+					$aiwp_access_code = sanitize_text_field( $_REQUEST['aiwp_access_code'] );
+				}
 
 					$aiwp_access_code = sanitize_text_field( $_REQUEST['aiwp_access_code'] );
-					update_option( 'aiwp_redeemed_code', $aiwp_access_code );
+
 					$token = $aiwp->gapi_controller->authenticate( $aiwp_access_code );
 					$aiwp->config->options['token'] = $token;
 					$aiwp->config->set_plugin_options( true );
@@ -1043,13 +1054,6 @@ final class AIWP_Settings {
 							$options = self::update_options( 'network' );
 						}
 					}
-
-			} else {
-				if ( 1 == stripos( 'x' . $_REQUEST['aiwp_access_code'], 'UA-', 1 ) ) {
-					$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "The access code is <strong>not</strong> your <strong>Tracking ID</strong> (UA-XXXXX-X) <strong>nor</strong> your <strong>email address</strong>!", 'analytics-insights' ) . ".</p></div>";
-				} else {
-					$message = "<div class='error' id='aiwp-autodismiss'><p>" . __( "You can only use the access code once.", 'analytics-insights' ) . "!</p></div>";
-				}
 			}
 		}
 		if ( isset( $_REQUEST['Refresh'] ) ) {
@@ -1116,7 +1120,7 @@ final class AIWP_Settings {
 			}
 		}
 		?>
-<?php self::html_form_begin(__( "Google Analytics Settings", 'analytics-insights' ), $_SERVER['REQUEST_URI'], $message)?>
+<?php self::html_form_begin(__( "Google Analytics Settings", 'analytics-insights' ), network_admin_url( 'admin.php?page=aiwp_settings' ), $message)?>
 <table class="aiwp-settings-options">
  <?php self::html_section_delimiter(__( "Network Setup", 'analytics-insights' ), false); ?>
 	<?php self::html_switch_button('options[network_mode]', 1, 'network_mode', $options['network_mode'], __( "use a single Google Analytics account for the entire network", 'analytics-insights'), false, true ); ?>
