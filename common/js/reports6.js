@@ -217,6 +217,7 @@ jQuery.fn.extend( {
 
 		reports = {
 			oldViewPort : 0,
+			inProgress : 0,
 			orgChartTableChartData : '',
 			tableChartData : '',
 			orgChartPieChartsData : '',
@@ -1107,26 +1108,35 @@ jQuery.fn.extend( {
 			},
 
 			init : function () {
+			
+							
+				if ( !reports.inProgress ) {
+					
+					reports.inProgress = 1;
 
-				try {
-					NProgress.configure( {
-						parent : "#aiwp-progressbar" + slug,
-						showSpinner : false
-					} );
-					NProgress.start();
-				} catch ( e ) {
-					reports.alertMessage( aiwpItemData.i18n[ 0 ] );
-				}
-
-				reports.render( jQuery( '#aiwp-sel-view' + slug ).val(), jQuery( '#aiwp-sel-period' + slug ).val(), jQuery( '#aiwp-sel-report' + slug ).val() );
-
-				jQuery( window ).resize( function () {
-					var diff = jQuery( window ).width() - reports.oldViewPort;
-					if ( ( diff < -5 ) || ( diff > 5 ) ) {
-						reports.oldViewPort = jQuery( window ).width();
-						reports.refresh(); // refresh only on over 5px viewport width changes
+					try {
+						NProgress.configure( {
+							parent : "#aiwp-progressbar" + slug,
+							showSpinner : false
+						} );
+						NProgress.start();
+					} catch ( e ) {
+						reports.alertMessage( aiwpItemData.i18n[ 0 ] );
 					}
-				} );
+	
+					reports.render( jQuery( '#aiwp-sel-view' + slug ).val(), jQuery( '#aiwp-sel-period' + slug ).val(), jQuery( '#aiwp-sel-report' + slug ).val() );
+	
+					jQuery( window ).resize( function () {
+						var diff = jQuery( window ).width() - reports.oldViewPort;
+						if ( ( diff < -5 ) || ( diff > 5 ) ) {
+							reports.oldViewPort = jQuery( window ).width();
+							reports.refresh(); // refresh only on over 5px viewport width changes
+						}
+					} );
+					
+					reports.inProgress = 0;
+									
+				}
 			}
 		}
 

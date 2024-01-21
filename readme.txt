@@ -91,6 +91,11 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 
 == Changelog ==
 
+= 6.4 (2024.01.19) =
+* Bug Fixes:
+	* prevent multiple Google Analytics reports calls at first widget render
+	* ISO3166 small fixes
+	
 = 6.3 (2024.01.16) =
 * Bug Fixes:
 	* fixed a bug causing the plugin to lose authentication when saving settings

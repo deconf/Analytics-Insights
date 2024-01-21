@@ -33,6 +33,7 @@ if ( ! class_exists( 'AIWP_Backend_Ajax' ) ) {
 		 * @return mixed|int
 		 */
 		public function ajax_item_reports() {
+
 			if ( ! isset( $_POST['aiwp_security_backend_item_reports'] ) || ! wp_verify_nonce( $_POST['aiwp_security_backend_item_reports'], 'aiwp_backend_item_reports' ) ) {
 				wp_die( 630 );
 			}
