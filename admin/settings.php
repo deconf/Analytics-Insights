@@ -57,7 +57,6 @@ final class AIWP_Settings {
 				$options['switch_profile'] = 0;
 				$options['backend_item_reports'] = 0;
 				$options['dashboard_widget'] = 0;
-				$options['backend_realtime_report'] = 0;
 				if ( empty( $new_options['access_back'] ) ) {
 					$new_options['access_back'][] = 'administrator';
 				}
@@ -251,9 +250,6 @@ final class AIWP_Settings {
  <?php self::html_switch_button('options[backend_item_reports]', 1, 'backend_item_reports', $options['backend_item_reports'], __( "enable reports on Posts List and Pages List", 'analytics-insights') ); ?>
  <?php self::html_switch_button('options[dashboard_widget]', 1, 'dashboard_widget', $options['dashboard_widget'], __( "enable the main Dashboard Widget", 'analytics-insights') ); ?>
  <?php self::html_section_delimiter(__( "Real-Time Settings", 'analytics-insights' )); ?>
- <?php if ( $options['user_api'] ) : ?>
- <?php self::html_switch_button('options[backend_realtime_report]', 1, 'backend_realtime_report', $options['backend_realtime_report'], __( "enable Real-Time report (requires access to Real-Time Reporting API)", 'analytics-insights') ); ?>
- <?php endif; ?>
  <tr>
 		<td colspan="2" class="aiwp-settings-title"> <?php _e("Maximum number of pages to display on real-time tab:", 'analytics-insights'); ?>
 									<input type="number" name="options[ga_realtime_pages]" id="ga_realtime_pages" value="<?php echo (int)$options['ga_realtime_pages']; ?>" size="3">

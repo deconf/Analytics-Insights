@@ -49,7 +49,6 @@ class AIWP_Install {
 			$options['ga_aff_tracking'] = 0;
 			$options['ga_event_affiliates'] = '/out/';
 			$options['backend_item_reports'] = 1;
-			$options['backend_realtime_report'] = 0;
 			$options['frontend_item_reports'] = 0;
 			$options['dashboard_widget'] = 1;
 			$options['api_backoff'] = 0;

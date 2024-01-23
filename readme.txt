@@ -95,6 +95,9 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 * Bug Fixes:
 	* prevent multiple Google Analytics reports calls at first widget render
 	* ISO3166 small fixes
+* Enhancements:
+	* on Google Analytics 4 no special access to Realtime reports API is required when using custom Google API projects
+	* automatically clear expired cache	
 	
 = 6.3 (2024.01.16) =
 * Bug Fixes:

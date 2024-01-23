@@ -53,7 +53,6 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 								'ga_speed_samplerate',
 								'ga_user_samplerate',
 								'ga_event_precision',
-								'backend_realtime_report',
 								'ga_optout',
 								'ga_dnt_optout',
 								'tm_optout',
@@ -174,7 +173,11 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 		}
 
 		private function maintain_compatibility() {
+
 			$flag = false;
+
+			AIWP_Tools::delete_expired_cache();
+
 			$prevver = get_option( 'aiwp_version' );
 			if ( $prevver && AIWP_CURRENT_VERSION != $prevver ) {
 				$flag = true;
@@ -234,7 +237,6 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 								'tm_pagescrolldepth_tracking', //v5.0
 								'ga_event_precision', //v5.1.1.1
 								'ga_force_ssl', //v5.1.2
-								'backend_realtime_report', //v5.2
 								'ga_optout', //v5.2.3
 								'ga_dnt_optout', //v5.2.3
 								'frontend_item_reports',
@@ -280,6 +282,7 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 								'sites_list_locked', //v6.0.3
 								'site_jail', //v6.0.3
 								'sites_list', //v6.0.3
+								'backend_realtime_report', //v6.4
 			);
 			foreach ( $unsets as $key ) {
 				if ( isset( $this->options[$key] ) ) {

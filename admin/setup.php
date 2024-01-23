@@ -139,11 +139,6 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 						'1095daysAgo' =>  sprintf( _n( "%s Year", "%s Years", 3, 'analytics-insights' ), __('Three', 'analytics-insights') ),
 					);
 
-
-					if ( $this->aiwp->config->options['user_api'] && ! $this->aiwp->config->options['backend_realtime_report'] ) {
-						array_shift( $datelist );
-					}
-
 					wp_localize_script( 'aiwp-backend-dashboard-reports', 'aiwpItemData', array(
 						'ajaxurl' => admin_url( 'admin-ajax.php' ),
 						'security' => wp_create_nonce( 'aiwp_backend_item_reports' ),
