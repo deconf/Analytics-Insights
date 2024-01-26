@@ -17,8 +17,30 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 
 		public function __construct() {
 			$this->option_keys_rename(); // Rename old option keys
+			/**
+			 * Get plugin options
+			 */
 			$this->get_plugin_options(); // Get plugin options
+			/**
+			 * Clear expired cache using WP Cron
+			 */
+			if ( ! wp_next_scheduled( 'aiwp_expired_cache_hook' ) ) {
+
+				$datetime = new DateTime('tomorrow', new DateTimeZone(wp_timezone_string()));
+				$timestamp = $datetime->getTimestamp();
+
+				wp_schedule_event($timestamp, 'daily', 'aiwp_expired_cache_hook');
+
+			}
+
+			add_action ( 'aiwp_expired_cache_hook', array( $this, 'delete_expired_cache' ) );
+
 		}
+
+		public function delete_expired_cache (){
+			AIWP_Tools::delete_expired_cache();
+		}
+
 
 		// Validates data before storing
 		public function validate_data( $options ) {
@@ -175,8 +197,6 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 		private function maintain_compatibility() {
 
 			$flag = false;
-
-			AIWP_Tools::delete_expired_cache();
 
 			$prevver = get_option( 'aiwp_version' );
 			if ( $prevver && AIWP_CURRENT_VERSION != $prevver ) {

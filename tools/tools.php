@@ -122,7 +122,11 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 		 */
 		public static function set_cache( $name, $value, $expiration = 0) {
 			update_option( '_aiwp_cache_' . $name, $value, 'no' );
-			update_option( '_aiwp_cache_timeout_' . $name, time() + (int) $expiration, 'no' );
+			if ( $expiration ) {
+				update_option( '_aiwp_cache_timeout_' . $name, time() + (int) $expiration, 'no' );
+			} else {
+				update_option( '_aiwp_cache_timeout_' . $name, time() + 7*24*3600, 'no' );
+			}
 		}
 
 		/**
@@ -164,7 +168,7 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 		 */
 		public static function clear_cache() {
 			global $wpdb;
-			$sqlquery = $wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '_aiwp_cache_qr%%'" );
+			$sqlquery = $wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '%%aiwp_cache_%%'" );
 		}
 
 		public static function delete_expired_cache() {

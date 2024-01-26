@@ -25,13 +25,13 @@ class AIWP_Uninstall {
 		if ( is_multisite() ) { // Cleanup Network install
 			foreach ( AIWP_Tools::get_sites( array( 'number' => apply_filters( 'aiwp_sites_limit', 100 ) ) ) as $blog ) {
 				switch_to_blog( $blog['blog_id'] );
-				$sqlquery = $wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'aiwp_cache_%%'" );
+				$sqlquery = $wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '%%aiwp_cache_%%'" );
 				delete_option( 'aiwp_options' );
 				restore_current_blog();
 			}
 			delete_site_option( 'aiwp_network_options' );
 		} else { // Cleanup Single install
-			$sqlquery = $wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE 'aiwp_cache_%%'" );
+			$sqlquery = $wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '%%aiwp_cache_%%'" );
 			delete_option( 'aiwp_options' );
 		}
 		AIWP_Tools::unset_cookie( 'default_metric' );
