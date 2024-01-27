@@ -124,6 +124,7 @@ td.aiwp-settings-roles {
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
+	text-align: left;
 }
 
 input.aiwp-settings-switchoo-checkbox {

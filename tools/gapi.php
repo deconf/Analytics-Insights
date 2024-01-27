@@ -865,10 +865,10 @@ if ( ! defined( 'ABSPATH' ) )
 			private function get_locations_ga4( $projectId, $from, $to, $metric, $filter = '' ) {
 				$metrics = 'ga:' . $metric;
 				$title = __( "Countries", 'analytics-insights' );
-				$serial = 'qr7_' . $this->get_serial( $projectId . $from . $filter . $metric );
 				$dimensions = 'ga:country';
+				$serial = 'qr7_' . $this->get_serial( $projectId . $from . $filter . $metric . $dimensions );
 				$local_filter = '';
-				if ( $this->aiwp->config->options['ga_target_geomap'] ) {
+				if ( 'None' !== $this->aiwp->config->options['ga_target_geomap'] ) {
 					$dimensions = array( 'ga:city', 'ga:region' );
 					if ( 'None' !== $this->aiwp->config->options['ga_target_geomap'] ) {
 						$local_filter = array( 'ga:country', 'EXACT', ( $this->aiwp->config->options['ga_target_geomap'] ), false );

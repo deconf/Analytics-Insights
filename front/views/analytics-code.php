@@ -8,7 +8,7 @@
  */
 ?>
 
-<!-- BEGIN AIWP v<?php echo AIWP_CURRENT_VERSION; ?> Google Analytics 4 - https://deconf.com/analytics-insights-for-wordpress/ -->
+<!-- BEGIN Analytics Insights v<?php echo AIWP_CURRENT_VERSION; ?> - https://deconf.com/analytics-insights-google-analytics-dashboard-wordpress/ -->
 <script async src="<?php echo esc_url( $data['tracking_script_path'] )?>?id=<?php echo esc_js( $data['gaid'] )?>"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -28,4 +28,4 @@ do_action('aiwp_gtag_output_after');
     });
   }
 </script>
-<!-- END AIWP Google Analytics 4 -->
+<!-- END Analytics Insights -->

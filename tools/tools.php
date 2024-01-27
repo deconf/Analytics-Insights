@@ -414,11 +414,12 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 		}
 
 		public static function secondstohms( $value ) {
+			$value = (float) $value;
 			$hours = floor( $value / 3600 );
 			$hours = $hours < 10 ? '0' . $hours : (string) $hours;
-			$minutes = floor( ( $value / 60 ) % 60 );
+			$minutes = floor( (int) ( $value / 60 ) % 60 );
 			$minutes = $minutes < 10 ? '0' . $minutes : (string) $minutes;
-			$seconds = $value % 60;
+			$seconds = floor( $value % 60 );
 			$seconds = $seconds < 10 ? '0' . $seconds : (string) $seconds;
 			return $hours . ':' . $minutes . ':' . $seconds;
 		}
@@ -465,5 +466,29 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 		/* @formatter:off */
 		 }
 		}
+
+		/** Keeps compatibility with WP < 5.3.0
+		 *
+		 * @return string
+		 */
+		public static function timezone_string() {
+			$timezone_string = get_option( 'timezone_string' );
+
+			if ( $timezone_string ) {
+				return $timezone_string;
+			}
+
+			$offset  = (float) get_option( 'gmt_offset' );
+			$hours   = (int) $offset;
+			$minutes = ( $offset - $hours );
+
+			$sign      = ( $offset < 0 ) ? '-' : '+';
+			$abs_hour  = abs( $hours );
+			$abs_mins  = abs( $minutes * 60 );
+			$tz_offset = sprintf( '%s%02d:%02d', $sign, $abs_hour, $abs_mins );
+
+			return $tz_offset;
+		}
+
 	}
 }

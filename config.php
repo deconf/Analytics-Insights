@@ -16,17 +16,28 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 		public $options;
 
 		public function __construct() {
+			global $wp_version;
+
 			$this->option_keys_rename(); // Rename old option keys
 			/**
 			 * Get plugin options
 			 */
 			$this->get_plugin_options(); // Get plugin options
+
 			/**
 			 * Clear expired cache using WP Cron
 			 */
 			if ( ! wp_next_scheduled( 'aiwp_expired_cache_hook' ) ) {
 
-				$datetime = new DateTime('tomorrow', new DateTimeZone(wp_timezone_string()));
+				/**
+				 * WP < 5.3.0 compatibility
+				 */
+				if ( version_compare( $wp_version, '5.3.0', '>=' ) ) {
+					$datetime = new DateTime( 'tomorrow', new DateTimeZone(wp_timezone_string()) );
+				} else {
+					$datetime = new DateTime( 'tomorrow', new DateTimeZone( AIWP_Tools::timezone_string()) );
+				}
+
 				$timestamp = $datetime->getTimestamp();
 
 				wp_schedule_event($timestamp, 'daily', 'aiwp_expired_cache_hook');

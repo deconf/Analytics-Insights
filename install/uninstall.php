@@ -38,5 +38,9 @@ class AIWP_Uninstall {
 		AIWP_Tools::unset_cookie( 'default_dimension' );
 		AIWP_Tools::unset_cookie( 'default_view' );
 		AIWP_Tools::unset_cookie( 'default_swmetric' );
+
+		$timestamp = wp_next_scheduled( 'aiwp_expired_cache_hook' );
+		wp_unschedule_event( $timestamp, 'aiwp_expired_cache_hook' );
+
 	}
 }

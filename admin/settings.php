@@ -785,7 +785,7 @@ final class AIWP_Settings {
 			return;
 		}
 		$options = self::update_options( 'general' );
-		printf( '<div id="gapi-warning" class="updated"><p>%1$s <a href="https://deconf.com/analytics-insights-for-wordpress/?utm_source=aiwp_config&utm_medium=link&utm_content=general_screen&utm_campaign=aiwp">%2$s</a></p></div>', __( 'Loading the required libraries. If this results in a blank screen or a fatal error, try this solution:', 'analytics-insights' ), __( 'Library conflicts between WordPress plugins', 'analytics-insights' ) );
+		printf( '<div id="gapi-warning" class="updated"><p>%1$s <a href="https://deconf.com/analytics-insights-google-analytics-dashboard-wordpress/?utm_source=aiwp_config&utm_medium=link&utm_content=general_screen&utm_campaign=aiwp">%2$s</a></p></div>', __( 'Loading the required libraries. If this results in a blank screen or a fatal error, try this solution:', 'analytics-insights' ), __( 'Library conflicts between WordPress plugins', 'analytics-insights' ) );
 		if ( null === $aiwp->gapi_controller ) {
 			$aiwp->gapi_controller = new AIWP_GAPI_Controller();
 		}
@@ -883,7 +883,7 @@ final class AIWP_Settings {
 	<?php self::html_section_delimiter(__( "Plugin Authorization", 'analytics-insights' ), false); ?>
 	<tr>
 		<td colspan="2" class="aiwp-settings-info">
-			<?php printf(__('You need to create a %1$s and follow this %2$s before proceeding to authorization.', 'analytics-insights'), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/creating-a-google-analytics-account/?utm_source=aiwp_config&utm_medium=link&utm_content=top_tutorial&utm_campaign=aiwp', __("free analytics account", 'analytics-insights')), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/analytics-insights-for-wordpress/?utm_source=aiwp_config&utm_medium=link&utm_content=top_tutorial&utm_campaign=aiwp', __("step-by-step tutorial", 'analytics-insights')));?>
+			<?php printf(__('You need to create a %1$s and follow this %2$s before proceeding to authorization.', 'analytics-insights'), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/creating-a-google-analytics-account/?utm_source=aiwp_config&utm_medium=link&utm_content=top_tutorial&utm_campaign=aiwp', __("free analytics account", 'analytics-insights')), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/analytics-insights-google-analytics-dashboard-wordpress/?utm_source=aiwp_config&utm_medium=link&utm_content=top_tutorial&utm_campaign=aiwp', __("step-by-step tutorial", 'analytics-insights')));?>
 		</td>
 	</tr>
 	 <?php if (! $options['token'] || ($options['user_api']  && ! $options['network_mode'])) : ?>
@@ -1005,7 +1005,7 @@ final class AIWP_Settings {
 		/*
 		 * Include GAPI
 		 */
-		echo '<div id="gapi-warning" class="updated"><p>' . __( 'Loading the required libraries. If this results in a blank screen or a fatal error, try this solution:', 'analytics-insights' ) . ' <a href="https://deconf.com/analytics-insights-for-wordpress/?utm_source=aiwp_config&utm_medium=link&utm_content=general_screen&utm_campaign=aiwp">Library conflicts between WordPress plugins</a></p></div>';
+		echo '<div id="gapi-warning" class="updated"><p>' . __( 'Loading the required libraries. If this results in a blank screen or a fatal error, try this solution:', 'analytics-insights' ) . ' <a href="https://deconf.com/analytics-insights-google-analytics-dashboard-wordpress/?utm_source=aiwp_config&utm_medium=link&utm_content=general_screen&utm_campaign=aiwp">Library conflicts between WordPress plugins</a></p></div>';
 		if ( null === $aiwp->gapi_controller ) {
 			$aiwp->gapi_controller = new AIWP_GAPI_Controller();
 		}
@@ -1125,7 +1125,7 @@ final class AIWP_Settings {
 	<?php self::html_section_delimiter(__( "Plugin Authorization", 'analytics-insights' ), false); ?>
 	<tr>
 		<td colspan="2" class="aiwp-settings-info">
-			<?php printf(__('You need to create a %1$s and follow this %2$s before proceeding to authorization.', 'analytics-insights'), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/creating-a-google-analytics-account/?utm_source=aiwp_config&utm_medium=link&utm_content=top_tutorial&utm_campaign=aiwp', __("free analytics account", 'analytics-insights')), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/analytics-insights-for-wordpress/?utm_source=aiwp_config&utm_medium=link&utm_content=top_tutorial&utm_campaign=aiwp', __("step-by-step tutorial", 'analytics-insights')));?>
+			<?php printf(__('You need to create a %1$s and follow this %2$s before proceeding to authorization.', 'analytics-insights'), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/creating-a-google-analytics-account/?utm_source=aiwp_config&utm_medium=link&utm_content=top_tutorial&utm_campaign=aiwp', __("free analytics account", 'analytics-insights')), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/analytics-insights-google-analytics-dashboard-wordpress/?utm_source=aiwp_config&utm_medium=link&utm_content=top_tutorial&utm_campaign=aiwp', __("step-by-step tutorial", 'analytics-insights')));?>
 		</td>
 	</tr>
 	<?php if ( ! $options['token'] || $options['user_api'] ) : ?>

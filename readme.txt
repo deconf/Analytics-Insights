@@ -1,10 +1,10 @@
 === Analytics Insights - Google Analytics Dashboard for WordPress ===
 Contributors: deconf
 Donate link: https://deconf.com/donate/
-Tags: wordPress analytics, google analytics, google analytics dashboard, google analytics widget, analytics dashboard, statistics, tracking, stats, google, ga, analytics insights, web stats
+Tags: wordPress analytics, google analytics, google analytics dashboard, google analytics widget, analytics dashboard, statistics, tracking, stats, google, ga, analytics insights, web stats, stats
 Requires at least: 3.5
 Tested up to: 6.4.1
-Stable tag: 6.3.1
+Stable tag: 6.3.2
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -70,30 +70,37 @@ You can submit pull requests, feature requests, and bug reports on [our GitHub r
 
 = Documentation, Tutorials, and FAQ =
 
-For documentation, tutorials, FAQ and videos check out: [Analytics Insights documentation](https://deconf.com/analytics-insights-for-wordpress/).
+For documentation, tutorials, FAQ and videos check out: [Analytics Insights documentation](https://deconf.com/analytics-insights-google-analytics-dashboard-wordpress/).
 
 == Screenshots ==
 
-1. Google Analytics 4 reports
-2. Real-Time Google Analytics 4 
+1. Google Analytics 4 stats
+2. Real-Time Google Analytics stats
 3. Analytics reports per Posts/Pages
-4. Google Analytics 4 Geo Map
-5. Google Analytics 4 Top Pages, Top Referrers, and Top Searches
-6. Google Analytics 4 Traffic Overview
-7. Google Analytics 4 Statistics per page on Frontend
-8. Google Analytics 4 Cities on the region map
+4. Analytics Insights Geo Map
+5. Stats for Top Pages, Top Referrers, and Top Searches
+6. Google Analytics traffic Overview
+7. Analytics Insights statistics per page on Frontend
+8. Cities on the region map
 9. Analytics Insights Widget
 
 == Upgrade Notice ==
 
 == Changelog ==
-
+= 6.3.2 (2024.01.27) =
+* Bug Fixes:
+	* fixes PHP 8.x deprecated warnings
+	* fixes an issue on Location reports when 'None' is selected
+	* delete crons on uninstall
+	* add compatibility for WordPress version lower than 5.3.0
+	* small CSS fixes	
+	
 = 6.3.1 (2024.01.26) =
 * Bug Fixes:
-	* prevent multiple Google Analytics reports calls at first widget render
+	* prevent multiple Google Analytics stats calls at first widget render
 	* ISO3166 small fixes
 * Enhancements:
-	* on Google Analytics 4 no special access to Realtime reports API is required when using custom Google API projects
+	* on Google Analytics 4 no special access to Realtime stats API is required when using custom Google API projects
 	* clear expired cache daily using WP Cron
 	
 = 6.3 (2024.01.16) =
@@ -147,7 +154,7 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 	* fix a bug preventing all Google Analytics properties and datastreams to be retrived
 * Enhancements:
 	* refactoring code and switching to wp_remote_* instead of using Google Analytics 4 PHP library
-	* removing all Google Analytics 3 reports, since most of them are obsolete after three months
+	* removing all Google Analytics 3 stats, since most of them are obsolete after three months
 * Upgrade Note:
 	* we're switching to the new, v2, Google OAuth2 flow, so re-authorizing may be required
 
@@ -246,7 +253,7 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 	
 = 5.7.6 (2022.09.20) =
 * Bug Fixes:
-	* "Search ..." placeholder missing for admin reports
+	* "Search ..." placeholder missing for admin stats
 	* solves precision loses warning for PHP 8.1 
 
 = 5.7.5 (2022.07.31) =
@@ -412,7 +419,7 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 	* fixes multisite/network mode random token resets 
 
 = 5.4 =
-* [Release notes](https://deconf.com/analytics-insights-for-wordpress/)
+* [Release notes](https://deconf.com/analytics-insights-google-analytics-dashboard-wordpress/)
 * Enhancements:
 	* capability to filter and search within displayed tables
 	* automatically authorize users with Google Analytics, without copy/pasting the access codes
