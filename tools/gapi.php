@@ -696,9 +696,10 @@ if ( ! defined( 'ABSPATH' ) )
 					$dimensions = array( 'ga:date', 'ga:dayOfWeekName' );
 					$dayorhour = __( "Date", 'analytics-insights' );
 				}
-				$filters = false;
 				if ( $filter ) {
 					$filters[] = array( 'ga:pagePath', 'EXACT', $filter, false );
+				} else {
+					$filters = false;
 				}
 				$serial = 'qr2_' . $this->get_serial( $projectId . $from . $metrics . $filter );
 				$data = $this->handle_corereports_ga4( $projectId, $from, $to, $metrics, $dimensions, false, $filters, $serial );
@@ -782,7 +783,6 @@ if ( ! defined( 'ABSPATH' ) )
 			 * @return array|int
 			 */
 			private function get_bottomstats_ga4( $projectId, $from, $to, $filter = '' ) {
-				$filters = false;
 				if ( $filter ) {
 					$filters[] = array( 'ga:pagePath', 'EXACT', $filter, false );
 					// @formatter:off
@@ -798,6 +798,7 @@ if ( ! defined( 'ABSPATH' ) )
 					);
 					// @formatter:on
 				} else {
+					$filters = false;
 					// @formatter:off
 					$metrics = array(
 						'ga:sessions',
@@ -833,9 +834,10 @@ if ( ! defined( 'ABSPATH' ) )
 				$metrics = 'ga:sessions';
 				$dimensions = 'ga:' . 'channelGrouping';
 				$sortby = '-' . $metrics;
-				$filters = false;
 				if ( $filter ) {
 					$filters[] = array( 'ga:pagePath', 'EXACT', $filter, false );
+				} else {
+					$filters = false;
 				}
 				$serial = 'qr9_' . $this->get_serial( $projectId . $from . 'channelGrouping' . $filter . 'ga:sessions' );
 				$data = $this->handle_corereports_ga4( $projectId, $from, $to, $metrics, $dimensions, $sortby, $filters, $serial );

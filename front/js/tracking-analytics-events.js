@@ -70,7 +70,7 @@ jQuery( window ).on( 'load', function () {
                 var reg = new RegExp( '.*\\.(' + aiwpUAEventsData.options[ 'event_downloads' ] + ')(\\?.*)?$' );
                 return this.href.match( reg );
             }
-		} ).click( function ( e ) {
+		} ).on("click", function ( e ) {
 			var category = this.getAttribute( 'data-vars-ga-category' ) || 'download';
 			var action = this.getAttribute( 'data-vars-ga-action' ) || 'click';
 			var label = this.getAttribute( 'data-vars-ga-label' ) || this.href;
@@ -78,7 +78,7 @@ jQuery( window ).on( 'load', function () {
 		} );
 
 		// Track Mailto
-		jQuery( 'a[href^="mailto"]' ).click( function ( e ) {
+		jQuery( 'a[href^="mailto"]' ).on("click",  function ( e ) {
 			var category = this.getAttribute( 'data-vars-ga-category' ) || 'email';
 			var action = this.getAttribute( 'data-vars-ga-action' ) || 'send';
 			var label = this.getAttribute( 'data-vars-ga-label' ) || this.href;
@@ -86,7 +86,7 @@ jQuery( window ).on( 'load', function () {
 		} );
 
 		// Track telephone calls
-		jQuery( 'a[href^="tel"]' ).click( function ( e ) {
+		jQuery( 'a[href^="tel"]' ).on("click",  function ( e ) {
 			var category = this.getAttribute( 'data-vars-ga-category' ) || 'telephone';
 			var action = this.getAttribute( 'data-vars-ga-action' ) || 'call';
 			var label = this.getAttribute( 'data-vars-ga-label' ) || this.href;
@@ -104,7 +104,7 @@ jQuery( window ).on( 'load', function () {
 					if ( this.href.indexOf( aiwpUAEventsData.options[ 'root_domain' ] ) == -1 && this.href.indexOf( '://' ) > -1 )
 						return this.href;
 				}
-			} ).click( function ( e ) {
+			} ).on("click",  function ( e ) {
 				aiwpRedirectCalled = false;
 				aiwpRedirectLink = this.href;
 				var category = this.getAttribute( 'data-vars-ga-category' ) || 'outbound';
@@ -140,7 +140,7 @@ jQuery( window ).on( 'load', function () {
 					return this.href.match( reg );
 				}	
 			}
-		} ).click( function ( e ) {
+		} ).on("click",  function ( e ) {
 			aiwpRedirectCalled = false;
 			aiwpRedirectLink = this.href;
 			var category = this.getAttribute( 'data-vars-ga-category' ) || 'affiliates';
@@ -171,7 +171,7 @@ jQuery( window ).on( 'load', function () {
 		jQuery( 'a' ).filter( function () {
 			if ( this.href.indexOf( aiwpUAEventsData.options[ 'root_domain' ] ) != -1 || this.href.indexOf( '://' ) == -1 )
 				return this.hash;
-		} ).click( function ( e ) {
+		} ).on("click",  function ( e ) {
 			var category = this.getAttribute( 'data-vars-ga-category' ) || 'hashmark';
 			var action = this.getAttribute( 'data-vars-ga-action' ) || 'click';
 			var label = this.getAttribute( 'data-vars-ga-label' ) || this.href;
@@ -182,7 +182,7 @@ jQuery( window ).on( 'load', function () {
 	if ( aiwpUAEventsData.options[ 'event_formsubmit' ] ) {
 
 		// Track Form Submit
-		jQuery( 'input[type="submit"], button[type="submit"]' ).click( function ( e ) {
+		jQuery( 'input[type="submit"], button[type="submit"]' ).on("click",  function ( e ) {
 			var aiwpSubmitObject = this;
 			var category = aiwpSubmitObject.getAttribute( 'data-vars-ga-category' ) || 'form';
 			var action = aiwpSubmitObject.getAttribute( 'data-vars-ga-action' ) || 'submit';

@@ -4,7 +4,7 @@ Donate link: https://deconf.com/donate/
 Tags: wordPress analytics, google analytics, google analytics dashboard, google analytics widget, analytics dashboard, statistics, tracking, stats, google, ga, analytics insights, web stats, stats
 Requires at least: 3.5
 Tested up to: 6.4.1
-Stable tag: 6.3.3
+Stable tag: 6.3.4
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -91,6 +91,7 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 = 6.3.4 (2024.02.05) =
 * Bug Fixes:
 	* fixes PHP 8.3 deprecated warnings
+	* fixes jQuery deprecated warnings		
 
 = 6.3.3 (2024.02.04) =
 * Bug Fixes:

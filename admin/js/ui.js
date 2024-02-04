@@ -15,7 +15,7 @@ jQuery( document ).ready( function () {
 		aiwp_security_dismiss_notices : aiwp_ui_data.security,
 	}
 
-	jQuery( "#aiwp-notice .notice-dismiss" ).click( function () {
+	jQuery( "#aiwp-notice .notice-dismiss" ).on("click", function () {
 		jQuery.post( aiwp_ui_data.ajaxurl, aiwp_ui );
 	} );
 

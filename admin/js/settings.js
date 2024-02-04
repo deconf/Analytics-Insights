@@ -27,7 +27,7 @@ jQuery( document ).ready( function () {
 		jQuery( "#aiwp-" + ident ).show();
 	}
 
-	jQuery( 'a[href^="#"]' ).click( function ( e ) {
+	jQuery( 'a[href^="#"]' ).on("click", function ( e ) {
 		if ( window.location.href.indexOf( "page=aiwp_" ) != -1 ) {
 			jQuery( ".nav-tab-wrapper a" ).each( function ( index ) {
 				jQuery( this ).removeClass( "nav-tab-active" );
