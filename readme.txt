@@ -87,6 +87,11 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 == Upgrade Notice ==
 
 == Changelog ==
+
+= 6.3.4 (2024.02.05) =
+* Bug Fixes:
+	* fixes PHP 8.3 deprecated warnings
+
 = 6.3.3 (2024.02.04) =
 * Bug Fixes:
 	* add compatibility for WordPress version lower than 4.0.0
