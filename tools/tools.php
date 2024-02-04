@@ -120,12 +120,12 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 		 * @param mixed $value
 		 * @param number $expiration
 		 */
-		public static function set_cache( $name, $value, $expiration = 0) {
+		public static function set_cache( $name, $value, $expiration = 0 ) {
 			update_option( '_aiwp_cache_' . $name, $value, 'no' );
 			if ( $expiration ) {
 				update_option( '_aiwp_cache_timeout_' . $name, time() + (int) $expiration, 'no' );
 			} else {
-				update_option( '_aiwp_cache_timeout_' . $name, time() + 7*24*3600, 'no' );
+				update_option( '_aiwp_cache_timeout_' . $name, time() + 7 * 24 * 3600, 'no' );
 			}
 		}
 
@@ -149,11 +149,9 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 		public static function get_cache( $name ) {
 			$value = get_option( '_aiwp_cache_' . $name );
 			$expires = get_option( '_aiwp_cache_timeout_' . $name );
-
 			if ( false === $value || ! isset( $value ) || ! isset( $expires ) ) {
 				return false;
 			}
-
 			if ( $expires < time() ) {
 				delete_option( '_aiwp_cache_' . $name );
 				delete_option( '_aiwp_cache_timeout_' . $name );
@@ -172,55 +170,55 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 		}
 
 		public static function delete_expired_cache() {
-			global $wpdb;
-
+			global $wpdb, $wp_version;
 			if ( wp_using_ext_object_cache() ) {
 				return;
 			}
-
-			$wpdb->query(
-				$wpdb->prepare(
-					"DELETE a, b FROM {$wpdb->options} a, {$wpdb->options} b
-			WHERE a.option_name LIKE %s
-			AND a.option_name NOT LIKE %s
-			AND b.option_name = CONCAT( '_aiwp_cache_timeout_', SUBSTRING( a.option_name, 13 ) )
-			AND b.option_value < %d",
-			$wpdb->esc_like( '_aiwp_cache_' ) . '%',
-			$wpdb->esc_like( '_aiwp_cache_timeout_' ) . '%',
-			time()
-				)
-				);
-
-			if ( ! is_multisite() ) {
-				// Single site stores site transients in the options table.
-				$wpdb->query(
-					$wpdb->prepare(
-						"DELETE a, b FROM {$wpdb->options} a, {$wpdb->options} b
+			if ( version_compare( $wp_version, '4.0.0', '>=' ) ) {
+				$wpdb->query( $wpdb->prepare( "DELETE a, b FROM {$wpdb->options} a, {$wpdb->options} b
 				WHERE a.option_name LIKE %s
 				AND a.option_name NOT LIKE %s
-				AND b.option_name = CONCAT( '_site_aiwp_cache_timeout_', SUBSTRING( a.option_name, 18 ) )
-				AND b.option_value < %d",
-				$wpdb->esc_like( '_site_aiwp_cache_' ) . '%',
-				$wpdb->esc_like( '_site_aiwp_cache_timeout_' ) . '%',
-				time()
-					)
-					);
-			} elseif ( is_multisite() && is_main_site() && is_main_network() ) {
-				// Multisite stores site transients in the sitemeta table.
-				$wpdb->query(
-					$wpdb->prepare(
-						"DELETE a, b FROM {$wpdb->sitemeta} a, {$wpdb->sitemeta} b
-				WHERE a.meta_key LIKE %s
-				AND a.meta_key NOT LIKE %s
-				AND b.meta_key = CONCAT( '_site_aiwp_cache_timeout_', SUBSTRING( a.meta_key, 18 ) )
-				AND b.meta_value < %d",
-				$wpdb->esc_like( '_site_aiwp_cache_' ) . '%',
-				$wpdb->esc_like( '_site_aiwp_cache_timeout_' ) . '%',
-				time()
-					)
-					);
+				AND b.option_name = CONCAT( '_aiwp_cache_timeout_', SUBSTRING( a.option_name, 13 ) )
+				AND b.option_value < %d", $wpdb->esc_like( '_aiwp_cache_' ) . '%', $wpdb->esc_like( '_aiwp_cache_timeout_' ) . '%', time() ) );
+				if ( ! is_multisite() ) {
+					// Single site stores site transients in the options table.
+					$wpdb->query( $wpdb->prepare( "DELETE a, b FROM {$wpdb->options} a, {$wpdb->options} b
+					WHERE a.option_name LIKE %s
+					AND a.option_name NOT LIKE %s
+					AND b.option_name = CONCAT( '_site_aiwp_cache_timeout_', SUBSTRING( a.option_name, 18 ) )
+					AND b.option_value < %d", $wpdb->esc_like( '_site_aiwp_cache_' ) . '%', $wpdb->esc_like( '_site_aiwp_cache_timeout_' ) . '%', time() ) );
+				} elseif ( is_multisite() && is_main_site() && is_main_network() ) {
+					// Multisite stores site transients in the sitemeta table.
+					$wpdb->query( $wpdb->prepare( "DELETE a, b FROM {$wpdb->sitemeta} a, {$wpdb->sitemeta} b
+					WHERE a.meta_key LIKE %s
+					AND a.meta_key NOT LIKE %s
+					AND b.meta_key = CONCAT( '_site_aiwp_cache_timeout_', SUBSTRING( a.meta_key, 18 ) )
+					AND b.meta_value < %d", $wpdb->esc_like( '_site_aiwp_cache_' ) . '%', $wpdb->esc_like( '_site_aiwp_cache_timeout_' ) . '%', time() ) );
+				}
+			} else {
+				$wpdb->query( $wpdb->prepare( "DELETE a, b FROM {$wpdb->options} a, {$wpdb->options} b
+				WHERE a.option_name LIKE %s
+				AND a.option_name NOT LIKE %s
+				AND b.option_name = CONCAT( '_aiwp_cache_timeout_', SUBSTRING( a.option_name, 13 ) )
+				AND b.option_value < %d", like_escape( '_aiwp_cache_' ) . '%', like_escape( '_aiwp_cache_timeout_' ) . '%', time() ) );
+				if ( ! is_multisite() ) {
+					// Single site stores site transients in the options table.
+					$wpdb->query( $wpdb->prepare( "DELETE a, b FROM {$wpdb->options} a, {$wpdb->options} b
+					WHERE a.option_name LIKE %s
+					AND a.option_name NOT LIKE %s
+					AND b.option_name = CONCAT( '_site_aiwp_cache_timeout_', SUBSTRING( a.option_name, 18 ) )
+					AND b.option_value < %d", like_escape( '_site_aiwp_cache_' ) . '%', like_escape( '_site_aiwp_cache_timeout_' ) . '%', time() ) );
+				} elseif ( is_multisite() && is_main_site() && is_main_network() ) {
+					// Multisite stores site transients in the sitemeta table.
+					$wpdb->query( $wpdb->prepare( "DELETE a, b FROM {$wpdb->sitemeta} a, {$wpdb->sitemeta} b
+					WHERE a.meta_key LIKE %s
+					AND a.meta_key NOT LIKE %s
+					AND b.meta_key = CONCAT( '_site_aiwp_cache_timeout_', SUBSTRING( a.meta_key, 18 ) )
+					AND b.meta_value < %d", like_escape( '_site_aiwp_cache_' ) . '%', like_escape( '_site_aiwp_cache_timeout_' ) . '%', time() ) );
+				}
 			}
 		}
+
 		public static function get_sites( $args ) { // Use wp_get_sites() if WP version is lower than 4.6.0
 			global $wp_version;
 			if ( version_compare( $wp_version, '4.6.0', '<' ) ) {
@@ -335,8 +333,8 @@ if ( ! class_exists( 'AIWP_Tools' ) ) {
 			if ( $options['token'] && ( ! WP_DEBUG || ( is_multisite() && ! current_user_can( 'manage_network_options' ) ) ) ) {
 				$options['token'] = 'HIDDEN';
 			} else {
-				$options['token'] = (array)$options['token'];
-				unset($options['token']['challenge']);
+				$options['token'] = (array) $options['token'];
+				unset( $options['token']['challenge'] );
 			}
 			if ( $options['client_secret'] ) {
 				$options['client_secret'] = 'HIDDEN';

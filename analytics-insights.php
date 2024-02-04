@@ -4,7 +4,7 @@
  * Plugin URI: https://deconf.com/analytics-insights-google-analytics-dashboard-wordpress/
  * Description: Displays Google Analytics Reports and Real-Time Statistics in your Dashboard. Automatically inserts the tracking code in every page of your website.
  * Author: DeConf
- * Version: 6.3.2
+ * Version: 6.3.3
  * Author URI: https://deconf.com
  * Text Domain: analytics-insights
  * Domain Path: /languages
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) )
 	exit();
 // Plugin Version
 if ( ! defined( 'AIWP_CURRENT_VERSION' ) ) {
-	define( 'AIWP_CURRENT_VERSION', '6.3.2' );
+	define( 'AIWP_CURRENT_VERSION', '6.3.3' );
 }
 if ( ! defined( 'AIWP_ENDPOINT_URL' ) ) {
 	define( 'AIWP_ENDPOINT_URL', 'https://api.deconf.com/aiwp/v4/' );

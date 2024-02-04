@@ -4,16 +4,16 @@ Donate link: https://deconf.com/donate/
 Tags: wordPress analytics, google analytics, google analytics dashboard, google analytics widget, analytics dashboard, statistics, tracking, stats, google, ga, analytics insights, web stats, stats
 Requires at least: 3.5
 Tested up to: 6.4.1
-Stable tag: 6.3.2
+Stable tag: 6.3.3
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-A Google Analytics Dashboard plugin for WordPress. Adds Google Analytics tracking code and displays stats to help you better understand your users and site content.
+A full-featured and entirely free Google Analytics Dashboard plugin for WordPress. Adds Google Analytics tracking code and displays stats to help you better understand your users and site content.
 
 == Description ==
 
-Analytics Insights is a Google Analytics plugin for WordPress which automatically inserts the Google Analytics tracking code in all your pages and displays your WordPress stats in a dashboard widget.
+Analytics Insights is a full-featured and entirely free Google Analytics plugin for WordPress which automatically inserts the Google Analytics tracking code in all your pages and displays your WordPress stats in a dashboard widget.
 
 = Analytics Insights Features =
 
@@ -87,6 +87,10 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 == Upgrade Notice ==
 
 == Changelog ==
+= 6.3.3 (2024.02.04) =
+* Bug Fixes:
+	* add compatibility for WordPress version lower than 4.0.0
+	
 = 6.3.2 (2024.01.27) =
 * Bug Fixes:
 	* fixes PHP 8.x deprecated warnings
