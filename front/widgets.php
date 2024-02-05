@@ -94,14 +94,9 @@ final class AIWP_Frontend_Widget extends WP_Widget {
 <script type="text/javascript">
 	google.charts.load('current', {'packages':['corechart']});
 	google.charts.setOnLoadCallback( AIWPWidgetLoad );
-	tools = {
-		isNumeric : function (string) {
-			return !isNaN(parseFloat(string)) && isFinite(string);
-		}
-	}
 	function AIWPWidgetLoad (){
 		jQuery.post("<?php echo admin_url( 'admin-ajax.php' ); ?>", {action: "ajax_frontwidget_report", aiwp_number: "<?php echo esc_js( $this->number ); ?>", aiwp_optionname: "<?php  echo esc_js( $this->option_name ); ?>" }, function(response){
-			if (!tools.isNumeric(response) && Array.isArray(response)){
+			if (!(!isNaN(parseFloat(response)) && isFinite(response)) && Array.isArray(response)){
 				if (jQuery("#aiwp-widgetchart")[0]){
 					aiwpFrontWidgetData = response[0];
 					aiwp_drawFrontWidgetChart(aiwpFrontWidgetData);
