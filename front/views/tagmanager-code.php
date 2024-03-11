@@ -8,7 +8,7 @@
  */
 ?>
 
-<!-- BEGIN Analytics Insights v<?php echo AIWP_CURRENT_VERSION; ?> - https://deconf.com/analytics-insights-google-analytics-dashboard-wordpress/ -->
+<!-- BEGIN Analytics Insights v<?php echo AIWP_CURRENT_VERSION; ?> - https://wordpress.org/plugins/analytics-insights/ -->
 <script>
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push(<?php echo wp_kses( $data['vars'], array() ); ?>);

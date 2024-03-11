@@ -195,7 +195,7 @@ jQuery.fn.extend({
 				tpl += '<div id="aiwp-reports' + slug + '"></div>';
 				tpl += '<div style="text-align:right;width:100%;font-size:0.8em;clear:both;margin-right:5px;margin-top:10px;">';
 				tpl += aiwpItemData.i18n[14];
-				tpl += ' <a href="https://deconf.com/analytics-insights-google-analytics-dashboard-wordpress/?utm_source=aiwp_report&utm_medium=link&utm_content=back_report&utm_campaign=aiwp" rel="nofollow" style="text-decoration:none;font-size:1em;">Analytics Insights</a>&nbsp;';
+				tpl += ' <a href="https://deconf.com/analytics-insights-google-analytics-dashboard-wordpress/?utm_source=aiwp_report&utm_medium=link&utm_content=backend-reports-widget&utm_campaign=aiwp" rel="nofollow" style="text-decoration:none;font-size:1em;">Analytics Insights</a>&nbsp;';
 				tpl += '</div>';
 				tpl += '</div>',
 
@@ -234,7 +234,11 @@ jQuery.fn.extend({
 				if (scope == 'admin-item') {
 					return jQuery('#aiwp' + slug).attr("title");
 				} else {
-					return document.getElementsByTagName("title")[0].innerHTML;
+					if (typeof document.getElementsByTagName("title")[0] === "undefined") {
+						return '';
+					} else	{
+						return document.getElementsByTagName("title")[0].innerHTML;
+					}
 				}
 			},
 

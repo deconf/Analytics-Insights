@@ -39,7 +39,7 @@ if ( ! class_exists( 'AIWP_Backend_Widgets' ) ) {
 				return;
 			}
 			if ( ! ( $projectId ) ) {
-				echo '<p>' . __( "Something went wrong while retrieving property data. You need to create and properly configure a Google Analytics account:", 'analytics-insights' ) . '</p> <form action="https://deconf.com/how-to-set-up-google-analytics-on-your-website/" method="POST">' . get_submit_button( __( "Find out more!", 'analytics-insights' ), 'secondary' ) . '</form>';
+				echo '<p>' . __( "Something went wrong while retrieving property data. You need to create and properly configure a Google Analytics account:", 'analytics-insights' ) . '</p> <form action="https://deconf.com/how-to-add-google-analytics-to-wordpress-easy-way/" method="POST">' . get_submit_button( __( "Find out more!", 'analytics-insights' ), 'secondary' ) . '</form>';
 				return;
 			}
 			?>

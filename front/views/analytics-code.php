@@ -8,7 +8,7 @@
  */
 ?>
 
-<!-- BEGIN Analytics Insights v<?php echo AIWP_CURRENT_VERSION; ?> - https://deconf.com/analytics-insights-google-analytics-dashboard-wordpress/ -->
+<!-- BEGIN Analytics Insights v<?php echo AIWP_CURRENT_VERSION; ?> - https://wordpress.org/plugins/analytics-insights/ -->
 <script async src="<?php echo esc_url( $data['tracking_script_path'] )?>?id=<?php echo esc_js( $data['gaid'] )?>"></script>
 <script>
   window.dataLayer = window.dataLayer || [];

@@ -883,7 +883,7 @@ final class AIWP_Settings {
 	<?php self::html_section_delimiter(__( "Plugin Authorization", 'analytics-insights' ), false); ?>
 	<tr>
 		<td colspan="2" class="aiwp-settings-info">
-			<?php printf(__('You need to create a %1$s and follow this %2$s before proceeding to authorization.', 'analytics-insights'), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/creating-a-google-analytics-account/?utm_source=aiwp_config&utm_medium=link&utm_content=top_tutorial&utm_campaign=aiwp', __("free analytics account", 'analytics-insights')), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/analytics-insights-google-analytics-dashboard-wordpress/?utm_source=aiwp_config&utm_medium=link&utm_content=top_tutorial&utm_campaign=aiwp', __("step-by-step tutorial", 'analytics-insights')));?>
+			<?php printf(__('New to Google Analytics? You should follow this %1$s before proceeding to authorization.', 'analytics-insights'), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/how-to-add-google-analytics-to-wordpress-easy-way/?utm_source=aiwp_config&utm_medium=link&utm_content=authorization-tutorial&utm_campaign=aiwp', __("step-by-step tutorial", 'analytics-insights')));?>
 		</td>
 	</tr>
 	 <?php if (! $options['token'] || ($options['user_api']  && ! $options['network_mode'])) : ?>
@@ -1125,7 +1125,7 @@ final class AIWP_Settings {
 	<?php self::html_section_delimiter(__( "Plugin Authorization", 'analytics-insights' ), false); ?>
 	<tr>
 		<td colspan="2" class="aiwp-settings-info">
-			<?php printf(__('You need to create a %1$s and follow this %2$s before proceeding to authorization.', 'analytics-insights'), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/creating-a-google-analytics-account/?utm_source=aiwp_config&utm_medium=link&utm_content=top_tutorial&utm_campaign=aiwp', __("free analytics account", 'analytics-insights')), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/analytics-insights-google-analytics-dashboard-wordpress/?utm_source=aiwp_config&utm_medium=link&utm_content=top_tutorial&utm_campaign=aiwp', __("step-by-step tutorial", 'analytics-insights')));?>
+			<?php printf(__('New to Google Analytics? You should follow this %1$s before proceeding to authorization.', 'analytics-insights'), sprintf('<a href="%1$s" target="_blank">%2$s</a>', 'https://deconf.com/how-to-add-google-analytics-to-wordpress-easy-way/?utm_source=aiwp_config&utm_medium=link&utm_content=authorizarion-screen&utm_campaign=aiwp', __("step-by-step tutorial", 'analytics-insights')));?>
 		</td>
 	</tr>
 	<?php if ( ! $options['token'] || $options['user_api'] ) : ?>

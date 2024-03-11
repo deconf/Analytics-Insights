@@ -18,6 +18,9 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 		public function __construct() {
 			global $wp_version;
 
+			// Increase HTTP API timeout
+			add_filter( 'http_request_timeout', array( $this, 'http_timeout_extend' ) );
+
 			$this->option_keys_rename(); // Rename old option keys
 			/**
 			 * Get plugin options
@@ -46,6 +49,17 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 
 			add_action ( 'aiwp_expired_cache_hook', array( $this, 'delete_expired_cache' ) );
 
+		}
+
+		/**
+		 * Increase HTTP API request timeout
+		 * Default timeout is 5s
+		 * @param int $time
+		 * @return int
+		 */
+		public function http_timeout_extend( $time )
+		{
+			return 30;
 		}
 
 		public function delete_expired_cache (){
