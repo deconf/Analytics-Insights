@@ -879,7 +879,7 @@ if ( ! defined( 'ABSPATH' ) )
 					}
 				}
 				$sortby = '-' . $metrics;
-				$filters = false;
+
 				if ( $filter ) {
 					$filters[] = array( 'ga:pagePath', 'EXACT', $filter, false );
 					if ( $local_filter ) {
@@ -890,6 +890,9 @@ if ( ! defined( 'ABSPATH' ) )
 					if ( $local_filter ) {
 						$filters[] = $local_filter;
 					}
+				}
+				if ( '' === $filter && '' === $local_filter ) {
+					$filters = false;	
 				}
 				$data = $this->handle_corereports_ga4( $projectId, $from, $to, $metrics, $dimensions, $sortby, $filters, $serial );
 				if ( is_numeric( $data ) ) {
@@ -926,10 +929,11 @@ if ( ! defined( 'ABSPATH' ) )
 				$metrics = 'ga:' . $metric;
 				$dimensions = 'ga:pageTitle';
 				$sortby = '-' . $metrics;
-				$filters = false;
 				if ( $filter ) {
 					$filters[] = array( 'ga:pagePath', 'EXACT', $filter, false );
-				}
+				} else(
+					$filters = false;	
+				)
 				$serial = 'qr4_' . $this->get_serial( $projectId . $from . $filter . $metric );
 				$data = $this->handle_corereports_ga4( $projectId, $from, $to, $metrics, $dimensions, $sortby, $filters, $serial );
 				if ( is_numeric( $data ) ) {
@@ -964,9 +968,10 @@ if ( ! defined( 'ABSPATH' ) )
 				$metrics = 'ga:' . $metric;
 				$dimensions = 'ga:' . $query;
 				$sortby = '-' . $metrics;
-				$filters = false;
 				if ( $filter ) {
 					$filters[] = array( 'ga:pagePath', 'EXACT', $filter, false );
+				} else {
+					$filters = false;	
 				}
 				$serial = 'qr8_' . $this->get_serial( $projectId . $from . $query . $filter . $metric );
 				$data = $this->handle_corereports_ga4( $projectId, $from, $to, $metrics, $dimensions, $sortby, $filters, $serial );
@@ -1007,7 +1012,6 @@ if ( ! defined( 'ABSPATH' ) )
 				$metrics = 'ga:' . $metric;
 				$dimensions = 'ga:source';
 				$sortby = '-' . $metrics;
-				$filters = false;
 				if ( $filter ) {
 					$filters[] = array( 'ga:pagePath', 'EXACT', $filter, false );
 					$filters[] = array( 'ga:medium', 'EXACT', 'referral', false );
@@ -1046,7 +1050,6 @@ if ( ! defined( 'ABSPATH' ) )
 				$metrics = 'ga:' . $metric;
 				$dimensions = 'ga:source';
 				$sortby = '-' . $metrics;
-				$filters = false;
 				if ( $filter ) {
 					$filters[] = array( 'ga:pagePath', 'EXACT', $filter, false );
 					$filters[] = array( 'ga:medium', 'EXACT', 'organic', false );
@@ -1087,7 +1090,6 @@ if ( ! defined( 'ABSPATH' ) )
 				$metrics = 'ga:' . $metric;
 				$dimensions = 'ga:' . $query;
 				$sortby = false;
-				$filters = false;
 				if ( 'source' == $query ) {
 					$sortby = '-' . $metrics;
 					if ( $filter ) {
@@ -1104,7 +1106,8 @@ if ( ! defined( 'ABSPATH' ) )
 					} else {
 						$filters[] = array( 'ga:' . $query, 'EXACT', '(not set)', true );
 					}
-				}
+				} 
+				
 				$serial = 'qr10_' . $this->get_serial( $projectId . $from . $query . $filter . $metric );
 				$data = $this->handle_corereports_ga4( $projectId, $from, $to, $metrics, $dimensions, $sortby, $filters, $serial );
 				if ( is_numeric( $data ) ) {
