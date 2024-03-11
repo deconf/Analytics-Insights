@@ -892,7 +892,7 @@ if ( ! defined( 'ABSPATH' ) )
 					}
 				}
 				if ( '' === $filter && '' === $local_filter ) {
-					$filters = false;	
+					$filters = false;
 				}
 				$data = $this->handle_corereports_ga4( $projectId, $from, $to, $metrics, $dimensions, $sortby, $filters, $serial );
 				if ( is_numeric( $data ) ) {
@@ -931,9 +931,9 @@ if ( ! defined( 'ABSPATH' ) )
 				$sortby = '-' . $metrics;
 				if ( $filter ) {
 					$filters[] = array( 'ga:pagePath', 'EXACT', $filter, false );
-				} else(
-					$filters = false;	
-				)
+				} else {
+					$filters = false;
+				}
 				$serial = 'qr4_' . $this->get_serial( $projectId . $from . $filter . $metric );
 				$data = $this->handle_corereports_ga4( $projectId, $from, $to, $metrics, $dimensions, $sortby, $filters, $serial );
 				if ( is_numeric( $data ) ) {
@@ -971,7 +971,7 @@ if ( ! defined( 'ABSPATH' ) )
 				if ( $filter ) {
 					$filters[] = array( 'ga:pagePath', 'EXACT', $filter, false );
 				} else {
-					$filters = false;	
+					$filters = false;
 				}
 				$serial = 'qr8_' . $this->get_serial( $projectId . $from . $query . $filter . $metric );
 				$data = $this->handle_corereports_ga4( $projectId, $from, $to, $metrics, $dimensions, $sortby, $filters, $serial );
@@ -1106,8 +1106,8 @@ if ( ! defined( 'ABSPATH' ) )
 					} else {
 						$filters[] = array( 'ga:' . $query, 'EXACT', '(not set)', true );
 					}
-				} 
-				
+				}
+
 				$serial = 'qr10_' . $this->get_serial( $projectId . $from . $query . $filter . $metric );
 				$data = $this->handle_corereports_ga4( $projectId, $from, $to, $metrics, $dimensions, $sortby, $filters, $serial );
 				if ( is_numeric( $data ) ) {
