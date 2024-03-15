@@ -124,7 +124,7 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 					wp_register_script( 'jquery-ui-tooltip-html', AIWP_URL . 'common/realtime/jquery.ui.tooltip.html' . AIWP_Tools::script_debug_suffix() . '.js' );
 					wp_register_script( 'googlecharts', 'https://www.gstatic.com/charts/loader.js', array(), null );
 					wp_enqueue_script( 'aiwp-nprogress', AIWP_URL . 'common/nprogress/nprogress' . AIWP_Tools::script_debug_suffix() . '.js', array( 'jquery' ), AIWP_CURRENT_VERSION );
-					wp_enqueue_script( 'aiwp-backend-dashboard-reports', AIWP_URL . 'common/js/reports6' . AIWP_Tools::script_debug_suffix() . '.js', array( 'jquery', 'googlecharts', 'aiwp-nprogress', 'jquery-ui-tooltip', 'jquery-ui-core', 'jquery-ui-position', 'jquery-ui-tooltip-html' ), AIWP_CURRENT_VERSION, true );
+					wp_enqueue_script( 'aiwp-backend-dashboard-reports', AIWP_URL . 'common/js/reports' . AIWP_Tools::script_debug_suffix() . '.js', array( 'jquery', 'googlecharts', 'aiwp-nprogress', 'jquery-ui-tooltip', 'jquery-ui-core', 'jquery-ui-position', 'jquery-ui-tooltip-html' ), AIWP_CURRENT_VERSION, true );
 					/* @formatter:off */
 
 					$datelist = array(
@@ -230,7 +230,7 @@ if ( ! class_exists( 'AIWP_Backend_Setup' ) ) {
 					wp_enqueue_style( "wp-jquery-ui-dialog" );
 					wp_register_script( 'googlecharts', 'https://www.gstatic.com/charts/loader.js', array(), null );
 					wp_enqueue_script( 'aiwp-nprogress', AIWP_URL . 'common/nprogress/nprogress' . AIWP_Tools::script_debug_suffix() . '.js', array( 'jquery' ), AIWP_CURRENT_VERSION );
-					wp_enqueue_script( 'aiwp-backend-item-reports', AIWP_URL . 'common/js/reports6' . AIWP_Tools::script_debug_suffix() . '.js', array( 'aiwp-nprogress', 'googlecharts', 'jquery', 'jquery-ui-dialog' ), AIWP_CURRENT_VERSION, true );
+					wp_enqueue_script( 'aiwp-backend-item-reports', AIWP_URL . 'common/js/reports' . AIWP_Tools::script_debug_suffix() . '.js', array( 'aiwp-nprogress', 'googlecharts', 'jquery', 'jquery-ui-dialog' ), AIWP_CURRENT_VERSION, true );
 					/* @formatter:off */
 					wp_localize_script( 'aiwp-backend-item-reports', 'aiwpItemData', array(
 						'ajaxurl' => admin_url( 'admin-ajax.php' ),

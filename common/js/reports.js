@@ -1002,9 +1002,9 @@ jQuery.fn.extend({
 
 					jQuery('#aiwp-sel-metric' + slug).hide();
 
-					jQuery(window).on("bind", "focus", function(event) {
+					jQuery(window).on("focus", function(event) {
 						reports.render.focusFlag = 1;
-					}).on("bind", "blur", function(event) {
+					}).on("blur", function(event) {
 						reports.render.focusFlag = 0;
 					});
 
@@ -1039,7 +1039,7 @@ jQuery.fn.extend({
 
 					reports.rtRefresh(reports.render.focusFlag);
 
-					reports.rtRuns = setInterval(reports.rtRefresh, 5000);
+					reports.rtRuns = setInterval(reports.rtRefresh, 60000);
 
 				} else {
 					if (jQuery.inArray(query, ['referrers', 'contentpages', 'searches']) > -1) {
