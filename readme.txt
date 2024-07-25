@@ -1,27 +1,39 @@
 === Analytics Insights - Google Analytics Dashboard for WordPress ===
 Contributors: deconf
 Donate link: https://deconf.com/donate/
-Tags: wordPress analytics, google analytics, google analytics dashboard, google analytics widget, analytics dashboard, statistics, tracking, stats, google, ga, analytics insights, web stats, stats
+Tags: wordPress analytics, google analytics, google analytics dashboard, analytics dashboard, stats
 Requires at least: 3.5
-Tested up to: 6.4.1
-Stable tag: 6.3.6
+Tested up to: 6.6
+Stable tag: 6.3.7
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-A full-featured and entirely free Google Analytics Dashboard plugin for WordPress. Adds Google Analytics tracking code and displays stats to help you better understand your users and site content.
+A full-featured and entirely free Google Analytics Dashboard plugin for WordPress. Displays stats to help you to better understand your site content.
 
 == Description ==
 
-Analytics Insights is a full-featured and entirely free Google Analytics plugin for WordPress which automatically inserts the Google Analytics tracking code in all your pages and displays your WordPress stats in a dashboard widget.
+Analytics Insights is a free WordPress plugin that enables site tracking using the latest Google Analytics 4 tracking code. It allows you to view key Google Analytics stats in your WordPress Dashboard.
 
-= Analytics Insights Features =
+= Google Analytics Reports, Stats and Insights =
 
- * **Google Analytics Dashboard:** displays easy to understand stats on your dashboard and in-depth reports for all website's pages. Real-time, audience, acquisition, behavior, and engagement stats are all presented as charts within your WordPress Dashboard.  
+Analytics Insights displays the reports you need on your dashboard and on the site's frontend. Audience, acquisition, behavior, engagement and real-time stats are all presented as charts within a dedicated dashboard widget.  
 
- * **Google Analytics Tracking:** installs the latest Google Analytics 4 tracking code. No matter the tracking method you choose, they are all available and customizable: Google Analytics 4 (GA4), Global Site Tag (gtag.js) tracking code, and Accelerated Mobile Pages (AMP) tracking.  
+In addition to a set of general Google Analytics stats, insights like in-depth Page reports and in-depth Post reports are available.
 
- * **Multisite:** fully compatible with multisite network installs. Allows using multiple Google Analytics accounts or using a single Google Analytics account for the entire network.
+= Google Analytics Tracking =
+
+The Google Analytics tracking code is fully customizable through options and hooks, allowing advanced data collection like custom dimensions and events.
+
+The plugin installs the latest Google Analytics 4 tracking code. No matter the tracking method you choose, they are all available and customizable: Google Analytics 4 (GA4), Global Site Tag (gtag.js) tracking code, and Accelerated Mobile Pages (AMP) tracking. Accelerated Mobile Pages (AMP) tracking for Google Analytics 4 is also available. 
+
+Advanced features like events tracking and custom dimensions tracking can be enabled with a switch of a button, without the need of any programming skills.  
+
+Old Google Analytics 3 reports are still available. Whenever you need to have a look at your old reports, you can switch back to Google Analytics 3 reports using the option available on <em>Analytics Insights > General Settings</em> screen. 
+ 
+= Analytics Insights on Multisite =
+
+This plugin is fully compatible with multisite network installs. Allows using multiple Google Analytics accounts or using a single Google Analytics account for the entire network.
 
 == Installation ==
 
@@ -88,6 +100,10 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 
 == Changelog ==
 
+= 6.3.7 (2024.07.25) =
+* Bug Fixes:
+	* update refresh intervals for Google Analytics Realtime report
+	
 = 6.3.6 (2024.03.15) =
 * Bug Fixes:
 	* fix focus/blur event causing the report to refresh while wasn't on focus

@@ -1039,7 +1039,7 @@ jQuery.fn.extend({
 
 					reports.rtRefresh(reports.render.focusFlag);
 
-					reports.rtRuns = setInterval(reports.rtRefresh, 60000);
+					reports.rtRuns = setInterval(reports.rtRefresh, 40000);
 
 				} else {
 					if (jQuery.inArray(query, ['referrers', 'contentpages', 'searches']) > -1) {
