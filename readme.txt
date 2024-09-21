@@ -1,7 +1,7 @@
 === Analytics Insights - Google Analytics Dashboard for WordPress ===
 Contributors: deconf
 Donate link: https://deconf.com/donate/
-Tags: wordPress analytics, google analytics, google analytics dashboard, analytics dashboard, stats
+Tags: WordPress analytics, google analytics, google analytics dashboard, google analytics widget, Website Analytics
 Requires at least: 3.5
 Tested up to: 6.6
 Stable tag: 6.3.8
@@ -21,19 +21,60 @@ Analytics Insights displays the reports you need on your dashboard and on the si
 
 In addition to a set of general Google Analytics stats, insights like in-depth Page reports and in-depth Post reports are available.
 
+The Google Analytics tracking code is fully customizable through options and hooks, allowing advanced data collection like custom dimensions and events.    
+
+= Google Analytics Real-Time Stats =
+
+Google Analytics reports, in real-time, in your dashboard screen:
+
+- Real-time number of visitors 
+- Real-time number of visitors per page
+- Real-time device category 
+
+= Google Analytics Reports and Insights =
+
+The Google Analytics insights and reports you need on your dashboard and on the site's frontend:  
+
+- Sessions, organic searches, page views, bounce rate analytics stats
+- Locations, pages, referrers, keywords, 404 errors analytics stats
+- Traffic channels, social networks, traffic mediums, search engines analytics stats
+- Device categories, browsers, operating systems, screen resolutions, mobile brands analytics stats
+
 = Google Analytics Tracking =
 
-The Google Analytics tracking code is fully customizable through options and hooks, allowing advanced data collection like custom dimensions and events.
+Installs the latest Google Analytics tracking code and allows full code customization:
 
-The plugin installs the latest Google Analytics 4 tracking code. No matter the tracking method you choose, they are all available and customizable: Google Analytics 4 (GA4), Global Site Tag (gtag.js) tracking code, and Accelerated Mobile Pages (AMP) tracking. Accelerated Mobile Pages (AMP) tracking for Google Analytics 4 is also available. 
+- Google Analytics 4 tracking code
+- Accelerated Mobile Pages (AMP) support for Google Analytics
+- Cross domain tracking
+- Ecommerce support for Google Analytics
+- User privacy oriented features and much more
 
-Advanced features like events tracking and custom dimensions tracking can be enabled with a switch of a button, without the need of any programming skills.  
+With Analytics Insights you can easily track events like downloads, page scrolling depth, outbound links, emails. In addition, you can track custom event categories, actions, and labels using annotated HTML elements.
 
-Old Google Analytics 3 reports are still available. Whenever you need to have a look at your old reports, you can switch back to Google Analytics 3 reports using the option available on <em>Analytics Insights > General Settings</em> screen. 
- 
+Custom dimensions tracking of authors, publication date, categories, tags is also possible with Analytics Insights.
+
+= Google Tag Manager Tracking =
+
+As an alternative to Google Analytics tracking code, you can use Google Tag Manager for tracking:
+
+- Google Tag Manager code
+- Data Layer variables: authors, publication date, categories, tags, user type
+- Accelerated Mobile Pages (AMP) support for Google Tag Manager
+
+= Accelerated Mobile Pages (AMP) features =
+
+- Google Tag Manager basic tracking
+- Google Analytics basic tracking 
+- Events tracking, custom dimensions tracking, annotated HTML elements tracking
+
 = Analytics Insights on Multisite =
 
-This plugin is fully compatible with multisite network installs. Allows using multiple Google Analytics accounts or using a single Google Analytics account for the entire network.
+This plugin is fully compatible with multisite network installs, allowing three setup modes:
+
+- Mode 1: network activated using multiple Google Analytics accounts
+- Mode 2: network activated using a single Google Analytics account
+- Mode 3: network deactivated using multiple Google Analytics accounts
 
 == Installation ==
 
