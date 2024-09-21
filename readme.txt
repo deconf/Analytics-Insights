@@ -4,7 +4,7 @@ Donate link: https://deconf.com/donate/
 Tags: wordPress analytics, google analytics, google analytics dashboard, analytics dashboard, stats
 Requires at least: 3.5
 Tested up to: 6.6
-Stable tag: 6.3.7
+Stable tag: 6.3.8
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -100,6 +100,10 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 
 == Changelog ==
 
+= 6.3.8 (2024.09.21) =
+* Bug Fixes:
+	* PHP warning fix on Google Analytics organic report
+	
 = 6.3.7 (2024.07.25) =
 * Bug Fixes:
 	* update refresh intervals for Google Analytics Realtime report

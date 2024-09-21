@@ -842,9 +842,11 @@ if ( ! defined( 'ABSPATH' ) )
 				$serial = 'qr9_' . $this->get_serial( $projectId . $from . 'channelGrouping' . $filter . 'ga:sessions' );
 				$data = $this->handle_corereports_ga4( $projectId, $from, $to, $metrics, $dimensions, $sortby, $filters, $serial );
 				$organic = 0;
-				foreach ( $data['values'] as $row ) {
-					if ( 'Organic Search' == $row[0] ) {
-						$organic = number_format_i18n( $row[1] );
+				if ( isset( $data['values'] ) && !empty( $data['values'] ) ) {
+					foreach ( $data['values'] as $row ) {
+						if ( 'Organic Search' == $row[0] ) {
+							$organic = number_format_i18n( $row[1] );
+						}
 					}
 				}
 				array_splice( $aiwp_data, 6, 0, $organic );
