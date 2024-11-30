@@ -251,6 +251,19 @@ if ( ! class_exists( 'AIWP_Tracking_GlobalSiteTag' ) ) {
 			if ( ! empty( $this->aiwp->config->options['ga_cookieexpires'] ) ) {
 				$fieldsobject['cookie_expires'] = (int) $this->aiwp->config->options['ga_cookieexpires'];
 			}
+
+			switch ( $this->aiwp->config->options['ga_samesite'] ) { // make sure we have a valid request
+				case 'Strict' :
+					$fieldsobject['cookie_flags'] = 'SameSite=Strict';
+					break;
+				case 'Lax' :
+					$fieldsobject['cookie_flags'] = 'SameSite=Lax';
+					break;
+				case 'None' :
+					$fieldsobject['cookie_flags'] = 'SameSite=None;Secure';
+					break;
+			}
+
 			if ( $this->aiwp->config->options['ga_crossdomain_tracking'] && '' != $this->aiwp->config->options['ga_crossdomain_list'] ) {
 				$domains = '';
 				$domains = explode( ',', sanitize_text_field( $this->aiwp->config->options['ga_crossdomain_list'] ) );

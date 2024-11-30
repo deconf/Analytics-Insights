@@ -37,6 +37,7 @@ final class AIWP_Settings {
 				$options['ga_formsubmit_tracking'] = 0;
 				$options['ga_force_ssl'] = 0;
 				$options['ga_pagescrolldepth_tracking'] = 0;
+				$options['ga_samesite'] = '';
 				$options['tm_pagescrolldepth_tracking'] = 0;
 				$options['tm_optout'] = 0;
 				$options['tm_dnt_optout'] = 0;
@@ -46,7 +47,6 @@ final class AIWP_Settings {
 				$options['optimize_pagehiding'] = 0;
 				$options['optimize_tracking'] = 0;
 				$options['trackingcode_infooter'] = 0;
-				$options['trackingevents_infooter'] = 0;
 				if ( isset( $_REQUEST['options']['ga_tracking_code'] ) ) {
 					$new_options['ga_tracking_code'] = trim( $new_options['ga_tracking_code'], "\t" );
 				}
@@ -611,6 +611,19 @@ final class AIWP_Settings {
 			<td>
 				<input type="text" id="ga_cookieexpires" name="options[ga_cookieexpires]" value="<?php echo esc_attr($options['ga_cookieexpires']); ?>" size="10">
 										<?php _e("seconds", 'analytics-insights' ); ?>
+			</td>
+		</tr>
+		<tr>
+			<td class="aiwp-settings-title">
+				<label for="ga_samesite"><?php _e("SameSite Attribute:", 'analytics-insights' ); ?></label>
+			</td>
+			<td>
+				<select id="ga_samesite" name="options[ga_samesite]">
+					<option value="" <?php selected( $options['ga_samesite'], '' ); ?>><?php _e("Disabled", 'analytics-insights');?></option>
+					<option value="Strict" <?php selected( $options['ga_samesite'], 'Strict' ); ?>><?php _e("Strict", 'analytics-insights');?></option>
+					<option value="Lax" <?php selected( $options['ga_samesite'], 'Lax' ); ?>><?php _e("Lax", 'analytics-insights');?></option>
+					<option value="None" <?php selected( $options['ga_samesite'], 'None' ); ?>><?php _e("None", 'analytics-insights');?></option>
+				</select>
 			</td>
 		</tr>
 	</table>

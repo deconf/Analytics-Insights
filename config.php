@@ -127,6 +127,7 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 							'ga_event_affiliates',
 							'ecommerce_mode',
 							'tracking_type',
+							'ga_samesite',
 			);
 			foreach ( $texts as $key ) {
 				if ( isset( $options[$key] ) ) {
@@ -408,6 +409,11 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 			}
 			if ( ! isset( $this->options['theme_color'] ) ) { // v5.5
 				$this->options['theme_color'] = '#1e73be';
+				$flag = true;
+			}
+
+			if ( ! isset( $this->options['ga_samesite'] ) ) { // v6.3.9
+				$this->options['ga_samesite'] = '';
 				$flag = true;
 			}
 

@@ -55,6 +55,7 @@ class AIWP_Install {
 			$options['ga_cookiedomain'] = '';
 			$options['ga_cookiename'] = '';
 			$options['ga_cookieexpires'] = '';
+			$options['ga_cookieexpires'] = 'ga_samesite';
 			$options['pagetitle_404'] = 'Page Not Found';
 			$options['maps_api_key'] = '';
 			$options['tm_author_var'] = 0;

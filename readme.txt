@@ -3,8 +3,8 @@ Contributors: deconf
 Donate link: https://deconf.com/donate/
 Tags: WordPress analytics, google analytics, google analytics dashboard, google analytics widget, Website Analytics
 Requires at least: 3.5
-Tested up to: 6.6
-Stable tag: 6.3.8
+Tested up to: 6.7
+Stable tag: 6.3.9
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -141,6 +141,10 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 
 == Changelog ==
 
+= 6.3.9 (2024.11.30) =
+* Enhancements:
+	* a new option to set SameSite attribute on Cookie Customization section
+	
 = 6.3.8 (2024.09.21) =
 * Bug Fixes:
 	* PHP warning fix on Google Analytics organic report
