@@ -60,7 +60,7 @@
 }
 
 [id^=aiwp-bottomstats-] .inside .small-box h3 {
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue";
 	font-size: 1em;
 	font-weight: 400;
 	color: #777;
@@ -111,7 +111,7 @@
 }
 
 .ui-dialog.aiwp {
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue";
 	font-size: 13px;
 	-webkit-box-sizing: initial;
 	-moz-box-sizing: initial;
@@ -236,7 +236,7 @@
 	height: 28px !important;
 	float: left;
 	color: #32373c;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue";
 	border: 1px solid #ddd !important;
 	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.07) !important;
 	background-color: #fff !important;
