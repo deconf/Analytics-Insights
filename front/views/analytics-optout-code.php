@@ -8,15 +8,10 @@
  */
 ?>
 <script>
-var aiwpDnt = false;
 var aiwpProperty = '<?php echo esc_js ( $data['gaid'] )?>';
-var aiwpDntFollow = <?php echo $data['gaDntOptout'] ? 'true' : 'false'?>;
 var aiwpOptout = <?php echo $data['gaOptout'] ? 'true' : 'false'?>;
 var disableStr = 'ga-disable-' + aiwpProperty;
-if(aiwpDntFollow && (window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
-	aiwpDnt = true;
-}
-if (aiwpDnt || (document.cookie.indexOf(disableStr + '=true') > -1 && aiwpOptout)) {
+if (document.cookie.indexOf(disableStr + '=true') > -1 && aiwpOptout) {
 	window[disableStr] = true;
 }
 function gaOptout() {

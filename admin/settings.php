@@ -26,7 +26,6 @@ final class AIWP_Settings {
 			if ( 'tracking' == $who ) {
 				$options['ga_anonymize_ip'] = 0;
 				$options['ga_optout'] = 0;
-				$options['ga_dnt_optout'] = 0;
 				$options['ga_event_tracking'] = 0;
 				$options['ga_enhanced_links'] = 0;
 				$options['ga_event_precision'] = 0;
@@ -40,7 +39,6 @@ final class AIWP_Settings {
 				$options['ga_samesite'] = '';
 				$options['tm_pagescrolldepth_tracking'] = 0;
 				$options['tm_optout'] = 0;
-				$options['tm_dnt_optout'] = 0;
 				$options['amp_tracking_analytics'] = 0;
 				$options['amp_tracking_clientidapi'] = 0;
 				$options['amp_tracking_tagmanager'] = 0;
@@ -577,6 +575,7 @@ final class AIWP_Settings {
 		<?php self::html_switch_button('options[ga_event_bouncerate]', 1, 'ga_event_bouncerate', $options['ga_event_bouncerate'], __( "exclude events from bounce-rate and time on page calculation", 'analytics-insights') ); ?>
 		<?php self::html_switch_button('options[ga_enhanced_links]', 1, 'ga_enhanced_links', $options['ga_enhanced_links'], __( "enable enhanced link attribution", 'analytics-insights') ); ?>
 		<?php self::html_switch_button('options[ga_event_precision]', 1, 'ga_event_precision', $options['ga_event_precision'], __( "use hitCallback to increase event tracking accuracy", 'analytics-insights') ); ?>
+		<?php self::html_switch_button('options[ga_optout]', 1, 'ga_optout', $options['ga_optout'], __( "enable support for user opt-out", 'analytics-insights') ); ?>
 		<?php self::html_section_delimiter(__( "Cross-domain Tracking", 'analytics-insights' ), false); ?>
 		<?php self::html_switch_button('options[ga_crossdomain_tracking]', 1, 'ga_crossdomain_tracking', $options['ga_crossdomain_tracking'], __( "enable cross domain tracking", 'analytics-insights') ); ?>
 		<tr>
@@ -649,7 +648,6 @@ final class AIWP_Settings {
 	<table class="aiwp-settings-options">
 		<?php self::html_section_delimiter(__( "Advanced Tracking", 'analytics-insights' ), false); ?>
 		<?php self::html_switch_button('options[tm_optout]', 1, 'tm_optout', $options['tm_optout'], __( "enable support for user opt-out", 'analytics-insights') ); ?>
-		<?php self::html_switch_button('options[tm_dnt_optout]', 1, 'tm_dnt_optout', $options['tm_dnt_optout'], __( "exclude tracking for users sending Do Not Track header", 'analytics-insights') ); ?>
 	</table>
 </div>
 <div id="aiwp-tmintegration">

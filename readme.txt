@@ -4,7 +4,7 @@ Donate link: https://deconf.com/donate/
 Tags: WordPress analytics, google analytics, google analytics dashboard, google analytics widget, Website Analytics
 Requires at least: 3.5
 Tested up to: 6.8
-Stable tag: 6.3.10
+Stable tag: 6.3.11
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -140,6 +140,12 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 == Upgrade Notice ==
 
 == Changelog ==
+
+= 6.3.11 (2025.04.27) =
+* Bug Fixes:
+	* bugfix for Google Analytics opt-out feature
+* Enhancements:
+    * drop support for DNT (Do Not Track) header, since it is deprecated
 
 = 6.3.10 (2025.04.27) =
 * Bug Fixes:

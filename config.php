@@ -101,9 +101,7 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 								'ga_user_samplerate',
 								'ga_event_precision',
 								'ga_optout',
-								'ga_dnt_optout',
 								'tm_optout',
-								'tm_dnt_optout',
 			);
 			foreach ( $numerics as $key ) {
 				if ( isset( $options[$key] ) ) {
@@ -284,10 +282,8 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 								'ga_event_precision', //v5.1.1.1
 								'ga_force_ssl', //v5.1.2
 								'ga_optout', //v5.2.3
-								'ga_dnt_optout', //v5.2.3
 								'frontend_item_reports',
 								'tm_optout', //v5.3.1.2
-								'tm_dnt_optout', //v5.3.1.2
 			);
 			foreach ( $zeros as $key ) {
 				if ( ! isset( $this->options[$key] ) ) {
@@ -328,7 +324,9 @@ if ( ! class_exists( 'AIWP_Config' ) ) {
 								'sites_list_locked', //v6.0.3
 								'site_jail', //v6.0.3
 								'sites_list', //v6.0.3
-								'backend_realtime_report', //v6.4
+								'backend_realtime_report', //v6.0.4
+								'ga_dnt_optout', //v6.3.10
+								'tm_dnt_optout', //v6.3.10
 			);
 			foreach ( $unsets as $key ) {
 				if ( isset( $this->options[$key] ) ) {

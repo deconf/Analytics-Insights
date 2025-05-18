@@ -342,8 +342,8 @@ if ( ! class_exists( 'AIWP_Tracking_GlobalSiteTag' ) ) {
 				}
 			}
 			$tracking_script_path = apply_filters( 'aiwp_gtag_script_path', 'https://www.googletagmanager.com/gtag/js' );
-			if ( $this->aiwp->config->options['ga_optout'] || $this->aiwp->config->options['ga_dnt_optout'] ) {
-				AIWP_Tools::load_view( 'front/views/analytics-optout-code.php', array( 'gaid' => $this->gaid, 'gaDntOptout' => $this->aiwp->config->options['ga_dnt_optout'], 'gaOptout' => $this->aiwp->config->options['ga_optout'] ) );
+			if ( $this->aiwp->config->options['ga_optout'] ) {
+				AIWP_Tools::load_view( 'front/views/analytics-optout-code.php', array( 'gaid' => $this->gaid, 'gaOptout' => $this->aiwp->config->options['ga_optout'] ) );
 			}
 			AIWP_Tools::load_view( 'front/views/analytics-code.php', array( 'trackingcode' => $trackingcode, 'tracking_script_path' => $tracking_script_path, 'gaid' => $this->gaid ) );
 		}

@@ -137,8 +137,8 @@ if ( ! class_exists( 'AIWP_Tracking_TagManager' ) ) {
 			} else {
 				$vars = "{}";
 			}
-			if ( ( $this->aiwp->config->options['tm_optout'] || $this->aiwp->config->options['tm_dnt_optout'] ) && ! empty( $this->gaid ) ) {
-				AIWP_Tools::load_view( 'front/views/analytics-optout-code.php', array( 'gaid' => $this->gaid, 'gaDntOptout' => $this->aiwp->config->options['tm_dnt_optout'], 'gaOptout' => $this->aiwp->config->options['tm_optout'] ) );
+			if ( ( $this->aiwp->config->options['tm_optout'] ) && ! empty( $this->gaid ) ) {
+				AIWP_Tools::load_view( 'front/views/analytics-optout-code.php', array( 'gaid' => $this->gaid, 'gaOptout' => $this->aiwp->config->options['tm_optout'] ) );
 			}
 			AIWP_Tools::load_view( 'front/views/tagmanager-code.php', array( 'containerid' => $this->aiwp->config->options['web_containerid'], 'vars' => $vars ) );
 		}
