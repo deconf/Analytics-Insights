@@ -3,7 +3,7 @@ Contributors: deconf
 Donate link: https://deconf.com/donate/
 Tags: WordPress analytics, google analytics, google analytics dashboard, google analytics widget, Website Analytics
 Requires at least: 3.5
-Tested up to: 6.9
+Tested up to: 7.0
 Stable tag: 6.3.12
 Requires PHP: 5.6
 License: GPLv2 or later
