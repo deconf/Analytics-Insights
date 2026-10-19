@@ -114,7 +114,7 @@ jQuery.fn.extend({
 				return false;
 			},
 			escape: function(str) {
-				div = document.createElement('div');
+				var div = document.createElement('div');
 				div.appendChild(document.createTextNode(str));
 				return div.innerHTML;
 			},
@@ -237,7 +237,7 @@ jQuery.fn.extend({
 					if (typeof document.getElementsByTagName("title")[0] === "undefined") {
 						return '';
 					} else	{
-						return document.getElementsByTagName("title")[0].innerHTML;
+						return document.getElementsByTagName("title")[0].textContent || document.getElementsByTagName("title")[0].innerText;
 					}
 				}
 			},
@@ -250,7 +250,7 @@ jQuery.fn.extend({
 					"color": "#000",
 					"border-left": "5px solid red"
 				});
-				jQuery("#aiwp-status" + slug).html(msg);
+				jQuery("#aiwp-status" + slug).text(msg);
 			},
 
 			areaChartBottomStats: function(response) {
@@ -687,7 +687,7 @@ jQuery.fn.extend({
 
 				for (i = 0; i < rtData.length; i++) {
 					count += parseInt(rtData[i].count);
-					table += "<tr><td class='aiwp-pgdetailsl'>" + rtData[i].value + "</td><td class='aiwp-pgdetailsr'>" + rtData[i].count + "</td></tr>";
+					table += "<tr><td class='aiwp-pgdetailsl'>" + tools.escape(rtData[i].value) + "</td><td class='aiwp-pgdetailsr'>" + tools.escape(rtData[i].count) + "</td></tr>";
 				}
 				;
 				if (count) {
@@ -705,25 +705,25 @@ jQuery.fn.extend({
 				for (i = 0; i < rtData.length; i++) {
 
 					if (rtData[i][0] == searchValue) {
-						pageTitle = rtData[i][5];
+						pageTitle = tools.escape(rtData[i][5]);
 
 						switch (rtData[i][3]) {
 
 							case "REFERRAL":
 								countrfr += parseInt(rtData[i][6]);
-								tablerfr += "<tr><td class='aiwp-pgdetailsl'>" + rtData[i][1] + "</td><td class='aiwp-pgdetailsr'>" + rtData[i][6] + "</td></tr>";
+								tablerfr += "<tr><td class='aiwp-pgdetailsl'>" + tools.escape(rtData[i][1]) + "</td><td class='aiwp-pgdetailsr'>" + tools.escape(rtData[i][6]) + "</td></tr>";
 								break;
 							case "ORGANIC":
 								countkwd += parseInt(rtData[i][6]);
-								tablekwd += "<tr><td class='aiwp-pgdetailsl'>" + rtData[i][2] + "</td><td class='aiwp-pgdetailsr'>" + rtData[i][6] + "</td></tr>";
+								tablekwd += "<tr><td class='aiwp-pgdetailsl'>" + tools.escape(rtData[i][2]) + "</td><td class='aiwp-pgdetailsr'>" + tools.escape(rtData[i][6]) + "</td></tr>";
 								break;
 							case "SOCIAL":
 								countscl += parseInt(rtData[i][6]);
-								tablescl += "<tr><td class='aiwp-pgdetailsl'>" + rtData[i][1] + "</td><td class='aiwp-pgdetailsr'>" + rtData[i][6] + "</td></tr>";
+								tablescl += "<tr><td class='aiwp-pgdetailsl'>" + tools.escape(rtData[i][1]) + "</td><td class='aiwp-pgdetailsr'>" + tools.escape(rtData[i][6]) + "</td></tr>";
 								break;
 							case "CUSTOM":
 								countcpg += parseInt(rtData[i][6]);
-								tablecpg += "<tr><td class='aiwp-pgdetailsl'>" + rtData[i][1] + "</td><td class='aiwp-pgdetailsr'>" + rtData[i][6] + "</td></tr>";
+								tablecpg += "<tr><td class='aiwp-pgdetailsl'>" + tools.escape(rtData[i][1]) + "</td><td class='aiwp-pgdetailsr'>" + tools.escape(rtData[i][6]) + "</td></tr>";
 								break;
 							case "DIRECT":
 								countdrt += parseInt(rtData[i][6]);
@@ -850,7 +850,7 @@ jQuery.fn.extend({
 				pgStatsTable = "";
 				for (i = 0; i < uScreenNameStats.length; i++) {
 					if (i < aiwpItemData.rtLimitPages) {
-						pgStatsTable += '<div class="aiwp-pline"><div class="aiwp-pleft">' + uScreenNameStats[i].screenName.substring(0, 70) + '</div><div class="aiwp-pright">' + uScreenNameStats[i].count + '</div></div>';
+						pgStatsTable += '<div class="aiwp-pline"><div class="aiwp-pleft">' + tools.escape(uScreenNameStats[i].screenName.substring(0, 70)) + '</div><div class="aiwp-pright">' + tools.escape(uScreenNameStats[i].count) + '</div></div>';
 					}
 				}
 				document.getElementById("aiwp-pages").innerHTML = '<br /><div class="aiwp-pg">' + pgStatsTable + '</div>';

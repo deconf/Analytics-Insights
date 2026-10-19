@@ -3,8 +3,8 @@ Contributors: deconf
 Donate link: https://deconf.com/donate/
 Tags: WordPress analytics, google analytics, google analytics dashboard, google analytics widget, Website Analytics
 Requires at least: 3.5
-Tested up to: 7.0
-Stable tag: 6.3.12
+Tested up to: 7.1
+Stable tag: 6.4
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -140,6 +140,10 @@ For documentation, tutorials, FAQ and videos check out: [Analytics Insights docu
 == Upgrade Notice ==
 
 == Changelog ==
+
+= 6.4 (2026.10.19) =
+* Security:
+	* Level: high; sanitization and output escaping; credits [Wordfence Team](https://www.wordfence.com/threat-intel/vulnerabilities/researchers/hei)
 
 = 6.3.12 (2026.01.04) =
 * Bug Fixes:
